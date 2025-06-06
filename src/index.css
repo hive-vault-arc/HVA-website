@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital,wght@0,400;1,400&family=Inter:wght@100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: 'Inter', sans-serif;
+  --font-serif: 'DM Serif Display', serif;
+  --color-black: #18181b;
+  --color-white: #fff;
+  --color-grey: #f4f4f5;
+  --color-grey-dark: #666;
+  --color-purple: #8B5CF6;
+  --color-purple-light: #A78BFA;
+  --color-purple-dark: #7C3AED;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-white);
+  color: var(--color-black);
+  overflow-x: hidden;
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+  letter-spacing: -0.01em;
+}
+
+.title-big {
+  font-size: 4.5rem;
+  font-weight: 400;
+  line-height: 1.1;
+  background: linear-gradient(135deg, var(--color-black) 0%, var(--color-purple) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.title-medium {
+  font-size: 2.8rem;
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.title-small {
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-purple) 0%, var(--color-purple-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-black {
+  background: var(--color-black) !important;
+}
+.bg-white {
+  background: var(--color-white) !important;
+}
+.bg-grey {
+  background: var(--color-grey) !important;
+}
+.bg-purple {
+  background: var(--color-purple) !important;
+}
+.bg-purple-light {
+  background: var(--color-purple-light) !important;
+}
+.bg-purple-dark {
+  background: var(--color-purple-dark) !important;
+}
+.text-black {
+  color: var(--color-black) !important;
+}
+.text-white {
+  color: var(--color-white) !important;
+}
+.text-grey {
+  color: var(--color-grey-dark) !important;
+}
+.text-purple {
+  color: var(--color-purple) !important;
+}
+.text-purple-dark {
+  color: var(--color-purple-dark) !important;
+}
+
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(139, 92, 246, 0.08);
+}
+
+.glow {
+  position: relative;
+}
+
+.glow::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--color-purple), var(--color-purple-dark), var(--color-purple));
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.glow:hover::after {
+  opacity: 0.5;
+}
