@@ -205,7 +205,7 @@ const Contact: React.FC = () => {
             <h2 className="text-4xl font-bold text-gray-900 mb-8">Find Us</h2>
             <div className="aspect-w-16 aspect-h-9 rounded-xl overflow-hidden">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3323.349348847754!2d-7.6189!3d33.5731!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzPCsDM0JzIzLjIiTiA3wrAzNycwOC4wIkU!5e0!3m2!1sen!2sma!4v1635000000000!5m2!1sen!2sma"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d103599.61833546984!2d-5.916869989721443!3d35.76338544764214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0b875cf04c132d%3A0x76bfc571bfb4e17a!2sTangier!5e0!3m2!1sen!2sma!4v1749336870988!5m2!1sen!2sma"
                 width="100%"
                 height="450"
                 style={{ border: 0 }}
