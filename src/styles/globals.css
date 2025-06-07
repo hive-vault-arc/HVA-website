@@ -7,10 +7,13 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body { 
+  background: transparent !important; 
+}
+
 body { 
-  font-family: 'Inter', sans-serif; 
-  background: #fff; 
-  color: #18181b;
+  font-family: sans-serif; 
+  /* color: #18181b; */ 
   overflow-x: hidden;
 }
 
@@ -23,9 +26,9 @@ body {
   font-size: clamp(2.5rem, 5vw, 4rem); 
   font-weight: 400; 
   line-height: 1.1;
-  background: linear-gradient(135deg, #18181b 0%, #8B5CF6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  /* background: linear-gradient(135deg, #18181b 0%, #8B5CF6 100%); */ /* Removed for solid black text */
+  /* -webkit-background-clip: text; */
+  /* -webkit-text-fill-color: transparent; */
 }
 
 .title-medium { 
@@ -46,19 +49,19 @@ section {
 }
 
 .navbar-blur { 
-  backdrop-filter: blur(12px); 
-  background: rgba(255, 255, 255, 0.9); 
-  border-bottom: 1px solid rgba(0,0,0,0.05);
-  transition: all 0.3s ease;
+  /* backdrop-filter: blur(12px); */ 
+  /* background: rgba(255, 255, 255, 0.9); */ 
+  /* border-bottom: 1px solid rgba(0,0,0,0.05); */
+  /* transition: all 0.3s ease; */
 }
 
 .navbar-blur.scrolled {
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+  /* background: rgba(255, 255, 255, 0.95); */
+  /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05); */
 }
 
 .nav-link { 
-  color: #18181b; 
+  /* color: #18181b; */ 
   font-weight: 500; 
   transition: all 0.3s ease;
   position: relative;
@@ -111,7 +114,7 @@ section {
 }
 
 .gradient-text {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-purple-800;
+  /* @apply bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-purple-800; */
 }
 
 .glow {
@@ -142,7 +145,7 @@ section {
   left: 0; 
   width: 100%; 
   height: 100%; 
-  z-index: -1; 
+  z-index: -2; 
   pointer-events: none;
 }
 
@@ -172,14 +175,14 @@ section {
 }
 
 .navbar {
-  @apply fixed top-0 left-0 right-0 z-50 transition-all duration-300;
-  backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.8);
+  /* @apply fixed top-0 left-0 right-0 z-50 transition-all duration-300; */
+  /* backdrop-filter: blur(10px); */
+  /* background: rgba(255, 255, 255, 0.8); */
 }
 
 .navbar.scrolled {
-  @apply shadow-md;
-  background: rgba(255, 255, 255, 0.95);
+  /* @apply shadow-md; */
+  /* background: rgba(255, 255, 255, 0.95); */
 }
 
 .nav-link {

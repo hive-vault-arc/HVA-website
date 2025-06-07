@@ -3,6 +3,9 @@ import { CheckCircle, ArrowRight, Phone, Mail } from 'lucide-react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { Tilt } from 'react-tilt';
+import Background3D from '../components/Background3D';
 
 const Pricing: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -101,135 +104,174 @@ const Pricing: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <div className="overflow-hidden">
+      <Background3D />
+
       {/* Hero Section */}
-      <section className="min-h-[60vh] flex flex-col justify-center items-center text-center relative" data-aos="fade-up">
-        <div className="max-w-4xl mx-auto px-4">
-          <h1 className="title-serif title-big mb-6 gradient-text">
-            Affordable Excellence
-          </h1>
-          <div className="title-small mb-12 text-gray-600 max-w-2xl mx-auto">
+      <section className="flex flex-col justify-center items-center relative py-12">
+        <div className="max-w-4xl mx-auto px-4 relative z-10">
+          <span
+            className="text-gray-600 font-medium text-sm mb-4 block"
+          >
+            Our Pricing
+          </span>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-6xl md:text-7xl font-extrabold leading-tight text-gray-900 mb-6"
+          >
+            Flexible Plans for Every Need
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-xl font-light max-w-2xl mx-auto text-gray-600 mb-12"
+          >
             High-quality digital solutions that fit your budget.
-          </div>
+          </motion.p>
         </div>
       </section>
 
       {/* Pricing Tiers Section */}
-      <section className="modern-section" data-aos="fade-up">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="title-serif title-medium text-center mb-12">Our Pricing</h2>
-          <div className="modern-grid-4 gap-8">
+      <section className="py-12 relative">
+        <div className="max-w-6xl mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl font-bold text-gray-900">Flexible Plans for Every Need</h2>
+          </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {pricingTiers.map((tier, index) => (
-              <div
-                key={index}
-                className="modern-card p-8 flex flex-col justify-between h-full"
-                data-aos="fade-up"
-                data-aos-delay={100 * index}
-              >
-                <div>
-                  <h3 className="font-semibold text-xl mb-4 text-purple-dark">{tier.name}</h3>
-                  <div className="title-medium font-bold mb-6">{tier.price}</div>
-                  <p className="text-gray-600 mb-8 flex-grow">{tier.description}</p>
-                  <ul className="space-y-4 mb-8">
-                    {tier.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-start">
-                        <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" />
-                        <span className="text-gray-700">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <Link
-                  to={tier.link}
-                  className="modern-button-primary group w-full text-center"
+              <Tilt key={index} options={{ max: 15, scale: 1.05, speed: 1000 }}>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="bg-white p-8 rounded-2xl flex flex-col justify-between h-full transition-all duration-300"
                 >
-                  Get Started
-                  <ArrowRight className="w-4 h-4 ml-2 inline-block group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </div>
+                  <div>
+                    <h3 className="font-semibold text-xl mb-4 text-gray-900">{tier.name}</h3>
+                    <div className="text-3xl font-bold text-blue-600 mb-6">{tier.price}</div>
+                    <p className="text-gray-600 mb-8 flex-grow">{tier.description}</p>
+                    <ul className="space-y-2 mb-8">
+                      {tier.features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-start">
+                          <CheckCircle className="w-5 h-5 text-gray-500 mr-2 flex-shrink-0" />
+                          <span className="text-gray-700">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <Link
+                    to={tier.link}
+                    className="px-8 py-4 bg-gray-800 text-white rounded-full font-medium hover:scale-105 transition-all duration-300 group inline-flex items-center justify-center"
+                  >
+                    Get Started
+                    <ArrowRight className="w-5 h-5 ml-2 inline-block group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </motion.div>
+              </Tilt>
             ))}
           </div>
-          <div className="text-center mt-12 text-gray-600">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-center mt-12 text-gray-600"
+          >
             <p>We offer discounts to startups and small businesses. Contact us for a free personalized estimate.</p>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Get a Quote Section */}
-      <section className="modern-section bg-gray-50" data-aos="fade-up">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="title-serif title-medium mb-8">Need a Custom Quote?</h2>
-          <p className="text-gray-600 mb-12 max-w-2xl mx-auto">
-            Every project is unique. Tell us about your needs, and we'll provide a tailored estimate.
-          </p>
-          <div className="modern-card p-8 text-left">
-          <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="modern-label">Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    className="modern-input"
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="modern-label">Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="modern-input"
-                    required
-                  />
-                </div>
-                 <div>
-                  <label htmlFor="service" className="modern-label">Interested Service</label>
-                  <select
-                    id="service"
-                    name="service"
-                    value={formData.service}
-                    onChange={handleChange}
-                    className="modern-input"
-                    required
-                  >
-                    <option value="">Select a service</option>
-                    <option value="MVP App">MVP App</option>
-                    <option value="Maintenance">Maintenance</option>
-                    <option value="AI Chatbot">AI Chatbot</option>
-                    <option value="Automation Tool">Automation Tool</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
-                <div>
-                  <label htmlFor="description" className="modern-label">Project Description</label>
-                  <textarea
-                    id="description"
-                    name="description"
-                    value={formData.description}
-                    onChange={handleChange}
-                    rows={4}
-                    className="modern-input"
-                    required
-                  />
-                </div>
-                <button type="submit" className="modern-button-primary group w-full">
-                  Get Free Quote
-                  <ArrowRight className="w-4 h-4 ml-2 inline-block group-hover:translate-x-1 transition-transform" />
-                </button>
-              </form>
-          </div>
+      <section className="py-12 relative bg-white">
+        <div className="max-w-4xl mx-auto px-4 relative z-10 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <span className="text-gray-600 font-medium mb-4 block">Custom Solutions</span>
+            <h2 className="text-4xl font-bold text-gray-900 mb-8">Need a Custom Quote?</h2>
+            <p className="text-gray-600 mb-12 max-w-2xl mx-auto">
+              Every project is unique. Tell us about your needs, and we'll provide a tailored estimate.
+            </p>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="bg-white p-8 rounded-2xl text-left shadow-sm"
+          >
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500 transition-colors duration-200"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500 transition-colors duration-200"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="service" className="block text-gray-700 text-sm font-bold mb-2">Interested Service</label>
+                <select
+                  id="service"
+                  name="service"
+                  value={formData.service}
+                  onChange={handleChange}
+                  className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500 transition-colors duration-200 bg-white"
+                  required
+                >
+                  <option value="">Select a service</option>
+                  <option value="MVP App">MVP App</option>
+                  <option value="Maintenance">Maintenance</option>
+                  <option value="AI Chatbot">AI Chatbot</option>
+                  <option value="Automation Tool">Automation Tool</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div>
+                <label htmlFor="description" className="block text-gray-700 text-sm font-bold mb-2">Project Description</label>
+                <textarea
+                  id="description"
+                  name="description"
+                  value={formData.description}
+                  onChange={handleChange}
+                  rows={4}
+                  className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500 transition-colors duration-200"
+                  required
+                />
+              </div>
+              <button type="submit" className="px-8 py-4 bg-gray-800 text-white rounded-full font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 group w-full inline-flex items-center justify-center">
+                Get Free Quote
+                <ArrowRight className="w-5 h-5 ml-2 inline-block group-hover:translate-x-1 transition-transform" />
+              </button>
+            </form>
+          </motion.div>
         </div>
       </section>
-
-      {/* FAQ Section */}
-      {/* You can add an FAQ section here if needed */}
-
     </div>
   );
 };

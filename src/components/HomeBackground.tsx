@@ -20,84 +20,65 @@ const HomeBackground: React.FC = () => {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     containerRef.current.appendChild(renderer.domElement);
 
-    // Create gradient material
-    const createGradientMaterial = (color1: number, color2: number) => {
-      const canvas = document.createElement('canvas');
-      canvas.width = 2;
-      canvas.height = 2;
-      const context = canvas.getContext('2d');
-      if (context) {
-        const gradient = context.createLinearGradient(0, 0, 2, 2);
-        gradient.addColorStop(0, `#${color1.toString(16).padStart(6, '0')}`);
-        gradient.addColorStop(1, `#${color2.toString(16).padStart(6, '0')}`);
-        context.fillStyle = gradient;
-        context.fillRect(0, 0, 2, 2);
-      }
-      const texture = new THREE.CanvasTexture(canvas);
-      return new THREE.MeshBasicMaterial({
-        map: texture,
-        transparent: true,
-        opacity: 0.15,
-        wireframe: true
-      });
-    };
+    // Create a new geometry for the lines
+    const lineGeometry = new THREE.BufferGeometry();
+    const lineCount = 100;
+    const positions = new Float32Array(lineCount * 3 * 2); // Two points per line
+    const colors = new Float32Array(lineCount * 3 * 2); // Two colors per line
 
-    // Create shapes with gradient materials
-    const shapes = [
-      {
-        geometry: new THREE.IcosahedronGeometry(2, 1),
-        material: createGradientMaterial(0x8B5CF6, 0x6366F1), // Purple to Indigo
-        scale: 1.2
-      },
-      {
-        geometry: new THREE.OctahedronGeometry(1.8, 2),
-        material: createGradientMaterial(0x6366F1, 0x4F46E5), // Indigo to Deep Purple
-        scale: 1
-      },
-      {
-        geometry: new THREE.TetrahedronGeometry(1.5, 3),
-        material: createGradientMaterial(0x4F46E5, 0x3730A3), // Deep Purple to Darker Purple
-        scale: 0.8
-      }
-    ];
+    const color1 = new THREE.Color(0x8B5CF6); // Purple
+    const color2 = new THREE.Color(0x6366F1); // Indigo
 
-    const meshes = shapes.map(({ geometry, material, scale }) => {
-      const mesh = new THREE.Mesh(geometry, material);
-      mesh.scale.set(scale, scale, scale);
-      scene.add(mesh);
-      return mesh;
-    });
+    for (let i = 0; i < lineCount; i++) {
+      const i6 = i * 6;
 
-    // Add floating particles
-    const particleCount = 100;
-    const particleGeometry = new THREE.BufferGeometry();
-    const particlePositions = new Float32Array(particleCount * 3);
-    const particleSizes = new Float32Array(particleCount);
+      // Start point
+      positions[i6 + 0] = (Math.random() - 0.5) * 5;
+      positions[i6 + 1] = (Math.random() - 0.5) * 5;
+      positions[i6 + 2] = (Math.random() - 0.5) * 5;
 
-    for (let i = 0; i < particleCount; i++) {
-      const i3 = i * 3;
-      particlePositions[i3] = (Math.random() - 0.5) * 20;
-      particlePositions[i3 + 1] = (Math.random() - 0.5) * 20;
-      particlePositions[i3 + 2] = (Math.random() - 0.5) * 20;
-      particleSizes[i] = Math.random() * 0.5;
+      // End point
+      positions[i6 + 3] = positions[i6 + 0] + (Math.random() - 0.5) * 2;
+      positions[i6 + 4] = positions[i6 + 1] + (Math.random() - 0.5) * 2;
+      positions[i6 + 5] = positions[i6 + 2] + (Math.random() - 0.5) * 2;
+
+      // Colors (linear interpolation between color1 and color2)
+      const mixColor = new THREE.Color().lerpColors(color1, color2, Math.random());
+      colors[i6 + 0] = mixColor.r;
+      colors[i6 + 1] = mixColor.g;
+      colors[i6 + 2] = mixColor.b;
+      colors[i6 + 3] = mixColor.r;
+      colors[i6 + 4] = mixColor.g;
+      colors[i6 + 5] = mixColor.b;
     }
 
-    particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
-    particleGeometry.setAttribute('size', new THREE.BufferAttribute(particleSizes, 1));
+    lineGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    lineGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
-    const particleMaterial = new THREE.PointsMaterial({
-      color: 0x8B5CF6,
-      size: 0.1,
+    // Material for the lines
+    const lineMaterial = new THREE.LineBasicMaterial({
+      vertexColors: true, // Enable vertex colors
       transparent: true,
-      opacity: 0.6,
-      sizeAttenuation: true
+      opacity: 0.8,
+      linewidth: 1 // This property might not work well on all platforms/renderers
     });
 
-    const particles = new THREE.Points(particleGeometry, particleMaterial);
-    scene.add(particles);
+    const lineMesh = new THREE.LineSegments(lineGeometry, lineMaterial);
+    scene.add(lineMesh);
+
+    // Mouse movement effect
+    let mouseX = 0;
+    let mouseY = 0;
+
+    const handleMouseMove = (event: MouseEvent) => {
+      mouseX = (event.clientX / window.innerWidth) * 2 - 1; // Normalize to -1 to +1
+      mouseY = -(event.clientY / window.innerHeight) * 2 + 1; // Normalize to -1 to +1, invert Y
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
 
     // Position camera
-    camera.position.z = 12;
+    camera.position.z = 5;
 
     // Animation
     let time = 0;
@@ -105,28 +86,9 @@ const HomeBackground: React.FC = () => {
       requestAnimationFrame(animate);
       time += 0.001;
 
-      // Animate shapes
-      meshes.forEach((mesh, index) => {
-        const speed = 0.2 + index * 0.1;
-        mesh.rotation.x = Math.sin(time * speed) * 0.2;
-        mesh.rotation.y = Math.cos(time * speed) * 0.2;
-        
-        // Scroll-based movement
-        const scrollY = window.scrollY;
-        const scrollProgress = scrollY / (document.documentElement.scrollHeight - window.innerHeight);
-        mesh.position.x = Math.sin(scrollProgress * Math.PI * 2 + index) * 2;
-        mesh.position.y = Math.cos(scrollProgress * Math.PI * 2 + index) * 2;
-      });
-
-      // Animate particles
-      const positions = particleGeometry.attributes.position.array as Float32Array;
-      for (let i = 0; i < particleCount; i++) {
-        const i3 = i * 3;
-        positions[i3] += Math.sin(time + i) * 0.01;
-        positions[i3 + 1] += Math.cos(time + i) * 0.01;
-        positions[i3 + 2] += Math.sin(time * 0.5 + i) * 0.01;
-      }
-      particleGeometry.attributes.position.needsUpdate = true;
+      // Animate lines
+      lineMesh.rotation.x = mouseY * 0.5;
+      lineMesh.rotation.y = mouseX * 0.5;
 
       renderer.render(scene, camera);
     };
@@ -144,14 +106,11 @@ const HomeBackground: React.FC = () => {
 
     // Cleanup
     return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', handleResize);
       containerRef.current?.removeChild(renderer.domElement);
-      shapes.forEach(({ geometry, material }) => {
-        geometry.dispose();
-        material.dispose();
-      });
-      particleGeometry.dispose();
-      particleMaterial.dispose();
+      lineGeometry.dispose();
+      lineMaterial.dispose();
       renderer.dispose();
     };
   }, []);
@@ -166,9 +125,9 @@ const HomeBackground: React.FC = () => {
         left: 0, 
         width: '100%', 
         height: '100%', 
-        zIndex: 10, 
+        zIndex: -1, 
         pointerEvents: 'none',
-        opacity: 0.8
+        opacity: 0.4
       }} 
     />
   );

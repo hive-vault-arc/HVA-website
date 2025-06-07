@@ -18,8 +18,8 @@
 
 body {
   font-family: var(--font-sans);
-  background: var(--color-white);
-  color: var(--color-black);
+  background-color: transparent !important;
+  /* color: var(--color-black); */
   overflow-x: hidden;
 }
 
@@ -55,11 +55,17 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
+.gradient-text-light {
+  background: linear-gradient(135deg, #A78BFA 0%, #E879F9 100%); /* Lighter purple to pink gradient */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .bg-black {
   background: var(--color-black) !important;
 }
 .bg-white {
-  background: var(--color-white) !important;
+  /* background: var(--color-white) !important; */
 }
 .bg-grey {
   background: var(--color-grey) !important;

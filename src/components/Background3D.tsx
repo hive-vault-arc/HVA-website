@@ -89,7 +89,7 @@ const Background3D: React.FC = () => {
     };
   }, []);
 
-  return <div ref={containerRef} id="canvas3d" />;
+  return <div ref={containerRef} id="canvas3d" style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -2, pointerEvents: 'none', opacity: 0.8 }} />;
 };
 
 export default Background3D; 
