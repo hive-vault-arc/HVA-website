@@ -17,19 +17,22 @@ const demoProjects = [
     title: 'Mini Mobile App',
     img: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80',
     desc: 'A simple, beautiful mobile app demo.',
-    link: '/portfolio'
+    link: '/portfolio',
+    category: 'Mobile'
   },
   {
     title: 'Dashboard UI',
     img: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80',
     desc: 'Modern dashboard for business management.',
-    link: '/portfolio'
+    link: '/portfolio',
+    category: 'Web Development'
   },
   {
     title: 'AI Chatbot',
     img: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80',
     desc: 'Conversational AI for customer support.',
-    link: '/portfolio'
+    link: '/portfolio',
+    category: 'Artificial Intelligence'
   }
 ];
 
@@ -62,7 +65,12 @@ const Home: React.FC = () => {
       <HomeBackground />
 
       {/* Hero Section - Asymmetric Design */}
-      <section className="flex items-center relative py-20">
+      <motion.section
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="flex items-center relative py-20"
+      >
         <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-20">
           {/* Left Content Area - Spans 5 columns */}
           <div className="lg:col-span-5 space-y-8 text-gray-900">
@@ -116,10 +124,7 @@ const Home: React.FC = () => {
 
           {/* Right Image Collage - Spans 7 columns */}
           <div className="lg:col-span-7 relative w-full h-[600px] z-30 flex items-center justify-center">
-            <div
-              className="w-[500px] h-[500px] flex items-center justify-center bg-white rounded-lg overflow-hidden"
-              style={{ clipPath: 'polygon(25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%)', opacity: 0.3 }}
-            >
+            <div className="w-[500px] h-[500px] flex items-center justify-center">
               <img
                 src={LogoImage}
                 alt="Abstract Shape Image"
@@ -128,10 +133,15 @@ const Home: React.FC = () => {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Services Section - Dynamic Grid */}
-      <section className="py-20 relative">
+      <motion.section
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="py-20 relative"
+      >
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -175,9 +185,9 @@ const Home: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className="group relative p-8 rounded-2xl transition-all duration-300 transform hover:-translate-y-2"
+                  className="group relative p-8 rounded-2xl transition-all duration-300 transform hover:-translate-y-3 hover:shadow-2xl border border-transparent hover:border-blue-200"
                 >
-                  <div className={`w-16 h-16 bg-gradient-to-br ${service.gradient} rounded-xl flex items-center justify-center mb-6 transform transition-transform duration-300`}>
+                  <div className={`w-16 h-16 bg-gradient-to-br ${service.gradient} rounded-xl flex items-center justify-center mb-6 transform transition-transform duration-300 group-hover:scale-110`}>
                     <service.icon className="w-8 h-8 text-white" />
                   </div>
                   <h3 className="text-xl font-bold mb-4 text-gray-900">{service.title}</h3>
@@ -187,10 +197,15 @@ const Home: React.FC = () => {
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Why Us Section - Asymmetric Layout */}
-      <section className="py-20 relative">
+      <motion.section
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="py-20 relative"
+      >
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <animated.div ref={ref} style={springProps} className="lg:col-span-5 space-y-8 text-gray-900">
@@ -241,22 +256,28 @@ const Home: React.FC = () => {
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.8 }}
-                  className="relative w-full h-[500px] rounded-3xl overflow-hidden flex items-center justify-center"
+                  className="relative w-full h-[500px] overflow-hidden flex items-center justify-center"
+                  style={{ clipPath: 'polygon(0% 15%, 15% 0%, 100% 0%, 100% 85%, 85% 100%, 0% 100%)' }}
                 >
                   <img
                     src={Home1Image}
                     alt="Team Collaboration"
-                    className="w-full h-full object-cover rounded-3xl"
+                    className="w-full h-full object-cover"
                   />
                 </motion.div>
               </Tilt>
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Demo Projects Section - Dynamic Grid */}
-      <section className="py-20 relative">
+      <motion.section
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="py-20 relative"
+      >
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -275,7 +296,7 @@ const Home: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="group relative overflow-hidden rounded-2xl transition-all duration-300 flex flex-col p-6 border border-gray-200 hover:shadow-lg"
+                className="group relative overflow-hidden rounded-2xl transition-all duration-300 flex flex-col p-6 border border-gray-200 hover:shadow-xl hover:-translate-y-2"
               >
                 <div className="aspect-[4/3] overflow-hidden rounded-lg mb-4">
                   <img
@@ -284,6 +305,7 @@ const Home: React.FC = () => {
                     className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
+                <span className="text-sm text-gray-500 font-medium mb-2 block">{proj.category}</span>
                 <div>
                   <h3 className="text-2xl font-semibold mb-2 text-gray-900">{proj.title}</h3>
                   <p className="mb-4 text-gray-600 text-lg">{proj.desc}</p>
@@ -299,10 +321,15 @@ const Home: React.FC = () => {
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Testimonials - Adjustments for new theme */}
-      <section className="py-20 relative">
+      <motion.section
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="py-20 relative"
+      >
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto">
             <Tilt options={{ max: 15, scale: 1.02, speed: 1000 }}>
@@ -310,12 +337,12 @@ const Home: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
-                className="rounded-3xl p-12 relative text-gray-900"
+                className="rounded-3xl p-12 relative text-gray-900 bg-gradient-to-br from-white to-gray-50 shadow-xl border border-gray-100"
               >
-                <div className="absolute -top-6 -left-6 w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-white text-4xl font-serif">
-                  "
+                <div className="absolute -top-6 -left-6 w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white text-5xl font-extrabold transform rotate-6 z-10 shadow-lg">
+                  “
                 </div>
-                <p className="text-2xl mb-8 leading-relaxed">
+                <p className="text-2xl mb-8 leading-relaxed italic text-gray-700">
                   "They helped us go digital fast, and it cost way less than agencies. The team is professional and responsive."
                 </p>
                 <div className="flex items-center justify-between">
@@ -335,7 +362,53 @@ const Home: React.FC = () => {
             </Tilt>
           </div>
         </div>
-      </section>
+      </motion.section>
+
+      {/* Call to Action Section */}
+      <motion.section
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="py-20 relative bg-gradient-to-r from-gray-800 to-gray-900 text-white"
+      >
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-5xl font-extrabold mb-6 leading-tight"
+          >
+            Ready to Start Your Project?
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-xl max-w-2xl mx-auto mb-10 text-gray-300"
+          >
+            Join over 500+ businesses who trusted us with their digital transformation. Let's build something amazing together.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="flex justify-center gap-6"
+          >
+            <Link
+              to="#"
+              className="px-10 py-5 bg-blue-600 text-white rounded-full font-bold text-lg hover:bg-blue-700 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+            >
+              Get Your Free Quote
+            </Link>
+            <Link
+              to="#"
+              className="px-10 py-5 border border-white text-white rounded-full font-bold text-lg hover:bg-white hover:text-gray-900 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+            >
+              Contact Us
+            </Link>
+          </motion.div>
+        </div>
+      </motion.section>
     </div>
   );
 };
