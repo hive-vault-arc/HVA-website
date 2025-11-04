@@ -11,7 +11,6 @@ import Services from './pages/Services';
 import Portfolio from './pages/Portfolio';
 import Pricing from './pages/Pricing';
 import Contact from './pages/Contact';
-import Background3D from './components/Background3D';
 
 function App() {
   useEffect(() => {
@@ -24,7 +23,6 @@ function App() {
 
   return (
     <Router>
-      <Background3D />
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />

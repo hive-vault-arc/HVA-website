@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Star, Clock, Users, Code, Smartphone, Bot } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Tilt } from 'react-tilt';
-import Background3D from '../components/Background3D';
+import Background3D from '../components/Plasma';
 
 const Portfolio: React.FC = () => {
 

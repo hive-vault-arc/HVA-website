@@ -5,7 +5,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { motion } from 'framer-motion';
 import { Tilt } from 'react-tilt';
-import Background3D from '../components/Background3D';
+import Background3D from '../components/Plasma';
 
 const teamMembers = [
   {

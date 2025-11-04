@@ -6,16 +6,13 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const year = new Date().getFullYear();
+
   return (
     <>
       <Navbar />
-      <main className="pt-24 min-h-[80vh] max-w-5xl mx-auto px-4 bg-transparent">
+      <main className="min-h-screen w-screen mx-auto ">
         {children}
       </main>
-      <footer className="footer-minimal">
-        &copy; {year} DevCraft. All rights reserved.
-      </footer>
     </>
   );
 };

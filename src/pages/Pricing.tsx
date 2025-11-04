@@ -5,7 +5,7 @@ import 'aos/dist/aos.css';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Tilt } from 'react-tilt';
-import Background3D from '../components/Background3D';
+import Background3D from '../components/Plasma';
 
 const Pricing: React.FC = () => {
   const [formData, setFormData] = useState({
