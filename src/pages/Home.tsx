@@ -2,13 +2,21 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Code, Brain, Rocket, Cloud, Check, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useRef, useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Background3d from '../components/Plasma';
+
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger);
 import TextType from '../components/TextType';
 import LightRays from '../components/LightRays';
 import LaserFlow from '../components/LaserFlow';
 import ShinyText from '../components/ShinyText';
 import { image } from 'framer-motion/client';
 import CardSwap, { Card } from '../components/CardSwap';
+import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from 'react-icons/si';
+import LogoLoop from '../components/LogoItem';
 
 const Home: React.FC = () => {
   const services = [
@@ -37,6 +45,19 @@ const Home: React.FC = () => {
       image: 'https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
     }
   ];
+  const techLogos = [
+  { node: <SiReact />, title: "React", href: "https://react.dev" },
+  { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org" },
+  { node: <SiTypescript />, title: "TypeScript", href: "https://www.typescriptlang.org" },
+  { node: <SiTailwindcss />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
+];
+
+// Alternative with image sources
+const imageLogos = [
+  { src: "/logos/company1.png", alt: "Company 1", href: "https://company1.com" },
+  { src: "/logos/company2.png", alt: "Company 2", href: "https://company2.com" },
+  { src: "/logos/company3.png", alt: "Company 3", href: "https://company3.com" },
+];
 
   const projects = [
     {
@@ -64,6 +85,51 @@ const Home: React.FC = () => {
     'Competitive Pricing',
     'Proven Track Record'
   ];
+
+  const highlightTextRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    if (!highlightTextRef.current) return;
+
+    const text = highlightTextRef.current;
+    const words = text.querySelectorAll('span');
+    
+    // Clear any existing styles
+    gsap.set(words, { 
+      y: 50,
+      opacity: 0,
+      display: 'inline-block',
+      willChange: 'transform, opacity'
+    });
+    
+    // Create the animation
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: text,
+        start: 'top 80%',
+        end: 'top 30%',
+        toggleActions: 'play none none none',
+        once: true
+      }
+    });
+    
+    // Animate each word with a slight delay
+    words.forEach((word, i) => {
+      tl.to(word, {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: 'power3.out',
+        delay: i * 0.1
+      }, '>');
+    });
+
+    // Clean up
+    return () => {
+      tl.kill();
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
 
   return (
     <div className="h-full">
@@ -136,7 +202,7 @@ const Home: React.FC = () => {
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 relative mx-10">
             {/* Left Column */}
-            <div className="space-y-4 mx-20 ">
+            <div className="space-y-4 mx-20">
               {services.slice(0, Math.ceil(services.length / 2)).map((service, index) => (
                 <motion.div
                   key={`left-${index}`}
@@ -156,22 +222,22 @@ const Home: React.FC = () => {
                       color: 'rgba(255, 255, 255, 0.5)'
                     }}
                   ></div>
-                  <div className="p-6 relative z-10">
-                    <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex items-center justify-center text-white mb-6">
-                      {service.icon}
+                  <div className="p-8 relative z-10 flex flex-col items-center text-center">
+                    <div className="w-20 h-20 bg-[#4F1AD6] rounded-xl flex items-center justify-center text-white mb-6 shadow-lg">
+                      {React.cloneElement(service.icon, { size: 28 })}
                     </div>
-                    <h3 className="text-xl font-bold mb-4 text-white">{service.title}</h3>
-                    <div className="h-px bg-gradient-to-r from-transparent via-purple/100 to-transparent my-4"></div>
-                    <p className="text-gray-300 mb-4">{service.description}</p>
+                    <h3 className="text-3xl font-light mb-4 text-white">{service.title}</h3>
+                    <div className="h-0.5 w-full bg-gradient-to-r from-transparent via-purple-400 to-transparent my-2"></div>
+                    <p className="text-gray-300 mb-6 max-w-md">{service.description}</p>
                   </div>
                   {service.image && (
-                    <div className="relative h-40 overflow-hidden">
+                    <div className="relative w-full h-42 overflow-hidden">
                       <img 
                         src={service.image} 
                         alt={service.title}
-                        className="mx-auto w-1/2 h-full object-cover rounded-xl transition-transform duration-500 hover:scale-105"
+                        className="mx-auto w-1/2 h-full p-2 object-cover rounded-xl transition-transform duration-500 hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
                     </div>
                   )
                 }</motion.div>
@@ -199,22 +265,22 @@ const Home: React.FC = () => {
                       color: 'rgba(255, 255, 255, 0.5)'
                     }}
                   ></div>
-                  <div className="p-6 relative z-10">
-                    <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex items-center justify-center text-white mb-6">
-                      {service.icon}
+                  <div className="p-8 relative z-10 flex flex-col items-center text-center">
+                    <div className="w-20 h-20 bg-[#4F1AD6] rounded-xl flex items-center justify-center text-white mb-6 shadow-lg">
+                      {React.cloneElement(service.icon, { size: 32 })}
                     </div>
-                    <h3 className="text-xl font-bold mb-4 text-white">{service.title}</h3>
-                    <div className="h-px bg-gradient-to-r from-transparent via-purple/100 to-transparent my-4"></div>
-                    <p className="text-gray-300 mb-4">{service.description}</p>
+                    <h3 className="text-3xl font-light mb-4 text-white">{service.title}</h3>
+                    <div className="h-0.5 w-full bg-gradient-to-r from-transparent via-purple-400 to-transparent my-2"></div>
+                    <p className="text-gray-300 mb-6 max-w-md">{service.description}</p>
                   </div>
                   {service.image && (
-                    <div className="relative h-40 overflow-hidden">
+                    <div className="relative w-full h-44 overflow-hidden">
                       <img 
                         src={service.image} 
                         alt={service.title}
-                        className="mx-auto w-1/2 h-full rounded-xl object-cover transition-transform duration-500 hover:scale-105"
+                        className="mx-auto w-1/2 h-full p-2 object-cover rounded-xl transition-transform duration-500 hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
                     </div>
                   )}
                 </motion.div>
@@ -223,94 +289,142 @@ const Home: React.FC = () => {
           </div>
         </div>
       </section>
-      
-      {/* Code Showcase Section */}
-      <section className="relative py-20 overflow-hidden">
+
+      {/* Monochrome Typography Section */}
+      <section className="relative py-40 overflow-hidden ">
         <div className="container mx-auto px-4 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left Column - Content */}
-            <div className="space-y-6 max-w-2xl mx-auto lg:mx-0">
-              <h2 className="text-4xl md:text-5xl font-bold text-white">
-                Clean & Efficient <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Code</span>
+          <div className="max-w-6xl mx-auto">
+            <div className="space-y-2 md:space-y-4 text-center">
+              <p className="text-white/70 text-sm md:text-base font-mono tracking-widest mb-6">INNOVATION MEETS PRECISION</p>
+              <h2 
+                ref={highlightTextRef} 
+                className="text-5xl md:text-8xl lg:text-9xl font-black leading-none text-white"
+              >
+                <span className="inline-block">CRAFTING</span><br/>
+                <span className="inline-block">DIGITAL</span><br/>
+                <span className="inline-block">EXPERIENCES</span>
+                <span className="inline-block">AND</span><br/>
+                <span className="inline-block">BEYOND</span><br/>
+                
               </h2>
-              <p className="text-gray-300 text-lg">
-                  We write scalable, optimized and high level code, ready to be shipped.
+              <p className="text-white/60 text-lg md:text-xl max-w-2xl mx-auto mt-20 font-light leading-relaxed">
+                Where every pixel has purpose and every interaction tells a story. 
+                We don't just build websites—we create digital landmarks.
               </p>
-              <div className="pt-4 space-y-4">
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 rounded-full bg-green-400"></div>
-                  <span className="text-gray-300">Production-ready code</span>
+              
+            </div>
+          </div>
+        </div>
+      
+      </section>
+       <div style={{ height: '200px', position: 'relative', overflow: 'hidden', color: 'white' , marginBottom: '10%'}}>
+        <h1 className="text-white/90 text-2xl lg:text-4xl md:text-xl mb-8 mx-auto text-center font-light leading-relaxed">TECHNOLOGY PARTNERS AND TECH STACK</h1>
+      <LogoLoop
+        logos={techLogos}
+        speed={100}
+        direction="left"
+        logoHeight={48}
+        gap={40}
+        pauseOnHover
+        scaleOnHover
+        fadeOut
+        fadeOutColor="black"
+        ariaLabel="Technology partners"
+      />
+    </div>
+      
+      {/* Engineering Excellence Section */}
+      <section className="relative py-24 overflow-hidden">
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            {/* Left Column - Content */}
+            <div className="space-y-8 max-w-2xl mx-auto lg:mx-0">
+              <div className="space-y-4">
+                <span className="inline-block text-sm font-mono text-blue-400 tracking-wider">ENGINEERING EXCELLENCE</span>
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white leading-tight">
+                  Enterprise-Grade <span className="text-transparent bg-clip-text bg-white/80">Code Architecture</span>
+                </h2>
+              </div>
+              
+              <p className="text-gray-300/90 text-lg leading-relaxed">
+                We craft scalable, maintainable software solutions with a focus on clean architecture, 
+                performance optimization, and industry best practices. Our code is production-ready, 
+                thoroughly tested, and built to evolve with your business needs.
+              </p>
+              
+              <div className="pt-2 space-y-5">
+                <div className="flex items-start space-x-4 group">
+                  <div className="flex-shrink-0 mt-1">
+                    <div className="w-3 h-3 rounded-full bg-green-400 transform group-hover:scale-125 transition-transform"></div>
+                  </div>
+                  <div>
+                    <h4 className="text-white font-medium">Production-Ready Solutions</h4>
+                    <p className="text-gray-400 text-sm mt-1">Battle-tested code with comprehensive test coverage and CI/CD integration</p>
+                  </div>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 rounded-full bg-blue-400"></div>
-                  <span className="text-gray-300">Responsive, scalable, secure and accessible</span>
+                
+                <div className="flex items-start space-x-4 group">
+                  <div className="flex-shrink-0 mt-1">
+                    <div className="w-3 h-3 rounded-full bg-blue-400 transform group-hover:scale-125 transition-transform"></div>
+                  </div>
+                  <div>
+                    <h4 className="text-white font-medium">Scalable Architecture</h4>
+                    <p className="text-gray-400 text-sm mt-1">Modular design patterns and microservices for seamless growth</p>
+                  </div>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-2 h-2 rounded-full bg-purple-400"></div>
-                  <span className="text-gray-300">Modern frameworks and libraries</span>
+                
+                <div className="flex items-start space-x-4 group">
+                  <div className="flex-shrink-0 mt-1">
+                    <div className="w-3 h-3 rounded-full bg-purple-400 transform group-hover:scale-125 transition-transform"></div>
+                  </div>
+                  <div>
+                    <h4 className="text-white font-medium">Modern Tech Stack</h4>
+                    <p className="text-gray-400 text-sm mt-1">Leveraging cutting-edge frameworks and tools for optimal performance</p>
+                  </div>
                 </div>
               </div>
             </div>
             
             {/* Right Column - CardSwap */}
-            <div className="relative h-[500px] lg:h-[500px] w-full">
+            <div className="relative h-[500px] lg:h-[700px] w-full">
               <CardSwap
                 cardDistance={50}
-                verticalDistance={60}
+                verticalDistance={50}
                 delay={5000}
                 pauseOnHover={true}
                 easing="elastic"
               >
-                <Card className="p-6 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50">
-                  <div className="text-blue-400 text-sm font-mono mb-2">// React Component</div>
-                  <pre className="text-gray-200 text-sm overflow-auto">
-                    {`function Button({ children }) {
-                    return (
-                      <button className="px-4 py-2 bg-blue-500 hover:bg-blue-600 
-                        text-white rounded-lg transition-colors">
-                        {children}
-                      </button>
-                    );
-                  }`}
-                  </pre>
+                <Card className="p-6 ">
+                  <div className="text-blue-400 text-sm font-mono mb-2 overflow-hidden">Java</div>
+                  <div className="relative w-full h-full overflow-hidden rounded-lg">
+                  <img 
+                    src="/Images/java.png" 
+                    alt="Java code example" 
+                    className="w-full h-full object-contain"
+                  />
+                </div>
                 </Card>
                 
-                <Card className="p-6 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50">
-                  <div className="text-purple-400 text-sm font-mono mb-2">// API Fetch</div>
-                  <pre className="text-gray-200 text-sm overflow-auto">
-                    {`async function fetchData(url) {
-                    try {
-                      const response = await fetch(url);
-                      if (!response.ok) throw new Error('Network error');
-                      return await response.json();
-                    } catch (error) {
-                      console.error('Fetch error:', error);
-                      throw error;
-                    }
-                  }`}
-                  </pre>
+                <Card className="p-6 ">
+                  <div className="text-purple-400 text-sm font-mono mb-2 overflow-hidden">javascript</div>
+                  <div className="relative w-full h-full overflow-hidden rounded-lg">
+                  <img 
+                    src="/Images/js.png" 
+                    alt="javascript code example" 
+                    className="w-full h-full object-contain"
+                  />
+                </div>
                 </Card>
                 
-                <Card className="p-6 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50">
-                  <div className="text-green-400 text-sm font-mono mb-2">// Tailwind Config</div>
-                  <pre className="text-gray-200 text-sm overflow-auto">
-                    {`module.exports = {
-                    theme: {
-                      extend: {
-                        colors: {
-                          primary: {
-                            DEFAULT: '#3B82F6',
-                            dark: '#2563EB',
-                          },
-                        },
-                        fontFamily: {
-                          sans: ['Inter', 'sans-serif'],
-                        },
-                      },
-                    },
-                    plugins: [],
-                  }`}
-                  </pre>
+                <Card className="p-6 ">
+                  <div className="text-green-400 text-sm font-mono mb-2 overflow-hidden">bash</div>
+                  <div className="relative w-full h-full overflow-hidden rounded-lg">
+                  <img 
+                    src="/Images/bash.png" 
+                    alt="bash code example" 
+                    className="w-full h-full object-contain"
+                  />
+                </div>
                 </Card>
               </CardSwap>
             </div>
