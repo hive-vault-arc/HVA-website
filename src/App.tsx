@@ -11,6 +11,7 @@ import Services from './pages/Services';
 import Portfolio from './pages/Portfolio';
 import Pricing from './pages/Pricing';
 import Contact from './pages/Contact';
+import GradualBlur from './components/GradualBlur';
 
 function App() {
   useEffect(() => {
@@ -24,8 +25,10 @@ function App() {
   return (
     <Router>
       <Layout>
+
         <Routes>
-          <Route path="/" element={<Home />} />
+          
+          <Route path="/" element={<Home /> }  />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/portfolio" element={<Portfolio />} />

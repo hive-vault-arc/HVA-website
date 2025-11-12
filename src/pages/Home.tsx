@@ -6,7 +6,7 @@ import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Background3d from '../components/Plasma';
-
+import ScrollStack, {ScrollStackItem} from '../components/ScrollStack';
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 import TextType from '../components/TextType';
@@ -14,9 +14,14 @@ import LightRays from '../components/LightRays';
 import LaserFlow from '../components/LaserFlow';
 import ShinyText from '../components/ShinyText';
 import { image } from 'framer-motion/client';
-import CardSwap, { Card } from '../components/CardSwap';
+
 import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from 'react-icons/si';
 import LogoLoop from '../components/LogoItem';
+import EngineeringExcellence from '../components/EngineeringExcellence';
+import { TimelineDemo } from '../components/timeline-demo';
+import GradualBlur from '../components/GradualBlur';
+import { HeroParallaxDemo } from '../components/ui/hero-parallax-demo';
+;
 
 const Home: React.FC = () => {
   const services = [
@@ -178,6 +183,16 @@ const imageLogos = [
             </div>
           </motion.div>
         </div>
+         <GradualBlur
+            target="parent"
+            position="bottom"
+            height="6rem"
+            strength={2}
+            divCount={5}
+            curve="bezier"
+            exponential={true}
+            opacity={1}
+          />
       </section>
 
       {/* Services Section */}
@@ -185,7 +200,7 @@ const imageLogos = [
         {/* LaserFlow Divider */}
         <div className="absolute inset-0 w-full h-[150vh] pointer-events-none">
           <LaserFlow 
-            className="absolute top-[85%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl"
+            className="absolute top-[90%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl"
             horizontalBeamOffset={0}
             verticalBeamOffset={0}
             color='#CF9FFF'
@@ -288,6 +303,16 @@ const imageLogos = [
             </div>
           </div>
         </div>
+         <GradualBlur
+            target="parent"
+            position="bottom"
+            height="3rem"
+            strength={2}
+            divCount={5}
+            curve="bezier"
+            exponential={true}
+            opacity={1}
+          />
       </section>
 
       {/* Monochrome Typography Section */}
@@ -333,156 +358,54 @@ const imageLogos = [
       />
     </div>
       
-      {/* Engineering Excellence Section */}
-      <section className="relative py-24 overflow-hidden">
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Left Column - Content */}
-            <div className="space-y-8 max-w-2xl mx-auto lg:mx-0">
-              <div className="space-y-4">
-                <span className="inline-block text-sm font-mono text-blue-400 tracking-wider">ENGINEERING EXCELLENCE</span>
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white leading-tight">
-                  Enterprise-Grade <span className="text-transparent bg-clip-text bg-white/80">Code Architecture</span>
-                </h2>
-              </div>
-              
-              <p className="text-gray-300/90 text-lg leading-relaxed">
-                We craft scalable, maintainable software solutions with a focus on clean architecture, 
-                performance optimization, and industry best practices. Our code is production-ready, 
-                thoroughly tested, and built to evolve with your business needs.
-              </p>
-              
-              <div className="pt-2 space-y-5">
-                <div className="flex items-start space-x-4 group">
-                  <div className="flex-shrink-0 mt-1">
-                    <div className="w-3 h-3 rounded-full bg-green-400 transform group-hover:scale-125 transition-transform"></div>
-                  </div>
-                  <div>
-                    <h4 className="text-white font-medium">Production-Ready Solutions</h4>
-                    <p className="text-gray-400 text-sm mt-1">Battle-tested code with comprehensive test coverage and CI/CD integration</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start space-x-4 group">
-                  <div className="flex-shrink-0 mt-1">
-                    <div className="w-3 h-3 rounded-full bg-blue-400 transform group-hover:scale-125 transition-transform"></div>
-                  </div>
-                  <div>
-                    <h4 className="text-white font-medium">Scalable Architecture</h4>
-                    <p className="text-gray-400 text-sm mt-1">Modular design patterns and microservices for seamless growth</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start space-x-4 group">
-                  <div className="flex-shrink-0 mt-1">
-                    <div className="w-3 h-3 rounded-full bg-purple-400 transform group-hover:scale-125 transition-transform"></div>
-                  </div>
-                  <div>
-                    <h4 className="text-white font-medium">Modern Tech Stack</h4>
-                    <p className="text-gray-400 text-sm mt-1">Leveraging cutting-edge frameworks and tools for optimal performance</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            {/* Right Column - CardSwap */}
-            <div className="relative h-[500px] lg:h-[700px] w-full">
-              <CardSwap
-                cardDistance={50}
-                verticalDistance={50}
-                delay={5000}
-                pauseOnHover={true}
-                easing="elastic"
-              >
-                <Card className="p-6 ">
-                  <div className="text-blue-400 text-sm font-mono mb-2 overflow-hidden">Java</div>
-                  <div className="relative w-full h-full overflow-hidden rounded-lg">
-                  <img 
-                    src="/Images/java.png" 
-                    alt="Java code example" 
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                </Card>
-                
-                <Card className="p-6 ">
-                  <div className="text-purple-400 text-sm font-mono mb-2 overflow-hidden">javascript</div>
-                  <div className="relative w-full h-full overflow-hidden rounded-lg">
-                  <img 
-                    src="/Images/js.png" 
-                    alt="javascript code example" 
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                </Card>
-                
-                <Card className="p-6 ">
-                  <div className="text-green-400 text-sm font-mono mb-2 overflow-hidden">bash</div>
-                  <div className="relative w-full h-full overflow-hidden rounded-lg">
-                  <img 
-                    src="/Images/bash.png" 
-                    alt="bash code example" 
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                </Card>
-              </CardSwap>
-            </div>
-          </div>
+      {/* Engineering Excellence Section with LightRays */}
+      <section className="relative">
+        {/* LightRays Background for Engineering Excellence */}
+        <div className="absolute pointer-events-none">
+          <LightRays
+            raysOrigin="top-center"
+            raysColor="rgba(147, 51, 234, 0.15)"
+            raysSpeed={0.3}
+            lightSpread={1.2}
+            rayLength={1.8}
+            followMouse={true}
+            mouseInfluence={0.15}
+            noiseAmount={0.03}
+            distortion={0.01}
+            className="w-full h-full"
+          />
         </div>
-        
-        {/* Background elements */}
-        <div className="absolute inset-0 overflow-hidden opacity-20">
-          <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-blue-500 rounded-full filter blur-3xl opacity-20"></div>
-          <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-purple-500 rounded-full filter blur-3xl opacity-20"></div>
+        <div className="relative z-10 py-20">
+          <EngineeringExcellence/>
         </div>
-      </section>
-      
-      {/* Projects Section */}
-      <section className="relative py-20 bg-transparent">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <span className="text-blue-600 font-medium">Our Work</span>
-            <h2 className="text-4xl font-bold text-gray-900 mt-2 mb-4">Recent Projects</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">Explore some of our latest work and see how we've helped businesses transform their operations.</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300"
-              >
-                <div className="h-64 overflow-hidden">
-                  <img 
-                    src={project.image} 
-                    alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <div className="p-6">
-                  <span className="text-sm text-blue-600 font-medium">{project.category}</span>
-                  <h3 className="text-xl font-bold text-gray-900 mt-2">{project.title}</h3>
-                  <button className="mt-4 text-blue-600 font-medium flex items-center group-hover:translate-x-1 transition-transform duration-300">
-                    View Project <ArrowRight className="w-4 h-4 ml-2" />
-                  </button>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-          <div className="text-center mt-12">
-            <Link
-              to="/portfolio"
-              className="inline-flex items-center px-6 py-3 border-2 border-blue-600 text-blue-600 rounded-lg font-medium hover:bg-blue-50 transition-colors duration-300"
-            >
-              View All Projects
-            </Link>
-          </div>
-        </div>
+         <GradualBlur
+            target="parent"
+            position="top"
+            height="6rem"
+            strength={2}
+            divCount={5}
+            curve="bezier"
+            exponential={true}
+            opacity={1}
+          />
       </section>
 
+      {/* Timeline Section with LightRays */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-black/5 to-black/10">
+        
+        <div className="relative z-10">
+          <TimelineDemo/>
+        </div>
+      </section>
+     
+
+     {/* Projects Section */}
+    <section className="min-h-screen w-full py-20 ">
+          <HeroParallaxDemo />    
+        </section>
+   
+     
+      
       {/* Why Choose Us */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
@@ -519,7 +442,18 @@ const imageLogos = [
           </div>
         </div>
       </section>
+      <GradualBlur
+       target="page"
+        position="bottom"
+        height="6rem"
+        strength={2}
+        divCount={5}
+        curve="bezier"
+        exponential={true}
+        opacity={1}
+        />
     </div>
+    
   );
 };
 

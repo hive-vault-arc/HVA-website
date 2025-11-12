@@ -47,6 +47,27 @@ section {
  
   position: relative;
 }
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.05);
+  }
+}
+
+/* Optimize animation performance */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  backface-visibility: hidden;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
 
 .navbar-blur { 
   /* backdrop-filter: blur(12px); */ 
