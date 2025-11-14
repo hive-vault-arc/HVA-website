@@ -7,6 +7,8 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Background3d from '../components/Plasma';
 import ScrollStack, {ScrollStackItem} from '../components/ScrollStack';
+import {DIcons} from 'dicons';
+import { FullScreenScrollFX, FullScreenFXAPI } from "../components/ui/full-screen-scroll-fx";
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 import TextType from '../components/TextType';
@@ -14,14 +16,14 @@ import LightRays from '../components/LightRays';
 import LaserFlow from '../components/LaserFlow';
 import ShinyText from '../components/ShinyText';
 import { image } from 'framer-motion/client';
-
 import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from 'react-icons/si';
 import LogoLoop from '../components/LogoItem';
+import FeatureCardsDemo from '../components/ui/feature-cards-demo';
 import EngineeringExcellence from '../components/EngineeringExcellence';
 import { TimelineDemo } from '../components/timeline-demo';
 import GradualBlur from '../components/GradualBlur';
 import { HeroParallaxDemo } from '../components/ui/hero-parallax-demo';
-;
+import { WorldMapDemo } from '../components/world-map-demo';
 
 const Home: React.FC = () => {
   const services = [
@@ -57,40 +59,37 @@ const Home: React.FC = () => {
   { node: <SiTailwindcss />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
 ];
 
-// Alternative with image sources
-const imageLogos = [
-  { src: "/logos/company1.png", alt: "Company 1", href: "https://company1.com" },
-  { src: "/logos/company2.png", alt: "Company 2", href: "https://company2.com" },
-  { src: "/logos/company3.png", alt: "Company 3", href: "https://company3.com" },
+  const sections = [
+  {
+    leftLabel: "Mobile Development",
+    title: <>Mobile apps</>,
+    rightLabel: "Mobile apps",
+    background: "./Images/app.png",
+    audioSrc: "/sfx/click-01.mp3",
+  },
+  {
+    leftLabel: "Web Development",
+    title: <>Web apps</>,
+    rightLabel: "Web apps",
+    background: "./Images/web.png",
+    audioSrc: "/sfx/whoosh-02.mp3",
+  },
+  {
+    leftLabel: "AI Development",
+    title: <>AI apps</>,
+    rightLabel: "AI apps",
+    background: "./Images/ai.jpg",
+    audioSrc: "/sfx/whoosh-02.mp3",
+  },
+  {
+    leftLabel: "SaaS Development",
+    title: <>SaaS apps</>,
+    rightLabel: "SaaS apps",
+    background: "./Images/saas.png",
+    audioSrc: "/sfx/whoosh-02.mp3",
+  },
+  // ...
 ];
-
-  const projects = [
-    {
-      title: 'AI-Powered Analytics',
-      category: 'AI Integration',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'
-    },
-    {
-      title: 'Enterprise SaaS',
-      category: 'SaaS Development',
-      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'
-    },
-    {
-      title: 'Custom CRM',
-      category: 'Custom Software',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'
-    }
-  ];
-
-  const whyUs = [
-    '10+ Years of Industry Experience',
-    'Dedicated Project Managers',
-    'Agile Development Process',
-    '24/7 Support & Maintenance',
-    'Competitive Pricing',
-    'Proven Track Record'
-  ];
-
   const highlightTextRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
@@ -123,7 +122,7 @@ const imageLogos = [
       tl.to(word, {
         y: 0,
         opacity: 1,
-        duration: 1,
+        duration: 0.4,
         ease: 'power3.out',
         delay: i * 0.1
       }, '>');
@@ -158,7 +157,7 @@ const imageLogos = [
             transition={{ duration: 0.8 }}
             className="max-w-4xl mx-auto"
           >
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
+            <h1 className="text-5xl md:text-8xl font-semibold text-white mb-6">
               <TextType 
               text={["We build Software", "We custom software", "We solve software"]}
               typingSpeed={75}
@@ -176,7 +175,7 @@ const imageLogos = [
             
               <Link
                 to="/portfolio"
-                className="px-8 py-4 bg-white/10 text-white border border-white/20 rounded-lg font-medium hover:bg-white/20 transition-colors duration-300 text-lg"
+                className="px-8 py-4 bg-white/10 text-white border border-white/10 rounded-lg font-medium hover:bg-white/20 transition-colors duration-300 text-lg"
               >
                 View Our Work
               </Link>
@@ -212,7 +211,7 @@ const imageLogos = [
         
         <div className="container mx-auto relative z-10 px-4">
           <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold text-white mt-2 mb-4">Our Services</h2>
+            <h2 className="text-7xl font-bold text-white mt-2 mb-4">WHAT WE OFFER</h2>
           </div>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 relative mx-10">
@@ -317,9 +316,10 @@ const imageLogos = [
 
       {/* Monochrome Typography Section */}
       <section className="relative py-40 overflow-hidden ">
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-6xl mx-auto">
-            <div className="space-y-2 md:space-y-4 text-center">
+        <div className="container mx-auto px-4 relative z-10 ">
+          <div className="max-w-6xl mx-auto ">
+            <div className="space-y-2 md:space-y-4 text-center p-4 ">
+               
               <p className="text-white/70 text-sm md:text-base font-mono tracking-widest mb-6">INNOVATION MEETS PRECISION</p>
               <h2 
                 ref={highlightTextRef} 
@@ -359,12 +359,28 @@ const imageLogos = [
     </div>
       
       {/* Engineering Excellence Section with LightRays */}
-      <section className="relative">
+      <section className="relative p-14">
         {/* LightRays Background for Engineering Excellence */}
-        <div className="absolute pointer-events-none">
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: 10,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            duration: 0.3,
+            delay: 1.2,
+          }}
+          className="relative mt-20 rounded border border-neutral-100 p-8 shadow-md"
+        >
+          <div className="w-full overflow-hidden ">
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <LightRays
             raysOrigin="top-center"
-            raysColor="rgba(147, 51, 234, 0.15)"
+            raysColor="rgba(0,0,255,1)"
             raysSpeed={0.3}
             lightSpread={1.2}
             rayLength={1.8}
@@ -375,73 +391,79 @@ const imageLogos = [
             className="w-full h-full"
           />
         </div>
-        <div className="relative z-10 py-20">
-          <EngineeringExcellence/>
-        </div>
-         <GradualBlur
-            target="parent"
-            position="top"
-            height="6rem"
-            strength={2}
-            divCount={5}
-            curve="bezier"
-            exponential={true}
-            opacity={1}
-          />
+            <EngineeringExcellence/>
+          </div>
+        </motion.div>
+         
       </section>
+
+      <div className="mb-10 mt-4  md:mt-6">
+          <div className="px-2">
+            <div className="relative mx-auto h-full max-w-7xl  md:px-12 md:py-20 [mask-image:radial-gradient(800rem_96rem_at_center,white)]">
+              <h1 className="flex select-none text-white flex-col  px-3 py-2 text-center text-5xl font-semibold leading-none tracking-tight md:flex-col md:text-8xl lg:flex-row lg:text-8xl">
+                <DIcons.Plus
+                  strokeWidth={4}
+                  className="text-ali absolute -left-5 -top-5 h-10 w-10 text-white "
+                />
+                <DIcons.Plus
+                  strokeWidth={4}
+                  className="text-ali absolute -bottom-5 -left-5 h-10 w-10 text-white"
+                />
+                <DIcons.Plus
+                  strokeWidth={4}
+                  className="text-ali absolute -right-5 -top-5 h-10 w-10 text-white"
+                />
+                <DIcons.Plus
+                  strokeWidth={4}
+                  className="text-ali absolute color-white -bottom-5 -right-5 h-10 w-10 text-white"
+                />
+                Redefining Excellence in Software
+              </h1>
+              <FeatureCardsDemo/>
+            </div>
+          </div>
+          </div>
 
       {/* Timeline Section with LightRays */}
       <section className="relative overflow-hidden bg-gradient-to-b from-black/5 to-black/10">
-        
         <div className="relative z-10">
           <TimelineDemo/>
         </div>
       </section>
-     
 
-     {/* Projects Section */}
-    <section className="min-h-screen w-full py-20 ">
-          <HeroParallaxDemo />    
-        </section>
-   
-     
-      
-      {/* Why Choose Us */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <span className="text-blue-600 font-medium">Why Choose Us</span>
-              <h2 className="text-4xl font-bold text-gray-900 mt-2 mb-6">We Deliver Exceptional Results</h2>
-              <p className="text-gray-600 mb-8">
-                Our team of experts is dedicated to providing top-notch software solutions that drive real business value. 
-                We combine technical expertise with industry knowledge to deliver outstanding results.
-              </p>
-              <ul className="space-y-3">
-                {whyUs.map((item, index) => (
-                  <li key={index} className="flex items-center">
-                    <Check className="w-5 h-5 text-green-500 mr-3" />
-                    <span className="text-gray-700">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="bg-white p-8 rounded-xl shadow-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Let's Build Something Amazing</h3>
-              <p className="text-gray-600 mb-8">
-                Ready to take your business to the next level? Get in touch with us today to discuss your project and 
-                discover how we can help you achieve your goals.
-              </p>
-              <Link
-                to="/contact"
-                className="inline-block px-8 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors duration-300"
-              >
-                Get a Free Consultation
-              </Link>
-            </div>
+      <section className='p-4'>
+       <motion.div
+          initial={{
+            opacity: 0,
+            y: 10,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            duration: 0.3,
+            delay: 1.2,
+          }}
+          className="relative z-10 mt-40 p-8 shadow-md"
+        >
+          <div className="w-full overflow-hidden rounded-xl ">
+            <FullScreenScrollFX
+            sections={ sections }
+            header={<><div>The Creative</div><div>Scope</div></>}
+            footer={<div></div>}
+            showProgress
+            durations={{ change: 0.7, snap: 800 }}
+            />
           </div>
-        </div>
+        </motion.div>
+     </section>
+ 
+      {/* World Map Section */}
+      <section className="min-h-screen w-full py-20 rounded-xl overflow-hidden">
+        <WorldMapDemo />
       </section>
+      
       <GradualBlur
        target="page"
         position="bottom"

@@ -6,9 +6,9 @@ export default function EngineeringExcellence() {
       <ContainerScroll
         titleComponent={
           <div className="text-center">
-            <h1 className="text-4xl font-semibold text-white">
+            <h1 className="text-5xl font-light text-white">
               Engineering Excellence with <br />
-              <span className="text-4xl md:text-7xl font-light mt-1 leading-none bg-purple-700  text-transparent bg-clip-text">
+              <span className="text-4xl md:text-7xl font-light mt-1 leading-none bg-purple-400  text-transparent bg-clip-text">
                 Modern Web Technologies
               </span>
             </h1>
