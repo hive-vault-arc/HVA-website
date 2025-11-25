@@ -16,7 +16,7 @@ import LightRays from '../components/LightRays';
 import LaserFlow from '../components/LaserFlow';
 import ShinyText from '../components/ShinyText';
 import { image } from 'framer-motion/client';
-import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss } from 'react-icons/si';
+import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiDocker, SiAwsamplify, SiAmazonwebservices, SiFirebase, SiGoogle, SiGithub } from 'react-icons/si';
 import LogoLoop from '../components/LogoItem';
 import FeatureCardsDemo from '../components/ui/feature-cards-demo';
 import EngineeringExcellence from '../components/EngineeringExcellence';
@@ -24,6 +24,9 @@ import { TimelineDemo } from '../components/timeline-demo';
 import GradualBlur from '../components/GradualBlur';
 import { HeroParallaxDemo } from '../components/ui/hero-parallax-demo';
 import { WorldMapDemo } from '../components/world-map-demo';
+import { InteractiveSpline } from '../components/ui/InteractiveSpline';
+import { Spotlight } from '../components/ui/spotlight';
+import { Card } from '../components/ui/container-scroll-animation';
 
 const Home: React.FC = () => {
   const services = [
@@ -55,8 +58,14 @@ const Home: React.FC = () => {
   const techLogos = [
   { node: <SiReact />, title: "React", href: "https://react.dev" },
   { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org" },
-  { node: <SiTypescript />, title: "TypeScript", href: "https://www.typescriptlang.org" },
-  { node: <SiTailwindcss />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
+  {node : <SiDocker />, title:"Docker", href:"https://www.docker.com"},
+  {node: <SiAmazonwebservices/>, title:"Aws", href:"https://www.aws.com"},
+  {node: <SiFirebase/>, title:"Firebase", href:"https://www.firebase.com"},
+  {node: <SiGoogle/>, title:"Google", href:"https://www.google.com"},
+  {node: <SiGithub/>, title:"Github", href:"https://www.github.com"},
+
+
+
 ];
 
   const sections = [
@@ -137,20 +146,23 @@ const Home: React.FC = () => {
 
   return (
     <div className="h-full">
+       
       <Background3d 
         color="#CF9FFF"
         speed={0.6}
         direction="forward"
         scale={1.1}
         opacity={0.8}
-        mouseInteractive={true}/>
+        mouseInteractive={false}/>
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 "></div>
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 "></div>
-        </div>
-        <div className="container mx-auto px-4 z-20 text-center">
+      
+      <InteractiveSpline
+        sceneUrl="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+        className="h-screen"
+        cursorSensitivity={0.15}
+      >
+       
+        <div className="container mx-auto px-4 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -159,20 +171,19 @@ const Home: React.FC = () => {
           >
             <h1 className="text-5xl md:text-8xl font-semibold text-white mb-6">
               <TextType 
-              text={["We build Software", "We custom software", "We solve software"]}
-              typingSpeed={75}
-              pauseDuration={1500}
-              showCursor={true}
-              cursorCharacter="|"
-            />
+                text={["We build Software", "We custom software", "We solve software"]}
+                typingSpeed={75}
+                pauseDuration={1500}
+                showCursor={true}
+                cursorCharacter="|"
+              />
             </h1>
-            <p className="text-xl  mb-8 max-w-2xl mx-auto">
+            <p className="text-xl mb-8 max-w-2xl mx-auto">
               <ShinyText
-              text=' We build custom software, AI solutions, and SaaS platforms that drive growth and innovation for your business.'/>
-             
+                text='We build custom software, AI solutions, and SaaS platforms that drive growth and innovation for your business.'
+              />
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-            
               <Link
                 to="/portfolio"
                 className="px-8 py-4 bg-white/10 text-white border border-white/10 rounded-lg font-medium hover:bg-white/20 transition-colors duration-300 text-lg"
@@ -182,24 +193,23 @@ const Home: React.FC = () => {
             </div>
           </motion.div>
         </div>
-         <GradualBlur
-            target="parent"
-            position="bottom"
-            height="6rem"
-            strength={2}
-            divCount={5}
-            curve="bezier"
-            exponential={true}
-            opacity={1}
-          />
-      </section>
-
+        <GradualBlur
+          target="parent"
+          position="bottom"
+          height="6rem"
+          strength={2}
+          divCount={5}
+          curve="bezier"
+          exponential={true}
+          opacity={1}
+        />
+      </InteractiveSpline>
       {/* Services Section */}
       <section className="relative min-h-screen w-full overflow-hidden py-20">
         {/* LaserFlow Divider */}
         <div className="absolute inset-0 w-full h-[150vh] pointer-events-none">
           <LaserFlow 
-            className="absolute top-[90%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl"
+            className="absolute top-[80%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl"
             horizontalBeamOffset={0}
             verticalBeamOffset={0}
             color='#CF9FFF'
@@ -224,37 +234,40 @@ const Home: React.FC = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="w-[100%] bg-white/4 rounded-xl backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-300 overflow-hidden relative group"
+                  className="w-[100%] bg-gradient-to-br from-white/5 to-white/2 rounded-xl backdrop-blur-lg border border-white/10 hover:border-purple-500/30 transition-all duration-500 overflow-hidden relative group flex flex-col"
                 >
-                  {/* Grid dotted background */}
-                  <div className="absolute inset-0 w-full h-full opacity-30 group-hover:opacity-50 transition-opacity duration-300" 
-                    style={{
-                      backgroundImage: 'radial-gradient(circle, currentColor 1px, transparent 1px)',
-                      backgroundSize: '20px 20px',
-                      WebkitMaskImage: 'radial-gradient(ellipse 60% 50% at 50% 50%, black 40%, transparent 100%)',
-                      maskImage: 'radial-gradient(ellipse 60% 50% at 50% 50%, black 40%, transparent 100%)',
-                      color: 'rgba(255, 255, 255, 0.5)'
-                    }}
-                  ></div>
-                  <div className="p-8 relative z-10 flex flex-col items-center text-center">
-                    <div className="w-20 h-20 bg-[#4F1AD6] rounded-xl flex items-center justify-center text-white mb-6 shadow-lg">
-                      {React.cloneElement(service.icon, { size: 28 })}
-                    </div>
-                    <h3 className="text-3xl font-light mb-4 text-white">{service.title}</h3>
-                    <div className="h-0.5 w-full bg-gradient-to-r from-transparent via-purple-400 to-transparent my-2"></div>
-                    <p className="text-gray-300 mb-6 max-w-md">{service.description}</p>
-                  </div>
+                  {/* Image Section */}
                   {service.image && (
-                    <div className="relative w-full h-42 overflow-hidden">
+                    <div className="relative w-full h-48 overflow-hidden">
                       <img 
                         src={service.image} 
                         alt={service.title}
-                        className="mx-auto w-1/2 h-full p-2 object-cover rounded-xl transition-transform duration-500 hover:scale-105"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                      
+                      {/* Title over image */}
+                      <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
+                        <div className="w-16 h-16 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-2xl flex items-center justify-center text-white shadow-lg mx-auto mb-4 group-hover:shadow-purple-500/20 transition-all duration-300">
+                          {React.cloneElement(service.icon, { 
+                            size: 24,
+                            className: 'transition-transform duration-300 group-hover:scale-110',
+                            strokeWidth: 1.5
+                          })}
+                        </div>
+                        <h3 className="text-3xl font-medium text-white">
+                          {service.title}
+                        </h3>
+                      </div>
                     </div>
-                  )
-                }</motion.div>
+                  )}
+                  
+                  {/* Description Section */}
+                  <div className="p-6 flex-1 flex flex-col">
+                    <div className="h-[1px] w-24 bg-gradient-to-r from-transparent via-purple-500/50 to-transparent my-4 mx-auto group-hover:w-32 transition-all duration-500"></div>
+                    <p className="text-gray-300/90 text-center leading-relaxed flex-1">{service.description}</p>
+                  </div>
+                </motion.div>
               ))}
             </div>
             
@@ -267,36 +280,39 @@ const Home: React.FC = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="w-[100%] bg-white/4 rounded-xl backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-300 overflow-hidden relative group"
+                  className="w-[100%] bg-gradient-to-br from-white/5 to-white/2 rounded-xl backdrop-blur-lg border border-white/10 hover:border-blue-500/30 transition-all duration-500 overflow-hidden relative group flex flex-col"
                 >
-                  {/* Grid dotted background */}
-                  <div className="absolute inset-0 w-full h-full opacity-30 group-hover:opacity-50 transition-opacity duration-300" 
-                    style={{
-                      backgroundImage: 'radial-gradient(circle, currentColor 1px, transparent 1px)',
-                      backgroundSize: '20px 20px',
-                      WebkitMaskImage: 'radial-gradient(ellipse 60% 50% at 50% 50%, black 40%, transparent 100%)',
-                      maskImage: 'radial-gradient(ellipse 60% 50% at 50% 50%, black 40%, transparent 100%)',
-                      color: 'rgba(255, 255, 255, 0.5)'
-                    }}
-                  ></div>
-                  <div className="p-8 relative z-10 flex flex-col items-center text-center">
-                    <div className="w-20 h-20 bg-[#4F1AD6] rounded-xl flex items-center justify-center text-white mb-6 shadow-lg">
-                      {React.cloneElement(service.icon, { size: 32 })}
-                    </div>
-                    <h3 className="text-3xl font-light mb-4 text-white">{service.title}</h3>
-                    <div className="h-0.5 w-full bg-gradient-to-r from-transparent via-purple-400 to-transparent my-2"></div>
-                    <p className="text-gray-300 mb-6 max-w-md">{service.description}</p>
-                  </div>
+                  {/* Image Section */}
                   {service.image && (
-                    <div className="relative w-full h-44 overflow-hidden">
+                    <div className="relative w-full h-48 overflow-hidden">
                       <img 
                         src={service.image} 
                         alt={service.title}
-                        className="mx-auto w-1/2 h-full p-2 object-cover rounded-xl transition-transform duration-500 hover:scale-105"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                      
+                      {/* Title over image */}
+                      <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
+                        <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-2xl flex items-center justify-center text-white shadow-lg mx-auto mb-4 group-hover:shadow-blue-500/20 transition-all duration-300">
+                          {React.cloneElement(service.icon, { 
+                            size: 24,
+                            className: 'transition-transform duration-300 group-hover:scale-110',
+                            strokeWidth: 1.5
+                          })}
+                        </div>
+                        <h3 className="text-3xl font-medium text-white">
+                          {service.title}
+                        </h3>
+                      </div>
                     </div>
                   )}
+                  
+                  {/* Description Section */}
+                  <div className="p-6 flex-1 flex flex-col">
+                    <div className="h-[1px] w-24 bg-gradient-to-r from-transparent via-blue-500/50 to-transparent my-4 mx-auto group-hover:w-32 transition-all duration-500"></div>
+                    <p className="text-gray-300/90 text-center leading-relaxed flex-1">{service.description}</p>
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -448,13 +464,83 @@ const Home: React.FC = () => {
           className="relative z-10 mt-40 p-8 shadow-md"
         >
           <div className="w-full overflow-hidden rounded-xl ">
-            <FullScreenScrollFX
-            sections={ sections }
-            header={<><div>The Creative</div><div>Scope</div></>}
-            footer={<div></div>}
+           <FullScreenScrollFX
+            sections={sections}
+            header={
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tight text-center space-y-2"
+              >
+                <div className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 animate-gradient-xy">
+                  The Creative
+                </div>
+                <div className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-blue-400 animate-gradient-xy">
+                  Scope
+                </div>
+              </motion.div>
+            }
+            footer={
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="text-center text-sm text-gray-300 mt-8 flex flex-col items-center"
+              >
+                <span className="mb-2">Scroll to explore our expertise</span>
+                <motion.div
+                  animate={{
+                    y: [0, 10, 0],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    repeatType: "loop",
+                  }}
+                  className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center p-1"
+                >
+                  <motion.div
+                    className="w-1 h-2 bg-gray-300 rounded-full"
+                    animate={{
+                      y: [0, 10],
+                      opacity: [0.4, 1, 0.4],
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      repeatType: "loop",
+                    }}
+                  />
+                </motion.div>
+              </motion.div>
+            }
             showProgress
-            durations={{ change: 0.7, snap: 800 }}
-            />
+           colors={{
+            text: 'rgba(255,255,255,0.92)',
+            overlay: 'rgba(0,0,0,0.5)',
+            pageBg: '#0f172a',
+            stageBg: '#1e293b'
+          }}
+            durations={{ 
+              change: 0.7, 
+              snap: 800 
+            }}
+           style={{
+             backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundBlendMode: 'overlay',
+              backgroundColor: 'rgba(0, 0, 0, 0.7)',
+              transition: 'all 0.7s cubic-bezier(0.4, 0, 0.2, 1)',
+              padding: '2rem',
+              backdropFilter: 'blur(4px)',
+              borderRadius: '1rem',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
+              maxWidth: '90%',
+              margin: '0 auto',       
+            }}
+          />
           </div>
         </motion.div>
      </section>
