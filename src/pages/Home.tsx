@@ -171,7 +171,7 @@ const Home: React.FC = () => {
           >
             <h1 className="text-5xl md:text-8xl font-semibold text-white mb-6">
               <TextType 
-                text={["We build Software", "We custom software", "We solve software"]}
+                text={["We Build Software", "We Build AI Systems", "We Build SaaS Products"]}
                 typingSpeed={75}
                 pauseDuration={1500}
                 showCursor={true}
@@ -180,7 +180,8 @@ const Home: React.FC = () => {
             </h1>
             <p className="text-xl mb-8 max-w-2xl mx-auto">
               <ShinyText
-                text='We build custom software, AI solutions, and SaaS platforms that drive growth and innovation for your business.'
+                text='Custom software, AI-driven solutions, and scalable SaaS products—built to accelerate your growth.
+'
               />
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -221,12 +222,12 @@ const Home: React.FC = () => {
         
         <div className="container mx-auto relative z-10 px-4">
           <div className="text-center mb-16">
-            <h2 className="text-7xl font-bold text-white mt-2 mb-4">WHAT WE OFFER</h2>
+            <h2 className="text-7xl font-bold text-white mt-2 mb-4">OUR SERVICES</h2>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 relative mx-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 px-4 lg:mx-10">
             {/* Left Column */}
-            <div className="space-y-4 mx-20">
+            <div className="space-y-6 lg:space-y-4 lg:mx-20">
               {services.slice(0, Math.ceil(services.length / 2)).map((service, index) => (
                 <motion.div
                   key={`left-${index}`}
@@ -234,7 +235,7 @@ const Home: React.FC = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="w-[100%] bg-gradient-to-br from-white/5 to-white/2 rounded-xl backdrop-blur-lg border border-white/10 hover:border-purple-500/30 transition-all duration-500 overflow-hidden relative group flex flex-col"
+                  className="w-full bg-gradient-to-br from-white/5 to-white/2 rounded-xl backdrop-blur-lg border border-white/10 hover:border-purple-500/30 transition-all duration-500 overflow-hidden relative flex flex-col"
                 >
                   {/* Image Section */}
                   {service.image && (
@@ -247,8 +248,8 @@ const Home: React.FC = () => {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
                       
                       {/* Title over image */}
-                      <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
-                        <div className="w-16 h-16 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-2xl flex items-center justify-center text-white shadow-lg mx-auto mb-4 group-hover:shadow-purple-500/20 transition-all duration-300">
+                      <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 text-center">
+                        <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-lg mx-auto mb-2 md:mb-4 group-hover:shadow-purple-500/20 transition-all duration-300">
                           {React.cloneElement(service.icon, { 
                             size: 24,
                             className: 'transition-transform duration-300 group-hover:scale-110',
@@ -264,15 +265,15 @@ const Home: React.FC = () => {
                   
                   {/* Description Section */}
                   <div className="p-6 flex-1 flex flex-col">
-                    <div className="h-[1px] w-24 bg-gradient-to-r from-transparent via-purple-500/50 to-transparent my-4 mx-auto group-hover:w-32 transition-all duration-500"></div>
-                    <p className="text-gray-300/90 text-center leading-relaxed flex-1">{service.description}</p>
+                    <div className="h-[1px] w-16 md:w-24 bg-gradient-to-r from-transparent via-purple-500/50 to-transparent my-3 md:my-4 mx-auto group-hover:w-24 md:group-hover:w-32 transition-all duration-500"></div>
+                    <p className="text-gray-300/90 text-sm md:text-base text-center leading-relaxed flex-1 px-2 md:px-0">{service.description}</p>
                   </div>
                 </motion.div>
               ))}
             </div>
             
             {/* Right Column */}
-            <div className="space-y-4 mx-20">
+            <div className="space-y-6 lg:space-y-4 lg:mx-20 mt-8 lg:mt-0">
               {services.slice(Math.ceil(services.length / 2)).map((service, index) => (
                 <motion.div
                   key={`right-${index}`}
@@ -280,7 +281,7 @@ const Home: React.FC = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="w-[100%] bg-gradient-to-br from-white/5 to-white/2 rounded-xl backdrop-blur-lg border border-white/10 hover:border-blue-500/30 transition-all duration-500 overflow-hidden relative group flex flex-col"
+                  className="w-full bg-gradient-to-br from-white/5 to-white/2 rounded-xl backdrop-blur-lg border border-white/10 hover:border-blue-500/30 transition-all duration-500 overflow-hidden relative flex flex-col"
                 >
                   {/* Image Section */}
                   {service.image && (
@@ -293,8 +294,8 @@ const Home: React.FC = () => {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
                       
                       {/* Title over image */}
-                      <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
-                        <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-2xl flex items-center justify-center text-white shadow-lg mx-auto mb-4 group-hover:shadow-blue-500/20 transition-all duration-300">
+                      <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 text-center">
+                        <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-lg mx-auto mb-2 md:mb-4 group-hover:shadow-blue-500/20 transition-all duration-300">
                           {React.cloneElement(service.icon, { 
                             size: 24,
                             className: 'transition-transform duration-300 group-hover:scale-110',
@@ -310,8 +311,8 @@ const Home: React.FC = () => {
                   
                   {/* Description Section */}
                   <div className="p-6 flex-1 flex flex-col">
-                    <div className="h-[1px] w-24 bg-gradient-to-r from-transparent via-blue-500/50 to-transparent my-4 mx-auto group-hover:w-32 transition-all duration-500"></div>
-                    <p className="text-gray-300/90 text-center leading-relaxed flex-1">{service.description}</p>
+                    <div className="h-[1px] w-16 md:w-24 bg-gradient-to-r from-transparent via-blue-500/50 to-transparent my-3 md:my-4 mx-auto group-hover:w-24 md:group-hover:w-32 transition-all duration-500"></div>
+                    <p className="text-gray-300/90 text-sm md:text-base text-center leading-relaxed flex-1 px-2 md:px-0">{service.description}</p>
                   </div>
                 </motion.div>
               ))}
@@ -336,7 +337,7 @@ const Home: React.FC = () => {
           <div className="max-w-6xl mx-auto ">
             <div className="space-y-2 md:space-y-4 text-center p-4 ">
                
-              <p className="text-white/70 text-sm md:text-base font-mono tracking-widest mb-6">INNOVATION MEETS PRECISION</p>
+              <p className="text-white/70 text-sm md:text-base font-mono tracking-widest mb-6">WHERE INNOVATION MEETS EXECUTION</p>
               <h2 
                 ref={highlightTextRef} 
                 className="text-5xl md:text-8xl lg:text-9xl font-black leading-none text-white"
@@ -359,7 +360,8 @@ const Home: React.FC = () => {
       
       </section>
        <div style={{ height: '200px', position: 'relative', overflow: 'hidden', color: 'white' , marginBottom: '10%'}}>
-        <h1 className="text-white/90 text-2xl lg:text-4xl md:text-xl mb-8 mx-auto text-center font-light leading-relaxed">TECHNOLOGY PARTNERS AND TECH STACK</h1>
+        <h1 className="text-white/90 text-2xl lg:text-4xl md:text-xl mb-8 mx-auto text-center font-light leading-relaxed">TECHNOLOGY PARTNERS & CORE STACK
+</h1>
       <LogoLoop
         logos={techLogos}
         speed={100}
@@ -375,7 +377,7 @@ const Home: React.FC = () => {
     </div>
       
       {/* Engineering Excellence Section with LightRays */}
-      <section className="relative p-14">
+      <section className="relative px-4 py-10 sm:px-6 lg:px-14 lg:py-14">
         {/* LightRays Background for Engineering Excellence */}
         <motion.div
           initial={{
@@ -390,23 +392,23 @@ const Home: React.FC = () => {
             duration: 0.3,
             delay: 1.2,
           }}
-          className="relative mt-20 rounded border border-neutral-100 p-8 shadow-md"
+          className="relative mt-10 lg:mt-20 border-t border-neutral-100 p-4 sm:p-6 lg:p-8 shadow-md"
         >
-          <div className="w-full overflow-hidden ">
+          <div className="w-full overflow-hidden">
             <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <LightRays
-            raysOrigin="top-center"
-            raysColor="rgba(0,0,255,1)"
-            raysSpeed={0.3}
-            lightSpread={1.2}
-            rayLength={1.8}
-            followMouse={true}
-            mouseInfluence={0.15}
-            noiseAmount={0.03}
-            distortion={0.01}
-            className="w-full h-full"
-          />
-        </div>
+              <LightRays
+                raysOrigin="top-center"
+                raysColor="rgba(0,0,255,1)"
+                raysSpeed={0.3}
+                lightSpread={1.2}
+                rayLength={1.8}
+                followMouse={true}
+                mouseInfluence={0.15}
+                noiseAmount={0.03}
+                distortion={0.01}
+                className="w-full h-full"
+              />
+            </div>
             <EngineeringExcellence/>
           </div>
         </motion.div>
@@ -433,7 +435,8 @@ const Home: React.FC = () => {
                   strokeWidth={4}
                   className="text-ali absolute color-white -bottom-5 -right-5 h-10 w-10 text-white"
                 />
-                Redefining Excellence in Software
+                Redefining Modern Software Excellence
+
               </h1>
               <FeatureCardsDemo/>
             </div>
@@ -464,86 +467,17 @@ const Home: React.FC = () => {
           className="relative z-10 mt-40 p-8 shadow-md"
         >
           <div className="w-full overflow-hidden rounded-xl ">
-           <FullScreenScrollFX
-            sections={sections}
-            header={
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tight text-center space-y-2"
-              >
-                <div className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 animate-gradient-xy">
-                  The Creative
-                </div>
-                <div className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-blue-400 animate-gradient-xy">
-                  Scope
-                </div>
-              </motion.div>
-            }
-            footer={
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="text-center text-sm text-gray-300 mt-8 flex flex-col items-center"
-              >
-                <span className="mb-2">Scroll to explore our expertise</span>
-                <motion.div
-                  animate={{
-                    y: [0, 10, 0],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    repeatType: "loop",
-                  }}
-                  className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center p-1"
-                >
-                  <motion.div
-                    className="w-1 h-2 bg-gray-300 rounded-full"
-                    animate={{
-                      y: [0, 10],
-                      opacity: [0.4, 1, 0.4],
-                    }}
-                    transition={{
-                      duration: 1.5,
-                      repeat: Infinity,
-                      repeatType: "loop",
-                    }}
-                  />
-                </motion.div>
-              </motion.div>
-            }
+            <FullScreenScrollFX
+            sections={ sections }
+            header={<><div>The Creative</div><div>Scope</div></>}
+            footer={<div></div>}
             showProgress
-           colors={{
-            text: 'rgba(255,255,255,0.92)',
-            overlay: 'rgba(0,0,0,0.5)',
-            pageBg: '#0f172a',
-            stageBg: '#1e293b'
-          }}
-            durations={{ 
-              change: 0.7, 
-              snap: 800 
-            }}
-           style={{
-             backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundBlendMode: 'overlay',
-              backgroundColor: 'rgba(0, 0, 0, 0.7)',
-              transition: 'all 0.7s cubic-bezier(0.4, 0, 0.2, 1)',
-              padding: '2rem',
-              backdropFilter: 'blur(4px)',
-              borderRadius: '1rem',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
-              maxWidth: '90%',
-              margin: '0 auto',       
-            }}
-          />
+            durations={{ change: 0.7, snap: 800 }}
+            />
           </div>
         </motion.div>
      </section>
+
  
       {/* World Map Section */}
       <section className="min-h-screen w-full py-20 rounded-xl overflow-hidden">

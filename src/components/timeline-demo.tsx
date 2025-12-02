@@ -29,17 +29,20 @@ export function TimelineDemo() {
               <div className="p-2 bg-purple-500/10 rounded-lg">
                 <Lightbulb className="w-5 h-5 text-purple-400" />
               </div>
-              <h3 className="text-lg font-medium text-neutral-200">Concept Development</h3>
+              <h3 className="text-lg font-medium text-neutral-200">Idea & Validation</h3>
             </div>
             <p className="text-neutral-400 text-sm leading-relaxed mb-6">
-              We transform your vision into actionable strategies through comprehensive market analysis and user research, ensuring we build solutions that truly resonate with your audience.
+              We turn raw ideas into strategic, validated concepts. Through research,
+                market alignment, and rapid experimentation, we ensure your product is
+                viable before a single line of code is written.
             </p>
             <div className="space-y-3">
               {[
-                { icon: <Users className="w-4 h-4" />, text: "User Research & Analysis" },
-                { icon: <BarChart3 className="w-4 h-4" />, text: "Market Validation" },
-                { icon: <Zap className="w-4 h-4" />, text: "Proof of Concept" },
-                { icon: <Layers className="w-4 h-4" />, text: "MVP Planning" }
+                { icon: <Users className="w-4 h-4" />, text: "User Research & Persona Analysis" },
+                { icon: <BarChart3 className="w-4 h-4" />, text: "Market & Competitor Validation" },
+                { icon: <Zap className="w-4 h-4" />, text: "Rapid Prototyping & Proof of Concept" },
+                { icon: <Layers className="w-4 h-4" />, text: "MVP Roadmapping & Feature Prioritization" }
+
               ].map((item, i) => (
                 <div 
                   key={i} 
@@ -69,17 +72,19 @@ export function TimelineDemo() {
               <div className="p-2 bg-blue-500/10 rounded-lg">
                 <Code className="w-5 h-5 text-blue-400" />
               </div>
-              <h3 className="text-lg font-medium text-neutral-200">Engineering Excellence</h3>
+              <h3 className="text-lg font-medium text-neutral-200">Product Development</h3>
             </div>
             <p className="text-neutral-400 text-sm leading-relaxed mb-6">
-              Our expert team builds robust, scalable solutions using cutting-edge technologies and best practices to bring your product to life with clean, maintainable code.
+              We engineer scalable, high-performance software using modern architectures
+              and industry best practices. Every component is designed for reliability,
+              maintainability, and long-term growth.
             </p>
             <div className="grid grid-cols-2 gap-3">
-              {[
-                { icon: <Cpu className="w-4 h-4" />, text: "Microservices" },
-                { icon: <GitBranch className="w-4 h-4" />, text: "CI/CD Pipelines" },
-                { icon: <Layers className="w-4 h-4" />, text: "Containerization" },
-                { icon: <Cloud className="w-4 h-4" />, text: "Cloud Native" }
+               {[
+                { icon: <Cpu className="w-4 h-4" />, text: "Microservices & Modular Architecture" },
+                { icon: <GitBranch className="w-4 h-4" />, text: "Automated CI/CD & GitOps" },
+                { icon: <Layers className="w-4 h-4" />, text: "Docker & Container Orchestration" },
+                { icon: <Cloud className="w-4 h-4" />, text: "Cloud-Native Infrastructure" }
               ].map((item, i) => (
                 <div 
                   key={i}
@@ -109,10 +114,12 @@ export function TimelineDemo() {
           <div className="p-2 bg-pink-500/10 rounded-lg">
             <Rocket className="w-5 h-5 text-pink-400" />
           </div>
-          <h3 className="text-lg font-medium text-neutral-200">Scale & Optimize</h3>
+          <h3 className="text-lg font-medium text-neutral-200">Growth & Scaling</h3>
         </div>
         <p className="text-neutral-400 text-sm leading-relaxed mb-6">
-          We help you scale your product efficiently while maintaining performance and user experience, with data-driven optimizations and growth strategies.
+           Once your product is live, we help you scale seamlessly. From performance
+           optimization to data-driven growth strategies, we make sure your product
+           accelerates—not breaks—under increasing demand.
         </p>
         <div className="space-y-4">
           <div className="space-y-2">
@@ -120,10 +127,10 @@ export function TimelineDemo() {
                <div className="p-2 bg-pink-500/10 rounded-lg">
             <Gauge className="w-5 h-5 text-pink-400" />
           </div>
-               Performance & Infrastructure
+              Performance & Infrastructure
             </h4>
             <p className="text-xs text-neutral-400 pl-6">
-              Optimized cloud architecture with auto-scaling and CDN integration
+              Auto-scaling cloud setups, performance tuning, and zero-downtime deployments.
             </p>
           </div>
           
@@ -135,7 +142,7 @@ export function TimelineDemo() {
                Data & Analytics
             </h4>
             <p className="text-xs text-neutral-400 pl-6">
-              Actionable insights through advanced analytics and A/B testing
+              Product analytics, user behavior insights, and A/B testing for continuous improvement.
             </p>
           </div>
           
@@ -147,7 +154,7 @@ export function TimelineDemo() {
                 Growth Strategy
             </h4>
             <p className="text-xs text-neutral-400 pl-6">
-              Data-driven growth initiatives and conversion optimization
+               Conversion optimization, lifecycle improvements, and scalable GTM systems.
             </p>
           </div>
         </div>

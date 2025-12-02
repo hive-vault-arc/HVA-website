@@ -105,7 +105,7 @@ return (
             Our <span className="text-white">Approach</span>
           </h2>
           <p className="text-neutral-400 text-base md:text-lg max-w-lg">
-            A timeline of our development process and key milestones.
+             A clear, structured, and efficient process designed to deliver exceptional results.
           </p>
         </motion.div>
       </div>

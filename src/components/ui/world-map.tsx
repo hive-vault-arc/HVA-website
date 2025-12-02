@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import DottedMap from "dotted-map";
+import { MapPin, Phone, Mail, Twitter, Linkedin, Github } from "lucide-react";
 
 interface MapProps {
   dots?: Array<{
@@ -46,6 +47,7 @@ export function WorldMap({
   };
 
   return (
+    <div>
     <div className="w-full aspect-[2/1] bg-white relative font-sans rounded-2xl">
       <div 
         className="h-full w-full [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)] pointer-events-none select-none"
@@ -162,5 +164,55 @@ export function WorldMap({
         ))}
       </svg>
     </div>
+    <div className="w-full  backdrop-blur-sm p-6 md:p-8 mt-6 rounded-xl ">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="space-y-2">
+          <h3 className="text-lg font-semibold text-white flex items-center">
+            <MapPin className="w-5 h-5 mr-2 text-purple-700" />
+            Our Office
+          </h3>
+          <p className="text-gray-300 text-sm">123 Tech Street</p>
+          <p className="text-gray-300 text-sm">San Francisco, CA 94107</p>
+          <p className="text-gray-300 text-sm">United States</p>
+        </div>
+        
+        <div className="space-y-2">
+          <h3 className="text-lg font-semibold text-white flex items-center">
+            <Phone className="w-5 h-5 mr-2 text-purple-700" />
+            Contact Us
+          </h3>
+          <p className="text-gray-300 text-sm">+1 (555) 123-4567</p>
+          <p className="text-gray-300 text-sm">Mon - Fri: 9:00 - 18:00</p>
+          <p className="text-gray-300 text-sm">Sat - Sun: Closed</p>
+        </div>
+        
+        <div className="space-y-2">
+          <h3 className="text-lg font-semibold text-white flex items-center">
+            <Mail className="w-5 h-5 mr-2 text-purple-700" />
+            Get In Touch
+          </h3>
+          <p className="text-gray-300 text-sm">hello@techagency.com</p>
+          <p className="text-gray-300 text-sm">support@techagency.com</p>
+          <div className="flex space-x-4 pt-2">
+            <a href="#" className="text-purple-700 hover:text-white transition-colors">
+              <Twitter className="w-5 h-5" />
+            </a>
+            <a href="#" className="text-purple-700 hover:text-white transition-colors">
+              <Linkedin className="w-5 h-5" />
+            </a>
+            <a href="#" className="text-purple-700 hover:text-white transition-colors">
+              <Github className="w-5 h-5" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div className="mt-8 pt-6 border-t border-purple/100 text-center">
+        <p className="text-sm text-gray-400">
+          © {new Date().getFullYear()} Tech Agency. All rights reserved.
+        </p>
+      </div>
+    </div>
+    </div>
+    
   );
 }

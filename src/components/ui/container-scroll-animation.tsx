@@ -37,17 +37,17 @@ export const ContainerScroll = ({
 
   return (
     <div
-      className="h-[60rem] md:h-[70rem] flex items-center justify-center relative p-2 md:p-20"
+      className="h-[50rem] sm:h-[60rem] md:h-[70rem] flex items-start md:items-center justify-center relative p-2 sm:p-4 md:p-8 lg:p-20 pt-48 sm:pt-24 md:pt-28"
       ref={containerRef}
     >
       <div
-        className="py-20 md:py-30 w-full relative"
+        className="w-full relative"
         style={{
           perspective: "700px",
         }}
       >
         <Header translate={translate} titleComponent={titleComponent} />
-        <Card rotate={rotate} translate={translate} scale={scale}>
+        <Card rotate={rotate} translate={translate} scale={scale} isMobile={isMobile}>
           {children}
         </Card>
       </div>
@@ -73,11 +73,13 @@ export const Card = ({
   scale,
   children,
   translate,
+  isMobile = false,
 }: {
   rotate: MotionValue<number>;
   scale: MotionValue<number>;
   translate: MotionValue<number>;
   children: React.ReactNode;
+  isMobile?: boolean;
 }) => {
   return (
     <motion.div
@@ -87,9 +89,11 @@ export const Card = ({
         boxShadow:
           "0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a, 0 233px 65px #00000003",
       }}
-      className="max-w-5xl -mt-8 mx-auto h-[35rem] md:h-[45rem] w-full   rounded-[35px] shadow-2xl"
+      className={`max-w-5xl mx-auto w-full rounded-3xl shadow-2xl ${
+        isMobile ? 'h-[20rem] mt-0' : 'h-[35rem] md:h-[45rem] mt-12 md:mt-16'
+      }`}
     >
-      <div className="h-full w-full overflow-hidden rounded-2xl md:rounded-2xl md:p-4">
+      <div className="h-full w-full overflow-hidden rounded-2xl p-2 sm:p-3 md:p-4">
         {children}
       </div>
     </motion.div>
