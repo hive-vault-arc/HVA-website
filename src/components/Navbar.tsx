@@ -54,7 +54,7 @@ const Navbar: React.FC = () => {
             {/* Logo */}
             <Link to="/" className="flex-shrink-0">
               <span className="text-2xl font-light tracking-tight text-white font-serif">
-                DevCraft
+                HIIVA
               </span>
             </Link>
 

@@ -191,8 +191,8 @@ export function WorldMap({
             <Mail className="w-5 h-5 mr-2 text-purple-700" />
             Get In Touch
           </h3>
-          <p className="text-gray-300 text-sm">hello@techagency.com</p>
-          <p className="text-gray-300 text-sm">support@techagency.com</p>
+          <p className="text-gray-300 text-sm">hello@hiiva.com</p>
+          <p className="text-gray-300 text-sm">support@hiiva.com</p>
           <div className="flex space-x-4 pt-2">
             <a href="#" className="text-purple-700 hover:text-white transition-colors">
               <Twitter className="w-5 h-5" />
@@ -208,7 +208,7 @@ export function WorldMap({
       </div>
       <div className="mt-8 pt-6 border-t border-purple/100 text-center">
         <p className="text-sm text-gray-400">
-          © {new Date().getFullYear()} Tech Agency. All rights reserved.
+          © {new Date().getFullYear()} Hive Vault Arc (HIIVA). All rights reserved.
         </p>
       </div>
     </div>
