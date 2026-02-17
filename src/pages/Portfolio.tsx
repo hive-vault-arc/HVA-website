@@ -1,278 +1,240 @@
-import React, { useEffect } from 'react';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Star, Clock, Users, Code, Smartphone, Bot } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Tilt } from 'react-tilt';
-import Background3D from '../components/Plasma';
+import { ArrowRight, Cpu, Fingerprint, Pencil, SlidersHorizontal, Sparkles, Zap } from 'lucide-react';
+import Background3d from '../components/Plasma';
+import GradualBlur from '../components/GradualBlur';
+
+type Project = {
+  title: string;
+  category: string;
+  image: string;
+  summary: string;
+  impact: string;
+};
+
+const projects: Project[] = [
+  {
+    title: 'EatsNow',
+    category: 'Mobile Product',
+    image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1200&q=80',
+    summary: 'Food ordering app with a clean flow from browsing to checkout.',
+    impact: 'Faster ordering experience and smoother daily operations.',
+  },
+  {
+    title: 'InventoryMaster',
+    category: 'Web Platform',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80',
+    summary: 'Operations dashboard for stock, reports, and team actions.',
+    impact: 'Better visibility and quicker decisions across teams.',
+  },
+  {
+    title: 'LegalBot',
+    category: 'AI Assistant',
+    image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=80',
+    summary: 'AI helper for document understanding and quick legal guidance.',
+    impact: 'Reduced manual review time and faster user support.',
+  },
+];
+
+const excellenceItems = [
+  {
+    icon: <Zap className="w-5 h-5 text-violet-400" />,
+    title: 'Fast',
+    text: 'Our code is optimized and ready for production.',
+  },
+  {
+    icon: <Cpu className="w-5 h-5 text-violet-400" />,
+    title: 'Powerful',
+    text: 'Strong logic and reliable systems shipped.',
+  },
+  {
+    icon: <Fingerprint className="w-5 h-5 text-violet-400" />,
+    title: 'Security',
+    text: 'Safe and stable code that passes strict checks.',
+  },
+  {
+    icon: <Pencil className="w-5 h-5 text-violet-400" />,
+    title: 'Customization',
+    text: 'Built around your business needs and workflow.',
+  },
+  {
+    icon: <SlidersHorizontal className="w-5 h-5 text-violet-400" />,
+    title: 'Clear Control',
+    text: 'Full visibility on delivery, status, and decisions.',
+  },
+  {
+    icon: <Sparkles className="w-5 h-5 text-violet-400" />,
+    title: 'AI Ready',
+    text: 'Ready to adopt practical AI where it adds value.',
+  },
+];
+
+const testimonials = [
+  {
+    quote: 'HIIVA helped us launch faster with a product that felt polished from day one.',
+    author: 'Aisha Rahmani',
+    role: 'Founder',
+  },
+  {
+    quote: 'The team was clear, reliable, and focused. Delivery stayed on track from start to finish.',
+    author: 'Omar Benali',
+    role: 'Operations Manager',
+  },
+];
 
 const Portfolio: React.FC = () => {
-
-  const demoProjects = [
-    {
-      title: 'EatsNow',
-      type: 'Mobile App',
-      image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80',
-      description: 'A food delivery mobile application with a user-friendly interface and efficient ordering system.',
-      features: ['User Authentication', 'Browse Restaurants', 'Place Orders', 'Payment Integration'],
-      link: '#',
-      icon: <Smartphone className="w-8 h-8" />
-    },
-    {
-      title: 'InventoryMaster',
-      type: 'Web Dashboard',
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80',
-      description: 'A comprehensive web dashboard for managing inventory, sales, and stock.',
-      features: ['Stock Management', 'Sales Tracking', 'Reporting', 'User Roles'],
-      link: '#',
-      icon: <Code className="w-8 h-8" />
-    },
-    {
-      title: 'LegalBot',
-      type: 'AI Agent',
-      image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80',
-      description: 'An AI-powered legal assistant that helps users understand legal documents and find relevant information.',
-      features: ['Document Analysis', 'Information Retrieval', 'NLP Queries', 'Summarization'],
-      link: '#',
-      icon: <Bot className="w-8 h-8" />
-    },
-  ];
-
-  const testimonials = [
-    {
-      quote: 'Working with this agency was a game-changer for our business. Their expertise in mobile app development helped us launch our product faster than we thought possible.',
-      author: 'Aisha Rahmani',
-      role: 'Founder, TechStart',
-      rating: 5,
-      image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80'
-    },
-    {
-      quote: 'The web dashboard they built for us streamlined our operations and significantly improved our efficiency. The team was professional and delivered beyond our expectations.',
-      author: 'Omar Benali',
-      role: 'Operations Manager, SupplyChain Solutions',
-      rating: 5,
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80'
-    },
-  ];
-
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-      offset: 100,
-      easing: 'ease-out-cubic'
-    });
-  }, []);
-
   return (
-    <div className="overflow-hidden">
-      <Background3D />
+    <div className="relative min-h-screen overflow-hidden bg-black text-white">
+      <Background3d color="#CF9FFF" speed={0.5} direction="forward" scale={1.05} opacity={0.75} mouseInteractive={false} />
 
-      {/* Hero Section */}
-      <section className="flex flex-col justify-center items-center text-center relative py-20">
-        <div className="max-w-4xl mx-auto px-4 relative z-10">
+      <section className="relative pt-32 pb-14">
+        <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="inline-block px-4 py-2 bg-blue-50 text-blue-600 rounded-full text-sm font-medium mb-4"
+            transition={{ duration: 0.7 }}
+            className="max-w-4xl"
           >
-            Our Portfolio
-          </motion.div>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-6xl md:text-7xl font-extrabold leading-tight text-gray-900 mb-6"
-          >
-            Our Work Speaks for Itself
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl font-light max-w-2xl mx-auto text-gray-600 mb-12"
-          >
-            We build digital solutions that drive growth and make an impact.
-          </motion.p>
-        </div>
-      </section>
-
-      {/* Demo Projects Section */}
-      <section className="py-20 relative">
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-12"
-          >
-            <span className="text-gray-600 font-medium mb-4 block">Featured Projects</span>
-            <h2 className="text-4xl font-bold text-gray-900">Our Latest Work</h2>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {demoProjects.map((project, index) => (
-              <Tilt key={index} options={{ max: 15, scale: 1.05, speed: 1000 }}>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="group relative overflow-hidden rounded-2xl transition-all duration-300 flex flex-col bg-white hover:shadow-lg"
-                >
-                  <div className="aspect-[4/3] overflow-hidden">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                  <div className="p-8">
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center">
-                        {React.cloneElement(project.icon, { className: "w-6 h-6 text-white" })}
-                      </div>
-                      <div>
-                        <h3 className="text-2xl font-semibold text-gray-900">{project.title}</h3>
-                        <p className="text-blue-600 font-medium">{project.type}</p>
-                      </div>
-                    </div>
-                    <p className="text-gray-600 mb-6">{project.description}</p>
-                    <div className="space-y-3 mb-6">
-                      {project.features.map((feature, featureIndex) => (
-                        <div key={featureIndex} className="flex items-center text-gray-600">
-                          <ArrowRight className="w-4 h-4 text-blue-600 mr-2 flex-shrink-0" />
-                          <span>{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-                    <Link
-                      to={project.link}
-                      className="inline-flex items-center text-blue-600 font-medium hover:underline group"
-                    >
-                      View Demo
-                      <ArrowRight className="w-5 h-5 ml-2 inline-block group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                  </div>
-                </motion.div>
-              </Tilt>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Coming Soon Section */}
-      <section className="py-20 relative">
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl mx-auto text-center"
-          >
-            <span className="text-gray-600 font-medium mb-4 block">Coming Soon</span>
-            <h2 className="text-4xl font-bold text-gray-900 mb-8">Client Projects in Progress</h2>
-            <p className="text-gray-600 mb-12 max-w-2xl mx-auto">
-              We are currently working on exciting projects for our clients. Check back soon to see them featured here!
+            <p className="text-sm uppercase tracking-[0.22em] text-white/70">Portfolio</p>
+            <h1 className="mt-4 text-4xl md:text-6xl font-semibold leading-tight">
+              Work that shows how we think, build, and deliver
+            </h1>
+            <p className="mt-6 text-lg text-white/75 max-w-3xl leading-relaxed">
+              We focus on clear outcomes, dependable execution, and products that perform in real use.
             </p>
-            <div className="flex justify-center gap-12">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="text-center"
+            <div className="mt-10 flex flex-wrap gap-4">
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-3 font-medium hover:bg-white/20 transition-colors"
               >
-                <div className="w-16 h-16 bg-blue-500 rounded-xl flex items-center justify-center mx-auto mb-4">
-                  <Clock className="w-8 h-8 text-white" />
-                </div>
-                <p className="text-gray-600">In Development</p>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                className="text-center"
+                Start Your Project
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                to="/services"
+                className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 font-medium text-white/90 hover:bg-white/10 transition-colors"
               >
-                <div className="w-16 h-16 bg-green-500 rounded-xl flex items-center justify-center mx-auto mb-4">
-                  <Users className="w-8 h-8 text-white" />
-                </div>
-                <p className="text-gray-600">Client Projects</p>
-              </motion.div>
+                Explore Services
+              </Link>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-20 relative">
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-12"
-          >
-            <span className="text-gray-600 font-medium mb-4 block">Testimonials</span>
-            <h2 className="text-4xl font-bold text-gray-900">What Our Clients Say</h2>
-          </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {testimonials.map((testimonial, index) => (
-              <Tilt key={index} options={{ max: 15, scale: 1.02, speed: 1000 }}>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-white p-8 rounded-2xl flex flex-col justify-between shadow-sm"
-                >
-                  <div className="flex items-start gap-6 mb-6">
-                    <img
-                      src={testimonial.image}
-                      alt={testimonial.author}
-                      className="w-16 h-16 rounded-full object-cover"
-                    />
-                    <div>
-                      <h4 className="font-semibold text-gray-900 text-lg">{testimonial.author}</h4>
-                      <p className="text-gray-600">{testimonial.role}</p>
-                    </div>
-                  </div>
-                  <p className="text-gray-700 italic mb-6">"{testimonial.quote}"</p>
-                  <div className="text-yellow-400 flex">
-                    {Array.from({ length: testimonial.rating }).map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-current" />
-                    ))}
-                  </div>
-                </motion.div>
-              </Tilt>
+      <section className="relative py-10">
+        <div className="container mx-auto px-4">
+          <div className="mb-10">
+            <p className="text-sm uppercase tracking-[0.2em] text-white/60">Selected Work</p>
+            <h2 className="mt-2 text-3xl md:text-5xl font-semibold">Recent Projects</h2>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {projects.map((project, idx) => (
+              <motion.article
+                key={project.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.45, delay: idx * 0.08 }}
+                className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl overflow-hidden"
+              >
+                <div className="aspect-[4/3] overflow-hidden">
+                  <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+                </div>
+                <div className="p-6">
+                  <p className="text-xs uppercase tracking-[0.14em] text-white/60">{project.category}</p>
+                  <h3 className="mt-2 text-2xl font-semibold">{project.title}</h3>
+                  <p className="mt-3 text-white/75 leading-relaxed">{project.summary}</p>
+                  <p className="mt-4 text-white/90">{project.impact}</p>
+                </div>
+              </motion.article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 relative">
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl mx-auto text-center"
-          >
-            <span className="text-gray-600 font-medium mb-4 block">Get Started</span>
-            <h2 className="text-4xl font-bold text-gray-900 mb-8">Ready to Start Your Project?</h2>
-            <p className="text-gray-600 mb-12 max-w-2xl mx-auto">
-              Let's discuss your ideas and turn them into a reality. Contact us for a free consultation and estimate.
-            </p>
-            <Link
-              to="/contact"
-              className="px-8 py-4 bg-gray-800 text-white rounded-full font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 group inline-flex items-center"
-            >
-              Get Your Free Quote
-              <ArrowRight className="w-5 h-5 ml-2 inline-block group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </motion.div>
+      <section className="relative py-14">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-4xl mx-auto">
+            <h2 className="text-5xl md:text-8xl font-semibold leading-[0.95]">Redefining Modern Software Excellence</h2>
+            <p className="mt-20 text-4xl md:text-6xl font-semibold">Power. Speed. Control.</p>
+            <p className="mt-4 text-white/60 text-xl">Everything you need to build fast, secure, scalable apps.</p>
+          </div>
+
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border border-white/40 max-w-5xl mx-auto">
+            {excellenceItems.map((item) => (
+              <div
+                key={item.title}
+                className="p-6 md:p-7 border-b border-r border-white/30 bg-black/40 relative overflow-hidden"
+                style={{
+                  backgroundImage:
+                    'radial-gradient(circle at 70% 20%, rgba(255,255,255,0.08), transparent 35%), linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)',
+                  backgroundSize: '100% 100%, 18px 18px, 18px 18px',
+                }}
+              >
+                <div className="mb-5">{item.icon}</div>
+                <h3 className="text-4xl md:text-3xl font-semibold">{item.title}</h3>
+                <p className="mt-3 text-white/85 leading-relaxed">{item.text}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
+
+      <section className="relative py-14">
+        <div className="container mx-auto px-4">
+          <div className="mb-8">
+            <p className="text-sm uppercase tracking-[0.2em] text-white/60">Client Voice</p>
+            <h2 className="mt-2 text-3xl md:text-5xl font-semibold">What Clients Say</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {testimonials.map((item, idx) => (
+              <motion.blockquote
+                key={item.author}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.45, delay: idx * 0.08 }}
+                className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-7 md:p-8"
+              >
+                <p className="text-white/85 text-lg leading-relaxed">"{item.quote}"</p>
+                <footer className="mt-6">
+                  <p className="text-white font-medium">{item.author}</p>
+                  <p className="text-white/65 text-sm">{item.role}</p>
+                </footer>
+              </motion.blockquote>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="relative py-14 mb-10">
+        <div className="container mx-auto px-4 text-center">
+          <div className="max-w-4xl mx-auto rounded-2xl border border-white/10 bg-gradient-to-r from-white/10 to-white/5 p-8 md:p-12">
+            <h2 className="text-3xl md:text-5xl text-white font-semibold">Ready to Build Something Great?</h2>
+            <p className="text-white/75 mt-4 max-w-2xl mx-auto">
+              Share your project goals. We will help you plan the right next move.
+            </p>
+            <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black rounded-lg font-medium hover:bg-gray-100 transition-colors duration-300"
+              >
+                Book a Call
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                to="/services"
+                className="inline-flex items-center justify-center px-8 py-4 bg-white/10 text-white border border-white/20 rounded-lg font-medium hover:bg-white/20 transition-colors duration-300"
+              >
+                View Services
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <GradualBlur target="page" position="bottom" height="5rem" strength={2} divCount={5} curve="bezier" exponential opacity={1} />
     </div>
   );
 };
