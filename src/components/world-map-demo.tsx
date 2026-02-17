@@ -2,18 +2,19 @@ import { WorldMap } from "./ui/world-map";
 
 export function WorldMapDemo() {
   return (
-    <div className="py-20  w-full">
+    <div className="py-12 w-full">
       <div className="max-w-7xl mx-auto px-4 text-center">
         <p className="font-bold text-3xl md:text-7xl text-white mb-6">
           Global Reach, Local Impact
         </p>
-        <p className="text-sm md:text-lg text-neutral-500 max-w-2xl mx-auto py-4">
-          Our team spans across the globe, working together seamlessly to deliver
-          exceptional results for our clients, no matter where they are located.
-          Global Reach, Local Impact
+        <p className="text-sm md:text-lg text-neutral-400 max-w-3xl mx-auto py-2">
+          We collaborate across regions to deliver consistent product quality and execution speed.
+        </p>
+        <p className="text-xs md:text-sm text-neutral-500 max-w-2xl mx-auto">
+          Active delivery network across MENA, Europe, and Asia.
         </p>
       </div>
-      <div className="max-w-6xl mx-auto px-4 mt-12">
+      <div className="max-w-6xl mx-auto px-4 mt-8">
         <WorldMap
         dots={[
           // Africa to Europe
