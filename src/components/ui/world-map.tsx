@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import DottedMap from "dotted-map";
 import { MapPin, Phone, Mail, Twitter, Linkedin, Github } from "lucide-react";
@@ -16,7 +16,7 @@ export function WorldMap({
   lineColor = "#0ea5e9",
 }: MapProps) {
   const svgRef = useRef<SVGSVGElement>(null);
-  const map = new DottedMap({ height: 100, grid: "diagonal" });
+  const map = useMemo(() => new DottedMap({ height: 100, grid: "diagonal" }), []);
 
   const [svgMap, setSvgMap] = useState("");
 
@@ -29,7 +29,7 @@ export function WorldMap({
       backgroundColor: "white",
     });
     setSvgMap(mapSvg);
-  }, []);
+  }, [map]);
 
   const projectPoint = (lat: number, lng: number) => {
     const x = (lng + 180) * (800 / 360);
@@ -171,9 +171,9 @@ export function WorldMap({
             <MapPin className="w-5 h-5 mr-2 text-purple-700" />
             Our Office
           </h3>
-          <p className="text-gray-300 text-sm">123 Tech Street</p>
-          <p className="text-gray-300 text-sm">San Francisco, CA 94107</p>
-          <p className="text-gray-300 text-sm">United States</p>
+          <p className="text-gray-300 text-sm">Technopark Tangier</p>
+          <p className="text-gray-300 text-sm">Route de Rabat</p>
+          <p className="text-gray-300 text-sm">Tangier, Morocco</p>
         </div>
         
         <div className="space-y-2">
@@ -181,7 +181,7 @@ export function WorldMap({
             <Phone className="w-5 h-5 mr-2 text-purple-700" />
             Contact Us
           </h3>
-          <p className="text-gray-300 text-sm">+1 (555) 123-4567</p>
+          <p className="text-gray-300 text-sm">+212 600-000-000</p>
           <p className="text-gray-300 text-sm">Mon - Fri: 9:00 - 18:00</p>
           <p className="text-gray-300 text-sm">Sat - Sun: Closed</p>
         </div>
@@ -192,15 +192,15 @@ export function WorldMap({
             Get In Touch
           </h3>
           <p className="text-gray-300 text-sm">hello@hiiva.com</p>
-          <p className="text-gray-300 text-sm">support@hiiva.com</p>
+          <p className="text-gray-300 text-sm">contact@hiiva.com</p>
           <div className="flex space-x-4 pt-2">
-            <a href="#" className="text-purple-700 hover:text-white transition-colors">
+            <a href="https://x.com" target="_blank" rel="noreferrer noopener" className="text-purple-700 hover:text-white transition-colors" aria-label="X (Twitter)">
               <Twitter className="w-5 h-5" />
             </a>
-            <a href="#" className="text-purple-700 hover:text-white transition-colors">
+            <a href="https://www.linkedin.com" target="_blank" rel="noreferrer noopener" className="text-purple-700 hover:text-white transition-colors" aria-label="LinkedIn">
               <Linkedin className="w-5 h-5" />
             </a>
-            <a href="#" className="text-purple-700 hover:text-white transition-colors">
+            <a href="https://github.com" target="_blank" rel="noreferrer noopener" className="text-purple-700 hover:text-white transition-colors" aria-label="GitHub">
               <Github className="w-5 h-5" />
             </a>
           </div>

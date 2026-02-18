@@ -45,74 +45,6 @@ const toCssLength = (value?: number | string): string | undefined =>
 
 const cx = (...parts: Array<string | false | null | undefined>) => parts.filter(Boolean).join(' ');
 
-const useResizeObserver = (
-  callback: () => void,
-  elements: Array<React.RefObject<Element | null>>,
-  dependencies: React.DependencyList
-) => {
-  useEffect(() => {
-    if (!window.ResizeObserver) {
-      const handleResize = () => callback();
-      window.addEventListener('resize', handleResize);
-      callback();
-      return () => window.removeEventListener('resize', handleResize);
-    }
-
-    const observers = elements.map(ref => {
-      if (!ref.current) return null;
-      const observer = new ResizeObserver(callback);
-      observer.observe(ref.current);
-      return observer;
-    });
-
-    callback();
-
-    return () => {
-      observers.forEach(observer => observer?.disconnect());
-    };
-  }, dependencies);
-};
-
-const useImageLoader = (
-  seqRef: React.RefObject<HTMLUListElement | null>,
-  onLoad: () => void,
-  dependencies: React.DependencyList
-) => {
-  useEffect(() => {
-    const images = seqRef.current?.querySelectorAll('img') ?? [];
-
-    if (images.length === 0) {
-      onLoad();
-      return;
-    }
-
-    let remainingImages = images.length;
-    const handleImageLoad = () => {
-      remainingImages -= 1;
-      if (remainingImages === 0) {
-        onLoad();
-      }
-    };
-
-    images.forEach(img => {
-      const htmlImg = img as HTMLImageElement;
-      if (htmlImg.complete) {
-        handleImageLoad();
-      } else {
-        htmlImg.addEventListener('load', handleImageLoad, { once: true });
-        htmlImg.addEventListener('error', handleImageLoad, { once: true });
-      }
-    });
-
-    return () => {
-      images.forEach(img => {
-        img.removeEventListener('load', handleImageLoad);
-        img.removeEventListener('error', handleImageLoad);
-      });
-    };
-  }, dependencies);
-};
-
 const useAnimationLoop = (
   trackRef: React.RefObject<HTMLDivElement | null>,
   targetVelocity: number,
@@ -180,7 +112,7 @@ const useAnimationLoop = (
       }
       lastTimestampRef.current = null;
     };
-  }, [targetVelocity, seqWidth, isHovered, pauseOnHover]);
+  }, [trackRef, targetVelocity, seqWidth, isHovered, pauseOnHover]);
 };
 
 export const LogoLoop = React.memo<LogoLoopProps>(
@@ -225,9 +157,66 @@ export const LogoLoop = React.memo<LogoLoopProps>(
       }
     }, []);
 
-    useResizeObserver(updateDimensions, [containerRef, seqRef], [logos, gap, logoHeight]);
+    useEffect(() => {
+      if (!window.ResizeObserver) {
+        const handleResize = () => updateDimensions();
+        window.addEventListener('resize', handleResize);
+        updateDimensions();
+        return () => window.removeEventListener('resize', handleResize);
+      }
 
-    useImageLoader(seqRef, updateDimensions, [logos, gap, logoHeight]);
+      const observers: ResizeObserver[] = [];
+      if (containerRef.current) {
+        const observer = new ResizeObserver(updateDimensions);
+        observer.observe(containerRef.current);
+        observers.push(observer);
+      }
+      if (seqRef.current) {
+        const observer = new ResizeObserver(updateDimensions);
+        observer.observe(seqRef.current);
+        observers.push(observer);
+      }
+
+      updateDimensions();
+
+      return () => {
+        observers.forEach(observer => observer.disconnect());
+      };
+    }, [updateDimensions, logos, gap, logoHeight]);
+
+    useEffect(() => {
+      const images = seqRef.current?.querySelectorAll('img') ?? [];
+
+      if (images.length === 0) {
+        updateDimensions();
+        return;
+      }
+
+      let remainingImages = images.length;
+      const handleImageLoad = () => {
+        remainingImages -= 1;
+        if (remainingImages === 0) {
+          updateDimensions();
+        }
+      };
+
+      images.forEach(img => {
+        const htmlImg = img as HTMLImageElement;
+        if (htmlImg.complete) {
+          handleImageLoad();
+        } else {
+          htmlImg.addEventListener('load', handleImageLoad, { once: true });
+          htmlImg.addEventListener('error', handleImageLoad, { once: true });
+        }
+      });
+
+      return () => {
+        images.forEach(img => {
+          img.removeEventListener('load', handleImageLoad);
+          img.removeEventListener('error', handleImageLoad);
+        });
+      };
+    }, [logos, gap, logoHeight, updateDimensions]);
 
     useAnimationLoop(trackRef, targetVelocity, seqWidth, isHovered, pauseOnHover);
 

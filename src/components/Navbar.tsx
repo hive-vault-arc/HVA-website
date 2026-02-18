@@ -22,17 +22,9 @@ const Navbar: React.FC = () => {
   }, []);
 
   const navItems = [
-    { path: '/services', label: 'Services' },
-    { path: '/contact', label: 'Contact' },
-    { path: '/blog', label: 'Blog' },
-  ];
-
-  const mobileNavItems = [
     { path: '/about', label: 'About' },
     { path: '/portfolio', label: 'Portfolio' },
     { path: '/services', label: 'Services' },
-    { path: '/contact', label: 'Contact' },
-    { path: '/blog', label: 'Blog' },
   ];
 
   return (
@@ -72,13 +64,14 @@ const Navbar: React.FC = () => {
                   {item.label}
                 </Link>
               ))}
-              <a 
-                href="#" 
+              <Link 
+                to="/contact"
+                aria-label="Book a call"
                 className="ml-2 px-4 py-2 bg-white text-black rounded-full text-sm font-medium hover:bg-gray-100 transition-all duration-300 flex items-center"
               >
                 Book a Call
                 <ArrowUpRight className="w-3.5 h-3.5 ml-1.5" />
-              </a>
+              </Link>
             </div>
 
             {/* Mobile menu button */}
@@ -106,7 +99,7 @@ const Navbar: React.FC = () => {
           }`}
         >
           <div className="px-4 pt-2 pb-4 space-y-1 bg-black/95 backdrop-blur-lg rounded-2xl mx-4 mt-2 border border-white/10">
-            {mobileNavItems.map((item) => (
+            {navItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
@@ -120,13 +113,14 @@ const Navbar: React.FC = () => {
               </Link>
             ))}
             <div className="pt-2">
-              <a
-                href="#"
+              <Link
+                to="/contact"
+                aria-label="Book a call"
                 className="w-full flex items-center justify-center px-4 py-3 border border-transparent rounded-full text-base font-medium text-black bg-white hover:bg-gray-100 transition-colors duration-200"
               >
                 Book a Call
                 <ArrowUpRight className="w-3.5 h-3.5 ml-1.5" />
-              </a>
+              </Link>
             </div>
           </div>
         </div>

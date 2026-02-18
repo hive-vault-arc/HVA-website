@@ -102,8 +102,6 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
 
       durations = { change: 0.7, snap: 800 },
       reduceMotion,
-      smoothScroll = false, // enable if you install Lenis
-
       bgTransition = "fade",
       parallaxAmount = 4,
 
@@ -147,7 +145,9 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
     const lastIndexRef = useRef(index);
     const isAnimatingRef = useRef(false);
     const isSnappingRef = useRef(false);
-    const sectionTopRef = useRef<number[]>([]);
+    const wheelAccumRef = useRef(0);
+    const lastWheelAtRef = useRef(0);
+    const goToRef = useRef<(to: number, withScroll?: boolean) => void>(() => {});
 
     // prefers-reduced-motion
     const prefersReduced = useMemo(() => {
@@ -172,15 +172,24 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
       return null;
     };
 
-    // Compute scroll snap positions
-    const computePositions = () => {
-      const el = fixedSectionRef.current;
-      if (!el) return;
-      const top = el.offsetTop;
-      const h = el.offsetHeight;
-      const arr: number[] = [];
-      for (let i = 0; i < total; i++) arr.push(top + (h * i) / total);
-      sectionTopRef.current = arr;
+    // Compute scroll snap position from ScrollTrigger's real start/end range
+    const getSnapTopForIndex = (targetIndex: number) => {
+      const clampedIndex = clamp(targetIndex, 0, total - 1);
+      const st = stRef.current;
+      if (st) {
+        const start = Number(st.start) || 0;
+        const end = Number(st.end) || start;
+        const travel = Math.max(0, end - start);
+        const step = total > 1 ? travel / (total - 1) : 0;
+        return start + step * clampedIndex + 1;
+      }
+
+      const fs = fixedSectionRef.current;
+      if (!fs || typeof window === "undefined") return 0;
+      const top = fs.offsetTop;
+      const travel = Math.max(0, fs.offsetHeight - window.innerHeight);
+      const step = total > 1 ? travel / (total - 1) : 0;
+      return top + step * clampedIndex + 1;
     };
 
     // Align lists: center active row
@@ -248,7 +257,6 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
         });
       });
 
-      computePositions();
       measureAndCenterLists(index, false);
 
       const st = ScrollTrigger.create({
@@ -257,14 +265,15 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
         end: "bottom bottom",
         pin: fixed,
         pinSpacing: true,
+        onToggle: () => {
+          wheelAccumRef.current = 0;
+        },
         onUpdate: (self) => {
           if (motionOff || isSnappingRef.current) return;
           const prog = self.progress;
-          const target = Math.min(total - 1, Math.floor(prog * total));
+          const target = clamp(Math.round(prog * (total - 1)), 0, total - 1);
           if (target !== lastIndexRef.current && !isAnimatingRef.current) {
-            const next = lastIndexRef.current + (target > lastIndexRef.current ? 1 : -1);
-            // programmatic one-step snap without extra sound
-            goTo(next, false);
+            changeSection(target);
           }
           if (progressFillRef.current) {
             const p = (lastIndexRef.current / (total - 1 || 1)) * 100;
@@ -282,7 +291,6 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
 
       // handle resize
       const ro = new ResizeObserver(() => {
-        computePositions();
         measureAndCenterLists(lastIndexRef.current, false);
         ScrollTrigger.refresh();
       });
@@ -403,10 +411,13 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
     // programmatic navigation
     const goTo = (to: number, withScroll = true) => {
       const clamped = clamp(to, 0, total - 1);
+      if (clamped === lastIndexRef.current) {
+        return;
+      }
       isSnappingRef.current = true;
       changeSection(clamped);
 
-      const pos = sectionTopRef.current[clamped];
+      const pos = getSnapTopForIndex(clamped);
       const snapMs = durations.snap ?? 800;
 
       if (withScroll && typeof window !== "undefined") {
@@ -421,6 +432,10 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
     const next = () => goTo(index + 1);
     const prev = () => goTo(index - 1);
 
+    useEffect(() => {
+      goToRef.current = goTo;
+    });
+
     useImperativeHandle(apiRef, () => ({
       next,
       prev,
@@ -431,6 +446,13 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
 
     // click/hover on list items
     const handleJump = (i: number) => goTo(i);
+    const handleItemKeyDown = (event: React.KeyboardEvent<HTMLDivElement>, i: number) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        handleJump(i);
+      }
+    };
+
     const handleLoadedStagger = () => {
       // soft entrance for lists at mount
       leftItemRefs.current.forEach((el, i) => {
@@ -455,6 +477,51 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
       measureAndCenterLists(index, false);
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    // Wheel snap: one deliberate wheel gesture = one section change while pinned
+    useEffect(() => {
+      if (typeof window === "undefined" || total <= 1) return;
+
+      const DELTA_THRESHOLD = 40;
+      const SNAP_COOLDOWN_MS = Math.max(250, durations.snap ?? 800);
+
+      const onWheel = (event: WheelEvent) => {
+        if (motionOff || isAnimatingRef.current || isSnappingRef.current) return;
+        if (!stRef.current?.isActive) return;
+
+        const now = performance.now();
+        if (now - lastWheelAtRef.current < SNAP_COOLDOWN_MS) {
+          event.preventDefault();
+          return;
+        }
+
+        wheelAccumRef.current += event.deltaY;
+        if (Math.abs(wheelAccumRef.current) < DELTA_THRESHOLD) {
+          event.preventDefault();
+          return;
+        }
+
+        const direction = wheelAccumRef.current > 0 ? 1 : -1;
+        const current = lastIndexRef.current;
+        const isAtStartAndGoingUp = current === 0 && direction < 0;
+        const isAtEndAndGoingDown = current === total - 1 && direction > 0;
+
+        if (isAtStartAndGoingUp || isAtEndAndGoingDown) {
+          wheelAccumRef.current = 0;
+          return;
+        }
+
+        event.preventDefault();
+        wheelAccumRef.current = 0;
+        lastWheelAtRef.current = now;
+        goToRef.current(current + direction, true);
+      };
+
+      window.addEventListener("wheel", onWheel, { passive: false });
+      return () => {
+        window.removeEventListener("wheel", onWheel);
+      };
+    }, [durations.snap, motionOff, total]);
 
     // CSS vars
     const cssVars: CSSProperties = {
@@ -521,6 +588,7 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
                           className={`fx-item fx-left-item ${i === index ? "active" : ""}`}
                           ref={(el) => el && (leftItemRefs.current[i] = el)}
                           onClick={() => handleJump(i)}
+                          onKeyDown={(event) => handleItemKeyDown(event, i)}
                           role="button"
                           tabIndex={0}
                           aria-pressed={i === index}
@@ -563,6 +631,7 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
                           className={`fx-item fx-right-item ${i === index ? "active" : ""}`}
                           ref={(el) => el && (rightItemRefs.current[i] = el)}
                           onClick={() => handleJump(i)}
+                          onKeyDown={(event) => handleItemKeyDown(event, i)}
                           role="button"
                           tabIndex={0}
                           aria-pressed={i === index}
@@ -606,6 +675,7 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
             letter-spacing: -0.02em;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+          }
 
           .fx-fixed-section { height: ${Math.max(1, total + 1)}00vh; position: relative; }
           .fx-fixed { position: sticky; top: 0; height: 100vh; width: 100%; overflow: hidden; background: var(--fx-page-bg); }

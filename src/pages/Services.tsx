@@ -3,90 +3,23 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import Background3d from '../components/Plasma';
-import ScrollStack, { ScrollStackItem } from '../components/ScrollStack';
 import GradualBlur from '../components/GradualBlur';
 
-type ServiceTrack = {
-  label: string;
-  bestFor: string;
-  title: string;
-  summary: string;
-  deliverables: string[];
-  outcomes: string[];
-};
-
-const serviceTracks: ServiceTrack[] = [
+const capabilityShowcase = [
   {
-    label: 'Mobile',
-    bestFor: 'Consumer products and field teams',
-    title: 'Mobile Product Development',
-    summary:
-      'Production-ready iOS and Android experiences focused on usability, performance, and long-term maintainability.',
-    deliverables: [
-      'Product strategy and feature roadmap',
-      'UX flows, wireframes, and high-fidelity UI',
-      'Cross-platform or native implementation',
-      'Release management and store deployment',
-    ],
-    outcomes: [
-      'Fast and reliable mobile experience',
-      'High retention through polished UX',
-      'Scalable architecture for future releases',
-    ],
+    title: 'Custom Software Systems',
+    subtitle: 'Product and internal systems engineered around your workflow.',
+    image: '/Images/dashboard3.jpg',
   },
   {
-    label: 'Web Platforms',
-    bestFor: 'Operations, portals, and internal tools',
-    title: 'Web Platforms and Internal Systems',
-    summary:
-      'Secure and scalable platforms for operations, customer experience, and data-driven decision-making.',
-    deliverables: [
-      'Custom dashboards and admin portals',
-      'CRM, operations, and workflow systems',
-      'Role-based access and security controls',
-      'API integrations with your existing tools',
-    ],
-    outcomes: [
-      'Reduced manual work and process friction',
-      'Higher operational visibility',
-      'Improved reliability for daily business use',
-    ],
+    title: 'Cloud & Platform Engineering',
+    subtitle: 'Reliable cloud architecture designed for growth and uptime.',
+    image: '/Images/web.png',
   },
   {
-    label: 'AI Automation',
-    bestFor: 'Support, workflow, and process-heavy teams',
-    title: 'AI and Automation',
-    summary:
-      'Practical AI features and automation pipelines that improve response times and cut repetitive workload.',
-    deliverables: [
-      'AI assistants and support workflows',
-      'Document and data processing automation',
-      'Intelligent routing and triage systems',
-      'Analytics and model performance monitoring',
-    ],
-    outcomes: [
-      'Faster service delivery',
-      'Lower operational cost per task',
-      'Better consistency across repetitive processes',
-    ],
-  },
-  {
-    label: 'SaaS',
-    bestFor: 'Growing B2B and multi-tenant products',
-    title: 'SaaS Engineering and Scale',
-    summary:
-      'End-to-end SaaS architecture and delivery designed for growth, reliability, and observable performance.',
-    deliverables: [
-      'Multi-tenant architecture planning',
-      'Authentication, billing, and subscriptions',
-      'Cloud deployment and CI/CD pipelines',
-      'Monitoring, logging, and incident readiness',
-    ],
-    outcomes: [
-      'Faster iteration with stable releases',
-      'Enterprise-grade reliability and uptime',
-      'Strong foundation for scaling users and features',
-    ],
+    title: 'Applied AI for Operations',
+    subtitle: 'Practical AI features that reduce manual effort and response time.',
+    image: '/Images/ai.jpg',
   },
 ];
 
@@ -131,6 +64,9 @@ const Services: React.FC = () => {
         scale={1.05}
         opacity={0.75}
         mouseInteractive={false}
+        maxDprCap={1}
+        targetFpsCap={24}
+        visibilityThreshold={0.15}
       />
 
       <section className="relative pt-32 pb-14">
@@ -191,59 +127,40 @@ const Services: React.FC = () => {
                 </div>
               </div>
 
-              <div className="overflow-x-auto pb-2 [scrollbar-width:thin]" dir="rtl">
-                <div className="flex min-w-max gap-4 md:gap-5 snap-x snap-mandatory">
-                  {serviceTracks.map((track, idx) => (
-                    <motion.article
-                      key={track.title}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, amount: 0.2 }}
-                      transition={{ duration: 0.45, delay: idx * 0.07 }}
-                      className={`snap-start shrink-0 rounded-2xl border border-white/10 bg-black/25 p-6 md:p-7 ${
-                        idx === 0 ? 'w-[min(42rem,88vw)] lg:w-[40rem]' : 'w-[min(36rem,88vw)] lg:w-[34rem]'
-                      }`}
-                      style={{ direction: 'ltr' }}
-                    >
-                      <div className="flex flex-wrap items-center gap-2 text-xs">
-                        <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-white/75">
-                          {track.label}
-                        </span>
-                        <span className="rounded-full border border-white/15 px-3 py-1 text-white/60">
-                          Best for: {track.bestFor}
-                        </span>
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                {capabilityShowcase.map((item, idx) => (
+                  <motion.article
+                    key={item.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.45, delay: idx * 0.07 }}
+                    className="group rounded-2xl border border-white/15 bg-white/[0.05] backdrop-blur-xl overflow-hidden shadow-[0_14px_36px_rgba(0,0,0,0.35)]"
+                  >
+                    <div className="h-9 px-3 border-b border-white/10 flex items-center justify-between bg-black/20">
+                      <div className="flex items-center gap-1.5">
+                        <span className="h-1.5 w-1.5 rounded-full bg-white/50" />
+                        <span className="h-1.5 w-1.5 rounded-full bg-white/35" />
+                        <span className="h-1.5 w-1.5 rounded-full bg-white/20" />
                       </div>
-
-                      <h3 className="mt-4 text-2xl font-semibold leading-tight">{track.title}</h3>
-                      <p className="mt-3 text-white/75 leading-relaxed">{track.summary}</p>
-
-                      <div className="mt-6 grid gap-5 md:grid-cols-2">
-                        <div>
-                          <p className="text-xs uppercase tracking-[0.16em] text-white/55">Scope</p>
-                          <ul className="mt-3 space-y-2">
-                            {track.deliverables.map((item) => (
-                              <li key={item} className="flex items-start gap-2 text-white/85">
-                                <span className="mt-2 h-1.5 w-1.5 rounded-full bg-white/45 shrink-0" />
-                                <span>{item}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                        <div>
-                          <p className="text-xs uppercase tracking-[0.16em] text-white/55">Client Value</p>
-                          <ul className="mt-3 space-y-2">
-                            {track.outcomes.map((item) => (
-                              <li key={item} className="flex items-start gap-2 text-white/85">
-                                <span className="mt-2 h-1.5 w-1.5 rounded-full bg-emerald-300/80 shrink-0" />
-                                <span>{item}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
+                      <span className="text-[10px] uppercase tracking-[0.14em] text-white/55">Capability</span>
+                    </div>
+                    <div className="p-2">
+                      <div className="aspect-[16/10] overflow-hidden rounded-xl border border-white/10 bg-black/40">
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          loading="lazy"
+                        />
                       </div>
-                    </motion.article>
-                  ))}
-                </div>
+                    </div>
+                    <div className="px-4 pb-4">
+                      <p className="text-white text-base font-medium">{item.title}</p>
+                      <p className="text-white/65 text-sm mt-1 leading-relaxed">{item.subtitle}</p>
+                    </div>
+                  </motion.article>
+                ))}
               </div>
           </div>
         </div>
@@ -256,41 +173,37 @@ const Services: React.FC = () => {
             <h2 className="mt-2 text-3xl md:text-5xl font-semibold">Execution Framework</h2>
           </div>
 
-          <ScrollStack
-            className="overflow-visible"
-            useWindowScroll
-            itemDistance={90}
-            itemScale={0.02}
-            itemStackDistance={24}
-            stackPosition="14%"
-            scaleEndPosition="8%"
-            baseScale={0.9}
-          >
-            {deliveryPhases.map((phase) => (
-              <ScrollStackItem
+          <div className="relative space-y-5">
+            <div className="absolute left-4 top-0 bottom-0 w-px bg-gradient-to-b from-white/30 via-white/10 to-transparent md:left-5" />
+            {deliveryPhases.map((phase, index) => (
+              <motion.article
                 key={phase.title}
-                itemClassName={`h-auto min-h-[18rem] md:min-h-[20rem] border border-white/10 bg-gradient-to-br ${phase.accent} backdrop-blur-lg`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+                className={`relative rounded-3xl border border-white/12 bg-gradient-to-br ${phase.accent} backdrop-blur-xl p-6 md:p-8 md:pl-12`}
               >
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <h3 className="text-2xl md:text-3xl font-semibold">{phase.title}</h3>
-                    <p className="mt-3 text-white/80 max-w-3xl leading-relaxed">{phase.detail}</p>
-                  </div>
+                <div className="absolute left-2 top-7 flex h-6 w-6 items-center justify-center rounded-full border border-white/25 bg-black/40 text-[10px] font-semibold text-white/90 md:left-2">
+                  {index + 1}
                 </div>
 
-                <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-3">
+                <h3 className="text-2xl md:text-3xl font-semibold">{phase.title}</h3>
+                <p className="mt-3 text-white/80 max-w-3xl leading-relaxed">{phase.detail}</p>
+
+                <div className="mt-7 grid grid-cols-1 md:grid-cols-3 gap-3">
                   {phase.points.map((point) => (
                     <div
                       key={point}
-                      className="rounded-xl border border-white/15 bg-black/20 px-4 py-3 text-sm text-white/90"
+                      className="rounded-xl border border-white/15 bg-black/25 px-4 py-3 text-sm text-white/90 transition-transform duration-300 hover:-translate-y-0.5"
                     >
                       {point}
                     </div>
                   ))}
                 </div>
-              </ScrollStackItem>
+              </motion.article>
             ))}
-          </ScrollStack>
+          </div>
         </div>
       </section>
 

@@ -56,28 +56,24 @@ const Home: React.FC = () => {
       title: <>Mobile apps</>,
       rightLabel: 'Mobile apps',
       background: './Images/app.png',
-      audioSrc: '/sfx/click-01.mp3',
     },
     {
       leftLabel: 'Web Development',
       title: <>Web apps</>,
       rightLabel: 'Web apps',
       background: './Images/web.png',
-      audioSrc: '/sfx/whoosh-02.mp3',
     },
     {
       leftLabel: 'AI Development',
       title: <>AI apps</>,
       rightLabel: 'AI apps',
       background: './Images/ai.jpg',
-      audioSrc: '/sfx/whoosh-02.mp3',
     },
     {
       leftLabel: 'SaaS Development',
       title: <>SaaS apps</>,
       rightLabel: 'SaaS apps',
       background: './Images/saas.png',
-      audioSrc: '/sfx/whoosh-02.mp3',
     },
   ];
 
@@ -99,7 +95,12 @@ const Home: React.FC = () => {
           >
             <h1 className="text-5xl md:text-8xl font-semibold text-white mb-6">
               <TextType
-                text={['We Build Software', 'We Build AI Systems', 'We Build SaaS Products']}
+                text={[
+                  'Software & Cloud Engineering',
+                  'Custom Digital Systems',
+                  'AI-Powered Applications',
+                  'Scalable Business Platforms'
+                ]}
                 typingSpeed={75}
                 pauseDuration={1500}
                 showCursor
@@ -107,7 +108,7 @@ const Home: React.FC = () => {
               />
             </h1>
             <p className="text-xl mb-8 max-w-3xl mx-auto">
-              <ShinyText text="Custom software, AI-driven solutions, and scalable SaaS products that accelerate growth, reduce operational friction, and improve ROI." />
+              <ShinyText text="A software and cloud engineering company building custom digital systems, AI-powered applications, and scalable platforms for modern businesses." />
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link
@@ -133,21 +134,21 @@ const Home: React.FC = () => {
           <div className="relative mb-10 rounded-2xl border border-white/15 bg-gradient-to-r from-white/[0.09] via-white/[0.05] to-white/[0.03] p-6 md:p-10 overflow-hidden">
             <div className="pointer-events-none absolute -top-16 -right-16 h-48 w-48 rounded-full bg-purple-500/20 blur-3xl" />
             <div className="pointer-events-none absolute -bottom-20 -left-16 h-52 w-52 rounded-full bg-indigo-500/20 blur-3xl" />
-            <p className="text-purple-200 tracking-[0.24em] text-xs uppercase font-medium">Why HIIVA</p>
-            <p className="text-white/60 tracking-[0.2em] text-[11px] uppercase mt-5">Where Innovation Meets Execution</p>
+            <p className="text-purple-200 tracking-[0.24em] text-xs uppercase font-medium">Who We Are</p>
+            <p className="text-white/60 tracking-[0.2em] text-[11px] uppercase mt-5">Software & Cloud Engineering Company</p>
             <h2 className="text-5xl md:text-7xl font-semibold text-white mt-3 leading-[0.92]">
-              Crafting Digital
+              Building Digital
               <br />
-              Products That
+              Systems That
               <br />
-              Endure
+              Scale
             </h2>
             <p className="text-white/80 mt-6 text-lg max-w-5xl">
-              We build software, AI systems, and SaaS platforms with senior product judgment and disciplined engineering.
-              The result is dependable delivery, scalable architecture, and systems designed to perform long after launch.
+              We engineer custom software systems, AI-powered applications, and cloud platforms with a focus on reliability,
+              performance, and long-term maintainability.
             </p>
             <div className="mt-6 inline-flex items-center rounded-full border border-purple-300/30 bg-purple-500/10 px-4 py-2 text-sm text-purple-100">
-              Serious engineering for long-term growth
+              Built for business outcomes, not just demos
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -165,11 +166,45 @@ const Home: React.FC = () => {
         </div>
       </section>
 
+      <section className="relative px-4 pb-10 sm:px-6 lg:px-14 lg:pb-16">
+        <div className="container mx-auto border border-white/10 bg-[linear-gradient(135deg,rgba(18,35,92,0.94),rgba(10,20,58,0.96))] px-6 py-12 md:px-10 md:py-16">
+          <div className="mx-auto max-w-5xl text-center">
+            <h2 className="text-4xl md:text-7xl font-semibold text-white leading-[0.95]">
+              Clear Scope...Ship
+            </h2>
+            <p className="mt-6 text-white/75 text-base md:text-2xl max-w-4xl mx-auto">
+              One focused process from discovery to release. We align requirements, architecture, and delivery so your product ships with confidence.
+            </p>
+          </div>
+
+          <div className="my-10 h-px w-full bg-white/20" />
+
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:items-start">
+            <h3 className="text-3xl md:text-5xl text-white font-medium leading-tight">
+              From strategy to production, one dependable engineering flow
+            </h3>
+
+            <div>
+              <p className="text-white/80 text-lg md:text-2xl">
+                Discover. Plan. Build. Scale. Each phase is tied to measurable business outcomes and technical quality.
+              </p>
+              <Link
+                to="/services"
+                className="mt-6 inline-flex items-center gap-2 border-b border-purple-200/70 pb-1 text-purple-200 tracking-[0.14em] uppercase text-sm font-medium hover:text-white hover:border-white transition-colors"
+              >
+                Engineering Process
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="relative py-14">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-4xl mx-auto mb-10">
-            <p className="text-white/70 tracking-[0.2em] text-xs uppercase">Our Approach</p>
-            <h2 className="text-4xl md:text-6xl font-semibold text-white mt-3">Simple, Focused Delivery Flow</h2>
+            <p className="text-white/70 tracking-[0.2em] text-xs uppercase">How We Deliver</p>
+            <h2 className="text-4xl md:text-6xl font-semibold text-white mt-3">Clear Engineering Execution</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {processSteps.map((step, index) => (
@@ -203,8 +238,8 @@ const Home: React.FC = () => {
               sections={sections}
               header={
                 <>
-                  <div>The Creative</div>
-                  <div>Scope</div>
+                  <div>What We</div>
+                  <div>Build</div>
                 </>
               }
               footer={<div />}
@@ -217,7 +252,7 @@ const Home: React.FC = () => {
 
       <div style={{ height: '200px', position: 'relative', overflow: 'hidden', color: 'white', marginBottom: '6%' }}>
         <h1 className="text-white/90 text-2xl lg:text-4xl md:text-xl mb-8 mx-auto text-center font-light leading-relaxed">
-          TECHNOLOGY PARTNERS & CORE STACK
+          CORE TECHNOLOGY STACK
         </h1>
         <LogoLoop
           logos={techLogos}

@@ -1,241 +1,180 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Users, Target, Award, Globe } from 'lucide-react';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import { ArrowRight, CheckCircle2, Globe, ShieldCheck, Target, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Tilt } from 'react-tilt';
-import Background3D from '../components/Plasma';
 
 const teamMembers = [
   {
     name: 'Khalid Chalhi',
-    role: 'Lead Engineer',
-    bio: 'Full-stack developer with expertise in React, Node.js, and cloud architecture.',
-    img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80'
+    role: 'Co-Founder & Software Engineer',
+    bio: 'Computer science engineer focused on architecture, platform reliability, and delivery execution.',
   },
   {
     name: 'Ali Amrani',
-    role: 'Senior Developer',
-    bio: 'Mobile app specialist with a focus on user experience and performance.',
-    img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80'
-  }
+    role: 'Co-Founder & Full-Stack Engineer',
+    bio: 'Computer science engineer focused on product development, frontend systems, and API architecture.',
+  },
+  {
+    name: 'Oubay Ghamat',
+    role: 'Co-Founder & Cloud Engineer',
+    bio: 'Computer science engineer focused on cloud infrastructure, deployment workflows, and scalability.',
+  },
 ];
 
-const values = [
+const principles = [
   {
-    icon: <Target className="w-8 h-8" />,
-    title: 'Client-Focused',
-    description: 'We prioritize your business goals and deliver solutions that drive real value.'
+    icon: <Target className="h-5 w-5" />,
+    title: 'Outcome-Driven',
+    description: 'Every milestone maps to a concrete business objective and measurable impact.',
   },
   {
-    icon: <Award className="w-8 h-8" />,
-    title: 'Quality First',
-    description: 'We maintain high standards in every line of code and every pixel of design.'
+    icon: <ShieldCheck className="h-5 w-5" />,
+    title: 'Quality by Default',
+    description: 'Performance, security, and maintainability are treated as baseline requirements.',
   },
   {
-    icon: <Globe className="w-8 h-8" />,
-    title: 'Local Expertise',
-    description: 'We understand the Moroccan market and build solutions that work here.'
-  }
+    icon: <Globe className="h-5 w-5" />,
+    title: 'Regional Context',
+    description: 'We design for market realities in Morocco and MENA without sacrificing global standards.',
+  },
+];
+
+const executionPoints = [
+  'Structured scope with clear ownership',
+  'Architecture decisions documented early',
+  'Incremental delivery with review checkpoints',
+  'Long-term support and optimization planning',
 ];
 
 const About: React.FC = () => {
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-      offset: 100,
-      easing: 'ease-out-cubic'
-    });
-  }, []);
-
   return (
-    <div className="overflow-hidden">
-      <Background3D />
+    <div className="relative overflow-hidden text-white">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(139,92,246,0.25),transparent_45%),radial-gradient(circle_at_85%_10%,rgba(56,189,248,0.2),transparent_40%),linear-gradient(180deg,#05060a_0%,#04050a_100%)]" />
 
-      {/* Hero Section */}
-      <section className="flex flex-col justify-center items-center text-center relative py-20">
-        <div className="max-w-4xl mx-auto px-4 relative z-10">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-6xl md:text-7xl font-extrabold leading-tight text-gray-900 mb-6"
-          >
-            About Our Agency
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl font-light max-w-2xl mx-auto text-gray-600 mb-12"
-          >
-            We're a team of passionate developers building digital solutions for Moroccan businesses.
-          </motion.p>
-        </div>
-      </section>
-
-      {/* Mission Section */}
-      <section className="py-20 relative">
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-4xl font-bold text-gray-900">Our Mission</h2>
-            <p className="text-gray-600 text-lg mt-4 max-w-3xl mx-auto">
-              To make high-quality digital solutions accessible to businesses in Morocco. We believe that every business, regardless of size, deserves access to modern technology that can help them grow.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {values.map((value, i) => (
-              <Tilt key={i} options={{ max: 15, scale: 1.05, speed: 1000 }}>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className="group relative p-8 rounded-2xl bg-white transition-all duration-300 transform hover:-translate-y-2 "
-                >
-                  <div className="w-16 h-16 bg-blue-500 rounded-xl flex items-center justify-center mb-6">
-                    {React.cloneElement(value.icon, { className: "w-8 h-8 text-white" })}
-                  </div>
-                  <h3 className="text-xl font-bold mb-2 text-gray-900">{value.title}</h3>
-                  <p className="text-gray-600">{value.description}</p>
-                </motion.div>
-              </Tilt>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Team Section */}
-      <section className="py-20 relative">
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-4xl font-bold text-gray-900 text-center mb-12"
-          >
-            Meet Our Team
-          </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {teamMembers.map((member, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="bg-white p-8 rounded-2xl flex items-start gap-6 shadow-sm"
-              >
-                <img
-                  src={member.img}
-                  alt={member.name}
-                  className="w-24 h-24 rounded-full object-cover shadow"
-                />
-                <div>
-                  <h3 className="font-semibold text-xl mb-1 text-gray-900">{member.name}</h3>
-                  <p className="text-blue-600 font-medium mb-3">{member.role}</p>
-                  <p className="text-gray-600">{member.bio}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Us */}
-      <section className="py-20 relative">
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-4xl font-bold text-gray-900 text-center mb-12"
-          >
-            Why Choose Us?
-          </motion.h2>
-          <div className="space-y-8 max-w-3xl mx-auto">
-            <div className="bg-white p-8 rounded-2xl shadow-sm">
-              <div className="flex items-start gap-4">
-                <div className="w-16 h-16 bg-blue-500 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <Users className="w-8 h-8 text-white" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-xl mb-2 text-gray-900">Experienced Team</h3>
-                  <p className="text-gray-600">
-                    Our team brings together years of experience in web development, mobile apps, and AI solutions. We've worked with businesses of all sizes and understand what it takes to deliver successful projects.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white p-8 rounded-2xl shadow-sm">
-              <div className="flex items-start gap-4">
-                <div className="w-16 h-16 bg-green-500 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <Target className="w-8 h-8 text-white" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-xl mb-2 text-gray-900">Business-Focused Approach</h3>
-                  <p className="text-gray-600">
-                    We don't just write code – we build solutions that solve real business problems. Every project starts with understanding your goals and ends with measurable results.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white p-8 rounded-2xl shadow-sm">
-              <div className="flex items-start gap-4">
-                <div className="w-16 h-16 bg-purple-500 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <Globe className="w-8 h-8 text-white" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-xl mb-2 text-gray-900">Local Expertise</h3>
-                  <p className="text-gray-600">
-                    As a Moroccan agency, we understand the local market, culture, and business needs. This helps us create solutions that are perfectly tailored to your audience.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 relative">
-        <div className="container mx-auto px-4 relative z-10 text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-4xl font-bold text-gray-900 mb-8"
-          >
-            Ready to Work Together?
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-gray-600 mb-12 max-w-2xl mx-auto"
-          >
-            Let's discuss how we can help transform your business with our digital solutions
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
+      <section className="relative container mx-auto px-4 pt-28 pb-14 md:pt-36 md:pb-20">
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45 }}
+          className="max-w-5xl"
+        >
+          <p className="text-xs uppercase tracking-[0.2em] text-white/65">About HIIVA</p>
+          <h1 className="mt-4 text-5xl font-semibold leading-[0.95] md:text-7xl">
+            A Software & Cloud
+            <br />
+            Engineering Company
+          </h1>
+          <p className="mt-7 max-w-3xl text-lg text-white/80">
+            We build custom digital systems, AI-powered applications, and scalable platforms for modern businesses.
+            Our focus is clear execution, dependable architecture, and outcomes that hold up in production.
+          </p>
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Link
               to="/contact"
-              className="px-8 py-4 bg-gray-800 text-white rounded-full font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 group"
+              className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/15 bg-white px-7 py-3 text-black transition-colors hover:bg-white/90"
             >
-              Get in Touch
-              <ArrowRight className="w-5 h-5 ml-2 inline-block group-hover:translate-x-1 transition-transform" />
+              Start a Project
+              <ArrowRight className="h-4 w-4" />
             </Link>
-          </motion.div>
+            <Link
+              to="/services"
+              className="inline-flex items-center justify-center rounded-lg border border-white/20 bg-white/10 px-7 py-3 text-white transition-colors hover:bg-white/15"
+            >
+              Explore Services
+            </Link>
+          </div>
+        </motion.div>
+      </section>
+
+      <section className="relative container mx-auto px-4 py-8 md:py-12">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          {principles.map((item, index) => (
+            <motion.article
+              key={item.title}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.35, delay: index * 0.06 }}
+              className="rounded-2xl border border-white/15 bg-white/[0.06] p-6 backdrop-blur-sm"
+            >
+              <div className="mb-4 inline-flex rounded-lg border border-white/20 bg-white/10 p-2 text-purple-200">
+                {item.icon}
+              </div>
+              <h2 className="text-2xl font-medium">{item.title}</h2>
+              <p className="mt-3 text-white/75">{item.description}</p>
+            </motion.article>
+          ))}
         </div>
+      </section>
+
+      <section className="relative container mx-auto px-4 py-10 md:py-14">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.4 }}
+          className="rounded-2xl border border-white/15 bg-gradient-to-r from-white/[0.09] via-white/[0.05] to-white/[0.03] p-7 md:p-10"
+        >
+          <p className="text-xs uppercase tracking-[0.2em] text-white/60">Execution Standard</p>
+          <h2 className="mt-4 text-4xl font-semibold md:text-5xl">How We Work</h2>
+          <p className="mt-4 max-w-3xl text-white/75">
+            We keep delivery structured and transparent so stakeholders always know what is being built, why it matters,
+            and how risk is managed.
+          </p>
+          <div className="mt-7 grid grid-cols-1 gap-3 md:grid-cols-2">
+            {executionPoints.map((point) => (
+              <div key={point} className="flex items-start gap-3 rounded-xl border border-white/15 bg-black/20 px-4 py-3">
+                <CheckCircle2 className="mt-0.5 h-4 w-4 text-purple-300" />
+                <span className="text-white/90">{point}</span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </section>
+
+      <section className="relative container mx-auto px-4 py-10 md:py-14">
+        <div className="mb-8 flex items-center gap-3">
+          <Users className="h-5 w-5 text-white/70" />
+          <h2 className="text-3xl font-semibold md:text-4xl">Team</h2>
+        </div>
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+          {teamMembers.map((member, index) => (
+            <motion.article
+              key={member.name}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.35, delay: index * 0.07 }}
+              className="rounded-2xl border border-white/15 bg-white/[0.05] p-6"
+            >
+              <h3 className="text-xl font-medium">{member.name}</h3>
+              <p className="mt-1 text-sm text-purple-200">{member.role}</p>
+              <p className="mt-3 text-white/75">{member.bio}</p>
+            </motion.article>
+          ))}
+        </div>
+      </section>
+
+      <section className="relative container mx-auto px-4 pt-6 pb-16 md:pb-20">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.35 }}
+          className="rounded-2xl border border-white/15 bg-white/[0.06] p-8 text-center"
+        >
+          <h2 className="text-3xl font-semibold md:text-5xl">Ready to Build With Us?</h2>
+          <p className="mx-auto mt-4 max-w-2xl text-white/75">
+            Share your goals and constraints. We will outline the right technical path and delivery model for your team.
+          </p>
+          <Link
+            to="/contact"
+            className="mt-8 inline-flex items-center gap-2 rounded-lg border border-white bg-white px-7 py-3 text-black transition-colors hover:bg-white/90"
+          >
+            Book a Call
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </motion.div>
       </section>
     </div>
   );

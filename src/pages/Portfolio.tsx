@@ -10,30 +10,88 @@ type Project = {
   category: string;
   image: string;
   summary: string;
-  impact: string;
+  sections: Array<{
+    heading: string;
+    items: string[];
+  }>;
 };
 
 const projects: Project[] = [
   {
-    title: 'EatsNow',
-    category: 'Mobile Product',
-    image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1200&q=80',
-    summary: 'Food ordering app with a clean flow from browsing to checkout.',
-    impact: 'Faster ordering experience and smoother daily operations.',
-  },
-  {
-    title: 'InventoryMaster',
-    category: 'Web Platform',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80',
-    summary: 'Operations dashboard for stock, reports, and team actions.',
-    impact: 'Better visibility and quicker decisions across teams.',
-  },
-  {
-    title: 'LegalBot',
+    title: 'Smart WhatsApp AI Assistant',
     category: 'AI Assistant',
-    image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=80',
-    summary: 'AI helper for document understanding and quick legal guidance.',
-    impact: 'Reduced manual review time and faster user support.',
+    image: '/Images/aiagent.png',
+    summary:
+      'Handles client conversations on WhatsApp 24/7 in Arabic, French, and English, then converts interactions into qualified business actions.',
+    sections: [
+      {
+        heading: 'Key Capabilities',
+        items: [
+          'Understands client needs: budget, location preferences, property type, and number of rooms.',
+          'Searches properties from internal inventory and external portals including Amanah.ma, Manafie.ma, and Aafer Immobilier.',
+          'Combines results to return best-match options for each client profile.',
+          'Creates structured CRM leads from every WhatsApp conversation.',
+          'Schedules calls and visits automatically based on client intent.',
+          'Remembers conversation context and long-term client preferences.',
+          'Scores lead quality from 0-100 based on engagement and buying intent.',
+        ],
+      },
+      {
+        heading: 'Security Features',
+        items: [
+          "Verifies incoming WhatsApp requests using Meta's signature validation.",
+          'Applies rate limiting: 60 requests/minute per IP and 10 requests/minute per phone.',
+          'Redacts sensitive data such as phone numbers and tokens in logs.',
+          "Prevents duplicate processing so the same message can't be handled twice.",
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Complete CRM System',
+    category: 'Business Platform',
+    image: '/Images/CRM.png',
+    summary:
+      'A full CRM for real-estate operations covering lead qualification, deal movement, scheduling, project inventory, and team coordination.',
+    sections: [
+      {
+        heading: 'Lead Management',
+        items: [
+          'Automatic capture from every WhatsApp conversation.',
+          'AI-based qualification scoring for lead quality.',
+          'Complete activity timeline across all interactions.',
+          'Smart conversion from hot leads to active deals.',
+        ],
+      },
+      {
+        heading: 'Deal Pipeline',
+        items: [
+          'Tracks progress from first contact to closing.',
+          'Schedules and monitors property visits.',
+          'Moves deals through custom sales stages.',
+          'Assigns deals to specific projects/properties.',
+        ],
+      },
+      {
+        heading: 'Schedule & Reminders',
+        items: [
+          'Supports Calls, Visits, and Messages workflows.',
+          'Auto-creates follow-ups from AI conversation signals.',
+          'Tracks states: Pending, Completed, Cancelled, Overdue.',
+          'Assigns schedules to responsible agents.',
+        ],
+      },
+      {
+        heading: 'Project, Team, and Access',
+        items: [
+          'Manages property catalog and unit availability by type/floor.',
+          'Provides search and filtering across projects and units.',
+          'Enables role-based access: Admin, Manager, Agent.',
+          'Includes internal real-time messaging and performance analytics.',
+          'Uses user approval workflows to control system access.',
+        ],
+      },
+    ],
   },
 ];
 
@@ -86,7 +144,17 @@ const testimonials = [
 const Portfolio: React.FC = () => {
   return (
     <div className="relative min-h-screen overflow-hidden bg-black text-white">
-      <Background3d color="#CF9FFF" speed={0.5} direction="forward" scale={1.05} opacity={0.75} mouseInteractive={false} />
+      <Background3d
+        color="#CF9FFF"
+        speed={0.5}
+        direction="forward"
+        scale={1.05}
+        opacity={0.75}
+        mouseInteractive={false}
+        maxDprCap={1}
+        targetFpsCap={24}
+        visibilityThreshold={0.15}
+      />
 
       <section className="relative pt-32 pb-14">
         <div className="container mx-auto px-4">
@@ -128,7 +196,7 @@ const Portfolio: React.FC = () => {
             <p className="text-sm uppercase tracking-[0.2em] text-white/60">Selected Work</p>
             <h2 className="mt-2 text-3xl md:text-5xl font-semibold">Recent Projects</h2>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {projects.map((project, idx) => (
               <motion.article
                 key={project.title}
@@ -145,7 +213,18 @@ const Portfolio: React.FC = () => {
                   <p className="text-xs uppercase tracking-[0.14em] text-white/60">{project.category}</p>
                   <h3 className="mt-2 text-2xl font-semibold">{project.title}</h3>
                   <p className="mt-3 text-white/75 leading-relaxed">{project.summary}</p>
-                  <p className="mt-4 text-white/90">{project.impact}</p>
+                  <div className="mt-5 space-y-4">
+                    {project.sections.map((section) => (
+                      <div key={section.heading}>
+                        <p className="text-sm uppercase tracking-[0.14em] text-white/60">{section.heading}</p>
+                        <ul className="mt-2 space-y-1.5 text-white/88 text-sm leading-relaxed list-disc pl-5">
+                          {section.items.map((item) => (
+                            <li key={item}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </motion.article>
             ))}

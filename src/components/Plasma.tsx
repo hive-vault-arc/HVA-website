@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Renderer, Program, Mesh, Triangle } from 'ogl';
+import { useAnimationQuality } from '../lib/animationQuality';
 
 interface PlasmaProps {
   color?: string;
@@ -8,6 +9,9 @@ interface PlasmaProps {
   scale?: number;
   opacity?: number;
   mouseInteractive?: boolean;
+  maxDprCap?: number;
+  targetFpsCap?: number;
+  visibilityThreshold?: number;
 }
 
 const hexToRgb = (hex: string): [number, number, number] => {
@@ -94,10 +98,40 @@ export const Plasma: React.FC<PlasmaProps> = ({
   direction = 'forward',
   scale = 1,
   opacity = 0.1,
-  mouseInteractive = true
+  mouseInteractive = true,
+  maxDprCap,
+  targetFpsCap,
+  visibilityThreshold = 0.05
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mousePos = useRef({ x: 0, y: 0 });
+  const [isInView, setIsInView] = useState(true);
+  const [isPageVisible, setIsPageVisible] = useState(
+    typeof document === 'undefined' ? true : document.visibilityState === 'visible'
+  );
+  const { plasmaMaxDpr, plasmaTargetFps } = useAnimationQuality();
+  const effectiveMaxDpr = Math.max(0.5, Math.min(plasmaMaxDpr, maxDprCap ?? Number.POSITIVE_INFINITY));
+  const effectiveTargetFps = Math.max(12, Math.min(plasmaTargetFps, targetFpsCap ?? Number.POSITIVE_INFINITY));
+  const isActive = isInView && isPageVisible;
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container || typeof IntersectionObserver === 'undefined') return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { threshold: visibilityThreshold }
+    );
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, [visibilityThreshold]);
+
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+    const onVisibilityChange = () => setIsPageVisible(document.visibilityState === 'visible');
+    document.addEventListener('visibilitychange', onVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', onVisibilityChange);
+  }, []);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -111,7 +145,7 @@ export const Plasma: React.FC<PlasmaProps> = ({
       webgl: 2,
       alpha: true,
       antialias: false,
-      dpr: Math.min(window.devicePixelRatio || 1, 2)
+      dpr: Math.min(window.devicePixelRatio || 1, effectiveMaxDpr)
     });
     const gl = renderer.gl;
     const canvas = gl.canvas as HTMLCanvasElement;
@@ -140,10 +174,11 @@ export const Plasma: React.FC<PlasmaProps> = ({
     });
 
     const mesh = new Mesh(gl, { geometry, program });
+    const container = containerRef.current;
 
     const handleMouseMove = (e: MouseEvent) => {
       if (!mouseInteractive) return;
-      const rect = containerRef.current!.getBoundingClientRect();
+      const rect = container!.getBoundingClientRect();
       mousePos.current.x = e.clientX - rect.left;
       mousePos.current.y = e.clientY - rect.top;
       const mouseUniform = program.uniforms.uMouse.value as Float32Array;
@@ -152,13 +187,14 @@ export const Plasma: React.FC<PlasmaProps> = ({
     };
 
     if (mouseInteractive) {
-      containerRef.current.addEventListener('mousemove', handleMouseMove);
+      container.addEventListener('mousemove', handleMouseMove);
     }
 
     const setSize = () => {
-      const rect = containerRef.current!.getBoundingClientRect();
+      const rect = container!.getBoundingClientRect();
       const width = Math.max(1, Math.floor(rect.width));
       const height = Math.max(1, Math.floor(rect.height));
+      renderer.dpr = Math.min(window.devicePixelRatio || 1, effectiveMaxDpr);
       renderer.setSize(width, height);
       const res = program.uniforms.iResolution.value as Float32Array;
       res[0] = gl.drawingBufferWidth;
@@ -166,13 +202,27 @@ export const Plasma: React.FC<PlasmaProps> = ({
     };
 
     const ro = new ResizeObserver(setSize);
-    ro.observe(containerRef.current);
+    ro.observe(container);
     setSize();
 
     let raf = 0;
     const t0 = performance.now();
+    const frameInterval = 1000 / effectiveTargetFps;
+    let lastFrameTime = 0;
+
     const loop = (t: number) => {
-      let timeValue = (t - t0) * 0.001;
+      if (!isActive) {
+        raf = requestAnimationFrame(loop);
+        return;
+      }
+
+      if (lastFrameTime > 0 && t - lastFrameTime < frameInterval) {
+        raf = requestAnimationFrame(loop);
+        return;
+      }
+      lastFrameTime = t;
+
+      const timeValue = (t - t0) * 0.001;
 
       if (direction === 'pingpong') {
         const cycle = Math.sin(timeValue * 0.5) * directionMultiplier;
@@ -188,14 +238,27 @@ export const Plasma: React.FC<PlasmaProps> = ({
     return () => {
       cancelAnimationFrame(raf);
       ro.disconnect();
-      if (mouseInteractive && containerRef.current) {
-        containerRef.current.removeEventListener('mousemove', handleMouseMove);
+      if (mouseInteractive) {
+        container.removeEventListener('mousemove', handleMouseMove);
       }
       try {
-        containerRef.current?.removeChild(canvas);
-      } catch {}
+        container.removeChild(canvas);
+      } catch {
+        // Canvas may already be detached during unmount.
+      }
     };
-  }, [color, speed, direction, scale, opacity, mouseInteractive]);
+  }, [
+    color,
+    speed,
+    direction,
+    scale,
+    opacity,
+    mouseInteractive,
+    isActive,
+    effectiveMaxDpr,
+    effectiveTargetFps,
+    visibilityThreshold
+  ]);
 
   return <div ref={containerRef} className="w-full h-full absolute " />;
 };

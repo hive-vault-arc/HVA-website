@@ -3,7 +3,6 @@ import {
   useScroll,
   useTransform,
   motion,
-  MotionValue,
   Variants, // Polish: Import MotionValue type for clarity
 } from "framer-motion";
 import React, { useLayoutEffect, useRef, useState } from "react";

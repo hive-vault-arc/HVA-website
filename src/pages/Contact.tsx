@@ -4,6 +4,14 @@ import { motion } from 'framer-motion';
 import Background3d from '../components/Plasma';
 import GradualBlur from '../components/GradualBlur';
 
+type ContactStatus = {
+  type: 'success' | 'error';
+  message: string;
+} | null;
+
+const CONTACT_EMAIL = 'hello@hiiva.com';
+const CONTACT_PHONE = '+212600000000';
+
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -11,18 +19,71 @@ const Contact: React.FC = () => {
     subject: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<ContactStatus>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setStatus(null);
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: wire backend/email service
-    console.log(formData);
+    setIsSubmitting(true);
+    setStatus(null);
+
+    try {
+      const endpoint = (import.meta.env.VITE_CONTACT_API_URL as string | undefined)?.trim();
+
+      if (endpoint) {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Submission failed with status ${response.status}`);
+        }
+
+        setStatus({
+          type: 'success',
+          message: 'Thank you. Your message was sent successfully.',
+        });
+      } else {
+        const subject = `[HIIVA] ${formData.subject}`;
+        const body = [
+          `Name: ${formData.name}`,
+          `Email: ${formData.email}`,
+          '',
+          formData.message,
+        ].join('\n');
+        const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = mailto;
+
+        setStatus({
+          type: 'success',
+          message: 'Your email client was opened. Please send the drafted message.',
+        });
+      }
+
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+      });
+    } catch {
+      setStatus({
+        type: 'error',
+        message: 'We could not send your message right now. Please try again or email us directly.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -74,8 +135,8 @@ const Contact: React.FC = () => {
                     </div>
                     <div>
                       <p className="font-medium text-white">Email</p>
-                      <a href="mailto:contact@agency.com" className="text-white/75 hover:text-white transition-colors">
-                        contact@agency.com
+                      <a href={`mailto:${CONTACT_EMAIL}`} className="text-white/75 hover:text-white transition-colors">
+                        {CONTACT_EMAIL}
                       </a>
                     </div>
                   </div>
@@ -85,7 +146,7 @@ const Contact: React.FC = () => {
                     </div>
                     <div>
                       <p className="font-medium text-white">Phone</p>
-                      <a href="tel:+212600000000" className="text-white/75 hover:text-white transition-colors">
+                      <a href={`tel:${CONTACT_PHONE}`} className="text-white/75 hover:text-white transition-colors">
                         +212 600-000-000
                       </a>
                     </div>
@@ -96,7 +157,7 @@ const Contact: React.FC = () => {
                     </div>
                     <div>
                       <p className="font-medium text-white">Location</p>
-                      <p className="text-white/75">Casablanca, Morocco</p>
+                      <p className="text-white/75">Tangier, Morocco - Technopark</p>
                     </div>
                   </div>
                 </div>
@@ -188,11 +249,20 @@ const Contact: React.FC = () => {
                 </div>
                 <button
                   type="submit"
+                  disabled={isSubmitting}
                   className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-white text-black px-5 py-3 font-medium hover:bg-white/90 transition-colors"
                 >
-                  Send Message
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
                   <Send className="w-4 h-4" />
                 </button>
+                {status && (
+                  <p
+                    className={`text-sm ${status.type === 'success' ? 'text-emerald-300' : 'text-rose-300'}`}
+                    role="status"
+                  >
+                    {status.message}
+                  </p>
+                )}
               </form>
             </motion.div>
           </div>
