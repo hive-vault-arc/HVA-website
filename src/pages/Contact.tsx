@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
 import { motion } from 'framer-motion';
-import Background3D from '../components/Plasma';
+import Background3d from '../components/Plasma';
+import GradualBlur from '../components/GradualBlur';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -22,99 +21,95 @@ const Contact: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
+    // TODO: wire backend/email service
     console.log(formData);
   };
 
   return (
-    <div className="overflow-hidden">
-      <Background3D />
+    <div className="relative min-h-screen overflow-hidden bg-black text-white">
+      <Background3d
+        color="#CF9FFF"
+        speed={0.5}
+        direction="forward"
+        scale={1.05}
+        opacity={0.75}
+        mouseInteractive={false}
+      />
 
-      {/* Hero Section */}
-      <section className="flex flex-col justify-center items-center text-center relative py-12">
-        <div className="max-w-4xl mx-auto px-4 relative z-10">
-          <span
-            className="text-gray-600 font-medium text-sm mb-4 block"
-          >
-            Contact Us
-          </span>
-          <motion.h1
+      <section className="relative pt-32 pb-14">
+        <div className="container mx-auto px-4">
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-6xl md:text-7xl font-extrabold leading-tight text-gray-900 mb-6"
+            transition={{ duration: 0.7 }}
+            className="max-w-4xl"
           >
-            Get in Touch
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl font-light max-w-2xl mx-auto text-gray-600 mb-12"
-          >
-            Let's discuss how we can help transform your business with our digital solutions.
-          </motion.p>
+            <p className="text-sm uppercase tracking-[0.22em] text-white/70">Contact</p>
+            <h1 className="mt-4 text-4xl md:text-6xl font-semibold leading-tight">
+              Let&apos;s discuss your project
+            </h1>
+            <p className="mt-6 text-lg text-white/75 max-w-3xl leading-relaxed">
+              Share what you are building. We will help you define the right next steps.
+            </p>
+          </motion.div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="py-12 relative">
-        <div className="max-w-6xl mx-auto px-4 relative z-10">
+      <section className="relative py-10">
+        <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Contact Info */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="space-y-8"
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6 }}
+              className="space-y-6"
             >
-              <div className="bg-white p-8 rounded-2xl shadow-sm">
-                <h2 className="text-4xl font-bold text-gray-900 mb-8">Contact Information</h2>
+              <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl p-8">
+                <h2 className="text-3xl md:text-4xl font-semibold mb-8">Contact Information</h2>
                 <div className="space-y-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <Mail className="w-6 h-6 text-white" />
+                    <div className="w-11 h-11 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center flex-shrink-0">
+                      <Mail className="w-5 h-5 text-purple-200" />
                     </div>
                     <div>
-                      <div className="font-semibold text-lg mb-1 text-gray-900">Email</div>
-                      <a href="mailto:contact@agency.com" className="text-blue-600 hover:underline">
+                      <p className="font-medium text-white">Email</p>
+                      <a href="mailto:contact@agency.com" className="text-white/75 hover:text-white transition-colors">
                         contact@agency.com
                       </a>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <Phone className="w-6 h-6 text-white" />
+                    <div className="w-11 h-11 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center flex-shrink-0">
+                      <Phone className="w-5 h-5 text-purple-200" />
                     </div>
                     <div>
-                      <div className="font-semibold text-lg mb-1 text-gray-900">Phone</div>
-                      <a href="tel:+212600000000" className="text-purple-600 hover:underline">
+                      <p className="font-medium text-white">Phone</p>
+                      <a href="tel:+212600000000" className="text-white/75 hover:text-white transition-colors">
                         +212 600-000-000
                       </a>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <MapPin className="w-6 h-6 text-white" />
+                    <div className="w-11 h-11 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center flex-shrink-0">
+                      <MapPin className="w-5 h-5 text-purple-200" />
                     </div>
                     <div>
-                      <div className="font-semibold text-lg mb-1 text-gray-900">Location</div>
-                      <div className="text-gray-600">
-                        Casablanca, Morocco
-                      </div>
+                      <p className="font-medium text-white">Location</p>
+                      <p className="text-white/75">Casablanca, Morocco</p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-white p-8 rounded-2xl shadow-sm">
-                <h3 className="font-semibold text-xl mb-4 text-gray-900">Business Hours</h3>
-                <div className="space-y-2 text-gray-600">
-                  <div className="flex justify-between">
+              <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl p-8">
+                <h3 className="text-2xl font-semibold mb-6">Business Hours</h3>
+                <div className="space-y-3 text-white/80">
+                  <div className="flex justify-between border-b border-white/10 pb-2">
                     <span>Monday - Friday</span>
                     <span>9:00 AM - 6:00 PM</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between border-b border-white/10 pb-2">
                     <span>Saturday</span>
                     <span>10:00 AM - 4:00 PM</span>
                   </div>
@@ -126,66 +121,77 @@ const Contact: React.FC = () => {
               </div>
             </motion.div>
 
-            {/* Contact Form */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="bg-white p-8 rounded-2xl shadow-sm"
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl p-8"
             >
-              <h2 className="text-4xl font-bold text-gray-900 mb-8">Send Us a Message</h2>
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <h2 className="text-3xl md:text-4xl font-semibold mb-8">Send Us a Message</h2>
+              <form onSubmit={handleSubmit} className="space-y-5">
                 <div>
-                  <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">Name</label>
+                  <label htmlFor="name" className="block text-white/80 text-sm font-medium mb-2">
+                    Name
+                  </label>
                   <input
                     type="text"
                     id="name"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500 transition-colors duration-200"
+                    className="w-full rounded-xl border border-white/15 bg-black/30 py-3 px-4 text-white placeholder:text-white/40 focus:outline-none focus:border-purple-300/60"
                     required
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                  <label htmlFor="email" className="block text-white/80 text-sm font-medium mb-2">
+                    Email
+                  </label>
                   <input
                     type="email"
                     id="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500 transition-colors duration-200"
+                    className="w-full rounded-xl border border-white/15 bg-black/30 py-3 px-4 text-white placeholder:text-white/40 focus:outline-none focus:border-purple-300/60"
                     required
                   />
                 </div>
                 <div>
-                  <label htmlFor="subject" className="block text-gray-700 text-sm font-bold mb-2">Subject</label>
+                  <label htmlFor="subject" className="block text-white/80 text-sm font-medium mb-2">
+                    Subject
+                  </label>
                   <input
                     type="text"
                     id="subject"
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500 transition-colors duration-200"
+                    className="w-full rounded-xl border border-white/15 bg-black/30 py-3 px-4 text-white placeholder:text-white/40 focus:outline-none focus:border-purple-300/60"
                     required
                   />
                 </div>
                 <div>
-                  <label htmlFor="message" className="block text-gray-700 text-sm font-bold mb-2">Message</label>
+                  <label htmlFor="message" className="block text-white/80 text-sm font-medium mb-2">
+                    Message
+                  </label>
                   <textarea
                     id="message"
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
                     rows={5}
-                    className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500 transition-colors duration-200"
+                    className="w-full rounded-xl border border-white/15 bg-black/30 py-3 px-4 text-white placeholder:text-white/40 focus:outline-none focus:border-purple-300/60"
                     required
                   />
                 </div>
-                <button type="submit" className="px-8 py-4 bg-gray-800 text-white rounded-full font-medium hover:scale-105 transition-all duration-300 group w-full inline-flex items-center justify-center">
+                <button
+                  type="submit"
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-white text-black px-5 py-3 font-medium hover:bg-white/90 transition-colors"
+                >
                   Send Message
-                  <Send className="w-5 h-5 ml-2 inline-block group-hover:translate-x-1 transition-transform" />
+                  <Send className="w-4 h-4" />
                 </button>
               </form>
             </motion.div>
@@ -193,21 +199,21 @@ const Contact: React.FC = () => {
         </div>
       </section>
 
-      {/* Map Section */}
-      <section className="py-12 relative bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4 relative z-10">
+      <section className="relative py-10 mb-10">
+        <div className="max-w-6xl mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="bg-white p-8 rounded-2xl shadow-sm"
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
+            className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl p-8"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-8">Find Us</h2>
-            <div className="aspect-w-16 aspect-h-9 rounded-xl overflow-hidden">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-8">Find Us</h2>
+            <div className="rounded-xl overflow-hidden border border-white/10">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d103599.61833546984!2d-5.916869989721443!3d35.76338544764214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0b875cf04c132d%3A0x76bfc571bfb4e17a!2sTangier!5e0!3m2!1sen!2sma!4v1749336870988!5m2!1sen!2sma"
                 width="100%"
-                height="450"
+                height="420"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
@@ -217,8 +223,11 @@ const Contact: React.FC = () => {
           </motion.div>
         </div>
       </section>
+
+      <GradualBlur target="page" position="bottom" height="5rem" strength={2} divCount={5} curve="bezier" exponential opacity={1} />
     </div>
   );
 };
 
 export default Contact;
+

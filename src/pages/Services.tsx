@@ -7,6 +7,8 @@ import ScrollStack, { ScrollStackItem } from '../components/ScrollStack';
 import GradualBlur from '../components/GradualBlur';
 
 type ServiceTrack = {
+  label: string;
+  bestFor: string;
   title: string;
   summary: string;
   deliverables: string[];
@@ -15,6 +17,8 @@ type ServiceTrack = {
 
 const serviceTracks: ServiceTrack[] = [
   {
+    label: 'Mobile',
+    bestFor: 'Consumer products and field teams',
     title: 'Mobile Product Development',
     summary:
       'Production-ready iOS and Android experiences focused on usability, performance, and long-term maintainability.',
@@ -31,6 +35,8 @@ const serviceTracks: ServiceTrack[] = [
     ],
   },
   {
+    label: 'Web Platforms',
+    bestFor: 'Operations, portals, and internal tools',
     title: 'Web Platforms and Internal Systems',
     summary:
       'Secure and scalable platforms for operations, customer experience, and data-driven decision-making.',
@@ -47,6 +53,8 @@ const serviceTracks: ServiceTrack[] = [
     ],
   },
   {
+    label: 'AI Automation',
+    bestFor: 'Support, workflow, and process-heavy teams',
     title: 'AI and Automation',
     summary:
       'Practical AI features and automation pipelines that improve response times and cut repetitive workload.',
@@ -63,6 +71,8 @@ const serviceTracks: ServiceTrack[] = [
     ],
   },
   {
+    label: 'SaaS',
+    bestFor: 'Growing B2B and multi-tenant products',
     title: 'SaaS Engineering and Scale',
     summary:
       'End-to-end SaaS architecture and delivery designed for growth, reliability, and observable performance.',
@@ -161,53 +171,80 @@ const Services: React.FC = () => {
 
       <section className="relative py-10">
         <div className="container mx-auto px-4">
-          <div className="mb-10">
-            <p className="text-sm uppercase tracking-[0.2em] text-white/60">What We Offer</p>
-            <h2 className="mt-2 text-3xl md:text-5xl font-semibold">Service Tracks</h2>
-          </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {serviceTracks.map((track, idx) => (
-              <motion.article
-                key={track.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.45, delay: idx * 0.08 }}
-            className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl p-7 md:p-8"
-          >
-                <div>
-                  <p className="inline-flex items-center rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/70">
-                    Service {idx + 1}
-                  </p>
-                  <h3 className="text-2xl font-semibold mt-4">{track.title}</h3>
-                  <p className="mt-2 text-white/75 leading-relaxed">{track.summary}</p>
+          <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-6 lg:gap-8">
+              <div className="lg:sticky lg:top-28 h-fit rounded-2xl border border-white/10 bg-black/20 p-6 md:p-7">
+                <p className="text-sm uppercase tracking-[0.2em] text-white/60">What We Offer</p>
+                <h2 className="mt-3 text-3xl md:text-5xl font-semibold leading-tight">Capability Areas</h2>
+                <p className="mt-5 text-white/75 leading-relaxed">
+                  A focused set of engineering capabilities used to design, ship, and scale dependable products.
+                  Each area is tied to business outcomes, not just technical output.
+                </p>
+                <div className="mt-8 space-y-4">
+                  <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
+                    <p className="text-xs uppercase tracking-[0.15em] text-white/55">Delivery Model</p>
+                    <p className="mt-2 text-white/90">Structured scope, clear milestones, and accountable ownership.</p>
+                  </div>
+                  <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
+                    <p className="text-xs uppercase tracking-[0.15em] text-white/55">Build Standard</p>
+                    <p className="mt-2 text-white/90">Performance, security, and maintainability from day one.</p>
+                  </div>
                 </div>
+              </div>
 
-                <div className="mt-7">
-                  <p className="text-sm uppercase tracking-[0.14em] text-white/60">Scope Includes</p>
-                  <ul className="mt-3 space-y-2">
-                    {track.deliverables.map((item) => (
-                      <li key={item} className="flex items-start gap-2 text-white/85">
-                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-white/50 shrink-0" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              <div className="overflow-x-auto pb-2 [scrollbar-width:thin]" dir="rtl">
+                <div className="flex min-w-max gap-4 md:gap-5 snap-x snap-mandatory">
+                  {serviceTracks.map((track, idx) => (
+                    <motion.article
+                      key={track.title}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ duration: 0.45, delay: idx * 0.07 }}
+                      className={`snap-start shrink-0 rounded-2xl border border-white/10 bg-black/25 p-6 md:p-7 ${
+                        idx === 0 ? 'w-[min(42rem,88vw)] lg:w-[40rem]' : 'w-[min(36rem,88vw)] lg:w-[34rem]'
+                      }`}
+                      style={{ direction: 'ltr' }}
+                    >
+                      <div className="flex flex-wrap items-center gap-2 text-xs">
+                        <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-white/75">
+                          {track.label}
+                        </span>
+                        <span className="rounded-full border border-white/15 px-3 py-1 text-white/60">
+                          Best for: {track.bestFor}
+                        </span>
+                      </div>
 
-                <div className="mt-7">
-                  <p className="text-sm uppercase tracking-[0.14em] text-white/60">Expected Outcomes</p>
-                  <ul className="mt-3 space-y-2">
-                    {track.outcomes.map((item) => (
-                      <li key={item} className="flex items-start gap-2 text-white/85">
-                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-emerald-300/80 shrink-0" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
+                      <h3 className="mt-4 text-2xl font-semibold leading-tight">{track.title}</h3>
+                      <p className="mt-3 text-white/75 leading-relaxed">{track.summary}</p>
+
+                      <div className="mt-6 grid gap-5 md:grid-cols-2">
+                        <div>
+                          <p className="text-xs uppercase tracking-[0.16em] text-white/55">Scope</p>
+                          <ul className="mt-3 space-y-2">
+                            {track.deliverables.map((item) => (
+                              <li key={item} className="flex items-start gap-2 text-white/85">
+                                <span className="mt-2 h-1.5 w-1.5 rounded-full bg-white/45 shrink-0" />
+                                <span>{item}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div>
+                          <p className="text-xs uppercase tracking-[0.16em] text-white/55">Client Value</p>
+                          <ul className="mt-3 space-y-2">
+                            {track.outcomes.map((item) => (
+                              <li key={item} className="flex items-start gap-2 text-white/85">
+                                <span className="mt-2 h-1.5 w-1.5 rounded-full bg-emerald-300/80 shrink-0" />
+                                <span>{item}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </motion.article>
+                  ))}
                 </div>
-              </motion.article>
-            ))}
+              </div>
           </div>
         </div>
       </section>
@@ -219,43 +256,41 @@ const Services: React.FC = () => {
             <h2 className="mt-2 text-3xl md:text-5xl font-semibold">Execution Framework</h2>
           </div>
 
-          <div className="rounded-3xl border border-white/10 bg-black/20 backdrop-blur-md">
-            <ScrollStack
-              className="overflow-visible"
-              useWindowScroll
-              itemDistance={90}
-              itemScale={0.02}
-              itemStackDistance={24}
-              stackPosition="14%"
-              scaleEndPosition="8%"
-              baseScale={0.9}
-            >
-              {deliveryPhases.map((phase) => (
-                <ScrollStackItem
-                  key={phase.title}
-                  itemClassName={`h-auto min-h-[18rem] md:min-h-[20rem] border border-white/10 bg-gradient-to-br ${phase.accent} backdrop-blur-lg`}
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <h3 className="text-2xl md:text-3xl font-semibold">{phase.title}</h3>
-                      <p className="mt-3 text-white/80 max-w-3xl leading-relaxed">{phase.detail}</p>
-                    </div>
+          <ScrollStack
+            className="overflow-visible"
+            useWindowScroll
+            itemDistance={90}
+            itemScale={0.02}
+            itemStackDistance={24}
+            stackPosition="14%"
+            scaleEndPosition="8%"
+            baseScale={0.9}
+          >
+            {deliveryPhases.map((phase) => (
+              <ScrollStackItem
+                key={phase.title}
+                itemClassName={`h-auto min-h-[18rem] md:min-h-[20rem] border border-white/10 bg-gradient-to-br ${phase.accent} backdrop-blur-lg`}
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <h3 className="text-2xl md:text-3xl font-semibold">{phase.title}</h3>
+                    <p className="mt-3 text-white/80 max-w-3xl leading-relaxed">{phase.detail}</p>
                   </div>
+                </div>
 
-                  <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-3">
-                    {phase.points.map((point) => (
-                      <div
-                        key={point}
-                        className="rounded-xl border border-white/15 bg-black/20 px-4 py-3 text-sm text-white/90"
-                      >
-                        {point}
-                      </div>
-                    ))}
-                  </div>
-                </ScrollStackItem>
-              ))}
-            </ScrollStack>
-          </div>
+                <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-3">
+                  {phase.points.map((point) => (
+                    <div
+                      key={point}
+                      className="rounded-xl border border-white/15 bg-black/20 px-4 py-3 text-sm text-white/90"
+                    >
+                      {point}
+                    </div>
+                  ))}
+                </div>
+              </ScrollStackItem>
+            ))}
+          </ScrollStack>
         </div>
       </section>
 
