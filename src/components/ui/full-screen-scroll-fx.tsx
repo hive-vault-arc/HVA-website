@@ -701,7 +701,7 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
           .fx-bg-img {
             position: absolute; inset: -10% 0 -10% 0;
             width: 100%; height: 120%; object-fit: cover;
-            filter: brightness(0.8);
+            filter: brightness(0.96) saturate(1.04);
             opacity: 0;
             will-change: transform, opacity;
           }

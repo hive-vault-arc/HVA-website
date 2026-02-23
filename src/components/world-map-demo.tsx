@@ -4,7 +4,7 @@ export function WorldMapDemo() {
   return (
     <div className="py-12 w-full">
       <div className="max-w-7xl mx-auto px-4 text-center">
-        <p className="font-bold text-3xl md:text-7xl text-white mb-6">
+        <p className="font-bold text-3xl md:text-7xl text-[#1E272E] mb-6">
           Global Reach, Local Impact
         </p>
         <p className="text-sm md:text-lg text-neutral-400 max-w-3xl mx-auto py-2">
@@ -48,7 +48,7 @@ export function WorldMapDemo() {
             end: { lat: 30.0444, lng: 31.2357 },    // Cairo, Egypt
           }
         ]}
-          lineColor="#9333ea" // Purple color to match your theme
+          lineColor="#0984E3"
         />
       </div>
     </div>

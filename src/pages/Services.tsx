@@ -1,252 +1,337 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import Background3d from '../components/Plasma';
-import GradualBlur from '../components/GradualBlur';
+import { MotionConfig, motion } from 'framer-motion';
+import {
+  ArrowRight,
+  Bot,
+  CheckCircle2,
+  Cloud,
+  Code2,
+  Database,
+  ShieldCheck,
+  Sparkles,
+  Workflow,
+} from 'lucide-react';
+import PageAmbientBackground from '../components/PageAmbientBackground';
+import { useAnimationQuality } from '../lib/animationQuality';
 
-const capabilityShowcase = [
+type ServicePillar = {
+  id: string;
+  title: string;
+  summary: string;
+  outcomes: string[];
+  featured?: boolean;
+};
+
+type ServiceDomain = {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  deliverables: string[];
+};
+
+const servicePillars: ServicePillar[] = [
   {
-    title: 'Custom Software Systems',
-    subtitle: 'Product and internal systems engineered around your workflow.',
-    image: '/Images/dashboard3.jpg',
+    id: '01',
+    title: 'Software Engineering and Automation',
+    summary: 'Custom software systems and process automation engineered around your business workflows.',
+    outcomes: ['Web and mobile applications', 'Internal tools and operations software', 'API integrations and automation flows'],
   },
   {
-    title: 'Cloud & Platform Engineering',
-    subtitle: 'Reliable cloud architecture designed for growth and uptime.',
-    image: '/Images/web.png',
+    id: '02',
+    title: 'AI Assistants and ML Features',
+    summary: 'Practical AI implementations that improve speed, decision-making, and customer interactions.',
+    outcomes: ['AI assistants and chatbots', 'Model training and evaluation', 'AI-powered product features'],
+    featured: true,
   },
   {
-    title: 'Applied AI for Operations',
-    subtitle: 'Practical AI features that reduce manual effort and response time.',
-    image: '/Images/ai.jpg',
+    id: '03',
+    title: 'Deployment, CI/CD, and Monitoring',
+    summary: 'Reliable release workflows and production monitoring for stable day-to-day operations.',
+    outcomes: ['Deployment workflows', 'CI/CD pipelines', 'Monitoring, alerts, and maintenance'],
   },
 ];
 
-const deliveryPhases = [
+const serviceDomains: ServiceDomain[] = [
   {
-    title: 'Discovery and Scoping',
-    detail:
-      'We align on goals, user needs, constraints, and delivery priorities before implementation begins.',
-    points: ['Business objectives and KPIs', 'Solution blueprint and milestones', 'Technical scope and timeline'],
-    accent: 'from-fuchsia-500/30 to-violet-500/10',
+    icon: <Code2 className="h-5 w-5 text-[#0984E3]" />,
+    title: 'Software Product Engineering',
+    description: 'From product idea to production-ready software with clear technical ownership.',
+    deliverables: ['Architecture and scope planning', 'Frontend, backend, and mobile implementation', 'Testing, QA, and release management'],
   },
   {
-    title: 'Design and Architecture',
-    detail:
-      'We design the experience and architecture together so product, engineering, and business stay aligned.',
-    points: ['UX/UI system and interaction model', 'Data model and API contracts', 'Security and reliability baselines'],
-    accent: 'from-cyan-500/30 to-blue-500/10',
+    icon: <Bot className="h-5 w-5 text-[#0984E3]" />,
+    title: 'AI Assistants and Chatbots',
+    description: 'Business-focused AI assistants that automate communication and support workflows.',
+    deliverables: ['WhatsApp and web chat assistants', 'Lead qualification and scoring', 'Context-aware conversation automation'],
   },
   {
-    title: 'Build and Integrate',
-    detail:
-      'We deliver in short iterations with clear demos, QA, and integration checkpoints.',
-    points: ['Feature delivery in sprints', 'Integration and regression testing', 'Infrastructure and release pipeline'],
-    accent: 'from-emerald-500/30 to-teal-500/10',
+    icon: <Cloud className="h-5 w-5 text-[#0984E3]" />,
+    title: 'Deployment and CI/CD Workflows',
+    description: 'Deployment pipelines and release workflows that keep delivery fast and stable.',
+    deliverables: ['Build and release pipeline setup', 'Automated testing in CI/CD', 'Monitoring and incident readiness'],
   },
   {
-    title: 'Launch and Optimize',
-    detail:
-      'Post-launch, we monitor, optimize, and iterate based on usage patterns and performance.',
-    points: ['Go-live and operational handover', 'Monitoring and performance tuning', 'Roadmap for next growth phase'],
-    accent: 'from-orange-500/30 to-amber-500/10',
+    icon: <Workflow className="h-5 w-5 text-[#0984E3]" />,
+    title: 'Integrations and Workflow Automation',
+    description: 'Connect systems and automate handoffs to reduce manual work and delays.',
+    deliverables: ['API and third-party integrations', 'Workflow and process orchestration', 'Business automation pipelines'],
+  },
+  {
+    icon: <Database className="h-5 w-5 text-[#0984E3]" />,
+    title: 'ML Models, Data, and Reporting',
+    description: 'Model development and data foundations that support measurable product outcomes.',
+    deliverables: ['Model training and evaluation workflows', 'Data model and schema design', 'Operational and performance dashboards'],
+  },
+  {
+    icon: <ShieldCheck className="h-5 w-5 text-[#0984E3]" />,
+    title: 'Security and Reliability',
+    description: 'Production standards for access control, auditability, and service continuity.',
+    deliverables: ['Access and permissions model', 'Security controls and checks', 'Reliability and maintenance planning'],
+  },
+];
+
+const deliveryFlow = [
+  {
+    step: 'Discover',
+    detail: 'Align on goals, constraints, and measurable outcomes.',
+  },
+  {
+    step: 'Design',
+    detail: 'Define architecture, user flows, and execution plan.',
+  },
+  {
+    step: 'Build',
+    detail: 'Deliver in milestones with QA, demos, and feedback loops.',
+  },
+  {
+    step: 'Scale',
+    detail: 'Optimize performance, reliability, and roadmap continuity.',
   },
 ];
 
 const Services: React.FC = () => {
+  const { tier } = useAnimationQuality();
+  const glassBlurClass = tier === 'high' ? 'backdrop-blur-sm' : 'backdrop-blur-none';
+
   return (
-    <div className="relative min-h-screen overflow-hidden bg-black text-white">
-      <Background3d
-        color="#CF9FFF"
-        speed={0.5}
-        direction="forward"
-        scale={1.05}
-        opacity={0.75}
-        mouseInteractive={false}
-        maxDprCap={1}
-        targetFpsCap={24}
-        visibilityThreshold={0.15}
-      />
+    <MotionConfig reducedMotion={tier === 'high' ? 'never' : 'always'}>
+      <div className="relative min-h-screen overflow-hidden bg-[#F5F6FA] text-[#1E272E]">
+        <PageAmbientBackground />
 
-      <section className="relative pt-32 pb-14">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="max-w-4xl"
-          >
-            <p className="text-sm uppercase tracking-[0.22em] text-white/70">Services</p>
-            <h1 className="mt-4 text-4xl md:text-6xl font-semibold leading-tight">
-              Digital Engineering for teams that need quality and momentum
-            </h1>
-            <p className="mt-6 text-lg text-white/75 max-w-3xl leading-relaxed">
-              HIIVA helps companies design, build, and scale software products. We focus on clear delivery,
-              robust architecture, and measurable outcomes. No public pricing is shown, every engagement is scoped
-              around your exact business needs.
-            </p>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-3 font-medium hover:bg-white/20 transition-colors"
+        <section className="relative pt-32 pb-14">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="max-w-5xl"
               >
-                Start a Project
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link
-                to="/portfolio"
-                className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 font-medium text-white/90 hover:bg-white/10 transition-colors"
-              >
-                View Case Studies
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      <section className="relative py-10">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-6 lg:gap-8">
-              <div className="lg:sticky lg:top-28 h-fit rounded-2xl border border-white/10 bg-black/20 p-6 md:p-7">
-                <p className="text-sm uppercase tracking-[0.2em] text-white/60">What We Offer</p>
-                <h2 className="mt-3 text-3xl md:text-5xl font-semibold leading-tight">Capability Areas</h2>
-                <p className="mt-5 text-white/75 leading-relaxed">
-                  A focused set of engineering capabilities used to design, ship, and scale dependable products.
-                  Each area is tied to business outcomes, not just technical output.
+                <p className="text-xs uppercase tracking-[0.22em] text-[#1E272E]/65">Services</p>
+                <h1 className="mt-4 text-4xl md:text-6xl font-semibold leading-[0.98]">
+                  Engineering Services That Move Business Forward
+                </h1>
+                <p className="mt-6 text-lg text-[#1E272E]/78 max-w-3xl leading-relaxed">
+                  We are software, computer science, and machine learning engineers building practical digital products.
+                  Our work includes automation software, AI assistants, ML-powered features, and production delivery workflows.
+                  We deploy, monitor, and improve systems continuously, without positioning ourselves as an infrastructure-as-a-service provider.
                 </p>
-                <div className="mt-8 space-y-4">
-                  <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
-                    <p className="text-xs uppercase tracking-[0.15em] text-white/55">Delivery Model</p>
-                    <p className="mt-2 text-white/90">Structured scope, clear milestones, and accountable ownership.</p>
-                  </div>
-                  <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
-                    <p className="text-xs uppercase tracking-[0.15em] text-white/55">Build Standard</p>
-                    <p className="mt-2 text-white/90">Performance, security, and maintainability from day one.</p>
-                  </div>
+                <div className="mt-10 flex flex-wrap gap-4">
+                  <Link
+                    to="/contact"
+                    className="inline-flex items-center gap-2 border border-[#1E272E]/20 bg-[#0984E3]/10 px-6 py-3 font-medium hover:bg-[#0984E3]/20 transition-colors"
+                  >
+                    Start a Project
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                  <Link
+                    to="/portfolio"
+                    className="inline-flex items-center gap-2 border border-[#1E272E]/20 px-6 py-3 font-medium text-[#1E272E]/90 hover:bg-[#0984E3]/10 transition-colors"
+                  >
+                    View Case Studies
+                  </Link>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-                {capabilityShowcase.map((item, idx) => (
+              <motion.aside
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.55, delay: 0.08 }}
+                className={`border border-[#1E272E]/15 bg-[#0984E3]/[0.04] ${glassBlurClass} p-6`}
+              >
+                <p className="text-xs uppercase tracking-[0.16em] text-[#1E272E]/60">At a Glance</p>
+                <div className="mt-4 space-y-3">
+                  {[
+                    'Custom software systems and business automation',
+                    'AI assistants, chatbots, and ML-powered product features',
+                    'Deployment workflows, CI/CD pipelines, and monitoring',
+                  ].map((line) => (
+                    <div key={line} className="flex items-start gap-2">
+                      <Sparkles className="h-4 w-4 mt-1 text-[#0984E3] shrink-0" />
+                      <p className="text-[#1E272E]/88 text-sm leading-relaxed">{line}</p>
+                    </div>
+                  ))}
+                </div>
+              </motion.aside>
+            </div>
+          </div>
+        </section>
+
+        <section className="relative py-10">
+          <div className="container mx-auto px-4">
+            <div className="mb-8">
+              <p className="text-xs uppercase tracking-[0.2em] text-[#1E272E]/60">Core Service Lines</p>
+              <h2 className="mt-2 text-3xl md:text-5xl font-semibold">What We Actually Deliver</h2>
+            </div>
+
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+              {servicePillars.map((pillar, index) => (
+                <motion.article
+                  key={pillar.title}
+                  initial={{ opacity: 0, y: 18 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.45, delay: index * 0.07 }}
+                  className={[
+                    'border p-6',
+                    pillar.featured
+                      ? 'border-[#0984E3]/70 bg-[#0984E3] text-[#F5F6FA] shadow-[0_18px_40px_rgba(9,132,227,0.25)]'
+                      : `border-[#1E272E]/15 bg-[#0984E3]/[0.04] ${glassBlurClass} text-[#1E272E]`,
+                  ].join(' ')}
+                >
+                  <p className={pillar.featured ? 'text-[#F5F6FA]/80 text-sm font-semibold' : 'text-[#0984E3] text-sm font-semibold'}>
+                    {pillar.id}
+                  </p>
+                  <h3 className="mt-3 text-2xl font-semibold leading-tight">{pillar.title}</h3>
+                  <p className={pillar.featured ? 'mt-3 text-[#F5F6FA]/90' : 'mt-3 text-[#1E272E]/75'}>{pillar.summary}</p>
+                  <div className="mt-6 space-y-2">
+                    {pillar.outcomes.map((item) => (
+                      <div key={item} className="flex items-start gap-2">
+                        <CheckCircle2 className={pillar.featured ? 'h-4 w-4 mt-0.5 text-[#F5F6FA] shrink-0' : 'h-4 w-4 mt-0.5 text-[#0984E3] shrink-0'} />
+                        <span className={pillar.featured ? 'text-[#F5F6FA]/90 text-sm' : 'text-[#1E272E]/85 text-sm'}>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </motion.article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="relative py-12">
+          <div className="container mx-auto px-4">
+            <div className="mb-8">
+              <p className="text-xs uppercase tracking-[0.2em] text-[#1E272E]/60">Service Catalog</p>
+              <h2 className="mt-2 text-3xl md:text-5xl font-semibold">Detailed Engineering Capabilities</h2>
+            </div>
+
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {serviceDomains.map((domain, index) => (
+                <motion.article
+                  key={domain.title}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.42, delay: index * 0.05 }}
+                  className={`border border-[#1E272E]/12 bg-white ${glassBlurClass} p-6`}
+                >
+                  <div className="mb-4 inline-flex items-center gap-2 border border-[#1E272E]/15 bg-[#0984E3]/10 px-3 py-2">
+                    {domain.icon}
+                    <span className="text-xs uppercase tracking-[0.12em] text-[#1E272E]/80">Service</span>
+                  </div>
+                  <h3 className="text-2xl font-semibold">{domain.title}</h3>
+                  <p className="mt-3 text-[#1E272E]/75">{domain.description}</p>
+                  <ul className="mt-5 space-y-2">
+                    {domain.deliverables.map((deliverable) => (
+                      <li key={deliverable} className="flex items-start gap-2 text-sm text-[#1E272E]/88">
+                        <span className="mt-1 h-1.5 w-1.5 bg-[#0984E3] shrink-0" />
+                        <span>{deliverable}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="relative py-12">
+          <div className="container mx-auto px-4">
+            <div className="mb-8">
+              <p className="text-xs uppercase tracking-[0.2em] text-[#1E272E]/60">Execution Flow</p>
+              <h2 className="mt-2 text-3xl md:text-5xl font-semibold">How Delivery Moves From Idea to Production</h2>
+            </div>
+
+            <div className="relative mt-10 overflow-hidden rounded-2xl border border-[#1E272E]/14 bg-gradient-to-br from-white to-[#ECF5FD]/45 p-4 md:p-6">
+              <div className="pointer-events-none absolute left-[10%] right-[10%] top-[48px] hidden xl:block h-[2px] bg-gradient-to-r from-[#0984E3]/15 via-[#0984E3]/55 to-[#0984E3]/15" />
+
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+                {deliveryFlow.map((item, index) => (
                   <motion.article
-                    key={item.title}
-                    initial={{ opacity: 0, y: 20 }}
+                    key={item.step}
+                    initial={{ opacity: 0, y: 14 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.2 }}
-                    transition={{ duration: 0.45, delay: idx * 0.07 }}
-                    className="group rounded-2xl border border-white/15 bg-white/[0.05] backdrop-blur-xl overflow-hidden shadow-[0_14px_36px_rgba(0,0,0,0.35)]"
+                    transition={{ duration: 0.36, delay: index * 0.05 }}
+                    className="group relative rounded-xl border border-[#1E272E]/12 bg-white/95 p-5 pt-8 shadow-[0_8px_24px_rgba(9,132,227,0.08)]"
                   >
-                    <div className="h-9 px-3 border-b border-white/10 flex items-center justify-between bg-black/20">
-                      <div className="flex items-center gap-1.5">
-                        <span className="h-1.5 w-1.5 rounded-full bg-white/50" />
-                        <span className="h-1.5 w-1.5 rounded-full bg-white/35" />
-                        <span className="h-1.5 w-1.5 rounded-full bg-white/20" />
-                      </div>
-                      <span className="text-[10px] uppercase tracking-[0.14em] text-white/55">Capability</span>
-                    </div>
-                    <div className="p-2">
-                      <div className="aspect-[16/10] overflow-hidden rounded-xl border border-white/10 bg-black/40">
-                        <img
-                          src={item.image}
-                          alt={item.title}
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                          loading="lazy"
-                        />
+                    <div className="absolute left-5 top-0 -translate-y-1/2">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#0984E3]/35 bg-[#F5F6FA] text-sm font-semibold text-[#0984E3] shadow-[0_4px_14px_rgba(9,132,227,0.18)]">
+                        {`0${index + 1}`}
                       </div>
                     </div>
-                    <div className="px-4 pb-4">
-                      <p className="text-white text-base font-medium">{item.title}</p>
-                      <p className="text-white/65 text-sm mt-1 leading-relaxed">{item.subtitle}</p>
+                    <p className="text-[11px] uppercase tracking-[0.18em] text-[#0984E3]/75">Step {index + 1}</p>
+                    <h3 className="mt-2 text-2xl font-semibold text-[#1E272E]">{item.step}</h3>
+                    <p className="mt-3 text-sm text-[#1E272E]/75 leading-relaxed">{item.detail}</p>
+                    <div className="mt-5 h-1 w-full rounded-full bg-[#1E272E]/8">
+                      <div
+                        className="h-full rounded-full bg-gradient-to-r from-[#0984E3] to-[#00CEC9]"
+                        style={{ width: `${(index + 1) * 25}%` }}
+                      />
                     </div>
                   </motion.article>
                 ))}
               </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="relative py-16">
-        <div className="container mx-auto px-4">
-          <div className="mb-8">
-            <p className="text-sm uppercase tracking-[0.2em] text-white/60">How We Deliver</p>
-            <h2 className="mt-2 text-3xl md:text-5xl font-semibold">Execution Framework</h2>
-          </div>
-
-          <div className="relative space-y-5">
-            <div className="absolute left-4 top-0 bottom-0 w-px bg-gradient-to-b from-white/30 via-white/10 to-transparent md:left-5" />
-            {deliveryPhases.map((phase, index) => (
-              <motion.article
-                key={phase.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
-                className={`relative rounded-3xl border border-white/12 bg-gradient-to-br ${phase.accent} backdrop-blur-xl p-6 md:p-8 md:pl-12`}
-              >
-                <div className="absolute left-2 top-7 flex h-6 w-6 items-center justify-center rounded-full border border-white/25 bg-black/40 text-[10px] font-semibold text-white/90 md:left-2">
-                  {index + 1}
+        <section className="relative py-14 mb-10">
+          <div className="container mx-auto px-4">
+            <div className={`border border-[#1E272E]/12 bg-gradient-to-r from-white/10 to-white/5 ${glassBlurClass} p-8 md:p-10`}>
+              <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.2em] text-[#1E272E]/60">Next Step</p>
+                  <h2 className="mt-3 text-3xl md:text-5xl font-semibold leading-tight">
+                    Share Your Product Context, We Define the Right Service Path
+                  </h2>
+                  <p className="mt-4 text-[#1E272E]/78 max-w-2xl">
+                    Tell us what you are building, where the bottlenecks are, and what timeline you are targeting.
+                    We will propose scope, priorities, and an execution model aligned to your business outcome.
+                  </p>
                 </div>
-
-                <h3 className="text-2xl md:text-3xl font-semibold">{phase.title}</h3>
-                <p className="mt-3 text-white/80 max-w-3xl leading-relaxed">{phase.detail}</p>
-
-                <div className="mt-7 grid grid-cols-1 md:grid-cols-3 gap-3">
-                  {phase.points.map((point) => (
-                    <div
-                      key={point}
-                      className="rounded-xl border border-white/15 bg-black/25 px-4 py-3 text-sm text-white/90 transition-transform duration-300 hover:-translate-y-0.5"
-                    >
-                      {point}
-                    </div>
-                  ))}
+                <div className="space-y-3">
+                  <Link
+                    to="/contact"
+                    className="inline-flex w-full items-center justify-center gap-2 bg-[#0984E3] text-[#F5F6FA] px-6 py-3 font-medium hover:bg-[#0776CC] transition-colors"
+                  >
+                    Book a Call
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                  <Link
+                    to="/portfolio"
+                    className="inline-flex w-full items-center justify-center gap-2 border border-[#1E272E]/20 bg-[#0984E3]/10 px-6 py-3 font-medium text-[#1E272E] hover:bg-[#0984E3]/15 transition-colors"
+                  >
+                    Explore Delivered Work
+                  </Link>
                 </div>
-              </motion.article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="relative py-16 mb-10">
-        <div className="container mx-auto px-4">
-          <div className="rounded-3xl border border-white/10 bg-gradient-to-r from-white/10 to-white/5 p-8 md:p-12">
-            <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-8 items-center">
-              <div>
-                <p className="text-sm uppercase tracking-[0.2em] text-white/60">Engagement Model</p>
-                <h2 className="mt-2 text-3xl md:text-5xl font-semibold">Custom Scoping, Zero Public Pricing</h2>
-                <p className="mt-5 text-white/80 leading-relaxed max-w-2xl">
-                  We scope each engagement around your product goals, technical constraints, and delivery timeline.
-                  If you share your project context, we provide a structured proposal with timeline, scope, and team plan.
-                </p>
-              </div>
-              <div className="space-y-3">
-                <div className="rounded-xl border border-white/15 bg-black/30 p-4 flex items-start gap-3">
-                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-fuchsia-300/90 shrink-0" />
-                  <p className="text-white/90">Dedicated team and communication rhythm</p>
-                </div>
-                <div className="rounded-xl border border-white/15 bg-black/30 p-4 flex items-start gap-3">
-                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-cyan-300/90 shrink-0" />
-                  <p className="text-white/90">Clear milestones and release visibility</p>
-                </div>
-                <div className="rounded-xl border border-white/15 bg-black/30 p-4 flex items-start gap-3">
-                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-emerald-300/90 shrink-0" />
-                  <p className="text-white/90">Quality, security, and maintainability by default</p>
-                </div>
-                <Link
-                  to="/contact"
-                  className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white text-black px-5 py-3 font-medium hover:bg-white/90 transition-colors"
-                >
-                  Contact Us to Discuss Your Project
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      <GradualBlur target="page" position="bottom" height="5rem" strength={2} divCount={5} curve="bezier" exponential opacity={1} />
-    </div>
+        </section>
+      </div>
+    </MotionConfig>
   );
 };
 

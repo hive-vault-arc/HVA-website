@@ -13,7 +13,7 @@ describe('Navbar', () => {
     screen.getAllByRole('link', { name: 'About' }).forEach(link => expect(link).toHaveAttribute('href', '/about'));
     screen.getAllByRole('link', { name: 'Portfolio' }).forEach(link => expect(link).toHaveAttribute('href', '/portfolio'));
     screen.getAllByRole('link', { name: 'Services' }).forEach(link => expect(link).toHaveAttribute('href', '/services'));
-    screen.getAllByRole('link', { name: 'Contact' }).forEach(link => expect(link).toHaveAttribute('href', '/contact'));
+    expect(screen.queryByRole('link', { name: 'Contact' })).toBeNull();
   });
 
   it('routes Book a Call CTA to contact page', () => {

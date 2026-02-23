@@ -1,12 +1,7 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import Contact from './Contact';
 
-vi.mock('../components/Plasma', () => ({
-  __esModule: true,
-  default: () => null,
-}));
-
-vi.mock('../components/GradualBlur', () => ({
+vi.mock('../components/PageAmbientBackground', () => ({
   __esModule: true,
   default: () => null,
 }));

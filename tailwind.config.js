@@ -19,7 +19,7 @@ module.exports = {
   		transparent: 'transparent',
   		current: 'currentColor',
   		white: '#ffffff',
-  		black: '#000000',
+  		black: '#1E272E',
   		gray: {
   			'50': '#f9fafb',
   			'100': '#f3f4f6',
@@ -33,22 +33,26 @@ module.exports = {
   			'900': '#111827'
   		},
   		purple: {
-  			'50': '#f5f3ff',
-  			'100': '#ede9fe',
-  			'200': '#ddd6fe',
-  			'300': '#c4b5fd',
-  			'400': '#a78bfa',
-  			'500': '#8b5cf6',
-  			'600': '#7c3aed',
-  			'700': '#6d28d9',
-  			'800': '#5b21b6',
-  			'900': '#4c1d95',
-  			'950': '#2e1065',
-  			DEFAULT: '#8B5CF6',
-  			dark: '#5A67D8',
-  			darker: '#4c57c4'
+  			'50': '#ecf5fd',
+  			'100': '#d6ebfb',
+  			'200': '#add8f6',
+  			'300': '#84c5f2',
+  			'400': '#5ab2ed',
+  			'500': '#0984E3',
+  			'600': '#0776cc',
+  			'700': '#0668b4',
+  			'800': '#045a9d',
+  			'900': '#034c86',
+  			'950': '#023d6e',
+  			DEFAULT: '#0984E3',
+  			dark: '#0776cc',
+  			darker: '#0668b4'
   		},
-  		dark: '#18181b'
+  		dark: '#1E272E',
+  		cyan: {
+  			'500': '#00CEC9'
+  		},
+  		cloud: '#F5F6FA'
   	},
   	extend: {
   		animation: {

@@ -48,8 +48,8 @@ const executionPoints = [
 
 const About: React.FC = () => {
   return (
-    <div className="relative overflow-hidden text-white">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(139,92,246,0.25),transparent_45%),radial-gradient(circle_at_85%_10%,rgba(56,189,248,0.2),transparent_40%),linear-gradient(180deg,#05060a_0%,#04050a_100%)]" />
+    <div className="relative overflow-hidden text-[#1E272E]">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(9,132,227,0.22),transparent_45%),radial-gradient(circle_at_85%_10%,rgba(0,206,201,0.16),transparent_40%),linear-gradient(180deg,#F5F6FA_0%,#ECF5FD_100%)]" />
 
       <section className="relative container mx-auto px-4 pt-28 pb-14 md:pt-36 md:pb-20">
         <motion.div
@@ -58,27 +58,27 @@ const About: React.FC = () => {
           transition={{ duration: 0.45 }}
           className="max-w-5xl"
         >
-          <p className="text-xs uppercase tracking-[0.2em] text-white/65">About HIIVA</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-[#1E272E]/65">About HIIVA</p>
           <h1 className="mt-4 text-5xl font-semibold leading-[0.95] md:text-7xl">
             A Software & Cloud
             <br />
             Engineering Company
           </h1>
-          <p className="mt-7 max-w-3xl text-lg text-white/80">
+          <p className="mt-7 max-w-3xl text-lg text-[#1E272E]/80">
             We build custom digital systems, AI-powered applications, and scalable platforms for modern businesses.
             Our focus is clear execution, dependable architecture, and outcomes that hold up in production.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Link
               to="/contact"
-              className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/15 bg-white px-7 py-3 text-black transition-colors hover:bg-white/90"
+              className="inline-flex items-center justify-center gap-2 rounded-lg border border-[#1E272E]/15 bg-white px-7 py-3 text-black transition-colors hover:bg-[#0984E3]/90"
             >
               Start a Project
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               to="/services"
-              className="inline-flex items-center justify-center rounded-lg border border-white/20 bg-white/10 px-7 py-3 text-white transition-colors hover:bg-white/15"
+              className="inline-flex items-center justify-center rounded-lg border border-[#1E272E]/20 bg-[#0984E3]/10 px-7 py-3 text-[#1E272E] transition-colors hover:bg-[#0984E3]/15"
             >
               Explore Services
             </Link>
@@ -95,13 +95,13 @@ const About: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
               transition={{ duration: 0.35, delay: index * 0.06 }}
-              className="rounded-2xl border border-white/15 bg-white/[0.06] p-6 backdrop-blur-sm"
+              className="rounded-2xl border border-[#1E272E]/15 bg-[#0984E3]/[0.06] p-6 backdrop-blur-sm"
             >
-              <div className="mb-4 inline-flex rounded-lg border border-white/20 bg-white/10 p-2 text-purple-200">
+              <div className="mb-4 inline-flex rounded-lg border border-[#1E272E]/20 bg-[#0984E3]/10 p-2 text-[#0984E3]">
                 {item.icon}
               </div>
               <h2 className="text-2xl font-medium">{item.title}</h2>
-              <p className="mt-3 text-white/75">{item.description}</p>
+              <p className="mt-3 text-[#1E272E]/75">{item.description}</p>
             </motion.article>
           ))}
         </div>
@@ -113,19 +113,19 @@ const About: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.4 }}
-          className="rounded-2xl border border-white/15 bg-gradient-to-r from-white/[0.09] via-white/[0.05] to-white/[0.03] p-7 md:p-10"
+          className="rounded-2xl border border-[#1E272E]/15 bg-gradient-to-r from-white/[0.09] via-white/[0.05] to-white/[0.03] p-7 md:p-10"
         >
-          <p className="text-xs uppercase tracking-[0.2em] text-white/60">Execution Standard</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-[#1E272E]/60">Execution Standard</p>
           <h2 className="mt-4 text-4xl font-semibold md:text-5xl">How We Work</h2>
-          <p className="mt-4 max-w-3xl text-white/75">
+          <p className="mt-4 max-w-3xl text-[#1E272E]/75">
             We keep delivery structured and transparent so stakeholders always know what is being built, why it matters,
             and how risk is managed.
           </p>
           <div className="mt-7 grid grid-cols-1 gap-3 md:grid-cols-2">
             {executionPoints.map((point) => (
-              <div key={point} className="flex items-start gap-3 rounded-xl border border-white/15 bg-black/20 px-4 py-3">
-                <CheckCircle2 className="mt-0.5 h-4 w-4 text-purple-300" />
-                <span className="text-white/90">{point}</span>
+              <div key={point} className="flex items-start gap-3 rounded-xl border border-[#1E272E]/15 bg-white px-4 py-3">
+                <CheckCircle2 className="mt-0.5 h-4 w-4 text-[#0984E3]" />
+                <span className="text-[#1E272E]/90">{point}</span>
               </div>
             ))}
           </div>
@@ -134,7 +134,7 @@ const About: React.FC = () => {
 
       <section className="relative container mx-auto px-4 py-10 md:py-14">
         <div className="mb-8 flex items-center gap-3">
-          <Users className="h-5 w-5 text-white/70" />
+          <Users className="h-5 w-5 text-[#1E272E]/70" />
           <h2 className="text-3xl font-semibold md:text-4xl">Team</h2>
         </div>
         <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
@@ -145,11 +145,11 @@ const About: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.35, delay: index * 0.07 }}
-              className="rounded-2xl border border-white/15 bg-white/[0.05] p-6"
+              className="rounded-2xl border border-[#1E272E]/15 bg-[#0984E3]/[0.05] p-6"
             >
               <h3 className="text-xl font-medium">{member.name}</h3>
-              <p className="mt-1 text-sm text-purple-200">{member.role}</p>
-              <p className="mt-3 text-white/75">{member.bio}</p>
+              <p className="mt-1 text-sm text-[#0984E3]">{member.role}</p>
+              <p className="mt-3 text-[#1E272E]/75">{member.bio}</p>
             </motion.article>
           ))}
         </div>
@@ -161,15 +161,15 @@ const About: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.35 }}
-          className="rounded-2xl border border-white/15 bg-white/[0.06] p-8 text-center"
+          className="rounded-2xl border border-[#1E272E]/15 bg-[#0984E3]/[0.06] p-8 text-center"
         >
           <h2 className="text-3xl font-semibold md:text-5xl">Ready to Build With Us?</h2>
-          <p className="mx-auto mt-4 max-w-2xl text-white/75">
+          <p className="mx-auto mt-4 max-w-2xl text-[#1E272E]/75">
             Share your goals and constraints. We will outline the right technical path and delivery model for your team.
           </p>
           <Link
             to="/contact"
-            className="mt-8 inline-flex items-center gap-2 rounded-lg border border-white bg-white px-7 py-3 text-black transition-colors hover:bg-white/90"
+            className="mt-8 inline-flex items-center gap-2 rounded-lg border border-white bg-white px-7 py-3 text-black transition-colors hover:bg-[#0984E3]/90"
           >
             Book a Call
             <ArrowRight className="h-4 w-4" />

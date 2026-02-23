@@ -1,14 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { MotionConfig, motion } from 'framer-motion';
 import { ArrowRight, Cpu, Fingerprint, Pencil, SlidersHorizontal, Sparkles, Zap } from 'lucide-react';
-import Background3d from '../components/Plasma';
-import GradualBlur from '../components/GradualBlur';
+import PageAmbientBackground from '../components/PageAmbientBackground';
+import ResponsiveImage from '../components/ui/ResponsiveImage';
+import { useAnimationQuality } from '../lib/animationQuality';
 
 type Project = {
   title: string;
   category: string;
-  image: string;
+  image: {
+    src: string;
+    fallbackSrc?: string;
+    sources?: Array<{
+      srcSet: string;
+      media?: string;
+      type?: string;
+      sizes?: string;
+    }>;
+  };
   summary: string;
   sections: Array<{
     heading: string;
@@ -20,7 +30,17 @@ const projects: Project[] = [
   {
     title: 'Smart WhatsApp AI Assistant',
     category: 'AI Assistant',
-    image: '/Images/aiagent.png',
+    image: {
+      src: '/Images/aiagent.webp',
+      fallbackSrc: '/Images/aiagent.webp',
+      sources: [
+        {
+          srcSet: '/Images/aiagent.webp',
+          type: 'image/webp',
+          sizes: '(min-width: 1280px) 620px, (min-width: 1024px) 48vw, 100vw',
+        },
+      ],
+    },
     summary:
       'Handles client conversations on WhatsApp 24/7 in Arabic, French, and English, then converts interactions into qualified business actions.',
     sections: [
@@ -50,7 +70,17 @@ const projects: Project[] = [
   {
     title: 'Complete CRM System',
     category: 'Business Platform',
-    image: '/Images/CRM.png',
+    image: {
+      src: '/Images/CRM.webp',
+      fallbackSrc: '/Images/CRM.webp',
+      sources: [
+        {
+          srcSet: '/Images/CRM.webp',
+          type: 'image/webp',
+          sizes: '(min-width: 1280px) 620px, (min-width: 1024px) 48vw, 100vw',
+        },
+      ],
+    },
     summary:
       'A full CRM for real-estate operations covering lead qualification, deal movement, scheduling, project inventory, and team coordination.',
     sections: [
@@ -97,32 +127,32 @@ const projects: Project[] = [
 
 const excellenceItems = [
   {
-    icon: <Zap className="w-5 h-5 text-violet-400" />,
+    icon: <Zap className="w-5 h-5 text-[#0984E3]" />,
     title: 'Fast',
     text: 'Our code is optimized and ready for production.',
   },
   {
-    icon: <Cpu className="w-5 h-5 text-violet-400" />,
+    icon: <Cpu className="w-5 h-5 text-[#0984E3]" />,
     title: 'Powerful',
     text: 'Strong logic and reliable systems shipped.',
   },
   {
-    icon: <Fingerprint className="w-5 h-5 text-violet-400" />,
+    icon: <Fingerprint className="w-5 h-5 text-[#0984E3]" />,
     title: 'Security',
     text: 'Safe and stable code that passes strict checks.',
   },
   {
-    icon: <Pencil className="w-5 h-5 text-violet-400" />,
+    icon: <Pencil className="w-5 h-5 text-[#0984E3]" />,
     title: 'Customization',
     text: 'Built around your business needs and workflow.',
   },
   {
-    icon: <SlidersHorizontal className="w-5 h-5 text-violet-400" />,
+    icon: <SlidersHorizontal className="w-5 h-5 text-[#0984E3]" />,
     title: 'Clear Control',
     text: 'Full visibility on delivery, status, and decisions.',
   },
   {
-    icon: <Sparkles className="w-5 h-5 text-violet-400" />,
+    icon: <Sparkles className="w-5 h-5 text-[#0984E3]" />,
     title: 'AI Ready',
     text: 'Ready to adopt practical AI where it adds value.',
   },
@@ -142,19 +172,13 @@ const testimonials = [
 ];
 
 const Portfolio: React.FC = () => {
+  const { tier } = useAnimationQuality();
+  const glassBlurClass = tier === 'high' ? 'backdrop-blur-sm' : 'backdrop-blur-none';
+
   return (
-    <div className="relative min-h-screen overflow-hidden bg-black text-white">
-      <Background3d
-        color="#CF9FFF"
-        speed={0.5}
-        direction="forward"
-        scale={1.05}
-        opacity={0.75}
-        mouseInteractive={false}
-        maxDprCap={1}
-        targetFpsCap={24}
-        visibilityThreshold={0.15}
-      />
+    <MotionConfig reducedMotion={tier === 'high' ? 'never' : 'always'}>
+      <div className="relative min-h-screen overflow-hidden bg-[#F5F6FA] text-[#1E272E]">
+      <PageAmbientBackground />
 
       <section className="relative pt-32 pb-14">
         <div className="container mx-auto px-4">
@@ -164,24 +188,25 @@ const Portfolio: React.FC = () => {
             transition={{ duration: 0.7 }}
             className="max-w-4xl"
           >
-            <p className="text-sm uppercase tracking-[0.22em] text-white/70">Portfolio</p>
+            <p className="text-sm uppercase tracking-[0.22em] text-[#1E272E]/70">Portfolio</p>
             <h1 className="mt-4 text-4xl md:text-6xl font-semibold leading-tight">
               Work that shows how we think, build, and deliver
             </h1>
-            <p className="mt-6 text-lg text-white/75 max-w-3xl leading-relaxed">
-              We focus on clear outcomes, dependable execution, and products that perform in real use.
+            <p className="mt-6 text-lg text-[#1E272E]/75 max-w-3xl leading-relaxed">
+              Software and machine learning engineering delivered as practical products:
+              custom applications, AI assistants, automation workflows, and production-ready releases.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-3 font-medium hover:bg-white/20 transition-colors"
+                className="inline-flex items-center gap-2 rounded-full border border-[#1E272E]/20 bg-[#0984E3]/10 px-6 py-3 font-medium hover:bg-[#0984E3]/20 transition-colors"
               >
                 Start Your Project
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 to="/services"
-                className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 font-medium text-white/90 hover:bg-white/10 transition-colors"
+                className="inline-flex items-center gap-2 rounded-full border border-[#1E272E]/20 px-6 py-3 font-medium text-[#1E272E]/90 hover:bg-[#0984E3]/10 transition-colors"
               >
                 Explore Services
               </Link>
@@ -193,10 +218,14 @@ const Portfolio: React.FC = () => {
       <section className="relative py-10">
         <div className="container mx-auto px-4">
           <div className="mb-10">
-            <p className="text-sm uppercase tracking-[0.2em] text-white/60">Selected Work</p>
+            <p className="text-sm uppercase tracking-[0.2em] text-[#1E272E]/60">Selected Work</p>
             <h2 className="mt-2 text-3xl md:text-5xl font-semibold">Recent Projects</h2>
+            <p className="mt-4 max-w-3xl text-[#1E272E]/72">
+              Case studies showing how we apply software engineering, AI, and automation to solve real operational problems.
+            </p>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+          <div className="space-y-6">
             {projects.map((project, idx) => (
               <motion.article
                 key={project.title}
@@ -204,26 +233,63 @@ const Portfolio: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.45, delay: idx * 0.08 }}
-                className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl overflow-hidden"
+                className={`overflow-hidden rounded-2xl border border-[#1E272E]/12 bg-gradient-to-br from-white/75 to-[#ECF5FD]/55 shadow-[0_18px_40px_rgba(9,132,227,0.08)] ${glassBlurClass}`}
               >
-                <div className="aspect-[4/3] overflow-hidden">
-                  <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
-                </div>
-                <div className="p-6">
-                  <p className="text-xs uppercase tracking-[0.14em] text-white/60">{project.category}</p>
-                  <h3 className="mt-2 text-2xl font-semibold">{project.title}</h3>
-                  <p className="mt-3 text-white/75 leading-relaxed">{project.summary}</p>
-                  <div className="mt-5 space-y-4">
-                    {project.sections.map((section) => (
-                      <div key={section.heading}>
-                        <p className="text-sm uppercase tracking-[0.14em] text-white/60">{section.heading}</p>
-                        <ul className="mt-2 space-y-1.5 text-white/88 text-sm leading-relaxed list-disc pl-5">
-                          {section.items.map((item) => (
-                            <li key={item}>{item}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
+                <div className="grid grid-cols-1 gap-6 p-5 md:p-6 lg:grid-cols-12 lg:items-start">
+                  <div
+                    className={[
+                      'lg:col-span-5',
+                      idx % 2 === 1 ? 'lg:order-2' : 'lg:order-1',
+                    ].join(' ')}
+                  >
+                    <div className="aspect-[16/10] overflow-hidden rounded-xl border border-[#1E272E]/10 bg-white/70">
+                      <ResponsiveImage
+                        alt={project.title}
+                        src={project.image.src}
+                        fallbackSrc={project.image.fallbackSrc}
+                        sources={project.image.sources}
+                        sizes="(min-width: 1280px) 520px, (min-width: 1024px) 42vw, 100vw"
+                        className="relative h-full w-full"
+                        imgClassName="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.03]"
+                        eager={idx === 0}
+                      />
+                    </div>
+                  </div>
+
+                  <div
+                    className={[
+                      'lg:col-span-7',
+                      idx % 2 === 1 ? 'lg:order-1' : 'lg:order-2',
+                    ].join(' ')}
+                  >
+                    <div className="flex flex-wrap items-center gap-2">
+                      <p className="text-xs uppercase tracking-[0.14em] text-[#1E272E]/62">{project.category}</p>
+                      <span className="inline-flex items-center rounded-full border border-[#0984E3]/25 bg-[#0984E3]/10 px-2.5 py-1 text-[11px] font-medium text-[#0984E3]">
+                        {project.sections.length} delivery areas
+                      </span>
+                    </div>
+                    <h3 className="mt-2 text-2xl md:text-3xl font-semibold leading-tight">{project.title}</h3>
+                    <p className="mt-3 max-w-3xl text-[#1E272E]/76 leading-relaxed">{project.summary}</p>
+
+                    <div className="mt-5 space-y-3">
+                      {project.sections.map((section, sectionIndex) => (
+                        <details
+                          key={section.heading}
+                          open={sectionIndex === 0}
+                          className="group rounded-lg border border-[#1E272E]/12 bg-white/70 px-4 py-3"
+                        >
+                          <summary className="flex cursor-pointer list-none items-center justify-between gap-3">
+                            <span className="text-sm uppercase tracking-[0.12em] text-[#1E272E]/70">{section.heading}</span>
+                            <span className="text-xs text-[#0984E3] transition-transform group-open:rotate-45">+</span>
+                          </summary>
+                          <ul className="mt-3 space-y-1.5 pl-5 text-sm leading-relaxed text-[#1E272E]/86 list-disc">
+                            {section.items.map((item) => (
+                              <li key={item}>{item}</li>
+                            ))}
+                          </ul>
+                        </details>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </motion.article>
@@ -237,23 +303,24 @@ const Portfolio: React.FC = () => {
           <div className="text-center max-w-4xl mx-auto">
             <h2 className="text-5xl md:text-8xl font-semibold leading-[0.95]">Redefining Modern Software Excellence</h2>
             <p className="mt-20 text-4xl md:text-6xl font-semibold">Power. Speed. Control.</p>
-            <p className="mt-4 text-white/60 text-xl">Everything you need to build fast, secure, scalable apps.</p>
+            <p className="mt-4 text-[#1E272E]/60 text-xl">Everything needed to build, automate, deploy, and maintain reliable software products.</p>
           </div>
 
-          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border border-white/40 max-w-5xl mx-auto">
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border border-[#1E272E]/28 bg-[linear-gradient(180deg,rgba(255,255,255,0.95),rgba(241,248,255,0.95))] max-w-5xl mx-auto shadow-[0_16px_40px_rgba(9,132,227,0.08)]">
             {excellenceItems.map((item) => (
               <div
                 key={item.title}
-                className="p-6 md:p-7 border-b border-r border-white/30 bg-black/40 relative overflow-hidden"
+                className="p-6 md:p-7 border-b border-r border-[#1E272E]/18 relative overflow-hidden"
                 style={{
                   backgroundImage:
-                    'radial-gradient(circle at 70% 20%, rgba(255,255,255,0.08), transparent 35%), linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)',
+                    'radial-gradient(circle at 70% 18%, rgba(9,132,227,0.12), transparent 38%), linear-gradient(rgba(30,39,46,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(30,39,46,0.07) 1px, transparent 1px)',
                   backgroundSize: '100% 100%, 18px 18px, 18px 18px',
+                  boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.75)',
                 }}
               >
                 <div className="mb-5">{item.icon}</div>
-                <h3 className="text-4xl md:text-3xl font-semibold">{item.title}</h3>
-                <p className="mt-3 text-white/85 leading-relaxed">{item.text}</p>
+                <h3 className="text-4xl md:text-3xl font-semibold text-[#1E272E]">{item.title}</h3>
+                <p className="mt-3 text-[#1E272E]/82 leading-relaxed">{item.text}</p>
               </div>
             ))}
           </div>
@@ -263,7 +330,7 @@ const Portfolio: React.FC = () => {
       <section className="relative py-14">
         <div className="container mx-auto px-4">
           <div className="mb-8">
-            <p className="text-sm uppercase tracking-[0.2em] text-white/60">Client Voice</p>
+            <p className="text-sm uppercase tracking-[0.2em] text-[#1E272E]/60">Client Voice</p>
             <h2 className="mt-2 text-3xl md:text-5xl font-semibold">What Clients Say</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -274,12 +341,12 @@ const Portfolio: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.45, delay: idx * 0.08 }}
-                className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5 p-7 md:p-8"
+                className="rounded-2xl border border-[#1E272E]/10 bg-gradient-to-br from-white/10 to-white/5 p-7 md:p-8"
               >
-                <p className="text-white/85 text-lg leading-relaxed">"{item.quote}"</p>
+                <p className="text-[#1E272E]/85 text-lg leading-relaxed">"{item.quote}"</p>
                 <footer className="mt-6">
-                  <p className="text-white font-medium">{item.author}</p>
-                  <p className="text-white/65 text-sm">{item.role}</p>
+                  <p className="text-[#1E272E] font-medium">{item.author}</p>
+                  <p className="text-[#1E272E]/65 text-sm">{item.role}</p>
                 </footer>
               </motion.blockquote>
             ))}
@@ -289,22 +356,22 @@ const Portfolio: React.FC = () => {
 
       <section className="relative py-14 mb-10">
         <div className="container mx-auto px-4 text-center">
-          <div className="max-w-4xl mx-auto rounded-2xl border border-white/10 bg-gradient-to-r from-white/10 to-white/5 p-8 md:p-12">
-            <h2 className="text-3xl md:text-5xl text-white font-semibold">Ready to Build Something Great?</h2>
-            <p className="text-white/75 mt-4 max-w-2xl mx-auto">
+          <div className="max-w-4xl mx-auto rounded-2xl border border-[#1E272E]/10 bg-gradient-to-r from-white/10 to-white/5 p-8 md:p-12">
+            <h2 className="text-3xl md:text-5xl text-[#1E272E] font-semibold">Ready to Build Something Great?</h2>
+            <p className="text-[#1E272E]/75 mt-4 max-w-2xl mx-auto">
               Share your project goals. We will help you plan the right next move.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
               <Link
                 to="/contact"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black rounded-lg font-medium hover:bg-gray-100 transition-colors duration-300"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#0984E3] text-[#F5F6FA] rounded-lg font-medium hover:bg-[#0776CC] transition-colors duration-300"
               >
                 Book a Call
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 to="/services"
-                className="inline-flex items-center justify-center px-8 py-4 bg-white/10 text-white border border-white/20 rounded-lg font-medium hover:bg-white/20 transition-colors duration-300"
+                className="inline-flex items-center justify-center px-8 py-4 bg-[#0984E3]/10 text-[#1E272E] border border-[#1E272E]/20 rounded-lg font-medium hover:bg-[#0984E3]/20 transition-colors duration-300"
               >
                 View Services
               </Link>
@@ -313,8 +380,8 @@ const Portfolio: React.FC = () => {
         </div>
       </section>
 
-      <GradualBlur target="page" position="bottom" height="5rem" strength={2} divCount={5} curve="bezier" exponential opacity={1} />
-    </div>
+      </div>
+    </MotionConfig>
   );
 };
 
