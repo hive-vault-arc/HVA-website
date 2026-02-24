@@ -4,7 +4,6 @@ import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Background3d from '../components/Plasma';
 import TextType from '../components/TextType';
-import ShinyText from '../components/ShinyText';
 import LogoLoop from '../components/LogoItem';
 import { InteractiveSpline } from '../components/ui/InteractiveSpline';
 import { FullScreenScrollFX } from '../components/ui/full-screen-scroll-fx';
@@ -92,7 +91,7 @@ const Home: React.FC = () => {
         transition={{ duration: 0.8 }}
         className="max-w-4xl mx-auto px-4 py-6 md:px-6 md:py-8"
       >
-        <h1 className="text-5xl md:text-8xl font-semibold text-[#0F1722] mb-6 [text-shadow:0_1px_0_rgba(255,255,255,0.35)]">
+        <h1 className="text-5xl md:text-8xl font-semibold text-[#101B2B] mb-6 [text-shadow:0_8px_28px_rgba(8,13,20,0.28)] [-webkit-text-stroke:0.6px_rgba(245,246,250,0.55)]">
           <TextType
             text={[
               'Software & Cloud Engineering',
@@ -104,22 +103,17 @@ const Home: React.FC = () => {
             pauseDuration={1500}
             showCursor
             cursorCharacter="|"
+            cursorClassName="text-[#101B2B]"
           />
         </h1>
-        <div className="inline-block px-4 py-3 bg-white/35 backdrop-blur-[1px]">
-          <p className="text-xl mb-0 max-w-3xl mx-auto text-[#0F1722]/92 leading-relaxed [text-shadow:0_1px_0_rgba(255,255,255,0.35)]">
-            <ShinyText
-              text="A software and cloud engineering company building custom digital systems, AI-powered applications, and scalable platforms for modern businesses."
-              disabled
-              className="text-[#0F1722]/92"
-            />
-          </p>
-        </div>
+        <p className="text-xl mb-0 max-w-3xl mx-auto text-[#1E272E] font-medium leading-relaxed [text-shadow:0_2px_10px_rgba(245,246,250,0.6)]">
+          A software and cloud engineering company building custom digital systems, AI-powered applications, and scalable platforms for modern businesses.
+        </p>
         <div className="h-8" />
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Link
             to="/portfolio"
-            className="px-8 py-4 bg-[#0984E3]/14 text-[#0F1722] border border-[#0F1722]/15 rounded-lg font-medium hover:bg-[#0984E3]/22 transition-colors duration-300 text-lg"
+            className="px-8 py-4 bg-[#0984E3] text-[#F5F6FA] border border-[#0984E3] rounded-lg font-medium hover:bg-[#0776CC] transition-colors duration-300 text-lg"
           >
             View Our Work
           </Link>
