@@ -160,7 +160,7 @@ const excellenceItems = [
 
 const testimonials = [
   {
-    quote: 'HIIVA helped us launch faster with a product that felt polished from day one.',
+    quote: 'HIVA helped us launch faster with a product that felt polished from day one.',
     author: 'Aisha Rahmani',
     role: 'Founder',
   },
@@ -172,11 +172,11 @@ const testimonials = [
 ];
 
 const Portfolio: React.FC = () => {
-  const { tier } = useAnimationQuality();
-  const glassBlurClass = tier === 'high' ? 'backdrop-blur-sm' : 'backdrop-blur-none';
+  const { motionReduced } = useAnimationQuality();
+  const glassBlurClass = 'backdrop-blur-none';
 
   return (
-    <MotionConfig reducedMotion={tier === 'high' ? 'never' : 'always'}>
+    <MotionConfig reducedMotion={motionReduced ? 'always' : 'never'}>
       <div className="relative min-h-screen overflow-hidden bg-[#F5F6FA] text-[#1E272E]">
       <PageAmbientBackground />
 

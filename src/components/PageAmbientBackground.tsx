@@ -5,12 +5,13 @@ import { useAnimationQuality } from '../lib/animationQuality';
 
 interface PageAmbientBackgroundProps {
   className?: string;
+  animated?: boolean;
 }
 
-const PageAmbientBackground: React.FC<PageAmbientBackgroundProps> = ({ className }) => {
+const PageAmbientBackground: React.FC<PageAmbientBackgroundProps> = ({ className, animated = true }) => {
   const { tier } = useAnimationQuality();
 
-  if (tier === 'high') {
+  if (animated && tier === 'high') {
     return (
       <Plasma
         color="#0984E3"

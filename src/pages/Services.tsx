@@ -91,6 +91,22 @@ const serviceDomains: ServiceDomain[] = [
   },
 ];
 
+const capabilityMatrix: ServiceDomain[] = [
+  ...serviceDomains,
+  {
+    icon: <Code2 className="h-6 w-6 text-[#0984E3]" />,
+    title: 'Software Engineering and Automation',
+    description: 'Custom software systems and process automation engineered around your business workflows.',
+    deliverables: ['Web and mobile applications', 'Internal tools and operations software', 'API integrations and automation flows'],
+  },
+  {
+    icon: <Bot className="h-6 w-6 text-[#0984E3]" />,
+    title: 'AI Assistants and ML Features',
+    description: 'Practical AI implementations that improve speed, decision-making, and customer interactions.',
+    deliverables: ['AI assistants and chatbots', 'Model training and evaluation', 'AI-powered product features'],
+  },
+];
+
 const deliveryFlow = [
   {
     step: 'Discover',
@@ -111,11 +127,11 @@ const deliveryFlow = [
 ];
 
 const Services: React.FC = () => {
-  const { tier } = useAnimationQuality();
-  const glassBlurClass = tier === 'high' ? 'backdrop-blur-sm' : 'backdrop-blur-none';
+  const { motionReduced } = useAnimationQuality();
+  const glassBlurClass = 'backdrop-blur-none';
 
   return (
-    <MotionConfig reducedMotion={tier === 'high' ? 'never' : 'always'}>
+    <MotionConfig reducedMotion={motionReduced ? 'always' : 'never'}>
       <div className="relative min-h-screen overflow-hidden bg-[#F5F6FA] text-[#1E272E]">
         <PageAmbientBackground />
 
@@ -221,37 +237,98 @@ const Services: React.FC = () => {
 
         <section className="relative py-12">
           <div className="container mx-auto px-4">
-            <div className="mb-8">
-              <p className="text-xs uppercase tracking-[0.2em] text-[#1E272E]/60">Service Catalog</p>
-              <h2 className="mt-2 text-3xl md:text-5xl font-semibold">Detailed Engineering Capabilities</h2>
+            <div className="mb-10 grid grid-cols-1 gap-6 lg:grid-cols-[1fr_1.15fr] lg:items-start">
+              <div>
+                <p className="text-xs uppercase tracking-[0.2em] text-[#1E272E]/60">Service Catalog</p>
+                <h2 className="mt-2 text-3xl md:text-5xl font-semibold">Detailed Engineering Capabilities</h2>
+              </div>
+              <p className="text-[#1E272E]/82 text-lg leading-relaxed max-w-3xl">
+                From AI assistants to production software delivery, our engineering capabilities cover the practical systems
+                your business needs to automate operations, ship faster, and maintain reliability in real use.
+              </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-              {serviceDomains.map((domain, index) => (
-                <motion.article
-                  key={domain.title}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.42, delay: index * 0.05 }}
-                  className={`border border-[#1E272E]/12 bg-white ${glassBlurClass} p-6`}
-                >
-                  <div className="mb-4 inline-flex items-center gap-2 border border-[#1E272E]/15 bg-[#0984E3]/10 px-3 py-2">
-                    {domain.icon}
-                    <span className="text-xs uppercase tracking-[0.12em] text-[#1E272E]/80">Service</span>
-                  </div>
-                  <h3 className="text-2xl font-semibold">{domain.title}</h3>
-                  <p className="mt-3 text-[#1E272E]/75">{domain.description}</p>
-                  <ul className="mt-5 space-y-2">
-                    {domain.deliverables.map((deliverable) => (
-                      <li key={deliverable} className="flex items-start gap-2 text-sm text-[#1E272E]/88">
-                        <span className="mt-1 h-1.5 w-1.5 bg-[#0984E3] shrink-0" />
-                        <span>{deliverable}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </motion.article>
+            <div className="overflow-hidden border border-[#1E272E]/16 bg-white">
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
+                {capabilityMatrix.map((domain, index) => (
+                  <motion.article
+                    key={domain.title}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.42, delay: index * 0.04 }}
+                    className="group relative min-h-[260px] border border-[#1E272E]/14 bg-[#F5F6FA]/65 overflow-hidden"
+                  >
+                    <div className="relative z-10 h-full flex flex-col p-5 transition-opacity duration-250 md:group-hover:opacity-0">
+                      <p className="text-[#1E272E] text-[40px] md:text-[38px] leading-[1.05] font-medium tracking-[-0.01em]">
+                        {domain.title}
+                      </p>
+                      <div className="mt-auto flex items-end justify-between pt-8">
+                        <span className="inline-flex items-center justify-center rounded-md border border-[#0984E3]/30 bg-[#0984E3]/10 p-2">
+                          {domain.icon}
+                        </span>
+                        <ArrowRight className="h-5 w-5 text-[#0984E3]/75 transition-transform duration-300 group-hover:translate-x-1" />
+                      </div>
+                    </div>
+
+                    <div
+                      className={[
+                        'absolute inset-0 z-20 p-5 transition-all duration-250',
+                        'opacity-100 translate-y-0 md:opacity-0 md:translate-y-1 md:group-hover:opacity-100 md:group-hover:translate-y-0',
+                        index % 2 === 0
+                          ? 'bg-gradient-to-br from-[#0984E3] to-[#00CEC9]'
+                          : 'bg-gradient-to-br from-[#1E272E] to-[#0984E3]',
+                      ].join(' ')}
+                    >
+                      <p className="text-white text-[30px] md:text-[28px] leading-[1.08] font-semibold tracking-[-0.01em]">
+                        {domain.title}
+                      </p>
+                      <p className="mt-3 text-white/95 text-[15px] leading-relaxed">{domain.description}</p>
+                      <ul className="mt-4 space-y-1.5">
+                        {domain.deliverables.slice(0, 3).map((deliverable) => (
+                          <li key={deliverable} className="flex items-start gap-2 text-[14px] text-white/95 leading-relaxed">
+                            <span className="mt-1 h-1.5 w-1.5 rounded-full bg-white/90 shrink-0" />
+                            <span>{deliverable}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <div className="mt-5 flex items-center justify-end">
+                        <ArrowRight className="h-5 w-5 text-white/95" />
+                      </div>
+                    </div>
+                  </motion.article>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">
+              {[
+                {
+                  label: 'Software Engineering',
+                  detail: 'Custom systems, web and mobile applications, and business workflow automation.',
+                },
+                {
+                  label: 'Applied AI & ML',
+                  detail: 'AI assistants, chatbots, and machine-learning powered product features.',
+                },
+                {
+                  label: 'Delivery Operations',
+                  detail: 'Deployment pipelines, CI/CD workflows, and monitoring for stable operations.',
+                },
+              ].map((item) => (
+                <div key={item.label} className="border border-[#1E272E]/12 bg-white p-4">
+                  <p className="text-sm uppercase tracking-[0.14em] text-[#0984E3]">{item.label}</p>
+                  <p className="mt-2 text-[#1E272E]/76 text-sm leading-relaxed">{item.detail}</p>
+                </div>
               ))}
+            </div>
+
+            <div className="mb-8 mt-12">
+              <p className="text-xs uppercase tracking-[0.2em] text-[#1E272E]/60">Service Catalog</p>
+              <h3 className="mt-2 text-2xl md:text-4xl font-semibold">Execution Coverage</h3>
+              <p className="mt-3 text-[#1E272E]/76 max-w-3xl">
+                Every capability above is delivered through one engineering flow: discover, design, build, and scale.
+              </p>
             </div>
           </div>
         </section>

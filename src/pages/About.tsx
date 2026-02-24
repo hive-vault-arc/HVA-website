@@ -58,7 +58,7 @@ const About: React.FC = () => {
           transition={{ duration: 0.45 }}
           className="max-w-5xl"
         >
-          <p className="text-xs uppercase tracking-[0.2em] text-[#1E272E]/65">About HIIVA</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-[#1E272E]/65">About HIVA</p>
           <h1 className="mt-4 text-5xl font-semibold leading-[0.95] md:text-7xl">
             A Software & Cloud
             <br />
@@ -95,7 +95,7 @@ const About: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
               transition={{ duration: 0.35, delay: index * 0.06 }}
-              className="rounded-2xl border border-[#1E272E]/15 bg-[#0984E3]/[0.06] p-6 backdrop-blur-sm"
+              className="rounded-2xl border border-[#1E272E]/15 bg-[#0984E3]/[0.06] p-6"
             >
               <div className="mb-4 inline-flex rounded-lg border border-[#1E272E]/20 bg-[#0984E3]/10 p-2 text-[#0984E3]">
                 {item.icon}

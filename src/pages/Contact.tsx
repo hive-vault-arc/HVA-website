@@ -9,12 +9,12 @@ type ContactStatus = {
   message: string;
 } | null;
 
-const CONTACT_EMAIL = 'hello@hiiva.com';
+const CONTACT_EMAIL = 'hello@hiva.com';
 const CONTACT_PHONE = '+212600000000';
 
 const Contact: React.FC = () => {
-  const { tier } = useAnimationQuality();
-  const glassBlurClass = tier === 'high' ? 'backdrop-blur-sm' : 'backdrop-blur-none';
+  const { motionReduced } = useAnimationQuality();
+  const glassBlurClass = 'backdrop-blur-none';
   const mapSectionRef = useRef<HTMLDivElement | null>(null);
   const [shouldLoadMap, setShouldLoadMap] = useState(false);
   const [formData, setFormData] = useState({
@@ -79,7 +79,7 @@ const Contact: React.FC = () => {
           message: 'Thank you. Your message was sent successfully.',
         });
       } else {
-        const subject = `[HIIVA] ${formData.subject}`;
+        const subject = `[HIVA] ${formData.subject}`;
         const body = [
           `Name: ${formData.name}`,
           `Email: ${formData.email}`,
@@ -112,7 +112,7 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <MotionConfig reducedMotion={tier === 'high' ? 'never' : 'always'}>
+    <MotionConfig reducedMotion={motionReduced ? 'always' : 'never'}>
       <div className="relative min-h-screen overflow-hidden bg-[#F5F6FA] text-[#1E272E]">
       <PageAmbientBackground />
 

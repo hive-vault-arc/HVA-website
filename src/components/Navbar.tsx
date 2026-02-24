@@ -38,14 +38,14 @@ const Navbar: React.FC = () => {
           <div 
             className={`flex items-center justify-between h-16 px-6 rounded-full transition-all duration-300 w-full ${
               isScrolled 
-                ? 'bg-[#F5F6FA]/90 backdrop-blur-md border border-[#1E272E]/12 shadow-[0_8px_28px_rgba(9,132,227,0.15)]' 
+                ? 'bg-[#F5F6FA]/90 backdrop-blur-md border border-[#1E272E]/12 shadow-[0_8px_24px_rgba(9,132,227,0.12)]' 
                 : 'bg-transparent'
             }`}
           >
             {/* Logo */}
             <Link to="/" className="flex-shrink-0">
               <span className="text-2xl font-light tracking-tight text-[#1E272E] font-serif">
-                HIIVA
+                HIVA
               </span>
             </Link>
 
@@ -98,7 +98,7 @@ const Navbar: React.FC = () => {
             isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
           }`}
         >
-          <div className="px-4 pt-2 pb-4 space-y-1 bg-[#F5F6FA]/95 backdrop-blur-lg rounded-2xl mx-4 mt-2 border border-[#1E272E]/12 shadow-[0_8px_28px_rgba(9,132,227,0.16)]">
+          <div className="px-4 pt-2 pb-4 space-y-1 bg-[#F5F6FA]/95 backdrop-blur-lg rounded-2xl mx-4 mt-2 border border-[#1E272E]/12 shadow-[0_8px_24px_rgba(9,132,227,0.14)]">
             {navItems.map((item) => (
               <Link
                 key={item.path}

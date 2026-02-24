@@ -26,6 +26,7 @@ export function InteractiveSpline({
   const [isSceneMounted, setIsSceneMounted] = useState(true)
 
   const {
+    splineEnabled,
     splineMouseSensitivity,
     splineMouseUpdateIntervalMs,
     splineInteractive
@@ -59,7 +60,7 @@ export function InteractiveSpline({
   }, [])
 
   useEffect(() => {
-    if (isActive) {
+    if (isActive && splineEnabled) {
       setIsSceneMounted(true)
       return
     }
@@ -69,10 +70,10 @@ export function InteractiveSpline({
     }, 350)
 
     return () => window.clearTimeout(timeoutId)
-  }, [isActive])
+  }, [isActive, splineEnabled])
 
   useEffect(() => {
-    if (!isActive || !splineInteractive) {
+    if (!isActive || !splineInteractive || !splineEnabled) {
       cursorX.set(0)
       cursorY.set(0)
       return
@@ -127,6 +128,7 @@ export function InteractiveSpline({
     cursorY,
     isActive,
     splineInteractive,
+    splineEnabled,
     splineMouseSensitivity,
     splineMouseUpdateIntervalMs
   ])
@@ -150,14 +152,14 @@ export function InteractiveSpline({
           willChange: 'transform' // Optimize for animations
         }}
       >
-        {isSceneMounted ? (
+        {isSceneMounted && splineEnabled ? (
           <SplineScene
             scene={sceneUrl}
             className="w-full h-full"
             renderOnDemand
           />
         ) : (
-          <div className="w-full h-full bg-black/20" aria-hidden="true" />
+          <div className="w-full h-full bg-[linear-gradient(180deg,#F5F6FA_0%,#ECF5FD_100%)]" aria-hidden="true" />
         )}
         <div 
           className="absolute inset-0" 

@@ -6,9 +6,11 @@ export interface AnimationQualityConfig {
   tier: AnimationQualityTier;
   plasmaMaxDpr: number;
   plasmaTargetFps: number;
+  splineEnabled: boolean;
   splineMouseSensitivity: number;
   splineMouseUpdateIntervalMs: number;
   splineInteractive: boolean;
+  motionReduced: boolean;
 }
 
 type NavigatorWithHints = Navigator & {
@@ -30,38 +32,43 @@ const getTierFromSignals = (prefersReducedMotion: boolean): AnimationQualityTier
   const saveData = Boolean(nav.connection?.saveData);
   const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
 
-  let score = 2; // high baseline
-
+  let score = 0;
   if (saveData) score -= 2;
+  if (deviceMemory >= 8) score += 1;
+  if (cores >= 8) score += 1;
+  if (!isCoarsePointer) score += 1;
   if (deviceMemory <= 4) score -= 1;
   if (deviceMemory <= 2) score -= 1;
   if (cores <= 4) score -= 1;
   if (cores <= 2) score -= 1;
   if (isCoarsePointer) score -= 1;
 
-  if (score <= 0) return 'low';
-  if (score === 1) return 'medium';
-  return 'high';
+  if (score >= 2) return 'high';
+  if (score >= 0) return 'medium';
+  return 'low';
 };
 
-const CONFIGS: Record<AnimationQualityTier, Omit<AnimationQualityConfig, 'tier'>> = {
+const CONFIGS: Record<AnimationQualityTier, Omit<AnimationQualityConfig, 'tier' | 'motionReduced'>> = {
   high: {
-    plasmaMaxDpr: 1.75,
-    plasmaTargetFps: 60,
-    splineMouseSensitivity: 1,
-    splineMouseUpdateIntervalMs: 16,
-    splineInteractive: true,
-  },
-  medium: {
-    plasmaMaxDpr: 1.25,
-    plasmaTargetFps: 45,
-    splineMouseSensitivity: 0.7,
+    plasmaMaxDpr: 0.75,
+    plasmaTargetFps: 15,
+    splineEnabled: true,
+    splineMouseSensitivity: 0.85,
     splineMouseUpdateIntervalMs: 33,
     splineInteractive: true,
   },
+  medium: {
+    plasmaMaxDpr: 0.6,
+    plasmaTargetFps: 12,
+    splineEnabled: false,
+    splineMouseSensitivity: 0.6,
+    splineMouseUpdateIntervalMs: 50,
+    splineInteractive: false,
+  },
   low: {
-    plasmaMaxDpr: 1,
-    plasmaTargetFps: 30,
+    plasmaMaxDpr: 0.5,
+    plasmaTargetFps: 8,
+    splineEnabled: false,
     splineMouseSensitivity: 0.45,
     splineMouseUpdateIntervalMs: 66,
     splineInteractive: false,
@@ -74,36 +81,41 @@ export const useAnimationQuality = (): AnimationQualityConfig => {
     window.matchMedia &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const [tier, setTier] = useState<AnimationQualityTier>(() =>
-    getTierFromSignals(getPrefersReduced())
-  );
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState<boolean>(() => getPrefersReduced());
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
     const nav = navigator as NavigatorWithHints;
-    const onChange = () => setTier(getTierFromSignals(media.matches));
+    const onSignalsChange = () => setPrefersReducedMotion(media.matches);
 
     if (media.addEventListener) {
-      media.addEventListener('change', onChange);
+      media.addEventListener('change', onSignalsChange);
     } else {
-      media.addListener(onChange);
+      media.addListener(onSignalsChange);
     }
 
-    nav.connection?.addEventListener?.('change', onChange);
-    window.addEventListener('resize', onChange);
+    nav.connection?.addEventListener?.('change', onSignalsChange);
+    window.addEventListener('resize', onSignalsChange);
 
     return () => {
       if (media.removeEventListener) {
-        media.removeEventListener('change', onChange);
+        media.removeEventListener('change', onSignalsChange);
       } else {
-        media.removeListener(onChange);
+        media.removeListener(onSignalsChange);
       }
-      nav.connection?.removeEventListener?.('change', onChange);
-      window.removeEventListener('resize', onChange);
+      nav.connection?.removeEventListener?.('change', onSignalsChange);
+      window.removeEventListener('resize', onSignalsChange);
     };
   }, []);
 
-  return useMemo(() => ({ tier, ...CONFIGS[tier] }), [tier]);
+  return useMemo(() => {
+    const tier = getTierFromSignals(prefersReducedMotion);
+    return {
+      tier,
+      motionReduced: prefersReducedMotion,
+      ...CONFIGS[tier],
+    };
+  }, [prefersReducedMotion]);
 };

@@ -164,7 +164,7 @@ export function WorldMap({
         ))}
       </svg>
     </div>
-    <div className="w-full bg-white/80 backdrop-blur-sm p-6 md:p-8 mt-6 rounded-xl border border-[#1E272E]/10">
+    <div className="w-full bg-white/90 p-6 md:p-8 mt-6 rounded-xl border border-[#1E272E]/10">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="space-y-2">
           <h3 className="text-lg font-semibold text-[#1E272E] flex items-center">
@@ -191,8 +191,8 @@ export function WorldMap({
             <Mail className="w-5 h-5 mr-2 text-[#0984E3]" />
             Get In Touch
           </h3>
-          <p className="text-[#1E272E]/70 text-sm">hello@hiiva.com</p>
-          <p className="text-[#1E272E]/70 text-sm">contact@hiiva.com</p>
+          <p className="text-[#1E272E]/70 text-sm">hello@hiva.com</p>
+          <p className="text-[#1E272E]/70 text-sm">contact@hiva.com</p>
           <div className="flex space-x-4 pt-2">
             <a href="https://x.com" target="_blank" rel="noreferrer noopener" className="text-[#0984E3] hover:text-[#1E272E] transition-colors" aria-label="X (Twitter)">
               <Twitter className="w-5 h-5" />
@@ -208,7 +208,7 @@ export function WorldMap({
       </div>
       <div className="mt-8 pt-6 border-t border-[#1E272E]/10 text-center">
         <p className="text-sm text-[#1E272E]/60">
-          © {new Date().getFullYear()} Hive Vault Arc (HIIVA). All rights reserved.
+          © {new Date().getFullYear()} Hive Vault Arc (HIVA). All rights reserved.
         </p>
       </div>
     </div>

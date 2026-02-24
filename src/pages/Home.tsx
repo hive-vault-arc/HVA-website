@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -6,10 +6,9 @@ import Background3d from '../components/Plasma';
 import TextType from '../components/TextType';
 import ShinyText from '../components/ShinyText';
 import LogoLoop from '../components/LogoItem';
-import GradualBlur from '../components/GradualBlur';
-import { WorldMapDemo } from '../components/world-map-demo';
 import { InteractiveSpline } from '../components/ui/InteractiveSpline';
 import { FullScreenScrollFX } from '../components/ui/full-screen-scroll-fx';
+import { useAnimationQuality } from '../lib/animationQuality';
 import {
   SiAmazonwebservices,
   SiDocker,
@@ -20,7 +19,15 @@ import {
   SiReact,
 } from 'react-icons/si';
 
+const WorldMapDemo = lazy(() =>
+  import('../components/world-map-demo').then((module) => ({ default: module.WorldMapDemo }))
+);
+
 const Home: React.FC = () => {
+  const { tier, splineEnabled, motionReduced } = useAnimationQuality();
+  const showAdvancedEffects = tier === 'high' && !motionReduced;
+  const showSplineHero = showAdvancedEffects && splineEnabled;
+
   const processSteps = [
     {
       title: 'Discover',
@@ -77,57 +84,85 @@ const Home: React.FC = () => {
     },
   ];
 
+  const heroContent = (
+    <div className="container mx-auto px-4 text-center">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="max-w-4xl mx-auto rounded-2xl border border-white/45 bg-white/40 px-4 py-6 md:px-8 md:py-8 shadow-[0_10px_28px_rgba(15,23,34,0.10)]"
+      >
+        <h1 className="text-5xl md:text-8xl font-semibold text-[#0F1722] mb-6 [text-shadow:0_1px_0_rgba(255,255,255,0.35)]">
+          <TextType
+            text={[
+              'Software & Cloud Engineering',
+              'Custom Digital Systems',
+              'AI-Powered Applications',
+              'Scalable Business Platforms'
+            ]}
+            typingSpeed={75}
+            pauseDuration={1500}
+            showCursor
+            cursorCharacter="|"
+          />
+        </h1>
+        <p className="text-xl mb-8 max-w-3xl mx-auto text-[#0F1722]/92 leading-relaxed">
+          <ShinyText
+            text="A software and cloud engineering company building custom digital systems, AI-powered applications, and scalable platforms for modern businesses."
+            disabled
+            className="text-[#0F1722]/92"
+          />
+        </p>
+        <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <Link
+            to="/portfolio"
+            className="px-8 py-4 bg-[#0984E3]/14 text-[#0F1722] border border-[#0F1722]/15 rounded-lg font-medium hover:bg-[#0984E3]/22 transition-colors duration-300 text-lg"
+          >
+            View Our Work
+          </Link>
+          <Link
+            to="/contact"
+            className="px-8 py-4 bg-white text-black border border-white rounded-lg font-medium hover:bg-[#ECF5FD] transition-colors duration-300 text-lg"
+          >
+            Book a Call
+          </Link>
+        </div>
+      </motion.div>
+    </div>
+  );
+
   return (
     <div className="h-full">
-      <Background3d color="#0984E3" speed={0.6} direction="forward" scale={1.1} opacity={0.26} mouseInteractive={false} />
+      {showAdvancedEffects && (
+        <Background3d
+          color="#0984E3"
+          speed={0.6}
+          direction="forward"
+          scale={1.1}
+          opacity={0.26}
+          mouseInteractive={false}
+          maxDprCap={0.7}
+          targetFpsCap={12}
+        />
+      )}
 
-      <InteractiveSpline
-        sceneUrl="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-        className="h-[88vh]"
-        cursorSensitivity={0.15}
-      >
-        <div className="container mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl mx-auto"
-          >
-            <h1 className="text-5xl md:text-8xl font-semibold text-[#1E272E] mb-6">
-              <TextType
-                text={[
-                  'Software & Cloud Engineering',
-                  'Custom Digital Systems',
-                  'AI-Powered Applications',
-                  'Scalable Business Platforms'
-                ]}
-                typingSpeed={75}
-                pauseDuration={1500}
-                showCursor
-                cursorCharacter="|"
-              />
-            </h1>
-            <p className="text-xl mb-8 max-w-3xl mx-auto">
-              <ShinyText text="A software and cloud engineering company building custom digital systems, AI-powered applications, and scalable platforms for modern businesses." />
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link
-                to="/portfolio"
-                className="px-8 py-4 bg-[#0984E3]/10 text-[#1E272E] border border-[#1E272E]/10 rounded-lg font-medium hover:bg-[#0984E3]/20 transition-colors duration-300 text-lg"
-              >
-                View Our Work
-              </Link>
-              <Link
-                to="/contact"
-                className="px-8 py-4 bg-white text-black border border-white rounded-lg font-medium hover:bg-[#ECF5FD] transition-colors duration-300 text-lg"
-              >
-                Book a Call
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-        <GradualBlur target="parent" position="bottom" height="6rem" strength={2} divCount={5} curve="bezier" exponential opacity={1} />
-      </InteractiveSpline>
+      {showSplineHero ? (
+        <InteractiveSpline
+          sceneUrl="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+          className="h-[88vh]"
+          cursorSensitivity={0.15}
+        >
+          {heroContent}
+        </InteractiveSpline>
+      ) : (
+        <section className="relative h-[88vh] overflow-hidden flex items-center">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_22%_20%,rgba(9,132,227,0.18),transparent_44%),radial-gradient(circle_at_80%_8%,rgba(0,206,201,0.13),transparent_38%),linear-gradient(180deg,#F5F6FA_0%,#ECF5FD_100%)]"
+          />
+          <div className="relative z-10 w-full">{heroContent}</div>
+        </section>
+      )}
 
       <section className="relative px-4 py-14 sm:px-6 lg:px-14 lg:py-20">
         <div className="container mx-auto relative z-10">
@@ -157,7 +192,7 @@ const Home: React.FC = () => {
               'Scalable architecture from day one',
               'Quality, security, and maintainability by default',
             ].map((item) => (
-              <div key={item} className="rounded-xl border border-[#1E272E]/15 bg-[#0984E3]/[0.06] backdrop-blur-md p-5 text-[#1E272E]/95 flex items-start gap-2 shadow-[0_0_0_1px_rgba(255,255,255,0.02)]">
+              <div key={item} className="rounded-xl border border-[#1E272E]/15 bg-[#0984E3]/[0.06] p-5 text-[#1E272E]/95 flex items-start gap-2 shadow-[0_0_0_1px_rgba(255,255,255,0.02)]">
                 <CheckCircle2 className="w-4 h-4 mt-1 text-[#0984E3] shrink-0" />
                 <span>{item}</span>
               </div>
@@ -214,7 +249,7 @@ const Home: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: index * 0.08 }}
                 viewport={{ once: true }}
-                className="rounded-xl border border-[#1E272E]/10 bg-[#0984E3]/5 p-6 backdrop-blur-md"
+                className="rounded-xl border border-[#1E272E]/10 bg-[#0984E3]/5 p-6"
               >
                 <p className="text-[#0984E3] text-sm font-mono">{`0${index + 1}`}</p>
                 <h3 className="text-[#1E272E] text-2xl mt-2">{step.title}</h3>
@@ -233,26 +268,43 @@ const Home: React.FC = () => {
           transition={{ duration: 0.4 }}
           className="relative z-10 mt-16 p-4 md:p-8 shadow-md"
         >
-          <div className="w-full overflow-hidden rounded-xl">
-            <FullScreenScrollFX
-              sections={sections}
-              header={
-                <>
-                  <div>What We</div>
-                  <div>Build</div>
-                </>
-              }
-              footer={<div />}
-              showProgress
-              colors={{
-                text: 'rgba(30,39,46,0.94)',
-                overlay: 'rgba(245,246,250,0.35)',
-                pageBg: '#F5F6FA',
-                stageBg: '#ECF5FD',
-              }}
-              durations={{ change: 0.7, snap: 800 }}
-            />
-          </div>
+          {showAdvancedEffects ? (
+            <div className="w-full overflow-hidden rounded-xl">
+              <FullScreenScrollFX
+                sections={sections}
+                header={
+                  <>
+                    <div>What We</div>
+                    <div>Build</div>
+                  </>
+                }
+                footer={<div />}
+                showProgress
+                colors={{
+                  text: 'rgba(30,39,46,0.94)',
+                  overlay: 'rgba(245,246,250,0.35)',
+                  pageBg: '#F5F6FA',
+                  stageBg: '#ECF5FD',
+                }}
+                durations={{ change: 0.7, snap: 800 }}
+              />
+            </div>
+          ) : (
+            <div className="rounded-xl border border-[#1E272E]/10 bg-white/90 p-6 md:p-8">
+              <p className="text-[#1E272E]/60 tracking-[0.2em] text-xs uppercase">What We Build</p>
+              <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                {sections.map((section) => (
+                  <article key={String(section.leftLabel)} className="rounded-lg border border-[#1E272E]/12 bg-[#F5F6FA] p-3">
+                    <div className="aspect-[16/10] overflow-hidden rounded-md border border-[#1E272E]/10">
+                      <img src={section.background} alt={String(section.title)} className="h-full w-full object-cover" loading="lazy" />
+                    </div>
+                    <h3 className="mt-3 text-xl font-semibold text-[#1E272E]">{section.title}</h3>
+                    <p className="text-sm text-[#1E272E]/72 mt-1">{section.leftLabel}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          )}
         </motion.div>
       </section>
 
@@ -275,7 +327,9 @@ const Home: React.FC = () => {
       </div>
 
       <section className="w-full py-12 rounded-xl overflow-hidden">
-        <WorldMapDemo />
+        <Suspense fallback={<div className="h-[360px] w-full bg-[#ECF5FD]" aria-hidden="true" />}>
+          <WorldMapDemo />
+        </Suspense>
       </section>
 
       <section className="relative py-12 mb-10">
@@ -304,7 +358,6 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <GradualBlur target="page" position="bottom" height="6rem" strength={2} divCount={5} curve="bezier" exponential opacity={1} />
     </div>
   );
 };
