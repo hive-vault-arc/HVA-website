@@ -90,7 +90,7 @@ const Home: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="max-w-4xl mx-auto rounded-2xl border border-white/45 bg-white/40 px-4 py-6 md:px-8 md:py-8 shadow-[0_10px_28px_rgba(15,23,34,0.10)]"
+        className="max-w-4xl mx-auto px-4 py-6 md:px-6 md:py-8"
       >
         <h1 className="text-5xl md:text-8xl font-semibold text-[#0F1722] mb-6 [text-shadow:0_1px_0_rgba(255,255,255,0.35)]">
           <TextType
@@ -106,13 +106,16 @@ const Home: React.FC = () => {
             cursorCharacter="|"
           />
         </h1>
-        <p className="text-xl mb-8 max-w-3xl mx-auto text-[#0F1722]/92 leading-relaxed">
-          <ShinyText
-            text="A software and cloud engineering company building custom digital systems, AI-powered applications, and scalable platforms for modern businesses."
-            disabled
-            className="text-[#0F1722]/92"
-          />
-        </p>
+        <div className="inline-block px-4 py-3 bg-white/35 backdrop-blur-[1px]">
+          <p className="text-xl mb-0 max-w-3xl mx-auto text-[#0F1722]/92 leading-relaxed [text-shadow:0_1px_0_rgba(255,255,255,0.35)]">
+            <ShinyText
+              text="A software and cloud engineering company building custom digital systems, AI-powered applications, and scalable platforms for modern businesses."
+              disabled
+              className="text-[#0F1722]/92"
+            />
+          </p>
+        </div>
+        <div className="h-8" />
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Link
             to="/portfolio"
