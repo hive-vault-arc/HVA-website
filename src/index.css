@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital,wght@0,400;1,400&family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital,wght@0,400;1,400&family=IBM+Plex+Serif:ital,wght@0,500;0,600;1,500&family=Inter:wght@100..900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -27,6 +27,13 @@ body {
 .font-serif {
   font-family: var(--font-serif);
   letter-spacing: -0.01em;
+}
+
+.font-hero-script {
+  font-family: 'IBM Plex Serif', 'DM Serif Display', serif;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  line-height: 1.06;
 }
 
 .title-big {

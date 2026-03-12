@@ -297,10 +297,6 @@ const Services: React.FC = () => {
             </div>
 
             <div className="relative overflow-hidden border border-[#1E272E]/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.7),rgba(236,245,253,0.62))] p-3 shadow-[0_12px_28px_rgba(9,132,227,0.08)] md:p-4">
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute left-[10%] right-[10%] top-[2.2rem] hidden h-[2px] bg-gradient-to-r from-[#0984E3]/45 via-[#4CA6EC]/45 to-[#00CEC9]/45 xl:block"
-              />
               <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
               {deliveryFlow.map((step, index) => (
                 <motion.article
@@ -311,7 +307,13 @@ const Services: React.FC = () => {
                   transition={{ duration: 0.34, delay: index * 0.05 }}
                   className="relative overflow-visible border border-[#1E272E]/10 bg-white/84 p-4 pt-7 shadow-[0_8px_20px_rgba(9,132,227,0.08)] md:p-5 md:pt-8"
                 >
-                  <div className="absolute -top-4 left-4 inline-flex h-9 min-w-9 items-center justify-center border border-[#0984E3]/35 bg-[#ECF5FD] px-2 text-lg font-semibold text-[#0984E3] md:h-10 md:min-w-10">
+                  {index < deliveryFlow.length - 1 ? (
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute left-[2.55rem] right-[-3.3rem] top-[0.28rem] hidden h-[2px] bg-gradient-to-r from-[#0984E3]/45 via-[#4CA6EC]/45 to-[#00CEC9]/45 xl:block"
+                    />
+                  ) : null}
+                  <div className="absolute -top-4 left-4 z-10 inline-flex h-9 min-w-9 items-center justify-center border border-[#0984E3]/35 bg-[#ECF5FD] px-2 text-lg font-semibold text-[#0984E3] md:h-10 md:min-w-10">
                     {`0${index + 1}`}
                   </div>
                   <p className="text-[10px] uppercase tracking-[0.22em] text-[#0984E3]/80">{`STEP ${index + 1}`}</p>

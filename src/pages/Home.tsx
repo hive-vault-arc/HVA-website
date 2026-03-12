@@ -89,7 +89,7 @@ const Home: React.FC = () => {
         transition={{ duration: 0.8 }}
         className="max-w-4xl mx-auto px-4 py-6 md:px-6 md:py-8"
       >
-        <h1 className="text-5xl md:text-8xl font-semibold text-[#101B2B] mb-6 [text-shadow:0_8px_28px_rgba(8,13,20,0.28)] [-webkit-text-stroke:0.6px_rgba(245,246,250,0.55)]">
+        <h1 className="font-hero-script text-5xl md:text-8xl text-[#101B2B] mb-6 [text-shadow:0_6px_18px_rgba(8,13,20,0.2)]">
           <TextType
             text={[
               'Software & Cloud Engineering',
@@ -184,35 +184,36 @@ const Home: React.FC = () => {
 
       <section className="relative px-4 pb-10 sm:px-6 lg:px-14 lg:pb-16">
         <div className="container mx-auto px-2 py-10 md:px-4 md:py-14">
-          <div className="relative overflow-hidden">
-            <div className="pointer-events-none absolute -left-12 top-8 h-28 w-28 rounded-full bg-[#1E272E]/12 blur-2xl" />
-            <div className="pointer-events-none absolute right-10 top-0 h-24 w-24 rounded-full bg-[#0984E3]/16 blur-2xl" />
-            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#1E272E]/30 to-transparent" />
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#0984E3]/35 to-transparent" />
+          <div className="relative overflow-hidden bg-[linear-gradient(132deg,#1E272E_0%,#2A4D79_52%,#0984E3_100%)] px-4 py-8 shadow-[0_24px_44px_rgba(9,132,227,0.2)] md:px-7 md:py-11">
+            <div className="pointer-events-none absolute -left-14 top-10 h-36 w-36 rounded-full bg-[#4CA6EC]/16 blur-3xl" />
+            <div className="pointer-events-none absolute right-0 top-0 h-44 w-44 rounded-full bg-[#00CEC9]/14 blur-3xl" />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_24%,rgba(255,255,255,0.1),transparent_44%),radial-gradient(circle_at_88%_16%,rgba(255,255,255,0.14),transparent_40%)]" />
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/42 to-transparent" />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#00CEC9]/55 to-transparent" />
 
-            <div className="mx-auto max-w-5xl px-2 text-center md:px-4">
-              <h2 className="font-serif text-4xl md:text-7xl font-semibold text-[#1E272E] leading-[0.95]">
+            <div className="relative z-10 mx-auto max-w-5xl px-2 text-center md:px-4">
+              <h2 className="font-serif text-4xl md:text-7xl font-semibold text-[#F5F6FA] leading-[0.95]">
                 Clear Scope...Ship
               </h2>
-              <p className="mx-auto mt-6 max-w-4xl text-base text-[#1E272E]/75 md:text-2xl">
+              <p className="mx-auto mt-6 max-w-4xl text-base text-[#F5F6FA]/84 md:text-2xl">
                 One focused process from discovery to release. We align requirements, architecture, and delivery so your product ships with confidence.
               </p>
             </div>
 
-            <div className="my-10 h-px w-full bg-gradient-to-r from-transparent via-[#1E272E]/16 to-transparent" />
+            <div className="my-10 h-px w-full bg-gradient-to-r from-transparent via-white/32 to-transparent" />
 
-            <div className="grid grid-cols-1 gap-8 px-2 pb-1 md:grid-cols-2 md:items-start md:px-4">
-              <h3 className="font-serif text-3xl md:text-5xl text-[#1E272E] leading-tight">
+            <div className="relative z-10 grid grid-cols-1 gap-8 px-2 pb-1 md:grid-cols-2 md:items-start md:px-4">
+              <h3 className="font-serif text-3xl md:text-5xl text-[#F5F6FA] leading-tight">
                 From strategy to production, one dependable engineering flow
               </h3>
 
               <div>
-                <p className="text-lg text-[#1E272E]/82 md:text-2xl">
+                <p className="text-lg text-[#F5F6FA]/86 md:text-2xl">
                   Discover. Plan. Build. Scale. Each phase is tied to measurable business outcomes and technical quality.
                 </p>
                 <Link
                   to="/services"
-                  className="mt-7 inline-flex items-center gap-2 bg-[#1E272E] px-5 py-2.5 text-[#F5F6FA] tracking-[0.14em] uppercase text-xs font-medium transition-colors hover:bg-[#0984E3]"
+                  className="mt-7 inline-flex items-center gap-2 border border-white/44 bg-white/12 px-5 py-2.5 text-[#F5F6FA] tracking-[0.14em] uppercase text-xs font-medium backdrop-blur-sm transition-colors hover:bg-white/18"
                 >
                   Engineering Process
                   <ArrowRight className="h-4 w-4" />

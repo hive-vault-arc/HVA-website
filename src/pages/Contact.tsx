@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Mail, MapPin, Phone, Send, Sparkles, Workflow } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowUpRight, Mail, MapPin, Phone, Send } from 'lucide-react';
 import { MotionConfig, motion, useScroll, useTransform } from 'framer-motion';
 import { useAnimationQuality } from '../lib/animationQuality';
 import PageAmbientBackground from '../components/PageAmbientBackground';
@@ -16,25 +15,8 @@ const CONTACT_PHONES = [
   { raw: '+212691918296', label: '+212 691-918296' },
 ];
 const COMPANY_ADDRESS = 'AVENUE TARIK IBN ZIAD N 38 ETAGE 6 N 32 TANGER';
-
-const conversationStarters = [
-  {
-    title: 'AI Receptionist & Agents',
-    detail: 'Front-desk AI, support agents, and role-based operational workflows.',
-  },
-  {
-    title: 'AI Analyst Systems',
-    detail: 'Reporting, dashboards, and insight pipelines for faster decisions.',
-  },
-  {
-    title: 'Automation & Custom Platforms',
-    detail: 'Internal systems, API orchestration, and process automation.',
-  },
-  {
-    title: 'Delivery & Reliability',
-    detail: 'CI/CD workflows, monitoring, security, and production readiness.',
-  },
-];
+const MAP_QUERY = encodeURIComponent(COMPANY_ADDRESS);
+const MAP_LINK = `https://www.google.com/maps/search/?api=1&query=${MAP_QUERY}`;
 
 const Contact: React.FC = () => {
   const { motionReduced } = useAnimationQuality();
@@ -42,37 +24,13 @@ const Contact: React.FC = () => {
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
   const heroShift = useTransform(scrollYProgress, [0, 0.35], [0, 30]);
 
-  const mapSectionRef = useRef<HTMLDivElement | null>(null);
-  const [shouldLoadMap, setShouldLoadMap] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    subject: '',
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState<ContactStatus>(null);
-
-  useEffect(() => {
-    const target = mapSectionRef.current;
-    if (!target || typeof IntersectionObserver === 'undefined') {
-      setShouldLoadMap(true);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShouldLoadMap(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: '250px 0px', threshold: 0.05 }
-    );
-
-    observer.observe(target);
-    return () => observer.disconnect();
-  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setStatus(null);
@@ -89,12 +47,16 @@ const Contact: React.FC = () => {
 
     try {
       const endpoint = (import.meta.env.VITE_CONTACT_API_URL as string | undefined)?.trim();
+      const payload = {
+        ...formData,
+        subject: 'Project Inquiry',
+      };
 
       if (endpoint) {
         const response = await fetch(endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(payload),
         });
 
         if (!response.ok) {
@@ -106,7 +68,7 @@ const Contact: React.FC = () => {
           message: 'Thank you. Your message was sent successfully.',
         });
       } else {
-        const subject = `[H.V.A] ${formData.subject}`;
+        const subject = '[H.V.A] Project Inquiry';
         const body = [`Name: ${formData.name}`, `Email: ${formData.email}`, '', formData.message].join('\n');
         const mailto = `mailto:${CONTACT_EMAILS.join(',')}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         window.location.href = mailto;
@@ -120,7 +82,6 @@ const Contact: React.FC = () => {
       setFormData({
         name: '',
         email: '',
-        subject: '',
         message: '',
       });
     } catch {
@@ -143,157 +104,120 @@ const Contact: React.FC = () => {
         />
         <PageAmbientBackground className="-z-10" />
 
-        <section className="relative pb-12 pt-32 md:pt-40 md:pb-16">
+        <section className="relative pb-12 pt-32 md:pb-14 md:pt-40">
           <div className="container mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55 }}
               style={{ y: heroShift }}
-              className="grid grid-cols-1 gap-8 lg:grid-cols-[1.1fr_0.9fr]"
+              className="relative py-5 md:py-8"
             >
-              <div>
-                <p className="text-xs uppercase tracking-[0.24em] text-[#1E272E]/58">Contact</p>
-                <h1 className="mt-4 max-w-5xl font-serif text-5xl leading-[0.95] md:text-7xl">Let’s map your next build.</h1>
-                <p className="mt-6 max-w-3xl text-lg leading-relaxed text-[#1E272E]/76">
-                  Share what you are building and where your bottlenecks are. We will help you define the right technical
-                  scope, priorities, and delivery path.
-                </p>
-                <div className="mt-8 flex flex-wrap gap-3">
-                  <a
-                    href={`mailto:${CONTACT_EMAILS[0]}`}
-                    className="inline-flex items-center gap-2 bg-[#0984E3] px-6 py-3 text-[#F5F6FA] transition-colors hover:bg-[#0776CC]"
-                  >
-                    Email Us
-                    <Mail className="h-4 w-4" />
-                  </a>
-                  <a
-                    href={`tel:${CONTACT_PHONES[0].raw}`}
-                    className="inline-flex items-center gap-2 bg-white/85 px-6 py-3 text-[#1E272E] shadow-[0_12px_26px_rgba(9,132,227,0.08)] transition-colors hover:bg-[#ECF5FD]"
-                  >
-                    Call {CONTACT_PHONES[0].label}
-                  </a>
-                  <a
-                    href={`tel:${CONTACT_PHONES[1].raw}`}
-                    className="inline-flex items-center gap-2 bg-white/85 px-6 py-3 text-[#1E272E] shadow-[0_12px_26px_rgba(9,132,227,0.08)] transition-colors hover:bg-[#ECF5FD]"
-                  >
-                    Call {CONTACT_PHONES[1].label}
-                  </a>
+              <div className="pointer-events-none absolute -left-14 top-10 h-24 w-64 rounded-full bg-[#0984E3]/10 blur-3xl" />
+              <div className="pointer-events-none absolute right-[28%] top-0 h-28 w-72 rounded-full bg-[#00CEC9]/10 blur-3xl" />
+              <div className="pointer-events-none absolute left-0 right-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(9,132,227,0.45),transparent)]" />
+              <div className="pointer-events-none absolute left-0 right-0 bottom-0 h-px bg-[linear-gradient(90deg,transparent,rgba(0,206,201,0.4),transparent)]" />
+              <div className="relative z-10 grid grid-cols-1 gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.24em] text-[#1E272E]/60">Contact</p>
+                  <h1 className="mt-4 max-w-5xl font-serif text-5xl leading-[0.95] md:text-7xl">
+                    Let’s build
+                    <br />
+                    your next
+                    <br />
+                    <span className="text-[#0984E3]">system.</span>
+                  </h1>
+                  <p className="mt-6 max-w-3xl text-lg leading-relaxed text-[#1E272E]/78">
+                    Send a short brief. We reply within 24 hours.
+                  </p>
+                  <div className="mt-8 flex flex-wrap gap-3">
+                    <a
+                      href={`mailto:${CONTACT_EMAILS[0]}`}
+                      className="inline-flex items-center gap-2 bg-[#1E272E] px-6 py-3 text-[#F5F6FA] transition-colors hover:bg-[#0984E3]"
+                    >
+                      Email Us
+                      <Mail className="h-4 w-4" />
+                    </a>
+                    <a
+                      href={`tel:${CONTACT_PHONES[0].raw}`}
+                      className="inline-flex items-center gap-2 bg-white/78 px-6 py-3 text-[#1E272E] transition-colors hover:bg-[#ECF5FD]"
+                    >
+                      {CONTACT_PHONES[0].label}
+                    </a>
+                    <a
+                      href={`tel:${CONTACT_PHONES[1].raw}`}
+                      className="inline-flex items-center gap-2 bg-white/78 px-6 py-3 text-[#1E272E] transition-colors hover:bg-[#ECF5FD]"
+                    >
+                      {CONTACT_PHONES[1].label}
+                    </a>
+                  </div>
+                </div>
+
+                <div className="space-y-2 text-sm text-[#1E272E]/78 lg:pb-2">
+                  {CONTACT_EMAILS.map((email) => (
+                    <a key={email} href={`mailto:${email}`} className="flex items-start gap-2.5 hover:text-[#1E272E]">
+                      <Mail className="mt-0.5 h-4 w-4 shrink-0 text-[#0984E3]" />
+                      <span>{email}</span>
+                    </a>
+                  ))}
+                  <div className="flex items-start gap-2.5">
+                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#0984E3]" />
+                    <span>{COMPANY_ADDRESS}</span>
+                  </div>
                 </div>
               </div>
-
-              <aside className="bg-white/82 p-6 shadow-[0_16px_38px_rgba(9,132,227,0.1)] md:p-7">
-                <p className="text-xs uppercase tracking-[0.18em] text-[#1E272E]/58">Conversation Starters</p>
-                <div className="mt-4 space-y-3">
-                  {conversationStarters.map((item) => (
-                    <div key={item.title} className="bg-[#F2F7FD] px-4 py-3">
-                      <p className="text-sm font-semibold text-[#1E272E]">{item.title}</p>
-                      <p className="mt-1 text-sm leading-relaxed text-[#1E272E]/72">{item.detail}</p>
-                    </div>
-                  ))}
-                </div>
-              </aside>
             </motion.div>
           </div>
         </section>
 
         <section className="relative py-10 md:py-14">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 gap-5 lg:grid-cols-[0.95fr_1.05fr]">
-              <div className="space-y-4 lg:sticky lg:top-28 lg:h-fit">
-                <motion.article
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.4 }}
-                  className="bg-white/84 p-7 text-[#1E272E] shadow-[0_16px_34px_rgba(9,132,227,0.1)] md:p-8"
-                >
-                  <p className="text-xs uppercase tracking-[0.18em] text-[#1E272E]/58">Direct Channels</p>
-                  <div className="mt-5 space-y-4">
-                    {CONTACT_EMAILS.map((email) => (
-                      <a key={email} href={`mailto:${email}`} className="flex items-start gap-3 text-[#1E272E]/86 hover:text-[#1E272E]">
-                        <Mail className="mt-0.5 h-5 w-5 text-[#0984E3]" />
-                        <span>{email}</span>
-                      </a>
-                    ))}
-                    {CONTACT_PHONES.map((phone) => (
-                      <a key={phone.raw} href={`tel:${phone.raw}`} className="flex items-start gap-3 text-[#1E272E]/86 hover:text-[#1E272E]">
-                        <Phone className="mt-0.5 h-5 w-5 text-[#0984E3]" />
-                        <span>{phone.label}</span>
-                      </a>
-                    ))}
-                    <div className="flex items-start gap-3 text-[#1E272E]/86">
-                      <MapPin className="mt-0.5 h-5 w-5 text-[#0984E3]" />
-                      <span>{COMPANY_ADDRESS}</span>
-                    </div>
-                  </div>
-
-                  <div className="mt-8 bg-[#ECF5FD] px-4 py-4">
-                    <p className="text-[10px] uppercase tracking-[0.16em] text-[#1E272E]/56">Response Window</p>
-                    <p className="mt-2 text-2xl font-semibold">Within 24 hours</p>
-                    <p className="mt-1 text-sm text-[#1E272E]/72">Monday to Friday, 9:00 to 18:00 (GMT+1)</p>
-                  </div>
-                </motion.article>
-
-                <motion.article
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.38, delay: 0.04 }}
-                  className="bg-white/84 p-6 shadow-[0_14px_30px_rgba(9,132,227,0.1)]"
-                >
-                  <p className="text-[10px] uppercase tracking-[0.16em] text-[#1E272E]/58">Preparation Notes</p>
-                  <ul className="mt-3 space-y-2.5 text-sm leading-relaxed text-[#1E272E]/78">
-                    <li className="flex items-start gap-2.5">
-                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#0984E3]" />
-                      <span>Share your business goal and expected timeline.</span>
-                    </li>
-                    <li className="flex items-start gap-2.5">
-                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#0984E3]" />
-                      <span>Describe current blockers in operations or product delivery.</span>
-                    </li>
-                    <li className="flex items-start gap-2.5">
-                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#0984E3]" />
-                      <span>Tell us whether you need AI agents, analyst flows, or full ecosystem delivery.</span>
-                    </li>
-                  </ul>
-                  <Link
-                    to="/services"
-                    className="mt-4 inline-flex items-center gap-2 text-sm text-[#0984E3] transition-colors hover:text-[#0668b4]"
-                  >
-                    Review service lines
-                    <Workflow className="h-4 w-4" />
-                  </Link>
-                </motion.article>
-
-                <motion.article
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.38, delay: 0.08 }}
-                  className="bg-[#ECF5FD] p-6 text-[#1E272E] shadow-[0_12px_26px_rgba(9,132,227,0.08)]"
-                >
-                  <p className="text-[10px] uppercase tracking-[0.16em] text-[#1E272E]/56">What Happens Next</p>
-                  <ul className="mt-3 space-y-2 text-sm leading-relaxed text-[#1E272E]/76">
-                    <li>1. We review your context and constraints.</li>
-                    <li>2. We send a practical scope and execution direction.</li>
-                    <li>3. We align priorities and start delivery planning.</li>
-                  </ul>
-                </motion.article>
-              </div>
+            <div className="grid grid-cols-1 gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.38 }}
+                className="space-y-4 lg:sticky lg:top-28"
+              >
+                <p className="text-xs uppercase tracking-[0.2em] text-[#1E272E]/58">Direct Contact</p>
+                <div className="space-y-3">
+                  {CONTACT_EMAILS.map((email) => (
+                    <a
+                      key={`primary-${email}`}
+                      href={`mailto:${email}`}
+                      className="flex items-center justify-between rounded-full bg-white/66 px-4 py-3 text-[#1E272E]/86 transition-colors hover:bg-white/90"
+                    >
+                      <span>{email}</span>
+                      <ArrowUpRight className="h-4 w-4 text-[#0984E3]" />
+                    </a>
+                  ))}
+                  {CONTACT_PHONES.map((phone) => (
+                    <a
+                      key={`primary-${phone.raw}`}
+                      href={`tel:${phone.raw}`}
+                      className="flex items-center justify-between rounded-full bg-white/66 px-4 py-3 text-[#1E272E]/86 transition-colors hover:bg-white/90"
+                    >
+                      <span>{phone.label}</span>
+                      <Phone className="h-4 w-4 text-[#0984E3]" />
+                    </a>
+                  ))}
+                </div>
+                <p className="text-sm text-[#1E272E]/62">Monday to Friday, 9:00 to 18:00 (GMT+1)</p>
+              </motion.div>
 
               <motion.article
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.4, delay: 0.05 }}
-                className="bg-white/84 p-7 shadow-[0_16px_36px_rgba(9,132,227,0.1)] md:p-8"
+                className="relative overflow-hidden rounded-[42px] bg-[linear-gradient(150deg,rgba(255,255,255,0.62),rgba(236,245,253,0.38))] p-7 shadow-[0_16px_36px_rgba(9,132,227,0.1)] md:p-8"
               >
-                <p className="text-xs uppercase tracking-[0.18em] text-[#1E272E]/58">Project Intake</p>
-                <h2 className="mt-3 font-serif text-4xl font-semibold leading-[1.02] md:text-5xl">Send Your Brief</h2>
-                <p className="mt-3 max-w-2xl text-[#1E272E]/74">
-                  Include your goal, current blockers, and timeline. We will respond with practical next steps.
-                </p>
+                <div className="pointer-events-none absolute -left-10 top-6 h-24 w-24 rounded-full bg-[#0984E3]/12 blur-2xl" />
+                <div className="pointer-events-none absolute right-0 top-0 h-24 w-24 rounded-full bg-[#00CEC9]/12 blur-2xl" />
+                <p className="text-xs uppercase tracking-[0.18em] text-[#1E272E]/58">Project Brief</p>
+                <h2 className="mt-3 font-serif text-4xl font-semibold leading-[1.02] md:text-5xl">Send a message</h2>
+                <p className="mt-2 max-w-2xl text-[#1E272E]/72">Name, email, and what you need.</p>
 
                 <form onSubmit={handleSubmit} className="mt-7 space-y-4">
                   <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -307,7 +231,7 @@ const Contact: React.FC = () => {
                         type="text"
                         value={formData.name}
                         onChange={handleChange}
-                        className="w-full bg-[#F2F7FD] px-4 py-3 text-[#1E272E] placeholder:text-[#1E272E]/40 focus:outline-none focus:ring-2 focus:ring-[#0984E3]/25"
+                        className="w-full rounded-2xl bg-white/80 px-4 py-3 text-[#1E272E] placeholder:text-[#1E272E]/40 focus:outline-none focus:ring-2 focus:ring-[#0984E3]/25"
                         required
                       />
                     </div>
@@ -321,25 +245,10 @@ const Contact: React.FC = () => {
                         type="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className="w-full bg-[#F2F7FD] px-4 py-3 text-[#1E272E] placeholder:text-[#1E272E]/40 focus:outline-none focus:ring-2 focus:ring-[#0984E3]/25"
+                        className="w-full rounded-2xl bg-white/80 px-4 py-3 text-[#1E272E] placeholder:text-[#1E272E]/40 focus:outline-none focus:ring-2 focus:ring-[#0984E3]/25"
                         required
                       />
                     </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="subject" className="mb-2 block text-sm font-medium text-[#1E272E]/76">
-                      Subject
-                    </label>
-                    <input
-                      id="subject"
-                      name="subject"
-                      type="text"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      className="w-full bg-[#F2F7FD] px-4 py-3 text-[#1E272E] placeholder:text-[#1E272E]/40 focus:outline-none focus:ring-2 focus:ring-[#0984E3]/25"
-                      required
-                    />
                   </div>
 
                   <div>
@@ -352,7 +261,7 @@ const Contact: React.FC = () => {
                       rows={6}
                       value={formData.message}
                       onChange={handleChange}
-                      className="w-full bg-[#F2F7FD] px-4 py-3 text-[#1E272E] placeholder:text-[#1E272E]/40 focus:outline-none focus:ring-2 focus:ring-[#0984E3]/25"
+                      className="w-full rounded-[22px] bg-white/80 px-4 py-3 text-[#1E272E] placeholder:text-[#1E272E]/40 focus:outline-none focus:ring-2 focus:ring-[#0984E3]/25"
                       required
                     />
                   </div>
@@ -360,7 +269,7 @@ const Contact: React.FC = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="inline-flex w-full items-center justify-center gap-2 bg-[#0984E3] px-6 py-3 font-medium text-[#F5F6FA] transition-colors hover:bg-[#0776CC] disabled:cursor-not-allowed disabled:opacity-70"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#0984E3] px-6 py-3 font-medium text-[#F5F6FA] transition-colors hover:bg-[#0776CC] disabled:cursor-not-allowed disabled:opacity-70"
                   >
                     {isSubmitting ? 'Sending...' : 'Send Message'}
                     <Send className="h-4 w-4" />
@@ -380,40 +289,29 @@ const Contact: React.FC = () => {
         <section className="relative pb-16 pt-8 md:pb-20">
           <div className="container mx-auto px-4">
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
+              viewport={{ once: true, amount: 0.25 }}
               transition={{ duration: 0.38 }}
-              className="bg-white/84 p-7 shadow-[0_16px_34px_rgba(9,132,227,0.1)] md:p-8"
+              className="relative overflow-hidden bg-[linear-gradient(128deg,#1E272E_0%,#2A4D79_48%,#0984E3_100%)] px-7 py-8 text-[#F5F6FA] shadow-[0_20px_42px_rgba(9,132,227,0.22)] md:px-10 md:py-10"
             >
-              <div className="mb-5 flex items-center justify-between gap-4">
+              <div className="pointer-events-none absolute -right-20 -top-16 h-52 w-52 rounded-full bg-[#4CA6EC]/24 blur-3xl" />
+              <div className="relative z-10 grid grid-cols-1 gap-5 md:grid-cols-[1.15fr_0.85fr] md:items-center">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.18em] text-[#1E272E]/58">Location</p>
-                  <h2 className="mt-2 font-serif text-3xl font-semibold leading-[1.02] md:text-4xl">Find Us in Tanger</h2>
+                  <p className="text-xs uppercase tracking-[0.18em] text-[#F5F6FA]/68">Office</p>
+                  <h2 className="mt-2 max-w-4xl font-serif text-2xl leading-tight md:text-4xl">{COMPANY_ADDRESS}</h2>
                 </div>
-                <span className="inline-flex items-center gap-2 bg-[#ECF5FD] px-3 py-1.5 text-xs uppercase tracking-[0.1em] text-[#0984E3]">
-                  <Sparkles className="h-3.5 w-3.5" />
-                  On-site Meetings
-                </span>
-              </div>
-
-              <div ref={mapSectionRef} className="min-h-[420px] overflow-hidden bg-[#EEF5FC]">
-                {shouldLoadMap ? (
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d103599.61833546984!2d-5.916869989721443!3d35.76338544764214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0b875cf04c132d%3A0x76bfc571bfb4e17a!2sTangier!5e0!3m2!1sen!2sma!4v1749336870988!5m2!1sen!2sma"
-                    width="100%"
-                    height="420"
-                    style={{ border: 0 }}
-                    allowFullScreen
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    title="H.V.A location map"
-                  />
-                ) : (
-                  <div className="flex h-[420px] w-full items-center justify-center text-sm text-[#1E272E]/60">
-                    Map loads when this section becomes visible
-                  </div>
-                )}
+                <div className="flex md:justify-end">
+                  <a
+                    href={MAP_LINK}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/45 bg-white/10 px-5 py-3 text-sm font-medium text-[#F5F6FA] backdrop-blur-sm transition-colors hover:bg-white/18"
+                  >
+                    Open in Google Maps
+                    <ArrowUpRight className="h-4 w-4" />
+                  </a>
+                </div>
               </div>
             </motion.div>
           </div>
