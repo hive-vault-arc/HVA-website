@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import Background3d from '../components/Plasma';
 import TextType from '../components/TextType';
 import LogoLoop from '../components/LogoItem';
-import { InteractiveSpline } from '../components/ui/InteractiveSpline';
 import { FullScreenScrollFX } from '../components/ui/full-screen-scroll-fx';
 import { useAnimationQuality } from '../lib/animationQuality';
 import {
@@ -23,9 +22,8 @@ const WorldMapDemo = lazy(() =>
 );
 
 const Home: React.FC = () => {
-  const { tier, splineEnabled, motionReduced } = useAnimationQuality();
+  const { tier, motionReduced } = useAnimationQuality();
   const showAdvancedEffects = tier === 'high' && !motionReduced;
-  const showSplineHero = showAdvancedEffects && splineEnabled;
 
   const processSteps = [
     {
@@ -143,23 +141,9 @@ const Home: React.FC = () => {
         />
       )}
 
-      {showSplineHero ? (
-        <InteractiveSpline
-          sceneUrl="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-          className="h-[88vh]"
-          cursorSensitivity={0.15}
-        >
-          {heroContent}
-        </InteractiveSpline>
-      ) : (
-        <section className="relative h-[88vh] overflow-hidden flex items-center">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_22%_20%,rgba(9,132,227,0.18),transparent_44%),radial-gradient(circle_at_80%_8%,rgba(0,206,201,0.13),transparent_38%),linear-gradient(180deg,#F5F6FA_0%,#ECF5FD_100%)]"
-          />
-          <div className="relative z-10 w-full">{heroContent}</div>
-        </section>
-      )}
+      <section className="relative h-[88vh] overflow-hidden flex items-center">
+        <div className="relative z-10 w-full">{heroContent}</div>
+      </section>
 
       <section className="relative px-4 py-14 sm:px-6 lg:px-14 lg:py-20">
         <div className="container mx-auto relative z-10">

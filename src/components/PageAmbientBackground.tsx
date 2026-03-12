@@ -9,34 +9,27 @@ interface PageAmbientBackgroundProps {
 }
 
 const PageAmbientBackground: React.FC<PageAmbientBackgroundProps> = ({ className, animated = true }) => {
-  const { tier } = useAnimationQuality();
+  const { tier, motionReduced } = useAnimationQuality();
 
-  if (animated && tier === 'high') {
+  if (animated && tier === 'high' && !motionReduced) {
     return (
-      <Plasma
-        color="#0984E3"
-        speed={0.34}
-        direction="forward"
-        scale={1.02}
-        opacity={0.22}
-        mouseInteractive={false}
-        maxDprCap={0.85}
-        targetFpsCap={18}
-        visibilityThreshold={0.2}
-      />
+      <div aria-hidden="true" className={cn('pointer-events-none absolute inset-0', className)}>
+        <Plasma
+          color="#0984E3"
+          speed={0.6}
+          direction="forward"
+          scale={1.1}
+          opacity={0.26}
+          mouseInteractive={false}
+          maxDprCap={0.7}
+          targetFpsCap={12}
+          visibilityThreshold={0.2}
+        />
+      </div>
     );
   }
 
-  return (
-    <div
-      aria-hidden="true"
-      className={cn(
-        'pointer-events-none absolute inset-0',
-        'bg-[radial-gradient(circle_at_18%_18%,rgba(9,132,227,0.22),transparent_45%),radial-gradient(circle_at_80%_8%,rgba(0,206,201,0.16),transparent_38%),linear-gradient(180deg,#F5F6FA_0%,#ECF5FD_100%)]',
-        className
-      )}
-    />
-  );
+  return null;
 };
 
 export default PageAmbientBackground;

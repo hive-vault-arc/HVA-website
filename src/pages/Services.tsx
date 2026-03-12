@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MotionConfig, motion } from 'framer-motion';
+import { MotionConfig, motion, useScroll, useTransform } from 'framer-motion';
 import {
   ArrowRight,
   Bot,
@@ -9,402 +9,366 @@ import {
   Code2,
   Database,
   ShieldCheck,
-  Sparkles,
   Workflow,
 } from 'lucide-react';
-import PageAmbientBackground from '../components/PageAmbientBackground';
 import { useAnimationQuality } from '../lib/animationQuality';
+import PageAmbientBackground from '../components/PageAmbientBackground';
 
-type ServicePillar = {
-  id: string;
+type ServiceLine = {
+  icon: React.ReactNode;
   title: string;
   summary: string;
   outcomes: string[];
-  featured?: boolean;
+  tone: 'light' | 'dark';
 };
 
-type ServiceDomain = {
+type Capability = {
   icon: React.ReactNode;
   title: string;
-  description: string;
-  deliverables: string[];
+  detail: string;
 };
 
-const servicePillars: ServicePillar[] = [
+const serviceLines: ServiceLine[] = [
   {
-    id: '01',
-    title: 'Software Engineering and Automation',
-    summary: 'Custom software systems and process automation engineered around your business workflows.',
-    outcomes: ['Web and mobile applications', 'Internal tools and operations software', 'API integrations and automation flows'],
+    icon: <Bot className="h-5 w-5" />,
+    title: 'AI Receptionist & Agent Operations',
+    summary: 'Customer-facing and internal AI agents that respond, route, and execute routine workflows continuously.',
+    outcomes: ['AI receptionist for WhatsApp and web', 'Lead qualification and smart routing', 'Operational agent actions'],
+    tone: 'dark',
   },
   {
-    id: '02',
-    title: 'AI Assistants and ML Features',
-    summary: 'Practical AI implementations that improve speed, decision-making, and customer interactions.',
-    outcomes: ['AI assistants and chatbots', 'Model training and evaluation', 'AI-powered product features'],
-    featured: true,
+    icon: <Database className="h-5 w-5" />,
+    title: 'AI Analyst & Decision Intelligence',
+    summary: 'Analyst copilots that organize data, generate reports, and support faster operational decisions.',
+    outcomes: ['AI analyst reporting copilots', 'Executive and ops dashboards', 'Insight workflows tied to KPIs'],
+    tone: 'light',
   },
   {
-    id: '03',
-    title: 'Deployment, CI/CD, and Monitoring',
-    summary: 'Reliable release workflows and production monitoring for stable day-to-day operations.',
-    outcomes: ['Deployment workflows', 'CI/CD pipelines', 'Monitoring, alerts, and maintenance'],
+    icon: <Workflow className="h-5 w-5" />,
+    title: 'Automation & Custom Platforms',
+    summary: 'Custom software systems and process automation aligned with how your business actually works.',
+    outcomes: ['Internal systems and portals', 'API orchestration and integrations', 'Workflow automations by department'],
+    tone: 'light',
+  },
+  {
+    icon: <Cloud className="h-5 w-5" />,
+    title: 'Delivery Ecosystem & Reliability',
+    summary: 'CI/CD, deployment workflows, and reliability patterns for stable releases and long-term maintainability.',
+    outcomes: ['Deployment pipelines', 'Monitoring and incident response', 'Security and reliability safeguards'],
+    tone: 'dark',
   },
 ];
 
-const serviceDomains: ServiceDomain[] = [
+const capabilities: Capability[] = [
   {
     icon: <Code2 className="h-5 w-5 text-[#0984E3]" />,
     title: 'Software Product Engineering',
-    description: 'From product idea to production-ready software with clear technical ownership.',
-    deliverables: ['Architecture and scope planning', 'Frontend, backend, and mobile implementation', 'Testing, QA, and release management'],
+    detail: 'Production-ready web and mobile systems with clear architecture ownership.',
   },
   {
     icon: <Bot className="h-5 w-5 text-[#0984E3]" />,
-    title: 'AI Assistants and Chatbots',
-    description: 'Business-focused AI assistants that automate communication and support workflows.',
-    deliverables: ['WhatsApp and web chat assistants', 'Lead qualification and scoring', 'Context-aware conversation automation'],
-  },
-  {
-    icon: <Cloud className="h-5 w-5 text-[#0984E3]" />,
-    title: 'Deployment and CI/CD Workflows',
-    description: 'Deployment pipelines and release workflows that keep delivery fast and stable.',
-    deliverables: ['Build and release pipeline setup', 'Automated testing in CI/CD', 'Monitoring and incident readiness'],
-  },
-  {
-    icon: <Workflow className="h-5 w-5 text-[#0984E3]" />,
-    title: 'Integrations and Workflow Automation',
-    description: 'Connect systems and automate handoffs to reduce manual work and delays.',
-    deliverables: ['API and third-party integrations', 'Workflow and process orchestration', 'Business automation pipelines'],
+    title: 'AI Receptionist Systems',
+    detail: 'Always-on front-desk automation for conversations, qualification, and scheduling.',
   },
   {
     icon: <Database className="h-5 w-5 text-[#0984E3]" />,
-    title: 'ML Models, Data, and Reporting',
-    description: 'Model development and data foundations that support measurable product outcomes.',
-    deliverables: ['Model training and evaluation workflows', 'Data model and schema design', 'Operational and performance dashboards'],
+    title: 'AI Analyst Reporting',
+    detail: 'Decision support workflows for reporting, insight extraction, and operational control.',
+  },
+  {
+    icon: <Workflow className="h-5 w-5 text-[#0984E3]" />,
+    title: 'Workflow Orchestration',
+    detail: 'Automated handoffs between tools, teams, and systems with fewer manual bottlenecks.',
+  },
+  {
+    icon: <Cloud className="h-5 w-5 text-[#0984E3]" />,
+    title: 'CI/CD and Deployment',
+    detail: 'Repeatable release flows with quality gates and deployment confidence.',
   },
   {
     icon: <ShieldCheck className="h-5 w-5 text-[#0984E3]" />,
     title: 'Security and Reliability',
-    description: 'Production standards for access control, auditability, and service continuity.',
-    deliverables: ['Access and permissions model', 'Security controls and checks', 'Reliability and maintenance planning'],
-  },
-];
-
-const capabilityMatrix: ServiceDomain[] = [
-  ...serviceDomains,
-  {
-    icon: <Code2 className="h-6 w-6 text-[#0984E3]" />,
-    title: 'Software Engineering and Automation',
-    description: 'Custom software systems and process automation engineered around your business workflows.',
-    deliverables: ['Web and mobile applications', 'Internal tools and operations software', 'API integrations and automation flows'],
-  },
-  {
-    icon: <Bot className="h-6 w-6 text-[#0984E3]" />,
-    title: 'AI Assistants and ML Features',
-    description: 'Practical AI implementations that improve speed, decision-making, and customer interactions.',
-    deliverables: ['AI assistants and chatbots', 'Model training and evaluation', 'AI-powered product features'],
+    detail: 'Controls, hardening, and observability for dependable operations.',
   },
 ];
 
 const deliveryFlow = [
-  {
-    step: 'Discover',
-    detail: 'Align on goals, constraints, and measurable outcomes.',
-  },
-  {
-    step: 'Design',
-    detail: 'Define architecture, user flows, and execution plan.',
-  },
-  {
-    step: 'Build',
-    detail: 'Deliver in milestones with QA, demos, and feedback loops.',
-  },
-  {
-    step: 'Scale',
-    detail: 'Optimize performance, reliability, and roadmap continuity.',
-  },
+  { step: 'Discover', detail: 'Clarify goals, constraints, and the delivery scope.' },
+  { step: 'Design', detail: 'Define architecture, workflows, and implementation priorities.' },
+  { step: 'Build', detail: 'Deliver incrementally with review checkpoints and QA.' },
+  { step: 'Scale', detail: 'Stabilize, optimize, and continuously improve outcomes.' },
 ];
+const deliveryAccentWidths = ['26%', '50%', '72%', '96%'];
 
 const Services: React.FC = () => {
   const { motionReduced } = useAnimationQuality();
-  const glassBlurClass = 'backdrop-blur-none';
+  const { scrollYProgress } = useScroll();
+  const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const heroShift = useTransform(scrollYProgress, [0, 0.35], [0, 42]);
 
   return (
     <MotionConfig reducedMotion={motionReduced ? 'always' : 'never'}>
-      <div className="relative min-h-screen overflow-hidden bg-[#F5F6FA] text-[#1E272E]">
-        <PageAmbientBackground />
+      <div className="relative isolate min-h-screen overflow-hidden bg-[#F5F6FA] text-[#1E272E]">
+        <motion.div
+          aria-hidden="true"
+          className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-gradient-to-r from-[#0984E3] via-[#4CA6EC] to-[#00CEC9]"
+          style={{ scaleX: progressScale }}
+        />
+        <PageAmbientBackground className="-z-10" />
 
-        <section className="relative pt-32 pb-14">
+        <section className="relative pb-14 pt-32 md:pb-20">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="max-w-5xl"
-              >
-                <p className="text-xs uppercase tracking-[0.22em] text-[#1E272E]/65">Services</p>
-                <h1 className="mt-4 text-4xl md:text-6xl font-semibold leading-[0.98]">
-                  Engineering Services That Move Business Forward
-                </h1>
-                <p className="mt-6 text-lg text-[#1E272E]/78 max-w-3xl leading-relaxed">
-                  We are software, computer science, and machine learning engineers building practical digital products.
-                  Our work includes automation software, AI assistants, ML-powered features, and production delivery workflows.
-                  We deploy, monitor, and improve systems continuously, without positioning ourselves as an infrastructure-as-a-service provider.
-                </p>
-                <div className="mt-10 flex flex-wrap gap-4">
-                  <Link
-                    to="/contact"
-                    className="inline-flex items-center gap-2 border border-[#1E272E]/20 bg-[#0984E3]/10 px-6 py-3 font-medium hover:bg-[#0984E3]/20 transition-colors"
-                  >
-                    Start a Project
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                  <Link
-                    to="/portfolio"
-                    className="inline-flex items-center gap-2 border border-[#1E272E]/20 px-6 py-3 font-medium text-[#1E272E]/90 hover:bg-[#0984E3]/10 transition-colors"
-                  >
-                    View Case Studies
-                  </Link>
-                </div>
-              </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55 }}
+              style={{ y: heroShift }}
+              className="relative overflow-hidden rounded-[32px] border border-[#1E272E]/12 bg-[linear-gradient(135deg,rgba(255,255,255,0.86),rgba(236,245,253,0.72))] p-6 shadow-[0_20px_44px_rgba(9,132,227,0.1)] md:p-10"
+            >
+              <div className="pointer-events-none absolute -right-24 top-0 h-48 w-48 rounded-full bg-[#0984E3]/12 blur-3xl" />
+              <div className="pointer-events-none absolute -left-20 bottom-0 h-56 w-56 rounded-full bg-[#00CEC9]/10 blur-3xl" />
 
-              <motion.aside
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: 0.08 }}
-                className={`border border-[#1E272E]/15 bg-[#0984E3]/[0.04] ${glassBlurClass} p-6`}
-              >
-                <p className="text-xs uppercase tracking-[0.16em] text-[#1E272E]/60">At a Glance</p>
-                <div className="mt-4 space-y-3">
-                  {[
-                    'Custom software systems and business automation',
-                    'AI assistants, chatbots, and ML-powered product features',
-                    'Deployment workflows, CI/CD pipelines, and monitoring',
-                  ].map((line) => (
-                    <div key={line} className="flex items-start gap-2">
-                      <Sparkles className="h-4 w-4 mt-1 text-[#0984E3] shrink-0" />
-                      <p className="text-[#1E272E]/88 text-sm leading-relaxed">{line}</p>
-                    </div>
-                  ))}
-                </div>
-              </motion.aside>
-            </div>
-          </div>
-        </section>
-
-        <section className="relative py-10">
-          <div className="container mx-auto px-4">
-            <div className="mb-8">
-              <p className="text-xs uppercase tracking-[0.2em] text-[#1E272E]/60">Core Service Lines</p>
-              <h2 className="mt-2 text-3xl md:text-5xl font-semibold">What We Actually Deliver</h2>
-            </div>
-
-            <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-              {servicePillars.map((pillar, index) => (
-                <motion.article
-                  key={pillar.title}
-                  initial={{ opacity: 0, y: 18 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.45, delay: index * 0.07 }}
-                  className={[
-                    'border p-6',
-                    pillar.featured
-                      ? 'border-[#0984E3]/70 bg-[#0984E3] text-[#F5F6FA] shadow-[0_18px_40px_rgba(9,132,227,0.25)]'
-                      : `border-[#1E272E]/15 bg-[#0984E3]/[0.04] ${glassBlurClass} text-[#1E272E]`,
-                  ].join(' ')}
-                >
-                  <p className={pillar.featured ? 'text-[#F5F6FA]/80 text-sm font-semibold' : 'text-[#0984E3] text-sm font-semibold'}>
-                    {pillar.id}
+              <div className="relative z-10 grid grid-cols-1 gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.24em] text-[#1E272E]/60">Services</p>
+                  <h1 className="mt-4 max-w-5xl text-5xl font-semibold leading-[0.93] md:text-7xl">
+                    Systems that move
+                    <br />
+                    faster than your
+                    <br />
+                    <span className="text-[#0984E3]">bottlenecks.</span>
+                  </h1>
+                  <p className="mt-6 max-w-3xl text-lg leading-relaxed text-[#1E272E]/78">
+                    We build practical ecosystems for modern businesses: AI agents, AI receptionist systems, AI analyst
+                    workflows, custom software platforms, and process automation connected end to end.
                   </p>
-                  <h3 className="mt-3 text-2xl font-semibold leading-tight">{pillar.title}</h3>
-                  <p className={pillar.featured ? 'mt-3 text-[#F5F6FA]/90' : 'mt-3 text-[#1E272E]/75'}>{pillar.summary}</p>
-                  <div className="mt-6 space-y-2">
-                    {pillar.outcomes.map((item) => (
-                      <div key={item} className="flex items-start gap-2">
-                        <CheckCircle2 className={pillar.featured ? 'h-4 w-4 mt-0.5 text-[#F5F6FA] shrink-0' : 'h-4 w-4 mt-0.5 text-[#0984E3] shrink-0'} />
-                        <span className={pillar.featured ? 'text-[#F5F6FA]/90 text-sm' : 'text-[#1E272E]/85 text-sm'}>{item}</span>
+                  <div className="mt-9 flex flex-wrap gap-3">
+                    <Link
+                      to="/contact"
+                      className="inline-flex items-center gap-2 bg-[#1E272E] px-7 py-3 text-[#F5F6FA] transition-colors hover:bg-[#0984E3]"
+                    >
+                      Start a Project
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                    <Link
+                      to="/portfolio"
+                      className="inline-flex items-center gap-2 bg-white/90 px-7 py-3 text-[#1E272E] shadow-[0_12px_26px_rgba(9,132,227,0.08)] transition-colors hover:bg-[#ECF5FD]"
+                    >
+                      View Case Studies
+                    </Link>
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-6">
+                  <p className="max-w-lg text-xl leading-relaxed text-[#1E272E]/78">
+                    Capabilities designed as one operating layer for growth, control, and reliable execution.
+                  </p>
+                  <div className="space-y-2.5">
+                    {[
+                      'AI receptionist, support agents, and internal role-based agents',
+                      'AI analyst systems for reporting, forecasting, and operational insight',
+                      'Automation, custom software, and deployment-ready ecosystems',
+                    ].map((item) => (
+                      <div key={item} className="flex items-start gap-2.5 text-sm leading-relaxed text-[#1E272E]/82">
+                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#0984E3]" />
+                        <span>{item}</span>
                       </div>
                     ))}
                   </div>
+
+                  <div className="grid grid-cols-3 gap-3">
+                    {[
+                      { label: 'Agents', className: 'h-24 bg-[linear-gradient(180deg,#E3F3FF_0%,#BFE3FF_100%)]' },
+                      { label: 'Ops', className: 'h-32 bg-[linear-gradient(180deg,#EAF7F6_0%,#C7F0E7_100%)]' },
+                      { label: 'Scale', className: 'h-40 bg-[linear-gradient(180deg,#ECF2FF_0%,#D2E3FF_100%)]' },
+                    ].map((pillar) => (
+                      <div key={pillar.label} className={`rounded-t-[40px] rounded-b-xl px-3 py-3 ${pillar.className}`}>
+                        <p className="text-[11px] uppercase tracking-[0.12em] text-[#1E272E]/70">{pillar.label}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <p className="bg-white/82 px-3 py-2 text-xs tracking-[0.08em] text-[#1E272E]/76">
+                    Focus: AI + Custom Systems. Model: End-to-End Delivery. We deliver worldwide and can work with you wherever you are.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        <section className="relative py-10 md:py-14">
+          <div className="container mx-auto px-4">
+            <div className="mb-8 max-w-4xl">
+              <p className="text-xs uppercase tracking-[0.2em] text-[#1E272E]/60">Core Service Lines</p>
+              <h2 className="mt-3 text-4xl font-semibold leading-tight md:text-6xl">What We Actually Deliver</h2>
+            </div>
+
+            <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
+              {serviceLines.map((line, index) => (
+                <motion.article
+                  key={line.title}
+                  initial={{ opacity: 0, y: 18 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.22 }}
+                  transition={{ duration: 0.42, delay: index * 0.05 }}
+                  className={[
+                    'p-7 shadow-[0_18px_38px_rgba(9,132,227,0.1)]',
+                    line.tone === 'dark'
+                      ? 'bg-[linear-gradient(130deg,#1E272E_0%,#0984E3_100%)] text-[#F5F6FA]'
+                      : 'bg-white/85 text-[#1E272E]',
+                  ].join(' ')}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <span
+                      className={[
+                        'inline-flex p-2',
+                        line.tone === 'dark' ? 'bg-white/14 text-[#F5F6FA]' : 'bg-[#ECF5FD] text-[#0984E3]',
+                      ].join(' ')}
+                    >
+                      {line.icon}
+                    </span>
+                    <p
+                      className={[
+                        'text-xs uppercase tracking-[0.16em]',
+                        line.tone === 'dark' ? 'text-[#F5F6FA]/72' : 'text-[#1E272E]/58',
+                      ].join(' ')}
+                    >
+                      Service Line
+                    </p>
+                  </div>
+                  <h3 className="mt-4 text-3xl font-semibold leading-tight">{line.title}</h3>
+                  <p className={line.tone === 'dark' ? 'mt-3 text-[#F5F6FA]/88' : 'mt-3 text-[#1E272E]/74'}>{line.summary}</p>
+                  <ul className="mt-5 space-y-2">
+                    {line.outcomes.map((outcome) => (
+                      <li key={outcome} className="flex items-start gap-2.5">
+                        <CheckCircle2
+                          className={[
+                            'mt-0.5 h-4 w-4 shrink-0',
+                            line.tone === 'dark' ? 'text-[#F5F6FA]' : 'text-[#0984E3]',
+                          ].join(' ')}
+                        />
+                        <span className={line.tone === 'dark' ? 'text-[#F5F6FA]/92' : 'text-[#1E272E]/82'}>{outcome}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </motion.article>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="relative py-12">
+        <section className="relative py-12 md:py-16">
           <div className="container mx-auto px-4">
-            <div className="mb-10 grid grid-cols-1 gap-6 lg:grid-cols-[1fr_1.15fr] lg:items-start">
+            <div className="mb-8 grid grid-cols-1 gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
               <div>
-                <p className="text-xs uppercase tracking-[0.2em] text-[#1E272E]/60">Service Catalog</p>
-                <h2 className="mt-2 text-3xl md:text-5xl font-semibold">Detailed Engineering Capabilities</h2>
+                <p className="text-xs uppercase tracking-[0.2em] text-[#1E272E]/60">Capability Catalog</p>
+                <h2 className="mt-3 text-4xl font-semibold leading-tight md:text-5xl">Detailed Engineering Capabilities</h2>
               </div>
-              <p className="text-[#1E272E]/82 text-lg leading-relaxed max-w-3xl">
-                From AI assistants to production software delivery, our engineering capabilities cover the practical systems
-                your business needs to automate operations, ship faster, and maintain reliability in real use.
+              <p className="max-w-3xl text-lg leading-relaxed text-[#1E272E]/76">
+                From AI receptionist and analyst systems to workflow automation and deployment reliability, our capability
+                set is designed as one connected delivery ecosystem.
               </p>
             </div>
 
-            <div className="overflow-hidden border border-[#1E272E]/16 bg-white">
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
-                {capabilityMatrix.map((domain, index) => (
-                  <motion.article
-                    key={domain.title}
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.2 }}
-                    transition={{ duration: 0.42, delay: index * 0.04 }}
-                    className="group relative min-h-[260px] border border-[#1E272E]/14 bg-[#F5F6FA]/65 overflow-hidden"
-                  >
-                    <div className="relative z-10 h-full flex flex-col p-5 transition-opacity duration-250 md:group-hover:opacity-0">
-                      <p className="text-[#1E272E] text-[40px] md:text-[38px] leading-[1.05] font-medium tracking-[-0.01em]">
-                        {domain.title}
-                      </p>
-                      <div className="mt-auto flex items-end justify-between pt-8">
-                        <span className="inline-flex items-center justify-center rounded-md border border-[#0984E3]/30 bg-[#0984E3]/10 p-2">
-                          {domain.icon}
-                        </span>
-                        <ArrowRight className="h-5 w-5 text-[#0984E3]/75 transition-transform duration-300 group-hover:translate-x-1" />
-                      </div>
-                    </div>
-
-                    <div
-                      className={[
-                        'absolute inset-0 z-20 p-5 transition-all duration-250',
-                        'opacity-100 translate-y-0 md:opacity-0 md:translate-y-1 md:group-hover:opacity-100 md:group-hover:translate-y-0',
-                        index % 2 === 0
-                          ? 'bg-gradient-to-br from-[#0984E3] to-[#00CEC9]'
-                          : 'bg-gradient-to-br from-[#1E272E] to-[#0984E3]',
-                      ].join(' ')}
-                    >
-                      <p className="text-white text-[30px] md:text-[28px] leading-[1.08] font-semibold tracking-[-0.01em]">
-                        {domain.title}
-                      </p>
-                      <p className="mt-3 text-white/95 text-[15px] leading-relaxed">{domain.description}</p>
-                      <ul className="mt-4 space-y-1.5">
-                        {domain.deliverables.slice(0, 3).map((deliverable) => (
-                          <li key={deliverable} className="flex items-start gap-2 text-[14px] text-white/95 leading-relaxed">
-                            <span className="mt-1 h-1.5 w-1.5 rounded-full bg-white/90 shrink-0" />
-                            <span>{deliverable}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      <div className="mt-5 flex items-center justify-end">
-                        <ArrowRight className="h-5 w-5 text-white/95" />
-                      </div>
-                    </div>
-                  </motion.article>
-                ))}
-              </div>
-            </div>
-
-            <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">
-              {[
-                {
-                  label: 'Software Engineering',
-                  detail: 'Custom systems, web and mobile applications, and business workflow automation.',
-                },
-                {
-                  label: 'Applied AI & ML',
-                  detail: 'AI assistants, chatbots, and machine-learning powered product features.',
-                },
-                {
-                  label: 'Delivery Operations',
-                  detail: 'Deployment pipelines, CI/CD workflows, and monitoring for stable operations.',
-                },
-              ].map((item) => (
-                <div key={item.label} className="border border-[#1E272E]/12 bg-white p-4">
-                  <p className="text-sm uppercase tracking-[0.14em] text-[#0984E3]">{item.label}</p>
-                  <p className="mt-2 text-[#1E272E]/76 text-sm leading-relaxed">{item.detail}</p>
-                </div>
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
+              {capabilities.map((capability, index) => (
+                <motion.article
+                  key={capability.title}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.36, delay: index * 0.04 }}
+                  className="bg-white/82 p-5 shadow-[0_14px_30px_rgba(9,132,227,0.08)] transition-transform duration-300 hover:-translate-y-1"
+                >
+                  <div className="inline-flex bg-[#ECF5FD] p-2">{capability.icon}</div>
+                  <h3 className="mt-3 text-2xl font-semibold leading-tight">{capability.title}</h3>
+                  <p className="mt-2 leading-relaxed text-[#1E272E]/74">{capability.detail}</p>
+                </motion.article>
               ))}
             </div>
-
-            <div className="mb-8 mt-12">
-              <p className="text-xs uppercase tracking-[0.2em] text-[#1E272E]/60">Service Catalog</p>
-              <h3 className="mt-2 text-2xl md:text-4xl font-semibold">Execution Coverage</h3>
-              <p className="mt-3 text-[#1E272E]/76 max-w-3xl">
-                Every capability above is delivered through one engineering flow: discover, design, build, and scale.
-              </p>
-            </div>
           </div>
         </section>
 
-        <section className="relative py-12">
+        <section className="relative pb-10 pt-8 md:pb-14 md:pt-10">
           <div className="container mx-auto px-4">
-            <div className="mb-8">
+            <div className="mb-5 md:mb-6">
               <p className="text-xs uppercase tracking-[0.2em] text-[#1E272E]/60">Execution Flow</p>
-              <h2 className="mt-2 text-3xl md:text-5xl font-semibold">How Delivery Moves From Idea to Production</h2>
+              <h2 className="mt-2 text-3xl font-semibold leading-tight md:text-4xl">How Delivery Moves to Production</h2>
             </div>
 
-            <div className="relative mt-10 overflow-hidden rounded-2xl border border-[#1E272E]/14 bg-gradient-to-br from-white to-[#ECF5FD]/45 p-4 md:p-6">
-              <div className="pointer-events-none absolute left-[10%] right-[10%] top-[48px] hidden xl:block h-[2px] bg-gradient-to-r from-[#0984E3]/15 via-[#0984E3]/55 to-[#0984E3]/15" />
-
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
-                {deliveryFlow.map((item, index) => (
-                  <motion.article
-                    key={item.step}
-                    initial={{ opacity: 0, y: 14 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.2 }}
-                    transition={{ duration: 0.36, delay: index * 0.05 }}
-                    className="group relative rounded-xl border border-[#1E272E]/12 bg-white/95 p-5 pt-8 shadow-[0_8px_24px_rgba(9,132,227,0.08)]"
-                  >
-                    <div className="absolute left-5 top-0 -translate-y-1/2">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#0984E3]/35 bg-[#F5F6FA] text-sm font-semibold text-[#0984E3] shadow-[0_4px_14px_rgba(9,132,227,0.18)]">
-                        {`0${index + 1}`}
-                      </div>
-                    </div>
-                    <p className="text-[11px] uppercase tracking-[0.18em] text-[#0984E3]/75">Step {index + 1}</p>
-                    <h3 className="mt-2 text-2xl font-semibold text-[#1E272E]">{item.step}</h3>
-                    <p className="mt-3 text-sm text-[#1E272E]/75 leading-relaxed">{item.detail}</p>
-                    <div className="mt-5 h-1 w-full rounded-full bg-[#1E272E]/8">
-                      <div
-                        className="h-full rounded-full bg-gradient-to-r from-[#0984E3] to-[#00CEC9]"
-                        style={{ width: `${(index + 1) * 25}%` }}
-                      />
-                    </div>
-                  </motion.article>
-                ))}
+            <div className="relative overflow-hidden border border-[#1E272E]/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.7),rgba(236,245,253,0.62))] p-3 shadow-[0_12px_28px_rgba(9,132,227,0.08)] md:p-4">
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute left-[14%] right-[14%] top-[2.65rem] hidden h-px bg-gradient-to-r from-[#0984E3]/45 via-[#4CA6EC]/45 to-[#00CEC9]/45 xl:block"
+              />
+              <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
+              {deliveryFlow.map((step, index) => (
+                <motion.article
+                  key={step.step}
+                  initial={{ opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.25 }}
+                  transition={{ duration: 0.34, delay: index * 0.05 }}
+                  className="relative overflow-visible border border-[#1E272E]/10 bg-white/84 p-4 pt-7 shadow-[0_8px_20px_rgba(9,132,227,0.08)] md:p-5 md:pt-8"
+                >
+                  <div className="absolute -top-4 left-4 inline-flex h-9 min-w-9 items-center justify-center border border-[#0984E3]/35 bg-[#ECF5FD] px-2 text-lg font-semibold text-[#0984E3] md:h-10 md:min-w-10">
+                    {`0${index + 1}`}
+                  </div>
+                  <p className="text-[10px] uppercase tracking-[0.22em] text-[#0984E3]/80">{`STEP ${index + 1}`}</p>
+                  <h3 className="mt-2 text-3xl font-semibold leading-none md:text-4xl">{step.step}</h3>
+                  <p className="mt-3 max-w-md text-base leading-relaxed text-[#1E272E]/74 md:text-lg">{step.detail}</p>
+                  <div
+                    aria-hidden="true"
+                    className="mt-4 h-[3px] bg-gradient-to-r from-[#0984E3] to-[#5DC6C4]"
+                    style={{ width: deliveryAccentWidths[index] ?? '100%' }}
+                  />
+                </motion.article>
+              ))}
               </div>
             </div>
           </div>
         </section>
 
-        <section className="relative py-14 mb-10">
+        <section className="relative pb-16 pt-2 md:pb-20">
           <div className="container mx-auto px-4">
-            <div className={`border border-[#1E272E]/12 bg-gradient-to-r from-white/10 to-white/5 ${glassBlurClass} p-8 md:p-10`}>
-              <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.4 }}
+              className="overflow-hidden bg-[#1E272E] px-8 py-10 text-[#F5F6FA] shadow-[0_20px_48px_rgba(30,39,46,0.28)]"
+            >
+              <div className="pointer-events-none absolute -right-24 -top-20 h-56 w-56 rounded-full bg-[#0984E3]/34 blur-3xl" />
+              <div className="pointer-events-none absolute -bottom-16 left-[8%] h-48 w-48 rounded-full bg-[#00CEC9]/24 blur-3xl" />
+              <div className="relative z-10 grid grid-cols-1 gap-8 lg:grid-cols-[1.12fr_0.88fr] lg:items-center">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.2em] text-[#1E272E]/60">Next Step</p>
-                  <h2 className="mt-3 text-3xl md:text-5xl font-semibold leading-tight">
-                    Share Your Product Context, We Define the Right Service Path
+                  <p className="text-xs uppercase tracking-[0.2em] text-[#F5F6FA]/65">Next Step</p>
+                  <h2 className="mt-3 max-w-3xl text-3xl font-semibold leading-tight md:text-5xl">
+                    Need AI agents, an AI analyst system, automations, or a full custom ecosystem?
                   </h2>
-                  <p className="mt-4 text-[#1E272E]/78 max-w-2xl">
-                    Tell us what you are building, where the bottlenecks are, and what timeline you are targeting.
-                    We will propose scope, priorities, and an execution model aligned to your business outcome.
+                  <p className="mt-4 max-w-2xl text-[#F5F6FA]/82">
+                    Share your operational goals and constraints. We will propose a practical scope and delivery path you
+                    can execute with confidence.
                   </p>
                 </div>
-                <div className="space-y-3">
+                <div className="grid gap-3">
                   <Link
                     to="/contact"
-                    className="inline-flex w-full items-center justify-center gap-2 bg-[#0984E3] text-[#F5F6FA] px-6 py-3 font-medium hover:bg-[#0776CC] transition-colors"
+                    className="inline-flex items-center justify-center gap-2 bg-[#0984E3] px-6 py-3 text-[#F5F6FA] transition-colors hover:bg-[#0776CC]"
                   >
                     Book a Call
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="h-4 w-4" />
                   </Link>
                   <Link
                     to="/portfolio"
-                    className="inline-flex w-full items-center justify-center gap-2 border border-[#1E272E]/20 bg-[#0984E3]/10 px-6 py-3 font-medium text-[#1E272E] hover:bg-[#0984E3]/15 transition-colors"
+                    className="inline-flex items-center justify-center gap-2 bg-[#F5F6FA]/12 px-6 py-3 text-[#F5F6FA] transition-colors hover:bg-[#F5F6FA]/20"
                   >
                     Explore Delivered Work
                   </Link>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </section>
       </div>

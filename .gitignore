@@ -5,7 +5,10 @@
 
 # testing
 /coverage
-
+.skills-lock.json
+skills-lock.json
+.agents
+/.agents
 # production
 /build
 /dist
