@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { useAnimationQuality } from '../lib/animationQuality';
 import PageAmbientBackground from '../components/PageAmbientBackground';
+import HeroCurvedShapes from '../components/HeroCurvedShapes';
 
 type ServiceLine = {
   icon: React.ReactNode;
@@ -100,6 +101,12 @@ const deliveryFlow = [
 ];
 const deliveryAccentWidths = ['26%', '50%', '72%', '96%'];
 
+const serviceHeroCurves = [
+  { label: 'Agents', value: '01', height: 176, tone: 'violet' as const },
+  { label: 'Ops', value: '02', height: 222, tone: 'teal' as const },
+  { label: 'Scale', value: '03', height: 268, tone: 'blue' as const },
+];
+
 const Services: React.FC = () => {
   const { motionReduced } = useAnimationQuality();
   const { scrollYProgress } = useScroll();
@@ -123,15 +130,16 @@ const Services: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55 }}
               style={{ y: heroShift }}
-              className="relative overflow-hidden rounded-[32px] border border-[#1E272E]/12 bg-[linear-gradient(135deg,rgba(255,255,255,0.86),rgba(236,245,253,0.72))] p-6 shadow-[0_20px_44px_rgba(9,132,227,0.1)] md:p-10"
+              className="relative py-5 md:py-8"
             >
-              <div className="pointer-events-none absolute -right-24 top-0 h-48 w-48 rounded-full bg-[#0984E3]/12 blur-3xl" />
-              <div className="pointer-events-none absolute -left-20 bottom-0 h-56 w-56 rounded-full bg-[#00CEC9]/10 blur-3xl" />
-
-              <div className="relative z-10 grid grid-cols-1 gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+              <div className="pointer-events-none absolute -left-14 top-10 h-24 w-64 rounded-full bg-[#0984E3]/10 blur-3xl" />
+              <div className="pointer-events-none absolute right-[28%] top-0 h-28 w-72 rounded-full bg-[#00CEC9]/10 blur-3xl" />
+              <div className="pointer-events-none absolute left-0 right-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(9,132,227,0.45),transparent)]" />
+              <div className="pointer-events-none absolute left-0 right-0 bottom-0 h-px bg-[linear-gradient(90deg,transparent,rgba(0,206,201,0.4),transparent)]" />
+              <div className="relative z-10 grid grid-cols-1 gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:items-start">
                 <div>
                   <p className="text-xs uppercase tracking-[0.24em] text-[#1E272E]/60">Services</p>
-                  <h1 className="mt-4 max-w-5xl text-5xl font-semibold leading-[0.93] md:text-7xl">
+                  <h1 className="mt-4 max-w-5xl font-serif text-5xl font-semibold leading-[0.94] md:text-7xl">
                     Systems that move
                     <br />
                     faster than your
@@ -159,15 +167,16 @@ const Services: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-6">
-                  <p className="max-w-lg text-xl leading-relaxed text-[#1E272E]/78">
-                    Capabilities designed as one operating layer for growth, control, and reliable execution.
+                <div className="relative flex flex-col gap-5 lg:pl-2">
+                  <div className="pointer-events-none absolute -left-10 top-6 h-20 w-20 rounded-full bg-[#0984E3]/12 blur-2xl" />
+                  <div className="pointer-events-none absolute right-0 top-0 h-24 w-24 rounded-full bg-[#00CEC9]/10 blur-2xl" />
+                  <p className="relative max-w-lg text-lg leading-relaxed text-[#1E272E]/78">
+                    One operating layer for growth and control.
                   </p>
-                  <div className="space-y-2.5">
+                  <div className="relative space-y-2">
                     {[
-                      'AI receptionist, support agents, and internal role-based agents',
-                      'AI analyst systems for reporting, forecasting, and operational insight',
-                      'Automation, custom software, and deployment-ready ecosystems',
+                      'AI receptionist + support agents',
+                      'Analyst systems + automation workflows',
                     ].map((item) => (
                       <div key={item} className="flex items-start gap-2.5 text-sm leading-relaxed text-[#1E272E]/82">
                         <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#0984E3]" />
@@ -176,20 +185,10 @@ const Services: React.FC = () => {
                     ))}
                   </div>
 
-                  <div className="grid grid-cols-3 gap-3">
-                    {[
-                      { label: 'Agents', className: 'h-24 bg-[linear-gradient(180deg,#E3F3FF_0%,#BFE3FF_100%)]' },
-                      { label: 'Ops', className: 'h-32 bg-[linear-gradient(180deg,#EAF7F6_0%,#C7F0E7_100%)]' },
-                      { label: 'Scale', className: 'h-40 bg-[linear-gradient(180deg,#ECF2FF_0%,#D2E3FF_100%)]' },
-                    ].map((pillar) => (
-                      <div key={pillar.label} className={`rounded-t-[40px] rounded-b-xl px-3 py-3 ${pillar.className}`}>
-                        <p className="text-[11px] uppercase tracking-[0.12em] text-[#1E272E]/70">{pillar.label}</p>
-                      </div>
-                    ))}
-                  </div>
+                  <HeroCurvedShapes items={serviceHeroCurves} badgeText="Execution Layer" />
 
-                  <p className="bg-white/82 px-3 py-2 text-xs tracking-[0.08em] text-[#1E272E]/76">
-                    Focus: AI + Custom Systems. Model: End-to-End Delivery. We deliver worldwide and can work with you wherever you are.
+                  <p className="text-xs tracking-[0.12em] text-[#1E272E]/72">
+                    AI + Custom Systems. End-to-end. Worldwide.
                   </p>
                 </div>
               </div>
@@ -201,7 +200,7 @@ const Services: React.FC = () => {
           <div className="container mx-auto px-4">
             <div className="mb-8 max-w-4xl">
               <p className="text-xs uppercase tracking-[0.2em] text-[#1E272E]/60">Core Service Lines</p>
-              <h2 className="mt-3 text-4xl font-semibold leading-tight md:text-6xl">What We Actually Deliver</h2>
+              <h2 className="mt-3 font-serif text-4xl font-semibold leading-[1.02] md:text-6xl">What We Actually Deliver</h2>
             </div>
 
             <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
@@ -263,7 +262,7 @@ const Services: React.FC = () => {
             <div className="mb-8 grid grid-cols-1 gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
               <div>
                 <p className="text-xs uppercase tracking-[0.2em] text-[#1E272E]/60">Capability Catalog</p>
-                <h2 className="mt-3 text-4xl font-semibold leading-tight md:text-5xl">Detailed Engineering Capabilities</h2>
+                <h2 className="mt-3 font-serif text-4xl font-semibold leading-[1.02] md:text-5xl">Detailed Engineering Capabilities</h2>
               </div>
               <p className="max-w-3xl text-lg leading-relaxed text-[#1E272E]/76">
                 From AI receptionist and analyst systems to workflow automation and deployment reliability, our capability
@@ -294,13 +293,13 @@ const Services: React.FC = () => {
           <div className="container mx-auto px-4">
             <div className="mb-5 md:mb-6">
               <p className="text-xs uppercase tracking-[0.2em] text-[#1E272E]/60">Execution Flow</p>
-              <h2 className="mt-2 text-3xl font-semibold leading-tight md:text-4xl">How Delivery Moves to Production</h2>
+              <h2 className="mt-2 font-serif text-3xl font-semibold leading-[1.02] md:text-4xl">How Delivery Moves to Production</h2>
             </div>
 
             <div className="relative overflow-hidden border border-[#1E272E]/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.7),rgba(236,245,253,0.62))] p-3 shadow-[0_12px_28px_rgba(9,132,227,0.08)] md:p-4">
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute left-[14%] right-[14%] top-[2.65rem] hidden h-px bg-gradient-to-r from-[#0984E3]/45 via-[#4CA6EC]/45 to-[#00CEC9]/45 xl:block"
+                className="pointer-events-none absolute left-[10%] right-[10%] top-[2.2rem] hidden h-[2px] bg-gradient-to-r from-[#0984E3]/45 via-[#4CA6EC]/45 to-[#00CEC9]/45 xl:block"
               />
               <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
               {deliveryFlow.map((step, index) => (
@@ -344,7 +343,7 @@ const Services: React.FC = () => {
               <div className="relative z-10 grid grid-cols-1 gap-8 lg:grid-cols-[1.12fr_0.88fr] lg:items-center">
                 <div>
                   <p className="text-xs uppercase tracking-[0.2em] text-[#F5F6FA]/65">Next Step</p>
-                  <h2 className="mt-3 max-w-3xl text-3xl font-semibold leading-tight md:text-5xl">
+                  <h2 className="mt-3 max-w-3xl font-serif text-3xl font-semibold leading-[1.02] md:text-5xl">
                     Need AI agents, an AI analyst system, automations, or a full custom ecosystem?
                   </h2>
                   <p className="mt-4 max-w-2xl text-[#F5F6FA]/82">

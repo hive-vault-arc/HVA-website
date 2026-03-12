@@ -14,6 +14,7 @@ import {
 import ResponsiveImage from '../components/ui/ResponsiveImage';
 import { useAnimationQuality } from '../lib/animationQuality';
 import PageAmbientBackground from '../components/PageAmbientBackground';
+import HeroCurvedShapes from '../components/HeroCurvedShapes';
 
 type Project = {
   title: string;
@@ -115,6 +116,12 @@ const proofBlocks = [
   },
 ];
 
+const portfolioHeroCurves = [
+  { label: 'Cases', value: String(projects.length), height: 176, tone: 'violet' as const },
+  { label: 'Domains', value: '6+', height: 226, tone: 'teal' as const },
+  { label: 'Stability', value: 'Prod', height: 272, tone: 'blue' as const },
+];
+
 const Portfolio: React.FC = () => {
   const { motionReduced } = useAnimationQuality();
   const { scrollYProgress } = useScroll();
@@ -138,15 +145,16 @@ const Portfolio: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.56 }}
               style={{ y: heroCopyY }}
-              className="relative overflow-hidden rounded-[32px] border border-[#1E272E]/12 bg-[linear-gradient(135deg,rgba(255,255,255,0.86),rgba(236,245,253,0.72))] p-6 shadow-[0_20px_44px_rgba(9,132,227,0.1)] md:p-10"
+              className="relative py-5 md:py-8"
             >
-              <div className="pointer-events-none absolute -right-24 top-0 h-48 w-48 rounded-full bg-[#0984E3]/12 blur-3xl" />
-              <div className="pointer-events-none absolute -left-20 bottom-0 h-56 w-56 rounded-full bg-[#00CEC9]/10 blur-3xl" />
-
-              <div className="relative z-10 grid grid-cols-1 gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+              <div className="pointer-events-none absolute -left-14 top-10 h-24 w-64 rounded-full bg-[#0984E3]/10 blur-3xl" />
+              <div className="pointer-events-none absolute right-[26%] top-1 h-28 w-72 rounded-full bg-[#00CEC9]/10 blur-3xl" />
+              <div className="pointer-events-none absolute left-0 right-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(9,132,227,0.45),transparent)]" />
+              <div className="pointer-events-none absolute left-0 right-0 bottom-0 h-px bg-[linear-gradient(90deg,transparent,rgba(0,206,201,0.4),transparent)]" />
+              <div className="relative z-10 grid grid-cols-1 gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:items-start">
                 <div>
                   <p className="text-xs uppercase tracking-[0.24em] text-[#1E272E]/60">Portfolio</p>
-                  <h1 className="mt-4 max-w-5xl text-5xl font-semibold leading-[0.92] md:text-7xl">
+                  <h1 className="mt-4 max-w-5xl font-serif text-5xl font-semibold leading-[0.94] md:text-7xl">
                     Practical systems.
                     <br />
                     Real outcomes.
@@ -174,16 +182,17 @@ const Portfolio: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-6">
-                  <p className="max-w-lg text-xl leading-relaxed text-[#1E272E]/78">
-                    Compact case snapshots built to show what matters most: outcomes, architecture decisions, and delivery discipline.
+                <div className="relative flex flex-col gap-5 lg:pl-2">
+                  <div className="pointer-events-none absolute -left-10 top-6 h-20 w-20 rounded-full bg-[#0984E3]/12 blur-2xl" />
+                  <div className="pointer-events-none absolute right-0 top-0 h-24 w-24 rounded-full bg-[#00CEC9]/10 blur-2xl" />
+                  <p className="relative max-w-lg text-lg leading-relaxed text-[#1E272E]/78">
+                    Case snapshots focused on outcomes and delivery clarity.
                   </p>
 
-                  <div className="space-y-2.5">
+                  <div className="relative space-y-2">
                     {[
-                      'AI receptionist and agent operations',
-                      'AI analyst reporting workflows',
-                      'Automation, CI/CD, and reliability coverage',
+                      'Agent operations + analyst systems',
+                      'Automation, CI/CD, reliability',
                     ].map((line) => (
                       <div key={line} className="flex items-start gap-2.5 text-sm leading-relaxed text-[#1E272E]/82">
                         <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#0984E3]" />
@@ -192,18 +201,7 @@ const Portfolio: React.FC = () => {
                     ))}
                   </div>
 
-                  <div className="grid grid-cols-3 gap-3">
-                    {[
-                      { label: 'Cases', value: String(projects.length), className: 'h-24 bg-[linear-gradient(180deg,#E3F3FF_0%,#BFE3FF_100%)]' },
-                      { label: 'Domains', value: '6+', className: 'h-32 bg-[linear-gradient(180deg,#EAF7F6_0%,#C7F0E7_100%)]' },
-                      { label: 'Stability', value: 'Prod', className: 'h-40 bg-[linear-gradient(180deg,#ECF2FF_0%,#D2E3FF_100%)]' },
-                    ].map((pillar) => (
-                      <div key={pillar.label} className={`rounded-t-[40px] rounded-b-xl px-3 py-3 ${pillar.className}`}>
-                        <p className="text-lg font-semibold text-[#1E272E]">{pillar.value}</p>
-                        <p className="text-[11px] uppercase tracking-[0.12em] text-[#1E272E]/70">{pillar.label}</p>
-                      </div>
-                    ))}
-                  </div>
+                  <HeroCurvedShapes items={portfolioHeroCurves} badgeText="Delivery Signal" />
                 </div>
               </div>
             </motion.div>
@@ -214,7 +212,7 @@ const Portfolio: React.FC = () => {
           <div className="container mx-auto px-4">
             <div className="mb-8">
               <p className="text-xs uppercase tracking-[0.2em] text-[#1E272E]/58">Selected Work</p>
-              <h2 className="mt-2 text-4xl font-semibold leading-tight md:text-6xl">Case Intelligence</h2>
+              <h2 className="mt-2 font-serif text-4xl font-semibold leading-[1.02] md:text-6xl">Case Intelligence</h2>
               <p className="mt-4 max-w-3xl text-lg leading-relaxed text-[#1E272E]/74">
                 Compact case studies focused on outcomes, architecture intent, and delivery clarity.
               </p>
@@ -285,13 +283,13 @@ const Portfolio: React.FC = () => {
               transition={{ duration: 0.4 }}
               className="text-center"
             >
-              <h2 className="mx-auto max-w-5xl text-5xl font-semibold leading-[0.96] text-[#1E272E] md:text-8xl">
+              <h2 className="mx-auto max-w-5xl font-serif text-5xl font-semibold leading-[0.96] text-[#1E272E] md:text-8xl">
                 Redefining Modern
                 <br />
                 Software Excellence
               </h2>
               <p className="mt-10 text-xs uppercase tracking-[0.2em] text-[#1E272E]/58">Delivery Signature</p>
-              <h3 className="mt-3 text-3xl font-semibold leading-tight text-[#1E272E] md:text-5xl">Power. Speed. Control.</h3>
+              <h3 className="mt-3 font-serif text-3xl font-semibold leading-[1.02] text-[#1E272E] md:text-5xl">Power. Speed. Control.</h3>
               <p className="mx-auto mt-3 max-w-4xl text-base leading-relaxed text-[#1E272E]/72 md:text-[1.55rem]">
                 Everything needed to build, automate, deploy, and maintain reliable software products.
               </p>
@@ -342,7 +340,7 @@ const Portfolio: React.FC = () => {
               <div className="relative z-10 grid grid-cols-1 gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
                 <div>
                   <p className="text-xs uppercase tracking-[0.2em] text-[#1E272E]/62">Next Move</p>
-                  <h2 className="mt-3 max-w-3xl text-3xl font-semibold leading-tight md:text-5xl">
+                  <h2 className="mt-3 max-w-3xl font-serif text-3xl font-semibold leading-[1.02] md:text-5xl">
                     Want your project to be the next case snapshot?
                   </h2>
                   <p className="mt-4 max-w-2xl text-[#1E272E]/76">

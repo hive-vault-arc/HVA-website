@@ -171,9 +171,8 @@ export function WorldMap({
             <MapPin className="w-5 h-5 mr-2 text-[#0984E3]" />
             Our Office
           </h3>
-          <p className="text-[#1E272E]/70 text-sm">Technopark Tangier</p>
-          <p className="text-[#1E272E]/70 text-sm">Route de Rabat</p>
-          <p className="text-[#1E272E]/70 text-sm">Tangier, Morocco</p>
+          <p className="text-[#1E272E]/70 text-sm">AVENUE TARIK IBN ZIAD N 38</p>
+          <p className="text-[#1E272E]/70 text-sm">ETAGE 6 N 32 TANGER</p>
         </div>
         
         <div className="space-y-2">
@@ -181,9 +180,9 @@ export function WorldMap({
             <Phone className="w-5 h-5 mr-2 text-[#0984E3]" />
             Contact Us
           </h3>
-          <p className="text-[#1E272E]/70 text-sm">+212 600-000-000</p>
+          <p className="text-[#1E272E]/70 text-sm">+212688270772</p>
+          <p className="text-[#1E272E]/70 text-sm">+212 691-918296</p>
           <p className="text-[#1E272E]/70 text-sm">Mon - Fri: 9:00 - 18:00</p>
-          <p className="text-[#1E272E]/70 text-sm">Sat - Sun: Closed</p>
         </div>
         
         <div className="space-y-2">
@@ -191,8 +190,8 @@ export function WorldMap({
             <Mail className="w-5 h-5 mr-2 text-[#0984E3]" />
             Get In Touch
           </h3>
-          <p className="text-[#1E272E]/70 text-sm">hello@hiva.com</p>
-          <p className="text-[#1E272E]/70 text-sm">contact@hiva.com</p>
+          <p className="text-[#1E272E]/70 text-sm">khalid.chelhi@outlook.fr</p>
+          <p className="text-[#1E272E]/70 text-sm">ali.amrani.dev@gmail.com</p>
           <div className="flex space-x-4 pt-2">
             <a href="https://x.com" target="_blank" rel="noreferrer noopener" className="text-[#0984E3] hover:text-[#1E272E] transition-colors" aria-label="X (Twitter)">
               <Twitter className="w-5 h-5" />
@@ -208,7 +207,7 @@ export function WorldMap({
       </div>
       <div className="mt-8 pt-6 border-t border-[#1E272E]/10 text-center">
         <p className="text-sm text-[#1E272E]/60">
-          © {new Date().getFullYear()} Hive Vault Arc (HIVA). All rights reserved.
+          © {new Date().getFullYear()} H.V.A. All rights reserved.
         </p>
       </div>
     </div>

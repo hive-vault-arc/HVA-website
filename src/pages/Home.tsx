@@ -183,60 +183,89 @@ const Home: React.FC = () => {
       </section>
 
       <section className="relative px-4 pb-10 sm:px-6 lg:px-14 lg:pb-16">
-        <div className="container mx-auto border border-[#1E272E]/10 bg-[linear-gradient(135deg,rgba(245,246,250,0.95),rgba(236,245,253,0.98))] px-6 py-12 md:px-10 md:py-16">
-          <div className="mx-auto max-w-5xl text-center">
-            <h2 className="text-4xl md:text-7xl font-semibold text-[#1E272E] leading-[0.95]">
-              Clear Scope...Ship
-            </h2>
-            <p className="mt-6 text-[#1E272E]/75 text-base md:text-2xl max-w-4xl mx-auto">
-              One focused process from discovery to release. We align requirements, architecture, and delivery so your product ships with confidence.
-            </p>
-          </div>
+        <div className="container mx-auto px-2 py-10 md:px-4 md:py-14">
+          <div className="relative overflow-hidden">
+            <div className="pointer-events-none absolute -left-12 top-8 h-28 w-28 rounded-full bg-[#1E272E]/12 blur-2xl" />
+            <div className="pointer-events-none absolute right-10 top-0 h-24 w-24 rounded-full bg-[#0984E3]/16 blur-2xl" />
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#1E272E]/30 to-transparent" />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#0984E3]/35 to-transparent" />
 
-          <div className="my-10 h-px w-full bg-[#0984E3]/20" />
-
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:items-start">
-            <h3 className="text-3xl md:text-5xl text-[#1E272E] font-medium leading-tight">
-              From strategy to production, one dependable engineering flow
-            </h3>
-
-            <div>
-              <p className="text-[#1E272E]/80 text-lg md:text-2xl">
-                Discover. Plan. Build. Scale. Each phase is tied to measurable business outcomes and technical quality.
+            <div className="mx-auto max-w-5xl px-2 text-center md:px-4">
+              <h2 className="font-serif text-4xl md:text-7xl font-semibold text-[#1E272E] leading-[0.95]">
+                Clear Scope...Ship
+              </h2>
+              <p className="mx-auto mt-6 max-w-4xl text-base text-[#1E272E]/75 md:text-2xl">
+                One focused process from discovery to release. We align requirements, architecture, and delivery so your product ships with confidence.
               </p>
-              <Link
-                to="/services"
-                className="mt-6 inline-flex items-center gap-2 border-b border-[#0984E3]/70 pb-1 text-[#0984E3] tracking-[0.14em] uppercase text-sm font-medium hover:text-[#1E272E] hover:border-white transition-colors"
-              >
-                Engineering Process
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+            </div>
+
+            <div className="my-10 h-px w-full bg-gradient-to-r from-transparent via-[#1E272E]/16 to-transparent" />
+
+            <div className="grid grid-cols-1 gap-8 px-2 pb-1 md:grid-cols-2 md:items-start md:px-4">
+              <h3 className="font-serif text-3xl md:text-5xl text-[#1E272E] leading-tight">
+                From strategy to production, one dependable engineering flow
+              </h3>
+
+              <div>
+                <p className="text-lg text-[#1E272E]/82 md:text-2xl">
+                  Discover. Plan. Build. Scale. Each phase is tied to measurable business outcomes and technical quality.
+                </p>
+                <Link
+                  to="/services"
+                  className="mt-7 inline-flex items-center gap-2 bg-[#1E272E] px-5 py-2.5 text-[#F5F6FA] tracking-[0.14em] uppercase text-xs font-medium transition-colors hover:bg-[#0984E3]"
+                >
+                  Engineering Process
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="relative py-14">
+      <section className="relative py-14 md:py-16">
         <div className="container mx-auto px-4">
-          <div className="text-center max-w-4xl mx-auto mb-10">
-            <p className="text-[#1E272E]/70 tracking-[0.2em] text-xs uppercase">How We Deliver</p>
-            <h2 className="text-4xl md:text-6xl font-semibold text-[#1E272E] mt-3">Clear Engineering Execution</h2>
+          <div className="mx-auto mb-10 max-w-4xl text-center">
+            <p className="text-[#1E272E]/62 tracking-[0.24em] text-xs uppercase">How We Deliver</p>
+            <h2 className="mt-3 font-serif text-4xl md:text-6xl font-semibold text-[#1E272E]">Clear Engineering Execution</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            {processSteps.map((step, index) => (
-              <motion.div
-                key={step.title}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.08 }}
-                viewport={{ once: true }}
-                className="rounded-xl border border-[#1E272E]/10 bg-[#0984E3]/5 p-6"
-              >
-                <p className="text-[#0984E3] text-sm font-mono">{`0${index + 1}`}</p>
-                <h3 className="text-[#1E272E] text-2xl mt-2">{step.title}</h3>
-                <p className="text-[#1E272E]/70 mt-3 text-sm leading-relaxed">{step.description}</p>
-              </motion.div>
-            ))}
+
+          <div className="relative rounded-[34px] bg-[linear-gradient(155deg,rgba(255,255,255,0.62),rgba(236,245,253,0.42))] p-4 md:p-5">
+            <div className="pointer-events-none absolute -left-8 top-14 h-24 w-24 rounded-full bg-[#0984E3]/10 blur-2xl" />
+            <div className="pointer-events-none absolute right-10 top-8 h-20 w-20 rounded-full bg-[#00CEC9]/12 blur-2xl" />
+            <div className="pointer-events-none absolute left-[11%] right-[11%] top-[4.2rem] hidden h-[2px] bg-gradient-to-r from-[#0984E3]/45 via-[#4CA6EC]/45 to-[#00CEC9]/45 xl:block" />
+
+            <div className="relative grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+              {processSteps.map((step, index) => (
+                <motion.article
+                  key={step.title}
+                  initial={{ opacity: 0, y: 18 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.08 }}
+                  viewport={{ once: true }}
+                  className={[
+                    'group relative overflow-hidden rounded-[28px] bg-[linear-gradient(160deg,rgba(255,255,255,0.82),rgba(236,245,253,0.68))] p-6 shadow-[0_12px_28px_rgba(9,132,227,0.09)]',
+                    index % 2 === 1 ? 'md:translate-y-3' : '',
+                  ].join(' ')}
+                >
+                  <div className="pointer-events-none absolute -right-10 -top-10 h-24 w-24 rounded-full bg-[#0984E3]/10 blur-2xl transition-transform duration-500 group-hover:scale-110" />
+                  <div className="inline-flex items-center gap-2 rounded-full bg-white/86 px-2.5 py-1">
+                    <span className="inline-flex h-6 min-w-6 items-center justify-center rounded-full bg-[#ECF5FD] text-[#0984E3] text-xs font-semibold">
+                      {`0${index + 1}`}
+                    </span>
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-[#1E272E]/56">Step</span>
+                  </div>
+                  <h3 className="mt-4 text-[#1E272E] text-4xl font-serif leading-none">{step.title}</h3>
+                  <p className="text-[#1E272E]/72 mt-4 text-lg leading-relaxed">{step.description}</p>
+                  <div className="mt-5 h-[3px] w-full bg-[#1E272E]/10">
+                    <div
+                      className="h-full bg-[linear-gradient(90deg,#0984E3_0%,#00CEC9_100%)]"
+                      style={{ width: `${44 + index * 18}%` }}
+                    />
+                  </div>
+                </motion.article>
+              ))}
+            </div>
           </div>
         </div>
       </section>

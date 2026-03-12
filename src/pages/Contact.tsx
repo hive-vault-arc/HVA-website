@@ -10,8 +10,12 @@ type ContactStatus = {
   message: string;
 } | null;
 
-const CONTACT_EMAIL = 'hello@hiva.com';
-const CONTACT_PHONE = '+212600000000';
+const CONTACT_EMAILS = ['khalid.chelhi@outlook.fr', 'ali.amrani.dev@gmail.com'];
+const CONTACT_PHONES = [
+  { raw: '+212688270772', label: '+212688270772' },
+  { raw: '+212691918296', label: '+212 691-918296' },
+];
+const COMPANY_ADDRESS = 'AVENUE TARIK IBN ZIAD N 38 ETAGE 6 N 32 TANGER';
 
 const conversationStarters = [
   {
@@ -102,9 +106,9 @@ const Contact: React.FC = () => {
           message: 'Thank you. Your message was sent successfully.',
         });
       } else {
-        const subject = `[HIVA] ${formData.subject}`;
+        const subject = `[H.V.A] ${formData.subject}`;
         const body = [`Name: ${formData.name}`, `Email: ${formData.email}`, '', formData.message].join('\n');
-        const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        const mailto = `mailto:${CONTACT_EMAILS.join(',')}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         window.location.href = mailto;
 
         setStatus({
@@ -157,17 +161,23 @@ const Contact: React.FC = () => {
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">
                   <a
-                    href={`mailto:${CONTACT_EMAIL}`}
+                    href={`mailto:${CONTACT_EMAILS[0]}`}
                     className="inline-flex items-center gap-2 bg-[#0984E3] px-6 py-3 text-[#F5F6FA] transition-colors hover:bg-[#0776CC]"
                   >
                     Email Us
                     <Mail className="h-4 w-4" />
                   </a>
                   <a
-                    href={`tel:${CONTACT_PHONE}`}
+                    href={`tel:${CONTACT_PHONES[0].raw}`}
                     className="inline-flex items-center gap-2 bg-white/85 px-6 py-3 text-[#1E272E] shadow-[0_12px_26px_rgba(9,132,227,0.08)] transition-colors hover:bg-[#ECF5FD]"
                   >
-                    Call +212 600-000-000
+                    Call {CONTACT_PHONES[0].label}
+                  </a>
+                  <a
+                    href={`tel:${CONTACT_PHONES[1].raw}`}
+                    className="inline-flex items-center gap-2 bg-white/85 px-6 py-3 text-[#1E272E] shadow-[0_12px_26px_rgba(9,132,227,0.08)] transition-colors hover:bg-[#ECF5FD]"
+                  >
+                    Call {CONTACT_PHONES[1].label}
                   </a>
                 </div>
               </div>
@@ -200,17 +210,21 @@ const Contact: React.FC = () => {
                 >
                   <p className="text-xs uppercase tracking-[0.18em] text-[#1E272E]/58">Direct Channels</p>
                   <div className="mt-5 space-y-4">
-                    <a href={`mailto:${CONTACT_EMAIL}`} className="flex items-start gap-3 text-[#1E272E]/86 hover:text-[#1E272E]">
-                      <Mail className="mt-0.5 h-5 w-5 text-[#0984E3]" />
-                      <span>{CONTACT_EMAIL}</span>
-                    </a>
-                    <a href={`tel:${CONTACT_PHONE}`} className="flex items-start gap-3 text-[#1E272E]/86 hover:text-[#1E272E]">
-                      <Phone className="mt-0.5 h-5 w-5 text-[#0984E3]" />
-                      <span>+212 600-000-000</span>
-                    </a>
+                    {CONTACT_EMAILS.map((email) => (
+                      <a key={email} href={`mailto:${email}`} className="flex items-start gap-3 text-[#1E272E]/86 hover:text-[#1E272E]">
+                        <Mail className="mt-0.5 h-5 w-5 text-[#0984E3]" />
+                        <span>{email}</span>
+                      </a>
+                    ))}
+                    {CONTACT_PHONES.map((phone) => (
+                      <a key={phone.raw} href={`tel:${phone.raw}`} className="flex items-start gap-3 text-[#1E272E]/86 hover:text-[#1E272E]">
+                        <Phone className="mt-0.5 h-5 w-5 text-[#0984E3]" />
+                        <span>{phone.label}</span>
+                      </a>
+                    ))}
                     <div className="flex items-start gap-3 text-[#1E272E]/86">
                       <MapPin className="mt-0.5 h-5 w-5 text-[#0984E3]" />
-                      <span>Tangier, Morocco - Technopark</span>
+                      <span>{COMPANY_ADDRESS}</span>
                     </div>
                   </div>
 
@@ -276,7 +290,7 @@ const Contact: React.FC = () => {
                 className="bg-white/84 p-7 shadow-[0_16px_36px_rgba(9,132,227,0.1)] md:p-8"
               >
                 <p className="text-xs uppercase tracking-[0.18em] text-[#1E272E]/58">Project Intake</p>
-                <h2 className="mt-3 text-4xl font-semibold leading-tight md:text-5xl">Send Your Brief</h2>
+                <h2 className="mt-3 font-serif text-4xl font-semibold leading-[1.02] md:text-5xl">Send Your Brief</h2>
                 <p className="mt-3 max-w-2xl text-[#1E272E]/74">
                   Include your goal, current blockers, and timeline. We will respond with practical next steps.
                 </p>
@@ -375,7 +389,7 @@ const Contact: React.FC = () => {
               <div className="mb-5 flex items-center justify-between gap-4">
                 <div>
                   <p className="text-xs uppercase tracking-[0.18em] text-[#1E272E]/58">Location</p>
-                  <h2 className="mt-2 text-3xl font-semibold md:text-4xl">Find Us in Tangier</h2>
+                  <h2 className="mt-2 font-serif text-3xl font-semibold leading-[1.02] md:text-4xl">Find Us in Tanger</h2>
                 </div>
                 <span className="inline-flex items-center gap-2 bg-[#ECF5FD] px-3 py-1.5 text-xs uppercase tracking-[0.1em] text-[#0984E3]">
                   <Sparkles className="h-3.5 w-3.5" />
@@ -393,7 +407,7 @@ const Contact: React.FC = () => {
                     allowFullScreen
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
-                    title="HIVA location map"
+                    title="H.V.A location map"
                   />
                 ) : (
                   <div className="flex h-[420px] w-full items-center justify-center text-sm text-[#1E272E]/60">

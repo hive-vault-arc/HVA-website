@@ -11,18 +11,17 @@ import {
   Search,
   ShieldCheck,
   Target,
-  Users2,
   Workflow,
 } from 'lucide-react';
 import { useAnimationQuality } from '../lib/animationQuality';
 import PageAmbientBackground from '../components/PageAmbientBackground';
+import HeroCurvedShapes from '../components/HeroCurvedShapes';
 
 type TeamMember = {
   name: string;
+  tag: string;
   role: string;
-  bio: string;
-  focus: string;
-  initials: string;
+  image: string;
 };
 
 type Principle = {
@@ -39,33 +38,32 @@ type DeliveryStep = {
   checkpoints: string[];
 };
 
-const proofPoints = [
-  'Tangier, Morocco',
-  'Software & Cloud Engineering',
-  'AI-Ready Product Delivery',
+const proofPoints = ['Based in Morocco', 'Software & Cloud', 'Serving Worldwide'];
+
+const aboutHeroCurves = [
+  { label: 'Clarity', value: '01', height: 176, tone: 'violet' as const },
+  { label: 'Quality', value: '02', height: 222, tone: 'teal' as const },
+  { label: 'Scale', value: '03', height: 268, tone: 'blue' as const },
 ];
 
 const teamMembers: TeamMember[] = [
   {
     name: 'Khalid Chalhi',
+    tag: 'Architecture & Delivery',
     role: 'Co-Founder & Software Engineer',
-    bio: 'Computer science engineer focused on architecture, platform reliability, and delivery execution.',
-    focus: 'Architecture & Delivery',
-    initials: 'KC',
+    image: '/Images/khalid.webp',
   },
   {
     name: 'Ali Amrani',
+    tag: 'Product & Systems',
     role: 'Co-Founder & Full-Stack Engineer',
-    bio: 'Computer science engineer focused on product development, frontend systems, and API architecture.',
-    focus: 'Product & Systems',
-    initials: 'AA',
+    image: '/Images/ali.webp',
   },
   {
     name: 'Oubay Ghamat',
+    tag: 'Cloud & Scale',
     role: 'Co-Founder & Cloud Engineer',
-    bio: 'Computer science engineer focused on cloud infrastructure, deployment workflows, and scalability.',
-    focus: 'Cloud & Scale',
-    initials: 'OG',
+    image: '/Images/oubay.webp',
   },
 ];
 
@@ -82,8 +80,8 @@ const principles: Principle[] = [
   },
   {
     icon: <Globe2 className="h-5 w-5" />,
-    title: 'Regional + Global',
-    description: 'Grounded in Morocco and MENA delivery realities with global engineering standards.',
+    title: 'Morocco + Worldwide',
+    description: 'Based in Morocco and delivering for clients worldwide with global engineering standards.',
   },
 ];
 
@@ -143,14 +141,15 @@ const About: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55 }}
               style={{ y: heroLift }}
-              className="relative overflow-hidden rounded-[32px] border border-[#1E272E]/12 bg-[linear-gradient(135deg,rgba(255,255,255,0.85),rgba(236,245,253,0.74))] p-6 shadow-[0_20px_44px_rgba(9,132,227,0.1)] md:p-10"
+              className="relative py-5 md:py-8"
             >
-              <div className="pointer-events-none absolute -right-24 -top-16 h-48 w-48 rounded-full bg-[#0984E3]/12 blur-3xl" />
-              <div className="pointer-events-none absolute -left-16 bottom-0 h-56 w-56 rounded-full bg-[#00CEC9]/10 blur-3xl" />
-
-              <div className="relative z-10 grid grid-cols-1 gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+              <div className="pointer-events-none absolute -left-14 top-10 h-24 w-64 rounded-full bg-[#0984E3]/10 blur-3xl" />
+              <div className="pointer-events-none absolute right-[26%] top-1 h-28 w-72 rounded-full bg-[#00CEC9]/10 blur-3xl" />
+              <div className="pointer-events-none absolute left-0 right-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(9,132,227,0.45),transparent)]" />
+              <div className="pointer-events-none absolute left-0 right-0 bottom-0 h-px bg-[linear-gradient(90deg,transparent,rgba(0,206,201,0.4),transparent)]" />
+              <div className="relative z-10 grid grid-cols-1 gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:items-start">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.26em] text-[#1E272E]/60">About HIVA</p>
+                  <p className="text-xs uppercase tracking-[0.26em] text-[#1E272E]/60">About H.V.A</p>
                   <h1 className="mt-5 max-w-5xl font-serif text-5xl leading-[0.94] md:text-7xl">
                     Engineering clarity
                     <br />
@@ -159,7 +158,7 @@ const About: React.FC = () => {
                     <span className="text-[#0984E3]">products.</span>
                   </h1>
                   <p className="mt-7 max-w-3xl text-lg leading-relaxed text-[#1E272E]/78 md:text-xl">
-                    HIVA is a software and cloud engineering company focused on custom systems, AI-powered applications,
+                    H.V.A is a software and cloud engineering company focused on custom systems, AI-powered applications,
                     and production-ready digital platforms.
                   </p>
 
@@ -181,15 +180,16 @@ const About: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-6">
-                  <p className="max-w-lg text-xl leading-relaxed text-[#1E272E]/78">
-                    We design practical engineering systems so decision-making stays clear from discovery through scale.
+                <div className="relative flex flex-col gap-5 lg:pl-2">
+                  <div className="pointer-events-none absolute -left-10 top-6 h-20 w-20 rounded-full bg-[#0984E3]/12 blur-2xl" />
+                  <div className="pointer-events-none absolute right-0 top-0 h-24 w-24 rounded-full bg-[#00CEC9]/10 blur-2xl" />
+                  <p className="relative max-w-lg text-lg leading-relaxed text-[#1E272E]/78">
+                    Practical systems with clear decisions from discovery to scale.
                   </p>
-                  <div className="space-y-2.5">
+                  <div className="relative space-y-2">
                     {[
-                      'Architecture before implementation',
-                      'Incremental delivery with review checkpoints',
-                      'Long-term support and optimization planning',
+                      'Architecture first',
+                      'Incremental delivery + optimization',
                     ].map((line) => (
                       <div key={line} className="flex items-start gap-2.5 text-sm leading-relaxed text-[#1E272E]/82">
                         <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#0984E3]" />
@@ -198,22 +198,10 @@ const About: React.FC = () => {
                     ))}
                   </div>
 
-                  <div className="grid grid-cols-3 gap-3">
-                    {[
-                      { label: 'Clarity', className: 'h-24 bg-[linear-gradient(180deg,#E3F3FF_0%,#BFE3FF_100%)]' },
-                      { label: 'Quality', className: 'h-32 bg-[linear-gradient(180deg,#EAF7F6_0%,#C7F0E7_100%)]' },
-                      { label: 'Scale', className: 'h-40 bg-[linear-gradient(180deg,#ECF2FF_0%,#D2E3FF_100%)]' },
-                    ].map((pillar) => (
-                      <div key={pillar.label} className="flex flex-col justify-end">
-                        <div className={`rounded-t-[40px] rounded-b-xl px-3 py-3 ${pillar.className}`}>
-                          <p className="text-[11px] uppercase tracking-[0.12em] text-[#1E272E]/70">{pillar.label}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="flex flex-wrap gap-2">
+                  <HeroCurvedShapes items={aboutHeroCurves} badgeText="Operating Layer" />
+                  <div className="flex flex-wrap gap-2 pt-1">
                     {proofPoints.map((point) => (
-                      <span key={point} className="bg-white/78 px-3 py-1.5 text-xs tracking-[0.08em] text-[#1E272E]/76">
+                      <span key={point} className="rounded-full bg-white/62 px-3 py-1 text-[11px] tracking-[0.13em] text-[#1E272E]/70">
                         {point}
                       </span>
                     ))}
@@ -363,50 +351,59 @@ const About: React.FC = () => {
         </section>
 
         <section className="relative container mx-auto px-4 py-10 md:py-16">
-          <div className="mb-8 flex items-center justify-between gap-4">
-            <div className="inline-flex items-center gap-3">
-              <Users2 className="h-5 w-5 text-[#0984E3]" />
-              <h2 className="font-serif text-4xl leading-none md:text-5xl">Founding Team</h2>
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-[0.95fr_1.05fr] md:items-start">
+            <div>
+              <p className="text-xs font-semibold tracking-[0.08em] text-[#1E272E]/58">Our Team</p>
+              <h2 className="mt-3 max-w-xl text-4xl font-semibold leading-[1.05] md:text-6xl">
+                The People Behind
+                <br />
+                H.V.A
+              </h2>
             </div>
-            <p className="hidden max-w-lg text-right text-sm leading-relaxed text-[#1E272E]/66 md:block">
-              Three complementary engineering leaders aligned on architecture, product delivery, and cloud scale.
+            <p className="max-w-xl text-lg leading-relaxed text-[#1E272E]/68">
+              Our founding team blends architecture, product, and cloud engineering expertise to deliver systems that are
+              practical, resilient, and built for long-term growth.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-12">
-            {teamMembers.map((member, index) => (
-              <motion.article
-                key={member.name}
-                initial={{ opacity: 0, y: 18 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.4, delay: index * 0.06 }}
-                className={[
-                  'group relative overflow-hidden border border-[#1E272E]/12 bg-[linear-gradient(140deg,rgba(255,255,255,0.9),rgba(236,245,253,0.76))] p-6 shadow-[0_16px_34px_rgba(9,132,227,0.12)]',
-                  index === 0 ? 'xl:col-span-5 xl:mt-2' : '',
-                  index === 1 ? 'xl:col-span-4 xl:mt-10' : '',
-                  index === 2 ? 'xl:col-span-3 xl:mt-5' : '',
-                ].join(' ')}
-              >
-                <span className="pointer-events-none absolute right-3 top-2 text-[72px] font-semibold leading-none text-[#0984E3]/12 md:text-[88px]">
-                  {member.initials}
-                </span>
-                <div className="relative z-10">
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="inline-flex h-11 w-11 items-center justify-center bg-[#1E272E] text-sm font-semibold text-[#F5F6FA]">
-                      {member.initials}
-                    </div>
-                    <span className="bg-[#ECF5FD] px-2.5 py-1 text-[11px] uppercase tracking-[0.13em] text-[#0984E3]">
-                      {member.focus}
-                    </span>
+          <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {teamMembers.map((member, index) => {
+              const firstName = member.name.split(' ')[0] ?? member.name;
+              return (
+                <motion.article
+                  key={member.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.42, delay: index * 0.07 }}
+                  className="group"
+                >
+                  <div className="relative overflow-hidden rounded-t-[20px] bg-[#D7D8DE]">
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      loading="lazy"
+                      className="h-[360px] w-full object-cover grayscale transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-transparent via-white/70 to-white" />
                   </div>
-                  <h3 className="mt-5 text-3xl font-semibold leading-tight">{member.name}</h3>
-                  <p className="mt-2 text-sm tracking-[0.08em] text-[#0984E3]">{member.role}</p>
-                  <p className="mt-4 leading-relaxed text-[#1E272E]/75">{member.bio}</p>
-                  <div className="mt-5 h-px w-full bg-[linear-gradient(90deg,#0984E3_0%,#00CEC9_100%)] opacity-80" />
-                </div>
-              </motion.article>
-            ))}
+
+                  <div className="rounded-b-[20px] bg-white px-5 py-4 shadow-[0_10px_22px_rgba(30,39,46,0.08)]">
+                    <p className="text-sm text-[#1E272E]/56">{member.tag}</p>
+                    <h3 className="mt-1 font-serif text-[2rem] leading-none text-[#1E272E]">{member.name}</h3>
+                    <p className="mt-2 text-sm text-[#1E272E]/76">{member.role}</p>
+                  </div>
+
+                  <Link
+                    to="/contact"
+                    className="mx-auto mt-3 inline-flex items-center gap-2 rounded-full bg-[#10151A] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[#0984E3]"
+                  >
+                    <span className="h-2 w-2 rounded-full bg-[#58FFB3]" />
+                    {`Talk With ${firstName}`}
+                  </Link>
+                </motion.article>
+              );
+            })}
           </div>
         </section>
 

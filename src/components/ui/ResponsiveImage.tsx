@@ -56,7 +56,6 @@ const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
           className={imgClassName}
           loading={eager ? 'eager' : 'lazy'}
           decoding="async"
-          fetchPriority={eager ? 'high' : 'auto'}
           sizes={sizes}
           onLoad={() => setIsLoaded(true)}
           onError={(event) => {
