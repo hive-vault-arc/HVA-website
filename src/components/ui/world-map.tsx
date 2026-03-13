@@ -70,7 +70,7 @@ export function WorldMap({ dots = [], lineColor = "#0ea5e9" }: MapProps) {
 
   return (
     <div>
-    <div className="w-full aspect-[2/1] bg-[#F5F6FA] relative font-sans rounded-2xl border border-[#1E272E]/10">
+    <div className="sharp-edge w-full aspect-[2/1] bg-[#F5F6FA] relative font-sans rounded-2xl border border-[#1E272E]/10">
       <div 
         className="h-full w-full [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)] pointer-events-none select-none"
         dangerouslySetInnerHTML={{ __html: svgMap }}
@@ -184,7 +184,7 @@ export function WorldMap({ dots = [], lineColor = "#0ea5e9" }: MapProps) {
         ))}
       </svg>
     </div>
-    <div className="w-full bg-white/90 p-6 md:p-8 mt-6 rounded-xl border border-[#1E272E]/10">
+    <div className="sharp-edge w-full bg-white/90 p-6 md:p-8 mt-6 rounded-xl border border-[#1E272E]/10">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="space-y-2">
           <h3 className="text-lg font-semibold text-[#1E272E] flex items-center">

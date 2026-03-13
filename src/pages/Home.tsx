@@ -151,13 +151,13 @@ const Home: React.FC = () => {
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Link
             to="/portfolio"
-            className="px-8 py-4 bg-[#0984E3] text-[#F5F6FA] border border-[#0984E3] rounded-lg font-medium hover:bg-[#0776CC] transition-colors duration-300 text-lg"
+            className="sharp-edge px-8 py-4 bg-[#0984E3] text-[#F5F6FA] border border-[#0984E3] font-medium hover:bg-[#0776CC] transition-colors duration-300 text-lg"
           >
             View Our Work
           </Link>
           <Link
             to="/contact"
-            className="px-8 py-4 bg-white text-black border border-white rounded-lg font-medium hover:bg-[#ECF5FD] transition-colors duration-300 text-lg"
+            className="sharp-edge px-8 py-4 bg-white text-black border border-white font-medium hover:bg-[#ECF5FD] transition-colors duration-300 text-lg"
           >
             Book a Call
           </Link>
@@ -187,7 +187,7 @@ const Home: React.FC = () => {
 
       <section className="relative px-4 py-14 sm:px-6 lg:px-14 lg:py-20">
         <div className="container mx-auto relative z-10">
-          <div className="relative mb-10 rounded-2xl border border-[#1E272E]/15 bg-gradient-to-r from-white/[0.09] via-white/[0.05] to-white/[0.03] p-6 md:p-10 overflow-hidden">
+          <div className="sharp-edge relative mb-10 rounded-2xl border border-[#1E272E]/15 bg-gradient-to-r from-white/[0.09] via-white/[0.05] to-white/[0.03] p-6 md:p-10 overflow-hidden">
             <div className="pointer-events-none absolute -top-16 -right-16 h-48 w-48 rounded-full bg-[#0984E3]/20 blur-3xl" />
             <div className="pointer-events-none absolute -bottom-20 -left-16 h-52 w-52 rounded-full bg-indigo-500/20 blur-3xl" />
             <p className="text-[#0984E3] tracking-[0.24em] text-xs uppercase font-medium">Who We Are</p>
@@ -203,7 +203,7 @@ const Home: React.FC = () => {
               We engineer custom software systems, AI-powered applications, and cloud platforms with a focus on reliability,
               performance, and long-term maintainability.
             </p>
-            <div className="mt-6 inline-flex items-center rounded-full border border-[#0984E3]/30 bg-[#0984E3]/10 px-4 py-2 text-sm text-[#0984E3]">
+            <div className="sharp-edge mt-6 inline-flex items-center rounded-full border border-[#0984E3]/30 bg-[#0984E3]/10 px-4 py-2 text-sm text-[#0984E3]">
               Built for business outcomes, not just demos
             </div>
           </div>
@@ -213,7 +213,7 @@ const Home: React.FC = () => {
               'Scalable architecture from day one',
               'Quality, security, and maintainability by default',
             ].map((item) => (
-              <div key={item} className="rounded-xl border border-[#1E272E]/15 bg-[#0984E3]/[0.06] p-5 text-[#1E272E]/95 flex items-start gap-2 shadow-[0_0_0_1px_rgba(255,255,255,0.02)]">
+              <div key={item} className="sharp-edge rounded-xl border border-[#1E272E]/15 bg-[#0984E3]/[0.06] p-5 text-[#1E272E]/95 flex items-start gap-2 shadow-[0_0_0_1px_rgba(255,255,255,0.02)]">
                 <CheckCircle2 className="w-4 h-4 mt-1 text-[#0984E3] shrink-0" />
                 <span>{item}</span>
               </div>
@@ -377,7 +377,7 @@ const Home: React.FC = () => {
         />
       </div>
 
-      <section ref={worldMapSectionRef} className="w-full py-12 rounded-xl overflow-hidden">
+      <section ref={worldMapSectionRef} className="sharp-edge w-full py-12 rounded-xl overflow-hidden">
         {shouldLoadWorldMap ? (
           <Suspense fallback={<div className="h-[360px] w-full bg-[#ECF5FD]" aria-hidden="true" />}>
             <WorldMapDemo />
@@ -389,7 +389,7 @@ const Home: React.FC = () => {
 
       <section className="relative py-12 mb-10">
         <div className="container mx-auto px-4 text-center">
-          <div className="max-w-4xl mx-auto rounded-2xl border border-[#1E272E]/10 bg-gradient-to-r from-white/10 to-white/5 p-8 md:p-12">
+          <div className="sharp-edge max-w-4xl mx-auto rounded-2xl border border-[#1E272E]/10 bg-gradient-to-r from-white/10 to-white/5 p-8 md:p-12">
             <h2 className="text-3xl md:text-5xl text-[#1E272E] font-semibold">Ready to Build What’s Next?</h2>
             <p className="text-[#1E272E]/75 mt-4 max-w-2xl mx-auto">
               Share your goals and constraints. We will propose a focused execution plan for your product.
@@ -397,14 +397,14 @@ const Home: React.FC = () => {
             <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
               <Link
                 to="/contact"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black rounded-lg font-medium hover:bg-[#ECF5FD] transition-colors duration-300"
+                className="sharp-edge inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black rounded-lg font-medium hover:bg-[#ECF5FD] transition-colors duration-300"
               >
                 Book a Call
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 to="/services"
-                className="inline-flex items-center justify-center px-8 py-4 bg-[#0984E3]/10 text-[#1E272E] border border-[#1E272E]/20 rounded-lg font-medium hover:bg-[#0984E3]/20 transition-colors duration-300"
+                className="sharp-edge inline-flex items-center justify-center px-8 py-4 bg-[#0984E3]/10 text-[#1E272E] border border-[#1E272E]/20 rounded-lg font-medium hover:bg-[#0984E3]/20 transition-colors duration-300"
               >
                 Explore Services
               </Link>

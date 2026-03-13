@@ -211,7 +211,7 @@ const Contact: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.4, delay: 0.05 }}
-                className="relative overflow-hidden rounded-[42px] bg-[linear-gradient(150deg,rgba(255,255,255,0.62),rgba(236,245,253,0.38))] p-7 shadow-[0_16px_36px_rgba(9,132,227,0.1)] md:p-8"
+                className="sharp-edge relative overflow-hidden rounded-[42px] bg-[linear-gradient(150deg,rgba(255,255,255,0.62),rgba(236,245,253,0.38))] p-7 shadow-[0_16px_36px_rgba(9,132,227,0.1)] md:p-8"
               >
                 <div className="pointer-events-none absolute -left-10 top-6 h-24 w-24 rounded-full bg-[#0984E3]/12 blur-2xl" />
                 <div className="pointer-events-none absolute right-0 top-0 h-24 w-24 rounded-full bg-[#00CEC9]/12 blur-2xl" />
@@ -231,7 +231,7 @@ const Contact: React.FC = () => {
                         type="text"
                         value={formData.name}
                         onChange={handleChange}
-                        className="w-full rounded-2xl bg-white/80 px-4 py-3 text-[#1E272E] placeholder:text-[#1E272E]/40 focus:outline-none focus:ring-2 focus:ring-[#0984E3]/25"
+                        className="sharp-edge w-full rounded-2xl bg-white/80 px-4 py-3 text-[#1E272E] placeholder:text-[#1E272E]/40 focus:outline-none focus:ring-2 focus:ring-[#0984E3]/25"
                         required
                       />
                     </div>
@@ -245,7 +245,7 @@ const Contact: React.FC = () => {
                         type="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className="w-full rounded-2xl bg-white/80 px-4 py-3 text-[#1E272E] placeholder:text-[#1E272E]/40 focus:outline-none focus:ring-2 focus:ring-[#0984E3]/25"
+                        className="sharp-edge w-full rounded-2xl bg-white/80 px-4 py-3 text-[#1E272E] placeholder:text-[#1E272E]/40 focus:outline-none focus:ring-2 focus:ring-[#0984E3]/25"
                         required
                       />
                     </div>
@@ -261,7 +261,7 @@ const Contact: React.FC = () => {
                       rows={6}
                       value={formData.message}
                       onChange={handleChange}
-                      className="w-full rounded-[22px] bg-white/80 px-4 py-3 text-[#1E272E] placeholder:text-[#1E272E]/40 focus:outline-none focus:ring-2 focus:ring-[#0984E3]/25"
+                      className="sharp-edge w-full rounded-[22px] bg-white/80 px-4 py-3 text-[#1E272E] placeholder:text-[#1E272E]/40 focus:outline-none focus:ring-2 focus:ring-[#0984E3]/25"
                       required
                     />
                   </div>
@@ -269,7 +269,7 @@ const Contact: React.FC = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#0984E3] px-6 py-3 font-medium text-[#F5F6FA] transition-colors hover:bg-[#0776CC] disabled:cursor-not-allowed disabled:opacity-70"
+                    className="sharp-edge inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#0984E3] px-6 py-3 font-medium text-[#F5F6FA] transition-colors hover:bg-[#0776CC] disabled:cursor-not-allowed disabled:opacity-70"
                   >
                     {isSubmitting ? 'Sending...' : 'Send Message'}
                     <Send className="h-4 w-4" />

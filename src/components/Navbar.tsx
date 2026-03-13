@@ -28,7 +28,7 @@ const Navbar: React.FC = () => {
   ];
 
   return (
-    <header className="fixed top-2 left-1/2 -translate-x-1/2 w-[90%] max-w-6xl z-50">
+    <header className="navbar-sharp fixed top-2 left-1/2 -translate-x-1/2 w-[90%] max-w-6xl z-50">
       <nav 
         className={`transition-all duration-300 ${
           isScrolled ? 'py-2' : 'py-4'

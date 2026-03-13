@@ -16,10 +16,28 @@ type HeroCurvedShapesProps = {
   className?: string;
 };
 
-const tones: Record<NonNullable<HeroCurvedShapeItem['tone']>, { top: string; bottom: string }> = {
-  blue: { top: 'rgba(83, 164, 255, 0.14)', bottom: 'rgba(52, 121, 212, 0.82)' },
-  teal: { top: 'rgba(103, 237, 231, 0.12)', bottom: 'rgba(21, 166, 162, 0.74)' },
-  violet: { top: 'rgba(173, 129, 255, 0.13)', bottom: 'rgba(117, 84, 221, 0.78)' },
+const tones: Record<
+  NonNullable<HeroCurvedShapeItem['tone']>,
+  { start: string; mid: string; bottom: string; glow: string }
+> = {
+  blue: {
+    start: 'rgba(83, 164, 255, 0)',
+    mid: 'rgba(83, 164, 255, 0.24)',
+    bottom: 'rgba(52, 121, 212, 0.82)',
+    glow: 'rgba(167, 215, 255, 0.22)',
+  },
+  teal: {
+    start: 'rgba(103, 237, 231, 0)',
+    mid: 'rgba(103, 237, 231, 0.22)',
+    bottom: 'rgba(21, 166, 162, 0.74)',
+    glow: 'rgba(167, 248, 238, 0.2)',
+  },
+  violet: {
+    start: 'rgba(173, 129, 255, 0)',
+    mid: 'rgba(173, 129, 255, 0.24)',
+    bottom: 'rgba(117, 84, 221, 0.78)',
+    glow: 'rgba(206, 182, 255, 0.2)',
+  },
 };
 
 const HeroCurvedShapes: React.FC<HeroCurvedShapesProps> = ({ items, badgeText, className }) => {
@@ -46,16 +64,21 @@ const HeroCurvedShapes: React.FC<HeroCurvedShapesProps> = ({ items, badgeText, c
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, delay: 0.08 * index }}
               className="relative overflow-hidden rounded-[999px] shadow-[0_20px_34px_rgba(9,132,227,0.16)]"
-              style={{ height: item.height, width: item.width ?? 106 }}
+              style={{
+                height: item.height,
+                width: item.width ?? 106,
+                maskImage: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.48) 22%, black 44%, black 100%)',
+                WebkitMaskImage:
+                  'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.48) 22%, black 44%, black 100%)',
+              }}
             >
               <div
                 className="absolute inset-0"
                 style={{
-                  background: `linear-gradient(180deg, ${tone.top} 0%, ${tone.bottom} 100%)`,
+                  background: `linear-gradient(180deg, ${tone.start} 0%, ${tone.mid} 35%, ${tone.bottom} 100%)`,
                 }}
               />
-              <div className="absolute left-1/2 top-4 h-9 w-9 -translate-x-1/2 rounded-full bg-white/18 blur-[1px]" />
-              <div className="absolute inset-x-0 top-0 h-[48%] bg-gradient-to-b from-[#F5F6FA] via-[#F5F6FA]/90 to-transparent" />
+              <div className="absolute left-1/2 top-4 h-9 w-9 -translate-x-1/2 rounded-full blur-[1px]" style={{ backgroundColor: tone.glow }} />
               <div className="absolute inset-x-2 bottom-2 h-[32%] rounded-[999px] bg-black/8 blur-sm" />
               <div className="absolute inset-x-4 bottom-4">
                 <p className="text-[10px] uppercase tracking-[0.16em] text-white/82">{item.label}</p>
@@ -66,7 +89,7 @@ const HeroCurvedShapes: React.FC<HeroCurvedShapesProps> = ({ items, badgeText, c
         })}
       </div>
 
-      <div className="pointer-events-none absolute inset-x-1 top-0 z-30 h-16 rounded-full bg-gradient-to-b from-[#F5F6FA]/88 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-1 top-0 z-30 h-16 rounded-full bg-gradient-to-b from-[#0984E3]/18 via-[#4CA6EC]/8 to-transparent" />
     </div>
   );
 };
