@@ -17,13 +17,6 @@
   --color-cyan: #00CEC9;
 }
 
-body {
-  font-family: var(--font-sans);
-  background-color: var(--color-white) !important;
-  color: var(--color-black);
-  overflow-x: hidden;
-}
-
 .font-serif {
   font-family: var(--font-serif);
   letter-spacing: -0.01em;
@@ -162,7 +155,7 @@ body {
     --chart-3: 204 21% 15%;
     --chart-4: 206 70% 58%;
     --chart-5: 177 72% 48%;
-    --radius: 0rem;
+    --radius: 0.5rem;
   }
   .dark {
     --background: 0 0% 3.9%;
@@ -192,26 +185,26 @@ body {
   }
 }
 
-/* Timeless sharp-edge visual language across all pages/components */
 @layer base {
-  :where(button, a, input, textarea, select) {
-    border-radius: 0 !important;
+  html {
+    scroll-behavior: smooth;
   }
-}
 
-@layer utilities {
-  [class*="rounded"] {
-    border-radius: 0 !important;
-  }
-}
-
-
-
-@layer base {
   * {
     @apply border-border;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    backface-visibility: hidden;
   }
+
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+
+  section {
+    position: relative;
   }
 }

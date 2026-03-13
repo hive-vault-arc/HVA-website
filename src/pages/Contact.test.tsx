@@ -26,7 +26,6 @@ describe('Contact form', () => {
 
     fireEvent.change(screen.getByLabelText('Name'), { target: { value: 'Khalid' } });
     fireEvent.change(screen.getByLabelText('Email'), { target: { value: 'khalid@example.com' } });
-    fireEvent.change(screen.getByLabelText('Subject'), { target: { value: 'Project inquiry' } });
     fireEvent.change(screen.getByLabelText('Message'), { target: { value: 'Need a platform build.' } });
 
     fireEvent.click(screen.getByRole('button', { name: /send message/i }));

@@ -1,50 +1,72 @@
 import { useRef, useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
-import DottedMap from "dotted-map";
 import { MapPin, Phone, Mail, Twitter, Linkedin, Github } from "lucide-react";
+import type { WorldMapDot } from "../../data/worldMapDots";
 
 interface MapProps {
-  dots?: Array<{
-    start: { lat: number; lng: number; label?: string };
-    end: { lat: number; lng: number; label?: string };
-  }>;
+  dots?: WorldMapDot[];
   lineColor?: string;
 }
 
-export function WorldMap({
-  dots = [],
-  lineColor = "#0ea5e9",
-}: MapProps) {
-  const svgRef = useRef<SVGSVGElement>(null);
-  const map = useMemo(() => new DottedMap({ height: 100, grid: "diagonal" }), []);
+const projectPoint = (lat: number, lng: number) => {
+  const x = (lng + 180) * (800 / 360);
+  const y = (90 - lat) * (400 / 180);
+  return { x, y };
+};
 
+const createCurvedPath = (
+  start: { x: number; y: number },
+  end: { x: number; y: number }
+) => {
+  const midX = (start.x + end.x) / 2;
+  const midY = Math.min(start.y, end.y) - 50;
+  return `M ${start.x} ${start.y} Q ${midX} ${midY} ${end.x} ${end.y}`;
+};
+
+export function WorldMap({ dots = [], lineColor = "#0ea5e9" }: MapProps) {
+  const svgRef = useRef<SVGSVGElement>(null);
   const [svgMap, setSvgMap] = useState("");
 
   useEffect(() => {
-    const isDark = document.documentElement.classList.contains('dark');
-    const mapSvg = map.getSVG({
-      radius: 0.22,
-      color: isDark ? "#FFFFFF40" : "#00000040",
-      shape: "circle",
-      backgroundColor: "white",
-    });
-    setSvgMap(mapSvg);
-  }, [map]);
+    let isMounted = true;
 
-  const projectPoint = (lat: number, lng: number) => {
-    const x = (lng + 180) * (800 / 360);
-    const y = (90 - lat) * (400 / 180);
-    return { x, y };
-  };
+    const loadDottedMap = async () => {
+      const { default: DottedMap } = await import("dotted-map");
+      if (!isMounted) return;
 
-  const createCurvedPath = (
-    start: { x: number; y: number },
-    end: { x: number; y: number }
-  ) => {
-    const midX = (start.x + end.x) / 2;
-    const midY = Math.min(start.y, end.y) - 50;
-    return `M ${start.x} ${start.y} Q ${midX} ${midY} ${end.x} ${end.y}`;
-  };
+      const isDark = document.documentElement.classList.contains("dark");
+      const dottedMap = new DottedMap({ height: 100, grid: "diagonal" });
+      const mapSvg = dottedMap.getSVG({
+        radius: 0.22,
+        color: isDark ? "#FFFFFF40" : "#00000040",
+        shape: "circle",
+        backgroundColor: "white",
+      });
+
+      if (isMounted) {
+        setSvgMap(mapSvg);
+      }
+    };
+
+    loadDottedMap();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const projectedDots = useMemo(
+    () =>
+      dots.map((dot) => {
+        const startPoint = projectPoint(dot.start.lat, dot.start.lng);
+        const endPoint = projectPoint(dot.end.lat, dot.end.lng);
+        return {
+          startPoint,
+          endPoint,
+          path: createCurvedPath(startPoint, endPoint),
+        };
+      }),
+    [dots]
+  );
 
   return (
     <div>
@@ -58,13 +80,11 @@ export function WorldMap({
         viewBox="0 0 800 400"
         className="w-full h-full absolute inset-0 pointer-events-none select-none"
       >
-        {dots.map((dot, i) => {
-          const startPoint = projectPoint(dot.start.lat, dot.start.lng);
-          const endPoint = projectPoint(dot.end.lat, dot.end.lng);
+        {projectedDots.map((dot, i) => {
           return (
             <g key={`path-group-${i}`}>
               <motion.path
-                d={createCurvedPath(startPoint, endPoint)}
+                d={dot.path}
                 fill="none"
                 stroke="url(#path-gradient)"
                 strokeWidth="1"
@@ -94,18 +114,18 @@ export function WorldMap({
           </linearGradient>
         </defs>
 
-        {dots.map((dot, i) => (
+        {projectedDots.map((dot, i) => (
           <g key={`points-group-${i}`}>
             <g key={`start-${i}`}>
               <circle
-                cx={projectPoint(dot.start.lat, dot.start.lng).x}
-                cy={projectPoint(dot.start.lat, dot.start.lng).y}
+                cx={dot.startPoint.x}
+                cy={dot.startPoint.y}
                 r="2"
                 fill={lineColor}
               />
               <circle
-                cx={projectPoint(dot.start.lat, dot.start.lng).x}
-                cy={projectPoint(dot.start.lat, dot.start.lng).y}
+                cx={dot.startPoint.x}
+                cy={dot.startPoint.y}
                 r="2"
                 fill={lineColor}
                 opacity="0.5"
@@ -130,14 +150,14 @@ export function WorldMap({
             </g>
             <g key={`end-${i}`}>
               <circle
-                cx={projectPoint(dot.end.lat, dot.end.lng).x}
-                cy={projectPoint(dot.end.lat, dot.end.lng).y}
+                cx={dot.endPoint.x}
+                cy={dot.endPoint.y}
                 r="2"
                 fill={lineColor}
               />
               <circle
-                cx={projectPoint(dot.end.lat, dot.end.lng).x}
-                cy={projectPoint(dot.end.lat, dot.end.lng).y}
+                cx={dot.endPoint.x}
+                cy={dot.endPoint.y}
                 r="2"
                 fill={lineColor}
                 opacity="0.5"

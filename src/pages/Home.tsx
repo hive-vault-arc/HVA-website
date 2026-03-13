@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -8,13 +8,20 @@ import LogoLoop from '../components/LogoItem';
 import { FullScreenScrollFX } from '../components/ui/full-screen-scroll-fx';
 import { useAnimationQuality } from '../lib/animationQuality';
 import {
+  SiAndroid,
   SiAmazonwebservices,
+  SiCplusplus,
   SiDocker,
   SiFirebase,
+  SiFlutter,
   SiGithub,
   SiGoogle,
   SiNextdotjs,
+  SiOpenjdk,
+  SiPostgresql,
+  SiPython,
   SiReact,
+  SiTensorflow,
 } from 'react-icons/si';
 
 const WorldMapDemo = lazy(() =>
@@ -24,6 +31,32 @@ const WorldMapDemo = lazy(() =>
 const Home: React.FC = () => {
   const { tier, motionReduced } = useAnimationQuality();
   const showAdvancedEffects = tier === 'high' && !motionReduced;
+  const worldMapSectionRef = useRef<HTMLElement | null>(null);
+  const [shouldLoadWorldMap, setShouldLoadWorldMap] = useState(false);
+
+  useEffect(() => {
+    if (shouldLoadWorldMap) return;
+
+    const section = worldMapSectionRef.current;
+    if (!section || typeof IntersectionObserver === 'undefined') {
+      setShouldLoadWorldMap(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry?.isIntersecting) {
+          setShouldLoadWorldMap(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '320px 0px', threshold: 0.01 }
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, [shouldLoadWorldMap]);
 
   const processSteps = [
     {
@@ -52,6 +85,13 @@ const Home: React.FC = () => {
     { node: <SiFirebase />, title: 'Firebase', href: 'https://firebase.google.com' },
     { node: <SiGoogle />, title: 'Google', href: 'https://www.google.com' },
     { node: <SiGithub />, title: 'GitHub', href: 'https://www.github.com' },
+    { node: <SiPython />, title: 'Python', href: 'https://www.python.org' },
+    { node: <SiFlutter />, title: 'Flutter', href: 'https://flutter.dev' },
+    { node: <SiTensorflow />, title: 'AI', href: 'https://www.tensorflow.org' },
+    { node: <SiAndroid />, title: 'Mobile App', href: 'https://developer.android.com' },
+    { node: <SiPostgresql />, title: 'Postgres', href: 'https://www.postgresql.org' },
+    { node: <SiCplusplus />, title: 'C++', href: 'https://isocpp.org' },
+    { node: <SiOpenjdk />, title: 'Java', href: 'https://openjdk.org' },
   ];
 
   const sections = [
@@ -337,10 +377,14 @@ const Home: React.FC = () => {
         />
       </div>
 
-      <section className="w-full py-12 rounded-xl overflow-hidden">
-        <Suspense fallback={<div className="h-[360px] w-full bg-[#ECF5FD]" aria-hidden="true" />}>
-          <WorldMapDemo />
-        </Suspense>
+      <section ref={worldMapSectionRef} className="w-full py-12 rounded-xl overflow-hidden">
+        {shouldLoadWorldMap ? (
+          <Suspense fallback={<div className="h-[360px] w-full bg-[#ECF5FD]" aria-hidden="true" />}>
+            <WorldMapDemo />
+          </Suspense>
+        ) : (
+          <div className="h-[360px] w-full bg-[#ECF5FD]" aria-hidden="true" />
+        )}
       </section>
 
       <section className="relative py-12 mb-10">

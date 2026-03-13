@@ -1,33 +1,53 @@
-# WEBAgency
+# H.V.A Website
 
-A modern digital agency website built with React, Tailwind CSS, and featuring interactive 3D animations.
+Marketing website for **H.V.A** built with **Vite + React + TypeScript + Tailwind CSS**.
 
-## Project Description
+## Features
 
-This project is a frontend application for a digital agency, designed to showcase services, portfolio, and contact information with a visually appealing interface, including:
+- Multi-page SPA with lazy-loaded routes (`Home`, `About`, `Services`, `Portfolio`, `Contact`)
+- Motion-rich UI using `framer-motion`, `gsap`, and WebGL-based visuals
+- Optimized technology stack and world-map sections with deferred loading
+- Contact form flow with optional API endpoint support via `VITE_CONTACT_API_URL`
+- Favicon + manifest setup for modern browser/device compatibility
 
-- Responsive design with Tailwind CSS
-- Interactive 3D background animations using Three.js
-- Scroll-based animations with AOS
-- Modern UI components
+## Tech Stack
 
-## Setup Instructions
+- React 18
+- TypeScript
+- Vite
+- Tailwind CSS
+- React Router
+- Vitest + Testing Library
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/kahliidc3/WEBAgency.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd WEBAgency
-   ```
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-4. Start the development server:
-   ```bash
-   npm run dev
-   ```
+## Getting Started
 
-The application should now be running at `http://localhost:5173/`. 
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Run the development server:
+
+```bash
+npm run dev
+```
+
+3. Open:
+
+```text
+http://localhost:5173
+```
+
+## Available Scripts
+
+- `npm run dev` - Start local development server
+- `npm run build` - Production build
+- `npm run preview` - Preview production build locally
+- `npm run lint` - Run ESLint
+- `npm run test` - Run test suite
+
+## Environment Variables
+
+- `VITE_CONTACT_API_URL` (optional): if set, contact form submits JSON to this endpoint; otherwise it falls back to `mailto:`.
+
