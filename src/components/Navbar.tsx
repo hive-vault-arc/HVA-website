@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
+import Logo from './Logo';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -43,14 +44,7 @@ const Navbar: React.FC = () => {
             }`}
           >
             {/* Logo */}
-            <Link to="/" className="flex-shrink-0 flex flex-col leading-none">
-              <span className="font-headline text-2xl font-semibold tracking-tight text-[#0F172A]">
-                HIVE
-              </span>
-              <span className="font-label text-[9px] font-bold tracking-[0.28em] uppercase text-[#475569] mt-0.5">
-                VAULT ARC
-              </span>
-            </Link>
+            <Logo />
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-1">

@@ -406,7 +406,7 @@ const Home: React.FC = () => {
                 {sections.map((section) => (
                   <article key={String(section.leftLabel)} className="rounded-lg border border-[#1E272E]/12 bg-[#F5F6FA] p-3">
                     <div className="aspect-[16/10] overflow-hidden rounded-md border border-[#1E272E]/10">
-                      <img src={section.background} alt={String(section.title)} className="h-full w-full object-cover" loading="lazy" />
+                      <img src={section.background} alt={section.title} className="h-full w-full object-cover" loading="lazy" />
                     </div>
                     <h3 className="mt-3 text-xl font-semibold text-[#1E272E]">{section.title}</h3>
                     <p className="text-sm text-[#1E272E]/72 mt-1">{section.leftLabel}</p>
