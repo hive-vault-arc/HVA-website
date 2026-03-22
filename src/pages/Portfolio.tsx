@@ -131,7 +131,8 @@ const Portfolio: React.FC = () => {
                   alt="Smart WhatsApp AI Assistant"
                   src="/Images/aiagent.webp"
                   className="relative w-full h-[500px] object-cover shadow-lg"
-                  loading="eager"
+                  loading="lazy"
+                  decoding="async"
                 />
                 {/* Floating info card */}
                 <div className="absolute -bottom-4 -right-4 w-52 bg-white p-6 shadow-xl hidden md:block">
@@ -253,6 +254,7 @@ const Portfolio: React.FC = () => {
                     src="/Images/CRM.webp"
                     className="w-full h-[500px] object-cover shadow-2xl"
                     loading="lazy"
+                    decoding="async"
                   />
                   {/* Floating header card — blue */}
                   <div className="absolute -top-4 -left-4 bg-[#2563EB] text-white p-8 hidden md:block">

@@ -187,6 +187,9 @@ const About: React.FC = () => {
                     src="/Images/abouthead.webp"
                     alt="H.V.A engineering precision"
                     className="object-cover w-full h-full"
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
                   />
                   {/* Asymmetric overlay card — inside image container */}
                   <div className="absolute top-0 left-0 p-7 bg-white shadow-xl max-w-[220px] hidden md:block">
@@ -397,6 +400,7 @@ const About: React.FC = () => {
                         src={member.image}
                         alt={member.name}
                         loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-700"
                       />
                     </div>

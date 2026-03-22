@@ -11,9 +11,13 @@
     <meta name="msapplication-TileColor" content="#F5F6FA" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>H.V.A</title>
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital,wght@0,400;1,400&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- Preconnect to Google Fonts (fonts are loaded via index.css) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Preload LCP hero image -->
+    <link rel="preload" as="image" href="/Images/hero.webp" fetchpriority="high" />
   </head>
   <body>
     <div id="root"></div>

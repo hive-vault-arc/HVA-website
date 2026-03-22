@@ -21,7 +21,9 @@ export default function EngineeringExcellence() {
         <img
           src='/Images/dashboard3.jpg'
           alt="Code example"
-          className="mx-auto rounded-2xl object-contain h-full w-full "
+          className="mx-auto rounded-2xl object-contain h-full w-full"
+          loading="lazy"
+          decoding="async"
           draggable={false}
         />
       </ContainerScroll>

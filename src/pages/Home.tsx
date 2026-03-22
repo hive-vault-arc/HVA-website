@@ -32,6 +32,7 @@ const Home: React.FC = () => {
   const showAdvancedEffects = tier === 'high' && !motionReduced;
   const worldMapSectionRef = useRef<HTMLElement | null>(null);
   const [shouldLoadWorldMap, setShouldLoadWorldMap] = useState(false);
+  const [bgReady, setBgReady] = useState(false);
 
   useEffect(() => {
     if (shouldLoadWorldMap) return;
@@ -56,6 +57,12 @@ const Home: React.FC = () => {
     observer.observe(section);
     return () => observer.disconnect();
   }, [shouldLoadWorldMap]);
+
+  // Defer WebGL background until after first paint so UI renders immediately
+  useEffect(() => {
+    const id = requestIdleCallback(() => setBgReady(true), { timeout: 2000 });
+    return () => cancelIdleCallback(id);
+  }, []);
 
   const processSteps = [
     {
@@ -122,7 +129,7 @@ const Home: React.FC = () => {
 
   return (
     <div className="h-full">
-      {showAdvancedEffects && (
+      {bgReady && showAdvancedEffects && (
         <Background3d
           color="#0984E3"
           speed={0.6}
@@ -186,6 +193,9 @@ const Home: React.FC = () => {
                   src="/Images/hero.webp"
                   alt="Precision software engineering"
                   className="w-full h-full object-cover hero-image-animate"
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
                 />
               </div>
               {/* Asymmetric floating card */}
