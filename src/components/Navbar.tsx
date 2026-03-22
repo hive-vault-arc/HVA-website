@@ -43,9 +43,12 @@ const Navbar: React.FC = () => {
             }`}
           >
             {/* Logo */}
-            <Link to="/" className="flex-shrink-0">
-              <span className="text-2xl font-light tracking-tight text-[#1E272E] font-serif">
-                H.V.A
+            <Link to="/" className="flex-shrink-0 flex flex-col leading-none">
+              <span className="font-headline text-2xl font-semibold tracking-tight text-[#0F172A]">
+                HIVE
+              </span>
+              <span className="font-label text-[9px] font-bold tracking-[0.28em] uppercase text-[#475569] mt-0.5">
+                VAULT ARC
               </span>
             </Link>
 

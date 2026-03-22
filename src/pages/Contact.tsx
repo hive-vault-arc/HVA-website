@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { ArrowUpRight, Mail, MapPin, Phone, Send } from 'lucide-react';
+import { ArrowRight, Mail, MapPin, Phone } from 'lucide-react';
 import { MotionConfig, motion, useScroll, useTransform } from 'framer-motion';
 import { useAnimationQuality } from '../lib/animationQuality';
-import PageAmbientBackground from '../components/PageAmbientBackground';
 
 type ContactStatus = {
   type: 'success' | 'error';
@@ -11,79 +10,47 @@ type ContactStatus = {
 
 const CONTACT_EMAILS = ['khalid.chelhi@outlook.fr', 'ali.amrani.dev@gmail.com'];
 const CONTACT_PHONES = [
-  { raw: '+212688270772', label: '+212688270772' },
-  { raw: '+212691918296', label: '+212 691-918296' },
+  { raw: '+212688270772', label: '+212 688 270 772' },
+  { raw: '+212691918296', label: '+212 691 918 296' },
 ];
-const COMPANY_ADDRESS = 'AVENUE TARIK IBN ZIAD N 38 ETAGE 6 N 32 TANGER';
-const MAP_QUERY = encodeURIComponent(COMPANY_ADDRESS);
-const MAP_LINK = `https://www.google.com/maps/search/?api=1&query=${MAP_QUERY}`;
 
 const Contact: React.FC = () => {
   const { motionReduced } = useAnimationQuality();
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const heroShift = useTransform(scrollYProgress, [0, 0.35], [0, 30]);
 
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState<ContactStatus>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setStatus(null);
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setStatus(null);
-
     try {
       const endpoint = (import.meta.env.VITE_CONTACT_API_URL as string | undefined)?.trim();
-      const payload = {
-        ...formData,
-        subject: 'Project Inquiry',
-      };
-
+      const payload = { ...formData, subject: 'Project Inquiry' };
       if (endpoint) {
         const response = await fetch(endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
         });
-
-        if (!response.ok) {
-          throw new Error(`Submission failed with status ${response.status}`);
-        }
-
-        setStatus({
-          type: 'success',
-          message: 'Thank you. Your message was sent successfully.',
-        });
+        if (!response.ok) throw new Error(`Submission failed with status ${response.status}`);
+        setStatus({ type: 'success', message: 'Thank you. Your message was sent successfully.' });
       } else {
         const subject = '[H.V.A] Project Inquiry';
         const body = [`Name: ${formData.name}`, `Email: ${formData.email}`, '', formData.message].join('\n');
         const mailto = `mailto:${CONTACT_EMAILS.join(',')}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        window.location.href = mailto;
-
-        setStatus({
-          type: 'success',
-          message: 'Your email client was opened. Please send the drafted message.',
-        });
+        globalThis.location.href = mailto;
+        setStatus({ type: 'success', message: 'Your email client was opened. Please send the drafted message.' });
       }
-
-      setFormData({
-        name: '',
-        email: '',
-        message: '',
-      });
+      setFormData({ name: '', email: '', message: '' });
     } catch {
       setStatus({
         type: 'error',
@@ -96,133 +63,133 @@ const Contact: React.FC = () => {
 
   return (
     <MotionConfig reducedMotion={motionReduced ? 'always' : 'never'}>
-      <div className="relative isolate min-h-screen overflow-hidden bg-[#F5F6FA] text-[#1E272E]">
+      <div className="relative min-h-screen bg-[#F8FAFC] text-[#0F172A]">
+
+        {/* Scroll progress bar */}
         <motion.div
           aria-hidden="true"
-          className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-gradient-to-r from-[#0984E3] via-[#4CA6EC] to-[#00CEC9]"
+          className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-gradient-to-r from-[#2563EB] via-[#3b82f6] to-[#60a5fa]"
           style={{ scaleX: progressScale }}
         />
-        <PageAmbientBackground className="-z-10" />
 
-        <section className="relative pb-12 pt-32 md:pb-14 md:pt-40">
-          <div className="container mx-auto px-4">
+        {/* ── Hero ─────────────────────────────────────────────────────── */}
+        <section className="relative pt-36 pb-20 px-8 max-w-7xl mx-auto">
+          <motion.div
+            className="max-w-3xl"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55 }}
+          >
+            <h1 className="text-6xl md:text-7xl font-headline tracking-tight text-[#0F172A] mb-8 leading-[1.1]">
+              Let's build your next system.
+            </h1>
+            <p className="text-xl font-body text-[#475569] max-w-xl leading-relaxed">
+              Send a short brief. We reply within 24 hours.
+            </p>
+          </motion.div>
+          {/* Architectural accent line */}
+          <div className="absolute top-24 right-8 hidden lg:block w-px h-64 bg-slate-200/60" />
+        </section>
+
+        {/* ── Main grid ────────────────────────────────────────────────── */}
+        <section className="px-8 pb-32 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
+
+            {/* Left column — contact info + map */}
             <motion.div
+              className="lg:col-span-4 space-y-16"
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55 }}
-              style={{ y: heroShift }}
-              className="relative py-5 md:py-8"
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
             >
-              <div className="pointer-events-none absolute -left-14 top-10 h-24 w-64 rounded-full bg-[#0984E3]/10 blur-3xl" />
-              <div className="pointer-events-none absolute right-[28%] top-0 h-28 w-72 rounded-full bg-[#00CEC9]/10 blur-3xl" />
-              <div className="pointer-events-none absolute left-0 right-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(9,132,227,0.45),transparent)]" />
-              <div className="pointer-events-none absolute left-0 right-0 bottom-0 h-px bg-[linear-gradient(90deg,transparent,rgba(0,206,201,0.4),transparent)]" />
-              <div className="relative z-10 grid grid-cols-1 gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
+              <div className="space-y-12">
+
+                {/* Office */}
                 <div>
-                  <p className="text-xs uppercase tracking-[0.24em] text-[#1E272E]/60">Contact</p>
-                  <h1 className="mt-4 max-w-5xl font-serif text-5xl leading-[0.95] md:text-7xl">
-                    Let’s build
-                    <br />
-                    your next
-                    <br />
-                    <span className="text-[#0984E3]">system.</span>
-                  </h1>
-                  <p className="mt-6 max-w-3xl text-lg leading-relaxed text-[#1E272E]/78">
-                    Send a short brief. We reply within 24 hours.
-                  </p>
-                  <div className="mt-8 flex flex-wrap gap-3">
-                    <a
-                      href={`mailto:${CONTACT_EMAILS[0]}`}
-                      className="inline-flex items-center gap-2 bg-[#1E272E] px-6 py-3 text-[#F5F6FA] transition-colors hover:bg-[#0984E3]"
-                    >
-                      Email Us
-                      <Mail className="h-4 w-4" />
-                    </a>
-                    <a
-                      href={`tel:${CONTACT_PHONES[0].raw}`}
-                      className="inline-flex items-center gap-2 bg-white/78 px-6 py-3 text-[#1E272E] transition-colors hover:bg-[#ECF5FD]"
-                    >
-                      {CONTACT_PHONES[0].label}
-                    </a>
-                    <a
-                      href={`tel:${CONTACT_PHONES[1].raw}`}
-                      className="inline-flex items-center gap-2 bg-white/78 px-6 py-3 text-[#1E272E] transition-colors hover:bg-[#ECF5FD]"
-                    >
-                      {CONTACT_PHONES[1].label}
-                    </a>
+                  <div className="flex items-center gap-4 mb-4">
+                    <MapPin className="w-5 h-5 text-[#2563EB] shrink-0" strokeWidth={1.5} />
+                    <h3 className="text-xs font-label font-bold uppercase tracking-widest text-[#475569]">Office</h3>
                   </div>
+                  <p className="text-lg font-body leading-relaxed text-[#0F172A]">
+                    Avenue Tarik Ibn Ziad N 38<br />
+                    Etage 6 N 32, Tanger
+                  </p>
                 </div>
 
-                <div className="space-y-2 text-sm text-[#1E272E]/78 lg:pb-2">
+                {/* Email */}
+                <div>
+                  <div className="flex items-center gap-4 mb-4">
+                    <Mail className="w-5 h-5 text-[#2563EB] shrink-0" strokeWidth={1.5} />
+                    <h3 className="text-xs font-label font-bold uppercase tracking-widest text-[#475569]">Inquiries</h3>
+                  </div>
                   {CONTACT_EMAILS.map((email) => (
-                    <a key={email} href={`mailto:${email}`} className="flex items-start gap-2.5 hover:text-[#1E272E]">
-                      <Mail className="mt-0.5 h-4 w-4 shrink-0 text-[#0984E3]" />
-                      <span>{email}</span>
+                    <a
+                      key={email}
+                      href={`mailto:${email}`}
+                      className="block text-lg font-body text-[#0F172A] hover:text-[#2563EB] transition-colors"
+                    >
+                      {email}
                     </a>
                   ))}
-                  <div className="flex items-start gap-2.5">
-                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#0984E3]" />
-                    <span>{COMPANY_ADDRESS}</span>
+                </div>
+
+                {/* Phone */}
+                <div>
+                  <div className="flex items-center gap-4 mb-4">
+                    <Phone className="w-5 h-5 text-[#2563EB] shrink-0" strokeWidth={1.5} />
+                    <h3 className="text-xs font-label font-bold uppercase tracking-widest text-[#475569]">Direct Line</h3>
                   </div>
+                  {CONTACT_PHONES.map((phone) => (
+                    <a
+                      key={phone.raw}
+                      href={`tel:${phone.raw}`}
+                      className="block text-lg font-body text-[#0F172A] hover:text-[#2563EB] transition-colors"
+                    >
+                      {phone.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* Map */}
+              <div className="bg-[#eceef0] aspect-square w-full relative overflow-hidden group">
+                <div className="absolute inset-0 bg-neutral-200/50 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-0" />
+                <img
+                  src="/Images/tangiermap.webp"
+                  alt="Map of Tangier, Morocco — H.V.A office location"
+                  className="w-full h-full object-cover grayscale opacity-80 transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div className="absolute bottom-6 left-6 bg-white px-4 py-2 shadow-sm">
+                  <span className="text-xs font-label font-bold uppercase tracking-tighter text-[#0F172A]">
+                    Tangier, Morocco
+                  </span>
                 </div>
               </div>
             </motion.div>
-          </div>
-        </section>
 
-        <section className="relative py-10 md:py-14">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.38 }}
-                className="space-y-4 lg:sticky lg:top-28"
-              >
-                <p className="text-xs uppercase tracking-[0.2em] text-[#1E272E]/58">Direct Contact</p>
-                <div className="space-y-3">
-                  {CONTACT_EMAILS.map((email) => (
-                    <a
-                      key={`primary-${email}`}
-                      href={`mailto:${email}`}
-                      className="flex items-center justify-between rounded-full bg-white/66 px-4 py-3 text-[#1E272E]/86 transition-colors hover:bg-white/90"
-                    >
-                      <span>{email}</span>
-                      <ArrowUpRight className="h-4 w-4 text-[#0984E3]" />
-                    </a>
-                  ))}
-                  {CONTACT_PHONES.map((phone) => (
-                    <a
-                      key={`primary-${phone.raw}`}
-                      href={`tel:${phone.raw}`}
-                      className="flex items-center justify-between rounded-full bg-white/66 px-4 py-3 text-[#1E272E]/86 transition-colors hover:bg-white/90"
-                    >
-                      <span>{phone.label}</span>
-                      <Phone className="h-4 w-4 text-[#0984E3]" />
-                    </a>
-                  ))}
-                </div>
-                <p className="text-sm text-[#1E272E]/62">Monday to Friday, 9:00 to 18:00 (GMT+1)</p>
-              </motion.div>
+            {/* Right column — form + quote */}
+            <motion.div
+              className="lg:col-span-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              {/* Form card */}
+              <div className="bg-white p-8 md:p-12 lg:p-16 relative">
+                <div className="absolute inset-0 border border-slate-200/30 pointer-events-none" />
+                <form onSubmit={handleSubmit} className="space-y-10">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
 
-              <motion.article
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.4, delay: 0.05 }}
-                className="sharp-edge relative overflow-hidden rounded-[42px] bg-[linear-gradient(150deg,rgba(255,255,255,0.62),rgba(236,245,253,0.38))] p-7 shadow-[0_16px_36px_rgba(9,132,227,0.1)] md:p-8"
-              >
-                <div className="pointer-events-none absolute -left-10 top-6 h-24 w-24 rounded-full bg-[#0984E3]/12 blur-2xl" />
-                <div className="pointer-events-none absolute right-0 top-0 h-24 w-24 rounded-full bg-[#00CEC9]/12 blur-2xl" />
-                <p className="text-xs uppercase tracking-[0.18em] text-[#1E272E]/58">Project Brief</p>
-                <h2 className="mt-3 font-serif text-4xl font-semibold leading-[1.02] md:text-5xl">Send a message</h2>
-                <p className="mt-2 max-w-2xl text-[#1E272E]/72">Name, email, and what you need.</p>
-
-                <form onSubmit={handleSubmit} className="mt-7 space-y-4">
-                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    {/* Name */}
                     <div>
-                      <label htmlFor="name" className="mb-2 block text-sm font-medium text-[#1E272E]/76">
+                      <label
+                        htmlFor="name"
+                        className="block text-xs font-label font-bold uppercase tracking-widest text-[#475569] mb-2"
+                      >
                         Name
                       </label>
                       <input
@@ -231,13 +198,20 @@ const Contact: React.FC = () => {
                         type="text"
                         value={formData.name}
                         onChange={handleChange}
-                        className="sharp-edge w-full rounded-2xl bg-white/80 px-4 py-3 text-[#1E272E] placeholder:text-[#1E272E]/40 focus:outline-none focus:ring-2 focus:ring-[#0984E3]/25"
+                        placeholder="Your full name"
                         required
+                        className="w-full bg-transparent border-0 border-b py-3 px-0 focus:outline-none text-lg font-body text-[#0F172A] placeholder:text-slate-300"
+                        style={{ borderImage: 'linear-gradient(to right, transparent, #2563EB 22%, #2563EB 78%, transparent) 1' }}
                       />
                     </div>
+
+                    {/* Email */}
                     <div>
-                      <label htmlFor="email" className="mb-2 block text-sm font-medium text-[#1E272E]/76">
-                        Email
+                      <label
+                        htmlFor="email"
+                        className="block text-xs font-label font-bold uppercase tracking-widest text-[#475569] mb-2"
+                      >
+                        Email Address
                       </label>
                       <input
                         id="email"
@@ -245,75 +219,83 @@ const Contact: React.FC = () => {
                         type="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className="sharp-edge w-full rounded-2xl bg-white/80 px-4 py-3 text-[#1E272E] placeholder:text-[#1E272E]/40 focus:outline-none focus:ring-2 focus:ring-[#0984E3]/25"
+                        placeholder="name@company.com"
                         required
+                        className="w-full bg-transparent border-0 border-b py-3 px-0 focus:outline-none text-lg font-body text-[#0F172A] placeholder:text-slate-300"
+                        style={{ borderImage: 'linear-gradient(to right, transparent, #2563EB 22%, #2563EB 78%, transparent) 1' }}
                       />
                     </div>
                   </div>
 
+                  {/* Project brief */}
                   <div>
-                    <label htmlFor="message" className="mb-2 block text-sm font-medium text-[#1E272E]/76">
-                      Message
+                    <label
+                      htmlFor="message"
+                      className="block text-xs font-label font-bold uppercase tracking-widest text-[#475569] mb-2"
+                    >
+                      Project Brief
                     </label>
                     <textarea
                       id="message"
                       name="message"
-                      rows={6}
+                      rows={5}
                       value={formData.message}
                       onChange={handleChange}
-                      className="sharp-edge w-full rounded-[22px] bg-white/80 px-4 py-3 text-[#1E272E] placeholder:text-[#1E272E]/40 focus:outline-none focus:ring-2 focus:ring-[#0984E3]/25"
+                      placeholder="Tell us about your objectives, timeline, and scope..."
                       required
+                      className="w-full bg-transparent border-0 border-b py-3 px-0 focus:outline-none text-lg font-body text-[#0F172A] placeholder:text-slate-300 resize-none"
+                      style={{ borderImage: 'linear-gradient(to right, transparent, #2563EB 22%, #2563EB 78%, transparent) 1' }}
                     />
                   </div>
 
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="sharp-edge inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#0984E3] px-6 py-3 font-medium text-[#F5F6FA] transition-colors hover:bg-[#0776CC] disabled:cursor-not-allowed disabled:opacity-70"
-                  >
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
-                    <Send className="h-4 w-4" />
-                  </button>
+                  {/* CTA row */}
+                  <div className="pt-6 flex flex-col md:flex-row md:items-center justify-between gap-8">
+                    <p className="text-sm font-body text-[#475569] max-w-xs leading-relaxed">
+                      By submitting this form, you agree to our processing of your data as outlined in our privacy policy.
+                    </p>
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="sharp-edge group flex items-center justify-center gap-3 bg-[#0F172A] text-white px-10 py-5 font-label font-bold text-sm tracking-widest uppercase transition-all hover:bg-[#2563EB] active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed"
+                    >
+                      {isSubmitting ? 'Sending…' : 'Send Message'}
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </button>
+                  </div>
 
                   {status && (
-                    <p className={`text-sm ${status.type === 'success' ? 'text-emerald-600' : 'text-rose-600'}`} role="status">
+                    <output
+                      className={`text-sm font-body ${status.type === 'success' ? 'text-emerald-600' : 'text-rose-600'}`}
+                    >
                       {status.message}
-                    </p>
+                    </output>
                   )}
                 </form>
-              </motion.article>
-            </div>
-          </div>
-        </section>
+              </div>
 
-        <section className="relative pb-16 pt-8 md:pb-20">
-          <div className="container mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.25 }}
-              transition={{ duration: 0.38 }}
-              className="relative overflow-hidden bg-[linear-gradient(128deg,#1E272E_0%,#2A4D79_48%,#0984E3_100%)] px-7 py-8 text-[#F5F6FA] shadow-[0_20px_42px_rgba(9,132,227,0.22)] md:px-10 md:py-10"
-            >
-              <div className="pointer-events-none absolute -right-20 -top-16 h-52 w-52 rounded-full bg-[#4CA6EC]/24 blur-3xl" />
-              <div className="relative z-10 grid grid-cols-1 gap-5 md:grid-cols-[1.15fr_0.85fr] md:items-center">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.18em] text-[#F5F6FA]/68">Office</p>
-                  <h2 className="mt-2 max-w-4xl font-serif text-2xl leading-tight md:text-4xl">{COMPANY_ADDRESS}</h2>
-                </div>
-                <div className="flex md:justify-end">
-                  <a
-                    href={MAP_LINK}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full border border-white/45 bg-white/10 px-5 py-3 text-sm font-medium text-[#F5F6FA] backdrop-blur-sm transition-colors hover:bg-white/18"
+              {/* Quote block */}
+              <div className="mt-12 bg-[#f2f4f6] p-10 lg:p-12 relative overflow-hidden">
+                <div className="relative z-10">
+                  <span
+                    aria-hidden="true"
+                    className="font-headline italic text-[#2563EB]/20 text-[6rem] leading-none absolute -top-4 -left-2 select-none"
                   >
-                    Open in Google Maps
-                    <ArrowUpRight className="h-4 w-4" />
-                  </a>
+                    "
+                  </span>
+                  <p className="text-2xl md:text-3xl font-headline italic text-[#0F172A] leading-snug">
+                    "Our mission is to bridge the gap between architectural vision and technical execution.
+                    Every system we build is a permanent asset for your firm."
+                  </p>
+                  <div className="mt-6 flex items-center gap-4">
+                    <div className="w-12 h-px bg-[#2563EB]" />
+                    <span className="text-sm font-label font-bold uppercase tracking-widest text-[#475569]">
+                      Managing Partner, H.V.A
+                    </span>
+                  </div>
                 </div>
               </div>
             </motion.div>
+
           </div>
         </section>
       </div>

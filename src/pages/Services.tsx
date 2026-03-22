@@ -279,12 +279,8 @@ const Services: React.FC = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-[1px] bg-[#d1d5db]">
               {serviceLines.map((line, index) => (
-                <motion.article
+                <article
                   key={line.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.5, delay: index * 0.07 }}
                   className={[
                     'relative flex flex-col gap-6 p-10 lg:p-14 group transition-all duration-300',
                     line.accent === 'dark'
@@ -365,7 +361,7 @@ const Services: React.FC = () => {
                         : 'bg-gradient-to-r from-[#2563EB] to-[#60a5fa] opacity-0 group-hover:opacity-100 transition-opacity duration-300',
                     ].join(' ')}
                   />
-                </motion.article>
+                </article>
               ))}
             </div>
           </div>
@@ -395,12 +391,8 @@ const Services: React.FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
               {competencies.map((cap, index) => (
-                <motion.article
+                <article
                   key={cap.title}
-                  initial={{ opacity: 0, y: 18 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.42, delay: index * 0.05 }}
                   className={[
                     'relative flex flex-col justify-between min-h-[260px] p-8 border border-[#e2e8f0]',
                     'group hover:border-[#2563EB]/40 hover:shadow-[0_16px_32px_rgba(37,99,235,0.08)] transition-all duration-300',
@@ -416,7 +408,7 @@ const Services: React.FC = () => {
                   </div>
                   {/* Hover accent */}
                   <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#2563EB] group-hover:w-full transition-all duration-500" />
-                </motion.article>
+                </article>
               ))}
             </div>
           </div>

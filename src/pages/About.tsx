@@ -128,7 +128,7 @@ const About: React.FC = () => {
         <PageAmbientBackground className="-z-10" />
 
         {/* Hero Section */}
-        <section className="relative pt-28 pb-24 md:pt-36 md:pb-32 px-6 lg:px-14">
+        <section className="relative pt-28 pb-10 md:pt-36 md:pb-14 px-6 lg:px-14">
           <div className="container mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
@@ -175,27 +175,29 @@ const About: React.FC = () => {
                 </div>
               </motion.div>
 
-              {/* Right: image + overlay card */}
+              {/* Right: image + floating card (part in, part out) */}
               <motion.div
-                className="lg:col-span-5 relative mt-12 lg:mt-0"
+                className="lg:col-span-5 relative mt-20 lg:mt-12"
                 initial={{ opacity: 0, x: 28 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.7, delay: 0.15 }}
               >
+                {/* Card straddling the top-left image edge — outside overflow-hidden */}
+                <div className="absolute -top-10 left-5 z-10 p-6 bg-white shadow-xl max-w-[240px] hidden md:block">
+                  <p className="text-[10px] font-bold text-[#2563EB] tracking-[0.2em] uppercase mb-2">01. FOUNDATIONS</p>
+                  <p className="text-lg font-serif italic text-[#0F172A] leading-snug">
+                    We know the full stack — from assembly to the cloud.
+                  </p>
+                </div>
                 <div className="relative aspect-square w-full bg-[#eceef0] overflow-hidden">
                   <img
                     src="/Images/abouthead.webp"
-                    alt="H.V.A engineering precision"
+                    alt="Early computing — H.V.A engineering roots"
                     className="object-cover w-full h-full"
                     loading="eager"
                     fetchPriority="high"
                     decoding="async"
                   />
-                  {/* Asymmetric overlay card — inside image container */}
-                  <div className="absolute top-0 left-0 p-7 bg-white shadow-xl max-w-[220px] hidden md:block">
-                    <p className="text-[10px] font-bold text-[#0984E3] tracking-[0.2em] uppercase mb-1">01. ANALYSIS</p>
-                    <p className="text-lg font-serif italic text-[#1E272E]">Precision in every data point.</p>
-                  </div>
                 </div>
               </motion.div>
 
@@ -203,38 +205,44 @@ const About: React.FC = () => {
           </div>
         </section>
 
-        <section className="relative container mx-auto px-4 py-10 md:py-16">
-          <div className="grid grid-cols-1 gap-8">
-            <div>
-              <p className="text-xs uppercase tracking-[0.24em] text-[#1E272E]/56">Delivery System</p>
-              <h2 className="mt-3 font-serif text-4xl leading-[1.02] md:text-5xl">How We Work</h2>
-              <p className="mt-4 max-w-3xl text-[#1E272E]/74">
+        <section className="relative px-6 lg:px-14 py-16 md:py-24 bg-[#f2f4f6]">
+          <div className="container mx-auto">
+
+            {/* Header */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45 }}
+              className="mb-12 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6"
+            >
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB] mb-3">Delivery System</p>
+                <h2 className="font-headline text-4xl md:text-5xl text-[#0F172A] leading-[1.02]">How We Work</h2>
+              </div>
+              <p className="max-w-xl text-[#475569] leading-relaxed lg:text-right">
                 The process is transparent, paced, and intentionally designed so stakeholders always understand what is
                 being built and why.
               </p>
-            </div>
+            </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.25 }}
+              viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.42 }}
-              className="relative overflow-hidden rounded-[28px] border border-[#1E272E]/10 bg-[linear-gradient(140deg,rgba(255,255,255,0.84),rgba(236,245,253,0.72))] p-5 shadow-[0_18px_36px_rgba(9,132,227,0.1)] md:p-8"
             >
-              <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-                <p className="text-xs uppercase tracking-[0.18em] text-[#1E272E]/58">Interactive Delivery Flow</p>
-                <p className="text-sm text-[#1E272E]/66">Select a step to inspect execution details.</p>
-              </div>
-
-              <div className="h-1.5 w-full overflow-hidden rounded-full bg-[#1E272E]/10">
+              {/* Slim progress track */}
+              <div className="relative h-px w-full bg-slate-300 mb-8">
                 <motion.div
-                  className="h-full rounded-full bg-gradient-to-r from-[#0984E3] to-[#00CEC9]"
+                  className="absolute inset-y-0 left-0 bg-[#2563EB]"
                   animate={{ width: `${((activeDeliveryStep + 1) / deliveryFlow.length) * 100}%` }}
-                  transition={{ duration: 0.32, ease: 'easeOut' }}
+                  transition={{ duration: 0.35, ease: 'easeOut' }}
                 />
               </div>
 
-              <div className="mt-5 grid grid-cols-1 gap-3 lg:grid-cols-2 xl:grid-cols-4">
+              {/* Step cards — separated by 1px lines */}
+              <div className="grid grid-cols-1 lg:grid-cols-4 gap-px bg-slate-300">
                 {deliveryFlow.map((item, index) => {
                   const isActive = activeDeliveryStep === index;
                   return (
@@ -244,53 +252,63 @@ const About: React.FC = () => {
                       onClick={() => setActiveDeliveryStep(index)}
                       onMouseEnter={() => setActiveDeliveryStep(index)}
                       onFocus={() => setActiveDeliveryStep(index)}
-                      className={`rounded-2xl border p-5 text-left transition-all duration-300 ${
-                        isActive
-                          ? 'border-[#0984E3]/65 bg-white shadow-[0_16px_30px_rgba(9,132,227,0.16)]'
-                          : 'border-[#1E272E]/10 bg-white/72 hover:bg-white/92'
+                      className={`relative bg-white p-8 text-left transition-all duration-300 group overflow-hidden ${
+                        isActive ? 'bg-white' : 'hover:bg-[#F8FAFC]'
                       }`}
                     >
-                      <div className="flex items-start justify-between gap-3">
-                        <span
-                          className={`inline-flex h-10 min-w-10 items-center justify-center rounded-full border text-sm font-semibold ${
-                            isActive
-                              ? 'border-[#0984E3]/55 bg-[#ECF5FD] text-[#0984E3]'
-                              : 'border-[#1E272E]/20 bg-white text-[#1E272E]/75'
-                          }`}
-                        >
-                          {item.step}
-                        </span>
-                        <div className={isActive ? 'text-[#0984E3]' : 'text-[#1E272E]/45'}>{item.icon}</div>
+                      {/* Active top-bar */}
+                      <div
+                        className={`absolute top-0 left-0 right-0 h-[3px] transition-all duration-300 ${
+                          isActive ? 'bg-[#2563EB]' : 'bg-transparent group-hover:bg-slate-200'
+                        }`}
+                      />
+
+                      {/* Ghost step number */}
+                      <p className="font-headline text-[5rem] leading-none text-[#0F172A]/[0.05] select-none mb-2 -ml-1">
+                        {item.step}
+                      </p>
+
+                      {/* Icon */}
+                      <div className={`mb-4 transition-colors duration-300 ${isActive ? 'text-[#2563EB]' : 'text-[#475569] group-hover:text-[#2563EB]'}`}>
+                        {item.icon}
                       </div>
-                      <h3 className="mt-4 text-xl font-semibold leading-tight text-[#1E272E]">{item.title}</h3>
-                      <p className="mt-2 text-sm leading-relaxed text-[#1E272E]/70">{item.detail}</p>
+
+                      <h3 className={`font-headline text-xl leading-tight mb-2 transition-colors duration-300 ${
+                        isActive ? 'text-[#0F172A]' : 'text-[#0F172A]/70'
+                      }`}>
+                        {item.title}
+                      </h3>
+                      <p className="text-sm leading-relaxed text-[#475569]">{item.detail}</p>
                     </button>
                   );
                 })}
               </div>
 
+              {/* Active step detail — dark panel */}
               <motion.div
                 key={activeDeliveryItem.step}
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.26 }}
-                className="mt-6 rounded-2xl border border-[#0984E3]/20 bg-white/90 p-5 md:p-6"
+                transition={{ duration: 0.28 }}
+                className="bg-[#0F172A] p-8 md:p-10"
               >
-                <div className="flex flex-wrap items-center gap-3">
-                  <span className="inline-flex h-11 min-w-11 items-center justify-center rounded-full bg-[#0984E3] text-sm font-semibold text-white">
-                    {activeDeliveryItem.step}
-                  </span>
-                  <div className="text-[#0984E3]">{activeDeliveryItem.icon}</div>
+                <div className="flex flex-wrap items-start gap-x-8 gap-y-4 mb-6">
+                  <div className="flex items-center gap-4">
+                    <span className="inline-flex h-10 w-10 items-center justify-center bg-[#2563EB] text-sm font-bold text-white font-label">
+                      {activeDeliveryItem.step}
+                    </span>
+                    <div className="text-[#2563EB]">{activeDeliveryItem.icon}</div>
+                  </div>
                   <div>
-                    <p className="text-[11px] uppercase tracking-[0.16em] text-[#1E272E]/56">Current Step</p>
-                    <h3 className="text-2xl font-semibold text-[#1E272E]">{activeDeliveryItem.title}</h3>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#2563EB] mb-1">Current Step</p>
+                    <h3 className="font-headline text-2xl text-white">{activeDeliveryItem.title}</h3>
                   </div>
                 </div>
-                <p className="mt-4 max-w-3xl text-[#1E272E]/75">{activeDeliveryItem.detail}</p>
-                <ul className="mt-4 grid grid-cols-1 gap-2 md:grid-cols-3">
+                <p className="text-[#94a3b8] max-w-2xl leading-relaxed mb-6">{activeDeliveryItem.detail}</p>
+                <ul className="grid grid-cols-1 gap-3 md:grid-cols-3 border-t border-white/10 pt-6">
                   {activeDeliveryItem.checkpoints.map((checkpoint) => (
-                    <li key={checkpoint} className="flex items-start gap-2 text-sm leading-relaxed text-[#1E272E]/80">
-                      <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[#0984E3]" />
+                    <li key={checkpoint} className="flex items-start gap-3 text-sm text-[#cbd5e1]">
+                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 bg-[#2563EB]" />
                       <span>{checkpoint}</span>
                     </li>
                   ))}
@@ -358,7 +376,7 @@ const About: React.FC = () => {
                       "The highest form of engineering is when the complexity disappears entirely."
                     </blockquote>
                     <div className="h-px bg-gradient-to-r from-[#0984E3]/60 via-[#00CEC9]/40 to-transparent mb-8" />
-                    <p className="text-[#F5F6FA]/58 text-sm font-light leading-relaxed max-w-md">
+                    <p className="text-[#F5F6FA]/90 text-sm font-light leading-relaxed max-w-md">
                       Three non-negotiables that shape planning, quality decisions, and execution pace on every engagement.
                     </p>
                   </div>
@@ -385,7 +403,6 @@ const About: React.FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
               {teamMembers.map((member, index) => {
-                const firstName = member.name.split(' ')[0] ?? member.name;
                 return (
                   <motion.div
                     key={member.name}
@@ -407,15 +424,7 @@ const About: React.FC = () => {
                     <div className="p-8">
                       <p className="text-[10px] font-bold text-[#0984E3] uppercase tracking-[0.18em] mb-1">{member.tag}</p>
                       <h3 className="font-serif text-2xl font-light text-[#1E272E] mb-1">{member.name}</h3>
-                      <p className="text-sm text-[#1E272E]/60 mb-5">{member.role}</p>
-                      <Link
-                        to="/contact"
-                        className="inline-flex items-center gap-2 text-sm font-bold text-[#1E272E] hover:text-[#0984E3] transition-colors duration-200"
-                      >
-                        <span className="h-1.5 w-1.5 rounded-full bg-[#58FFB3]" />
-                        {`Talk with ${firstName}`}
-                        <ArrowRight className="h-3.5 w-3.5" />
-                      </Link>
+                      <p className="text-sm text-[#1E272E]/60">{member.role}</p>
                     </div>
                   </motion.div>
                 );

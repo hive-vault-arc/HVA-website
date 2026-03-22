@@ -1,6 +1,6 @@
 import React, { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle2, Layers } from 'lucide-react';
+import { ArrowRight, Bot, Cloud, Database, Eye, Layers, Smartphone } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Background3d from '../components/Plasma';
 import LogoLoop from '../components/LogoItem';
@@ -64,22 +64,26 @@ const Home: React.FC = () => {
     return () => cancelIdleCallback(id);
   }, []);
 
-  const processSteps = [
+  const servicePillars = [
     {
-      title: 'Discover',
-      description: 'Align on goals, audience, and delivery constraints.',
+      icon: <Bot className="w-5 h-5" strokeWidth={1.5} />,
+      title: 'AI & Automation',
+      desc: 'AI agents, receptionists, and automated workflows that handle repetitive operations continuously — no manual effort required.',
     },
     {
-      title: 'Plan',
-      description: 'Define scope, architecture, and milestone roadmap.',
+      icon: <Database className="w-5 h-5" strokeWidth={1.5} />,
+      title: 'Custom Platforms',
+      desc: 'CRM systems, inventory tools, and enterprise platforms engineered from scratch for the exact way your business operates.',
     },
     {
-      title: 'Build',
-      description: 'Ship in focused sprints with QA and regular demos.',
+      icon: <Cloud className="w-5 h-5" strokeWidth={1.5} />,
+      title: 'Cloud & Infrastructure',
+      desc: 'End-to-end cloud deployment, CI/CD pipelines, and managed infrastructure built for zero-downtime reliability.',
     },
     {
-      title: 'Scale',
-      description: 'Optimize performance and grow with confidence.',
+      icon: <Smartphone className="w-5 h-5" strokeWidth={1.5} />,
+      title: 'Apps & Web',
+      desc: 'Custom mobile apps and high-performance web platforms — from concept to production, fully owned by you.',
     },
   ];
 
@@ -103,25 +107,25 @@ const Home: React.FC = () => {
   const sections = [
     {
       leftLabel: 'Mobile Development',
-      title: <>Mobile apps</>,
+      title: 'Mobile apps',
       rightLabel: 'Mobile apps',
       background: './Images/app.png',
     },
     {
       leftLabel: 'Web Development',
-      title: <>Web apps</>,
+      title: 'Web apps',
       rightLabel: 'Web apps',
       background: './Images/web.png',
     },
     {
       leftLabel: 'AI Development',
-      title: <>AI apps</>,
+      title: 'AI apps',
       rightLabel: 'AI apps',
       background: '/Images/ai.webp',
     },
     {
       leftLabel: 'SaaS Development',
-      title: <>SaaS apps</>,
+      title: 'SaaS apps',
       rightLabel: 'SaaS apps',
       background: './Images/saas.png',
     },
@@ -214,129 +218,155 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <section className="relative px-4 py-14 sm:px-6 lg:px-14 lg:py-20">
-        <div className="container mx-auto relative z-10">
-          <div className="sharp-edge relative mb-10 rounded-2xl border border-[#1E272E]/15 bg-gradient-to-r from-white/[0.09] via-white/[0.05] to-white/[0.03] p-6 md:p-10 overflow-hidden">
-            <div className="pointer-events-none absolute -top-16 -right-16 h-48 w-48 rounded-full bg-[#0984E3]/20 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-20 -left-16 h-52 w-52 rounded-full bg-indigo-500/20 blur-3xl" />
-            <p className="text-[#0984E3] tracking-[0.24em] text-xs uppercase font-medium">Who We Are</p>
-            <p className="text-[#1E272E]/60 tracking-[0.2em] text-[11px] uppercase mt-5">Software & Cloud Engineering Company</p>
-            <h2 className="text-5xl md:text-7xl font-semibold text-[#1E272E] mt-3 leading-[0.92]">
-              Building Digital
-              <br />
-              Systems That
-              <br />
-              Scale
+      {/* ── Who We Are — Identity Section ──────────────────────────────── */}
+      <section className="relative grid grid-cols-1 lg:grid-cols-12">
+
+        {/* Left — dark identity panel */}
+        <div className="lg:col-span-5 relative bg-[#0F172A] px-10 py-16 lg:py-24 flex flex-col justify-between overflow-hidden">
+          {/* Dot grid texture */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 opacity-[0.07]"
+            style={{ backgroundImage: 'radial-gradient(#60a5fa 1px, transparent 0)', backgroundSize: '28px 28px' }}
+          />
+          {/* Blue left accent bar */}
+          <div className="pointer-events-none absolute left-0 inset-y-0 w-[3px] bg-[#2563EB]" />
+
+          <div className="relative z-10">
+            <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#2563EB] mb-10">Our Identity</p>
+            <h2 className="font-headline text-5xl md:text-6xl text-white leading-[1.08] mb-8">
+              Strategic Vision.<br />
+              <em className="font-headline italic text-white/35">Technical Execution.</em>
             </h2>
-            <p className="text-[#1E272E]/80 mt-6 text-lg max-w-5xl">
-              We engineer custom software systems, AI-powered applications, and cloud platforms with a focus on reliability,
-              performance, and long-term maintainability.
+            <p className="text-white/60 font-body leading-relaxed text-base mb-10 max-w-sm">
+              Hive Vault Arc is a software and AI engineering agency. We build the systems your business runs on — from intelligent automation and custom platforms to cloud infrastructure and mobile apps.
             </p>
-            <div className="sharp-edge mt-6 inline-flex items-center rounded-full border border-[#0984E3]/30 bg-[#0984E3]/10 px-4 py-2 text-sm text-[#0984E3]">
-              Built for business outcomes, not just demos
-            </div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {[
-              'Clear ownership and predictable delivery',
-              'Scalable architecture from day one',
-              'Quality, security, and maintainability by default',
-            ].map((item) => (
-              <div key={item} className="sharp-edge rounded-xl border border-[#1E272E]/15 bg-[#0984E3]/[0.06] p-5 text-[#1E272E]/95 flex items-start gap-2 shadow-[0_0_0_1px_rgba(255,255,255,0.02)]">
-                <CheckCircle2 className="w-4 h-4 mt-1 text-[#0984E3] shrink-0" />
-                <span>{item}</span>
-              </div>
-            ))}
+            <div className="h-px w-12 bg-[#2563EB] mb-4" />
+            <p className="text-[9px] font-label font-bold uppercase tracking-[0.28em] text-white/35">
+              AI · Cloud · Automation · Mobile
+            </p>
           </div>
         </div>
-      </section>
 
-      <section className="relative px-4 pb-10 sm:px-6 lg:px-14 lg:pb-16">
-        <div className="container mx-auto px-2 py-10 md:px-4 md:py-14">
-          <div className="relative overflow-hidden bg-[linear-gradient(132deg,#1E272E_0%,#2A4D79_52%,#0984E3_100%)] px-4 py-8 shadow-[0_24px_44px_rgba(9,132,227,0.2)] md:px-7 md:py-11">
-            <div className="pointer-events-none absolute -left-14 top-10 h-36 w-36 rounded-full bg-[#4CA6EC]/16 blur-3xl" />
-            <div className="pointer-events-none absolute right-0 top-0 h-44 w-44 rounded-full bg-[#00CEC9]/14 blur-3xl" />
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_24%,rgba(255,255,255,0.1),transparent_44%),radial-gradient(circle_at_88%_16%,rgba(255,255,255,0.14),transparent_40%)]" />
-            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/42 to-transparent" />
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#00CEC9]/55 to-transparent" />
-
-            <div className="relative z-10 mx-auto max-w-5xl px-2 text-center md:px-4">
-              <h2 className="font-serif text-4xl md:text-7xl font-semibold text-[#F5F6FA] leading-[0.95]">
-                Clear Scope...Ship
-              </h2>
-              <p className="mx-auto mt-6 max-w-4xl text-base text-[#F5F6FA]/84 md:text-2xl">
-                One focused process from discovery to release. We align requirements, architecture, and delivery so your product ships with confidence.
-              </p>
-            </div>
-
-            <div className="my-10 h-px w-full bg-gradient-to-r from-transparent via-white/32 to-transparent" />
-
-            <div className="relative z-10 grid grid-cols-1 gap-8 px-2 pb-1 md:grid-cols-2 md:items-start md:px-4">
-              <h3 className="font-serif text-3xl md:text-5xl text-[#F5F6FA] leading-tight">
-                From strategy to production, one dependable engineering flow
-              </h3>
-
+        {/* Right — 2×2 service pillars */}
+        <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-px bg-[#d1d5db]">
+          {servicePillars.map((pillar) => (
+            <div
+              key={pillar.title}
+              className="bg-white p-10 flex flex-col gap-5 group relative hover:bg-[#F8FAFC] transition-colors duration-300"
+            >
+              <div className="w-10 h-10 flex items-center justify-center bg-[#dbeafe] text-[#2563EB] shrink-0">
+                {pillar.icon}
+              </div>
               <div>
-                <p className="text-lg text-[#F5F6FA]/86 md:text-2xl">
-                  Discover. Plan. Build. Scale. Each phase is tied to measurable business outcomes and technical quality.
-                </p>
-                <Link
-                  to="/services"
-                  className="mt-7 inline-flex items-center gap-2 border border-white/44 bg-white/12 px-5 py-2.5 text-[#F5F6FA] tracking-[0.14em] uppercase text-xs font-medium backdrop-blur-sm transition-colors hover:bg-white/18"
-                >
-                  Engineering Process
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
+                <h3 className="font-headline text-xl text-[#0F172A] mb-2">{pillar.title}</h3>
+                <p className="text-sm text-[#475569] leading-relaxed">{pillar.desc}</p>
               </div>
+              {/* Bottom hover accent */}
+              <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-[#2563EB] group-hover:w-full transition-all duration-500" />
             </div>
-          </div>
+          ))}
         </div>
+
       </section>
 
-      <section className="relative py-14 md:py-16">
-        <div className="container mx-auto px-4">
-          <div className="mx-auto mb-10 max-w-4xl text-center">
-            <p className="text-[#1E272E]/62 tracking-[0.24em] text-xs uppercase">How We Deliver</p>
-            <h2 className="mt-3 font-serif text-4xl md:text-6xl font-semibold text-[#1E272E]">Clear Engineering Execution</h2>
-          </div>
+      {/* ── Vision / Trust Section ─────────────────────────────────────── */}
+      <section className="relative bg-[#0F172A] py-24 md:py-32 overflow-hidden">
+        {/* Blueprint grid overlay */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage:
+              'repeating-linear-gradient(0deg,#60a5fa 0,#60a5fa 1px,transparent 0,transparent 50%),repeating-linear-gradient(90deg,#60a5fa 0,#60a5fa 1px,transparent 0,transparent 50%)',
+            backgroundSize: '48px 48px',
+          }}
+        />
+        {/* Ambient glow */}
+        <div className="pointer-events-none absolute -top-32 left-1/4 h-96 w-96 rounded-full bg-[#2563EB]/20 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-24 right-1/4 h-72 w-72 rounded-full bg-[#3b82f6]/15 blur-3xl" />
 
-          <div className="relative rounded-[34px] bg-[linear-gradient(155deg,rgba(255,255,255,0.62),rgba(236,245,253,0.42))] p-4 md:p-5">
-            <div className="pointer-events-none absolute -left-8 top-14 h-24 w-24 rounded-full bg-[#0984E3]/10 blur-2xl" />
-            <div className="pointer-events-none absolute right-10 top-8 h-20 w-20 rounded-full bg-[#00CEC9]/12 blur-2xl" />
-            <div className="pointer-events-none absolute left-[11%] right-[11%] top-[4.2rem] hidden h-[2px] bg-gradient-to-r from-[#0984E3]/45 via-[#4CA6EC]/45 to-[#00CEC9]/45 xl:block" />
+        <div className="relative z-10 max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
 
-            <div className="relative grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
-              {processSteps.map((step, index) => (
-                <motion.article
-                  key={step.title}
-                  initial={{ opacity: 0, y: 18 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: index * 0.08 }}
-                  viewport={{ once: true }}
-                  className={[
-                    'group relative overflow-hidden rounded-[28px] bg-[linear-gradient(160deg,rgba(255,255,255,0.82),rgba(236,245,253,0.68))] p-6 shadow-[0_12px_28px_rgba(9,132,227,0.09)]',
-                    index % 2 === 1 ? 'md:translate-y-3' : '',
-                  ].join(' ')}
-                >
-                  <div className="pointer-events-none absolute -right-10 -top-10 h-24 w-24 rounded-full bg-[#0984E3]/10 blur-2xl transition-transform duration-500 group-hover:scale-110" />
-                  <div className="inline-flex items-center gap-2 rounded-full bg-white/86 px-2.5 py-1">
-                    <span className="inline-flex h-6 min-w-6 items-center justify-center rounded-full bg-[#ECF5FD] text-[#0984E3] text-xs font-semibold">
-                      {`0${index + 1}`}
-                    </span>
-                    <span className="text-[10px] uppercase tracking-[0.2em] text-[#1E272E]/56">Step</span>
-                  </div>
-                  <h3 className="mt-4 text-[#1E272E] text-4xl font-serif leading-none">{step.title}</h3>
-                  <p className="text-[#1E272E]/72 mt-4 text-lg leading-relaxed">{step.description}</p>
-                  <div className="mt-5 h-[3px] w-full bg-[#1E272E]/10">
-                    <div
-                      className="h-full bg-[linear-gradient(90deg,#0984E3_0%,#00CEC9_100%)]"
-                      style={{ width: `${44 + index * 18}%` }}
-                    />
-                  </div>
-                </motion.article>
-              ))}
+          {/* Left — heading + feature list */}
+          <motion.div
+            initial={{ opacity: 0, x: -24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="font-headline text-5xl md:text-6xl text-white leading-tight mb-14">
+              Our Vision is Built on{' '}
+              <em className="not-italic text-[#2563EB] font-headline italic">Architectural Rigor</em>
+            </h2>
+
+            <div className="space-y-10">
+              {/* Feature 01 */}
+              <div className="flex gap-6">
+                <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-white/10 border border-white/10">
+                  <Layers className="w-5 h-5 text-white" strokeWidth={1.5} />
+                </div>
+                <div>
+                  <h4 className="font-headline text-2xl text-white mb-2">Precision Engineering</h4>
+                  <p className="text-white/60 font-body leading-relaxed">
+                    We don't just write code; we engineer systems. Every module is stress-tested for endurance and future expansion.
+                  </p>
+                </div>
+              </div>
+
+              {/* Feature 02 */}
+              <div className="flex gap-6">
+                <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-white/10 border border-white/10">
+                  <Eye className="w-5 h-5 text-white" strokeWidth={1.5} />
+                </div>
+                <div>
+                  <h4 className="font-headline text-2xl text-white mb-2">Technical Execution</h4>
+                  <p className="text-white/60 font-body leading-relaxed">
+                    Clarity in strategy leads to excellence in execution. We maintain an uncompromising standard of technical debt management.
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
+          </motion.div>
+
+          {/* Right — testimonial card */}
+          <motion.div
+            className="relative"
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            {/* Glow behind card */}
+            <div className="pointer-events-none absolute -top-12 -left-12 w-64 h-64 bg-[#2563EB]/20 blur-3xl rounded-full" />
+
+            <div className="relative z-10 bg-[#F2F4F6] p-10 md:p-12">
+              {/* Opening quote mark */}
+              <span aria-hidden="true" className="font-headline italic text-[#2563EB]/20 text-[5rem] leading-none absolute top-2 left-6 select-none">"</span>
+              <p className="text-2xl md:text-3xl font-headline italic text-[#0F172A] leading-snug mb-8">
+                "H.V.A didn't just build a platform; they built a legacy infrastructure. Their architectural vision saved us years of technical restructuring."
+              </p>
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-[#0F172A] flex items-center justify-center shrink-0">
+                  <span className="text-white text-xs font-bold font-label">CTO</span>
+                </div>
+                <div>
+                  <p className="font-label font-bold uppercase tracking-widest text-xs text-[#0F172A]">Chief Technology Officer</p>
+                  <p className="font-body text-sm text-[#475569]">Global Logistics Corp.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Link to services */}
+            <Link
+              to="/services"
+              className="mt-6 inline-flex items-center gap-2 border border-white/20 px-6 py-3 text-xs font-label font-bold uppercase tracking-widest text-white/70 hover:text-white hover:border-white/40 transition-colors"
+            >
+              Our Engineering Process
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </motion.div>
+
         </div>
       </section>
 
