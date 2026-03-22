@@ -1,30 +1,72 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital,wght@0,400;1,400&family=IBM+Plex+Serif:ital,wght@0,500;0,600;1,500&family=Inter:wght@100..900&display=swap');
+/* ─── Fonts ─────────────────────────────────────────────────────────────────
+   Headline : Newsreader  (editorial serif)
+   Body     : Inter       (clean sans-serif)
+   Label    : Inter       (same as body)
+   ──────────────────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Inter:wght@100..900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ─── Design System Tokens ───────────────────────────────────────────────────
+   All colors, typography, and spacing live here.
+   Every page inherits these via the global import in main.tsx.
+   ──────────────────────────────────────────────────────────────────────── */
 :root {
-  --font-sans: 'Inter', sans-serif;
-  --font-serif: 'DM Serif Display', serif;
-  --color-black: #1E272E;
-  --color-white: #F5F6FA;
-  --color-grey: #e6e9f0;
-  --color-grey-dark: #495866;
-  --color-purple: #0984E3;
-  --color-purple-light: #4ca6ec;
-  --color-purple-dark: #0668b4;
-  --color-cyan: #00CEC9;
+  /* ── Color: Primary  (#2563EB — blue-600) ── */
+  --color-primary:          #2563EB;
+  --color-primary-light:    #3b82f6;
+  --color-primary-subtle:   #dbeafe;
+  --color-primary-dark:     #1d4ed8;
+  --color-primary-darker:   #1e40af;
+
+  /* ── Color: Secondary  (#475569 — slate-600) ── */
+  --color-secondary:        #475569;
+  --color-secondary-light:  #64748b;
+  --color-secondary-subtle: #f1f5f9;
+  --color-secondary-dark:   #334155;
+
+  /* ── Color: Tertiary  (#0F172A — slate-900, used for primary CTAs) ── */
+  --color-tertiary:         #0F172A;
+  --color-tertiary-mid:     #1e293b;
+
+  /* ── Color: Neutral  (#F8FAFC — slate-50) ── */
+  --color-neutral:          #F8FAFC;
+  --color-neutral-dark:     #e2e8f0;
+  --color-neutral-mid:      #cbd5e1;
+
+  /* ── Legacy aliases — backward compatible with existing pages ── */
+  --color-black:        #0F172A;
+  --color-white:        #F8FAFC;
+  --color-grey:         #e2e8f0;
+  --color-grey-dark:    #475569;
+  --color-purple:       #2563EB;
+  --color-purple-light: #3b82f6;
+  --color-purple-dark:  #1d4ed8;
+  --color-cyan:         #60a5fa;  /* lighter blue as accent */
+
+  /* ── Typography ── */
+  --font-headline: 'Newsreader', Georgia, serif;
+  --font-serif:    'Newsreader', Georgia, serif;
+  --font-body:     'Inter', system-ui, sans-serif;
+  --font-label:    'Inter', system-ui, sans-serif;
+  --font-sans:     'Inter', system-ui, sans-serif;
 }
 
-.font-serif {
+/* ─── Typography Classes ─────────────────────────────────────────────────── */
+
+.font-serif,
+.font-headline {
   font-family: var(--font-serif);
   letter-spacing: -0.01em;
 }
 
+/* Used by Home hero heading */
 .font-hero-script {
-  font-family: 'IBM Plex Serif', 'DM Serif Display', serif;
-  font-weight: 600;
+  font-family: 'Newsreader', serif;
+  font-weight: 500;
+  font-style: italic;
   letter-spacing: -0.005em;
   line-height: 1.06;
 }
@@ -33,7 +75,8 @@
   font-size: 4.5rem;
   font-weight: 400;
   line-height: 1.1;
-  background: linear-gradient(135deg, var(--color-black) 0%, var(--color-purple) 100%);
+  font-family: var(--font-serif);
+  background: linear-gradient(135deg, var(--color-tertiary) 0%, var(--color-primary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -42,90 +85,149 @@
   font-size: 2.8rem;
   font-weight: 400;
   line-height: 1.15;
+  font-family: var(--font-serif);
 }
 
 .title-small {
   font-size: 1.5rem;
   font-weight: 400;
   line-height: 1.2;
+  font-family: var(--font-serif);
 }
 
+/* ─── Gradient Text ──────────────────────────────────────────────────────── */
+
 .gradient-text {
-  background: linear-gradient(135deg, var(--color-purple) 0%, var(--color-purple-dark) 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .gradient-text-light {
-  background: linear-gradient(135deg, #4CA6EC 0%, #00CEC9 100%);
+  background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-cyan) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.bg-black {
-  background: var(--color-black) !important;
+/* ─── Color Helpers ──────────────────────────────────────────────────────── */
+
+.bg-black        { background: var(--color-tertiary)       !important; }
+.bg-grey         { background: var(--color-neutral-dark)   !important; }
+.bg-purple       { background: var(--color-primary)        !important; }
+.bg-purple-light { background: var(--color-primary-light)  !important; }
+.bg-purple-dark  { background: var(--color-primary-dark)   !important; }
+
+.text-black      { color: var(--color-tertiary)      !important; }
+.text-white      { color: var(--color-neutral)        !important; }
+.text-grey       { color: var(--color-secondary)      !important; }
+.text-purple     { color: var(--color-primary)        !important; }
+.text-purple-dark{ color: var(--color-primary-dark)   !important; }
+
+/* ─── Button System ──────────────────────────────────────────────────────────
+   Matches the design system spec:
+     Primary  → dark (#0F172A) bg, neutral text
+     Secondary→ slate (#475569) bg, neutral text
+     Inverted → dark bg, neutral text  (same as primary)
+     Outlined → transparent bg, dark border + text
+   ──────────────────────────────────────────────────────────────────────── */
+
+.btn-primary {
+  background:      var(--color-tertiary);
+  color:           var(--color-neutral);
+  padding:         0.75rem 2rem;
+  font-family:     var(--font-label);
+  font-size:       0.875rem;
+  font-weight:     700;
+  letter-spacing:  0.06em;
+  text-transform:  uppercase;
+  cursor:          pointer;
+  transition:      background 0.2s ease, transform 0.15s ease;
 }
-.bg-white {
-  /* background: var(--color-white) !important; */
+.btn-primary:hover  { background: var(--color-primary); }
+.btn-primary:active { transform: scale(0.97); }
+
+.btn-secondary {
+  background:      var(--color-secondary);
+  color:           var(--color-neutral);
+  padding:         0.75rem 2rem;
+  font-family:     var(--font-label);
+  font-size:       0.875rem;
+  font-weight:     700;
+  letter-spacing:  0.06em;
+  text-transform:  uppercase;
+  cursor:          pointer;
+  transition:      background 0.2s ease;
 }
-.bg-grey {
-  background: var(--color-grey) !important;
+.btn-secondary:hover { background: var(--color-secondary-dark); }
+
+.btn-inverted {
+  background:      var(--color-tertiary);
+  color:           var(--color-neutral);
+  padding:         0.75rem 2rem;
+  font-family:     var(--font-label);
+  font-size:       0.875rem;
+  font-weight:     700;
+  letter-spacing:  0.06em;
+  text-transform:  uppercase;
+  cursor:          pointer;
+  transition:      background 0.2s ease;
 }
-.bg-purple {
-  background: var(--color-purple) !important;
+.btn-inverted:hover { background: var(--color-tertiary-mid); }
+
+.btn-outlined {
+  background:      transparent;
+  color:           var(--color-tertiary);
+  border:          1.5px solid var(--color-tertiary);
+  padding:         0.75rem 2rem;
+  font-family:     var(--font-label);
+  font-size:       0.875rem;
+  font-weight:     700;
+  letter-spacing:  0.06em;
+  text-transform:  uppercase;
+  cursor:          pointer;
+  transition:      background 0.2s ease, color 0.2s ease;
 }
-.bg-purple-light {
-  background: var(--color-purple-light) !important;
-}
-.bg-purple-dark {
-  background: var(--color-purple-dark) !important;
-}
-.text-black {
-  color: var(--color-black) !important;
-}
-.text-white {
-  color: var(--color-white) !important;
-}
-.text-grey {
-  color: var(--color-grey-dark) !important;
-}
-.text-purple {
-  color: var(--color-purple) !important;
-}
-.text-purple-dark {
-  color: var(--color-purple-dark) !important;
+.btn-outlined:hover {
+  background: var(--color-tertiary);
+  color:      var(--color-neutral);
 }
 
-.card-hover {
-  transition: all 0.3s ease;
-}
+/* ─── Card Hover ─────────────────────────────────────────────────────────── */
 
+.card-hover { transition: all 0.3s ease; }
 .card-hover:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(139, 92, 246, 0.08);
+  transform:  translateY(-5px);
+  box-shadow: 0 20px 40px rgba(37, 99, 235, 0.08);
 }
 
-.glow {
-  position: relative;
-}
+/* ─── Glow ───────────────────────────────────────────────────────────────── */
 
+.glow { position: relative; }
 .glow::after {
   content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(45deg, var(--color-purple), var(--color-purple-dark), var(--color-purple));
+  position:      absolute;
+  inset:         -2px;
+  background:    linear-gradient(45deg, var(--color-primary), var(--color-primary-dark), var(--color-primary));
   border-radius: inherit;
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  z-index:       -1;
+  opacity:       0;
+  transition:    opacity 0.3s ease;
+}
+.glow:hover::after { opacity: 0.5; }
+
+/* ─── Animations ─────────────────────────────────────────────────────────── */
+
+@keyframes hero-color-cycle {
+  0%,  15% { filter: grayscale(100%); }
+  40%, 60% { filter: grayscale(0%);   }
+  85%,100% { filter: grayscale(100%); }
 }
 
-.glow:hover::after {
-  opacity: 0.5;
+.hero-image-animate {
+  animation: hero-color-cycle 8s ease-in-out infinite;
 }
+
+/* ─── Utilities ──────────────────────────────────────────────────────────── */
 
 @layer utilities {
   .sharp-edge {
@@ -137,63 +239,62 @@
   }
 }
 
-
+/* ─── Tailwind Design Tokens (HSL) ────────────────────────────────────────── */
 
 @layer base {
   :root {
-    --background: 220 33% 97%;
-    --foreground: 204 21% 15%;
-    --card: 220 33% 98%;
-    --card-foreground: 204 21% 15%;
-    --popover: 220 33% 98%;
-    --popover-foreground: 204 21% 15%;
-    --primary: 206 92% 46%;
-    --primary-foreground: 220 33% 98%;
-    --secondary: 220 20% 92%;
-    --secondary-foreground: 204 21% 15%;
-    --muted: 220 20% 92%;
-    --muted-foreground: 204 12% 38%;
-    --accent: 177 100% 40%;
-    --accent-foreground: 204 21% 15%;
-    --destructive: 0 84% 56%;
-    --destructive-foreground: 220 33% 98%;
-    --border: 205 18% 82%;
-    --input: 205 18% 82%;
-    --ring: 206 92% 46%;
-    --chart-1: 206 92% 46%;
-    --chart-2: 177 100% 40%;
-    --chart-3: 204 21% 15%;
-    --chart-4: 206 70% 58%;
-    --chart-5: 177 72% 48%;
-    --radius: 0.5rem;
+    /* Maps directly to the design system palette */
+    --background:             210 40% 98%;   /* #F8FAFC — neutral   */
+    --foreground:             222 47% 11%;   /* #0F172A — tertiary  */
+    --card:                   210 40% 99%;
+    --card-foreground:        222 47% 11%;
+    --popover:                210 40% 99%;
+    --popover-foreground:     222 47% 11%;
+    --primary:                221 83% 53%;   /* #2563EB — primary   */
+    --primary-foreground:     210 40% 98%;
+    --secondary:              215 19% 35%;   /* #475569 — secondary */
+    --secondary-foreground:   210 40% 98%;
+    --muted:                  215 19% 92%;
+    --muted-foreground:       215 19% 40%;
+    --accent:                 217 91% 60%;   /* #60a5fa — accent    */
+    --accent-foreground:      222 47% 11%;
+    --destructive:            0   84% 56%;
+    --destructive-foreground: 210 40% 98%;
+    --border:                 215 19% 82%;
+    --input:                  215 19% 82%;
+    --ring:                   221 83% 53%;
+    --chart-1:                221 83% 53%;
+    --chart-2:                217 91% 60%;
+    --chart-3:                222 47% 11%;
+    --chart-4:                215 19% 35%;
+    --chart-5:                210 40% 70%;
+    --radius:                 0.5rem;
   }
+
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --background:             222 47% 11%;
+    --foreground:             210 40% 98%;
+    --card:                   222 47% 13%;
+    --card-foreground:        210 40% 98%;
+    --popover:                222 47% 13%;
+    --popover-foreground:     210 40% 98%;
+    --primary:                221 83% 60%;
+    --primary-foreground:     222 47% 11%;
+    --secondary:              215 19% 25%;
+    --secondary-foreground:   210 40% 98%;
+    --muted:                  215 19% 20%;
+    --muted-foreground:       215 19% 63%;
+    --accent:                 215 19% 20%;
+    --accent-foreground:      210 40% 98%;
+    --destructive:            0   62% 30%;
+    --destructive-foreground: 210 40% 98%;
+    --border:                 215 19% 20%;
+    --input:                  215 19% 20%;
+    --ring:                   221 83% 60%;
   }
 }
+
+/* ─── Global Base ────────────────────────────────────────────────────────── */
 
 @layer base {
   html {
@@ -202,16 +303,20 @@
 
   * {
     @apply border-border;
-    -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing:  antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    backface-visibility: hidden;
+    text-rendering:          optimizeLegibility;
+    backface-visibility:     hidden;
   }
 
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-sans);
-    overflow-x: hidden;
+    font-family:  var(--font-sans);
+    overflow-x:   hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-headline);
   }
 
   section {

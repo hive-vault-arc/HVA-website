@@ -1,9 +1,8 @@
 import React, { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Layers } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Background3d from '../components/Plasma';
-import TextType from '../components/TextType';
 import LogoLoop from '../components/LogoItem';
 import { FullScreenScrollFX } from '../components/ui/full-screen-scroll-fx';
 import { useAnimationQuality } from '../lib/animationQuality';
@@ -121,51 +120,6 @@ const Home: React.FC = () => {
     },
   ];
 
-  const heroContent = (
-    <div className="container mx-auto px-4 text-center">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="max-w-4xl mx-auto px-4 py-6 md:px-6 md:py-8"
-      >
-        <h1 className="font-hero-script text-5xl md:text-8xl text-[#101B2B] mb-6 [text-shadow:0_6px_18px_rgba(8,13,20,0.2)]">
-          <TextType
-            text={[
-              'Software & Cloud Engineering',
-              'Custom Digital Systems',
-              'AI-Powered Applications',
-              'Scalable Business Platforms'
-            ]}
-            typingSpeed={75}
-            pauseDuration={1500}
-            showCursor
-            cursorCharacter="|"
-            cursorClassName="text-[#101B2B]"
-          />
-        </h1>
-        <p className="text-xl mb-0 max-w-3xl mx-auto text-[#1E272E] font-medium leading-relaxed [text-shadow:0_2px_10px_rgba(245,246,250,0.6)]">
-          A software and cloud engineering company building custom digital systems, AI-powered applications, and scalable platforms for modern businesses.
-        </p>
-        <div className="h-8" />
-        <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <Link
-            to="/portfolio"
-            className="sharp-edge px-8 py-4 bg-[#0984E3] text-[#F5F6FA] border border-[#0984E3] font-medium hover:bg-[#0776CC] transition-colors duration-300 text-lg"
-          >
-            View Our Work
-          </Link>
-          <Link
-            to="/contact"
-            className="sharp-edge px-8 py-4 bg-white text-black border border-white font-medium hover:bg-[#ECF5FD] transition-colors duration-300 text-lg"
-          >
-            Book a Call
-          </Link>
-        </div>
-      </motion.div>
-    </div>
-  );
-
   return (
     <div className="h-full">
       {showAdvancedEffects && (
@@ -181,8 +135,73 @@ const Home: React.FC = () => {
         />
       )}
 
-      <section className="relative h-[88vh] overflow-hidden flex items-center">
-        <div className="relative z-10 w-full">{heroContent}</div>
+      {/* Hero Section */}
+      <section className="relative px-6 pt-28 pb-32 lg:px-14 lg:pt-36 lg:pb-40 overflow-visible">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+            {/* Left: copy */}
+            <motion.div
+              className="lg:col-span-7 z-10"
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <span className="inline-block px-3 py-1 bg-[#0984E3]/10 text-[#0984E3] text-[10px] uppercase tracking-[0.22em] font-bold mb-8">
+                Software &amp; Cloud Engineering
+              </span>
+              <h1 className="font-serif text-5xl md:text-7xl xl:text-[5.5rem] font-medium leading-[1.04] tracking-tight text-[#1E272E] mb-8">
+                Building the Next<br />
+                Generation of{' '}
+                <em className="italic">Digital<br />Systems</em>.
+              </h1>
+              <p className="text-xl text-[#1E272E]/60 max-w-xl mb-12 font-light leading-relaxed">
+                We engineer custom software, AI-powered applications, and cloud platforms that power modern businesses at scale.
+              </p>
+              <div className="flex flex-wrap gap-6">
+                <Link
+                  to="/portfolio"
+                  className="sharp-edge bg-[#1E272E] text-[#F5F6FA] px-8 py-4 text-sm font-bold hover:bg-[#0984E3] transition-colors duration-300"
+                >
+                  View Our Work
+                </Link>
+                <Link
+                  to="/services"
+                  className="flex items-center gap-2 px-8 py-4 text-sm font-bold text-[#1E272E] hover:gap-4 transition-all duration-300"
+                >
+                  Our Services <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* Right: image + floating card */}
+            <motion.div
+              className="lg:col-span-5 relative mt-12 lg:mt-0"
+              initial={{ opacity: 0, x: 28 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <div className="aspect-[4/5] overflow-hidden shadow-2xl">
+                <img
+                  src="/Images/hero.webp"
+                  alt="Precision software engineering"
+                  className="w-full h-full object-cover hero-image-animate"
+                />
+              </div>
+              {/* Asymmetric floating card */}
+              <div className="absolute -bottom-16 -left-6 md:-left-14 bg-white p-8 max-w-[17rem] shadow-xl hidden md:block">
+                <Layers className="w-8 h-8 text-[#0984E3] mb-4" />
+                <h3 className="font-serif text-xl mb-3 italic font-medium text-[#1E272E]">
+                  Precision in Delivery.
+                </h3>
+                <p className="text-sm text-[#1E272E]/60 leading-relaxed">
+                  Every line of code and architectural decision is built for performance, reliability, and long-term scale.
+                </p>
+              </div>
+            </motion.div>
+
+          </div>
+        </div>
       </section>
 
       <section className="relative px-4 py-14 sm:px-6 lg:px-14 lg:py-20">

@@ -6,372 +6,616 @@ import {
   Bot,
   CheckCircle2,
   Cloud,
-  Code2,
   Database,
-  ShieldCheck,
   Workflow,
 } from 'lucide-react';
 import { useAnimationQuality } from '../lib/animationQuality';
 import PageAmbientBackground from '../components/PageAmbientBackground';
-import HeroCurvedShapes from '../components/HeroCurvedShapes';
 
-type ServiceLine = {
-  icon: React.ReactNode;
-  title: string;
-  summary: string;
-  outcomes: string[];
-  tone: 'light' | 'dark';
-};
+/* ── Data ─────────────────────────────────────────────────────────────────── */
 
-type Capability = {
-  icon: React.ReactNode;
-  title: string;
-  detail: string;
-};
-
-const serviceLines: ServiceLine[] = [
+const serviceLines = [
   {
-    icon: <Bot className="h-5 w-5" />,
+    num: '01',
+    icon: <Bot className="h-6 w-6" />,
     title: 'AI Receptionist & Agent Operations',
-    summary: 'Customer-facing and internal AI agents that respond, route, and execute routine workflows continuously.',
-    outcomes: ['AI receptionist for WhatsApp and web', 'Lead qualification and smart routing', 'Operational agent actions'],
-    tone: 'dark',
+    summary:
+      'Customer-facing and internal AI agents that respond, route, and execute routine workflows continuously — with no human intervention required.',
+    outcomes: [
+      'AI receptionist for WhatsApp, web, and voice',
+      'Automated lead qualification and smart routing',
+      'CRM & calendar deep integration',
+    ],
+    accent: 'dark',
   },
   {
-    icon: <Database className="h-5 w-5" />,
+    num: '02',
+    icon: <Database className="h-6 w-6" />,
     title: 'AI Analyst & Decision Intelligence',
-    summary: 'Analyst copilots that organize data, generate reports, and support faster operational decisions.',
-    outcomes: ['AI analyst reporting copilots', 'Executive and ops dashboards', 'Insight workflows tied to KPIs'],
-    tone: 'light',
+    summary:
+      'Internal analyst copilots that organize data, generate reports, and surface the operational insights your team needs — exactly when they need them.',
+    outcomes: [
+      'Predictive performance dashboards',
+      'NLP-based reporting and summarization',
+      'Insight workflows tied to business KPIs',
+    ],
+    accent: 'light',
   },
   {
-    icon: <Workflow className="h-5 w-5" />,
+    num: '03',
+    icon: <Workflow className="h-6 w-6" />,
     title: 'Automation & Custom Platforms',
-    summary: 'Custom software systems and process automation aligned with how your business actually works.',
-    outcomes: ['Internal systems and portals', 'API orchestration and integrations', 'Workflow automations by department'],
-    tone: 'light',
+    summary:
+      'We design and engineer the operational backbone of your digital product — from bespoke SaaS platforms to enterprise workflow orchestration systems.',
+    outcomes: [
+      'Custom enterprise SaaS engineering',
+      'Internal portals and API architecture',
+      'Cross-system workflow automations',
+    ],
+    accent: 'light',
   },
   {
-    icon: <Cloud className="h-5 w-5" />,
+    num: '04',
+    icon: <Cloud className="h-6 w-6" />,
     title: 'Delivery Ecosystem & Reliability',
-    summary: 'CI/CD, deployment workflows, and reliability patterns for stable releases and long-term maintainability.',
-    outcomes: ['Deployment pipelines', 'Monitoring and incident response', 'Security and reliability safeguards'],
-    tone: 'dark',
+    summary:
+      'Scalability is not an accident. We implement the infrastructure, security controls, and CI/CD pipelines that ensure zero-downtime production operations.',
+    outcomes: [
+      'Cloud infrastructure and AWS/Azure setup',
+      'End-to-end security auditing and hardening',
+      'Automated scaling and deployment pipelines',
+    ],
+    accent: 'dark',
   },
 ];
 
-const capabilities: Capability[] = [
+const competencies = [
   {
-    icon: <Code2 className="h-5 w-5 text-[#0984E3]" />,
+    num: '01',
     title: 'Software Product Engineering',
-    detail: 'Production-ready web and mobile systems with clear architecture ownership.',
+    detail:
+      'Production-ready web and mobile systems built with modern frameworks — clear architecture, ownership, and maintainability from day one.',
   },
   {
-    icon: <Bot className="h-5 w-5 text-[#0984E3]" />,
+    num: '02',
     title: 'AI Receptionist Systems',
-    detail: 'Always-on front-desk automation for conversations, qualification, and scheduling.',
+    detail:
+      'Always-on front-desk automation for conversations, qualification, and scheduling — natural language understanding with custom LLM tuning.',
   },
   {
-    icon: <Database className="h-5 w-5 text-[#0984E3]" />,
+    num: '03',
     title: 'AI Analyst Reporting',
-    detail: 'Decision support workflows for reporting, insight extraction, and operational control.',
+    detail:
+      'Decision support workflows for reporting, insight extraction, and operational control. Real-time dashboards for executive teams.',
   },
   {
-    icon: <Workflow className="h-5 w-5 text-[#0984E3]" />,
+    num: '04',
     title: 'Workflow Orchestration',
-    detail: 'Automated handoffs between tools, teams, and systems with fewer manual bottlenecks.',
+    detail:
+      'Automated handoffs between tools, teams, and systems with fewer manual bottlenecks. Built on Python, Make, or custom microservices.',
   },
   {
-    icon: <Cloud className="h-5 w-5 text-[#0984E3]" />,
+    num: '05',
     title: 'CI/CD and Deployment',
-    detail: 'Repeatable release flows with quality gates and deployment confidence.',
+    detail:
+      'Hardened deployment pipelines with quality gates — every push to production is secure, tested, and fully reversible.',
   },
   {
-    icon: <ShieldCheck className="h-5 w-5 text-[#0984E3]" />,
+    num: '06',
     title: 'Security and Reliability',
-    detail: 'Controls, hardening, and observability for dependable operations.',
+    detail:
+      'Infrastructure-as-code and persistent monitoring for enterprise-grade security. Validation, rate limits, and control layers from day one.',
+  },
+];
+
+const brandPrinciples = [
+  {
+    num: '01',
+    title: 'Outcome-Driven',
+    desc: 'Every milestone is tied to measurable business outcomes, not just output.',
+  },
+  {
+    num: '02',
+    title: 'Quality by Default',
+    desc: 'Performance, reliability, and maintainability are built in from day one — never bolted on.',
+  },
+  {
+    num: '03',
+    title: 'End-to-End Ownership',
+    desc: 'We own the delivery from architecture to production. No hand-offs in the dark.',
   },
 ];
 
 const deliveryFlow = [
-  { step: 'Discover', detail: 'Clarify goals, constraints, and the delivery scope.' },
-  { step: 'Design', detail: 'Define architecture, workflows, and implementation priorities.' },
-  { step: 'Build', detail: 'Deliver incrementally with review checkpoints and QA.' },
-  { step: 'Scale', detail: 'Stabilize, optimize, and continuously improve outcomes.' },
+  {
+    num: '01',
+    step: 'Discover',
+    detail: 'We audit your current bottlenecks and map out the highest-impact AI and automation opportunities.',
+    width: '28%',
+  },
+  {
+    num: '02',
+    step: 'Design',
+    detail: 'Engineering the blueprints: tech stack, security protocols, architecture decisions, and UX flows.',
+    width: '52%',
+  },
+  {
+    num: '03',
+    step: 'Build',
+    detail: 'Sprint-based delivery. We code, test, and integrate the system into your active environment.',
+    width: '75%',
+  },
+  {
+    num: '04',
+    step: 'Scale',
+    detail: 'Production hand-off and continuous monitoring to ensure the system scales with your volume.',
+    width: '100%',
+  },
 ];
-const deliveryAccentWidths = ['26%', '50%', '72%', '96%'];
 
-const serviceHeroCurves = [
-  { label: 'Agents', value: '01', height: 176, tone: 'violet' as const },
-  { label: 'Ops', value: '02', height: 222, tone: 'teal' as const },
-  { label: 'Scale', value: '03', height: 268, tone: 'blue' as const },
+const heroStats = [
+  { value: '4', label: 'Core Service Lines', sub: 'AI · Automation · Cloud · Platform' },
+  { value: '24/7', label: 'Continuous AI Coverage', sub: 'Agents always operational' },
+  { value: '100%', label: 'Production Delivery', sub: 'Every sprint ships to prod' },
 ];
+
+/* ── Component ────────────────────────────────────────────────────────────── */
 
 const Services: React.FC = () => {
   const { motionReduced } = useAnimationQuality();
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const heroShift = useTransform(scrollYProgress, [0, 0.35], [0, 42]);
+  const heroShift = useTransform(scrollYProgress, [0, 0.3], [0, 30]);
 
   return (
     <MotionConfig reducedMotion={motionReduced ? 'always' : 'never'}>
-      <div className="relative isolate min-h-screen overflow-hidden bg-[#F5F6FA] text-[#1E272E]">
+      <div className="relative isolate min-h-screen overflow-x-hidden bg-[#F8FAFC] text-[#0F172A]">
+
+        {/* Scroll progress */}
         <motion.div
           aria-hidden="true"
-          className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-gradient-to-r from-[#0984E3] via-[#4CA6EC] to-[#00CEC9]"
+          className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-gradient-to-r from-[#2563EB] via-[#3b82f6] to-[#60a5fa]"
           style={{ scaleX: progressScale }}
         />
         <PageAmbientBackground className="-z-10" />
 
-        <section className="relative pb-14 pt-32 md:pb-20">
-          <div className="container mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 22 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55 }}
-              style={{ y: heroShift }}
-              className="relative py-5 md:py-8"
-            >
-              <div className="pointer-events-none absolute -left-14 top-10 h-24 w-64 rounded-full bg-[#0984E3]/10 blur-3xl" />
-              <div className="pointer-events-none absolute right-[28%] top-0 h-28 w-72 rounded-full bg-[#00CEC9]/10 blur-3xl" />
-              <div className="pointer-events-none absolute left-0 right-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(9,132,227,0.45),transparent)]" />
-              <div className="pointer-events-none absolute left-0 right-0 bottom-0 h-px bg-[linear-gradient(90deg,transparent,rgba(0,206,201,0.4),transparent)]" />
-              <div className="relative z-10 grid grid-cols-1 gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:items-start">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.24em] text-[#1E272E]/60">Services</p>
-                  <h1 className="mt-4 max-w-5xl font-serif text-5xl font-semibold leading-[0.94] md:text-7xl">
-                    Systems that move
-                    <br />
-                    faster than your
-                    <br />
-                    <span className="text-[#0984E3]">bottlenecks.</span>
-                  </h1>
-                  <p className="mt-6 max-w-3xl text-lg leading-relaxed text-[#1E272E]/78">
-                    We build practical ecosystems for modern businesses: AI agents, AI receptionist systems, AI analyst
-                    workflows, custom software platforms, and process automation connected end to end.
-                  </p>
-                  <div className="mt-9 flex flex-wrap gap-3">
-                    <Link
-                      to="/contact"
-                      className="inline-flex items-center gap-2 bg-[#1E272E] px-7 py-3 text-[#F5F6FA] transition-colors hover:bg-[#0984E3]"
-                    >
-                      Start a Project
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                    <Link
-                      to="/portfolio"
-                      className="inline-flex items-center gap-2 bg-white/90 px-7 py-3 text-[#1E272E] shadow-[0_12px_26px_rgba(9,132,227,0.08)] transition-colors hover:bg-[#ECF5FD]"
-                    >
-                      View Case Studies
-                    </Link>
-                  </div>
+        {/* ────────────────────────────────────────────────────────────────────
+            SECTION 1 — HERO
+        ──────────────────────────────────────────────────────────────────── */}
+        <section className="relative overflow-hidden bg-white">
+          {/* Blueprint grid */}
+          <div
+            className="absolute inset-0 opacity-50"
+            style={{
+              backgroundImage:
+                'linear-gradient(to right, rgba(37,99,235,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(37,99,235,0.05) 1px, transparent 1px)',
+              backgroundSize: '40px 40px',
+            }}
+          />
+          {/* Skewed right panel */}
+          <div className="absolute top-0 right-0 w-2/5 h-full bg-[#f1f5f9] skew-x-6 translate-x-20 hidden lg:block" />
+
+          <div className="relative max-w-7xl mx-auto px-6 lg:px-14 pt-32 pb-28">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+              {/* Left: copy */}
+              <motion.div
+                className="lg:col-span-8"
+                initial={{ opacity: 0, y: 28 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7 }}
+                style={{ y: heroShift }}
+              >
+                <span className="inline-block text-[#2563EB] font-bold tracking-[0.22em] text-[10px] uppercase mb-6">
+                  Engineering Excellence
+                </span>
+                <h1 className="font-serif text-6xl md:text-8xl text-[#0F172A] leading-[1.03] tracking-tight mb-8">
+                  Systems that move faster<br />
+                  than your <em className="italic">bottlenecks.</em>
+                </h1>
+                <p className="text-xl md:text-2xl text-[#475569] font-light max-w-2xl leading-relaxed mb-10">
+                  We deploy the operational layer for growth and control — integrating AI agents,
+                  custom platforms, and reliable delivery ecosystems into the core of your business.
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <Link
+                    to="/contact"
+                    className="sharp-edge bg-[#0F172A] text-[#F8FAFC] px-8 py-4 text-sm font-bold uppercase tracking-wide hover:bg-[#2563EB] transition-colors duration-300"
+                  >
+                    View Capabilities
+                  </Link>
+                  <Link
+                    to="/portfolio"
+                    className="sharp-edge bg-white border border-[#0F172A]/15 px-8 py-4 text-sm font-bold uppercase tracking-wide hover:bg-[#f1f5f9] transition-colors duration-300"
+                  >
+                    Client Portfolio →
+                  </Link>
                 </div>
+              </motion.div>
 
-                <div className="relative flex flex-col gap-5 lg:pl-2">
-                  <div className="pointer-events-none absolute -left-10 top-6 h-20 w-20 rounded-full bg-[#0984E3]/12 blur-2xl" />
-                  <div className="pointer-events-none absolute right-0 top-0 h-24 w-24 rounded-full bg-[#00CEC9]/10 blur-2xl" />
-                  <p className="relative max-w-lg text-lg leading-relaxed text-[#1E272E]/78">
-                    One operating layer for growth and control.
-                  </p>
-                  <div className="relative space-y-2">
-                    {[
-                      'AI receptionist + support agents',
-                      'Analyst systems + automation workflows',
-                    ].map((item) => (
-                      <div key={item} className="flex items-start gap-2.5 text-sm leading-relaxed text-[#1E272E]/82">
-                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#0984E3]" />
-                        <span>{item}</span>
-                      </div>
-                    ))}
+              {/* Right: stat cards */}
+              <motion.div
+                className="lg:col-span-4 flex flex-col gap-4"
+                initial={{ opacity: 0, x: 28 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.7, delay: 0.2 }}
+              >
+                {heroStats.map((stat, i) => (
+                  <div
+                    key={stat.label}
+                    className="bg-white p-6 shadow-[0_10px_28px_rgba(37,99,235,0.09)] border-l-4 border-[#2563EB]"
+                  >
+                    <p className="font-serif text-4xl font-medium text-[#2563EB]">{stat.value}</p>
+                    <p className="text-[#0F172A] font-bold text-sm mt-1">{stat.label}</p>
+                    <p className="text-[#475569] text-xs mt-1 font-light tracking-wide">{stat.sub}</p>
                   </div>
+                ))}
+              </motion.div>
 
-                  <HeroCurvedShapes items={serviceHeroCurves} badgeText="Execution Layer" />
-
-                  <p className="text-xs tracking-[0.12em] text-[#1E272E]/72">
-                    AI + Custom Systems. End-to-end. Worldwide.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
+            </div>
           </div>
         </section>
 
-        <section className="relative py-10 md:py-14">
-          <div className="container mx-auto px-4">
-            <div className="mb-8 max-w-4xl">
-              <p className="text-xs uppercase tracking-[0.2em] text-[#1E272E]/60">Core Service Lines</p>
-              <h2 className="mt-3 font-serif text-4xl font-semibold leading-[1.02] md:text-6xl">What We Actually Deliver</h2>
+        {/* ────────────────────────────────────────────────────────────────────
+            SECTION 2 — CORE SERVICE LINES
+        ──────────────────────────────────────────────────────────────────── */}
+        <section className="bg-[#f2f4f6] py-24 md:py-32">
+          <div className="max-w-7xl mx-auto px-6 lg:px-14">
+
+            <div className="mb-16">
+              <p className="text-[10px] uppercase tracking-[0.22em] text-[#475569] font-bold mb-3">
+                Core Service Lines
+              </p>
+              <div className="flex items-end justify-between flex-wrap gap-6">
+                <h2 className="font-serif text-5xl md:text-6xl text-[#0F172A] leading-tight max-w-2xl">
+                  What We Actually Deliver
+                </h2>
+                <p className="text-[#475569] max-w-md font-light leading-relaxed">
+                  Four connected service lines that cover the full operational spectrum — from intelligent customer-facing agents to the infrastructure that keeps them running.
+                </p>
+              </div>
+              <div className="mt-8 w-16 h-[3px] bg-[#2563EB]" />
             </div>
 
-            <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-[1px] bg-[#d1d5db]">
               {serviceLines.map((line, index) => (
                 <motion.article
                   key={line.title}
-                  initial={{ opacity: 0, y: 18 }}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.22 }}
-                  transition={{ duration: 0.42, delay: index * 0.05 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.5, delay: index * 0.07 }}
                   className={[
-                    'p-7 shadow-[0_18px_38px_rgba(9,132,227,0.1)]',
-                    line.tone === 'dark'
-                      ? 'bg-[linear-gradient(130deg,#1E272E_0%,#0984E3_100%)] text-[#F5F6FA]'
-                      : 'bg-white/85 text-[#1E272E]',
+                    'relative flex flex-col gap-6 p-10 lg:p-14 group transition-all duration-300',
+                    line.accent === 'dark'
+                      ? 'bg-[#0F172A] text-[#F8FAFC]'
+                      : 'bg-white text-[#0F172A] hover:bg-[#F8FAFC]',
                   ].join(' ')}
                 >
-                  <div className="flex items-center gap-2.5">
-                    <span
+                  {/* Large background number */}
+                  <span
+                    className={[
+                      'absolute top-8 right-10 font-serif text-[7rem] font-medium leading-none select-none pointer-events-none',
+                      line.accent === 'dark' ? 'text-white/6' : 'text-[#0F172A]/5',
+                    ].join(' ')}
+                  >
+                    {line.num}
+                  </span>
+
+                  {/* Icon + badge */}
+                  <div className="flex items-center gap-3">
+                    <div
                       className={[
-                        'inline-flex p-2',
-                        line.tone === 'dark' ? 'bg-white/14 text-[#F5F6FA]' : 'bg-[#ECF5FD] text-[#0984E3]',
+                        'inline-flex p-2.5',
+                        line.accent === 'dark'
+                          ? 'bg-white/12 text-[#60a5fa]'
+                          : 'bg-[#dbeafe] text-[#2563EB]',
                       ].join(' ')}
                     >
                       {line.icon}
-                    </span>
-                    <p
+                    </div>
+                    <span
                       className={[
-                        'text-xs uppercase tracking-[0.16em]',
-                        line.tone === 'dark' ? 'text-[#F5F6FA]/72' : 'text-[#1E272E]/58',
+                        'text-[10px] font-bold uppercase tracking-[0.18em]',
+                        line.accent === 'dark' ? 'text-[#60a5fa]' : 'text-[#2563EB]',
                       ].join(' ')}
                     >
-                      Service Line
+                      Service Line {line.num}
+                    </span>
+                  </div>
+
+                  {/* Content */}
+                  <div>
+                    <h3 className="font-serif text-3xl leading-tight mb-4">{line.title}</h3>
+                    <p
+                      className={[
+                        'leading-relaxed mb-6 font-light',
+                        line.accent === 'dark' ? 'text-[#F8FAFC]/75' : 'text-[#475569]',
+                      ].join(' ')}
+                    >
+                      {line.summary}
                     </p>
+                    <ul className="space-y-3">
+                      {line.outcomes.map((outcome) => (
+                        <li key={outcome} className="flex items-start gap-3 text-sm">
+                          <CheckCircle2
+                            className={[
+                              'mt-0.5 h-4 w-4 shrink-0',
+                              line.accent === 'dark' ? 'text-[#60a5fa]' : 'text-[#2563EB]',
+                            ].join(' ')}
+                          />
+                          <span
+                            className={
+                              line.accent === 'dark' ? 'text-[#F8FAFC]/85 font-medium' : 'text-[#0F172A] font-medium'
+                            }
+                          >
+                            {outcome}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <h3 className="mt-4 text-3xl font-semibold leading-tight">{line.title}</h3>
-                  <p className={line.tone === 'dark' ? 'mt-3 text-[#F5F6FA]/88' : 'mt-3 text-[#1E272E]/74'}>{line.summary}</p>
-                  <ul className="mt-5 space-y-2">
-                    {line.outcomes.map((outcome) => (
-                      <li key={outcome} className="flex items-start gap-2.5">
-                        <CheckCircle2
-                          className={[
-                            'mt-0.5 h-4 w-4 shrink-0',
-                            line.tone === 'dark' ? 'text-[#F5F6FA]' : 'text-[#0984E3]',
-                          ].join(' ')}
-                        />
-                        <span className={line.tone === 'dark' ? 'text-[#F5F6FA]/92' : 'text-[#1E272E]/82'}>{outcome}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </motion.article>
-              ))}
-            </div>
-          </div>
-        </section>
 
-        <section className="relative py-12 md:py-16">
-          <div className="container mx-auto px-4">
-            <div className="mb-8 grid grid-cols-1 gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
-              <div>
-                <p className="text-xs uppercase tracking-[0.2em] text-[#1E272E]/60">Capability Catalog</p>
-                <h2 className="mt-3 font-serif text-4xl font-semibold leading-[1.02] md:text-5xl">Detailed Engineering Capabilities</h2>
-              </div>
-              <p className="max-w-3xl text-lg leading-relaxed text-[#1E272E]/76">
-                From AI receptionist and analyst systems to workflow automation and deployment reliability, our capability
-                set is designed as one connected delivery ecosystem.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
-              {capabilities.map((capability, index) => (
-                <motion.article
-                  key={capability.title}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.36, delay: index * 0.04 }}
-                  className="bg-white/82 p-5 shadow-[0_14px_30px_rgba(9,132,227,0.08)] transition-transform duration-300 hover:-translate-y-1"
-                >
-                  <div className="inline-flex bg-[#ECF5FD] p-2">{capability.icon}</div>
-                  <h3 className="mt-3 text-2xl font-semibold leading-tight">{capability.title}</h3>
-                  <p className="mt-2 leading-relaxed text-[#1E272E]/74">{capability.detail}</p>
-                </motion.article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="relative pb-10 pt-8 md:pb-14 md:pt-10">
-          <div className="container mx-auto px-4">
-            <div className="mb-5 md:mb-6">
-              <p className="text-xs uppercase tracking-[0.2em] text-[#1E272E]/60">Execution Flow</p>
-              <h2 className="mt-2 font-serif text-3xl font-semibold leading-[1.02] md:text-4xl">How Delivery Moves to Production</h2>
-            </div>
-
-            <div className="relative overflow-hidden border border-[#1E272E]/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.7),rgba(236,245,253,0.62))] p-3 shadow-[0_12px_28px_rgba(9,132,227,0.08)] md:p-4">
-              <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
-              {deliveryFlow.map((step, index) => (
-                <motion.article
-                  key={step.step}
-                  initial={{ opacity: 0, y: 14 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.25 }}
-                  transition={{ duration: 0.34, delay: index * 0.05 }}
-                  className="relative overflow-visible border border-[#1E272E]/10 bg-white/84 p-4 pt-7 shadow-[0_8px_20px_rgba(9,132,227,0.08)] md:p-5 md:pt-8"
-                >
-                  {index < deliveryFlow.length - 1 ? (
-                    <div
-                      aria-hidden="true"
-                      className="pointer-events-none absolute left-[2.55rem] right-[-3.3rem] top-[0.28rem] hidden h-[2px] bg-gradient-to-r from-[#0984E3]/45 via-[#4CA6EC]/45 to-[#00CEC9]/45 xl:block"
-                    />
-                  ) : null}
-                  <div className="absolute -top-4 left-4 z-10 inline-flex h-9 min-w-9 items-center justify-center border border-[#0984E3]/35 bg-[#ECF5FD] px-2 text-lg font-semibold text-[#0984E3] md:h-10 md:min-w-10">
-                    {`0${index + 1}`}
-                  </div>
-                  <p className="text-[10px] uppercase tracking-[0.22em] text-[#0984E3]/80">{`STEP ${index + 1}`}</p>
-                  <h3 className="mt-2 text-3xl font-semibold leading-none md:text-4xl">{step.step}</h3>
-                  <p className="mt-3 max-w-md text-base leading-relaxed text-[#1E272E]/74 md:text-lg">{step.detail}</p>
+                  {/* Bottom accent bar */}
                   <div
-                    aria-hidden="true"
-                    className="mt-4 h-[3px] bg-gradient-to-r from-[#0984E3] to-[#5DC6C4]"
-                    style={{ width: deliveryAccentWidths[index] ?? '100%' }}
+                    className={[
+                      'h-[2px] w-full mt-auto',
+                      line.accent === 'dark'
+                        ? 'bg-gradient-to-r from-[#2563EB]/60 to-transparent'
+                        : 'bg-gradient-to-r from-[#2563EB] to-[#60a5fa] opacity-0 group-hover:opacity-100 transition-opacity duration-300',
+                    ].join(' ')}
                   />
                 </motion.article>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ────────────────────────────────────────────────────────────────────
+            SECTION 3 — TECHNICAL COMPETENCIES
+        ──────────────────────────────────────────────────────────────────── */}
+        <section className="py-24 md:py-32">
+          <div className="max-w-7xl mx-auto px-6 lg:px-14">
+
+            <div className="mb-16 grid grid-cols-1 lg:grid-cols-2 gap-10 items-end">
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.22em] text-[#475569] font-bold mb-3">
+                  Capability Catalog
+                </p>
+                <h2 className="font-serif text-5xl md:text-6xl text-[#0F172A] leading-tight">
+                  Technical Competencies
+                </h2>
+                <div className="mt-6 w-16 h-[3px] bg-[#2563EB]" />
+              </div>
+              <p className="text-[#475569] text-lg font-light leading-relaxed max-w-lg">
+                From AI receptionist and analyst systems to workflow automation and deployment
+                reliability — our capability set is designed as one connected delivery ecosystem.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+              {competencies.map((cap, index) => (
+                <motion.article
+                  key={cap.title}
+                  initial={{ opacity: 0, y: 18 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.42, delay: index * 0.05 }}
+                  className={[
+                    'relative flex flex-col justify-between min-h-[260px] p-8 border border-[#e2e8f0]',
+                    'group hover:border-[#2563EB]/40 hover:shadow-[0_16px_32px_rgba(37,99,235,0.08)] transition-all duration-300',
+                    index % 2 === 0 ? 'bg-[#F8FAFC]' : 'bg-white',
+                  ].join(' ')}
+                >
+                  <span className="text-[10px] font-bold text-[#94a3b8] tracking-[0.18em]">
+                    {cap.num}
+                  </span>
+                  <div>
+                    <h4 className="text-xl font-bold text-[#0F172A] mb-3 leading-tight">{cap.title}</h4>
+                    <p className="text-sm text-[#475569] leading-relaxed">{cap.detail}</p>
+                  </div>
+                  {/* Hover accent */}
+                  <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#2563EB] group-hover:w-full transition-all duration-500" />
+                </motion.article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ────────────────────────────────────────────────────────────────────
+            SECTION 4 — BRAND STANDARDS  (the "Why H.V.A" section)
+        ──────────────────────────────────────────────────────────────────── */}
+        <section className="bg-[#0F172A] text-[#F8FAFC] py-24 md:py-32">
+          <div className="max-w-7xl mx-auto px-6 lg:px-14">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+
+              {/* Left: quote */}
+              <motion.div
+                className="lg:col-span-6"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.6 }}
+              >
+                <p className="text-[#2563EB] text-[10px] font-bold tracking-[0.22em] uppercase mb-8">
+                  Our Standard
+                </p>
+                <blockquote className="font-serif text-3xl md:text-4xl italic text-[#F8FAFC] leading-snug">
+                  "We don't ship features.<br />
+                  We ship systems that operate<br />
+                  with or without you in the room."
+                </blockquote>
+                <div className="mt-10 h-px bg-gradient-to-r from-[#2563EB]/60 via-[#3b82f6]/40 to-transparent" />
+                <p className="mt-6 text-[#F8FAFC]/55 text-sm font-light leading-relaxed max-w-md">
+                  Every engagement is structured around production outcomes, not deliverable counts.
+                  The goal is a system your team trusts and your business depends on.
+                </p>
+
+                {/* Stat strip */}
+                <div className="mt-10 grid grid-cols-3 gap-6 pt-10 border-t border-[#F8FAFC]/10">
+                  {[
+                    { v: '4+', l: 'Years Delivering' },
+                    { v: '2+', l: 'Products Shipped' },
+                    { v: '3', l: 'Co-Founders Engineering' },
+                  ].map((s) => (
+                    <div key={s.l}>
+                      <p className="font-serif text-3xl text-[#2563EB]">{s.v}</p>
+                      <p className="text-[#F8FAFC]/50 text-[10px] uppercase tracking-wider mt-1 font-bold">{s.l}</p>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Right: 3 principles */}
+              <motion.div
+                className="lg:col-span-6 space-y-8"
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.6, delay: 0.15 }}
+              >
+                {brandPrinciples.map((p, i) => (
+                  <div
+                    key={p.title}
+                    className={[
+                      'border-l-2 pl-8 py-2',
+                      i === 0 ? 'border-[#2563EB]' : 'border-[#F8FAFC]/15',
+                    ].join(' ')}
+                  >
+                    <p
+                      className={[
+                        'text-[10px] font-bold uppercase tracking-[0.2em] mb-2',
+                        i === 0 ? 'text-[#2563EB]' : 'text-[#F8FAFC]/35',
+                      ].join(' ')}
+                    >
+                      Rule {p.num}
+                    </p>
+                    <h3 className="text-2xl font-medium text-[#F8FAFC] mb-2">{p.title}</h3>
+                    <p className="text-[#F8FAFC]/55 font-light text-sm leading-relaxed">{p.desc}</p>
+                  </div>
+                ))}
+              </motion.div>
+
+            </div>
+          </div>
+        </section>
+
+        {/* ────────────────────────────────────────────────────────────────────
+            SECTION 5 — EXECUTION FLOW
+        ──────────────────────────────────────────────────────────────────── */}
+        <section className="bg-white py-24 md:py-32">
+          <div className="max-w-7xl mx-auto px-6 lg:px-14">
+
+            <div className="text-center mb-20">
+              <p className="text-[10px] uppercase tracking-[0.22em] text-[#475569] font-bold mb-4">
+                Execution Flow
+              </p>
+              <h2 className="font-serif text-5xl md:text-6xl text-[#0F172A] leading-tight">
+                How Delivery Moves to Production
+              </h2>
+              <p className="mt-4 text-[#475569] font-light text-lg max-w-xl mx-auto">
+                The architectural lifecycle of every H.V.A engagement.
+              </p>
+            </div>
+
+            {/* Step cards with connecting line */}
+            <div className="relative">
+              {/* Horizontal connector (desktop) */}
+              <div className="hidden lg:block absolute top-[2.25rem] left-[12.5%] right-[12.5%] h-px bg-[#e2e8f0] z-0" />
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
+                {deliveryFlow.map((item, index) => (
+                  <motion.div
+                    key={item.step}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.45, delay: index * 0.08 }}
+                    className="flex flex-col items-start"
+                  >
+                    {/* Step number circle */}
+                    <div className="w-[4.5rem] h-[4.5rem] bg-[#0F172A] text-[#F8FAFC] flex items-center justify-center text-xl font-bold font-serif mb-6 shrink-0">
+                      {item.num}
+                    </div>
+                    <h4 className="text-2xl font-bold text-[#0F172A] mb-3">{item.step}</h4>
+                    <p className="text-[#475569] text-sm leading-relaxed font-light mb-4">{item.detail}</p>
+                    {/* Progress bar */}
+                    <div className="w-full h-[3px] bg-[#e2e8f0] mt-auto">
+                      <motion.div
+                        className="h-full bg-gradient-to-r from-[#2563EB] to-[#60a5fa]"
+                        initial={{ width: 0 }}
+                        whileInView={{ width: item.width }}
+                        viewport={{ once: true, amount: 0.5 }}
+                        transition={{ duration: 0.8, delay: 0.2 + index * 0.1 }}
+                      />
+                    </div>
+                  </motion.div>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
-        <section className="relative pb-16 pt-2 md:pb-20">
-          <div className="container mx-auto px-4">
+        {/* ────────────────────────────────────────────────────────────────────
+            SECTION 6 — CTA
+        ──────────────────────────────────────────────────────────────────── */}
+        <section className="py-16 md:py-20">
+          <div className="max-w-7xl mx-auto px-6 lg:px-14">
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
-              transition={{ duration: 0.4 }}
-              className="overflow-hidden bg-[#1E272E] px-8 py-10 text-[#F5F6FA] shadow-[0_20px_48px_rgba(30,39,46,0.28)]"
+              transition={{ duration: 0.5 }}
+              className="relative overflow-hidden bg-[#0F172A] text-[#F8FAFC] px-10 py-16 md:px-20 md:py-24"
             >
-              <div className="pointer-events-none absolute -right-24 -top-20 h-56 w-56 rounded-full bg-[#0984E3]/34 blur-3xl" />
-              <div className="pointer-events-none absolute -bottom-16 left-[8%] h-48 w-48 rounded-full bg-[#00CEC9]/24 blur-3xl" />
-              <div className="relative z-10 grid grid-cols-1 gap-8 lg:grid-cols-[1.12fr_0.88fr] lg:items-center">
+              {/* Glows */}
+              <div className="pointer-events-none absolute -right-24 -top-20 h-64 w-64 rounded-full bg-[#2563EB]/30 blur-3xl" />
+              <div className="pointer-events-none absolute -bottom-20 left-[8%] h-56 w-56 rounded-full bg-[#3b82f6]/20 blur-3xl" />
+              {/* Blueprint grid subtle */}
+              <div
+                className="absolute inset-0 opacity-5"
+                style={{
+                  backgroundImage:
+                    'linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)',
+                  backgroundSize: '40px 40px',
+                }}
+              />
+
+              <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-10 items-center">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.2em] text-[#F5F6FA]/65">Next Step</p>
-                  <h2 className="mt-3 max-w-3xl font-serif text-3xl font-semibold leading-[1.02] md:text-5xl">
-                    Need AI agents, an AI analyst system, automations, or a full custom ecosystem?
+                  <p className="text-[#2563EB] text-[10px] font-bold tracking-[0.22em] uppercase mb-5">
+                    Next Step
+                  </p>
+                  <h2 className="font-serif text-4xl md:text-6xl leading-tight mb-6">
+                    Need AI agents that actually understand your business?
                   </h2>
-                  <p className="mt-4 max-w-2xl text-[#F5F6FA]/82">
-                    Share your operational goals and constraints. We will propose a practical scope and delivery path you
-                    can execute with confidence.
+                  <p className="text-[#F8FAFC]/65 text-lg font-light leading-relaxed max-w-xl">
+                    Share your operational goals and constraints. We'll propose a practical scope
+                    and delivery path you can execute with confidence.
                   </p>
                 </div>
-                <div className="grid gap-3">
+
+                <div className="flex flex-col gap-4 lg:items-end">
                   <Link
                     to="/contact"
-                    className="inline-flex items-center justify-center gap-2 bg-[#0984E3] px-6 py-3 text-[#F5F6FA] transition-colors hover:bg-[#0776CC]"
+                    className="sharp-edge bg-[#2563EB] text-white px-10 py-5 text-sm font-bold uppercase tracking-wide hover:bg-[#1d4ed8] transition-colors duration-200 inline-flex items-center justify-center gap-2 active:scale-95"
                   >
-                    Book a Call
+                    Book a Discovery Call
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                   <Link
                     to="/portfolio"
-                    className="inline-flex items-center justify-center gap-2 bg-[#F5F6FA]/12 px-6 py-3 text-[#F5F6FA] transition-colors hover:bg-[#F5F6FA]/20"
+                    className="sharp-edge border border-[#F8FAFC]/20 text-[#F8FAFC] px-10 py-5 text-sm font-bold uppercase tracking-wide hover:bg-[#F8FAFC]/10 transition-colors duration-200 inline-flex items-center justify-center gap-2"
                   >
                     Explore Delivered Work
+                    <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
               </div>
             </motion.div>
           </div>
         </section>
+
       </div>
     </MotionConfig>
   );

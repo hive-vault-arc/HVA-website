@@ -15,7 +15,6 @@ import {
 } from 'lucide-react';
 import { useAnimationQuality } from '../lib/animationQuality';
 import PageAmbientBackground from '../components/PageAmbientBackground';
-import HeroCurvedShapes from '../components/HeroCurvedShapes';
 
 type TeamMember = {
   name: string;
@@ -39,12 +38,6 @@ type DeliveryStep = {
 };
 
 const proofPoints = ['Based in Morocco', 'Software & Cloud', 'Serving Worldwide'];
-
-const aboutHeroCurves = [
-  { label: 'Clarity', value: '01', height: 176, tone: 'violet' as const },
-  { label: 'Quality', value: '02', height: 222, tone: 'teal' as const },
-  { label: 'Scale', value: '03', height: 268, tone: 'blue' as const },
-];
 
 const teamMembers: TeamMember[] = [
   {
@@ -134,81 +127,76 @@ const About: React.FC = () => {
         />
         <PageAmbientBackground className="-z-10" />
 
-        <section className="relative pt-32 pb-14 md:pt-40 md:pb-20">
-          <div className="container mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 22 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55 }}
-              style={{ y: heroLift }}
-              className="relative py-5 md:py-8"
-            >
-              <div className="pointer-events-none absolute -left-14 top-10 h-24 w-64 rounded-full bg-[#0984E3]/10 blur-3xl" />
-              <div className="pointer-events-none absolute right-[26%] top-1 h-28 w-72 rounded-full bg-[#00CEC9]/10 blur-3xl" />
-              <div className="pointer-events-none absolute left-0 right-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(9,132,227,0.45),transparent)]" />
-              <div className="pointer-events-none absolute left-0 right-0 bottom-0 h-px bg-[linear-gradient(90deg,transparent,rgba(0,206,201,0.4),transparent)]" />
-              <div className="relative z-10 grid grid-cols-1 gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:items-start">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.26em] text-[#1E272E]/60">About H.V.A</p>
-                  <h1 className="mt-5 max-w-5xl font-serif text-5xl leading-[0.94] md:text-7xl">
-                    Engineering clarity
-                    <br />
-                    for modern
-                    <br />
-                    <span className="text-[#0984E3]">products.</span>
-                  </h1>
-                  <p className="mt-7 max-w-3xl text-lg leading-relaxed text-[#1E272E]/78 md:text-xl">
-                    H.V.A is a software and cloud engineering company focused on custom systems, AI-powered applications,
-                    and production-ready digital platforms.
-                  </p>
+        {/* Hero Section */}
+        <section className="relative pt-28 pb-24 md:pt-36 md:pb-32 px-6 lg:px-14">
+          <div className="container mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
-                  <div className="mt-9 flex flex-wrap gap-3">
-                    <Link
-                      to="/contact"
-                      className="inline-flex items-center gap-2 bg-[#1E272E] px-7 py-3 text-[#F5F6FA] transition-colors hover:bg-[#0984E3]"
-                    >
-                      Start a Project
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                    <Link
-                      to="/services"
-                      className="inline-flex items-center gap-2 bg-white/90 px-7 py-3 text-[#1E272E] shadow-[0_10px_25px_rgba(9,132,227,0.08)] transition-colors hover:bg-[#ECF5FD]"
-                    >
-                      Explore Services
-                      <Layers3 className="h-4 w-4 text-[#0984E3]" />
-                    </Link>
+              {/* Left: content */}
+              <motion.div
+                className="lg:col-span-7 z-10"
+                initial={{ opacity: 0, y: 22 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.55 }}
+                style={{ y: heroLift }}
+              >
+                <span className="inline-block text-[#0984E3] font-bold tracking-[0.22em] text-[10px] uppercase mb-6">
+                  Expertise &amp; Vision
+                </span>
+                <h1 className="font-serif text-5xl md:text-7xl font-medium leading-[1.08] tracking-tight text-[#1E272E] mb-8">
+                  Engineering clarity<br />
+                  for <em className="italic">modern products</em>
+                </h1>
+                <p className="text-xl text-[#1E272E]/60 font-light max-w-xl leading-relaxed mb-10">
+                  H.V.A is a software and cloud engineering company focused on custom systems, AI-powered applications,
+                  and production-ready digital platforms — built precise, deliberate, and engineered for scale.
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <Link
+                    to="/contact"
+                    className="sharp-edge bg-[#1E272E] text-[#F5F6FA] px-8 py-4 text-sm font-bold hover:bg-[#0984E3] transition-colors duration-300"
+                  >
+                    Start a Project
+                  </Link>
+                  <Link
+                    to="/services"
+                    className="sharp-edge inline-flex items-center gap-2 bg-white/90 px-8 py-4 text-sm font-bold text-[#1E272E] shadow-[0_10px_25px_rgba(9,132,227,0.08)] hover:bg-[#ECF5FD] transition-colors duration-300"
+                  >
+                    Explore Services
+                    <Layers3 className="h-4 w-4 text-[#0984E3]" />
+                  </Link>
+                </div>
+                <div className="mt-8 flex flex-wrap gap-2">
+                  {proofPoints.map((point) => (
+                    <span key={point} className="rounded-full bg-white/62 px-3 py-1 text-[11px] tracking-[0.13em] text-[#1E272E]/70">
+                      {point}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Right: image + overlay card */}
+              <motion.div
+                className="lg:col-span-5 relative mt-12 lg:mt-0"
+                initial={{ opacity: 0, x: 28 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.7, delay: 0.15 }}
+              >
+                <div className="relative aspect-square w-full bg-[#eceef0] overflow-hidden">
+                  <img
+                    src="/Images/abouthead.webp"
+                    alt="H.V.A engineering precision"
+                    className="object-cover w-full h-full"
+                  />
+                  {/* Asymmetric overlay card — inside image container */}
+                  <div className="absolute top-0 left-0 p-7 bg-white shadow-xl max-w-[220px] hidden md:block">
+                    <p className="text-[10px] font-bold text-[#0984E3] tracking-[0.2em] uppercase mb-1">01. ANALYSIS</p>
+                    <p className="text-lg font-serif italic text-[#1E272E]">Precision in every data point.</p>
                   </div>
                 </div>
+              </motion.div>
 
-                <div className="relative flex flex-col gap-5 lg:pl-2">
-                  <div className="pointer-events-none absolute -left-10 top-6 h-20 w-20 rounded-full bg-[#0984E3]/12 blur-2xl" />
-                  <div className="pointer-events-none absolute right-0 top-0 h-24 w-24 rounded-full bg-[#00CEC9]/10 blur-2xl" />
-                  <p className="relative max-w-lg text-lg leading-relaxed text-[#1E272E]/78">
-                    Practical systems with clear decisions from discovery to scale.
-                  </p>
-                  <div className="relative space-y-2">
-                    {[
-                      'Architecture first',
-                      'Incremental delivery + optimization',
-                    ].map((line) => (
-                      <div key={line} className="flex items-start gap-2.5 text-sm leading-relaxed text-[#1E272E]/82">
-                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#0984E3]" />
-                        <span>{line}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <HeroCurvedShapes items={aboutHeroCurves} badgeText="Operating Layer" />
-                  <div className="flex flex-wrap gap-2 pt-1">
-                    {proofPoints.map((point) => (
-                      <span key={point} className="rounded-full bg-white/62 px-3 py-1 text-[11px] tracking-[0.13em] text-[#1E272E]/70">
-                        {point}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+            </div>
           </div>
         </section>
 
@@ -309,101 +297,126 @@ const About: React.FC = () => {
           </div>
         </section>
 
-        <section className="relative container mx-auto px-4 py-10 md:py-16">
-          <div className="grid grid-cols-1 gap-5 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-            <div className="lg:sticky lg:top-24">
-              <div className="inline-flex items-center gap-3">
-                <Workflow className="h-5 w-5 text-[#0984E3]" />
-                <p className="text-xs uppercase tracking-[0.2em] text-[#1E272E]/58">Operating Principles</p>
-              </div>
-              <h2 className="mt-4 font-serif text-4xl leading-[0.95] md:text-5xl">The Rules Behind How We Deliver</h2>
-              <p className="mt-4 max-w-md text-[#1E272E]/72">
-                Three non-negotiables that shape planning, quality decisions, and execution pace on every engagement.
-              </p>
-            </div>
+        {/* Operating Principles — redesigned */}
+        <section className="relative px-6 lg:px-14 py-16 md:py-24">
+          <div className="container mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
 
-            <div className="space-y-3">
-              {principles.map((principle, index) => (
-                <motion.article
-                  key={principle.title}
-                  initial={{ opacity: 0, x: 18 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.38, delay: index * 0.06 }}
-                  className="group relative overflow-hidden border border-[#1E272E]/12 bg-white/84 shadow-[0_14px_32px_rgba(9,132,227,0.1)]"
-                >
-                  <div className="grid grid-cols-[72px_1fr] md:grid-cols-[86px_1fr]">
-                    <div className="relative flex items-center justify-center border-r border-[#1E272E]/10 bg-[linear-gradient(180deg,#1E272E_0%,#0984E3_100%)] text-[#F5F6FA]">
-                      <span className="text-lg font-semibold md:text-2xl">{`0${index + 1}`}</span>
-                    </div>
-                    <div className="relative p-5 md:p-6">
-                      <div className="inline-flex bg-[#ECF5FD] p-2 text-[#0984E3]">{principle.icon}</div>
-                      <h3 className="mt-3 text-2xl font-semibold leading-tight">{principle.title}</h3>
-                      <p className="mt-2 max-w-2xl leading-relaxed text-[#1E272E]/74">{principle.description}</p>
-                      <div className="mt-4 h-[3px] w-full bg-[linear-gradient(90deg,#0984E3_0%,#00CEC9_100%)] opacity-70 transition-opacity group-hover:opacity-100" />
-                    </div>
+              {/* Left: heading + bordered rules */}
+              <div className="lg:col-span-5">
+                <div className="inline-flex items-center gap-3 mb-6">
+                  <Workflow className="h-5 w-5 text-[#0984E3]" />
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-[#1E272E]/58">Operating Principles</p>
+                </div>
+                <h2 className="font-serif text-4xl md:text-5xl font-medium text-[#1E272E] mb-12 leading-tight">
+                  The Rules Behind<br />How We Deliver
+                </h2>
+                <div className="space-y-10">
+                  {principles.map((principle, index) => (
+                    <motion.div
+                      key={principle.title}
+                      initial={{ opacity: 0, x: -12 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ duration: 0.38, delay: index * 0.08 }}
+                      className={`border-l-2 pl-8 py-2 ${
+                        index === 0 ? 'border-[#0984E3]' : 'border-[#1E272E]/20'
+                      }`}
+                    >
+                      <h4 className={`text-[10px] font-bold uppercase tracking-[0.2em] mb-2 ${
+                        index === 0 ? 'text-[#0984E3]' : 'text-[#1E272E]/45'
+                      }`}>
+                        {`Rule 0${index + 1}`}
+                      </h4>
+                      <h3 className="text-2xl font-medium text-[#1E272E] mb-3">{principle.title}</h3>
+                      <p className="text-[#1E272E]/64 font-light leading-relaxed">{principle.description}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right: dark quote card */}
+              <motion.div
+                className="lg:col-span-7"
+                initial={{ opacity: 0, x: 18 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5 }}
+              >
+                <div className="relative min-h-[480px] bg-[#1E272E] overflow-hidden flex flex-col justify-end">
+                  <div className="pointer-events-none absolute -right-20 -top-16 h-52 w-52 rounded-full bg-[#0984E3]/35 blur-3xl" />
+                  <div className="pointer-events-none absolute -bottom-20 left-[8%] h-56 w-56 rounded-full bg-[#00CEC9]/20 blur-3xl" />
+                  <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#0984E3]/50 to-transparent" />
+                  <div className="relative z-10 p-10 md:p-14">
+                    <p className="text-[#0984E3] text-[10px] font-bold tracking-[0.24em] uppercase mb-8">
+                      H.V.A Core Creed
+                    </p>
+                    <blockquote className="font-serif text-2xl md:text-3xl italic text-[#F5F6FA] leading-snug mb-8">
+                      "The highest form of engineering is when the complexity disappears entirely."
+                    </blockquote>
+                    <div className="h-px bg-gradient-to-r from-[#0984E3]/60 via-[#00CEC9]/40 to-transparent mb-8" />
+                    <p className="text-[#F5F6FA]/58 text-sm font-light leading-relaxed max-w-md">
+                      Three non-negotiables that shape planning, quality decisions, and execution pace on every engagement.
+                    </p>
                   </div>
-                  <div className="pointer-events-none absolute -right-12 top-0 h-full w-24 bg-[linear-gradient(180deg,rgba(9,132,227,0.14),transparent)] blur-2xl" />
-                </motion.article>
-              ))}
+                </div>
+              </motion.div>
+
             </div>
           </div>
         </section>
 
-        <section className="relative container mx-auto px-4 py-10 md:py-16">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-[0.95fr_1.05fr] md:items-start">
-            <div>
-              <p className="text-xs font-semibold tracking-[0.08em] text-[#1E272E]/58">Our Team</p>
-              <h2 className="mt-3 max-w-xl text-4xl font-semibold leading-[1.05] md:text-6xl">
-                The People Behind
-                <br />
-                H.V.A
+        {/* Team Section — improved design */}
+        <section className="relative px-6 lg:px-14 py-16 md:py-24 bg-[#eceef0]">
+          <div className="container mx-auto">
+            <div className="mb-16 text-center max-w-3xl mx-auto">
+              <p className="text-[10px] font-bold tracking-[0.2em] text-[#1E272E]/58 uppercase mb-4">Our Team</p>
+              <h2 className="font-serif text-4xl md:text-5xl font-medium text-[#1E272E] mb-6">
+                The People Behind H.V.A
               </h2>
+              <p className="text-[#1E272E]/64 leading-relaxed">
+                Our founding team blends architecture, product, and cloud engineering expertise to deliver systems
+                that are practical, resilient, and built for long-term growth.
+              </p>
             </div>
-            <p className="max-w-xl text-lg leading-relaxed text-[#1E272E]/68">
-              Our founding team blends architecture, product, and cloud engineering expertise to deliver systems that are
-              practical, resilient, and built for long-term growth.
-            </p>
-          </div>
 
-          <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {teamMembers.map((member, index) => {
-              const firstName = member.name.split(' ')[0] ?? member.name;
-              return (
-                <motion.article
-                  key={member.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.42, delay: index * 0.07 }}
-                  className="group"
-                >
-                  <div className="relative overflow-hidden rounded-t-[20px] bg-[#D7D8DE]">
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      loading="lazy"
-                      className="h-[360px] w-full object-cover grayscale transition-transform duration-500 group-hover:scale-[1.03]"
-                    />
-                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-transparent via-white/70 to-white" />
-                  </div>
-
-                  <div className="rounded-b-[20px] bg-white px-5 py-4 shadow-[0_10px_22px_rgba(30,39,46,0.08)]">
-                    <p className="text-sm text-[#1E272E]/56">{member.tag}</p>
-                    <h3 className="mt-1 font-serif text-[2rem] leading-none text-[#1E272E]">{member.name}</h3>
-                    <p className="mt-2 text-sm text-[#1E272E]/76">{member.role}</p>
-                  </div>
-
-                  <Link
-                    to="/contact"
-                    className="mx-auto mt-3 inline-flex items-center gap-2 rounded-full bg-[#10151A] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[#0984E3]"
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
+              {teamMembers.map((member, index) => {
+                const firstName = member.name.split(' ')[0] ?? member.name;
+                return (
+                  <motion.div
+                    key={member.name}
+                    className="group bg-[#F5F6FA]"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.42, delay: index * 0.07 }}
                   >
-                    <span className="h-2 w-2 rounded-full bg-[#58FFB3]" />
-                    {`Talk With ${firstName}`}
-                  </Link>
-                </motion.article>
-              );
-            })}
+                    <div className="aspect-[4/5] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
+                      <img
+                        src={member.image}
+                        alt={member.name}
+                        loading="lazy"
+                        className="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-700"
+                      />
+                    </div>
+                    <div className="p-8">
+                      <p className="text-[10px] font-bold text-[#0984E3] uppercase tracking-[0.18em] mb-1">{member.tag}</p>
+                      <h3 className="font-serif text-2xl font-light text-[#1E272E] mb-1">{member.name}</h3>
+                      <p className="text-sm text-[#1E272E]/60 mb-5">{member.role}</p>
+                      <Link
+                        to="/contact"
+                        className="inline-flex items-center gap-2 text-sm font-bold text-[#1E272E] hover:text-[#0984E3] transition-colors duration-200"
+                      >
+                        <span className="h-1.5 w-1.5 rounded-full bg-[#58FFB3]" />
+                        {`Talk with ${firstName}`}
+                        <ArrowRight className="h-3.5 w-3.5" />
+                      </Link>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
         </section>
 

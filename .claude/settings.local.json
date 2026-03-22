@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -E '\\\\.\\(json|toml|yml|yaml\\)$')",
+      "Bash(git config:*)"
+    ]
+  }
+}

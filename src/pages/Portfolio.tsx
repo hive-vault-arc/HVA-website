@@ -11,77 +11,19 @@ import {
   Sparkles,
   Workflow,
 } from 'lucide-react';
-import ResponsiveImage from '../components/ui/ResponsiveImage';
 import { useAnimationQuality } from '../lib/animationQuality';
 import PageAmbientBackground from '../components/PageAmbientBackground';
-import HeroCurvedShapes from '../components/HeroCurvedShapes';
 
-type Project = {
-  title: string;
-  category: string;
-  summary: string;
-  image: {
-    src: string;
-    fallbackSrc?: string;
-    sources?: Array<{
-      srcSet: string;
-      media?: string;
-      type?: string;
-      sizes?: string;
-    }>;
-  };
-  outcomes: string[];
-  stack: string[];
+/* ── Blueprint grid background (reused in hero + CTA) ── */
+const blueprintGrid: React.CSSProperties = {
+  backgroundImage: `
+    linear-gradient(to right,  rgba(37,99,235,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(37,99,235,0.05) 1px, transparent 1px)
+  `,
+  backgroundSize: '40px 40px',
 };
 
-const projects: Project[] = [
-  {
-    title: 'Smart WhatsApp AI Assistant',
-    category: 'AI Agent System',
-    summary:
-      'A multilingual assistant that turns incoming WhatsApp conversations into qualified leads, scheduled actions, and CRM-ready records.',
-    image: {
-      src: '/Images/aiagent.webp',
-      fallbackSrc: '/Images/aiagent.webp',
-      sources: [
-        {
-          srcSet: '/Images/aiagent.webp',
-          type: 'image/webp',
-          sizes: '(min-width: 1024px) 220px, 100vw',
-        },
-      ],
-    },
-    outcomes: [
-      '24/7 lead qualification and routing',
-      'Context-aware conversations in Arabic, French, and English',
-      'Automatic scheduling and CRM lead creation',
-    ],
-    stack: ['AI Receptionist', 'CRM Sync', 'Security Controls'],
-  },
-  {
-    title: 'Complete Real-Estate CRM Platform',
-    category: 'Business Platform',
-    summary:
-      'An operations CRM designed for qualification, pipeline movement, scheduling, team collaboration, and project inventory control.',
-    image: {
-      src: '/Images/CRM.webp',
-      fallbackSrc: '/Images/CRM.webp',
-      sources: [
-        {
-          srcSet: '/Images/CRM.webp',
-          type: 'image/webp',
-          sizes: '(min-width: 1024px) 220px, 100vw',
-        },
-      ],
-    },
-    outcomes: [
-      'Pipeline visibility from first contact to closing',
-      'Role-based access and accountability by team',
-      'Integrated scheduling and internal collaboration',
-    ],
-    stack: ['Custom CRM', 'Workflow Automation', 'Reporting Analytics'],
-  },
-];
+/* ── Data ─────────────────────────────────────────────────────────────────── */
 
 const proofBlocks = [
   {
@@ -116,164 +58,218 @@ const proofBlocks = [
   },
 ];
 
-const portfolioHeroCurves = [
-  { label: 'Cases', value: String(projects.length), height: 176, tone: 'violet' as const },
-  { label: 'Domains', value: '6+', height: 226, tone: 'teal' as const },
-  { label: 'Stability', value: 'Prod', height: 272, tone: 'blue' as const },
-];
+/* ── Component ────────────────────────────────────────────────────────────── */
 
 const Portfolio: React.FC = () => {
   const { motionReduced } = useAnimationQuality();
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const heroCopyY = useTransform(scrollYProgress, [0, 0.35], [0, 35]);
 
   return (
     <MotionConfig reducedMotion={motionReduced ? 'always' : 'never'}>
-      <div className="relative isolate min-h-screen overflow-hidden bg-[#F5F6FA] text-[#1E272E]">
+      <div className="relative isolate min-h-screen overflow-x-hidden bg-[#F8FAFC] text-[#0F172A]">
+
+        {/* Scroll progress bar */}
         <motion.div
           aria-hidden="true"
-          className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-gradient-to-r from-[#0984E3] via-[#4CA6EC] to-[#00CEC9]"
+          className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-gradient-to-r from-[#2563EB] via-[#3b82f6] to-[#60a5fa]"
           style={{ scaleX: progressScale }}
         />
         <PageAmbientBackground className="-z-10" />
 
-        <section className="relative pt-32 pb-14 md:pt-40 md:pb-18">
-          <div className="container mx-auto px-4">
+        {/* ── Hero ──────────────────────────────────────────────────────────── */}
+        <section className="relative min-h-[680px] flex items-center overflow-hidden bg-white">
+          {/* Blueprint grid overlay */}
+          <div className="absolute inset-0 opacity-60" style={blueprintGrid} />
+          {/* Right-side decorative skewed panel */}
+          <div className="absolute top-0 right-0 w-1/2 h-full bg-[#f2f4f6] skew-x-12 translate-x-32 hidden lg:block" />
+
+          <div className="relative max-w-7xl mx-auto px-8 w-full py-32">
             <motion.div
-              initial={{ opacity: 0, y: 22 }}
+              className="max-w-3xl"
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.56 }}
-              style={{ y: heroCopyY }}
-              className="relative py-5 md:py-8"
+              transition={{ duration: 0.7 }}
             >
-              <div className="pointer-events-none absolute -left-14 top-10 h-24 w-64 rounded-full bg-[#0984E3]/10 blur-3xl" />
-              <div className="pointer-events-none absolute right-[26%] top-1 h-28 w-72 rounded-full bg-[#00CEC9]/10 blur-3xl" />
-              <div className="pointer-events-none absolute left-0 right-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(9,132,227,0.45),transparent)]" />
-              <div className="pointer-events-none absolute left-0 right-0 bottom-0 h-px bg-[linear-gradient(90deg,transparent,rgba(0,206,201,0.4),transparent)]" />
-              <div className="relative z-10 grid grid-cols-1 gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:items-start">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.24em] text-[#1E272E]/60">Portfolio</p>
-                  <h1 className="mt-4 max-w-5xl font-serif text-5xl font-semibold leading-[0.94] md:text-7xl">
-                    Practical systems.
-                    <br />
-                    Real outcomes.
-                    <br />
-                    <span className="text-[#0984E3]">Built to hold.</span>
-                  </h1>
-                  <p className="mt-6 max-w-3xl text-lg leading-relaxed text-[#1E272E]/78">
-                    Selected delivery snapshots across AI agents, AI receptionist workflows, AI analyst systems, and custom
-                    business platforms engineered for production.
+              <span className="inline-block px-4 py-1 mb-6 bg-[#2563EB]/10 text-[#2563EB] font-bold text-[10px] uppercase tracking-[0.2em]">
+                The Archive
+              </span>
+              <h1 className="font-serif text-6xl md:text-8xl text-[#0F172A] leading-tight mb-8">
+                Selected Work &amp; Case Snapshots
+              </h1>
+              <p className="text-xl text-[#475569] max-w-xl leading-relaxed font-light">
+                Architecting digital systems that bridge the gap between complex technical
+                infrastructure and seamless user experiences.
+              </p>
+            </motion.div>
+
+            {/* Scroll cue */}
+            <div className="absolute bottom-12 right-12 hidden md:flex items-center gap-4 text-[#475569]">
+              <span className="text-sm font-bold tracking-[0.2em] uppercase">Scroll to explore</span>
+              <div className="w-12 h-px bg-[#475569]/40" />
+            </div>
+          </div>
+        </section>
+
+        {/* ── Projects ──────────────────────────────────────────────────────── */}
+        <section className="py-24 space-y-32">
+
+          {/* Project 1 — AI Assistant (image left, content right) */}
+          <motion.div
+            className="max-w-7xl mx-auto px-8"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="grid lg:grid-cols-12 gap-12 items-center">
+
+              {/* Image */}
+              <div className="lg:col-span-7 relative group pb-10 pr-8">
+                <div className="absolute -inset-4 bg-[#2563EB]/5 transition-all duration-300 group-hover:bg-[#2563EB]/10" />
+                <img
+                  alt="Smart WhatsApp AI Assistant"
+                  src="/Images/aiagent.webp"
+                  className="relative w-full h-[500px] object-cover shadow-lg"
+                  loading="eager"
+                />
+                {/* Floating info card */}
+                <div className="absolute -bottom-4 -right-4 w-52 bg-white p-6 shadow-xl hidden md:block">
+                  <Bot className="h-8 w-8 text-[#2563EB] mb-3" />
+                  <p className="text-[10px] font-bold text-[#475569] uppercase tracking-wider leading-relaxed">
+                    System Module 01: Conversational Intelligence
                   </p>
-                  <div className="mt-9 flex flex-wrap gap-3">
-                    <Link
-                      to="/contact"
-                      className="inline-flex items-center gap-2 bg-[#0984E3] px-7 py-3 text-[#F5F6FA] transition-colors hover:bg-[#0776CC]"
-                    >
-                      Start Your Project
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                    <Link
-                      to="/services"
-                      className="inline-flex items-center gap-2 bg-white/90 px-7 py-3 text-[#1E272E] shadow-[0_10px_24px_rgba(9,132,227,0.08)] transition-colors hover:bg-[#ECF5FD]"
-                    >
-                      Explore Services
-                    </Link>
-                  </div>
                 </div>
+              </div>
 
-                <div className="relative flex flex-col gap-5 lg:pl-2">
-                  <div className="pointer-events-none absolute -left-10 top-6 h-20 w-20 rounded-full bg-[#0984E3]/12 blur-2xl" />
-                  <div className="pointer-events-none absolute right-0 top-0 h-24 w-24 rounded-full bg-[#00CEC9]/10 blur-2xl" />
-                  <p className="relative max-w-lg text-lg leading-relaxed text-[#1E272E]/78">
-                    Case snapshots focused on outcomes and delivery clarity.
-                  </p>
+              {/* Content */}
+              <div className="lg:col-span-5 space-y-5">
+                <h2 className="font-serif text-4xl text-[#0F172A] leading-tight">
+                  Smart WhatsApp AI Assistant
+                </h2>
+                <div className="flex flex-wrap gap-2">
+                  {['Multilingual', 'CRM Integration', 'Automated Scheduling'].map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-3 py-1 bg-[#e2e8f0] text-[#475569] text-[10px] font-bold uppercase tracking-wide"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <p className="text-[#475569] leading-relaxed font-light">
+                  Developed a custom LLM-powered solution for global lead management. The system
+                  handles initial inquiries in 12 languages, qualifies prospects based on custom
+                  logic, and creates automated records in the client's CRM without human
+                  intervention.
+                </p>
+                <ul className="space-y-3 text-sm text-[#475569]">
+                  {[
+                    '85% reduction in manual qualification time',
+                    '24/7 lead capture across timezones',
+                    'Direct HubSpot & Salesforce synchronization',
+                  ].map((item) => (
+                    <li key={item} className="flex items-center gap-3">
+                      <CheckCircle2 className="h-4 w-4 text-[#2563EB] shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <div className="pt-3">
+                  <Link
+                    to="/contact"
+                    className="inline-flex items-center gap-2 text-[#2563EB] font-bold border-b-2 border-[#2563EB] pb-1 hover:text-[#1d4ed8] hover:border-[#1d4ed8] transition-all group"
+                  >
+                    View Technical Breakdown
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </div>
+              </div>
 
-                  <div className="relative space-y-2">
-                    {[
-                      'Agent operations + analyst systems',
-                      'Automation, CI/CD, reliability',
-                    ].map((line) => (
-                      <div key={line} className="flex items-start gap-2.5 text-sm leading-relaxed text-[#1E272E]/82">
-                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#0984E3]" />
-                        <span>{line}</span>
-                      </div>
+            </div>
+          </motion.div>
+
+          {/* Project 2 — CRM Platform (content left, image right) */}
+          <div className="bg-[#f2f4f6] py-24">
+            <motion.div
+              className="max-w-7xl mx-auto px-8"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="grid lg:grid-cols-12 gap-12 items-center">
+
+                {/* Content */}
+                <div className="lg:col-span-5 space-y-5 order-2 lg:order-1">
+                  <h2 className="font-serif text-4xl text-[#0F172A] leading-tight">
+                    Complete Real-Estate CRM Platform
+                  </h2>
+                  <div className="flex flex-wrap gap-2">
+                    {['Custom SaaS', 'Team Collaboration', 'Pipeline Automation'].map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-3 py-1 bg-[#e0e3e5] text-[#475569] text-[10px] font-bold uppercase tracking-wide"
+                      >
+                        {tag}
+                      </span>
                     ))}
                   </div>
-
-                  <HeroCurvedShapes items={portfolioHeroCurves} badgeText="Delivery Signal" />
+                  <p className="text-[#475569] leading-relaxed font-light">
+                    A high-performance internal tool built for a luxury real estate group. We
+                    replaced three disparate systems with a unified architectural platform that
+                    tracks the entire buyer journey from initial contact to property closing.
+                  </p>
+                  {/* Stats */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-white p-4 border-l-4 border-[#2563EB]">
+                      <p className="font-serif text-2xl text-[#2563EB]">40%</p>
+                      <p className="text-[10px] font-bold text-[#475569] uppercase tracking-wider">
+                        Efficiency Gain
+                      </p>
+                    </div>
+                    <div className="bg-white p-4 border-l-4 border-[#2563EB]">
+                      <p className="font-serif text-2xl text-[#2563EB]">$2.4M</p>
+                      <p className="text-[10px] font-bold text-[#475569] uppercase tracking-wider">
+                        Tracked Pipeline
+                      </p>
+                    </div>
+                  </div>
+                  <div className="pt-3">
+                    <Link
+                      to="/contact"
+                      className="inline-flex items-center gap-2 text-[#2563EB] font-bold border-b-2 border-[#2563EB] pb-1 hover:text-[#1d4ed8] hover:border-[#1d4ed8] transition-all group"
+                    >
+                      Read Case Study
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </Link>
+                  </div>
                 </div>
+
+                {/* Image */}
+                <div className="lg:col-span-7 relative order-1 lg:order-2 pt-10 pl-8">
+                  <img
+                    alt="Real Estate CRM Platform"
+                    src="/Images/CRM.webp"
+                    className="w-full h-[500px] object-cover shadow-2xl"
+                    loading="lazy"
+                  />
+                  {/* Floating header card — blue */}
+                  <div className="absolute -top-4 -left-4 bg-[#2563EB] text-white p-8 hidden md:block">
+                    <h3 className="font-serif text-2xl mb-2">Architectural Precision</h3>
+                    <p className="text-[10px] font-bold opacity-80 uppercase tracking-[0.2em]">
+                      Built for scale
+                    </p>
+                  </div>
+                </div>
+
               </div>
             </motion.div>
           </div>
+
         </section>
 
-        <section className="relative py-8 md:py-12">
-          <div className="container mx-auto px-4">
-            <div className="mb-8">
-              <p className="text-xs uppercase tracking-[0.2em] text-[#1E272E]/58">Selected Work</p>
-              <h2 className="mt-2 font-serif text-4xl font-semibold leading-[1.02] md:text-6xl">Case Intelligence</h2>
-              <p className="mt-4 max-w-3xl text-lg leading-relaxed text-[#1E272E]/74">
-                Compact case studies focused on outcomes, architecture intent, and delivery clarity.
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              {projects.map((project, idx) => (
-                <motion.article
-                  key={project.title}
-                  initial={{ opacity: 0, y: 18 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.23 }}
-                  transition={{ duration: 0.42, delay: idx * 0.06 }}
-                  className="bg-white/84 p-5 shadow-[0_14px_30px_rgba(9,132,227,0.1)] md:p-6"
-                >
-                  <div className="grid grid-cols-1 gap-5 lg:grid-cols-[220px_1fr]">
-                    <div className="overflow-hidden bg-[#ECF3FC]">
-                      <ResponsiveImage
-                        alt={project.title}
-                        src={project.image.src}
-                        fallbackSrc={project.image.fallbackSrc}
-                        sources={project.image.sources}
-                        sizes="(min-width: 1024px) 220px, 100vw"
-                        className="relative h-full w-full"
-                        imgClassName="h-full w-full object-cover"
-                        eager={idx === 0}
-                      />
-                    </div>
-
-                    <div>
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className="inline-flex bg-[#0984E3]/12 px-2.5 py-1 text-[11px] uppercase tracking-[0.12em] text-[#0984E3]">
-                          {project.category}
-                        </span>
-                        {project.stack.map((tag) => (
-                          <span
-                            key={tag}
-                            className="inline-flex bg-[#ECF5FD] px-2.5 py-1 text-[11px] uppercase tracking-[0.1em] text-[#1E272E]/65"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      <h3 className="mt-3 text-3xl font-semibold leading-tight md:text-4xl">{project.title}</h3>
-                      <p className="mt-3 max-w-3xl leading-relaxed text-[#1E272E]/78">{project.summary}</p>
-                      <ul className="mt-4 grid grid-cols-1 gap-2 md:grid-cols-2">
-                        {project.outcomes.map((outcome) => (
-                          <li key={outcome} className="flex items-start gap-2.5 text-sm leading-relaxed text-[#1E272E]/82">
-                            <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#0984E3]" />
-                            <span>{outcome}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </motion.article>
-              ))}
-            </div>
-          </div>
-        </section>
-
+        {/* ── Delivery Signature — DO NOT CHANGE ─────────────────────────────── */}
         <section className="relative py-14 md:py-20">
           <div className="container mx-auto px-4">
             <motion.div
@@ -327,45 +323,45 @@ const Portfolio: React.FC = () => {
           </div>
         </section>
 
-        <section className="relative pb-16 pt-8 md:pb-20">
-          <div className="container mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.24 }}
-              transition={{ duration: 0.4 }}
-              className="overflow-hidden bg-[linear-gradient(130deg,#ECF5FD_0%,#D9EDFF_100%)] px-8 py-10 text-[#1E272E] shadow-[0_18px_40px_rgba(9,132,227,0.14)]"
-            >
-              <div className="pointer-events-none absolute -right-24 -top-20 h-56 w-56 rounded-full bg-[#0984E3]/18 blur-3xl" />
-              <div className="relative z-10 grid grid-cols-1 gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.2em] text-[#1E272E]/62">Next Move</p>
-                  <h2 className="mt-3 max-w-3xl font-serif text-3xl font-semibold leading-[1.02] md:text-5xl">
-                    Want your project to be the next case snapshot?
-                  </h2>
-                  <p className="mt-4 max-w-2xl text-[#1E272E]/76">
-                    Share your goals and constraints. We will map the right architecture and execution path for your team.
-                  </p>
-                </div>
-                <div className="grid gap-3">
-                  <Link
-                    to="/contact"
-                    className="inline-flex items-center justify-center gap-2 bg-[#0984E3] px-6 py-3 text-[#F5F6FA] transition-colors hover:bg-[#0776CC]"
-                  >
-                    Book a Call
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                  <Link
-                    to="/services"
-                    className="inline-flex items-center justify-center gap-2 bg-white px-6 py-3 text-[#1E272E] transition-colors hover:bg-[#ECF5FD]"
-                  >
-                    Review Services
-                  </Link>
-                </div>
+        {/* ── CTA ───────────────────────────────────────────────────────────── */}
+        <section className="max-w-5xl mx-auto px-8 py-24 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5 }}
+            className="bg-[#0F172A] text-white p-16 relative overflow-hidden"
+          >
+            {/* Blueprint grid in CTA */}
+            <div className="absolute inset-0 opacity-10" style={blueprintGrid} />
+            {/* Blue glow */}
+            <div className="pointer-events-none absolute -right-20 -top-16 h-52 w-52 rounded-full bg-[#2563EB]/30 blur-3xl" />
+            <div className="pointer-events-none absolute -bottom-20 left-8 h-52 w-52 rounded-full bg-[#3b82f6]/20 blur-3xl" />
+
+            <div className="relative z-10">
+              <h2 className="font-serif text-5xl mb-8">Ready to start a project?</h2>
+              <p className="text-xl opacity-70 mb-10 max-w-xl mx-auto font-light leading-relaxed">
+                We are currently accepting new high-impact consulting engagements. Let's map the right
+                architecture and execution path for your team.
+              </p>
+              <div className="flex flex-col md:flex-row gap-4 justify-center">
+                <Link
+                  to="/contact"
+                  className="sharp-edge bg-white text-[#0F172A] px-10 py-4 text-sm font-bold tracking-wide uppercase hover:bg-[#e2e8f0] transition-colors active:scale-95 duration-150"
+                >
+                  Book Your Discovery Call
+                </Link>
+                <Link
+                  to="/services"
+                  className="sharp-edge border border-white/30 text-white px-10 py-4 text-sm font-bold tracking-wide uppercase hover:bg-white/10 transition-colors"
+                >
+                  View Services
+                </Link>
               </div>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </section>
+
       </div>
     </MotionConfig>
   );
