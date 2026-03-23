@@ -59,7 +59,12 @@ const Home: React.FC = () => {
   }, [shouldLoadWorldMap]);
 
   // Defer WebGL background until after first paint so UI renders immediately
+  // requestIdleCallback is not available on iOS Safari < 16.4 — fallback to setTimeout
   useEffect(() => {
+    if (typeof requestIdleCallback === 'undefined') {
+      const id = setTimeout(() => setBgReady(true), 200);
+      return () => clearTimeout(id);
+    }
     const id = requestIdleCallback(() => setBgReady(true), { timeout: 2000 });
     return () => cancelIdleCallback(id);
   }, []);

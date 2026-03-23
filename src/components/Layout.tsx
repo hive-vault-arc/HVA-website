@@ -10,7 +10,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen w-screen mx-auto ">
+      <main className="min-h-screen w-full">
         {children}
       </main>
     </>
