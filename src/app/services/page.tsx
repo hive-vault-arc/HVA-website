@@ -1,26 +1,34 @@
 import type { Metadata } from 'next';
 import Services from '../../views/Services';
 import JsonLd from '../../components/JsonLd';
-import { buildPageMetadata } from '../../lib/seo';
+import { GLOBAL_KEYWORDS, buildPageMetadata, mergeKeywords } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'AI Receptionist, Automation, SaaS & Cloud Services in Morocco',
   description:
     'Explore H.V.A service lines: AI receptionist systems, AI analyst reporting, workflow automation, custom software platforms, and cloud reliability engineering.',
   path: '/services',
-  keywords: [
-    'AI receptionist Morocco',
-    'AI analyst Morocco',
-    'workflow automation Morocco',
-    'custom software development Morocco',
-    'cloud infrastructure Morocco',
-    'agents IA Maroc',
-    'automatisation des workflows maroc',
-    'موظف استقبال بالذكاء الاصطناعي المغرب',
-    'أتمتة سير العمل المغرب',
-    'recepcionista con ia marruecos',
-    'automatizacion de flujos de trabajo marruecos',
-  ],
+  keywords: mergeKeywords(GLOBAL_KEYWORDS, [
+    'AI receptionist implementation for businesses',
+    'AI analyst dashboards for executives',
+    'custom CRM development and migration',
+    'ERP and CRM integration services',
+    'workflow automation for operations teams',
+    'devops and CI/CD setup for product teams',
+    'cloud migration and deployment partner',
+    'mobile app development for companies',
+    'web app development for internal operations',
+    'migration from legacy systems to modern cloud',
+    'service company for app deployment Morocco',
+    'team to automate sales and support workflows',
+    'services IA pour entreprise au Maroc',
+    'migration CRM et intégration API Maroc',
+    'développement application web et mobile entreprise Maroc',
+    'خدمات استقبال ذكي وتحليل أعمال بالذكاء الاصطناعي',
+    'ترحيل CRM وتكامل الأنظمة في المغرب',
+    'desarrollo de software empresarial y automatizacion marruecos',
+    'migracion de sistemas legacy a cloud en marruecos',
+  ]),
   alternates: {
     en: '/en/services',
     fr: '/fr/services',
@@ -50,6 +58,12 @@ export default function Page() {
       'CI/CD and DevOps',
     ],
     availableLanguage: ['en', 'fr', 'ar', 'es'],
+    keywords: mergeKeywords(GLOBAL_KEYWORDS, [
+      'AI receptionist systems',
+      'AI analyst and decision intelligence',
+      'custom platform development',
+      'cloud reliability engineering',
+    ]),
     url: 'https://www.hiva.ma/services',
   };
 

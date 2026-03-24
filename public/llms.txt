@@ -21,14 +21,72 @@
 ## Keywords
 - AI agents Tangier
 - AI agents Morocco
+- AI automation agency Morocco
 - AI receptionist Morocco
+- AI receptionist Tangier
+- AI analyst Morocco
+- AI chatbot development Morocco
+- WhatsApp AI chatbot Morocco
 - custom software solutions Morocco
+- custom software development Morocco
+- custom mobile app development Morocco
+- custom web app development Morocco
+- CRM migration services Morocco
+- CRM integration services Morocco
+- SaaS development Morocco
+- product engineering agency Morocco
+- workflow automation Morocco
+- business process automation Tangier
+- cloud migration Morocco
+- cloud deployment services Morocco
+- DevOps consulting Morocco
+- CI/CD implementation Morocco
+- application modernization Morocco
+- legacy system modernization Morocco
+- IT service and consulting Morocco
 - IT services consultant Tangier
-- agents IA Tanger
+- software company Tangier
+- hire developers in Morocco
+- build app for my company Morocco
+- build custom CRM for my business Morocco
+- company to build mobile app in Morocco
+- agency to deploy my app in cloud Morocco
 - services et conseil informatique Maroc
+- agents IA Tanger
+- agence IA Maroc
+- réceptionniste IA Maroc
+- analyste IA Maroc
+- développement logiciel sur mesure Maroc
+- développement application mobile sur mesure Maroc
+- développement application web sur mesure Maroc
+- migration CRM Maroc
+- intégration CRM Maroc
+- automatisation des workflows Maroc
+- déploiement cloud Maroc
+- conseil DevOps Maroc
+- prestataire IT Tanger
 - وكلاء الذكاء الاصطناعي طنجة
+- وكالة ذكاء اصطناعي المغرب
+- موظف استقبال بالذكاء الاصطناعي المغرب
+- محلل ذكاء اصطناعي المغرب
 - حلول برمجية مخصصة المغرب
+- تطوير تطبيقات موبايل مخصصة المغرب
+- تطوير تطبيقات ويب مخصصة المغرب
+- ترحيل نظام CRM المغرب
+- تكامل CRM المغرب
+- أتمتة العمليات التجارية المغرب
+- نشر تطبيقات سحابية المغرب
+- استشارات تقنية المعلومات المغرب
 - recepcionista con ia marruecos
+- analista de ia marruecos
+- desarrollo de software a medida marruecos
+- desarrollo de app movil a medida marruecos
+- desarrollo de app web a medida marruecos
+- migracion de CRM marruecos
+- integracion de CRM marruecos
+- automatizacion de procesos marruecos
+- despliegue cloud marruecos
+- consultoria IT en marruecos
 
 ## Contact
 - Website: https://www.hiva.ma/contact

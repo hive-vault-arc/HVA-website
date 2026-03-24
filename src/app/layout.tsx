@@ -80,6 +80,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     name: BUSINESS_NAME,
     alternateName: 'H.V.A',
     url: SITE_URL,
+    description: DEFAULT_DESCRIPTION,
     logo: absoluteUrl('/Images/favico/android-chrome-512x512.png'),
     image: absoluteUrl('/Images/hero.webp'),
     areaServed: ['Tangier', 'Morocco'],
@@ -93,6 +94,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       'Web Application Development',
       'Mobile Application Development',
     ],
+    knowsAbout: GLOBAL_KEYWORDS,
     sameAs: [],
   };
 
