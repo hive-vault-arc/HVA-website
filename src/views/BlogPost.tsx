@@ -121,12 +121,12 @@ export default function BlogPostView({ post }: Props) {
   return (
     <main className="bg-[#f7f9fb]">
       {/* Hero */}
-      <section className="bg-[#0F172A] pt-36 pb-16 px-6 md:px-8">
+      <section className="bg-[#f2f4f6] pt-36 pb-16 px-6 md:px-8">
         <div className="max-w-4xl mx-auto">
           {/* Breadcrumb */}
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 text-white/50 hover:text-white transition-colors mb-8 text-sm"
+            className="inline-flex items-center gap-2 text-[#76777d] hover:text-[#0F172A] transition-colors mb-8 text-sm"
             style={{ fontFamily: 'var(--font-body)' }}
           >
             <ArrowLeft className="w-4 h-4" />
@@ -139,21 +139,21 @@ export default function BlogPostView({ post }: Props) {
             style={{ fontFamily: 'var(--font-body)' }}
           >
             <span style={{ color: '#2563EB' }}>{post.category}</span>
-            <span className="w-1 h-1 rounded-full bg-white/20" />
-            <span className="text-white/50">
+            <span className="w-1 h-1 rounded-full bg-[#c6c6cd]" />
+            <span className="text-[#76777d]">
               {new Date(post.publishedAt).toLocaleDateString('en-GB', {
                 day: 'numeric',
                 month: 'long',
                 year: 'numeric',
               })}
             </span>
-            <span className="w-1 h-1 rounded-full bg-white/20" />
-            <span className="text-white/50">{post.readTime}</span>
+            <span className="w-1 h-1 rounded-full bg-[#c6c6cd]" />
+            <span className="text-[#76777d]">{post.readTime}</span>
           </div>
 
           {/* Title */}
           <h1
-            className="text-4xl md:text-6xl leading-tight tracking-tight text-white mb-6"
+            className="text-4xl md:text-6xl leading-tight tracking-tight text-[#0F172A] mb-6"
             style={{ fontFamily: 'var(--font-headline)' }}
           >
             {post.title}
@@ -161,7 +161,7 @@ export default function BlogPostView({ post }: Props) {
 
           {/* Subtitle */}
           <p
-            className="text-lg text-white/60 leading-relaxed max-w-2xl mb-10"
+            className="text-lg text-[#45464d] leading-relaxed max-w-2xl mb-10"
             style={{ fontFamily: 'var(--font-body)' }}
           >
             {post.subtitle}
@@ -169,18 +169,18 @@ export default function BlogPostView({ post }: Props) {
 
           {/* Author row */}
           <div className="flex items-center gap-4">
-            <div className="w-10 h-10 bg-[#2563EB] flex items-center justify-center text-white text-xs font-bold">
+            <div className="w-10 h-10 bg-[#0F172A] flex items-center justify-center text-white text-xs font-bold">
               {post.authors[0]?.initials}
             </div>
             <div>
               <p
-                className="text-sm font-semibold text-white"
+                className="text-sm font-semibold text-[#191c1e]"
                 style={{ fontFamily: 'var(--font-body)' }}
               >
                 {post.authors[0]?.name}
               </p>
               <p
-                className="text-xs text-white/50"
+                className="text-xs text-[#76777d]"
                 style={{ fontFamily: 'var(--font-body)' }}
               >
                 {post.authors[0]?.role}
