@@ -433,9 +433,9 @@ const Home: React.FC = () => {
       </section>
 
       <div style={{ height: '200px', position: 'relative', overflow: 'hidden', color: '#1E272E', marginBottom: '6%' }}>
-        <h1 className="text-[#1E272E]/90 text-2xl lg:text-4xl md:text-xl mb-8 mx-auto text-center font-light leading-relaxed">
+        <h2 className="text-[#1E272E]/90 text-2xl lg:text-4xl md:text-xl mb-8 mx-auto text-center font-light leading-relaxed">
           CORE TECHNOLOGY STACK
-        </h1>
+        </h2>
         <LogoLoop
           logos={techLogos}
           speed={100}

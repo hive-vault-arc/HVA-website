@@ -212,10 +212,10 @@ const About: React.FC = () => {
 
             {/* Header */}
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45 }}
+              viewport={{ once: true, amount: 0.05 }}
+              transition={{ duration: 0.35 }}
               className="mb-12 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6"
             >
               <div>
@@ -229,10 +229,10 @@ const About: React.FC = () => {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.15 }}
-              transition={{ duration: 0.42 }}
+              viewport={{ once: true, amount: 0.05 }}
+              transition={{ duration: 0.35 }}
             >
               {/* Slim progress track */}
               <div className="relative h-px w-full bg-slate-300 mb-8">
@@ -409,10 +409,10 @@ const About: React.FC = () => {
                   <motion.div
                     key={member.name}
                     className="group bg-[#F5F6FA]"
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 8 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.2 }}
-                    transition={{ duration: 0.42, delay: index * 0.07 }}
+                    viewport={{ once: true, amount: 0.05 }}
+                    transition={{ duration: 0.35, delay: index * 0.07 }}
                   >
                     <div className="aspect-[4/5] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
                       <img

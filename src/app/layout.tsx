@@ -40,17 +40,30 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
   },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
     type: 'website',
     siteName: SITE_NAME,
     title: DEFAULT_TITLE,
     description: DEFAULT_DESCRIPTION,
     url: '/',
+    images: [
+      {
+        url: '/Images/hero.webp',
+        width: 1200,
+        height: 630,
+        alt: 'H.V.A — AI Agents, Custom Software & Cloud Engineering in Tangier, Morocco',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: DEFAULT_TITLE,
     description: DEFAULT_DESCRIPTION,
+    images: ['/Images/hero.webp'],
   },
   icons: {
     icon: [

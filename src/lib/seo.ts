@@ -127,11 +127,20 @@ export function buildPageMetadata(input: PageMetaInput): Metadata {
       description: input.description,
       siteName: SITE_NAME,
       locale: input.locale ?? 'en',
+      images: [
+        {
+          url: new URL('/Images/hero.webp', SITE_URL).toString(),
+          width: 1200,
+          height: 630,
+          alt: `${input.title} | ${SITE_NAME}`,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title: input.title,
       description: input.description,
+      images: [new URL('/Images/hero.webp', SITE_URL).toString()],
     },
   };
 }
