@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { SITE_URL } from '../lib/seo';
+import { getAllPosts } from '../lib/blog';
 
 const LOCALES = ['en', 'fr', 'ar', 'es'] as const;
 
@@ -75,5 +76,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: locale === 'en' ? 0.9 : 0.8,
       },
     ]),
+    {
+      url: `${SITE_URL}/blog`,
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    },
+    ...getAllPosts().map((post) => ({
+      url: `${SITE_URL}/blog/${post.slug}`,
+      lastModified: new Date(post.publishedAt),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    })),
   ];
 }
