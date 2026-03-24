@@ -80,7 +80,7 @@ const Portfolio: React.FC = () => {
         <PageAmbientBackground className="-z-10" />
 
         {/* ── Hero ──────────────────────────────────────────────────────────── */}
-        <section className="relative min-h-[680px] flex items-center overflow-hidden bg-white">
+        <section className="relative min-h-[420px] sm:min-h-[560px] lg:min-h-[680px] flex items-center overflow-hidden bg-white">
           {/* Blueprint grid overlay */}
           <div className="absolute inset-0 opacity-60" style={blueprintGrid} />
           {/* Right-side decorative skewed panel */}
@@ -96,7 +96,7 @@ const Portfolio: React.FC = () => {
               <span className="inline-block px-4 py-1 mb-6 bg-[#2563EB]/10 text-[#2563EB] font-bold text-[10px] uppercase tracking-[0.2em]">
                 The Archive
               </span>
-              <h1 className="font-serif text-6xl md:text-8xl text-[#0F172A] leading-tight mb-8">
+              <h1 className="font-serif text-3xl sm:text-4xl md:text-6xl lg:text-8xl text-[#0F172A] leading-tight mb-8">
                 Selected Work &amp; Case Snapshots
               </h1>
               <p className="text-xl text-[#475569] max-w-xl leading-relaxed font-light">
@@ -132,7 +132,7 @@ const Portfolio: React.FC = () => {
                 <img
                   alt="Smart WhatsApp AI Assistant"
                   src="/Images/aiagent.webp"
-                  className="relative w-full h-[500px] object-cover shadow-lg"
+                  className="relative w-full h-[260px] sm:h-[380px] md:h-[500px] object-cover shadow-lg"
                   loading="lazy"
                   decoding="async"
                 />
@@ -254,7 +254,7 @@ const Portfolio: React.FC = () => {
                   <img
                     alt="Real Estate CRM Platform"
                     src="/Images/CRM.webp"
-                    className="w-full h-[500px] object-cover shadow-2xl"
+                    className="w-full h-[260px] sm:h-[380px] md:h-[500px] object-cover shadow-2xl"
                     loading="lazy"
                     decoding="async"
                   />
@@ -283,13 +283,13 @@ const Portfolio: React.FC = () => {
               transition={{ duration: 0.4 }}
               className="text-center"
             >
-              <h2 className="mx-auto max-w-5xl font-serif text-5xl font-semibold leading-[0.96] text-[#1E272E] md:text-8xl">
+              <h2 className="mx-auto max-w-5xl font-serif text-3xl sm:text-4xl md:text-5xl lg:text-8xl font-semibold leading-[0.96] text-[#1E272E]">
                 Redefining Modern
                 <br />
                 Software Excellence
               </h2>
               <p className="mt-10 text-xs uppercase tracking-[0.2em] text-[#1E272E]/58">Delivery Signature</p>
-              <h3 className="mt-3 font-serif text-3xl font-semibold leading-[1.02] text-[#1E272E] md:text-5xl">Power. Speed. Control.</h3>
+              <h3 className="mt-3 font-serif text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold leading-[1.02] text-[#1E272E]">Power. Speed. Control.</h3>
               <p className="mx-auto mt-3 max-w-4xl text-base leading-relaxed text-[#1E272E]/72 md:text-[1.55rem]">
                 Everything needed to build, automate, deploy, and maintain reliable software products.
               </p>
@@ -305,7 +305,7 @@ const Portfolio: React.FC = () => {
                     viewport={{ once: true, amount: 0.2 }}
                     transition={{ duration: 0.35, delay: index * 0.04 }}
                     className={[
-                      'relative min-h-[170px] border border-[#1E272E]/10 p-5 md:p-6',
+                      'relative border border-[#1E272E]/10 p-5 md:p-6 py-6',
                       'bg-[linear-gradient(rgba(30,39,46,0.055)_1px,transparent_1px),linear-gradient(90deg,rgba(30,39,46,0.055)_1px,transparent_1px)] bg-[size:26px_26px]',
                       index % 2 === 0 ? 'bg-[#F8FAFD]' : 'bg-[#F4F8FD]',
                     ].join(' ')}
@@ -334,7 +334,7 @@ const Portfolio: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.5 }}
-            className="bg-[#0F172A] text-white p-16 relative overflow-hidden"
+            className="bg-[#0F172A] text-white p-6 sm:p-10 md:p-16 relative overflow-hidden"
           >
             {/* Blueprint grid in CTA */}
             <div className="absolute inset-0 opacity-10" style={blueprintGrid} />
@@ -343,7 +343,7 @@ const Portfolio: React.FC = () => {
             <div className="pointer-events-none absolute -bottom-20 left-8 h-52 w-52 rounded-full bg-[#3b82f6]/20 blur-3xl" />
 
             <div className="relative z-10">
-              <h2 className="font-serif text-5xl mb-8">Ready to start a project?</h2>
+              <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl mb-8">Ready to start a project?</h2>
               <p className="text-xl opacity-70 mb-10 max-w-xl mx-auto font-light leading-relaxed">
                 We are currently accepting new high-impact consulting engagements. Let's map the right
                 architecture and execution path for your team.

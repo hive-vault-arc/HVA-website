@@ -175,7 +175,7 @@ const Home: React.FC = () => {
               <span className="home-hero-eyebrow inline-block px-3 py-1 bg-[#0984E3]/10 text-[#0984E3] text-[10px] uppercase tracking-[0.22em] font-bold mb-8">
                 Software &amp; Cloud Engineering
               </span>
-              <h1 className="home-hero-title font-serif text-5xl md:text-7xl xl:text-[5.5rem] font-medium leading-[1.04] tracking-tight text-[#1E272E] mb-8">
+              <h1 className="home-hero-title font-serif text-4xl sm:text-5xl md:text-7xl xl:text-[5.5rem] font-medium leading-[1.04] tracking-tight text-[#1E272E] mb-8">
                 Building the Next<br />
                 Generation of{' '}
                 <em className="italic">Digital<br />Systems</em>.
@@ -432,7 +432,7 @@ const Home: React.FC = () => {
         </motion.div>
       </section>
 
-      <div style={{ height: '200px', position: 'relative', overflow: 'hidden', color: '#1E272E', marginBottom: '6%' }}>
+      <div style={{ position: 'relative', overflow: 'hidden', color: '#1E272E', marginBottom: '6%' }} className="min-h-[140px] md:min-h-[200px]">
         <h2 className="text-[#1E272E]/90 text-2xl lg:text-4xl md:text-xl mb-8 mx-auto text-center font-light leading-relaxed">
           CORE TECHNOLOGY STACK
         </h2>
@@ -452,11 +452,11 @@ const Home: React.FC = () => {
 
       <section ref={worldMapSectionRef} className="sharp-edge w-full py-12 rounded-xl overflow-hidden">
         {shouldLoadWorldMap ? (
-          <Suspense fallback={<div className="h-[360px] w-full bg-[#ECF5FD]" aria-hidden="true" />}>
+          <Suspense fallback={<div className="h-[220px] sm:h-[300px] md:h-[360px] w-full bg-[#ECF5FD]" aria-hidden="true" />}>
             <WorldMapDemo />
           </Suspense>
         ) : (
-          <div className="h-[360px] w-full bg-[#ECF5FD]" aria-hidden="true" />
+          <div className="h-[220px] sm:h-[300px] md:h-[360px] w-full bg-[#ECF5FD]" aria-hidden="true" />
         )}
       </section>
 

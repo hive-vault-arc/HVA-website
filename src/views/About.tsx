@@ -244,7 +244,7 @@ const About: React.FC = () => {
               </div>
 
               {/* Step cards — separated by 1px lines */}
-              <div className="grid grid-cols-1 lg:grid-cols-4 gap-px bg-slate-300">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-slate-300">
                 {deliveryFlow.map((item, index) => {
                   const isActive = activeDeliveryStep === index;
                   return (
@@ -366,7 +366,7 @@ const About: React.FC = () => {
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.5 }}
               >
-                <div className="relative min-h-[480px] bg-[#1E272E] overflow-hidden flex flex-col justify-end">
+                <div className="relative min-h-[320px] md:min-h-[480px] bg-[#1E272E] overflow-hidden flex flex-col justify-end">
                   <div className="pointer-events-none absolute -right-20 -top-16 h-52 w-52 rounded-full bg-[#0984E3]/35 blur-3xl" />
                   <div className="pointer-events-none absolute -bottom-20 left-[8%] h-56 w-56 rounded-full bg-[#00CEC9]/20 blur-3xl" />
                   <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#0984E3]/50 to-transparent" />

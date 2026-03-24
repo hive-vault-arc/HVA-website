@@ -32,7 +32,7 @@ export default function BlogIndex() {
               Insights &amp; Perspectives
             </span>
             <h1
-              className="text-5xl md:text-7xl font-light leading-tight tracking-tight text-[#0F172A]"
+              className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-light leading-tight tracking-tight text-[#0F172A]"
               style={{ fontFamily: 'var(--font-headline)' }}
             >
               The H.V.A <br />

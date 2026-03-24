@@ -64,7 +64,7 @@ function RenderSection({ section, index }: { section: ContentSection; index: num
       );
     case 'stat-block':
       return (
-        <div key={index} className="my-10 grid grid-cols-2 gap-4">
+        <div key={index} className="my-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
           {section.stats.map((stat, si) => (
             <div key={si} className="bg-[#f2f4f6] p-6">
               <p

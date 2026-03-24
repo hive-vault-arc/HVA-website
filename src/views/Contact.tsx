@@ -82,7 +82,7 @@ const Contact: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55 }}
           >
-            <h1 className="text-6xl md:text-7xl font-headline tracking-tight text-[#0F172A] mb-8 leading-[1.1]">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-headline tracking-tight text-[#0F172A] mb-8 leading-[1.1]">
               Let's build your next system.
             </h1>
             <p className="text-xl font-body text-[#475569] max-w-xl leading-relaxed">
@@ -276,7 +276,7 @@ const Contact: React.FC = () => {
               </div>
 
               {/* Quote block */}
-              <div className="mt-12 bg-[#f2f4f6] p-10 lg:p-12 relative overflow-hidden">
+              <div className="mt-12 bg-[#f2f4f6] p-6 sm:p-8 lg:p-12 relative overflow-hidden">
                 <div className="relative z-10">
                   <span
                     aria-hidden="true"

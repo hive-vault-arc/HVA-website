@@ -11,8 +11,9 @@ const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  // Close mobile menu when route changes
+  // Close mobile menu and restore scroll when route changes
   useEffect(() => {
+    document.body.style.overflow = '';
     setIsMobileMenuOpen(false);
   }, [pathname]);
 
@@ -78,9 +79,13 @@ const Navbar: React.FC = () => {
             {/* Mobile menu button */}
             <div className="md:hidden flex items-center">
               <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                onClick={() => {
+                  const next = !isMobileMenuOpen;
+                  document.body.style.overflow = next ? 'hidden' : '';
+                  setIsMobileMenuOpen(next);
+                }}
                 className="inline-flex items-center justify-center p-2 rounded-md text-[#1E272E]/70 hover:text-[#1E272E] hover:bg-[#0984E3]/10 focus:outline-none"
-                aria-expanded="false"
+                aria-expanded={isMobileMenuOpen}
               >
                 <span className="sr-only">Open main menu</span>
                 {isMobileMenuOpen ? (

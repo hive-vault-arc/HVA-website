@@ -211,7 +211,7 @@ const Services: React.FC = () => {
                 <span className="inline-block text-[#2563EB] font-bold tracking-[0.22em] text-[10px] uppercase mb-6">
                   Engineering Excellence
                 </span>
-                <h1 className="font-serif text-6xl md:text-8xl text-[#0F172A] leading-[1.03] tracking-tight mb-8">
+                <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl lg:text-8xl text-[#0F172A] leading-[1.03] tracking-tight mb-8">
                   Systems that move faster<br />
                   than your <em className="italic">bottlenecks.</em>
                 </h1>
@@ -269,7 +269,7 @@ const Services: React.FC = () => {
                 Core Service Lines
               </p>
               <div className="flex items-end justify-between flex-wrap gap-6">
-                <h2 className="font-serif text-5xl md:text-6xl text-[#0F172A] leading-tight max-w-2xl">
+                <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-[#0F172A] leading-tight max-w-2xl">
                   What We Actually Deliver
                 </h2>
                 <p className="text-[#475569] max-w-md font-light leading-relaxed">
@@ -284,7 +284,7 @@ const Services: React.FC = () => {
                 <article
                   key={line.title}
                   className={[
-                    'relative flex flex-col gap-6 p-10 lg:p-14 group transition-all duration-300',
+                    'relative flex flex-col gap-6 p-6 sm:p-8 md:p-10 lg:p-14 group transition-all duration-300',
                     line.accent === 'dark'
                       ? 'bg-[#0F172A] text-[#F8FAFC]'
                       : 'bg-white text-[#0F172A] hover:bg-[#F8FAFC]',
@@ -380,7 +380,7 @@ const Services: React.FC = () => {
                 <p className="text-[10px] uppercase tracking-[0.22em] text-[#475569] font-bold mb-3">
                   Capability Catalog
                 </p>
-                <h2 className="font-serif text-5xl md:text-6xl text-[#0F172A] leading-tight">
+                <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-[#0F172A] leading-tight">
                   Technical Competencies
                 </h2>
                 <div className="mt-6 w-16 h-[3px] bg-[#2563EB]" />
@@ -446,7 +446,7 @@ const Services: React.FC = () => {
                 </p>
 
                 {/* Stat strip */}
-                <div className="mt-10 grid grid-cols-3 gap-6 pt-10 border-t border-[#F8FAFC]/10">
+                <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 pt-10 border-t border-[#F8FAFC]/10">
                   {[
                     { v: '4+', l: 'Years Delivering' },
                     { v: '2+', l: 'Products Shipped' },
@@ -504,7 +504,7 @@ const Services: React.FC = () => {
               <p className="text-[10px] uppercase tracking-[0.22em] text-[#475569] font-bold mb-4">
                 Execution Flow
               </p>
-              <h2 className="font-serif text-5xl md:text-6xl text-[#0F172A] leading-tight">
+              <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-[#0F172A] leading-tight">
                 How Delivery Moves to Production
               </h2>
               <p className="mt-4 text-[#475569] font-light text-lg max-w-xl mx-auto">
@@ -528,7 +528,7 @@ const Services: React.FC = () => {
                     className="flex flex-col items-start"
                   >
                     {/* Step number circle */}
-                    <div className="w-[4.5rem] h-[4.5rem] bg-[#0F172A] text-[#F8FAFC] flex items-center justify-center text-xl font-bold font-serif mb-6 shrink-0">
+                    <div className="w-10 h-10 md:w-[4.5rem] md:h-[4.5rem] bg-[#0F172A] text-[#F8FAFC] flex items-center justify-center text-base md:text-xl font-bold font-serif mb-6 shrink-0">
                       {item.num}
                     </div>
                     <h4 className="text-2xl font-bold text-[#0F172A] mb-3">{item.step}</h4>
@@ -560,7 +560,7 @@ const Services: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
               transition={{ duration: 0.5 }}
-              className="relative overflow-hidden bg-[#0F172A] text-[#F8FAFC] px-10 py-16 md:px-20 md:py-24"
+              className="relative overflow-hidden bg-[#0F172A] text-[#F8FAFC] px-6 py-10 sm:px-10 sm:py-16 md:px-20 md:py-24"
             >
               {/* Glows */}
               <div className="pointer-events-none absolute -right-24 -top-20 h-64 w-64 rounded-full bg-[#2563EB]/30 blur-3xl" />
@@ -580,7 +580,7 @@ const Services: React.FC = () => {
                   <p className="text-[#2563EB] text-[10px] font-bold tracking-[0.22em] uppercase mb-5">
                     Next Step
                   </p>
-                  <h2 className="font-serif text-4xl md:text-6xl leading-tight mb-6">
+                  <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-6xl leading-tight mb-6">
                     Need AI agents that actually understand your business?
                   </h2>
                   <p className="text-[#F8FAFC]/65 text-lg font-light leading-relaxed max-w-xl">
