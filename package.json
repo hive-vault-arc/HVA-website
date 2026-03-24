@@ -31,12 +31,10 @@
     "primeicons": "^7.0.0",
     "primereact": "^10.9.6",
     "react": "^19.2.0",
-    "react-blob-shape": "^1.0.1",
     "react-dom": "^19.2.0",
     "react-icons": "^5.5.0",
     "react-intersection-observer": "^9.16.0",
     "react-svg-blob": "^0.3.1",
-    "react-tilt": "^1.0.2",
     "tailwind-merge": "^3.3.1",
     "three": "^0.177.0"
   },
