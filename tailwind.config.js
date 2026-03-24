@@ -13,11 +13,11 @@ const config = {
        Label            : Inter       (same as body)
        ─────────────────────────────────────────────────────────────────── */
     fontFamily: {
-      serif:    ['Newsreader', 'Georgia', 'serif'],
-      sans:     ['Inter', 'system-ui', 'sans-serif'],
-      headline: ['Newsreader', 'Georgia', 'serif'],
-      body:     ['Inter', 'system-ui', 'sans-serif'],
-      label:    ['Inter', 'system-ui', 'sans-serif'],
+      serif:    ['var(--font-newsreader)', 'Georgia', 'serif'],
+      sans:     ['var(--font-inter)', 'system-ui', 'sans-serif'],
+      headline: ['var(--font-newsreader)', 'Georgia', 'serif'],
+      body:     ['var(--font-inter)', 'system-ui', 'sans-serif'],
+      label:    ['var(--font-inter)', 'system-ui', 'sans-serif'],
     },
 
     /* ── Color Palette ──────────────────────────────────────────────────────
