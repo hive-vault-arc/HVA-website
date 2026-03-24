@@ -1,5 +1,5 @@
 import React from 'react';
-import Plasma from './Plasma';
+import dynamic from 'next/dynamic';
 import { cn } from '../lib/utils';
 import { useAnimationQuality } from '../lib/animationQuality';
 
@@ -7,6 +7,8 @@ interface PageAmbientBackgroundProps {
   className?: string;
   animated?: boolean;
 }
+
+const Plasma = dynamic(() => import('./Plasma'), { ssr: false });
 
 const PageAmbientBackground: React.FC<PageAmbientBackgroundProps> = ({ className, animated = true }) => {
   const { tier, motionReduced } = useAnimationQuality();

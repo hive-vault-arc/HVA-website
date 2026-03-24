@@ -1,5 +1,7 @@
+'use client';
+
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { MotionConfig, motion, useScroll, useTransform } from 'framer-motion';
 import {
   ArrowRight,
@@ -178,7 +180,7 @@ const Portfolio: React.FC = () => {
                 </ul>
                 <div className="pt-3">
                   <Link
-                    to="/contact"
+                    href="/contact"
                     className="inline-flex items-center gap-2 text-[#2563EB] font-bold border-b-2 border-[#2563EB] pb-1 hover:text-[#1d4ed8] hover:border-[#1d4ed8] transition-all group"
                   >
                     View Technical Breakdown
@@ -238,7 +240,7 @@ const Portfolio: React.FC = () => {
                   </div>
                   <div className="pt-3">
                     <Link
-                      to="/contact"
+                      href="/contact"
                       className="inline-flex items-center gap-2 text-[#2563EB] font-bold border-b-2 border-[#2563EB] pb-1 hover:text-[#1d4ed8] hover:border-[#1d4ed8] transition-all group"
                     >
                       Read Case Study
@@ -348,13 +350,13 @@ const Portfolio: React.FC = () => {
               </p>
               <div className="flex flex-col md:flex-row gap-4 justify-center">
                 <Link
-                  to="/contact"
+                  href="/contact"
                   className="sharp-edge bg-white text-[#0F172A] px-10 py-4 text-sm font-bold tracking-wide uppercase hover:bg-[#e2e8f0] transition-colors active:scale-95 duration-150"
                 >
                   Book Your Discovery Call
                 </Link>
                 <Link
-                  to="/services"
+                  href="/services"
                   className="sharp-edge border border-white/30 text-white px-10 py-4 text-sm font-bold tracking-wide uppercase hover:bg-white/10 transition-colors"
                 >
                   View Services
@@ -370,3 +372,4 @@ const Portfolio: React.FC = () => {
 };
 
 export default Portfolio;
+

@@ -1,5 +1,7 @@
+'use client';
+
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { MotionConfig, motion, useScroll, useTransform } from 'framer-motion';
 import {
   ArrowRight,
@@ -153,13 +155,13 @@ const About: React.FC = () => {
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link
-                    to="/contact"
+                    href="/contact"
                     className="sharp-edge bg-[#1E272E] text-[#F5F6FA] px-8 py-4 text-sm font-bold hover:bg-[#0984E3] transition-colors duration-300"
                   >
                     Start a Project
                   </Link>
                   <Link
-                    to="/services"
+                    href="/services"
                     className="sharp-edge inline-flex items-center gap-2 bg-white/90 px-8 py-4 text-sm font-bold text-[#1E272E] shadow-[0_10px_25px_rgba(9,132,227,0.08)] hover:bg-[#ECF5FD] transition-colors duration-300"
                   >
                     Explore Services
@@ -456,14 +458,14 @@ const About: React.FC = () => {
               </div>
               <div className="grid gap-3">
                 <Link
-                  to="/contact"
+                  href="/contact"
                   className="inline-flex items-center justify-center gap-2 bg-[#0984E3] px-7 py-3 text-[#F5F6FA] transition-colors hover:bg-[#0776CC]"
                 >
                   Book a Call
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
-                  to="/services"
+                  href="/services"
                   className="inline-flex items-center justify-center gap-2 bg-[#F5F6FA]/12 px-7 py-3 text-[#F5F6FA] transition-colors hover:bg-[#F5F6FA]/18"
                 >
                   Review Services
@@ -479,3 +481,4 @@ const About: React.FC = () => {
 };
 
 export default About;
+

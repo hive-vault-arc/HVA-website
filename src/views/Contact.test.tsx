@@ -1,3 +1,4 @@
+import React from 'react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import Contact from './Contact';
 
@@ -8,7 +9,7 @@ vi.mock('../components/PageAmbientBackground', () => ({
 
 describe('Contact form', () => {
   beforeEach(() => {
-    vi.stubEnv('VITE_CONTACT_API_URL', 'https://example.com/contact');
+    vi.stubEnv('NEXT_PUBLIC_CONTACT_API_URL', 'https://example.com/contact');
   });
 
   afterEach(() => {
@@ -25,8 +26,8 @@ describe('Contact form', () => {
     render(<Contact />);
 
     fireEvent.change(screen.getByLabelText('Name'), { target: { value: 'Khalid' } });
-    fireEvent.change(screen.getByLabelText('Email'), { target: { value: 'khalid@example.com' } });
-    fireEvent.change(screen.getByLabelText('Message'), { target: { value: 'Need a platform build.' } });
+    fireEvent.change(screen.getByLabelText('Email Address'), { target: { value: 'khalid@example.com' } });
+    fireEvent.change(screen.getByLabelText('Project Brief'), { target: { value: 'Need a platform build.' } });
 
     fireEvent.click(screen.getByRole('button', { name: /send message/i }));
 

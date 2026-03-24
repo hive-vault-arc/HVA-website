@@ -1,20 +1,22 @@
-import React, { Suspense, lazy, useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+'use client';
+
+import React, { useEffect, useRef, useState } from 'react';
+import dynamic from 'next/dynamic';
+import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight, Bot, Cloud, Database, Eye, Layers, Smartphone } from 'lucide-react';
 import { motion } from 'framer-motion';
-import Background3d from '../components/Plasma';
 import LogoLoop from '../components/LogoItem';
-import { FullScreenScrollFX } from '../components/ui/full-screen-scroll-fx';
 import { useAnimationQuality } from '../lib/animationQuality';
 import {
   SiAndroid,
-  SiAmazonwebservices,
   SiCplusplus,
   SiDocker,
   SiFirebase,
   SiFlutter,
   SiGithub,
   SiGoogle,
+  SiGooglecloud,
   SiNextdotjs,
   SiOpenjdk,
   SiPostgresql,
@@ -23,8 +25,17 @@ import {
   SiTensorflow,
 } from 'react-icons/si';
 
-const WorldMapDemo = lazy(() =>
-  import('../components/world-map-demo').then((module) => ({ default: module.WorldMapDemo }))
+const Background3d = dynamic(() => import('../components/Plasma'), { ssr: false });
+const WorldMapDemo = dynamic(
+  () => import('../components/world-map-demo').then((module) => module.WorldMapDemo),
+  {
+    ssr: false,
+    loading: () => <div className="h-[360px] w-full bg-[#ECF5FD]" aria-hidden="true" />,
+  }
+);
+const FullScreenScrollFX = dynamic(
+  () => import('../components/ui/full-screen-scroll-fx').then((module) => module.FullScreenScrollFX),
+  { ssr: false }
 );
 
 const Home: React.FC = () => {
@@ -96,7 +107,7 @@ const Home: React.FC = () => {
     { node: <SiReact />, title: 'React', href: 'https://react.dev' },
     { node: <SiNextdotjs />, title: 'Next.js', href: 'https://nextjs.org' },
     { node: <SiDocker />, title: 'Docker', href: 'https://www.docker.com' },
-    { node: <SiAmazonwebservices />, title: 'AWS', href: 'https://aws.amazon.com' },
+    { node: <SiGooglecloud />, title: 'Cloud', href: 'https://cloud.google.com' },
     { node: <SiFirebase />, title: 'Firebase', href: 'https://firebase.google.com' },
     { node: <SiGoogle />, title: 'Google', href: 'https://www.google.com' },
     { node: <SiGithub />, title: 'GitHub', href: 'https://www.github.com' },
@@ -176,13 +187,13 @@ const Home: React.FC = () => {
               </p>
               <div className="flex flex-wrap gap-6">
                 <Link
-                  to="/portfolio"
+                  href="/portfolio"
                   className="sharp-edge bg-[#1E272E] text-[#F5F6FA] px-8 py-4 text-sm font-bold hover:bg-[#0984E3] transition-colors duration-300"
                 >
                   View Our Work
                 </Link>
                 <Link
-                  to="/services"
+                  href="/services"
                   className="flex items-center gap-2 px-8 py-4 text-sm font-bold text-[#1E272E] hover:gap-4 transition-all duration-300"
                 >
                   Our Services <ArrowRight className="w-4 h-4" />
@@ -197,14 +208,14 @@ const Home: React.FC = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <div className="aspect-[4/5] overflow-hidden shadow-2xl">
-                <img
+              <div className="relative aspect-[4/5] overflow-hidden shadow-2xl">
+                <Image
                   src="/Images/hero.webp"
                   alt="Precision software engineering"
-                  className="w-full h-full object-cover hero-image-animate"
-                  loading="eager"
-                  fetchPriority="high"
-                  decoding="async"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 42vw, 100vw"
+                  className="object-cover hero-image-animate"
                 />
               </div>
               {/* Asymmetric floating card */}
@@ -364,7 +375,7 @@ const Home: React.FC = () => {
 
             {/* Link to services */}
             <Link
-              to="/services"
+              href="/services"
               className="mt-6 inline-flex items-center gap-2 border border-white/20 px-6 py-3 text-xs font-label font-bold uppercase tracking-widest text-white/70 hover:text-white hover:border-white/40 transition-colors"
             >
               Our Engineering Process
@@ -443,9 +454,7 @@ const Home: React.FC = () => {
 
       <section ref={worldMapSectionRef} className="sharp-edge w-full py-12 rounded-xl overflow-hidden">
         {shouldLoadWorldMap ? (
-          <Suspense fallback={<div className="h-[360px] w-full bg-[#ECF5FD]" aria-hidden="true" />}>
-            <WorldMapDemo />
-          </Suspense>
+          <WorldMapDemo />
         ) : (
           <div className="h-[360px] w-full bg-[#ECF5FD]" aria-hidden="true" />
         )}
@@ -460,14 +469,14 @@ const Home: React.FC = () => {
             </p>
             <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
               <Link
-                to="/contact"
+                href="/contact"
                 className="sharp-edge inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black rounded-lg font-medium hover:bg-[#ECF5FD] transition-colors duration-300"
               >
                 Book a Call
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
-                to="/services"
+                href="/services"
                 className="sharp-edge inline-flex items-center justify-center px-8 py-4 bg-[#0984E3]/10 text-[#1E272E] border border-[#1E272E]/20 rounded-lg font-medium hover:bg-[#0984E3]/20 transition-colors duration-300"
               >
                 Explore Services
@@ -482,3 +491,4 @@ const Home: React.FC = () => {
 };
 
 export default Home;
+
