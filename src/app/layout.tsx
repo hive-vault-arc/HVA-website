@@ -71,28 +71,58 @@ export const viewport: Viewport = {
   themeColor: '#F5F6FA',
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   const organizationSchema = {
     '@context': 'https://schema.org',
-    '@type': 'ProfessionalService',
+    '@type': ['LocalBusiness', 'ProfessionalService'],
+    '@id': `${SITE_URL}/#organization`,
     name: BUSINESS_NAME,
-    alternateName: 'H.V.A',
+    alternateName: ['H.V.A', 'Hive Vault Arc'],
     url: SITE_URL,
-    description: DEFAULT_DESCRIPTION,
-    logo: absoluteUrl('/Images/favico/android-chrome-512x512.png'),
+    description: 'Hive Vault Arc (H.V.A) is an AI agent and software engineering agency based in Tangier, Morocco. We build AI receptionist systems, AI analyst tools, custom software platforms, workflow automation, and cloud infrastructure for businesses across Morocco and internationally.',
+    logo: {
+      '@type': 'ImageObject',
+      url: absoluteUrl('/Images/favico/android-chrome-512x512.png'),
+    },
     image: absoluteUrl('/Images/hero.webp'),
-    areaServed: ['Tangier', 'Morocco'],
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Tangier',
+      addressRegion: 'Tanger-Tétouan-Al Hoceïma',
+      addressCountry: 'MA',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: 35.7595,
+      longitude: -5.834,
+    },
+    areaServed: [
+      { '@type': 'City', name: 'Tangier' },
+      { '@type': 'Country', name: 'Morocco' },
+    ],
     serviceType: [
       'AI Agent Development',
       'AI Receptionist Systems',
-      'Custom Software Development',
+      'AI Analyst Tools',
       'Workflow Automation',
+      'Custom Software Development',
       'Cloud Infrastructure',
-      'DevOps',
+      'DevOps Engineering',
       'Web Application Development',
       'Mobile Application Development',
     ],
-    knowsAbout: GLOBAL_KEYWORDS,
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'AI & Software Engineering Services',
+      itemListElement: [
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'AI Agent Development', description: 'Custom AI agents for receptionists, analysts, and business automation in Tangier and Morocco.' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Workflow Automation', description: 'End-to-end business process automation using AI and custom integrations.' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Custom Software Development', description: 'Bespoke web and mobile applications, CRM systems, and enterprise platforms.' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Cloud Infrastructure', description: 'Cloud deployment, CI/CD pipelines, and managed infrastructure on AWS, GCP, and Azure.' } },
+      ],
+    },
+    foundingDate: '2023',
+    knowsLanguage: ['en', 'fr', 'ar', 'es'],
     sameAs: [],
   };
 

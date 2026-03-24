@@ -1,92 +1,84 @@
-# H.V.A (Hive Vault Arc)
+# H.V.A — Hive Vault Arc
 
-> AI, software, automation, and cloud engineering services in Tangier, Morocco.
+> H.V.A (Hive Vault Arc) is an AI agent and software engineering agency based in Tangier, Morocco. We build AI agents, custom software platforms, workflow automation systems, and cloud infrastructure for businesses in Morocco and internationally.
+
+## What Is H.V.A?
+
+Hive Vault Arc, operating as H.V.A, is a Moroccan technology agency founded in Tangier. The company specializes in building AI agents, custom software systems, and cloud-native platforms. H.V.A serves growth-focused businesses that need reliable, scalable technology — from AI-powered receptionists to enterprise-grade web and mobile applications.
+
+H.V.A operates in four languages: English, French, Arabic, and Spanish, making it uniquely positioned to serve Morocco's multilingual business environment and bridge clients between Europe, North Africa, and the Middle East.
+
+## Questions and Answers
+
+### What does H.V.A do?
+
+H.V.A designs and deploys AI agents, builds custom software platforms, automates business workflows, and engineers cloud infrastructure. The agency's core service lines are: AI agent development, custom software engineering, workflow automation, and cloud & DevOps services.
+
+### What is an AI agent?
+
+An AI agent is an autonomous software system powered by large language models (LLMs) that can perform tasks, make decisions, and take actions without constant human input. Unlike simple chatbots that follow fixed scripts, AI agents can reason, call external tools, read data, and complete multi-step processes — such as answering a customer call, checking availability, and booking an appointment.
+
+### Does H.V.A build AI agents in Tangier?
+
+Yes. H.V.A is an AI agent development company based in Tangier, Morocco. The agency builds custom AI agents for businesses in Tangier, across Morocco, and internationally. Services include AI receptionist systems, AI analyst agents, WhatsApp AI chatbots, voice AI, and workflow automation agents.
+
+### What types of AI agents does H.V.A build?
+
+H.V.A builds three core categories of AI agents:
+
+1. **AI Receptionists** — Voice and chat agents that handle inbound calls, WhatsApp messages, appointment bookings, and customer FAQs in Arabic, French, Spanish, and English.
+2. **AI Analysts** — Data agents that pull business metrics, generate performance dashboards, and surface actionable insights for executives and operations teams.
+3. **Workflow Automation Agents** — Systems that automate sales pipelines, customer support queues, invoice processing, and internal operations using APIs, Zapier, Make, and custom integrations.
+
+### Does H.V.A build WhatsApp AI chatbots in Morocco?
+
+Yes. H.V.A builds WhatsApp Business API chatbots powered by AI that can handle customer queries, send follow-ups, qualify leads, and route requests — operating 24/7 in multiple languages. These are widely used by Moroccan businesses to automate customer communication without increasing headcount.
+
+### What custom software does H.V.A build?
+
+H.V.A builds: custom CRM systems, ERP integrations, SaaS platforms, internal tools, mobile applications (iOS and Android), web applications, and enterprise platforms. The agency also handles legacy system modernization and CRM migration projects.
+
+### Where is H.V.A located?
+
+H.V.A is based in Tangier, Morocco. The agency works with clients locally in Tangier, across Morocco, and remotely with international clients in Europe, the Middle East, and Africa.
+
+### What technology stack does H.V.A use?
+
+H.V.A engineers use: React, Next.js, Node.js, Python, Flutter, Java, PostgreSQL, Firebase, Google Cloud, AWS, Docker, and CI/CD tooling. For AI systems, the team works with OpenAI, Anthropic, LangChain, and custom LLM pipelines.
+
+### What languages does H.V.A work in?
+
+H.V.A operates in English, French, Arabic, and Spanish — matching Morocco's multilingual business environment and enabling the agency to serve clients across North Africa, Europe, and beyond.
+
+### How do I contact H.V.A?
+
+Contact H.V.A via the website at https://www.hiva.ma/contact or book a discovery call directly. The team responds in English, French, Arabic, or Spanish.
 
 ## Primary Services
-- AI Receptionist & Agent Operations
-- AI Analyst & Decision Intelligence
-- Workflow Automation & Custom Platforms
-- Cloud Infrastructure, CI/CD, and Reliability Engineering
-- Web and Mobile Product Engineering
+
+- **AI Agent Development** — Custom AI agents for reception, analysis, lead qualification, and automation
+- **AI Receptionist Systems** — Voice and chat agents handling calls, WhatsApp, and bookings 24/7
+- **AI Analyst Tools** — Automated reporting, dashboards, and business intelligence agents
+- **Workflow Automation** — Process automation using AI, APIs, and no-code/low-code integrations
+- **Custom Software Platforms** — Web apps, mobile apps, CRM systems, and enterprise tools
+- **Cloud Infrastructure & DevOps** — Cloud deployment, CI/CD pipelines, and managed infrastructure
+
+## Key Facts
+
+- **Company name:** Hive Vault Arc (H.V.A)
+- **Location:** Tangier, Morocco
+- **Founded:** 2023
+- **Languages:** English, French, Arabic, Spanish
+- **Specialization:** AI agents, custom software, cloud engineering
+- **Clients:** Businesses in Morocco and internationally
 
 ## Important URLs
-- https://www.hiva.ma/
-- https://www.hiva.ma/services
-- https://www.hiva.ma/contact
-- https://www.hiva.ma/en
-- https://www.hiva.ma/fr
-- https://www.hiva.ma/ar
-- https://www.hiva.ma/es
 
-## Keywords
-- AI agents Tangier
-- AI agents Morocco
-- AI automation agency Morocco
-- AI receptionist Morocco
-- AI receptionist Tangier
-- AI analyst Morocco
-- AI chatbot development Morocco
-- WhatsApp AI chatbot Morocco
-- custom software solutions Morocco
-- custom software development Morocco
-- custom mobile app development Morocco
-- custom web app development Morocco
-- CRM migration services Morocco
-- CRM integration services Morocco
-- SaaS development Morocco
-- product engineering agency Morocco
-- workflow automation Morocco
-- business process automation Tangier
-- cloud migration Morocco
-- cloud deployment services Morocco
-- DevOps consulting Morocco
-- CI/CD implementation Morocco
-- application modernization Morocco
-- legacy system modernization Morocco
-- IT service and consulting Morocco
-- IT services consultant Tangier
-- software company Tangier
-- hire developers in Morocco
-- build app for my company Morocco
-- build custom CRM for my business Morocco
-- company to build mobile app in Morocco
-- agency to deploy my app in cloud Morocco
-- services et conseil informatique Maroc
-- agents IA Tanger
-- agence IA Maroc
-- réceptionniste IA Maroc
-- analyste IA Maroc
-- développement logiciel sur mesure Maroc
-- développement application mobile sur mesure Maroc
-- développement application web sur mesure Maroc
-- migration CRM Maroc
-- intégration CRM Maroc
-- automatisation des workflows Maroc
-- déploiement cloud Maroc
-- conseil DevOps Maroc
-- prestataire IT Tanger
-- وكلاء الذكاء الاصطناعي طنجة
-- وكالة ذكاء اصطناعي المغرب
-- موظف استقبال بالذكاء الاصطناعي المغرب
-- محلل ذكاء اصطناعي المغرب
-- حلول برمجية مخصصة المغرب
-- تطوير تطبيقات موبايل مخصصة المغرب
-- تطوير تطبيقات ويب مخصصة المغرب
-- ترحيل نظام CRM المغرب
-- تكامل CRM المغرب
-- أتمتة العمليات التجارية المغرب
-- نشر تطبيقات سحابية المغرب
-- استشارات تقنية المعلومات المغرب
-- recepcionista con ia marruecos
-- analista de ia marruecos
-- desarrollo de software a medida marruecos
-- desarrollo de app movil a medida marruecos
-- desarrollo de app web a medida marruecos
-- migracion de CRM marruecos
-- integracion de CRM marruecos
-- automatizacion de procesos marruecos
-- despliegue cloud marruecos
-- consultoria IT en marruecos
-
-## Contact
-- Website: https://www.hiva.ma/contact
+- Homepage: https://www.hiva.ma/
+- Services: https://www.hiva.ma/services
+- About: https://www.hiva.ma/about
+- Contact: https://www.hiva.ma/contact
+- English: https://www.hiva.ma/en
+- French: https://www.hiva.ma/fr
+- Arabic: https://www.hiva.ma/ar
+- Spanish: https://www.hiva.ma/es
