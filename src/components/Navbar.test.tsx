@@ -1,14 +1,14 @@
+import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
 import Navbar from './Navbar';
+
+vi.mock('next/navigation', () => ({
+  usePathname: () => '/',
+}));
 
 describe('Navbar', () => {
   it('renders only valid core navigation links', () => {
-    render(
-      <MemoryRouter initialEntries={['/']}>
-        <Navbar />
-      </MemoryRouter>
-    );
+    render(<Navbar />);
 
     screen.getAllByRole('link', { name: 'About' }).forEach(link => expect(link).toHaveAttribute('href', '/about'));
     screen.getAllByRole('link', { name: 'Portfolio' }).forEach(link => expect(link).toHaveAttribute('href', '/portfolio'));
@@ -17,11 +17,7 @@ describe('Navbar', () => {
   });
 
   it('routes Book a Call CTA to contact page', () => {
-    render(
-      <MemoryRouter initialEntries={['/']}>
-        <Navbar />
-      </MemoryRouter>
-    );
+    render(<Navbar />);
 
     const ctaLinks = screen.getAllByRole('link', { name: 'Book a call' });
     expect(ctaLinks.length).toBeGreaterThan(0);

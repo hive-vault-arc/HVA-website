@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { ArrowRight, Mail, MapPin, Phone } from 'lucide-react';
 import { MotionConfig, motion, useScroll, useTransform } from 'framer-motion';
@@ -33,7 +35,7 @@ const Contact: React.FC = () => {
     setIsSubmitting(true);
     setStatus(null);
     try {
-      const endpoint = (import.meta.env.VITE_CONTACT_API_URL as string | undefined)?.trim();
+      const endpoint = process.env.NEXT_PUBLIC_CONTACT_API_URL?.trim();
       const payload = { ...formData, subject: 'Project Inquiry' };
       if (endpoint) {
         const response = await fetch(endpoint, {

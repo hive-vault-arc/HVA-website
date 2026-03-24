@@ -12,11 +12,26 @@ skills-lock.json
 # production
 /build
 /dist
+/.next
 
 # misc
 .DS_Store
 *.log
 .env
+
+# local AI/coding assistants
+.claude/
+.codex/
+
+# deploy/build caches
+.vercel/
+.cache/
+*.tsbuildinfo
+out/
+
+# package manager local caches
+.npm/
+.pnpm-store/
 .env.local
 .env.development.local
 .env.test.local

@@ -1,17 +1,20 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
 import Logo from './Logo';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const location = useLocation();
+  const pathname = usePathname();
 
   // Close mobile menu when route changes
   useEffect(() => {
     setIsMobileMenuOpen(false);
-  }, [location]);
+  }, [pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,9 +54,9 @@ const Navbar: React.FC = () => {
               {navItems.map((item) => (
                 <Link
                   key={item.path}
-                  to={item.path}
+                  href={item.path}
                   className={`px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200 ${
-                    location.pathname === item.path
+                    pathname === item.path
                       ? 'text-[#F5F6FA] bg-[#0984E3]'
                       : 'text-[#1E272E]/72 hover:text-[#1E272E] hover:bg-[#0984E3]/10'
                   }`}
@@ -62,7 +65,7 @@ const Navbar: React.FC = () => {
                 </Link>
               ))}
               <Link 
-                to="/contact"
+                href="/contact"
                 aria-label="Book a call"
                 className="ml-2 px-4 py-2 bg-[#1E272E] text-[#F5F6FA] rounded-full text-sm font-medium hover:bg-[#0984E3] transition-all duration-300 flex items-center"
               >
@@ -99,9 +102,9 @@ const Navbar: React.FC = () => {
             {navItems.map((item) => (
               <Link
                 key={item.path}
-                to={item.path}
+                href={item.path}
                 className={`block px-4 py-3 text-base font-medium rounded-lg ${
-                  location.pathname === item.path
+                  pathname === item.path
                     ? 'text-[#F5F6FA] bg-[#0984E3]'
                     : 'text-[#1E272E]/72 hover:text-[#1E272E] hover:bg-[#0984E3]/10'
                 }`}
@@ -111,7 +114,7 @@ const Navbar: React.FC = () => {
             ))}
             <div className="pt-2">
               <Link
-                to="/contact"
+                href="/contact"
                 aria-label="Book a call"
                 className="w-full flex items-center justify-center px-4 py-3 border border-transparent rounded-full text-base font-medium text-[#F5F6FA] bg-[#1E272E] hover:bg-[#0984E3] transition-colors duration-200"
               >

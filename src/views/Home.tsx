@@ -1,5 +1,7 @@
+'use client';
+
 import React, { Suspense, lazy, useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { ArrowRight, Bot, Cloud, Database, Eye, Layers, Smartphone } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Background3d from '../components/Plasma';
@@ -8,13 +10,13 @@ import { FullScreenScrollFX } from '../components/ui/full-screen-scroll-fx';
 import { useAnimationQuality } from '../lib/animationQuality';
 import {
   SiAndroid,
-  SiAmazonwebservices,
   SiCplusplus,
   SiDocker,
   SiFirebase,
   SiFlutter,
   SiGithub,
   SiGoogle,
+  SiGooglecloud,
   SiNextdotjs,
   SiOpenjdk,
   SiPostgresql,
@@ -69,6 +71,13 @@ const Home: React.FC = () => {
     return () => cancelIdleCallback(id);
   }, []);
 
+  useEffect(() => {
+    document.body.classList.add('home-page');
+    return () => {
+      document.body.classList.remove('home-page');
+    };
+  }, []);
+
   const servicePillars = [
     {
       icon: <Bot className="w-5 h-5" strokeWidth={1.5} />,
@@ -96,7 +105,7 @@ const Home: React.FC = () => {
     { node: <SiReact />, title: 'React', href: 'https://react.dev' },
     { node: <SiNextdotjs />, title: 'Next.js', href: 'https://nextjs.org' },
     { node: <SiDocker />, title: 'Docker', href: 'https://www.docker.com' },
-    { node: <SiAmazonwebservices />, title: 'AWS', href: 'https://aws.amazon.com' },
+    { node: <SiGooglecloud />, title: 'Cloud', href: 'https://cloud.google.com' },
     { node: <SiFirebase />, title: 'Firebase', href: 'https://firebase.google.com' },
     { node: <SiGoogle />, title: 'Google', href: 'https://www.google.com' },
     { node: <SiGithub />, title: 'GitHub', href: 'https://www.github.com' },
@@ -137,7 +146,7 @@ const Home: React.FC = () => {
   ];
 
   return (
-    <div className="h-full">
+    <div className="h-full home-reference">
       {bgReady && showAdvancedEffects && (
         <Background3d
           color="#0984E3"
@@ -163,27 +172,27 @@ const Home: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <span className="inline-block px-3 py-1 bg-[#0984E3]/10 text-[#0984E3] text-[10px] uppercase tracking-[0.22em] font-bold mb-8">
+              <span className="home-hero-eyebrow inline-block px-3 py-1 bg-[#0984E3]/10 text-[#0984E3] text-[10px] uppercase tracking-[0.22em] font-bold mb-8">
                 Software &amp; Cloud Engineering
               </span>
-              <h1 className="font-serif text-5xl md:text-7xl xl:text-[5.5rem] font-medium leading-[1.04] tracking-tight text-[#1E272E] mb-8">
+              <h1 className="home-hero-title font-serif text-5xl md:text-7xl xl:text-[5.5rem] font-medium leading-[1.04] tracking-tight text-[#1E272E] mb-8">
                 Building the Next<br />
                 Generation of{' '}
                 <em className="italic">Digital<br />Systems</em>.
               </h1>
-              <p className="text-xl text-[#1E272E]/60 max-w-xl mb-12 font-light leading-relaxed">
+              <p className="home-hero-copy text-xl text-[#1E272E]/60 max-w-xl mb-12 font-light leading-relaxed">
                 We engineer custom software, AI-powered applications, and cloud platforms that power modern businesses at scale.
               </p>
               <div className="flex flex-wrap gap-6">
                 <Link
-                  to="/portfolio"
-                  className="sharp-edge bg-[#1E272E] text-[#F5F6FA] px-8 py-4 text-sm font-bold hover:bg-[#0984E3] transition-colors duration-300"
+                  href="/portfolio"
+                  className="home-hero-primary sharp-edge bg-[#1E272E] text-[#F5F6FA] px-8 py-4 text-sm font-bold hover:bg-[#0984E3] transition-colors duration-300"
                 >
                   View Our Work
                 </Link>
                 <Link
-                  to="/services"
-                  className="flex items-center gap-2 px-8 py-4 text-sm font-bold text-[#1E272E] hover:gap-4 transition-all duration-300"
+                  href="/services"
+                  className="home-hero-secondary flex items-center gap-2 px-8 py-4 text-sm font-bold text-[#1E272E] hover:gap-4 transition-all duration-300"
                 >
                   Our Services <ArrowRight className="w-4 h-4" />
                 </Link>
@@ -210,10 +219,10 @@ const Home: React.FC = () => {
               {/* Asymmetric floating card */}
               <div className="absolute -bottom-16 -left-6 md:-left-14 bg-white p-8 max-w-[17rem] shadow-xl hidden md:block">
                 <Layers className="w-8 h-8 text-[#0984E3] mb-4" />
-                <h3 className="font-serif text-xl mb-3 italic font-medium text-[#1E272E]">
+                <h3 className="home-float-title font-serif text-xl mb-3 italic font-medium text-[#1E272E]">
                   Precision in Delivery.
                 </h3>
-                <p className="text-sm text-[#1E272E]/60 leading-relaxed">
+                <p className="home-float-copy text-sm text-[#1E272E]/60 leading-relaxed">
                   Every line of code and architectural decision is built for performance, reliability, and long-term scale.
                 </p>
               </div>
@@ -364,7 +373,7 @@ const Home: React.FC = () => {
 
             {/* Link to services */}
             <Link
-              to="/services"
+              href="/services"
               className="mt-6 inline-flex items-center gap-2 border border-white/20 px-6 py-3 text-xs font-label font-bold uppercase tracking-widest text-white/70 hover:text-white hover:border-white/40 transition-colors"
             >
               Our Engineering Process
@@ -460,14 +469,14 @@ const Home: React.FC = () => {
             </p>
             <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
               <Link
-                to="/contact"
+                href="/contact"
                 className="sharp-edge inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black rounded-lg font-medium hover:bg-[#ECF5FD] transition-colors duration-300"
               >
                 Book a Call
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
-                to="/services"
+                href="/services"
                 className="sharp-edge inline-flex items-center justify-center px-8 py-4 bg-[#0984E3]/10 text-[#1E272E] border border-[#1E272E]/20 rounded-lg font-medium hover:bg-[#0984E3]/20 transition-colors duration-300"
               >
                 Explore Services

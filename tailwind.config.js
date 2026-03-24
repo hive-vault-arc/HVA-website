@@ -1,5 +1,7 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+import tailwindcssAnimate from 'tailwindcss-animate';
+
+const config = {
   darkMode: ["class"],
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
@@ -11,11 +13,11 @@ module.exports = {
        Label            : Inter       (same as body)
        ─────────────────────────────────────────────────────────────────── */
     fontFamily: {
-      serif:    ['Newsreader', 'Georgia', 'serif'],
-      sans:     ['Inter', 'system-ui', 'sans-serif'],
-      headline: ['Newsreader', 'Georgia', 'serif'],
-      body:     ['Inter', 'system-ui', 'sans-serif'],
-      label:    ['Inter', 'system-ui', 'sans-serif'],
+      serif:    ['var(--font-newsreader)', 'Georgia', 'serif'],
+      sans:     ['var(--font-inter)', 'system-ui', 'sans-serif'],
+      headline: ['var(--font-newsreader)', 'Georgia', 'serif'],
+      body:     ['var(--font-inter)', 'system-ui', 'sans-serif'],
+      label:    ['var(--font-inter)', 'system-ui', 'sans-serif'],
     },
 
     /* ── Color Palette ──────────────────────────────────────────────────────
@@ -173,5 +175,7 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
-}
+  plugins: [tailwindcssAnimate],
+};
+
+export default config;

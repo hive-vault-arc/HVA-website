@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 interface LogoProps {
   /** Extra classes on the root Link element */
@@ -12,7 +12,7 @@ interface LogoProps {
  */
 const Logo: React.FC<LogoProps> = ({ className }) => (
   <Link
-    to="/"
+    href="/"
     className={['flex-shrink-0 inline-block relative', className].filter(Boolean).join(' ')}
     style={{ paddingBottom: '3px' }}
   >
@@ -36,7 +36,7 @@ const Logo: React.FC<LogoProps> = ({ className }) => (
         textLength="100%"
         lengthAdjust="spacingAndGlyphs"
         style={{
-          fontFamily: 'Inter, sans-serif',
+          fontFamily: 'var(--font-body), sans-serif',
           fontSize: '7.5px',
           fontWeight: 700,
           fill: '#475569',

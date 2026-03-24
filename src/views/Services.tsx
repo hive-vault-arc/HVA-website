@@ -1,5 +1,7 @@
+'use client';
+
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { MotionConfig, motion, useScroll, useTransform } from 'framer-motion';
 import {
   ArrowRight,
@@ -219,13 +221,13 @@ const Services: React.FC = () => {
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link
-                    to="/contact"
+                    href="/contact"
                     className="sharp-edge bg-[#0F172A] text-[#F8FAFC] px-8 py-4 text-sm font-bold uppercase tracking-wide hover:bg-[#2563EB] transition-colors duration-300"
                   >
                     View Capabilities
                   </Link>
                   <Link
-                    to="/portfolio"
+                    href="/portfolio"
                     className="sharp-edge bg-white border border-[#0F172A]/15 px-8 py-4 text-sm font-bold uppercase tracking-wide hover:bg-[#f1f5f9] transition-colors duration-300"
                   >
                     Client Portfolio →
@@ -240,7 +242,7 @@ const Services: React.FC = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.7, delay: 0.2 }}
               >
-                {heroStats.map((stat, i) => (
+                {heroStats.map((stat) => (
                   <div
                     key={stat.label}
                     className="bg-white p-6 shadow-[0_10px_28px_rgba(37,99,235,0.09)] border-l-4 border-[#2563EB]"
@@ -278,7 +280,7 @@ const Services: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-[1px] bg-[#d1d5db]">
-              {serviceLines.map((line, index) => (
+              {serviceLines.map((line) => (
                 <article
                   key={line.title}
                   className={[
@@ -589,14 +591,14 @@ const Services: React.FC = () => {
 
                 <div className="flex flex-col gap-4 lg:items-end">
                   <Link
-                    to="/contact"
+                    href="/contact"
                     className="sharp-edge bg-[#2563EB] text-white px-10 py-5 text-sm font-bold uppercase tracking-wide hover:bg-[#1d4ed8] transition-colors duration-200 inline-flex items-center justify-center gap-2 active:scale-95"
                   >
                     Book a Discovery Call
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                   <Link
-                    to="/portfolio"
+                    href="/portfolio"
                     className="sharp-edge border border-[#F8FAFC]/20 text-[#F8FAFC] px-10 py-5 text-sm font-bold uppercase tracking-wide hover:bg-[#F8FAFC]/10 transition-colors duration-200 inline-flex items-center justify-center gap-2"
                   >
                     Explore Delivered Work
