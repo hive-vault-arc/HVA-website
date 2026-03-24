@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { MapPin, Phone, Mail } from "lucide-react";
-import { FaTwitter, FaLinkedin, FaGithub } from "react-icons/fa";
+import { FiTwitter, FiLinkedin, FiGithub } from "react-icons/fi";
 import type { WorldMapDot } from "../../data/worldMapDots";
 
 interface MapProps {
@@ -215,13 +215,13 @@ export function WorldMap({ dots = [], lineColor = "#0ea5e9" }: MapProps) {
           <p className="text-[#1E272E]/70 text-sm">ali.amrani.dev@gmail.com</p>
           <div className="flex space-x-4 pt-2">
             <a href="https://x.com" target="_blank" rel="noreferrer noopener" className="text-[#0984E3] hover:text-[#1E272E] transition-colors" aria-label="X (Twitter)">
-              <FaTwitter className="w-5 h-5" />
+              <FiTwitter className="w-5 h-5" />
             </a>
             <a href="https://www.linkedin.com" target="_blank" rel="noreferrer noopener" className="text-[#0984E3] hover:text-[#1E272E] transition-colors" aria-label="LinkedIn">
-              <FaLinkedin className="w-5 h-5" />
+              <FiLinkedin className="w-5 h-5" />
             </a>
             <a href="https://github.com" target="_blank" rel="noreferrer noopener" className="text-[#0984E3] hover:text-[#1E272E] transition-colors" aria-label="GitHub">
-              <FaGithub className="w-5 h-5" />
+              <FiGithub className="w-5 h-5" />
             </a>
           </div>
         </div>

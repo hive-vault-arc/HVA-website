@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
-import dynamic from 'next/dynamic';
+import React, { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { ArrowRight, Bot, Cloud, Database, Eye, Layers, Smartphone } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Background3d from '../components/Plasma';
 import LogoLoop from '../components/LogoItem';
+import { FullScreenScrollFX } from '../components/ui/full-screen-scroll-fx';
 import { useAnimationQuality } from '../lib/animationQuality';
 import {
   SiAndroid,
@@ -25,17 +25,8 @@ import {
   SiTensorflow,
 } from 'react-icons/si';
 
-const Background3d = dynamic(() => import('../components/Plasma'), { ssr: false });
-const WorldMapDemo = dynamic(
-  () => import('../components/world-map-demo').then((module) => module.WorldMapDemo),
-  {
-    ssr: false,
-    loading: () => <div className="h-[360px] w-full bg-[#ECF5FD]" aria-hidden="true" />,
-  }
-);
-const FullScreenScrollFX = dynamic(
-  () => import('../components/ui/full-screen-scroll-fx').then((module) => module.FullScreenScrollFX),
-  { ssr: false }
+const WorldMapDemo = lazy(() =>
+  import('../components/world-map-demo').then((module) => ({ default: module.WorldMapDemo }))
 );
 
 const Home: React.FC = () => {
@@ -78,6 +69,13 @@ const Home: React.FC = () => {
     }
     const id = requestIdleCallback(() => setBgReady(true), { timeout: 2000 });
     return () => cancelIdleCallback(id);
+  }, []);
+
+  useEffect(() => {
+    document.body.classList.add('home-page');
+    return () => {
+      document.body.classList.remove('home-page');
+    };
   }, []);
 
   const servicePillars = [
@@ -148,7 +146,7 @@ const Home: React.FC = () => {
   ];
 
   return (
-    <div className="h-full">
+    <div className="h-full home-reference">
       {bgReady && showAdvancedEffects && (
         <Background3d
           color="#0984E3"
@@ -174,27 +172,27 @@ const Home: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <span className="inline-block px-3 py-1 bg-[#0984E3]/10 text-[#0984E3] text-[10px] uppercase tracking-[0.22em] font-bold mb-8">
+              <span className="home-hero-eyebrow inline-block px-3 py-1 bg-[#0984E3]/10 text-[#0984E3] text-[10px] uppercase tracking-[0.22em] font-bold mb-8">
                 Software &amp; Cloud Engineering
               </span>
-              <h1 className="font-serif text-5xl md:text-7xl xl:text-[5.5rem] font-medium leading-[1.04] tracking-tight text-[#1E272E] mb-8">
+              <h1 className="home-hero-title font-serif text-5xl md:text-7xl xl:text-[5.5rem] font-medium leading-[1.04] tracking-tight text-[#1E272E] mb-8">
                 Building the Next<br />
                 Generation of{' '}
                 <em className="italic">Digital<br />Systems</em>.
               </h1>
-              <p className="text-xl text-[#1E272E]/60 max-w-xl mb-12 font-light leading-relaxed">
+              <p className="home-hero-copy text-xl text-[#1E272E]/60 max-w-xl mb-12 font-light leading-relaxed">
                 We engineer custom software, AI-powered applications, and cloud platforms that power modern businesses at scale.
               </p>
               <div className="flex flex-wrap gap-6">
                 <Link
                   href="/portfolio"
-                  className="sharp-edge bg-[#1E272E] text-[#F5F6FA] px-8 py-4 text-sm font-bold hover:bg-[#0984E3] transition-colors duration-300"
+                  className="home-hero-primary sharp-edge bg-[#1E272E] text-[#F5F6FA] px-8 py-4 text-sm font-bold hover:bg-[#0984E3] transition-colors duration-300"
                 >
                   View Our Work
                 </Link>
                 <Link
                   href="/services"
-                  className="flex items-center gap-2 px-8 py-4 text-sm font-bold text-[#1E272E] hover:gap-4 transition-all duration-300"
+                  className="home-hero-secondary flex items-center gap-2 px-8 py-4 text-sm font-bold text-[#1E272E] hover:gap-4 transition-all duration-300"
                 >
                   Our Services <ArrowRight className="w-4 h-4" />
                 </Link>
@@ -208,23 +206,23 @@ const Home: React.FC = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <div className="relative aspect-[4/5] overflow-hidden shadow-2xl">
-                <Image
+              <div className="aspect-[4/5] overflow-hidden shadow-2xl">
+                <img
                   src="/Images/hero.webp"
                   alt="Precision software engineering"
-                  fill
-                  priority
-                  sizes="(min-width: 1024px) 42vw, 100vw"
-                  className="object-cover hero-image-animate"
+                  className="w-full h-full object-cover hero-image-animate"
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
                 />
               </div>
               {/* Asymmetric floating card */}
               <div className="absolute -bottom-16 -left-6 md:-left-14 bg-white p-8 max-w-[17rem] shadow-xl hidden md:block">
                 <Layers className="w-8 h-8 text-[#0984E3] mb-4" />
-                <h3 className="font-serif text-xl mb-3 italic font-medium text-[#1E272E]">
+                <h3 className="home-float-title font-serif text-xl mb-3 italic font-medium text-[#1E272E]">
                   Precision in Delivery.
                 </h3>
-                <p className="text-sm text-[#1E272E]/60 leading-relaxed">
+                <p className="home-float-copy text-sm text-[#1E272E]/60 leading-relaxed">
                   Every line of code and architectural decision is built for performance, reliability, and long-term scale.
                 </p>
               </div>
@@ -454,7 +452,9 @@ const Home: React.FC = () => {
 
       <section ref={worldMapSectionRef} className="sharp-edge w-full py-12 rounded-xl overflow-hidden">
         {shouldLoadWorldMap ? (
-          <WorldMapDemo />
+          <Suspense fallback={<div className="h-[360px] w-full bg-[#ECF5FD]" aria-hidden="true" />}>
+            <WorldMapDemo />
+          </Suspense>
         ) : (
           <div className="h-[360px] w-full bg-[#ECF5FD]" aria-hidden="true" />
         )}
@@ -491,4 +491,3 @@ const Home: React.FC = () => {
 };
 
 export default Home;
-
