@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
-import { Inter, Newsreader } from 'next/font/google';
 import Layout from '../components/Layout';
 import JsonLd from '../components/JsonLd';
 import {
@@ -13,22 +12,6 @@ import {
   absoluteUrl,
 } from '../lib/seo';
 import './globals.css';
-
-const inter = Inter({
-  subsets: ['latin'],
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-  style: ['normal'],
-  display: 'swap',
-  variable: '--font-inter',
-});
-
-const newsreader = Newsreader({
-  subsets: ['latin'],
-  weight: ['200', '300', '400', '500', '600', '700', '800'],
-  style: ['normal', 'italic'],
-  display: 'swap',
-  variable: '--font-newsreader',
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -100,7 +83,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
   return (
     <html lang="en" data-scroll-behavior="smooth">
-      <body className={`${inter.variable} ${newsreader.variable}`}>
+      <body>
         <JsonLd data={organizationSchema} />
         <Layout>{children}</Layout>
       </body>

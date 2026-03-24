@@ -36,7 +36,7 @@ const Logo: React.FC<LogoProps> = ({ className }) => (
         textLength="100%"
         lengthAdjust="spacingAndGlyphs"
         style={{
-          fontFamily: 'var(--font-inter), sans-serif',
+          fontFamily: 'Inter, sans-serif',
           fontSize: '7.5px',
           fontWeight: 700,
           fill: '#475569',
