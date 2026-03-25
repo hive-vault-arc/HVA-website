@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { ArrowRight, Mail, MapPin, Phone } from 'lucide-react';
 import { MotionConfig, motion, useScroll, useTransform } from 'framer-motion';
 import { useAnimationQuality } from '../lib/animationQuality';
@@ -24,6 +24,8 @@ const Contact: React.FC = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState<ContactStatus>(null);
+  const lastSubmitAt = useRef<number>(0);
+  const RATE_LIMIT_MS = 30_000;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setStatus(null);
@@ -32,6 +34,12 @@ const Contact: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const now = Date.now();
+    if (now - lastSubmitAt.current < RATE_LIMIT_MS) {
+      const secondsLeft = Math.ceil((RATE_LIMIT_MS - (now - lastSubmitAt.current)) / 1000);
+      setStatus({ type: 'error', message: `Please wait ${secondsLeft}s before submitting again.` });
+      return;
+    }
     setIsSubmitting(true);
     setStatus(null);
     try {
@@ -44,12 +52,14 @@ const Contact: React.FC = () => {
           body: JSON.stringify(payload),
         });
         if (!response.ok) throw new Error(`Submission failed with status ${response.status}`);
+        lastSubmitAt.current = Date.now();
         setStatus({ type: 'success', message: 'Thank you. Your message was sent successfully.' });
       } else {
         const subject = '[H.V.A] Project Inquiry';
         const body = [`Name: ${formData.name}`, `Email: ${formData.email}`, '', formData.message].join('\n');
         const mailto = `mailto:${CONTACT_EMAILS.join(',')}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         globalThis.location.href = mailto;
+        lastSubmitAt.current = Date.now();
         setStatus({ type: 'success', message: 'Your email client was opened. Please send the drafted message.' });
       }
       setFormData({ name: '', email: '', message: '' });
@@ -202,6 +212,7 @@ const Contact: React.FC = () => {
                         onChange={handleChange}
                         placeholder="Your full name"
                         required
+                        maxLength={100}
                         className="w-full bg-transparent border-0 border-b py-3 px-0 focus:outline-none text-lg font-body text-[#0F172A] placeholder:text-slate-300"
                         style={{ borderImage: 'linear-gradient(to right, transparent, #2563EB 22%, #2563EB 78%, transparent) 1' }}
                       />
@@ -223,6 +234,7 @@ const Contact: React.FC = () => {
                         onChange={handleChange}
                         placeholder="name@company.com"
                         required
+                        maxLength={254}
                         className="w-full bg-transparent border-0 border-b py-3 px-0 focus:outline-none text-lg font-body text-[#0F172A] placeholder:text-slate-300"
                         style={{ borderImage: 'linear-gradient(to right, transparent, #2563EB 22%, #2563EB 78%, transparent) 1' }}
                       />
@@ -245,6 +257,7 @@ const Contact: React.FC = () => {
                       onChange={handleChange}
                       placeholder="Tell us about your objectives, timeline, and scope..."
                       required
+                      maxLength={5000}
                       className="w-full bg-transparent border-0 border-b py-3 px-0 focus:outline-none text-lg font-body text-[#0F172A] placeholder:text-slate-300 resize-none"
                       style={{ borderImage: 'linear-gradient(to right, transparent, #2563EB 22%, #2563EB 78%, transparent) 1' }}
                     />
