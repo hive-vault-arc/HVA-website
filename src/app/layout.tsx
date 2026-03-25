@@ -73,6 +73,9 @@ export const metadata: Metadata = {
     ],
     apple: [{ url: '/Images/favico/apple-touch-icon.png', sizes: '180x180' }],
   },
+  verification: {
+    google: '10960c2117d3f45e',
+  },
   other: {
     'msapplication-TileColor': '#F5F6FA',
   },
