@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import JsonLd from '../../../components/JsonLd';
+import FaqSection from '../../../components/FaqSection';
+import { LOCALE_SERVICES_FAQS } from '../../../data/faqs';
 import { SITE_URL, SUPPORTED_LOCALES, type SupportedLocale, buildPageMetadata } from '../../../lib/seo';
 
 const servicesContent: Record<
@@ -208,20 +210,26 @@ export default async function LocaleServicesPage({ params }: LocaleServicesPageP
   };
 
   return (
-    <section
-      className="mx-auto max-w-6xl px-6 py-28 md:py-36"
-      lang={locale}
-      dir={isRtl ? 'rtl' : 'ltr'}
-    >
-      <JsonLd data={serviceSchema} />
-      <p className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-[#2563EB]">{locale.toUpperCase()}</p>
-      <h1 className="mb-6 font-serif text-4xl leading-tight text-[#0F172A] md:text-6xl">{content.h1}</h1>
-      <p className="max-w-3xl text-lg leading-relaxed text-[#334155]">{content.intro}</p>
-      <ul className="mt-8 list-disc space-y-2 pl-5 text-[#0F172A]">
-        {content.bullets.map((bullet) => (
-          <li key={bullet}>{bullet}</li>
-        ))}
-      </ul>
-    </section>
+    <>
+      <section
+        className="mx-auto max-w-6xl px-6 py-28 md:py-36"
+        lang={locale}
+        dir={isRtl ? 'rtl' : 'ltr'}
+      >
+        <JsonLd data={serviceSchema} />
+        <p className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-[#2563EB]">{locale.toUpperCase()}</p>
+        <h1 className="mb-6 font-serif text-4xl leading-tight text-[#0F172A] md:text-6xl">{content.h1}</h1>
+        <p className="max-w-3xl text-lg leading-relaxed text-[#334155]">{content.intro}</p>
+        <ul className="mt-8 list-disc space-y-2 pl-5 text-[#0F172A]">
+          {content.bullets.map((bullet) => (
+            <li key={bullet}>{bullet}</li>
+          ))}
+        </ul>
+      </section>
+      <FaqSection
+        faqs={LOCALE_SERVICES_FAQS[locale as SupportedLocale]}
+        dir={isRtl ? 'rtl' : 'ltr'}
+      />
+    </>
   );
 }

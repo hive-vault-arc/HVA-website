@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import About from '../../views/About';
+import FaqSection from '../../components/FaqSection';
+import { ABOUT_FAQS } from '../../data/faqs';
 import { GLOBAL_KEYWORDS, buildPageMetadata, mergeKeywords } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
@@ -22,6 +24,11 @@ export const metadata: Metadata = buildPageMetadata({
 });
 
 export default function Page() {
-  return <About />;
+  return (
+    <>
+      <About />
+      <FaqSection faqs={ABOUT_FAQS} />
+    </>
+  );
 }
 

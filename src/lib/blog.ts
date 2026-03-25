@@ -17,6 +17,7 @@ export type BlogPost = {
   coverImage: string;
   excerpt: string;
   tags: string[];
+  faqs?: { question: string; answer: string }[];
   sources: { label: string; url: string }[];
   sections: ContentSection[];
 };
@@ -35,6 +36,28 @@ const POSTS: BlogPost[] = [
     excerpt:
       'Agentic AI systems that can plan, reason, and act autonomously are the next major shift in enterprise technology. Backed by Gartner, McKinsey, and PwC research, we explore what this means for businesses in Morocco and how to get ahead.',
     tags: ['agentic AI', 'AI agents', 'automation', 'Morocco', 'enterprise AI'],
+    faqs: [
+      {
+        question: 'What is agentic AI?',
+        answer:
+          'Agentic AI refers to AI systems that can set goals, plan multi-step tasks, use external tools, evaluate results, and iterate autonomously — without requiring a human to direct each step. Unlike a conventional AI assistant that responds to a single prompt, an agentic AI receives a high-level objective and executes it end-to-end.',
+      },
+      {
+        question: 'How is an AI agent different from a basic AI assistant?',
+        answer:
+          'A basic AI assistant responds to a single prompt and stops. An AI agent takes a high-level goal, breaks it into tasks, calls APIs and databases, checks its own outputs, and delivers a final result — all autonomously. The key difference is autonomous execution of multi-step processes.',
+      },
+      {
+        question: 'Which industries in Morocco are adopting agentic AI first?',
+        answer:
+          'Customer service and reception were the earliest adopters, driven by clear ROI from 24/7 multilingual operation. Business intelligence and operations automation are growing rapidly. In Morocco, logistics, real estate, and healthcare businesses have the most to gain from agentic AI given their high-volume, multilingual customer workflows.',
+      },
+      {
+        question: 'How does a business in Morocco get started with AI agents?',
+        answer:
+          'Start by identifying your highest-volume, lowest-variance workflows — these are the best candidates for AI agent deployment. Choose a narrow vertical first: one process, one agent, one measurable outcome. H.V.A builds custom AI agents for businesses in Morocco; contact us for an initial scoping call.',
+      },
+    ],
     sources: [
       { label: 'Gartner Top Strategic Technology Trends 2025', url: 'https://www.gartner.com/en/articles/gartner-top-10-strategic-technology-trends-for-2025' },
       { label: 'PwC AI Business Survey 2024', url: 'https://www.pwc.com/us/en/tech-effect/ai-analytics/ai-business-survey.html' },
@@ -191,6 +214,28 @@ const POSTS: BlogPost[] = [
     excerpt:
       'Generic SaaS tools are fast to start but slow to scale. Industry research from Forrester, McKinsey, Deloitte, and HIMSS shows that custom digital solutions consistently deliver higher ROI, lower long-term cost, and measurable operational improvements across real estate, healthcare, construction, and beyond.',
     tags: ['custom software', 'digital transformation', 'Morocco', 'CRM', 'real estate', 'healthcare'],
+    faqs: [
+      {
+        question: 'When should a business choose custom software over off-the-shelf SaaS?',
+        answer:
+          "Choose custom software when your competitive advantage lives inside your process — pricing logic, client workflow, local language requirements, or regulatory compliance. If you are spending significant staff hours working around a SaaS tool, or if your workflow has Morocco-specific requirements (Arabic CRM, local payment integration, WhatsApp-native processes), custom is the right answer.",
+      },
+      {
+        question: 'What is the ROI of custom software compared to SaaS?',
+        answer:
+          'Forrester research found that custom software delivers an average three-year ROI significantly higher than equivalent SaaS deployments. The gap comes from eliminating friction costs — workarounds, manual exports, broken integrations, and paying for features you never use.',
+      },
+      {
+        question: 'Can H.V.A build a custom CRM for a real estate or healthcare business in Morocco?',
+        answer:
+          'Yes. H.V.A has built custom CRM systems for real estate agencies and patient management platforms for clinics in Morocco. These systems handle Arabic and French natively, integrate with WhatsApp Business for client communication, and are built around the specific workflows of each business — not a generic international SaaS template.',
+      },
+      {
+        question: 'How long does it take to build a custom software platform with H.V.A?',
+        answer:
+          'A focused custom platform — CRM, internal portal, or patient management system — typically takes 8 to 20 weeks from discovery to production deployment, depending on scope and integrations. H.V.A delivers in sprints with regular demos so you have full visibility throughout the build.',
+      },
+    ],
     sources: [
       { label: 'Forrester Total Economic Impact Study 2023', url: 'https://www.forrester.com' },
       { label: 'National Association of Realtors Technology Report 2023', url: 'https://www.nar.realtor' },

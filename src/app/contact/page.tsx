@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Contact from '../../views/Contact';
 import JsonLd from '../../components/JsonLd';
+import FaqSection from '../../components/FaqSection';
+import { CONTACT_FAQS } from '../../data/faqs';
 import { GLOBAL_KEYWORDS, buildPageMetadata, mergeKeywords } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
@@ -43,6 +45,7 @@ export default function Page() {
     <>
       <JsonLd data={contactSchema} />
       <Contact />
+      <FaqSection faqs={CONTACT_FAQS} />
     </>
   );
 }

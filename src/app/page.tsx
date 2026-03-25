@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Home from '../views/Home';
 import JsonLd from '../components/JsonLd';
+import FaqSection from '../components/FaqSection';
+import { HOME_FAQS } from '../data/faqs';
 import { GLOBAL_KEYWORDS, buildPageMetadata, mergeKeywords } from '../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
@@ -55,6 +57,7 @@ export default function Page() {
     <>
       <JsonLd data={websiteSchema} />
       <Home />
+      <FaqSection faqs={HOME_FAQS} />
     </>
   );
 }

@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import Portfolio from '../../views/Portfolio';
+import FaqSection from '../../components/FaqSection';
+import { PORTFOLIO_FAQS } from '../../data/faqs';
 import { GLOBAL_KEYWORDS, buildPageMetadata, mergeKeywords } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
@@ -24,6 +26,11 @@ export const metadata: Metadata = buildPageMetadata({
 });
 
 export default function Page() {
-  return <Portfolio />;
+  return (
+    <>
+      <Portfolio />
+      <FaqSection faqs={PORTFOLIO_FAQS} />
+    </>
+  );
 }
 

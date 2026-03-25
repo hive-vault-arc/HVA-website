@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { getAllPosts, getPostBySlug } from '../../../lib/blog';
 import { buildPageMetadata, absoluteUrl } from '../../../lib/seo';
 import JsonLd from '../../../components/JsonLd';
+import FaqSection from '../../../components/FaqSection';
 import BlogPostView from '../../../views/BlogPost';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -62,6 +63,9 @@ export default async function BlogPostPage({ params }: Props) {
     <>
       <JsonLd data={articleSchema} />
       <BlogPostView post={post} />
+      {post.faqs && post.faqs.length > 0 && (
+        <FaqSection faqs={post.faqs} heading="Questions About This Article" />
+      )}
     </>
   );
 }
