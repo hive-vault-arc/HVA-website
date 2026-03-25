@@ -3,7 +3,7 @@ import Services from '../../views/Services';
 import JsonLd from '../../components/JsonLd';
 import FaqSection from '../../components/FaqSection';
 import { SERVICES_FAQS } from '../../data/faqs';
-import { GLOBAL_KEYWORDS, buildPageMetadata, mergeKeywords } from '../../lib/seo';
+import { GLOBAL_KEYWORDS, SITE_URL, absoluteUrl, buildPageMetadata, mergeKeywords } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'AI Receptionist, Automation, SaaS & Cloud Services in Morocco',
@@ -46,8 +46,23 @@ export default function Page() {
     '@type': 'Service',
     name: 'AI, Automation, Software and Cloud Services',
     provider: {
-      '@type': 'ProfessionalService',
+      '@type': ['LocalBusiness', 'ProfessionalService'],
+      // @id links this node to the root organization defined in layout.tsx,
+      // so Google treats them as the same entity and inherits all its fields.
+      '@id': `${SITE_URL}/#organization`,
       name: 'Hive Vault Arc',
+      url: SITE_URL,
+      telephone: ['+212688270772', '+212691918296'],
+      priceRange: '$$',
+      image: absoluteUrl('/Images/hero.webp'),
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Avenue Tarik Ibn Ziad N 38, Etage 6 N 32',
+        addressLocality: 'Tangier',
+        addressRegion: 'Tanger-Tétouan-Al Hoceïma',
+        postalCode: '90000',
+        addressCountry: 'MA',
+      },
       areaServed: ['Tangier', 'Morocco'],
     },
     areaServed: ['Tangier', 'Morocco'],
