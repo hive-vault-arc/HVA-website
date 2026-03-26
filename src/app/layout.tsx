@@ -30,6 +30,7 @@ const newsreader = Newsreader({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  applicationName: SITE_NAME,
   title: {
     default: DEFAULT_TITLE,
     template: `%s | ${SITE_NAME}`,
