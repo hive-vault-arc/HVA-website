@@ -22,6 +22,7 @@ skills-lock.json
 # local AI/coding assistants
 .claude/
 .codex/
+CLAUDE.md
 
 # deploy/build caches
 .vercel/
