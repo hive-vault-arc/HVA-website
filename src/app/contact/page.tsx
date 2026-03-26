@@ -3,7 +3,7 @@ import Contact from '../../views/Contact';
 import JsonLd from '../../components/JsonLd';
 import FaqSection from '../../components/FaqSection';
 import { CONTACT_FAQS } from '../../data/faqs';
-import { GLOBAL_KEYWORDS, buildPageMetadata, mergeKeywords } from '../../lib/seo';
+import { GLOBAL_KEYWORDS, SITE_URL, buildPageMetadata, mergeKeywords } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'Contact | Start Your AI or Software Project in Morocco',
@@ -32,7 +32,7 @@ export default function Page() {
     '@context': 'https://schema.org',
     '@type': 'ContactPage',
     name: 'Contact H.V.A',
-    url: 'https://www.hiva.ma/contact',
+    url: `${SITE_URL}/contact`,
     inLanguage: ['en', 'fr', 'ar', 'es'],
     keywords: mergeKeywords(GLOBAL_KEYWORDS, [
       'book AI strategy call',

@@ -81,7 +81,7 @@ export default function Page() {
       'custom platform development',
       'cloud reliability engineering',
     ]).join(', '),
-    url: 'https://www.hiva.ma/services',
+    url: `${SITE_URL}/services`,
   };
 
   const breadcrumbSchema = {
@@ -92,13 +92,13 @@ export default function Page() {
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://www.hiva.ma/',
+        item: `${SITE_URL}/`,
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'Services',
-        item: 'https://www.hiva.ma/services',
+        item: `${SITE_URL}/services`,
       },
     ],
   };

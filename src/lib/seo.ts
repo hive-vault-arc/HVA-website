@@ -4,7 +4,7 @@ export const SUPPORTED_LOCALES = ['en', 'fr', 'ar', 'es'] as const;
 export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
 
 export const SITE_NAME = 'H.V.A';
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.hiva.ma';
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://hiva-nine.vercel.app';
 
 export const BUSINESS_NAME = 'Hive Vault Arc';
 export const DEFAULT_TITLE = `${SITE_NAME} | AI, Software & Cloud Engineering in Tangier, Morocco`;

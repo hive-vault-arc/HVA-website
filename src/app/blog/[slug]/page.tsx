@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getAllPosts, getPostBySlug } from '../../../lib/blog';
-import { buildPageMetadata, absoluteUrl } from '../../../lib/seo';
+import { buildPageMetadata, absoluteUrl, SITE_URL } from '../../../lib/seo';
 import JsonLd from '../../../components/JsonLd';
 import FaqSection from '../../../components/FaqSection';
 import BlogPostView from '../../../views/BlogPost';
@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'article',
       publishedTime: isoDate,
       modifiedTime: isoDate,
-      authors: ['https://www.hiva.ma/about'],
+      authors: [absoluteUrl('/about')],
       section: post.category,
       images: [{ url: coverUrl, width: 1200, height: 630, alt: post.title }],
     },
@@ -62,12 +62,12 @@ export default async function BlogPostPage({ params }: Props) {
     author: {
       '@type': 'Person',
       name: 'H.V.A Research Team',
-      url: 'https://www.hiva.ma/about',
+      url: absoluteUrl('/about'),
     },
     publisher: {
       '@type': 'Organization',
       name: 'Hive Vault Arc',
-      url: 'https://www.hiva.ma',
+      url: SITE_URL,
       logo: {
         '@type': 'ImageObject',
         url: absoluteUrl('/Images/favico/android-chrome-512x512.png'),
@@ -84,7 +84,7 @@ export default async function BlogPostPage({ params }: Props) {
     keywords: post.tags.join(', '),
     about: {
       '@type': 'Organization',
-      '@id': 'https://www.hiva.ma/#organization',
+      '@id': `${SITE_URL}/#organization`,
     },
     articleSection: post.category,
   };

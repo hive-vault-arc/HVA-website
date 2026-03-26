@@ -3,7 +3,7 @@ import Home from '../views/Home';
 import JsonLd from '../components/JsonLd';
 import FaqSection from '../components/FaqSection';
 import { HOME_FAQS } from '../data/faqs';
-import { GLOBAL_KEYWORDS, buildPageMetadata, mergeKeywords } from '../lib/seo';
+import { GLOBAL_KEYWORDS, SITE_URL, buildPageMetadata, mergeKeywords } from '../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'AI Agents, Custom Software & Cloud Engineering in Tangier, Morocco',
@@ -41,7 +41,7 @@ export default function Page() {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'H.V.A',
-    url: 'https://www.hiva.ma/',
+    url: `${SITE_URL}/`,
     inLanguage: ['en', 'fr', 'ar', 'es'],
     keywords: mergeKeywords(GLOBAL_KEYWORDS, [
       'AI receptionist',

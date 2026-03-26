@@ -52,7 +52,7 @@ H.V.A operates in English, French, Arabic, and Spanish — matching Morocco's mu
 
 ### How do I contact H.V.A?
 
-Contact H.V.A via the website at https://www.hiva.ma/contact or book a discovery call directly. The team responds in English, French, Arabic, or Spanish.
+Contact H.V.A via the website at https://hiva-nine.vercel.app/contact or book a discovery call directly. The team responds in English, French, Arabic, or Spanish.
 
 ## Primary Services
 
@@ -74,11 +74,11 @@ Contact H.V.A via the website at https://www.hiva.ma/contact or book a discovery
 
 ## Important URLs
 
-- Homepage: https://www.hiva.ma/
-- Services: https://www.hiva.ma/services
-- About: https://www.hiva.ma/about
-- Contact: https://www.hiva.ma/contact
-- English: https://www.hiva.ma/en
-- French: https://www.hiva.ma/fr
-- Arabic: https://www.hiva.ma/ar
-- Spanish: https://www.hiva.ma/es
+- Homepage: https://hiva-nine.vercel.app/
+- Services: https://hiva-nine.vercel.app/services
+- About: https://hiva-nine.vercel.app/about
+- Contact: https://hiva-nine.vercel.app/contact
+- English: https://hiva-nine.vercel.app/en
+- French: https://hiva-nine.vercel.app/fr
+- Arabic: https://hiva-nine.vercel.app/ar
+- Spanish: https://hiva-nine.vercel.app/es
