@@ -133,20 +133,32 @@ export async function generateMetadata({ params }: LocalePageProps): Promise<Met
   }
 
   const content = homeContent[locale as SupportedLocale];
-  return buildPageMetadata({
+  const base = buildPageMetadata({
     title: content.title,
     description: content.description,
     path: `/${locale}`,
     locale,
     keywords: content.keywords,
     alternates: {
-      en: '/en',
+      en: '/',
       fr: '/fr',
       ar: '/ar',
       es: '/es',
-      'x-default': '/en',
+      'x-default': '/',
     },
   });
+
+  // /en duplicates the English root page — keep it crawlable but non-indexed
+  // so link equity and canonical authority stay on /
+  if (locale === 'en') {
+    return {
+      ...base,
+      robots: { index: false, follow: true },
+      alternates: { canonical: '/' },
+    };
+  }
+
+  return base;
 }
 
 export default async function LocaleHomePage({ params }: LocalePageProps) {

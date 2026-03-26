@@ -124,24 +124,28 @@ const Home: React.FC = () => {
       title: 'Mobile apps',
       rightLabel: 'Mobile apps',
       background: './Images/app.png',
+      alt: 'Custom mobile app development by H.V.A',
     },
     {
       leftLabel: 'Web Development',
       title: 'Web apps',
       rightLabel: 'Web apps',
       background: './Images/web.png',
+      alt: 'Custom web application development by H.V.A',
     },
     {
       leftLabel: 'AI Development',
       title: 'AI apps',
       rightLabel: 'AI apps',
       background: '/Images/ai.webp',
+      alt: 'AI-powered application development by H.V.A',
     },
     {
       leftLabel: 'SaaS Development',
       title: 'SaaS apps',
       rightLabel: 'SaaS apps',
       background: './Images/saas.png',
+      alt: 'Custom SaaS platform development by H.V.A',
     },
   ];
 

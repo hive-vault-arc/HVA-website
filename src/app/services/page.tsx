@@ -8,7 +8,7 @@ import { GLOBAL_KEYWORDS, SITE_URL, absoluteUrl, buildPageMetadata, mergeKeyword
 export const metadata: Metadata = buildPageMetadata({
   title: 'AI Receptionist, Automation, SaaS & Cloud Services in Morocco',
   description:
-    'Explore H.V.A service lines: AI receptionist systems, AI analyst reporting, workflow automation, custom software platforms, and cloud reliability engineering.',
+    'AI receptionists, WhatsApp chatbots, custom CRM, workflow automation, and cloud engineering — H.V.A service lines built specifically for Moroccan businesses.',
   path: '/services',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'AI receptionist implementation for businesses',
@@ -80,7 +80,7 @@ export default function Page() {
       'AI analyst and decision intelligence',
       'custom platform development',
       'cloud reliability engineering',
-    ]),
+    ]).join(', '),
     url: 'https://www.hiva.ma/services',
   };
 

@@ -18,12 +18,32 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = posts.find((p) => p.slug === slug);
   if (!post) return {};
 
-  return buildPageMetadata({
+  const base = buildPageMetadata({
     title: post.title,
     description: post.excerpt,
     path: `/blog/${post.slug}`,
     keywords: post.tags,
   });
+
+  const isoDate = post.publishedAt.includes('T') ? post.publishedAt : `${post.publishedAt}T00:00:00Z`;
+  const coverUrl = absoluteUrl(post.coverImage);
+
+  return {
+    ...base,
+    openGraph: {
+      ...base.openGraph,
+      type: 'article',
+      publishedTime: isoDate,
+      modifiedTime: isoDate,
+      authors: ['https://www.hiva.ma/about'],
+      section: post.category,
+      images: [{ url: coverUrl, width: 1200, height: 630, alt: post.title }],
+    },
+    twitter: {
+      ...base.twitter,
+      images: [coverUrl],
+    },
+  };
 }
 
 export default async function BlogPostPage({ params }: Props) {
@@ -32,31 +52,41 @@ export default async function BlogPostPage({ params }: Props) {
   const post = posts.find((p) => p.slug === slug);
   if (!post) notFound();
 
+  const isoDate = post.publishedAt.includes('T') ? post.publishedAt : `${post.publishedAt}T00:00:00Z`;
+
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: post.title,
     description: post.excerpt,
     author: {
-      '@type': 'Organization',
-      name: 'Hive Vault Arc',
-      url: 'https://www.hiva.ma',
+      '@type': 'Person',
+      name: 'H.V.A Research Team',
+      url: 'https://www.hiva.ma/about',
     },
     publisher: {
       '@type': 'Organization',
       name: 'Hive Vault Arc',
+      url: 'https://www.hiva.ma',
       logo: {
         '@type': 'ImageObject',
         url: absoluteUrl('/Images/favico/android-chrome-512x512.png'),
       },
     },
-    datePublished: post.publishedAt,
+    datePublished: isoDate,
+    dateModified: isoDate,
     image: absoluteUrl(post.coverImage),
+    inLanguage: 'en',
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': absoluteUrl(`/blog/${post.slug}`),
     },
     keywords: post.tags.join(', '),
+    about: {
+      '@type': 'Organization',
+      '@id': 'https://www.hiva.ma/#organization',
+    },
+    articleSection: post.category,
   };
 
   return (

@@ -19,6 +19,7 @@ if (typeof window !== "undefined") {
 type Section = {
   id?: string;
   background: string;
+  alt?: string;
   leftLabel?: ReactNode;
   title: string | ReactNode;
   rightLabel?: ReactNode;
@@ -571,7 +572,7 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
                             if (el) bgRefs.current[i] = el;
                           }}
                           src={s.background}
-                          alt=""
+                          alt={s.alt ?? ''}
                           className="fx-bg-img"
                         />
                         <div className="fx-bg-overlay" />
@@ -616,7 +617,7 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
                       tempWordBucket.current = [];
                       const isString = typeof s.title === "string";
                       return (
-                        <div key={`C-${s.id ?? sIdx}`} className={`fx-featured ${sIdx === index ? "active" : ""}`}>
+                        <div key={`C-${s.id ?? sIdx}`} className={`fx-featured ${sIdx === index ? "active" : ""}`} aria-hidden={sIdx !== index ? true : undefined}>
                           <h3 className="fx-featured-title">
                             {isString ? splitWords(s.title as string) : s.title}
                           </h3>

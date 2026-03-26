@@ -93,6 +93,27 @@ export const GLOBAL_KEYWORDS = [
   'despliegue cloud marruecos',
   'empresa de software en tanger',
   'consultoria IT en marruecos',
+  // Pain-point & competitive intent keywords
+  'automate WhatsApp customer service Morocco',
+  'WhatsApp chatbot business Morocco',
+  'WhatsApp automation Morocco',
+  'WhatsApp Business API integration Morocco',
+  'AI WhatsApp chatbot Arabic French Morocco',
+  '24/7 AI customer support Morocco',
+  'reduce missed calls with AI Morocco',
+  'AI receptionist replace human Morocco',
+  'AI lead qualification Morocco',
+  'AI appointment booking Morocco',
+  'AI agent for real estate Morocco',
+  'AI agent for healthcare clinic Morocco',
+  'AI agent for logistics Morocco',
+  'custom CRM Arabic interface Morocco',
+  'bilingual chatbot French Arabic Morocco',
+  'best AI agency Morocco 2025',
+  'best AI agency Morocco 2026',
+  'AI automation for SMEs Morocco',
+  'digital transformation small business Morocco',
+  'no-code automation Morocco',
 ];
 
 type PageMetaInput = {

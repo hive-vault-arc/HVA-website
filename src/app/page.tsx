@@ -8,7 +8,7 @@ import { GLOBAL_KEYWORDS, buildPageMetadata, mergeKeywords } from '../lib/seo';
 export const metadata: Metadata = buildPageMetadata({
   title: 'AI Agents, Custom Software & Cloud Engineering in Tangier, Morocco',
   description:
-    'H.V.A designs AI agents, custom software platforms, workflow automations, and cloud systems for businesses in Tangier and across Morocco.',
+    'H.V.A builds AI receptionists, custom software, and cloud systems for businesses in Morocco and Tangier. Operate 24/7, cut overhead, and capture every lead.',
   path: '/',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'hire AI agency in Tangier',
@@ -28,11 +28,11 @@ export const metadata: Metadata = buildPageMetadata({
     'empresa para desarrollar app movil a medida en tanger',
   ]),
   alternates: {
-    en: '/en',
+    en: '/',
     fr: '/fr',
     ar: '/ar',
     es: '/es',
-    'x-default': '/en',
+    'x-default': '/',
   },
 });
 

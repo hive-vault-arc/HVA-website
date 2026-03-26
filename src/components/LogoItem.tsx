@@ -308,6 +308,7 @@ export const LogoLoop = React.memo<LogoLoopProps>(
             target="_blank"
             rel="noreferrer noopener"
           >
+            <span className="sr-only">{itemAriaLabel || 'logo link'}</span>
             {content}
           </a>
         ) : (

@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
 import Portfolio from '../../views/Portfolio';
 import FaqSection from '../../components/FaqSection';
+import JsonLd from '../../components/JsonLd';
 import { PORTFOLIO_FAQS } from '../../data/faqs';
-import { GLOBAL_KEYWORDS, buildPageMetadata, mergeKeywords } from '../../lib/seo';
+import { GLOBAL_KEYWORDS, SITE_URL, buildPageMetadata, mergeKeywords } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Portfolio | AI, Automation and Software Projects by H.V.A',
+  title: 'Portfolio | AI, Automation and Software Projects',
   description:
-    'See H.V.A portfolio work across AI systems, software platforms, cloud delivery, and automation projects for modern businesses.',
+    'AI receptionists, custom CRM systems, cloud infrastructure, and mobile apps delivered for Moroccan businesses. Production-ready work, not prototypes.',
   path: '/portfolio',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'AI project portfolio Morocco',
@@ -26,8 +27,18 @@ export const metadata: Metadata = buildPageMetadata({
 });
 
 export default function Page() {
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+      { '@type': 'ListItem', position: 2, name: 'Portfolio', item: `${SITE_URL}/portfolio` },
+    ],
+  };
+
   return (
     <>
+      <JsonLd data={breadcrumbSchema} />
       <Portfolio />
       <FaqSection faqs={PORTFOLIO_FAQS} />
     </>

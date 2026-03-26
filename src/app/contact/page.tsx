@@ -6,9 +6,9 @@ import { CONTACT_FAQS } from '../../data/faqs';
 import { GLOBAL_KEYWORDS, buildPageMetadata, mergeKeywords } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Contact H.V.A | Start Your AI or Software Project in Morocco',
+  title: 'Contact | Start Your AI or Software Project in Morocco',
   description:
-    'Contact H.V.A for AI receptionist systems, custom software development, cloud infrastructure, and workflow automation in Tangier and Morocco.',
+    'Book a free discovery call with H.V.A. Tell us your challenge — AI, software, or cloud — and we will define a scope and timeline before any work begins.',
   path: '/contact',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'contact AI agency Morocco',

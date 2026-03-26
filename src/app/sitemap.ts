@@ -49,18 +49,36 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: 'monthly',
       priority: 0.7,
+      alternates: asAlternates({
+        en: '/en/about',
+        fr: '/fr/about',
+        ar: '/ar/about',
+        es: '/es/about',
+      }),
     },
     {
       url: `${SITE_URL}/portfolio`,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.8,
+      alternates: asAlternates({
+        en: '/en/portfolio',
+        fr: '/fr/portfolio',
+        ar: '/ar/portfolio',
+        es: '/es/portfolio',
+      }),
     },
     {
       url: `${SITE_URL}/contact`,
       lastModified: now,
       changeFrequency: 'monthly',
       priority: 0.8,
+      alternates: asAlternates({
+        en: '/en/contact',
+        fr: '/fr/contact',
+        ar: '/ar/contact',
+        es: '/es/contact',
+      }),
     },
     ...LOCALES.flatMap((locale) => [
       {

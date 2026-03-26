@@ -51,8 +51,24 @@ const securityHeaders = [
   },
 ];
 
+// Vercel preview/deployment URL — set VERCEL_URL in environment or override with NEXT_PUBLIC_SITE_URL
+// This redirect consolidates all traffic to www.hiva.ma so Google sees one canonical domain.
+// To activate: set NEXT_PUBLIC_VERCEL_HOST to your Vercel deployment hostname (e.g. hiva-nine.vercel.app)
+const vercelHost = process.env.NEXT_PUBLIC_VERCEL_HOST ?? '';
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  async redirects() {
+    if (!vercelHost) return [];
+    return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: vercelHost }],
+        destination: `https://www.hiva.ma/:path*`,
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

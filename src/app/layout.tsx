@@ -172,6 +172,11 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
 
   return (
     <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} ${newsreader.variable}`}>
+      <head>
+        {/* Warm up third-party connections used for 3D assets */}
+        <link rel="preconnect" href="https://prod.spline.design" />
+        <link rel="dns-prefetch" href="https://prod.spline.design" />
+      </head>
       <body>
         <JsonLd data={organizationSchema} />
         <Layout>{children}</Layout>
