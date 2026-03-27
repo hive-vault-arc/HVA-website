@@ -19,8 +19,8 @@ export default function EngineeringExcellence() {
         }
       >
         <img
-          src='/Images/dashboard3.jpg'
-          alt="Code example"
+          src='/Images/ai-analytics-dashboard-business.jpg'
+          alt="AI analytics dashboard built by H.V.A for business intelligence"
           className="mx-auto rounded-2xl object-contain h-full w-full"
           loading="lazy"
           decoding="async"

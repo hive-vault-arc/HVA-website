@@ -168,7 +168,7 @@ const Contact: React.FC = () => {
               <div className="bg-[#eceef0] aspect-square w-full relative overflow-hidden group">
                 <div className="absolute inset-0 bg-neutral-200/50 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-0" />
                 <img
-                  src="/Images/tangiermap.webp"
+                  src="/Images/tangier-morocco-office-location.webp"
                   alt="Map of Tangier, Morocco — H.V.A office location"
                   className="w-full h-full object-cover grayscale opacity-80 transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"

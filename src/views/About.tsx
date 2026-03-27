@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { MotionConfig, motion, useScroll, useTransform } from 'framer-motion';
 import {
-  ArrowRight,
   CalendarCheck,
   Globe2,
   Home,
@@ -17,6 +16,7 @@ import {
 } from 'lucide-react';
 import { useAnimationQuality } from '../lib/animationQuality';
 import PageAmbientBackground from '../components/PageAmbientBackground';
+import BottomCTA from '../components/BottomCTA';
 
 type TeamMember = {
   name: string;
@@ -46,19 +46,19 @@ const teamMembers: TeamMember[] = [
     name: 'Khalid Chalhi',
     tag: 'Architecture & Delivery',
     role: 'Co-Founder & Software Engineer',
-    image: '/Images/khalid.webp',
+    image: '/Images/khalid-chalhi-hva-co-founder.webp',
   },
   {
     name: 'Ali Amrani',
     tag: 'Product & Systems',
     role: 'Co-Founder & Full-Stack Engineer',
-    image: '/Images/ali.webp',
+    image: '/Images/ali-amrani-hva-co-founder.webp',
   },
   {
     name: 'Oubay Ghamat',
     tag: 'Cloud & Scale',
     role: 'Co-Founder & Cloud Engineer',
-    image: '/Images/oubay.webp',
+    image: '/Images/oubay-ghamat-hva-co-founder.webp',
   },
 ];
 
@@ -193,8 +193,8 @@ const About: React.FC = () => {
                 </div>
                 <div className="relative aspect-square w-full bg-[#eceef0] overflow-hidden">
                   <img
-                    src="/Images/abouthead.webp"
-                    alt="Early computing — H.V.A engineering roots"
+                    src="/Images/hva-team-tangier-morocco.webp"
+                    alt="H.V.A co-founders team in Tangier, Morocco — Khalid Chalhi, Ali Amrani, Oubay Ghamat"
                     className="object-cover w-full h-full"
                     loading="eager"
                     fetchPriority="high"
@@ -435,46 +435,15 @@ const About: React.FC = () => {
           </div>
         </section>
 
-        <section className="relative container mx-auto px-4 pb-16 pt-8 md:pb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.42 }}
-            className="overflow-hidden bg-[#1E272E] px-7 py-9 text-[#F5F6FA] shadow-[0_20px_52px_rgba(30,39,46,0.28)] md:px-10 md:py-11"
-          >
-            <div className="pointer-events-none absolute -right-20 -top-16 h-52 w-52 rounded-full bg-[#0984E3]/35 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-20 left-[8%] h-56 w-56 rounded-full bg-[#00CEC9]/20 blur-3xl" />
-            <div className="relative z-10 grid grid-cols-1 gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
-              <div>
-                <p className="text-xs uppercase tracking-[0.2em] text-[#F5F6FA]/65">Next Step</p>
-                <h2 className="mt-3 max-w-3xl font-serif text-4xl leading-[1.02] md:text-5xl">
-                  Ready to define the right build path?
-                </h2>
-                <p className="mt-4 max-w-2xl text-[#F5F6FA]/80">
-                  Share your goals and constraints. We will map a clear technical direction and an execution model your
-                  team can trust.
-                </p>
-              </div>
-              <div className="grid gap-3">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center gap-2 bg-[#0984E3] px-7 py-3 text-[#F5F6FA] transition-colors hover:bg-[#0776CC]"
-                >
-                  Book a Call
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link
-                  href="/services"
-                  className="inline-flex items-center justify-center gap-2 bg-[#F5F6FA]/12 px-7 py-3 text-[#F5F6FA] transition-colors hover:bg-[#F5F6FA]/18"
-                >
-                  Review Services
-                  <Layers3 className="h-4 w-4" />
-                </Link>
-              </div>
-            </div>
-          </motion.div>
-        </section>
+        <BottomCTA
+          variant="dark"
+          headline="Ready to define the right build path?"
+          subtext="Share your goals and constraints. We will map a clear technical direction and an execution model your team can trust."
+          primaryLabel="Book a Call"
+          primaryHref="/contact"
+          secondaryLabel="Review Services"
+          secondaryHref="/services"
+        />
       </div>
     </MotionConfig>
   );

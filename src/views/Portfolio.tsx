@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { useAnimationQuality } from '../lib/animationQuality';
 import PageAmbientBackground from '../components/PageAmbientBackground';
+import BottomCTA from '../components/BottomCTA';
 
 /* ── Blueprint grid background (reused in hero + CTA) ── */
 const blueprintGrid: React.CSSProperties = {
@@ -130,8 +131,8 @@ const Portfolio: React.FC = () => {
               <div className="lg:col-span-7 relative group pb-10 pr-8">
                 <div className="absolute -inset-4 bg-[#2563EB]/5 transition-all duration-300 group-hover:bg-[#2563EB]/10" />
                 <img
-                  alt="Smart WhatsApp AI Assistant"
-                  src="/Images/aiagent.webp"
+                  alt="Custom AI agent WhatsApp assistant built by H.V.A Morocco"
+                  src="/Images/custom-ai-agent-morocco.webp"
                   className="relative w-full h-[260px] sm:h-[380px] md:h-[500px] object-cover shadow-lg"
                   loading="lazy"
                   decoding="async"
@@ -252,8 +253,8 @@ const Portfolio: React.FC = () => {
                 {/* Image */}
                 <div className="lg:col-span-7 relative order-1 lg:order-2 pt-10 pl-8">
                   <img
-                    alt="Real Estate CRM Platform"
-                    src="/Images/CRM.webp"
+                    alt="Custom real estate CRM system built by H.V.A for Moroccan businesses"
+                    src="/Images/custom-crm-system-morocco.webp"
                     className="w-full h-[260px] sm:h-[380px] md:h-[500px] object-cover shadow-2xl"
                     loading="lazy"
                     decoding="async"
@@ -328,43 +329,15 @@ const Portfolio: React.FC = () => {
         </section>
 
         {/* ── CTA ───────────────────────────────────────────────────────────── */}
-        <section className="max-w-5xl mx-auto px-8 py-24 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5 }}
-            className="bg-[#0F172A] text-white p-6 sm:p-10 md:p-16 relative overflow-hidden"
-          >
-            {/* Blueprint grid in CTA */}
-            <div className="absolute inset-0 opacity-10" style={blueprintGrid} />
-            {/* Blue glow */}
-            <div className="pointer-events-none absolute -right-20 -top-16 h-52 w-52 rounded-full bg-[#2563EB]/30 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-20 left-8 h-52 w-52 rounded-full bg-[#3b82f6]/20 blur-3xl" />
-
-            <div className="relative z-10">
-              <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl mb-8">Ready to start a project?</h2>
-              <p className="text-xl opacity-70 mb-10 max-w-xl mx-auto font-light leading-relaxed">
-                We are currently accepting new high-impact consulting engagements. Let's map the right
-                architecture and execution path for your team.
-              </p>
-              <div className="flex flex-col md:flex-row gap-4 justify-center">
-                <Link
-                  href="/contact"
-                  className="sharp-edge bg-white text-[#0F172A] px-10 py-4 text-sm font-bold tracking-wide uppercase hover:bg-[#e2e8f0] transition-colors active:scale-95 duration-150"
-                >
-                  Book Your Discovery Call
-                </Link>
-                <Link
-                  href="/services"
-                  className="sharp-edge border border-white/30 text-white px-10 py-4 text-sm font-bold tracking-wide uppercase hover:bg-white/10 transition-colors"
-                >
-                  View Services
-                </Link>
-              </div>
-            </div>
-          </motion.div>
-        </section>
+        <BottomCTA
+          variant="dark"
+          headline="Ready to start a project?"
+          subtext="We are currently accepting new high-impact consulting engagements. Let's map the right architecture and execution path for your team."
+          primaryLabel="Book Your Discovery Call"
+          primaryHref="/contact"
+          secondaryLabel="View Services"
+          secondaryHref="/services"
+        />
 
       </div>
     </MotionConfig>

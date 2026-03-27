@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     url: '/',
     images: [
       {
-        url: '/Images/hero.webp',
+        url: '/Images/hva-ai-software-agency-tangier.webp',
         width: 1200,
         height: 630,
         alt: 'H.V.A — AI Agents, Custom Software & Cloud Engineering in Tangier, Morocco',
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: DEFAULT_TITLE,
     description: DEFAULT_DESCRIPTION,
-    images: ['/Images/hero.webp'],
+    images: ['/Images/hva-ai-software-agency-tangier.webp'],
   },
   icons: {
     icon: [
@@ -94,14 +94,14 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     '@type': ['LocalBusiness', 'ProfessionalService'],
     '@id': `${SITE_URL}/#organization`,
     name: BUSINESS_NAME,
-    alternateName: ['H.V.A', 'Hive Vault Arc'],
+    alternateName: ['H.V.A', 'Hive Vault Arc', 'HIVA'],
     url: SITE_URL,
     description: 'Hive Vault Arc (H.V.A) is an AI agent and software engineering agency based in Tangier, Morocco. We build AI receptionist systems, AI analyst tools, custom software platforms, workflow automation, and cloud infrastructure for businesses across Morocco and internationally.',
     logo: {
       '@type': 'ImageObject',
       url: absoluteUrl('/Images/favico/android-chrome-512x512.png'),
     },
-    image: absoluteUrl('/Images/hero.webp'),
+    image: absoluteUrl('/Images/hva-ai-software-agency-tangier.webp'),
     address: {
       '@type': 'PostalAddress',
       streetAddress: 'Avenue Tarik Ibn Ziad N 38, Etage 6 N 32',
@@ -171,6 +171,20 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     sameAs: [],
   };
 
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${SITE_URL}/#website`,
+    name: 'H.V.A',
+    alternateName: ['H.V.A', 'Hive Vault Arc', 'HIVA'],
+    url: SITE_URL,
+    description: DEFAULT_DESCRIPTION,
+    publisher: {
+      '@id': `${SITE_URL}/#organization`,
+    },
+    inLanguage: ['en', 'fr', 'ar', 'es'],
+  };
+
   return (
     <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} ${newsreader.variable}`}>
       <head>
@@ -180,6 +194,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
       </head>
       <body>
         <JsonLd data={organizationSchema} />
+        <JsonLd data={websiteSchema} />
         <Layout>{children}</Layout>
       </body>
     </html>

@@ -54,7 +54,7 @@ export default function Page() {
       url: SITE_URL,
       telephone: ['+212688270772', '+212691918296'],
       priceRange: '$$',
-      image: absoluteUrl('/Images/hero.webp'),
+      image: absoluteUrl('/Images/hva-ai-software-agency-tangier.webp'),
       address: {
         '@type': 'PostalAddress',
         streetAddress: 'Avenue Tarik Ibn Ziad N 38, Etage 6 N 32',

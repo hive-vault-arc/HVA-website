@@ -4,6 +4,7 @@ import React, { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Bot, Cloud, Database, Eye, Layers, Smartphone } from 'lucide-react';
 import { motion } from 'framer-motion';
+import BottomCTA from '../components/BottomCTA';
 import Background3d from '../components/Plasma';
 import LogoLoop from '../components/LogoItem';
 import { FullScreenScrollFX } from '../components/ui/full-screen-scroll-fx';
@@ -123,29 +124,29 @@ const Home: React.FC = () => {
       leftLabel: 'Mobile Development',
       title: 'Mobile apps',
       rightLabel: 'Mobile apps',
-      background: './Images/app.png',
-      alt: 'Custom mobile app development by H.V.A',
+      background: '/Images/mobile-app-development-morocco.png',
+      alt: 'Custom mobile app development by H.V.A in Morocco',
     },
     {
       leftLabel: 'Web Development',
       title: 'Web apps',
       rightLabel: 'Web apps',
-      background: './Images/web.png',
-      alt: 'Custom web application development by H.V.A',
+      background: '/Images/web-application-development-morocco.png',
+      alt: 'Custom web application development by H.V.A in Tangier',
     },
     {
       leftLabel: 'AI Development',
       title: 'AI apps',
       rightLabel: 'AI apps',
-      background: '/Images/ai.webp',
-      alt: 'AI-powered application development by H.V.A',
+      background: '/Images/ai-agent-development-service.webp',
+      alt: 'AI agent development service by H.V.A Morocco',
     },
     {
       leftLabel: 'SaaS Development',
       title: 'SaaS apps',
       rightLabel: 'SaaS apps',
-      background: './Images/saas.png',
-      alt: 'Custom SaaS platform development by H.V.A',
+      background: '/Images/saas-platform-development-morocco.png',
+      alt: 'Custom SaaS platform development by H.V.A in Morocco',
     },
   ];
 
@@ -212,8 +213,8 @@ const Home: React.FC = () => {
             >
               <div className="aspect-[4/5] overflow-hidden shadow-2xl">
                 <img
-                  src="/Images/hero.webp"
-                  alt="Precision software engineering"
+                  src="/Images/hva-ai-software-agency-tangier.webp"
+                  alt="H.V.A AI software agency team in Tangier, Morocco"
                   className="w-full h-full object-cover hero-image-animate"
                   loading="eager"
                   fetchPriority="high"
@@ -464,31 +465,15 @@ const Home: React.FC = () => {
         )}
       </section>
 
-      <section className="relative py-12 mb-10">
-        <div className="container mx-auto px-4 text-center">
-          <div className="sharp-edge max-w-4xl mx-auto rounded-2xl border border-[#1E272E]/10 bg-gradient-to-r from-white/10 to-white/5 p-8 md:p-12">
-            <h2 className="text-3xl md:text-5xl text-[#1E272E] font-semibold">Ready to Build What’s Next?</h2>
-            <p className="text-[#1E272E]/75 mt-4 max-w-2xl mx-auto">
-              Share your goals and constraints. We will propose a focused execution plan for your product.
-            </p>
-            <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-              <Link
-                href="/contact"
-                className="sharp-edge inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black rounded-lg font-medium hover:bg-[#ECF5FD] transition-colors duration-300"
-              >
-                Book a Call
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link
-                href="/services"
-                className="sharp-edge inline-flex items-center justify-center px-8 py-4 bg-[#0984E3]/10 text-[#1E272E] border border-[#1E272E]/20 rounded-lg font-medium hover:bg-[#0984E3]/20 transition-colors duration-300"
-              >
-                Explore Services
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <BottomCTA
+        variant="light"
+        headline="Ready to Build What’s Next?"
+        subtext="Share your goals and constraints. We will propose a focused execution plan for your product."
+        primaryLabel="Book a Call"
+        primaryHref="/contact"
+        secondaryLabel="Explore Services"
+        secondaryHref="/services"
+      />
 
     </div>
   );
