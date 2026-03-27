@@ -28,8 +28,10 @@ const Navbar: React.FC = () => {
 
   const navItems = [
     { path: '/about', label: 'About' },
-    { path: '/portfolio', label: 'Portfolio' },
     { path: '/services', label: 'Services' },
+    { path: '/products-systems', label: 'Products' },
+    { path: '/case-studies', label: 'Case Studies' },
+    { path: '/portfolio', label: 'Portfolio' },
     { path: '/blog', label: 'Blog' },
   ];
 
@@ -53,19 +55,25 @@ const Navbar: React.FC = () => {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-1">
-              {navItems.map((item) => (
-                <Link
-                  key={item.path}
-                  href={item.path}
-                  className={`px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200 ${
-                    pathname === item.path
-                      ? 'text-[#F5F6FA] bg-[#0984E3]'
-                      : 'text-[#1E272E]/72 hover:text-[#1E272E] hover:bg-[#0984E3]/10'
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {navItems.map((item) => {
+                const isActive =
+                  pathname === item.path ||
+                  (item.path !== '/' && pathname?.startsWith(`${item.path}/`));
+
+                return (
+                  <Link
+                    key={item.path}
+                    href={item.path}
+                    className={`px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200 ${
+                      isActive
+                        ? 'text-[#F5F6FA] bg-[#0984E3]'
+                        : 'text-[#1E272E]/72 hover:text-[#1E272E] hover:bg-[#0984E3]/10'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
               <Link 
                 href="/contact"
                 aria-label="Book a call"
@@ -105,19 +113,25 @@ const Navbar: React.FC = () => {
           }`}
         >
           <div className="px-4 pt-2 pb-4 space-y-1 bg-[#F5F6FA]/95 backdrop-blur-lg rounded-2xl mx-4 mt-2 border border-[#1E272E]/12 shadow-[0_8px_24px_rgba(9,132,227,0.14)]">
-            {navItems.map((item) => (
-              <Link
-                key={item.path}
-                href={item.path}
-                className={`block px-4 py-3 text-base font-medium rounded-lg ${
-                  pathname === item.path
-                    ? 'text-[#F5F6FA] bg-[#0984E3]'
-                    : 'text-[#1E272E]/72 hover:text-[#1E272E] hover:bg-[#0984E3]/10'
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              const isActive =
+                pathname === item.path ||
+                (item.path !== '/' && pathname?.startsWith(`${item.path}/`));
+
+              return (
+                <Link
+                  key={item.path}
+                  href={item.path}
+                  className={`block px-4 py-3 text-base font-medium rounded-lg ${
+                    isActive
+                      ? 'text-[#F5F6FA] bg-[#0984E3]'
+                      : 'text-[#1E272E]/72 hover:text-[#1E272E] hover:bg-[#0984E3]/10'
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
             <div className="pt-2">
               <Link
                 href="/contact"

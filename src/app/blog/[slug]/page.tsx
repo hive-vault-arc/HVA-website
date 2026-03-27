@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getAllPosts, getPostBySlug } from '../../../lib/blog';
+import { getAllPosts } from '../../../lib/blog';
 import { buildPageMetadata, absoluteUrl, SITE_URL } from '../../../lib/seo';
 import JsonLd from '../../../components/JsonLd';
 import FaqSection from '../../../components/FaqSection';

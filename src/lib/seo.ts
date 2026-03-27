@@ -7,13 +7,17 @@ export const SITE_NAME = 'H.V.A';
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://hiva-nine.vercel.app';
 
 export const BUSINESS_NAME = 'Hive Vault Arc';
-export const DEFAULT_TITLE = `${SITE_NAME} | AI, Software & Cloud Engineering in Tangier, Morocco`;
+export const DEFAULT_TITLE = `${SITE_NAME} | IT Consulting, AI Product Systems & Software Engineering`;
 export const DEFAULT_DESCRIPTION =
-  'H.V.A builds AI agents, custom software platforms, workflow automations, and cloud infrastructure for businesses in Tangier and across Morocco.';
+  'H.V.A is a mature IT consulting and engineering company in Tangier building AI product systems, Zoho-grade CRM platforms, workflow automation, and cloud infrastructure.';
 
 export const GLOBAL_KEYWORDS = [
   'AI agents Tangier',
   'AI agents Morocco',
+  'AI product builder Morocco',
+  'AI systems builder Morocco',
+  'product and systems engineering Morocco',
+  'IT consulting and software engineering Morocco',
   'AI agency Tangier',
   'AI automation agency Morocco',
   'AI receptionist Morocco',
@@ -31,7 +35,7 @@ export const GLOBAL_KEYWORDS = [
   'CRM integration services Morocco',
   'enterprise software development Morocco',
   'SaaS development Morocco',
-  'product engineering agency Morocco',
+  'product engineering company Morocco',
   'workflow automation Morocco',
   'business process automation Morocco',
   'cloud migration Morocco',
@@ -50,7 +54,7 @@ export const GLOBAL_KEYWORDS = [
   'build custom CRM for my business Morocco',
   'company to build mobile app in Morocco',
   'team to build web app for startup Morocco',
-  'agency to deploy my app in cloud Morocco',
+  'team to deploy my app in cloud Morocco',
   'services et conseil informatique Maroc',
   'agents IA Tanger',
   'agence IA Maroc',

@@ -161,10 +161,10 @@ const About: React.FC = () => {
                     Start a Project
                   </Link>
                   <Link
-                    href="/services"
+                    href="/case-studies"
                     className="sharp-edge inline-flex items-center gap-2 bg-white/90 px-8 py-4 text-sm font-bold text-[#1E272E] shadow-[0_10px_25px_rgba(9,132,227,0.08)] hover:bg-[#ECF5FD] transition-colors duration-300"
                   >
-                    Explore Services
+                    Explore Proof
                     <Layers3 className="h-4 w-4 text-[#0984E3]" />
                   </Link>
                 </div>

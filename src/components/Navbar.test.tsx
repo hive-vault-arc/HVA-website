@@ -11,8 +11,11 @@ describe('Navbar', () => {
     render(<Navbar />);
 
     screen.getAllByRole('link', { name: 'About' }).forEach(link => expect(link).toHaveAttribute('href', '/about'));
-    screen.getAllByRole('link', { name: 'Portfolio' }).forEach(link => expect(link).toHaveAttribute('href', '/portfolio'));
     screen.getAllByRole('link', { name: 'Services' }).forEach(link => expect(link).toHaveAttribute('href', '/services'));
+    screen.getAllByRole('link', { name: 'Products' }).forEach(link => expect(link).toHaveAttribute('href', '/products-systems'));
+    screen.getAllByRole('link', { name: 'Case Studies' }).forEach(link => expect(link).toHaveAttribute('href', '/case-studies'));
+    screen.getAllByRole('link', { name: 'Portfolio' }).forEach(link => expect(link).toHaveAttribute('href', '/portfolio'));
+    screen.getAllByRole('link', { name: 'Blog' }).forEach(link => expect(link).toHaveAttribute('href', '/blog'));
     expect(screen.queryByRole('link', { name: 'Contact' })).toBeNull();
   });
 

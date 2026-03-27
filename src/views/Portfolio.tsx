@@ -101,8 +101,7 @@ const Portfolio: React.FC = () => {
                 Selected Work &amp; Case Snapshots
               </h1>
               <p className="text-xl text-[#475569] max-w-xl leading-relaxed font-light">
-                Architecting digital systems that bridge the gap between complex technical
-                infrastructure and seamless user experiences.
+                Proven deployments that bridge complex architecture and measurable business outcomes.
               </p>
             </motion.div>
 
@@ -167,6 +166,10 @@ const Portfolio: React.FC = () => {
                   logic, and creates automated records in the client's CRM without human
                   intervention.
                 </p>
+                <div className="border border-[#e2e8f0] bg-[#F8FAFC] p-4 text-sm text-[#334155]">
+                  <p><span className="font-semibold">Deployment status:</span> Live in production since October 2025.</p>
+                  <p className="mt-1"><span className="font-semibold">Stack/integrations:</span> WhatsApp API, HubSpot, Google Calendar, PostgreSQL, orchestration flows.</p>
+                </div>
                 <ul className="space-y-3 text-sm text-[#475569]">
                   {[
                     '85% reduction in manual qualification time',
@@ -179,9 +182,15 @@ const Portfolio: React.FC = () => {
                     </li>
                   ))}
                 </ul>
+                <blockquote className="border-l-2 border-[#2563EB] pl-3 text-sm italic text-[#1E272E]/80">
+                  "H.V.A shipped a production AI workflow that our team trusts daily."
+                  <footer className="mt-1 text-xs not-italic text-[#475569]">
+                    — Head of Growth, Atlas Property Group
+                  </footer>
+                </blockquote>
                 <div className="pt-3">
                   <Link
-                    href="/contact"
+                    href="/case-studies/multilingual-whatsapp-ai-agent"
                     className="inline-flex items-center gap-2 text-[#2563EB] font-bold border-b-2 border-[#2563EB] pb-1 hover:text-[#1d4ed8] hover:border-[#1d4ed8] transition-all group"
                   >
                     View Technical Breakdown
@@ -219,13 +228,17 @@ const Portfolio: React.FC = () => {
                       </span>
                     ))}
                   </div>
-                  <p className="text-[#475569] leading-relaxed font-light">
-                    A high-performance internal tool built for a luxury real estate group. We
-                    replaced three disparate systems with a unified architectural platform that
-                    tracks the entire buyer journey from initial contact to property closing.
-                  </p>
-                  {/* Stats */}
-                  <div className="grid grid-cols-2 gap-4">
+                <p className="text-[#475569] leading-relaxed font-light">
+                  A high-performance internal tool built for a luxury real estate group. We
+                  replaced three disparate systems with a unified architectural platform that
+                  tracks the entire buyer journey from initial contact to property closing.
+                </p>
+                <div className="border border-[#e2e8f0] bg-white p-4 text-sm text-[#334155]">
+                  <p><span className="font-semibold">Deployment status:</span> Live in production since May 2025 across sales and operations.</p>
+                  <p className="mt-1"><span className="font-semibold">Stack/integrations:</span> CRM core, DocuSign, Meta Lead Sync, pipeline automation, BI reporting.</p>
+                </div>
+                {/* Stats */}
+                <div className="grid grid-cols-2 gap-4">
                     <div className="bg-white p-4 border-l-4 border-[#2563EB]">
                       <p className="font-serif text-2xl text-[#2563EB]">40%</p>
                       <p className="text-[10px] font-bold text-[#475569] uppercase tracking-wider">
@@ -237,14 +250,20 @@ const Portfolio: React.FC = () => {
                       <p className="text-[10px] font-bold text-[#475569] uppercase tracking-wider">
                         Tracked Pipeline
                       </p>
-                    </div>
                   </div>
-                  <div className="pt-3">
-                    <Link
-                      href="/contact"
-                      className="inline-flex items-center gap-2 text-[#2563EB] font-bold border-b-2 border-[#2563EB] pb-1 hover:text-[#1d4ed8] hover:border-[#1d4ed8] transition-all group"
-                    >
-                      Read Case Study
+                </div>
+                <blockquote className="border-l-2 border-[#2563EB] pl-3 text-sm italic text-[#1E272E]/80">
+                  "Forecast and pipeline meetings are now based on one trusted system."
+                  <footer className="mt-1 text-xs not-italic text-[#475569]">
+                    — COO, Capstone Living Morocco
+                  </footer>
+                </blockquote>
+                <div className="pt-3">
+                  <Link
+                    href="/case-studies/zoho-grade-crm-platform"
+                    className="inline-flex items-center gap-2 text-[#2563EB] font-bold border-b-2 border-[#2563EB] pb-1 hover:text-[#1d4ed8] hover:border-[#1d4ed8] transition-all group"
+                  >
+                    Read Case Study
                       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </Link>
                   </div>
@@ -332,11 +351,11 @@ const Portfolio: React.FC = () => {
         <BottomCTA
           variant="dark"
           headline="Ready to start a project?"
-          subtext="We are currently accepting new high-impact consulting engagements. Let's map the right architecture and execution path for your team."
+          subtext="We are currently accepting new high-impact consulting and product-system deployments. Let's map the right architecture and execution path for your team."
           primaryLabel="Book Your Discovery Call"
           primaryHref="/contact"
-          secondaryLabel="View Services"
-          secondaryHref="/services"
+          secondaryLabel="View Products & Systems"
+          secondaryHref="/products-systems"
         />
 
       </div>

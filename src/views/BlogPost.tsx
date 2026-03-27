@@ -271,7 +271,7 @@ export default function BlogPostView({ post }: Props) {
                   className="text-white/60 text-xs mb-4 leading-relaxed"
                   style={{ fontFamily: 'var(--font-body)' }}
                 >
-                  H.V.A builds AI agents and custom software for businesses in Morocco.
+                  H.V.A builds proven AI product systems and custom software for businesses in Morocco.
                 </p>
                 <Link
                   href="/contact"
@@ -317,16 +317,16 @@ export default function BlogPostView({ post }: Props) {
               className="text-[#45464d] leading-relaxed mb-6 max-w-xl"
               style={{ fontFamily: 'var(--font-body)' }}
             >
-              H.V.A is an AI agent and software engineering agency based in Tangier, Morocco. We
-              build AI receptionists, analyst agents, custom software platforms, workflow automation,
+              H.V.A is a mature IT consulting and engineering company based in Tangier, Morocco. We
+              build AI product systems, analyst agents, custom software platforms, workflow automation,
               and cloud infrastructure for businesses across Morocco and internationally.
             </p>
             <Link
-              href="/about"
+              href="/case-studies"
               className="inline-flex items-center gap-2 text-sm font-bold tracking-widest uppercase text-[#2563EB] hover:gap-4 transition-all"
               style={{ fontFamily: 'var(--font-body)' }}
             >
-              Learn more about us
+              Explore case studies
               <ArrowUpRight className="w-4 h-4" />
             </Link>
           </div>

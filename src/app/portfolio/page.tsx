@@ -4,11 +4,12 @@ import FaqSection from '../../components/FaqSection';
 import JsonLd from '../../components/JsonLd';
 import { PORTFOLIO_FAQS } from '../../data/faqs';
 import { GLOBAL_KEYWORDS, SITE_URL, buildPageMetadata, mergeKeywords } from '../../lib/seo';
+import { getAllCaseStudies } from '../../lib/proof';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Portfolio | AI, Automation and Software Projects',
+  title: 'Portfolio | Proven AI Systems and Software Deployments',
   description:
-    'AI receptionists, custom CRM systems, cloud infrastructure, and mobile apps delivered for Moroccan businesses. Production-ready work, not prototypes.',
+    'Verified project portfolio: AI WhatsApp systems, full CRM platforms, and executive dashboards deployed in production with measurable results.',
   path: '/portfolio',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'AI project portfolio Morocco',
@@ -27,6 +28,8 @@ export const metadata: Metadata = buildPageMetadata({
 });
 
 export default function Page() {
+  const caseStudies = getAllCaseStudies();
+
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -36,9 +39,21 @@ export default function Page() {
     ],
   };
 
+  const caseItemListSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'H.V.A Proven System Deployments',
+    itemListElement: caseStudies.map((study, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: study.title,
+      url: `${SITE_URL}/case-studies/${study.slug}`,
+    })),
+  };
+
   return (
     <>
-      <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={[breadcrumbSchema, caseItemListSchema]} />
       <Portfolio />
       <FaqSection faqs={PORTFOLIO_FAQS} />
     </>

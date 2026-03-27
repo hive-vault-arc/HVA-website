@@ -7,12 +7,14 @@ import { GLOBAL_KEYWORDS, SITE_URL, buildPageMetadata, mergeKeywords } from '../
 
 export const metadata: Metadata = {
   ...buildPageMetadata({
-    title: 'AI Agents, Custom Software & Cloud Engineering in Tangier, Morocco',
+    title: 'IT Consulting, AI Product Systems & Software Engineering in Tangier',
     description:
-      'H.V.A builds AI receptionists, custom software, and cloud systems for businesses in Morocco and Tangier. Operate 24/7, cut overhead, and capture every lead.',
+      'H.V.A builds proven AI product systems, full CRM platforms, and cloud software infrastructure with measurable production outcomes for businesses in Morocco.',
     path: '/',
     keywords: mergeKeywords(GLOBAL_KEYWORDS, [
       'hire AI agency in Tangier',
+      'IT consulting and AI systems Tangier',
+      'AI product builder Morocco',
       'best company to build custom software in Morocco',
       'who can build a custom mobile app for my company in Morocco',
       'need a team to develop web app for my business in Tangier',
@@ -56,10 +58,12 @@ export default function Page() {
     keywords: mergeKeywords(GLOBAL_KEYWORDS, [
       'AI receptionist',
       'AI analyst',
+      'AI product systems',
       'custom mobile app development',
       'custom web app development',
       'CRM migration',
       'cloud deployment',
+      'measured software delivery outcomes',
     ]),
   };
 

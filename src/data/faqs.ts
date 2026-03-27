@@ -31,6 +31,11 @@ export const HOME_FAQS: FaqSet = [
     answer:
       'The first step is a discovery call. You share your goals, constraints, and timeline. We map the highest-impact opportunities, propose a focused scope, and agree on a delivery model before any work begins. Contact us through the form on our website or by phone to book a session.',
   },
+  {
+    question: 'Does H.V.A publish real deployment proof or only marketing claims?',
+    answer:
+      'H.V.A publishes production case studies with named systems, technical architecture, integrations, deployment status, and measured outcomes. We also share approved screenshots and client-attributed testimonials where publication rights are granted.',
+  },
 ];
 
 // ─── Services ────────────────────────────────────────────────────────────────
@@ -87,6 +92,11 @@ export const SERVICES_FAQS: FaqSet = [
     question: 'Does H.V.A build mobile applications for Android and iOS?',
     answer:
       'Yes. H.V.A builds cross-platform mobile applications using Flutter and native Android frameworks. We deliver fully owned, production-ready applications — not white-label templates — with custom backend integration, API architecture, and ongoing maintenance support.',
+  },
+  {
+    question: 'Can H.V.A prove technical depth before we start an engagement?',
+    answer:
+      'Yes. During evaluation, we provide architecture snapshots, integration maps, and KPI evidence from approved deployments (for example AI WhatsApp systems, CRM platforms, and executive analytics dashboards). Where required, deeper technical walkthroughs can be shared under NDA.',
   },
 ];
 
@@ -167,6 +177,11 @@ export const PORTFOLIO_FAQS: FaqSet = [
     question: 'How does H.V.A ensure quality across its delivered projects?',
     answer:
       'Quality is built in from the start, not added at the end. Every H.V.A project includes architecture review, sprint-based QA checkpoints, security hardening, and automated testing before production deployment. Our delivery model makes reliability a non-negotiable — not a premium add-on.',
+  },
+  {
+    question: 'What proof details are included in H.V.A case studies?',
+    answer:
+      'Each case study is documented with five evidence blocks: system built, stack and integrations, deployment status, measured outcomes, and client quote. This format helps buyers evaluate real technical maturity instead of generic claims.',
   },
 ];
 

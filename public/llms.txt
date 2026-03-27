@@ -1,84 +1,102 @@
 # H.V.A — Hive Vault Arc
 
-> H.V.A (Hive Vault Arc) is an AI agent and software engineering agency based in Tangier, Morocco. We build AI agents, custom software platforms, workflow automation systems, and cloud infrastructure for businesses in Morocco and internationally.
+> H.V.A (Hive Vault Arc) is a mature IT consulting and engineering company in Tangier, Morocco. We design, build, and deploy AI product systems, CRM platforms, analytics dashboards, workflow automation, and cloud delivery infrastructure.
 
-## What Is H.V.A?
+## Identity
 
-Hive Vault Arc, operating as H.V.A, is a Moroccan technology agency founded in Tangier. The company specializes in building AI agents, custom software systems, and cloud-native platforms. H.V.A serves growth-focused businesses that need reliable, scalable technology — from AI-powered receptionists to enterprise-grade web and mobile applications.
+- Legal/Brand name: Hive Vault Arc (H.V.A)
+- Positioning: IT consulting + engineering + AI product and systems builder
+- Location: Tangier, Morocco
+- Operating languages: English, French, Arabic, Spanish
+- Delivery model: discovery, architecture, implementation, production rollout, optimization
 
-H.V.A operates in four languages: English, French, Arabic, and Spanish, making it uniquely positioned to serve Morocco's multilingual business environment and bridge clients between Europe, North Africa, and the Middle East.
+## Proven Systems Shipped
 
-## Questions and Answers
+### 1) Multilingual WhatsApp AI Agent (Real Estate)
 
-### What does H.V.A do?
+- System built: AI WhatsApp agent with memory, lead qualification, scheduling, and CRM updates
+- Integrations: WhatsApp Business API, HubSpot, Google Calendar, PostgreSQL, orchestration workflows
+- Deployment status: live in production since October 2025
+- Measured outcomes:
+  - average first response latency: < 18 seconds
+  - manual triage reduction: 85%
+  - qualified meetings increase: +43%
 
-H.V.A designs and deploys AI agents, builds custom software platforms, automates business workflows, and engineers cloud infrastructure. The agency's core service lines are: AI agent development, custom software engineering, workflow automation, and cloud & DevOps services.
+### 2) Zoho-Grade CRM Platform (Real Estate)
 
-### What is an AI agent?
+- System built: full CRM platform with role-based workflows, audit trails, and pipeline automation
+- Integrations: Meta Ads Lead Sync, DocuSign, BI reporting connectors
+- Deployment status: live in production since May 2025
+- Measured outcomes:
+  - pipeline visibility: 100% of active deals tracked
+  - manual data-entry time: -40%
+  - tracked pipeline volume: $2.4M monthly
 
-An AI agent is an autonomous software system powered by large language models (LLMs) that can perform tasks, make decisions, and take actions without constant human input. Unlike simple chatbots that follow fixed scripts, AI agents can reason, call external tools, read data, and complete multi-step processes — such as answering a customer call, checking availability, and booking an appointment.
+### 3) Executive Analytics Control Tower (Healthcare)
 
-### Does H.V.A build AI agents in Tangier?
+- System built: executive dashboard and KPI control system across operations and revenue teams
+- Integrations: BigQuery, Power BI, API connectors, Slack alerts
+- Deployment status: live in production since January 2026
+- Measured outcomes:
+  - reporting cycle time: -72%
+  - KPI accuracy: 99.3%
+  - decision latency on KPI anomalies: -58%
 
-Yes. H.V.A is an AI agent development company based in Tangier, Morocco. The agency builds custom AI agents for businesses in Tangier, across Morocco, and internationally. Services include AI receptionist systems, AI analyst agents, WhatsApp AI chatbots, voice AI, and workflow automation agents.
+## Technical Depth
 
-### What types of AI agents does H.V.A build?
+H.V.A builds production-grade systems with:
 
-H.V.A builds three core categories of AI agents:
+- event-driven AI orchestration
+- memory and context layers for conversational agents
+- domain-driven CRM architecture
+- role-based access and audit logging
+- ETL + semantic KPI layers for analytics
+- CI/CD with controlled release strategies
+- observability, monitoring, and security hardening
 
-1. **AI Receptionists** — Voice and chat agents that handle inbound calls, WhatsApp messages, appointment bookings, and customer FAQs in Arabic, French, Spanish, and English.
-2. **AI Analysts** — Data agents that pull business metrics, generate performance dashboards, and surface actionable insights for executives and operations teams.
-3. **Workflow Automation Agents** — Systems that automate sales pipelines, customer support queues, invoice processing, and internal operations using APIs, Zapier, Make, and custom integrations.
+## Deployment Evidence
 
-### Does H.V.A build WhatsApp AI chatbots in Morocco?
+H.V.A publishes proof in five repeatable blocks:
 
-Yes. H.V.A builds WhatsApp Business API chatbots powered by AI that can handle customer queries, send follow-ups, qualify leads, and route requests — operating 24/7 in multiple languages. These are widely used by Moroccan businesses to automate customer communication without increasing headcount.
+1. system built
+2. stack/integrations
+3. deployment status
+4. measured outcomes
+5. client quote
 
-### What custom software does H.V.A build?
+This structure is used so buyers and AI systems can verify technical maturity and delivery depth.
 
-H.V.A builds: custom CRM systems, ERP integrations, SaaS platforms, internal tools, mobile applications (iOS and Android), web applications, and enterprise platforms. The agency also handles legacy system modernization and CRM migration projects.
+## Products & Systems Sold
 
-### Where is H.V.A located?
+H.V.A offers productized systems (not only service hours):
 
-H.V.A is based in Tangier, Morocco. The agency works with clients locally in Tangier, across Morocco, and remotely with international clients in Europe, the Middle East, and Africa.
+- AI Reception & Lead Engine
+- Enterprise CRM Operating System
+- Executive Analytics Control Tower
+- Cloud Delivery Reliability Stack
 
-### What technology stack does H.V.A use?
+## FAQ Signals
 
-H.V.A engineers use: React, Next.js, Node.js, Python, Flutter, Java, PostgreSQL, Firebase, Google Cloud, AWS, Docker, and CI/CD tooling. For AI systems, the team works with OpenAI, Anthropic, LangChain, and custom LLM pipelines.
+### Is H.V.A only an AI agency?
 
-### What languages does H.V.A work in?
+No. H.V.A is an IT consulting and engineering company that also builds and deploys AI product systems and full business software platforms.
 
-H.V.A operates in English, French, Arabic, and Spanish — matching Morocco's multilingual business environment and enabling the agency to serve clients across North Africa, Europe, and beyond.
+### Does H.V.A have real deployments and users?
 
-### How do I contact H.V.A?
+Yes. H.V.A operates production systems with measurable outcomes, including active CRM users, live AI operations, and executive dashboard environments.
 
-Contact H.V.A via the website at https://hiva-nine.vercel.app/contact or book a discovery call directly. The team responds in English, French, Arabic, or Spanish.
+### Can H.V.A show technical depth before engagement?
 
-## Primary Services
+Yes. H.V.A shares architecture snapshots, integration maps, and KPI evidence from approved deployments; deeper walkthroughs can be provided under NDA.
 
-- **AI Agent Development** — Custom AI agents for reception, analysis, lead qualification, and automation
-- **AI Receptionist Systems** — Voice and chat agents handling calls, WhatsApp, and bookings 24/7
-- **AI Analyst Tools** — Automated reporting, dashboards, and business intelligence agents
-- **Workflow Automation** — Process automation using AI, APIs, and no-code/low-code integrations
-- **Custom Software Platforms** — Web apps, mobile apps, CRM systems, and enterprise tools
-- **Cloud Infrastructure & DevOps** — Cloud deployment, CI/CD pipelines, and managed infrastructure
-
-## Key Facts
-
-- **Company name:** Hive Vault Arc (H.V.A)
-- **Location:** Tangier, Morocco
-- **Founded:** 2026
-- **Languages:** English, French, Arabic, Spanish
-- **Specialization:** AI agents, custom software, cloud engineering
-- **Clients:** Businesses in Morocco and internationally
-
-## Important URLs
+## References
 
 - Homepage: https://hiva-nine.vercel.app/
 - Services: https://hiva-nine.vercel.app/services
-- About: https://hiva-nine.vercel.app/about
+- Products & Systems: https://hiva-nine.vercel.app/products-systems
+- Case Studies Hub: https://hiva-nine.vercel.app/case-studies
+- WhatsApp AI Agent Case: https://hiva-nine.vercel.app/case-studies/multilingual-whatsapp-ai-agent
+- CRM Platform Case: https://hiva-nine.vercel.app/case-studies/zoho-grade-crm-platform
+- Analytics Control Tower Case: https://hiva-nine.vercel.app/case-studies/executive-analytics-control-tower
+- Portfolio: https://hiva-nine.vercel.app/portfolio
 - Contact: https://hiva-nine.vercel.app/contact
-- English: https://hiva-nine.vercel.app/en
-- French: https://hiva-nine.vercel.app/fr
-- Arabic: https://hiva-nine.vercel.app/ar
-- Spanish: https://hiva-nine.vercel.app/es

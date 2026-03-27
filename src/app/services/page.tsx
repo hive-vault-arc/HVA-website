@@ -6,9 +6,9 @@ import { SERVICES_FAQS } from '../../data/faqs';
 import { GLOBAL_KEYWORDS, SITE_URL, absoluteUrl, buildPageMetadata, mergeKeywords } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'AI Receptionist, Automation, SaaS & Cloud Services in Morocco',
+  title: 'AI Product Systems, CRM Engineering & Cloud Delivery Services',
   description:
-    'AI receptionists, WhatsApp chatbots, custom CRM, workflow automation, and cloud engineering — H.V.A service lines built specifically for Moroccan businesses.',
+    'H.V.A delivers AI product systems, WhatsApp agent operations, Zoho-grade CRM engineering, workflow automation, and cloud reliability for production teams.',
   path: '/services',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'AI receptionist implementation for businesses',
@@ -22,6 +22,8 @@ export const metadata: Metadata = buildPageMetadata({
     'web app development for internal operations',
     'migration from legacy systems to modern cloud',
     'service company for app deployment Morocco',
+    'IT consulting engineering team Morocco',
+    'AI system implementation Morocco',
     'team to automate sales and support workflows',
     'services IA pour entreprise au Maroc',
     'migration CRM et intégration API Maroc',
@@ -67,6 +69,7 @@ export default function Page() {
     },
     areaServed: ['Tangier', 'Morocco'],
     serviceType: [
+      'AI Product System Implementation',
       'AI Receptionist Systems',
       'AI Analyst Reporting',
       'Workflow Automation',
@@ -78,10 +81,17 @@ export default function Page() {
     keywords: mergeKeywords(GLOBAL_KEYWORDS, [
       'AI receptionist systems',
       'AI analyst and decision intelligence',
+      'production AI systems',
       'custom platform development',
       'cloud reliability engineering',
     ]).join(', '),
     url: `${SITE_URL}/services`,
+    subjectOf: [
+      `${SITE_URL}/case-studies/multilingual-whatsapp-ai-agent`,
+      `${SITE_URL}/case-studies/zoho-grade-crm-platform`,
+      `${SITE_URL}/case-studies/executive-analytics-control-tower`,
+      `${SITE_URL}/products-systems`,
+    ],
   };
 
   const breadcrumbSchema = {

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { SITE_URL } from '../lib/seo';
 import { getAllPosts } from '../lib/blog';
+import { getAllCaseStudies } from '../lib/proof';
 
 const LOCALES = ['en', 'fr', 'ar', 'es'] as const;
 
@@ -18,6 +19,7 @@ function asAlternates(pathByLocale: Record<(typeof LOCALES)[number], string>) {
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
+  const caseStudies = getAllCaseStudies();
 
   return [
     {
@@ -49,36 +51,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: 'monthly',
       priority: 0.7,
-      alternates: asAlternates({
-        en: '/en/about',
-        fr: '/fr/about',
-        ar: '/ar/about',
-        es: '/es/about',
-      }),
     },
     {
       url: `${SITE_URL}/portfolio`,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.8,
-      alternates: asAlternates({
-        en: '/en/portfolio',
-        fr: '/fr/portfolio',
-        ar: '/ar/portfolio',
-        es: '/es/portfolio',
-      }),
     },
     {
       url: `${SITE_URL}/contact`,
       lastModified: now,
       changeFrequency: 'monthly',
       priority: 0.8,
-      alternates: asAlternates({
-        en: '/en/contact',
-        fr: '/fr/contact',
-        ar: '/ar/contact',
-        es: '/es/contact',
-      }),
+    },
+    {
+      url: `${SITE_URL}/case-studies`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${SITE_URL}/products-systems`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.9,
     },
     ...LOCALES.flatMap((locale) => [
       {
@@ -105,6 +101,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(post.publishedAt),
       changeFrequency: 'monthly' as const,
       priority: 0.7,
+    })),
+    ...caseStudies.map((caseStudy) => ({
+      url: `${SITE_URL}/case-studies/${caseStudy.slug}`,
+      lastModified: new Date(caseStudy.lastUpdated),
+      changeFrequency: 'monthly' as const,
+      priority: 0.85,
     })),
   ];
 }

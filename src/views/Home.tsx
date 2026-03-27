@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import BottomCTA from '../components/BottomCTA';
 import Background3d from '../components/Plasma';
 import LogoLoop from '../components/LogoItem';
-import { FullScreenScrollFX } from '../components/ui/full-screen-scroll-fx';
+import VideoScrollSection from '../components/ui/VideoScrollSection';
 import { useAnimationQuality } from '../lib/animationQuality';
 import {
   SiAndroid,
@@ -119,36 +119,6 @@ const Home: React.FC = () => {
     { node: <SiOpenjdk />, title: 'Java', href: 'https://openjdk.org' },
   ];
 
-  const sections = [
-    {
-      leftLabel: 'Mobile Development',
-      title: 'Mobile apps',
-      rightLabel: 'Mobile apps',
-      background: '/Images/mobile-app-development-morocco.png',
-      alt: 'Custom mobile app development by H.V.A in Morocco',
-    },
-    {
-      leftLabel: 'Web Development',
-      title: 'Web apps',
-      rightLabel: 'Web apps',
-      background: '/Images/web-application-development-morocco.png',
-      alt: 'Custom web application development by H.V.A in Tangier',
-    },
-    {
-      leftLabel: 'AI Development',
-      title: 'AI apps',
-      rightLabel: 'AI apps',
-      background: '/Images/ai-agent-development-service.webp',
-      alt: 'AI agent development service by H.V.A Morocco',
-    },
-    {
-      leftLabel: 'SaaS Development',
-      title: 'SaaS apps',
-      rightLabel: 'SaaS apps',
-      background: '/Images/saas-platform-development-morocco.png',
-      alt: 'Custom SaaS platform development by H.V.A in Morocco',
-    },
-  ];
 
   return (
     <div className="h-full home-reference">
@@ -178,7 +148,7 @@ const Home: React.FC = () => {
               transition={{ duration: 0.8 }}
             >
               <span className="home-hero-eyebrow inline-block px-3 py-1 bg-[#0984E3]/10 text-[#0984E3] text-[10px] uppercase tracking-[0.22em] font-bold mb-8">
-                Software &amp; Cloud Engineering
+                IT Consulting, Engineering &amp; Product Systems
               </span>
               <h1 className="home-hero-title font-serif text-4xl sm:text-5xl md:text-7xl xl:text-[5.5rem] font-medium leading-[1.04] tracking-tight text-[#1E272E] mb-8">
                 Building the Next<br />
@@ -186,20 +156,20 @@ const Home: React.FC = () => {
                 <em className="italic">Digital<br />Systems</em>.
               </h1>
               <p className="home-hero-copy text-xl text-[#1E272E]/60 max-w-xl mb-12 font-light leading-relaxed">
-                We engineer custom software, AI-powered applications, and cloud platforms that power modern businesses at scale.
+                We engineer and deploy proven AI product systems, full CRM platforms, and cloud infrastructure with measurable outcomes in production.
               </p>
               <div className="flex flex-wrap gap-6">
                 <Link
-                  href="/portfolio"
+                  href="/case-studies"
                   className="home-hero-primary sharp-edge bg-[#1E272E] text-[#F5F6FA] px-8 py-4 text-sm font-bold hover:bg-[#0984E3] transition-colors duration-300"
                 >
-                  View Our Work
+                  View Case Studies
                 </Link>
                 <Link
-                  href="/services"
+                  href="/products-systems"
                   className="home-hero-secondary flex items-center gap-2 px-8 py-4 text-sm font-bold text-[#1E272E] hover:gap-4 transition-all duration-300"
                 >
-                  Our Services <ArrowRight className="w-4 h-4" />
+                  Products &amp; Systems <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
             </motion.div>
@@ -214,7 +184,7 @@ const Home: React.FC = () => {
               <div className="aspect-[4/5] overflow-hidden shadow-2xl">
                 <img
                   src="/Images/hva-ai-software-agency-tangier.webp"
-                  alt="H.V.A AI software agency team in Tangier, Morocco"
+                  alt="H.V.A engineering and product systems team in Tangier, Morocco"
                   className="w-full h-full object-cover hero-image-animate"
                   loading="eager"
                   fetchPriority="high"
@@ -258,7 +228,7 @@ const Home: React.FC = () => {
               <em className="font-headline italic text-white/35">Technical Execution.</em>
             </h2>
             <p className="text-white/60 font-body leading-relaxed text-base mb-10 max-w-sm">
-              Hive Vault Arc is a software and AI engineering agency. We build the systems your business runs on — from intelligent automation and custom platforms to cloud infrastructure and mobile apps.
+              Hive Vault Arc is a mature IT consulting and engineering company. We build the systems your business runs on — from AI product operations and CRM platforms to cloud infrastructure and mobile apps.
             </p>
             <div className="h-px w-12 bg-[#2563EB] mb-4" />
             <p className="text-[9px] font-label font-bold uppercase tracking-[0.28em] text-white/35">
@@ -287,6 +257,54 @@ const Home: React.FC = () => {
           ))}
         </div>
 
+      </section>
+
+      <section className="bg-white py-20 md:py-24">
+        <div className="mx-auto max-w-7xl px-8">
+          <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
+            Proof In Production
+          </p>
+          <h2 className="font-headline text-4xl md:text-5xl text-[#0F172A] leading-tight">
+            Flagship Systems Deployed With Real Users
+          </h2>
+          <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+            {[
+              {
+                title: 'System Built',
+                body: 'Multilingual WhatsApp AI agent with memory, lead qualification, scheduling, and CRM pipeline automation.',
+                meta: 'Stack: WhatsApp API · HubSpot · Calendar · PostgreSQL',
+              },
+              {
+                title: 'Deployment Status',
+                body: 'Zoho-grade CRM platform live across sales and operations with 94 active internal users.',
+                meta: 'Status: Production since May 2025',
+              },
+              {
+                title: 'Measured Outcomes',
+                body: '85% manual triage reduction, 43% increase in qualified meetings, and 72% faster executive reporting cycles.',
+                meta: 'Evidence: dashboards + approved client reporting exports',
+              },
+            ].map((item) => (
+              <article key={item.title} className="border border-[#e2e8f0] bg-[#F8FAFC] p-6">
+                <h3 className="font-headline text-2xl text-[#0F172A]">{item.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-[#334155]">{item.body}</p>
+                <p className="mt-4 text-[10px] font-bold uppercase tracking-[0.16em] text-[#2563EB]">{item.meta}</p>
+              </article>
+            ))}
+          </div>
+          <div className="mt-8 flex flex-wrap gap-5">
+            <Link href="/case-studies" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">
+              Explore detailed case studies &rarr;
+            </Link>
+            <Link href="/products-systems" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">
+              Explore products and systems &rarr;
+            </Link>
+          </div>
+          <blockquote className="mt-8 border-l-2 border-[#2563EB] pl-4 text-sm italic text-[#334155]">
+            "From lead intake to executive reporting, H.V.A delivered a complete system we use every day."
+            <footer className="mt-1 text-xs not-italic text-[#64748b]">— COO, Capstone Living Morocco</footer>
+          </blockquote>
+        </div>
       </section>
 
       {/* ── Vision / Trust Section ─────────────────────────────────────── */}
@@ -389,53 +407,11 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <section className="p-4">
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-          className="relative z-10 mt-16 p-4 md:p-8 shadow-md"
-        >
-          {showAdvancedEffects ? (
-            <div className="w-full overflow-hidden rounded-xl">
-              <FullScreenScrollFX
-                sections={sections}
-                header={
-                  <>
-                    <div>What We</div>
-                    <div>Build</div>
-                  </>
-                }
-                footer={<div />}
-                showProgress
-                colors={{
-                  text: 'rgba(30,39,46,0.94)',
-                  overlay: 'rgba(245,246,250,0.35)',
-                  pageBg: '#F5F6FA',
-                  stageBg: '#ECF5FD',
-                }}
-                durations={{ change: 0.7, snap: 800 }}
-              />
-            </div>
-          ) : (
-            <div className="rounded-xl border border-[#1E272E]/10 bg-white/90 p-6 md:p-8">
-              <p className="text-[#1E272E]/60 tracking-[0.2em] text-xs uppercase">What We Build</p>
-              <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
-                {sections.map((section) => (
-                  <article key={String(section.leftLabel)} className="rounded-lg border border-[#1E272E]/12 bg-[#F5F6FA] p-3">
-                    <div className="aspect-[16/10] overflow-hidden rounded-md border border-[#1E272E]/10">
-                      <img src={section.background} alt={section.title} className="h-full w-full object-cover" loading="lazy" />
-                    </div>
-                    <h3 className="mt-3 text-xl font-semibold text-[#1E272E]">{section.title}</h3>
-                    <p className="text-sm text-[#1E272E]/72 mt-1">{section.leftLabel}</p>
-                  </article>
-                ))}
-              </div>
-            </div>
-          )}
-        </motion.div>
-      </section>
+      <VideoScrollSection
+        videoSrc="/Images/scrollanimaion.mp4"
+        topBg="#0F172A"
+        bottomBg="#F5F6FA"
+      />
 
       <div style={{ position: 'relative', overflow: 'hidden', color: '#1E272E', marginBottom: '6%' }} className="min-h-[140px] md:min-h-[200px]">
         <h2 className="text-[#1E272E]/90 text-2xl lg:text-4xl md:text-xl mb-8 mx-auto text-center font-light leading-relaxed">

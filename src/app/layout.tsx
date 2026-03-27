@@ -56,7 +56,7 @@ export const metadata: Metadata = {
         url: '/Images/hva-ai-software-agency-tangier.webp',
         width: 1200,
         height: 630,
-        alt: 'H.V.A — AI Agents, Custom Software & Cloud Engineering in Tangier, Morocco',
+        alt: 'H.V.A — IT Consulting, AI Product Systems, and Custom Software Engineering',
       },
     ],
   },
@@ -96,7 +96,8 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     name: BUSINESS_NAME,
     alternateName: ['H.V.A', 'Hive Vault Arc', 'HIVA'],
     url: SITE_URL,
-    description: 'Hive Vault Arc (H.V.A) is an AI agent and software engineering agency based in Tangier, Morocco. We build AI receptionist systems, AI analyst tools, custom software platforms, workflow automation, and cloud infrastructure for businesses across Morocco and internationally.',
+    description:
+      'Hive Vault Arc (H.V.A) is a mature IT consulting and engineering company in Tangier, Morocco. We build AI product systems, full CRM platforms, analytics dashboards, workflow automation, and cloud delivery infrastructure for businesses in Morocco and internationally.',
     logo: {
       '@type': 'ImageObject',
       url: absoluteUrl('/Images/favico/android-chrome-512x512.png'),
@@ -145,8 +146,10 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     ],
     serviceType: [
       'AI Agent Development',
+      'AI Product Systems',
       'AI Receptionist Systems',
       'AI Analyst Tools',
+      'CRM Platform Engineering',
       'Workflow Automation',
       'Custom Software Development',
       'Cloud Infrastructure',
@@ -159,8 +162,9 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
       name: 'AI & Software Engineering Services',
       itemListElement: [
         { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'AI Agent Development', description: 'Custom AI agents for receptionists, analysts, and business automation in Tangier and Morocco.' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'AI Product System Delivery', description: 'End-to-end AI product and system implementation with production deployment and measurable outcomes.' } },
         { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Workflow Automation', description: 'End-to-end business process automation using AI and custom integrations.' } },
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Custom Software Development', description: 'Bespoke web and mobile applications, CRM systems, and enterprise platforms.' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Custom Software Development', description: 'Bespoke web and mobile applications, Zoho-grade CRM systems, and enterprise platforms.' } },
         { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Cloud Infrastructure', description: 'Cloud deployment, CI/CD pipelines, and managed infrastructure on AWS, GCP, and Azure.' } },
       ],
     },

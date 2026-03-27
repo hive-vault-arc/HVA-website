@@ -8,6 +8,7 @@ import React, {
   useMemo,
   useRef,
   useState,
+  useCallback,
 } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -78,6 +79,9 @@ export type FullScreenFXProps = {
   // Colors
   colors?: Colors;
 
+  // Video scrub background (replaces per-section images when set)
+  videoSrc?: string;
+
   // Imperative API
   apiRef?: React.Ref<FullScreenFXAPI>;
   ariaLabel?: string;
@@ -117,6 +121,7 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
         stageBg: "#000000",
       },
 
+      videoSrc,
       apiRef,
       ariaLabel = "Full screen scroll slideshow",
     },
@@ -141,6 +146,12 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
 
     const progressFillRef = useRef<HTMLDivElement | null>(null);
     const currentNumberRef = useRef<HTMLSpanElement | null>(null);
+
+    const videoRef = useRef<HTMLVideoElement | null>(null);
+    const videoDurRef = useRef(0);
+    const handleVideoMeta = useCallback(() => {
+      if (videoRef.current) videoDurRef.current = videoRef.current.duration;
+    }, []);
 
     const stRef = useRef<ScrollTrigger | null>(null);
     const lastIndexRef = useRef(index);
@@ -251,9 +262,11 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
       const fs = fixedSectionRef.current;
       if (!fixed || !fs || total === 0) return;
 
-      // initial bg states
-      gsap.set(bgRefs.current, { opacity: 0, scale: 1.04, yPercent: 0 });
-      if (bgRefs.current[0]) gsap.set(bgRefs.current[0], { opacity: 1, scale: 1 });
+      // initial bg states — only when image backgrounds are rendered (not video mode)
+      if (bgRefs.current.length > 0) {
+        gsap.set(bgRefs.current, { opacity: 0, scale: 1.04, yPercent: 0 });
+        if (bgRefs.current[0]) gsap.set(bgRefs.current[0], { opacity: 1, scale: 1 });
+      }
 
       // initial center words
       wordRefs.current.forEach((words, sIdx) => {
@@ -292,6 +305,32 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
 
       stRef.current = st;
 
+      // Video scrub: GSAP native currentTime tween — uses RAF ticker for smooth interpolation
+      let videoTween: gsap.core.Tween | null = null;
+      if (videoSrc && videoRef.current) {
+        const setupVideoScrub = () => {
+          if (!videoRef.current || !fs) return;
+          const dur = videoRef.current.duration;
+          if (!dur || !Number.isFinite(dur)) return;
+          videoTween?.kill();
+          videoTween = gsap.to(videoRef.current, {
+            currentTime: dur,
+            ease: "none",
+            scrollTrigger: {
+              trigger: fs,
+              start: "top top",
+              end: "bottom bottom",
+              scrub: true,
+            },
+          });
+        };
+        if (videoRef.current.readyState >= 1) {
+          setupVideoScrub();
+        } else {
+          videoRef.current.addEventListener("loadedmetadata", setupVideoScrub, { once: true });
+        }
+      }
+
       // initial jump if needed
       if (initialIndex && initialIndex > 0 && initialIndex < total) {
         requestAnimationFrame(() => goTo(initialIndex, false));
@@ -307,6 +346,7 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
       return () => {
         ro.disconnect();
         st.kill();
+        videoTween?.kill();
         stRef.current = null;
       };
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -479,6 +519,18 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
       });
     };
 
+    // Force video to buffer on mount so currentTime scrubbing works immediately
+    useEffect(() => {
+      if (!videoSrc || !videoRef.current) return;
+      const vid = videoRef.current;
+      vid.load();
+      // Seek to frame 0 after a short delay to confirm the video is seekable
+      const id = setTimeout(() => {
+        if (vid.readyState >= 1) vid.currentTime = 0;
+      }, 200);
+      return () => clearTimeout(id);
+    }, [videoSrc]);
+
     // mount entrance
     useEffect(() => {
       handleLoadedStagger();
@@ -561,25 +613,42 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
             <div className="fx-fixed" ref={fixedRef}>
               {/* Backgrounds */}
               <div className="fx-bgs" aria-hidden="true">
-                {sections.map((s, i) => (
-                  <div className="fx-bg" key={s.id ?? i}>
-                    {s.renderBackground ? (
-                      s.renderBackground(index === i, lastIndexRef.current === i)
-                    ) : (
-                      <>
-                        <img
-                          ref={(el) => {
-                            if (el) bgRefs.current[i] = el;
-                          }}
-                          src={s.background}
-                          alt={s.alt ?? ''}
-                          className="fx-bg-img"
-                        />
-                        <div className="fx-bg-overlay" />
-                      </>
-                    )}
-                  </div>
-                ))}
+                {videoSrc ? (
+                  <>
+                    <video
+                      ref={videoRef}
+                      src={videoSrc}
+                      muted
+                      playsInline
+                      preload="auto"
+                      className="fx-bg-video"
+                      onLoadedMetadata={handleVideoMeta}
+                    />
+                    <div className="fx-video-overlay" />
+                    <div className="fx-fade-top" />
+                    <div className="fx-fade-bottom" />
+                  </>
+                ) : (
+                  sections.map((s, i) => (
+                    <div className="fx-bg" key={s.id ?? i}>
+                      {s.renderBackground ? (
+                        s.renderBackground(index === i, lastIndexRef.current === i)
+                      ) : (
+                        <>
+                          <img
+                            ref={(el) => {
+                              if (el) bgRefs.current[i] = el;
+                            }}
+                            src={s.background}
+                            alt={s.alt ?? ''}
+                            className="fx-bg-img"
+                          />
+                          <div className="fx-bg-overlay" />
+                        </>
+                      )}
+                    </div>
+                  ))
+                )}
               </div>
 
               {/* Grid */}
@@ -727,6 +796,35 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
           }
           .fx-bg:not(.active) .fx-bg-overlay {
             opacity: 0.8;
+          }
+
+          /* Video scrub background */
+          .fx-bg-video {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: 0;
+          }
+          .fx-video-overlay {
+            position: absolute; inset: 0;
+            background: rgba(0, 0, 0, 0.22);
+            backdrop-filter: blur(1.5px);
+            -webkit-backdrop-filter: blur(1.5px);
+            z-index: 1;
+          }
+          .fx-fade-top {
+            position: absolute; top: 0; left: 0; right: 0;
+            height: 22%;
+            background: linear-gradient(to bottom, var(--fx-page-bg) 0%, transparent 100%);
+            z-index: 2;
+            pointer-events: none;
+          }
+          .fx-fade-bottom {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            height: 22%;
+            background: linear-gradient(to top, var(--fx-page-bg) 0%, transparent 100%);
+            z-index: 2;
+            pointer-events: none;
           }
 
           .fx-header {

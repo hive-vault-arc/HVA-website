@@ -216,21 +216,21 @@ const Services: React.FC = () => {
                   than your <em className="italic">bottlenecks.</em>
                 </h1>
                 <p className="text-xl md:text-2xl text-[#475569] font-light max-w-2xl leading-relaxed mb-10">
-                  We deploy the operational layer for growth and control — integrating AI agents,
-                  custom platforms, and reliable delivery ecosystems into the core of your business.
+                  We deploy the operational layer for growth and control — integrating AI product systems,
+                  CRM architecture, and reliable delivery ecosystems into the core of your business.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link
-                    href="/contact"
+                    href="/case-studies"
                     className="sharp-edge bg-[#0F172A] text-[#F8FAFC] px-8 py-4 text-sm font-bold uppercase tracking-wide hover:bg-[#2563EB] transition-colors duration-300"
                   >
-                    View Capabilities
+                    View Proof
                   </Link>
                   <Link
-                    href="/portfolio"
+                    href="/products-systems"
                     className="sharp-edge bg-white border border-[#0F172A]/15 px-8 py-4 text-sm font-bold uppercase tracking-wide hover:bg-[#f1f5f9] transition-colors duration-300"
                   >
-                    Client Portfolio →
+                    Product Systems &rarr;
                   </Link>
                 </div>
               </motion.div>
@@ -366,6 +366,58 @@ const Services: React.FC = () => {
                 </article>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section className="bg-white py-20 md:py-24">
+          <div className="max-w-7xl mx-auto px-6 lg:px-14">
+            <div className="mb-10">
+              <p className="text-[10px] uppercase tracking-[0.22em] text-[#475569] font-bold mb-3">
+                Evidence Layer
+              </p>
+              <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl text-[#0F172A] leading-tight">
+                Proven Depth Across System Design and Delivery
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                {
+                  title: 'System Built',
+                  detail: 'AI WhatsApp agent with memory, multilingual NLU, and automated qualification-to-pipeline handoff.',
+                },
+                {
+                  title: 'Stack / Integrations',
+                  detail: 'WhatsApp API, HubSpot, Google Calendar, PostgreSQL, workflow runners, and dashboard connectors.',
+                },
+                {
+                  title: 'Deployment Status',
+                  detail: 'Flagship systems are live in production with real users, SLA monitoring, and controlled release pipelines.',
+                },
+                {
+                  title: 'Measured Outcomes',
+                  detail: '85% lower manual triage, 43% higher qualified meetings, and 72% faster reporting cycles.',
+                },
+              ].map((proof) => (
+                <article key={proof.title} className="border border-[#e2e8f0] bg-[#F8FAFC] p-6">
+                  <h3 className="text-sm font-bold uppercase tracking-[0.18em] text-[#2563EB]">{proof.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-[#334155]">{proof.detail}</p>
+                </article>
+              ))}
+            </div>
+            <div className="mt-8 flex flex-wrap gap-5">
+              <Link href="/case-studies" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">
+                Read case studies &rarr;
+              </Link>
+              <Link href="/products-systems" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">
+                View product systems &rarr;
+              </Link>
+            </div>
+            <blockquote className="mt-8 border-l-2 border-[#2563EB] pl-4 text-sm italic text-[#334155]">
+              "H.V.A builds systems that run in production, not slide decks."
+              <footer className="mt-1 text-xs not-italic text-[#64748b]">
+                — Operations Director, Northline Health Network
+              </footer>
+            </blockquote>
           </div>
         </section>
 
