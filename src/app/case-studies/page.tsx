@@ -21,6 +21,7 @@ export const metadata: Metadata = buildPageMetadata({
 
 export default function CaseStudiesPage() {
   const studies = getAllCaseStudies();
+  const totalOutcomes = studies.reduce((sum, study) => sum + study.measuredOutcomes.length, 0);
 
   const itemListSchema = {
     '@context': 'https://schema.org',
@@ -49,54 +50,69 @@ export default function CaseStudiesPage() {
   return (
     <>
       <JsonLd data={[itemListSchema, collectionSchema]} />
-      <main className="bg-[#F8FAFC] text-[#0F172A]">
-        <section className="mx-auto max-w-7xl px-6 py-28 md:py-36">
-          <p className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-[#2563EB]">Proof Library</p>
-          <h1 className="max-w-4xl font-serif text-4xl leading-tight md:text-6xl">
-            Production Systems With Measured Outcomes
-          </h1>
-          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-[#475569]">
-            Each case shows how H.V.A designs, builds, and operates intelligent systems that run core operations.
-            Every study includes architecture, integrations, deployment status, and verified metrics.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-4">
-            <Link href="/products-systems" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">
-              View products and systems &rarr;
-            </Link>
-            <Link href="/services" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">
-              View services &rarr;
-            </Link>
+      <main className="editorial-page case-studies-page">
+        <section className="editorial-hero editorial-hero--case">
+          <div className="editorial-shell">
+            <p className="editorial-kicker">Proof Library</p>
+            <h1 className="editorial-title">Production Systems With Measured Outcomes</h1>
+            <p className="editorial-lead">
+              Each case documents the system built, integrations, deployment reality, and measurable business outcomes
+              in production environments.
+            </p>
+            <div className="editorial-actions">
+              <Link href="/products-systems" className="editorial-cta">
+                View Products and Systems
+              </Link>
+              <Link href="/services" className="editorial-link">
+                Implementation Services &rarr;
+              </Link>
+            </div>
+            <aside className="expert-insight-card">
+              <p className="expert-insight-card__kicker">Expert Insight</p>
+              <p className="expert-insight-card__quote">
+                “Mature engineering shows up in operating systems that run daily with measurable outcomes, not just demos.”
+              </p>
+              <div className="expert-insight-card__meta">
+                <span>{studies.length} published case studies</span>
+                <span>{totalOutcomes} verified outcome points</span>
+              </div>
+            </aside>
           </div>
         </section>
 
-        <section className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-6 pb-28 md:grid-cols-2 lg:grid-cols-3">
-          {studies.map((study) => (
-            <article key={study.slug} className="overflow-hidden border border-[#e2e8f0] bg-white shadow-sm transition hover:shadow-lg">
-              <div className="relative h-56 w-full">
-                <Image
-                  src={study.assets.coverImage}
-                  alt={study.title}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 33vw"
-                />
-              </div>
-              <div className="space-y-4 p-6">
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#2563EB]">{study.industry}</p>
-                <h2 className="font-serif text-2xl leading-tight">{study.title}</h2>
-                <p className="text-sm leading-relaxed text-[#475569]">{study.summary}</p>
-                <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[#1e293b]">
-                  {study.deploymentStatus}
-                </p>
-                <Link
-                  href={`/case-studies/${study.slug}`}
-                  className="inline-flex items-center text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]"
-                >
-                  Read full case study &rarr;
-                </Link>
-              </div>
-            </article>
-          ))}
+        <section className="case-grid-zone">
+          <div className="editorial-shell case-grid">
+            {studies.map((study, index) => (
+              <article key={study.slug} className={`case-card ${index % 2 === 1 ? 'case-card--alt' : ''}`}>
+                <div className="case-card__media">
+                  <Image
+                    src={study.assets.coverImage}
+                    alt={study.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 33vw"
+                  />
+                </div>
+                <div className="case-card__body">
+                  <p className="case-card__industry">{study.industry}</p>
+                  <h2 className="case-card__title">{study.title}</h2>
+                  <p className="case-card__summary">{study.summary}</p>
+                  <p className="case-card__status">{study.deploymentStatus}</p>
+                  <ul className="case-card__metrics">
+                    {study.measuredOutcomes.slice(0, 2).map((metric) => (
+                      <li key={metric.label}>
+                        <span>{metric.value}</span>
+                        <small>{metric.label}</small>
+                      </li>
+                    ))}
+                  </ul>
+                  <Link href={`/case-studies/${study.slug}`} className="editorial-link editorial-link--strong">
+                    Read Full Case Study &rarr;
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
         </section>
       </main>
     </>
