@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { ArrowUpRight, ArrowLeft, ExternalLink } from 'lucide-react';
 import type { BlogPost, ContentSection } from '../lib/blog';
 import { getRelatedPosts } from '../lib/blog';
+import BottomCTA from '../components/BottomCTA';
 
 function RenderSection({ section, index }: { section: ContentSection; index: number }) {
   switch (section.type) {
@@ -402,31 +403,13 @@ export default function BlogPostView({ post }: Props) {
         </section>
       )}
 
-      {/* Bottom CTA */}
-      <section className="bg-[#2563EB] py-20 px-6 md:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2
-            className="text-3xl md:text-4xl text-white mb-4 leading-tight"
-            style={{ fontFamily: 'var(--font-headline)' }}
-          >
-            Ready to build your AI or software strategy?
-          </h2>
-          <p
-            className="text-white/80 text-lg mb-8 max-w-xl mx-auto"
-            style={{ fontFamily: 'var(--font-body)' }}
-          >
-            Let&#39;s talk about what agentic AI or a custom platform could do for your business.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 bg-white text-[#2563EB] px-8 py-3 text-sm font-bold uppercase tracking-widest hover:bg-[#0F172A] hover:text-white transition-colors duration-200"
-            style={{ fontFamily: 'var(--font-body)' }}
-          >
-            Talk to H.V.A
-            <ArrowUpRight className="w-4 h-4" />
-          </Link>
-        </div>
-      </section>
+      <BottomCTA
+        variant="blue"
+        headline="Ready to build your AI or software strategy?"
+        subtext="Let's talk about what agentic AI or a custom platform could do for your business."
+        primaryLabel="Talk to H.V.A"
+        primaryHref="/contact"
+      />
     </main>
   );
 }

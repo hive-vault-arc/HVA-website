@@ -4,7 +4,6 @@ import React from 'react';
 import Link from 'next/link';
 import { MotionConfig, motion, useScroll, useTransform } from 'framer-motion';
 import {
-  ArrowRight,
   Bot,
   CheckCircle2,
   Cloud,
@@ -13,6 +12,7 @@ import {
 } from 'lucide-react';
 import { useAnimationQuality } from '../lib/animationQuality';
 import PageAmbientBackground from '../components/PageAmbientBackground';
+import BottomCTA from '../components/BottomCTA';
 
 /* ── Data ─────────────────────────────────────────────────────────────────── */
 
@@ -553,62 +553,15 @@ const Services: React.FC = () => {
         {/* ────────────────────────────────────────────────────────────────────
             SECTION 6 — CTA
         ──────────────────────────────────────────────────────────────────── */}
-        <section className="py-16 md:py-20">
-          <div className="max-w-7xl mx-auto px-6 lg:px-14">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.25 }}
-              transition={{ duration: 0.5 }}
-              className="relative overflow-hidden bg-[#0F172A] text-[#F8FAFC] px-6 py-10 sm:px-10 sm:py-16 md:px-20 md:py-24"
-            >
-              {/* Glows */}
-              <div className="pointer-events-none absolute -right-24 -top-20 h-64 w-64 rounded-full bg-[#2563EB]/30 blur-3xl" />
-              <div className="pointer-events-none absolute -bottom-20 left-[8%] h-56 w-56 rounded-full bg-[#3b82f6]/20 blur-3xl" />
-              {/* Blueprint grid subtle */}
-              <div
-                className="absolute inset-0 opacity-5"
-                style={{
-                  backgroundImage:
-                    'linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)',
-                  backgroundSize: '40px 40px',
-                }}
-              />
-
-              <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-10 items-center">
-                <div>
-                  <p className="text-[#2563EB] text-[10px] font-bold tracking-[0.22em] uppercase mb-5">
-                    Next Step
-                  </p>
-                  <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-6xl leading-tight mb-6">
-                    Need AI agents that actually understand your business?
-                  </h2>
-                  <p className="text-[#F8FAFC]/65 text-lg font-light leading-relaxed max-w-xl">
-                    Share your operational goals and constraints. We'll propose a practical scope
-                    and delivery path you can execute with confidence.
-                  </p>
-                </div>
-
-                <div className="flex flex-col gap-4 lg:items-end">
-                  <Link
-                    href="/contact"
-                    className="sharp-edge bg-[#2563EB] text-white px-10 py-5 text-sm font-bold uppercase tracking-wide hover:bg-[#1d4ed8] transition-colors duration-200 inline-flex items-center justify-center gap-2 active:scale-95"
-                  >
-                    Book a Discovery Call
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                  <Link
-                    href="/portfolio"
-                    className="sharp-edge border border-[#F8FAFC]/20 text-[#F8FAFC] px-10 py-5 text-sm font-bold uppercase tracking-wide hover:bg-[#F8FAFC]/10 transition-colors duration-200 inline-flex items-center justify-center gap-2"
-                  >
-                    Explore Delivered Work
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
+        <BottomCTA
+          variant="dark"
+          headline="Need AI agents that actually understand your business?"
+          subtext="Share your operational goals and constraints. We'll propose a practical scope and delivery path you can execute with confidence."
+          primaryLabel="Book a Discovery Call"
+          primaryHref="/contact"
+          secondaryLabel="Explore Delivered Work"
+          secondaryHref="/portfolio"
+        />
 
       </div>
     </MotionConfig>

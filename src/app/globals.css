@@ -324,3 +324,9 @@
     position: relative;
   }
 }
+
+/* ─── BottomCTA ───── */
+.cta-banner {
+  position: relative;
+  overflow: hidden;
+}
