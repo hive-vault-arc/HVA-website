@@ -7,26 +7,23 @@ import { GLOBAL_KEYWORDS, SITE_URL, buildPageMetadata, mergeKeywords } from '../
 
 export const metadata: Metadata = {
   ...buildPageMetadata({
-    title: 'IT Consulting, AI Product Systems & Software Engineering in Tangier',
+    title: 'AI-Driven Business Transformation Partner | AI Business Operating Systems',
     description:
-      'H.V.A builds proven AI product systems, full CRM platforms, and cloud software infrastructure with measurable production outcomes for businesses in Morocco.',
+      'Hive Vault Arc is an AI-driven business transformation partner that designs, builds, and operates intelligent systems that run core business operations. We redesign and automate how businesses operate through consulting, AI agents, CRM, custom software, mobile apps, and SaaS systems.',
     path: '/',
     keywords: mergeKeywords(GLOBAL_KEYWORDS, [
-      'hire AI agency in Tangier',
-      'IT consulting and AI systems Tangier',
-      'AI product builder Morocco',
-      'best company to build custom software in Morocco',
-      'who can build a custom mobile app for my company in Morocco',
-      'need a team to develop web app for my business in Tangier',
-      'AI and automation partner for SMEs in Morocco',
-      'digital transformation partner Tangier',
-      'software and cloud engineering agency Morocco',
-      'AI software company Tangier',
-      'agence pour cr\u00e9er application sur mesure au Maroc',
-      'entreprise pour d\u00e9velopper application mobile Tanger',
-      "besoin d'une \u00e9quipe pour application web sur mesure Maroc",
-      '\u0634\u0631\u0643\u0629 \u0644\u062a\u0637\u0648\u064a\u0631 \u062a\u0637\u0628\u064a\u0642 \u0645\u062e\u0635\u0635 \u0641\u064a \u0627\u0644\u0645\u063a\u0631\u0628',
-      '\u0634\u0631\u0643\u0629 \u0644\u0628\u0646\u0627\u0621 \u062a\u0637\u0628\u064a\u0642 \u0645\u0648\u0628\u0627\u064a\u0644 \u0644\u0644\u0634\u0631\u0643\u0627\u062a \u0637\u0646\u062c\u0629',
+      'AI business operating systems Morocco',
+      'AI-driven business transformation partner',
+      'operational systems consulting',
+      'real estate operating system',
+      'clinic operating system',
+      'construction operations system',
+      'digital operating system for SMEs',
+      'agence pour creer application sur mesure au Maroc',
+      'entreprise pour developper application mobile Tanger',
+      "besoin d'une equipe pour application web sur mesure Maroc",
+      'شركة لتطوير تطبيق مخصص في المغرب',
+      'شركة لبناء تطبيق موبايل للشركات طنجة',
       'agencia para crear app personalizada en marruecos',
       'empresa para desarrollar app movil a medida en tanger',
     ]),
@@ -39,7 +36,7 @@ export const metadata: Metadata = {
     },
   }),
   title: {
-    absolute: 'H.V.A | AI Agents & Custom Software in Tangier, Morocco',
+    absolute: 'H.V.A | AI-Driven Business Transformation Partner',
   },
 };
 
@@ -56,20 +53,39 @@ export default function Page() {
       'query-input': 'required name=search_term_string',
     },
     keywords: mergeKeywords(GLOBAL_KEYWORDS, [
-      'AI receptionist',
-      'AI analyst',
-      'AI product systems',
-      'custom mobile app development',
-      'custom web app development',
-      'CRM migration',
-      'cloud deployment',
-      'measured software delivery outcomes',
+      'AI business operating systems',
+      'business transformation consulting',
+      'AI operational systems',
     ]),
+  };
+
+  const serviceSchema = {
+    '@context': 'https://schema.org',
+    '@type': ['ProfessionalService', 'Service'],
+    name: 'H.V.A AI Business Transformation Services',
+    provider: {
+      '@id': `${SITE_URL}/#organization`,
+    },
+    description:
+      'Consulting, engineering, and operations support to design, build, and run AI business operating systems.',
+    serviceType: [
+      'AI Business Operating Systems',
+      'Business Transformation Consulting',
+      'AI Agent Development',
+      'CRM Systems Engineering',
+      'Custom Software Development',
+      'Mobile App Development',
+      'SaaS Development',
+      'Workflow Automation',
+    ],
+    areaServed: ['Morocco', 'Remote'],
+    availableLanguage: ['en', 'fr', 'ar', 'es'],
+    url: `${SITE_URL}/services`,
   };
 
   return (
     <>
-      <JsonLd data={websiteSchema} />
+      <JsonLd data={[websiteSchema, serviceSchema]} />
       <Home />
       <FaqSection faqs={HOME_FAQS} />
     </>

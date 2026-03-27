@@ -7,9 +7,9 @@ import { GLOBAL_KEYWORDS, SITE_URL, buildPageMetadata, mergeKeywords } from '../
 import { getAllCaseStudies } from '../../lib/proof';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Portfolio | Proven AI Systems and Software Deployments',
+  title: 'Portfolio | Operational Systems and AI Delivery Outcomes',
   description:
-    'Verified project portfolio: AI WhatsApp systems, full CRM platforms, and executive dashboards deployed in production with measurable results.',
+    'Verified H.V.A deployments across AI customer operations, CRM operating systems, executive analytics, and automation with measurable outcomes.',
   path: '/portfolio',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'AI project portfolio Morocco',
@@ -19,7 +19,7 @@ export const metadata: Metadata = buildPageMetadata({
     'cloud migration case studies Morocco',
     'CRM automation project examples Morocco',
     'portfolio projets IA maroc',
-    'études de cas développement logiciel maroc',
+    'etudes de cas developpement logiciel maroc',
     'أعمال برمجية وذكاء اصطناعي المغرب',
     'دراسات حالة تطوير تطبيقات في المغرب',
     'portafolio desarrollo software marruecos',
@@ -59,4 +59,3 @@ export default function Page() {
     </>
   );
 }
-

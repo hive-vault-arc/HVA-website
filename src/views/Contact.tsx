@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef, useState } from 'react';
-import { ArrowRight, Mail, MapPin, Phone } from 'lucide-react';
+import { ArrowRight, Globe2, Mail, Phone } from 'lucide-react';
 import { MotionConfig, motion, useScroll, useTransform } from 'framer-motion';
 import { useAnimationQuality } from '../lib/animationQuality';
 
@@ -117,15 +117,15 @@ const Contact: React.FC = () => {
             >
               <div className="space-y-12">
 
-                {/* Office */}
+                {/* Region */}
                 <div>
                   <div className="flex items-center gap-4 mb-4">
-                    <MapPin className="w-5 h-5 text-[#2563EB] shrink-0" strokeWidth={1.5} />
-                    <h3 className="text-xs font-label font-bold uppercase tracking-widest text-[#475569]">Office</h3>
+                    <Globe2 className="w-5 h-5 text-[#2563EB] shrink-0" strokeWidth={1.5} />
+                    <h3 className="text-xs font-label font-bold uppercase tracking-widest text-[#475569]">Operating Region</h3>
                   </div>
                   <p className="text-lg font-body leading-relaxed text-[#0F172A]">
-                    Avenue Tarik Ibn Ziad N 38<br />
-                    Etage 6 N 32, Tanger
+                    Tangier, Morocco<br />
+                    Remote delivery worldwide
                   </p>
                 </div>
 
@@ -169,14 +169,14 @@ const Contact: React.FC = () => {
                 <div className="absolute inset-0 bg-neutral-200/50 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-0" />
                 <img
                   src="/Images/tangier-morocco-office-location.webp"
-                  alt="Map of Tangier, Morocco — H.V.A office location"
+                  alt="Map of Tangier, Morocco — H.V.A operating region"
                   className="w-full h-full object-cover grayscale opacity-80 transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
                   decoding="async"
                 />
                 <div className="absolute bottom-6 left-6 bg-white px-4 py-2 shadow-sm">
                   <span className="text-xs font-label font-bold uppercase tracking-tighter text-[#0F172A]">
-                    Tangier, Morocco
+                    Morocco + Remote
                   </span>
                 </div>
               </div>

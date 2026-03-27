@@ -6,19 +6,19 @@ import { CONTACT_FAQS } from '../../data/faqs';
 import { GLOBAL_KEYWORDS, SITE_URL, buildPageMetadata, mergeKeywords } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Contact | Start Your AI or Software Project in Morocco',
+  title: 'Contact | Book an AI Business Transformation Discovery Call',
   description:
-    'Book a free discovery call with H.V.A. Tell us your challenge — AI, software, or cloud — and we will define a scope and timeline before any work begins.',
+    'Book a discovery call with H.V.A to scope your AI business operating system, consulting roadmap, and implementation priorities. Pricing is discussed after discovery.',
   path: '/contact',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
-    'contact AI agency Morocco',
+    'contact AI business transformation Morocco',
     'hire software development team Morocco',
     'request quote custom mobile app Morocco',
     'request quote custom web app Morocco',
     'book consultation CRM migration Morocco',
     'book consultation cloud deployment Morocco',
     'contact IT consultant Tangier',
-    'devis développement logiciel sur mesure maroc',
+    'devis developpement logiciel sur mesure maroc',
     'devis migration CRM maroc',
     'طلب عرض سعر تطوير تطبيق مخصص المغرب',
     'احجز استشارة ترحيل CRM في المغرب',
@@ -35,9 +35,9 @@ export default function Page() {
     url: `${SITE_URL}/contact`,
     inLanguage: ['en', 'fr', 'ar', 'es'],
     keywords: mergeKeywords(GLOBAL_KEYWORDS, [
-      'book AI strategy call',
-      'custom software consultation',
-      'cloud migration consultation',
+      'book AI systems strategy call',
+      'business transformation consultation',
+      'cloud reliability consultation',
     ]),
   };
 
@@ -49,4 +49,3 @@ export default function Page() {
     </>
   );
 }
-

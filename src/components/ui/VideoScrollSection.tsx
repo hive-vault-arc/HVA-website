@@ -21,7 +21,7 @@ const PANELS = [
     category: 'Web Development',
     title: 'Web Apps',
     description:
-      'High-performance web platforms and enterprise portals built with Next.js and React — from concept to production.',
+      'High-performance web systems and enterprise portals built with Next.js and React — from concept to production.',
   },
   {
     num: '03',

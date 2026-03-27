@@ -46,9 +46,9 @@ const serviceLines = [
   {
     num: '03',
     icon: <Workflow className="h-6 w-6" />,
-    title: 'Automation & Custom Platforms',
+    title: 'Automation & Custom Systems',
     summary:
-      'We design and engineer the operational backbone of your digital product — from bespoke SaaS platforms to enterprise workflow orchestration systems.',
+      'We design and engineer the operational backbone of your business — from bespoke SaaS systems to enterprise workflow orchestration.',
     outcomes: [
       'Custom enterprise SaaS engineering',
       'Internal portals and API architecture',
@@ -156,7 +156,7 @@ const deliveryFlow = [
 ];
 
 const heroStats = [
-  { value: '4', label: 'Core Service Lines', sub: 'AI · Automation · Cloud · Platform' },
+  { value: '4', label: 'Core Service Lines', sub: 'AI · Automation · Software · Cloud' },
   { value: '24/7', label: 'Continuous AI Coverage', sub: 'Agents always operational' },
   { value: '100%', label: 'Production Delivery', sub: 'Every sprint ships to prod' },
 ];
@@ -209,15 +209,15 @@ const Services: React.FC = () => {
                 style={{ y: heroShift }}
               >
                 <span className="inline-block text-[#2563EB] font-bold tracking-[0.22em] text-[10px] uppercase mb-6">
-                  Engineering Excellence
+                  Consulting, Design, Build, and Operate
                 </span>
                 <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl lg:text-8xl text-[#0F172A] leading-[1.03] tracking-tight mb-8">
-                  Systems that move faster<br />
-                  than your <em className="italic">bottlenecks.</em>
+                  Engineering and Advisory for<br />
+                  <em className="italic">Core Operations.</em>
                 </h1>
                 <p className="text-xl md:text-2xl text-[#475569] font-light max-w-2xl leading-relaxed mb-10">
-                  We deploy the operational layer for growth and control — integrating AI product systems,
-                  CRM architecture, and reliable delivery ecosystems into the core of your business.
+                  Hive Vault Arc is an AI-driven business transformation partner that designs, builds, and operates
+                  intelligent systems for daily operations. We lead consulting, architecture, implementation, and automation end to end.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link
@@ -230,7 +230,7 @@ const Services: React.FC = () => {
                     href="/products-systems"
                     className="sharp-edge bg-white border border-[#0F172A]/15 px-8 py-4 text-sm font-bold uppercase tracking-wide hover:bg-[#f1f5f9] transition-colors duration-300"
                   >
-                    Product Systems &rarr;
+                    Products & Systems &rarr;
                   </Link>
                 </div>
               </motion.div>
@@ -266,14 +266,14 @@ const Services: React.FC = () => {
 
             <div className="mb-16">
               <p className="text-[10px] uppercase tracking-[0.22em] text-[#475569] font-bold mb-3">
-                Core Service Lines
+                Implementation Pillars
               </p>
               <div className="flex items-end justify-between flex-wrap gap-6">
                 <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-[#0F172A] leading-tight max-w-2xl">
-                  What We Actually Deliver
+                  How We Deliver Operational Systems
                 </h2>
                 <p className="text-[#475569] max-w-md font-light leading-relaxed">
-                  Four connected service lines that cover the full operational spectrum — from intelligent customer-facing agents to the infrastructure that keeps them running.
+                  Four execution streams that turn strategy into production operations for leadership teams.
                 </p>
               </div>
               <div className="mt-8 w-16 h-[3px] bg-[#2563EB]" />
@@ -607,12 +607,12 @@ const Services: React.FC = () => {
         ──────────────────────────────────────────────────────────────────── */}
         <BottomCTA
           variant="dark"
-          headline="Need AI agents that actually understand your business?"
-          subtext="Share your operational goals and constraints. We'll propose a practical scope and delivery path you can execute with confidence."
-          primaryLabel="Book a Discovery Call"
+          headline="Need a Transformation Partner You Can Trust?"
+          subtext="Share your operating constraints and we will map the right implementation path, ownership model, and cadence."
+          primaryLabel="Book Discovery Call"
           primaryHref="/contact"
-          secondaryLabel="Explore Delivered Work"
-          secondaryHref="/portfolio"
+          secondaryLabel="View Case Studies"
+          secondaryHref="/case-studies"
         />
 
       </div>

@@ -6,9 +6,9 @@ import { SERVICES_FAQS } from '../../data/faqs';
 import { GLOBAL_KEYWORDS, SITE_URL, absoluteUrl, buildPageMetadata, mergeKeywords } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'AI Product Systems, CRM Engineering & Cloud Delivery Services',
+  title: 'Services | AI Business Transformation Consulting and Engineering',
   description:
-    'H.V.A delivers AI product systems, WhatsApp agent operations, Zoho-grade CRM engineering, workflow automation, and cloud reliability for production teams.',
+    'H.V.A provides consulting, solution design, implementation, and operations support for AI agents, CRM systems, workflow automation, custom software, mobile apps, SaaS, and cloud reliability.',
   path: '/services',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'AI receptionist implementation for businesses',
@@ -26,8 +26,8 @@ export const metadata: Metadata = buildPageMetadata({
     'AI system implementation Morocco',
     'team to automate sales and support workflows',
     'services IA pour entreprise au Maroc',
-    'migration CRM et intégration API Maroc',
-    'développement application web et mobile entreprise Maroc',
+    'migration CRM et integration API Maroc',
+    'developpement application web et mobile entreprise Maroc',
     'خدمات استقبال ذكي وتحليل أعمال بالذكاء الاصطناعي',
     'ترحيل CRM وتكامل الأنظمة في المغرب',
     'desarrollo de software empresarial y automatizacion marruecos',
@@ -46,35 +46,26 @@ export default function Page() {
   const serviceSchema = {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    name: 'AI, Automation, Software and Cloud Services',
+    name: 'AI Business Transformation and Systems Engineering',
     provider: {
-      '@type': ['LocalBusiness', 'ProfessionalService'],
-      // @id links this node to the root organization defined in layout.tsx,
-      // so Google treats them as the same entity and inherits all its fields.
+      '@type': ['Organization', 'ProfessionalService'],
       '@id': `${SITE_URL}/#organization`,
       name: 'Hive Vault Arc',
       url: SITE_URL,
       telephone: ['+212688270772', '+212691918296'],
       priceRange: '$$',
       image: absoluteUrl('/Images/hva-ai-software-agency-tangier.webp'),
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: 'Avenue Tarik Ibn Ziad N 38, Etage 6 N 32',
-        addressLocality: 'Tangier',
-        addressRegion: 'Tanger-Tétouan-Al Hoceïma',
-        postalCode: '90000',
-        addressCountry: 'MA',
-      },
-      areaServed: ['Tangier', 'Morocco'],
+      areaServed: ['Morocco', 'Remote'],
     },
-    areaServed: ['Tangier', 'Morocco'],
+    areaServed: ['Morocco', 'Remote'],
     serviceType: [
-      'AI Product System Implementation',
-      'AI Receptionist Systems',
-      'AI Analyst Reporting',
+      'Business Transformation Consulting',
+      'AI Agent Development',
+      'CRM Systems Engineering',
       'Workflow Automation',
-      'Custom SaaS Engineering',
-      'Cloud Infrastructure',
+      'Custom Software Development',
+      'Mobile and Web App Engineering',
+      'Cloud Reliability Advisory',
       'CI/CD and DevOps',
     ],
     availableLanguage: ['en', 'fr', 'ar', 'es'],
@@ -82,7 +73,7 @@ export default function Page() {
       'AI receptionist systems',
       'AI analyst and decision intelligence',
       'production AI systems',
-      'custom platform development',
+      'custom software development',
       'cloud reliability engineering',
     ]).join(', '),
     url: `${SITE_URL}/services`,
@@ -121,4 +112,3 @@ export default function Page() {
     </>
   );
 }
-

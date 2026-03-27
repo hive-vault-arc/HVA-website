@@ -7,19 +7,27 @@ export const SITE_NAME = 'H.V.A';
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://hiva-nine.vercel.app';
 
 export const BUSINESS_NAME = 'Hive Vault Arc';
-export const DEFAULT_TITLE = `${SITE_NAME} | IT Consulting, AI Product Systems & Software Engineering`;
+export const DEFAULT_TITLE = `${SITE_NAME} | AI-Driven Business Transformation Partner`;
 export const DEFAULT_DESCRIPTION =
-  'H.V.A is a mature IT consulting and engineering company in Tangier building AI product systems, Zoho-grade CRM platforms, workflow automation, and cloud infrastructure.';
+  'Hive Vault Arc is an AI-driven business transformation partner that designs, builds, and operates intelligent systems that run core business operations. We redesign and automate how businesses operate through consulting, AI agents, CRM, custom software, mobile apps, and SaaS systems.';
 
 export const GLOBAL_KEYWORDS = [
+  'AI business operating systems',
+  'business transformation partner',
+  'operating system for business workflows',
+  'AI-driven operations partner',
+  'intelligent operational systems',
+  'real estate operating system',
+  'clinic operating system',
+  'construction operations system',
   'AI agents Tangier',
   'AI agents Morocco',
   'AI product builder Morocco',
   'AI systems builder Morocco',
   'product and systems engineering Morocco',
   'IT consulting and software engineering Morocco',
-  'AI agency Tangier',
-  'AI automation agency Morocco',
+  'AI systems engineering Tangier',
+  'AI implementation partner Morocco',
   'AI receptionist Morocco',
   'AI receptionist Tangier',
   'AI analyst Morocco',
@@ -113,8 +121,8 @@ export const GLOBAL_KEYWORDS = [
   'AI agent for logistics Morocco',
   'custom CRM Arabic interface Morocco',
   'bilingual chatbot French Arabic Morocco',
-  'best AI agency Morocco 2025',
-  'best AI agency Morocco 2026',
+  'best AI systems builder Morocco 2025',
+  'best AI systems builder Morocco 2026',
   'AI automation for SMEs Morocco',
   'digital transformation small business Morocco',
   'no-code automation Morocco',

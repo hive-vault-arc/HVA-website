@@ -6,16 +6,16 @@ import { ABOUT_FAQS } from '../../data/faqs';
 import { GLOBAL_KEYWORDS, SITE_URL, buildPageMetadata, mergeKeywords } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'About | AI and Software Engineering Team in Tangier',
+  title: 'About | Founding Team Behind H.V.A Operational Systems',
   description:
-    'H.V.A is a founding-team-led engineering firm in Tangier. Our founders design and build every project — no account managers, no handoffs, no surprises.',
+    'H.V.A is a founding-team-led AI-driven business transformation partner in Tangier. The same founders consult, design, build, and operate intelligent systems end to end.',
   path: '/about',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'software engineering team Tangier',
-    'AI agency Morocco',
+    'AI business transformation team Morocco',
     'company profile software and AI Morocco',
     'team for custom software projects Morocco',
-    'équipe ingénierie logicielle Tanger',
+    'equipe ingenierie logicielle Tanger',
     'agence software et cloud Maroc',
     'فريق هندسة برمجيات طنجة',
     'شركة متخصصة في الذكاء الاصطناعي والبرمجيات المغرب',
@@ -31,9 +31,9 @@ export default function Page() {
     name: 'About H.V.A',
     url: `${SITE_URL}/about`,
     description:
-      'Hive Vault Arc (H.V.A) is a founding-team-led AI and software engineering firm based in Tangier, Morocco. Founded by three engineers with end-to-end ownership from system design to cloud deployment.',
+      'Hive Vault Arc (H.V.A) is a founding-team-led AI-driven business transformation partner based in Tangier, Morocco. Built and operated by three engineers with end-to-end ownership.',
     mainEntity: {
-      '@type': ['LocalBusiness', 'ProfessionalService'],
+      '@type': ['Organization', 'ProfessionalService'],
       '@id': `${SITE_URL}/#organization`,
     },
   };
@@ -55,4 +55,3 @@ export default function Page() {
     </>
   );
 }
-

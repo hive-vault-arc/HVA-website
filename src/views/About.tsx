@@ -106,7 +106,7 @@ const deliveryFlow: DeliveryStep[] = [
     step: '04',
     icon: <Home className="h-8 w-8" />,
     title: 'Stabilize & Scale',
-    detail: 'Handover, optimize, and support the platform as usage and complexity grow.',
+    detail: 'Handover, optimize, and support the system as usage and complexity grow.',
     checkpoints: ['Handover with documentation', 'Monitor production reliability', 'Plan scale roadmap'],
   },
 ];
@@ -143,15 +143,15 @@ const About: React.FC = () => {
                 style={{ y: heroLift }}
               >
                 <span className="inline-block text-[#0984E3] font-bold tracking-[0.22em] text-[10px] uppercase mb-6">
-                  Expertise &amp; Vision
+                  Transformation Leadership
                 </span>
                 <h1 className="font-serif text-5xl md:text-7xl font-medium leading-[1.08] tracking-tight text-[#1E272E] mb-8">
-                  Engineering clarity<br />
-                  for <em className="italic">modern products</em>
+                  Founders Operating<br />
+                  <em className="italic">Critical Systems</em>
                 </h1>
                 <p className="text-xl text-[#1E272E]/60 font-light max-w-xl leading-relaxed mb-10">
-                  H.V.A is a software and cloud engineering company focused on custom systems, AI-powered applications,
-                  and production-ready digital platforms — built precise, deliberate, and engineered for scale.
+                  H.V.A is an AI-driven business transformation partner led by engineers. We do not hand projects off between layers; the same founders
+                  own architecture, deployment, and optimization across the full operating lifecycle.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link

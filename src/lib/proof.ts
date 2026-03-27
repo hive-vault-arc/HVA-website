@@ -12,6 +12,7 @@ export type CaseStudy = {
   summary: string;
   problem: string;
   systemArchitecture: string;
+  operationalModules: string[];
   integrations: string[];
   deploymentScale: string;
   deploymentStatus: string;
@@ -50,6 +51,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       'Inbound leads were handled manually across WhatsApp and phone. The client was losing after-hours opportunities and spending too much time on repetitive triage.',
     systemArchitecture:
       'Event-driven AI orchestration with multilingual NLU, memory store, intent routing, and escalation policies for human takeover.',
+    operationalModules: ['Customer Operations Engine', 'Automation and Orchestration Layer', 'Revenue and Pipeline Control'],
     integrations: ['WhatsApp Business API', 'HubSpot', 'Google Calendar', 'n8n workflow runner', 'PostgreSQL'],
     deploymentScale: '6 regions, 24/7 operation, 12-language support',
     deploymentStatus: 'Live in production since October 2025',
@@ -84,15 +86,16 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
   {
     slug: 'zoho-grade-crm-platform',
-    title: 'Zoho-Grade CRM Platform for Real Estate Operations',
+    title: 'Zoho-Grade CRM Operating System for Real Estate Operations',
     clientName: 'Capstone Living Morocco',
     industry: 'Real Estate',
     summary:
-      'Engineered a full CRM platform with pipeline stages, role-based workflows, audit trails, and automated follow-up orchestration.',
+      'Engineered a full CRM operating system with pipeline stages, role-based workflows, audit trails, and automated follow-up orchestration.',
     problem:
       'Three disconnected tools created data duplication, missed follow-ups, and no reliable reporting layer for leadership decisions.',
     systemArchitecture:
       'Modular CRM architecture with domain-driven entities, workflow engine, event logs, and permissions by department.',
+    operationalModules: ['Revenue and Pipeline Control', 'Automation and Orchestration Layer', 'Executive Decision Intelligence'],
     integrations: ['Meta Ads Lead Sync', 'HubSpot migration bridge', 'DocuSign', 'Twilio', 'Power BI'],
     deploymentScale: '94 active users across sales, operations, and management',
     deploymentStatus: 'Live in production since May 2025',
@@ -110,7 +113,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       {
         label: 'Tracked Deal Volume',
         value: '$2.4M',
-        context: 'Monthly pipeline volume monitored in the platform dashboard.',
+        context: 'Monthly pipeline volume monitored in the operational dashboard.',
       },
     ],
     testimonial: {
@@ -136,6 +139,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       'Leadership had fragmented reports and no single source of truth across clinics, call operations, and billing teams.',
     systemArchitecture:
       'Lakehouse-backed analytics stack with scheduled ETL, semantic KPI layer, and role-aware dashboard delivery.',
+    operationalModules: ['Executive Decision Intelligence', 'Cloud Reliability and Security Runtime'],
     integrations: ['BigQuery', 'Power BI', 'Google Sheets ingestion', 'Custom API connectors', 'Slack alerts'],
     deploymentScale: '3 executive teams, 11 clinics, 42 tracked KPI streams',
     deploymentStatus: 'Live in production since January 2026',
@@ -182,7 +186,7 @@ export const PRODUCT_SYSTEMS: ProductSystem[] = [
   },
   {
     name: 'Enterprise CRM Operating System',
-    category: 'Business System Platform',
+    category: 'AI Business Operating System',
     modules: ['Pipeline orchestration', 'Role-based permissions', 'Automated follow-up sequences', 'Audit and compliance logs'],
     integrations: ['Meta Ads', 'DocuSign', 'Email automation suites', 'BI connectors'],
     deliveryModel: 'Domain mapping, phased migration, and production rollout by team.',

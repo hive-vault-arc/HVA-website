@@ -9,7 +9,7 @@ export const HOME_FAQS: FaqSet = [
   {
     question: 'What does H.V.A build?',
     answer:
-      'H.V.A (Hive Vault Arc) builds four types of digital systems: AI agents and receptionist systems that automate customer interactions; custom software platforms such as CRM systems, enterprise SaaS, and internal portals; cloud and DevOps infrastructure on AWS and Azure; and mobile and web applications. We serve businesses in Tangier, across Morocco, and internationally.',
+      'H.V.A (Hive Vault Arc) builds four types of digital systems: AI agents and receptionist systems that automate customer interactions; custom software systems such as CRM, enterprise SaaS, and internal portals; cloud and DevOps infrastructure on AWS and Azure; and mobile and web applications. We serve businesses in Tangier, across Morocco, and internationally.',
   },
   {
     question: 'Where is H.V.A based, and does it work with international clients?',
@@ -19,7 +19,7 @@ export const HOME_FAQS: FaqSet = [
   {
     question: 'How long does it take H.V.A to deliver a software or AI project?',
     answer:
-      'Timelines depend on scope. A focused AI receptionist or chatbot project typically takes 4 to 8 weeks. A custom software platform or CRM system typically runs 8 to 20 weeks. We follow a four-stage delivery process — Discover, Design, Build, Scale — with sprint-based checkpoints so you have visibility at every stage.',
+      'Timelines depend on scope. A focused AI receptionist or chatbot project typically takes 4 to 8 weeks. A custom software or CRM system typically runs 8 to 20 weeks. We follow a four-stage delivery process — Discover, Design, Build, Scale — with sprint-based checkpoints so you have visibility at every stage.',
   },
   {
     question: 'What industries does H.V.A work with?',
@@ -36,6 +36,16 @@ export const HOME_FAQS: FaqSet = [
     answer:
       'H.V.A publishes production case studies with named systems, technical architecture, integrations, deployment status, and measured outcomes. We also share approved screenshots and client-attributed testimonials where publication rights are granted.',
   },
+  {
+    question: 'What does "we operate the operating system of your business" mean?',
+    answer:
+      'It means H.V.A designs, builds, and operates one coordinated system layer across customer operations, revenue workflows, executive reporting, and cloud reliability. Instead of isolated project deliverables, you get one operating rhythm that improves over time.',
+  },
+  {
+    question: 'How does pricing work with H.V.A?',
+    answer:
+      'H.V.A keeps pricing private and defines it after a discovery call. Commercial structure depends on scope, integrations, complexity, and deployment requirements.',
+  },
 ];
 
 // ─── Services ────────────────────────────────────────────────────────────────
@@ -50,7 +60,7 @@ export const SERVICES_FAQS: FaqSet = [
   {
     question: 'Does H.V.A build AI agents in Tangier, Morocco?',
     answer:
-      'Yes. H.V.A (Hive Vault Arc) is an AI agent development agency based in Tangier, Morocco. We design and deploy AI receptionist systems, AI analyst tools, and workflow automation agents for Moroccan businesses and international clients. We operate in Arabic, French, Spanish, and English.',
+      'Yes. H.V.A (Hive Vault Arc) is an AI-driven business transformation partner based in Tangier, Morocco. We design and deploy AI receptionist systems, AI analyst tools, and workflow automation agents for Moroccan businesses and international clients. We operate in Arabic, French, Spanish, and English.',
   },
   {
     question: 'What types of AI agents does H.V.A build?',
@@ -76,12 +86,12 @@ export const SERVICES_FAQS: FaqSet = [
   {
     question: 'What custom software does H.V.A build for businesses in Morocco?',
     answer:
-      'H.V.A builds CRM systems tailored to Moroccan business workflows (Arabic, French, multilingual), enterprise SaaS platforms, internal operations portals, and API architectures. Unlike off-the-shelf SaaS, these systems are engineered for your specific process, data model, and user base — giving you a competitive advantage no vendor subscription can replicate.',
+      'H.V.A builds CRM systems tailored to Moroccan business workflows (Arabic, French, multilingual), enterprise SaaS systems, internal operations portals, and API architectures. Unlike off-the-shelf SaaS, these systems are engineered for your specific process, data model, and user base — giving you a competitive advantage no vendor subscription can replicate.',
   },
   {
-    question: 'Can H.V.A migrate our existing CRM or legacy system to a modern platform?',
+    question: 'Can H.V.A migrate our existing CRM or legacy system to a modern operating system?',
     answer:
-      'Yes. H.V.A specialises in CRM migration, ERP integration, and legacy system modernisation. We audit your current system, design the migration path to minimise data loss and downtime, and rebuild the platform with modern architecture — with full support for Arabic and French interfaces where required.',
+      'Yes. H.V.A specialises in CRM migration, ERP integration, and legacy system modernisation. We audit your current system, design the migration path to minimise data loss and downtime, and rebuild the system with modern architecture — with full support for Arabic and French interfaces where required.',
   },
   {
     question: 'What cloud and DevOps services does H.V.A provide?',
@@ -91,12 +101,12 @@ export const SERVICES_FAQS: FaqSet = [
   {
     question: 'Does H.V.A build mobile applications for Android and iOS?',
     answer:
-      'Yes. H.V.A builds cross-platform mobile applications using Flutter and native Android frameworks. We deliver fully owned, production-ready applications — not white-label templates — with custom backend integration, API architecture, and ongoing maintenance support.',
+      'Yes. H.V.A builds multi-device mobile applications using Flutter and native Android frameworks. We deliver fully owned, production-ready applications — not white-label templates — with custom backend integration, API architecture, and ongoing maintenance support.',
   },
   {
     question: 'Can H.V.A prove technical depth before we start an engagement?',
     answer:
-      'Yes. During evaluation, we provide architecture snapshots, integration maps, and KPI evidence from approved deployments (for example AI WhatsApp systems, CRM platforms, and executive analytics dashboards). Where required, deeper technical walkthroughs can be shared under NDA.',
+      'Yes. During evaluation, we provide architecture snapshots, integration maps, and KPI evidence from approved deployments (for example AI WhatsApp systems, CRM operating systems, and executive analytics dashboards). Where required, deeper technical walkthroughs can be shared under NDA.',
   },
 ];
 
@@ -161,7 +171,7 @@ export const PORTFOLIO_FAQS: FaqSet = [
   {
     question: 'What types of projects has H.V.A delivered?',
     answer:
-      'H.V.A has delivered AI receptionist systems for multilingual customer operations, CRM platforms for real estate and healthcare businesses, cloud infrastructure with CI/CD for product engineering teams, and mobile applications for Android and iOS. All systems are built for production use — not prototypes.',
+      'H.V.A has delivered AI receptionist systems for multilingual customer operations, CRM operating systems for real estate and healthcare businesses, cloud infrastructure with CI/CD for product engineering teams, and mobile applications for Android and iOS. All systems are built for production use — not prototypes.',
   },
   {
     question: 'Does H.V.A share case studies or past client work?',

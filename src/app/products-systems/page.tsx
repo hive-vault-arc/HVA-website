@@ -5,11 +5,12 @@ import { PRODUCT_SYSTEMS } from '../../lib/proof';
 import { SITE_URL, buildPageMetadata, mergeKeywords, GLOBAL_KEYWORDS, absoluteUrl } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Products & Systems | AI Products, CRM Platforms, and Analytics Systems',
+  title: 'Products and Systems | AI Business Operating Systems by H.V.A',
   description:
-    'Explore H.V.A productized systems: AI reception and lead engines, Zoho-grade CRM platforms, executive analytics control towers, and reliability infrastructure stacks.',
+    'Explore AI business operating systems designed and delivered by H.V.A: customer operations, CRM control, executive analytics, automation, and cloud reliability modules.',
   path: '/products-systems',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
+    'AI business operating systems',
     'AI product builder Morocco',
     'product systems engineering',
     'custom CRM product development',
@@ -51,14 +52,19 @@ export default function ProductsSystemsPage() {
       <JsonLd data={[softwareSchema, pageSchema]} />
       <main className="bg-[#F8FAFC] text-[#0F172A]">
         <section className="mx-auto max-w-7xl px-6 py-28 md:py-36">
-          <p className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-[#2563EB]">Product and Systems Builder</p>
+          <p className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-[#2563EB]">Products and Systems Builder</p>
           <h1 className="max-w-5xl font-serif text-4xl leading-tight md:text-6xl">
-            AI Products and Operational Systems You Can Deploy and Scale
+            AI Business Operating Systems for Core Operations
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-relaxed text-[#475569]">
-            H.V.A sells and implements mature product systems, not only service hours. Each system includes architecture,
-            integrations, rollout model, and measurable outcomes.
+            Every module is designed for real operational use and delivered with consulting, architecture, implementation,
+            and automation support.
           </p>
+          <div className="mt-6">
+            <Link href="/case-studies" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">
+              View case studies &rarr;
+            </Link>
+          </div>
         </section>
 
         <section className="mx-auto grid max-w-7xl grid-cols-1 gap-6 px-6 pb-24 md:grid-cols-2">

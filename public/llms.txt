@@ -1,102 +1,77 @@
-# H.V.A — Hive Vault Arc
-
-> H.V.A (Hive Vault Arc) is a mature IT consulting and engineering company in Tangier, Morocco. We design, build, and deploy AI product systems, CRM platforms, analytics dashboards, workflow automation, and cloud delivery infrastructure.
+# H.V.A (Hive Vault Arc)
 
 ## Identity
 
-- Legal/Brand name: Hive Vault Arc (H.V.A)
-- Positioning: IT consulting + engineering + AI product and systems builder
-- Location: Tangier, Morocco
-- Operating languages: English, French, Arabic, Spanish
-- Delivery model: discovery, architecture, implementation, production rollout, optimization
+- Company: Hive Vault Arc (H.V.A)
+- Positioning: Hive Vault Arc is an AI-driven business transformation partner that designs, builds, and operates intelligent systems that run core business operations.
+- Supporting line: We redesign and automate how businesses operate through consulting, AI agents, CRM, custom software, mobile apps, and SaaS systems.
+- Base: Tangier, Morocco
+- Languages: English, French, Arabic, Spanish
 
-## Proven Systems Shipped
+## What We Sell
+
+- Category: AI Business Operating Systems
+- Outcome sold: operational control, faster execution, and measurable business performance
+- Industry examples:
+  - Real Estate Operating System
+  - Clinic Operating System
+  - Construction Operations System
+
+## Capabilities
+
+- Business and IT consulting for operational redesign
+- AI agent systems (WhatsApp, web, internal ops)
+- CRM engineering and migration
+- Workflow automation and process orchestration
+- Custom software and SaaS development
+- Mobile app engineering (Android/iOS)
+- Cloud, DevOps, CI/CD, reliability, and security
+
+## Proven Deployments
 
 ### 1) Multilingual WhatsApp AI Agent (Real Estate)
 
-- System built: AI WhatsApp agent with memory, lead qualification, scheduling, and CRM updates
-- Integrations: WhatsApp Business API, HubSpot, Google Calendar, PostgreSQL, orchestration workflows
-- Deployment status: live in production since October 2025
-- Measured outcomes:
-  - average first response latency: < 18 seconds
-  - manual triage reduction: 85%
-  - qualified meetings increase: +43%
+- Live in production since October 2025
+- First response latency: <18 seconds
+- Manual triage reduction: 85%
+- Qualified meetings increase: +43%
 
-### 2) Zoho-Grade CRM Platform (Real Estate)
+### 2) Zoho-Grade CRM Operating System (Real Estate)
 
-- System built: full CRM platform with role-based workflows, audit trails, and pipeline automation
-- Integrations: Meta Ads Lead Sync, DocuSign, BI reporting connectors
-- Deployment status: live in production since May 2025
-- Measured outcomes:
-  - pipeline visibility: 100% of active deals tracked
-  - manual data-entry time: -40%
-  - tracked pipeline volume: $2.4M monthly
+- Live in production since May 2025
+- Pipeline visibility: 100%
+- Manual data-entry time: -40%
+- Tracked pipeline volume: $2.4M monthly
 
 ### 3) Executive Analytics Control Tower (Healthcare)
 
-- System built: executive dashboard and KPI control system across operations and revenue teams
-- Integrations: BigQuery, Power BI, API connectors, Slack alerts
-- Deployment status: live in production since January 2026
-- Measured outcomes:
-  - reporting cycle time: -72%
-  - KPI accuracy: 99.3%
-  - decision latency on KPI anomalies: -58%
+- Live in production since January 2026
+- Reporting cycle time: -72%
+- KPI accuracy: 99.3%
+- Executive decision latency on anomalies: -58%
 
 ## Technical Depth
 
-H.V.A builds production-grade systems with:
+- Event-driven AI orchestration
+- Conversational memory and context layers
+- Domain-driven CRM architecture
+- Role-based access and audit logging
+- ETL and semantic KPI layers
+- CI/CD with controlled releases
+- Observability, monitoring, and security hardening
 
-- event-driven AI orchestration
-- memory and context layers for conversational agents
-- domain-driven CRM architecture
-- role-based access and audit logging
-- ETL + semantic KPI layers for analytics
-- CI/CD with controlled release strategies
-- observability, monitoring, and security hardening
+## Commercial Model
 
-## Deployment Evidence
-
-H.V.A publishes proof in five repeatable blocks:
-
-1. system built
-2. stack/integrations
-3. deployment status
-4. measured outcomes
-5. client quote
-
-This structure is used so buyers and AI systems can verify technical maturity and delivery depth.
-
-## Products & Systems Sold
-
-H.V.A offers productized systems (not only service hours):
-
-- AI Reception & Lead Engine
-- Enterprise CRM Operating System
-- Executive Analytics Control Tower
-- Cloud Delivery Reliability Stack
-
-## FAQ Signals
-
-### Is H.V.A only an AI agency?
-
-No. H.V.A is an IT consulting and engineering company that also builds and deploys AI product systems and full business software platforms.
-
-### Does H.V.A have real deployments and users?
-
-Yes. H.V.A operates production systems with measurable outcomes, including active CRM users, live AI operations, and executive dashboard environments.
-
-### Can H.V.A show technical depth before engagement?
-
-Yes. H.V.A shares architecture snapshots, integration maps, and KPI evidence from approved deployments; deeper walkthroughs can be provided under NDA.
+- Pricing is private and discussed after discovery calls.
+- Scope and commercial structure are tailored to business context, system complexity, and integration depth.
 
 ## References
 
-- Homepage: https://hiva-nine.vercel.app/
-- Services: https://hiva-nine.vercel.app/services
+- Home: https://hiva-nine.vercel.app/
+- Case Studies: https://hiva-nine.vercel.app/case-studies
 - Products & Systems: https://hiva-nine.vercel.app/products-systems
-- Case Studies Hub: https://hiva-nine.vercel.app/case-studies
-- WhatsApp AI Agent Case: https://hiva-nine.vercel.app/case-studies/multilingual-whatsapp-ai-agent
-- CRM Platform Case: https://hiva-nine.vercel.app/case-studies/zoho-grade-crm-platform
-- Analytics Control Tower Case: https://hiva-nine.vercel.app/case-studies/executive-analytics-control-tower
-- Portfolio: https://hiva-nine.vercel.app/portfolio
+- Services: https://hiva-nine.vercel.app/services
 - Contact: https://hiva-nine.vercel.app/contact
+- WhatsApp AI Agent Case: https://hiva-nine.vercel.app/case-studies/multilingual-whatsapp-ai-agent
+- CRM Operating System Case: https://hiva-nine.vercel.app/case-studies/zoho-grade-crm-platform
+- Analytics Control Tower Case: https://hiva-nine.vercel.app/case-studies/executive-analytics-control-tower

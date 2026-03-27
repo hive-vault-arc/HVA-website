@@ -28,7 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 1,
       alternates: asAlternates({
-        en: '/en',
+        en: '/',
         fr: '/fr',
         ar: '/ar',
         es: '/es',
@@ -40,7 +40,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.9,
       alternates: asAlternates({
-        en: '/en/services',
+        en: '/services',
         fr: '/fr/services',
         ar: '/ar/services',
         es: '/es/services',

@@ -88,7 +88,7 @@ const Home: React.FC = () => {
     {
       icon: <Database className="w-5 h-5" strokeWidth={1.5} />,
       title: 'Custom Platforms',
-      desc: 'CRM systems, inventory tools, and enterprise platforms engineered from scratch for the exact way your business operates.',
+      desc: 'CRM systems, inventory tools, and operational software engineered from scratch for the exact way your business runs.',
     },
     {
       icon: <Cloud className="w-5 h-5" strokeWidth={1.5} />,
@@ -98,7 +98,7 @@ const Home: React.FC = () => {
     {
       icon: <Smartphone className="w-5 h-5" strokeWidth={1.5} />,
       title: 'Apps & Web',
-      desc: 'Custom mobile apps and high-performance web platforms — from concept to production, fully owned by you.',
+      desc: 'Custom mobile apps and high-performance web systems — from concept to production, fully owned by you.',
     },
   ];
 
@@ -148,15 +148,16 @@ const Home: React.FC = () => {
               transition={{ duration: 0.8 }}
             >
               <span className="home-hero-eyebrow inline-block px-3 py-1 bg-[#0984E3]/10 text-[#0984E3] text-[10px] uppercase tracking-[0.22em] font-bold mb-8">
-                IT Consulting, Engineering &amp; Product Systems
+                AI-Driven Business Transformation Partner
               </span>
               <h1 className="home-hero-title font-serif text-4xl sm:text-5xl md:text-7xl xl:text-[5.5rem] font-medium leading-[1.04] tracking-tight text-[#1E272E] mb-8">
-                Building the Next<br />
-                Generation of{' '}
-                <em className="italic">Digital<br />Systems</em>.
+                AI Business<br />
+                <em className="italic">Operating Systems</em><br />
+                for Core Operations.
               </h1>
               <p className="home-hero-copy text-xl text-[#1E272E]/60 max-w-xl mb-12 font-light leading-relaxed">
-                We engineer and deploy proven AI product systems, full CRM platforms, and cloud infrastructure with measurable outcomes in production.
+                Hive Vault Arc is an AI-driven business transformation partner that designs, builds, and operates intelligent systems that run core business operations.
+                We redesign and automate how businesses operate through consulting, AI agents, CRM, custom software, mobile apps, and SaaS systems.
               </p>
               <div className="flex flex-wrap gap-6">
                 <Link
@@ -169,7 +170,7 @@ const Home: React.FC = () => {
                   href="/products-systems"
                   className="home-hero-secondary flex items-center gap-2 px-8 py-4 text-sm font-bold text-[#1E272E] hover:gap-4 transition-all duration-300"
                 >
-                  Products &amp; Systems <ArrowRight className="w-4 h-4" />
+                  Products & Systems <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
             </motion.div>
@@ -195,10 +196,10 @@ const Home: React.FC = () => {
               <div className="absolute -bottom-16 -left-6 md:-left-14 bg-white p-8 max-w-[17rem] shadow-xl hidden md:block">
                 <Layers className="w-8 h-8 text-[#0984E3] mb-4" />
                 <h3 className="home-float-title font-serif text-xl mb-3 italic font-medium text-[#1E272E]">
-                  Precision in Delivery.
+                  Category-Level Control.
                 </h3>
                 <p className="home-float-copy text-sm text-[#1E272E]/60 leading-relaxed">
-                  Every line of code and architectural decision is built for performance, reliability, and long-term scale.
+                  We do not ship isolated projects. We run one operating layer that compounds execution quality month after month.
                 </p>
               </div>
             </motion.div>
@@ -224,11 +225,12 @@ const Home: React.FC = () => {
           <div className="relative z-10">
             <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#2563EB] mb-10">Our Identity</p>
             <h2 className="font-headline text-5xl md:text-6xl text-white leading-[1.08] mb-8">
-              Strategic Vision.<br />
-              <em className="font-headline italic text-white/35">Technical Execution.</em>
+              Market Command.<br />
+              <em className="font-headline italic text-white/35">Operational Precision.</em>
             </h2>
             <p className="text-white/60 font-body leading-relaxed text-base mb-10 max-w-sm">
-              Hive Vault Arc is a mature IT consulting and engineering company. We build the systems your business runs on — from AI product operations and CRM platforms to cloud infrastructure and mobile apps.
+              H.V.A partners with leadership teams to redesign and automate how operations run using AI agents, CRM systems,
+              custom software, and cloud reliability engineering.
             </p>
             <div className="h-px w-12 bg-[#2563EB] mb-4" />
             <p className="text-[9px] font-label font-bold uppercase tracking-[0.28em] text-white/35">
@@ -265,23 +267,23 @@ const Home: React.FC = () => {
             Proof In Production
           </p>
           <h2 className="font-headline text-4xl md:text-5xl text-[#0F172A] leading-tight">
-            Flagship Systems Deployed With Real Users
+            Systems That Run Revenue and Decisions Every Day
           </h2>
           <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
             {[
               {
                 title: 'System Built',
-                body: 'Multilingual WhatsApp AI agent with memory, lead qualification, scheduling, and CRM pipeline automation.',
+                body: 'Customer operations engine now handles multilingual lead intake, qualification, and scheduling directly in production.',
                 meta: 'Stack: WhatsApp API · HubSpot · Calendar · PostgreSQL',
               },
               {
                 title: 'Deployment Status',
-                body: 'Zoho-grade CRM platform live across sales and operations with 94 active internal users.',
+                body: 'Revenue control module runs across sales and operations with 94 active internal users.',
                 meta: 'Status: Production since May 2025',
               },
               {
                 title: 'Measured Outcomes',
-                body: '85% manual triage reduction, 43% increase in qualified meetings, and 72% faster executive reporting cycles.',
+                body: 'Manual triage dropped 85%, qualified meetings increased 43%, and executive reporting cycles accelerated by 72%.',
                 meta: 'Evidence: dashboards + approved client reporting exports',
               },
             ].map((item) => (
@@ -294,14 +296,14 @@ const Home: React.FC = () => {
           </div>
           <div className="mt-8 flex flex-wrap gap-5">
             <Link href="/case-studies" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">
-              Explore detailed case studies &rarr;
+              Explore proof library &rarr;
             </Link>
             <Link href="/products-systems" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">
-              Explore products and systems &rarr;
+              Explore products & systems &rarr;
             </Link>
           </div>
           <blockquote className="mt-8 border-l-2 border-[#2563EB] pl-4 text-sm italic text-[#334155]">
-            "From lead intake to executive reporting, H.V.A delivered a complete system we use every day."
+            "We moved from tool chaos to one operating rhythm. Our leadership team now makes faster decisions with far more confidence."
             <footer className="mt-1 text-xs not-italic text-[#64748b]">— COO, Capstone Living Morocco</footer>
           </blockquote>
         </div>
@@ -333,8 +335,8 @@ const Home: React.FC = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="font-headline text-5xl md:text-6xl text-white leading-tight mb-14">
-              Our Vision is Built on{' '}
-              <em className="not-italic text-[#2563EB] font-headline italic">Architectural Rigor</em>
+              Category Leadership Requires{' '}
+              <em className="not-italic text-[#2563EB] font-headline italic">Operational Mastery</em>
             </h2>
 
             <div className="space-y-10">
@@ -346,7 +348,7 @@ const Home: React.FC = () => {
                 <div>
                   <h4 className="font-headline text-2xl text-white mb-2">Precision Engineering</h4>
                   <p className="text-white/60 font-body leading-relaxed">
-                    We don't just write code; we engineer systems. Every module is stress-tested for endurance and future expansion.
+                    Platform modules are engineered for control under pressure, then tuned continuously to compound business performance.
                   </p>
                 </div>
               </div>
@@ -359,7 +361,7 @@ const Home: React.FC = () => {
                 <div>
                   <h4 className="font-headline text-2xl text-white mb-2">Technical Execution</h4>
                   <p className="text-white/60 font-body leading-relaxed">
-                    Clarity in strategy leads to excellence in execution. We maintain an uncompromising standard of technical debt management.
+                    We run a predictable operating cadence so strategy decisions translate into measurable operational outcomes.
                   </p>
                 </div>
               </div>
@@ -381,7 +383,7 @@ const Home: React.FC = () => {
               {/* Opening quote mark */}
               <span aria-hidden="true" className="font-headline italic text-[#2563EB]/20 text-[5rem] leading-none absolute top-2 left-6 select-none">"</span>
               <p className="text-2xl md:text-3xl font-headline italic text-[#0F172A] leading-snug mb-8">
-                "H.V.A didn't just build a platform; they built a legacy infrastructure. Their architectural vision saved us years of technical restructuring."
+                "H.V.A gave us an operating system, not a project. Revenue, reporting, and execution now move in one coordinated cadence."
               </p>
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-[#0F172A] flex items-center justify-center shrink-0">
@@ -399,7 +401,7 @@ const Home: React.FC = () => {
               href="/services"
               className="mt-6 inline-flex items-center gap-2 border border-white/20 px-6 py-3 text-xs font-label font-bold uppercase tracking-widest text-white/70 hover:text-white hover:border-white/40 transition-colors"
             >
-              Our Engineering Process
+              Implementation Services
               <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
@@ -443,12 +445,12 @@ const Home: React.FC = () => {
 
       <BottomCTA
         variant="light"
-        headline="Ready to Build What’s Next?"
-        subtext="Share your goals and constraints. We will propose a focused execution plan for your product."
-        primaryLabel="Book a Call"
+        headline="Ready to Transform Core Operations?"
+        subtext="Share your goals and constraints. We will scope the right consulting and build path for your business, then discuss pricing after discovery."
+        primaryLabel="Book Discovery Call"
         primaryHref="/contact"
-        secondaryLabel="Explore Services"
-        secondaryHref="/services"
+        secondaryLabel="View Case Studies"
+        secondaryHref="/case-studies"
       />
 
     </div>

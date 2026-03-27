@@ -95,13 +95,13 @@ const Portfolio: React.FC = () => {
               transition={{ duration: 0.7 }}
             >
               <span className="inline-block px-4 py-1 mb-6 bg-[#2563EB]/10 text-[#2563EB] font-bold text-[10px] uppercase tracking-[0.2em]">
-                The Archive
+                Proof Library
               </span>
               <h1 className="font-serif text-3xl sm:text-4xl md:text-6xl lg:text-8xl text-[#0F172A] leading-tight mb-8">
-                Selected Work &amp; Case Snapshots
+                Operational Systems in Production
               </h1>
               <p className="text-xl text-[#475569] max-w-xl leading-relaxed font-light">
-                Proven deployments that bridge complex architecture and measurable business outcomes.
+                These are not isolated projects. Each deployment shows how H.V.A systems run core operations with measurable impact.
               </p>
             </motion.div>
 
@@ -202,7 +202,7 @@ const Portfolio: React.FC = () => {
             </div>
           </motion.div>
 
-          {/* Project 2 — CRM Platform (content left, image right) */}
+          {/* Project 2 — CRM Operating System (content left, image right) */}
           <div className="bg-[#f2f4f6] py-24">
             <motion.div
               className="max-w-7xl mx-auto px-8"
@@ -216,7 +216,7 @@ const Portfolio: React.FC = () => {
                 {/* Content */}
                 <div className="lg:col-span-5 space-y-5 order-2 lg:order-1">
                   <h2 className="font-serif text-4xl text-[#0F172A] leading-tight">
-                    Complete Real-Estate CRM Platform
+                    Complete Real-Estate CRM Operating System
                   </h2>
                   <div className="flex flex-wrap gap-2">
                     {['Custom SaaS', 'Team Collaboration', 'Pipeline Automation'].map((tag) => (
@@ -230,7 +230,7 @@ const Portfolio: React.FC = () => {
                   </div>
                 <p className="text-[#475569] leading-relaxed font-light">
                   A high-performance internal tool built for a luxury real estate group. We
-                  replaced three disparate systems with a unified architectural platform that
+                  replaced three disparate systems with a unified operational system that
                   tracks the entire buyer journey from initial contact to property closing.
                 </p>
                 <div className="border border-[#e2e8f0] bg-white p-4 text-sm text-[#334155]">
@@ -350,12 +350,12 @@ const Portfolio: React.FC = () => {
         {/* ── CTA ───────────────────────────────────────────────────────────── */}
         <BottomCTA
           variant="dark"
-          headline="Ready to start a project?"
-          subtext="We are currently accepting new high-impact consulting and product-system deployments. Let's map the right architecture and execution path for your team."
-          primaryLabel="Book Your Discovery Call"
+          headline="Ready to Move from Project Work to Operational Control?"
+          subtext="Share your constraints and we will map the right consulting and engineering path for your operating model."
+          primaryLabel="Book Discovery Call"
           primaryHref="/contact"
-          secondaryLabel="View Products & Systems"
-          secondaryHref="/products-systems"
+          secondaryLabel="View Case Studies"
+          secondaryHref="/case-studies"
         />
 
       </div>

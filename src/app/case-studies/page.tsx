@@ -6,14 +6,14 @@ import { getAllCaseStudies } from '../../lib/proof';
 import { SITE_URL, buildPageMetadata, mergeKeywords, GLOBAL_KEYWORDS, absoluteUrl } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Case Studies | Proven AI Systems and Software Delivery',
+  title: 'Case Studies | Proven AI Business Operating Systems',
   description:
-    'Verified case studies from H.V.A: production AI WhatsApp agent operations, Zoho-grade CRM engineering, and executive analytics systems with measured outcomes.',
+    'Verified case studies from H.V.A showing AI business operating systems running customer operations, CRM workflows, and executive analytics in production.',
   path: '/case-studies',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'AI case studies Morocco',
     'WhatsApp AI agent case study',
-    'CRM platform case study Morocco',
+    'CRM operating system case study Morocco',
     'analytics dashboard system case study',
     'IT consulting engineering case studies',
   ]),
@@ -56,9 +56,17 @@ export default function CaseStudiesPage() {
             Production Systems With Measured Outcomes
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-relaxed text-[#475569]">
-            These deployments show how H.V.A operates as an IT consulting and engineering company that also builds sellable AI product systems.
-            Each case includes architecture, integrations, deployment status, and verified metrics.
+            Each case shows how H.V.A designs, builds, and operates intelligent systems that run core operations.
+            Every study includes architecture, integrations, deployment status, and verified metrics.
           </p>
+          <div className="mt-6 flex flex-wrap gap-4">
+            <Link href="/products-systems" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">
+              View products and systems &rarr;
+            </Link>
+            <Link href="/services" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">
+              View services &rarr;
+            </Link>
+          </div>
         </section>
 
         <section className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-6 pb-28 md:grid-cols-2 lg:grid-cols-3">

@@ -1,7 +1,5 @@
 import { useRef, useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
-import { MapPin, Phone, Mail } from "lucide-react";
-import { FiTwitter, FiLinkedin, FiGithub } from "react-icons/fi";
 import type { WorldMapDot } from "../../data/worldMapDots";
 
 interface MapProps {
@@ -70,7 +68,6 @@ export function WorldMap({ dots = [], lineColor = "#0ea5e9" }: MapProps) {
   );
 
   return (
-    <div>
     <div className="sharp-edge w-full aspect-[2/1] bg-[#F5F6FA] relative font-sans rounded-2xl border border-[#1E272E]/10">
       <div 
         className="h-full w-full [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)] pointer-events-none select-none"
@@ -185,54 +182,6 @@ export function WorldMap({ dots = [], lineColor = "#0ea5e9" }: MapProps) {
         ))}
       </svg>
     </div>
-    <div className="sharp-edge w-full bg-white/90 p-6 md:p-8 mt-6 rounded-xl border border-[#1E272E]/10">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="space-y-2">
-          <h3 className="text-lg font-semibold text-[#1E272E] flex items-center">
-            <MapPin className="w-5 h-5 mr-2 text-[#0984E3]" />
-            Our Office
-          </h3>
-          <p className="text-[#1E272E]/70 text-sm">AVENUE TARIK IBN ZIAD N 38</p>
-          <p className="text-[#1E272E]/70 text-sm">ETAGE 6 N 32 TANGER</p>
-        </div>
-        
-        <div className="space-y-2">
-          <h3 className="text-lg font-semibold text-[#1E272E] flex items-center">
-            <Phone className="w-5 h-5 mr-2 text-[#0984E3]" />
-            Contact Us
-          </h3>
-          <p className="text-[#1E272E]/70 text-sm">+212688270772</p>
-          <p className="text-[#1E272E]/70 text-sm">+212 691-918296</p>
-          <p className="text-[#1E272E]/70 text-sm">Mon - Fri: 9:00 - 18:00</p>
-        </div>
-        
-        <div className="space-y-2">
-          <h3 className="text-lg font-semibold text-[#1E272E] flex items-center">
-            <Mail className="w-5 h-5 mr-2 text-[#0984E3]" />
-            Get In Touch
-          </h3>
-          <p className="text-[#1E272E]/70 text-sm">khalid.chelhi@outlook.fr</p>
-          <p className="text-[#1E272E]/70 text-sm">ali.amrani.dev@gmail.com</p>
-          <div className="flex space-x-4 pt-2">
-            <a href="https://x.com" target="_blank" rel="noreferrer noopener" className="text-[#0984E3] hover:text-[#1E272E] transition-colors" aria-label="X (Twitter)">
-              <FiTwitter className="w-5 h-5" />
-            </a>
-            <a href="https://www.linkedin.com" target="_blank" rel="noreferrer noopener" className="text-[#0984E3] hover:text-[#1E272E] transition-colors" aria-label="LinkedIn">
-              <FiLinkedin className="w-5 h-5" />
-            </a>
-            <a href="https://github.com" target="_blank" rel="noreferrer noopener" className="text-[#0984E3] hover:text-[#1E272E] transition-colors" aria-label="GitHub">
-              <FiGithub className="w-5 h-5" />
-            </a>
-          </div>
-        </div>
-      </div>
-      <div className="mt-8 pt-6 border-t border-[#1E272E]/10 text-center">
-        <p className="text-sm text-[#1E272E]/60">
-          © {new Date().getFullYear()} H.V.A. All rights reserved.
-        </p>
-      </div>
-    </div>
-    </div>
-    
+
   );
 }
