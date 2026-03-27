@@ -67,7 +67,7 @@ Contact H.V.A via the website at https://hiva-nine.vercel.app/contact or book a 
 
 - **Company name:** Hive Vault Arc (H.V.A)
 - **Location:** Tangier, Morocco
-- **Founded:** 2023
+- **Founded:** 2026
 - **Languages:** English, French, Arabic, Spanish
 - **Specialization:** AI agents, custom software, cloud engineering
 - **Clients:** Businesses in Morocco and internationally
