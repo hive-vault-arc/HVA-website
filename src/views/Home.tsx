@@ -156,7 +156,7 @@ const Home: React.FC = () => {
                 for Core Operations.
               </h1>
               <p className="home-hero-copy text-xl text-[#1E272E]/60 max-w-xl mb-12 font-light leading-relaxed">
-                Hive Vault Arc is an AI-driven business transformation partner that designs, builds, and operates intelligent systems that run core business operations.
+                H.V.A (Hive Vault Arc) is an AI-driven business transformation partner that designs, builds, and operates intelligent systems that run core business operations.
                 We redesign and automate how businesses operate through consulting, AI agents, CRM, custom software, mobile apps, and SaaS systems.
               </p>
               <div className="flex flex-wrap gap-6">

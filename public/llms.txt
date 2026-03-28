@@ -67,11 +67,12 @@
 
 ## References
 
-- Home: https://hiva-nine.vercel.app/
-- Case Studies: https://hiva-nine.vercel.app/case-studies
-- Products & Systems: https://hiva-nine.vercel.app/products-systems
-- Services: https://hiva-nine.vercel.app/services
-- Contact: https://hiva-nine.vercel.app/contact
-- WhatsApp AI Agent Case: https://hiva-nine.vercel.app/case-studies/multilingual-whatsapp-ai-agent
-- CRM Operating System Case: https://hiva-nine.vercel.app/case-studies/zoho-grade-crm-platform
-- Analytics Control Tower Case: https://hiva-nine.vercel.app/case-studies/executive-analytics-control-tower
+- Official site URL: https://hiva-nine.vercel.app
+- Home: /
+- Case Studies: /case-studies
+- Products & Systems: /products-systems
+- Services: /services
+- Contact: /contact
+- WhatsApp AI Agent Case: /case-studies/multilingual-whatsapp-ai-agent
+- CRM Operating System Case: /case-studies/zoho-grade-crm-platform
+- Analytics Control Tower Case: /case-studies/executive-analytics-control-tower

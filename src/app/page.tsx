@@ -41,24 +41,6 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  const websiteSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: 'H.V.A',
-    url: `${SITE_URL}/`,
-    inLanguage: ['en', 'fr', 'ar', 'es'],
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: { '@type': 'EntryPoint', urlTemplate: `${SITE_URL}/?q={search_term_string}` },
-      'query-input': 'required name=search_term_string',
-    },
-    keywords: mergeKeywords(GLOBAL_KEYWORDS, [
-      'AI business operating systems',
-      'business transformation consulting',
-      'AI operational systems',
-    ]),
-  };
-
   const serviceSchema = {
     '@context': 'https://schema.org',
     '@type': ['ProfessionalService', 'Service'],
@@ -85,7 +67,7 @@ export default function Page() {
 
   return (
     <>
-      <JsonLd data={[websiteSchema, serviceSchema]} />
+      <JsonLd data={serviceSchema} />
       <Home />
       <FaqSection faqs={HOME_FAQS} />
     </>

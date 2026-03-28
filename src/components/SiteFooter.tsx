@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Globe, Mail, Phone, Share2 } from 'lucide-react';
 import { FiLinkedin } from 'react-icons/fi';
 import Logo from './Logo';
+import { SITE_URL } from '../lib/seo';
 
 const pageLinks = [
   { href: '/', label: 'Home' },
@@ -86,7 +87,7 @@ export default function SiteFooter() {
             <p>© {year} H.V.A. ALL RIGHTS RESERVED. PRECISION IN EXECUTION.</p>
             <div className="site-footer__social">
               <a
-                href="https://hiva-nine.vercel.app"
+                href={SITE_URL}
                 target="_blank"
                 rel="noreferrer noopener"
                 className="site-footer__icon-link sharp-edge"

@@ -4,6 +4,7 @@ import { getAllPosts } from '../lib/blog';
 import { getAllCaseStudies } from '../lib/proof';
 
 const LOCALES = ['en', 'fr', 'ar', 'es'] as const;
+const INDEXABLE_LOCALES = LOCALES.filter((locale) => locale !== 'en');
 
 function asAlternates(pathByLocale: Record<(typeof LOCALES)[number], string>) {
   return {
@@ -76,18 +77,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.9,
     },
-    ...LOCALES.flatMap((locale) => [
+    ...INDEXABLE_LOCALES.flatMap((locale) => [
       {
         url: `${SITE_URL}/${locale}`,
         lastModified: now,
         changeFrequency: 'weekly' as const,
-        priority: locale === 'en' ? 0.95 : 0.85,
+        priority: 0.85,
       },
       {
         url: `${SITE_URL}/${locale}/services`,
         lastModified: now,
         changeFrequency: 'weekly' as const,
-        priority: locale === 'en' ? 0.9 : 0.8,
+        priority: 0.8,
       },
     ]),
     {

@@ -173,20 +173,31 @@ export async function generateMetadata({ params }: LocaleServicesPageProps): Pro
   }
 
   const content = servicesContent[locale as SupportedLocale];
-  return buildPageMetadata({
+
+  const base = buildPageMetadata({
     title: content.title,
     description: content.description,
-    path: `/${locale}/services`,
+    path: locale === 'en' ? '/services' : `/${locale}/services`,
     locale,
     keywords: content.keywords,
     alternates: {
-      en: '/en/services',
+      en: '/services',
       fr: '/fr/services',
       ar: '/ar/services',
       es: '/es/services',
-      'x-default': '/en/services',
+      'x-default': '/services',
     },
   });
+
+  if (locale === 'en') {
+    return {
+      ...base,
+      robots: { index: false, follow: true },
+      alternates: { ...(base.alternates ?? {}), canonical: '/services' },
+    };
+  }
+
+  return base;
 }
 
 export default async function LocaleServicesPage({ params }: LocaleServicesPageProps) {
@@ -206,7 +217,7 @@ export default async function LocaleServicesPage({ params }: LocaleServicesPageP
     keywords: content.keywords,
     areaServed: ['Tangier', 'Morocco'],
     availableLanguage: locale,
-    url: `${SITE_URL}/${locale}/services`,
+    url: locale === 'en' ? `${SITE_URL}/services` : `${SITE_URL}/${locale}/services`,
   };
 
   return (

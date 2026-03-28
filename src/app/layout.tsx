@@ -159,9 +159,14 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     '@type': 'WebSite',
     '@id': `${SITE_URL}/#website`,
     name: 'H.V.A',
-    alternateName: ['H.V.A', 'Hive Vault Arc', 'HIVA'],
+    alternateName: ['Hive Vault Arc', 'hiva-nine.vercel.app', 'HIVA'],
     url: SITE_URL,
     description: DEFAULT_DESCRIPTION,
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: { '@type': 'EntryPoint', urlTemplate: `${SITE_URL}/?q={search_term_string}` },
+      'query-input': 'required name=search_term_string',
+    },
     publisher: {
       '@id': `${SITE_URL}/#organization`,
     },
