@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { getAllPosts } from '../lib/blog';
 
-const CATEGORIES = ['All', 'AI & Automation', 'Software & Strategy'];
+const CATEGORIES = ['All', 'AI & Automation', 'Strategy & Execution'];
 
 export default function BlogIndex() {
   const allPosts = getAllPosts();
@@ -29,14 +29,14 @@ export default function BlogIndex() {
               className="block text-xs font-bold tracking-[0.2em] uppercase mb-6"
               style={{ color: '#2563EB', fontFamily: 'var(--font-body)' }}
             >
-              Insights &amp; Perspectives
+              Strategy + Execution Journal
             </span>
             <h1
               className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-light leading-tight tracking-tight text-[#0F172A]"
               style={{ fontFamily: 'var(--font-headline)' }}
             >
               The H.V.A <br />
-              <span className="italic">Intelligence Archive</span>
+              <span className="italic">Consulting Briefing</span>
             </h1>
           </div>
           <div className="lg:col-span-4 pb-2">
@@ -48,8 +48,7 @@ export default function BlogIndex() {
               }}
             >
               An editorial collection of insights on AI agents, custom software, and the
-              architecture of modern business operations — written for leaders in Morocco and
-              beyond.
+              architecture of modern business operations — written for CEOs, COOs, and leadership teams in Morocco and beyond.
             </p>
           </div>
         </div>

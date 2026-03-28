@@ -271,7 +271,7 @@ export default function BlogPostView({ post }: Props) {
                   className="text-white/60 text-xs mb-4 leading-relaxed"
                   style={{ fontFamily: 'var(--font-body)' }}
                 >
-                  H.V.A builds proven AI product systems and custom software for businesses in Morocco.
+                  H.V.A combines technology consulting with engineering delivery to help businesses modernize operations with confidence.
                 </p>
                 <Link
                   href="/contact"
@@ -317,9 +317,7 @@ export default function BlogPostView({ post }: Props) {
               className="text-[#45464d] leading-relaxed mb-6 max-w-xl"
               style={{ fontFamily: 'var(--font-body)' }}
             >
-              H.V.A is a mature IT consulting and engineering company based in Tangier, Morocco. We
-              build AI product systems, analyst agents, custom software systems, workflow automation,
-              and cloud infrastructure for businesses across Morocco and internationally.
+              H.V.A is a technology consulting and digital transformation firm based in Tangier, Morocco. We advise, engineer, build, ship, and maintain intelligent systems across AI, automation, custom software, IT modernization, cloud infrastructure, and data services.
             </p>
             <Link
               href="/case-studies"
@@ -405,8 +403,8 @@ export default function BlogPostView({ post }: Props) {
 
       <BottomCTA
         variant="blue"
-        headline="Ready to build your AI or software strategy?"
-        subtext="Let's talk about what agentic AI or a custom operational system could do for your business."
+        headline="Ready to turn strategy into execution?"
+        subtext="Let us scope the consulting and engineering plan that fits your goals, constraints, and operating model."
         primaryLabel="Talk to H.V.A"
         primaryHref="/contact"
       />

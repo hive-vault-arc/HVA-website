@@ -7,12 +7,13 @@ import { GLOBAL_KEYWORDS, SITE_URL, buildPageMetadata, mergeKeywords } from '../
 import { getAllCaseStudies } from '../../lib/proof';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Portfolio | Operational Systems and AI Delivery Outcomes',
+  title: 'Portfolio | Transformation Engagements and Delivery Outcomes',
   description:
-    'Verified H.V.A deployments across AI customer operations, CRM operating systems, executive analytics, and automation with measurable outcomes.',
+    'Explore consulting-led transformation engagements delivered by H.V.A across AI operations, CRM modernization, analytics, software engineering, and cloud reliability.',
   path: '/portfolio',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
-    'AI project portfolio Morocco',
+    'digital transformation portfolio Morocco',
+    'technology consulting case examples',
     'software development portfolio Tangier',
     'mobile app case studies Morocco',
     'web app case studies Morocco',
@@ -42,7 +43,7 @@ export default function Page() {
   const caseItemListSchema = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: 'H.V.A Proven System Deployments',
+    name: 'H.V.A Transformation Outcomes',
     itemListElement: caseStudies.map((study, index) => ({
       '@type': 'ListItem',
       position: index + 1,

@@ -25,7 +25,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${study.title} | Case Study`,
     description: study.summary,
     path: `/case-studies/${study.slug}`,
-    keywords: [study.industry, ...study.integrations, ...study.operationalModules, 'case study', 'AI business operating systems'],
+    keywords: [
+      study.industry,
+      ...study.integrations,
+      ...study.operationalModules,
+      'case study',
+      'digital transformation consulting',
+      'technology consulting outcomes',
+    ],
   });
 }
 
@@ -115,11 +122,11 @@ export default async function CaseStudyDetailPage({ params }: Props) {
 
         <section className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-6 pb-24 md:grid-cols-2">
           <article className="border border-[#e2e8f0] bg-white p-6">
-            <h2 className="mb-3 font-serif text-2xl">System Built</h2>
+            <h2 className="mb-3 font-serif text-2xl">Business Challenge and Strategy</h2>
             <p className="leading-relaxed text-[#475569]">{study.problem}</p>
-            <h3 className="mt-6 mb-2 text-sm font-bold uppercase tracking-[0.15em] text-[#2563EB]">Architecture</h3>
+            <h3 className="mt-6 mb-2 text-sm font-bold uppercase tracking-[0.15em] text-[#2563EB]">Execution Architecture</h3>
             <p className="leading-relaxed text-[#475569]">{study.systemArchitecture}</p>
-            <h3 className="mt-6 mb-2 text-sm font-bold uppercase tracking-[0.15em] text-[#2563EB]">Operational Modules Activated</h3>
+            <h3 className="mt-6 mb-2 text-sm font-bold uppercase tracking-[0.15em] text-[#2563EB]">Execution Modules Activated</h3>
             <ul className="list-disc space-y-1 pl-5 text-[#334155]">
               {study.operationalModules.map((moduleName) => (
                 <li key={moduleName}>{moduleName}</li>
@@ -134,7 +141,7 @@ export default async function CaseStudyDetailPage({ params }: Props) {
           </article>
 
           <article className="border border-[#e2e8f0] bg-white p-6">
-            <h2 className="mb-3 font-serif text-2xl">Measured Outcomes</h2>
+            <h2 className="mb-3 font-serif text-2xl">Operating Impact</h2>
             <ul className="space-y-4">
               {study.measuredOutcomes.map((metric) => (
                 <li key={metric.label} className="border-l-2 border-[#2563EB] pl-4">
@@ -158,9 +165,9 @@ export default async function CaseStudyDetailPage({ params }: Props) {
         <section className="mx-auto max-w-6xl px-6 pb-24">
           <div className="border border-[#e2e8f0] bg-white p-6">
             <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#2563EB]">Next Step</p>
-            <h2 className="mt-2 font-serif text-3xl">Apply This System Pattern to Your Operations</h2>
+            <h2 className="mt-2 font-serif text-3xl">Apply This Transformation Pattern to Your Operations</h2>
             <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[#475569]">
-              Review the relevant products and systems, then book a discovery call to scope your operating model.
+              Review the relevant system programs, then book a discovery call to scope your transformation roadmap.
             </p>
             <div className="mt-5 flex flex-wrap gap-4">
               <Link href="/products-systems" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">

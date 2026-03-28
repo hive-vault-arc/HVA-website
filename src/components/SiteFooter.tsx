@@ -3,6 +3,7 @@ import { Globe, Mail, Phone, Share2 } from 'lucide-react';
 import { FiLinkedin } from 'react-icons/fi';
 import Logo from './Logo';
 import { SITE_URL } from '../lib/seo';
+import { CANONICAL_MARKET_IDENTITY } from '../lib/positioning';
 
 const pageLinks = [
   { href: '/', label: 'Home' },
@@ -16,11 +17,11 @@ const pageLinks = [
 ];
 
 const expertiseLinks = [
-  { href: '/products-systems', label: 'AI Business Operating Systems' },
+  { href: '/products-systems', label: 'Transformation Programs' },
   { href: '/case-studies/multilingual-whatsapp-ai-agent', label: 'WhatsApp Agent Operations' },
-  { href: '/case-studies/zoho-grade-crm-platform', label: 'CRM Operating System' },
+  { href: '/case-studies/zoho-grade-crm-platform', label: 'CRM Modernization' },
   { href: '/case-studies/executive-analytics-control-tower', label: 'Decision Intelligence' },
-  { href: '/services', label: 'Consulting + Delivery' },
+  { href: '/services', label: 'Consulting + Engineering' },
 ];
 
 export default function SiteFooter() {
@@ -34,7 +35,7 @@ export default function SiteFooter() {
             <div className="site-footer__brand-col">
               <Logo className="site-footer__logo" />
               <p className="site-footer__statement">
-                We engineer and operate intelligent systems that keep your business clear, fast, and resilient.
+                {CANONICAL_MARKET_IDENTITY.shortDescriptor}
               </p>
             </div>
 

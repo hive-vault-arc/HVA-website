@@ -4,6 +4,7 @@ import JsonLd from '../../../components/JsonLd';
 import FaqSection from '../../../components/FaqSection';
 import { LOCALE_SERVICES_FAQS } from '../../../data/faqs';
 import { SITE_URL, SUPPORTED_LOCALES, type SupportedLocale, buildPageMetadata } from '../../../lib/seo';
+import { getLocaleMessaging } from '../../../lib/positioning';
 
 const servicesContent: Record<
   SupportedLocale,
@@ -17,15 +18,16 @@ const servicesContent: Record<
   }
 > = {
   en: {
-    title: 'AI Receptionist, Automation, and Cloud Services in Morocco',
+    title: 'Technology Consulting Services in Morocco',
     description:
-      'Service lines from H.V.A: AI receptionist operations, AI analyst reporting, workflow automation, custom software, and cloud delivery reliability.',
-    h1: 'Service Lines for AI, Automation, and Scalable Delivery',
+      'Consulting and engineering services from H.V.A: advisory, architecture, AI automation, custom software, modernization, cloud, and data services.',
+    h1: 'Advisory to Execution Service Lines',
     intro:
-      'Our team delivers AI receptionist systems, AI analyst reporting, workflow orchestration, custom SaaS engineering, and cloud infrastructure in Morocco.',
+      'Our engagement model spans strategic consulting, architecture, technical execution, and managed evolution so systems continue performing after launch.',
     keywords: [
-      'ai receptionist morocco',
-      'ai analyst morocco',
+      'technology consulting services morocco',
+      'digital transformation services morocco',
+      'it strategy advisory tangier',
       'workflow automation morocco',
       'custom software development morocco',
       'cloud infrastructure morocco',
@@ -45,22 +47,23 @@ const servicesContent: Record<
       'security hardening and reliability engineering morocco',
     ],
     bullets: [
-      'AI Receptionist and customer-facing agents',
-      'AI Analyst dashboards and reporting workflows',
-      'Custom SaaS and enterprise software engineering',
-      'Cloud, CI/CD, and zero-downtime delivery systems',
+      'Transformation advisory and execution roadmaps',
+      'AI and automation programs for operations',
+      'Custom software, CRM, and mobile/web engineering',
+      'IT modernization, cloud reliability, and data services',
     ],
   },
   fr: {
-    title: 'Services IA, automatisation et cloud au Maroc',
+    title: 'Services de conseil technologique au Maroc',
     description:
-      "Services H.V.A: réceptionniste IA, analyste IA, automatisation des workflows, développement logiciel sur mesure et fiabilité cloud.",
-    h1: 'Services IA, automatisation et livraison à grande échelle',
+      'Services H.V.A: conseil technologique, transformation digitale, IA, automatisation, logiciel sur mesure, modernisation IT et cloud.',
+    h1: 'Conseil, architecture et execution',
     intro:
-      'Nous livrons des systèmes de réceptionniste IA, des analyses métiers IA, des automatisations opérationnelles et des plateformes cloud robustes au Maroc.',
+      "Nous accompagnons les entreprises de la strategie jusqu'a l'exploitation en production avec un modele de delivery clair et mesurable.",
     keywords: [
-      'réceptionniste ia maroc',
-      'analyste ia maroc',
+      'services conseil technologique maroc',
+      'transformation digitale entreprise maroc',
+      'strategie IT et architecture maroc',
       'automatisation des workflows maroc',
       'développement logiciel sur mesure maroc',
       'infrastructure cloud maroc',
@@ -80,22 +83,23 @@ const servicesContent: Record<
       'sécurité applicative et fiabilité cloud maroc',
     ],
     bullets: [
-      'Réceptionniste IA et agents conversationnels',
-      'Tableaux de bord analyste IA et reporting',
-      'Ingénierie SaaS et plateformes d’entreprise',
-      'Cloud, CI/CD et déploiement sans interruption',
+      'Conseil transformation et cadrage strategique',
+      'Programmes IA et automatisation des operations',
+      "Ingenierie logicielle, CRM, web et mobile",
+      'Modernisation IT, cloud, DevOps et data',
     ],
   },
   ar: {
-    title: 'خدمات الذكاء الاصطناعي والأتمتة والسحابة في المغرب',
+    title: 'خدمات الاستشارات التقنية في المغرب',
     description:
-      'تشمل خدمات H.V.A: أنظمة استقبال بالذكاء الاصطناعي، تحليلات ذكية، أتمتة سير العمل، تطوير برمجيات مخصصة، وبنية سحابية موثوقة.',
-    h1: 'خدمات الذكاء الاصطناعي والأتمتة للتوسع بثقة',
+      'خدمات H.V.A تشمل الاستشارات التقنية والتحول الرقمي والذكاء الاصطناعي والأتمتة وتطوير البرمجيات وتحديث البنية التقنية والسحابة.',
+    h1: 'من الاستراتيجية الى التنفيذ',
     intro:
-      'نقدم أنظمة استقبال ذكية وتقارير تحليلية وأتمتة عمليات ومنصات برمجية مخصصة مع بنية سحابية عالية الاعتمادية في المغرب.',
+      'نعمل مع فرق القيادة لتحديد الاولويات وبناء الانظمة وتشغيلها وصيانتها ضمن دورة تسليم واضحة ومستمرة.',
     keywords: [
-      'موظف استقبال بالذكاء الاصطناعي المغرب',
-      'محلل ذكاء اصطناعي المغرب',
+      'خدمات استشارات تقنية المغرب',
+      'خدمات التحول الرقمي للشركات المغرب',
+      'استراتيجية تقنية وهندسة حلول المغرب',
       'أتمتة سير العمل المغرب',
       'تطوير برمجيات مخصصة المغرب',
       'البنية التحتية السحابية المغرب',
@@ -115,22 +119,23 @@ const servicesContent: Record<
       'تقوية أمن التطبيقات وموثوقية البنية السحابية المغرب',
     ],
     bullets: [
-      'أنظمة استقبال ووكلاء ذكاء اصطناعي للعملاء',
-      'لوحات تحليل وتقارير ذكاء اصطناعي',
-      'هندسة SaaS ومنصات أعمال مخصصة',
-      'السحابة و CI/CD ونشر بدون توقف',
+      'استشارات التحول الرقمي وتخطيط التنفيذ',
+      'برامج الذكاء الاصطناعي والاتمتة التشغيلية',
+      'هندسة CRM والبرمجيات المخصصة والويب والموبايل',
+      'تحديث الانظمة القديمة والسحابة وDevOps وخدمات البيانات',
     ],
   },
   es: {
-    title: 'Servicios de IA, automatizacion y cloud en Marruecos',
+    title: 'Servicios de consultoria tecnologica en Marruecos',
     description:
-      'Servicios de H.V.A: recepcionista con IA, analista IA, automatizacion de procesos, software a medida e infraestructura cloud confiable.',
-    h1: 'Servicios de IA, automatizacion y entrega escalable',
+      'Servicios de H.V.A: consultoria tecnologica, transformacion digital, IA, automatizacion, software a medida, modernizacion IT y cloud.',
+    h1: 'De la estrategia a la ejecucion',
     intro:
-      'Entregamos sistemas de recepcionista con IA, analitica operativa, automatizacion de flujos, plataformas SaaS y arquitectura cloud en Marruecos.',
+      'Trabajamos con equipos directivos para disenar la estrategia, ejecutar la ingenieria y mantener la operacion en produccion a largo plazo.',
     keywords: [
-      'recepcionista con ia marruecos',
-      'analista de ia marruecos',
+      'servicios de consultoria tecnologica marruecos',
+      'transformacion digital para empresas marruecos',
+      'estrategia IT y arquitectura tecnica marruecos',
       'automatizacion de flujos de trabajo marruecos',
       'desarrollo de software a medida marruecos',
       'infraestructura cloud marruecos',
@@ -150,10 +155,10 @@ const servicesContent: Record<
       'seguridad de aplicaciones y confiabilidad cloud marruecos',
     ],
     bullets: [
-      'Recepcionista con IA y agentes conversacionales',
-      'Analista IA, reportes y paneles operativos',
-      'Ingenieria SaaS y software empresarial',
-      'Cloud, CI/CD y despliegues sin caidas',
+      'Consultoria de transformacion y hoja de ruta',
+      'Programas de IA y automatizacion operacional',
+      'Ingenieria CRM, software a medida, web y movil',
+      'Modernizacion IT, cloud, DevOps y servicios de datos',
     ],
   },
 };
@@ -173,10 +178,11 @@ export async function generateMetadata({ params }: LocaleServicesPageProps): Pro
   }
 
   const content = servicesContent[locale as SupportedLocale];
+  const identity = getLocaleMessaging(locale).identity;
 
   const base = buildPageMetadata({
     title: content.title,
-    description: content.description,
+    description: identity.longDescriptor,
     path: locale === 'en' ? '/services' : `/${locale}/services`,
     locale,
     keywords: content.keywords,
@@ -208,12 +214,13 @@ export default async function LocaleServicesPage({ params }: LocaleServicesPageP
 
   const content = servicesContent[locale as SupportedLocale];
   const isRtl = locale === 'ar';
+  const identity = getLocaleMessaging(locale).identity;
 
   const serviceSchema = {
     '@context': 'https://schema.org',
     '@type': 'Service',
     name: content.title,
-    description: content.description,
+    description: identity.longDescriptor,
     keywords: content.keywords,
     areaServed: ['Tangier', 'Morocco'],
     availableLanguage: locale,
@@ -230,7 +237,8 @@ export default async function LocaleServicesPage({ params }: LocaleServicesPageP
         <JsonLd data={serviceSchema} />
         <p className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-[#2563EB]">{locale.toUpperCase()}</p>
         <h1 className="mb-6 font-serif text-4xl leading-tight text-[#0F172A] md:text-6xl">{content.h1}</h1>
-        <p className="max-w-3xl text-lg leading-relaxed text-[#334155]">{content.intro}</p>
+        <p className="max-w-3xl text-lg leading-relaxed text-[#334155]">{identity.shortDescriptor}</p>
+        <p className="mt-4 max-w-3xl text-lg leading-relaxed text-[#334155]">{content.intro}</p>
         <ul className="mt-8 list-disc space-y-2 pl-5 text-[#0F172A]">
           {content.bullets.map((bullet) => (
             <li key={bullet}>{bullet}</li>

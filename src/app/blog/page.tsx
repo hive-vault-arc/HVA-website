@@ -5,12 +5,14 @@ import BlogIndex from '../../views/BlogIndex';
 import JsonLd from '../../components/JsonLd';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Blog | AI, Software & Digital Strategy Insights',
+  title: 'Blog | Technology Strategy and Execution Insights',
   description:
-    'Practical guides on AI automation, WhatsApp chatbots, and custom software for Moroccan businesses. Written for decision-makers, not tech enthusiasts.',
+    'Practical insights on technology consulting, digital transformation, AI automation, software engineering, and operating model execution for decision-makers.',
   path: '/blog',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'agentic AI future',
+    'technology strategy insights Morocco',
+    'digital transformation execution playbooks',
     'AI agents Morocco blog',
     'custom software ROI Morocco',
     'digital transformation Morocco',
@@ -42,7 +44,7 @@ export default function BlogPage() {
     name: 'H.V.A Blog',
     url: `${SITE_URL}/blog`,
     description:
-      'Practical guides on AI automation, WhatsApp chatbots, and custom software for Moroccan businesses.',
+      'Strategy and execution insights on digital transformation, AI automation, and engineering delivery.',
     publisher: {
       '@type': 'Organization',
       '@id': `${SITE_URL}/#organization`,

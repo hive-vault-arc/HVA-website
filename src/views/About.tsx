@@ -17,6 +17,7 @@ import {
 import { useAnimationQuality } from '../lib/animationQuality';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 import BottomCTA from '../components/BottomCTA';
+import { CANONICAL_MARKET_IDENTITY } from '../lib/positioning';
 
 type TeamMember = {
   name: string;
@@ -143,28 +144,27 @@ const About: React.FC = () => {
                 style={{ y: heroLift }}
               >
                 <span className="inline-block text-[#0984E3] font-bold tracking-[0.22em] text-[10px] uppercase mb-6">
-                  Transformation Leadership
+                  AI · Digital Transformation · Technology Consulting
                 </span>
                 <h1 className="font-serif text-5xl md:text-7xl font-medium leading-[1.08] tracking-tight text-[#1E272E] mb-8">
-                  Founders Operating<br />
-                  <em className="italic">Critical Systems</em>
+                  Long-Term Partners for AI<br />
+                  <em className="italic">and Digital Transformation</em>
                 </h1>
                 <p className="text-xl text-[#1E272E]/60 font-light max-w-xl leading-relaxed mb-10">
-                  H.V.A is an AI-driven business transformation partner led by engineers. We do not hand projects off between layers; the same founders
-                  own architecture, deployment, and optimization across the full operating lifecycle.
+                  {CANONICAL_MARKET_IDENTITY.longDescriptor} We do not hand projects off between layers; the same founders stay accountable from discovery to production operations.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link
                     href="/contact"
                     className="sharp-edge bg-[#1E272E] text-[#F5F6FA] px-8 py-4 text-sm font-bold hover:bg-[#0984E3] transition-colors duration-300"
                   >
-                    Start a Project
+                    Start Discovery
                   </Link>
                   <Link
                     href="/case-studies"
                     className="sharp-edge inline-flex items-center gap-2 bg-white/90 px-8 py-4 text-sm font-bold text-[#1E272E] shadow-[0_10px_25px_rgba(9,132,227,0.08)] hover:bg-[#ECF5FD] transition-colors duration-300"
                   >
-                    Explore Proof
+                    Explore Case Studies
                     <Layers3 className="h-4 w-4 text-[#0984E3]" />
                   </Link>
                 </div>
@@ -188,7 +188,7 @@ const About: React.FC = () => {
                 <div className="absolute -top-10 left-5 z-10 p-6 bg-white shadow-xl max-w-[240px] hidden md:block">
                   <p className="text-[10px] font-bold text-[#2563EB] tracking-[0.2em] uppercase mb-2">01. FOUNDATIONS</p>
                   <p className="text-lg font-serif italic text-[#0F172A] leading-snug">
-                    We know the full stack — from assembly to the cloud.
+                    We align executive strategy with technical execution.
                   </p>
                 </div>
                 <div className="relative aspect-square w-full bg-[#eceef0] overflow-hidden">
@@ -224,7 +224,7 @@ const About: React.FC = () => {
               </div>
               <p className="max-w-xl text-[#475569] leading-relaxed lg:text-right">
                 The process is transparent, paced, and intentionally designed so stakeholders always understand what is
-                being built and why.
+                being changed, why it matters, and how outcomes will be measured.
               </p>
             </motion.div>
 
@@ -332,7 +332,7 @@ const About: React.FC = () => {
                   <p className="text-[10px] uppercase tracking-[0.2em] text-[#1E272E]/58">Operating Principles</p>
                 </div>
                 <h2 className="font-serif text-4xl md:text-5xl font-medium text-[#1E272E] mb-12 leading-tight">
-                  The Rules Behind<br />How We Deliver
+                  The Rules Behind<br />How We Partner
                 </h2>
                 <div className="space-y-10">
                   {principles.map((principle, index) => (
@@ -375,7 +375,7 @@ const About: React.FC = () => {
                       H.V.A Core Creed
                     </p>
                     <blockquote className="font-serif text-2xl md:text-3xl italic text-[#F5F6FA] leading-snug mb-8">
-                      "The highest form of engineering is when the complexity disappears entirely."
+                      "Real AI and digital transformation is only complete when it works under real operational pressure."
                     </blockquote>
                     <div className="h-px bg-gradient-to-r from-[#0984E3]/60 via-[#00CEC9]/40 to-transparent mb-8" />
                     <p className="text-[#F5F6FA]/90 text-sm font-light leading-relaxed max-w-md">
@@ -398,8 +398,7 @@ const About: React.FC = () => {
                 The People Behind H.V.A
               </h2>
               <p className="text-[#1E272E]/64 leading-relaxed">
-                Our founding team blends architecture, product, and cloud engineering expertise to deliver systems
-                that are practical, resilient, and built for long-term growth.
+                Our founding team blends AI systems, digital transformation strategy, software architecture, and cloud engineering to deliver programs that are practical, resilient, and built for long-term evolution.
               </p>
             </div>
 
@@ -437,8 +436,8 @@ const About: React.FC = () => {
 
         <BottomCTA
           variant="dark"
-          headline="Ready to define the right build path?"
-          subtext="Share your goals and constraints. We will map a clear technical direction and an execution model your team can trust."
+          headline="Ready to Define Your AI and Transformation Roadmap?"
+          subtext="Share your goals and constraints. We will map the right AI automation, digital transformation, and engineering delivery path — then discuss scope after discovery."
           primaryLabel="Book a Call"
           primaryHref="/contact"
           secondaryLabel="Review Services"

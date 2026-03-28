@@ -6,13 +6,15 @@ import { SERVICES_FAQS } from '../../data/faqs';
 import { GLOBAL_KEYWORDS, SITE_URL, absoluteUrl, buildPageMetadata, mergeKeywords } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Services | AI Business Transformation Consulting and Engineering',
+  title: 'Services | Technology Consulting, Engineering, and Managed Evolution',
   description:
-    'H.V.A provides consulting, solution design, implementation, and operations support for AI agents, CRM systems, workflow automation, custom software, mobile apps, SaaS, and cloud reliability.',
+    'H.V.A delivers advisory, architecture, engineering delivery, modernization, and managed evolution across AI, automation, custom software, cloud infrastructure, and data services.',
   path: '/services',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
-    'AI receptionist implementation for businesses',
-    'AI analyst dashboards for executives',
+    'technology consulting services Morocco',
+    'digital transformation services Tangier',
+    'IT strategy and architecture consulting',
+    'AI transformation consulting',
     'custom CRM development and migration',
     'ERP and CRM integration services',
     'workflow automation for operations teams',
@@ -23,7 +25,7 @@ export const metadata: Metadata = buildPageMetadata({
     'migration from legacy systems to modern cloud',
     'service company for app deployment Morocco',
     'IT consulting engineering team Morocco',
-    'AI system implementation Morocco',
+    'custom software and maintenance services',
     'team to automate sales and support workflows',
     'services IA pour entreprise au Maroc',
     'migration CRM et integration API Maroc',
@@ -34,11 +36,11 @@ export const metadata: Metadata = buildPageMetadata({
     'migracion de sistemas legacy a cloud en marruecos',
   ]),
   alternates: {
-    en: '/en/services',
+    en: '/services',
     fr: '/fr/services',
     ar: '/ar/services',
     es: '/es/services',
-    'x-default': '/en/services',
+    'x-default': '/services',
   },
 });
 
@@ -59,22 +61,24 @@ export default function Page() {
     },
     areaServed: ['Morocco', 'Remote'],
     serviceType: [
-      'Business Transformation Consulting',
+      'Technology Consulting',
+      'Digital Transformation Advisory',
+      'Enterprise Architecture',
       'AI Agent Development',
-      'CRM Systems Engineering',
       'Workflow Automation',
+      'CRM and Systems Engineering',
       'Custom Software Development',
       'Mobile and Web App Engineering',
-      'Cloud Reliability Advisory',
+      'IT Modernization',
+      'Cloud Infrastructure and Reliability',
       'CI/CD and DevOps',
+      'Data Services and Analytics',
     ],
     availableLanguage: ['en', 'fr', 'ar', 'es'],
     keywords: mergeKeywords(GLOBAL_KEYWORDS, [
-      'AI receptionist systems',
-      'AI analyst and decision intelligence',
-      'production AI systems',
-      'custom software development',
-      'cloud reliability engineering',
+      'technology consulting and execution',
+      'transformation roadmap and delivery',
+      'long-term systems maintenance partner',
     ]).join(', '),
     url: `${SITE_URL}/services`,
     subjectOf: [

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useLayoutEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -37,6 +37,27 @@ const PANELS = [
     description:
       'Custom iOS & Android applications built with Flutter and React Native — engineered for performance, designed to scale.',
   },
+  {
+    num: '05',
+    category: 'Process Automation',
+    title: 'Automation',
+    description:
+      'End-to-end workflow automation and system integrations — eliminate manual ops and connect every tool in your stack.',
+  },
+  {
+    num: '06',
+    category: 'Data & Intelligence',
+    title: 'Analytics',
+    description:
+      'Custom data pipelines, dashboards, and AI-powered insights that turn raw signals into decisions your team can act on.',
+  },
+  {
+    num: '07',
+    category: 'Growth & Scale',
+    title: 'Growth Stack',
+    description:
+      'Performance marketing infrastructure, attribution systems, and conversion tooling — built to compound as your business grows.',
+  },
 ];
 
 interface Props {
@@ -59,12 +80,13 @@ export default function VideoScrollSection({
   const panelRefs = useRef<Array<HTMLDivElement | null>>([]);
   const progressRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number>(0);
+  // GSAP tweens this plain JS object — no video seeks triggered by GSAP itself.
+  // The RAF loop reads it and lerps video.currentTime at a controlled rate,
+  // preventing seek-flooding (which freezes the canvas when 60 seeks/sec abort each other).
+  const scrubProxyRef = useRef({ time: 0 });
+  const displayTimeRef = useRef(0);
 
   // ── Canvas RAF loop ──────────────────────────────────────────────────────────
-  // GSAP scrubs video.currentTime on a hidden <video>.
-  // This loop reads each decoded frame and blends it onto the canvas at 72% alpha.
-  // The 28% of the previous frame that bleeds through creates a soft cross-dissolve
-  // between keyframes, hiding the "slideshow" effect caused by sparse GOP encoding.
   useEffect(() => {
     const canvas = canvasRef.current;
     const video = videoRef.current;
@@ -105,15 +127,31 @@ export default function VideoScrollSection({
         sy = (vh - sh) / 2;
       }
 
-      // Blend new frame at 72% over the previous canvas content.
-      // Converges to 100% of the current frame after ~8 ticks (~133 ms at 60 fps)
-      // which is imperceptible when stopped, but smooths jumpy keyframe seeks.
+      // Blend new frame at 72% — cross-dissolves between decoded frames
       ctx.globalAlpha = 0.72;
       ctx.drawImage(video, sx, sy, sw, sh, 0, 0, cw, ch);
-      ctx.globalAlpha = 1.0;
+      ctx.globalAlpha = 1;
     };
 
+    // Draw immediately when a seek fully completes (no waiting for next RAF tick)
+    const onSeeked = () => { if (video.readyState >= 2) drawCover(); };
+    video.addEventListener('seeked', onSeeked);
+
     const loop = () => {
+      const target = scrubProxyRef.current.time;
+      const current = displayTimeRef.current;
+      const dist = target - current;
+
+      // Skip seeks smaller than 20ms — avoids micro-seeks that overwhelm the decoder
+      if (Math.abs(dist) > 0.02 && video.readyState >= 1) {
+        // Adaptive lerp: gentle for small nudges, faster for bigger jumps
+        const videoDur = video.duration || 1;
+        const factor = Math.abs(dist) > videoDur * 0.05 ? 0.35 : 0.12;
+        const next = current + dist * factor;
+        video.currentTime = next;
+        displayTimeRef.current = next;
+      }
+
       if (video.readyState >= 2) drawCover();
       rafRef.current = requestAnimationFrame(loop);
     };
@@ -122,6 +160,7 @@ export default function VideoScrollSection({
     return () => {
       cancelAnimationFrame(rafRef.current);
       ro.disconnect();
+      video.removeEventListener('seeked', onSeeked);
     };
   }, []);
 
@@ -150,9 +189,12 @@ export default function VideoScrollSection({
 
       ctx?.revert();
       ctx = gsap.context(() => {
-        const TOTAL = PANELS.length; // 4 units
+        const TOTAL = PANELS.length;
 
-        // Single timeline — scrub: true keeps video + text + progress in perfect sync
+        // scrub: true = playhead tracks scroll immediately.
+        // GSAP tweens the proxy (a plain JS object), NOT video.currentTime directly,
+        // so no seeks are triggered by GSAP. The RAF loop lerps currentTime toward
+        // proxy.time at a controlled rate — preventing seek-flooding.
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: wrapper,
@@ -164,8 +206,8 @@ export default function VideoScrollSection({
           },
         });
 
-        // Video scrub across full scroll range
-        tl.to(video, { currentTime: dur, ease: 'none', duration: TOTAL }, 0);
+        // Tween the proxy — RAF loop reads this and seeks the video
+        tl.to(scrubProxyRef.current, { time: dur, ease: 'none', duration: TOTAL }, 0);
 
         // Progress bar
         if (progressRef.current) {
@@ -212,7 +254,7 @@ export default function VideoScrollSection({
           backgroundColor: '#050505',
         }}
       >
-        {/* Canvas — receives blended video frames from the RAF loop */}
+        {/* Canvas — receives blended video frames */}
         <canvas
           ref={canvasRef}
           style={{
@@ -221,8 +263,8 @@ export default function VideoScrollSection({
             width: '100%',
             height: '100%',
             zIndex: 0,
-            // Blur masks remaining keyframe-seek artifacts; brightness reduces harshness
-            filter: 'blur(5px) brightness(0.78) saturate(1.05)',
+            // Extra blur masks keyframe-seek seams; lower brightness lifts text contrast
+            filter: 'blur(9px) brightness(0.72) saturate(1.05)',
           }}
         />
 

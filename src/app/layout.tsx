@@ -12,6 +12,7 @@ import {
   SITE_URL,
   absoluteUrl,
 } from '../lib/seo';
+import { CANONICAL_MARKET_IDENTITY } from '../lib/positioning';
 import './globals.css';
 
 const inter = Inter({
@@ -56,7 +57,7 @@ export const metadata: Metadata = {
         url: '/Images/hva-ai-software-agency-tangier.webp',
         width: 1200,
         height: 630,
-        alt: 'H.V.A — AI-Driven Business Transformation Partner',
+        alt: 'H.V.A — AI & Automation · Digital Transformation · Technology Consulting',
       },
     ],
   },
@@ -96,8 +97,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     name: BUSINESS_NAME,
     alternateName: ['H.V.A', 'Hive Vault Arc', 'HIVA'],
     url: SITE_URL,
-    description:
-      'Hive Vault Arc is an AI-driven business transformation partner that designs, builds, and operates intelligent systems that run core business operations. We redesign and automate how businesses operate through consulting, AI agents, CRM, custom software, mobile apps, and SaaS systems.',
+    description: CANONICAL_MARKET_IDENTITY.longDescriptor,
     logo: {
       '@type': 'ImageObject',
       url: absoluteUrl('/Images/favico/android-chrome-512x512.png'),
@@ -132,18 +132,17 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
       { '@type': 'City', name: 'Sydney' },
     ],
     serviceType: [
-      'AI Business Operating Systems',
-      'Business Transformation Consulting',
-      'AI Agent Development',
-      'AI Product Systems',
-      'AI Receptionist Systems',
-      'AI Analyst Tools',
-      'CRM Systems Engineering',
-      'Workflow Automation',
+      'AI Agent Development and Deployment',
+      'Intelligent Workflow Automation',
+      'AI-Powered Digital Transformation',
+      'Digital Transformation Consulting',
+      'Technology Consulting and IT Advisory',
       'Custom Software Development',
+      'CRM Engineering and Integration',
+      'Legacy IT Modernization',
+      'Cloud Infrastructure and DevOps',
+      'Data Services and Decision Intelligence',
       'Custom SaaS Development',
-      'Cloud Infrastructure',
-      'DevOps Engineering',
       'Web Application Development',
       'Mobile Application Development',
     ],
@@ -161,7 +160,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     name: 'H.V.A',
     alternateName: ['Hive Vault Arc', 'hiva-nine.vercel.app', 'HIVA'],
     url: SITE_URL,
-    description: DEFAULT_DESCRIPTION,
+    description: CANONICAL_MARKET_IDENTITY.longDescriptor,
     potentialAction: {
       '@type': 'SearchAction',
       target: { '@type': 'EntryPoint', urlTemplate: `${SITE_URL}/?q={search_term_string}` },

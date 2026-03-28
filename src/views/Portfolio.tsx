@@ -95,13 +95,13 @@ const Portfolio: React.FC = () => {
               transition={{ duration: 0.7 }}
             >
               <span className="inline-block px-4 py-1 mb-6 bg-[#2563EB]/10 text-[#2563EB] font-bold text-[10px] uppercase tracking-[0.2em]">
-                Proof Library
+                Transformation Portfolio
               </span>
               <h1 className="font-serif text-3xl sm:text-4xl md:text-6xl lg:text-8xl text-[#0F172A] leading-tight mb-8">
-                Operational Systems in Production
+                Consulting-Led Programs in Production
               </h1>
               <p className="text-xl text-[#475569] max-w-xl leading-relaxed font-light">
-                These are not isolated projects. Each deployment shows how H.V.A systems run core operations with measurable impact.
+                These are not isolated builds. Each engagement shows how H.V.A turns strategic priorities into measurable operational impact.
               </p>
             </motion.div>
 
@@ -140,7 +140,7 @@ const Portfolio: React.FC = () => {
                 <div className="absolute -bottom-4 -right-4 w-52 bg-white p-6 shadow-xl hidden md:block">
                   <Bot className="h-8 w-8 text-[#2563EB] mb-3" />
                   <p className="text-[10px] font-bold text-[#475569] uppercase tracking-wider leading-relaxed">
-                    System Module 01: Conversational Intelligence
+                    Program Stream 01: Conversational Intelligence
                   </p>
                 </div>
               </div>
@@ -161,10 +161,7 @@ const Portfolio: React.FC = () => {
                   ))}
                 </div>
                 <p className="text-[#475569] leading-relaxed font-light">
-                  Developed a custom LLM-powered solution for global lead management. The system
-                  handles initial inquiries in 12 languages, qualifies prospects based on custom
-                  logic, and creates automated records in the client's CRM without human
-                  intervention.
+                  Delivered a consulting-led AI transformation stream for global lead management. The system handles initial inquiries in 12 languages, qualifies prospects with custom logic, and updates CRM records automatically.
                 </p>
                 <div className="border border-[#e2e8f0] bg-[#F8FAFC] p-4 text-sm text-[#334155]">
                   <p><span className="font-semibold">Deployment status:</span> Live in production since October 2025.</p>
@@ -183,7 +180,7 @@ const Portfolio: React.FC = () => {
                   ))}
                 </ul>
                 <blockquote className="border-l-2 border-[#2563EB] pl-3 text-sm italic text-[#1E272E]/80">
-                  "H.V.A shipped a production AI workflow that our team trusts daily."
+                  "H.V.A translated our strategy into a production AI workflow our team trusts daily."
                   <footer className="mt-1 text-xs not-italic text-[#475569]">
                     — Head of Growth, Atlas Property Group
                   </footer>
@@ -216,7 +213,7 @@ const Portfolio: React.FC = () => {
                 {/* Content */}
                 <div className="lg:col-span-5 space-y-5 order-2 lg:order-1">
                   <h2 className="font-serif text-4xl text-[#0F172A] leading-tight">
-                    Complete Real-Estate CRM Operating System
+                    Real-Estate CRM Transformation Program
                   </h2>
                   <div className="flex flex-wrap gap-2">
                     {['Custom SaaS', 'Team Collaboration', 'Pipeline Automation'].map((tag) => (
@@ -229,9 +226,7 @@ const Portfolio: React.FC = () => {
                     ))}
                   </div>
                 <p className="text-[#475569] leading-relaxed font-light">
-                  A high-performance internal tool built for a luxury real estate group. We
-                  replaced three disparate systems with a unified operational system that
-                  tracks the entire buyer journey from initial contact to property closing.
+                  A consulting and engineering engagement for a luxury real estate group. We replaced three disconnected tools with one unified CRM operation that tracks the full buyer journey.
                 </p>
                 <div className="border border-[#e2e8f0] bg-white p-4 text-sm text-[#334155]">
                   <p><span className="font-semibold">Deployment status:</span> Live in production since May 2025 across sales and operations.</p>
@@ -253,7 +248,7 @@ const Portfolio: React.FC = () => {
                   </div>
                 </div>
                 <blockquote className="border-l-2 border-[#2563EB] pl-3 text-sm italic text-[#1E272E]/80">
-                  "Forecast and pipeline meetings are now based on one trusted system."
+                  "Forecast and pipeline meetings are now based on one trusted operating model."
                   <footer className="mt-1 text-xs not-italic text-[#475569]">
                     — COO, Capstone Living Morocco
                   </footer>
@@ -282,7 +277,7 @@ const Portfolio: React.FC = () => {
                   <div className="absolute -top-4 -left-4 bg-[#2563EB] text-white p-8 hidden md:block">
                     <h3 className="font-serif text-2xl mb-2">Architectural Precision</h3>
                     <p className="text-[10px] font-bold opacity-80 uppercase tracking-[0.2em]">
-                      Built for scale
+                      Consulting-led execution
                     </p>
                   </div>
                 </div>
@@ -306,12 +301,12 @@ const Portfolio: React.FC = () => {
               <h2 className="mx-auto max-w-5xl font-serif text-3xl sm:text-4xl md:text-5xl lg:text-8xl font-semibold leading-[0.96] text-[#1E272E]">
                 Redefining Modern
                 <br />
-                Software Excellence
+                Transformation Delivery
               </h2>
               <p className="mt-10 text-xs uppercase tracking-[0.2em] text-[#1E272E]/58">Delivery Signature</p>
               <h3 className="mt-3 font-serif text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold leading-[1.02] text-[#1E272E]">Power. Speed. Control.</h3>
               <p className="mx-auto mt-3 max-w-4xl text-base leading-relaxed text-[#1E272E]/72 md:text-[1.55rem]">
-                Everything needed to build, automate, deploy, and maintain reliable software products.
+                Everything needed to advise, engineer, deploy, and maintain reliable digital operations.
               </p>
             </motion.div>
 
@@ -350,7 +345,7 @@ const Portfolio: React.FC = () => {
         {/* ── CTA ───────────────────────────────────────────────────────────── */}
         <BottomCTA
           variant="dark"
-          headline="Ready to Move from Project Work to Operational Control?"
+          headline="Ready to Move from Fragmented Projects to Guided Transformation?"
           subtext="Share your constraints and we will map the right consulting and engineering path for your operating model."
           primaryLabel="Book Discovery Call"
           primaryHref="/contact"

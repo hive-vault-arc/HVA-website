@@ -2,12 +2,13 @@
 
 import React, { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Bot, Cloud, Database, Eye, Layers, Smartphone } from 'lucide-react';
+import { ArrowRight, Bot, Cloud, Eye, Layers } from 'lucide-react';
 import { motion } from 'framer-motion';
 import BottomCTA from '../components/BottomCTA';
 import Background3d from '../components/Plasma';
 import LogoLoop from '../components/LogoItem';
 import VideoScrollSection from '../components/ui/VideoScrollSection';
+import HeroSlider from '../components/ui/HeroSlider';
 import { useAnimationQuality } from '../lib/animationQuality';
 import {
   SiAndroid,
@@ -82,23 +83,23 @@ const Home: React.FC = () => {
   const servicePillars = [
     {
       icon: <Bot className="w-5 h-5" strokeWidth={1.5} />,
-      title: 'AI & Automation',
-      desc: 'AI agents, receptionists, and automated workflows that handle repetitive operations continuously — no manual effort required.',
+      title: 'AI & Intelligent Automation',
+      desc: 'AI agents, receptionists, and workflow orchestration that run operations continuously — qualifying leads, routing tasks, and generating insights 24/7.',
     },
     {
-      icon: <Database className="w-5 h-5" strokeWidth={1.5} />,
-      title: 'Custom Platforms',
-      desc: 'CRM systems, inventory tools, and operational software engineered from scratch for the exact way your business runs.',
+      icon: <Layers className="w-5 h-5" strokeWidth={1.5} />,
+      title: 'Digital Transformation',
+      desc: 'End-to-end transformation programs: operational diagnostics, IT modernization, legacy upgrades, cloud migration, and CRM transformation.',
+    },
+    {
+      icon: <Eye className="w-5 h-5" strokeWidth={1.5} />,
+      title: 'Technology Consulting',
+      desc: 'Strategic advisory, roadmap design, and architecture decisions that align technology investments with measurable business outcomes.',
     },
     {
       icon: <Cloud className="w-5 h-5" strokeWidth={1.5} />,
-      title: 'Cloud & Infrastructure',
-      desc: 'End-to-end cloud deployment, CI/CD pipelines, and managed infrastructure built for zero-downtime reliability.',
-    },
-    {
-      icon: <Smartphone className="w-5 h-5" strokeWidth={1.5} />,
-      title: 'Apps & Web',
-      desc: 'Custom mobile apps and high-performance web systems — from concept to production, fully owned by you.',
+      title: 'Engineering & Delivery',
+      desc: 'Custom software, mobile apps, SaaS platforms, and cloud infrastructure — engineered and shipped with full production accountability.',
     },
   ];
 
@@ -135,78 +136,7 @@ const Home: React.FC = () => {
         />
       )}
 
-      {/* Hero Section */}
-      <section className="relative px-6 pt-28 pb-32 lg:px-14 lg:pt-36 lg:pb-40 overflow-visible">
-        <div className="container mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-
-            {/* Left: copy */}
-            <motion.div
-              className="lg:col-span-7 z-10"
-              initial={{ opacity: 0, y: 28 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <span className="home-hero-eyebrow inline-block px-3 py-1 bg-[#0984E3]/10 text-[#0984E3] text-[10px] uppercase tracking-[0.22em] font-bold mb-8">
-                AI-Driven Business Transformation Partner
-              </span>
-              <h1 className="home-hero-title font-serif text-4xl sm:text-5xl md:text-7xl xl:text-[5.5rem] font-medium leading-[1.04] tracking-tight text-[#1E272E] mb-8">
-                AI Business<br />
-                <em className="italic">Operating Systems</em><br />
-                for Core Operations.
-              </h1>
-              <p className="home-hero-copy text-xl text-[#1E272E]/60 max-w-xl mb-12 font-light leading-relaxed">
-                H.V.A (Hive Vault Arc) is an AI-driven business transformation partner that designs, builds, and operates intelligent systems that run core business operations.
-                We redesign and automate how businesses operate through consulting, AI agents, CRM, custom software, mobile apps, and SaaS systems.
-              </p>
-              <div className="flex flex-wrap gap-6">
-                <Link
-                  href="/case-studies"
-                  className="home-hero-primary sharp-edge bg-[#1E272E] text-[#F5F6FA] px-8 py-4 text-sm font-bold hover:bg-[#0984E3] transition-colors duration-300"
-                >
-                  View Case Studies
-                </Link>
-                <Link
-                  href="/products-systems"
-                  className="home-hero-secondary flex items-center gap-2 px-8 py-4 text-sm font-bold text-[#1E272E] hover:gap-4 transition-all duration-300"
-                >
-                  Products & Systems <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-            </motion.div>
-
-            {/* Right: image + floating card */}
-            <motion.div
-              className="lg:col-span-5 relative mt-12 lg:mt-0"
-              initial={{ opacity: 0, x: 28 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <div className="aspect-[4/5] overflow-hidden shadow-2xl">
-                <img
-                  src="/Images/hva-ai-software-agency-tangier.webp"
-                  alt="H.V.A engineering and product systems team in Tangier, Morocco"
-                  className="w-full h-full object-cover hero-image-animate"
-                  loading="eager"
-                  fetchPriority="high"
-                  decoding="async"
-                />
-              </div>
-              {/* Asymmetric floating card */}
-              <div className="absolute -bottom-16 -left-6 md:-left-14 bg-white p-8 max-w-[17rem] shadow-xl hidden md:block">
-                <Layers className="w-8 h-8 text-[#0984E3] mb-4" />
-                <h3 className="home-float-title font-serif text-xl mb-3 italic font-medium text-[#1E272E]">
-                  Category-Level Control.
-                </h3>
-                <p className="home-float-copy text-sm text-[#1E272E]/60 leading-relaxed">
-                  We do not ship isolated projects. We run one operating layer that compounds execution quality month after month.
-                </p>
-              </div>
-            </motion.div>
-
-          </div>
-        </div>
-      </section>
+      <HeroSlider />
 
       {/* ── Who We Are — Identity Section ──────────────────────────────── */}
       <section className="relative grid grid-cols-1 lg:grid-cols-12">
@@ -225,16 +155,15 @@ const Home: React.FC = () => {
           <div className="relative z-10">
             <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#2563EB] mb-10">Our Identity</p>
             <h2 className="font-headline text-5xl md:text-6xl text-white leading-[1.08] mb-8">
-              Market Command.<br />
-              <em className="font-headline italic text-white/35">Operational Precision.</em>
+              Strategic Clarity.<br />
+              <em className="font-headline italic text-white/35">Engineering Precision.</em>
             </h2>
             <p className="text-white/60 font-body leading-relaxed text-base mb-10 max-w-sm">
-              H.V.A partners with leadership teams to redesign and automate how operations run using AI agents, CRM systems,
-              custom software, and cloud reliability engineering.
+              H.V.A builds AI automation systems, leads digital transformation programs, and delivers production-grade engineering — from strategic roadmap through long-term operations.
             </p>
             <div className="h-px w-12 bg-[#2563EB] mb-4" />
             <p className="text-[9px] font-label font-bold uppercase tracking-[0.28em] text-white/35">
-              AI · Cloud · Automation · Mobile
+              AI · Transformation · Consulting · Cloud
             </p>
           </div>
         </div>
@@ -267,7 +196,7 @@ const Home: React.FC = () => {
             Proof In Production
           </p>
           <h2 className="font-headline text-4xl md:text-5xl text-[#0F172A] leading-tight">
-            Systems That Run Revenue and Decisions Every Day
+            Transformation Programs Running in Production
           </h2>
           <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
             {[
@@ -303,7 +232,7 @@ const Home: React.FC = () => {
             </Link>
           </div>
           <blockquote className="mt-8 border-l-2 border-[#2563EB] pl-4 text-sm italic text-[#334155]">
-            "We moved from tool chaos to one operating rhythm. Our leadership team now makes faster decisions with far more confidence."
+            "H.V.A aligned strategy, process, and engineering into one operating model. Our leadership team now makes faster decisions with far more confidence."
             <footer className="mt-1 text-xs not-italic text-[#64748b]">— COO, Capstone Living Morocco</footer>
           </blockquote>
         </div>
@@ -335,7 +264,7 @@ const Home: React.FC = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="font-headline text-5xl md:text-6xl text-white leading-tight mb-14">
-              Category Leadership Requires{' '}
+              Lasting Transformation Requires{' '}
               <em className="not-italic text-[#2563EB] font-headline italic">Operational Mastery</em>
             </h2>
 
@@ -348,7 +277,7 @@ const Home: React.FC = () => {
                 <div>
                   <h4 className="font-headline text-2xl text-white mb-2">Precision Engineering</h4>
                   <p className="text-white/60 font-body leading-relaxed">
-                    Platform modules are engineered for control under pressure, then tuned continuously to compound business performance.
+                    Systems are engineered for reliability under pressure, then continuously tuned to improve business performance.
                   </p>
                 </div>
               </div>
@@ -361,7 +290,7 @@ const Home: React.FC = () => {
                 <div>
                   <h4 className="font-headline text-2xl text-white mb-2">Technical Execution</h4>
                   <p className="text-white/60 font-body leading-relaxed">
-                    We run a predictable operating cadence so strategy decisions translate into measurable operational outcomes.
+                    We run a predictable consulting-to-delivery cadence so strategy decisions translate into measurable operational outcomes.
                   </p>
                 </div>
               </div>
@@ -383,7 +312,7 @@ const Home: React.FC = () => {
               {/* Opening quote mark */}
               <span aria-hidden="true" className="font-headline italic text-[#2563EB]/20 text-[5rem] leading-none absolute top-2 left-6 select-none">"</span>
               <p className="text-2xl md:text-3xl font-headline italic text-[#0F172A] leading-snug mb-8">
-                "H.V.A gave us an operating system, not a project. Revenue, reporting, and execution now move in one coordinated cadence."
+                "H.V.A became our long-term transformation partner. Strategy, delivery, and operations now move in one coordinated cadence."
               </p>
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-[#0F172A] flex items-center justify-center shrink-0">
@@ -401,7 +330,7 @@ const Home: React.FC = () => {
               href="/services"
               className="mt-6 inline-flex items-center gap-2 border border-white/20 px-6 py-3 text-xs font-label font-bold uppercase tracking-widest text-white/70 hover:text-white hover:border-white/40 transition-colors"
             >
-              Implementation Services
+              Our Services
               <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
@@ -445,8 +374,8 @@ const Home: React.FC = () => {
 
       <BottomCTA
         variant="light"
-        headline="Ready to Transform Core Operations?"
-        subtext="Share your goals and constraints. We will scope the right consulting and build path for your business, then discuss pricing after discovery."
+        headline="Ready to Transform Core Operations End to End?"
+        subtext="Share your goals and constraints. We will define the strategy, architecture, and execution path, then discuss pricing after discovery."
         primaryLabel="Book Discovery Call"
         primaryHref="/contact"
         secondaryLabel="View Case Studies"

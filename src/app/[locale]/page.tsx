@@ -3,50 +3,44 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import JsonLd from '../../components/JsonLd';
 import { SITE_NAME, SITE_URL, SUPPORTED_LOCALES, type SupportedLocale, buildPageMetadata } from '../../lib/seo';
+import { getLocaleMessaging } from '../../lib/positioning';
 
 const homeContent: Record<
   SupportedLocale,
   {
     title: string;
-    description: string;
     h1: string;
     body: string;
     keywords: string[];
-    servicesHref: string;
+    primaryHref: string;
     cta: string;
   }
 > = {
   en: {
-    title: 'AI-Driven Business Transformation Partner in Tangier, Morocco',
-    description:
-      'Hive Vault Arc is an AI-driven business transformation partner that designs, builds, and operates intelligent systems that run core business operations.',
-    h1: 'AI Business Operating Systems for Core Operations',
-    body: 'We redesign and automate how businesses operate through consulting, AI agents, CRM, custom software, mobile apps, and SaaS systems.',
+    title: 'Technology Consulting and Digital Transformation in Tangier, Morocco',
+    h1: 'Technology Consulting + Engineering Execution',
+    body: 'We guide strategy, architect solutions, build systems, and maintain production operations for teams scaling with AI, automation, software, cloud, and data.',
     keywords: [
-      'AI business operating systems Morocco',
-      'AI-driven business transformation partner',
-      'AI agents Morocco',
-      'operational systems consulting',
+      'technology consulting Morocco',
+      'digital transformation consulting Tangier',
+      'IT advisory and engineering execution',
+      'AI and automation consulting Morocco',
       'workflow automation partner Morocco',
       'CRM integration with ERP Morocco',
       'cloud reliability and CI/CD Morocco',
-      'AI analyst dashboards for company decisions',
-      'real estate operating system',
-      'clinic operating system',
-      'construction operations system',
+      'data services and analytics consulting Morocco',
     ],
-    servicesHref: '/case-studies',
+    primaryHref: '/case-studies',
     cta: 'View Case Studies',
   },
   fr: {
-    title: 'Agents IA et logiciels sur mesure à Tanger, Maroc',
-    description:
-      "H.V.A conçoit des systèmes de réceptionniste IA, d'analyse IA, d'automatisation des workflows, de plateformes logicielles et d'infrastructure cloud.",
-    h1: 'Systèmes IA, logiciels et cloud pour la croissance',
-    body: 'Nous développons des agents IA, des automatisations métiers et des plateformes sur mesure pour les entreprises à Tanger et au Maroc.',
+    title: 'Conseil technologique et transformation digitale à Tanger, Maroc',
+    h1: 'Conseil stratégique et execution technique',
+    body: "Nous accompagnons les entreprises de la strategie a la production: conseil, architecture, IA, automatisation, logiciel sur mesure, cloud et services data.",
     keywords: [
-      'agence IA Tanger',
-      'agents IA Maroc',
+      'conseil technologique maroc',
+      'cabinet transformation digitale tanger',
+      'strategie IT et execution technique',
       'développement logiciel sur mesure Maroc',
       'développement application mobile entreprise Maroc',
       'développement application web sur mesure Tanger',
@@ -55,23 +49,22 @@ const homeContent: Record<
       'automatisation des workflows entreprise Maroc',
       'migration cloud et déploiement Maroc',
       'conseil DevOps et CI/CD Maroc',
-      'mise en place réceptionniste IA entreprise',
-      'analyste IA pour reporting décisionnel',
+      'consulting IA et automatisation maroc',
+      'services data et reporting decisionnel maroc',
       'j’ai besoin d’une équipe pour créer mon application au Maroc',
-      'meilleure agence software pour startup à Tanger',
+      'meilleure equipe software pour startup à Tanger',
     ],
-    servicesHref: '/fr/services',
+    primaryHref: '/fr/services',
     cta: 'Voir les services',
   },
   ar: {
-    title: 'وكلاء ذكاء اصطناعي وبرمجيات مخصصة في طنجة، المغرب',
-    description:
-      'تقوم H.V.A ببناء أنظمة استقبال بالذكاء الاصطناعي، أدوات تحليل ذكية، أتمتة سير العمل، منصات برمجية مخصصة، وبنية سحابية.',
-    h1: 'أنظمة ذكاء اصطناعي وبرمجيات وسحابة تدعم النمو',
-    body: 'نقوم بهندسة وكلاء الذكاء الاصطناعي وخطوط الأتمتة والمنتجات البرمجية للشركات في طنجة وفي مختلف أنحاء المغرب.',
+    title: 'استشارات تقنية وتحول رقمي في طنجة، المغرب',
+    h1: 'استشارات استراتيجية وتنفيذ تقني',
+    body: 'نرافق الشركات من الاستراتيجية الى التشغيل الفعلي: استشارات تقنية وهندسة حلول وذكاء اصطناعي واتوماسيون وبرمجيات مخصصة وبنية سحابية وخدمات بيانات.',
     keywords: [
-      'وكالة ذكاء اصطناعي طنجة',
-      'وكلاء ذكاء اصطناعي المغرب',
+      'استشارات تقنية المغرب',
+      'شركة تحول رقمي طنجة',
+      'استشارات التحول الرقمي المغرب',
       'تطوير برمجيات مخصصة المغرب',
       'تطوير تطبيق موبايل مخصص للشركات المغرب',
       'تطوير تطبيق ويب مخصص طنجة',
@@ -80,23 +73,22 @@ const homeContent: Record<
       'أتمتة سير العمل للشركات المغرب',
       'ترحيل ونشر سحابي المغرب',
       'استشارات DevOps و CI/CD المغرب',
-      'تنفيذ استقبال آلي بالذكاء الاصطناعي للشركات',
-      'محلل ذكاء اصطناعي لتقارير الإدارة',
+      'استشارات الذكاء الاصطناعي والاتمتة للمؤسسات',
+      'خدمات البيانات ولوحات القرار للمؤسسات',
       'أحتاج فريق لتطوير تطبيقي في المغرب',
-      'أفضل شركة برمجة للشركات الناشئة في طنجة',
+      'افضل فريق برمجة للشركات الناشئة في طنجة',
     ],
-    servicesHref: '/ar/services',
+    primaryHref: '/ar/services',
     cta: 'استكشف الخدمات',
   },
   es: {
-    title: 'Agentes de IA y software a medida en Tánger, Marruecos',
-    description:
-      'H.V.A crea recepcionistas con IA, analistas IA, automatizacion de flujos, plataformas de software a medida e infraestructura cloud.',
-    h1: 'Sistemas de IA, software y cloud para crecer',
-    body: 'Desarrollamos agentes de IA, automatizaciones y productos de software para empresas en Tanger y en todo Marruecos.',
+    title: 'Consultoria tecnologica y transformacion digital en Tanger, Marruecos',
+    h1: 'Consultoria estrategica y ejecucion tecnica',
+    body: 'Acompanamos a empresas desde la estrategia hasta la operacion en produccion con IA, automatizacion, software a medida, modernizacion IT, cloud y datos.',
     keywords: [
-      'agencia de IA en tanger',
-      'agentes de IA marruecos',
+      'consultoria tecnologica marruecos',
+      'transformacion digital tanger',
+      'consultoria IT y ejecucion tecnica',
       'desarrollo de software a medida marruecos',
       'desarrollo de app movil personalizada para empresa',
       'desarrollo de app web personalizada tanger',
@@ -105,12 +97,12 @@ const homeContent: Record<
       'automatizacion de flujos de trabajo empresariales',
       'migracion y despliegue cloud marruecos',
       'consultoria DevOps y CI/CD marruecos',
-      'implementacion recepcionista con IA para negocios',
-      'analista de IA para reportes ejecutivos',
+      'consultoria de IA y automatizacion para empresas',
+      'servicios de datos y reporting ejecutivo marruecos',
       'necesito equipo para crear mi app en marruecos',
-      'mejor empresa de software para startup en tanger',
+      'mejor equipo de software para startup en tanger',
     ],
-    servicesHref: '/es/services',
+    primaryHref: '/es/services',
     cta: 'Ver servicios',
   },
 };
@@ -130,9 +122,10 @@ export async function generateMetadata({ params }: LocalePageProps): Promise<Met
   }
 
   const content = homeContent[locale as SupportedLocale];
+  const identity = getLocaleMessaging(locale).identity;
   const base = buildPageMetadata({
     title: content.title,
-    description: content.description,
+    description: identity.longDescriptor,
     path: `/${locale}`,
     locale,
     keywords: content.keywords,
@@ -166,11 +159,12 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
 
   const isRtl = locale === 'ar';
   const content = homeContent[locale as SupportedLocale];
+  const identity = getLocaleMessaging(locale).identity;
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     name: content.title,
-    description: content.description,
+    description: identity.longDescriptor,
     keywords: content.keywords,
     url: `${SITE_URL}/${locale}`,
     inLanguage: locale,
@@ -190,9 +184,11 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       <JsonLd data={schema} />
       <p className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-[#2563EB]">{locale.toUpperCase()}</p>
       <h1 className="mb-6 font-serif text-4xl leading-tight text-[#0F172A] md:text-6xl">{content.h1}</h1>
-      <p className="max-w-3xl text-lg leading-relaxed text-[#334155]">{content.body}</p>
+      <p className="max-w-3xl text-lg leading-relaxed text-[#334155]">{identity.shortDescriptor}</p>
+      <p className="mt-4 max-w-3xl text-lg leading-relaxed text-[#334155]">{content.body}</p>
+      <p className="mt-4 max-w-3xl text-sm leading-relaxed text-[#475569]">{identity.proofStatement}</p>
       <Link
-        href={content.servicesHref}
+        href={content.primaryHref}
         className="mt-10 inline-flex items-center rounded bg-[#0F172A] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#2563EB]"
       >
         {content.cta}

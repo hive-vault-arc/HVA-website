@@ -93,10 +93,10 @@ const Contact: React.FC = () => {
             transition={{ duration: 0.55 }}
           >
             <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-headline tracking-tight text-[#0F172A] mb-8 leading-[1.1]">
-              Let's build your next system.
+              Start your transformation discovery.
             </h1>
             <p className="text-xl font-body text-[#475569] max-w-xl leading-relaxed">
-              Send a short brief. We reply within 24 hours.
+              Share your goals, constraints, and current bottlenecks. We reply within 24 hours and guide the next step.
             </p>
           </motion.div>
           {/* Architectural accent line */}
@@ -247,7 +247,7 @@ const Contact: React.FC = () => {
                       htmlFor="message"
                       className="block text-xs font-label font-bold uppercase tracking-widest text-[#475569] mb-2"
                     >
-                      Project Brief
+                      Transformation Brief
                     </label>
                     <textarea
                       id="message"
@@ -266,7 +266,7 @@ const Contact: React.FC = () => {
                   {/* CTA row */}
                   <div className="pt-6 flex flex-col md:flex-row md:items-center justify-between gap-8">
                     <p className="text-sm font-body text-[#475569] max-w-xs leading-relaxed">
-                      By submitting this form, you agree to our processing of your data as outlined in our privacy policy.
+                      We use this information to scope strategy, architecture, and delivery options for your team.
                     </p>
                     <button
                       type="submit"
@@ -298,8 +298,7 @@ const Contact: React.FC = () => {
                     "
                   </span>
                   <p className="text-2xl md:text-3xl font-headline italic text-[#0F172A] leading-snug">
-                    "Our mission is to bridge the gap between architectural vision and technical execution.
-                    Every system we build is a permanent asset for your firm."
+                    "The value is not only in code delivery. The value is in building a reliable operating capability your business can grow on."
                   </p>
                   <div className="mt-6 flex items-center gap-4">
                     <div className="w-12 h-px bg-[#2563EB]" />

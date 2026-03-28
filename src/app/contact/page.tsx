@@ -6,12 +6,13 @@ import { CONTACT_FAQS } from '../../data/faqs';
 import { GLOBAL_KEYWORDS, SITE_URL, buildPageMetadata, mergeKeywords } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Contact | Book an AI Business Transformation Discovery Call',
+  title: 'Contact | Start a Technology and Transformation Discovery',
   description:
-    'Book a discovery call with H.V.A to scope your AI business operating system, consulting roadmap, and implementation priorities. Pricing is discussed after discovery.',
+    'Start a strategic discovery call with H.V.A to scope your transformation priorities, technical roadmap, and delivery model. Pricing is discussed after discovery.',
   path: '/contact',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
-    'contact AI business transformation Morocco',
+    'contact digital transformation consulting Morocco',
+    'technology strategy discovery call Tangier',
     'hire software development team Morocco',
     'request quote custom mobile app Morocco',
     'request quote custom web app Morocco',
@@ -35,9 +36,9 @@ export default function Page() {
     url: `${SITE_URL}/contact`,
     inLanguage: ['en', 'fr', 'ar', 'es'],
     keywords: mergeKeywords(GLOBAL_KEYWORDS, [
-      'book AI systems strategy call',
-      'business transformation consultation',
-      'cloud reliability consultation',
+      'book transformation strategy call',
+      'technology consulting discovery',
+      'cloud and modernization consultation',
     ]),
   };
 

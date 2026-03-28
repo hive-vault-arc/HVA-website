@@ -3,76 +3,86 @@
 ## Identity
 
 - Company: Hive Vault Arc (H.V.A)
-- Positioning: Hive Vault Arc is an AI-driven business transformation partner that designs, builds, and operates intelligent systems that run core business operations.
-- Supporting line: We redesign and automate how businesses operate through consulting, AI agents, CRM, custom software, mobile apps, and SaaS systems.
+- Positioning: H.V.A is an AI-powered digital transformation and technology consulting firm.
+- Three pillars: (1) AI & Intelligent Automation, (2) Digital Transformation Programs, (3) Technology Consulting and Advisory.
+- Descriptor: We design and deploy intelligent automation and AI agents, lead end-to-end digital transformation programs, develop custom software and cloud infrastructure, and provide strategic technology consulting — from roadmap to long-term production operations.
 - Base: Tangier, Morocco
 - Languages: English, French, Arabic, Spanish
 
-## What We Sell
+## Three-Pillar Positioning
 
-- Category: AI Business Operating Systems
-- Outcome sold: operational control, faster execution, and measurable business performance
-- Industry examples:
-  - Real Estate Operating System
-  - Clinic Operating System
-  - Construction Operations System
+### Pillar 1 — AI & Intelligent Automation
+The leading capability cluster. We build and deploy AI agents for customer operations, sales workflows, and internal processes. This includes WhatsApp AI agents, AI receptionists, lead qualification automation, decision intelligence dashboards, and workflow orchestration systems.
 
-## Capabilities
+### Pillar 2 — Digital Transformation
+End-to-end transformation programs: operational diagnostics, IT modernization, legacy system upgrades, cloud migration, data pipelines, and CRM transformation. We own transformation programs from strategy through production — not just the advisory layer.
 
-- Business and IT consulting for operational redesign
-- AI agent systems (WhatsApp, web, internal ops)
-- CRM engineering and migration
-- Workflow automation and process orchestration
-- Custom software and SaaS development
-- Mobile app engineering (Android/iOS)
-- Cloud, DevOps, CI/CD, reliability, and security
+### Pillar 3 — Technology Consulting
+Strategic advisory layer: digital transformation roadmap design, operational diagnostics, architecture decisions, technology strategy for growth-stage and established businesses. Consulting is always paired with execution accountability.
 
-## Proven Deployments
+## Engagement Model
+
+- Engagement model: strategy advisory → architecture design → engineering execution → managed evolution.
+- Operating style: founder-led, end-to-end ownership, outcome accountability.
+- Delivery principle: not advice-only and not build-only; consulting and execution are always integrated.
+- Partnership horizon: project launch through long-term maintenance and optimization.
+- Discovery-first model with strategic and technical scoping before any scope is locked.
+
+## Execution Capabilities
+
+- AI agents and intelligent automation (WhatsApp, web, voice, internal workflows)
+- Workflow automation, orchestration, and process redesign
+- Decision intelligence and AI-powered analytics dashboards
+- Digital transformation diagnostics and roadmap design
+- CRM engineering, migration, and deep integration
+- Custom software, SaaS, web, and mobile development
+- IT modernization and legacy system upgrades
+- Cloud infrastructure, DevOps, CI/CD, observability, and security
+- Data services, KPI design, and executive analytics
+
+## Transformation Proof
 
 ### 1) Multilingual WhatsApp AI Agent (Real Estate)
 
-- Live in production since October 2025
-- First response latency: <18 seconds
-- Manual triage reduction: 85%
-- Qualified meetings increase: +43%
+- Status: Live in production since October 2025
+- Outcomes:
+  - First response latency: <18 seconds
+  - Manual triage reduction: 85%
+  - Qualified meetings increase: +43%
 
-### 2) Zoho-Grade CRM Operating System (Real Estate)
+### 2) CRM Transformation Program (Real Estate)
 
-- Live in production since May 2025
-- Pipeline visibility: 100%
-- Manual data-entry time: -40%
-- Tracked pipeline volume: $2.4M monthly
+- Status: Live in production since May 2025
+- Outcomes:
+  - Pipeline visibility: 100%
+  - Manual data-entry time: -40%
+  - Tracked pipeline volume: $2.4M monthly
 
 ### 3) Executive Analytics Control Tower (Healthcare)
 
-- Live in production since January 2026
-- Reporting cycle time: -72%
-- KPI accuracy: 99.3%
-- Executive decision latency on anomalies: -58%
+- Status: Live in production since January 2026
+- Outcomes:
+  - Reporting cycle time: -72%
+  - KPI accuracy: 99.3%
+  - Decision latency on anomalies: -58%
 
-## Technical Depth
+## Commercial Approach
 
-- Event-driven AI orchestration
-- Conversational memory and context layers
-- Domain-driven CRM architecture
-- Role-based access and audit logging
-- ETL and semantic KPI layers
-- CI/CD with controlled releases
-- Observability, monitoring, and security hardening
-
-## Commercial Model
-
-- Pricing is private and discussed after discovery calls.
-- Scope and commercial structure are tailored to business context, system complexity, and integration depth.
+- Discovery-first model with strategic and technical scoping.
+- Pricing is private and discussed after discovery.
+- Commercial structure is tailored to scope, complexity, integrations, and maintenance requirements.
 
 ## References
 
 - Official site URL: https://hiva-nine.vercel.app
 - Home: /
+- Services: /services
+- About: /about
+- Portfolio: /portfolio
 - Case Studies: /case-studies
 - Products & Systems: /products-systems
-- Services: /services
+- Blog: /blog
 - Contact: /contact
-- WhatsApp AI Agent Case: /case-studies/multilingual-whatsapp-ai-agent
-- CRM Operating System Case: /case-studies/zoho-grade-crm-platform
+- WhatsApp Agent Case: /case-studies/multilingual-whatsapp-ai-agent
+- CRM Transformation Case: /case-studies/zoho-grade-crm-platform
 - Analytics Control Tower Case: /case-studies/executive-analytics-control-tower

@@ -340,8 +340,6 @@
 
 .site-footer__frame {
   position: relative;
-  max-width: 1280px;
-  margin: 0 auto;
   border: 1px solid rgba(37, 99, 235, 0.28);
   background: #f8fafc;
   box-shadow: 0 12px 36px rgba(25, 28, 30, 0.04);
@@ -371,7 +369,7 @@
 }
 
 .site-footer__container {
-  padding: 2.3rem 1.35rem 1rem;
+  padding: 2.3rem clamp(1.35rem, 5vw, 4rem) 1rem;
 }
 
 .site-footer__main {
@@ -515,7 +513,7 @@
 
 @media (min-width: 900px) {
   .site-footer__container {
-    padding: 3rem 2rem 1.2rem;
+    padding: 3rem clamp(2rem, 6vw, 5rem) 1.2rem;
   }
 
   .site-footer__main {

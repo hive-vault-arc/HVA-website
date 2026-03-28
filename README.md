@@ -2,6 +2,12 @@
 
 Marketing website for **H.V.A** built with **Next.js 16 + React + TypeScript + Tailwind CSS**.
 
+## Market Identity
+
+H.V.A is positioned as a **technology consulting and digital transformation firm** with end-to-end ownership from strategy to long-term maintenance.
+
+For copy governance rules, see [Brand Copy Lint Checklist](docs/brand-copy-checklist.md).
+
 ## Features
 
 - App Router routes for `Home`, `About`, `Services`, `Portfolio`, and `Contact`

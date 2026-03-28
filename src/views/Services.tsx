@@ -13,6 +13,7 @@ import {
 import { useAnimationQuality } from '../lib/animationQuality';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 import BottomCTA from '../components/BottomCTA';
+import { CANONICAL_MARKET_IDENTITY } from '../lib/positioning';
 
 /* ── Data ─────────────────────────────────────────────────────────────────── */
 
@@ -156,7 +157,7 @@ const deliveryFlow = [
 ];
 
 const heroStats = [
-  { value: '4', label: 'Core Service Lines', sub: 'AI · Automation · Software · Cloud' },
+  { value: '3', label: 'Service Pillars', sub: 'AI · Transformation · Consulting' },
   { value: '24/7', label: 'Continuous AI Coverage', sub: 'Agents always operational' },
   { value: '100%', label: 'Production Delivery', sub: 'Every sprint ships to prod' },
 ];
@@ -209,15 +210,14 @@ const Services: React.FC = () => {
                 style={{ y: heroShift }}
               >
                 <span className="inline-block text-[#2563EB] font-bold tracking-[0.22em] text-[10px] uppercase mb-6">
-                  Consulting, Design, Build, and Operate
+                  AI &amp; Automation · Digital Transformation · Technology Consulting
                 </span>
                 <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl lg:text-8xl text-[#0F172A] leading-[1.03] tracking-tight mb-8">
-                  Engineering and Advisory for<br />
-                  <em className="italic">Core Operations.</em>
+                  AI, Automation, and Digital<br />
+                  <em className="italic">Transformation — Delivered.</em>
                 </h1>
                 <p className="text-xl md:text-2xl text-[#475569] font-light max-w-2xl leading-relaxed mb-10">
-                  Hive Vault Arc is an AI-driven business transformation partner that designs, builds, and operates
-                  intelligent systems for daily operations. We lead consulting, architecture, implementation, and automation end to end.
+                  {CANONICAL_MARKET_IDENTITY.longDescriptor}
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link
@@ -266,14 +266,14 @@ const Services: React.FC = () => {
 
             <div className="mb-16">
               <p className="text-[10px] uppercase tracking-[0.22em] text-[#475569] font-bold mb-3">
-                Implementation Pillars
+                Transformation Pillars
               </p>
               <div className="flex items-end justify-between flex-wrap gap-6">
                 <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-[#0F172A] leading-tight max-w-2xl">
-                  How We Deliver Operational Systems
+                  How We Deliver End-to-End Programs
                 </h2>
                 <p className="text-[#475569] max-w-md font-light leading-relaxed">
-                  Four execution streams that turn strategy into production operations for leadership teams.
+                  Four execution streams that connect advisory strategy to stable production delivery.
                 </p>
               </div>
               <div className="mt-8 w-16 h-[3px] bg-[#2563EB]" />
@@ -376,7 +376,7 @@ const Services: React.FC = () => {
                 Evidence Layer
               </p>
               <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl text-[#0F172A] leading-tight">
-                Proven Depth Across System Design and Delivery
+                Proven Depth Across Consulting and Delivery
               </h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -438,8 +438,7 @@ const Services: React.FC = () => {
                 <div className="mt-6 w-16 h-[3px] bg-[#2563EB]" />
               </div>
               <p className="text-[#475569] text-lg font-light leading-relaxed max-w-lg">
-                From AI receptionist and analyst systems to workflow automation and deployment
-                reliability — our capability set is designed as one connected delivery ecosystem.
+                From AI programs and workflow automation to software modernization and cloud reliability, our capability set is structured as one connected execution model.
               </p>
             </div>
 
@@ -487,14 +486,14 @@ const Services: React.FC = () => {
                   Our Standard
                 </p>
                 <blockquote className="font-serif text-3xl md:text-4xl italic text-[#F8FAFC] leading-snug">
-                  "We don't ship features.<br />
-                  We ship systems that operate<br />
-                  with or without you in the room."
+                  "We do not stop at recommendations.<br />
+                  We stay accountable through delivery,<br />
+                  reliability, and measurable outcomes."
                 </blockquote>
                 <div className="mt-10 h-px bg-gradient-to-r from-[#2563EB]/60 via-[#3b82f6]/40 to-transparent" />
                 <p className="mt-6 text-[#F8FAFC]/55 text-sm font-light leading-relaxed max-w-md">
-                  Every engagement is structured around production outcomes, not deliverable counts.
-                  The goal is a system your team trusts and your business depends on.
+                  Every engagement is structured around business outcomes, not output volume.
+                  The goal is a resilient operating capability your team can trust long term.
                 </p>
 
                 {/* Stat strip */}
@@ -556,11 +555,11 @@ const Services: React.FC = () => {
               <p className="text-[10px] uppercase tracking-[0.22em] text-[#475569] font-bold mb-4">
                 Execution Flow
               </p>
-              <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-[#0F172A] leading-tight">
-                How Delivery Moves to Production
-              </h2>
+                <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-[#0F172A] leading-tight">
+                How Transformation Moves to Production
+                </h2>
               <p className="mt-4 text-[#475569] font-light text-lg max-w-xl mx-auto">
-                The architectural lifecycle of every H.V.A engagement.
+                The consulting-to-engineering lifecycle of every H.V.A engagement.
               </p>
             </div>
 
@@ -607,8 +606,8 @@ const Services: React.FC = () => {
         ──────────────────────────────────────────────────────────────────── */}
         <BottomCTA
           variant="dark"
-          headline="Need a Transformation Partner You Can Trust?"
-          subtext="Share your operating constraints and we will map the right implementation path, ownership model, and cadence."
+          headline="AI Strategy, Digital Transformation, and Engineering — in One Partner."
+          subtext="Share your constraints and we will map the right AI automation, transformation, and delivery path for your organization."
           primaryLabel="Book Discovery Call"
           primaryHref="/contact"
           secondaryLabel="View Case Studies"
