@@ -39,7 +39,7 @@ const industries = [
     name: 'SME Services',
     sector: 'SME & Professional Services',
     focus: 'AI-assisted client operations, custom software, IT modernization, and scalable cloud foundations.',
-    href: '/services#solution-programs',
+    href: '/services/solution-programs',
   },
 ];
 

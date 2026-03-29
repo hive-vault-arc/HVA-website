@@ -6,9 +6,9 @@ import { SERVICES_FAQS } from '../../data/faqs';
 import { GLOBAL_KEYWORDS, SITE_URL, absoluteUrl, buildPageMetadata, mergeKeywords } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Services | Technology Consulting, Solution Programs, and Managed Evolution',
+  title: 'Services | Consulting, Engineering, and Solution Program Brief',
   description:
-    'H.V.A delivers advisory, architecture, engineering delivery, modernization, and managed evolution across AI, automation, custom software, cloud infrastructure, and data services.',
+    'A concise overview of H.V.A service pillars plus a solution-program preview across AI, automation, custom software, modernization, cloud, and data.',
   path: '/services',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'technology consulting services Morocco',
@@ -49,7 +49,7 @@ export default function Page() {
   const serviceSchema = {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    name: 'AI Business Transformation and Systems Engineering',
+    name: 'H.V.A Services Brief and Solution Preview',
     provider: {
       '@type': ['Organization', 'ProfessionalService'],
       '@id': `${SITE_URL}/#organization`,
@@ -86,7 +86,7 @@ export default function Page() {
       `${SITE_URL}/case-studies/multilingual-whatsapp-ai-agent`,
       `${SITE_URL}/case-studies/zoho-grade-crm-platform`,
       `${SITE_URL}/case-studies/executive-analytics-control-tower`,
-      `${SITE_URL}/services#solution-programs`,
+      `${SITE_URL}/services/solution-programs`,
       `${SITE_URL}/services/in-detail`,
     ],
   };

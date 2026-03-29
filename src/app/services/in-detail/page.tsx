@@ -6,9 +6,9 @@ import { SERVICES_FAQS } from '../../../data/faqs';
 import { GLOBAL_KEYWORDS, SITE_URL, absoluteUrl, buildPageMetadata, mergeKeywords } from '../../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Services In Detail | Technology Consulting, Engineering, and Managed Evolution',
+  title: 'Services In Detail | Technical Capability Depth and Execution Model',
   description:
-    'Detailed capabilities from H.V.A across advisory, architecture, engineering delivery, modernization, and managed evolution.',
+    'Deep technical breakdown of H.V.A consulting execution capabilities across architecture, AI, automation, software, cloud, and data operations.',
   path: '/services/in-detail',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'services in detail technology consulting',
@@ -47,7 +47,7 @@ export default function ServicesInDetailPage() {
     availableLanguage: ['en', 'fr', 'ar', 'es'],
     url: `${SITE_URL}/services/in-detail`,
     subjectOf: [
-      `${SITE_URL}/services#solution-programs`,
+      `${SITE_URL}/services/solution-programs`,
       `${SITE_URL}/case-studies/multilingual-whatsapp-ai-agent`,
       `${SITE_URL}/case-studies/zoho-grade-crm-platform`,
       `${SITE_URL}/case-studies/executive-analytics-control-tower`,

@@ -11,7 +11,7 @@ describe('Navbar', () => {
     render(<Navbar />);
 
     screen.getAllByRole('link', { name: 'ARC' }).forEach(link => expect(link).toHaveAttribute('href', '/arc'));
-    screen.getAllByRole('link', { name: 'Overview' }).forEach(link => expect(link).toHaveAttribute('href', '/services'));
+    screen.getAllByRole('link', { name: 'Solution Programs' }).forEach(link => expect(link).toHaveAttribute('href', '/services/solution-programs'));
     screen.getAllByRole('link', { name: 'In Detail' }).forEach(link => expect(link).toHaveAttribute('href', '/services/in-detail'));
     screen.getAllByRole('link', { name: 'Real Estate' }).forEach(link => expect(link).toHaveAttribute('href', '/industries#real-estate'));
     screen.getAllByRole('link', { name: 'Healthcare' }).forEach(link => expect(link).toHaveAttribute('href', '/industries#healthcare'));

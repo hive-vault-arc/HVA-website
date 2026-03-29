@@ -51,7 +51,7 @@ const CaseStudies: React.FC = () => {
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link
-                  href="/services#solution-programs"
+                  href="/services/solution-programs"
                   className="sharp-edge bg-[#1E272E] text-[#F5F6FA] px-8 py-4 text-sm font-bold hover:bg-[#0984E3] transition-colors duration-300"
                 >
                   View Solution Programs
@@ -152,7 +152,7 @@ const CaseStudies: React.FC = () => {
         primaryLabel="Start Discovery"
         primaryHref="/contact"
         secondaryLabel="View Solution Programs"
-        secondaryHref="/services#solution-programs"
+        secondaryHref="/services/solution-programs"
       />
     </div>
   );

@@ -227,7 +227,7 @@ const ServicesInDetail: React.FC = () => {
                     View Proof
                   </Link>
                   <Link
-                    href="/services#solution-programs"
+                    href="/services/solution-programs"
                     className="sharp-edge bg-white border border-[#0F172A]/15 px-8 py-4 text-sm font-bold uppercase tracking-wide hover:bg-[#f1f5f9] transition-colors duration-300"
                   >
                     Solution Programs &rarr;
@@ -408,7 +408,7 @@ const ServicesInDetail: React.FC = () => {
               <Link href="/case-studies" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">
                 Read case studies &rarr;
               </Link>
-              <Link href="/services#solution-programs" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">
+              <Link href="/services/solution-programs" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">
                 View solution programs &rarr;
               </Link>
             </div>

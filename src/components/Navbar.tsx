@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
   }, []);
 
   const servicesItems = [
-    { path: '/services', label: 'Overview' },
+    { path: '/services/solution-programs', label: 'Solution Programs' },
     { path: '/services/in-detail', label: 'In Detail' },
   ];
 
@@ -70,8 +70,8 @@ const Navbar: React.FC = () => {
     (path === '/insights/case-studies' && pathname?.startsWith('/case-studies'));
 
   const isServicesItemActive = (path: string) => {
-    if (path === '/services') {
-      return pathname === '/services';
+    if (path === '/services/solution-programs') {
+      return pathname === '/services/solution-programs';
     }
 
     return isRouteActive(path);

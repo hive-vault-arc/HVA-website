@@ -78,7 +78,7 @@ Strategic advisory layer: digital transformation roadmap design, operational dia
 - Home: /
 - Services: /services
 - Services In Detail: /services/in-detail
-- Solution Programs: /services#solution-programs
+- Solution Programs: /services/solution-programs
 - Industries: /industries
 - ARC: /arc
 - About: /about
