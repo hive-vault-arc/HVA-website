@@ -1,5 +1,5 @@
 import { permanentRedirect } from 'next/navigation';
 
 export default function ProductsSystemsRedirectPage() {
-  permanentRedirect('/services/solutions');
+  permanentRedirect('/services#solution-programs');
 }

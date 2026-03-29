@@ -26,11 +26,17 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navItems = [
-    { path: '/arc', label: 'ARC' },
-    { path: '/services', label: 'Services' },
-    { path: '/industries', label: 'Industries' },
-    { path: '/about', label: 'Who We Are' },
+  const servicesItems = [
+    { path: '/services', label: 'Overview' },
+    { path: '/services/in-detail', label: 'In Detail' },
+  ];
+
+  const industriesItems = [
+    { path: '/industries#real-estate', label: 'Real Estate' },
+    { path: '/industries#healthcare', label: 'Healthcare' },
+    { path: '/industries#construction', label: 'Construction' },
+    { path: '/industries#logistics', label: 'Logistics' },
+    { path: '/industries#sme-services', label: 'SME Services' },
   ];
 
   const insightsItems = [
@@ -43,6 +49,8 @@ const Navbar: React.FC = () => {
 
   const isInsightsActive =
     pathname?.startsWith('/insights') || pathname?.startsWith('/blog') || pathname?.startsWith('/case-studies');
+  const isServicesActive = pathname?.startsWith('/services');
+  const isIndustriesActive = pathname?.startsWith('/industries');
 
   const desktopLinkClass = (isActive: boolean) =>
     `px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200 ${
@@ -54,13 +62,20 @@ const Navbar: React.FC = () => {
       isActive ? 'text-[#F5F6FA] bg-[#0984E3]' : 'text-[#1E272E]/72 hover:text-[#1E272E] hover:bg-[#0984E3]/10'
     }`;
 
-  const isNavActive = (path: string) =>
-    pathname === path || (path !== '/' && pathname?.startsWith(`${path}/`));
+  const isRouteActive = (path: string) => pathname === path || (path !== '/' && pathname?.startsWith(`${path}/`));
 
   const isInsightsItemActive = (path: string) =>
     pathname === path ||
     (path === '/insights/blogs' && pathname?.startsWith('/blog')) ||
     (path === '/insights/case-studies' && pathname?.startsWith('/case-studies'));
+
+  const isServicesItemActive = (path: string) => {
+    if (path === '/services') {
+      return pathname === '/services';
+    }
+
+    return isRouteActive(path);
+  };
 
   return (
     <header className="navbar-sharp fixed top-2 left-1/2 -translate-x-1/2 w-[90%] max-w-6xl z-50">
@@ -82,19 +97,60 @@ const Navbar: React.FC = () => {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-1">
-              {navItems.map((item) => {
-                const isActive = isNavActive(item.path);
-
-                return (
-                  <Link
-                    key={item.path}
-                    href={item.path}
-                    className={desktopLinkClass(isActive)}
-                  >
-                    {item.label}
-                  </Link>
-                );
-              })}
+              <Link href="/arc" className={desktopLinkClass(isRouteActive('/arc'))}>
+                ARC
+              </Link>
+              <div className="relative group">
+                <Link
+                  href="/services"
+                  className={`${desktopLinkClass(!!isServicesActive)} inline-flex items-center gap-1.5`}
+                >
+                  Services
+                  <ChevronDown className="h-3.5 w-3.5" />
+                </Link>
+                <div className="pointer-events-none absolute left-0 top-full pt-2 opacity-0 transition duration-200 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
+                  <div className="min-w-[220px] rounded-xl border border-[#1E272E]/10 bg-[#F5F6FA] p-2 shadow-[0_8px_24px_rgba(9,132,227,0.14)]">
+                    {servicesItems.map((item) => (
+                      <Link
+                        key={item.path}
+                        href={item.path}
+                        className={`block rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                          isServicesItemActive(item.path)
+                            ? 'bg-[#0984E3] text-[#F5F6FA]'
+                            : 'text-[#1E272E]/75 hover:bg-[#0984E3]/10 hover:text-[#1E272E]'
+                        }`}
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div className="relative group">
+                <Link
+                  href="/industries"
+                  className={`${desktopLinkClass(!!isIndustriesActive)} inline-flex items-center gap-1.5`}
+                >
+                  Industries
+                  <ChevronDown className="h-3.5 w-3.5" />
+                </Link>
+                <div className="pointer-events-none absolute left-0 top-full pt-2 opacity-0 transition duration-200 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
+                  <div className="min-w-[220px] rounded-xl border border-[#1E272E]/10 bg-[#F5F6FA] p-2 shadow-[0_8px_24px_rgba(9,132,227,0.14)]">
+                    {industriesItems.map((item) => (
+                      <Link
+                        key={item.path}
+                        href={item.path}
+                        className="block rounded-lg px-3 py-2 text-sm font-medium text-[#1E272E]/75 transition-colors hover:bg-[#0984E3]/10 hover:text-[#1E272E]"
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <Link href="/about" className={desktopLinkClass(isRouteActive('/about'))}>
+                Who We Are
+              </Link>
               <div className="relative group">
                 <Link
                   href="/insights"
@@ -160,19 +216,44 @@ const Navbar: React.FC = () => {
           }`}
         >
           <div className="px-4 pt-2 pb-4 space-y-1 bg-[#F5F6FA]/95 backdrop-blur-lg rounded-2xl mx-4 mt-2 border border-[#1E272E]/12 shadow-[0_8px_24px_rgba(9,132,227,0.14)]">
-            {navItems.map((item) => {
-              const isActive = isNavActive(item.path);
-
-              return (
+            <Link href="/arc" className={mobileLinkClass(isRouteActive('/arc'))}>
+              ARC
+            </Link>
+            <Link href="/services" className={mobileLinkClass(!!isServicesActive)}>
+              Services
+            </Link>
+            <div className="ml-3 rounded-xl border border-[#1E272E]/10 bg-white/80 p-2">
+              {servicesItems.map((item) => (
                 <Link
                   key={item.path}
                   href={item.path}
-                  className={mobileLinkClass(isActive)}
+                  className={`block rounded-lg px-3 py-2 text-sm ${
+                    isServicesItemActive(item.path)
+                      ? 'bg-[#0984E3] text-[#F5F6FA]'
+                      : 'text-[#1E272E]/72 hover:bg-[#0984E3]/10 hover:text-[#1E272E]'
+                  }`}
                 >
                   {item.label}
                 </Link>
-              );
-            })}
+              ))}
+            </div>
+            <Link href="/industries" className={mobileLinkClass(!!isIndustriesActive)}>
+              Industries
+            </Link>
+            <div className="ml-3 rounded-xl border border-[#1E272E]/10 bg-white/80 p-2">
+              {industriesItems.map((item) => (
+                <Link
+                  key={item.path}
+                  href={item.path}
+                  className="block rounded-lg px-3 py-2 text-sm text-[#1E272E]/72 hover:bg-[#0984E3]/10 hover:text-[#1E272E]"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+            <Link href="/about" className={mobileLinkClass(isRouteActive('/about'))}>
+              Who We Are
+            </Link>
             <Link
               href="/insights"
               className={mobileLinkClass(!!isInsightsActive)}

@@ -7,34 +7,39 @@ import BottomCTA from '../components/BottomCTA';
 
 const industries = [
   {
+    anchorId: 'real-estate',
     name: 'Real Estate',
     sector: 'Real Estate & Property',
     focus: 'Lead operations, CRM modernization, pipeline governance, multilingual client workflows.',
     href: '/case-studies/zoho-grade-crm-platform',
   },
   {
+    anchorId: 'healthcare',
     name: 'Healthcare',
     sector: 'Healthcare & Clinical Ops',
     focus: 'Executive reporting, clinical operations dashboards, workflow reliability, decision intelligence.',
     href: '/case-studies/executive-analytics-control-tower',
   },
   {
+    anchorId: 'construction',
     name: 'Construction',
     sector: 'Construction & Projects',
     focus: 'Operational planning, schedule visibility, field-to-office process automation, risk tracking.',
     href: '/services',
   },
   {
+    anchorId: 'logistics',
     name: 'Logistics',
     sector: 'Logistics & Operations',
     focus: 'Dispatch workflows, service operations automation, SLA monitoring, control-tower visibility.',
     href: '/services',
   },
   {
+    anchorId: 'sme-services',
     name: 'SME Services',
     sector: 'SME & Professional Services',
     focus: 'AI-assisted client operations, custom software, IT modernization, and scalable cloud foundations.',
-    href: '/services/solutions',
+    href: '/services#solution-programs',
   },
 ];
 
@@ -94,9 +99,10 @@ export default function Industries() {
             {industries.map((item) => (
               <motion.article
                 key={item.name}
+                id={item.anchorId}
                 variants={fadeUp}
                 transition={{ duration: 0.5 }}
-                className="group flex flex-col bg-[#F2F4F6] p-8 md:p-10"
+                className="group flex scroll-mt-36 flex-col bg-[#F2F4F6] p-8 md:p-10"
               >
                 <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.22em] text-[#2563EB]">
                   {item.sector}

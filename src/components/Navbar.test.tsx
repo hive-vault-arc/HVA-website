@@ -11,6 +11,13 @@ describe('Navbar', () => {
     render(<Navbar />);
 
     screen.getAllByRole('link', { name: 'ARC' }).forEach(link => expect(link).toHaveAttribute('href', '/arc'));
+    screen.getAllByRole('link', { name: 'Overview' }).forEach(link => expect(link).toHaveAttribute('href', '/services'));
+    screen.getAllByRole('link', { name: 'In Detail' }).forEach(link => expect(link).toHaveAttribute('href', '/services/in-detail'));
+    screen.getAllByRole('link', { name: 'Real Estate' }).forEach(link => expect(link).toHaveAttribute('href', '/industries#real-estate'));
+    screen.getAllByRole('link', { name: 'Healthcare' }).forEach(link => expect(link).toHaveAttribute('href', '/industries#healthcare'));
+    screen.getAllByRole('link', { name: 'Construction' }).forEach(link => expect(link).toHaveAttribute('href', '/industries#construction'));
+    screen.getAllByRole('link', { name: 'Logistics' }).forEach(link => expect(link).toHaveAttribute('href', '/industries#logistics'));
+    screen.getAllByRole('link', { name: 'SME Services' }).forEach(link => expect(link).toHaveAttribute('href', '/industries#sme-services'));
     screen.getAllByRole('link', { name: 'Services' }).forEach(link => expect(link).toHaveAttribute('href', '/services'));
     screen.getAllByRole('link', { name: 'Industries' }).forEach(link => expect(link).toHaveAttribute('href', '/industries'));
     screen.getAllByRole('link', { name: 'Who We Are' }).forEach(link => expect(link).toHaveAttribute('href', '/about'));

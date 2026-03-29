@@ -17,7 +17,7 @@ const pageLinks = [
 ];
 
 const expertiseLinks = [
-  { href: '/services/solutions', label: 'Solution Programs' },
+  { href: '/services#solution-programs', label: 'Solution Programs' },
   { href: '/case-studies/multilingual-whatsapp-ai-agent', label: 'WhatsApp Agent Operations' },
   { href: '/case-studies/zoho-grade-crm-platform', label: 'CRM Modernization' },
   { href: '/case-studies/executive-analytics-control-tower', label: 'Decision Intelligence' },

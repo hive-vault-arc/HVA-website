@@ -14,7 +14,6 @@ import { useAnimationQuality } from '../lib/animationQuality';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 import BottomCTA from '../components/BottomCTA';
 import { CANONICAL_MARKET_IDENTITY } from '../lib/positioning';
-import { PRODUCT_SYSTEMS } from '../lib/proof';
 
 /* ── Data ─────────────────────────────────────────────────────────────────── */
 
@@ -165,7 +164,7 @@ const heroStats = [
 
 /* ── Component ────────────────────────────────────────────────────────────── */
 
-const Services: React.FC = () => {
+const ServicesInDetail: React.FC = () => {
   const { motionReduced } = useAnimationQuality();
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
@@ -422,70 +421,6 @@ const Services: React.FC = () => {
           </div>
         </section>
 
-        <section id="solution-programs" className="systems-grid-zone scroll-mt-36">
-          <div className="editorial-shell mb-10">
-            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#475569] mb-3">
-              Solution Programs
-            </p>
-            <h2 className="font-serif text-2xl sm:text-3xl md:text-5xl text-[#0F172A] leading-tight">
-              Consulting-Led Operational Systems
-            </h2>
-            <p className="mt-4 max-w-3xl text-sm leading-relaxed text-[#475569]">
-              Reusable operating systems adapted to your context through advisory, architecture, engineering,
-              and long-term maintenance.
-            </p>
-          </div>
-
-          <div className="editorial-shell systems-grid">
-            {PRODUCT_SYSTEMS.map((system, index) => (
-              <article
-                key={system.name}
-                className={`system-card ${index % 2 === 0 ? 'system-card--tinted' : ''}`}
-              >
-                <div className="system-card__header">
-                  <p className="system-card__category">{system.category}</p>
-                  <h3 className="system-card__title">{system.name}</h3>
-                </div>
-
-                <div className="system-card__blocks">
-                  <section className="system-block">
-                    <h3>Modules</h3>
-                    <ul>
-                      {system.modules.map((moduleName) => (
-                        <li key={moduleName}>{moduleName}</li>
-                      ))}
-                    </ul>
-                  </section>
-                  <section className="system-block">
-                    <h3>Integrations</h3>
-                    <p>{system.integrations.join(', ')}</p>
-                  </section>
-                  <section className="system-block">
-                    <h3>Delivery Model</h3>
-                    <p>{system.deliveryModel}</p>
-                  </section>
-                  <section className="system-block">
-                    <h3>Outcomes</h3>
-                    <ul>
-                      {system.outcomes.map((outcome) => (
-                        <li key={outcome}>{outcome}</li>
-                      ))}
-                    </ul>
-                  </section>
-                </div>
-
-                <div className="system-card__proof-links">
-                  {system.proofLinks.map((proofLink) => (
-                    <Link key={proofLink} href={proofLink} className="editorial-link editorial-link--strong">
-                      View Proof &rarr;
-                    </Link>
-                  ))}
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
         {/* ────────────────────────────────────────────────────────────────────
             SECTION 3 — TECHNICAL COMPETENCIES
         ──────────────────────────────────────────────────────────────────── */}
@@ -684,4 +619,4 @@ const Services: React.FC = () => {
   );
 };
 
-export default Services;
+export default ServicesInDetail;

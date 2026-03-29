@@ -48,7 +48,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       }),
     },
     {
-      url: `${SITE_URL}/services/solutions`,
+      url: `${SITE_URL}/services/in-detail`,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.85,

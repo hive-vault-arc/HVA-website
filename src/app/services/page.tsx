@@ -6,7 +6,7 @@ import { SERVICES_FAQS } from '../../data/faqs';
 import { GLOBAL_KEYWORDS, SITE_URL, absoluteUrl, buildPageMetadata, mergeKeywords } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Services | Technology Consulting, Engineering, and Managed Evolution',
+  title: 'Services | Technology Consulting, Solution Programs, and Managed Evolution',
   description:
     'H.V.A delivers advisory, architecture, engineering delivery, modernization, and managed evolution across AI, automation, custom software, cloud infrastructure, and data services.',
   path: '/services',
@@ -27,6 +27,7 @@ export const metadata: Metadata = buildPageMetadata({
     'IT consulting engineering team Morocco',
     'custom software and maintenance services',
     'team to automate sales and support workflows',
+    'consulting-led solution programs',
     'services IA pour entreprise au Maroc',
     'migration CRM et integration API Maroc',
     'developpement application web et mobile entreprise Maroc',
@@ -85,7 +86,8 @@ export default function Page() {
       `${SITE_URL}/case-studies/multilingual-whatsapp-ai-agent`,
       `${SITE_URL}/case-studies/zoho-grade-crm-platform`,
       `${SITE_URL}/case-studies/executive-analytics-control-tower`,
-      `${SITE_URL}/services/solutions`,
+      `${SITE_URL}/services#solution-programs`,
+      `${SITE_URL}/services/in-detail`,
     ],
   };
 

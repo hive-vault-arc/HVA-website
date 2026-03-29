@@ -339,7 +339,7 @@ const Home: React.FC = () => {
             <Link href="/case-studies" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">
               Explore proof library &rarr;
             </Link>
-            <Link href="/services/solutions" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">
+            <Link href="/services#solution-programs" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">
               Explore solution programs &rarr;
             </Link>
           </div>
