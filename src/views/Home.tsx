@@ -2,7 +2,7 @@
 
 import React, { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Bot, Cloud, Eye, Layers } from 'lucide-react';
+import { ArrowRight, BarChart3, Bot, Cloud, Eye, Layers, MessageSquare } from 'lucide-react';
 import { motion } from 'framer-motion';
 import BottomCTA from '../components/BottomCTA';
 import Background3d from '../components/Plasma';
@@ -80,26 +80,68 @@ const Home: React.FC = () => {
     };
   }, []);
 
+  const [hoveredPillar, setHoveredPillar] = useState<number | null>(null);
+
   const servicePillars = [
     {
       icon: <Bot className="w-5 h-5" strokeWidth={1.5} />,
       title: 'AI & Intelligent Automation',
-      desc: 'AI agents, receptionists, and workflow orchestration that run operations continuously — qualifying leads, routing tasks, and generating insights 24/7.',
+      desc: 'AI agents that handle inquiries, qualify leads, and run your back-office — 24/7, without adding headcount.',
+      details: [
+        'WhatsApp & inbox AI receptionists',
+        'Lead qualification & routing agents',
+        'Internal workflow automation pipelines',
+      ],
     },
     {
       icon: <Layers className="w-5 h-5" strokeWidth={1.5} />,
       title: 'Digital Transformation',
-      desc: 'End-to-end transformation programs: operational diagnostics, IT modernization, legacy upgrades, cloud migration, and CRM transformation.',
+      desc: 'We take operations running on spreadsheets and rebuild them on integrated, purpose-built digital systems.',
+      details: [
+        'Full operational audit & process mapping',
+        'CRM, ERP & platform modernization',
+        'Cloud migration with zero-downtime plans',
+      ],
     },
     {
       icon: <Eye className="w-5 h-5" strokeWidth={1.5} />,
       title: 'Technology Consulting',
-      desc: 'Strategic advisory, roadmap design, and architecture decisions that align technology investments with measurable business outcomes.',
+      desc: 'Strategy that stays accountable through delivery. Same team from architecture decisions to long-term operations.',
+      details: [
+        'Technology roadmap & architecture design',
+        'Build vs. buy decision frameworks',
+        'Ongoing technical leadership & advisory',
+      ],
     },
     {
       icon: <Cloud className="w-5 h-5" strokeWidth={1.5} />,
       title: 'Engineering & Delivery',
-      desc: 'Custom software, mobile apps, SaaS platforms, and cloud infrastructure — engineered and shipped with full production accountability.',
+      desc: 'Production-grade web, mobile, and cloud systems — built for real load and delivered with full accountability.',
+      details: [
+        'Full-stack web & mobile development',
+        'SaaS platform & API engineering',
+        'DevOps, CI/CD & cloud infrastructure',
+      ],
+    },
+    {
+      icon: <MessageSquare className="w-5 h-5" strokeWidth={1.5} />,
+      title: 'Conversational AI & WhatsApp',
+      desc: 'AI agents deployed on WhatsApp, web chat, and email — multilingual, always available, and trained on your business.',
+      details: [
+        'Multilingual WhatsApp AI bots',
+        'Web chat & email automation',
+        'Human escalation & handoff flows',
+      ],
+    },
+    {
+      icon: <BarChart3 className="w-5 h-5" strokeWidth={1.5} />,
+      title: 'Analytics & Decision Intelligence',
+      desc: 'Executive dashboards and data pipelines that turn scattered operational data into real-time clarity for leadership.',
+      details: [
+        'Executive KPI dashboards & control towers',
+        'Operational data pipelines & ETL',
+        'Custom reporting for founders & ops teams',
+      ],
     },
   ];
 
@@ -120,6 +162,15 @@ const Home: React.FC = () => {
     { node: <SiOpenjdk />, title: 'Java', href: 'https://openjdk.org' },
   ];
 
+
+  let pillarGridCols: string | undefined;
+  if (hoveredPillar === null) {
+    pillarGridCols = undefined;
+  } else if (hoveredPillar % 2 === 0) {
+    pillarGridCols = '1.7fr 0.7fr';
+  } else {
+    pillarGridCols = '0.7fr 1.7fr';
+  }
 
   return (
     <div className="h-full home-reference">
@@ -168,25 +219,86 @@ const Home: React.FC = () => {
           </div>
         </div>
 
-        {/* Right — 2×2 service pillars */}
-        <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-px bg-[#d1d5db]">
-          {servicePillars.map((pillar) => (
-            <div
-              key={pillar.title}
-              className="bg-white p-10 flex flex-col gap-5 group relative hover:bg-[#F8FAFC] transition-colors duration-300"
-            >
-              <div className="w-10 h-10 flex items-center justify-center bg-[#dbeafe] text-[#2563EB] shrink-0">
-                {pillar.icon}
-              </div>
-              <div>
-                <h3 className="font-headline text-xl text-[#0F172A] mb-2">{pillar.title}</h3>
-                <p className="text-sm text-[#475569] leading-relaxed">{pillar.desc}</p>
-              </div>
-              {/* Bottom hover accent */}
-              <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-[#2563EB] group-hover:w-full transition-all duration-500" />
-            </div>
-          ))}
-        </div>
+        {/* Right — 2×3 service pillars */}
+        <ul
+          className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 bg-white list-none m-0 p-0"
+          style={{
+            isolation: 'isolate',
+            gridTemplateColumns: pillarGridCols,
+            transition: 'grid-template-columns 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+          }}
+          onMouseLeave={() => setHoveredPillar(null)}
+        >
+          {servicePillars.map((pillar, idx) => {
+            const row = Math.floor(idx / 2);
+            const col = idx % 2;
+            const totalRows = Math.ceil(servicePillars.length / 2);
+            let originV = 'center';
+            if (row === 0) originV = 'top';
+            else if (row === totalRows - 1) originV = 'bottom';
+            const originH = col === 0 ? 'left' : 'right';
+            const isHovered = hoveredPillar === idx;
+            const isOther = hoveredPillar !== null && hoveredPillar !== idx;
+            return (
+              <li
+                key={pillar.title}
+                className="bg-white relative"
+                style={{
+                  zIndex: isHovered ? 10 : 1,
+                  opacity: isOther ? 0.45 : 1,
+                  transition: 'opacity 0.4s ease',
+                  borderRight: col === 0 ? '1px solid #e2e8f0' : undefined,
+                  borderBottom: row < totalRows - 1 ? '1px solid #e2e8f0' : undefined,
+                }}
+                onMouseEnter={() => setHoveredPillar(idx)}
+              >
+                {/* Inner wrapper scales up on hover only — li stays full grid-cell size */}
+                <div
+                  className="h-full p-10 flex flex-col relative"
+                  style={{
+                    transform: isHovered ? 'scale(1.18)' : 'scale(1)',
+                    transformOrigin: `${originV} ${originH}`,
+                    transition: 'transform 0.55s cubic-bezier(0.16, 1, 0.3, 1)',
+                  }}
+                >
+                  <div className="w-10 h-10 flex items-center justify-center bg-[#dbeafe] text-[#2563EB] shrink-0">
+                    {pillar.icon}
+                  </div>
+                  {/* pb-16 reserves visual space for the absolute details below */}
+                  <div className="mt-5 pb-16">
+                    <h3 className="font-headline text-xl text-[#0F172A] mb-2">{pillar.title}</h3>
+                    <p className="text-sm text-[#475569] leading-relaxed">{pillar.desc}</p>
+                  </div>
+                  {/* Detail bullets — position:absolute so they never affect card height */}
+                  <ul
+                    className="absolute bottom-10 left-10 right-10 space-y-1.5 list-none p-0 m-0"
+                    aria-hidden={!isHovered}
+                    style={{
+                      opacity: isHovered ? 1 : 0,
+                      transform: isHovered ? 'translateY(0)' : 'translateY(5px)',
+                      transition: 'opacity 0.3s ease 0.08s, transform 0.35s ease 0.08s',
+                    }}
+                  >
+                    {pillar.details.map((detail) => (
+                      <li key={detail} className="flex items-center gap-2 text-xs text-[#2563EB] font-semibold">
+                        <span className="w-1 h-1 rounded-full bg-[#2563EB] shrink-0" />
+                        {detail}
+                      </li>
+                    ))}
+                  </ul>
+                  {/* Bottom accent bar */}
+                  <div
+                    className="absolute bottom-0 left-0 h-[2px] bg-[#2563EB]"
+                    style={{
+                      width: isHovered ? '100%' : '0%',
+                      transition: 'width 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+                    }}
+                  />
+                </div>
+              </li>
+            );
+          })}
+        </ul>
 
       </section>
 
@@ -227,8 +339,8 @@ const Home: React.FC = () => {
             <Link href="/case-studies" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">
               Explore proof library &rarr;
             </Link>
-            <Link href="/products-systems" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">
-              Explore products & systems &rarr;
+            <Link href="/services/solutions" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">
+              Explore solution programs &rarr;
             </Link>
           </div>
           <blockquote className="mt-8 border-l-2 border-[#2563EB] pl-4 text-sm italic text-[#334155]">
@@ -362,7 +474,7 @@ const Home: React.FC = () => {
         />
       </div>
 
-      <section ref={worldMapSectionRef} className="sharp-edge w-full py-12 rounded-xl overflow-hidden">
+      <section ref={worldMapSectionRef} className="sharp-edge w-full pt-12 pb-0 rounded-xl overflow-hidden">
         {shouldLoadWorldMap ? (
           <Suspense fallback={<div className="h-[220px] sm:h-[300px] md:h-[360px] w-full bg-[#ECF5FD]" aria-hidden="true" />}>
             <WorldMapDemo />

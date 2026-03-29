@@ -227,10 +227,10 @@ const Services: React.FC = () => {
                     View Proof
                   </Link>
                   <Link
-                    href="/products-systems"
+                    href="/services/solutions"
                     className="sharp-edge bg-white border border-[#0F172A]/15 px-8 py-4 text-sm font-bold uppercase tracking-wide hover:bg-[#f1f5f9] transition-colors duration-300"
                   >
-                    Products & Systems &rarr;
+                    Solution Programs &rarr;
                   </Link>
                 </div>
               </motion.div>
@@ -408,8 +408,8 @@ const Services: React.FC = () => {
               <Link href="/case-studies" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">
                 Read case studies &rarr;
               </Link>
-              <Link href="/products-systems" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">
-                View product systems &rarr;
+              <Link href="/services/solutions" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">
+                View solution programs &rarr;
               </Link>
             </div>
             <blockquote className="mt-8 border-l-2 border-[#2563EB] pl-4 text-sm italic text-[#334155]">

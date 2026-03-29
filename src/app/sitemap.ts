@@ -48,6 +48,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       }),
     },
     {
+      url: `${SITE_URL}/services/solutions`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    },
+    {
+      url: `${SITE_URL}/arc`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    },
+    {
+      url: `${SITE_URL}/industries`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    },
+    {
       url: `${SITE_URL}/about`,
       lastModified: now,
       changeFrequency: 'monthly',
@@ -72,10 +90,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${SITE_URL}/products-systems`,
+      url: `${SITE_URL}/insights`,
       lastModified: now,
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.85,
+    },
+    {
+      url: `${SITE_URL}/insights/news-articles`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${SITE_URL}/insights/perspectives`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${SITE_URL}/insights/research-reports`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.7,
     },
     ...INDEXABLE_LOCALES.flatMap((locale) => [
       {

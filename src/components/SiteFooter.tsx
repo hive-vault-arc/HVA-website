@@ -2,26 +2,26 @@ import Link from 'next/link';
 import { Globe, Mail, Phone, Share2 } from 'lucide-react';
 import { FiLinkedin } from 'react-icons/fi';
 import Logo from './Logo';
+import FooterSpotlight from './ui/FooterSpotlight';
 import { SITE_URL } from '../lib/seo';
 import { CANONICAL_MARKET_IDENTITY } from '../lib/positioning';
 
 const pageLinks = [
   { href: '/', label: 'Home' },
-  { href: '/case-studies', label: 'Case Studies' },
-  { href: '/products-systems', label: 'Products & Systems' },
+  { href: '/arc', label: 'ARC' },
   { href: '/services', label: 'Services' },
-  { href: '/portfolio', label: 'Portfolio' },
-  { href: '/about', label: 'About' },
-  { href: '/blog', label: 'Blog' },
+  { href: '/industries', label: 'Industries' },
+  { href: '/about', label: 'Who We Are' },
+  { href: '/insights', label: 'Insights' },
   { href: '/contact', label: 'Contact' },
 ];
 
 const expertiseLinks = [
-  { href: '/products-systems', label: 'Transformation Programs' },
+  { href: '/services/solutions', label: 'Solution Programs' },
   { href: '/case-studies/multilingual-whatsapp-ai-agent', label: 'WhatsApp Agent Operations' },
   { href: '/case-studies/zoho-grade-crm-platform', label: 'CRM Modernization' },
   { href: '/case-studies/executive-analytics-control-tower', label: 'Decision Intelligence' },
-  { href: '/services', label: 'Consulting + Engineering' },
+  { href: '/insights/research-reports', label: 'Research Reports' },
 ];
 
 export default function SiteFooter() {
@@ -29,11 +29,11 @@ export default function SiteFooter() {
 
   return (
     <footer className="site-footer">
-      <div className="site-footer__frame sharp-edge">
+      <FooterSpotlight>
         <div className="site-footer__container">
           <div className="site-footer__main">
             <div className="site-footer__brand-col">
-              <Logo className="site-footer__logo" />
+              <Logo className="site-footer__logo" light />
               <p className="site-footer__statement">
                 {CANONICAL_MARKET_IDENTITY.shortDescriptor}
               </p>
@@ -41,7 +41,7 @@ export default function SiteFooter() {
 
             <nav className="site-footer__group" aria-label="Footer pages">
               <p className="site-footer__title">Pages</p>
-              <ul className="site-footer__list-grid">
+              <ul className="site-footer__list-stack">
                 {pageLinks.map((item) => (
                   <li key={item.href}>
                     <Link href={item.href} className="site-footer__link">
@@ -108,7 +108,7 @@ export default function SiteFooter() {
             </div>
           </div>
         </div>
-      </div>
+      </FooterSpotlight>
     </footer>
   );
 }

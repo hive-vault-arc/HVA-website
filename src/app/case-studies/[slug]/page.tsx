@@ -170,8 +170,8 @@ export default async function CaseStudyDetailPage({ params }: Props) {
               Review the relevant system programs, then book a discovery call to scope your transformation roadmap.
             </p>
             <div className="mt-5 flex flex-wrap gap-4">
-              <Link href="/products-systems" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">
-                View products and systems &rarr;
+              <Link href="/services/solutions" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">
+                View solution programs &rarr;
               </Link>
               <Link href="/contact" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">
                 Book discovery call &rarr;

@@ -151,7 +151,7 @@ export default function HeroSlider() {
               </span>
               <h1 className="home-hero-title font-serif text-4xl sm:text-5xl md:text-7xl xl:text-[5.5rem] font-medium leading-[1.04] tracking-tight text-[#1E272E] mb-8">
                 {slide.h1Line1}<br />
-                <em className="italic">{slide.h1Line2}</em>
+                <em className="italic bg-gradient-to-r from-[#0984E3] to-[#2563EB] bg-clip-text text-transparent">{slide.h1Line2}</em>
               </h1>
               <p className="home-hero-copy text-xl text-[#1E272E]/60 max-w-xl mb-12 font-light leading-relaxed">
                 {slide.description}

@@ -77,10 +77,18 @@ Strategic advisory layer: digital transformation roadmap design, operational dia
 - Official site URL: https://hiva-nine.vercel.app
 - Home: /
 - Services: /services
+- Solutions: /services/solutions
+- Industries: /industries
+- ARC: /arc
 - About: /about
 - Portfolio: /portfolio
 - Case Studies: /case-studies
-- Products & Systems: /products-systems
+- Insights: /insights
+- Insights Blogs: /insights/blogs
+- Insights Case Studies: /insights/case-studies
+- News Articles: /insights/news-articles
+- Perspectives: /insights/perspectives
+- Research Reports: /insights/research-reports
 - Blog: /blog
 - Contact: /contact
 - WhatsApp Agent Case: /case-studies/multilingual-whatsapp-ai-agent

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ArrowUpRight, Menu, X } from 'lucide-react';
+import { ArrowUpRight, ChevronDown, Menu, X } from 'lucide-react';
 import Logo from './Logo';
 
 const Navbar: React.FC = () => {
@@ -27,13 +27,40 @@ const Navbar: React.FC = () => {
   }, []);
 
   const navItems = [
-    { path: '/case-studies', label: 'Case Studies' },
-    { path: '/products-systems', label: 'Products & Systems' },
+    { path: '/arc', label: 'ARC' },
     { path: '/services', label: 'Services' },
-    { path: '/portfolio', label: 'Portfolio' },
-    { path: '/about', label: 'About' },
-    { path: '/blog', label: 'Blog' },
+    { path: '/industries', label: 'Industries' },
+    { path: '/about', label: 'Who We Are' },
   ];
+
+  const insightsItems = [
+    { path: '/insights/blogs', label: 'Blogs' },
+    { path: '/insights/case-studies', label: 'Case Studies' },
+    { path: '/insights/news-articles', label: 'News Articles' },
+    { path: '/insights/perspectives', label: 'Perspectives' },
+    { path: '/insights/research-reports', label: 'Research Reports' },
+  ];
+
+  const isInsightsActive =
+    pathname?.startsWith('/insights') || pathname?.startsWith('/blog') || pathname?.startsWith('/case-studies');
+
+  const desktopLinkClass = (isActive: boolean) =>
+    `px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200 ${
+      isActive ? 'text-[#F5F6FA] bg-[#0984E3]' : 'text-[#1E272E]/72 hover:text-[#1E272E] hover:bg-[#0984E3]/10'
+    }`;
+
+  const mobileLinkClass = (isActive: boolean) =>
+    `block px-4 py-3 text-base font-medium rounded-lg ${
+      isActive ? 'text-[#F5F6FA] bg-[#0984E3]' : 'text-[#1E272E]/72 hover:text-[#1E272E] hover:bg-[#0984E3]/10'
+    }`;
+
+  const isNavActive = (path: string) =>
+    pathname === path || (path !== '/' && pathname?.startsWith(`${path}/`));
+
+  const isInsightsItemActive = (path: string) =>
+    pathname === path ||
+    (path === '/insights/blogs' && pathname?.startsWith('/blog')) ||
+    (path === '/insights/case-studies' && pathname?.startsWith('/case-studies'));
 
   return (
     <header className="navbar-sharp fixed top-2 left-1/2 -translate-x-1/2 w-[90%] max-w-6xl z-50">
@@ -56,24 +83,44 @@ const Navbar: React.FC = () => {
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-1">
               {navItems.map((item) => {
-                const isActive =
-                  pathname === item.path ||
-                  (item.path !== '/' && pathname?.startsWith(`${item.path}/`));
+                const isActive = isNavActive(item.path);
 
                 return (
                   <Link
                     key={item.path}
                     href={item.path}
-                    className={`px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200 ${
-                      isActive
-                        ? 'text-[#F5F6FA] bg-[#0984E3]'
-                        : 'text-[#1E272E]/72 hover:text-[#1E272E] hover:bg-[#0984E3]/10'
-                    }`}
+                    className={desktopLinkClass(isActive)}
                   >
                     {item.label}
                   </Link>
                 );
               })}
+              <div className="relative group">
+                <Link
+                  href="/insights"
+                  className={`${desktopLinkClass(!!isInsightsActive)} inline-flex items-center gap-1.5`}
+                >
+                  Insights
+                  <ChevronDown className="h-3.5 w-3.5" />
+                </Link>
+                <div className="pointer-events-none absolute left-0 top-full pt-2 opacity-0 transition duration-200 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
+                  <div className="min-w-[220px] rounded-xl border border-[#1E272E]/10 bg-[#F5F6FA] p-2 shadow-[0_8px_24px_rgba(9,132,227,0.14)]">
+                    {insightsItems.map((item) => (
+                      <Link
+                        key={item.path}
+                        href={item.path}
+                        className={`block rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                          isInsightsItemActive(item.path)
+                            ? 'bg-[#0984E3] text-[#F5F6FA]'
+                            : 'text-[#1E272E]/75 hover:bg-[#0984E3]/10 hover:text-[#1E272E]'
+                        }`}
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
               <Link 
                 href="/contact"
                 aria-label="Book a call"
@@ -114,24 +161,39 @@ const Navbar: React.FC = () => {
         >
           <div className="px-4 pt-2 pb-4 space-y-1 bg-[#F5F6FA]/95 backdrop-blur-lg rounded-2xl mx-4 mt-2 border border-[#1E272E]/12 shadow-[0_8px_24px_rgba(9,132,227,0.14)]">
             {navItems.map((item) => {
-              const isActive =
-                pathname === item.path ||
-                (item.path !== '/' && pathname?.startsWith(`${item.path}/`));
+              const isActive = isNavActive(item.path);
 
               return (
                 <Link
                   key={item.path}
                   href={item.path}
-                  className={`block px-4 py-3 text-base font-medium rounded-lg ${
-                    isActive
-                      ? 'text-[#F5F6FA] bg-[#0984E3]'
-                      : 'text-[#1E272E]/72 hover:text-[#1E272E] hover:bg-[#0984E3]/10'
-                  }`}
+                  className={mobileLinkClass(isActive)}
                 >
                   {item.label}
                 </Link>
               );
             })}
+            <Link
+              href="/insights"
+              className={mobileLinkClass(!!isInsightsActive)}
+            >
+              Insights
+            </Link>
+            <div className="ml-3 rounded-xl border border-[#1E272E]/10 bg-white/80 p-2">
+              {insightsItems.map((item) => (
+                <Link
+                  key={item.path}
+                  href={item.path}
+                  className={`block rounded-lg px-3 py-2 text-sm ${
+                    isInsightsItemActive(item.path)
+                      ? 'bg-[#0984E3] text-[#F5F6FA]'
+                      : 'text-[#1E272E]/72 hover:bg-[#0984E3]/10 hover:text-[#1E272E]'
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
             <div className="pt-2">
               <Link
                 href="/contact"

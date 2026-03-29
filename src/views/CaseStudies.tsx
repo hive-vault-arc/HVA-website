@@ -51,10 +51,10 @@ const CaseStudies: React.FC = () => {
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link
-                  href="/products-systems"
+                  href="/services/solutions"
                   className="sharp-edge bg-[#1E272E] text-[#F5F6FA] px-8 py-4 text-sm font-bold hover:bg-[#0984E3] transition-colors duration-300"
                 >
-                  View Products &amp; Systems
+                  View Solution Programs
                 </Link>
                 <Link
                   href="/services"
@@ -151,8 +151,8 @@ const CaseStudies: React.FC = () => {
         subtext="Start with a discovery call. We will show you exactly how strategy, architecture, and delivery are aligned in real environments."
         primaryLabel="Start Discovery"
         primaryHref="/contact"
-        secondaryLabel="View Products & Systems"
-        secondaryHref="/products-systems"
+        secondaryLabel="View Solution Programs"
+        secondaryHref="/services/solutions"
       />
     </div>
   );

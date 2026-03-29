@@ -4,13 +4,15 @@ import Link from 'next/link';
 interface LogoProps {
   /** Extra classes on the root Link element */
   className?: string;
+  /** Use light (white) colors for dark backgrounds */
+  light?: boolean;
 }
 
 /**
  * Shared logo lockup — "HIVE" on top, "VAULT ARC" below.
  * SVG textLength="100%" stretches "VAULT ARC" to exactly match HIVE's width.
  */
-const Logo: React.FC<LogoProps> = ({ className }) => (
+const Logo: React.FC<LogoProps> = ({ className, light = false }) => (
   <Link
     href="/"
     className={['flex-shrink-0 inline-block relative', className].filter(Boolean).join(' ')}
@@ -18,7 +20,7 @@ const Logo: React.FC<LogoProps> = ({ className }) => (
   >
     {/* HIVE — sets the inline-block container width */}
     <span
-      className="font-headline font-bold leading-none tracking-tight text-[#0F172A] block"
+      className={`font-headline font-bold leading-none tracking-tight block ${light ? 'text-white' : 'text-[#0F172A]'}`}
       style={{ fontSize: '1.6rem', letterSpacing: '-0.01em' }}
     >
       HIVE
@@ -39,7 +41,7 @@ const Logo: React.FC<LogoProps> = ({ className }) => (
           fontFamily: 'var(--font-body), sans-serif',
           fontSize: '7.5px',
           fontWeight: 700,
-          fill: '#475569',
+          fill: light ? 'rgba(148,163,184,0.8)' : '#475569',
           textTransform: 'uppercase',
         }}
       >

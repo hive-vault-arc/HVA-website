@@ -10,12 +10,16 @@ describe('Navbar', () => {
   it('renders only valid core navigation links', () => {
     render(<Navbar />);
 
-    screen.getAllByRole('link', { name: 'Case Studies' }).forEach(link => expect(link).toHaveAttribute('href', '/case-studies'));
-    screen.getAllByRole('link', { name: 'Products & Systems' }).forEach(link => expect(link).toHaveAttribute('href', '/products-systems'));
+    screen.getAllByRole('link', { name: 'ARC' }).forEach(link => expect(link).toHaveAttribute('href', '/arc'));
     screen.getAllByRole('link', { name: 'Services' }).forEach(link => expect(link).toHaveAttribute('href', '/services'));
-    screen.getAllByRole('link', { name: 'Portfolio' }).forEach(link => expect(link).toHaveAttribute('href', '/portfolio'));
-    screen.getAllByRole('link', { name: 'About' }).forEach(link => expect(link).toHaveAttribute('href', '/about'));
-    screen.getAllByRole('link', { name: 'Blog' }).forEach(link => expect(link).toHaveAttribute('href', '/blog'));
+    screen.getAllByRole('link', { name: 'Industries' }).forEach(link => expect(link).toHaveAttribute('href', '/industries'));
+    screen.getAllByRole('link', { name: 'Who We Are' }).forEach(link => expect(link).toHaveAttribute('href', '/about'));
+    screen.getAllByRole('link', { name: 'Insights' }).forEach(link => expect(link).toHaveAttribute('href', '/insights'));
+    screen.getAllByRole('link', { name: 'Blogs' }).forEach(link => expect(link).toHaveAttribute('href', '/insights/blogs'));
+    screen.getAllByRole('link', { name: 'Case Studies' }).forEach(link => expect(link).toHaveAttribute('href', '/insights/case-studies'));
+    screen.getAllByRole('link', { name: 'News Articles' }).forEach(link => expect(link).toHaveAttribute('href', '/insights/news-articles'));
+    screen.getAllByRole('link', { name: 'Perspectives' }).forEach(link => expect(link).toHaveAttribute('href', '/insights/perspectives'));
+    screen.getAllByRole('link', { name: 'Research Reports' }).forEach(link => expect(link).toHaveAttribute('href', '/insights/research-reports'));
     expect(screen.queryByRole('link', { name: 'Contact' })).toBeNull();
   });
 
