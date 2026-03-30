@@ -6,9 +6,9 @@ import { SERVICES_FAQS } from '../../../data/faqs';
 import { GLOBAL_KEYWORDS, SITE_URL, absoluteUrl, buildPageMetadata, mergeKeywords } from '../../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Services In Detail | Technical Capability Depth and Execution Model',
+  title: 'Services In Detail | Full Capability Architecture and BOT Delivery Model',
   description:
-    'Deep technical breakdown of H.V.A consulting execution capabilities across architecture, AI, automation, software, cloud, and data operations.',
+    'Full capability depth across 8 service domains including AI systems, transformation, consulting, engineering, data and growth, cybersecurity, emerging tech, and Build-Operate-Transfer delivery.',
   path: '/services/in-detail',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'services in detail technology consulting',
@@ -16,6 +16,11 @@ export const metadata: Metadata = buildPageMetadata({
     'digital transformation execution details',
     'consulting and engineering delivery model',
     'cloud and data systems capabilities',
+    'cybersecurity digital risk services',
+    'deep tech and IoT service capabilities',
+    'build operate transfer technology delivery',
+    'digital ecosystems and tech function advisory',
+    'agile at scale transformation support',
   ]),
 });
 
@@ -37,12 +42,28 @@ export default function ServicesInDetailPage() {
     areaServed: ['Morocco', 'Remote'],
     serviceType: [
       'Technology Consulting',
+      'Business Transformation',
       'Digital Transformation Advisory',
+      'Digital, Technology, and Data',
+      'Digital Strategy',
+      'Agile at Scale',
+      'Tech Function Design',
+      'Roadmap Architecture',
       'AI Agent Development',
       'Workflow Automation',
+      'Decision Intelligence',
       'Custom Software Development',
+      'Web and Mobile Engineering',
+      'SaaS Platform Engineering',
       'Cloud Infrastructure and Reliability',
+      'IT Modernization',
       'Data Services and Analytics',
+      'Marketing Systems',
+      'Cybersecurity and Digital Risk',
+      'Emerging Technologies',
+      'Deep Tech',
+      'Internet of Things',
+      'Build-Operate-Transfer Delivery Model',
     ],
     availableLanguage: ['en', 'fr', 'ar', 'es'],
     url: `${SITE_URL}/services/in-detail`,

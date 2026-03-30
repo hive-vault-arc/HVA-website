@@ -164,22 +164,50 @@ const Home: React.FC = () => {
   ];
 
 
-  // Compute absolute position (percentages) for each service card based on hover state
-  const getCardPos = (idx: number): { top: string; left: string; width: string; height: string } => {
-    if (hoveredPillar === null) {
-      const r = Math.floor(idx / 2);
-      const c = idx % 2;
-      return { top: `${r * 33.333}%`, left: `${c * 50}%`, width: '50%', height: '33.333%' };
-    }
-    if (idx === hoveredPillar) {
-      return { top: '0%', left: '0%', width: '100%', height: '50%' };
-    }
-    const remaining = [0, 1, 2, 3, 4, 5].filter((i) => i !== hoveredPillar);
+  type CardRect = { top: string; left: string; width: string; height: string };
+  const defaultPos = (idx: number): CardRect => {
+    const r = Math.floor(idx / 2);
+    const c = idx % 2;
+    return { top: `${r * 33.333}%`, left: `${c * 50}%`, width: '50%', height: '33.333%' };
+  };
+  const hoveredRowTop: Record<number, number> = { 0: 0, 1: 25, 2: 50 };
+  const posRow0 = (idx: number, h: number): CardRect => {
+    const remaining = [0, 1, 2, 3, 4, 5].filter((i) => i !== h);
     const pos = remaining.indexOf(idx);
-    if (pos < 2) {
-      return { top: '50%', left: `${pos * 50}%`, width: '50%', height: '25%' };
-    }
+    if (pos < 2) return { top: '50%', left: `${pos * 50}%`, width: '50%', height: '25%' };
     return { top: '75%', left: `${(pos - 2) * 33.333}%`, width: '33.333%', height: '25%' };
+  };
+  const posRow1 = (idx: number, sibling: number): CardRect | null => {
+    const topCards = [0, 1, sibling];
+    const botCards = [4, 5];
+    const posTop = topCards.indexOf(idx);
+    if (posTop !== -1) return { top: '0%', left: `${posTop * 33.333}%`, width: '33.333%', height: '25%' };
+    const posBot = botCards.indexOf(idx);
+    if (posBot !== -1) return { top: '75%', left: `${posBot * 50}%`, width: '50%', height: '25%' };
+    return null;
+  };
+  const posRow2 = (idx: number, sibling: number): CardRect | null => {
+    const topCards = [0, 1];
+    const midCards = [2, 3, sibling];
+    const posTop = topCards.indexOf(idx);
+    if (posTop !== -1) return { top: '0%', left: `${posTop * 50}%`, width: '50%', height: '25%' };
+    const posMid = midCards.indexOf(idx);
+    if (posMid !== -1) return { top: '25%', left: `${posMid * 33.333}%`, width: '33.333%', height: '25%' };
+    return null;
+  };
+
+  // Grid: 6 cards in 3 rows × 2 cols. Hovered card expands full-width in its row zone.
+  // Its row-sibling is displaced upward, creating a 3-card row in the adjacent band.
+  const getCardPos = (idx: number): CardRect => {
+    if (hoveredPillar === null) return defaultPos(idx);
+    const h = hoveredPillar;
+    const hRow = Math.floor(h / 2);
+    const sibling = h % 2 === 0 ? h + 1 : h - 1;
+    if (idx === h) return { top: `${hoveredRowTop[hRow]}%`, left: '0%', width: '100%', height: '50%' };
+    if (hRow === 0) return posRow0(idx, h);
+    if (hRow === 1) return posRow1(idx, sibling) ?? defaultPos(idx);
+    if (hRow === 2) return posRow2(idx, sibling) ?? defaultPos(idx);
+    return defaultPos(idx);
   };
 
   return (

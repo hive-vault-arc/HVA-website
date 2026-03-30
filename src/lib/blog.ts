@@ -844,7 +844,7 @@ const POSTS: BlogPost[] = [
     readTime: '11 min read',
     publishedAt: '2026-03-27',
     authors: [{ name: 'H.V.A Editorial', role: 'AI Strategy', initials: 'HE' }],
-    coverImage: '/Images/hva-ai-software-agency-tangier.webp',
+    coverImage: '/Images/ai-agents-integration-2026-enterprise-guide.webp',
     excerpt:
       'The global AI agent market is projected to reach $103.6 billion by 2032, and 52% of executives have already deployed agents in production. Companies that delay are not staying neutral — they are falling behind competitors who are compounding operational advantages every month. This article makes the case for why 2026 is the year to act, and how Morocco\'s businesses can position themselves as smart followers rather than permanent laggards.',
     tags: ['AI agents', 'automation', 'Morocco', 'digital transformation', 'enterprise AI', 'human-AI collaboration'],

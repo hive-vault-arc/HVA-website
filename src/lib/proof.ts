@@ -79,7 +79,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       role: 'Head of Growth, Atlas Property Group',
     },
     assets: {
-      coverImage: '/Images/custom-ai-agent-morocco.webp',
+      coverImage: '/Images/whatsapp-ai-agent-operations-case-study-morocco.webp',
       logoLabel: 'Atlas Property Group',
     },
     lastUpdated: '2026-03-27',
@@ -123,7 +123,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       role: 'COO, Capstone Living Morocco',
     },
     assets: {
-      coverImage: '/Images/custom-crm-system-morocco.webp',
+      coverImage: '/Images/zoho-crm-transformation-case-study-morocco.webp',
       logoLabel: 'Capstone Living Morocco',
     },
     lastUpdated: '2026-03-27',

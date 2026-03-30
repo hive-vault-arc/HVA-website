@@ -1,8 +1,9 @@
 'use client';
 
 import Link from 'next/link';
+import { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { FlaskConical, Layers, Target } from 'lucide-react';
+import { BarChart3, Bot, Cloud, Database, FlaskConical, Layers, RefreshCw, Target, Zap } from 'lucide-react';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 import BottomCTA from '../components/BottomCTA';
 
@@ -24,29 +25,50 @@ const pillars = [
   },
 ];
 
-const operatingModel = [
+const innovationTracks = [
   {
-    step: '01',
-    title: 'Diagnose',
-    text: 'Map operating friction, decision bottlenecks, and technology constraints with leadership and functional teams.',
+    code: 'ARC-001',
+    icon: <Bot className="w-8 h-8" strokeWidth={1.25} />,
+    title: 'AI agents for customer and internal operations',
+    desc: 'Autonomous agents designed for high-precision task execution and complex problem resolution across multi-tenant environments.',
   },
   {
-    step: '02',
-    title: 'Engineer',
-    text: 'Translate strategy into architecture, workflows, and software modules that can run under real production pressure.',
+    code: 'ARC-002',
+    icon: <BarChart3 className="w-8 h-8" strokeWidth={1.25} />,
+    title: 'Decision intelligence and KPI reliability',
+    desc: 'Advanced analytics engines that go beyond reporting to provide actionable, high-fidelity business intelligence.',
   },
   {
-    step: '03',
-    title: 'Run and Evolve',
-    text: 'Stabilize, monitor, optimize, and extend systems as your business model and scale requirements change.',
+    code: 'ARC-003',
+    icon: <Database className="w-8 h-8" strokeWidth={1.25} />,
+    title: 'CRM and workflow orchestration modernization',
+    desc: 'Re-engineering legacy workflows into modern, responsive architectures that reduce manual friction.',
+  },
+  {
+    code: 'ARC-004',
+    icon: <Cloud className="w-8 h-8" strokeWidth={1.25} />,
+    title: 'Cloud reliability and release governance',
+    desc: 'Implementing military-grade deployment protocols and fail-safe cloud infrastructure for zero-downtime evolution.',
   },
 ];
 
-const innovationTracks = [
-  'AI agents for customer and internal operations',
-  'Decision intelligence and KPI reliability',
-  'CRM and workflow orchestration modernization',
-  'Cloud reliability and release governance',
+const differenceContrasts = [
+  {
+    others: 'Advisory firms advise.',
+    arc: 'ARC executes — same team, from whiteboard to production.',
+  },
+  {
+    others: 'Agencies ship and disappear.',
+    arc: 'ARC stays through evolution — monitoring, extending, improving.',
+  },
+  {
+    others: 'Strategy and engineering are separated.',
+    arc: 'ARC keeps them in one accountable loop — no handoff, no drift.',
+  },
+  {
+    others: 'Technology is treated as a cost center.',
+    arc: 'ARC treats your systems as compounding operational assets.',
+  },
 ];
 
 const fadeUp = {
@@ -58,8 +80,16 @@ export default function Arc() {
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
+  const heroRef = useRef<HTMLElement>(null);
+  const [heroSpot, setHeroSpot] = useState<{ x: number; y: number } | null>(null);
+  const onHeroMove = (e: React.MouseEvent<HTMLElement>) => {
+    const r = heroRef.current?.getBoundingClientRect();
+    if (!r) return;
+    setHeroSpot({ x: e.clientX - r.left, y: e.clientY - r.top });
+  };
+
   return (
-    <div className="relative isolate overflow-x-hidden bg-[#F8FAFC] text-[#0F172A]">
+    <div className="relative isolate overflow-x-clip bg-[#F8FAFC] text-[#0F172A]">
       {/* Scroll progress */}
       <motion.div
         aria-hidden="true"
@@ -70,152 +100,448 @@ export default function Arc() {
       <PageAmbientBackground className="-z-10" />
 
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
-      <section className="mx-auto max-w-7xl px-6 pt-32 pb-20 lg:px-14">
-        <motion.div
-          className="max-w-4xl"
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55 }}
-        >
-          <p className="mb-6 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
-            ARC — The H.V.A Framework
-          </p>
-          <h1 className="font-headline text-4xl font-medium leading-[1.04] tracking-tight sm:text-5xl lg:text-[4.5rem]">
-            The ARC Framework:
-            <br />
-            <em className="italic text-[#475569]">Category Thinking + Field Execution.</em>
-          </h1>
-          <p className="mt-8 max-w-2xl text-xl font-light leading-relaxed text-[#0F172A]/60">
-            ARC is H.V.A's flagship transformation framework. It combines strategic clarity,
-            production-grade engineering, and operational iteration so your systems keep creating value after launch.
-          </p>
-        </motion.div>
+      <section
+        ref={heroRef}
+        className="relative pt-24 pb-32 overflow-hidden"
+        onMouseMove={onHeroMove}
+        onMouseLeave={() => setHeroSpot(null)}
+      >
+        {/* Cursor spotlight — blue radial glow on white */}
+        <div
+          aria-hidden="true"
+          className="arc-hero-spotlight"
+          style={
+            heroSpot
+              ? {
+                  background: `radial-gradient(circle 520px at ${heroSpot.x}px ${heroSpot.y}px, rgba(37,99,235,0.10) 0%, rgba(37,99,235,0.04) 50%, transparent 100%)`,
+                  opacity: 1,
+                }
+              : { opacity: 0 }
+          }
+        />
+        {/* Scanline texture */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 opacity-[0.03]"
+          style={{
+            background: 'repeating-linear-gradient(to bottom, transparent 0px, transparent 3px, #2563EB 3px, #2563EB 4px)',
+          }}
+        />
+        {/* Ambient glow */}
+        <div className="pointer-events-none absolute -top-20 -right-20 w-96 h-96 bg-[#2563EB]/8 rounded-full blur-[120px]" />
+
+        <div className="max-w-7xl mx-auto px-6 lg:px-14 grid grid-cols-12 gap-4">
+          <motion.div
+            className="col-span-12 lg:col-span-9 z-10"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55 }}
+          >
+            <p className="mb-6 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
+              ARC — The H.V.A Framework
+            </p>
+            <h1 className="font-headline text-6xl md:text-8xl text-[#0F172A] leading-tight">
+              The <span className="text-[#2563EB]">ARC</span> Framework:<br />
+              <em className="italic font-light text-[#475569]">Category Thinking</em><br />
+              <span className="inline-block translate-x-12 md:translate-x-32">+ Field Execution.</span>
+            </h1>
+          </motion.div>
+          <motion.div
+            className="col-span-12 lg:col-span-3 flex items-end justify-end"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.15 }}
+          >
+            <div className="border-l border-[#2563EB]/30 pl-6 mb-12">
+              <p className="font-label uppercase tracking-[0.3em] text-[10px] text-[#2563EB] mb-2">
+                STATUS: ACTIVE_FRAMEWORK
+              </p>
+              <p className="text-sm text-[#475569] max-w-xs leading-relaxed">
+                ARC is H.V.A's flagship transformation framework. It combines strategic clarity,
+                production-grade engineering, and operational iteration so your systems keep creating value after launch.
+              </p>
+            </div>
+          </motion.div>
+        </div>
       </section>
 
-      {/* ── 3 Pillars ─────────────────────────────────────────────────────── */}
-      <section className="bg-[#F2F4F6] py-20">
-        <div className="mx-auto max-w-7xl px-6 lg:px-14">
+      {/* ── 3 Pillars — editorial band layout ───────────────────────────── */}
+      <section className="bg-white">
+        {pillars.map((p, i) => (
           <motion.div
-            className="grid grid-cols-1 gap-px bg-[#e2e8f0] md:grid-cols-3"
+            key={p.label}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: i * 0.1 }}
+            className="group relative border-b border-[#e2e8f0] last:border-b-0"
+          >
+            {/* Hover blue left accent bar */}
+            <div
+              className="pointer-events-none absolute left-0 top-0 h-full w-[3px] bg-[#2563EB] origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500"
+              aria-hidden="true"
+            />
+
+            <div className="mx-auto max-w-7xl px-6 lg:px-14 grid grid-cols-12 items-center gap-6 py-14">
+              {/* Decorative number */}
+              <div className="col-span-2 hidden lg:block">
+                <span
+                  className="font-headline text-[7rem] leading-none select-none text-[#f0f2f5] group-hover:text-[#dbeafe] transition-colors duration-500"
+                  aria-hidden="true"
+                >
+                  0{i + 1}
+                </span>
+              </div>
+
+              {/* Label + icon */}
+              <div className="col-span-12 lg:col-span-3 flex items-center gap-4">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-[#dbeafe] text-[#2563EB]">
+                  {p.icon}
+                </div>
+                <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#2563EB]">
+                  {p.label}
+                </p>
+              </div>
+
+              {/* Body text — large editorial style */}
+              <div className="col-span-12 lg:col-span-7">
+                <p className="font-headline text-xl md:text-2xl text-[#0F172A] leading-snug italic">
+                  {p.text}
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </section>
+
+      {/* ── Phase 01: Diagnose ────────────────────────────────────────────── */}
+      <section className="relative py-32 bg-[#F2F4F6]/50">
+        <div className="max-w-7xl mx-auto px-6 lg:px-14 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          {/* Visual HUD panel */}
+          <motion.div
+            className="relative order-2 md:order-1"
+            initial={{ opacity: 0, x: -24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="absolute -inset-4 bg-[#2563EB]/4 blur-xl" />
+            <div className="relative aspect-video border border-[#e2e8f0] bg-[#F2F4F6] overflow-hidden">
+              {/* Blueprint grid */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 opacity-[0.06]"
+                style={{
+                  backgroundImage: 'linear-gradient(to right,#2563EB 1px,transparent 1px),linear-gradient(to bottom,#2563EB 1px,transparent 1px)',
+                  backgroundSize: '40px 40px',
+                }}
+              />
+              <div className="absolute inset-0 flex flex-col justify-between p-6">
+                <div className="flex justify-between items-start">
+                  <div className="bg-[#dbeafe] px-2 py-1 text-[8px] font-mono text-[#2563EB] uppercase border border-[#2563EB]/20">
+                    SCANNING_BOTTLENECKS
+                  </div>
+                  <div className="text-[10px] font-mono text-[#94a3b8]">01011001 01011010</div>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="bg-white border border-[#e2e8f0] p-4">
+                    <p className="text-[10px] uppercase tracking-wider text-[#94a3b8]">System Audit</p>
+                  </div>
+                  <div className="bg-white border border-[#e2e8f0] p-4">
+                    <p className="text-[10px] uppercase tracking-wider text-[#94a3b8]">Network Mapping</p>
+                  </div>
+                </div>
+                <div className="h-[1px] w-full bg-[#2563EB]/20 relative">
+                  <div className="absolute top-0 left-0 h-[1px] w-24 bg-[#2563EB] animate-pulse" />
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Text content */}
+          <motion.div
+            className="order-1 md:order-2"
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="flex items-center gap-4 mb-6">
+              <span className="font-headline text-5xl text-[#2563EB]">01</span>
+              <div className="h-[1px] flex-grow bg-[#2563EB]/30" />
+            </div>
+            <h2 className="font-headline text-4xl text-[#0F172A] mb-6">Diagnose</h2>
+            <p className="text-[#475569] text-base leading-relaxed uppercase tracking-widest text-sm">
+              Map operating friction, decision bottlenecks, and technology constraints with leadership and functional teams.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── Phase 02: Engineer ────────────────────────────────────────────── */}
+      <section className="relative py-32 bg-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-14">
+          <motion.div
+            className="flex flex-col items-center text-center mb-20"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <span className="font-headline text-5xl text-[#2563EB] mb-4">02</span>
+            <h2 className="font-headline text-4xl text-[#0F172A] mb-6">Engineer</h2>
+            <div className="w-24 h-[1px] bg-[#2563EB] mb-8" />
+            <p className="text-[#475569] text-xl max-w-2xl leading-relaxed">
+              Translate strategy into architecture, workflows, and software modules that can run under real production pressure.
+            </p>
+          </motion.div>
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#2563EB]/10 border border-[#2563EB]/10"
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
             transition={{ staggerChildren: 0.1 }}
           >
-            {pillars.map((p) => (
-              <motion.article
-                key={p.label}
+            {[
+              { title: 'Core Systems', desc: 'Developing the bedrock of your technical infrastructure with unbreakable logic.' },
+              { title: 'Workflow Modules', desc: 'Building modular orchestration that scales with functional complexity.' },
+              { title: 'Production Pressure', desc: 'Stress-testing every component to ensure stability at peak operational velocity.' },
+            ].map((card) => (
+              <motion.div
+                key={card.title}
                 variants={fadeUp}
                 transition={{ duration: 0.5 }}
-                className="flex flex-col gap-5 bg-[#F2F4F6] p-8 md:p-10"
+                className="p-12 bg-white hover:bg-[#F2F4F6] transition-all group"
               >
-                <div className="flex h-11 w-11 items-center justify-center bg-[#dbeafe] text-[#2563EB]">
-                  {p.icon}
-                </div>
-                <div>
-                  <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.22em] text-[#2563EB]">
-                    {p.label}
-                  </p>
-                  <p className="text-base leading-relaxed text-[#475569]">{p.text}</p>
-                </div>
-              </motion.article>
+                <h3 className="font-headline text-2xl text-[#0F172A] mb-4 group-hover:text-[#2563EB] transition-colors">
+                  {card.title}
+                </h3>
+                <p className="text-sm text-[#94a3b8] leading-relaxed">{card.desc}</p>
+              </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* ── Operating Model ───────────────────────────────────────────────── */}
-      <section className="py-20">
-        <div className="mx-auto max-w-7xl px-6 lg:px-14">
+      {/* ── Phase 03: Run and Evolve ──────────────────────────────────────── */}
+      <section className="relative py-32 bg-[#F8FAFC] overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 lg:px-14 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.5 }}
+            initial={{ opacity: 0, x: -24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
           >
-            <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
-              How ARC Works
+            <div className="flex items-center gap-4 mb-6">
+              <span className="font-headline text-5xl text-[#2563EB]">03</span>
+              <div className="h-[1px] flex-grow bg-[#2563EB]/30" />
+            </div>
+            <h2 className="font-headline text-4xl text-[#0F172A] mb-6">Run and Evolve</h2>
+            <p className="text-[#475569] text-base leading-relaxed mb-10">
+              Stabilize, monitor, optimize, and extend systems as your business model and scale requirements change.
             </p>
-            <h2 className="font-headline text-3xl font-medium text-[#0F172A] md:text-4xl">
-              Three Phases. One Accountable Loop.
-            </h2>
+            <ul className="space-y-6">
+              <li className="flex items-start gap-4">
+                <Zap className="w-5 h-5 text-[#2563EB] shrink-0 mt-0.5" strokeWidth={1.5} />
+                <div>
+                  <h4 className="text-[#0F172A] text-sm uppercase tracking-widest font-bold">Optimization Engine</h4>
+                  <p className="text-xs text-[#94a3b8] mt-1">Continuous performance tuning for high-traffic environments.</p>
+                </div>
+              </li>
+              <li className="flex items-start gap-4">
+                <RefreshCw className="w-5 h-5 text-[#2563EB] shrink-0 mt-0.5" strokeWidth={1.5} />
+                <div>
+                  <h4 className="text-[#0F172A] text-sm uppercase tracking-widest font-bold">Dynamic Extension</h4>
+                  <p className="text-xs text-[#94a3b8] mt-1">Agile system upgrades that prevent technical debt buildup.</p>
+                </div>
+              </li>
+            </ul>
           </motion.div>
 
-          <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
-            {operatingModel.map((s, i) => (
+          {/* Rotating visual panel */}
+          <motion.div
+            className="relative"
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="absolute inset-0 bg-[#2563EB]/15 blur-[100px] opacity-30" />
+            <div className="relative p-2 bg-[#F2F4F6] border border-[#e2e8f0] overflow-hidden rotate-2 hover:rotate-0 transition-transform duration-700 shadow-lg">
+              {/* Blueprint grid */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 opacity-[0.05]"
+                style={{
+                  backgroundImage: 'linear-gradient(to right,#2563EB 1px,transparent 1px),linear-gradient(to bottom,#2563EB 1px,transparent 1px)',
+                  backgroundSize: '32px 32px',
+                }}
+              />
+              <div className="relative h-[500px] flex flex-col justify-between p-8">
+                {/* Top decorative elements */}
+                <div className="flex justify-between items-start">
+                  <div className="text-[10px] font-mono text-[#94a3b8] uppercase tracking-widest">
+                    SYSTEM_EVOLUTION
+                  </div>
+                  <div className="text-[10px] font-mono text-[#2563EB]">ARC/RUN</div>
+                </div>
+
+                {/* Center visualization */}
+                <div className="flex-1 flex items-center justify-center">
+                  <div className="relative">
+                    <div className="w-32 h-32 border border-[#2563EB]/20 flex items-center justify-center">
+                      <div className="w-20 h-20 border border-[#2563EB]/40 flex items-center justify-center">
+                        <div className="w-10 h-10 bg-[#2563EB]/10 border border-[#2563EB] flex items-center justify-center">
+                          <RefreshCw className="w-4 h-4 text-[#2563EB]" strokeWidth={1.5} />
+                        </div>
+                      </div>
+                    </div>
+                    {/* Orbit indicators */}
+                    <div className="absolute -top-1 -right-1 w-2 h-2 bg-[#2563EB] rounded-full animate-pulse" />
+                    <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-[#2563EB]/40 rounded-full" />
+                  </div>
+                </div>
+
+                {/* Status badge */}
+                <div className="absolute top-10 right-10">
+                  <div className="bg-[#F2F4F6]/80 p-3 border-l-2 border-[#2563EB]">
+                    <p className="text-[10px] font-mono text-[#2563EB] uppercase">System Integrity: 99.99%</p>
+                  </div>
+                </div>
+
+                {/* Bottom scan line */}
+                <div className="h-[1px] w-full bg-[#2563EB]/20 relative">
+                  <div className="absolute top-0 left-0 h-[1px] w-32 bg-[#2563EB] animate-pulse" />
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── The ARC Difference ────────────────────────────────────────────── */}
+      <section className="bg-[#0F172A] py-32 relative overflow-hidden">
+        {/* Blueprint grid */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage: 'repeating-linear-gradient(0deg,#60a5fa 0,#60a5fa 1px,transparent 0,transparent 50%),repeating-linear-gradient(90deg,#60a5fa 0,#60a5fa 1px,transparent 0,transparent 50%)',
+            backgroundSize: '48px 48px',
+          }}
+        />
+        {/* Ambient glow */}
+        <div className="pointer-events-none absolute -top-32 left-1/4 h-96 w-96 rounded-full bg-[#2563EB]/20 blur-3xl" />
+
+        <div className="max-w-7xl mx-auto px-6 lg:px-14 relative z-10 grid grid-cols-12 gap-8 items-start">
+          {/* Left — manifesto */}
+          <motion.div
+            className="col-span-12 lg:col-span-5"
+            initial={{ opacity: 0, x: -24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#2563EB] mb-6">
+              Why ARC Is Different
+            </p>
+            <h2 className="font-headline text-5xl md:text-6xl text-white leading-tight mb-8">
+              One firm.<br />
+              Strategy.<br />
+              Engineering.<br />
+              <em className="italic text-[#2563EB]">Operations.</em>
+            </h2>
+            <p className="text-white/60 text-base leading-relaxed mb-8">
+              Most transformation programs fail at the handoff. Advisory firms leave after the deck. Engineering agencies ship and disappear. ARC was built to eliminate that gap — permanently.
+            </p>
+            <div className="h-px w-12 bg-[#2563EB]" />
+          </motion.div>
+
+          {/* Right — contrast cards */}
+          <motion.div
+            className="col-span-12 lg:col-span-7 grid grid-cols-1 gap-px bg-white/5 border border-white/5"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ staggerChildren: 0.1 }}
+          >
+            {differenceContrasts.map((item, i) => (
               <motion.div
-                key={s.title}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="relative pl-6 before:absolute before:left-0 before:top-0 before:h-full before:w-[2px] before:bg-[#2563EB]"
+                key={i}
+                variants={fadeUp}
+                transition={{ duration: 0.5 }}
+                className="p-8 bg-[#0F172A] hover:bg-slate-900/50 transition-colors"
               >
-                <p className="mb-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#94a3b8]">
-                  Phase {s.step}
+                <p className="text-[10px] uppercase tracking-[0.22em] text-[#94a3b8] mb-2 line-through decoration-[#94a3b8]/40">
+                  {item.others}
                 </p>
-                <h3 className="font-headline text-2xl text-[#0F172A]">{s.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-[#475569]">{s.text}</p>
+                <h3 className="font-headline text-xl text-white">{item.arc}</h3>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* ── Innovation Tracks ─────────────────────────────────────────────── */}
-      <section className="py-20">
-        <div className="mx-auto max-w-7xl px-6 lg:px-14">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.5 }}
-            className="bg-[#0F172A] p-8 md:p-14"
-          >
-            {/* Grid texture */}
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-0 opacity-[0.04]"
-              style={{
-                backgroundImage:
-                  'linear-gradient(to right,rgba(255,255,255,.1) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,.1) 1px,transparent 1px)',
-                backgroundSize: '40px 40px',
-              }}
-            />
-            <div className="relative">
-              <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.24em] text-[#60a5fa]">
-                Current Innovation Tracks
+      <section className="bg-[#F2F4F6] py-32">
+        <div className="max-w-7xl mx-auto px-6 lg:px-14 grid grid-cols-12 gap-8 items-start">
+          {/* Left — sticky panel. No motion transform here — transforms break position:sticky */}
+          <div className="col-span-12 lg:col-span-4 lg:sticky lg:top-32">
+            <p className="font-label text-[#2563EB] uppercase tracking-[0.4em] text-xs mb-4">
+              Laboratory_Active
+            </p>
+            <h2 className="font-headline text-5xl text-[#0F172A] mb-8">
+              Active Research &amp; Development
+            </h2>
+            <div className="p-6 border border-[#2563EB]/20 bg-[#2563EB]/5">
+              <p className="text-sm text-[#475569] italic leading-relaxed">
+                &ldquo;The framework isn&rsquo;t just a process — it&rsquo;s a living intelligence that responds to market entropy and compounds with every engagement.&rdquo;
               </p>
-              <h2 className="font-headline text-2xl text-white md:text-3xl">
-                Active Research &amp; Development Themes
-              </h2>
-              <ul className="mt-8 grid grid-cols-1 gap-3 md:grid-cols-2">
-                {innovationTracks.map((track) => (
-                  <li
-                    key={track}
-                    className="flex items-center gap-3 bg-white/5 px-5 py-4 text-sm font-medium text-white/80"
-                  >
-                    <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#2563EB]" />
-                    {track}
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-8 flex flex-wrap gap-6">
-                <Link
-                  href="/insights"
-                  className="sharp-edge inline-flex items-center gap-2 bg-[#2563EB] px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-white hover:bg-[#1d4ed8] transition-colors duration-200"
-                >
-                  Explore ARC Insights
-                </Link>
-                <Link
-                  href="/services"
-                  className="sharp-edge inline-flex items-center gap-2 border border-white/20 px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-white/80 hover:bg-white/10 transition-colors duration-200"
-                >
-                  Explore Services
-                </Link>
-              </div>
             </div>
+          </div>
+
+          {/* Right — 2×2 grid */}
+          <motion.div
+            className="col-span-12 lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-px bg-[#e2e8f0] border border-[#e2e8f0]"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ staggerChildren: 0.1 }}
+          >
+            {innovationTracks.map((track) => (
+              <motion.div
+                key={track.code}
+                variants={fadeUp}
+                transition={{ duration: 0.5 }}
+                className="p-10 bg-[#F2F4F6] hover:bg-white transition-colors group"
+              >
+                <div className="flex items-center justify-between mb-12">
+                  <span className="text-[#2563EB]">{track.icon}</span>
+                  <span className="text-[10px] font-mono text-[#94a3b8]">{track.code}</span>
+                </div>
+                <h4 className="font-headline text-xl text-[#0F172A] mb-4 group-hover:text-[#2563EB] transition-colors">
+                  {track.title}
+                </h4>
+                <p className="text-sm text-[#94a3b8] leading-relaxed">{track.desc}</p>
+              </motion.div>
+            ))}
           </motion.div>
+        </div>
+
+        {/* Links */}
+        <div className="max-w-7xl mx-auto px-6 lg:px-14 mt-14 flex flex-wrap gap-6">
+          <Link
+            href="/insights"
+            className="sharp-edge inline-flex items-center gap-2 bg-[#2563EB] px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-white hover:bg-[#1d4ed8] transition-colors duration-200"
+          >
+            Explore ARC Insights
+          </Link>
+          <Link
+            href="/services"
+            className="sharp-edge inline-flex items-center gap-2 border border-[#0F172A]/20 px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-[#475569] hover:bg-[#0F172A]/5 transition-colors duration-200"
+          >
+            Explore Services
+          </Link>
         </div>
       </section>
 

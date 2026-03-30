@@ -50,54 +50,54 @@ export const HOME_FAQS: FaqSet = [
 // Services
 export const SERVICES_FAQS: FaqSet = [
   {
-    question: 'What are H.V.A\'s core service areas?',
+    question: 'What are H.V.A\'s service domains?',
     answer:
-      'Our three core pillars are: AI and intelligent automation (agents, workflow systems, decision intelligence), digital transformation programs (end-to-end modernization, cloud, data, IT upgrades), and technology consulting (strategy, roadmaps, architecture advisory). Most engagements combine elements from all three.',
+      'H.V.A operates across eight domains: AI Systems, Business Transformation, Digital/Technology/Data, Consulting, Engineering, Data and Growth, Cybersecurity and Digital Risk, and Emerging Tech. Engagements combine these domains based on business priorities and operating constraints.',
   },
   {
     question: 'What AI and automation solutions do you deliver?',
     answer:
-      'We design and deploy AI agents for customer operations (WhatsApp, web, voice), automated lead qualification and routing, internal workflow orchestration, AI-powered reporting assistants, and decision intelligence dashboards. Every system integrates with the tools your team already uses.',
+      'We deliver AI agents, workflow automation, decision intelligence, and AI-enabled reporting systems. Typical deployments include WhatsApp/web/voice agents, orchestration layers, and operational automation linked to CRM and data systems.',
   },
   {
-    question: 'What does technology consulting include at H.V.A?',
+    question: 'What does consulting include at H.V.A?',
     answer:
-      'Technology consulting includes operational diagnostics, transformation strategy, architecture decisions, roadmap design, risk planning, and transformation sequencing. We align executive goals with concrete execution milestones — and then execute against them.',
+      'Consulting includes strategy, architecture decisions, roadmap design, tech function planning, and transformation sequencing. We align executive priorities with execution milestones and stay accountable during delivery.',
   },
   {
     question: 'How do you approach digital transformation programs?',
     answer:
-      'We run transformation programs end-to-end: discovery and diagnostics, roadmap and architecture design, engineering execution, and managed evolution. This lifecycle model ensures business and technical continuity from strategy through long-term production operations.',
+      'We run business and IT modernization from diagnostics to operating rollout. Coverage includes CRM and operations redesign, digital maturity progression, digital ecosystems, agile-at-scale enablement, and platform evolution tied to measurable outcomes.',
   },
   {
-    question: 'Can H.V.A deliver custom software, CRM, and mobile systems?',
+    question: 'Do you provide engineering delivery for product and platform builds?',
     answer:
-      'Yes. We build custom software platforms, CRM systems, operational portals, mobile apps, and SaaS products that match your process model, data structure, and team responsibilities.',
+      'Yes. We engineer custom web apps, mobile apps, SaaS platforms, cloud systems, APIs, and integrations. We also deliver CRM modernization and operational platform builds matched to your process model.',
   },
   {
-    question: 'Do you handle IT modernization and legacy upgrades?',
+    question: 'What data and growth services are included?',
     answer:
-      'Yes. We modernize legacy systems by redesigning architecture, migrating critical workloads, integrating existing tools, and upgrading delivery pipelines while protecting business continuity.',
+      'We provide analytics architecture, KPI dashboards, data pipelines, decision support workflows, and marketing system engineering. The goal is reliable decision intelligence and repeatable growth operations.',
   },
   {
-    question: 'What cloud and data services are included?',
+    question: 'Do you cover cybersecurity and digital risk?',
     answer:
-      'We provide cloud architecture, CI/CD, DevOps, security hardening, observability, data pipelines, and reporting systems to ensure infrastructure reliability and decision-quality data.',
+      'Yes. Cybersecurity and digital risk are embedded in service delivery: security architecture, identity controls, monitoring, risk mitigation, and governance for resilient transformation programs.',
   },
   {
-    question: 'Can we engage H.V.A as a long-term partner?',
+    question: 'Do you work on emerging technologies, deep tech, and IoT?',
     answer:
-      'Yes. Many clients retain H.V.A as a long-term transformation partner for managed evolution, roadmap expansion, optimization sprints, and ongoing technical leadership.',
+      'Yes. We support emerging technology adoption, deep tech prototyping, and IoT architecture/integration when they provide clear operational or commercial advantage.',
   },
   {
-    question: 'Do you work with startups and established firms?',
+    question: 'How does Build-Operate-Transfer (BOT) work with H.V.A?',
     answer:
-      'Yes. We support startups needing rapid AI and automation deployment and established firms undergoing deeper digital transformation, process redesign, and multi-system modernization.',
+      'BOT runs in three phases: Build (implement systems), Operate (stabilize and optimize with H.V.A ownership), and Transfer (handover to your internal team when readiness criteria are met). It is recommended when you need staged capability transfer with low operational risk.',
   },
   {
-    question: 'How long do transformation engagements take?',
+    question: 'Can H.V.A stay involved after launch?',
     answer:
-      'Focused AI automation programs can launch in weeks. Broader digital transformation programs — involving modernization, cloud migration, and multi-system integration — run across phased quarters with clear milestones.',
+      'Yes. We provide long-term maintenance, optimization, and scaling support. Engagements can remain fully managed or transition through BOT depending on your operating model goals.',
   },
 ];
 
@@ -195,7 +195,7 @@ export const LOCALE_SERVICES_FAQS: Record<SupportedLocale, FaqSet> = {
     {
       question: "Quels types d'automatisation IA proposez-vous ?",
       answer:
-        "Nous concevons et déployons des agents IA pour les opérations clients (WhatsApp, web, voix), l'automatisation des workflows internes, la qualification de leads, les assistants de reporting, et les tableaux de bord d'intelligence décisionnelle.",
+        "Nous déployons des agents IA (WhatsApp, web, voix), l'automatisation des workflows, la qualification de leads, et des tableaux de bord décisionnels. Nous couvrons aussi cybersécurité digitale, deep tech et IoT quand ces briques sont nécessaires au programme.",
     },
     {
       question: 'Que comprend une mission de transformation digitale chez H.V.A ?',
@@ -215,7 +215,7 @@ export const LOCALE_SERVICES_FAQS: Record<SupportedLocale, FaqSet> = {
     {
       question: 'Comment sont gérées les conditions commerciales ?',
       answer:
-        "Les conditions commerciales sont définies après discovery, selon le périmètre IA, la complexité technique, les intégrations et l'effort de maintenance.",
+        "Les conditions commerciales sont définies après discovery selon le périmètre, y compris les scénarios Build-Operate-Transfer (BOT), la complexité technique, les intégrations et l'effort de maintenance.",
     },
   ],
   ar: [
@@ -227,7 +227,7 @@ export const LOCALE_SERVICES_FAQS: Record<SupportedLocale, FaqSet> = {
     {
       question: 'ما أنواع حلول الذكاء الاصطناعي التي تقدمونها؟',
       answer:
-        'نصمم وننشر وكلاء ذكاء اصطناعي للعمليات المواجهة للعملاء (واتساب، ويب، صوت)، وأتمتة سير العمل الداخلي، وتأهيل العملاء المحتملين، ومساعدي التقارير، ولوحات الذكاء التحليلي.',
+        'نصمم وننشر وكلاء ذكاء اصطناعي للعمليات المواجهة للعملاء (واتساب، ويب، صوت)، وأتمتة سير العمل الداخلي، وتأهيل العملاء المحتملين، ومساعدي التقارير، ولوحات الذكاء التحليلي، مع تغطية الأمن السيبراني وDeep Tech وIoT عند الحاجة.',
     },
     {
       question: 'ماذا يشمل مسار التحول الرقمي لديكم؟',
@@ -247,7 +247,7 @@ export const LOCALE_SERVICES_FAQS: Record<SupportedLocale, FaqSet> = {
     {
       question: 'كيف يتم تحديد الأسعار؟',
       answer:
-        'يتم تحديد السعر بعد جلسة الاكتشاف بناء على نطاق الذكاء الاصطناعي والتحول، والتعقيد التقني، والتكاملات ومتطلبات الصيانة.',
+        'يتم تحديد السعر بعد جلسة الاكتشاف بناء على نطاق التحول والتنفيذ، بما في ذلك خيارات Build-Operate-Transfer (BOT)، والتعقيد التقني، والتكاملات ومتطلبات الصيانة.',
     },
   ],
   es: [
@@ -259,7 +259,7 @@ export const LOCALE_SERVICES_FAQS: Record<SupportedLocale, FaqSet> = {
     {
       question: '¿Qué soluciones de automatización e IA ofrecéis?',
       answer:
-        'Diseñamos y desplegamos agentes de IA para operaciones comerciales (WhatsApp, web, voz), automatización de flujos internos, calificación de leads, asistentes de reporting e inteligencia operativa para decisiones ejecutivas.',
+        'Diseñamos y desplegamos agentes de IA para operaciones comerciales (WhatsApp, web, voz), automatización de flujos internos, calificación de leads, asistentes de reporting e inteligencia operativa, con cobertura de ciberseguridad, deep tech e IoT cuando el programa lo requiere.',
     },
     {
       question: '¿Qué incluye un programa de transformación digital con H.V.A?',
@@ -279,7 +279,7 @@ export const LOCALE_SERVICES_FAQS: Record<SupportedLocale, FaqSet> = {
     {
       question: '¿Cómo se define la parte comercial?',
       answer:
-        'La estructura comercial se define después del discovery, según el alcance de IA y transformación, complejidad técnica, integraciones y necesidades de mantenimiento.',
+        'La estructura comercial se define después del discovery, incluyendo escenarios Build-Operate-Transfer (BOT), según alcance, complejidad técnica, integraciones y necesidades de mantenimiento.',
     },
   ],
 };

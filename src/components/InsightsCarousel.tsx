@@ -55,9 +55,9 @@ function buildItems(): CarouselItem[] {
 
 const ITEMS = buildItems();
 const TOTAL = ITEMS.length;
-const X_TABLE = [0, 380, 640];
-const SCALE_TABLE = [1, 0.7, 0.5];
-const OPACITY_TABLE = [1, 0.82, 0.55];
+const X_TABLE = [0, 320, 620];
+const SCALE_TABLE = [1, 0.5, 0.72];
+const OPACITY_TABLE = [1, 0.7, 0.88];
 
 function circularOffset(i: number, active: number): number {
   let d = i - active;

@@ -1,11 +1,30 @@
 import { PRODUCT_SYSTEMS } from './proof';
 
+export type ServiceDomain = {
+  id: string;
+  title: string;
+  briefLine: string;
+  briefBullets: string[];
+  strategicContext: string;
+  executionContext: string;
+  subservices: string[];
+  relatedOutcomes: string[];
+};
+
+export type DeliveryModel = {
+  name: string;
+  phases: { id: string; title: string; detail: string }[];
+  fitCriteria: string[];
+};
+
 export type ServiceBriefSection = {
   id: string;
   title: string;
   summary: string;
   bullets: string[];
 };
+
+export type ServiceDetailSection = ServiceDomain;
 
 export type EngagementStep = {
   step: string;
@@ -25,57 +44,203 @@ export type SolutionProgramDetail = {
   proofLinks: string[];
 };
 
-export const SERVICE_BRIEF_SECTIONS: ServiceBriefSection[] = [
+export const SERVICE_DOMAINS: ServiceDomain[] = [
   {
-    id: 'strategy',
-    title: 'Strategy and Transformation Advisory',
-    summary:
-      'Executive-level diagnostics, operating model design, and transformation roadmap definition before implementation begins.',
-    bullets: ['Operating diagnostics', 'Transformation roadmap', 'Architecture decision support'],
+    id: 'ai-systems',
+    title: 'AI Systems',
+    briefLine: 'Production AI systems for operations, decision velocity, and always-on execution.',
+    briefBullets: ['AI agents', 'Workflow automation', 'Decision intelligence'],
+    strategicContext:
+      'AI becomes competitive advantage only when integrated into day-to-day operations, not isolated pilots.',
+    executionContext:
+      'We scope operational goals, deploy production agents, and connect every workflow to measurable outcomes.',
+    subservices: [
+      'AI agent design and deployment',
+      'AI workflow orchestration',
+      'Decision intelligence automation',
+      'AI assistant and copilot systems',
+    ],
+    relatedOutcomes: ['Faster decisions', 'Lower manual load', '24/7 operational continuity'],
   },
   {
-    id: 'ai-automation',
-    title: 'AI and Automation Delivery',
-    summary:
-      'Production AI agents and workflow automation that handle customer operations, reporting cycles, and team handoffs.',
-    bullets: ['AI reception and qualification', 'Workflow orchestration', 'Decision intelligence automation'],
+    id: 'business-transformation',
+    title: 'Business Transformation',
+    briefLine: 'Business and IT modernization programs that redesign operating models for scale.',
+    briefBullets: ['Business + IT modernization', 'CRM + operations redesign', 'Transformation governance'],
+    strategicContext:
+      'Transformation succeeds when business process redesign and technology redesign move together.',
+    executionContext:
+      'We diagnose bottlenecks, redesign target operations, and run phased rollout across teams and systems.',
+    subservices: [
+      'Transformation diagnostics',
+      'Operating model redesign',
+      'CRM and operations transformation',
+      'Agile at scale enablement',
+      'Business continuity migration planning',
+    ],
+    relatedOutcomes: ['Higher process consistency', 'Fewer operational bottlenecks', 'Stronger execution discipline'],
+  },
+  {
+    id: 'digital-technology-data',
+    title: 'Digital, Technology, and Data',
+    briefLine: 'End-to-end digital capability uplift across platforms, maturity, and data foundations.',
+    briefBullets: ['Digital transformation', 'Data and analytics', 'Data and digital platform'],
+    strategicContext:
+      'Digital strategy fails without connected platforms, trusted data, and maturity roadmaps that teams can execute.',
+    executionContext:
+      'We align digital strategy with platform architecture, analytics foundations, and organizational readiness.',
+    subservices: [
+      'Digital strategy and transformation',
+      'Digital maturity programs',
+      'Data and digital platform architecture',
+      'Digital ecosystem design',
+    ],
+    relatedOutcomes: ['Clear digital roadmap', 'Unified data foundations', 'Faster capability scaling'],
+  },
+  {
+    id: 'consulting',
+    title: 'Consulting',
+    briefLine: 'Strategic advisory that translates business goals into technical execution plans.',
+    briefBullets: ['Strategy', 'Architecture', 'Roadmaps'],
+    strategicContext:
+      'Leadership needs clear decisions on priorities, risk, sequencing, and investment before engineering scales.',
+    executionContext:
+      'We run executive workshops, architecture reviews, and delivery roadmaps tied to measurable business outcomes.',
+    subservices: [
+      'Technology strategy advisory',
+      'Architecture decision support',
+      'Transformation roadmaps',
+      'Tech function design',
+      'Digital strategy alignment',
+    ],
+    relatedOutcomes: ['Sharper prioritization', 'Reduced delivery risk', 'Better strategic alignment'],
   },
   {
     id: 'engineering',
-    title: 'Custom Engineering and Product Build',
-    summary:
-      'Custom web, mobile, and SaaS engineering with deployment ownership, security hardening, and long-term maintainability.',
-    bullets: ['Custom software and APIs', 'Mobile and web product delivery', 'Reliability and performance engineering'],
+    title: 'Engineering',
+    briefLine: 'Custom engineering for web, mobile, SaaS, and cloud-native systems.',
+    briefBullets: ['Web apps', 'Mobile apps', 'SaaS platforms'],
+    strategicContext:
+      'Growth requires systems built for operational fit, not generic tooling that creates workflow friction.',
+    executionContext:
+      'We engineer custom applications, APIs, and cloud services with reliability, security, and maintainability built in.',
+    subservices: [
+      'Custom web application engineering',
+      'Mobile application development',
+      'SaaS platform development',
+      'Cloud system engineering',
+      'API and integration engineering',
+    ],
+    relatedOutcomes: ['Faster product delivery', 'Better system fit', 'Sustainable maintainability'],
   },
   {
-    id: 'modernization',
-    title: 'Modernization, Cloud, and Data',
-    summary:
-      'Legacy modernization, cloud infrastructure, and analytics systems to keep operations measurable and resilient as scale grows.',
-    bullets: ['Cloud migration and CI/CD', 'CRM and system modernization', 'Data pipelines and KPI dashboards'],
+    id: 'data-growth',
+    title: 'Data and Growth',
+    briefLine: 'Analytics and growth systems that convert operational data into commercial leverage.',
+    briefBullets: ['Analytics', 'Data pipelines', 'Marketing systems'],
+    strategicContext:
+      'Teams need decision-ready data and growth instrumentation to optimize revenue, efficiency, and acquisition.',
+    executionContext:
+      'We implement analytics architectures, pipeline governance, and marketing intelligence systems for repeatable growth.',
+    subservices: [
+      'Executive analytics and dashboards',
+      'Data pipeline engineering',
+      'Marketing system architecture',
+      'Attribution and growth reporting',
+    ],
+    relatedOutcomes: ['Improved visibility', 'Faster optimization cycles', 'Higher growth efficiency'],
+  },
+  {
+    id: 'cybersecurity-risk',
+    title: 'Cybersecurity and Digital Risk',
+    briefLine: 'Security and risk controls embedded across transformation and engineering delivery.',
+    briefBullets: ['Cybersecurity posture', 'Digital risk controls', 'Security operations'],
+    strategicContext:
+      'Security cannot be retrofitted after launch; risk controls must be designed into architecture and operations.',
+    executionContext:
+      'We implement security design patterns, risk monitoring, and governance controls across applications and infrastructure.',
+    subservices: [
+      'Cybersecurity architecture',
+      'Digital risk assessment and mitigation',
+      'Identity and access controls',
+      'Security monitoring and incident readiness',
+    ],
+    relatedOutcomes: ['Lower operational risk', 'Stronger compliance posture', 'Resilient delivery operations'],
+  },
+  {
+    id: 'emerging-tech',
+    title: 'Emerging Tech',
+    briefLine: 'Future-ready capability building through deep tech and Internet of Things programs.',
+    briefBullets: ['Emerging technologies', 'Deep tech', 'Internet of Things'],
+    strategicContext:
+      'Emerging capabilities create early strategic advantage when tied to real operational and market opportunities.',
+    executionContext:
+      'We validate emerging technology use cases, build prototypes, and operationalize high-value deep tech and IoT paths.',
+    subservices: [
+      'Emerging technology scouting and pilots',
+      'Deep tech solution prototyping',
+      'Internet of Things architecture and integration',
+      'Sensor and edge data activation',
+    ],
+    relatedOutcomes: ['Faster innovation cycles', 'New capability options', 'Early-mover advantage'],
   },
 ];
+
+export const SERVICE_BRIEF_SECTIONS: ServiceBriefSection[] = SERVICE_DOMAINS.map((domain) => ({
+  id: domain.id,
+  title: domain.title,
+  summary: domain.briefLine,
+  bullets: domain.briefBullets.slice(0, 3),
+}));
+
+export const SERVICE_DETAIL_SECTIONS: ServiceDetailSection[] = SERVICE_DOMAINS;
+
+export const BOT_DELIVERY_MODEL: DeliveryModel = {
+  name: 'Build-Operate-Transfer',
+  phases: [
+    {
+      id: 'build',
+      title: 'Build',
+      detail: 'Design and implement the target system, controls, and integrations required for production.',
+    },
+    {
+      id: 'operate',
+      title: 'Operate',
+      detail: 'Run and optimize operations with H.V.A-led execution, governance, and performance management.',
+    },
+    {
+      id: 'transfer',
+      title: 'Transfer',
+      detail: 'Transfer capabilities, documentation, and operating ownership to the client team when ready.',
+    },
+  ],
+  fitCriteria: [
+    'Internal team needs staged capability transfer',
+    'Operations must stay stable during scale-up',
+    'Leadership wants execution certainty before handover',
+  ],
+};
 
 export const ENGAGEMENT_STEPS: EngagementStep[] = [
   {
     step: '01',
     title: 'Diagnose',
-    detail: 'Assess process friction, data quality, and system constraints with leadership and operators.',
+    detail: 'Assess business constraints, process friction, and system readiness with leadership and operators.',
   },
   {
     step: '02',
-    title: 'Architect',
-    detail: 'Define operating model, solution scope, and technical architecture before development starts.',
+    title: 'Build',
+    detail: 'Design and implement systems, automations, and controls mapped to the approved roadmap.',
   },
   {
     step: '03',
-    title: 'Deliver',
-    detail: 'Ship in production sprints with integrations, QA controls, and measurable milestone outcomes.',
+    title: 'Operate',
+    detail: 'Run production with optimization loops, governance, and KPI-backed performance ownership.',
   },
   {
     step: '04',
-    title: 'Evolve',
-    detail: 'Maintain and optimize systems through recurring improvement cycles tied to business KPIs.',
+    title: 'Transfer',
+    detail: 'Enable client teams to assume ownership through BOT handover or continue managed scaling with H.V.A.',
   },
 ];
 

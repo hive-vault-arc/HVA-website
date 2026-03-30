@@ -6,9 +6,9 @@ import { SERVICES_FAQS } from '../../data/faqs';
 import { GLOBAL_KEYWORDS, SITE_URL, absoluteUrl, buildPageMetadata, mergeKeywords } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Services | Consulting, Engineering, and Solution Program Brief',
+  title: 'Services | 8 Service Domains and Solution Program Overview',
   description:
-    'A concise overview of H.V.A service pillars plus a solution-program preview across AI, automation, custom software, modernization, cloud, and data.',
+    'Concise services overview across AI systems, transformation, consulting, engineering, data and growth, cybersecurity, and emerging tech with a BOT delivery model snapshot.',
   path: '/services',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'technology consulting services Morocco',
@@ -28,6 +28,14 @@ export const metadata: Metadata = buildPageMetadata({
     'custom software and maintenance services',
     'team to automate sales and support workflows',
     'consulting-led solution programs',
+    'cybersecurity and digital risk consulting',
+    'emerging technologies advisory',
+    'deep tech implementation services',
+    'internet of things consulting and delivery',
+    'build operate transfer model technology projects',
+    'digital ecosystems strategy',
+    'agile at scale transformation',
+    'data and digital platform strategy',
     'services IA pour entreprise au Maroc',
     'migration CRM et integration API Maroc',
     'developpement application web et mobile entreprise Maroc',
@@ -63,10 +71,17 @@ export default function Page() {
     areaServed: ['Morocco', 'Remote'],
     serviceType: [
       'Technology Consulting',
+      'Business Transformation',
       'Digital Transformation Advisory',
+      'Digital, Technology, and Data',
       'Enterprise Architecture',
+      'Digital Strategy',
+      'Agile at Scale',
+      'Tech Function Design',
+      'Roadmap Design',
       'AI Agent Development',
       'Workflow Automation',
+      'Decision Intelligence',
       'CRM and Systems Engineering',
       'Custom Software Development',
       'Mobile and Web App Engineering',
@@ -74,6 +89,12 @@ export default function Page() {
       'Cloud Infrastructure and Reliability',
       'CI/CD and DevOps',
       'Data Services and Analytics',
+      'Marketing Systems',
+      'Cybersecurity and Digital Risk',
+      'Emerging Technologies',
+      'Deep Tech',
+      'Internet of Things',
+      'Build-Operate-Transfer Delivery Model',
     ],
     availableLanguage: ['en', 'fr', 'ar', 'es'],
     keywords: mergeKeywords(GLOBAL_KEYWORDS, [
