@@ -11,7 +11,7 @@ const pageLinks = [
   { href: '/arc', label: 'ARC' },
   { href: '/services', label: 'Services' },
   { href: '/industries', label: 'Industries' },
-  { href: '/about', label: 'Who We Are' },
+  { href: '/whoweare/abouthva', label: 'Who We Are' },
   { href: '/insights', label: 'Insights' },
   { href: '/contact', label: 'Contact' },
 ];
@@ -20,7 +20,7 @@ const expertiseLinks = [
   { href: '/services/solution-programs', label: 'Solution Programs' },
   { href: '/case-studies/multilingual-whatsapp-ai-agent', label: 'WhatsApp Agent Operations' },
   { href: '/case-studies/zoho-grade-crm-platform', label: 'CRM Modernization' },
-  { href: '/case-studies/executive-analytics-control-tower', label: 'Decision Intelligence' },
+  { href: '/case-studies', label: 'Healthcare Case Studies' },
   { href: '/insights/research-reports', label: 'Research Reports' },
 ];
 

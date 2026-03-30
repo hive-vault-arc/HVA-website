@@ -9,12 +9,14 @@ import Logo from './Logo';
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
   const pathname = usePathname();
 
-  // Close mobile menu and restore scroll when route changes
+  // Close all dropdowns and mobile menu on route change
   useEffect(() => {
     document.body.style.overflow = '';
     setIsMobileMenuOpen(false);
+    setOpenMenu(null);
   }, [pathname]);
 
   useEffect(() => {
@@ -46,11 +48,16 @@ const Navbar: React.FC = () => {
     { path: '/insights/perspectives', label: 'Perspectives' },
     { path: '/insights/research-reports', label: 'Research Reports' },
   ];
+  const whoWeAreItems = [
+    { path: '/whoweare/abouthva', label: 'About H.V.A' },
+    { path: '/whoarewe/portfolio', label: 'Portfolio' },
+  ];
 
   const isInsightsActive =
     pathname?.startsWith('/insights') || pathname?.startsWith('/blog') || pathname?.startsWith('/case-studies');
   const isServicesActive = pathname?.startsWith('/services');
   const isIndustriesActive = pathname?.startsWith('/industries');
+  const isWhoWeAreActive = pathname?.startsWith('/whoweare') || pathname?.startsWith('/whoarewe');
 
   const desktopLinkClass = (isActive: boolean) =>
     `px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200 ${
@@ -77,6 +84,9 @@ const Navbar: React.FC = () => {
     return isRouteActive(path);
   };
 
+  const isWhoWeAreItemActive = (path: string) =>
+    pathname === path || (path !== '/' && pathname?.startsWith(`${path}/`));
+
   return (
     <header className="navbar-sharp fixed top-2 left-1/2 -translate-x-1/2 w-[90%] max-w-6xl z-50">
       <nav 
@@ -100,7 +110,11 @@ const Navbar: React.FC = () => {
               <Link href="/arc" className={desktopLinkClass(isRouteActive('/arc'))}>
                 ARC
               </Link>
-              <div className="relative group">
+              <div
+                className="relative"
+                onMouseEnter={() => setOpenMenu('services')}
+                onMouseLeave={() => setOpenMenu(null)}
+              >
                 <Link
                   href="/services"
                   className={`${desktopLinkClass(!!isServicesActive)} inline-flex items-center gap-1.5`}
@@ -108,7 +122,7 @@ const Navbar: React.FC = () => {
                   Services
                   <ChevronDown className="h-3.5 w-3.5" />
                 </Link>
-                <div className="pointer-events-none absolute left-0 top-full pt-2 opacity-0 transition duration-200 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
+                <div className={`absolute left-0 top-full pt-2 transition duration-200 ${openMenu === 'services' ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`}>
                   <div className="min-w-[220px] rounded-xl border border-[#1E272E]/10 bg-[#F5F6FA] p-2 shadow-[0_8px_24px_rgba(9,132,227,0.14)]">
                     {servicesItems.map((item) => (
                       <Link
@@ -126,7 +140,11 @@ const Navbar: React.FC = () => {
                   </div>
                 </div>
               </div>
-              <div className="relative group">
+              <div
+                className="relative"
+                onMouseEnter={() => setOpenMenu('industries')}
+                onMouseLeave={() => setOpenMenu(null)}
+              >
                 <Link
                   href="/industries"
                   className={`${desktopLinkClass(!!isIndustriesActive)} inline-flex items-center gap-1.5`}
@@ -134,7 +152,7 @@ const Navbar: React.FC = () => {
                   Industries
                   <ChevronDown className="h-3.5 w-3.5" />
                 </Link>
-                <div className="pointer-events-none absolute left-0 top-full pt-2 opacity-0 transition duration-200 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
+                <div className={`absolute left-0 top-full pt-2 transition duration-200 ${openMenu === 'industries' ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`}>
                   <div className="min-w-[220px] rounded-xl border border-[#1E272E]/10 bg-[#F5F6FA] p-2 shadow-[0_8px_24px_rgba(9,132,227,0.14)]">
                     {industriesItems.map((item) => (
                       <Link
@@ -148,10 +166,41 @@ const Navbar: React.FC = () => {
                   </div>
                 </div>
               </div>
-              <Link href="/about" className={desktopLinkClass(isRouteActive('/about'))}>
-                Who We Are
-              </Link>
-              <div className="relative group">
+              <div
+                className="relative"
+                onMouseEnter={() => setOpenMenu('who-we-are')}
+                onMouseLeave={() => setOpenMenu(null)}
+              >
+                <Link
+                  href="/whoweare/abouthva"
+                  className={`${desktopLinkClass(!!isWhoWeAreActive)} inline-flex items-center gap-1.5`}
+                >
+                  Who We Are
+                  <ChevronDown className="h-3.5 w-3.5" />
+                </Link>
+                <div className={`absolute left-0 top-full pt-2 transition duration-200 ${openMenu === 'who-we-are' ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`}>
+                  <div className="min-w-[220px] rounded-xl border border-[#1E272E]/10 bg-[#F5F6FA] p-2 shadow-[0_8px_24px_rgba(9,132,227,0.14)]">
+                    {whoWeAreItems.map((item) => (
+                      <Link
+                        key={item.path}
+                        href={item.path}
+                        className={`block rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                          isWhoWeAreItemActive(item.path)
+                            ? 'bg-[#0984E3] text-[#F5F6FA]'
+                            : 'text-[#1E272E]/75 hover:bg-[#0984E3]/10 hover:text-[#1E272E]'
+                        }`}
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div
+                className="relative"
+                onMouseEnter={() => setOpenMenu('insights')}
+                onMouseLeave={() => setOpenMenu(null)}
+              >
                 <Link
                   href="/insights"
                   className={`${desktopLinkClass(!!isInsightsActive)} inline-flex items-center gap-1.5`}
@@ -159,7 +208,7 @@ const Navbar: React.FC = () => {
                   Insights
                   <ChevronDown className="h-3.5 w-3.5" />
                 </Link>
-                <div className="pointer-events-none absolute left-0 top-full pt-2 opacity-0 transition duration-200 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
+                <div className={`absolute left-0 top-full pt-2 transition duration-200 ${openMenu === 'insights' ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`}>
                   <div className="min-w-[220px] rounded-xl border border-[#1E272E]/10 bg-[#F5F6FA] p-2 shadow-[0_8px_24px_rgba(9,132,227,0.14)]">
                     {insightsItems.map((item) => (
                       <Link
@@ -251,9 +300,24 @@ const Navbar: React.FC = () => {
                 </Link>
               ))}
             </div>
-            <Link href="/about" className={mobileLinkClass(isRouteActive('/about'))}>
+            <Link href="/whoweare/abouthva" className={mobileLinkClass(!!isWhoWeAreActive)}>
               Who We Are
             </Link>
+            <div className="ml-3 rounded-xl border border-[#1E272E]/10 bg-white/80 p-2">
+              {whoWeAreItems.map((item) => (
+                <Link
+                  key={item.path}
+                  href={item.path}
+                  className={`block rounded-lg px-3 py-2 text-sm ${
+                    isWhoWeAreItemActive(item.path)
+                      ? 'bg-[#0984E3] text-[#F5F6FA]'
+                      : 'text-[#1E272E]/72 hover:bg-[#0984E3]/10 hover:text-[#1E272E]'
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
             <Link
               href="/insights"
               className={mobileLinkClass(!!isInsightsActive)}

@@ -66,7 +66,7 @@ const SLIDES: Slide[] = [
     primaryLabel: 'Book Discovery Call',
     primaryHref: '/contact',
     secondaryLabel: 'Meet Our Team',
-    secondaryHref: '/about',
+    secondaryHref: '/whoweare/abouthva',
     image: '/Images/strategic-technology-consulting-tangier-morocco.png',
     imageAlt: 'H.V.A consulting and engineering team in Tangier, Morocco',
     cardIcon: <Eye className="w-8 h-8 text-[#0984E3]" strokeWidth={1.5} />,

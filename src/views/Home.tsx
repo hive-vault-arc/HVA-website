@@ -9,6 +9,7 @@ import Background3d from '../components/Plasma';
 import LogoLoop from '../components/LogoItem';
 import VideoScrollSection from '../components/ui/VideoScrollSection';
 import HeroSlider from '../components/ui/HeroSlider';
+import InsightsCarousel from '../components/InsightsCarousel';
 import { useAnimationQuality } from '../lib/animationQuality';
 import {
   SiAndroid,
@@ -163,14 +164,23 @@ const Home: React.FC = () => {
   ];
 
 
-  let pillarGridCols: string | undefined;
-  if (hoveredPillar === null) {
-    pillarGridCols = undefined;
-  } else if (hoveredPillar % 2 === 0) {
-    pillarGridCols = '1.7fr 0.7fr';
-  } else {
-    pillarGridCols = '0.7fr 1.7fr';
-  }
+  // Compute absolute position (percentages) for each service card based on hover state
+  const getCardPos = (idx: number): { top: string; left: string; width: string; height: string } => {
+    if (hoveredPillar === null) {
+      const r = Math.floor(idx / 2);
+      const c = idx % 2;
+      return { top: `${r * 33.333}%`, left: `${c * 50}%`, width: '50%', height: '33.333%' };
+    }
+    if (idx === hoveredPillar) {
+      return { top: '0%', left: '0%', width: '100%', height: '50%' };
+    }
+    const remaining = [0, 1, 2, 3, 4, 5].filter((i) => i !== hoveredPillar);
+    const pos = remaining.indexOf(idx);
+    if (pos < 2) {
+      return { top: '50%', left: `${pos * 50}%`, width: '50%', height: '25%' };
+    }
+    return { top: '75%', left: `${(pos - 2) * 33.333}%`, width: '33.333%', height: '25%' };
+  };
 
   return (
     <div className="h-full home-reference">
@@ -188,6 +198,9 @@ const Home: React.FC = () => {
       )}
 
       <HeroSlider />
+
+      {/* ── Insights Carousel ──────────────────────────────────────────── */}
+      <InsightsCarousel />
 
       {/* ── Who We Are — Identity Section ──────────────────────────────── */}
       <section className="relative grid grid-cols-1 lg:grid-cols-12">
@@ -219,64 +232,51 @@ const Home: React.FC = () => {
           </div>
         </div>
 
-        {/* Right — 2×3 service pillars */}
+        {/* Right — 2×3 service pillars (absolute-positioned for fixed-height section) */}
         <ul
-          className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 bg-white list-none m-0 p-0"
-          style={{
-            isolation: 'isolate',
-            gridTemplateColumns: pillarGridCols,
-            transition: 'grid-template-columns 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
-          }}
+          className="lg:col-span-7 relative list-none m-0 p-0 overflow-hidden"
+          style={{ height: '600px' }}
           onMouseLeave={() => setHoveredPillar(null)}
         >
           {servicePillars.map((pillar, idx) => {
-            const row = Math.floor(idx / 2);
-            const col = idx % 2;
-            const totalRows = Math.ceil(servicePillars.length / 2);
-            let originV = 'center';
-            if (row === 0) originV = 'top';
-            else if (row === totalRows - 1) originV = 'bottom';
-            const originH = col === 0 ? 'left' : 'right';
             const isHovered = hoveredPillar === idx;
             const isOther = hoveredPillar !== null && hoveredPillar !== idx;
             return (
-              <li
+              <motion.li
                 key={pillar.title}
-                className="bg-white relative"
+                layout
+                transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute bg-white overflow-hidden"
                 style={{
+                  ...getCardPos(idx),
                   zIndex: isHovered ? 10 : 1,
+                  outline: '1px solid #e2e8f0',
                   opacity: isOther ? 0.45 : 1,
                   transition: 'opacity 0.4s ease',
-                  borderRight: col === 0 ? '1px solid #e2e8f0' : undefined,
-                  borderBottom: row < totalRows - 1 ? '1px solid #e2e8f0' : undefined,
                 }}
                 onMouseEnter={() => setHoveredPillar(idx)}
               >
-                {/* Inner wrapper scales up on hover only — li stays full grid-cell size */}
-                <div
-                  className="h-full p-10 flex flex-col relative"
-                  style={{
-                    transform: isHovered ? 'scale(1.18)' : 'scale(1)',
-                    transformOrigin: `${originV} ${originH}`,
-                    transition: 'transform 0.55s cubic-bezier(0.16, 1, 0.3, 1)',
-                  }}
-                >
+                <div className="h-full p-5 flex flex-col relative">
                   <div className="w-10 h-10 flex items-center justify-center bg-[#dbeafe] text-[#2563EB] shrink-0">
                     {pillar.icon}
                   </div>
-                  {/* pb-16 reserves visual space for the absolute details below */}
-                  <div className="mt-5 pb-16">
-                    <h3 className="font-headline text-xl text-[#0F172A] mb-2">{pillar.title}</h3>
-                    <p className="text-sm text-[#475569] leading-relaxed">{pillar.desc}</p>
+                  <div className="mt-3 pb-12">
+                    <h3 className="font-headline text-lg text-[#0F172A] mb-1.5">{pillar.title}</h3>
+                    <p
+                      className="text-sm text-[#475569] leading-relaxed"
+                      style={{ opacity: isOther ? 0 : 1, transition: 'opacity 0.25s ease' }}
+                    >
+                      {pillar.desc}
+                    </p>
                   </div>
-                  {/* Detail bullets — position:absolute so they never affect card height */}
+                  {/* Detail bullets — absolute so they never affect card height */}
                   <ul
-                    className="absolute bottom-10 left-10 right-10 space-y-1.5 list-none p-0 m-0"
+                    className="absolute bottom-5 left-5 right-5 space-y-1.5 list-none p-0 m-0"
                     aria-hidden={!isHovered}
                     style={{
                       opacity: isHovered ? 1 : 0,
                       transform: isHovered ? 'translateY(0)' : 'translateY(5px)',
-                      transition: 'opacity 0.3s ease 0.08s, transform 0.35s ease 0.08s',
+                      transition: 'opacity 0.3s ease 0.1s, transform 0.35s ease 0.1s',
                     }}
                   >
                     {pillar.details.map((detail) => (
@@ -295,57 +295,79 @@ const Home: React.FC = () => {
                     }}
                   />
                 </div>
-              </li>
+              </motion.li>
             );
           })}
         </ul>
 
       </section>
 
-      <section className="bg-white py-20 md:py-24">
-        <div className="mx-auto max-w-7xl px-8">
+      <section className="bg-[#F2F4F6] py-20 md:py-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-14">
           <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
             Proof In Production
           </p>
-          <h2 className="font-headline text-4xl md:text-5xl text-[#0F172A] leading-tight">
+          <h2 className="font-headline text-4xl font-medium leading-[1.04] tracking-tight text-[#0F172A] md:text-5xl">
             Transformation Programs Running in Production
           </h2>
-          <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+
+          {/* Cards — gap-px grid, no borders */}
+          <div className="mt-10 grid grid-cols-1 gap-px bg-[#e2e8f0] md:grid-cols-3">
             {[
               {
-                title: 'System Built',
-                body: 'Customer operations engine now handles multilingual lead intake, qualification, and scheduling directly in production.',
+                eyebrow: 'System Built',
+                title: 'Customer Operations Engine',
+                body: 'Multilingual lead intake, qualification, and scheduling — handled end-to-end in production without manual intervention.',
                 meta: 'Stack: WhatsApp API · HubSpot · Calendar · PostgreSQL',
               },
               {
-                title: 'Deployment Status',
-                body: 'Revenue control module runs across sales and operations with 94 active internal users.',
+                eyebrow: 'Deployment Status',
+                title: 'Revenue Control Module',
+                body: 'Runs live across sales and operations with 94 active internal users and zero downtime since launch.',
                 meta: 'Status: Production since May 2025',
               },
               {
-                title: 'Measured Outcomes',
-                body: 'Manual triage dropped 85%, qualified meetings increased 43%, and executive reporting cycles accelerated by 72%.',
+                eyebrow: 'Measured Outcomes',
+                title: 'Quantified Results',
+                body: 'Manual triage dropped 85%, qualified meetings increased 43%, and deal capture consistency improved across operating teams.',
                 meta: 'Evidence: dashboards + approved client reporting exports',
               },
             ].map((item) => (
-              <article key={item.title} className="border border-[#e2e8f0] bg-[#F8FAFC] p-6">
+              <article key={item.eyebrow} className="bg-white p-8 md:p-10">
+                <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.22em] text-[#2563EB]">
+                  {item.eyebrow}
+                </p>
                 <h3 className="font-headline text-2xl text-[#0F172A]">{item.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-[#334155]">{item.body}</p>
-                <p className="mt-4 text-[10px] font-bold uppercase tracking-[0.16em] text-[#2563EB]">{item.meta}</p>
+                <p className="mt-4 text-sm leading-relaxed text-[#475569]">{item.body}</p>
+                <p className="mt-5 text-[10px] font-bold uppercase tracking-[0.16em] text-[#94a3b8]">{item.meta}</p>
               </article>
             ))}
           </div>
-          <div className="mt-8 flex flex-wrap gap-5">
-            <Link href="/case-studies" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">
-              Explore proof library &rarr;
+
+          {/* Links */}
+          <div className="mt-8 flex flex-wrap gap-6">
+            <Link
+              href="/case-studies"
+              className="text-sm font-bold uppercase tracking-wide text-[#2563EB] hover:text-[#1d4ed8] transition-colors duration-200"
+            >
+              Explore proof library →
             </Link>
-            <Link href="/services/solution-programs" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">
-              Explore solution programs &rarr;
+            <Link
+              href="/services/solution-programs"
+              className="text-sm font-bold uppercase tracking-wide text-[#2563EB] hover:text-[#1d4ed8] transition-colors duration-200"
+            >
+              Explore solution programs →
             </Link>
           </div>
-          <blockquote className="mt-8 border-l-2 border-[#2563EB] pl-4 text-sm italic text-[#334155]">
-            "H.V.A aligned strategy, process, and engineering into one operating model. Our leadership team now makes faster decisions with far more confidence."
-            <footer className="mt-1 text-xs not-italic text-[#64748b]">— COO, Capstone Living Morocco</footer>
+
+          {/* Testimonial */}
+          <blockquote className="mt-10 border-l-2 border-[#2563EB] pl-6">
+            <p className="font-headline text-xl italic leading-relaxed text-[#0F172A]">
+              &ldquo;H.V.A built an AI agent that completely transformed our sales pipeline — empowering our team rather than replacing them. Combined with the CRM they engineered alongside it, the whole operation reached a level we didn&rsquo;t think was attainable.&rdquo;
+            </p>
+            <footer className="mt-3 text-[10px] font-bold uppercase not-italic tracking-[0.22em] text-[#94a3b8]">
+              — CEO, Immoworld
+            </footer>
           </blockquote>
         </div>
       </section>
@@ -384,6 +406,19 @@ const Home: React.FC = () => {
               {/* Feature 01 */}
               <div className="flex gap-6">
                 <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-white/10 border border-white/10">
+                  <MessageSquare className="w-5 h-5 text-white" strokeWidth={1.5} />
+                </div>
+                <div>
+                  <h4 className="font-headline text-2xl text-white mb-2">Strategic Consulting</h4>
+                  <p className="text-white/60 font-body leading-relaxed">
+                    We diagnose operational friction, map decision bottlenecks, and translate leadership goals into an executable transformation program.
+                  </p>
+                </div>
+              </div>
+
+              {/* Feature 02 */}
+              <div className="flex gap-6">
+                <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-white/10 border border-white/10">
                   <Layers className="w-5 h-5 text-white" strokeWidth={1.5} />
                 </div>
                 <div>
@@ -394,7 +429,7 @@ const Home: React.FC = () => {
                 </div>
               </div>
 
-              {/* Feature 02 */}
+              {/* Feature 03 */}
               <div className="flex gap-6">
                 <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-white/10 border border-white/10">
                   <Eye className="w-5 h-5 text-white" strokeWidth={1.5} />
@@ -424,15 +459,15 @@ const Home: React.FC = () => {
               {/* Opening quote mark */}
               <span aria-hidden="true" className="font-headline italic text-[#2563EB]/20 text-[5rem] leading-none absolute top-2 left-6 select-none">"</span>
               <p className="text-2xl md:text-3xl font-headline italic text-[#0F172A] leading-snug mb-8">
-                "H.V.A became our long-term transformation partner. Strategy, delivery, and operations now move in one coordinated cadence."
+                &ldquo;H.V.A built an AI agent that completely transformed our sales pipeline — empowering our team rather than replacing them. Combined with the CRM they engineered alongside it, the whole operation reached a level we didn&rsquo;t think was attainable.&rdquo;
               </p>
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-[#0F172A] flex items-center justify-center shrink-0">
-                  <span className="text-white text-xs font-bold font-label">CTO</span>
+                  <span className="text-white text-xs font-bold font-label">CEO</span>
                 </div>
                 <div>
-                  <p className="font-label font-bold uppercase tracking-widest text-xs text-[#0F172A]">Chief Technology Officer</p>
-                  <p className="font-body text-sm text-[#475569]">Global Logistics Corp.</p>
+                  <p className="font-label font-bold uppercase tracking-widest text-xs text-[#0F172A]">Chief Executive Officer</p>
+                  <p className="font-body text-sm text-[#475569]">Immoworld</p>
                 </div>
               </div>
             </div>

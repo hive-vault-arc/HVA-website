@@ -58,14 +58,6 @@ Strategic advisory layer: digital transformation roadmap design, operational dia
   - Manual data-entry time: -40%
   - Tracked pipeline volume: $2.4M monthly
 
-### 3) Executive Analytics Control Tower (Healthcare)
-
-- Status: Live in production since January 2026
-- Outcomes:
-  - Reporting cycle time: -72%
-  - KPI accuracy: 99.3%
-  - Decision latency on anomalies: -58%
-
 ## Commercial Approach
 
 - Discovery-first model with strategic and technical scoping.
@@ -81,8 +73,8 @@ Strategic advisory layer: digital transformation roadmap design, operational dia
 - Solution Programs: /services/solution-programs
 - Industries: /industries
 - ARC: /arc
-- About: /about
-- Portfolio: /portfolio
+- About H.V.A: /whoweare/abouthva
+- Portfolio: /whoarewe/portfolio
 - Case Studies: /case-studies
 - Insights: /insights
 - Insights Blogs: /insights/blogs
@@ -94,4 +86,3 @@ Strategic advisory layer: digital transformation roadmap design, operational dia
 - Contact: /contact
 - WhatsApp Agent Case: /case-studies/multilingual-whatsapp-ai-agent
 - CRM Transformation Case: /case-studies/zoho-grade-crm-platform
-- Analytics Control Tower Case: /case-studies/executive-analytics-control-tower

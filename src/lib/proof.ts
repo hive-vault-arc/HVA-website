@@ -128,50 +128,6 @@ export const CASE_STUDIES: CaseStudy[] = [
     },
     lastUpdated: '2026-03-27',
   },
-  {
-    slug: 'executive-analytics-control-tower',
-    title: 'Executive Analytics Control Tower for Multi-Site Operations',
-    clientName: 'Northline Health Network',
-    industry: 'Healthcare Services',
-    summary:
-      'Delivered a unified analytics and dashboard system combining operational KPIs, agent performance, and revenue intelligence for executives.',
-    problem:
-      'Leadership had fragmented reports and no single source of truth across clinics, call operations, and billing teams.',
-    systemArchitecture:
-      'Lakehouse-backed analytics stack with scheduled ETL, semantic KPI layer, and role-aware dashboard delivery.',
-    operationalModules: ['Executive Decision Intelligence', 'Cloud Reliability and Security Runtime'],
-    integrations: ['BigQuery', 'Power BI', 'Google Sheets ingestion', 'Custom API connectors', 'Slack alerts'],
-    deploymentScale: '3 executive teams, 11 clinics, 42 tracked KPI streams',
-    deploymentStatus: 'Live in production since January 2026',
-    measuredOutcomes: [
-      {
-        label: 'Reporting Cycle Time',
-        value: '-72%',
-        context: 'Weekly performance reporting reduced from 11 hours to 3 hours.',
-      },
-      {
-        label: 'KPI Accuracy',
-        value: '99.3%',
-        context: 'Validated against finance and operations source systems.',
-      },
-      {
-        label: 'Executive Decision Latency',
-        value: '-58%',
-        context: 'Average time to act on flagged KPI anomalies.',
-      },
-    ],
-    testimonial: {
-      quote:
-        'The dashboards changed how we run weekly leadership. We now see risk signals early and take action before they become operational incidents.',
-      author: 'Dr. Salma Kettani',
-      role: 'Director of Operations, Northline Health Network',
-    },
-    assets: {
-      coverImage: '/Images/ai-analytics-dashboard-business.jpg',
-      logoLabel: 'Northline Health Network',
-    },
-    lastUpdated: '2026-03-27',
-  },
 ];
 
 export const PRODUCT_SYSTEMS: ProductSystem[] = [
@@ -194,22 +150,13 @@ export const PRODUCT_SYSTEMS: ProductSystem[] = [
     proofLinks: ['/case-studies/zoho-grade-crm-platform'],
   },
   {
-    name: 'Executive Analytics Control Tower',
-    category: 'Decision Intelligence Program',
-    modules: ['ETL orchestration', 'Semantic KPI catalog', 'Executive dashboards', 'Anomaly alerts'],
-    integrations: ['BigQuery', 'Power BI', 'Slack', 'Internal APIs'],
-    deliveryModel: 'KPI advisory workshops followed by staged delivery and operating governance.',
-    outcomes: ['Real-time leadership visibility', 'Higher forecasting accuracy', 'Faster operational decisions'],
-    proofLinks: ['/case-studies/executive-analytics-control-tower'],
-  },
-  {
     name: 'Cloud Delivery Reliability Stack',
     category: 'Cloud Reliability Program',
     modules: ['CI/CD pipeline hardening', 'Blue-green deployment patterns', 'Observability dashboards', 'Security controls'],
     integrations: ['AWS', 'Google Cloud', 'Docker', 'GitHub Actions'],
     deliveryModel: 'Reliability audit, remediation sprints, and ongoing SRE collaboration.',
     outcomes: ['Lower deployment risk', 'Faster release cycles', 'Improved uptime posture'],
-    proofLinks: ['/services', '/portfolio'],
+    proofLinks: ['/services', '/whoarewe/portfolio'],
   },
 ];
 

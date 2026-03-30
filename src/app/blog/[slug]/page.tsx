@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'article',
       publishedTime: isoDate,
       modifiedTime: isoDate,
-      authors: [absoluteUrl('/about')],
+      authors: [absoluteUrl('/whoweare/abouthva')],
       section: post.category,
       images: [{ url: coverUrl, width: 1200, height: 630, alt: post.title }],
     },
@@ -62,7 +62,7 @@ export default async function BlogPostPage({ params }: Props) {
     author: {
       '@type': 'Person',
       name: 'H.V.A Research Team',
-      url: absoluteUrl('/about'),
+      url: absoluteUrl('/whoweare/abouthva'),
     },
     publisher: {
       '@type': 'Organization',

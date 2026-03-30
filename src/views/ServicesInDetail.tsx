@@ -395,7 +395,7 @@ const ServicesInDetail: React.FC = () => {
                 },
                 {
                   title: 'Measured Outcomes',
-                  detail: '85% lower manual triage, 43% higher qualified meetings, and 72% faster reporting cycles.',
+                  detail: '85% lower manual triage, 43% higher qualified meetings, and stronger pipeline visibility across teams.',
                 },
               ].map((proof) => (
                 <article key={proof.title} className="border border-[#e2e8f0] bg-[#F8FAFC] p-6">
@@ -415,7 +415,7 @@ const ServicesInDetail: React.FC = () => {
             <blockquote className="mt-8 border-l-2 border-[#2563EB] pl-4 text-sm italic text-[#334155]">
               "H.V.A builds systems that run in production, not slide decks."
               <footer className="mt-1 text-xs not-italic text-[#64748b]">
-                — Operations Director, Northline Health Network
+                — Operations Director, Capstone Living Morocco
               </footer>
             </blockquote>
           </div>

@@ -1,16 +1,16 @@
 import type { Metadata } from 'next';
-import About from '../../views/About';
-import FaqSection from '../../components/FaqSection';
-import JsonLd from '../../components/JsonLd';
-import { ABOUT_FAQS } from '../../data/faqs';
-import { GLOBAL_KEYWORDS, SITE_URL, buildPageMetadata, mergeKeywords } from '../../lib/seo';
-import { CANONICAL_MARKET_IDENTITY } from '../../lib/positioning';
+import About from '../../../views/About';
+import FaqSection from '../../../components/FaqSection';
+import JsonLd from '../../../components/JsonLd';
+import { ABOUT_FAQS } from '../../../data/faqs';
+import { GLOBAL_KEYWORDS, SITE_URL, buildPageMetadata, mergeKeywords } from '../../../lib/seo';
+import { CANONICAL_MARKET_IDENTITY } from '../../../lib/positioning';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'About | Technology Consulting and Transformation Partner',
   description:
     'Meet the H.V.A team: a consulting-led digital transformation firm in Tangier that combines strategy, architecture, engineering delivery, and long-term operations ownership.',
-  path: '/about',
+  path: '/whoweare/abouthva',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'software engineering team Tangier',
     'digital transformation consulting team Morocco',
@@ -30,7 +30,7 @@ export default function Page() {
     '@context': 'https://schema.org',
     '@type': 'AboutPage',
     name: 'About H.V.A',
-    url: `${SITE_URL}/about`,
+    url: `${SITE_URL}/whoweare/abouthva`,
     description: CANONICAL_MARKET_IDENTITY.longDescriptor,
     mainEntity: {
       '@type': ['Organization', 'ProfessionalService'],
@@ -43,7 +43,7 @@ export default function Page() {
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
-      { '@type': 'ListItem', position: 2, name: 'About', item: `${SITE_URL}/about` },
+      { '@type': 'ListItem', position: 2, name: 'About H.V.A', item: `${SITE_URL}/whoweare/abouthva` },
     ],
   };
 

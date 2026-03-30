@@ -85,7 +85,6 @@ export default function Page() {
     subjectOf: [
       `${SITE_URL}/case-studies/multilingual-whatsapp-ai-agent`,
       `${SITE_URL}/case-studies/zoho-grade-crm-platform`,
-      `${SITE_URL}/case-studies/executive-analytics-control-tower`,
       `${SITE_URL}/services/solution-programs`,
       `${SITE_URL}/services/in-detail`,
     ],

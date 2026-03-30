@@ -72,13 +72,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.85,
     },
     {
-      url: `${SITE_URL}/about`,
+      url: `${SITE_URL}/whoweare/abouthva`,
       lastModified: now,
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
-      url: `${SITE_URL}/portfolio`,
+      url: `${SITE_URL}/whoarewe/portfolio`,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.8,

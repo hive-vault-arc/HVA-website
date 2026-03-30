@@ -50,7 +50,6 @@ export default function ServicesInDetailPage() {
       `${SITE_URL}/services/solution-programs`,
       `${SITE_URL}/case-studies/multilingual-whatsapp-ai-agent`,
       `${SITE_URL}/case-studies/zoho-grade-crm-platform`,
-      `${SITE_URL}/case-studies/executive-analytics-control-tower`,
     ],
   };
 

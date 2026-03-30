@@ -84,8 +84,6 @@ const PROGRAM_SUMMARIES: Record<string, string> = {
     'Deploy multilingual AI reception and lead operations as a daily operating capability, not a one-off automation.',
   'Enterprise CRM Modernization Program':
     'Transform fragmented CRM operations into one governed system with reliable pipeline and process ownership.',
-  'Executive Analytics Control Tower':
-    'Give leadership a real-time control layer with trusted KPIs, anomaly visibility, and faster operational decisions.',
   'Cloud Delivery Reliability Stack':
     'Stabilize release velocity with hardened infrastructure, deployment safety, observability, and security controls.',
 };
@@ -110,4 +108,3 @@ export const SOLUTION_PROGRAM_DETAILS: SolutionProgramDetail[] = PRODUCT_SYSTEMS
   outcomes: program.outcomes,
   proofLinks: program.proofLinks,
 }));
-

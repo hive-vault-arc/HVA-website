@@ -13,25 +13,25 @@ export function HeroParallaxDemo() {
 export const products = [
   {
     title: "E-Commerce Platform",
-    link: "/portfolio/ecommerce",
+    link: "/whoarewe/portfolio",
     thumbnail:
       "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
   },
   {
     title: "Mobile App Development",
-    link: "/portfolio/mobile",
+    link: "/whoarewe/portfolio",
     thumbnail:
       "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
   },
   {
     title: "Web Applications",
-    link: "/portfolio/web-apps",
+    link: "/whoarewe/portfolio",
     thumbnail:
       "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80",
   },
   {
     title: "UI/UX Design",
-    link: "/portfolio/design",
+    link: "/whoarewe/portfolio",
     thumbnail:
       "https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80",
   },

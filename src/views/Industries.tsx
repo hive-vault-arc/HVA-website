@@ -18,7 +18,7 @@ const industries = [
     name: 'Healthcare',
     sector: 'Healthcare & Clinical Ops',
     focus: 'Executive reporting, clinical operations dashboards, workflow reliability, decision intelligence.',
-    href: '/case-studies/executive-analytics-control-tower',
+    href: '/case-studies',
   },
   {
     anchorId: 'construction',

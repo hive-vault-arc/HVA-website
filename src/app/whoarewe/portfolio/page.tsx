@@ -1,16 +1,16 @@
 import type { Metadata } from 'next';
-import Portfolio from '../../views/Portfolio';
-import FaqSection from '../../components/FaqSection';
-import JsonLd from '../../components/JsonLd';
-import { PORTFOLIO_FAQS } from '../../data/faqs';
-import { GLOBAL_KEYWORDS, SITE_URL, buildPageMetadata, mergeKeywords } from '../../lib/seo';
-import { getAllCaseStudies } from '../../lib/proof';
+import Portfolio from '../../../views/Portfolio';
+import FaqSection from '../../../components/FaqSection';
+import JsonLd from '../../../components/JsonLd';
+import { PORTFOLIO_FAQS } from '../../../data/faqs';
+import { GLOBAL_KEYWORDS, SITE_URL, buildPageMetadata, mergeKeywords } from '../../../lib/seo';
+import { getAllCaseStudies } from '../../../lib/proof';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'Portfolio | Transformation Engagements and Delivery Outcomes',
   description:
     'Explore consulting-led transformation engagements delivered by H.V.A across AI operations, CRM modernization, analytics, software engineering, and cloud reliability.',
-  path: '/portfolio',
+  path: '/whoarewe/portfolio',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'digital transformation portfolio Morocco',
     'technology consulting case examples',
@@ -36,7 +36,7 @@ export default function Page() {
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
-      { '@type': 'ListItem', position: 2, name: 'Portfolio', item: `${SITE_URL}/portfolio` },
+      { '@type': 'ListItem', position: 2, name: 'Portfolio', item: `${SITE_URL}/whoarewe/portfolio` },
     ],
   };
 
