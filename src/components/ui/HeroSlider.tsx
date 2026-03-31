@@ -86,6 +86,14 @@ export default function HeroSlider() {
   const [active, setActive] = useState(0);
   const [direction, setDirection] = useState(1);
 
+  // Preload all slide images immediately on mount so they're ready before auto-advance fires
+  useEffect(() => {
+    SLIDES.forEach((s) => {
+      const img = new globalThis.Image();
+      img.src = s.image;
+    });
+  }, []);
+
   const navigate = useCallback((dir: number) => {
     setDirection(dir);
     setActive((prev) => (prev + dir + SLIDES.length) % SLIDES.length);
@@ -151,7 +159,7 @@ export default function HeroSlider() {
               </span>
               <h1 className="home-hero-title font-serif text-4xl sm:text-5xl md:text-7xl xl:text-[5.5rem] font-medium leading-[1.04] tracking-tight text-[#1E272E] mb-8">
                 {slide.h1Line1}<br />
-                <em className="italic bg-gradient-to-r from-[#0984E3] to-[#2563EB] bg-clip-text text-transparent">{slide.h1Line2}</em>
+                <em className="italic bg-gradient-to-r from-[#0984E3] to-[#2563EB] bg-clip-text text-transparent pl-[0.08em] -ml-[0.08em]">{slide.h1Line2}</em>
               </h1>
               <p className="home-hero-copy text-xl text-[#1E272E]/60 max-w-xl mb-12 font-light leading-relaxed">
                 {slide.description}
@@ -179,7 +187,7 @@ export default function HeroSlider() {
                   src={slide.image}
                   alt={slide.imageAlt}
                   className="w-full h-full object-cover hero-image-animate"
-                  loading={active === 0 ? 'eager' : 'lazy'}
+                  loading="eager"
                   fetchPriority={active === 0 ? 'high' : 'auto'}
                   decoding="async"
                 />

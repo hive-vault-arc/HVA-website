@@ -36,32 +36,7 @@ const Home: React.FC = () => {
   const { tier, motionReduced } = useAnimationQuality();
   const showAdvancedEffects = tier === 'high' && !motionReduced;
   const worldMapSectionRef = useRef<HTMLElement | null>(null);
-  const [shouldLoadWorldMap, setShouldLoadWorldMap] = useState(false);
   const [bgReady, setBgReady] = useState(false);
-
-  useEffect(() => {
-    if (shouldLoadWorldMap) return;
-
-    const section = worldMapSectionRef.current;
-    if (!section || typeof IntersectionObserver === 'undefined') {
-      setShouldLoadWorldMap(true);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const [entry] = entries;
-        if (entry?.isIntersecting) {
-          setShouldLoadWorldMap(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: '320px 0px', threshold: 0.01 }
-    );
-
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, [shouldLoadWorldMap]);
 
   // Defer WebGL background until after first paint so UI renders immediately
   // requestIdleCallback is not available on iOS Safari < 16.4 — fallback to setTimeout
@@ -538,13 +513,9 @@ const Home: React.FC = () => {
       </div>
 
       <section ref={worldMapSectionRef} className="sharp-edge w-full pt-12 pb-0 rounded-xl overflow-hidden">
-        {shouldLoadWorldMap ? (
-          <Suspense fallback={<div className="h-[220px] sm:h-[300px] md:h-[360px] w-full bg-[#ECF5FD]" aria-hidden="true" />}>
-            <WorldMapDemo />
-          </Suspense>
-        ) : (
-          <div className="h-[220px] sm:h-[300px] md:h-[360px] w-full bg-[#ECF5FD]" aria-hidden="true" />
-        )}
+        <Suspense fallback={<div className="h-[220px] sm:h-[300px] md:h-[360px] w-full bg-[#ECF5FD]" aria-hidden="true" />}>
+          <WorldMapDemo />
+        </Suspense>
       </section>
 
       <BottomCTA

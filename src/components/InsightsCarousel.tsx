@@ -71,6 +71,16 @@ export default function InsightsCarousel() {
   const [isPaused, setIsPaused] = useState(false);
   const [hoveredCenter, setHoveredCenter] = useState(false);
 
+  // Preload all carousel images immediately so they're ready before auto-advance
+  useEffect(() => {
+    ITEMS.forEach((item) => {
+      if (item.image) {
+        const img = new globalThis.Image();
+        img.src = item.image;
+      }
+    });
+  }, []);
+
   // Reset hover state whenever the active card changes
   useEffect(() => {
     setHoveredCenter(false);
@@ -89,9 +99,9 @@ export default function InsightsCarousel() {
   const next = useCallback(() => setActiveIndex((p) => (p + 1) % TOTAL), []);
 
   return (
-    <section className="bg-[#F8FAFC] py-20 overflow-hidden">
+    <section className="bg-[#F8FAFC] py-12 overflow-hidden">
       {/* Header */}
-      <div className="mx-auto max-w-7xl px-6 lg:px-14 mb-14">
+      <div className="mx-auto max-w-7xl px-6 lg:px-14 mb-8">
         <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB] mb-4">
           Welcome to H.V.A
         </p>
@@ -101,17 +111,23 @@ export default function InsightsCarousel() {
       </div>
 
       {/* Carousel viewport — fixed height, overflow hidden */}
-      <div className="relative h-[480px]">
+      <div className="relative h-[460px]">
         {ITEMS.map((item, i) => {
           const offset = circularOffset(i, activeIndex);
           const absOffset = Math.abs(offset);
-          if (absOffset > 2) return null;
+          // Render up to ±3 so entering cards slide in from off-screen instead of popping
+          if (absOffset > 3) return null;
 
           const isCenter = offset === 0;
-          const x = offset < 0 ? -X_TABLE[absOffset] : X_TABLE[absOffset];
-          const scale = SCALE_TABLE[absOffset];
-          const opacity = OPACITY_TABLE[absOffset];
-          const zIndex = 20 - absOffset * 5;
+
+          // Cards at absOffset=3 sit just off-screen (opacity 0) so Framer Motion
+          // can animate them into view from outside the frame
+          const x = absOffset === 3
+            ? (offset < 0 ? -960 : 960)
+            : (offset < 0 ? -X_TABLE[absOffset] : X_TABLE[absOffset]);
+          const scale = absOffset === 3 ? 0.65 : SCALE_TABLE[absOffset];
+          const opacity = absOffset === 3 ? 0 : OPACITY_TABLE[absOffset];
+          const zIndex = absOffset === 3 ? 0 : 20 - absOffset * 5;
 
           return (
             <motion.div
@@ -163,6 +179,18 @@ export default function InsightsCarousel() {
                 ) : (
                   <div className="w-full h-full bg-gradient-to-br from-[#dbeafe] to-[#e0e7ff]" />
                 )}
+
+                {/* Title overlay on blurred image */}
+                <motion.div
+                  className="absolute inset-0 flex items-center justify-center px-5 z-20"
+                  animate={{ opacity: isCenter && hoveredCenter ? 1 : 0 }}
+                  transition={{ duration: 0.28 }}
+                  style={{ pointerEvents: 'none' }}
+                >
+                  <p className="font-headline text-white text-2xl font-semibold leading-snug text-center drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)]">
+                    {item.title}
+                  </p>
+                </motion.div>
               </div>
 
               {/* ── Text section (bottom 40%) ── */}
@@ -216,7 +244,7 @@ export default function InsightsCarousel() {
       </div>
 
       {/* Navigation controls */}
-      <div className="mx-auto max-w-7xl px-6 lg:px-14 mt-10 flex items-center gap-2">
+      <div className="mx-auto max-w-7xl px-6 lg:px-14 mt-6 flex items-center gap-2">
         <button
           onClick={() => setIsPaused((p) => !p)}
           className="w-9 h-9 border border-[#e2e8f0] flex items-center justify-center

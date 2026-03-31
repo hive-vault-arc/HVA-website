@@ -86,12 +86,9 @@ export function WorldMap({ dots = [], lineColor = "#0ea5e9" }: MapProps) {
                 fill="none"
                 stroke="url(#path-gradient)"
                 strokeWidth="1"
-                initial={{
-                  pathLength: 0,
-                }}
-                animate={{
-                  pathLength: 1,
-                }}
+                initial={{ pathLength: 0 }}
+                whileInView={{ pathLength: 1 }}
+                viewport={{ once: true, amount: 0.1 }}
                 transition={{
                   duration: 1,
                   delay: 0.5 * i,

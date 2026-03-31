@@ -113,7 +113,7 @@ export default function Arc() {
           style={
             heroSpot
               ? {
-                  background: `radial-gradient(circle 520px at ${heroSpot.x}px ${heroSpot.y}px, rgba(37,99,235,0.10) 0%, rgba(37,99,235,0.04) 50%, transparent 100%)`,
+                  background: `radial-gradient(circle 200px at ${heroSpot.x}px ${heroSpot.y}px, rgba(37,99,235,0.28) 0%, rgba(37,99,235,0.10) 55%, transparent 100%)`,
                   opacity: 1,
                 }
               : { opacity: 0 }
@@ -147,19 +147,31 @@ export default function Arc() {
             </h1>
           </motion.div>
           <motion.div
-            className="col-span-12 lg:col-span-3 flex items-end justify-end"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.15 }}
+            className="col-span-12 lg:col-span-3 flex items-center justify-end"
+            initial={{ opacity: 0, scale: 0.95, y: 16 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.2 }}
           >
-            <div className="border-l border-[#2563EB]/30 pl-6 mb-12">
-              <p className="font-label uppercase tracking-[0.3em] text-[10px] text-[#2563EB] mb-2">
-                STATUS: ACTIVE_FRAMEWORK
-              </p>
-              <p className="text-sm text-[#475569] max-w-xs leading-relaxed">
-                ARC is H.V.A's flagship transformation framework. It combines strategic clarity,
-                production-grade engineering, and operational iteration so your systems keep creating value after launch.
-              </p>
+            <div className="relative w-full max-w-[280px]">
+              {/* Soft ambient glow */}
+              <div className="absolute inset-0 rounded-3xl bg-[#2563EB]/20 blur-3xl scale-110" />
+
+              {/* Image */}
+              <img
+                src="/Images/Hva-pulse.png"
+                alt="H.V.A Pulse"
+                className="relative w-full rounded-3xl shadow-xl shadow-[#2563EB]/10"
+              />
+
+              {/* Frosted glass info card — floats over bottom of image */}
+              <div className="absolute bottom-4 left-4 right-4 rounded-2xl border border-white/60 bg-white/75 p-4 shadow-sm backdrop-blur-md">
+                <p className="mb-2 text-[8px] font-label uppercase tracking-[0.28em] text-[#2563EB]">
+                  Status: Active_Framework
+                </p>
+                <p className="text-[11px] leading-relaxed text-[#475569]">
+                  Strategic clarity, production-grade engineering, and operational iteration — in one accountable loop.
+                </p>
+              </div>
             </div>
           </motion.div>
         </div>
@@ -280,46 +292,108 @@ export default function Arc() {
 
       {/* ── Phase 02: Engineer ────────────────────────────────────────────── */}
       <section className="relative py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-14">
+        <div className="max-w-7xl mx-auto px-6 lg:px-14 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+          {/* Text content */}
           <motion.div
-            className="flex flex-col items-center text-center mb-20"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -24 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.6 }}
           >
-            <span className="font-headline text-5xl text-[#2563EB] mb-4">02</span>
+            <div className="flex items-center gap-4 mb-6">
+              <span className="font-headline text-5xl text-[#2563EB]">02</span>
+              <div className="h-[1px] flex-grow bg-[#2563EB]/30" />
+            </div>
             <h2 className="font-headline text-4xl text-[#0F172A] mb-6">Engineer</h2>
-            <div className="w-24 h-[1px] bg-[#2563EB] mb-8" />
-            <p className="text-[#475569] text-xl max-w-2xl leading-relaxed">
+            <p className="text-[#475569] text-base leading-relaxed mb-10">
               Translate strategy into architecture, workflows, and software modules that can run under real production pressure.
             </p>
+            {/* 3 layer labels */}
+            <div className="space-y-0 border-l border-[#e2e8f0]">
+              {[
+                { label: 'Core Systems', desc: 'Bedrock infrastructure with unbreakable logic.' },
+                { label: 'Workflow Modules', desc: 'Modular orchestration that scales with complexity.' },
+                { label: 'Production Pressure', desc: 'Stress-tested for stability at peak velocity.' },
+              ].map((item, i) => (
+                <div key={item.label} className="pl-6 py-4 border-b border-[#e2e8f0] last:border-b-0 group hover:border-l-[#2563EB] transition-colors">
+                  <div className="flex items-center gap-3 mb-1">
+                    <span className="text-[9px] font-mono text-[#2563EB]">LAYER_{String(i + 1).padStart(2, '0')}</span>
+                  </div>
+                  <h4 className="font-headline text-lg text-[#0F172A] group-hover:text-[#2563EB] transition-colors">{item.label}</h4>
+                  <p className="text-xs text-[#94a3b8] mt-1">{item.desc}</p>
+                </div>
+              ))}
+            </div>
           </motion.div>
+
+          {/* Architecture stack visual panel */}
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#2563EB]/10 border border-[#2563EB]/10"
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ staggerChildren: 0.1 }}
+            className="relative"
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
           >
-            {[
-              { title: 'Core Systems', desc: 'Developing the bedrock of your technical infrastructure with unbreakable logic.' },
-              { title: 'Workflow Modules', desc: 'Building modular orchestration that scales with functional complexity.' },
-              { title: 'Production Pressure', desc: 'Stress-testing every component to ensure stability at peak operational velocity.' },
-            ].map((card) => (
-              <motion.div
-                key={card.title}
-                variants={fadeUp}
-                transition={{ duration: 0.5 }}
-                className="p-12 bg-white hover:bg-[#F2F4F6] transition-all group"
-              >
-                <h3 className="font-headline text-2xl text-[#0F172A] mb-4 group-hover:text-[#2563EB] transition-colors">
-                  {card.title}
-                </h3>
-                <p className="text-sm text-[#94a3b8] leading-relaxed">{card.desc}</p>
-              </motion.div>
-            ))}
+            <div className="absolute inset-0 bg-[#2563EB]/8 blur-[80px] opacity-40" />
+            <div className="relative border border-[#e2e8f0] bg-[#F2F4F6] overflow-hidden">
+              {/* Blueprint grid */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 opacity-[0.06]"
+                style={{
+                  backgroundImage: 'linear-gradient(to right,#2563EB 1px,transparent 1px),linear-gradient(to bottom,#2563EB 1px,transparent 1px)',
+                  backgroundSize: '40px 40px',
+                }}
+              />
+              <div className="relative p-8">
+                {/* Header */}
+                <div className="flex justify-between items-center mb-10">
+                  <div className="bg-[#dbeafe] px-2 py-1 text-[8px] font-mono text-[#2563EB] uppercase border border-[#2563EB]/20">
+                    BUILDING_ARCHITECTURE
+                  </div>
+                  <div className="text-[10px] font-mono text-[#94a3b8]">11001010 10110011</div>
+                </div>
+
+                {/* Stacked architecture layers */}
+                <div className="space-y-0">
+                  {[
+                    { id: 'LAYER_01', name: 'Core Systems', status: 'COMPILED', color: 'bg-[#2563EB]' },
+                    { id: 'LAYER_02', name: 'Workflow Modules', status: 'LINKED', color: 'bg-[#60a5fa]' },
+                    { id: 'LAYER_03', name: 'Production Pressure', status: 'TESTING', color: 'bg-[#dbeafe]' },
+                  ].map((layer, i) => (
+                    <div key={layer.id}>
+                      <div className="bg-white border border-[#e2e8f0] px-5 py-4 flex items-center justify-between group hover:border-[#2563EB]/40 transition-colors">
+                        <div className="flex items-center gap-3">
+                          <div className={`w-1.5 h-1.5 rounded-full ${layer.color} ${i === 1 ? 'animate-pulse' : ''}`} />
+                          <span className="text-[9px] font-mono text-[#94a3b8]">{layer.id}</span>
+                          <span className="font-headline text-sm text-[#0F172A]">{layer.name}</span>
+                        </div>
+                        <span className="text-[8px] font-mono text-[#2563EB] tracking-widest">{layer.status}</span>
+                      </div>
+                      {/* Connector */}
+                      {i < 2 && (
+                        <div className="flex justify-center h-6 items-center">
+                          <div className="w-[1px] h-full bg-[#2563EB]/30 relative">
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-[#2563EB] rounded-full" />
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+
+                {/* Bottom status */}
+                <div className="mt-8 flex justify-between items-center">
+                  <div className="h-[1px] flex-1 bg-[#2563EB]/20 relative">
+                    <div className="absolute top-0 left-0 h-[1px] w-16 bg-[#2563EB] animate-pulse" />
+                  </div>
+                  <span className="ml-4 text-[9px] font-mono text-[#2563EB]">BUILD_IN_PROGRESS</span>
+                </div>
+              </div>
+            </div>
           </motion.div>
+
         </div>
       </section>
 

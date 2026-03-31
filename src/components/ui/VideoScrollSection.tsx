@@ -80,11 +80,10 @@ export default function VideoScrollSection({
   const panelRefs = useRef<Array<HTMLDivElement | null>>([]);
   const progressRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number>(0);
-  // GSAP tweens this plain JS object — no video seeks triggered by GSAP itself.
-  // The RAF loop reads it and lerps video.currentTime at a controlled rate,
-  // preventing seek-flooding (which freezes the canvas when 60 seeks/sec abort each other).
+  // GSAP tweens this plain JS object — the RAF loop reads it and seeks the video.
   const scrubProxyRef = useRef({ time: 0 });
-  const displayTimeRef = useRef(0);
+  // Throttle flag: prevents concurrent seeks from flooding the decoder.
+  const isSeekingRef = useRef(false);
 
   // ── Canvas RAF loop ──────────────────────────────────────────────────────────
   useEffect(() => {
@@ -127,32 +126,38 @@ export default function VideoScrollSection({
         sy = (vh - sh) / 2;
       }
 
-      // Blend new frame at 72% — cross-dissolves between decoded frames
-      ctx.globalAlpha = 0.72;
+      // Clear before drawing — prevents ghosting/smearing from accumulated frames
+      ctx.clearRect(0, 0, cw, ch);
       ctx.drawImage(video, sx, sy, sw, sh, 0, 0, cw, ch);
-      ctx.globalAlpha = 1;
     };
 
-    // Draw immediately when a seek fully completes (no waiting for next RAF tick)
-    const onSeeked = () => { if (video.readyState >= 2) drawCover(); };
+    // Issue a seek to the current proxy target, guarded by the throttle flag.
+    const doSeek = () => {
+      if (video.readyState < 1) return;
+      isSeekingRef.current = true;
+      video.currentTime = scrubProxyRef.current.time;
+    };
+
+    // When a seek completes: draw the frame, then re-seek if the target has moved.
+    // This chains seeks so scroll-during-seek is always caught without decoder flooding.
+    const onSeeked = () => {
+      isSeekingRef.current = false;
+      if (video.readyState >= 2) drawCover();
+      if (Math.abs(video.currentTime - scrubProxyRef.current.time) > 0.016) {
+        doSeek();
+      }
+    };
     video.addEventListener('seeked', onSeeked);
 
+    // RAF loop: trigger a seek whenever the target has moved and we're not already seeking.
+    // One seek at a time — no lerp, no catch-up animation after scroll stops.
     const loop = () => {
       const target = scrubProxyRef.current.time;
-      const current = displayTimeRef.current;
-      const dist = target - current;
-
-      // Skip seeks smaller than 20ms — avoids micro-seeks that overwhelm the decoder
-      if (Math.abs(dist) > 0.02 && video.readyState >= 1) {
-        // Adaptive lerp: gentle for small nudges, faster for bigger jumps
-        const videoDur = video.duration || 1;
-        const factor = Math.abs(dist) > videoDur * 0.05 ? 0.35 : 0.12;
-        const next = current + dist * factor;
-        video.currentTime = next;
-        displayTimeRef.current = next;
+      if (!isSeekingRef.current && Math.abs(video.currentTime - target) > 0.016 && video.readyState >= 1) {
+        doSeek();
+      } else if (!isSeekingRef.current && video.readyState >= 2) {
+        drawCover();
       }
-
-      if (video.readyState >= 2) drawCover();
       rafRef.current = requestAnimationFrame(loop);
     };
     rafRef.current = requestAnimationFrame(loop);
