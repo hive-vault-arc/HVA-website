@@ -10,13 +10,19 @@ const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const [openMobileSection, setOpenMobileSection] = useState<string | null>(null);
   const pathname = usePathname();
+
+  const toggleMobileSection = (section: string) => {
+    setOpenMobileSection((prev) => (prev === section ? null : section));
+  };
 
   // Close all dropdowns and mobile menu on route change
   useEffect(() => {
     document.body.style.overflow = '';
     setIsMobileMenuOpen(false);
     setOpenMenu(null);
+    setOpenMobileSection(null);
   }, [pathname]);
 
   useEffect(() => {
@@ -61,11 +67,6 @@ const Navbar: React.FC = () => {
 
   const desktopLinkClass = (isActive: boolean) =>
     `px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200 ${
-      isActive ? 'text-[#F5F6FA] bg-[#0984E3]' : 'text-[#1E272E]/72 hover:text-[#1E272E] hover:bg-[#0984E3]/10'
-    }`;
-
-  const mobileLinkClass = (isActive: boolean) =>
-    `block px-4 py-3 text-base font-medium rounded-lg ${
       isActive ? 'text-[#F5F6FA] bg-[#0984E3]' : 'text-[#1E272E]/72 hover:text-[#1E272E] hover:bg-[#0984E3]/10'
     }`;
 
@@ -258,96 +259,250 @@ const Navbar: React.FC = () => {
           </div>
         </div>
 
-        {/* Mobile menu */}
+        {/* Mobile menu — full-screen slide-down overlay */}
         <div
-          className={`md:hidden transition-all duration-300 ease-in-out ${
-            isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          className={`md:hidden fixed inset-0 z-[60] transition-opacity duration-300 ${
+            isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
           }`}
         >
-          <div className="px-4 pt-2 pb-4 space-y-1 bg-[#F5F6FA]/95 backdrop-blur-lg rounded-2xl mx-4 mt-2 border border-[#1E272E]/12 shadow-[0_8px_24px_rgba(9,132,227,0.14)]">
-            <Link href="/arc" className={mobileLinkClass(isRouteActive('/arc'))}>
-              ARC
-            </Link>
-            <Link href="/services" className={mobileLinkClass(!!isServicesActive)}>
-              Services
-            </Link>
-            <div className="ml-3 rounded-xl border border-[#1E272E]/10 bg-white/80 p-2">
-              {servicesItems.map((item) => (
-                <Link
-                  key={item.path}
-                  href={item.path}
-                  className={`block rounded-lg px-3 py-2 text-sm ${
-                    isServicesItemActive(item.path)
-                      ? 'bg-[#0984E3] text-[#F5F6FA]'
-                      : 'text-[#1E272E]/72 hover:bg-[#0984E3]/10 hover:text-[#1E272E]'
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-[#0F172A]/25 backdrop-blur-sm"
+            onClick={() => {
+              document.body.style.overflow = '';
+              setIsMobileMenuOpen(false);
+            }}
+          />
+
+          {/* Slide-down panel */}
+          <div
+            className={`absolute inset-x-0 top-0 bg-[#F5F6FA] shadow-2xl max-h-[100dvh] overflow-y-auto transition-transform duration-300 ease-out ${
+              isMobileMenuOpen ? 'translate-y-0' : '-translate-y-3'
+            }`}
+          >
+            {/* Panel header */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-[#1E272E]/10 sticky top-0 bg-[#F5F6FA]/95 backdrop-blur-md z-10">
+              <Logo />
+              <button
+                type="button"
+                onClick={() => {
+                  document.body.style.overflow = '';
+                  setIsMobileMenuOpen(false);
+                }}
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-[#1E272E]/8 text-[#1E272E]/60 hover:bg-[#0984E3]/12 hover:text-[#0984E3] transition-colors"
+                aria-label="Close menu"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            {/* Nav items */}
+            <div className="px-4 py-3 pb-10">
+
+              {/* ARC — standalone */}
+              <Link
+                href="/arc"
+                className={`flex items-center justify-between px-4 py-3.5 rounded-xl text-[15px] font-semibold transition-colors mb-1 ${
+                  isRouteActive('/arc')
+                    ? 'bg-[#0984E3] text-white'
+                    : 'text-[#1E272E] hover:bg-[#0984E3]/8'
+                }`}
+              >
+                ARC
+                <ArrowUpRight className="h-4 w-4 opacity-40" />
+              </Link>
+
+              {/* Services accordion */}
+              <div className="mb-1">
+                <button
+                  type="button"
+                  onClick={() => toggleMobileSection('services')}
+                  className={`w-full flex items-center justify-between px-4 py-3.5 rounded-xl text-[15px] font-semibold transition-colors ${
+                    isServicesActive ? 'text-[#0984E3]' : 'text-[#1E272E]'
+                  } hover:bg-[#0984E3]/8`}
+                >
+                  <span className="flex items-center gap-2.5">
+                    {isServicesActive && <span className="h-1.5 w-1.5 rounded-full bg-[#0984E3]" />}
+                    Services
+                  </span>
+                  <ChevronDown
+                    className={`h-4 w-4 text-[#1E272E]/35 transition-transform duration-200 ${
+                      openMobileSection === 'services' ? 'rotate-180 text-[#0984E3]' : ''
+                    }`}
+                  />
+                </button>
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                    openMobileSection === 'services' ? 'max-h-64 opacity-100 mt-1' : 'max-h-0 opacity-0'
                   }`}
                 >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-            <Link href="/industries" className={mobileLinkClass(!!isIndustriesActive)}>
-              Industries
-            </Link>
-            <div className="ml-3 rounded-xl border border-[#1E272E]/10 bg-white/80 p-2">
-              {industriesItems.map((item) => (
-                <Link
-                  key={item.path}
-                  href={item.path}
-                  className="block rounded-lg px-3 py-2 text-sm text-[#1E272E]/72 hover:bg-[#0984E3]/10 hover:text-[#1E272E]"
+                  <div className="ml-4 border-l-2 border-[#0984E3]/20 pl-3 space-y-0.5 pb-2">
+                    <Link
+                      href="/services"
+                      className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm text-[#1E272E]/50 hover:text-[#0984E3] hover:bg-[#0984E3]/6 transition-colors"
+                    >
+                      All Services
+                    </Link>
+                    {servicesItems.map((item) => (
+                      <Link
+                        key={item.path}
+                        href={item.path}
+                        className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                          isServicesItemActive(item.path)
+                            ? 'bg-[#0984E3]/10 text-[#0984E3] font-semibold'
+                            : 'text-[#1E272E]/65 hover:text-[#0984E3] hover:bg-[#0984E3]/6'
+                        }`}
+                      >
+                        {item.label}
+                        <ArrowUpRight className="h-3.5 w-3.5 opacity-35" />
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Industries accordion */}
+              <div className="mb-1">
+                <button
+                  type="button"
+                  onClick={() => toggleMobileSection('industries')}
+                  className={`w-full flex items-center justify-between px-4 py-3.5 rounded-xl text-[15px] font-semibold transition-colors ${
+                    isIndustriesActive ? 'text-[#0984E3]' : 'text-[#1E272E]'
+                  } hover:bg-[#0984E3]/8`}
                 >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-            <Link href="/whoweare/abouthva" className={mobileLinkClass(!!isWhoWeAreActive)}>
-              Who We Are
-            </Link>
-            <div className="ml-3 rounded-xl border border-[#1E272E]/10 bg-white/80 p-2">
-              {whoWeAreItems.map((item) => (
-                <Link
-                  key={item.path}
-                  href={item.path}
-                  className={`block rounded-lg px-3 py-2 text-sm ${
-                    isWhoWeAreItemActive(item.path)
-                      ? 'bg-[#0984E3] text-[#F5F6FA]'
-                      : 'text-[#1E272E]/72 hover:bg-[#0984E3]/10 hover:text-[#1E272E]'
+                  <span className="flex items-center gap-2.5">
+                    {isIndustriesActive && <span className="h-1.5 w-1.5 rounded-full bg-[#0984E3]" />}
+                    Industries
+                  </span>
+                  <ChevronDown
+                    className={`h-4 w-4 text-[#1E272E]/35 transition-transform duration-200 ${
+                      openMobileSection === 'industries' ? 'rotate-180 text-[#0984E3]' : ''
+                    }`}
+                  />
+                </button>
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                    openMobileSection === 'industries' ? 'max-h-80 opacity-100 mt-1' : 'max-h-0 opacity-0'
                   }`}
                 >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-            <Link
-              href="/insights"
-              className={mobileLinkClass(!!isInsightsActive)}
-            >
-              Insights
-            </Link>
-            <div className="ml-3 rounded-xl border border-[#1E272E]/10 bg-white/80 p-2">
-              {insightsItems.map((item) => (
-                <Link
-                  key={item.path}
-                  href={item.path}
-                  className={`block rounded-lg px-3 py-2 text-sm ${
-                    isInsightsItemActive(item.path)
-                      ? 'bg-[#0984E3] text-[#F5F6FA]'
-                      : 'text-[#1E272E]/72 hover:bg-[#0984E3]/10 hover:text-[#1E272E]'
+                  <div className="ml-4 border-l-2 border-[#0984E3]/20 pl-3 space-y-0.5 pb-2">
+                    {industriesItems.map((item) => (
+                      <Link
+                        key={item.path}
+                        href={item.path}
+                        className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-[#1E272E]/65 hover:text-[#0984E3] hover:bg-[#0984E3]/6 transition-colors"
+                      >
+                        {item.label}
+                        <ArrowUpRight className="h-3.5 w-3.5 opacity-35" />
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Who We Are accordion */}
+              <div className="mb-1">
+                <button
+                  type="button"
+                  onClick={() => toggleMobileSection('who-we-are')}
+                  className={`w-full flex items-center justify-between px-4 py-3.5 rounded-xl text-[15px] font-semibold transition-colors ${
+                    isWhoWeAreActive ? 'text-[#0984E3]' : 'text-[#1E272E]'
+                  } hover:bg-[#0984E3]/8`}
+                >
+                  <span className="flex items-center gap-2.5">
+                    {isWhoWeAreActive && <span className="h-1.5 w-1.5 rounded-full bg-[#0984E3]" />}
+                    Who We Are
+                  </span>
+                  <ChevronDown
+                    className={`h-4 w-4 text-[#1E272E]/35 transition-transform duration-200 ${
+                      openMobileSection === 'who-we-are' ? 'rotate-180 text-[#0984E3]' : ''
+                    }`}
+                  />
+                </button>
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                    openMobileSection === 'who-we-are' ? 'max-h-64 opacity-100 mt-1' : 'max-h-0 opacity-0'
                   }`}
                 >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-            <div className="pt-2">
+                  <div className="ml-4 border-l-2 border-[#0984E3]/20 pl-3 space-y-0.5 pb-2">
+                    {whoWeAreItems.map((item) => (
+                      <Link
+                        key={item.path}
+                        href={item.path}
+                        className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                          isWhoWeAreItemActive(item.path)
+                            ? 'bg-[#0984E3]/10 text-[#0984E3] font-semibold'
+                            : 'text-[#1E272E]/65 hover:text-[#0984E3] hover:bg-[#0984E3]/6'
+                        }`}
+                      >
+                        {item.label}
+                        <ArrowUpRight className="h-3.5 w-3.5 opacity-35" />
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Insights accordion */}
+              <div className="mb-1">
+                <button
+                  type="button"
+                  onClick={() => toggleMobileSection('insights')}
+                  className={`w-full flex items-center justify-between px-4 py-3.5 rounded-xl text-[15px] font-semibold transition-colors ${
+                    isInsightsActive ? 'text-[#0984E3]' : 'text-[#1E272E]'
+                  } hover:bg-[#0984E3]/8`}
+                >
+                  <span className="flex items-center gap-2.5">
+                    {isInsightsActive && <span className="h-1.5 w-1.5 rounded-full bg-[#0984E3]" />}
+                    Insights
+                  </span>
+                  <ChevronDown
+                    className={`h-4 w-4 text-[#1E272E]/35 transition-transform duration-200 ${
+                      openMobileSection === 'insights' ? 'rotate-180 text-[#0984E3]' : ''
+                    }`}
+                  />
+                </button>
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                    openMobileSection === 'insights' ? 'max-h-80 opacity-100 mt-1' : 'max-h-0 opacity-0'
+                  }`}
+                >
+                  <div className="ml-4 border-l-2 border-[#0984E3]/20 pl-3 space-y-0.5 pb-2">
+                    {insightsItems.map((item) => (
+                      <Link
+                        key={item.path}
+                        href={item.path}
+                        className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                          isInsightsItemActive(item.path)
+                            ? 'bg-[#0984E3]/10 text-[#0984E3] font-semibold'
+                            : 'text-[#1E272E]/65 hover:text-[#0984E3] hover:bg-[#0984E3]/6'
+                        }`}
+                      >
+                        {item.label}
+                        <ArrowUpRight className="h-3.5 w-3.5 opacity-35" />
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Divider */}
+              <div className="my-5 h-px bg-[#1E272E]/10" />
+
+              {/* CTA */}
               <Link
                 href="/contact"
                 aria-label="Book a call"
-                className="w-full flex items-center justify-center px-4 py-3 border border-transparent rounded-full text-base font-medium text-[#F5F6FA] bg-[#1E272E] hover:bg-[#0984E3] transition-colors duration-200"
+                className="flex items-center justify-center gap-2 w-full px-6 py-4 bg-[#1E272E] text-[#F5F6FA] rounded-xl text-[15px] font-semibold hover:bg-[#0984E3] transition-colors duration-200"
               >
                 Book a Call
-                <ArrowUpRight className="w-3.5 h-3.5 ml-1.5" />
+                <ArrowUpRight className="h-4 w-4" />
               </Link>
+
+              {/* Brand tagline */}
+              <p className="mt-6 text-center text-[9px] font-mono uppercase tracking-[0.22em] text-[#1E272E]/25">
+                H.V.A · Strategy · Engineering · Operations
+              </p>
             </div>
           </div>
         </div>
