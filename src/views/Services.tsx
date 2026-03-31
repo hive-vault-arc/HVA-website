@@ -576,53 +576,62 @@ export default function Services() {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.28 }}
-              className="bg-[#0F172A] p-8 md:p-10"
+              className="bg-[#0F172A] p-5 md:p-7"
             >
-              <div className="mb-6 flex flex-wrap items-start gap-x-8 gap-y-4">
-                <div className="flex items-center gap-4">
-                  <span className="inline-flex h-10 w-10 items-center justify-center bg-[#2563EB] text-sm font-bold text-white font-label">
-                    {activeBOTItem.step}
-                  </span>
-                  <div className="text-[#2563EB]">{activeBOTItem.icon}</div>
-                </div>
-                <div>
-                  <p className="mb-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#2563EB]">Current Phase</p>
-                  <h3 className="font-headline text-2xl text-white">{activeBOTItem.title}</h3>
-                </div>
+              {/* Compact header */}
+              <div className="mb-4 flex items-center gap-4">
+                <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center bg-[#2563EB] text-xs font-bold text-white">
+                  {activeBOTItem.step}
+                </span>
+                <div className="text-[#2563EB] shrink-0">{activeBOTItem.icon}</div>
+                <h3 className="font-headline text-xl text-white">{activeBOTItem.title}</h3>
               </div>
 
-              <p className="mb-7 max-w-2xl leading-relaxed text-[#94a3b8]">{activeBOTItem.detail}</p>
-
-              <div className="grid grid-cols-1 gap-5 border-t border-white/10 pt-6 md:grid-cols-2">
-                <article className="border border-white/10 bg-white/5 p-5">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#60a5fa]">H.V.A Owns</p>
-                  <p className="mt-2 text-sm leading-relaxed text-[#cbd5e1]">{activeBOTItem.hvaOwns}</p>
-                </article>
-                <article className="border border-white/10 bg-white/5 p-5">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#60a5fa]">Client Role</p>
-                  <p className="mt-2 text-sm leading-relaxed text-[#cbd5e1]">{activeBOTItem.clientRole}</p>
-                </article>
-              </div>
-
-              <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">
-                <article>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#60a5fa]">Phase Outputs</p>
-                  <ul className="mt-3 space-y-2">
-                    {activeBOTItem.outputs.map((output) => (
-                      <li key={output} className="flex items-start gap-3 text-sm text-[#cbd5e1]">
-                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 bg-[#2563EB]" />
-                        <span>{output}</span>
+              {/* 4-col bullet grid */}
+              <div className="grid grid-cols-2 gap-px bg-white/8 border border-white/8 md:grid-cols-4">
+                <article className="bg-[#0F172A] p-4">
+                  <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#60a5fa] mb-2">H.V.A Owns</p>
+                  <ul className="space-y-1.5">
+                    {activeBOTItem.hvaOwns.split(', ').map((item) => (
+                      <li key={item} className="flex items-start gap-1.5 text-xs text-[#94a3b8]">
+                        <span className="mt-1.5 h-1 w-1 shrink-0 bg-[#2563EB]" />
+                        {item.replace(/\.$/, '')}
                       </li>
                     ))}
                   </ul>
                 </article>
-                <article>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#60a5fa]">Execution Checkpoints</p>
-                  <ul className="mt-3 space-y-2">
+
+                <article className="bg-[#0F172A] p-4">
+                  <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#60a5fa] mb-2">Client Role</p>
+                  <ul className="space-y-1.5">
+                    {activeBOTItem.clientRole.split(', ').map((item) => (
+                      <li key={item} className="flex items-start gap-1.5 text-xs text-[#94a3b8]">
+                        <span className="mt-1.5 h-1 w-1 shrink-0 bg-[#2563EB]" />
+                        {item.replace(/\.$/, '')}
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+
+                <article className="bg-[#0F172A] p-4">
+                  <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#60a5fa] mb-2">Outputs</p>
+                  <ul className="space-y-1.5">
+                    {activeBOTItem.outputs.map((output) => (
+                      <li key={output} className="flex items-start gap-1.5 text-xs text-[#94a3b8]">
+                        <span className="mt-1.5 h-1 w-1 shrink-0 bg-[#2563EB]" />
+                        {output}
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+
+                <article className="bg-[#0F172A] p-4">
+                  <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#60a5fa] mb-2">Checkpoints</p>
+                  <ul className="space-y-1.5">
                     {activeBOTItem.checkpoints.map((checkpoint) => (
-                      <li key={checkpoint} className="flex items-start gap-3 text-sm text-[#cbd5e1]">
-                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 bg-[#2563EB]" />
-                        <span>{checkpoint}</span>
+                      <li key={checkpoint} className="flex items-start gap-1.5 text-xs text-[#94a3b8]">
+                        <span className="mt-1.5 h-1 w-1 shrink-0 bg-[#2563EB]" />
+                        {checkpoint}
                       </li>
                     ))}
                   </ul>
