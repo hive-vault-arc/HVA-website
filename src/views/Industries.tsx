@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { BarChart3, MessageSquare, Network, ShieldCheck } from 'lucide-react';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 import BottomCTA from '../components/BottomCTA';
 
@@ -47,6 +48,33 @@ const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0 },
 };
+
+const approachTracks = [
+  {
+    code: 'IND-001',
+    icon: <BarChart3 className="h-6 w-6" strokeWidth={1.5} />,
+    title: 'Sector-calibrated diagnostics',
+    desc: 'We calibrate diagnostics to sector economics, cycle times, and bottleneck patterns before architecture decisions.',
+  },
+  {
+    code: 'IND-002',
+    icon: <Network className="h-6 w-6" strokeWidth={1.5} />,
+    title: 'Domain-aware architecture decisions',
+    desc: 'Architecture choices reflect domain language, data structures, and decision hierarchies specific to each industry.',
+  },
+  {
+    code: 'IND-003',
+    icon: <ShieldCheck className="h-6 w-6" strokeWidth={1.5} />,
+    title: 'Regulatory and compliance awareness',
+    desc: 'Controls are introduced early to reduce delivery risk in healthcare, finance-like workflows, and sensitive operations.',
+  },
+  {
+    code: 'IND-004',
+    icon: <MessageSquare className="h-6 w-6" strokeWidth={1.5} />,
+    title: 'Stakeholder communication patterns',
+    desc: 'Execution plans are adapted to how leadership, operations, and technical teams actually communicate in that sector.',
+  },
+];
 
 export default function Industries() {
   const { scrollYProgress } = useScroll();
@@ -123,41 +151,77 @@ export default function Industries() {
       </section>
 
       {/* ── Cross-industry note ───────────────────────────────────────────── */}
-      <section className="py-20">
-        <div className="mx-auto max-w-7xl px-6 lg:px-14">
+      <section className="relative overflow-hidden bg-[#F2F4F6] py-20 md:py-24">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 opacity-[0.05]"
+          style={{
+            backgroundImage:
+              'linear-gradient(to right,#2563EB 1px,transparent 1px),linear-gradient(to bottom,#2563EB 1px,transparent 1px)',
+            backgroundSize: '44px 44px',
+          }}
+        />
+        <div className="pointer-events-none absolute -left-24 top-10 h-64 w-64 rounded-full bg-[#2563EB]/10 blur-3xl" />
+        <div className="pointer-events-none absolute -right-24 bottom-10 h-64 w-64 rounded-full bg-[#2563EB]/10 blur-3xl" />
+
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-14 grid grid-cols-12 gap-8 items-start">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5 }}
-            className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-20"
+            className="col-span-12 lg:col-span-4 lg:sticky lg:top-32"
           >
-            <div>
-              <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
-                Our Approach
-              </p>
-              <h2 className="font-headline text-3xl font-medium text-[#0F172A] md:text-4xl">
-                One Framework. Many Operating Contexts.
-              </h2>
-              <p className="mt-5 text-base leading-relaxed text-[#475569]">
-                The ARC framework adapts to sector-specific terminology, decision hierarchies, and workflow constraints
-                without losing the engineering rigor that makes outcomes stick.
-              </p>
-              <Link
-                href="/arc"
-                className="sharp-edge mt-8 inline-flex items-center gap-2 bg-[#2563EB] px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-white hover:bg-[#1d4ed8] transition-colors duration-200"
+            <p className="font-label text-[#2563EB] uppercase tracking-[0.4em] text-[10px] mb-3">
+              Laboratory_Active
+            </p>
+            <h3 className="font-headline text-4xl md:text-5xl text-[#0F172A] leading-tight mb-8">
+              Active Research &amp; Development
+            </h3>
+
+            <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
+              Our Approach
+            </p>
+            <h2 className="font-headline text-3xl font-medium text-[#0F172A] md:text-4xl">
+              One Framework. Many Operating Contexts.
+            </h2>
+            <p className="mt-5 text-base leading-relaxed text-[#475569]">
+              The ARC framework adapts to sector terminology, decision hierarchies, and workflow constraints without
+              losing engineering rigor. We run a continuous calibration loop that turns field feedback into better
+              execution patterns across industries.
+            </p>
+            <Link
+              href="/arc"
+              className="sharp-edge mt-8 inline-flex items-center gap-2 bg-[#2563EB] px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-white hover:bg-[#1d4ed8] transition-colors duration-200"
+            >
+              Learn About ARC
+            </Link>
+          </motion.div>
+
+          <motion.div
+            className="col-span-12 lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-px bg-[#dbe3f0] border border-[#dbe3f0]"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ staggerChildren: 0.08 }}
+          >
+            {approachTracks.map((track) => (
+              <motion.article
+                key={track.code}
+                variants={fadeUp}
+                transition={{ duration: 0.45 }}
+                className="group bg-white p-7 hover:bg-[#F8FAFC] transition-colors duration-300"
               >
-                Learn About ARC
-              </Link>
-            </div>
-            <div className="flex flex-col gap-4">
-              {['Sector-calibrated diagnostics', 'Domain-aware architecture decisions', 'Regulatory and compliance awareness', 'Stakeholder communication patterns'].map((item) => (
-                <div key={item} className="flex items-center gap-4 bg-[#F2F4F6] px-6 py-4">
-                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#2563EB]" />
-                  <p className="text-sm font-semibold text-[#0F172A]">{item}</p>
+                <div className="mb-5 flex items-center justify-between">
+                  <div className="text-[#2563EB]">{track.icon}</div>
+                  <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#94a3b8]">{track.code}</span>
                 </div>
-              ))}
-            </div>
+                <h4 className="font-headline text-2xl leading-tight text-[#0F172A] group-hover:text-[#2563EB] transition-colors duration-300">
+                  {track.title}
+                </h4>
+                <p className="mt-3 text-sm leading-relaxed text-[#475569]">{track.desc}</p>
+              </motion.article>
+            ))}
           </motion.div>
         </div>
       </section>
