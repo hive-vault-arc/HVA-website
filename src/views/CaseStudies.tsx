@@ -1,163 +1,265 @@
 'use client';
 
-import React from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import PageAmbientBackground from '../components/PageAmbientBackground';
+import { ArrowUpRight } from 'lucide-react';
 import BottomCTA from '../components/BottomCTA';
 import { getAllCaseStudies } from '../lib/proof';
 
-const CaseStudies: React.FC = () => {
+export default function CaseStudies() {
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
-  const studies = getAllCaseStudies();
-  const totalOutcomes = studies.reduce((sum, s) => sum + s.measuredOutcomes.length, 0);
+  const allStudies = getAllCaseStudies();
+  const industries = ['All', ...Array.from(new Set(allStudies.map((s) => s.industry)))];
+  const [activeFilter, setActiveFilter] = useState('All');
+
+  const filtered =
+    activeFilter === 'All' ? allStudies : allStudies.filter((s) => s.industry === activeFilter);
+  const featured = filtered[0];
+  const rest = filtered.slice(1);
 
   return (
-    <div className="relative isolate overflow-hidden bg-[#F5F6FA] text-[#1E272E]">
-      {/* Scroll progress bar */}
+    <main className="bg-[#f7f9fb] min-h-screen">
+      {/* Scroll progress */}
       <motion.div
         aria-hidden="true"
-        className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-gradient-to-r from-[#0984E3] via-[#4CA6EC] to-[#00CEC9]"
+        className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-gradient-to-r from-[#2563EB] via-[#60a5fa] to-[#0ea5e9]"
         style={{ scaleX: progressScale }}
       />
 
-      <PageAmbientBackground className="-z-10" />
-
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
-      <section className="relative pt-28 pb-16 md:pt-36 md:pb-24 px-6 lg:px-14">
-        <div className="container mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-
-            {/* Left: copy */}
-            <motion.div
-              className="lg:col-span-7 z-10"
-              initial={{ opacity: 0, y: 22 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55 }}
+      <section className="bg-[#f2f4f6] pt-36 pb-20 px-6 md:px-8">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+          <div className="lg:col-span-8">
+            <span
+              className="block text-xs font-bold tracking-[0.2em] uppercase mb-6 text-[#2563EB]"
+              style={{ fontFamily: 'var(--font-body)' }}
             >
-              <span className="inline-block text-[#0984E3] font-bold tracking-[0.22em] text-[10px] uppercase mb-6">
-                Transformation Proof
-              </span>
-              <h1 className="font-serif text-4xl sm:text-5xl md:text-[4.5rem] xl:text-[5rem] font-medium leading-[1.04] tracking-tight text-[#1E272E] mb-8">
-                Consulting-Led Delivery<br />
-                <em className="italic">With Measured Outcomes.</em>
-              </h1>
-              <p className="text-xl text-[#1E272E]/60 max-w-xl mb-10 font-light leading-relaxed">
-                Each case documents the business challenge, consulting strategy, execution architecture, deployment reality, and measurable operating impact.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Link
-                  href="/capabilities/solution-programs"
-                  className="sharp-edge bg-[#1E272E] text-[#F5F6FA] px-8 py-4 text-sm font-bold hover:bg-[#0984E3] transition-colors duration-300"
-                >
-                  View Solution Programs
-                </Link>
-                <Link
-                  href="/capabilities"
-                  className="sharp-edge inline-flex items-center gap-2 bg-white/90 px-8 py-4 text-sm font-bold text-[#1E272E] shadow-[0_10px_25px_rgba(9,132,227,0.08)] hover:bg-[#ECF5FD] transition-colors duration-300"
-                >
-                  Consulting Capabilities <ArrowRight className="h-4 w-4 text-[#0984E3]" />
-                </Link>
-              </div>
-            </motion.div>
-
-            {/* Right: expert insight card */}
-            <motion.div
-              className="lg:col-span-5"
-              initial={{ opacity: 0, x: 22 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.55, delay: 0.15 }}
+              Transformation Proof
+            </span>
+            <h1
+              className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-light leading-tight tracking-tight text-[#0F172A]"
+              style={{ fontFamily: 'var(--font-headline)' }}
             >
-              <div className="bg-white shadow-xl p-8 md:p-10">
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#2563EB] mb-4">
-                  Expert Insight
-                </p>
-                <blockquote className="font-serif text-xl md:text-2xl text-[#0F172A] leading-[1.44] mb-8 italic">
-                  "Mature consulting shows up when strategy survives production pressure with measurable outcomes."
-                </blockquote>
-                <div className="flex flex-wrap gap-8 pt-6 border-t border-slate-100">
-                  <div>
-                    <p className="font-serif text-3xl font-medium text-[#0F172A]">{studies.length}</p>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#475569] mt-1">
-                      Published cases
-                    </p>
-                  </div>
-                  <div>
-                    <p className="font-serif text-3xl font-medium text-[#0F172A]">{totalOutcomes}</p>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#475569] mt-1">
-                      Verified outcomes
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
+              Consulting-Led
+              <br />
+              <span className="italic">Case Studies</span>
+            </h1>
+          </div>
+          <div className="lg:col-span-4 pb-2">
+            <p
+              className="text-lg leading-relaxed pl-6 text-[#45464d]"
+              style={{ fontFamily: 'var(--font-body)', borderLeft: '2px solid #c6c6cd' }}
+            >
+              Each case documents the business challenge, execution architecture, and measurable
+              operating impact — no marketing, just production proof.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* ── Case studies grid ─────────────────────────────────────────────── */}
-      <section className="case-grid-zone">
-        <div className="editorial-shell case-grid">
-          {studies.map((study, index) => (
-            <motion.article
-              key={study.slug}
-              className={`case-card ${index % 2 === 1 ? 'case-card--alt' : ''}`}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.05 }}
-              transition={{ duration: 0.4, delay: (index % 2) * 0.08 }}
+      {/* ── Industry filter ───────────────────────────────────────────────── */}
+      <section className="max-w-7xl mx-auto px-6 md:px-8 pt-12 pb-8">
+        <div className="flex flex-wrap items-center gap-8">
+          {industries.map((ind) => (
+            <button
+              key={ind}
+              onClick={() => setActiveFilter(ind)}
+              className="text-sm font-bold tracking-[0.15em] uppercase pb-2 transition-colors duration-200"
+              style={{
+                fontFamily: 'var(--font-body)',
+                color: activeFilter === ind ? '#0F172A' : '#76777d',
+                borderBottom: activeFilter === ind ? '2px solid #0F172A' : '2px solid transparent',
+              }}
             >
-              <div className="case-card__media">
-                <Image
-                  src={study.assets.coverImage}
-                  alt={study.title}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
-              <div className="case-card__body">
-                <p className="case-card__industry">{study.industry}</p>
-                <h2 className="case-card__title">{study.title}</h2>
-                <p className="case-card__summary">{study.summary}</p>
-                <p className="case-card__status">{study.deploymentStatus}</p>
-                <ul className="case-card__metrics">
-                  {study.measuredOutcomes.slice(0, 2).map((metric) => (
-                    <li key={metric.label}>
-                      <span>{metric.value}</span>
-                      <small>{metric.label}</small>
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href={`/case-studies/${study.slug}`}
-                  className="editorial-link editorial-link--strong"
-                >
-                  Read Full Case Study &rarr;
-                </Link>
-              </div>
-            </motion.article>
+              {ind}
+            </button>
           ))}
         </div>
+        <div className="mt-4 h-px bg-[#e0e3e5]" />
       </section>
+
+      {/* ── Featured case study ───────────────────────────────────────────── */}
+      {featured && (
+        <section className="max-w-7xl mx-auto px-6 md:px-8 mb-24">
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.05 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+          >
+            <Link href={`/case-studies/${featured.slug}`} className="group block">
+              <div className="flex flex-col lg:flex-row items-stretch">
+                {/* Image — 60% */}
+                <div className="w-full lg:w-[60%] shrink-0 relative">
+                  <div className="aspect-[4/3] relative overflow-hidden bg-[#e0e3e5]">
+                    <Image
+                      src={featured.assets.coverImage}
+                      alt={featured.title}
+                      fill
+                      className="object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
+                      sizes="(max-width: 1024px) 100vw, 60vw"
+                    />
+                  </div>
+                </div>
+                {/* Content — overlaps image */}
+                <div className="w-full lg:w-[46%] lg:-ml-[6%] z-10 flex items-center relative">
+                  <div
+                    className="bg-white p-10 lg:p-14"
+                    style={{ boxShadow: '0 10px 40px rgba(25,28,30,0.08)' }}
+                  >
+                    <div className="flex items-center gap-4 mb-5">
+                      <span
+                        className="text-xs font-bold tracking-widest uppercase px-3 py-1"
+                        style={{
+                          color: '#2563EB',
+                          background: 'rgba(37,99,235,0.08)',
+                          fontFamily: 'var(--font-body)',
+                        }}
+                      >
+                        {featured.industry}
+                      </span>
+                      <span
+                        className="text-xs font-medium text-[#76777d]"
+                        style={{ fontFamily: 'var(--font-body)' }}
+                      >
+                        {featured.deploymentStatus}
+                      </span>
+                    </div>
+                    <h2
+                      className="text-3xl md:text-4xl mb-5 leading-tight text-[#191c1e] group-hover:text-[#2563EB] transition-colors"
+                      style={{ fontFamily: 'var(--font-headline)' }}
+                    >
+                      {featured.title}
+                    </h2>
+                    <p
+                      className="text-[#45464d] mb-6 leading-relaxed line-clamp-3"
+                      style={{ fontFamily: 'var(--font-body)' }}
+                    >
+                      {featured.summary}
+                    </p>
+                    {/* Key metrics */}
+                    <div className="flex gap-8 mb-8 pt-5 border-t border-[#f0f0f3]">
+                      {featured.measuredOutcomes.slice(0, 2).map((metric) => (
+                        <div key={metric.label}>
+                          <p
+                            className="text-xl font-semibold text-[#0F172A]"
+                            style={{ fontFamily: 'var(--font-headline)' }}
+                          >
+                            {metric.value}
+                          </p>
+                          <p
+                            className="text-[9px] font-bold uppercase tracking-[0.15em] text-[#94a3b8] mt-0.5"
+                            style={{ fontFamily: 'var(--font-body)' }}
+                          >
+                            {metric.label}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span
+                        className="text-sm font-bold text-[#2563EB]"
+                        style={{ fontFamily: 'var(--font-body)' }}
+                      >
+                        Read Full Case Study
+                      </span>
+                      <ArrowUpRight className="w-5 h-5 text-[#0F172A] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </motion.div>
+        </section>
+      )}
+
+      {/* ── Remaining grid ────────────────────────────────────────────────── */}
+      {rest.length > 0 && (
+        <section className="max-w-7xl mx-auto px-6 md:px-8 pb-32">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-16">
+            {rest.map((study, i) => (
+              <motion.article
+                key={study.slug}
+                className="group"
+                initial={{ opacity: 0, y: 8 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.05 }}
+                transition={{ duration: 0.5, delay: i * 0.08, ease: 'easeOut' }}
+              >
+                <Link href={`/case-studies/${study.slug}`} className="block">
+                  <div className="aspect-square bg-[#f2f4f6] mb-7 overflow-hidden relative">
+                    <Image
+                      src={study.assets.coverImage}
+                      alt={study.title}
+                      fill
+                      className="object-cover grayscale transition-all duration-500 group-hover:grayscale-0 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                  </div>
+                  <div className="space-y-3">
+                    <div
+                      className="flex justify-between items-center text-[10px] font-bold tracking-[0.2em] uppercase text-[#45464d]"
+                      style={{ fontFamily: 'var(--font-body)' }}
+                    >
+                      <span className="text-[#2563EB]">{study.industry}</span>
+                      <span>{study.measuredOutcomes.length} outcomes</span>
+                    </div>
+                    <h3
+                      className="text-xl leading-snug text-[#191c1e] group-hover:text-[#2563EB] transition-colors"
+                      style={{ fontFamily: 'var(--font-headline)' }}
+                    >
+                      {study.title}
+                    </h3>
+                    <p
+                      className="text-[#45464d] text-sm leading-relaxed line-clamp-2"
+                      style={{ fontFamily: 'var(--font-body)' }}
+                    >
+                      {study.summary}
+                    </p>
+                    <div
+                      className="pt-4 flex items-center justify-between"
+                      style={{ borderTop: '1px solid rgba(198,198,205,0.3)' }}
+                    >
+                      <span
+                        className="text-xs text-[#76777d] italic"
+                        style={{ fontFamily: 'var(--font-body)' }}
+                      >
+                        {study.deploymentStatus}
+                      </span>
+                      <ArrowUpRight className="w-4 h-4 text-[#0F172A] opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </div>
+                  </div>
+                </Link>
+              </motion.article>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Empty state when a filter returns nothing */}
+      {filtered.length === 0 && (
+        <section className="max-w-7xl mx-auto px-6 md:px-8 py-24 text-center">
+          <p
+            className="text-sm text-[#76777d]"
+            style={{ fontFamily: 'var(--font-body)' }}
+          >
+            No case studies in this category yet.
+          </p>
+        </section>
+      )}
 
       <BottomCTA
         headline="Ready to See How Transformation Looks in Production?"
-        subtext="Start with a discovery call. We will show you exactly how strategy, architecture, and delivery are aligned in real environments."
+        subtext="Start with a discovery call. We'll show you exactly how strategy, architecture, and delivery are aligned in real environments."
         primaryLabel="Start Discovery"
         primaryHref="/contact"
         secondaryLabel="View Solution Programs"
         secondaryHref="/capabilities/solution-programs"
       />
-    </div>
+    </main>
   );
-};
-
-export default CaseStudies;
-
-
+}

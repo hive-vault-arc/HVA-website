@@ -307,64 +307,101 @@ const Home: React.FC = () => {
 
       <section className="bg-[#F2F4F6] py-20 md:py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-14">
-          <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
-            Proof In Production
-          </p>
-          <h2 className="font-headline text-4xl font-medium leading-[1.04] tracking-tight text-[#0F172A] md:text-5xl">
-            Transformation Programs Running in Production
-          </h2>
 
-          {/* Cards — gap-px grid, no borders */}
-          <div className="mt-10 grid grid-cols-1 gap-px bg-[#e2e8f0] md:grid-cols-3">
+          {/* Header row */}
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+            <div>
+              <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
+                Proof In Production
+              </p>
+              <h2 className="font-headline text-4xl font-medium leading-[1.04] tracking-tight text-[#0F172A] md:text-5xl">
+                Transformation Programs<br className="hidden md:block" /> Running in Production
+              </h2>
+            </div>
+            <div className="flex flex-wrap gap-6 pb-1">
+              <Link
+                href="/case-studies"
+                className="text-xs font-bold uppercase tracking-widest text-[#2563EB] hover:text-[#1d4ed8] transition-colors"
+              >
+                Proof Library →
+              </Link>
+              <Link
+                href="/capabilities/solution-programs"
+                className="text-xs font-bold uppercase tracking-widest text-[#2563EB] hover:text-[#1d4ed8] transition-colors"
+              >
+                Solution Programs →
+              </Link>
+            </div>
+          </div>
+
+          {/* Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {[
               {
                 eyebrow: 'System Built',
                 title: 'Customer Operations Engine',
-                body: 'Multilingual lead intake, qualification, and scheduling — handled end-to-end in production without manual intervention.',
-                meta: 'Stack: WhatsApp API · HubSpot · Calendar · PostgreSQL',
+                stat: 'Zero manual intervention · end-to-end in production',
               },
               {
-                eyebrow: 'Deployment Status',
+                eyebrow: 'Live Deployment',
                 title: 'Revenue Control Module',
-                body: 'Runs live across sales and operations with 94 active internal users and zero downtime since launch.',
-                meta: 'Status: Production since May 2025',
+                stat: '94 active users · production since May 2025',
               },
               {
                 eyebrow: 'Measured Outcomes',
                 title: 'Quantified Results',
-                body: 'Manual triage dropped 85%, qualified meetings increased 43%, and deal capture consistency improved across operating teams.',
-                meta: 'Evidence: dashboards + approved client reporting exports',
+                stat: 'Manual triage ↓85% · Qualified meetings ↑43%',
               },
             ].map((item) => (
-              <article key={item.eyebrow} className="bg-white p-8 md:p-10">
-                <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.22em] text-[#2563EB]">
-                  {item.eyebrow}
-                </p>
-                <h3 className="font-headline text-2xl text-[#0F172A]">{item.title}</h3>
-                <p className="mt-4 text-sm leading-relaxed text-[#475569]">{item.body}</p>
-                <p className="mt-5 text-[10px] font-bold uppercase tracking-[0.16em] text-[#94a3b8]">{item.meta}</p>
+              <article
+                key={item.eyebrow}
+                className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
+              >
+                {/* Image placeholder */}
+                <div className="relative h-52 bg-[#e8ecf0] overflow-hidden">
+                  {/* Subtle grid pattern */}
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 opacity-40"
+                    style={{
+                      backgroundImage:
+                        'repeating-linear-gradient(0deg,#cbd5e1 0,#cbd5e1 1px,transparent 0,transparent 32px),repeating-linear-gradient(90deg,#cbd5e1 0,#cbd5e1 1px,transparent 0,transparent 32px)',
+                    }}
+                  />
+                  {/* Placeholder icon */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <svg
+                      aria-hidden="true"
+                      width="40"
+                      height="40"
+                      viewBox="0 0 40 40"
+                      fill="none"
+                      className="opacity-30"
+                    >
+                      <rect x="4" y="8" width="32" height="24" rx="3" stroke="#94a3b8" strokeWidth="1.5" />
+                      <circle cx="14" cy="17" r="3" stroke="#94a3b8" strokeWidth="1.5" />
+                      <path d="M4 28l8-7 6 5 5-4 13 9" stroke="#94a3b8" strokeWidth="1.5" strokeLinejoin="round" />
+                    </svg>
+                  </div>
+                  {/* Eyebrow badge */}
+                  <span className="absolute top-4 left-4 text-[9px] font-bold uppercase tracking-[0.2em] bg-[#2563EB] text-white px-3 py-1 rounded-full">
+                    {item.eyebrow}
+                  </span>
+                </div>
+
+                {/* Content */}
+                <div className="px-6 py-5">
+                  <h3 className="font-headline text-xl text-[#0F172A] leading-snug">{item.title}</h3>
+                  <p className="mt-2 text-[11px] font-medium uppercase tracking-[0.14em] text-[#64748b]">
+                    {item.stat}
+                  </p>
+                </div>
               </article>
             ))}
           </div>
 
-          {/* Links */}
-          <div className="mt-8 flex flex-wrap gap-6">
-            <Link
-              href="/case-studies"
-              className="text-sm font-bold uppercase tracking-wide text-[#2563EB] hover:text-[#1d4ed8] transition-colors duration-200"
-            >
-              Explore proof library →
-            </Link>
-            <Link
-              href="/capabilities/solution-programs"
-              className="text-sm font-bold uppercase tracking-wide text-[#2563EB] hover:text-[#1d4ed8] transition-colors duration-200"
-            >
-              Explore solution programs →
-            </Link>
-          </div>
-
           {/* Testimonial */}
-          <blockquote className="mt-10 border-l-2 border-[#2563EB] pl-6">
+          <blockquote className="mt-12 border-l-2 border-[#2563EB] pl-6">
             <p className="font-headline text-xl italic leading-relaxed text-[#0F172A]">
               &ldquo;H.V.A built an AI agent that completely transformed our sales pipeline — empowering our team rather than replacing them. Combined with the CRM they engineered alongside it, the whole operation reached a level we didn&rsquo;t think was attainable.&rdquo;
             </p>
@@ -372,6 +409,7 @@ const Home: React.FC = () => {
               — CEO, Immoworld
             </footer>
           </blockquote>
+
         </div>
       </section>
 

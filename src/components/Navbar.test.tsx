@@ -17,6 +17,9 @@ describe('Navbar', () => {
     screen.getAllByRole('link', { name: 'Healthcare' }).forEach(link => expect(link).toHaveAttribute('href', '/industries#healthcare'));
     screen.getAllByRole('link', { name: 'Construction' }).forEach(link => expect(link).toHaveAttribute('href', '/industries#construction'));
     screen.getAllByRole('link', { name: 'Logistics' }).forEach(link => expect(link).toHaveAttribute('href', '/industries#logistics'));
+    screen.getAllByRole('link', { name: 'Finance & Brokerage' }).forEach(link =>
+      expect(link).toHaveAttribute('href', '/industries#finance-brokerage')
+    );
     screen.getAllByRole('link', { name: 'SME Capabilities' }).forEach(link => expect(link).toHaveAttribute('href', '/industries#sme-capabilities'));
     screen.getAllByRole('link', { name: 'Capabilities' }).forEach(link => expect(link).toHaveAttribute('href', '/capabilities'));
     screen.getAllByRole('link', { name: 'Industries' }).forEach(link => expect(link).toHaveAttribute('href', '/industries'));

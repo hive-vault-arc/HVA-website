@@ -36,6 +36,14 @@ const industries = [
     href: '/capabilities',
   },
   {
+    anchorId: 'finance-brokerage',
+    name: 'Finance & Brokerage',
+    sector: 'Financial Services & Deal Operations',
+    focus:
+      'Deal pipeline visibility, sales-agent and broker workflows, lead qualification, closing cadence, and commission reporting.',
+    href: '/capabilities/solution-programs',
+  },
+  {
     anchorId: 'sme-capabilities',
     name: 'SME Capabilities',
     sector: 'SME & Professional Capabilities',

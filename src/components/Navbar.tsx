@@ -44,6 +44,7 @@ const Navbar: React.FC = () => {
     { path: '/industries#healthcare', label: 'Healthcare' },
     { path: '/industries#construction', label: 'Construction' },
     { path: '/industries#logistics', label: 'Logistics' },
+    { path: '/industries#finance-brokerage', label: 'Finance & Brokerage' },
     { path: '/industries#sme-capabilities', label: 'SME Capabilities' },
   ];
 
