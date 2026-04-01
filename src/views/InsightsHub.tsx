@@ -6,8 +6,6 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 import BottomCTA from '../components/BottomCTA';
 import InsightsSlider from '../components/InsightsSlider';
-import { NEWS_ARTICLES, PERSPECTIVES, RESEARCH_REPORTS } from '../lib/insights';
-// INSIGHTS_CATEGORIES replaced by CATEGORY_CARDS above
 import { getAllPosts } from '../lib/blog';
 import { getAllCaseStudies } from '../lib/proof';
 
@@ -123,6 +121,315 @@ function CategoryCards() {
         );
       })}
     </motion.div>
+  );
+}
+
+/* ── Latest section ───────────────────────────────────────────────────────── */
+
+type LatestProps = {
+  readonly latestPost: ReturnType<typeof getAllPosts>[number] | undefined;
+  readonly latestCaseStudy: ReturnType<typeof getAllCaseStudies>[number] | undefined;
+};
+
+function LatestSection({ latestPost, latestCaseStudy }: LatestProps) {
+  return (
+    <section className="py-20 bg-[#F8FAFC]">
+      <div className="mx-auto max-w-7xl px-6 lg:px-14">
+        <p className="mb-10 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
+          Latest
+        </p>
+
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+          {/* ── Featured blog — tall image card ── */}
+          {latestPost && (
+            <motion.article
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.55 }}
+              className="group relative overflow-hidden bg-[#0F172A]"
+              style={{ minHeight: 480 }}
+            >
+              {/* Cover image */}
+              {latestPost.coverImage && (
+                <motion.img
+                  src={latestPost.coverImage}
+                  alt={latestPost.title}
+                  className="absolute inset-0 w-full h-full object-cover opacity-60
+                             transition-transform duration-700 group-hover:scale-105"
+                />
+              )}
+
+              {/* Gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-[#0f172a]/50 to-transparent" />
+
+              {/* Content */}
+              <div className="relative z-10 flex flex-col justify-end h-full p-8 md:p-10" style={{ minHeight: 480 }}>
+                <div className="mb-auto pt-6 flex items-center gap-2">
+                  <span className="h-[1px] w-6 bg-[#2563EB]" />
+                  <p className="text-[9px] font-bold uppercase tracking-[0.24em] text-[#60a5fa]">
+                    Latest Blog · {latestPost.category}
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-headline text-3xl font-medium leading-tight text-white md:text-4xl">
+                    {latestPost.title}
+                  </h3>
+                  <p className="mt-4 text-sm leading-relaxed text-white/60 line-clamp-3 max-w-lg">
+                    {latestPost.excerpt}
+                  </p>
+                  <div className="mt-6 flex items-center gap-4">
+                    <Link
+                      href={`/blog/${latestPost.slug}`}
+                      className="inline-flex items-center gap-2 px-5 py-2.5 text-[10px] font-bold
+                                 uppercase tracking-[0.14em] text-white border border-white/30
+                                 bg-white/10 backdrop-blur-sm hover:bg-[#2563EB] hover:border-[#2563EB]
+                                 transition-all duration-200"
+                    >
+                      Read article <span aria-hidden="true">→</span>
+                    </Link>
+                    <span className="text-[10px] text-white/35 uppercase tracking-widest">
+                      {latestPost.readTime}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </motion.article>
+          )}
+
+          {/* ── Case study — split layout ── */}
+          {latestCaseStudy && (
+            <motion.article
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.55, delay: 0.1 }}
+              className="group flex flex-col overflow-hidden"
+              style={{ minHeight: 480 }}
+            >
+              {/* Top image */}
+              <div className="relative overflow-hidden bg-[#0F172A]" style={{ height: 260 }}>
+                {latestCaseStudy.assets.coverImage && (
+                  <motion.img
+                    src={latestCaseStudy.assets.coverImage}
+                    alt={latestCaseStudy.title}
+                    className="absolute inset-0 w-full h-full object-cover opacity-80
+                               transition-transform duration-700 group-hover:scale-105"
+                  />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/60 to-transparent" />
+                {/* Industry pill */}
+                <div className="absolute top-5 left-5">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 text-[9px] font-bold
+                                   uppercase tracking-[0.18em] text-white bg-[#2563EB]/80 backdrop-blur-sm">
+                    <span className="w-1.5 h-1.5 rounded-full bg-white/80" />
+                    {latestCaseStudy.industry}
+                  </span>
+                </div>
+              </div>
+
+              {/* Bottom text panel */}
+              <div className="flex flex-col flex-1 bg-white border border-[#e2e8f0] border-t-0 p-8">
+                <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
+                  Latest Case Study
+                </p>
+                <h3 className="font-headline text-2xl font-medium leading-snug text-[#0F172A]">
+                  {latestCaseStudy.title}
+                </h3>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-[#475569] line-clamp-3">
+                  {latestCaseStudy.summary}
+                </p>
+                <div className="mt-6 flex items-center justify-between">
+                  <Link
+                    href={`/case-studies/${latestCaseStudy.slug}`}
+                    className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase
+                               tracking-[0.14em] text-[#0F172A] border border-[#0F172A]
+                               px-4 py-2 hover:bg-[#0F172A] hover:text-white transition-all duration-200"
+                  >
+                    Read case study <span aria-hidden="true">→</span>
+                  </Link>
+                  <span className="text-[10px] text-[#94a3b8] uppercase tracking-widest">
+                    {latestCaseStudy.clientName}
+                  </span>
+                </div>
+              </div>
+            </motion.article>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── All Insights grid ────────────────────────────────────────────────────── */
+
+type InsightGridItem = {
+  id: string;
+  tag: string;
+  title: string;
+  excerpt: string;
+  image: string;
+  href: string;
+  date: string;
+};
+
+function buildAllInsights(): InsightGridItem[] {
+  const posts = getAllPosts().map((p) => ({
+    id: `blog-${p.slug}`,
+    tag: p.category,
+    title: p.title,
+    excerpt: p.excerpt,
+    image: p.coverImage ?? '',
+    href: `/blog/${p.slug}`,
+    date: p.publishedAt,
+  }));
+
+  const studies = getAllCaseStudies().map((s) => ({
+    id: `case-${s.slug}`,
+    tag: s.industry,
+    title: s.title,
+    excerpt: s.summary,
+    image: s.assets.coverImage ?? '',
+    href: `/case-studies/${s.slug}`,
+    date: s.lastUpdated,
+  }));
+
+  // interleave: blog, blog, case study
+  const result: InsightGridItem[] = [];
+  let bi = 0, si = 0;
+  while (bi < posts.length || si < studies.length) {
+    if (bi < posts.length) result.push(posts[bi++]);
+    if (bi < posts.length) result.push(posts[bi++]);
+    if (si < studies.length) result.push(studies[si++]);
+  }
+  return result.filter((x) => !!x.image);
+}
+
+const ALL_INSIGHTS = buildAllInsights();
+const INITIAL_COUNT = 6;
+
+function InsightCard({ item, index }: { readonly item: InsightGridItem; readonly index: number }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ duration: 0.45, delay: (index % 6) * 0.06 }}
+      className="group relative overflow-hidden bg-[#0F172A] cursor-pointer"
+      style={{ height: 320 }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* Image */}
+      <motion.img
+        src={item.image}
+        alt={item.title}
+        className="absolute inset-0 w-full h-full object-cover"
+        animate={{
+          scale: hovered ? 1.07 : 1,
+          filter: hovered ? 'blur(6px)' : 'blur(0px)',
+        }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      />
+
+      {/* Base overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/85 via-[#0f172a]/25 to-transparent" />
+
+      {/* Tag — fades on hover */}
+      <motion.div
+        className="absolute top-4 left-4 flex items-center gap-1.5"
+        animate={{ opacity: hovered ? 0 : 1 }}
+        transition={{ duration: 0.2 }}
+      >
+        <span className="w-1.5 h-1.5 rounded-full bg-[#60a5fa]" />
+        <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-white">
+          {item.tag}
+        </span>
+      </motion.div>
+
+      {/* Default bottom title */}
+      <motion.div
+        className="absolute bottom-0 left-0 right-0 p-5"
+        animate={{ opacity: hovered ? 0 : 1 }}
+        transition={{ duration: 0.2 }}
+      >
+        <p className="font-headline text-lg font-medium text-white leading-snug line-clamp-2">
+          {item.title}
+        </p>
+      </motion.div>
+
+      {/* Hover overlay */}
+      <motion.div
+        className="absolute inset-0 flex flex-col justify-start p-5 pt-8"
+        animate={{ opacity: hovered ? 1 : 0 }}
+        transition={{ duration: 0.28 }}
+        style={{ pointerEvents: hovered ? 'auto' : 'none', background: 'rgba(15,23,42,0.72)', backdropFilter: 'blur(2px)' }}
+      >
+        <h3 className="font-headline text-xl font-medium text-white leading-snug mb-3">
+          {item.title}
+        </h3>
+        <p className="text-xs leading-relaxed text-white/65 line-clamp-3 mb-5">
+          {item.excerpt}
+        </p>
+        <Link
+          href={item.href}
+          className="inline-flex items-center gap-2 self-start px-4 py-2 text-[9px] font-bold
+                     uppercase tracking-[0.14em] text-white border border-white/35
+                     bg-white/10 backdrop-blur-sm hover:bg-[#2563EB] hover:border-[#2563EB]
+                     transition-all duration-200"
+        >
+          Learn more <span aria-hidden="true">→</span>
+        </Link>
+      </motion.div>
+    </motion.article>
+  );
+}
+
+function AllInsightsGrid() {
+  const [revealed, setRevealed] = useState(false);
+  const visible = revealed ? ALL_INSIGHTS : ALL_INSIGHTS.slice(0, INITIAL_COUNT);
+  const hasMore = ALL_INSIGHTS.length > INITIAL_COUNT && !revealed;
+
+  return (
+    <section className="py-20 bg-[#F8FAFC]">
+      <div className="mx-auto max-w-7xl px-6 lg:px-14">
+        <div className="flex items-end justify-between mb-10">
+          <div>
+            <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
+              All Insights
+            </p>
+            <h2 className="font-headline text-2xl font-medium text-[#0F172A]">
+              Everything We've Published
+            </h2>
+          </div>
+          <span className="text-[10px] text-[#94a3b8] uppercase tracking-widest hidden sm:block">
+            {ALL_INSIGHTS.length} items
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {visible.map((item, i) => (
+            <InsightCard key={item.id} item={item} index={i} />
+          ))}
+        </div>
+
+        {hasMore && (
+          <div className="mt-12 flex justify-center">
+            <button
+              onClick={() => setRevealed(true)}
+              className="inline-flex items-center gap-3 px-8 py-3.5 text-[10px] font-bold
+                         uppercase tracking-[0.18em] text-[#0F172A] border border-[#0F172A]
+                         hover:bg-[#0F172A] hover:text-white transition-all duration-200"
+            >
+              {"Load more "}
+              <span aria-hidden="true" className="text-xs">↓</span>
+            </button>
+          </div>
+        )}
+      </div>
+    </section>
   );
 }
 
@@ -264,94 +571,10 @@ export default function InsightsHub() {
       </section>
 
       {/* ── Latest Featured ───────────────────────────────────────────────── */}
-      <section className="py-20">
-        <div className="mx-auto max-w-7xl px-6 lg:px-14">
-          <p className="mb-8 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
-            Latest
-          </p>
-          <div className="grid grid-cols-1 gap-px bg-[#e2e8f0] lg:grid-cols-2">
-            {latestPost && (
-              <motion.article
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.5 }}
-                className="flex flex-col bg-white p-8 md:p-10"
-              >
-                <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.22em] text-[#2563EB]">
-                  Latest Blog
-                </p>
-                <h3 className="font-headline text-3xl text-[#0F172A]">{latestPost.title}</h3>
-                <p className="mt-4 flex-1 text-sm leading-relaxed text-[#475569]">{latestPost.excerpt}</p>
-                <Link
-                  href={`/blog/${latestPost.slug}`}
-                  className="mt-6 inline-flex items-center text-sm font-bold uppercase tracking-wide text-[#2563EB] hover:text-[#1d4ed8] transition-colors duration-200"
-                >
-                  Read article →
-                </Link>
-              </motion.article>
-            )}
-            {latestCaseStudy && (
-              <motion.article
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="flex flex-col bg-white p-8 md:p-10"
-              >
-                <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.22em] text-[#2563EB]">
-                  Latest Case Study
-                </p>
-                <h3 className="font-headline text-3xl text-[#0F172A]">{latestCaseStudy.title}</h3>
-                <p className="mt-4 flex-1 text-sm leading-relaxed text-[#475569]">{latestCaseStudy.summary}</p>
-                <Link
-                  href={`/case-studies/${latestCaseStudy.slug}`}
-                  className="mt-6 inline-flex items-center text-sm font-bold uppercase tracking-wide text-[#2563EB] hover:text-[#1d4ed8] transition-colors duration-200"
-                >
-                  Read case study →
-                </Link>
-              </motion.article>
-            )}
-          </div>
-        </div>
-      </section>
+      <LatestSection latestPost={latestPost} latestCaseStudy={latestCaseStudy} />
 
-      {/* ── Signal Cards ──────────────────────────────────────────────────── */}
-      <section className="bg-[#F2F4F6] py-20">
-        <div className="mx-auto max-w-7xl px-6 lg:px-14">
-          <p className="mb-8 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
-            Recent Signals
-          </p>
-          <motion.div
-            className="grid grid-cols-1 gap-px bg-[#e2e8f0] md:grid-cols-3"
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.15 }}
-            transition={{ staggerChildren: 0.08 }}
-          >
-            {[
-              { label: 'News Article', item: NEWS_ARTICLES[0] },
-              { label: 'Perspective', item: PERSPECTIVES[0] },
-              { label: 'Research Report', item: RESEARCH_REPORTS[0] },
-            ].map(({ label, item }) =>
-              item ? (
-                <motion.article
-                  key={label}
-                  variants={fadeUp}
-                  transition={{ duration: 0.5 }}
-                  className="flex flex-col bg-[#F2F4F6] p-8 md:p-10"
-                >
-                  <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.22em] text-[#94a3b8]">
-                    {label}
-                  </p>
-                  <h4 className="font-headline text-2xl text-[#0F172A]">{item.title}</h4>
-                  <p className="mt-3 flex-1 text-sm leading-relaxed text-[#475569]">{item.summary}</p>
-                </motion.article>
-              ) : null
-            )}
-          </motion.div>
-        </div>
-      </section>
+      {/* ── All Insights Grid ────────────────────────────────────────────── */}
+      <AllInsightsGrid />
 
       <BottomCTA
         variant="dark"
