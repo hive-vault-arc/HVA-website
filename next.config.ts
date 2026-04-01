@@ -53,6 +53,40 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  async redirects() {
+    return [
+      {
+        source: '/services',
+        destination: '/capabilities',
+        permanent: true,
+      },
+      {
+        source: '/services/in-detail',
+        destination: '/capabilities/in-detail',
+        permanent: true,
+      },
+      {
+        source: '/services/solution-programs',
+        destination: '/capabilities/solution-programs',
+        permanent: true,
+      },
+      {
+        source: '/:locale(en|fr|ar|es)/services',
+        destination: '/:locale/capabilities',
+        permanent: true,
+      },
+      {
+        source: '/:locale(en|fr|ar|es)/services/in-detail',
+        destination: '/:locale/capabilities/in-detail',
+        permanent: true,
+      },
+      {
+        source: '/:locale(en|fr|ar|es)/services/solution-programs',
+        destination: '/:locale/capabilities/solution-programs',
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

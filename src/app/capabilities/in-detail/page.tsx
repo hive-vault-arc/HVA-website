@@ -1,34 +1,36 @@
 import type { Metadata } from 'next';
-import ServicesInDetail from '../../../views/ServicesInDetail';
+import CapabilitiesInDetail from '../../../views/CapabilitiesInDetail';
 import JsonLd from '../../../components/JsonLd';
 import FaqSection from '../../../components/FaqSection';
-import { SERVICES_FAQS } from '../../../data/faqs';
+import { CAPABILITIES_FAQS } from '../../../data/faqs';
 import { GLOBAL_KEYWORDS, SITE_URL, absoluteUrl, buildPageMetadata, mergeKeywords } from '../../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Services In Detail | Full Capability Architecture and BOT Delivery Model',
+  title: 'Capabilities In Detail | Full Capability Architecture and BOT Delivery Model',
   description:
-    'Full capability depth across 8 service domains including AI systems, transformation, consulting, engineering, data and growth, cybersecurity, emerging tech, and Build-Operate-Transfer delivery.',
-  path: '/services/in-detail',
+    'Full capability depth across 8 capability domains including AI systems, transformation, consulting, engineering, data and growth, cybersecurity, emerging tech, and Build-Operate-Transfer delivery. Our capabilities are our services.',
+  path: '/capabilities/in-detail',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
+    'capabilities in detail technology consulting',
     'services in detail technology consulting',
-    'detailed AI automation services Morocco',
+    'detailed AI automation capabilities Morocco',
     'digital transformation execution details',
     'consulting and engineering delivery model',
     'cloud and data systems capabilities',
-    'cybersecurity digital risk services',
-    'deep tech and IoT service capabilities',
+    'cybersecurity digital risk capabilities',
+    'deep tech and IoT capability architecture',
     'build operate transfer technology delivery',
     'digital ecosystems and tech function advisory',
     'agile at scale transformation support',
   ]),
 });
 
-export default function ServicesInDetailPage() {
-  const serviceSchema = {
+export default function CapabilitiesInDetailPage() {
+  const capabilitySchema = {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    name: 'H.V.A Services In Detail',
+    name: 'H.V.A Capabilities In Detail',
+    alternateName: 'H.V.A Services In Detail',
     provider: {
       '@type': ['Organization', 'ProfessionalService'],
       '@id': `${SITE_URL}/#organization`,
@@ -57,7 +59,7 @@ export default function ServicesInDetailPage() {
       'SaaS Platform Engineering',
       'Cloud Infrastructure and Reliability',
       'IT Modernization',
-      'Data Services and Analytics',
+      'Data Capabilities and Analytics',
       'Marketing Systems',
       'Cybersecurity and Digital Risk',
       'Emerging Technologies',
@@ -66,9 +68,9 @@ export default function ServicesInDetailPage() {
       'Build-Operate-Transfer Delivery Model',
     ],
     availableLanguage: ['en', 'fr', 'ar', 'es'],
-    url: `${SITE_URL}/services/in-detail`,
+    url: `${SITE_URL}/capabilities/in-detail`,
     subjectOf: [
-      `${SITE_URL}/services/solution-programs`,
+      `${SITE_URL}/capabilities/solution-programs`,
       `${SITE_URL}/case-studies/multilingual-whatsapp-ai-agent`,
       `${SITE_URL}/case-studies/zoho-grade-crm-platform`,
     ],
@@ -87,23 +89,24 @@ export default function ServicesInDetailPage() {
       {
         '@type': 'ListItem',
         position: 2,
-        name: 'Services',
-        item: `${SITE_URL}/services`,
+        name: 'Capabilities',
+        item: `${SITE_URL}/capabilities`,
       },
       {
         '@type': 'ListItem',
         position: 3,
         name: 'In Detail',
-        item: `${SITE_URL}/services/in-detail`,
+        item: `${SITE_URL}/capabilities/in-detail`,
       },
     ],
   };
 
   return (
     <>
-      <JsonLd data={[serviceSchema, breadcrumbSchema]} />
-      <ServicesInDetail />
-      <FaqSection faqs={SERVICES_FAQS} />
+      <JsonLd data={[capabilitySchema, breadcrumbSchema]} />
+      <CapabilitiesInDetail />
+      <FaqSection faqs={CAPABILITIES_FAQS} />
     </>
   );
 }
+

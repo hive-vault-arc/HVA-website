@@ -317,7 +317,7 @@ export default function BlogPostView({ post }: Props) {
               className="text-[#45464d] leading-relaxed mb-6 max-w-xl"
               style={{ fontFamily: 'var(--font-body)' }}
             >
-              H.V.A is a technology consulting and digital transformation firm based in Tangier, Morocco. We advise, engineer, build, ship, and maintain intelligent systems across AI, automation, custom software, IT modernization, cloud infrastructure, and data services.
+              H.V.A is a technology consulting and digital transformation firm based in Tangier, Morocco. We advise, engineer, build, ship, and maintain intelligent systems across AI, automation, custom software, IT modernization, cloud infrastructure, and data capabilities.
             </p>
             <Link
               href="/case-studies"

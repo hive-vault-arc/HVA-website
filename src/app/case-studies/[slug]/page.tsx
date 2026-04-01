@@ -170,7 +170,7 @@ export default async function CaseStudyDetailPage({ params }: Props) {
               Review the relevant system programs, then book a discovery call to scope your transformation roadmap.
             </p>
             <div className="mt-5 flex flex-wrap gap-4">
-              <Link href="/services/solution-programs" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">
+              <Link href="/capabilities/solution-programs" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">
                 View solution programs &rarr;
               </Link>
               <Link href="/contact" className="text-sm font-bold text-[#2563EB] hover:text-[#1d4ed8]">
@@ -183,3 +183,4 @@ export default async function CaseStudyDetailPage({ params }: Props) {
     </>
   );
 }
+

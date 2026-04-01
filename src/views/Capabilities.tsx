@@ -6,7 +6,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { Bot, Briefcase, Building2, ChartColumn, Cloud, Cpu, Database, Send, Settings, Shield, Sparkles, Wrench } from 'lucide-react';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 import BottomCTA from '../components/BottomCTA';
-import { SERVICE_BRIEF_SECTIONS, SOLUTION_PROGRAM_DETAILS } from '../lib/services-content';
+import { CAPABILITY_BRIEF_SECTIONS, CAPABILITY_SOLUTION_PROGRAM_DETAILS } from '../lib/capabilities-content';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -73,7 +73,7 @@ const BOT_PHASES = [
   },
 ];
 
-export default function Services() {
+export default function Capabilities() {
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
   const [activeBOTStep, setActiveBOTStep] = useState(0);
@@ -101,22 +101,22 @@ export default function Services() {
               Strategy · Consulting · Engineering
             </p>
             <h1 className="font-headline text-4xl font-medium leading-[1.04] tracking-tight sm:text-5xl lg:text-[4.2rem]">
-              Service Coverage at a Glance.
+              Capability Coverage at a Glance.
               <br />
               <em className="italic text-[#475569]">Built for fast decision-making.</em>
             </h1>
             <p className="mt-6 max-w-2xl text-lg font-light leading-relaxed text-[#0F172A]/60">
-              A concise service scan across all eight domains. Full execution depth lives in In Detail.
+              A concise capability scan across all eight domains. Full execution depth lives in In Detail.
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-4">
               <Link
-                href="/services/in-detail"
+                href="/capabilities/in-detail"
                 className="sharp-edge inline-flex items-center gap-2 bg-[#2563EB] px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-white transition-colors duration-200 hover:bg-[#1d4ed8]"
               >
                 Explore In Detail
               </Link>
               <Link
-                href="/services/solution-programs"
+                href="/capabilities/solution-programs"
                 className="text-sm font-bold uppercase tracking-wide text-[#2563EB] transition-colors duration-200 hover:text-[#1d4ed8]"
               >
                 View Solution Programs →
@@ -140,7 +140,7 @@ export default function Services() {
               </p>
               <nav className="relative">
                 {[
-                  { label: 'Service Pillars', anchor: '#service-pillars', meta: '8 domains' },
+                  { label: 'Capability Pillars', anchor: '#capability-pillars', meta: '8 domains' },
                   { label: 'Solution Programs', anchor: '#solution-programs', meta: '3 active' },
                   { label: 'BOT Engagement Model', anchor: '#bot-model', meta: 'How we work' },
                 ].map((item) => (
@@ -160,7 +160,7 @@ export default function Services() {
               </nav>
               <div className="relative mt-4 border-t border-white/10 pt-4">
                 <p className="text-[9px] font-mono uppercase tracking-[0.18em] text-white/25">
-                  Full depth → /services/in-detail
+                  Full depth → /capabilities/in-detail
                 </p>
               </div>
             </div>
@@ -168,7 +168,7 @@ export default function Services() {
         </motion.div>
       </section>
 
-      <section id="service-pillars" className="scroll-mt-28 bg-[#F2F4F6] py-14">
+      <section id="capability-pillars" className="scroll-mt-28 bg-[#F2F4F6] py-14">
         <div className="mx-auto max-w-7xl px-6 lg:px-14">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -178,8 +178,8 @@ export default function Services() {
             className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between"
           >
             <div>
-              <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">Service Pillars</p>
-              <h2 className="font-headline text-3xl font-medium text-[#0F172A] md:text-4xl">Eight concise service domains.</h2>
+              <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">Capability Pillars</p>
+              <h2 className="font-headline text-3xl font-medium text-[#0F172A] md:text-4xl">Eight concise capability domains.</h2>
             </div>
             <div aria-hidden="true" className="hidden h-[2px] w-20 shrink-0 bg-[#2563EB] md:block" />
           </motion.div>
@@ -191,7 +191,7 @@ export default function Services() {
             viewport={{ once: true, amount: 0.1 }}
             transition={{ staggerChildren: 0.06 }}
           >
-            {SERVICE_BRIEF_SECTIONS.map((pillar) => (
+            {CAPABILITY_BRIEF_SECTIONS.map((pillar) => (
               <motion.article
                 key={pillar.id}
                 variants={fadeUp}
@@ -291,7 +291,7 @@ export default function Services() {
                 <span className="text-[8px] font-mono text-[#2563EB] uppercase tracking-widest">PROGRAM_REGISTRY</span>
                 <span className="text-[8px] font-mono text-[#94a3b8]">3 ACTIVE</span>
               </div>
-              {SOLUTION_PROGRAM_DETAILS.map((prog, i) => (
+              {CAPABILITY_SOLUTION_PROGRAM_DETAILS.map((prog, i) => (
                 <div key={prog.slug} className="px-4 py-2.5 border-b border-[#e2e8f0] last:border-b-0 flex items-center gap-3">
                   <div className="h-1.5 w-1.5 rounded-full bg-[#2563EB] animate-pulse" style={{ animationDelay: `${i * 0.3}s` }} />
                   <span className="text-[10px] font-mono text-[#475569]">PRG-00{i + 1}</span>
@@ -301,7 +301,7 @@ export default function Services() {
             </div>
 
             <Link
-              href="/services/solution-programs"
+              href="/capabilities/solution-programs"
               className="sharp-edge inline-flex items-center gap-2 bg-[#0F172A] px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition-colors duration-200 hover:bg-[#2563EB]"
             >
               Full Program Catalog →
@@ -316,7 +316,7 @@ export default function Services() {
             viewport={{ once: true, amount: 0.1 }}
             transition={{ staggerChildren: 0.1 }}
           >
-            {SOLUTION_PROGRAM_DETAILS.map((program, i) => {
+            {CAPABILITY_SOLUTION_PROGRAM_DETAILS.map((program, i) => {
               const programIcons = [
                 <Bot key="bot" className="w-7 h-7" strokeWidth={1.25} />,
                 <Database key="db" className="w-7 h-7" strokeWidth={1.25} />,
@@ -642,13 +642,13 @@ export default function Services() {
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <Link
-              href="/services/in-detail"
+              href="/capabilities/in-detail"
               className="sharp-edge inline-flex items-center gap-2 bg-[#2563EB] px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-white transition-colors duration-200 hover:bg-[#1d4ed8]"
             >
               Explore In Detail
             </Link>
             <Link
-              href="/services/solution-programs"
+              href="/capabilities/solution-programs"
               className="text-sm font-bold uppercase tracking-wide text-[#2563EB] transition-colors duration-200 hover:text-[#1d4ed8]"
             >
               View Solution Programs →
@@ -660,12 +660,17 @@ export default function Services() {
       <BottomCTA
         variant="dark"
         headline="Need the full capability map with delivery depth?"
-        subtext="Use In Detail for strategic context, execution model, and full subservice coverage across all domains."
+        subtext="Use In Detail for strategic context, execution model, and full sub-capability coverage across all domains."
         primaryLabel="Explore In Detail"
-        primaryHref="/services/in-detail"
+        primaryHref="/capabilities/in-detail"
         secondaryLabel="Book Discovery Call"
         secondaryHref="/contact"
       />
     </div>
   );
 }
+
+
+
+
+

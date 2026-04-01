@@ -2,11 +2,11 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import JsonLd from '../../../components/JsonLd';
 import FaqSection from '../../../components/FaqSection';
-import { LOCALE_SERVICES_FAQS } from '../../../data/faqs';
+import { LOCALE_CAPABILITIES_FAQS } from '../../../data/faqs';
 import { SITE_URL, SUPPORTED_LOCALES, type SupportedLocale, buildPageMetadata } from '../../../lib/seo';
 import { getLocaleMessaging } from '../../../lib/positioning';
 
-const servicesContent: Record<
+const capabilitiesContent: Record<
   SupportedLocale,
   {
     title: string;
@@ -18,15 +18,18 @@ const servicesContent: Record<
   }
 > = {
   en: {
-    title: 'Technology Consulting Services in Morocco',
+    title: 'Technology Consulting Capabilities in Morocco',
     description:
-      'Consulting and engineering services from H.V.A: advisory, architecture, AI automation, custom software, modernization, cloud, and data services.',
-    h1: 'Advisory to Execution Service Lines',
+      'Consulting and engineering capabilities from H.V.A: advisory, architecture, AI automation, custom software, modernization, cloud, and data capabilities.',
+    h1: 'Advisory to Execution Capability Lines',
     intro:
       'Our engagement model spans strategic consulting, architecture, technical execution, and managed evolution so systems continue performing after launch.',
     keywords: [
+      'technology consulting capabilities morocco',
+      'digital transformation capabilities morocco',
       'technology consulting services morocco',
       'digital transformation services morocco',
+      'ai automation services tangier',
       'it strategy advisory tangier',
       'workflow automation morocco',
       'custom software development morocco',
@@ -56,15 +59,18 @@ const servicesContent: Record<
     ],
   },
   fr: {
-    title: 'Services de conseil technologique au Maroc',
+    title: 'Capacités de conseil technologique au Maroc',
     description:
-      'Services H.V.A: conseil technologique, transformation digitale, IA, automatisation, logiciel sur mesure, modernisation IT et cloud.',
-    h1: 'Conseil, architecture et execution',
+      'Capacités H.V.A: conseil technologique, transformation digitale, IA, automatisation, logiciel sur mesure, modernisation IT et cloud.',
+    h1: 'Conseil, architecture et exécution',
     intro:
       "Nous accompagnons les entreprises de la strategie jusqu'a l'exploitation en production avec un modele de delivery clair et mesurable.",
     keywords: [
-      'services conseil technologique maroc',
+      'capacites conseil technologique maroc',
       'transformation digitale entreprise maroc',
+      'services de conseil technologique maroc',
+      'services de transformation digitale maroc',
+      'services IA et automatisation maroc',
       'strategie IT et architecture maroc',
       'automatisation des workflows maroc',
       'développement logiciel sur mesure maroc',
@@ -76,7 +82,7 @@ const servicesContent: Record<
       'déployer mon application sur cloud maroc',
       'conseil devops startup maroc',
       'mise en place pipeline ci cd maroc',
-      'agent ia service client maroc',
+      'agent ia operations client maroc',
       'automatisation qualification de leads maroc',
       'modernisation système legacy maroc',
       'ingénierie saas entreprise maroc',
@@ -85,24 +91,27 @@ const servicesContent: Record<
       'sécurité applicative et fiabilité cloud maroc',
     ],
     bullets: [
-      "Systemes IA : agents, automatisation et intelligence decisionnelle",
-      "Transformation metier et IT : modernisation et refonte CRM/operations",
-      "Conseil : strategie, architecture, roadmaps et fonction technologique",
-      "Ingenierie : web, mobile, SaaS et systemes cloud",
-      "Data et croissance : analytics, pipelines data et marketing systems",
-      "Cybersecurite, deep tech, IoT et modele Build-Operate-Transfer",
+      'Systemes IA : agents, automatisation et intelligence decisionnelle',
+      'Transformation metier et IT : modernisation et refonte CRM/operations',
+      'Conseil : strategie, architecture, roadmaps et fonction technologique',
+      'Ingenierie : web, mobile, SaaS et systemes cloud',
+      'Data et croissance : analytics, pipelines data et marketing systems',
+      'Cybersecurite, deep tech, IoT et modele Build-Operate-Transfer',
     ],
   },
   ar: {
-    title: 'خدمات الاستشارات التقنية في المغرب',
+    title: 'قدرات الاستشارات التقنية في المغرب',
     description:
-      'خدمات H.V.A تشمل الاستشارات التقنية والتحول الرقمي والذكاء الاصطناعي والأتمتة وتطوير البرمجيات وتحديث البنية التقنية والسحابة.',
+      'قدرات H.V.A تشمل الاستشارات التقنية والتحول الرقمي والذكاء الاصطناعي والأتمتة وتطوير البرمجيات وتحديث البنية التقنية والسحابة.',
     h1: 'من الاستراتيجية الى التنفيذ',
     intro:
       'نعمل مع فرق القيادة لتحديد الاولويات وبناء الانظمة وتشغيلها وصيانتها ضمن دورة تسليم واضحة ومستمرة.',
     keywords: [
-      'خدمات استشارات تقنية المغرب',
-      'خدمات التحول الرقمي للشركات المغرب',
+      'قدرات استشارات تقنية المغرب',
+      'قدرات التحول الرقمي للشركات المغرب',
+      'خدمات الاستشارات التقنية المغرب',
+      'خدمات التحول الرقمي المغرب',
+      'خدمات أتمتة الذكاء الاصطناعي المغرب',
       'استراتيجية تقنية وهندسة حلول المغرب',
       'أتمتة سير العمل المغرب',
       'تطوير برمجيات مخصصة المغرب',
@@ -114,7 +123,7 @@ const servicesContent: Record<
       'نشر التطبيقات على السحابة المغرب',
       'استشارات DevOps للشركات الناشئة المغرب',
       'إعداد خطوط CI CD لفرق التطوير المغرب',
-      'تنفيذ وكيل ذكاء اصطناعي لخدمة العملاء المغرب',
+      'تنفيذ وكيل ذكاء اصطناعي لعمليات العملاء المغرب',
       'أتمتة تأهيل العملاء المحتملين المغرب',
       'تحديث الأنظمة القديمة إلى أنظمة حديثة المغرب',
       'هندسة منصات SaaS للمؤسسات المغرب',
@@ -132,15 +141,18 @@ const servicesContent: Record<
     ],
   },
   es: {
-    title: 'Servicios de consultoria tecnologica en Marruecos',
+    title: 'Capacidades de consultoria tecnologica en Marruecos',
     description:
-      'Servicios de H.V.A: consultoria tecnologica, transformacion digital, IA, automatizacion, software a medida, modernizacion IT y cloud.',
+      'Capacidades de H.V.A: consultoria tecnologica, transformacion digital, IA, automatizacion, software a medida, modernizacion IT y cloud.',
     h1: 'De la estrategia a la ejecucion',
     intro:
       'Trabajamos con equipos directivos para disenar la estrategia, ejecutar la ingenieria y mantener la operacion en produccion a largo plazo.',
     keywords: [
-      'servicios de consultoria tecnologica marruecos',
+      'capacidades de consultoria tecnologica marruecos',
       'transformacion digital para empresas marruecos',
+      'servicios de consultoria tecnologica marruecos',
+      'servicios de transformacion digital marruecos',
+      'servicios de automatizacion con IA marruecos',
       'estrategia IT y arquitectura tecnica marruecos',
       'automatizacion de flujos de trabajo marruecos',
       'desarrollo de software a medida marruecos',
@@ -152,7 +164,7 @@ const servicesContent: Record<
       'desplegar mi aplicacion en cloud marruecos',
       'consultoria devops para startups marruecos',
       'implementacion pipeline ci cd para equipos de desarrollo',
-      'agente de ia para atencion al cliente marruecos',
+      'agente de ia para operaciones de clientes marruecos',
       'automatizacion de calificacion de leads marruecos',
       'modernizacion de sistemas legacy marruecos',
       'ingenieria saas empresarial marruecos',
@@ -171,7 +183,7 @@ const servicesContent: Record<
   },
 };
 
-type LocaleServicesPageProps = {
+type LocaleCapabilitiesPageProps = {
   params: Promise<{ locale: string }>;
 };
 
@@ -179,27 +191,27 @@ export async function generateStaticParams() {
   return SUPPORTED_LOCALES.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata({ params }: LocaleServicesPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: LocaleCapabilitiesPageProps): Promise<Metadata> {
   const { locale } = await params;
   if (!SUPPORTED_LOCALES.includes(locale as SupportedLocale)) {
     return {};
   }
 
-  const content = servicesContent[locale as SupportedLocale];
-  const identity = getLocaleMessaging(locale).identity;
+  const content = capabilitiesContent[locale as SupportedLocale];
+  const { serviceEquivalence } = getLocaleMessaging(locale);
 
   const base = buildPageMetadata({
     title: content.title,
-    description: identity.longDescriptor,
-    path: locale === 'en' ? '/services' : `/${locale}/services`,
+    description: `${content.description} ${serviceEquivalence}`,
+    path: locale === 'en' ? '/capabilities' : `/${locale}/capabilities`,
     locale,
     keywords: content.keywords,
     alternates: {
-      en: '/services',
-      fr: '/fr/services',
-      ar: '/ar/services',
-      es: '/es/services',
-      'x-default': '/services',
+      en: '/capabilities',
+      fr: '/fr/capabilities',
+      ar: '/ar/capabilities',
+      es: '/es/capabilities',
+      'x-default': '/capabilities',
     },
   });
 
@@ -207,32 +219,33 @@ export async function generateMetadata({ params }: LocaleServicesPageProps): Pro
     return {
       ...base,
       robots: { index: false, follow: true },
-      alternates: { ...(base.alternates ?? {}), canonical: '/services' },
+      alternates: { ...(base.alternates ?? {}), canonical: '/capabilities' },
     };
   }
 
   return base;
 }
 
-export default async function LocaleServicesPage({ params }: LocaleServicesPageProps) {
+export default async function LocaleCapabilitiesPage({ params }: LocaleCapabilitiesPageProps) {
   const { locale } = await params;
   if (!SUPPORTED_LOCALES.includes(locale as SupportedLocale)) {
     notFound();
   }
 
-  const content = servicesContent[locale as SupportedLocale];
+  const content = capabilitiesContent[locale as SupportedLocale];
   const isRtl = locale === 'ar';
-  const identity = getLocaleMessaging(locale).identity;
+  const { identity, serviceEquivalence } = getLocaleMessaging(locale);
 
-  const serviceSchema = {
+  const capabilitySchema = {
     '@context': 'https://schema.org',
     '@type': 'Service',
     name: content.title,
-    description: identity.longDescriptor,
+    alternateName: [serviceEquivalence],
+    description: `${identity.longDescriptor} ${serviceEquivalence}`,
     keywords: content.keywords,
     areaServed: ['Tangier', 'Morocco'],
     availableLanguage: locale,
-    url: locale === 'en' ? `${SITE_URL}/services` : `${SITE_URL}/${locale}/services`,
+    url: locale === 'en' ? `${SITE_URL}/capabilities` : `${SITE_URL}/${locale}/capabilities`,
   };
 
   return (
@@ -242,10 +255,11 @@ export default async function LocaleServicesPage({ params }: LocaleServicesPageP
         lang={locale}
         dir={isRtl ? 'rtl' : 'ltr'}
       >
-        <JsonLd data={serviceSchema} />
+        <JsonLd data={capabilitySchema} />
         <p className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-[#2563EB]">{locale.toUpperCase()}</p>
         <h1 className="mb-6 font-serif text-4xl leading-tight text-[#0F172A] md:text-6xl">{content.h1}</h1>
         <p className="max-w-3xl text-lg leading-relaxed text-[#334155]">{identity.shortDescriptor}</p>
+        <p className="mt-4 max-w-3xl text-base font-semibold leading-relaxed text-[#0F172A]">{serviceEquivalence}</p>
         <p className="mt-4 max-w-3xl text-lg leading-relaxed text-[#334155]">{content.intro}</p>
         <ul className="mt-8 list-disc space-y-2 pl-5 text-[#0F172A]">
           {content.bullets.map((bullet) => (
@@ -254,7 +268,7 @@ export default async function LocaleServicesPage({ params }: LocaleServicesPageP
         </ul>
       </section>
       <FaqSection
-        faqs={LOCALE_SERVICES_FAQS[locale as SupportedLocale]}
+        faqs={LOCALE_CAPABILITIES_FAQS[locale as SupportedLocale]}
         dir={isRtl ? 'rtl' : 'ltr'}
       />
     </>

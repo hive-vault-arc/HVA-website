@@ -1294,3 +1294,327 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ─── InsightsSlider ─────────────────────────────────────────────────────────
+   Shared component used on the Insights hub page.
+   Large landscape image-cards that auto-advance every 10 s.
+   ──────────────────────────────────────────────────────────────────────── */
+
+.insights-slider-section {
+  background: var(--color-neutral);
+  padding: 5rem 0 4rem;
+  overflow: hidden;
+  --card-w: 620px;
+  --card-gap: 1.25rem;
+}
+
+.insights-slider-header {
+  max-width: 88rem;
+  margin: 0 auto;
+  padding: 0 1.5rem 2rem;
+}
+
+@media (min-width: 1024px) {
+  .insights-slider-header { padding: 0 3.5rem 2rem; }
+}
+
+.insights-slider-eyebrow {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+/* layout: [controls] [track] */
+.insights-slider-layout {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  padding-left: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .insights-slider-layout { padding-left: 3.5rem; }
+}
+
+/* ── Left controls (counter + nav) ── */
+.insights-slider-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  flex-shrink: 0;
+  width: 2.5rem;
+}
+
+.insights-slider-counter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  user-select: none;
+}
+
+.insights-slider-counter-current {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-tertiary);
+  line-height: 1;
+}
+
+.insights-slider-counter-sep {
+  display: block;
+  width: 1.25rem;
+  height: 1px;
+  background: var(--color-neutral-mid);
+}
+
+.insights-slider-counter-total {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--color-secondary-light);
+  line-height: 1;
+}
+
+.insights-slider-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.insights-slider-nav-btn {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  border: 1px solid var(--color-neutral-dark);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-secondary);
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.insights-slider-nav-btn:hover {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+
+.insights-slider-nav-icon {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+/* ── Track ── */
+@media (max-width: 768px) {
+  .insights-slider-section {
+    --card-w: 85vw;
+  }
+}
+
+.insights-slider-track-outer {
+  overflow: hidden;
+  flex: 1;
+}
+
+.insights-slider-track {
+  display: flex;
+  gap: var(--card-gap);
+  will-change: transform;
+}
+
+/* ── Individual card ── */
+.insights-slide-card {
+  flex-shrink: 0;
+  width: var(--card-w);
+  height: 420px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+  cursor: default;
+}
+
+@media (min-width: 1280px) {
+  .insights-slide-card { height: 480px; }
+}
+
+.insights-slide-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.insights-slide-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: center;
+}
+
+/* Semi-transparent bottom gradient always present */
+.insights-slide-overlay-base {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(15, 23, 42, 0.85) 0%,
+    rgba(15, 23, 42, 0.35) 45%,
+    rgba(15, 23, 42, 0.08) 100%
+  );
+  z-index: 1;
+}
+
+/* Tag row top-left */
+.insights-slide-tag-row {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.5rem;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.insights-slide-tag-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--color-primary-light);
+  flex-shrink: 0;
+}
+
+.insights-slide-tag-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+/* Default bottom content (visible when not hovered) */
+.insights-slide-default-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.75rem 1.75rem 1.5rem;
+  z-index: 10;
+}
+
+.insights-slide-title-default {
+  font-family: var(--font-headline);
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+/* Hover overlay */
+.insights-slide-hover-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.insights-slide-hover-content {
+  padding: 2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 90%;
+}
+
+.insights-slide-hover-title {
+  font-family: var(--font-headline);
+  font-size: 1.625rem;
+  font-weight: 500;
+  line-height: 1.18;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.insights-slide-hover-desc {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: rgba(248, 250, 252, 0.75);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.insights-slide-learn-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+  margin-top: 0.5rem;
+  padding: 0.6rem 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: background 0.18s ease, border-color 0.18s ease;
+  align-self: flex-start;
+}
+
+.insights-slide-learn-more:hover {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.insights-slide-learn-arrow {
+  transition: transform 0.18s ease;
+}
+
+.insights-slide-learn-more:hover .insights-slide-learn-arrow {
+  transform: translateX(3px);
+}
+
+/* ── Dot indicators ── */
+.insights-slider-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 2rem 1.5rem 0;
+  max-width: 88rem;
+  margin: 0 auto;
+}
+
+@media (min-width: 1024px) {
+  .insights-slider-dots { padding: 2rem 3.5rem 0; }
+}
+
+.insights-slider-dot {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-neutral-mid);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s ease, width 0.25s ease;
+  flex-shrink: 0;
+}
+
+.insights-slider-dot--active {
+  background: var(--color-primary);
+  width: 1.5rem;
+  border-radius: 9999px;
+}

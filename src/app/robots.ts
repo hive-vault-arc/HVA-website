@@ -1,27 +1,37 @@
 import type { MetadataRoute } from 'next';
 import { SITE_URL } from '../lib/seo';
 
+const crawlAllowPaths = [
+  '/',
+  '/capabilities',
+  '/capabilities/in-detail',
+  '/capabilities/solution-programs',
+  '/services',
+  '/services/in-detail',
+  '/services/solution-programs',
+];
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
-      { userAgent: '*', allow: '/' },
+      { userAgent: '*', allow: crawlAllowPaths },
       // OpenAI / ChatGPT
-      { userAgent: 'GPTBot', allow: '/' },
-      { userAgent: 'OAI-SearchBot', allow: '/' },
-      { userAgent: 'ChatGPT-User', allow: '/' },
+      { userAgent: 'GPTBot', allow: crawlAllowPaths },
+      { userAgent: 'OAI-SearchBot', allow: crawlAllowPaths },
+      { userAgent: 'ChatGPT-User', allow: crawlAllowPaths },
       // Perplexity
-      { userAgent: 'PerplexityBot', allow: '/' },
+      { userAgent: 'PerplexityBot', allow: crawlAllowPaths },
       // Anthropic / Claude
-      { userAgent: 'ClaudeBot', allow: '/' },
-      { userAgent: 'anthropic-ai', allow: '/' },
+      { userAgent: 'ClaudeBot', allow: crawlAllowPaths },
+      { userAgent: 'anthropic-ai', allow: crawlAllowPaths },
       // Google Gemini + AI Overviews
-      { userAgent: 'Google-Extended', allow: '/' },
+      { userAgent: 'Google-Extended', allow: crawlAllowPaths },
       // Microsoft Copilot (Bing)
-      { userAgent: 'Bingbot', allow: '/' },
+      { userAgent: 'Bingbot', allow: crawlAllowPaths },
       // Meta AI
-      { userAgent: 'FacebookBot', allow: '/' },
+      { userAgent: 'FacebookBot', allow: crawlAllowPaths },
       // Apple
-      { userAgent: 'Applebot', allow: '/' },
+      { userAgent: 'Applebot', allow: crawlAllowPaths },
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,
     host: SITE_URL,

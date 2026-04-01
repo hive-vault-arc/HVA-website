@@ -156,7 +156,7 @@ export const PRODUCT_SYSTEMS: ProductSystem[] = [
     integrations: ['AWS', 'Google Cloud', 'Docker', 'GitHub Actions'],
     deliveryModel: 'Reliability audit, remediation sprints, and ongoing SRE collaboration.',
     outcomes: ['Lower deployment risk', 'Faster release cycles', 'Improved uptime posture'],
-    proofLinks: ['/services', '/whoarewe/portfolio'],
+    proofLinks: ['/capabilities', '/whoarewe/portfolio'],
   },
 ];
 
@@ -171,3 +171,4 @@ export function getCaseStudyBySlug(slug: string): CaseStudy {
   }
   return caseStudy;
 }
+

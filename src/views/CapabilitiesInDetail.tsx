@@ -7,7 +7,7 @@ import { Bot, Briefcase, Building2, ChartColumn, Cpu, Shield, Sparkles, Wrench }
 import { useAnimationQuality } from '../lib/animationQuality';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 import BottomCTA from '../components/BottomCTA';
-import { BOT_DELIVERY_MODEL, SERVICE_DETAIL_SECTIONS } from '../lib/services-content';
+import { BOT_DELIVERY_MODEL, CAPABILITY_DETAIL_SECTIONS } from '../lib/capabilities-content';
 
 function getDetailIcon(id: string) {
   const cls = 'h-5 w-5';
@@ -33,7 +33,7 @@ function getDetailIcon(id: string) {
   }
 }
 
-const ServicesInDetail: React.FC = () => {
+const CapabilitiesInDetail: React.FC = () => {
   const { motionReduced } = useAnimationQuality();
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
@@ -60,7 +60,7 @@ const ServicesInDetail: React.FC = () => {
           <div className="relative mx-auto max-w-7xl px-6 pt-32 pb-24 lg:px-14">
             <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
               <p className="mb-6 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
-                Services In Detail
+                Capabilities In Detail
               </p>
               <h1 className="font-serif text-4xl leading-[1.04] tracking-tight sm:text-5xl lg:text-7xl">
                 Full capability depth:
@@ -68,22 +68,22 @@ const ServicesInDetail: React.FC = () => {
                 <em className="italic text-[#475569]">strategy, execution, and operating ownership.</em>
               </h1>
               <p className="mt-7 max-w-3xl text-lg leading-relaxed text-[#475569]">
-                This page expands all service domains with strategic context, execution context, and full subservice
+                This page expands all capability domains with strategic context, execution context, and full sub-capability
                 coverage including digital strategy, data and analytics, cybersecurity and digital risk, agile at scale,
                 digital ecosystems, deep tech, and IoT.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link
-                  href="/services/solution-programs"
+                  href="/capabilities/solution-programs"
                   className="sharp-edge bg-[#0F172A] px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-white transition-colors duration-200 hover:bg-[#2563EB]"
                 >
                   View Solution Programs
                 </Link>
                 <Link
-                  href="/services"
+                  href="/capabilities"
                   className="text-sm font-bold uppercase tracking-wide text-[#2563EB] transition-colors duration-200 hover:text-[#1d4ed8]"
                 >
-                  Back to Services →
+                  Back to Capabilities →
                 </Link>
               </div>
             </motion.div>
@@ -95,13 +95,13 @@ const ServicesInDetail: React.FC = () => {
             <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <div>
                 <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">Domain Catalog</p>
-                <h2 className="font-headline text-3xl font-medium text-[#0F172A] md:text-4xl">Eight domains with full service context.</h2>
+                <h2 className="font-headline text-3xl font-medium text-[#0F172A] md:text-4xl">Eight domains with full capability context.</h2>
               </div>
               <div aria-hidden="true" className="hidden h-[2px] w-20 shrink-0 bg-[#2563EB] md:block" />
             </div>
 
             <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
-              {SERVICE_DETAIL_SECTIONS.map((domain, index) => (
+              {CAPABILITY_DETAIL_SECTIONS.map((domain, index) => (
                 <motion.article
                   key={domain.id}
                   initial={{ opacity: 0, y: 18 }}
@@ -114,7 +114,7 @@ const ServicesInDetail: React.FC = () => {
                     <div className="flex h-10 w-10 items-center justify-center bg-[#dbeafe] text-[#2563EB]">
                       {getDetailIcon(domain.id)}
                     </div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#94a3b8]">Service Domain</p>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#94a3b8]">Capability Domain</p>
                   </div>
 
                   <h3 className="font-headline text-3xl leading-tight text-[#0F172A]">{domain.title}</h3>
@@ -132,12 +132,12 @@ const ServicesInDetail: React.FC = () => {
 
                   <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
                     <div>
-                      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#2563EB]">Subservices</p>
+                      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#2563EB]">Sub-Capabilities</p>
                       <ul className="mt-2 space-y-1.5">
-                        {domain.subservices.map((subservice) => (
-                          <li key={subservice} className="flex items-start gap-2.5 text-sm text-[#0F172A]">
+                        {domain.subCapabilities.map((subCapability) => (
+                          <li key={subCapability} className="flex items-start gap-2.5 text-sm text-[#0F172A]">
                             <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#2563EB]" />
-                            {subservice}
+                            {subCapability}
                           </li>
                         ))}
                       </ul>
@@ -197,15 +197,20 @@ const ServicesInDetail: React.FC = () => {
         <BottomCTA
           variant="dark"
           headline="Need this mapped to your business constraints?"
-          subtext="Book a discovery session and we will align service domains, subservices, and delivery model to your roadmap."
+          subtext="Book a discovery session and we will align capability domains, sub-capabilities, and delivery model to your roadmap."
           primaryLabel="Book Discovery Call"
           primaryHref="/contact"
           secondaryLabel="View Solution Programs"
-          secondaryHref="/services/solution-programs"
+          secondaryHref="/capabilities/solution-programs"
         />
       </div>
     </MotionConfig>
   );
 };
 
-export default ServicesInDetail;
+export default CapabilitiesInDetail;
+
+
+
+
+

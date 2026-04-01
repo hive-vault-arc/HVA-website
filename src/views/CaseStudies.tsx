@@ -51,16 +51,16 @@ const CaseStudies: React.FC = () => {
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link
-                  href="/services/solution-programs"
+                  href="/capabilities/solution-programs"
                   className="sharp-edge bg-[#1E272E] text-[#F5F6FA] px-8 py-4 text-sm font-bold hover:bg-[#0984E3] transition-colors duration-300"
                 >
                   View Solution Programs
                 </Link>
                 <Link
-                  href="/services"
+                  href="/capabilities"
                   className="sharp-edge inline-flex items-center gap-2 bg-white/90 px-8 py-4 text-sm font-bold text-[#1E272E] shadow-[0_10px_25px_rgba(9,132,227,0.08)] hover:bg-[#ECF5FD] transition-colors duration-300"
                 >
-                  Consulting Services <ArrowRight className="h-4 w-4 text-[#0984E3]" />
+                  Consulting Capabilities <ArrowRight className="h-4 w-4 text-[#0984E3]" />
                 </Link>
               </div>
             </motion.div>
@@ -152,10 +152,12 @@ const CaseStudies: React.FC = () => {
         primaryLabel="Start Discovery"
         primaryHref="/contact"
         secondaryLabel="View Solution Programs"
-        secondaryHref="/services/solution-programs"
+        secondaryHref="/capabilities/solution-programs"
       />
     </div>
   );
 };
 
 export default CaseStudies;
+
+

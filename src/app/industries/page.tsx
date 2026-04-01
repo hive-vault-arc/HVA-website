@@ -6,7 +6,7 @@ import { GLOBAL_KEYWORDS, SITE_URL, buildPageMetadata, mergeKeywords } from '../
 export const metadata: Metadata = buildPageMetadata({
   title: 'Industries | Sector-Focused Transformation Programs',
   description:
-    'Explore how H.V.A applies consulting, engineering, and transformation delivery across real estate, healthcare, construction, logistics, and SME services.',
+    'Explore how H.V.A applies consulting, engineering, and transformation delivery across real estate, healthcare, construction, logistics, and SME capabilities.',
   path: '/industries',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'industry specific digital transformation',

@@ -64,13 +64,29 @@ Strategic advisory layer: digital transformation roadmap design, operational dia
 - Pricing is private and discussed after discovery.
 - Commercial structure is tailored to scope, complexity, integrations, and maintenance requirements.
 
+## Terminology Mapping
+
+- EN: Our capabilities are our services.
+- FR: Nos capacités sont nos services.
+- AR: قدراتنا هي خدماتنا.
+- ES: Nuestras capacidades son nuestros servicios.
+
+## URL Canonicalization
+
+- Canonical IA term and path family: Capabilities (`/capabilities*`).
+- Legacy URLs in the `/services*` family are historical paths and permanently redirect (308) to `/capabilities*`.
+- Locale legacy URLs (`/fr/services*`, `/ar/services*`, `/es/services*`) also permanently redirect to locale capabilities paths.
+
 ## References
 
 - Official site URL: https://hiva-nine.vercel.app
 - Home: /
-- Services: /services
-- Services In Detail: /services/in-detail
-- Solution Programs: /services/solution-programs
+- Capabilities: /capabilities
+- Capabilities In Detail: /capabilities/in-detail
+- Capability Solution Programs: /capabilities/solution-programs
+- FR Capabilities: /fr/capabilities
+- AR Capabilities: /ar/capabilities
+- ES Capabilities: /es/capabilities
 - Industries: /industries
 - ARC: /arc
 - About H.V.A: /whoweare/abouthva

@@ -32,7 +32,7 @@ const SLIDES: Slide[] = [
     primaryLabel: 'View Case Studies',
     primaryHref: '/case-studies',
     secondaryLabel: 'Explore AI Solutions',
-    secondaryHref: '/services',
+    secondaryHref: '/capabilities',
     image: '/Images/ai-powered-transformation-operations-tangier-morocco.webp',
     imageAlt: 'H.V.A AI automation and engineering team in Tangier, Morocco',
     cardIcon: <Bot className="w-8 h-8 text-[#0984E3]" strokeWidth={1.5} />,
@@ -47,7 +47,7 @@ const SLIDES: Slide[] = [
     description:
       'Many businesses still run on spreadsheets, email chains, and disconnected tools. We replace that fragmented complexity with integrated digital systems — purpose-built for how your business actually works.',
     primaryLabel: 'Explore Our Programs',
-    primaryHref: '/services',
+    primaryHref: '/capabilities',
     secondaryLabel: 'See Case Studies',
     secondaryHref: '/case-studies',
     image: '/Images/digital-transformation-scalable-systems-tangier-morocco.webp',
@@ -226,3 +226,4 @@ export default function HeroSlider() {
     </section>
   );
 }
+

@@ -36,25 +36,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
       }),
     },
     {
-      url: `${SITE_URL}/services`,
+      url: `${SITE_URL}/capabilities`,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.9,
       alternates: asAlternates({
-        en: '/services',
-        fr: '/fr/services',
-        ar: '/ar/services',
-        es: '/es/services',
+        en: '/capabilities',
+        fr: '/fr/capabilities',
+        ar: '/ar/capabilities',
+        es: '/es/capabilities',
       }),
     },
     {
-      url: `${SITE_URL}/services/in-detail`,
+      url: `${SITE_URL}/capabilities/in-detail`,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.85,
     },
     {
-      url: `${SITE_URL}/services/solution-programs`,
+      url: `${SITE_URL}/capabilities/solution-programs`,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.85,
@@ -127,10 +127,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.85,
       },
       {
-        url: `${SITE_URL}/${locale}/services`,
+        url: `${SITE_URL}/${locale}/capabilities`,
         lastModified: now,
         changeFrequency: 'weekly' as const,
         priority: 0.8,
+      },
+      {
+        url: `${SITE_URL}/${locale}/capabilities/in-detail`,
+        lastModified: now,
+        changeFrequency: 'monthly' as const,
+        priority: 0.7,
+      },
+      {
+        url: `${SITE_URL}/${locale}/capabilities/solution-programs`,
+        lastModified: now,
+        changeFrequency: 'monthly' as const,
+        priority: 0.7,
       },
     ]),
     {
@@ -153,3 +165,4 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   ];
 }
+

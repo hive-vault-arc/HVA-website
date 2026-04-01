@@ -26,21 +26,21 @@ const industries = [
     name: 'Construction',
     sector: 'Construction & Projects',
     focus: 'Operational planning, schedule visibility, field-to-office process automation, risk tracking.',
-    href: '/services',
+    href: '/capabilities',
   },
   {
     anchorId: 'logistics',
     name: 'Logistics',
     sector: 'Logistics & Operations',
-    focus: 'Dispatch workflows, service operations automation, SLA monitoring, control-tower visibility.',
-    href: '/services',
+    focus: 'Dispatch workflows, operations automation, SLA monitoring, control-tower visibility.',
+    href: '/capabilities',
   },
   {
-    anchorId: 'sme-services',
-    name: 'SME Services',
-    sector: 'SME & Professional Services',
+    anchorId: 'sme-capabilities',
+    name: 'SME Capabilities',
+    sector: 'SME & Professional Capabilities',
     focus: 'AI-assisted client operations, custom software, IT modernization, and scalable cloud foundations.',
-    href: '/services/solution-programs',
+    href: '/capabilities/solution-programs',
   },
 ];
 
@@ -229,12 +229,14 @@ export default function Industries() {
       <BottomCTA
         variant="dark"
         headline="Need an Industry-Specific Transformation Plan?"
-        subtext="Book a discovery call and we'll map the right service and system program for your sector."
+        subtext="Book a discovery call and we'll map the right capability and system program for your sector."
         primaryLabel="Book Discovery Call"
         primaryHref="/contact"
-        secondaryLabel="View Services"
-        secondaryHref="/services"
+        secondaryLabel="View Capabilities"
+        secondaryHref="/capabilities"
       />
     </div>
   );
 }
+
+

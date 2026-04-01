@@ -1,13 +1,13 @@
 import { PRODUCT_SYSTEMS } from './proof';
 
-export type ServiceDomain = {
+export type CapabilityDomain = {
   id: string;
   title: string;
   briefLine: string;
   briefBullets: string[];
   strategicContext: string;
   executionContext: string;
-  subservices: string[];
+  subCapabilities: string[];
   relatedOutcomes: string[];
 };
 
@@ -17,14 +17,14 @@ export type DeliveryModel = {
   fitCriteria: string[];
 };
 
-export type ServiceBriefSection = {
+export type CapabilityBriefSection = {
   id: string;
   title: string;
   summary: string;
   bullets: string[];
 };
 
-export type ServiceDetailSection = ServiceDomain;
+export type CapabilityDetailSection = CapabilityDomain;
 
 export type EngagementStep = {
   step: string;
@@ -44,7 +44,7 @@ export type SolutionProgramDetail = {
   proofLinks: string[];
 };
 
-export const SERVICE_DOMAINS: ServiceDomain[] = [
+export const CAPABILITY_DOMAINS: CapabilityDomain[] = [
   {
     id: 'ai-systems',
     title: 'AI Systems',
@@ -54,7 +54,7 @@ export const SERVICE_DOMAINS: ServiceDomain[] = [
       'AI becomes competitive advantage only when integrated into day-to-day operations, not isolated pilots.',
     executionContext:
       'We scope operational goals, deploy production agents, and connect every workflow to measurable outcomes.',
-    subservices: [
+    subCapabilities: [
       'AI agent design and deployment',
       'AI workflow orchestration',
       'Decision intelligence automation',
@@ -71,7 +71,7 @@ export const SERVICE_DOMAINS: ServiceDomain[] = [
       'Transformation succeeds when business process redesign and technology redesign move together.',
     executionContext:
       'We diagnose bottlenecks, redesign target operations, and run phased rollout across teams and systems.',
-    subservices: [
+    subCapabilities: [
       'Transformation diagnostics',
       'Operating model redesign',
       'CRM and operations transformation',
@@ -89,7 +89,7 @@ export const SERVICE_DOMAINS: ServiceDomain[] = [
       'Digital strategy fails without connected platforms, trusted data, and maturity roadmaps that teams can execute.',
     executionContext:
       'We align digital strategy with platform architecture, analytics foundations, and organizational readiness.',
-    subservices: [
+    subCapabilities: [
       'Digital strategy and transformation',
       'Digital maturity programs',
       'Data and digital platform architecture',
@@ -106,7 +106,7 @@ export const SERVICE_DOMAINS: ServiceDomain[] = [
       'Leadership needs clear decisions on priorities, risk, sequencing, and investment before engineering scales.',
     executionContext:
       'We run executive workshops, architecture reviews, and delivery roadmaps tied to measurable business outcomes.',
-    subservices: [
+    subCapabilities: [
       'Technology strategy advisory',
       'Architecture decision support',
       'Transformation roadmaps',
@@ -123,8 +123,8 @@ export const SERVICE_DOMAINS: ServiceDomain[] = [
     strategicContext:
       'Growth requires systems built for operational fit, not generic tooling that creates workflow friction.',
     executionContext:
-      'We engineer custom applications, APIs, and cloud services with reliability, security, and maintainability built in.',
-    subservices: [
+      'We engineer custom applications, APIs, and cloud systems with reliability, security, and maintainability built in.',
+    subCapabilities: [
       'Custom web application engineering',
       'Mobile application development',
       'SaaS platform development',
@@ -142,7 +142,7 @@ export const SERVICE_DOMAINS: ServiceDomain[] = [
       'Teams need decision-ready data and growth instrumentation to optimize revenue, efficiency, and acquisition.',
     executionContext:
       'We implement analytics architectures, pipeline governance, and marketing intelligence systems for repeatable growth.',
-    subservices: [
+    subCapabilities: [
       'Executive analytics and dashboards',
       'Data pipeline engineering',
       'Marketing system architecture',
@@ -159,7 +159,7 @@ export const SERVICE_DOMAINS: ServiceDomain[] = [
       'Security cannot be retrofitted after launch; risk controls must be designed into architecture and operations.',
     executionContext:
       'We implement security design patterns, risk monitoring, and governance controls across applications and infrastructure.',
-    subservices: [
+    subCapabilities: [
       'Cybersecurity architecture',
       'Digital risk assessment and mitigation',
       'Identity and access controls',
@@ -176,7 +176,7 @@ export const SERVICE_DOMAINS: ServiceDomain[] = [
       'Emerging capabilities create early strategic advantage when tied to real operational and market opportunities.',
     executionContext:
       'We validate emerging technology use cases, build prototypes, and operationalize high-value deep tech and IoT paths.',
-    subservices: [
+    subCapabilities: [
       'Emerging technology scouting and pilots',
       'Deep tech solution prototyping',
       'Internet of Things architecture and integration',
@@ -186,14 +186,14 @@ export const SERVICE_DOMAINS: ServiceDomain[] = [
   },
 ];
 
-export const SERVICE_BRIEF_SECTIONS: ServiceBriefSection[] = SERVICE_DOMAINS.map((domain) => ({
+export const CAPABILITY_BRIEF_SECTIONS: CapabilityBriefSection[] = CAPABILITY_DOMAINS.map((domain) => ({
   id: domain.id,
   title: domain.title,
   summary: domain.briefLine,
   bullets: domain.briefBullets.slice(0, 3),
 }));
 
-export const SERVICE_DETAIL_SECTIONS: ServiceDetailSection[] = SERVICE_DOMAINS;
+export const CAPABILITY_DETAIL_SECTIONS: CapabilityDetailSection[] = CAPABILITY_DOMAINS;
 
 export const BOT_DELIVERY_MODEL: DeliveryModel = {
   name: 'Build-Operate-Transfer',
@@ -221,7 +221,7 @@ export const BOT_DELIVERY_MODEL: DeliveryModel = {
   ],
 };
 
-export const ENGAGEMENT_STEPS: EngagementStep[] = [
+export const CAPABILITY_ENGAGEMENT_STEPS: EngagementStep[] = [
   {
     step: '01',
     title: 'Diagnose',
@@ -260,7 +260,7 @@ const slugify = (value: string): string =>
     .trim()
     .replace(/\s+/g, '-');
 
-export const SOLUTION_PROGRAM_DETAILS: SolutionProgramDetail[] = PRODUCT_SYSTEMS.map((program) => ({
+export const CAPABILITY_SOLUTION_PROGRAM_DETAILS: SolutionProgramDetail[] = PRODUCT_SYSTEMS.map((program) => ({
   slug: slugify(program.name),
   name: program.name,
   category: program.category,
@@ -273,3 +273,5 @@ export const SOLUTION_PROGRAM_DETAILS: SolutionProgramDetail[] = PRODUCT_SYSTEMS
   outcomes: program.outcomes,
   proofLinks: program.proofLinks,
 }));
+
+

@@ -611,10 +611,10 @@ export default function Arc() {
             Explore ARC Insights
           </Link>
           <Link
-            href="/services"
+            href="/capabilities"
             className="sharp-edge inline-flex items-center gap-2 border border-[#0F172A]/20 px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-[#475569] hover:bg-[#0F172A]/5 transition-colors duration-200"
           >
-            Explore Services
+            Explore Capabilities
           </Link>
         </div>
       </section>
@@ -631,3 +631,5 @@ export default function Arc() {
     </div>
   );
 }
+
+

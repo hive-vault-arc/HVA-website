@@ -34,9 +34,9 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const servicesItems = [
-    { path: '/services/solution-programs', label: 'Solution Programs' },
-    { path: '/services/in-detail', label: 'In Detail' },
+  const CapabilitiesItems = [
+    { path: '/capabilities/solution-programs', label: 'Solution Programs' },
+    { path: '/capabilities/in-detail', label: 'In Detail' },
   ];
 
   const industriesItems = [
@@ -44,7 +44,7 @@ const Navbar: React.FC = () => {
     { path: '/industries#healthcare', label: 'Healthcare' },
     { path: '/industries#construction', label: 'Construction' },
     { path: '/industries#logistics', label: 'Logistics' },
-    { path: '/industries#sme-services', label: 'SME Services' },
+    { path: '/industries#sme-capabilities', label: 'SME Capabilities' },
   ];
 
   const insightsItems = [
@@ -61,7 +61,7 @@ const Navbar: React.FC = () => {
 
   const isInsightsActive =
     pathname?.startsWith('/insights') || pathname?.startsWith('/blog') || pathname?.startsWith('/case-studies');
-  const isServicesActive = pathname?.startsWith('/services');
+  const isCapabilitiesActive = pathname?.startsWith('/capabilities');
   const isIndustriesActive = pathname?.startsWith('/industries');
   const isWhoWeAreActive = pathname?.startsWith('/whoweare') || pathname?.startsWith('/whoarewe');
 
@@ -77,9 +77,9 @@ const Navbar: React.FC = () => {
     (path === '/insights/blogs' && pathname?.startsWith('/blog')) ||
     (path === '/insights/case-studies' && pathname?.startsWith('/case-studies'));
 
-  const isServicesItemActive = (path: string) => {
-    if (path === '/services/solution-programs') {
-      return pathname === '/services/solution-programs';
+  const isCapabilitiesItemActive = (path: string) => {
+    if (path === '/capabilities/solution-programs') {
+      return pathname === '/capabilities/solution-programs';
     }
 
     return isRouteActive(path);
@@ -113,24 +113,24 @@ const Navbar: React.FC = () => {
               </Link>
               <div
                 className="relative"
-                onMouseEnter={() => setOpenMenu('services')}
+                onMouseEnter={() => setOpenMenu('capabilities')}
                 onMouseLeave={() => setOpenMenu(null)}
               >
                 <Link
-                  href="/services"
-                  className={`${desktopLinkClass(!!isServicesActive)} inline-flex items-center gap-1.5`}
+                  href="/capabilities"
+                  className={`${desktopLinkClass(!!isCapabilitiesActive)} inline-flex items-center gap-1.5`}
                 >
-                  Services
+                  Capabilities
                   <ChevronDown className="h-3.5 w-3.5" />
                 </Link>
-                <div className={`absolute left-0 top-full pt-2 transition duration-200 ${openMenu === 'services' ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`}>
+                <div className={`absolute left-0 top-full pt-2 transition duration-200 ${openMenu === 'capabilities' ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`}>
                   <div className="min-w-[220px] rounded-xl border border-[#1E272E]/10 bg-[#F5F6FA] p-2 shadow-[0_8px_24px_rgba(9,132,227,0.14)]">
-                    {servicesItems.map((item) => (
+                    {CapabilitiesItems.map((item) => (
                       <Link
                         key={item.path}
                         href={item.path}
                         className={`block rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
-                          isServicesItemActive(item.path)
+                          isCapabilitiesItemActive(item.path)
                             ? 'bg-[#0984E3] text-[#F5F6FA]'
                             : 'text-[#1E272E]/75 hover:bg-[#0984E3]/10 hover:text-[#1E272E]'
                         }`}
@@ -312,43 +312,43 @@ const Navbar: React.FC = () => {
                 <ArrowUpRight className="h-4 w-4 opacity-40" />
               </Link>
 
-              {/* Services accordion */}
+              {/* Capabilities accordion */}
               <div className="mb-1">
                 <button
                   type="button"
-                  onClick={() => toggleMobileSection('services')}
+                  onClick={() => toggleMobileSection('capabilities')}
                   className={`w-full flex items-center justify-between px-4 py-3.5 rounded-xl text-[15px] font-semibold transition-colors ${
-                    isServicesActive ? 'text-[#0984E3]' : 'text-[#1E272E]'
+                    isCapabilitiesActive ? 'text-[#0984E3]' : 'text-[#1E272E]'
                   } hover:bg-[#0984E3]/8`}
                 >
                   <span className="flex items-center gap-2.5">
-                    {isServicesActive && <span className="h-1.5 w-1.5 rounded-full bg-[#0984E3]" />}
-                    Services
+                    {isCapabilitiesActive && <span className="h-1.5 w-1.5 rounded-full bg-[#0984E3]" />}
+                    Capabilities
                   </span>
                   <ChevronDown
                     className={`h-4 w-4 text-[#1E272E]/35 transition-transform duration-200 ${
-                      openMobileSection === 'services' ? 'rotate-180 text-[#0984E3]' : ''
+                      openMobileSection === 'capabilities' ? 'rotate-180 text-[#0984E3]' : ''
                     }`}
                   />
                 </button>
                 <div
                   className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                    openMobileSection === 'services' ? 'max-h-64 opacity-100 mt-1' : 'max-h-0 opacity-0'
+                    openMobileSection === 'capabilities' ? 'max-h-64 opacity-100 mt-1' : 'max-h-0 opacity-0'
                   }`}
                 >
                   <div className="ml-4 border-l-2 border-[#0984E3]/20 pl-3 space-y-0.5 pb-2">
                     <Link
-                      href="/services"
+                      href="/capabilities"
                       className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm text-[#1E272E]/50 hover:text-[#0984E3] hover:bg-[#0984E3]/6 transition-colors"
                     >
-                      All Services
+                      All Capabilities
                     </Link>
-                    {servicesItems.map((item) => (
+                    {CapabilitiesItems.map((item) => (
                       <Link
                         key={item.path}
                         href={item.path}
                         className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                          isServicesItemActive(item.path)
+                          isCapabilitiesItemActive(item.path)
                             ? 'bg-[#0984E3]/10 text-[#0984E3] font-semibold'
                             : 'text-[#1E272E]/65 hover:text-[#0984E3] hover:bg-[#0984E3]/6'
                         }`}
@@ -512,3 +512,5 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar; 
+
+

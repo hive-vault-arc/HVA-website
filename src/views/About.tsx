@@ -440,8 +440,8 @@ const About: React.FC = () => {
           subtext="Share your goals and constraints. We will map the right AI automation, digital transformation, and engineering delivery path — then discuss scope after discovery."
           primaryLabel="Book a Call"
           primaryHref="/contact"
-          secondaryLabel="Review Services"
-          secondaryHref="/services"
+          secondaryLabel="ReView Capabilities"
+          secondaryHref="/capabilities"
         />
       </div>
     </MotionConfig>
@@ -449,3 +449,5 @@ const About: React.FC = () => {
 };
 
 export default About;
+
+

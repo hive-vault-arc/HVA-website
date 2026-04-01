@@ -28,7 +28,7 @@ const homeContent: Record<
       'workflow automation partner Morocco',
       'CRM integration with ERP Morocco',
       'cloud reliability and CI/CD Morocco',
-      'data services and analytics consulting Morocco',
+      'data capabilities and analytics consulting Morocco',
     ],
     primaryHref: '/case-studies',
     cta: 'View Case Studies',
@@ -36,7 +36,7 @@ const homeContent: Record<
   fr: {
     title: 'Conseil technologique et transformation digitale à Tanger, Maroc',
     h1: 'Conseil stratégique et execution technique',
-    body: "Nous accompagnons les entreprises de la strategie a la production: conseil, architecture, IA, automatisation, logiciel sur mesure, cloud et services data.",
+    body: "Nous accompagnons les entreprises de la strategie a la production: conseil, architecture, IA, automatisation, logiciel sur mesure, cloud et capacites data.",
     keywords: [
       'conseil technologique maroc',
       'cabinet transformation digitale tanger',
@@ -50,12 +50,12 @@ const homeContent: Record<
       'migration cloud et déploiement Maroc',
       'conseil DevOps et CI/CD Maroc',
       'consulting IA et automatisation maroc',
-      'services data et reporting decisionnel maroc',
+      'capacites data et reporting decisionnel maroc',
       'j’ai besoin d’une équipe pour créer mon application au Maroc',
       'meilleure equipe software pour startup à Tanger',
     ],
-    primaryHref: '/fr/services',
-    cta: 'Voir les services',
+    primaryHref: '/fr/capabilities',
+    cta: 'Voir les capacites',
   },
   ar: {
     title: 'استشارات تقنية وتحول رقمي في طنجة، المغرب',
@@ -78,8 +78,8 @@ const homeContent: Record<
       'أحتاج فريق لتطوير تطبيقي في المغرب',
       'افضل فريق برمجة للشركات الناشئة في طنجة',
     ],
-    primaryHref: '/ar/services',
-    cta: 'استكشف الخدمات',
+    primaryHref: '/ar/capabilities',
+    cta: 'استكشف القدرات',
   },
   es: {
     title: 'Consultoria tecnologica y transformacion digital en Tanger, Marruecos',
@@ -98,12 +98,12 @@ const homeContent: Record<
       'migracion y despliegue cloud marruecos',
       'consultoria DevOps y CI/CD marruecos',
       'consultoria de IA y automatizacion para empresas',
-      'servicios de datos y reporting ejecutivo marruecos',
+      'capacidades de datos y reporting ejecutivo marruecos',
       'necesito equipo para crear mi app en marruecos',
       'mejor equipo de software para startup en tanger',
     ],
-    primaryHref: '/es/services',
-    cta: 'Ver servicios',
+    primaryHref: '/es/capabilities',
+    cta: 'Ver capacidades',
   },
 };
 
@@ -196,3 +196,4 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
     </section>
   );
 }
+

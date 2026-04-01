@@ -47,10 +47,10 @@ export const HOME_FAQS: FaqSet = [
   },
 ];
 
-// Services
-export const SERVICES_FAQS: FaqSet = [
+// Capabilities
+export const CAPABILITIES_FAQS: FaqSet = [
   {
-    question: 'What are H.V.A\'s service domains?',
+    question: "What are H.V.A's capability domains?",
     answer:
       'H.V.A operates across eight domains: AI Systems, Business Transformation, Digital/Technology/Data, Consulting, Engineering, Data and Growth, Cybersecurity and Digital Risk, and Emerging Tech. Engagements combine these domains based on business priorities and operating constraints.',
   },
@@ -75,14 +75,14 @@ export const SERVICES_FAQS: FaqSet = [
       'Yes. We engineer custom web apps, mobile apps, SaaS platforms, cloud systems, APIs, and integrations. We also deliver CRM modernization and operational platform builds matched to your process model.',
   },
   {
-    question: 'What data and growth services are included?',
+    question: 'What data and growth capabilities are included?',
     answer:
       'We provide analytics architecture, KPI dashboards, data pipelines, decision support workflows, and marketing system engineering. The goal is reliable decision intelligence and repeatable growth operations.',
   },
   {
     question: 'Do you cover cybersecurity and digital risk?',
     answer:
-      'Yes. Cybersecurity and digital risk are embedded in service delivery: security architecture, identity controls, monitoring, risk mitigation, and governance for resilient transformation programs.',
+      'Yes. Cybersecurity and digital risk are embedded in capability delivery: security architecture, identity controls, monitoring, risk mitigation, and governance for resilient transformation programs.',
   },
   {
     question: 'Do you work on emerging technologies, deep tech, and IoT?',
@@ -183,9 +183,9 @@ export const PORTFOLIO_FAQS: FaqSet = [
   },
 ];
 
-// Locale Services
-export const LOCALE_SERVICES_FAQS: Record<SupportedLocale, FaqSet> = {
-  en: SERVICES_FAQS,
+// Locale Capabilities
+export const LOCALE_CAPABILITIES_FAQS: Record<SupportedLocale, FaqSet> = {
+  en: CAPABILITIES_FAQS,
   fr: [
     {
       question: 'Comment H.V.A se positionne-t-il sur le marché ?',
@@ -283,3 +283,4 @@ export const LOCALE_SERVICES_FAQS: Record<SupportedLocale, FaqSet> = {
     },
   ],
 };
+

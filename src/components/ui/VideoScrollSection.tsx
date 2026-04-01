@@ -247,7 +247,7 @@ export default function VideoScrollSection({
     <div
       ref={wrapperRef}
       style={{ height: `${(PANELS.length + 1) * 100}vh` }}
-      aria-label="What We Build — scroll to explore our services"
+      aria-label="What We Build — scroll to explore Our Capabilities"
     >
       <div
         ref={stickyRef}
@@ -449,3 +449,4 @@ export default function VideoScrollSection({
     </div>
   );
 }
+

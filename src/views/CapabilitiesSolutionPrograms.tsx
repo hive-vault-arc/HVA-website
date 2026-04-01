@@ -3,16 +3,16 @@
 import Link from 'next/link';
 import BottomCTA from '../components/BottomCTA';
 import PageAmbientBackground from '../components/PageAmbientBackground';
-import { SOLUTION_PROGRAM_DETAILS } from '../lib/services-content';
+import { CAPABILITY_SOLUTION_PROGRAM_DETAILS } from '../lib/capabilities-content';
 
-export default function ServicesSolutionPrograms() {
+export default function CapabilitiesSolutionPrograms() {
   return (
     <main className="editorial-page">
       <PageAmbientBackground className="-z-10" />
 
       <section className="editorial-hero">
         <div className="editorial-shell">
-          <p className="editorial-kicker">Services / Solution Programs</p>
+          <p className="editorial-kicker">Capabilities / Solution Programs</p>
           <h1 className="editorial-title">
             Solution Programs:
             <br />
@@ -23,7 +23,7 @@ export default function ServicesSolutionPrograms() {
             is intentionally operational and implementation-ready.
           </p>
           <div className="editorial-actions">
-            <Link href="/services/in-detail" className="editorial-link editorial-link--strong">
+            <Link href="/capabilities/in-detail" className="editorial-link editorial-link--strong">
               Explore In Detail →
             </Link>
           </div>
@@ -32,7 +32,7 @@ export default function ServicesSolutionPrograms() {
 
       <section className="systems-grid-zone">
         <div className="editorial-shell systems-grid">
-          {SOLUTION_PROGRAM_DETAILS.map((program, index) => (
+          {CAPABILITY_SOLUTION_PROGRAM_DETAILS.map((program, index) => (
             <article key={program.slug} className={`system-card ${index % 2 === 0 ? 'system-card--tinted' : ''}`}>
               <p className="system-card__category">{program.category}</p>
               <h2 className="system-card__title">{program.name}</h2>
@@ -83,10 +83,14 @@ export default function ServicesSolutionPrograms() {
         subtext="We align solution program selection with your constraints, integrations, and timeline before execution starts."
         primaryLabel="Book Discovery Call"
         primaryHref="/contact"
-        secondaryLabel="View Services"
-        secondaryHref="/services"
+        secondaryLabel="View Capabilities"
+        secondaryHref="/capabilities"
       />
     </main>
   );
 }
+
+
+
+
 

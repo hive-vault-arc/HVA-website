@@ -9,7 +9,7 @@ import { CANONICAL_MARKET_IDENTITY } from '../lib/positioning';
 const pageLinks = [
   { href: '/', label: 'Home' },
   { href: '/arc', label: 'ARC' },
-  { href: '/services', label: 'Services' },
+  { href: '/capabilities', label: 'Capabilities' },
   { href: '/industries', label: 'Industries' },
   { href: '/whoweare/abouthva', label: 'Who We Are' },
   { href: '/insights', label: 'Insights' },
@@ -17,7 +17,7 @@ const pageLinks = [
 ];
 
 const expertiseLinks = [
-  { href: '/services/solution-programs', label: 'Solution Programs' },
+  { href: '/capabilities/solution-programs', label: 'Solution Programs' },
   { href: '/case-studies/multilingual-whatsapp-ai-agent', label: 'WhatsApp Agent Operations' },
   { href: '/case-studies/zoho-grade-crm-platform', label: 'CRM Modernization' },
   { href: '/case-studies', label: 'Healthcare Case Studies' },
@@ -112,3 +112,5 @@ export default function SiteFooter() {
     </footer>
   );
 }
+
+

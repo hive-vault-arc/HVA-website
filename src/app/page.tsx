@@ -40,10 +40,10 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  const serviceSchema = {
+  const capabilitySchema = {
     '@context': 'https://schema.org',
     '@type': ['ProfessionalService', 'Service'],
-    name: 'H.V.A Technology Consulting and Digital Transformation Services',
+    name: 'H.V.A Technology Consulting and Digital Transformation Capabilities',
     provider: {
       '@id': `${SITE_URL}/#organization`,
     },
@@ -59,18 +59,19 @@ export default function Page() {
       'Custom Software Development',
       'Mobile App Development',
       'Cloud Infrastructure',
-      'Data Services',
+      'Data Capabilities',
     ],
     areaServed: ['Morocco', 'Remote'],
     availableLanguage: ['en', 'fr', 'ar', 'es'],
-    url: `${SITE_URL}/services`,
+    url: `${SITE_URL}/capabilities`,
   };
 
   return (
     <>
-      <JsonLd data={serviceSchema} />
+      <JsonLd data={capabilitySchema} />
       <Home />
       <FaqSection faqs={HOME_FAQS} />
     </>
   );
 }
+

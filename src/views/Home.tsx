@@ -58,7 +58,7 @@ const Home: React.FC = () => {
 
   const [hoveredPillar, setHoveredPillar] = useState<number | null>(null);
 
-  const servicePillars = [
+  const capabilityPillars = [
     {
       icon: <Bot className="w-5 h-5" strokeWidth={1.5} />,
       title: 'AI & Intelligent Automation',
@@ -235,13 +235,13 @@ const Home: React.FC = () => {
           </div>
         </div>
 
-        {/* Right — 2×3 service pillars (absolute-positioned for fixed-height section) */}
+        {/* Right — 2×3 Capability Pillars (absolute-positioned for fixed-height section) */}
         <ul
           className="lg:col-span-7 relative list-none m-0 p-0 overflow-hidden"
           style={{ height: '600px' }}
           onMouseLeave={() => setHoveredPillar(null)}
         >
-          {servicePillars.map((pillar, idx) => {
+          {capabilityPillars.map((pillar, idx) => {
             const isHovered = hoveredPillar === idx;
             const isOther = hoveredPillar !== null && hoveredPillar !== idx;
             return (
@@ -356,7 +356,7 @@ const Home: React.FC = () => {
               Explore proof library →
             </Link>
             <Link
-              href="/services/solution-programs"
+              href="/capabilities/solution-programs"
               className="text-sm font-bold uppercase tracking-wide text-[#2563EB] hover:text-[#1d4ed8] transition-colors duration-200"
             >
               Explore solution programs →
@@ -475,12 +475,12 @@ const Home: React.FC = () => {
               </div>
             </div>
 
-            {/* Link to services */}
+            {/* Link to capabilities */}
             <Link
-              href="/services"
+              href="/capabilities"
               className="mt-6 inline-flex items-center gap-2 border border-white/20 px-6 py-3 text-xs font-label font-bold uppercase tracking-widest text-white/70 hover:text-white hover:border-white/40 transition-colors"
             >
-              Our Services
+              Our Capabilities
               <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
@@ -533,3 +533,5 @@ const Home: React.FC = () => {
 };
 
 export default Home;
+
+

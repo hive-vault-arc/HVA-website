@@ -23,6 +23,7 @@ export type MessagingRules = {
 type LocaleMessaging = {
   identity: MarketIdentity;
   capabilities: CapabilityCluster;
+  serviceEquivalence: string;
 };
 
 export const POSITIONING_BY_LOCALE: Record<PositioningLocale, LocaleMessaging> = {
@@ -58,6 +59,7 @@ export const POSITIONING_BY_LOCALE: Record<PositioningLocale, LocaleMessaging> =
         'Data pipelines, observability, and reliability engineering',
       ],
     },
+    serviceEquivalence: 'Our capabilities are our services.',
   },
   fr: {
     identity: {
@@ -91,6 +93,7 @@ export const POSITIONING_BY_LOCALE: Record<PositioningLocale, LocaleMessaging> =
         'Pipelines de données, observabilité et ingénierie de fiabilité',
       ],
     },
+    serviceEquivalence: 'Nos capacités sont nos services.',
   },
   ar: {
     identity: {
@@ -124,6 +127,7 @@ export const POSITIONING_BY_LOCALE: Record<PositioningLocale, LocaleMessaging> =
         'خطوط البيانات والمراقبة وهندسة الموثوقية',
       ],
     },
+    serviceEquivalence: 'قدراتنا هي خدماتنا.',
   },
   es: {
     identity: {
@@ -157,6 +161,7 @@ export const POSITIONING_BY_LOCALE: Record<PositioningLocale, LocaleMessaging> =
         'Pipelines de datos, observabilidad e ingeniería de confiabilidad',
       ],
     },
+    serviceEquivalence: 'Nuestras capacidades son nuestros servicios.',
   },
 };
 
