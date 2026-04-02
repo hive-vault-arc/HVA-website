@@ -29,7 +29,21 @@ export default function CaseStudyDetail({ study }: Props) {
       />
 
       {/* ── Dark hero ─────────────────────────────────────────────────────── */}
-      <section className="relative bg-[#0F172A] pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden">
+      <section className="relative bg-[#0F172A] pt-28 pb-0 md:pt-36 md:pb-0 overflow-hidden">
+        {/*
+          Navbar contrast helper — the navbar is transparent with dark text when not scrolled.
+          This gradient lightens the area behind it (top ~88px) then fades to transparent,
+          keeping the dark hero intact for all visible content below.
+        */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 top-0 z-[2]"
+          style={{
+            height: '110px',
+            background: 'linear-gradient(to bottom, #F8FAFC 0%, rgba(248,250,252,0.55) 50%, transparent 100%)',
+          }}
+        />
+
         {/* Blueprint grid */}
         <div
           aria-hidden="true"
@@ -110,28 +124,26 @@ export default function CaseStudyDetail({ study }: Props) {
         </div>
       </section>
 
-      {/* ── Cover image ───────────────────────────────────────────────────── */}
+      {/* ── Cover image — full-bleed, no gaps, no radius ─────────────────── */}
       <motion.div
         className="relative w-full overflow-hidden"
-        style={{ height: 'clamp(280px, 45vw, 560px)' }}
-        initial={{ opacity: 0, scale: 1.02 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.7, delay: 0.2 }}
+        style={{ aspectRatio: '16 / 7' }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
       >
         <Image
           src={study.assets.coverImage}
           alt={study.title}
           fill
-          className="object-cover"
-          sizes="100vw"
+          className="object-cover object-center"
+          sizes="(max-width: 1280px) 100vw, 1280px"
           priority
         />
-        {/* Bottom fade into page bg */}
-        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#F8FAFC] to-transparent" />
       </motion.div>
 
       {/* ── Metrics strip ─────────────────────────────────────────────────── */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-14 -mt-4 pb-16">
+      <section className="max-w-7xl mx-auto px-6 lg:px-14 pt-0 pb-16">
         <motion.div
           className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-[#e2e8f0] border border-[#e2e8f0]"
           initial="hidden"

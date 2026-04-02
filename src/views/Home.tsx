@@ -355,20 +355,20 @@ const Home: React.FC = () => {
             ].map((item) => (
               <article
                 key={item.eyebrow}
-                className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
+                className="group sharp-edge overflow-hidden border border-[#e2e8f0] bg-white transition-all duration-300 hover:border-[#2563EB]/35 hover:shadow-[0_14px_34px_rgba(15,23,42,0.08)]"
               >
-                {/* Image placeholder */}
-                <div className="relative h-52 bg-[#e8ecf0] overflow-hidden">
-                  {/* Subtle grid pattern */}
+                {/* Image panel with blur-hover title treatment */}
+                <div className="relative h-52 overflow-hidden bg-[#e8ecf0]">
                   <div
                     aria-hidden="true"
-                    className="absolute inset-0 opacity-40"
+                    className="absolute inset-0 opacity-40 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.08] group-hover:blur-[6px]"
                     style={{
                       backgroundImage:
                         'repeating-linear-gradient(0deg,#cbd5e1 0,#cbd5e1 1px,transparent 0,transparent 32px),repeating-linear-gradient(90deg,#cbd5e1 0,#cbd5e1 1px,transparent 0,transparent 32px)',
                     }}
                   />
-                  {/* Placeholder icon */}
+
+                  {/* Placeholder icon layer */}
                   <div className="absolute inset-0 flex items-center justify-center">
                     <svg
                       aria-hidden="true"
@@ -383,15 +383,28 @@ const Home: React.FC = () => {
                       <path d="M4 28l8-7 6 5 5-4 13 9" stroke="#94a3b8" strokeWidth="1.5" strokeLinejoin="round" />
                     </svg>
                   </div>
-                  {/* Eyebrow badge */}
-                  <span className="absolute top-4 left-4 text-[9px] font-bold uppercase tracking-[0.2em] bg-[#2563EB] text-white px-3 py-1 rounded-full">
+
+                  {/* Hover dark layer for title readability */}
+                  <div className="absolute inset-0 bg-[#0F172A]/55 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+                  {/* Eyebrow badge (fades on hover) */}
+                  <span className="sharp-edge absolute top-4 left-4 bg-[#2563EB] px-3 py-1 text-[9px] font-bold uppercase tracking-[0.2em] text-white transition-opacity duration-200 group-hover:opacity-0">
                     {item.eyebrow}
                   </span>
+
+                  {/* Title overlay on blurred image */}
+                  <div className="pointer-events-none absolute inset-0 z-[1] flex items-center justify-center px-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                    <p className="font-headline text-center text-2xl leading-tight text-white drop-shadow-[0_3px_10px_rgba(0,0,0,0.45)]">
+                      {item.title}
+                    </p>
+                  </div>
                 </div>
 
                 {/* Content */}
-                <div className="px-6 py-5">
-                  <h3 className="font-headline text-xl text-[#0F172A] leading-snug">{item.title}</h3>
+                <div className="bg-white px-6 py-5 transition-colors duration-300 group-hover:bg-[#F8FAFC]">
+                  <h3 className="font-headline text-xl leading-snug text-[#0F172A] transition-opacity duration-200 group-hover:opacity-0">
+                    {item.title}
+                  </h3>
                   <p className="mt-2 text-[11px] font-medium uppercase tracking-[0.14em] text-[#64748b]">
                     {item.stat}
                   </p>

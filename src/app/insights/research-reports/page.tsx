@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import InsightsCollection from '../../../views/InsightsCollection';
-import { RESEARCH_REPORTS } from '../../../lib/insights';
 import { GLOBAL_KEYWORDS, buildPageMetadata, mergeKeywords } from '../../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
@@ -21,7 +20,7 @@ export default function InsightsResearchReportsPage() {
       eyebrow="Insights / Research Reports"
       title="Research Reports"
       description="Data-backed reports designed to help executives evaluate technology strategy and execution maturity."
-      cards={RESEARCH_REPORTS}
+      cards={[]}
     />
   );
 }

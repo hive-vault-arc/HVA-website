@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import InsightsCollection from '../../../views/InsightsCollection';
-import { PERSPECTIVES } from '../../../lib/insights';
 import { GLOBAL_KEYWORDS, buildPageMetadata, mergeKeywords } from '../../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
@@ -21,7 +20,7 @@ export default function InsightsPerspectivesPage() {
       eyebrow="Insights / Perspectives"
       title="Perspectives"
       description="Editorial viewpoints on how strategy, architecture, and execution should be governed in modern organizations."
-      cards={PERSPECTIVES}
+      cards={[]}
     />
   );
 }
