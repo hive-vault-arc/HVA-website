@@ -2,238 +2,409 @@
 
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { BarChart3, MessageSquare, Network, ShieldCheck } from 'lucide-react';
-import PageAmbientBackground from '../components/PageAmbientBackground';
+import { BarChart3, MessageSquare, Network, ShieldCheck, ArrowUpRight } from 'lucide-react';
 import BottomCTA from '../components/BottomCTA';
+import PageAmbientBackground from '../components/PageAmbientBackground';
 
-const industries = [
-  {
-    anchorId: 'real-estate',
-    name: 'Real Estate',
-    sector: 'Real Estate & Property',
-    focus: 'Lead operations, CRM modernization, pipeline governance, multilingual client workflows.',
-    href: '/case-studies/zoho-grade-crm-platform',
-  },
-  {
-    anchorId: 'healthcare',
-    name: 'Healthcare',
-    sector: 'Healthcare & Clinical Ops',
-    focus: 'Executive reporting, clinical operations dashboards, workflow reliability, decision intelligence.',
-    href: '/case-studies',
-  },
-  {
-    anchorId: 'construction',
-    name: 'Construction',
-    sector: 'Construction & Projects',
-    focus: 'Operational planning, schedule visibility, field-to-office process automation, risk tracking.',
-    href: '/capabilities',
-  },
-  {
-    anchorId: 'logistics',
-    name: 'Logistics',
-    sector: 'Logistics & Operations',
-    focus: 'Dispatch workflows, operations automation, SLA monitoring, control-tower visibility.',
-    href: '/capabilities',
-  },
-  {
-    anchorId: 'finance-brokerage',
-    name: 'Finance & Brokerage',
-    sector: 'Financial Services & Deal Operations',
-    focus:
-      'Deal pipeline visibility, sales-agent and broker workflows, lead qualification, closing cadence, and commission reporting.',
-    href: '/capabilities/solution-programs',
-  },
-  {
-    anchorId: 'sme-capabilities',
-    name: 'SME Capabilities',
-    sector: 'SME & Professional Capabilities',
-    focus: 'AI-assisted client operations, custom software, IT modernization, and scalable cloud foundations.',
-    href: '/capabilities/solution-programs',
-  },
-];
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0 },
+const IMGS = {
+  realEstate:   '/Images/real-estate-crm-lead-operations-morocco.webp',
+  healthcare:   '/Images/healthcare-clinical-operations-dashboard-morocco.webp',
+  construction: '/Images/construction-project-management-automation-morocco.webp',
+  logistics:    '/Images/logistics-dispatch-workflow-automation-morocco.webp',
+  finance:      '/Images/finance-brokerage-deal-pipeline-morocco.webp',
+  sme:          '/Images/sme-capabilities-it-modernization-morocco.webp',
+  rdLab:        '/Images/hva-ai-software-agency-tangier.webp',
 };
 
 const approachTracks = [
   {
     code: 'IND-001',
-    icon: <BarChart3 className="h-6 w-6" strokeWidth={1.5} />,
+    icon: <BarChart3 className="h-5 w-5" strokeWidth={1.5} />,
     title: 'Sector-calibrated diagnostics',
-    desc: 'We calibrate diagnostics to sector economics, cycle times, and bottleneck patterns before architecture decisions.',
+    desc: 'Calibrated to sector economics, cycle times, and bottleneck patterns.',
+    group: 'Methodology',
   },
   {
     code: 'IND-002',
-    icon: <Network className="h-6 w-6" strokeWidth={1.5} />,
-    title: 'Domain-aware architecture decisions',
-    desc: 'Architecture choices reflect domain language, data structures, and decision hierarchies specific to each industry.',
+    icon: <Network className="h-5 w-5" strokeWidth={1.5} />,
+    title: 'Domain-aware architecture',
+    desc: 'Architecture reflects domain language, data structures, and decision hierarchies.',
+    group: 'Methodology',
   },
   {
     code: 'IND-003',
-    icon: <ShieldCheck className="h-6 w-6" strokeWidth={1.5} />,
-    title: 'Regulatory and compliance awareness',
-    desc: 'Controls are introduced early to reduce delivery risk in healthcare, finance-like workflows, and sensitive operations.',
+    icon: <ShieldCheck className="h-5 w-5" strokeWidth={1.5} />,
+    title: 'Regulatory awareness',
+    desc: 'Controls introduced early to reduce delivery risk in sensitive operations.',
+    group: 'Compliance',
   },
   {
     code: 'IND-004',
-    icon: <MessageSquare className="h-6 w-6" strokeWidth={1.5} />,
-    title: 'Stakeholder communication patterns',
-    desc: 'Execution plans are adapted to how leadership, operations, and technical teams actually communicate in that sector.',
+    icon: <MessageSquare className="h-5 w-5" strokeWidth={1.5} />,
+    title: 'Stakeholder communication',
+    desc: 'Execution adapted to how leadership and operations actually communicate.',
+    group: 'Compliance',
   },
 ];
+
+const fadeUp = { hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0 } };
 
 export default function Industries() {
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
-    <div className="relative isolate overflow-x-hidden bg-[#F8FAFC] text-[#0F172A]">
-      {/* Scroll progress */}
+    <div className="relative isolate overflow-x-hidden bg-[#f7f9fb] text-[#0F172A]">
+      {/* Scroll progress bar */}
       <motion.div
         aria-hidden="true"
         className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-gradient-to-r from-[#2563EB] via-[#60a5fa] to-[#0ea5e9]"
         style={{ scaleX: progressScale }}
       />
 
-      <PageAmbientBackground className="-z-10" />
-
-      {/* ── Hero ──────────────────────────────────────────────────────────── */}
-      <section className="mx-auto max-w-7xl px-6 pt-32 pb-20 lg:px-14">
-        <motion.div
-          className="max-w-4xl"
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55 }}
-        >
-          <p className="mb-6 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
-            Industries
-          </p>
-          <h1 className="font-headline text-4xl font-medium leading-[1.04] tracking-tight sm:text-5xl lg:text-[4.5rem]">
-            Industry Context,
-            <br />
-            <em className="italic text-[#475569]">Not Generic Delivery.</em>
-          </h1>
-          <p className="mt-8 max-w-2xl text-xl font-light leading-relaxed text-[#0F172A]/60">
-            H.V.A designs transformation programs around sector workflows, operating constraints, and
-            decision models — not copied templates.
-          </p>
-        </motion.div>
-      </section>
-
-      {/* ── Industry Cards ────────────────────────────────────────────────── */}
-      <section className="bg-[#F2F4F6] py-20">
-        <div className="mx-auto max-w-7xl px-6 lg:px-14">
+      {/* ── Hero ─────────────────────────────────────────────────────────────── */}
+      <section className="relative overflow-hidden mx-auto max-w-7xl px-8 pt-36 pb-24 md:pb-32">
+        <PageAmbientBackground className="-z-10" />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           <motion.div
-            className="grid grid-cols-1 gap-px bg-[#e2e8f0] md:grid-cols-2 lg:grid-cols-3"
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.15 }}
-            transition={{ staggerChildren: 0.08 }}
+            className="lg:col-span-8"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55 }}
           >
-            {industries.map((item) => (
-              <motion.article
-                key={item.name}
-                id={item.anchorId}
-                variants={fadeUp}
-                transition={{ duration: 0.5 }}
-                className="group flex scroll-mt-36 flex-col bg-[#F2F4F6] p-8 md:p-10"
+            <p className="mb-6 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
+              Industries
+            </p>
+            <h1 className="font-headline text-5xl md:text-7xl font-light tracking-tight leading-[1.1]">
+              Industry Context,<br />
+              <em className="italic text-[#475569]">Not Generic Delivery.</em>
+            </h1>
+            <p className="mt-8 max-w-2xl text-xl md:text-2xl font-light leading-relaxed text-[#45464d]">
+              H.V.A designs transformation programs around sector workflows, operating constraints,
+              and decision models — not copied templates.
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="lg:col-span-4 flex flex-col justify-end h-full"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.15 }}
+          >
+            <div className="bg-[#f2f4f6] p-8 border-l-4 border-[#2563EB]">
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#475569] mb-3">
+                Our Mandate
+              </p>
+              <p
+                className="text-lg text-[#0F172A] italic"
+                style={{ fontFamily: 'var(--font-headline)' }}
               >
-                <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.22em] text-[#2563EB]">
-                  {item.sector}
-                </p>
-                <h2 className="font-headline text-3xl text-[#0F172A]">{item.name}</h2>
-                <p className="mt-4 flex-1 text-sm leading-relaxed text-[#475569]">{item.focus}</p>
-                <Link
-                  href={item.href}
-                  className="mt-6 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-[#2563EB] transition-colors duration-200 hover:text-[#1d4ed8]"
-                >
-                  {'See related work '}
-                  <span className="transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">→</span>
-                </Link>
-              </motion.article>
-            ))}
+                "Specificity is the antidote to technical debt."
+              </p>
+            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* ── Cross-industry note ───────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-[#F2F4F6] py-20 md:py-24">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.05]"
-          style={{
-            backgroundImage:
-              'linear-gradient(to right,#2563EB 1px,transparent 1px),linear-gradient(to bottom,#2563EB 1px,transparent 1px)',
-            backgroundSize: '44px 44px',
-          }}
-        />
-        <div className="pointer-events-none absolute -left-24 top-10 h-64 w-64 rounded-full bg-[#2563EB]/10 blur-3xl" />
-        <div className="pointer-events-none absolute -right-24 bottom-10 h-64 w-64 rounded-full bg-[#2563EB]/10 blur-3xl" />
-
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-14 grid grid-cols-12 gap-8 items-start">
+      {/* ── Bento Industry Grid ──────────────────────────────────────────────── */}
+      <section className="bg-[#f2f4f6] py-24 md:py-32">
+        <div className="max-w-7xl mx-auto px-8">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.5 }}
-            className="col-span-12 lg:col-span-4 lg:sticky lg:top-32"
-          >
-            <p className="font-label text-[#2563EB] uppercase tracking-[0.4em] text-[10px] mb-3">
-              Laboratory_Active
-            </p>
-            <h3 className="font-headline text-4xl md:text-5xl text-[#0F172A] leading-tight mb-8">
-              Active Research &amp; Development
-            </h3>
-
-            <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
-              Our Approach
-            </p>
-            <h2 className="font-headline text-3xl font-medium text-[#0F172A] md:text-4xl">
-              One Framework. Many Operating Contexts.
-            </h2>
-            <p className="mt-5 text-base leading-relaxed text-[#475569]">
-              The ARC framework adapts to sector terminology, decision hierarchies, and workflow constraints without
-              losing engineering rigor. We run a continuous calibration loop that turns field feedback into better
-              execution patterns across industries.
-            </p>
-            <Link
-              href="/arc"
-              className="sharp-edge mt-8 inline-flex items-center gap-2 bg-[#2563EB] px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-white hover:bg-[#1d4ed8] transition-colors duration-200"
-            >
-              Learn About ARC
-            </Link>
-          </motion.div>
-
-          <motion.div
-            className="col-span-12 lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-px bg-[#dbe3f0] border border-[#dbe3f0]"
+            className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8"
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ staggerChildren: 0.08 }}
+            transition={{ staggerChildren: 0.07 }}
           >
-            {approachTracks.map((track) => (
-              <motion.article
-                key={track.code}
-                variants={fadeUp}
-                transition={{ duration: 0.45 }}
-                className="group bg-white p-7 hover:bg-[#F8FAFC] transition-colors duration-300"
-              >
-                <div className="mb-5 flex items-center justify-between">
-                  <div className="text-[#2563EB]">{track.icon}</div>
-                  <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#94a3b8]">{track.code}</span>
+
+            {/* ── Real Estate — col-span-7, side-by-side ── */}
+            <motion.div
+              variants={fadeUp}
+              transition={{ duration: 0.5 }}
+              className="md:col-span-7 group bg-white overflow-hidden flex flex-col md:flex-row"
+            >
+              <div className="w-full md:w-1/2 h-64 md:h-auto overflow-hidden shrink-0">
+                <img
+                  src={IMGS.realEstate}
+                  alt="Real estate CRM lead operations Morocco"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+              <div className="p-8 md:p-10 flex flex-col justify-center">
+                <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#2563EB] mb-3">
+                  Real Estate &amp; Property
+                </p>
+                <h3
+                  className="text-3xl mb-5 italic text-[#0F172A]"
+                  style={{ fontFamily: 'var(--font-headline)' }}
+                >
+                  Real Estate
+                </h3>
+                <ul className="space-y-2.5 text-sm text-[#475569]">
+                  {['Lead operations', 'CRM modernization', 'Pipeline governance'].map((item) => (
+                    <li key={item} className="flex items-start gap-2.5">
+                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#2563EB] shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  href="/case-studies/zoho-grade-crm-platform"
+                  className="mt-7 inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-widest text-[#2563EB] hover:text-[#1d4ed8] transition-colors"
+                >
+                  See related work <ArrowUpRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* ── Healthcare — col-span-5, image + dark overlay ── */}
+            <motion.div
+              variants={fadeUp}
+              transition={{ duration: 0.5 }}
+              className="md:col-span-5 group relative overflow-hidden bg-[#0F172A] flex flex-col justify-between min-h-[320px]"
+            >
+              <img
+                src={IMGS.healthcare}
+                alt="Healthcare clinical operations dashboard Morocco"
+                className="absolute inset-0 w-full h-full object-cover opacity-35 transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="relative z-10 p-10 flex flex-col h-full justify-between">
+                <div>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#93c5fd] mb-4">
+                    Healthcare &amp; Clinical Ops
+                  </p>
+                  <h3
+                    className="text-3xl italic text-white mb-4"
+                    style={{ fontFamily: 'var(--font-headline)' }}
+                  >
+                    Healthcare
+                  </h3>
+                  <p className="text-[#bfdbfe] text-sm leading-relaxed">
+                    Executive reporting, clinical dashboards, and workflow reliability for critical
+                    care environments.
+                  </p>
                 </div>
-                <h4 className="font-headline text-2xl leading-tight text-[#0F172A] group-hover:text-[#2563EB] transition-colors duration-300">
-                  {track.title}
-                </h4>
-                <p className="mt-3 text-sm leading-relaxed text-[#475569]">{track.desc}</p>
-              </motion.article>
-            ))}
+                <Link
+                  href="/case-studies"
+                  className="mt-8 inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-widest text-[#93c5fd] hover:text-white transition-colors"
+                >
+                  See related work <ArrowUpRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* ── Construction — col-span-4, image top ── */}
+            <motion.div
+              variants={fadeUp}
+              transition={{ duration: 0.5 }}
+              className="md:col-span-4 group bg-white overflow-hidden flex flex-col"
+            >
+              <div className="w-full h-52 overflow-hidden shrink-0">
+                <img
+                  src={IMGS.construction}
+                  alt="Construction project management automation Morocco"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+              <div className="p-8 flex flex-col flex-1">
+                <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#2563EB] mb-3">
+                  Construction &amp; Projects
+                </p>
+                <h3
+                  className="text-2xl text-[#0F172A] mb-3"
+                  style={{ fontFamily: 'var(--font-headline)' }}
+                >
+                  Construction
+                </h3>
+                <p className="text-sm text-[#475569] leading-relaxed">
+                  Operational planning, schedule visibility, and field-to-office process automation.
+                </p>
+                <div className="mt-auto pt-6 border-t border-[#e2e8f0]">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#475569]">
+                    Priority: Schedule visibility
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* ── Logistics — col-span-4, image top ── */}
+            <motion.div
+              variants={fadeUp}
+              transition={{ duration: 0.5 }}
+              className="md:col-span-4 group bg-white overflow-hidden flex flex-col"
+            >
+              <div className="w-full h-52 overflow-hidden shrink-0">
+                <img
+                  src={IMGS.logistics}
+                  alt="Logistics dispatch workflow automation Morocco"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+              <div className="p-8 flex flex-col flex-1">
+                <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#2563EB] mb-3">
+                  Logistics &amp; Operations
+                </p>
+                <h3
+                  className="text-2xl text-[#0F172A] mb-3"
+                  style={{ fontFamily: 'var(--font-headline)' }}
+                >
+                  Logistics
+                </h3>
+                <p className="text-sm text-[#475569] leading-relaxed">
+                  Dispatch workflows, operations automation, and SLA monitoring across supply
+                  chains.
+                </p>
+                <Link
+                  href="/capabilities"
+                  className="mt-auto pt-6 inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-widest text-[#2563EB] hover:text-[#1d4ed8] transition-colors"
+                >
+                  See related work <ArrowUpRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* ── Finance — col-span-4, image top ── */}
+            <motion.div
+              variants={fadeUp}
+              transition={{ duration: 0.5 }}
+              className="md:col-span-4 group bg-white overflow-hidden flex flex-col"
+            >
+              <div className="w-full h-52 overflow-hidden shrink-0">
+                <img
+                  src={IMGS.finance}
+                  alt="Finance brokerage deal pipeline Morocco"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+              <div className="p-8 flex flex-col flex-1">
+                <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#2563EB] mb-3">
+                  Financial Services
+                </p>
+                <h3
+                  className="text-2xl italic text-[#0F172A] mb-3"
+                  style={{ fontFamily: 'var(--font-headline)' }}
+                >
+                  Finance &amp; Brokerage
+                </h3>
+                <div className="flex justify-between items-center bg-[#f2f4f6] px-4 py-3 mb-3">
+                  <span className="text-sm font-medium text-[#0F172A]">Deal Pipeline</span>
+                  <span className="text-[11px] font-bold text-[#2563EB]">↑ Active</span>
+                </div>
+                <p className="text-sm text-[#475569] leading-relaxed">
+                  Lead qualification and closing cadence through secure, low-latency interfaces.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* ── SME — col-span-12, image right, text left ── */}
+            <motion.div
+              variants={fadeUp}
+              transition={{ duration: 0.5 }}
+              className="md:col-span-12 group bg-white overflow-hidden flex flex-col md:flex-row-reverse border border-[#e2e8f0]"
+            >
+              <div className="w-full md:w-1/3 h-64 md:h-auto overflow-hidden shrink-0">
+                <img
+                  src={IMGS.sme}
+                  alt="SME capabilities IT modernization Morocco"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+              <div className="w-full md:w-2/3 p-12 flex flex-col justify-center">
+                <div className="max-w-xl">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB] mb-4">
+                    Scale up
+                  </p>
+                  <h3
+                    className="text-4xl italic mb-6 text-[#0F172A]"
+                    style={{ fontFamily: 'var(--font-headline)' }}
+                  >
+                    SME &amp; Professional Capabilities
+                  </h3>
+                  <p className="text-[#475569] text-lg leading-relaxed mb-8">
+                    Custom software, IT modernization, and scalable foundations designed for firms
+                    ready to bridge the gap between boutique service and enterprise capability.
+                  </p>
+                  <Link
+                    href="/capabilities/solution-programs"
+                    className="inline-block border border-[#0F172A] px-8 py-3 text-[11px] font-bold uppercase tracking-widest text-[#0F172A] hover:bg-[#0F172A] hover:text-white transition-all duration-200"
+                  >
+                    Explore Foundations
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
 
+      {/* ── R&D / Laboratory_Active ──────────────────────────────────────────── */}
+      <section className="max-w-7xl mx-auto px-8 py-24 md:py-32">
+        <div className="flex flex-col lg:flex-row gap-16 items-center">
+          {/* Image left with decorative offset */}
+          <div className="lg:w-1/2">
+            <div className="relative">
+              <img
+                src={IMGS.rdLab}
+                alt="HVA AI software agency research Tangier Morocco"
+                className="w-full shadow-2xl relative z-10"
+              />
+              <div className="absolute -top-6 -left-6 w-32 h-32 bg-[#e6e8ea] z-0" />
+            </div>
+          </div>
+
+          {/* Content right */}
+          <div className="lg:w-1/2">
+            <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#2563EB] mb-3">
+              Laboratory_Active
+            </p>
+            <h2
+              className="text-4xl md:text-5xl mb-8 leading-tight text-[#0F172A]"
+              style={{ fontFamily: 'var(--font-headline)' }}
+            >
+              Active Research &amp; Development —<br />
+              <em className="font-light italic">One Framework. Many Operating Contexts.</em>
+            </h2>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+              {(['Methodology', 'Compliance'] as const).map((group) => (
+                <div key={group}>
+                  <h4 className="text-[11px] font-bold uppercase tracking-widest mb-4 text-[#2563EB]">
+                    {group}
+                  </h4>
+                  <ul className="space-y-5">
+                    {approachTracks
+                      .filter((t) => t.group === group)
+                      .map((t) => (
+                        <li key={t.code} className="flex gap-3 items-start">
+                          <div className="text-[#2563EB] shrink-0 mt-0.5">{t.icon}</div>
+                          <span className="text-sm text-[#475569] leading-relaxed">{t.title}</span>
+                        </li>
+                      ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+
+            {/* Buttons */}
+            <div className="mt-10 flex flex-wrap items-center gap-4">
+              <Link
+                href="/arc"
+                className="inline-block bg-[#0F172A] px-8 py-4 text-sm font-bold uppercase tracking-widest text-white hover:bg-[#2563EB] transition-colors duration-200"
+              >
+                Learn About ARC
+              </Link>
+              <Link
+                href="/capabilities"
+                className="inline-flex items-center gap-1.5 text-sm font-bold uppercase tracking-widest text-[#2563EB] hover:text-[#1d4ed8] transition-colors duration-200"
+              >
+                Explore Capabilities <ArrowUpRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA ──────────────────────────────────────────────────────────────── */}
       <BottomCTA
         variant="dark"
         headline="Need an Industry-Specific Transformation Plan?"
@@ -246,5 +417,3 @@ export default function Industries() {
     </div>
   );
 }
-
-

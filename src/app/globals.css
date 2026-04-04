@@ -31,6 +31,15 @@
   --color-neutral-dark:     #e2e8f0;
   --color-neutral-mid:      #cbd5e1;
 
+  /* ── Surface containers (Material-style elevation layers) ── */
+  --surface:                #f7f9fb;   /* page background */
+  --surface-low:            #f2f4f6;   /* section backgrounds, cards */
+  --surface-high:           #e6e8ea;   /* elevated card backgrounds */
+  --surface-highest:        #e0e3e5;   /* highest-elevation surfaces */
+  --surface-lowest:         #ffffff;   /* pure white card surfaces */
+  --on-surface-variant:     #45464d;   /* muted body text */
+  --outline-variant:        #c6c6cd;   /* subtle borders */
+
   /* ── Legacy aliases — backward compatible with existing pages ── */
   --color-black:        #0F172A;
   --color-white:        #F8FAFC;

@@ -13,27 +13,27 @@ const CATEGORY_CARDS = [
   {
     label: 'Blogs',
     href: '/insights/blogs',
-    image: '/Images/ai-agents-integration-2026-enterprise-guide.webp',
+    image: '/Images/hva-insights-blog-articles-tangier-morocco.webp',
   },
   {
     label: 'Case Studies',
     href: '/insights/case-studies',
-    image: '/Images/whatsapp-ai-agent-operations-case-study-morocco.webp',
+    image: '/Images/hva-case-studies-ai-transformation-morocco.webp',
   },
   {
     label: 'News Articles',
     href: '/insights/news-articles',
-    image: '/Images/hva-ai-software-agency-tangier.webp',
+    image: '/Images/hva-news-articles-ai-industry-updates.webp',
   },
   {
     label: 'Perspectives',
     href: '/insights/perspectives',
-    image: '/Images/strategic-technology-consulting-tangier-morocco.png',
+    image: '/Images/hva-perspectives-strategic-ai-insights.webp',
   },
   {
     label: 'Research Reports',
     href: '/insights/research-reports',
-    image: '/Images/ai-powered-transformation-operations-tangier-morocco.webp',
+    image: '/Images/hva-research-reports-ai-technology-morocco.webp',
   },
 ];
 
