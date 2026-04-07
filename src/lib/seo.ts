@@ -125,7 +125,7 @@ export function buildPageMetadata(input: PageMetaInput): Metadata {
       locale: input.locale ?? 'en',
       images: [
         {
-          url: new URL('/Images/hva-ai-software-agency-tangier.webp', SITE_URL).toString(),
+          url: new URL('/Images/brand/hva-ai-software-agency-tangier.webp', SITE_URL).toString(),
           width: 1200,
           height: 630,
           alt: `${input.title} | ${SITE_NAME}`,
@@ -136,7 +136,7 @@ export function buildPageMetadata(input: PageMetaInput): Metadata {
       card: 'summary_large_image',
       title: input.title,
       description: input.description,
-      images: [new URL('/Images/hva-ai-software-agency-tangier.webp', SITE_URL).toString()],
+      images: [new URL('/Images/brand/hva-ai-software-agency-tangier.webp', SITE_URL).toString()],
     },
   };
 }

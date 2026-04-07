@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     url: '/',
     images: [
       {
-        url: '/Images/hva-ai-software-agency-tangier.webp',
+        url: '/Images/brand/hva-ai-software-agency-tangier.webp',
         width: 1200,
         height: 630,
         alt: 'H.V.A — AI & Automation · Digital Transformation · Technology Consulting',
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: DEFAULT_TITLE,
     description: DEFAULT_DESCRIPTION,
-    images: ['/Images/hva-ai-software-agency-tangier.webp'],
+    images: ['/Images/brand/hva-ai-software-agency-tangier.webp'],
   },
   icons: {
     icon: [
@@ -102,7 +102,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
       '@type': 'ImageObject',
       url: absoluteUrl('/Images/favico/android-chrome-512x512.png'),
     },
-    image: absoluteUrl('/Images/hva-ai-software-agency-tangier.webp'),
+    image: absoluteUrl('/Images/brand/hva-ai-software-agency-tangier.webp'),
     areaServed: [
       { '@type': 'City', name: 'Tangier' },
       { '@type': 'Country', name: 'Morocco' },

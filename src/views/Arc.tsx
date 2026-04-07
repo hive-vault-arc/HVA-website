@@ -158,7 +158,7 @@ export default function Arc() {
 
               {/* Image */}
               <img
-                src="/Images/Hva-pulse.png"
+                src="/Images/brand/Hva-pulse.png"
                 alt="H.V.A Pulse"
                 className="relative w-full rounded-3xl shadow-xl shadow-[#2563EB]/10"
               />

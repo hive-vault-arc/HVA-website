@@ -563,7 +563,7 @@ const Home: React.FC = () => {
       </section>
 
       <VideoScrollSection
-        videoSrc="/Images/scrollanimaion.mp4"
+        videoSrc="/Images/media/scrollanimaion.mp4"
         topBg="#0F172A"
         bottomBg="#F5F6FA"
       />

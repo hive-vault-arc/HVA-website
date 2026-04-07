@@ -47,19 +47,19 @@ const teamMembers: TeamMember[] = [
     name: 'Khalid Chalhi',
     tag: 'Architecture & Delivery',
     role: 'Co-Founder & Software Engineer',
-    image: '/Images/khalid-chalhi-hva-co-founder.webp',
+    image: '/Images/team/khalid-chalhi-hva-co-founder.webp',
   },
   {
     name: 'Ali Amrani',
     tag: 'Product & Systems',
     role: 'Co-Founder & Full-Stack Engineer',
-    image: '/Images/ali-amrani-hva-co-founder.webp',
+    image: '/Images/team/ali-amrani-hva-co-founder.webp',
   },
   {
     name: 'Oubay Ghamat',
     tag: 'Cloud & Scale',
     role: 'Co-Founder & Cloud Engineer',
-    image: '/Images/oubay-ghamat-hva-co-founder.webp',
+    image: '/Images/team/oubay-ghamat-hva-co-founder.webp',
   },
 ];
 
@@ -193,7 +193,7 @@ const About: React.FC = () => {
                 </div>
                 <div className="relative aspect-square w-full bg-[#eceef0] overflow-hidden">
                   <img
-                    src="/Images/hva-team-tangier-morocco.webp"
+                    src="/Images/team/hva-team-tangier-morocco.webp"
                     alt="H.V.A co-founders team in Tangier, Morocco — Khalid Chalhi, Ali Amrani, Oubay Ghamat"
                     className="object-cover w-full h-full"
                     loading="eager"

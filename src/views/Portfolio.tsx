@@ -131,7 +131,7 @@ const Portfolio: React.FC = () => {
                 <div className="absolute -inset-4 bg-[#2563EB]/5 transition-all duration-300 group-hover:bg-[#2563EB]/10" />
                 <img
                   alt="Custom AI agent WhatsApp assistant built by H.V.A Morocco"
-                  src="/Images/custom-ai-agent-morocco.webp"
+                  src="/Images/blog/custom-ai-agent-morocco.webp"
                   className="relative w-full h-[260px] sm:h-[380px] md:h-[500px] object-cover shadow-lg"
                   loading="lazy"
                   decoding="async"
@@ -268,7 +268,7 @@ const Portfolio: React.FC = () => {
                 <div className="lg:col-span-7 relative order-1 lg:order-2 pt-10 pl-8">
                   <img
                     alt="Custom real estate CRM system built by H.V.A for Moroccan businesses"
-                    src="/Images/custom-crm-system-morocco.webp"
+                    src="/Images/blog/custom-crm-system-morocco.webp"
                     className="w-full h-[260px] sm:h-[380px] md:h-[500px] object-cover shadow-2xl"
                     loading="lazy"
                     decoding="async"

@@ -7,13 +7,13 @@ import BottomCTA from '../components/BottomCTA';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 
 const IMGS = {
-  realEstate:   '/Images/real-estate-crm-lead-operations-morocco.webp',
-  healthcare:   '/Images/healthcare-clinical-operations-dashboard-morocco.webp',
-  construction: '/Images/construction-project-management-automation-morocco.webp',
-  logistics:    '/Images/logistics-dispatch-workflow-automation-morocco.webp',
-  finance:      '/Images/finance-brokerage-deal-pipeline-morocco.webp',
-  sme:          '/Images/sme-capabilities-it-modernization-morocco.webp',
-  rdLab:        '/Images/hva-ai-software-agency-tangier.webp',
+  realEstate:   '/Images/industries/real-estate-crm-lead-operations-morocco.webp',
+  healthcare:   '/Images/industries/healthcare-clinical-operations-dashboard-morocco.webp',
+  construction: '/Images/industries/construction-project-management-automation-morocco.webp',
+  logistics:    '/Images/industries/logistics-dispatch-workflow-automation-morocco.webp',
+  finance:      '/Images/industries/finance-brokerage-deal-pipeline-morocco.webp',
+  sme:          '/Images/industries/sme-capabilities-it-modernization-morocco.webp',
+  rdLab:        '/Images/brand/hva-ai-software-agency-tangier.webp',
 };
 
 const approachTracks = [

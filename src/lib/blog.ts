@@ -32,7 +32,7 @@ const POSTS: BlogPost[] = [
     readTime: '10 min read',
     publishedAt: '2025-03-10',
     authors: [{ name: 'H.V.A Research Team', role: 'Technology Consulting & Transformation Desk', initials: 'HV' }],
-    coverImage: '/Images/custom-ai-agent-morocco.webp',
+    coverImage: '/Images/blog/custom-ai-agent-morocco.webp',
     excerpt:
       'Agentic AI systems that can plan, reason, and act autonomously are the next major shift in enterprise technology. Backed by Gartner, McKinsey, and PwC research, we explore what this means for businesses in Morocco and how to get ahead.',
     tags: ['agentic AI', 'AI agents', 'automation', 'Morocco', 'enterprise AI'],
@@ -210,7 +210,7 @@ const POSTS: BlogPost[] = [
     readTime: '12 min read',
     publishedAt: '2025-03-17',
     authors: [{ name: 'H.V.A Research Team', role: 'Technology Consulting & Transformation Desk', initials: 'HV' }],
-    coverImage: '/Images/custom-crm-system-morocco.webp',
+    coverImage: '/Images/blog/custom-crm-system-morocco.webp',
     excerpt:
       'Generic SaaS tools are fast to start but slow to scale. Industry research from Forrester, McKinsey, Deloitte, and HIMSS shows that custom digital solutions consistently deliver higher ROI, lower long-term cost, and measurable operational improvements across real estate, healthcare, construction, and beyond.',
     tags: ['custom software', 'digital transformation', 'Morocco', 'CRM', 'real estate', 'healthcare'],
@@ -390,7 +390,7 @@ const POSTS: BlogPost[] = [
     readTime: '11 min read',
     publishedAt: '2026-03-25',
     authors: [{ name: 'H.V.A Research Team', role: 'Technology Consulting & Transformation Desk', initials: 'HV' }],
-    coverImage: '/Images/software-onboarding-guide-morocco.webp',
+    coverImage: '/Images/blog/software-onboarding-guide-morocco.webp',
     excerpt:
       'Research shows that up to 50% of app conversions are decided during onboarding — before users ever reach the core product. Yet most developers treat onboarding as an afterthought. Here are the four rules that separate apps that triple revenue from apps that leave it on the table.',
     tags: ['mobile app', 'onboarding', 'conversion', 'UX', 'product strategy', 'app revenue', 'paywall', 'retention'],
@@ -647,7 +647,7 @@ const POSTS: BlogPost[] = [
     readTime: '9 min read',
     publishedAt: '2026-03-26',
     authors: [{ name: 'H.V.A Research Team', role: 'Technology Consulting & Transformation Desk', initials: 'HV' }],
-    coverImage: '/Images/ai-agent-development-service.webp',
+    coverImage: '/Images/blog/ai-agent-development-service.webp',
     excerpt:
       'WhatsApp handles more customer conversations in Morocco than email, phone, and live chat combined. Yet most businesses still manage it manually — missing leads, delaying responses, losing sales. Here is how WhatsApp AI chatbots work, what they cost, and how to deploy one for your business.',
     tags: ['WhatsApp chatbot', 'AI chatbot Morocco', 'WhatsApp automation', 'customer service AI', 'Morocco', 'AI agents', 'WhatsApp Business API'],
@@ -844,7 +844,7 @@ const POSTS: BlogPost[] = [
     readTime: '11 min read',
     publishedAt: '2026-03-27',
     authors: [{ name: 'H.V.A Editorial', role: 'AI Strategy', initials: 'HE' }],
-    coverImage: '/Images/ai-agents-integration-2026-enterprise-guide.webp',
+    coverImage: '/Images/blog/ai-agents-integration-2026-enterprise-guide.webp',
     excerpt:
       'The global AI agent market is projected to reach $103.6 billion by 2032, and 52% of executives have already deployed agents in production. Companies that delay are not staying neutral — they are falling behind competitors who are compounding operational advantages every month. This article makes the case for why 2026 is the year to act, and how Morocco\'s businesses can position themselves as smart followers rather than permanent laggards.',
     tags: ['AI agents', 'automation', 'Morocco', 'digital transformation', 'enterprise AI', 'human-AI collaboration'],

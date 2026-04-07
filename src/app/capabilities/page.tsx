@@ -69,7 +69,7 @@ export default function Page() {
       url: SITE_URL,
       telephone: ['+212688270772', '+212691918296'],
       priceRange: '$$',
-      image: absoluteUrl('/Images/hva-ai-software-agency-tangier.webp'),
+      image: absoluteUrl('/Images/brand/hva-ai-software-agency-tangier.webp'),
       areaServed: ['Morocco', 'Remote'],
     },
     areaServed: ['Morocco', 'Remote'],
