@@ -1,15 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { SITE_URL } from '../lib/seo';
 
-const crawlAllowPaths = [
-  '/',
-  '/capabilities',
-  '/capabilities/in-detail',
-  '/capabilities/solution-programs',
-  '/services',
-  '/services/in-detail',
-  '/services/solution-programs',
-];
+const crawlAllowPaths = ['/'];
 
 export default function robots(): MetadataRoute.Robots {
   return {

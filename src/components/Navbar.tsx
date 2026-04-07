@@ -110,7 +110,10 @@ const Navbar: React.FC = () => {
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-1">
               <Link href="/arc" className={desktopLinkClass(isRouteActive('/arc'))}>
-                ARC
+                <span className="flex flex-col leading-none gap-0.5">
+                  <span>ARC</span>
+                  <span className="text-[8px] tracking-widest uppercase opacity-50 font-normal">Framework</span>
+                </span>
               </Link>
               <div
                 className="relative"

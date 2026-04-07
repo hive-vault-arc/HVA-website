@@ -10,7 +10,7 @@ type ContactStatus = {
   message: string;
 } | null;
 
-const CONTACT_EMAILS = ['khalid.chelhi@outlook.fr', 'ali.amrani.dev@gmail.com'];
+const CONTACT_EMAILS = ['contact@hivevaultarc.com'];
 const CONTACT_PHONES = [
   { raw: '+212688270772', label: '+212 688 270 772' },
   { raw: '+212691918296', label: '+212 691 918 296' },
@@ -21,7 +21,7 @@ const Contact: React.FC = () => {
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', company: '', industry: '', teamSize: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState<ContactStatus>(null);
   const lastSubmitAt = useRef<number>(0);
@@ -56,13 +56,21 @@ const Contact: React.FC = () => {
         setStatus({ type: 'success', message: 'Thank you. Your message was sent successfully.' });
       } else {
         const subject = '[H.V.A] Project Inquiry';
-        const body = [`Name: ${formData.name}`, `Email: ${formData.email}`, '', formData.message].join('\n');
+        const body = [
+          `Name: ${formData.name}`,
+          `Email: ${formData.email}`,
+          formData.company ? `Company: ${formData.company}` : '',
+          formData.industry ? `Industry: ${formData.industry}` : '',
+          formData.teamSize ? `Team Size: ${formData.teamSize}` : '',
+          '',
+          formData.message,
+        ].filter(Boolean).join('\n');
         const mailto = `mailto:${CONTACT_EMAILS.join(',')}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         globalThis.location.href = mailto;
         lastSubmitAt.current = Date.now();
         setStatus({ type: 'success', message: 'Your email client was opened. Please send the drafted message.' });
       }
-      setFormData({ name: '', email: '', message: '' });
+      setFormData({ name: '', email: '', company: '', industry: '', teamSize: '', message: '' });
     } catch {
       setStatus({
         type: 'error',
@@ -238,6 +246,77 @@ const Contact: React.FC = () => {
                         className="w-full bg-transparent border-0 border-b py-3 px-0 focus:outline-none text-lg font-body text-[#0F172A] placeholder:text-slate-300"
                         style={{ borderImage: 'linear-gradient(to right, transparent, #2563EB 22%, #2563EB 78%, transparent) 1' }}
                       />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+
+                    {/* Company */}
+                    <div>
+                      <label
+                        htmlFor="company"
+                        className="block text-xs font-label font-bold uppercase tracking-widest text-[#475569] mb-2"
+                      >
+                        Company Name
+                      </label>
+                      <input
+                        id="company"
+                        name="company"
+                        type="text"
+                        value={formData.company}
+                        onChange={handleChange}
+                        placeholder="Your company"
+                        maxLength={120}
+                        className="w-full bg-transparent border-0 border-b py-3 px-0 focus:outline-none text-lg font-body text-[#0F172A] placeholder:text-slate-300"
+                        style={{ borderImage: 'linear-gradient(to right, transparent, #2563EB 22%, #2563EB 78%, transparent) 1' }}
+                      />
+                    </div>
+
+                    {/* Industry */}
+                    <div>
+                      <label
+                        htmlFor="industry"
+                        className="block text-xs font-label font-bold uppercase tracking-widest text-[#475569] mb-2"
+                      >
+                        Industry
+                      </label>
+                      <input
+                        id="industry"
+                        name="industry"
+                        type="text"
+                        value={formData.industry}
+                        onChange={handleChange}
+                        placeholder="e.g. Real Estate, Healthcare"
+                        maxLength={80}
+                        className="w-full bg-transparent border-0 border-b py-3 px-0 focus:outline-none text-lg font-body text-[#0F172A] placeholder:text-slate-300"
+                        style={{ borderImage: 'linear-gradient(to right, transparent, #2563EB 22%, #2563EB 78%, transparent) 1' }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Team size */}
+                  <div>
+                    <label
+                      htmlFor="teamSize"
+                      className="block text-xs font-label font-bold uppercase tracking-widest text-[#475569] mb-2"
+                    >
+                      Team / Company Size
+                    </label>
+                    <div className="flex flex-wrap gap-3 pt-1">
+                      {['1–10', '11–50', '51–200', '200+'].map((size) => (
+                        <button
+                          key={size}
+                          type="button"
+                          onClick={() => setFormData((prev) => ({ ...prev, teamSize: prev.teamSize === size ? '' : size }))}
+                          className={`px-4 py-2 text-xs font-label font-bold uppercase tracking-widest border transition-colors ${
+                            formData.teamSize === size
+                              ? 'bg-[#0F172A] text-white border-[#0F172A]'
+                              : 'bg-transparent text-[#475569] border-slate-200 hover:border-[#2563EB] hover:text-[#2563EB]'
+                          }`}
+                        >
+                          {size}
+                        </button>
+                      ))}
                     </div>
                   </div>
 

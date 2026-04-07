@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Globe, Mail, Phone, Share2 } from 'lucide-react';
+import { Globe, Mail, Phone } from 'lucide-react';
 import { FiLinkedin } from 'react-icons/fi';
 import Logo from './Logo';
 import FooterSpotlight from './ui/FooterSpotlight';
@@ -68,13 +68,9 @@ export default function SiteFooter() {
             <div className="site-footer__group">
               <p className="site-footer__title">Connect</p>
               <div className="site-footer__contacts">
-                <a href="mailto:khalid.chelhi@outlook.fr" className="site-footer__contact">
+                <a href="mailto:contact@hivevaultarc.com" className="site-footer__contact">
                   <Mail className="h-3.5 w-3.5" />
-                  khalid.chelhi@outlook.fr
-                </a>
-                <a href="mailto:ali.amrani.dev@gmail.com" className="site-footer__contact">
-                  <Share2 className="h-3.5 w-3.5" />
-                  ali.amrani.dev@gmail.com
+                  contact@hivevaultarc.com
                 </a>
                 <a href="tel:+212688270772" className="site-footer__contact">
                   <Phone className="h-3.5 w-3.5" />

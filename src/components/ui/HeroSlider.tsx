@@ -107,11 +107,6 @@ export default function HeroSlider() {
     [active]
   );
 
-  useEffect(() => {
-    const t = setTimeout(() => navigate(1), 5000);
-    return () => clearTimeout(t);
-  }, [active, navigate]);
-
   const slide = SLIDES[active]!;
 
   return (
@@ -141,7 +136,7 @@ export default function HeroSlider() {
 
       <div className="container mx-auto">
 
-        <AnimatePresence mode="wait" custom={direction}>
+        <AnimatePresence initial={false} mode="wait" custom={direction}>
           <motion.div
             key={active}
             custom={direction}

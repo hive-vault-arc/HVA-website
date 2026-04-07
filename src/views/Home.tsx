@@ -202,6 +202,29 @@ const Home: React.FC = () => {
 
       <HeroSlider />
 
+      {/* ── Trusted by ─────────────────────────────────────────────────── */}
+      <section className="border-y border-[#E2E8F0] py-5 px-6 bg-white">
+        <div className="container mx-auto flex flex-col sm:flex-row items-center gap-6 sm:gap-10">
+          <p
+            className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#94a3b8] shrink-0"
+            style={{ fontFamily: 'var(--font-body)' }}
+          >
+            Trusted by teams in
+          </p>
+          <div className="flex flex-wrap gap-x-8 gap-y-2">
+            {['Real Estate', 'Healthcare', 'Logistics', 'Finance', 'Construction'].map((sector) => (
+              <span
+                key={sector}
+                className="text-xs font-semibold text-[#334155] uppercase tracking-wide"
+                style={{ fontFamily: 'var(--font-body)' }}
+              >
+                {sector}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── Insights Carousel ──────────────────────────────────────────── */}
       <InsightsCarousel />
 
