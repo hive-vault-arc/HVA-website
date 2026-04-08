@@ -36,7 +36,7 @@ function CaseStudySidebar({ study }: { readonly study: CaseStudy }) {
         ))}
       </div>
 
-      {/* Testimonial card */}
+      {/* Program delivery record */}
       <div className="relative bg-[#0F172A] p-6 overflow-hidden">
         <div
           aria-hidden="true"
@@ -52,21 +52,23 @@ function CaseStudySidebar({ study }: { readonly study: CaseStudy }) {
           className="relative z-10 text-[9px] font-bold uppercase tracking-[0.2em] text-[#2563EB] mb-4"
           style={{ fontFamily: 'var(--font-body)' }}
         >
-          Client Testimony
+          Program Delivery Record
         </p>
-        <blockquote
-          className="relative z-10 text-sm text-white leading-relaxed italic mb-5"
-          style={{ fontFamily: 'var(--font-headline)' }}
-        >
-          &ldquo;{study.testimonial.quote}&rdquo;
-        </blockquote>
-        <div className="relative z-10 border-t border-white/10 pt-4">
-          <p className="text-xs font-semibold text-white" style={{ fontFamily: 'var(--font-body)' }}>
-            {study.testimonial.author}
-          </p>
-          <p className="text-[10px] text-white/50 mt-0.5" style={{ fontFamily: 'var(--font-body)' }}>
-            {study.testimonial.role}
-          </p>
+        <div className="relative z-10 space-y-0">
+          {([
+            { label: 'Deployment status', value: 'Live', pulse: true },
+            { label: 'Architecture review', value: 'Passed', pulse: false },
+            { label: 'Delivery framework', value: 'ARC', pulse: false },
+            { label: 'Accountability model', value: 'End-to-end', pulse: false },
+          ] as { label: string; value: string; pulse: boolean }[]).map((row) => (
+            <div key={row.label} className="flex items-center justify-between border-t border-white/10 py-3">
+              <span className="text-xs text-white/50" style={{ fontFamily: 'var(--font-body)' }}>{row.label}</span>
+              <span className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wide text-[#2563EB]" style={{ fontFamily: 'var(--font-body)' }}>
+                {row.pulse && <span className="h-1.5 w-1.5 rounded-full bg-[#2563EB] animate-pulse inline-block" />}
+                {row.value}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     </div>

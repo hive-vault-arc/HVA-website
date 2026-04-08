@@ -179,12 +179,18 @@ const Portfolio: React.FC = () => {
                     </li>
                   ))}
                 </ul>
-                <blockquote className="border-l-2 border-[#2563EB] pl-3 text-sm italic text-[#1E272E]/80">
-                  "H.V.A translated our strategy into a production AI workflow our team trusts daily."
-                  <footer className="mt-1 text-xs not-italic text-[#475569]">
-                    — Head of Growth, Atlas Property Group
-                  </footer>
-                </blockquote>
+                <div className="flex gap-0 border border-[#e2e8f0] overflow-hidden">
+                  {[
+                    { value: '85%', label: 'Triage cut' },
+                    { value: '24/7', label: 'Autonomous' },
+                    { value: '12', label: 'Languages' },
+                  ].map((m, i) => (
+                    <div key={m.label} className={`flex-1 text-center py-4 ${i < 2 ? 'border-r border-[#e2e8f0]' : ''}`}>
+                      <p className="font-serif text-2xl text-[#2563EB]">{m.value}</p>
+                      <p className="text-[9px] font-bold uppercase tracking-wider text-[#475569] mt-0.5">{m.label}</p>
+                    </div>
+                  ))}
+                </div>
                 <div className="pt-3">
                   <Link
                     href="/case-studies/multilingual-whatsapp-ai-agent"
@@ -247,12 +253,10 @@ const Portfolio: React.FC = () => {
                       </p>
                   </div>
                 </div>
-                <blockquote className="border-l-2 border-[#2563EB] pl-3 text-sm italic text-[#1E272E]/80">
-                  "Forecast and pipeline meetings are now based on one trusted operating model."
-                  <footer className="mt-1 text-xs not-italic text-[#475569]">
-                    — COO, Capstone Living Morocco
-                  </footer>
-                </blockquote>
+                <div className="border-l-4 border-[#2563EB] bg-[#f8fafc] px-4 py-3">
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-[#0F172A]">Program status: Live in production</p>
+                  <p className="text-[9px] text-[#94a3b8] mt-0.5">Full-stack CRM · BI reporting layer · real-time lead sync</p>
+                </div>
                 <div className="pt-3">
                   <Link
                     href="/case-studies/zoho-grade-crm-platform"

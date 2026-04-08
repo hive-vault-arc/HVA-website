@@ -84,6 +84,8 @@ export default function VideoScrollSection({
   const scrubProxyRef = useRef({ time: 0 });
   // Throttle flag: prevents concurrent seeks from flooding the decoder.
   const isSeekingRef = useRef(false);
+  // Visibility gate — skip expensive video work when section is off-screen.
+  const isVisibleRef = useRef(false);
 
   // ── Canvas RAF loop ──────────────────────────────────────────────────────────
   useEffect(() => {
@@ -149,22 +151,31 @@ export default function VideoScrollSection({
     };
     video.addEventListener('seeked', onSeeked);
 
+    // Visibility gate — only do expensive video work when section is in view.
+    const observer = new IntersectionObserver(
+      ([entry]) => { isVisibleRef.current = entry.isIntersecting; },
+      { threshold: 0 }
+    );
+    if (wrapperRef.current) observer.observe(wrapperRef.current);
+
     // RAF loop: trigger a seek whenever the target has moved and we're not already seeking.
     // One seek at a time — no lerp, no catch-up animation after scroll stops.
     const loop = () => {
+      rafRef.current = requestAnimationFrame(loop);
+      if (!isVisibleRef.current) return;
       const target = scrubProxyRef.current.time;
       if (!isSeekingRef.current && Math.abs(video.currentTime - target) > 0.016 && video.readyState >= 1) {
         doSeek();
       } else if (!isSeekingRef.current && video.readyState >= 2) {
         drawCover();
       }
-      rafRef.current = requestAnimationFrame(loop);
     };
     rafRef.current = requestAnimationFrame(loop);
 
     return () => {
       cancelAnimationFrame(rafRef.current);
       ro.disconnect();
+      observer.disconnect();
       video.removeEventListener('seeked', onSeeked);
     };
   }, []);

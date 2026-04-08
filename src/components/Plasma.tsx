@@ -212,7 +212,6 @@ export const Plasma: React.FC<PlasmaProps> = ({
 
     const loop = (t: number) => {
       if (!isActive) {
-        raf = requestAnimationFrame(loop);
         return;
       }
 

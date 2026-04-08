@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Pause, Play, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -70,6 +70,20 @@ export default function InsightsCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [hoveredCenter, setHoveredCenter] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Pause auto-advance when the carousel is scrolled off-screen
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   // Preload all carousel images immediately so they're ready before auto-advance
   useEffect(() => {
@@ -86,20 +100,20 @@ export default function InsightsCarousel() {
     setHoveredCenter(false);
   }, [activeIndex]);
 
-  // Auto-advance
+  // Auto-advance — paused when off-screen or manually paused
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || !isVisible) return;
     const id = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % TOTAL);
     }, 4000);
     return () => clearInterval(id);
-  }, [isPaused]);
+  }, [isPaused, isVisible]);
 
   const prev = useCallback(() => setActiveIndex((p) => (p - 1 + TOTAL) % TOTAL), []);
   const next = useCallback(() => setActiveIndex((p) => (p + 1) % TOTAL), []);
 
   return (
-    <section className="bg-[#F8FAFC] py-12 overflow-hidden">
+    <section ref={sectionRef} className="bg-[#F8FAFC] py-12 overflow-hidden">
       {/* Header */}
       <div className="mx-auto max-w-7xl px-6 lg:px-14 mb-8">
         <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB] mb-4">

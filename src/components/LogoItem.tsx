@@ -56,6 +56,19 @@ const useAnimationLoop = (
   const lastTimestampRef = useRef<number | null>(null);
   const offsetRef = useRef(0);
   const velocityRef = useRef(0);
+  const [isVisible, setIsVisible] = useState(true);
+
+  // Gate RAF loop with IntersectionObserver — stop when scrolled off-screen
+  useEffect(() => {
+    const container = trackRef.current?.parentElement;
+    if (!container || typeof IntersectionObserver === 'undefined') return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, [trackRef]);
 
   useEffect(() => {
     const track = trackRef.current;
@@ -100,8 +113,14 @@ const useAnimationLoop = (
         track.style.transform = `translate3d(${translateX}px, 0, 0)`;
       }
 
+      if (!isVisible) {
+        rafRef.current = null;
+        return;
+      }
       rafRef.current = requestAnimationFrame(animate);
     };
+
+    if (!isVisible) return () => { lastTimestampRef.current = null; };
 
     rafRef.current = requestAnimationFrame(animate);
 
@@ -112,7 +131,7 @@ const useAnimationLoop = (
       }
       lastTimestampRef.current = null;
     };
-  }, [trackRef, targetVelocity, seqWidth, isHovered, pauseOnHover]);
+  }, [trackRef, targetVelocity, seqWidth, isHovered, pauseOnHover, isVisible]);
 };
 
 export const LogoLoop = React.memo<LogoLoopProps>(

@@ -364,68 +364,50 @@ const Home: React.FC = () => {
                 eyebrow: 'System Built',
                 title: 'Customer Operations Engine',
                 stat: 'Zero manual intervention · end-to-end in production',
+                bars: [45, 60, 35, 80, 55, 70, 90],
               },
               {
                 eyebrow: 'Live Deployment',
                 title: 'Revenue Control Module',
                 stat: '94 active users · production since May 2025',
+                bars: [70, 50, 85, 40, 65, 75, 55],
               },
               {
                 eyebrow: 'Measured Outcomes',
                 title: 'Quantified Results',
                 stat: 'Manual triage ↓85% · Qualified meetings ↑43%',
+                bars: [30, 55, 45, 85, 60, 70, 95],
               },
             ].map((item) => (
               <article
                 key={item.eyebrow}
                 className="group sharp-edge overflow-hidden border border-[#e2e8f0] bg-white transition-all duration-300 hover:border-[#2563EB]/35 hover:shadow-[0_14px_34px_rgba(15,23,42,0.08)]"
               >
-                {/* Image panel with blur-hover title treatment */}
-                <div className="relative h-52 overflow-hidden bg-[#e8ecf0]">
+                {/* Dark header with decorative data bars */}
+                <div className="relative h-36 bg-[#0F172A] px-6 py-5 flex flex-col justify-between overflow-hidden">
                   <div
                     aria-hidden="true"
-                    className="absolute inset-0 opacity-40 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.08] group-hover:blur-[6px]"
-                    style={{
-                      backgroundImage:
-                        'repeating-linear-gradient(0deg,#cbd5e1 0,#cbd5e1 1px,transparent 0,transparent 32px),repeating-linear-gradient(90deg,#cbd5e1 0,#cbd5e1 1px,transparent 0,transparent 32px)',
-                    }}
+                    className="pointer-events-none absolute inset-0 opacity-[0.06]"
+                    style={{ backgroundImage: 'repeating-linear-gradient(0deg,#60a5fa 0,#60a5fa 1px,transparent 0,transparent 40px),repeating-linear-gradient(90deg,#60a5fa 0,#60a5fa 1px,transparent 0,transparent 40px)' }}
                   />
-
-                  {/* Placeholder icon layer */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <svg
-                      aria-hidden="true"
-                      width="40"
-                      height="40"
-                      viewBox="0 0 40 40"
-                      fill="none"
-                      className="opacity-30"
-                    >
-                      <rect x="4" y="8" width="32" height="24" rx="3" stroke="#94a3b8" strokeWidth="1.5" />
-                      <circle cx="14" cy="17" r="3" stroke="#94a3b8" strokeWidth="1.5" />
-                      <path d="M4 28l8-7 6 5 5-4 13 9" stroke="#94a3b8" strokeWidth="1.5" strokeLinejoin="round" />
-                    </svg>
-                  </div>
-
-                  {/* Hover dark layer for title readability */}
-                  <div className="absolute inset-0 bg-[#0F172A]/55 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-                  {/* Eyebrow badge (fades on hover) */}
-                  <span className="sharp-edge absolute top-4 left-4 bg-[#2563EB] px-3 py-1 text-[9px] font-bold uppercase tracking-[0.2em] text-white transition-opacity duration-200 group-hover:opacity-0">
+                  <span className="sharp-edge relative z-10 inline-block self-start bg-[#2563EB] px-3 py-1 text-[9px] font-bold uppercase tracking-[0.2em] text-white">
                     {item.eyebrow}
                   </span>
-
-                  {/* Title overlay on blurred image */}
-                  <div className="pointer-events-none absolute inset-0 z-[1] flex items-center justify-center px-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <p className="font-headline text-center text-2xl leading-tight text-white drop-shadow-[0_3px_10px_rgba(0,0,0,0.45)]">
-                      {item.title}
-                    </p>
+                  {/* Decorative bar chart */}
+                  <div className="relative z-10 flex items-end gap-1 h-10">
+                    {item.bars.map((h, i) => (
+                      <div
+                        key={i}
+                        className="flex-1 rounded-sm bg-[#2563EB]/30 transition-all duration-500 group-hover:bg-[#2563EB]/55"
+                        style={{ height: `${h}%` }}
+                      />
+                    ))}
                   </div>
                 </div>
 
                 {/* Content */}
                 <div className="bg-white px-6 py-5 transition-colors duration-300 group-hover:bg-[#F8FAFC]">
-                  <h3 className="font-headline text-xl leading-snug text-[#0F172A] transition-opacity duration-200 group-hover:opacity-0">
+                  <h3 className="font-headline text-xl leading-snug text-[#0F172A]">
                     {item.title}
                   </h3>
                   <p className="mt-2 text-[11px] font-medium uppercase tracking-[0.14em] text-[#64748b]">
@@ -436,15 +418,16 @@ const Home: React.FC = () => {
             ))}
           </div>
 
-          {/* Testimonial */}
-          <blockquote className="mt-12 border-l-2 border-[#2563EB] pl-6">
-            <p className="font-headline text-xl italic leading-relaxed text-[#0F172A]">
-              &ldquo;H.V.A built an AI agent that completely transformed our sales pipeline — empowering our team rather than replacing them. Combined with the CRM they engineered alongside it, the whole operation reached a level we didn&rsquo;t think was attainable.&rdquo;
+          {/* Production integrity note */}
+          <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-[#0F172A]/10 pt-8">
+            <div className="flex items-center gap-2 shrink-0">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#2563EB] animate-pulse inline-block" />
+              <span className="text-[9px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">Production Verified</span>
+            </div>
+            <p className="text-sm font-body text-[#475569]">
+              Every program listed is live in a real operating environment — no demos, no projected results.
             </p>
-            <footer className="mt-3 text-[10px] font-bold uppercase not-italic tracking-[0.22em] text-[#94a3b8]">
-              — CEO, Immoworld
-            </footer>
-          </blockquote>
+          </div>
 
         </div>
       </section>
@@ -532,21 +515,30 @@ const Home: React.FC = () => {
             {/* Glow behind card */}
             <div className="pointer-events-none absolute -top-12 -left-12 w-64 h-64 bg-[#2563EB]/20 blur-3xl rounded-full" />
 
-            <div className="relative z-10 bg-[#F2F4F6] p-10 md:p-12">
-              {/* Opening quote mark */}
-              <span aria-hidden="true" className="font-headline italic text-[#2563EB]/20 text-[5rem] leading-none absolute top-2 left-6 select-none">"</span>
-              <p className="text-2xl md:text-3xl font-headline italic text-[#0F172A] leading-snug mb-8">
-                &ldquo;H.V.A built an AI agent that completely transformed our sales pipeline — empowering our team rather than replacing them. Combined with the CRM they engineered alongside it, the whole operation reached a level we didn&rsquo;t think was attainable.&rdquo;
-              </p>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-[#0F172A] flex items-center justify-center shrink-0">
-                  <span className="text-white text-xs font-bold font-label">CEO</span>
-                </div>
-                <div>
-                  <p className="font-label font-bold uppercase tracking-widest text-xs text-[#0F172A]">Chief Executive Officer</p>
-                  <p className="font-body text-sm text-[#475569]">Immoworld</p>
-                </div>
+            <div className="relative z-10 bg-[#F2F4F6] p-10 md:p-12 overflow-hidden">
+              <div className="flex items-center gap-2 mb-8">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#2563EB] animate-pulse inline-block" />
+                <p className="text-[9px] font-mono uppercase tracking-[0.28em] text-[#2563EB]">Live Program Metrics</p>
               </div>
+              <div className="space-y-0">
+                {([
+                  { value: '85%', dir: '↓', label: 'Reduction in manual triage' },
+                  { value: '43%', dir: '↑', label: 'Increase in qualified meetings' },
+                  { value: '$2.4M', dir: '→', label: 'Revenue pipeline tracked' },
+                  { value: '94',   dir: '↑', label: 'Daily active system operators' },
+                ] as { value: string; dir: string; label: string }[]).map((m) => (
+                  <div key={m.label} className="flex items-baseline justify-between border-b border-[#0F172A]/10 py-4">
+                    <span className="text-sm font-body text-[#475569]">{m.label}</span>
+                    <div className="flex items-baseline gap-1.5 ml-6 shrink-0">
+                      <span className="text-[#2563EB] text-sm font-bold">{m.dir}</span>
+                      <span className="font-headline text-3xl text-[#0F172A] font-medium">{m.value}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-6 text-[9px] font-mono uppercase tracking-[0.2em] text-[#94a3b8]">
+                From live deployments in production — Morocco, 2025
+              </p>
             </div>
 
             {/* Link to capabilities */}
