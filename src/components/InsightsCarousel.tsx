@@ -4,10 +4,8 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Pause, Play, ChevronLeft, ChevronRight } from 'lucide-react';
-import { getAllPosts } from '../lib/blog';
-import { getAllCaseStudies } from '../lib/proof';
 
-type CarouselItem = {
+export type InsightsCarouselItem = {
   id: string;
   type: 'blog' | 'case-study';
   tag: string;
@@ -18,60 +16,34 @@ type CarouselItem = {
   date: string;
 };
 
-function buildItems(): CarouselItem[] {
-  const posts = getAllPosts().map((p) => ({
-    id: `blog-${p.slug}`,
-    type: 'blog' as const,
-    tag: p.category,
-    title: p.title,
-    excerpt: p.excerpt,
-    image: p.coverImage,
-    href: `/blog/${p.slug}`,
-    date: p.publishedAt,
-  }));
-
-  const studies = getAllCaseStudies().map((s) => ({
-    id: `case-${s.slug}`,
-    type: 'case-study' as const,
-    tag: s.industry,
-    title: s.title,
-    excerpt: s.summary,
-    image: s.assets.coverImage,
-    href: `/case-studies/${s.slug}`,
-    date: s.lastUpdated,
-  }));
-
-  // Interleave 2 blogs then 1 case-study for visual variety
-  const result: CarouselItem[] = [];
-  let bi = 0;
-  let si = 0;
-  while (bi < posts.length || si < studies.length) {
-    if (bi < posts.length) result.push(posts[bi++]);
-    if (bi < posts.length) result.push(posts[bi++]);
-    if (si < studies.length) result.push(studies[si++]);
-  }
-  return result;
-}
-
-const ITEMS = buildItems();
-const TOTAL = ITEMS.length;
 const X_TABLE = [0, 320, 620];
 const SCALE_TABLE = [1, 0.5, 0.72];
 const OPACITY_TABLE = [1, 0.7, 0.88];
 
-function circularOffset(i: number, active: number): number {
+function circularOffset(i: number, active: number, total: number): number {
   let d = i - active;
-  if (d > TOTAL / 2) d -= TOTAL;
-  if (d < -TOTAL / 2) d += TOTAL;
+  if (d > total / 2) d -= total;
+  if (d < -total / 2) d += total;
   return d;
 }
 
-export default function InsightsCarousel() {
+type InsightsCarouselProps = {
+  items: InsightsCarouselItem[];
+};
+
+export default function InsightsCarousel({ items }: InsightsCarouselProps) {
+  const total = items.length;
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [hoveredCenter, setHoveredCenter] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (activeIndex >= total) {
+      setActiveIndex(0);
+    }
+  }, [activeIndex, total]);
 
   // Pause auto-advance when the carousel is scrolled off-screen
   useEffect(() => {
@@ -85,15 +57,15 @@ export default function InsightsCarousel() {
     return () => observer.disconnect();
   }, []);
 
-  // Preload all carousel images immediately so they're ready before auto-advance
+  // Preload carousel images so hover transitions are smooth
   useEffect(() => {
-    ITEMS.forEach((item) => {
+    items.forEach((item) => {
       if (item.image) {
         const img = new globalThis.Image();
         img.src = item.image;
       }
     });
-  }, []);
+  }, [items]);
 
   // Reset hover state whenever the active card changes
   useEffect(() => {
@@ -102,40 +74,53 @@ export default function InsightsCarousel() {
 
   // Auto-advance — paused when off-screen or manually paused
   useEffect(() => {
-    if (isPaused || !isVisible) return;
+    if (isPaused || !isVisible || total < 2) return;
     const id = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % TOTAL);
+      setActiveIndex((prev) => (prev + 1) % total);
     }, 4000);
     return () => clearInterval(id);
-  }, [isPaused, isVisible]);
+  }, [isPaused, isVisible, total]);
 
-  const prev = useCallback(() => setActiveIndex((p) => (p - 1 + TOTAL) % TOTAL), []);
-  const next = useCallback(() => setActiveIndex((p) => (p + 1) % TOTAL), []);
+  const prev = useCallback(() => setActiveIndex((p) => (p - 1 + total) % total), [total]);
+  const next = useCallback(() => setActiveIndex((p) => (p + 1) % total), [total]);
+
+  if (!total) return null;
 
   return (
-    <section ref={sectionRef} className="bg-[#F8FAFC] py-12 overflow-hidden">
+    <section ref={sectionRef} className="bg-white py-16 overflow-hidden border-t border-[#e2e8f0]">
       {/* Header */}
-      <div className="mx-auto max-w-7xl px-6 lg:px-14 mb-8">
-        <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB] mb-4">
-          Welcome to H.V.A
-        </p>
-        <h2 className="font-headline text-4xl font-medium leading-[1.04] tracking-tight text-[#0F172A] md:text-5xl">
-          Thinking, Testing, Shipping.
-        </h2>
+      <div className="mx-auto max-w-7xl px-6 lg:px-14 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-end pb-10 border-b border-[#e2e8f0]">
+          <div className="md:col-span-7">
+            <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB] mb-4">
+              Welcome to H.V.A
+            </p>
+            <h2 className="font-headline text-5xl md:text-6xl leading-[1.04] tracking-tight text-[#0F172A]">
+              Thinking, Testing,<br className="hidden md:block" /> Shipping.
+            </h2>
+          </div>
+          <div className="md:col-span-5 flex flex-col gap-5">
+            <p className="text-base text-[#475569] leading-relaxed">
+              Articles, case studies, and perspectives from programs we&apos;ve built and teams we&apos;ve transformed — field notes from the work.
+            </p>
+            <div className="flex items-center gap-4">
+              <div className="h-px flex-1 bg-[#e2e8f0]" />
+              <span className="text-[9px] font-mono text-[#94a3b8] uppercase tracking-[0.24em] shrink-0">
+                {total} entries
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Carousel viewport — fixed height, overflow hidden */}
       <div className="relative h-[460px]">
-        {ITEMS.map((item, i) => {
-          const offset = circularOffset(i, activeIndex);
+        {items.map((item, i) => {
+          const offset = circularOffset(i, activeIndex, total);
           const absOffset = Math.abs(offset);
-          // Render up to ±3 so entering cards slide in from off-screen instead of popping
           if (absOffset > 3) return null;
 
           const isCenter = offset === 0;
-
-          // Cards at absOffset=3 sit just off-screen (opacity 0) so Framer Motion
-          // can animate them into view from outside the frame
           const x = absOffset === 3
             ? (offset < 0 ? -960 : 960)
             : (offset < 0 ? -X_TABLE[absOffset] : X_TABLE[absOffset]);
@@ -163,9 +148,7 @@ export default function InsightsCarousel() {
               onMouseEnter={() => { if (isCenter) setHoveredCenter(true); }}
               onMouseLeave={() => { if (isCenter) setHoveredCenter(false); }}
             >
-              {/* ── Image section (top 60%) ── */}
               <div className="relative overflow-hidden" style={{ height: '60%' }}>
-                {/* Category badge */}
                 <span
                   className="absolute top-3 left-3 z-10 bg-white/90 backdrop-blur-sm px-2.5 py-1
                              text-[9px] font-bold uppercase tracking-[0.2em] text-[#2563EB]"
@@ -173,7 +156,6 @@ export default function InsightsCarousel() {
                   {item.tag}
                 </span>
 
-                {/* Image with zoom + blur on center hover */}
                 {item.image ? (
                   <motion.img
                     src={item.image}
@@ -194,7 +176,6 @@ export default function InsightsCarousel() {
                   <div className="w-full h-full bg-gradient-to-br from-[#dbeafe] to-[#e0e7ff]" />
                 )}
 
-                {/* Title overlay on blurred image */}
                 <motion.div
                   className="absolute inset-0 flex items-center justify-center px-5 z-20"
                   animate={{ opacity: isCenter && hoveredCenter ? 1 : 0 }}
@@ -207,17 +188,14 @@ export default function InsightsCarousel() {
                 </motion.div>
               </div>
 
-              {/* ── Text section (bottom 40%) ── */}
               <div
                 className="relative bg-white flex flex-col justify-between overflow-hidden"
                 style={{ height: '40%', outline: '1px solid #e2e8f0', padding: '20px' }}
               >
-                {/* Eyebrow */}
                 <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#94a3b8]">
                   {item.type === 'blog' ? 'Article' : 'Case Study'} · {item.date}
                 </p>
 
-                {/* Title — subtle zoom on center hover */}
                 <motion.h3
                   className="font-headline text-lg leading-snug text-[#0F172A] mt-1"
                   animate={{ scale: isCenter && hoveredCenter ? 1.03 : 1 }}
@@ -227,7 +205,6 @@ export default function InsightsCarousel() {
                   {item.title}
                 </motion.h3>
 
-                {/* Hover overlay — description + expand button with backdrop blur */}
                 <motion.div
                   className="absolute inset-0 flex flex-col justify-end"
                   style={{
@@ -257,7 +234,6 @@ export default function InsightsCarousel() {
         })}
       </div>
 
-      {/* Navigation controls */}
       <div className="mx-auto max-w-7xl px-6 lg:px-14 mt-6 flex items-center gap-2">
         <button
           onClick={() => setIsPaused((p) => !p)}

@@ -2,6 +2,8 @@
 
 import React, { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import { ArrowRight, BarChart3, Bot, Cloud, Eye, Layers, MessageSquare } from 'lucide-react';
 import { motion } from 'framer-motion';
 import BottomCTA from '../components/BottomCTA';
@@ -9,7 +11,7 @@ import Background3d from '../components/Plasma';
 import LogoLoop from '../components/LogoItem';
 import VideoScrollSection from '../components/ui/VideoScrollSection';
 import HeroSlider from '../components/ui/HeroSlider';
-import InsightsCarousel from '../components/InsightsCarousel';
+import type { InsightsCarouselItem } from '../components/InsightsCarousel';
 import { useAnimationQuality } from '../lib/animationQuality';
 import {
   SiAndroid,
@@ -31,12 +33,22 @@ import {
 const WorldMapDemo = lazy(() =>
   import('../components/world-map-demo').then((module) => ({ default: module.WorldMapDemo }))
 );
+const InsightsCarousel = dynamic(() => import('../components/InsightsCarousel'), {
+  loading: () => <div className="h-[560px] bg-[#F8FAFC]" aria-hidden="true" />,
+});
 
-const Home: React.FC = () => {
+type HomeProps = {
+  insightsCarouselItems: InsightsCarouselItem[];
+};
+
+const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
   const { tier, motionReduced } = useAnimationQuality();
   const showAdvancedEffects = tier === 'high' && !motionReduced;
   const worldMapSectionRef = useRef<HTMLElement | null>(null);
+  const liveMetricsRef = useRef<HTMLDivElement | null>(null);
+  const metricsRafRef = useRef<number | null>(null);
   const [bgReady, setBgReady] = useState(false);
+  const [liveMetricsProgress, setLiveMetricsProgress] = useState(0);
 
   // Defer WebGL background until after first paint so UI renders immediately
   // requestIdleCallback is not available on iOS Safari < 16.4 — fallback to setTimeout
@@ -56,7 +68,67 @@ const Home: React.FC = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (motionReduced) {
+      setLiveMetricsProgress(1);
+      return;
+    }
+
+    const node = liveMetricsRef.current;
+    if (!node) return;
+
+    let hasStarted = false;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries[0]?.isIntersecting || hasStarted) return;
+        hasStarted = true;
+        observer.disconnect();
+
+        const durationMs = 1400;
+        const start = performance.now();
+
+        const tick = (now: number) => {
+          const elapsed = Math.min((now - start) / durationMs, 1);
+          const eased = 1 - Math.pow(1 - elapsed, 3);
+          setLiveMetricsProgress(eased);
+
+          if (elapsed < 1) {
+            metricsRafRef.current = requestAnimationFrame(tick);
+          }
+        };
+
+        metricsRafRef.current = requestAnimationFrame(tick);
+      },
+      { threshold: 0.4 }
+    );
+
+    observer.observe(node);
+
+    return () => {
+      observer.disconnect();
+      if (metricsRafRef.current !== null) {
+        cancelAnimationFrame(metricsRafRef.current);
+      }
+    };
+  }, [motionReduced]);
+
   const [hoveredPillar, setHoveredPillar] = useState<number | null>(null);
+  const liveMetrics = [
+    { target: 85, dir: '↓', label: 'Reduction in manual triage', kind: 'percent' as const },
+    { target: 43, dir: '↑', label: 'Increase in qualified meetings', kind: 'percent' as const },
+    { target: 2.4, dir: '→', label: 'Revenue pipeline tracked', kind: 'moneyM' as const },
+    { target: 94, dir: '↑', label: 'Daily active system operators', kind: 'integer' as const },
+  ];
+
+  const formatLiveMetric = (target: number, kind: 'percent' | 'moneyM' | 'integer') => {
+    if (kind === 'percent') {
+      return `${Math.round(target * liveMetricsProgress)}%`;
+    }
+    if (kind === 'moneyM') {
+      return `$${(target * liveMetricsProgress).toFixed(1)}M`;
+    }
+    return `${Math.round(target * liveMetricsProgress)}`;
+  };
 
   const capabilityPillars = [
     {
@@ -203,30 +275,32 @@ const Home: React.FC = () => {
       <HeroSlider />
 
       {/* ── Trusted by ─────────────────────────────────────────────────── */}
-      <section className="border-y border-[#E2E8F0] py-5 px-6 bg-white">
-        <div className="container mx-auto flex flex-col sm:flex-row items-center gap-6 sm:gap-10">
-          <p
-            className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#94a3b8] shrink-0"
-            style={{ fontFamily: 'var(--font-body)' }}
-          >
-            Trusted by teams in
+      <section className="bg-white border-y border-[#e2e8f0]">
+        <div className="mx-auto max-w-7xl px-6 lg:px-14 py-5 flex items-center gap-8">
+          <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#94a3b8] shrink-0 hidden sm:block">
+            Trusted by
           </p>
-          <div className="flex flex-wrap gap-x-8 gap-y-2">
-            {['Real Estate', 'Healthcare', 'Logistics', 'Finance', 'Construction'].map((sector) => (
-              <span
-                key={sector}
-                className="text-xs font-semibold text-[#334155] uppercase tracking-wide"
-                style={{ fontFamily: 'var(--font-body)' }}
-              >
-                {sector}
-              </span>
-            ))}
+          <div className="h-5 w-px bg-[#e2e8f0] shrink-0 hidden sm:block" />
+          <div className="flex items-center gap-10 flex-1">
+            <div className="group">
+              <Image
+                src="/Images/trustedby/logo.png"
+                alt="Trusted partner logo"
+                width={140}
+                height={40}
+                className="h-7 w-auto object-contain grayscale opacity-50 transition duration-300 group-hover:opacity-75 group-hover:grayscale-0"
+              />
+            </div>
+          </div>
+          <div className="hidden md:flex items-center gap-2 shrink-0">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-[10px] text-[#94a3b8] uppercase tracking-[0.22em]">Active partnership</span>
           </div>
         </div>
       </section>
 
       {/* ── Insights Carousel ──────────────────────────────────────────── */}
-      <InsightsCarousel />
+      <InsightsCarousel items={insightsCarouselItems} />
 
       {/* ── Who We Are — Identity Section ──────────────────────────────── */}
       <section className="relative grid grid-cols-1 lg:grid-cols-12">
@@ -328,105 +402,154 @@ const Home: React.FC = () => {
 
       </section>
 
-      <section className="bg-[#F2F4F6] py-20 md:py-24">
+      <section className="bg-white py-24 md:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-14">
 
-          {/* Header row */}
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
-            <div>
-              <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
+          {/* Header — two column */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-end mb-14 pb-12 border-b border-[#e2e8f0]">
+            <div className="md:col-span-7">
+              <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.28em] text-[#2563EB]">
                 Proof In Production
               </p>
-              <h2 className="font-headline text-4xl font-medium leading-[1.04] tracking-tight text-[#0F172A] md:text-5xl">
+              <h2 className="font-headline text-5xl md:text-6xl leading-[1.02] tracking-tight text-[#0F172A]">
                 Transformation Programs<br className="hidden md:block" /> Running in Production
               </h2>
             </div>
-            <div className="flex flex-wrap gap-6 pb-1">
-              <Link
-                href="/case-studies"
-                className="text-xs font-bold uppercase tracking-widest text-[#2563EB] hover:text-[#1d4ed8] transition-colors"
-              >
-                Proof Library →
-              </Link>
-              <Link
-                href="/capabilities/solution-programs"
-                className="text-xs font-bold uppercase tracking-widest text-[#2563EB] hover:text-[#1d4ed8] transition-colors"
-              >
-                Solution Programs →
-              </Link>
+            <div className="md:col-span-5 flex flex-col gap-5">
+              <p className="text-base text-[#475569] leading-relaxed">
+                Every program listed is live in a real operating environment — no demos, no projected results.
+              </p>
+              <div className="flex flex-wrap gap-6">
+                <Link href="/case-studies" className="text-xs font-bold uppercase tracking-widest text-[#0F172A] border-b-2 border-[#0F172A]/20 hover:border-[#2563EB] hover:text-[#2563EB] pb-0.5 transition-all">
+                  Proof Library →
+                </Link>
+                <Link href="/capabilities/solution-programs" className="text-xs font-bold uppercase tracking-widest text-[#0F172A] border-b-2 border-[#0F172A]/20 hover:border-[#2563EB] hover:text-[#2563EB] pb-0.5 transition-all">
+                  Solution Programs →
+                </Link>
+              </div>
             </div>
           </div>
 
-          {/* Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {[
-              {
-                eyebrow: 'System Built',
-                title: 'Customer Operations Engine',
-                stat: 'Zero manual intervention · end-to-end in production',
-                bars: [45, 60, 35, 80, 55, 70, 90],
-              },
-              {
-                eyebrow: 'Live Deployment',
-                title: 'Revenue Control Module',
-                stat: '94 active users · production since May 2025',
-                bars: [70, 50, 85, 40, 65, 75, 55],
-              },
-              {
-                eyebrow: 'Measured Outcomes',
-                title: 'Quantified Results',
-                stat: 'Manual triage ↓85% · Qualified meetings ↑43%',
-                bars: [30, 55, 45, 85, 60, 70, 95],
-              },
-            ].map((item) => (
-              <article
-                key={item.eyebrow}
-                className="group sharp-edge overflow-hidden border border-[#e2e8f0] bg-white transition-all duration-300 hover:border-[#2563EB]/35 hover:shadow-[0_14px_34px_rgba(15,23,42,0.08)]"
-              >
-                {/* Dark header with decorative data bars */}
-                <div className="relative h-36 bg-[#0F172A] px-6 py-5 flex flex-col justify-between overflow-hidden">
-                  <div
-                    aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 opacity-[0.06]"
-                    style={{ backgroundImage: 'repeating-linear-gradient(0deg,#60a5fa 0,#60a5fa 1px,transparent 0,transparent 40px),repeating-linear-gradient(90deg,#60a5fa 0,#60a5fa 1px,transparent 0,transparent 40px)' }}
-                  />
-                  <span className="sharp-edge relative z-10 inline-block self-start bg-[#2563EB] px-3 py-1 text-[9px] font-bold uppercase tracking-[0.2em] text-white">
-                    {item.eyebrow}
-                  </span>
-                  {/* Decorative bar chart */}
-                  <div className="relative z-10 flex items-end gap-1 h-10">
-                    {item.bars.map((h, i) => (
-                      <div
-                        key={i}
-                        className="flex-1 rounded-sm bg-[#2563EB]/30 transition-all duration-500 group-hover:bg-[#2563EB]/55"
-                        style={{ height: `${h}%` }}
-                      />
-                    ))}
-                  </div>
-                </div>
+          {/* Cards — asymmetric: large featured left + 2 stacked right */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:h-[620px]">
 
-                {/* Content */}
-                <div className="bg-white px-6 py-5 transition-colors duration-300 group-hover:bg-[#F8FAFC]">
-                  <h3 className="font-headline text-xl leading-snug text-[#0F172A]">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-[11px] font-medium uppercase tracking-[0.14em] text-[#64748b]">
-                    {item.stat}
-                  </p>
+            {/* Featured card */}
+            <motion.article
+              className="md:col-span-7 relative overflow-hidden sharp-edge aspect-[4/3] md:aspect-auto md:h-full group"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55 }}
+            >
+              <Image
+                src="/Images/home/proof-in-production/customer-operations-engine-live-deployment.webp"
+                alt="Customer operations engine dashboard and workflow system in production"
+                fill
+                sizes="(max-width: 768px) 100vw, 58vw"
+                className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
+              />
+              {/* Dark gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/90 via-[#0F172A]/20 to-transparent" />
+              {/* Sequence number watermark */}
+              <span aria-hidden="true" className="absolute top-5 right-6 font-headline text-[120px] leading-none text-white/[0.07] select-none pointer-events-none">
+                01
+              </span>
+              {/* Eyebrow badge */}
+              <span className="sharp-edge absolute left-5 top-5 z-10 bg-[#2563EB] px-3 py-1 text-[9px] font-bold uppercase tracking-[0.22em] text-white">
+                System Built
+              </span>
+              {/* Bottom content */}
+              <div className="absolute bottom-0 left-0 right-0 p-8 z-10">
+                <h3 className="font-headline text-3xl md:text-4xl text-white leading-tight mb-3">
+                  Customer Operations Engine
+                </h3>
+                <p className="text-sm text-white/55 uppercase tracking-[0.14em]">
+                  Zero manual intervention · end-to-end in production
+                </p>
+                <div className="mt-5 h-[1px] w-0 group-hover:w-full bg-[#2563EB] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]" />
+              </div>
+            </motion.article>
+
+            {/* Right: 2 stacked cards */}
+            <div className="md:col-span-5 grid grid-rows-1 md:grid-rows-2 gap-4 md:h-full">
+
+              {/* Card 2 */}
+              <motion.article
+                className="relative overflow-hidden sharp-edge aspect-[4/3] md:aspect-auto group"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.55, delay: 0.1 }}
+              >
+                <Image
+                  src="/Images/home/proof-in-production/revenue-control-module-live-operations.webp"
+                  alt="Revenue control module interface for live business operations"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 42vw"
+                  className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/90 via-[#0F172A]/20 to-transparent" />
+                <span aria-hidden="true" className="absolute top-3 right-4 font-headline text-[72px] leading-none text-white/[0.07] select-none pointer-events-none">02</span>
+                <span className="sharp-edge absolute left-4 top-4 z-10 bg-[#0F172A]/80 backdrop-blur-sm border border-white/10 px-3 py-1 text-[9px] font-bold uppercase tracking-[0.22em] text-white">
+                  Live Deployment
+                </span>
+                <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
+                  <h3 className="font-headline text-2xl text-white leading-tight mb-2">Revenue Control Module</h3>
+                  <p className="text-[11px] text-white/55 uppercase tracking-[0.14em]">94 active users · production since May 2025</p>
+                  <div className="mt-4 h-[1px] w-0 group-hover:w-full bg-[#2563EB] transition-all duration-700" />
                 </div>
-              </article>
+              </motion.article>
+
+              {/* Card 3 */}
+              <motion.article
+                className="relative overflow-hidden sharp-edge aspect-[4/3] md:aspect-auto group"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.55, delay: 0.2 }}
+              >
+                <Image
+                  src="/Images/home/proof-in-production/quantified-results-growth-dashboard.webp"
+                  alt="Quantified business results and growth metrics visualization"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 42vw"
+                  className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/90 via-[#0F172A]/20 to-transparent" />
+                <span aria-hidden="true" className="absolute top-3 right-4 font-headline text-[72px] leading-none text-white/[0.07] select-none pointer-events-none">03</span>
+                <span className="sharp-edge absolute left-4 top-4 z-10 bg-[#0F172A]/80 backdrop-blur-sm border border-white/10 px-3 py-1 text-[9px] font-bold uppercase tracking-[0.22em] text-white">
+                  Measured Outcomes
+                </span>
+                <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
+                  <h3 className="font-headline text-2xl text-white leading-tight mb-2">Quantified Results</h3>
+                  <p className="text-[11px] text-white/55 uppercase tracking-[0.14em]">Manual triage ↓85% · Qualified meetings ↑43%</p>
+                  <div className="mt-4 h-[1px] w-0 group-hover:w-full bg-[#2563EB] transition-all duration-700" />
+                </div>
+              </motion.article>
+
+            </div>
+          </div>
+
+          {/* Metrics strip */}
+          <div className="mt-5 grid grid-cols-2 md:grid-cols-4 border border-[#e2e8f0] divide-y md:divide-y-0 md:divide-x divide-[#e2e8f0]">
+            {[
+              { val: '↓85%', label: 'Manual triage cut' },
+              { val: '↑43%', label: 'Qualified meeting lift' },
+              { val: '$2.4M', label: 'Revenue pipeline active' },
+              { val: '94', label: 'Daily active operators' },
+            ].map((m) => (
+              <div key={m.label} className="flex items-center gap-4 px-7 py-5">
+                <span className="font-headline text-2xl text-[#0F172A]">{m.val}</span>
+                <span className="text-[10px] text-[#94a3b8] uppercase tracking-widest leading-snug">{m.label}</span>
+              </div>
             ))}
           </div>
 
-          {/* Production integrity note */}
-          <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-[#0F172A]/10 pt-8">
-            <div className="flex items-center gap-2 shrink-0">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#2563EB] animate-pulse inline-block" />
-              <span className="text-[9px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">Production Verified</span>
-            </div>
-            <p className="text-sm font-body text-[#475569]">
-              Every program listed is live in a real operating environment — no demos, no projected results.
-            </p>
+          {/* Production verified */}
+          <div className="mt-5 flex items-center gap-3">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#2563EB] animate-pulse inline-block shrink-0" />
+            <span className="text-[9px] font-bold uppercase tracking-[0.24em] text-[#2563EB] shrink-0">Production Verified</span>
+            <span className="h-px flex-1 bg-[#e2e8f0]" />
           </div>
 
         </div>
@@ -515,23 +638,20 @@ const Home: React.FC = () => {
             {/* Glow behind card */}
             <div className="pointer-events-none absolute -top-12 -left-12 w-64 h-64 bg-[#2563EB]/20 blur-3xl rounded-full" />
 
-            <div className="relative z-10 bg-[#F2F4F6] p-10 md:p-12 overflow-hidden">
+            <div ref={liveMetricsRef} className="relative z-10 bg-[#F2F4F6] p-10 md:p-12 overflow-hidden">
               <div className="flex items-center gap-2 mb-8">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#2563EB] animate-pulse inline-block" />
                 <p className="text-[9px] font-mono uppercase tracking-[0.28em] text-[#2563EB]">Live Program Metrics</p>
               </div>
               <div className="space-y-0">
-                {([
-                  { value: '85%', dir: '↓', label: 'Reduction in manual triage' },
-                  { value: '43%', dir: '↑', label: 'Increase in qualified meetings' },
-                  { value: '$2.4M', dir: '→', label: 'Revenue pipeline tracked' },
-                  { value: '94',   dir: '↑', label: 'Daily active system operators' },
-                ] as { value: string; dir: string; label: string }[]).map((m) => (
-                  <div key={m.label} className="flex items-baseline justify-between border-b border-[#0F172A]/10 py-4">
-                    <span className="text-sm font-body text-[#475569]">{m.label}</span>
+                {liveMetrics.map((metric) => (
+                  <div key={metric.label} className="flex items-baseline justify-between border-b border-[#0F172A]/10 py-4">
+                    <span className="text-sm font-body text-[#475569]">{metric.label}</span>
                     <div className="flex items-baseline gap-1.5 ml-6 shrink-0">
-                      <span className="text-[#2563EB] text-sm font-bold">{m.dir}</span>
-                      <span className="font-headline text-3xl text-[#0F172A] font-medium">{m.value}</span>
+                      <span className="text-[#2563EB] text-sm font-bold">{metric.dir}</span>
+                      <span className="font-headline text-3xl text-[#0F172A] font-medium">
+                        {formatLiveMetric(metric.target, metric.kind)}
+                      </span>
                     </div>
                   </div>
                 ))}

@@ -119,7 +119,7 @@ export default function Arc() {
 
           {/* Left — copy */}
           <motion.div
-            className="lg:col-span-7"
+            className="lg:col-span-8"
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -128,8 +128,13 @@ export default function Arc() {
               Operational Excellence
             </span>
             <h1 className="font-headline text-[clamp(3rem,7vw,6rem)] text-[#0F172A] leading-[1.02] tracking-tight mb-8">
-              The <span className="text-[#2563EB]">ARC</span> Framework:<br />
-              <em className="italic font-light text-[var(--on-surface-variant)]">Category Thinking</em> + Field Execution.
+              The <span className="text-[#2563EB]">ARC</span> Framework:
+              <br />
+              <em className="italic font-light text-[var(--on-surface-variant)]">Category</em>
+              <span className="block md:ml-[0.7em]">
+                <em className="italic font-light text-[var(--on-surface-variant)]">Thinking</em> + Field
+              </span>
+              <span className="block md:ml-[2.1em]">Execution.</span>
             </h1>
             <p className="text-xl text-[var(--on-surface-variant)] font-light max-w-xl leading-relaxed mb-10">
               A rigorous architectural approach to digital transformation. Strategy, engineering, and operational iteration — in one accountable loop.
@@ -147,23 +152,6 @@ export default function Arc() {
               >
                 View Programs →
               </Link>
-            </div>
-          </motion.div>
-
-          {/* Right — pulse visual */}
-          <motion.div
-            className="lg:col-span-5 flex items-center justify-center"
-            initial={{ opacity: 0, scale: 0.95, y: 16 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.65, delay: 0.2 }}
-          >
-            <div className="relative w-full max-w-[300px]">
-              <div className="absolute inset-0 rounded-3xl bg-[#2563EB]/20 blur-3xl scale-110" />
-              <img
-                src="/Images/brand/Hva-pulse.png"
-                alt="H.V.A ARC Framework — strategic pulse visualization"
-                className="relative w-full rounded-3xl shadow-xl shadow-[#2563EB]/10"
-              />
             </div>
           </motion.div>
 
