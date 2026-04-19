@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface LogoProps {
   /** Extra classes on the root Link element */
@@ -8,46 +9,19 @@ interface LogoProps {
   light?: boolean;
 }
 
-/**
- * Shared logo lockup — "HIVE" on top, "VAULT ARC" below.
- * SVG textLength="100%" stretches "VAULT ARC" to exactly match HIVE's width.
- */
 const Logo: React.FC<LogoProps> = ({ className, light = false }) => (
   <Link
     href="/"
-    className={['flex-shrink-0 inline-block relative', className].filter(Boolean).join(' ')}
-    style={{ paddingBottom: '3px' }}
+    aria-label="H.V.A Home"
+    className={['inline-flex flex-shrink-0 items-center', className].filter(Boolean).join(' ')}
   >
-    {/* HIVE — sets the inline-block container width */}
-    <span
-      className={`font-headline font-bold leading-none tracking-tight block ${light ? 'text-white' : 'text-[#0F172A]'}`}
-      style={{ fontSize: '1.6rem', letterSpacing: '-0.01em' }}
-    >
-      HIVE
-    </span>
-
-    {/* VAULT ARC — absolutely positioned so width: 100% = HIVE's width */}
-    <svg
-      width="100%"
-      height="9"
-      overflow="visible"
-      style={{ position: 'absolute', left: 0, bottom: 0 }}
-    >
-      <text
-        y="8"
-        textLength="100%"
-        lengthAdjust="spacingAndGlyphs"
-        style={{
-          fontFamily: 'var(--font-body), sans-serif',
-          fontSize: '7.5px',
-          fontWeight: 700,
-          fill: light ? 'rgba(148,163,184,0.8)' : '#475569',
-          textTransform: 'uppercase',
-        }}
-      >
-        VAULT ARC
-      </text>
-    </svg>
+    <Image
+      src="/Images/favico/logo.png"
+      alt="H.V.A logo"
+      width={44}
+      height={44}
+      className={`h-11 w-auto object-contain ${light ? 'brightness-0 invert opacity-90' : ''}`}
+    />
   </Link>
 );
 
