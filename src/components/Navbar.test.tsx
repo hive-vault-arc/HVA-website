@@ -33,8 +33,8 @@ describe('Navbar', () => {
       expect(link).toHaveAttribute('href', '/whoarewe/portfolio')
     );
     screen.getAllByRole('link', { name: 'Insights' }).forEach(link => expect(link).toHaveAttribute('href', '/insights'));
-    screen.getAllByRole('link', { name: 'Blogs' }).forEach(link => expect(link).toHaveAttribute('href', '/insights/blogs'));
-    screen.getAllByRole('link', { name: 'Case Studies' }).forEach(link => expect(link).toHaveAttribute('href', '/insights/case-studies'));
+    screen.getAllByRole('link', { name: 'Blogs' }).forEach(link => expect(link).toHaveAttribute('href', '/blog'));
+    screen.getAllByRole('link', { name: 'Case Studies' }).forEach(link => expect(link).toHaveAttribute('href', '/case-studies'));
     screen.getAllByRole('link', { name: 'News Articles' }).forEach(link => expect(link).toHaveAttribute('href', '/insights/news-articles'));
     screen.getAllByRole('link', { name: 'Perspectives' }).forEach(link => expect(link).toHaveAttribute('href', '/insights/perspectives'));
     screen.getAllByRole('link', { name: 'Research Reports' }).forEach(link => expect(link).toHaveAttribute('href', '/insights/research-reports'));

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { BarChart3, Bot, Cloud, Database, RefreshCw, Zap } from 'lucide-react';
@@ -86,10 +87,13 @@ export default function Arc() {
       >
         {/* Background image */}
         <div className="absolute inset-0 z-0" aria-hidden="true">
-          <img
+          <Image
             src="/Images/brand/hva-ai-software-agency-tangier.webp"
             alt=""
+            fill
             className="w-full h-full object-cover grayscale opacity-[0.14]"
+            sizes="100vw"
+            priority
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[var(--surface)] via-[var(--surface)]/90 to-[var(--surface)]/30" />
         </div>
@@ -405,10 +409,12 @@ export default function Arc() {
             </div>
             {/* Image */}
             <div className="w-full md:w-2/5 md:-ml-8 h-64 md:h-auto min-h-[300px]">
-              <img
+              <Image
                 src="/Images/brand/hva-ai-software-agency-tangier.webp"
                 alt="H.V.A engineering operations — Tangier"
+                fill
                 className="w-full h-full object-cover grayscale"
+                sizes="(max-width: 768px) 100vw, 40vw"
               />
             </div>
           </motion.div>

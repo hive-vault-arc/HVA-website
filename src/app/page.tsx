@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import Home from '../views/Home';
 import JsonLd from '../components/JsonLd';
 import type { InsightsCarouselItem } from '../components/InsightsCarousel';
@@ -118,6 +119,32 @@ export default function Page() {
     <>
       <JsonLd data={capabilitySchema} />
       <Home insightsCarouselItems={insightsCarouselItems} />
+      <section className="border-t border-[#e2e8f0] bg-white py-14">
+        <div className="mx-auto max-w-7xl px-6 lg:px-14">
+          <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
+            Service Landing Pages
+          </p>
+          <h2 className="font-headline text-3xl font-medium text-[#0F172A] md:text-4xl">
+            Explore Local and National Service Guides
+          </h2>
+          <div className="mt-7 grid gap-3 md:grid-cols-2">
+            {[
+              { href: '/ai-agents-tangier', label: 'AI Agents in Tangier' },
+              { href: '/ai-agents-morocco', label: 'AI Agents in Morocco' },
+              { href: '/it-consulting-tangier', label: 'IT Consulting in Tangier' },
+              { href: '/custom-software-morocco', label: 'Custom Software in Morocco' },
+            ].map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="border border-[#e2e8f0] bg-[#F8FAFC] px-5 py-4 text-sm font-bold uppercase tracking-[0.14em] text-[#2563EB] transition-colors hover:bg-[#ECF5FD] hover:text-[#1d4ed8]"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
       <FaqSection faqs={HOME_FAQS} />
     </>
   );

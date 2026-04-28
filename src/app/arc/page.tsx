@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Arc from '../../views/Arc';
 import JsonLd from '../../components/JsonLd';
-import { GLOBAL_KEYWORDS, SITE_URL, buildPageMetadata, mergeKeywords } from '../../lib/seo';
+import { GLOBAL_KEYWORDS, SITE_URL, buildBreadcrumbSchema, buildPageMetadata, mergeKeywords } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'ARC | Category Framework for Transformation Execution',
@@ -26,10 +26,14 @@ export default function ArcPage() {
     url: `${SITE_URL}/arc`,
     isPartOf: { '@id': `${SITE_URL}/#website` },
   };
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'ARC Program', path: '/arc' },
+  ]);
 
   return (
     <>
-      <JsonLd data={pageSchema} />
+      <JsonLd data={[pageSchema, breadcrumbSchema]} />
       <Arc />
     </>
   );

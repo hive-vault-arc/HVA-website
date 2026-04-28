@@ -10,6 +10,7 @@ import React, {
   useState,
   useCallback,
 } from "react";
+import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -620,7 +621,7 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
                       src={videoSrc}
                       muted
                       playsInline
-                      preload="auto"
+                      preload="metadata"
                       className="fx-bg-video"
                       onLoadedMetadata={handleVideoMeta}
                     />
@@ -635,12 +636,14 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
                         s.renderBackground(index === i, lastIndexRef.current === i)
                       ) : (
                         <>
-                          <img
+                          <Image
                             ref={(el) => {
                               if (el) bgRefs.current[i] = el;
                             }}
                             src={s.background}
                             alt={s.alt ?? ''}
+                            fill
+                            sizes="100vw"
                             className="fx-bg-img"
                           />
                           <div className="fx-bg-overlay" />

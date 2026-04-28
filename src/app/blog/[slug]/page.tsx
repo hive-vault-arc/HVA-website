@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getAllPosts } from '../../../lib/blog';
-import { buildPageMetadata, absoluteUrl, SITE_URL } from '../../../lib/seo';
+import { buildBreadcrumbSchema, buildPageMetadata, absoluteUrl, SITE_URL } from '../../../lib/seo';
 import JsonLd from '../../../components/JsonLd';
 import FaqSection from '../../../components/FaqSection';
 import BlogPostView from '../../../views/BlogPost';
@@ -30,6 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     ...base,
+    authors: [{ name: 'H.V.A Research Team', url: absoluteUrl('/whoweare/abouthva') }],
     openGraph: {
       ...base.openGraph,
       type: 'article',
@@ -88,10 +89,15 @@ export default async function BlogPostPage({ params }: Props) {
     },
     articleSection: post.category,
   };
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Blog', path: '/blog' },
+    { name: post.title, path: `/blog/${post.slug}` },
+  ]);
 
   return (
     <>
-      <JsonLd data={articleSchema} />
+      <JsonLd data={[articleSchema, breadcrumbSchema]} />
       <BlogPostView post={post} />
       {post.faqs && post.faqs.length > 0 && (
         <FaqSection faqs={post.faqs} heading="Questions About This Article" />

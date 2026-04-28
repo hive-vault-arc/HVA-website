@@ -88,8 +88,8 @@ export const RESEARCH_REPORTS: InsightCard[] = [
 ];
 
 export const INSIGHTS_CATEGORIES = [
-  { label: 'Blogs', href: '/insights/blogs' },
-  { label: 'Case Studies', href: '/insights/case-studies' },
+  { label: 'Blogs', href: '/blog' },
+  { label: 'Case Studies', href: '/case-studies' },
   { label: 'News Articles', href: '/insights/news-articles' },
   { label: 'Perspectives', href: '/insights/perspectives' },
   { label: 'Research Reports', href: '/insights/research-reports' },

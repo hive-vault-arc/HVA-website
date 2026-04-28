@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { MotionConfig, motion, useScroll, useTransform } from 'framer-motion';
 import {
   CalendarCheck,
@@ -192,13 +193,13 @@ const About: React.FC = () => {
                   </p>
                 </div>
                 <div className="relative aspect-square w-full bg-[#eceef0] overflow-hidden">
-                  <img
+                  <Image
                     src="/Images/team/hva-team-tangier-morocco.webp"
                     alt="H.V.A co-founders team in Tangier, Morocco — Khalid Chalhi, Ali Amrani, Oubay Ghamat"
+                    fill
                     className="object-cover w-full h-full"
-                    loading="eager"
-                    fetchPriority="high"
-                    decoding="async"
+                    sizes="(max-width: 1024px) 100vw, 42vw"
+                    priority
                   />
                 </div>
               </motion.div>
@@ -414,11 +415,11 @@ const About: React.FC = () => {
                     transition={{ duration: 0.35, delay: index * 0.07 }}
                   >
                     <div className="aspect-[4/5] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
-                      <img
+                      <Image
                         src={member.image}
                         alt={member.name}
-                        loading="lazy"
-                        decoding="async"
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         className="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-700"
                       />
                     </div>

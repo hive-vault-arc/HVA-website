@@ -49,8 +49,8 @@ const Navbar: React.FC = () => {
   ];
 
   const insightsItems = [
-    { path: '/insights/blogs', label: 'Blogs' },
-    { path: '/insights/case-studies', label: 'Case Studies' },
+    { path: '/blog', label: 'Blogs' },
+    { path: '/case-studies', label: 'Case Studies' },
     { path: '/insights/news-articles', label: 'News Articles' },
     { path: '/insights/perspectives', label: 'Perspectives' },
     { path: '/insights/research-reports', label: 'Research Reports' },
@@ -74,9 +74,7 @@ const Navbar: React.FC = () => {
   const isRouteActive = (path: string) => pathname === path || (path !== '/' && pathname?.startsWith(`${path}/`));
 
   const isInsightsItemActive = (path: string) =>
-    pathname === path ||
-    (path === '/insights/blogs' && pathname?.startsWith('/blog')) ||
-    (path === '/insights/case-studies' && pathname?.startsWith('/case-studies'));
+    pathname === path || (path !== '/' && pathname?.startsWith(`${path}/`));
 
   const isCapabilitiesItemActive = (path: string) => {
     if (path === '/capabilities/solution-programs') {

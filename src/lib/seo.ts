@@ -5,90 +5,24 @@ export const SUPPORTED_LOCALES = ['en', 'fr', 'ar', 'es'] as const;
 export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
 
 export const SITE_NAME = 'H.V.A';
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://hiva-nine.vercel.app';
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://hivevaultarc.com';
+export const LINKEDIN_URL = 'https://www.linkedin.com/company/hive-vault-arc';
 
 export const BUSINESS_NAME = 'Hive Vault Arc';
 export const DEFAULT_TITLE = `${SITE_NAME} | AI & Automation · Digital Transformation · Technology Consulting`;
 export const DEFAULT_DESCRIPTION = CANONICAL_MARKET_IDENTITY.longDescriptor;
 
 export const GLOBAL_KEYWORDS = [
-  'technology capabilities and services Morocco',
-  'digital transformation capabilities and services Morocco',
-  'AI automation capabilities and services Morocco',
-  'AI automation company Morocco',
+  'AI Morocco',
+  'AI consulting Tangier',
+  'WhatsApp AI agent',
   'AI agents Morocco',
-  'intelligent automation Morocco',
-  'AI-powered digital transformation Morocco',
-  'digital transformation company Morocco',
-  'digital transformation firm Tangier',
-  'technology consulting firm Morocco',
-  'digital transformation consulting Morocco',
-  'IT consulting and engineering Morocco',
-  'AI consulting and automation Morocco',
-  'custom software development Morocco',
-  'custom enterprise software Tangier',
-  'custom CRM development Morocco',
-  'CRM migration and integration Morocco',
-  'workflow automation consulting Morocco',
-  'business process automation Morocco',
-  'AI agent development Morocco',
-  'WhatsApp AI agent Morocco',
-  'AI receptionist Morocco',
-  'decision intelligence dashboards Morocco',
-  'mobile app development Morocco',
-  'web application engineering Morocco',
-  'SaaS development Morocco',
-  'legacy system modernization Morocco',
-  'application modernization Morocco',
-  'cloud infrastructure consulting Morocco',
-  'cloud migration Morocco',
-  'DevOps consulting Morocco',
-  'CI/CD engineering Morocco',
-  'data capabilities consulting Morocco',
-  'managed software maintenance Morocco',
-  'long-term technology partner Morocco',
-  'technology strategy consulting Tangier',
-  'capacites et services technologiques Maroc',
-  'capacites et services de transformation digitale Maroc',
-  'capacites et conseil informatique Maroc',
-  'cabinet conseil transformation digitale Maroc',
-  'conseil technologie et architecture Maroc',
-  'agents IA Tanger',
-  'agence IA Maroc',
-  'développement logiciel sur mesure Maroc',
-  'migration CRM Maroc',
-  'intégration CRM Maroc',
-  'déploiement cloud Maroc',
-  'conseil DevOps Maroc',
-  'modernisation informatique Maroc',
-  'القدرات والخدمات التقنية المغرب',
-  'القدرات وخدمات التحول الرقمي المغرب',
-  'وكلاء الذكاء الاصطناعي طنجة',
-  'استشارات التحول الرقمي المغرب',
-  'استشارات تقنية المعلومات المغرب',
-  'تطوير برمجيات مخصصة المغرب',
-  'ترحيل نظام CRM المغرب',
-  'تكامل CRM المغرب',
-  'نشر تطبيقات سحابية المغرب',
-  'خدمات ديف أوبس المغرب',
-  'consultoria transformacion digital marruecos',
-  'consultoria tecnologica marruecos',
-  'agencia de ia marruecos',
-  'desarrollo de software a medida marruecos',
-  'migracion de CRM marruecos',
-  'integracion de CRM marruecos',
-  'despliegue cloud marruecos',
-  'consultoria DevOps marruecos',
-  'capacidades y servicios tecnologicos marruecos',
-  'capacidades y servicios de transformacion digital marruecos',
-  'software company Tangier',
-  'AI agency Morocco',
-  'software agency Tangier',
-  'automation agency Morocco',
-  'automate WhatsApp customer service Morocco',
-  'WhatsApp Business API integration Morocco',
-  'AI lead qualification Morocco',
-  'AI appointment booking Morocco',
+  'digital transformation',
+  'custom software Morocco',
+  'CRM Morocco',
+  'IT consulting Morocco',
+  'ARC program HVA',
+  'Hive Vault Arc',
 ];
 
 type PageMetaInput = {
@@ -147,4 +81,17 @@ export function absoluteUrl(path: string): string {
 
 export function mergeKeywords(...groups: string[][]): string[] {
   return Array.from(new Set(groups.flat().map((keyword) => keyword.trim()).filter(Boolean)));
+}
+
+export function buildBreadcrumbSchema(crumbs: { name: string; path: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: crumbs.map((crumb, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: crumb.name,
+      item: absoluteUrl(crumb.path),
+    })),
+  };
 }

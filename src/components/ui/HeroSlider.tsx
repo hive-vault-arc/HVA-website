@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Bot, ChevronLeft, ChevronRight, Eye, Layers } from 'lucide-react';
 import type { ReactNode } from 'react';
@@ -67,7 +68,7 @@ const SLIDES: Slide[] = [
     primaryHref: '/contact',
     secondaryLabel: 'Meet Our Team',
     secondaryHref: '/whoweare/abouthva',
-    image: '/Images/hero/strategic-technology-consulting-tangier-morocco.png',
+    image: '/Images/hero/strategic-technology-consulting-tangier-morocco.webp',
     imageAlt: 'H.V.A consulting and engineering team in Tangier, Morocco',
     cardIcon: <Eye className="w-8 h-8 text-[#0984E3]" strokeWidth={1.5} />,
     cardTitle: 'Consulting That Delivers.',
@@ -85,14 +86,6 @@ const variants = {
 export default function HeroSlider() {
   const [active, setActive] = useState(0);
   const [direction, setDirection] = useState(1);
-
-  // Preload all slide images immediately on mount so they're ready before auto-advance fires
-  useEffect(() => {
-    SLIDES.forEach((s) => {
-      const img = new globalThis.Image();
-      img.src = s.image;
-    });
-  }, []);
 
   const navigate = useCallback((dir: number) => {
     setDirection(dir);
@@ -178,13 +171,13 @@ export default function HeroSlider() {
             {/* Right: image + floating card */}
             <div className="lg:col-span-5 relative mt-12 lg:mt-0">
               <div className="aspect-[4/5] overflow-hidden shadow-2xl">
-                <img
+                <Image
                   src={slide.image}
                   alt={slide.imageAlt}
+                  fill
                   className="w-full h-full object-cover hero-image-animate"
-                  loading="eager"
-                  fetchPriority={active === 0 ? 'high' : 'auto'}
-                  decoding="async"
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                  priority={active === 0}
                 />
               </div>
               {/* Asymmetric floating card */}

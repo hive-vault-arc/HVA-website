@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { BarChart3, MessageSquare, Network, ShieldCheck, ArrowUpRight } from 'lucide-react';
 import BottomCTA from '../components/BottomCTA';
@@ -123,10 +124,12 @@ export default function Industries() {
               transition={{ duration: 0.5 }}
               className="md:col-span-7 group bg-white overflow-hidden flex flex-col md:flex-row"
             >
-              <div className="w-full md:w-1/2 h-64 md:h-auto overflow-hidden shrink-0">
-                <img
+              <div className="relative w-full md:w-1/2 h-64 md:h-auto overflow-hidden shrink-0">
+                <Image
                   src={IMGS.realEstate}
                   alt="Real estate CRM lead operations Morocco"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
@@ -163,9 +166,11 @@ export default function Industries() {
               transition={{ duration: 0.5 }}
               className="md:col-span-5 group relative overflow-hidden bg-[#0F172A] flex flex-col justify-between min-h-[320px]"
             >
-              <img
+              <Image
                 src={IMGS.healthcare}
                 alt="Healthcare clinical operations dashboard Morocco"
+                fill
+                sizes="(max-width: 768px) 100vw, 42vw"
                 className="absolute inset-0 w-full h-full object-cover opacity-35 transition-transform duration-700 group-hover:scale-105"
               />
               <div className="relative z-10 p-10 flex flex-col h-full justify-between">
@@ -199,10 +204,12 @@ export default function Industries() {
               transition={{ duration: 0.5 }}
               className="md:col-span-4 group bg-white overflow-hidden flex flex-col"
             >
-              <div className="w-full h-52 overflow-hidden shrink-0">
-                <img
+              <div className="relative w-full h-52 overflow-hidden shrink-0">
+                <Image
                   src={IMGS.construction}
                   alt="Construction project management automation Morocco"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
@@ -233,10 +240,12 @@ export default function Industries() {
               transition={{ duration: 0.5 }}
               className="md:col-span-4 group bg-white overflow-hidden flex flex-col"
             >
-              <div className="w-full h-52 overflow-hidden shrink-0">
-                <img
+              <div className="relative w-full h-52 overflow-hidden shrink-0">
+                <Image
                   src={IMGS.logistics}
                   alt="Logistics dispatch workflow automation Morocco"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
@@ -269,10 +278,12 @@ export default function Industries() {
               transition={{ duration: 0.5 }}
               className="md:col-span-4 group bg-white overflow-hidden flex flex-col"
             >
-              <div className="w-full h-52 overflow-hidden shrink-0">
-                <img
+              <div className="relative w-full h-52 overflow-hidden shrink-0">
+                <Image
                   src={IMGS.finance}
                   alt="Finance brokerage deal pipeline Morocco"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
@@ -302,10 +313,12 @@ export default function Industries() {
               transition={{ duration: 0.5 }}
               className="md:col-span-12 group bg-white overflow-hidden flex flex-col md:flex-row-reverse border border-[#e2e8f0]"
             >
-              <div className="w-full md:w-1/3 h-64 md:h-auto overflow-hidden shrink-0">
-                <img
+              <div className="relative w-full md:w-1/3 h-64 md:h-auto overflow-hidden shrink-0">
+                <Image
                   src={IMGS.sme}
                   alt="SME capabilities IT modernization Morocco"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
@@ -343,9 +356,12 @@ export default function Industries() {
           {/* Image left with decorative offset */}
           <div className="lg:w-1/2">
             <div className="relative">
-              <img
+              <Image
                 src={IMGS.rdLab}
                 alt="HVA AI software agency research Tangier Morocco"
+                width={1200}
+                height={800}
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="w-full shadow-2xl relative z-10"
               />
               <div className="absolute -top-6 -left-6 w-32 h-32 bg-[#e6e8ea] z-0" />

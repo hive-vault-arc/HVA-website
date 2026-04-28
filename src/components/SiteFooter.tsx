@@ -3,7 +3,7 @@ import { Globe, Mail, Phone } from 'lucide-react';
 import { FiLinkedin } from 'react-icons/fi';
 import Logo from './Logo';
 import FooterSpotlight from './ui/FooterSpotlight';
-import { SITE_URL } from '../lib/seo';
+import { LINKEDIN_URL, SITE_URL } from '../lib/seo';
 import { CANONICAL_MARKET_IDENTITY } from '../lib/positioning';
 
 const pageLinks = [
@@ -93,7 +93,7 @@ export default function SiteFooter() {
                 <Globe className="h-4 w-4" />
               </a>
               <a
-                href="https://www.linkedin.com"
+                href={LINKEDIN_URL}
                 target="_blank"
                 rel="noreferrer noopener"
                 className="site-footer__icon-link sharp-edge"

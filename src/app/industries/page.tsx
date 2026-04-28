@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Industries from '../../views/Industries';
 import JsonLd from '../../components/JsonLd';
-import { GLOBAL_KEYWORDS, SITE_URL, buildPageMetadata, mergeKeywords } from '../../lib/seo';
+import { GLOBAL_KEYWORDS, SITE_URL, buildBreadcrumbSchema, buildPageMetadata, mergeKeywords } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'Industries | Sector-Focused Transformation Programs',
@@ -29,10 +29,14 @@ export default function IndustriesPage() {
       'Industry-focused transformation programs delivered by H.V.A across real estate, healthcare, construction, logistics, finance and brokerage, and SME operations.',
     url: `${SITE_URL}/industries`,
   };
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Industries', path: '/industries' },
+  ]);
 
   return (
     <>
-      <JsonLd data={pageSchema} />
+      <JsonLd data={[pageSchema, breadcrumbSchema]} />
       <Industries />
     </>
   );

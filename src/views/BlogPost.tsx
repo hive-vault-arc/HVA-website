@@ -200,14 +200,21 @@ export default function BlogPostView({ post }: { post: BlogPost }) {
     <ArticleDetailPage
       backHref="/blog"
       backLabel="All articles"
+      breadcrumbs={[
+        { label: 'Home', href: '/' },
+        { label: 'Blog', href: '/blog' },
+        { label: post.title },
+      ]}
       eyebrow={post.category}
       publishedAt={post.publishedAt}
       readTime={post.readTime}
       title={post.title}
       subtitle={post.subtitle}
       author={post.authors[0]}
+      authorHref="/whoweare/abouthva"
       coverImage={post.coverImage}
       coverAlt={post.title}
+      contentAsArticle
       showAboutStrip
       relatedItems={related.map((p) => ({
         href: `/blog/${p.slug}`,

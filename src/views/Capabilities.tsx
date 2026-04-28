@@ -217,6 +217,19 @@ export default function Capabilities() {
                   </div>
                   <h3 className="font-headline text-xl leading-tight text-[#0F172A]">{pillar.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-[#475569]">{pillar.summary}</p>
+                  {pillar.landingLinks.length > 0 && (
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {pillar.landingLinks.map((item) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#2563EB] hover:text-[#1d4ed8]"
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 {/* ── Hover overlay — fades in, no layout impact ── */}
@@ -233,6 +246,24 @@ export default function Capabilities() {
                       </li>
                     ))}
                   </ul>
+                  {pillar.landingLinks.length > 0 && (
+                    <div className="mt-4 border-t border-[#2563EB]/15 pt-3">
+                      <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.18em] text-[#2563EB]/70">
+                        Service Pages
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {pillar.landingLinks.map((item) => (
+                          <Link
+                            key={`${item.href}-hover`}
+                            href={item.href}
+                            className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#2563EB] hover:text-[#1d4ed8]"
+                          >
+                            {item.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </motion.article>
             ))}

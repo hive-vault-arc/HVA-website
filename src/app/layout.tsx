@@ -1,18 +1,18 @@
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import { Inter, Newsreader } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/react';
 import Layout from '../components/Layout';
 import JsonLd from '../components/JsonLd';
 import {
-  BUSINESS_NAME,
   DEFAULT_DESCRIPTION,
   DEFAULT_TITLE,
   GLOBAL_KEYWORDS,
+  LINKEDIN_URL,
   SITE_NAME,
   SITE_URL,
   absoluteUrl,
 } from '../lib/seo';
-import { CANONICAL_MARKET_IDENTITY } from '../lib/positioning';
 import './globals.css';
 
 const inter = Inter({
@@ -79,6 +79,7 @@ export const metadata: Metadata = {
     google: '10960c2117d3f45e',
   },
   other: {
+    'article:publisher': LINKEDIN_URL,
     'msapplication-TileColor': '#F5F6FA',
   },
 };
@@ -94,82 +95,109 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     '@context': 'https://schema.org',
     '@type': ['Organization', 'ProfessionalService'],
     '@id': `${SITE_URL}/#organization`,
-    name: BUSINESS_NAME,
-    alternateName: ['H.V.A', 'Hive Vault Arc', 'HIVA', 'H.V.A Capabilities and Services'],
+    name: 'Hive Vault Arc',
+    alternateName: 'H.V.A',
     url: SITE_URL,
-    description: `${CANONICAL_MARKET_IDENTITY.longDescriptor} Our capabilities are our services.`,
     logo: {
       '@type': 'ImageObject',
       url: absoluteUrl('/Images/favico/android-chrome-512x512.png'),
+      width: 512,
+      height: 512,
     },
-    image: absoluteUrl('/Images/brand/hva-ai-software-agency-tangier.webp'),
+    image: absoluteUrl('/Images/media/og-default.png'),
+    description:
+      'AI & digital transformation consulting firm based in Tangier, Morocco. Specializing in custom AI agents, WhatsApp automation, ARC programs, and SaaS platform development for businesses in Morocco, France, and globally.',
+    foundingDate: '2026',
+    founders: [
+      {
+        '@type': 'Person',
+        name: 'Khalid',
+        jobTitle: 'Founder & CEO',
+      },
+    ],
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Tangier',
+      addressRegion: 'Tanger-Tetouan-Al Hoceima',
+      addressCountry: 'MA',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: 35.7595,
+      longitude: -5.834,
+    },
     areaServed: [
-      { '@type': 'City', name: 'Tangier' },
       { '@type': 'Country', name: 'Morocco' },
-      { '@type': 'Country', name: 'United States' },
       { '@type': 'Country', name: 'France' },
-      { '@type': 'Country', name: 'Spain' },
-      { '@type': 'Country', name: 'United Kingdom' },
-      { '@type': 'Country', name: 'Germany' },
-      { '@type': 'Country', name: 'Netherlands' },
-      { '@type': 'Country', name: 'Italy' },
-      { '@type': 'Country', name: 'Canada' },
-      { '@type': 'Country', name: 'Australia' },
-      { '@type': 'City', name: 'casablanca' },
-      { '@type': 'City', name: 'rabat' },
-      { '@type': 'City', name: 'marrakech' },
-      { '@type': 'City', name: 'fes' },
-      { '@type': 'City', name: 'agadir' },
-      { '@type': 'City', name: 'Madrid' },
-      { '@type': 'City', name: 'Paris' },
-      { '@type': 'City', name: 'London' },
-      { '@type': 'City', name: 'Berlin' },
-      { '@type': 'City', name: 'Amsterdam' },
-      { '@type': 'City', name: 'Rome' },
-      { '@type': 'City', name: 'New York' },
-      { '@type': 'City', name: 'Los Angeles' },
-      { '@type': 'City', name: 'Toronto' },
-      { '@type': 'City', name: 'Sydney' },
+      { '@type': 'AdministrativeArea', name: 'North Africa' },
+      { '@type': 'AdministrativeArea', name: 'Europe' },
     ],
     serviceType: [
-      'AI Agent Development and Deployment',
-      'Intelligent Workflow Automation',
-      'AI-Powered Digital Transformation',
-      'Digital Transformation Consulting',
-      'Technology Consulting and IT Advisory',
+      'AI Consulting',
+      'Digital Transformation',
+      'WhatsApp AI Agents',
       'Custom Software Development',
-      'CRM Engineering and Integration',
-      'Legacy IT Modernization',
-      'Cloud Infrastructure and DevOps',
-      'Data Capabilities and Decision Intelligence',
-      'Custom SaaS Development',
-      'Web Application Development',
-      'Mobile Application Development',
+      'SaaS Platform Development',
     ],
+    email: 'contact@hivevaultarc.com',
     telephone: ['+212688270772', '+212691918296'],
-    priceRange: '$$',
-    foundingDate: '2026',
-    knowsLanguage: ['en', 'fr', 'ar', 'es'],
-    sameAs: [],
+    sameAs: [
+      LINKEDIN_URL,
+      'https://github.com/hive-vault-arc',
+      // Add Twitter/X, Instagram, Crunchbase URLs here when accounts exist
+    ],
+    knowsAbout: [
+      'Artificial Intelligence',
+      'Machine Learning',
+      'Digital Transformation',
+      'WhatsApp Business API',
+      'Real Estate Technology',
+      'SaaS Development',
+    ],
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'H.V.A Services',
+      itemListElement: [
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'ARC Program',
+            description: 'Full AI & digital transformation engagement: Audit, Roadmap, Craft',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'WhatsApp AI Agent',
+            description:
+              'Intelligent WhatsApp automation for lead qualification, customer support, and sales',
+          },
+        },
+      ],
+    },
   };
 
   const websiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     '@id': `${SITE_URL}/#website`,
-    name: 'H.V.A',
-    alternateName: ['Hive Vault Arc', 'hiva-nine.vercel.app', 'HIVA'],
     url: SITE_URL,
-    description: `${CANONICAL_MARKET_IDENTITY.longDescriptor} Our capabilities are our services.`,
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: { '@type': 'EntryPoint', urlTemplate: `${SITE_URL}/?q={search_term_string}` },
-      'query-input': 'required name=search_term_string',
-    },
+    name: 'Hive Vault Arc',
+    description: 'AI & digital transformation consulting for Moroccan and global businesses',
+    inLanguage: ['en', 'fr', 'ar', 'es'],
     publisher: {
       '@id': `${SITE_URL}/#organization`,
     },
-    inLanguage: ['en', 'fr', 'ar', 'es'],
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${SITE_URL}/blog?q={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
   };
 
   return (
@@ -183,6 +211,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         <JsonLd data={organizationSchema} />
         <JsonLd data={websiteSchema} />
         <Layout>{children}</Layout>
+        <Analytics />
       </body>
     </html>
   );

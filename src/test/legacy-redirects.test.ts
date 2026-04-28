@@ -1,12 +1,22 @@
 import { describe, expect, it } from 'vitest';
 import nextConfig from '../../next.config';
 
-describe('Legacy Services Redirect Rules', () => {
-  it('contains permanent redirects from legacy services URLs to capabilities URLs', async () => {
+describe('Legacy Redirect Rules', () => {
+  it('contains permanent redirects from legacy URLs to canonical destinations', async () => {
     const redirects = await (nextConfig.redirects?.() ?? Promise.resolve([]));
 
     expect(redirects).toEqual(
       expect.arrayContaining([
+        {
+          source: '/insights/blogs',
+          destination: '/blog',
+          permanent: true,
+        },
+        {
+          source: '/insights/case-studies',
+          destination: '/case-studies',
+          permanent: true,
+        },
         {
           source: '/services',
           destination: '/capabilities',

@@ -12,12 +12,12 @@ import { getAllCaseStudies } from '../lib/proof';
 const CATEGORY_CARDS = [
   {
     label: 'Blogs',
-    href: '/insights/blogs',
+    href: '/blog',
     image: '/Images/insights/hva-insights-blog-articles-tangier-morocco.webp',
   },
   {
     label: 'Case Studies',
-    href: '/insights/case-studies',
+    href: '/case-studies',
     image: '/Images/insights/hva-case-studies-ai-transformation-morocco.webp',
   },
   {

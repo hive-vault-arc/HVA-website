@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { MotionConfig, motion, useScroll, useTransform } from 'framer-motion';
 import {
   ArrowRight,
@@ -129,13 +130,15 @@ const Portfolio: React.FC = () => {
               {/* Image */}
               <div className="lg:col-span-7 relative group pb-10 pr-8">
                 <div className="absolute -inset-4 bg-[#2563EB]/5 transition-all duration-300 group-hover:bg-[#2563EB]/10" />
-                <img
-                  alt="Custom AI agent WhatsApp assistant built by H.V.A Morocco"
-                  src="/Images/blog/custom-ai-agent-morocco.webp"
-                  className="relative w-full h-[260px] sm:h-[380px] md:h-[500px] object-cover shadow-lg"
-                  loading="lazy"
-                  decoding="async"
-                />
+                <div className="relative w-full h-[260px] sm:h-[380px] md:h-[500px] shadow-lg">
+                  <Image
+                    alt="Custom AI agent WhatsApp assistant built by H.V.A Morocco"
+                    src="/Images/blog/custom-ai-agent-morocco.webp"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 58vw"
+                    className="relative w-full h-full object-cover"
+                  />
+                </div>
                 {/* Floating info card */}
                 <div className="absolute -bottom-4 -right-4 w-52 bg-white p-6 shadow-xl hidden md:block">
                   <Bot className="h-8 w-8 text-[#2563EB] mb-3" />
@@ -270,13 +273,15 @@ const Portfolio: React.FC = () => {
 
                 {/* Image */}
                 <div className="lg:col-span-7 relative order-1 lg:order-2 pt-10 pl-8">
-                  <img
-                    alt="Custom real estate CRM system built by H.V.A for Moroccan businesses"
-                    src="/Images/blog/custom-crm-system-morocco.webp"
-                    className="w-full h-[260px] sm:h-[380px] md:h-[500px] object-cover shadow-2xl"
-                    loading="lazy"
-                    decoding="async"
-                  />
+                  <div className="relative w-full h-[260px] sm:h-[380px] md:h-[500px] shadow-2xl">
+                    <Image
+                      alt="Custom real estate CRM system built by H.V.A for Moroccan businesses"
+                      src="/Images/blog/custom-crm-system-morocco.webp"
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 58vw"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                   {/* Floating header card — blue */}
                   <div className="absolute -top-4 -left-4 bg-[#2563EB] text-white p-8 hidden md:block">
                     <h3 className="font-serif text-2xl mb-2">Architectural Precision</h3>

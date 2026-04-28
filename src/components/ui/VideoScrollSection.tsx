@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useLayoutEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -73,6 +73,7 @@ export default function VideoScrollSection({
   topBg = '#0F172A',
   bottomBg = '#F5F6FA',
 }: Props) {
+  const [activeVideoSrc, setActiveVideoSrc] = useState<string | null>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -86,6 +87,21 @@ export default function VideoScrollSection({
   const isSeekingRef = useRef(false);
   // Visibility gate — skip expensive video work when section is off-screen.
   const isVisibleRef = useRef(false);
+
+  // Delay attaching the heavy video source until this section nears the viewport.
+  useEffect(() => {
+    if (activeVideoSrc || !wrapperRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        setActiveVideoSrc(videoSrc);
+        observer.disconnect();
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(wrapperRef.current);
+    return () => observer.disconnect();
+  }, [activeVideoSrc, videoSrc]);
 
   // ── Canvas RAF loop ──────────────────────────────────────────────────────────
   useEffect(() => {
@@ -187,7 +203,7 @@ export default function VideoScrollSection({
     const wrapper = wrapperRef.current;
     const sticky = stickyRef.current;
     const video = videoRef.current;
-    if (!wrapper || !sticky || !video) return;
+    if (!wrapper || !sticky || !video || !activeVideoSrc) return;
 
     // Initial panel states — runs before paint, no flash
     panelRefs.current.forEach((el, i) => {
@@ -244,6 +260,7 @@ export default function VideoScrollSection({
       }, wrapper);
     };
 
+    video.src = activeVideoSrc;
     video.load();
     if (video.readyState >= 1) {
       setupTimeline();
@@ -252,7 +269,7 @@ export default function VideoScrollSection({
     }
 
     return () => ctx?.revert();
-  }, [videoSrc]);
+  }, [activeVideoSrc]);
 
   return (
     <div
@@ -287,10 +304,10 @@ export default function VideoScrollSection({
         {/* Hidden video — GSAP animates currentTime; canvas reads the decoded frames */}
         <video
           ref={videoRef}
-          src={videoSrc}
+          src={activeVideoSrc ?? undefined}
           muted
           playsInline
-          preload="auto"
+          preload="none"
           tabIndex={-1}
           style={{
             position: 'absolute',

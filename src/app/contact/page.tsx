@@ -3,7 +3,7 @@ import Contact from '../../views/Contact';
 import JsonLd from '../../components/JsonLd';
 import FaqSection from '../../components/FaqSection';
 import { CONTACT_FAQS } from '../../data/faqs';
-import { GLOBAL_KEYWORDS, SITE_URL, buildPageMetadata, mergeKeywords } from '../../lib/seo';
+import { GLOBAL_KEYWORDS, SITE_URL, buildBreadcrumbSchema, buildPageMetadata, mergeKeywords } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'Contact | Start a Technology and Transformation Discovery',
@@ -41,10 +41,14 @@ export default function Page() {
       'cloud and modernization consultation',
     ]),
   };
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Contact', path: '/contact' },
+  ]);
 
   return (
     <>
-      <JsonLd data={contactSchema} />
+      <JsonLd data={[contactSchema, breadcrumbSchema]} />
       <Contact />
       <FaqSection faqs={CONTACT_FAQS} />
     </>

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 type ResponsiveSource = {
   srcSet: string;
@@ -29,9 +30,15 @@ const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   eager = false,
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [resolvedSrc, setResolvedSrc] = useState(() => sources[0]?.srcSet.split(',')[0]?.trim().split(' ')[0] || src);
+
+  useEffect(() => {
+    setResolvedSrc(sources[0]?.srcSet.split(',')[0]?.trim().split(' ')[0] || src);
+    setIsLoaded(false);
+  }, [src, sources]);
 
   return (
-    <div className={className}>
+    <div className={['relative', className].filter(Boolean).join(' ')}>
       {!isLoaded && (
         <div
           aria-hidden="true"
@@ -39,32 +46,19 @@ const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
         />
       )}
 
-      <picture>
-        {sources.map((source) => (
-          <source
-            key={`${source.srcSet}-${source.media ?? ''}-${source.type ?? ''}`}
-            srcSet={source.srcSet}
-            media={source.media}
-            type={source.type}
-            sizes={source.sizes ?? sizes}
-          />
-        ))}
-
-        <img
-          src={src}
-          alt={alt}
-          className={imgClassName}
-          loading={eager ? 'eager' : 'lazy'}
-          decoding="async"
-          sizes={sizes}
-          onLoad={() => setIsLoaded(true)}
-          onError={(event) => {
-            const img = event.currentTarget;
-            if (!fallbackSrc || img.src.includes(fallbackSrc)) return;
-            img.src = fallbackSrc;
-          }}
-        />
-      </picture>
+      <Image
+        src={resolvedSrc}
+        alt={alt}
+        fill
+        className={imgClassName}
+        sizes={sizes}
+        priority={eager}
+        onLoad={() => setIsLoaded(true)}
+        onError={() => {
+          if (!fallbackSrc || resolvedSrc === fallbackSrc) return;
+          setResolvedSrc(fallbackSrc);
+        }}
+      />
     </div>
   );
 };

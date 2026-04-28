@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useRef, useState } from 'react';
+import Image from 'next/image';
 import { ArrowRight, Globe2, Mail, Phone } from 'lucide-react';
 import { MotionConfig, motion, useScroll, useTransform } from 'framer-motion';
 import { useAnimationQuality } from '../lib/animationQuality';
@@ -175,12 +176,12 @@ const Contact: React.FC = () => {
               {/* Map */}
               <div className="bg-[#eceef0] aspect-square w-full relative overflow-hidden group">
                 <div className="absolute inset-0 bg-neutral-200/50 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-0" />
-                <img
+                <Image
                   src="/Images/locations/tangier-morocco-office-location.webp"
                   alt="Map of Tangier, Morocco — H.V.A operating region"
+                  fill
                   className="w-full h-full object-cover grayscale opacity-80 transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy"
-                  decoding="async"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
                 />
                 <div className="absolute bottom-6 left-6 bg-white px-4 py-2 shadow-sm">
                   <span className="text-xs font-label font-bold uppercase tracking-tighter text-[#0F172A]">

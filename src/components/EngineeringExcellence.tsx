@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { ContainerScroll } from "./ui/container-scroll-animation";
 
 export default function EngineeringExcellence() {
@@ -18,14 +19,16 @@ export default function EngineeringExcellence() {
           </div>
         }
       >
-        <img
-          src='/Images/brand/ai-analytics-dashboard-business.jpg'
-          alt="AI analytics dashboard built by H.V.A for business intelligence"
-          className="mx-auto rounded-2xl object-contain h-full w-full"
-          loading="lazy"
-          decoding="async"
-          draggable={false}
-        />
+        <div className="relative mx-auto h-full w-full overflow-hidden rounded-2xl">
+          <Image
+            src="/Images/brand/ai-analytics-dashboard-business.jpg"
+            alt="AI analytics dashboard built by H.V.A for business intelligence"
+            fill
+            className="object-contain"
+            sizes="(max-width: 1024px) 100vw, 80vw"
+            draggable={false}
+          />
+        </div>
       </ContainerScroll>
     </div>
   );

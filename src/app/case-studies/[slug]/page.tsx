@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import JsonLd from '../../../components/JsonLd';
 import { getAllCaseStudies } from '../../../lib/proof';
-import { SITE_URL, absoluteUrl, buildPageMetadata } from '../../../lib/seo';
+import { SITE_URL, absoluteUrl, buildBreadcrumbSchema, buildPageMetadata } from '../../../lib/seo';
 import CaseStudyDetail from '../../../views/CaseStudyDetail';
 
 type Props = {
@@ -74,15 +74,11 @@ export default async function CaseStudyDetailPage({ params }: Props) {
     },
   };
 
-  const breadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
-      { '@type': 'ListItem', position: 2, name: 'Case Studies', item: `${SITE_URL}/case-studies` },
-      { '@type': 'ListItem', position: 3, name: study.title, item: `${SITE_URL}/case-studies/${study.slug}` },
-    ],
-  };
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Case Studies', path: '/case-studies' },
+    { name: study.title, path: `/case-studies/${study.slug}` },
+  ]);
 
   return (
     <>

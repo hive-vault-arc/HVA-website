@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import {
   motion,
   useScroll,
@@ -138,15 +139,16 @@ export const ProductCard = ({
     >
       <Link
         href={product.link}
-        className="block group-hover/product:shadow-2xl"
+        className="relative block h-full w-full group-hover/product:shadow-2xl"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <img
+        <Image
           src={product.thumbnail}
+          fill
+          sizes="(max-width: 768px) 100vw, 30rem"
           className="object-cover object-left-top absolute h-full w-full inset-0 rounded-3xl"
           alt={product.title}
-          loading="lazy"
         />
       </Link>
       <div className="absolute inset-0 h-full w-full opacity-0 group-hover/product:opacity-80 bg-gradient-to-t from-black/90 to-transparent pointer-events-none transition-opacity duration-300"></div>

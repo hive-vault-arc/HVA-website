@@ -53,8 +53,26 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+    ],
+  },
   async redirects() {
     return [
+      {
+        source: '/insights/blogs',
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/insights/case-studies',
+        destination: '/case-studies',
+        permanent: true,
+      },
       {
         source: '/services',
         destination: '/capabilities',

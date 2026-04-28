@@ -26,6 +26,5 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: 'Applebot', allow: crawlAllowPaths },
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,
-    host: SITE_URL,
   };
 }

@@ -22,6 +22,7 @@ export type CapabilityBriefSection = {
   title: string;
   summary: string;
   bullets: string[];
+  landingLinks: { label: string; href: string }[];
 };
 
 export type CapabilityDetailSection = CapabilityDomain;
@@ -191,6 +192,17 @@ export const CAPABILITY_BRIEF_SECTIONS: CapabilityBriefSection[] = CAPABILITY_DO
   title: domain.title,
   summary: domain.briefLine,
   bullets: domain.briefBullets.slice(0, 3),
+  landingLinks:
+    domain.id === 'ai-systems'
+      ? [
+          { label: 'AI Agents Tangier', href: '/ai-agents-tangier' },
+          { label: 'AI Agents Morocco', href: '/ai-agents-morocco' },
+        ]
+      : domain.id === 'consulting'
+      ? [{ label: 'IT Consulting Tangier', href: '/it-consulting-tangier' }]
+      : domain.id === 'engineering'
+      ? [{ label: 'Custom Software Morocco', href: '/custom-software-morocco' }]
+      : [],
 }));
 
 export const CAPABILITY_DETAIL_SECTIONS: CapabilityDetailSection[] = CAPABILITY_DOMAINS;

@@ -3,7 +3,14 @@ import Capabilities from '../../views/Capabilities';
 import JsonLd from '../../components/JsonLd';
 import FaqSection from '../../components/FaqSection';
 import { CAPABILITIES_FAQS } from '../../data/faqs';
-import { GLOBAL_KEYWORDS, SITE_URL, absoluteUrl, buildPageMetadata, mergeKeywords } from '../../lib/seo';
+import {
+  GLOBAL_KEYWORDS,
+  SITE_URL,
+  absoluteUrl,
+  buildBreadcrumbSchema,
+  buildPageMetadata,
+  mergeKeywords,
+} from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'Capabilities | 8 Capability Domains and Solution Program Overview',
@@ -116,24 +123,10 @@ export default function Page() {
     ],
   };
 
-  const breadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: `${SITE_URL}/`,
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Capabilities',
-        item: `${SITE_URL}/capabilities`,
-      },
-    ],
-  };
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Capabilities', path: '/capabilities' },
+  ]);
 
   return (
     <>
@@ -143,4 +136,3 @@ export default function Page() {
     </>
   );
 }
-

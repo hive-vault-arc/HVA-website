@@ -25,11 +25,17 @@ type BottomCtaConfig = {
   secondaryHref?: string;
 };
 
+type BreadcrumbItem = {
+  label: string;
+  href?: string;
+};
+
 type Props = {
   // Breadcrumb
   backHref: string;
   backLabel: string;
   crumbText?: string;
+  breadcrumbs?: BreadcrumbItem[];
 
   // Hero meta
   eyebrow: string;
@@ -43,6 +49,7 @@ type Props = {
 
   // Author (blogs only)
   author?: { name: string; role: string; initials: string };
+  authorHref?: string;
 
   // Cover image
   coverImage?: string;
@@ -51,6 +58,7 @@ type Props = {
   // Content slots
   children: React.ReactNode;
   sidebar?: React.ReactNode;
+  contentAsArticle?: boolean;
 
   // About strip
   showAboutStrip?: boolean;
@@ -65,10 +73,14 @@ type Props = {
   bottomCta?: BottomCtaConfig;
 };
 
-/* ── Date helper ─────────────────────────────────────────────────────────── */
+/* ── Date helpers ────────────────────────────────────────────────────────── */
 
-function fmtDate(iso: string) {
-  return new Date(iso).toLocaleDateString('en-GB', {
+function toIsoDateTime(input: string) {
+  return input.includes('T') ? input : `${input}T00:00:00Z`;
+}
+
+function fmtDate(isoDateTime: string) {
+  return new Date(isoDateTime).toLocaleDateString('en-US', {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
@@ -81,6 +93,7 @@ export default function ArticleDetailPage({
   backHref,
   backLabel,
   crumbText,
+  breadcrumbs,
   eyebrow,
   publishedAt,
   readTime,
@@ -88,10 +101,12 @@ export default function ArticleDetailPage({
   title,
   subtitle,
   author,
+  authorHref = '/whoweare/abouthva',
   coverImage,
   coverAlt,
   children,
   sidebar,
+  contentAsArticle = false,
   showAboutStrip = false,
   relatedItems = [],
   relatedTitle = 'Related Insights',
@@ -101,6 +116,15 @@ export default function ArticleDetailPage({
 }: Props) {
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const isoDate = publishedAt ? toIsoDateTime(publishedAt) : undefined;
+  const resolvedBreadcrumbs =
+    breadcrumbs && breadcrumbs.length > 0
+      ? breadcrumbs
+      : [
+          { label: 'Home', href: '/' },
+          { label: backLabel, href: backHref },
+          { label: crumbText ?? title },
+        ];
 
   return (
     <main className="bg-[#f7f9fb]">
@@ -116,27 +140,44 @@ export default function ArticleDetailPage({
         <div className="max-w-5xl mx-auto">
 
           {/* Breadcrumb */}
-          <div className="flex items-center gap-3 mb-8">
-            <Link
-              href={backHref}
-              className="inline-flex items-center gap-2 text-[#76777d] hover:text-[#0F172A] transition-colors text-sm"
-              style={{ fontFamily: 'var(--font-body)' }}
-            >
-              <ArrowLeft className="w-4 h-4" />
-              {backLabel}
-            </Link>
-            {crumbText && (
-              <>
-                <span className="text-[#c6c6cd] text-xs">/</span>
-                <span
-                  className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#76777d] truncate max-w-[240px]"
-                  style={{ fontFamily: 'var(--font-body)' }}
-                >
-                  {crumbText}
-                </span>
-              </>
-            )}
-          </div>
+          <nav aria-label="Breadcrumb" className="mb-8">
+            <ol className="flex flex-wrap items-center gap-2 text-sm text-[#76777d]">
+              {resolvedBreadcrumbs.map((crumb, index) => {
+                const isCurrent = index === resolvedBreadcrumbs.length - 1;
+                return (
+                  <li key={`${crumb.label}-${index}`} className="flex items-center gap-2">
+                    {index === 1 && crumb.href ? (
+                      <Link
+                        href={crumb.href}
+                        className="inline-flex items-center gap-2 hover:text-[#0F172A] transition-colors"
+                        style={{ fontFamily: 'var(--font-body)' }}
+                      >
+                        <ArrowLeft className="w-4 h-4" />
+                        {crumb.label}
+                      </Link>
+                    ) : crumb.href && !isCurrent ? (
+                      <Link
+                        href={crumb.href}
+                        className="hover:text-[#0F172A] transition-colors"
+                        style={{ fontFamily: 'var(--font-body)' }}
+                      >
+                        {crumb.label}
+                      </Link>
+                    ) : (
+                      <span
+                        aria-current={isCurrent ? 'page' : undefined}
+                        className={isCurrent ? 'font-medium text-[#191c1e] truncate max-w-[240px]' : undefined}
+                        style={{ fontFamily: 'var(--font-body)' }}
+                      >
+                        {crumb.label}
+                      </span>
+                    )}
+                    {!isCurrent && <span aria-hidden="true" className="text-[#c6c6cd] text-xs">/</span>}
+                  </li>
+                );
+              })}
+            </ol>
+          </nav>
 
           {/* Meta row */}
           <div
@@ -144,10 +185,12 @@ export default function ArticleDetailPage({
             style={{ fontFamily: 'var(--font-body)' }}
           >
             <span style={{ color: '#2563EB' }}>{eyebrow}</span>
-            {publishedAt && (
+            {isoDate && (
               <>
                 <span className="w-1 h-1 rounded-full bg-[#c6c6cd]" />
-                <span className="text-[#76777d]">{fmtDate(publishedAt)}</span>
+                <time dateTime={isoDate} className="text-[#76777d]">
+                  {fmtDate(isoDate)}
+                </time>
               </>
             )}
             {readTime && (
@@ -199,14 +242,17 @@ export default function ArticleDetailPage({
               <div className="w-10 h-10 bg-[#0F172A] flex items-center justify-center text-white text-xs font-bold shrink-0">
                 {author.initials}
               </div>
-              <div>
-                <p className="text-sm font-semibold text-[#191c1e]" style={{ fontFamily: 'var(--font-body)' }}>
-                  {author.name}
+              <address className="not-italic">
+                <p className="text-sm text-[#191c1e]" style={{ fontFamily: 'var(--font-body)' }}>
+                  <span>By </span>
+                  <Link rel="author" href={authorHref} className="text-[#2563EB] hover:underline">
+                    {author.name}
+                  </Link>
                 </p>
                 <p className="text-xs text-[#76777d]" style={{ fontFamily: 'var(--font-body)' }}>
                   {author.role}
                 </p>
-              </div>
+              </address>
             </motion.div>
           )}
         </div>
@@ -243,13 +289,25 @@ export default function ArticleDetailPage({
 
           {/* Main content — 9 cols (or full 12 if no sidebar) */}
           <div className={sidebar ? 'md:col-span-9 order-1 md:order-2' : 'md:col-span-12'}>
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: 'easeOut' }}
-            >
-              {children}
-            </motion.div>
+            {contentAsArticle ? (
+              <motion.article
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
+                itemScope
+                itemType="https://schema.org/Article"
+              >
+                {children}
+              </motion.article>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
+              >
+                {children}
+              </motion.div>
+            )}
           </div>
         </div>
       </section>

@@ -3,7 +3,7 @@ import About from '../../../views/About';
 import FaqSection from '../../../components/FaqSection';
 import JsonLd from '../../../components/JsonLd';
 import { ABOUT_FAQS } from '../../../data/faqs';
-import { GLOBAL_KEYWORDS, SITE_URL, buildPageMetadata, mergeKeywords } from '../../../lib/seo';
+import { GLOBAL_KEYWORDS, SITE_URL, buildBreadcrumbSchema, buildPageMetadata, mergeKeywords } from '../../../lib/seo';
 import { CANONICAL_MARKET_IDENTITY } from '../../../lib/positioning';
 
 export const metadata: Metadata = buildPageMetadata({
@@ -38,14 +38,10 @@ export default function Page() {
     },
   };
 
-  const breadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
-      { '@type': 'ListItem', position: 2, name: 'About H.V.A', item: `${SITE_URL}/whoweare/abouthva` },
-    ],
-  };
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'About H.V.A', path: '/whoweare/abouthva' },
+  ]);
 
   return (
     <>

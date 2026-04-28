@@ -239,7 +239,11 @@ export default function CaseStudyDetail({ study }: { readonly study: CaseStudy }
     <ArticleDetailPage
       backHref="/case-studies"
       backLabel="Case Studies"
-      crumbText={study.assets.logoLabel.toUpperCase()}
+      breadcrumbs={[
+        { label: 'Home', href: '/' },
+        { label: 'Case Studies', href: '/case-studies' },
+        { label: study.title },
+      ]}
       eyebrow={study.industry}
       metaLabel={study.deploymentStatus}
       title={study.title}
