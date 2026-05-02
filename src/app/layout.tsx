@@ -68,12 +68,15 @@ export const metadata: Metadata = {
     images: ['/Images/brand/hva-ai-software-agency-tangier.webp'],
   },
   icons: {
+    shortcut: [{ url: '/Images/favico/favicon.ico' }],
     icon: [
       { url: '/Images/favico/favicon.ico' },
-      { url: '/Images/favico/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
       { url: '/Images/favico/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/Images/favico/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/Images/favico/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/Images/favico/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' },
     ],
-    apple: [{ url: '/Images/favico/apple-touch-icon.png', sizes: '180x180' }],
+    apple: [{ url: '/Images/favico/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
   },
   verification: {
     google: '5a73152a76ce06c0',

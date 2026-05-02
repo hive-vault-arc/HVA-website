@@ -17,10 +17,11 @@ const Logo: React.FC<LogoProps> = ({ className, light = false }) => (
   >
     <Image
       src="/Images/favico/logo.png"
-      alt="H.V.A logo"
-      width={44}
-      height={44}
-      className={`h-11 w-auto object-contain ${light ? 'brightness-0 invert opacity-90' : ''}`}
+      alt="H.V.A"
+      width={2319}
+      height={333}
+      className={`h-7 w-auto object-contain ${light ? 'brightness-0 invert opacity-90' : ''}`}
+      priority
     />
   </Link>
 );
