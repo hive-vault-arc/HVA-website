@@ -76,7 +76,7 @@ export const metadata: Metadata = {
     apple: [{ url: '/Images/favico/apple-touch-icon.png', sizes: '180x180' }],
   },
   verification: {
-    google: '10960c2117d3f45e',
+    google: '5a73152a76ce06c0',
   },
   other: {
     'article:publisher': LINKEDIN_URL,

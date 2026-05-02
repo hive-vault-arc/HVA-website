@@ -28,16 +28,17 @@
 
 ---
 
-### OUT-2 — Custom Domain DNS Setup (if not done)
+### ~~OUT-2 — Custom Domain DNS Setup~~ ✅ DONE
 
-**Where:** Your domain registrar (Namecheap, GoDaddy, Cloudflare, etc.) + Vercel
+- hivevaultarc.com → Production ✅
+- www.hivevaultarc.com → 308 permanent redirect to hivevaultarc.com ✅
+- hiva-nine.vercel.app → 403 by design (Standard Protection — blocks internal URL to public) ✅
+- SSL auto-provisioned ✅
+- Firewall active, CDN healthy (90.3% cache hit, 0% error rate) ✅
+- Speed Insights active ✅
+- Security: Build Logs Protection, Source Protection, Git Fork Protection all enabled ✅
 
-**Action:**
-1. In Vercel: Project Settings → Domains → Add `hivevaultarc.com`
-2. Vercel will provide DNS records (A record, CNAME)
-3. In your domain registrar: add those records
-4. Wait for DNS propagation (can take 1–48 hours)
-5. Vercel auto-provisions SSL certificate
+> **One thing left:** `NEXT_PUBLIC_SITE_URL` env var (OUT-1) still needs to be set. Framework mismatch warning (Vite vs Next.js in Project Settings) — low priority, auto-resolves on next deploy.
 
 **Verify:** `https://hivevaultarc.com` loads correctly and shows a valid SSL certificate (green padlock).
 
@@ -222,8 +223,8 @@ For each new page, paste the URL into URL Inspection and click **Request Indexin
 
 | Task | Owner | Status | Deadline |
 |------|-------|--------|----------|
-| OUT-1: Vercel env var | Khalid | ⬜ | Immediately |
-| OUT-2: Custom domain DNS | Khalid | ⬜ | Before launch |
+| OUT-1: Vercel env var (`NEXT_PUBLIC_SITE_URL`) | Khalid | ⬜ | Immediately |
+| OUT-2: Custom domain + www redirect | Khalid | ✅ Done | 2026-04-28 |
 | OUT-3: Google Search Console | Khalid | ⬜ | Week 1 |
 | OUT-4: Google Analytics 4 | Khalid | ⬜ | Week 1 |
 | OUT-5: Google Tag Manager | Khalid | ⬜ | Week 2 |

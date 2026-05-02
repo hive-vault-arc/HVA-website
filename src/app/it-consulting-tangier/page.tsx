@@ -83,63 +83,58 @@ export default function ITConsultingTangierPage() {
     <>
       <JsonLd data={[professionalServiceSchema, breadcrumbSchema]} />
 
-      <main className="bg-[#F8FAFC] text-[#0F172A]">
-        <section className="mx-auto max-w-5xl px-6 pb-10 pt-28 lg:px-12 lg:pt-32">
-          <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
-            Tangier Technology Advisory
-          </p>
-          <h1 className="font-headline text-4xl font-medium leading-[1.06] tracking-tight md:text-6xl">
-            IT Consulting for Tangier&apos;s Growing Businesses
-          </h1>
-          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-[#475569]">
-            H.V.A supports leadership teams in Tangier with consulting that connects strategy to execution. We help you
-            decide what to modernize, when to invest, and how to deliver without creating operational instability. We
-            support organizations in Tangier, Casablanca, Rabat, Marrakech, Fes, Agadir, and other Moroccan cities. The
-            goal is not simply to choose technology; it is to build a reliable operating model for growth.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <Link
-              href="/contact"
-              className="sharp-edge bg-[#0F172A] px-6 py-3 text-xs font-bold uppercase tracking-[0.14em] text-white transition-colors hover:bg-[#2563EB]"
-            >
-              Book IT Discovery
-            </Link>
-            <Link
-              href="/arc"
-              className="text-xs font-bold uppercase tracking-[0.14em] text-[#2563EB] transition-colors hover:text-[#1d4ed8]"
-            >
-              View ARC Framework →
-            </Link>
+      <main className="bg-neutral text-tertiary">
+
+        {/* ── Hero ── */}
+        <section className="editorial-hero">
+          <div className="editorial-shell">
+            <p className="geo-kicker">Tangier Technology Advisory</p>
+            <h1 className="editorial-title">IT Consulting for Tangier&apos;s Growing Businesses</h1>
+            <p className="editorial-lead max-w-3xl">
+              H.V.A supports leadership teams in Tangier with consulting that connects strategy to execution. We help you
+              decide what to modernize, when to invest, and how to deliver without creating operational instability. We
+              support organizations in Tangier, Casablanca, Rabat, Marrakech, Fes, Agadir, and other Moroccan cities. The
+              goal is not simply to choose technology; it is to build a reliable operating model for growth.
+            </p>
+            <div className="editorial-actions">
+              <Link href="/contact" className="editorial-cta sharp-edge">
+                Book IT Discovery
+              </Link>
+              <Link href="/arc" className="editorial-link">
+                View ARC Framework →
+              </Link>
+            </div>
           </div>
         </section>
 
+        {/* ── Feature band ── */}
         <section className="border-y border-[#e2e8f0] bg-white">
           <div className="mx-auto max-w-5xl px-6 py-12 lg:px-12">
-            <h2 className="font-headline text-3xl font-medium text-[#0F172A]">
+            <h2 className="services-brief-section-title">
               What H.V.A Delivers as Your IT Consulting Partner
             </h2>
-            <p className="mt-4 text-base leading-relaxed text-[#475569]">
+            <p className="mt-4 text-base leading-relaxed text-secondary">
               IT consulting should reduce decision uncertainty, not add theoretical complexity. H.V.A starts by
               diagnosing your current architecture, operational bottlenecks, and governance gaps, then translates that
               into a clear roadmap with execution priorities. This includes technical sequencing, ownership boundaries,
               and business impact checkpoints.
             </p>
-            <p className="mt-4 text-base leading-relaxed text-[#475569]">
+            <p className="mt-4 text-base leading-relaxed text-secondary">
               We treat consulting as part of delivery. That means architecture advice is tied to implementation
               realities, cost boundaries, and team readiness. You get practical options with tradeoffs, not generic best
               practices disconnected from your market context.
             </p>
             <div className="mt-5 grid gap-4 md:grid-cols-2">
-              <div className="border border-[#e2e8f0] bg-[#F8FAFC] p-5">
-                <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-[#2563EB]">Strategic Layer</h3>
-                <p className="mt-3 text-sm leading-relaxed text-[#475569]">
+              <div className="geo-card card-hover">
+                <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-primary">Strategic Layer</h3>
+                <p className="mt-3 text-sm leading-relaxed text-secondary">
                   Technology audit, roadmap design, risk framing, investment prioritization, and transformation
                   governance.
                 </p>
               </div>
-              <div className="border border-[#e2e8f0] bg-[#F8FAFC] p-5">
-                <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-[#2563EB]">Execution Layer</h3>
-                <p className="mt-3 text-sm leading-relaxed text-[#475569]">
+              <div className="geo-card card-hover">
+                <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-primary">Execution Layer</h3>
+                <p className="mt-3 text-sm leading-relaxed text-secondary">
                   Architecture decisions, implementation planning, integration sequencing, and performance tracking.
                 </p>
               </div>
@@ -147,46 +142,47 @@ export default function ITConsultingTangierPage() {
           </div>
         </section>
 
+        {/* ── Body sections ── */}
         <section className="mx-auto max-w-5xl space-y-12 px-6 py-14 lg:px-12">
           <article>
-            <h2 className="font-headline text-3xl font-medium text-[#0F172A]">ARC Framework: Audit → Roadmap → Craft</h2>
-            <p className="mt-4 text-base leading-relaxed text-[#475569]">
+            <h2 className="services-brief-section-title">ARC Framework: Audit → Roadmap → Craft</h2>
+            <p className="mt-4 text-base leading-relaxed text-secondary">
               H.V.A uses ARC as a practical consulting-to-delivery path. In the <strong>Audit</strong> phase, we assess
               current systems, process friction, and decision bottlenecks. In <strong>Roadmap</strong>, we structure
-              milestones, define architecture principles, and align executive priorities with delivery reality. In
+              milestones, define architecture principles, and align executive priorities with delivery reality. In{' '}
               <strong>Craft</strong>, we execute with controlled rollout, governance checkpoints, and post-launch
               optimization.
             </p>
-            <p className="mt-4 text-base leading-relaxed text-[#475569]">
+            <p className="mt-4 text-base leading-relaxed text-secondary">
               This structure prevents a common failure pattern in consulting engagements: strategy that never becomes
               production. ARC keeps accountability continuous and measurable from planning to operations.
             </p>
           </article>
 
           <article>
-            <h2 className="font-headline text-3xl font-medium text-[#0F172A]">Core IT Consulting Services in Tangier</h2>
+            <h2 className="services-brief-section-title">Core IT Consulting Services in Tangier</h2>
             <div className="mt-5 grid gap-4 md:grid-cols-2">
-              <div className="border border-[#e2e8f0] bg-white p-5">
-                <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-[#2563EB]">System Architecture</h3>
-                <p className="mt-3 text-sm leading-relaxed text-[#475569]">
+              <div className="geo-card card-hover">
+                <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-primary">System Architecture</h3>
+                <p className="mt-3 text-sm leading-relaxed text-secondary">
                   Target-state architecture for business-critical systems, with scalability and maintainability built in.
                 </p>
               </div>
-              <div className="border border-[#e2e8f0] bg-white p-5">
-                <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-[#2563EB]">Database Design</h3>
-                <p className="mt-3 text-sm leading-relaxed text-[#475569]">
+              <div className="geo-card card-hover">
+                <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-primary">Database Design</h3>
+                <p className="mt-3 text-sm leading-relaxed text-secondary">
                   Data model review, normalization strategy, and performance-aware schema planning for operational use.
                 </p>
               </div>
-              <div className="border border-[#e2e8f0] bg-white p-5">
-                <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-[#2563EB]">API Development Strategy</h3>
-                <p className="mt-3 text-sm leading-relaxed text-[#475569]">
+              <div className="geo-card card-hover">
+                <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-primary">API Development Strategy</h3>
+                <p className="mt-3 text-sm leading-relaxed text-secondary">
                   API design governance, integration contracts, and security principles for stable system communication.
                 </p>
               </div>
-              <div className="border border-[#e2e8f0] bg-white p-5">
-                <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-[#2563EB]">Cloud Infrastructure</h3>
-                <p className="mt-3 text-sm leading-relaxed text-[#475569]">
+              <div className="geo-card card-hover">
+                <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-primary">Cloud Infrastructure</h3>
+                <p className="mt-3 text-sm leading-relaxed text-secondary">
                   Environment strategy, deployment reliability, observability readiness, and long-term operations posture.
                 </p>
               </div>
@@ -194,14 +190,14 @@ export default function ITConsultingTangierPage() {
           </article>
 
           <article>
-            <h2 className="font-headline text-3xl font-medium text-[#0F172A]">Why Local IT Consulting Matters in Tangier</h2>
-            <p className="mt-4 text-base leading-relaxed text-[#475569]">
+            <h2 className="services-brief-section-title">Why Local IT Consulting Matters in Tangier</h2>
+            <p className="mt-4 text-base leading-relaxed text-secondary">
               Local presence changes execution quality. Tangier organizations often operate across Arabic and French
               communication environments, with decision structures that require both technical rigor and practical
               stakeholder alignment. A local consulting partner can shorten loops between leadership intent and delivery
               action because context is understood directly, not inferred remotely.
             </p>
-            <p className="mt-4 text-base leading-relaxed text-[#475569]">
+            <p className="mt-4 text-base leading-relaxed text-secondary">
               H.V.A combines this local understanding with global engineering standards. You get technical depth that can
               scale beyond local boundaries while still respecting market-specific realities such as regulatory
               sensitivity, bilingual operations, and cross-functional coordination patterns.
@@ -209,46 +205,41 @@ export default function ITConsultingTangierPage() {
           </article>
 
           <article>
-            <h2 className="font-headline text-3xl font-medium text-[#0F172A]">
+            <h2 className="services-brief-section-title">
               Typical Engagement Timeline and What to Expect
             </h2>
-            <p className="mt-4 text-base leading-relaxed text-[#475569]">
+            <p className="mt-4 text-base leading-relaxed text-secondary">
               A focused IT consulting engagement usually starts with a two- to four-week discovery and architecture
               window. During this stage we interview stakeholders, inspect systems, map data and process dependencies,
               and define risk boundaries. The output is a practical roadmap that leadership can use for decision-making.
             </p>
-            <p className="mt-4 text-base leading-relaxed text-[#475569]">
+            <p className="mt-4 text-base leading-relaxed text-secondary">
               Execution advisory and implementation oversight then run in milestone cycles. Each cycle includes technical
               design review, progress checkpoints, and operating impact validation. This structure gives leadership
               regular clarity on scope movement, timeline confidence, and where additional investment will produce the
               strongest outcomes.
             </p>
-            <ul className="mt-5 grid gap-3 text-sm leading-relaxed text-[#475569] md:grid-cols-3">
-              <li className="border border-[#e2e8f0] bg-white p-4">Phase 1: Audit and architecture baseline.</li>
-              <li className="border border-[#e2e8f0] bg-white p-4">Phase 2: Roadmap with implementation priorities.</li>
-              <li className="border border-[#e2e8f0] bg-white p-4">Phase 3: Advisory through rollout and stabilization.</li>
+            <ul className="mt-5 grid gap-3 text-sm leading-relaxed text-secondary md:grid-cols-3">
+              <li className="geo-card card-hover">Phase 1: Audit and architecture baseline.</li>
+              <li className="geo-card card-hover">Phase 2: Roadmap with implementation priorities.</li>
+              <li className="geo-card card-hover">Phase 3: Advisory through rollout and stabilization.</li>
             </ul>
           </article>
         </section>
 
+        {/* ── Bottom CTA ── */}
         <section className="border-t border-[#e2e8f0] bg-white">
           <div className="mx-auto max-w-5xl px-6 py-12 lg:px-12">
-            <h2 className="font-headline text-3xl font-medium text-[#0F172A]">Need an IT Strategy You Can Actually Execute?</h2>
-            <p className="mt-4 max-w-3xl text-base leading-relaxed text-[#475569]">
+            <h2 className="services-brief-section-title">Need an IT Strategy You Can Actually Execute?</h2>
+            <p className="mt-4 max-w-3xl text-base leading-relaxed text-secondary">
               We can map your current setup, define the right modernization sequence, and move from consulting decisions
               to production execution with clear ownership.
             </p>
-            <div className="mt-7 flex flex-wrap gap-4">
-              <Link
-                href="/arc"
-                className="sharp-edge bg-[#2563EB] px-6 py-3 text-xs font-bold uppercase tracking-[0.14em] text-white transition-colors hover:bg-[#1d4ed8]"
-              >
+            <div className="editorial-actions mt-7">
+              <Link href="/arc" className="editorial-cta sharp-edge">
                 Explore ARC
               </Link>
-              <Link
-                href="/contact"
-                className="text-xs font-bold uppercase tracking-[0.14em] text-[#2563EB] transition-colors hover:text-[#1d4ed8]"
-              >
+              <Link href="/contact" className="editorial-link">
                 Talk to H.V.A →
               </Link>
             </div>

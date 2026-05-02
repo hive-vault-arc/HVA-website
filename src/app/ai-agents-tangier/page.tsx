@@ -87,77 +87,73 @@ export default function AIAgentsTangierPage() {
     <>
       <JsonLd data={[professionalServiceSchema, breadcrumbSchema]} />
 
-      <main className="bg-[#F8FAFC] text-[#0F172A]">
-        <section className="mx-auto max-w-5xl px-6 pb-10 pt-28 lg:px-12 lg:pt-32">
-          <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
-            Tangier Local AI Services
-          </p>
-          <h1 className="font-headline text-4xl font-medium leading-[1.06] tracking-tight md:text-6xl">
-            AI Agents Built for Tangier Businesses
-          </h1>
-          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-[#475569]">
-            H.V.A helps teams in Tangier deploy practical AI agents that answer customer questions, qualify new leads,
-            and keep operations moving even outside business hours. We also support deployments in Casablanca, Rabat,
-            Marrakech, Fes, Agadir, and other Moroccan cities. We design each system around your real workflow, so the
-            agent becomes a working part of daily execution rather than a disconnected chatbot experiment.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <Link
-              href="/contact"
-              className="sharp-edge bg-[#0F172A] px-6 py-3 text-xs font-bold uppercase tracking-[0.14em] text-white transition-colors hover:bg-[#2563EB]"
-            >
-              Start AI Discovery
-            </Link>
-            <Link
-              href="/capabilities"
-              className="text-xs font-bold uppercase tracking-[0.14em] text-[#2563EB] transition-colors hover:text-[#1d4ed8]"
-            >
-              Explore Capabilities →
-            </Link>
+      <main className="bg-neutral text-tertiary">
+
+        {/* ── Hero ── */}
+        <section className="editorial-hero">
+          <div className="editorial-shell">
+            <p className="geo-kicker">Tangier Local AI Services</p>
+            <h1 className="editorial-title">AI Agents Built for Tangier Businesses</h1>
+            <p className="editorial-lead max-w-3xl">
+              H.V.A helps teams in Tangier deploy practical AI agents that answer customer questions, qualify new leads,
+              and keep operations moving even outside business hours. We also support deployments in Casablanca, Rabat,
+              Marrakech, Fes, Agadir, and other Moroccan cities. We design each system around your real workflow, so the
+              agent becomes a working part of daily execution rather than a disconnected chatbot experiment.
+            </p>
+            <div className="editorial-actions">
+              <Link href="/contact" className="editorial-cta sharp-edge">
+                Start AI Discovery
+              </Link>
+              <Link href="/capabilities" className="editorial-link">
+                Explore Capabilities →
+              </Link>
+            </div>
           </div>
         </section>
 
+        {/* ── Feature band ── */}
         <section className="border-y border-[#e2e8f0] bg-white">
           <div className="mx-auto grid max-w-5xl gap-6 px-6 py-10 md:grid-cols-3 lg:px-12">
-            <article>
-              <h2 className="text-sm font-bold uppercase tracking-[0.16em] text-[#2563EB]">Local Context</h2>
-              <p className="mt-2 text-sm leading-relaxed text-[#475569]">
+            <article className="geo-card card-hover">
+              <h2 className="text-sm font-bold uppercase tracking-[0.16em] text-primary">Local Context</h2>
+              <p className="mt-2 text-sm leading-relaxed text-secondary">
                 Built for Tangier sales and operations realities, while fully deployable across all Moroccan cities with
                 multilingual communication and fast inbound response standards.
               </p>
             </article>
-            <article>
-              <h2 className="text-sm font-bold uppercase tracking-[0.16em] text-[#2563EB]">Core Use Cases</h2>
-              <p className="mt-2 text-sm leading-relaxed text-[#475569]">
+            <article className="geo-card card-hover">
+              <h2 className="text-sm font-bold uppercase tracking-[0.16em] text-primary">Core Use Cases</h2>
+              <p className="mt-2 text-sm leading-relaxed text-secondary">
                 WhatsApp reception, lead qualification, customer support triage, and routing to the right person at the
                 right time.
               </p>
             </article>
-            <article>
-              <h2 className="text-sm font-bold uppercase tracking-[0.16em] text-[#2563EB]">Delivery Model</h2>
-              <p className="mt-2 text-sm leading-relaxed text-[#475569]">
+            <article className="geo-card card-hover">
+              <h2 className="text-sm font-bold uppercase tracking-[0.16em] text-primary">Delivery Model</h2>
+              <p className="mt-2 text-sm leading-relaxed text-secondary">
                 ARC-style execution from audit to rollout, with measurable KPIs and post-launch optimization support.
               </p>
             </article>
           </div>
         </section>
 
+        {/* ── Body sections ── */}
         <section className="mx-auto max-w-5xl space-y-12 px-6 py-14 lg:px-12">
           <article>
-            <h2 className="font-headline text-3xl font-medium text-[#0F172A]">What Is an AI Agent?</h2>
-            <p className="mt-4 text-base leading-relaxed text-[#475569]">
+            <h2 className="services-brief-section-title">What Is an AI Agent?</h2>
+            <p className="mt-4 text-base leading-relaxed text-secondary">
               An AI agent is a software worker that can understand requests, apply decision logic, and execute defined
               actions inside your systems. In practical terms for a Tangier SME, that means the agent can read an
               incoming WhatsApp message, identify intent, ask qualification questions, and either provide a direct
               answer or route the request to a human owner with full context.
             </p>
-            <p className="mt-4 text-base leading-relaxed text-[#475569]">
+            <p className="mt-4 text-base leading-relaxed text-secondary">
               Unlike basic scripted bots, production AI agents operate with stronger context handling. They can connect
               to your lead data, apply your business rules, and keep conversation quality consistent across Arabic,
               French, and English touchpoints. This reduces response delays, lowers repetitive workload for your team,
               and improves conversion reliability because every inbound inquiry follows a structured path.
             </p>
-            <p className="mt-4 text-base leading-relaxed text-[#475569]">
+            <p className="mt-4 text-base leading-relaxed text-secondary">
               The real value is not just speed. It is operational consistency. Your team stops relying on individual
               memory for frequent questions, follow-up timing, and qualification criteria. The system handles that
               layer automatically and creates cleaner data for leadership decisions.
@@ -165,25 +161,25 @@ export default function AIAgentsTangierPage() {
           </article>
 
           <article>
-            <h2 className="font-headline text-3xl font-medium text-[#0F172A]">H.V.A AI Agent Offerings in Tangier</h2>
+            <h2 className="services-brief-section-title">H.V.A AI Agent Offerings in Tangier</h2>
             <div className="mt-5 grid gap-5 md:grid-cols-3">
-              <div className="border border-[#e2e8f0] bg-white p-5">
-                <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-[#2563EB]">WhatsApp Agent</h3>
-                <p className="mt-3 text-sm leading-relaxed text-[#475569]">
+              <div className="geo-card card-hover">
+                <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-primary">WhatsApp Agent</h3>
+                <p className="mt-3 text-sm leading-relaxed text-secondary">
                   Always-on WhatsApp handling for inbound questions, service detail requests, and initial lead capture.
                   Designed for response speed and clean conversation routing.
                 </p>
               </div>
-              <div className="border border-[#e2e8f0] bg-white p-5">
-                <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-[#2563EB]">Lead Qualification Agent</h3>
-                <p className="mt-3 text-sm leading-relaxed text-[#475569]">
+              <div className="geo-card card-hover">
+                <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-primary">Lead Qualification Agent</h3>
+                <p className="mt-3 text-sm leading-relaxed text-secondary">
                   Structured qualification logic that collects key commercial data, scores opportunity quality, and
                   passes complete context to your sales team.
                 </p>
               </div>
-              <div className="border border-[#e2e8f0] bg-white p-5">
-                <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-[#2563EB]">Customer Support Agent</h3>
-                <p className="mt-3 text-sm leading-relaxed text-[#475569]">
+              <div className="geo-card card-hover">
+                <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-primary">Customer Support Agent</h3>
+                <p className="mt-3 text-sm leading-relaxed text-secondary">
                   FAQ resolution, first-line support triage, and escalation orchestration so human teams focus on
                   high-value or sensitive cases.
                 </p>
@@ -192,17 +188,17 @@ export default function AIAgentsTangierPage() {
           </article>
 
           <article>
-            <h2 className="font-headline text-3xl font-medium text-[#0F172A]">
+            <h2 className="services-brief-section-title">
               Why Tangier Businesses Are Accelerating AI Adoption
             </h2>
-            <p className="mt-4 text-base leading-relaxed text-[#475569]">
+            <p className="mt-4 text-base leading-relaxed text-secondary">
               Tangier companies are scaling in a market where customers expect immediate replies and multilingual
-              support across channels. Morocco's broader digital and AI agenda, including Maroc IA 2030, has pushed AI
+              support across channels. Morocco&apos;s broader digital and AI agenda, including Maroc IA 2030, has pushed AI
               from trend discussion into operational planning. At the same time, regional growth forecasts for AI
               markets remain strong, and business surveys increasingly show AI investment moving from pilot budgets into
               core execution plans.
             </p>
-            <p className="mt-4 text-base leading-relaxed text-[#475569]">
+            <p className="mt-4 text-base leading-relaxed text-secondary">
               In this environment, waiting creates execution drag. Teams that adopt AI agents early can respond faster,
               preserve lead quality, and reduce manual workload without adding headcount at the same pace as message
               volume growth. The main advantage is not hype; it is control over response quality and process discipline.
@@ -210,32 +206,32 @@ export default function AIAgentsTangierPage() {
           </article>
 
           <article>
-            <h2 className="font-headline text-3xl font-medium text-[#0F172A]">How H.V.A Executes: ARC Process Snapshot</h2>
+            <h2 className="services-brief-section-title">How H.V.A Executes: ARC Process Snapshot</h2>
             <ol className="mt-5 grid gap-4 md:grid-cols-2">
-              <li className="border border-[#e2e8f0] bg-white p-5">
-                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#2563EB]">01 Diagnose</p>
-                <p className="mt-2 text-sm leading-relaxed text-[#475569]">
+              <li className="geo-card card-hover">
+                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-primary">01 Diagnose</p>
+                <p className="mt-2 text-sm leading-relaxed text-secondary">
                   Map current inquiry flow, bottlenecks, and target business outcomes. We define where AI brings direct
                   measurable value first.
                 </p>
               </li>
-              <li className="border border-[#e2e8f0] bg-white p-5">
-                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#2563EB]">02 Design</p>
-                <p className="mt-2 text-sm leading-relaxed text-[#475569]">
+              <li className="geo-card card-hover">
+                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-primary">02 Design</p>
+                <p className="mt-2 text-sm leading-relaxed text-secondary">
                   Define conversation architecture, escalation rules, integrations, and quality controls for production
                   readiness.
                 </p>
               </li>
-              <li className="border border-[#e2e8f0] bg-white p-5">
-                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#2563EB]">03 Deploy</p>
-                <p className="mt-2 text-sm leading-relaxed text-[#475569]">
+              <li className="geo-card card-hover">
+                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-primary">03 Deploy</p>
+                <p className="mt-2 text-sm leading-relaxed text-secondary">
                   Launch staged rollout, validate response quality, and align internal team workflows with the new AI
                   operating layer.
                 </p>
               </li>
-              <li className="border border-[#e2e8f0] bg-white p-5">
-                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#2563EB]">04 Optimize</p>
-                <p className="mt-2 text-sm leading-relaxed text-[#475569]">
+              <li className="geo-card card-hover">
+                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-primary">04 Optimize</p>
+                <p className="mt-2 text-sm leading-relaxed text-secondary">
                   Track KPIs, refine prompts and routing logic, and improve conversion or support performance over
                   monthly optimization cycles.
                 </p>
@@ -244,47 +240,42 @@ export default function AIAgentsTangierPage() {
           </article>
 
           <article>
-            <h2 className="font-headline text-3xl font-medium text-[#0F172A]">
+            <h2 className="services-brief-section-title">
               Readiness Checklist Before You Deploy an AI Agent
             </h2>
-            <p className="mt-4 text-base leading-relaxed text-[#475569]">
+            <p className="mt-4 text-base leading-relaxed text-secondary">
               The most successful Tangier deployments start with clear operational inputs. Teams identify the top
               message categories, define qualification criteria, and agree on escalation ownership before launch. This
               preparation reduces rollout friction and avoids the common issue of deploying an agent without a stable
               process backbone.
             </p>
-            <p className="mt-4 text-base leading-relaxed text-[#475569]">
+            <p className="mt-4 text-base leading-relaxed text-secondary">
               We also recommend setting KPI baselines early: first-response time, qualified lead rate, conversion
               follow-up speed, and support resolution cycle. When those baselines are documented, performance gains from
               automation become visible quickly and leadership can make better scaling decisions.
             </p>
-            <ul className="mt-5 grid gap-3 text-sm leading-relaxed text-[#475569] md:grid-cols-2">
-              <li className="border border-[#e2e8f0] bg-white p-4">Define top 10 inquiry intents and response standards.</li>
-              <li className="border border-[#e2e8f0] bg-white p-4">Document qualification rules used by sales teams today.</li>
-              <li className="border border-[#e2e8f0] bg-white p-4">Assign escalation owner per business line and time window.</li>
-              <li className="border border-[#e2e8f0] bg-white p-4">Track metrics weekly and tune prompts based on real traffic.</li>
+            <ul className="mt-5 grid gap-3 text-sm leading-relaxed text-secondary md:grid-cols-2">
+              <li className="geo-card">Define top 10 inquiry intents and response standards.</li>
+              <li className="geo-card">Document qualification rules used by sales teams today.</li>
+              <li className="geo-card">Assign escalation owner per business line and time window.</li>
+              <li className="geo-card">Track metrics weekly and tune prompts based on real traffic.</li>
             </ul>
           </article>
         </section>
 
+        {/* ── Bottom CTA ── */}
         <section className="border-t border-[#e2e8f0] bg-white">
           <div className="mx-auto max-w-5xl px-6 py-12 lg:px-12">
-            <h2 className="font-headline text-3xl font-medium text-[#0F172A]">Ready to Launch AI Agents in Tangier?</h2>
-            <p className="mt-4 max-w-3xl text-base leading-relaxed text-[#475569]">
+            <h2 className="services-brief-section-title">Ready to Launch AI Agents in Tangier?</h2>
+            <p className="mt-4 max-w-3xl text-base leading-relaxed text-secondary">
               If your team is handling repetitive inbound messages and lead triage manually, we can map an AI agent plan
               that starts with your highest-impact workflow and moves fast toward production.
             </p>
-            <div className="mt-7 flex flex-wrap gap-4">
-              <Link
-                href="/contact"
-                className="sharp-edge bg-[#2563EB] px-6 py-3 text-xs font-bold uppercase tracking-[0.14em] text-white transition-colors hover:bg-[#1d4ed8]"
-              >
+            <div className="editorial-actions mt-7">
+              <Link href="/contact" className="editorial-cta sharp-edge">
                 Book Discovery Call
               </Link>
-              <Link
-                href="/case-studies/multilingual-whatsapp-ai-agent"
-                className="text-xs font-bold uppercase tracking-[0.14em] text-[#2563EB] transition-colors hover:text-[#1d4ed8]"
-              >
+              <Link href="/case-studies/multilingual-whatsapp-ai-agent" className="editorial-link">
                 View AI Case Study →
               </Link>
             </div>

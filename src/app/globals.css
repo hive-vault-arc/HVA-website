@@ -1304,6 +1304,28 @@
   }
 }
 
+/* ─── Geo Service Landing Pages ─────────────────────────────────────────────
+   Shared primitives for /ai-agents-tangier, /ai-agents-morocco,
+   /it-consulting-tangier, /custom-software-morocco
+   ──────────────────────────────────────────────────────────────────────── */
+
+.geo-kicker {
+  margin: 0 0 1rem;
+  font-family: var(--font-body);
+  font-size: 0.625rem;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.geo-card {
+  padding: 1.25rem;
+  background: var(--surface-lowest);
+  border: 1px solid var(--color-neutral-dark);
+  box-shadow: 0 8px 24px rgba(25, 28, 30, 0.05);
+}
+
 /* ─── InsightsSlider ─────────────────────────────────────────────────────────
    Shared component used on the Insights hub page.
    Large landscape image-cards that auto-advance every 10 s.
