@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     },
   }),
   title: {
-    absolute: 'H.V.A | Technology Consulting and Digital Transformation Firm',
+    absolute: 'Hive Vault Arc (H.V.A) | AI & Digital Transformation · Technology Consulting · Tangier',
   },
 };
 

@@ -124,6 +124,9 @@ const config = {
     },
 
     extend: {
+      transitionTimingFunction: {
+        spring: 'cubic-bezier(0.16, 1, 0.3, 1)',
+      },
       animation: {
         shine: 'shine 5s linear infinite',
       },

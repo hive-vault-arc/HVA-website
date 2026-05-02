@@ -73,10 +73,10 @@ export const metadata: Metadata = {
       { url: '/Images/favico/favicon.ico' },
       { url: '/Images/favico/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
       { url: '/Images/favico/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/Images/favico/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
-      { url: '/Images/favico/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' },
+      { url: '/Images/favico/android-chrome-192x192.png', sizes: '139x139', type: 'image/png' },
+      { url: '/Images/favico/android-chrome-512x512.png', sizes: '367x367', type: 'image/png' },
     ],
-    apple: [{ url: '/Images/favico/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+    apple: [{ url: '/Images/favico/apple-touch-icon.png', sizes: '131x131', type: 'image/png' }],
   },
   verification: {
     google: '5a73152a76ce06c0',
@@ -188,6 +188,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     '@id': `${SITE_URL}/#website`,
     url: SITE_URL,
     name: 'Hive Vault Arc',
+    alternateName: 'H.V.A',
     description: 'AI & digital transformation consulting for Moroccan and global businesses',
     inLanguage: ['en', 'fr', 'ar', 'es'],
     publisher: {
@@ -203,6 +204,21 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     },
   };
 
+  const navigationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Hive Vault Arc Site Navigation',
+    itemListElement: [
+      { '@type': 'SiteNavigationElement', position: 1, name: 'Home',         url: `${SITE_URL}/` },
+      { '@type': 'SiteNavigationElement', position: 2, name: 'ARC Framework', url: `${SITE_URL}/arc` },
+      { '@type': 'SiteNavigationElement', position: 3, name: 'Capabilities',  url: `${SITE_URL}/capabilities` },
+      { '@type': 'SiteNavigationElement', position: 4, name: 'Industries',    url: `${SITE_URL}/industries` },
+      { '@type': 'SiteNavigationElement', position: 5, name: 'Who We Are',   url: `${SITE_URL}/whoweare/abouthva` },
+      { '@type': 'SiteNavigationElement', position: 6, name: 'Insights',     url: `${SITE_URL}/insights` },
+      { '@type': 'SiteNavigationElement', position: 7, name: 'Contact',      url: `${SITE_URL}/contact` },
+    ],
+  };
+
   return (
     <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} ${newsreader.variable}`}>
       <head>
@@ -213,6 +229,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
       <body>
         <JsonLd data={organizationSchema} />
         <JsonLd data={websiteSchema} />
+        <JsonLd data={navigationSchema} />
         <Layout>{children}</Layout>
         <Analytics />
       </body>

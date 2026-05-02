@@ -170,7 +170,7 @@ export default function HeroSlider() {
 
             {/* Right: image + floating card */}
             <div className="lg:col-span-5 relative mt-12 lg:mt-0">
-              <div className="aspect-[4/5] overflow-hidden shadow-2xl">
+              <div className="relative aspect-[4/5] overflow-hidden shadow-2xl">
                 <Image
                   src={slide.image}
                   alt={slide.imageAlt}

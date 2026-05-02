@@ -446,7 +446,7 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
                 alt="Customer operations engine dashboard and workflow system in production"
                 fill
                 sizes="(max-width: 768px) 100vw, 58vw"
-                className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
+                className="object-cover transition-transform duration-700 ease-spring group-hover:scale-[1.03]"
               />
               {/* Dark gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/90 via-[#0F172A]/20 to-transparent" />
@@ -466,7 +466,7 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
                 <p className="text-sm text-white/55 uppercase tracking-[0.14em]">
                   Zero manual intervention · end-to-end in production
                 </p>
-                <div className="mt-5 h-[1px] w-0 group-hover:w-full bg-[#2563EB] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]" />
+                <div className="mt-5 h-[1px] w-0 group-hover:w-full bg-[#2563EB] transition-all duration-700 ease-spring" />
               </div>
             </motion.article>
 
@@ -486,7 +486,7 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
                   alt="Revenue control module interface for live business operations"
                   fill
                   sizes="(max-width: 768px) 100vw, 42vw"
-                  className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
+                  className="object-cover transition-transform duration-700 ease-spring group-hover:scale-[1.04]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/90 via-[#0F172A]/20 to-transparent" />
                 <span aria-hidden="true" className="absolute top-3 right-4 font-headline text-[72px] leading-none text-white/[0.07] select-none pointer-events-none">02</span>
@@ -513,7 +513,7 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
                   alt="Quantified business results and growth metrics visualization"
                   fill
                   sizes="(max-width: 768px) 100vw, 42vw"
-                  className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
+                  className="object-cover transition-transform duration-700 ease-spring group-hover:scale-[1.04]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/90 via-[#0F172A]/20 to-transparent" />
                 <span aria-hidden="true" className="absolute top-3 right-4 font-headline text-[72px] leading-none text-white/[0.07] select-none pointer-events-none">03</span>
