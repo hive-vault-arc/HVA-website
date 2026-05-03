@@ -13,8 +13,7 @@ type ContactStatus = {
 
 const CONTACT_EMAILS = ['contact@hivevaultarc.com'];
 const CONTACT_PHONES = [
-  { raw: '+212688270772', label: '+212 688 270 772' },
-  { raw: '+212691918296', label: '+212 691 918 296' },
+  { raw: '+212670431249', label: '+212 670 431 249' },
 ];
 
 const Contact: React.FC = () => {

@@ -143,7 +143,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
       'SaaS Platform Development',
     ],
     email: 'contact@hivevaultarc.com',
-    telephone: ['+212688270772', '+212691918296'],
+    telephone: ['+212670431249'],
     sameAs: [
       LINKEDIN_URL,
       'https://github.com/hive-vault-arc',

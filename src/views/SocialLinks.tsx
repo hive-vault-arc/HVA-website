@@ -3,6 +3,7 @@ import {
   FaEnvelope,
   FaFacebook,
   FaInstagram,
+  FaLinkedin,
   FaPhone,
   FaTiktok,
   FaWhatsapp,
@@ -58,6 +59,13 @@ const SOCIAL_LINKS: SocialLink[] = [
     label: 'TikTok',
     handle: '@hivevaultarc',
     href: 'https://www.tiktok.com/@hivevaultarc',
+    external: true,
+  },
+  {
+    icon: FaLinkedin,
+    label: 'LinkedIn',
+    handle: 'Hive Vault Arc',
+    href: 'https://www.linkedin.com/company/hive-vault-arc',
     external: true,
   },
   {

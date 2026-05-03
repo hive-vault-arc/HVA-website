@@ -25,6 +25,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/insights/research-reports`,          lastModified: now, ...m(0.7) },
     { url: `${SITE_URL}/contact`,                            lastModified: now, ...m(0.8) },
     { url: `${SITE_URL}/whoweare/abouthva`,                  lastModified: now, ...m(0.7) },
+    { url: `${SITE_URL}/privacy-policy`,                     lastModified: now, ...m(0.5) },
+    { url: `${SITE_URL}/mentions-legales`,                   lastModified: now, ...m(0.5) },
     { url: `${SITE_URL}/whoarewe/portfolio`,                 lastModified: now, ...w(0.8) },
 
     // ── Geo landing pages ─────────────────────────────────────────────────

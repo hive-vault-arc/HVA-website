@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { ArrowRight, Bot, Cloud, Layers } from 'lucide-react';
 import Home from '../views/Home';
 import JsonLd from '../components/JsonLd';
 import type { InsightsCarouselItem } from '../components/InsightsCarousel';
@@ -119,29 +120,81 @@ export default function Page() {
     <>
       <JsonLd data={capabilitySchema} />
       <Home insightsCarouselItems={insightsCarouselItems} />
-      <section className="border-t border-[#e2e8f0] bg-white py-14">
-        <div className="mx-auto max-w-7xl px-6 lg:px-14">
-          <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
-            Service Landing Pages
-          </p>
-          <h2 className="font-headline text-3xl font-medium text-[#0F172A] md:text-4xl">
-            Explore Local and National Service Guides
-          </h2>
-          <div className="mt-7 grid gap-3 md:grid-cols-2">
-            {[
-              { href: '/ai-agents-tangier', label: 'AI Agents in Tangier' },
-              { href: '/ai-agents-morocco', label: 'AI Agents in Morocco' },
-              { href: '/it-consulting-tangier', label: 'IT Consulting in Tangier' },
-              { href: '/custom-software-morocco', label: 'Custom Software in Morocco' },
-            ].map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="border border-[#e2e8f0] bg-[#F8FAFC] px-5 py-4 text-sm font-bold uppercase tracking-[0.14em] text-[#2563EB] transition-colors hover:bg-[#ECF5FD] hover:text-[#1d4ed8]"
-              >
-                {item.label}
-              </Link>
-            ))}
+      <section className="relative overflow-hidden bg-[#0F172A] py-20 md:py-28">
+        {/* Subtle grid overlay */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 opacity-[0.06]"
+          style={{
+            backgroundImage:
+              'linear-gradient(to right, #2563EB 1px, transparent 1px), linear-gradient(to bottom, #2563EB 1px, transparent 1px)',
+            backgroundSize: '42px 42px',
+          }}
+        />
+        {/* Radial glow */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-24 right-0 h-[36rem] w-[36rem] rounded-full bg-[#2563EB]/10 blur-3xl"
+        />
+
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-14">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-20">
+
+            {/* Left — editorial column */}
+            <div className="lg:col-span-4 flex flex-col justify-center">
+              <p className="mb-5 text-[10px] font-bold uppercase tracking-[0.28em] text-[#2563EB]">
+                Service Landing Pages
+              </p>
+              <h2 className="font-headline text-4xl leading-[1.04] tracking-tight text-white md:text-5xl">
+                Explore Local and National Service Guides
+              </h2>
+              <p className="mt-5 text-sm leading-relaxed text-white/50">
+                In-depth guides for businesses in Morocco seeking specific AI, consulting,
+                and software capabilities in their market.
+              </p>
+              <div className="mt-8 h-px bg-[#2563EB]/25" />
+              <p className="mt-4 font-mono text-[9px] uppercase tracking-[0.22em] text-white/25">
+                Morocco · Tangier · Remote
+              </p>
+            </div>
+
+            {/* Right — card grid */}
+            <div className="lg:col-span-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
+              {[
+                { href: '/ai-agents-tangier',     label: 'AI Agents in Tangier',         tag: 'Tangier', Icon: Bot    },
+                { href: '/ai-agents-morocco',      label: 'AI Agents in Morocco',          tag: 'Morocco', Icon: Bot    },
+                { href: '/it-consulting-tangier',  label: 'IT Consulting in Tangier',      tag: 'Tangier', Icon: Layers },
+                { href: '/custom-software-morocco',label: 'Custom Software in Morocco',    tag: 'Morocco', Icon: Cloud  },
+              ].map(({ href, label, tag, Icon }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  className="group relative overflow-hidden border border-white/10 bg-white/[0.04] p-6 transition-all duration-300 hover:border-[#2563EB]/50 hover:bg-white/[0.08]"
+                >
+                  {/* Top row: tag + arrow */}
+                  <div className="mb-8 flex items-start justify-between">
+                    <span className="border border-[#2563EB]/30 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.24em] text-[#2563EB]/70">
+                      {tag}
+                    </span>
+                    <ArrowRight className="h-4 w-4 translate-x-0 text-white/20 transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#2563EB]" />
+                  </div>
+
+                  {/* Bottom row: title + icon */}
+                  <div className="flex items-end justify-between">
+                    <h3 className="font-headline pr-4 text-xl leading-tight text-white">
+                      {label}
+                    </h3>
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center bg-[#2563EB]/10 text-[#2563EB]/50 transition-all duration-300 group-hover:bg-[#2563EB]/20 group-hover:text-[#2563EB]">
+                      <Icon className="h-4 w-4" />
+                    </div>
+                  </div>
+
+                  {/* Animated bottom bar */}
+                  <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-[#2563EB] transition-all duration-500 ease-spring group-hover:w-full" />
+                </Link>
+              ))}
+            </div>
+
           </div>
         </div>
       </section>

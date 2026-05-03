@@ -36,7 +36,7 @@ export default function CapabilitiesInDetailPage() {
       '@id': `${SITE_URL}/#organization`,
       name: 'Hive Vault Arc',
       url: SITE_URL,
-      telephone: ['+212688270772', '+212691918296'],
+      telephone: ['+212670431249'],
       priceRange: '$$',
       image: absoluteUrl('/Images/brand/hva-ai-software-agency-tangier.webp'),
       areaServed: ['Morocco', 'Remote'],

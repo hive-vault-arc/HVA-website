@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Globe, Mail, Phone } from 'lucide-react';
+import { ArrowUpRight, Globe, Mail, Phone } from 'lucide-react';
 import { FiLinkedin } from 'react-icons/fi';
 import Logo from './Logo';
 import FooterSpotlight from './ui/FooterSpotlight';
@@ -22,6 +22,11 @@ const expertiseLinks = [
   { href: '/case-studies/zoho-grade-crm-platform', label: 'CRM Modernization' },
   { href: '/case-studies', label: 'Healthcare Case Studies' },
   { href: '/insights/research-reports', label: 'Research Reports' },
+];
+
+const legalLinks = [
+  { href: '/privacy-policy', label: 'Privacy Policy' },
+  { href: '/mentions-legales', label: 'Legal Mentions' },
 ];
 
 export default function SiteFooter() {
@@ -68,20 +73,39 @@ export default function SiteFooter() {
             <div className="site-footer__group">
               <p className="site-footer__title">Connect</p>
               <div className="site-footer__contacts">
+                <Link
+                  href="/contact"
+                  aria-label="Book a call"
+                  className="self-start px-4 py-2 bg-[#1E272E] text-[#F5F6FA] text-sm font-medium hover:bg-[#0984E3] transition-all duration-300 flex items-center sharp-edge"
+                >
+                  Book a Call
+                  <ArrowUpRight className="w-3.5 h-3.5 ml-1.5" />
+                </Link>
                 <a href="mailto:contact@hivevaultarc.com" className="site-footer__contact">
                   <Mail className="h-3.5 w-3.5" />
                   contact@hivevaultarc.com
                 </a>
-                <a href="tel:+212688270772" className="site-footer__contact">
+                <a href="tel:+212670431249" className="site-footer__contact">
                   <Phone className="h-3.5 w-3.5" />
-                  +212 688 270 772
+                  +212 670 431 249
                 </a>
               </div>
             </div>
           </div>
 
           <div className="site-footer__bar">
-            <p>© {year} H.V.A. ALL RIGHTS RESERVED. PRECISION IN EXECUTION.</p>
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
+              <p>© {year} H.V.A. ALL RIGHTS RESERVED. PRECISION IN EXECUTION.</p>
+              {legalLinks.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="site-footer__link text-[10px] opacity-50 hover:opacity-100"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
             <div className="site-footer__social">
               <a
                 href={SITE_URL}
