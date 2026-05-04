@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -86,6 +86,7 @@ const variants = {
 export default function HeroSlider() {
   const [active, setActive] = useState(0);
   const [direction, setDirection] = useState(1);
+  const touchStartX = useRef<number>(0);
 
   const navigate = useCallback((dir: number) => {
     setDirection(dir);
@@ -100,28 +101,42 @@ export default function HeroSlider() {
     [active]
   );
 
-  const slide = SLIDES[active]!;
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.targetTouches[0]?.clientX ?? 0;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const delta = touchStartX.current - (e.changedTouches[0]?.clientX ?? 0);
+    if (Math.abs(delta) > 50) navigate(delta > 0 ? 1 : -1);
+  };
+
+  const slide = SLIDES[active];
+  if (!slide) return null;
 
   return (
-    <section className="relative group px-6 pt-28 pb-20 lg:px-14 lg:pt-36 lg:pb-28 overflow-visible">
+    <section
+      className="relative group px-6 pt-20 pb-14 lg:px-14 lg:pt-36 lg:pb-28 overflow-visible"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
 
-      {/* Left arrow */}
+      {/* Left arrow — desktop only */}
       <button
         onClick={() => navigate(-1)}
         aria-label="Previous slide"
         className="absolute left-2 lg:left-6 top-1/2 -translate-y-1/2 z-20
-                   opacity-0 group-hover:opacity-100 transition-opacity duration-300
+                   hidden lg:flex opacity-0 group-hover:opacity-100 transition-opacity duration-300
                    p-2 text-[#1E272E]/30 hover:text-[#0984E3]"
       >
         <ChevronLeft className="w-7 h-7" />
       </button>
 
-      {/* Right arrow */}
+      {/* Right arrow — desktop only */}
       <button
         onClick={() => navigate(1)}
         aria-label="Next slide"
         className="absolute right-2 lg:right-6 top-1/2 -translate-y-1/2 z-20
-                   opacity-0 group-hover:opacity-100 transition-opacity duration-300
+                   hidden lg:flex opacity-0 group-hover:opacity-100 transition-opacity duration-300
                    p-2 text-[#1E272E]/30 hover:text-[#0984E3]"
       >
         <ChevronRight className="w-7 h-7" />
@@ -138,39 +153,39 @@ export default function HeroSlider() {
             animate="center"
             exit="exit"
             transition={{ duration: 0.45, ease: 'easeInOut' }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
+            className="grid grid-cols-1 lg:grid-cols-12 gap-3 lg:gap-12 items-center"
           >
-            {/* Left: copy */}
-            <div className="lg:col-span-7 z-10">
-              <span className="home-hero-eyebrow inline-block px-3 py-1 bg-[#0984E3]/10 text-[#0984E3] text-[10px] uppercase tracking-[0.22em] font-bold mb-8">
+            {/* Left: copy — second on mobile, first on desktop */}
+            <div className="lg:col-span-7 z-10 order-2 lg:order-1">
+              <span className="home-hero-eyebrow inline-block px-3 py-1 bg-[#0984E3]/10 text-[#0984E3] text-[10px] uppercase tracking-[0.22em] font-bold mb-6 lg:mb-8">
                 {slide.eyebrow}
               </span>
-              <h1 className="home-hero-title font-serif text-4xl sm:text-5xl md:text-7xl xl:text-[5.5rem] font-medium leading-[1.04] tracking-tight text-[#1E272E] mb-8">
+              <h1 className="home-hero-title font-serif text-3xl sm:text-4xl md:text-7xl xl:text-[5.5rem] font-medium leading-[1.04] tracking-tight text-[#1E272E] mb-6 lg:mb-8">
                 {slide.h1Line1}<br />
                 <em className="italic bg-gradient-to-r from-[#0984E3] to-[#2563EB] bg-clip-text text-transparent pl-[0.08em] -ml-[0.08em]">{slide.h1Line2}</em>
               </h1>
-              <p className="home-hero-copy text-xl text-[#1E272E]/60 max-w-xl mb-12 font-light leading-relaxed">
+              <p className="home-hero-copy text-base lg:text-xl text-[#1E272E]/60 max-w-xl mb-8 lg:mb-12 font-light leading-relaxed line-clamp-3 lg:line-clamp-none">
                 {slide.description}
               </p>
-              <div className="flex flex-wrap gap-6">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-6">
                 <Link
                   href={slide.primaryHref}
-                  className="home-hero-primary sharp-edge bg-[#1E272E] text-[#F5F6FA] px-8 py-4 text-sm font-bold hover:bg-[#0984E3] transition-colors duration-300"
+                  className="home-hero-primary sharp-edge bg-[#1E272E] text-[#F5F6FA] px-8 py-4 text-sm font-bold hover:bg-[#0984E3] transition-colors duration-300 w-full sm:w-auto text-center"
                 >
                   {slide.primaryLabel}
                 </Link>
                 <Link
                   href={slide.secondaryHref}
-                  className="home-hero-secondary flex items-center gap-2 px-8 py-4 text-sm font-bold text-[#1E272E] hover:gap-4 transition-all duration-300"
+                  className="home-hero-secondary flex items-center justify-center sm:justify-start gap-2 px-8 py-4 text-sm font-bold text-[#1E272E] hover:gap-4 transition-all duration-300"
                 >
                   {slide.secondaryLabel} <ChevronRight className="w-4 h-4" />
                 </Link>
               </div>
             </div>
 
-            {/* Right: image + floating card */}
-            <div className="lg:col-span-5 relative mt-12 lg:mt-0">
-              <div className="relative aspect-[4/5] overflow-hidden shadow-2xl">
+            {/* Right: image + floating card — first on mobile, second on desktop */}
+            <div className="lg:col-span-5 relative order-1 lg:order-2 -mx-6 lg:mx-0">
+              <div className="relative aspect-[9/10] lg:aspect-[4/5] overflow-hidden shadow-2xl">
                 <Image
                   src={slide.image}
                   alt={slide.imageAlt}
@@ -180,7 +195,7 @@ export default function HeroSlider() {
                   priority={active === 0}
                 />
               </div>
-              {/* Asymmetric floating card */}
+              {/* Asymmetric floating card — desktop only */}
               <div className="absolute -bottom-16 -left-6 md:-left-14 bg-white p-8 max-w-[17rem] shadow-xl hidden md:block">
                 {slide.cardIcon}
                 <h3 className="home-float-title font-serif text-xl mt-4 mb-3 italic font-medium text-[#1E272E]">
@@ -195,10 +210,10 @@ export default function HeroSlider() {
         </AnimatePresence>
 
         {/* Slide indicators */}
-        <div className="flex items-center justify-center gap-3 mt-20 lg:mt-24">
-          {SLIDES.map((_, i) => (
+        <div className="flex items-center justify-center gap-3 mt-10 lg:mt-24">
+          {SLIDES.map((s, i) => (
             <button
-              key={i}
+              key={s.eyebrow}
               onClick={() => goTo(i)}
               aria-label={`Go to slide ${i + 1}`}
               className={`h-[3px] rounded-full transition-all duration-300 ${
@@ -209,9 +224,11 @@ export default function HeroSlider() {
             />
           ))}
         </div>
+        <p className="lg:hidden mt-3 text-center text-[10px] uppercase tracking-widest text-[#1E272E]/30">
+          Swipe to explore
+        </p>
 
       </div>
     </section>
   );
 }
-

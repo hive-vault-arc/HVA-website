@@ -332,9 +332,24 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
           </div>
         </div>
 
-        {/* Right — 2×3 Capability Pillars (absolute-positioned for fixed-height section) */}
+        {/* Right — mobile 2-col grid fallback */}
+        <div className="lg:hidden grid grid-cols-2 gap-px bg-[#e2e8f0]">
+          {capabilityPillars.map((pillar) => (
+            <div key={pillar.title} className="bg-white p-5 flex flex-col gap-3">
+              <div className="w-9 h-9 flex items-center justify-center bg-[#dbeafe] text-[#2563EB] shrink-0">
+                {pillar.icon}
+              </div>
+              <div>
+                <h3 className="font-headline text-sm text-[#0F172A] mb-1 leading-snug">{pillar.title}</h3>
+                <p className="text-xs text-[#475569] leading-relaxed">{pillar.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Right — 2×3 Capability Pillars desktop (absolute-positioned for fixed-height section) */}
         <ul
-          className="lg:col-span-7 relative list-none m-0 p-0 overflow-hidden"
+          className="lg:col-span-7 relative list-none m-0 p-0 overflow-hidden hidden lg:block"
           style={{ height: '600px' }}
           onMouseLeave={() => setHoveredPillar(null)}
         >

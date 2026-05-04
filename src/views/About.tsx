@@ -414,7 +414,7 @@ const About: React.FC = () => {
                     viewport={{ once: true, amount: 0.05 }}
                     transition={{ duration: 0.35, delay: index * 0.07 }}
                   >
-                    <div className="aspect-[4/5] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
+                    <div className="relative aspect-[4/5] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
                       <Image
                         src={member.image}
                         alt={member.name}
