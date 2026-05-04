@@ -11,6 +11,16 @@ export const HOME_FAQS: FaqSet = [
       'H.V.A is an AI-powered digital transformation and technology consulting firm. We work across three pillars: (1) AI agents and intelligent automation — building systems that handle operations, qualify leads, and run workflows continuously; (2) digital transformation programs — end-to-end modernization of how your business operates through cloud, data, and custom software; and (3) technology consulting — strategic advisory, roadmap design, and architecture decisions that align your technology investments with business outcomes.',
   },
   {
+    question: 'What is the ARC Program?',
+    answer:
+      'The ARC Program is H.V.A\'s structured engagement model: Audit (assess the current operational state), Roadmap (design the AI and transformation plan), and Craft (build, deploy, and operate the solution). Most ARC engagements run 6–12 weeks and cover strategy through production, with optional managed evolution after go-live.',
+  },
+  {
+    question: 'Does H.V.A build WhatsApp AI agents?',
+    answer:
+      'Yes. WhatsApp AI agents are one of H.V.A\'s core offerings. We build intelligent agents on the WhatsApp Business API that handle lead qualification, customer support, and sales automation. WhatsApp has over 90% penetration in Morocco, making it the primary B2B channel — our production deployments operate 24/7 with multilingual support, persistent memory, and direct CRM integration.',
+  },
+  {
     question: 'Is H.V.A an AI company, a consulting firm, or a software agency?',
     answer:
       'All three — and that combination is intentional. We lead with AI and automation because that is where the highest operational leverage is right now. We run it through digital transformation programs so change actually sticks. And we back everything with consulting rigor so strategy and execution stay aligned. We go beyond advising and beyond building — we own delivery and remain accountable through production.',

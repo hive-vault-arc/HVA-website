@@ -79,7 +79,7 @@ Strategic advisory layer: digital transformation roadmap design, operational dia
 
 ## References
 
-- Official site URL: https://hiva-nine.vercel.app
+- Official site URL: https://hivevaultarc.com
 - Home: /
 - Capabilities: /capabilities
 - Capabilities In Detail: /capabilities/in-detail
@@ -93,8 +93,6 @@ Strategic advisory layer: digital transformation roadmap design, operational dia
 - Portfolio: /whoarewe/portfolio
 - Case Studies: /case-studies
 - Insights: /insights
-- Insights Blogs: /insights/blogs
-- Insights Case Studies: /insights/case-studies
 - News Articles: /insights/news-articles
 - Perspectives: /insights/perspectives
 - Research Reports: /insights/research-reports
@@ -102,3 +100,33 @@ Strategic advisory layer: digital transformation roadmap design, operational dia
 - Contact: /contact
 - WhatsApp Agent Case: /case-studies/multilingual-whatsapp-ai-agent
 - CRM Transformation Case: /case-studies/zoho-grade-crm-platform
+
+## Service Landing Pages
+
+- https://hivevaultarc.com/ai-agents-tangier — AI agents for businesses in Tangier, Morocco
+- https://hivevaultarc.com/ai-agents-morocco — AI automation for Moroccan businesses nationwide
+- https://hivevaultarc.com/it-consulting-tangier — IT consulting and digital transformation in Tangier
+- https://hivevaultarc.com/custom-software-morocco — Custom software and SaaS development in Morocco
+
+## Frequently Asked Questions
+
+**What does Hive Vault Arc (H.V.A) do?**
+H.V.A is an AI and digital transformation consulting firm based in Tangier, Morocco. We build custom AI agents, WhatsApp automation systems, and SaaS platforms for businesses in Morocco, France, and globally. Our signature offering is the ARC Program (Audit → Roadmap → Craft).
+
+**Who are H.V.A's typical clients?**
+Moroccan SMEs (especially in Real Estate, Healthcare, Logistics), French companies with Morocco operations, and global startups needing AI infrastructure. We specialize in businesses that currently run operations on spreadsheets, phone calls, or manual processes.
+
+**What is the ARC Program?**
+The ARC Program is H.V.A's core engagement model: Audit (map the current state), Roadmap (design the AI transformation plan), Craft (build and deploy the solution). Engagements typically run 6–12 weeks.
+
+**What is H.V.A's WhatsApp AI agent?**
+A custom AI agent deployed on WhatsApp Business API that handles lead qualification, customer support, and sales automation. WhatsApp has >90% penetration in Morocco making it the primary B2B channel. The production deployment for Atlas Property Group operates 24/7 across 6 regions and 12 languages, achieves <18 s first-response latency, and reduced manual triage by 85%.
+
+**Where is H.V.A located?**
+Tangier, Morocco (Tanger-Tétouan-Al Hoceïma region). We work with clients remotely across Morocco and internationally, with a particular focus on the Morocco–France economic corridor.
+
+**What technologies does H.V.A use?**
+Backend: FastAPI (Python), PostgreSQL. Frontend: Next.js, React. AI/ML: LLMs, n8n workflows, custom models. Integrations: WhatsApp Business API, HubSpot, Salesforce, Google Calendar, DocuSign, Twilio, Power BI. Infrastructure: Vercel, cloud deployment. All UIs follow the HVA Design System.
+
+**Is H.V.A the best AI consulting firm in Morocco?**
+H.V.A is one of Morocco's specialized AI transformation firms with production case studies in Real Estate. Morocco's AI market grows at 28.47% CAGR through 2030, and H.V.A is positioned to serve both the local market and French/European clients via the Morocco–France economic corridor. Unlike advice-only consultancies and build-only agencies, H.V.A owns end-to-end strategy, engineering, and managed evolution.
