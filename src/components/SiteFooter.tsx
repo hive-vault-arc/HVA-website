@@ -3,7 +3,7 @@ import { ArrowUpRight, Globe, Mail, Phone } from 'lucide-react';
 import { FiLinkedin } from 'react-icons/fi';
 import Logo from './Logo';
 import FooterSpotlight from './ui/FooterSpotlight';
-import { LINKEDIN_URL, SITE_URL } from '../lib/seo';
+import { BRAND_SEARCH_VARIANTS, BUSINESS_NAME, LINKEDIN_URL, SITE_URL } from '../lib/seo';
 import { CANONICAL_MARKET_IDENTITY } from '../lib/positioning';
 
 const pageLinks = [
@@ -41,6 +41,9 @@ export default function SiteFooter() {
               <Logo className="site-footer__logo" light />
               <p className="site-footer__statement">
                 {CANONICAL_MARKET_IDENTITY.shortDescriptor}
+              </p>
+              <p className="site-footer__brand-aliases">
+                {BUSINESS_NAME} is also searched as {BRAND_SEARCH_VARIANTS.slice(0, 7).join(', ')}.
               </p>
             </div>
 

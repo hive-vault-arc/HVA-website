@@ -314,14 +314,7 @@ export default function InsightIndexPage({
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center">
-                        <span
-                          className="text-4xl font-light italic text-[#dde1e7] select-none px-6 text-center leading-tight"
-                          style={{ fontFamily: 'var(--font-headline)' }}
-                        >
-                          {item.tag}
-                        </span>
-                      </div>
+                      <ImagePlaceholder tag={item.tag} />
                     )}
                   </div>
                   {/* Meta */}

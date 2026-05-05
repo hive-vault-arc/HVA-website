@@ -7,8 +7,12 @@ import JsonLd from '../components/JsonLd';
 import {
   DEFAULT_DESCRIPTION,
   DEFAULT_TITLE,
+  BRAND_ALIASES,
   GLOBAL_KEYWORDS,
   LINKEDIN_URL,
+  SITE_LOGO_HEIGHT,
+  SITE_LOGO_PATH,
+  SITE_LOGO_WIDTH,
   SITE_NAME,
   SITE_URL,
   absoluteUrl,
@@ -68,15 +72,16 @@ export const metadata: Metadata = {
     images: ['/Images/brand/hva-ai-software-agency-tangier.webp'],
   },
   icons: {
-    shortcut: [{ url: '/Images/favico/favicon.ico' }],
+    shortcut: [{ url: SITE_LOGO_PATH, type: 'image/png' }],
     icon: [
+      { url: SITE_LOGO_PATH, sizes: `${SITE_LOGO_WIDTH}x${SITE_LOGO_HEIGHT}`, type: 'image/png' },
       { url: '/Images/favico/favicon.ico' },
       { url: '/Images/favico/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
       { url: '/Images/favico/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
       { url: '/Images/favico/android-chrome-192x192.png', sizes: '139x139', type: 'image/png' },
       { url: '/Images/favico/android-chrome-512x512.png', sizes: '367x367', type: 'image/png' },
     ],
-    apple: [{ url: '/Images/favico/apple-touch-icon.png', sizes: '131x131', type: 'image/png' }],
+    apple: [{ url: SITE_LOGO_PATH, sizes: `${SITE_LOGO_WIDTH}x${SITE_LOGO_HEIGHT}`, type: 'image/png' }],
   },
   verification: {
     google: '5a73152a76ce06c0',
@@ -99,13 +104,15 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     '@type': ['Organization', 'ProfessionalService'],
     '@id': `${SITE_URL}/#organization`,
     name: 'Hive Vault Arc',
-    alternateName: 'H.V.A',
+    alternateName: BRAND_ALIASES,
+    legalName: 'Hive Vault Arc',
     url: SITE_URL,
     logo: {
       '@type': 'ImageObject',
-      url: absoluteUrl('/Images/favico/android-chrome-512x512.png'),
-      width: 512,
-      height: 512,
+      url: absoluteUrl(SITE_LOGO_PATH),
+      contentUrl: absoluteUrl(SITE_LOGO_PATH),
+      width: SITE_LOGO_WIDTH,
+      height: SITE_LOGO_HEIGHT,
     },
     image: absoluteUrl('/Images/media/og-default.png'),
     description:
@@ -147,7 +154,10 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     sameAs: [
       LINKEDIN_URL,
       'https://github.com/hive-vault-arc',
-      // Add Twitter/X, Instagram, Crunchbase URLs here when accounts exist
+      'https://www.instagram.com/hive.vault.arc/',
+      'https://x.com/Hivevaultarc',
+      'https://www.tiktok.com/@hivevaultarc',
+      'https://web.facebook.com/profile.php?id=61588911931881',
     ],
     knowsAbout: [
       'Artificial Intelligence',
@@ -188,7 +198,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     '@id': `${SITE_URL}/#website`,
     url: SITE_URL,
     name: 'Hive Vault Arc',
-    alternateName: 'H.V.A',
+    alternateName: BRAND_ALIASES,
     description: 'AI & digital transformation consulting for Moroccan and global businesses',
     inLanguage: ['en', 'fr', 'ar', 'es'],
     publisher: {

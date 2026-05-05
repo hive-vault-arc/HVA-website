@@ -420,6 +420,17 @@
   color: rgba(226, 232, 240, 0.85);
 }
 
+.site-footer__brand-aliases {
+  margin: 1rem 0 0;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.65;
+  text-transform: uppercase;
+  color: rgba(148, 163, 184, 0.62);
+}
+
 .site-footer__list-grid,
 .site-footer__list-stack {
   margin: 0;

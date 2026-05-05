@@ -4,6 +4,12 @@
   "description": "AI & digital transformation consulting firm based in Tangier, Morocco.",
   "icons": [
     {
+      "src": "/Images/favico/logo.png",
+      "sizes": "359x359",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
       "src": "/Images/favico/android-chrome-192x192.png",
       "sizes": "139x139",
       "type": "image/png",

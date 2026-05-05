@@ -2,6 +2,26 @@ import { describe, expect, it } from 'vitest';
 import nextConfig from '../../next.config';
 
 describe('Legacy Redirect Rules', () => {
+  it('consolidates the www hostname to the canonical apex domain', async () => {
+    const redirects = await (nextConfig.redirects?.() ?? Promise.resolve([]));
+
+    expect(redirects).toEqual(
+      expect.arrayContaining([
+        {
+          source: '/:path*',
+          has: [
+            {
+              type: 'host',
+              value: 'www.hivevaultarc.com',
+            },
+          ],
+          destination: 'https://hivevaultarc.com/:path*',
+          permanent: true,
+        },
+      ])
+    );
+  });
+
   it('contains permanent redirects from legacy URLs to canonical destinations', async () => {
     const redirects = await (nextConfig.redirects?.() ?? Promise.resolve([]));
 

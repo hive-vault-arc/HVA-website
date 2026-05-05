@@ -64,6 +64,17 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'www.hivevaultarc.com',
+          },
+        ],
+        destination: 'https://hivevaultarc.com/:path*',
+        permanent: true,
+      },
+      {
         source: '/insights/blogs',
         destination: '/blog',
         permanent: true,

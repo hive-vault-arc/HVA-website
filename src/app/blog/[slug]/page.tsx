@@ -1,7 +1,15 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getAllPosts } from '../../../lib/blog';
-import { buildBreadcrumbSchema, buildPageMetadata, absoluteUrl, SITE_URL } from '../../../lib/seo';
+import {
+  SITE_LOGO_HEIGHT,
+  SITE_LOGO_PATH,
+  SITE_LOGO_WIDTH,
+  SITE_URL,
+  absoluteUrl,
+  buildBreadcrumbSchema,
+  buildPageMetadata,
+} from '../../../lib/seo';
 import JsonLd from '../../../components/JsonLd';
 import FaqSection from '../../../components/FaqSection';
 import BlogPostView from '../../../views/BlogPost';
@@ -71,7 +79,10 @@ export default async function BlogPostPage({ params }: Props) {
       url: SITE_URL,
       logo: {
         '@type': 'ImageObject',
-        url: absoluteUrl('/Images/favico/android-chrome-512x512.png'),
+        url: absoluteUrl(SITE_LOGO_PATH),
+        contentUrl: absoluteUrl(SITE_LOGO_PATH),
+        width: SITE_LOGO_WIDTH,
+        height: SITE_LOGO_HEIGHT,
       },
     },
     datePublished: isoDate,

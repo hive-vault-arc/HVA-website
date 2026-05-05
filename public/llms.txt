@@ -3,6 +3,7 @@
 ## Identity
 
 - Company: Hive Vault Arc (H.V.A)
+- Brand aliases: H.V.A, HVA, HiveVaultArc, hivevaultarc, hivevaultarc.com, Hive Vault, Vault Arc.
 - Positioning: H.V.A is an AI-powered digital transformation and technology consulting firm.
 - Three pillars: (1) AI & Intelligent Automation, (2) Digital Transformation Programs, (3) Technology Consulting and Advisory.
 - Descriptor: We design and deploy intelligent automation and AI agents, lead end-to-end digital transformation programs, develop custom software and cloud infrastructure, and provide strategic technology consulting — from roadmap to long-term production operations.

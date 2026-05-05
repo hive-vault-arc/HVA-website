@@ -7,12 +7,26 @@ export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
 export const SITE_NAME = 'H.V.A';
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://hivevaultarc.com';
 export const LINKEDIN_URL = 'https://www.linkedin.com/company/hive-vault-arc';
+export const SITE_LOGO_PATH = '/Images/favico/logo.png';
+export const SITE_LOGO_WIDTH = 359;
+export const SITE_LOGO_HEIGHT = 359;
 
 export const BUSINESS_NAME = 'Hive Vault Arc';
+export const BRAND_ALIASES = [
+  'H.V.A',
+  'HVA',
+  'HiveVaultArc',
+  'hivevaultarc',
+  'hivevaultarc.com',
+  'Hive Vault ARC',
+];
+export const BRAND_SEARCH_VARIANTS = [...BRAND_ALIASES, 'Hive Vault', 'Vault Arc'];
 export const DEFAULT_TITLE = `${SITE_NAME} | AI & Automation · Digital Transformation · Technology Consulting`;
 export const DEFAULT_DESCRIPTION = CANONICAL_MARKET_IDENTITY.longDescriptor;
 
 export const GLOBAL_KEYWORDS = [
+  BUSINESS_NAME,
+  ...BRAND_SEARCH_VARIANTS,
   'AI Morocco',
   'AI consulting Tangier',
   'WhatsApp AI agent',
@@ -22,7 +36,6 @@ export const GLOBAL_KEYWORDS = [
   'CRM Morocco',
   'IT consulting Morocco',
   'ARC program HVA',
-  'Hive Vault Arc',
 ];
 
 type PageMetaInput = {
