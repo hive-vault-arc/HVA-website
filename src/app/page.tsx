@@ -19,6 +19,11 @@ export const metadata: Metadata = {
     keywords: mergeKeywords(GLOBAL_KEYWORDS, [
       'technology consulting firm Tangier',
       'digital transformation partner Morocco',
+      'digital services Tangier',
+      'digital services Morocco',
+      'digital agency Tangier',
+      'services digitaux Tanger',
+      'agence digitale Tanger',
       'end-to-end consulting and technical execution',
       'AI automation consulting Morocco',
       'custom software and IT modernization',
@@ -161,6 +166,8 @@ export default function Page() {
             {/* Right — card grid */}
             <div className="lg:col-span-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
               {[
+                { href: '/digital-services-tangier', label: 'Digital Services in Tangier', tag: 'Tangier', Icon: Layers },
+                { href: '/services-digitaux-tanger', label: 'Services Digitaux à Tanger', tag: 'Tanger', Icon: Layers },
                 { href: '/ai-agents-tangier',     label: 'AI Agents in Tangier',         tag: 'Tangier', Icon: Bot    },
                 { href: '/ai-agents-morocco',      label: 'AI Agents in Morocco',          tag: 'Morocco', Icon: Bot    },
                 { href: '/it-consulting-tangier',  label: 'IT Consulting in Tangier',      tag: 'Tangier', Icon: Layers },
@@ -202,4 +209,3 @@ export default function Page() {
     </>
   );
 }
-

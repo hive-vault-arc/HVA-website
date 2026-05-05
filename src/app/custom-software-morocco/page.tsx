@@ -254,6 +254,9 @@ export default function CustomSoftwareMoroccoPage() {
               <Link href="/case-studies/zoho-grade-crm-platform" className="editorial-link">
                 Review CRM Case Study →
               </Link>
+              <Link href="/digital-services-tangier" className="editorial-link">
+                View Full Digital Services Portfolio →
+              </Link>
             </div>
           </div>
         </section>

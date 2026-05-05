@@ -207,6 +207,8 @@ H.V.A's typical AI agent architecture follows an **event-driven orchestration pa
 - AI Agents Morocco: https://hivevaultarc.com/ai-agents-morocco
 - IT Consulting Tangier: https://hivevaultarc.com/it-consulting-tangier
 - Custom Software Morocco: https://hivevaultarc.com/custom-software-morocco
+- Digital Services Tangier: https://hivevaultarc.com/digital-services-tangier
+- Services Digitaux Tanger: https://hivevaultarc.com/services-digitaux-tanger
 
 ### Featured case studies
 - Multilingual WhatsApp AI Agent: https://hivevaultarc.com/case-studies/multilingual-whatsapp-ai-agent

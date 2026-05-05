@@ -242,6 +242,9 @@ export default function ITConsultingTangierPage() {
               <Link href="/contact" className="editorial-link">
                 Talk to H.V.A →
               </Link>
+              <Link href="/digital-services-tangier" className="editorial-link">
+                Explore All Digital Services →
+              </Link>
             </div>
           </div>
         </section>

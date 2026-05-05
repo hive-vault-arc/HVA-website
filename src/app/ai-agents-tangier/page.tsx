@@ -278,6 +278,9 @@ export default function AIAgentsTangierPage() {
               <Link href="/case-studies/multilingual-whatsapp-ai-agent" className="editorial-link">
                 View AI Case Study →
               </Link>
+              <Link href="/digital-services-tangier" className="editorial-link">
+                See All Digital Services in Tangier →
+              </Link>
             </div>
           </div>
         </section>

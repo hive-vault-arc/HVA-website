@@ -36,6 +36,13 @@ export const GLOBAL_KEYWORDS = [
   'CRM Morocco',
   'IT consulting Morocco',
   'ARC program HVA',
+  'digital services Tangier',
+  'digital services Morocco',
+  'digital agency Tangier',
+  'services digitaux Tanger',
+  'agence digitale Tanger',
+  'digital services Tanger',
+  'technology services Tangier',
 ];
 
 type PageMetaInput = {

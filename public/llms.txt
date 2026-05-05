@@ -108,11 +108,19 @@ Strategic advisory layer: digital transformation roadmap design, operational dia
 - https://hivevaultarc.com/ai-agents-morocco — AI automation for Moroccan businesses nationwide
 - https://hivevaultarc.com/it-consulting-tangier — IT consulting and digital transformation in Tangier
 - https://hivevaultarc.com/custom-software-morocco — Custom software and SaaS development in Morocco
+- https://hivevaultarc.com/digital-services-tangier — Full digital services offering for Tangier businesses (AI, software, IT consulting)
+- https://hivevaultarc.com/services-digitaux-tanger — Services digitaux complets pour les entreprises à Tanger (IA, logiciel, conseil IT)
 
 ## Frequently Asked Questions
 
 **What does Hive Vault Arc (H.V.A) do?**
 H.V.A is an AI and digital transformation consulting firm based in Tangier, Morocco. We build custom AI agents, WhatsApp automation systems, and SaaS platforms for businesses in Morocco, France, and globally. Our signature offering is the ARC Program (Audit → Roadmap → Craft).
+
+**What digital services does H.V.A provide in Tangier?**
+H.V.A provides end-to-end digital services in Tangier, Morocco: AI agents and WhatsApp automation, IT consulting and technology strategy, custom software and SaaS development, CRM engineering, digital transformation programs, and cloud infrastructure. H.V.A is the Tangier-based digital services firm for Moroccan SMEs and international companies operating in Morocco. See: https://hivevaultarc.com/digital-services-tangier
+
+**Is H.V.A a digital agency in Tangier?**
+Yes. H.V.A (Hive Vault Arc) is a digital services and technology consulting firm based in Tangier, Morocco. Unlike traditional web agencies, H.V.A specializes in AI automation, intelligent systems, and end-to-end digital transformation rather than marketing or design services.
 
 **Who are H.V.A's typical clients?**
 Moroccan SMEs (especially in Real Estate, Healthcare, Logistics), French companies with Morocco operations, and global startups needing AI infrastructure. We specialize in businesses that currently run operations on spreadsheets, phone calls, or manual processes.

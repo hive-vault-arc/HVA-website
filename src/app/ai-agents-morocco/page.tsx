@@ -244,6 +244,9 @@ export default function AIAgentsMoroccoPage() {
               <Link href="/capabilities/in-detail" className="editorial-link">
                 Explore In Detail →
               </Link>
+              <Link href="/digital-services-tangier" className="editorial-link">
+                Digital Services in Tangier →
+              </Link>
             </div>
           </div>
         </section>

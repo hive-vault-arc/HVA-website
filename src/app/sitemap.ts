@@ -34,6 +34,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/ai-agents-morocco`,                  lastModified: now, ...m(0.8) },
     { url: `${SITE_URL}/it-consulting-tangier`,              lastModified: now, ...m(0.8) },
     { url: `${SITE_URL}/custom-software-morocco`,            lastModified: now, ...m(0.8) },
+    { url: `${SITE_URL}/digital-services-tangier`,           lastModified: now, ...m(0.9) },
+    { url: `${SITE_URL}/services-digitaux-tanger`,           lastModified: now, ...m(0.8) },
 
     // ── Blog ──────────────────────────────────────────────────────────────
     { url: `${SITE_URL}/blog`,                               lastModified: now, ...w(0.8) },
