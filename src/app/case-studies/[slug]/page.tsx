@@ -63,9 +63,10 @@ export default async function CaseStudyDetailPage({ params }: Props) {
     '@context': 'https://schema.org',
     '@type': 'Review',
     itemReviewed: {
-      '@type': 'Service',
-      name: study.title,
-      provider: { '@id': `${SITE_URL}/#organization` },
+      '@type': 'Organization',
+      '@id': `${SITE_URL}/#organization`,
+      name: 'H.V.A - Hive Vault Arc',
+      url: SITE_URL,
     },
     reviewBody: study.testimonial.quote,
     author: {
