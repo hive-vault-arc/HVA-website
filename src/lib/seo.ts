@@ -4,7 +4,7 @@ import { CANONICAL_MARKET_IDENTITY } from './positioning';
 export const SUPPORTED_LOCALES = ['en', 'fr', 'ar', 'es'] as const;
 export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
 
-export const SITE_NAME = 'H.V.A';
+export const SITE_NAME = 'Hive Vault Arc';
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://hivevaultarc.com';
 export const LINKEDIN_URL = 'https://www.linkedin.com/company/hive-vault-arc';
 export const SITE_LOGO_PATH = '/Images/favico/logo.png';
@@ -17,10 +17,9 @@ export const BRAND_ALIASES = [
   'HVA',
   'HiveVaultArc',
   'hivevaultarc',
-  'hivevaultarc.com',
   'Hive Vault ARC',
 ];
-export const BRAND_SEARCH_VARIANTS = [...BRAND_ALIASES, 'Hive Vault', 'Vault Arc'];
+export const BRAND_SEARCH_VARIANTS = [...BRAND_ALIASES, 'Hive Vault', 'Vault Arc', 'hivevaultarc.com'];
 export const DEFAULT_TITLE = `${SITE_NAME} | AI & Automation · Digital Transformation · Technology Consulting`;
 export const DEFAULT_DESCRIPTION = CANONICAL_MARKET_IDENTITY.longDescriptor;
 

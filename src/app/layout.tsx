@@ -72,16 +72,17 @@ export const metadata: Metadata = {
     images: ['/Images/brand/hva-ai-software-agency-tangier.webp'],
   },
   icons: {
-    shortcut: [{ url: SITE_LOGO_PATH, type: 'image/png' }],
+    shortcut: [{ url: '/favicon.ico', type: 'image/x-icon' }],
     icon: [
-      { url: SITE_LOGO_PATH, sizes: `${SITE_LOGO_WIDTH}x${SITE_LOGO_HEIGHT}`, type: 'image/png' },
-      { url: '/Images/favico/favicon.ico' },
+      { url: '/favicon.ico', type: 'image/x-icon' },
       { url: '/Images/favico/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
       { url: '/Images/favico/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/Images/favico/android-chrome-192x192.png', sizes: '139x139', type: 'image/png' },
-      { url: '/Images/favico/android-chrome-512x512.png', sizes: '367x367', type: 'image/png' },
+      { url: '/Images/favico/favicon-48x48.png', sizes: '48x48', type: 'image/png' },
+      { url: '/Images/favico/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/Images/favico/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/Images/favico/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' },
     ],
-    apple: [{ url: SITE_LOGO_PATH, sizes: `${SITE_LOGO_WIDTH}x${SITE_LOGO_HEIGHT}`, type: 'image/png' }],
+    apple: [{ url: '/Images/favico/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
   },
   verification: {
     google: '5a73152a76ce06c0',
