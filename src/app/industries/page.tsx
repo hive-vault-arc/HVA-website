@@ -4,9 +4,9 @@ import JsonLd from '../../components/JsonLd';
 import { GLOBAL_KEYWORDS, SITE_URL, buildBreadcrumbSchema, buildPageMetadata, mergeKeywords } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Industries | Sector-Focused Transformation Programs',
+  title: 'Industries | 8 Sector-Focused Transformation Verticals',
   description:
-    'Explore how H.V.A applies consulting, engineering, and transformation delivery across real estate, healthcare, construction, logistics, finance and brokerage, and SME capabilities.',
+    'Explore how H.V.A applies ARC delivery across 8 industry verticals: real estate and construction, healthcare, financial services, government, retail, energy, logistics, and consumer goods.',
   path: '/industries',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'industry specific digital transformation',
@@ -15,8 +15,10 @@ export const metadata: Metadata = buildPageMetadata({
     'logistics automation consulting Morocco',
     'construction operations digitization',
     'financial services automation Morocco',
-    'broker workflow automation Morocco',
-    'deal closing sales operations automation',
+    'government digital transformation Morocco',
+    'retail ecommerce platform Morocco',
+    'energy sustainability digital Morocco',
+    'consumer goods luxury operations Morocco',
   ]),
 });
 
@@ -26,7 +28,7 @@ export default function IndustriesPage() {
     '@type': 'CollectionPage',
     name: 'H.V.A Industries',
     description:
-      'Industry-focused transformation programs delivered by H.V.A across real estate, healthcare, construction, logistics, finance and brokerage, and SME operations.',
+      'Industry-focused transformation programs delivered by H.V.A across real estate and construction, healthcare and life sciences, financial services, government and public sector, retail and e-commerce, energy and sustainability, logistics and transportation, and consumer goods and luxury.',
     url: `${SITE_URL}/industries`,
   };
   const breadcrumbSchema = buildBreadcrumbSchema([

@@ -132,63 +132,63 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
 
   const capabilityPillars = [
     {
-      icon: <Bot className="w-5 h-5" strokeWidth={1.5} />,
-      title: 'AI & Intelligent Automation',
-      desc: 'AI agents that handle inquiries, qualify leads, and run your back-office — 24/7, without adding headcount.',
+      icon: <MessageSquare className="w-5 h-5" strokeWidth={1.5} />,
+      title: 'Strategy & Business Consulting',
+      desc: 'Diagnose, define, and design transformation before a single line of code is written.',
       details: [
-        'WhatsApp & inbox AI receptionists',
-        'Lead qualification & routing agents',
-        'Internal workflow automation pipelines',
-      ],
-    },
-    {
-      icon: <Layers className="w-5 h-5" strokeWidth={1.5} />,
-      title: 'Digital Transformation',
-      desc: 'We take operations running on spreadsheets and rebuild them on integrated, purpose-built digital systems.',
-      details: [
-        'Full operational audit & process mapping',
-        'CRM, ERP & platform modernization',
-        'Cloud migration with zero-downtime plans',
+        'Business and digital transformation strategy',
+        'Operational diagnostics and process redesign',
+        'Innovation strategy and market expansion',
       ],
     },
     {
       icon: <Eye className="w-5 h-5" strokeWidth={1.5} />,
       title: 'Technology Consulting',
-      desc: 'Strategy that stays accountable through delivery. Same team from architecture decisions to long-term operations.',
+      desc: 'Architecture decisions made early compound positively. We design systems that last.',
       details: [
-        'Technology roadmap & architecture design',
-        'Build vs. buy decision frameworks',
-        'Ongoing technical leadership & advisory',
+        'Enterprise architecture and technology roadmaps',
+        'Platform strategy and systems integration',
+        'IT modernization and infrastructure design',
+      ],
+    },
+    {
+      icon: <Bot className="w-5 h-5" strokeWidth={1.5} />,
+      title: 'AI, Data & Analytics',
+      desc: 'AI agents on WhatsApp, web chat, and email — multilingual, always-on, trained on your operations.',
+      details: [
+        'AI agent design and deployment',
+        'Generative AI strategy and engineering',
+        'Data engineering and business intelligence',
+      ],
+    },
+    {
+      icon: <Layers className="w-5 h-5" strokeWidth={1.5} />,
+      title: 'Software Engineering',
+      desc: 'Production-grade custom software, SaaS platforms, and web and mobile applications.',
+      details: [
+        'Custom software and SaaS platform development',
+        'Web and mobile application delivery',
+        'API engineering and DevOps',
       ],
     },
     {
       icon: <Cloud className="w-5 h-5" strokeWidth={1.5} />,
-      title: 'Engineering & Delivery',
-      desc: 'Production-grade web, mobile, and cloud systems — built for real load and delivered with full accountability.',
+      title: 'Cloud & Infrastructure',
+      desc: 'Built for scale, security, and resilience — zero-trust design and observability from day one.',
       details: [
-        'Full-stack web & mobile development',
-        'SaaS platform & API engineering',
-        'DevOps, CI/CD & cloud infrastructure',
-      ],
-    },
-    {
-      icon: <MessageSquare className="w-5 h-5" strokeWidth={1.5} />,
-      title: 'Conversational AI & WhatsApp',
-      desc: 'AI agents deployed on WhatsApp, web chat, and email — multilingual, always available, and trained on your business.',
-      details: [
-        'Multilingual WhatsApp AI bots',
-        'Web chat & email automation',
-        'Human escalation & handoff flows',
+        'AWS, Azure, and GCP cloud migration',
+        'Infrastructure automation and security architecture',
+        'Observability, DR, and managed cloud services',
       ],
     },
     {
       icon: <BarChart3 className="w-5 h-5" strokeWidth={1.5} />,
-      title: 'Analytics & Decision Intelligence',
-      desc: 'Executive dashboards and data pipelines that turn scattered operational data into real-time clarity for leadership.',
+      title: 'Operations & Managed Services',
+      desc: 'We stay after go-live. Same team — strategy through production. No handoff.',
       details: [
-        'Executive KPI dashboards & control towers',
-        'Operational data pipelines & ETL',
-        'Custom reporting for founders & ops teams',
+        'Managed operations and application maintenance',
+        'AI system management post-deployment',
+        'Business process outsourcing and shared services',
       ],
     },
   ];
@@ -319,15 +319,15 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
           <div className="relative z-10">
             <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#2563EB] mb-10">Our Identity</p>
             <h2 className="font-headline text-5xl md:text-6xl text-white leading-[1.08] mb-8">
-              Strategic Clarity.<br />
-              <em className="font-headline italic text-white/35">Engineering Precision.</em>
+              Advise. Build.<br />
+              <em className="font-headline italic text-white/35">Operate.</em>
             </h2>
             <p className="text-white/60 font-body leading-relaxed text-base mb-10 max-w-sm">
-              H.V.A builds AI automation systems, leads digital transformation programs, and delivers production-grade engineering — from strategic roadmap through long-term operations.
+              H.V.A is a technology transformation partner — combining strategy, AI engineering, software development, and managed operations in one team. We stay until it works.
             </p>
             <div className="h-px w-12 bg-[#2563EB] mb-4" />
             <p className="text-[9px] font-label font-bold uppercase tracking-[0.28em] text-white/35">
-              AI · Transformation · Consulting · Cloud
+              Strategy · AI Engineering · Software · Operations
             </p>
           </div>
         </div>
@@ -597,7 +597,7 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
           >
             <h2 className="font-headline text-5xl md:text-6xl text-white leading-tight mb-14">
               Lasting Transformation Requires{' '}
-              <em className="not-italic text-[#2563EB] font-headline italic">Operational Mastery</em>
+              <em className="not-italic text-[#2563EB] font-headline italic">The Full ARC</em>
             </h2>
 
             <div className="space-y-10">
@@ -607,9 +607,9 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
                   <MessageSquare className="w-5 h-5 text-white" strokeWidth={1.5} />
                 </div>
                 <div>
-                  <h4 className="font-headline text-2xl text-white mb-2">Strategic Consulting</h4>
+                  <h4 className="font-headline text-2xl text-white mb-2">Assess — Strategy & Architecture</h4>
                   <p className="text-white/60 font-body leading-relaxed">
-                    We diagnose operational friction, map decision bottlenecks, and translate leadership goals into an executable transformation program.
+                    We diagnose operational friction, define target architecture, and sequence the transformation so leadership has a plan they can actually execute.
                   </p>
                 </div>
               </div>
@@ -620,9 +620,9 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
                   <Layers className="w-5 h-5 text-white" strokeWidth={1.5} />
                 </div>
                 <div>
-                  <h4 className="font-headline text-2xl text-white mb-2">Precision Engineering</h4>
+                  <h4 className="font-headline text-2xl text-white mb-2">Re-engineer — AI, Software & Cloud</h4>
                   <p className="text-white/60 font-body leading-relaxed">
-                    Systems are engineered for reliability under pressure, then continuously tuned to improve business performance.
+                    We build the systems, deploy the intelligence, and wire the infrastructure — engineered for reliability under real operational load.
                   </p>
                 </div>
               </div>
@@ -633,9 +633,9 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
                   <Eye className="w-5 h-5 text-white" strokeWidth={1.5} />
                 </div>
                 <div>
-                  <h4 className="font-headline text-2xl text-white mb-2">Technical Execution</h4>
+                  <h4 className="font-headline text-2xl text-white mb-2">Command — Operate & Evolve</h4>
                   <p className="text-white/60 font-body leading-relaxed">
-                    We run a predictable consulting-to-delivery cadence so strategy decisions translate into measurable operational outcomes.
+                    We stabilize, monitor, and evolve the systems we build — owning outcomes long-term so strategy decisions translate into measurable operational results.
                   </p>
                 </div>
               </div>

@@ -61,7 +61,7 @@ export const metadata: Metadata = {
         url: '/Images/brand/hva-ai-software-agency-tangier.webp',
         width: 1200,
         height: 630,
-        alt: 'H.V.A — AI & Automation · Digital Transformation · Technology Consulting',
+        alt: 'H.V.A — Technology Transformation Partner · Strategy · AI Engineering · Operations',
       },
     ],
   },
@@ -117,7 +117,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     },
     image: absoluteUrl('/Images/media/og-default.png'),
     description:
-      'AI & digital transformation consulting firm based in Tangier, Morocco. Specializing in custom AI agents, WhatsApp automation, ARC programs, and SaaS platform development for businesses in Morocco, France, and globally.',
+      'Technology transformation partner based in Tangier, Morocco. H.V.A combines strategy, AI engineering, custom software, cloud infrastructure, and managed operations from advisory through production.',
     foundingDate: '2026',
     founders: [
       {
@@ -144,11 +144,12 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
       { '@type': 'AdministrativeArea', name: 'Europe' },
     ],
     serviceType: [
-      'AI Consulting',
-      'Digital Transformation',
-      'WhatsApp AI Agents',
-      'Custom Software Development',
-      'SaaS Platform Development',
+      'Strategy and Business Consulting',
+      'Technology Consulting',
+      'AI Engineering and Data Analytics',
+      'Custom Software Engineering',
+      'Cloud Infrastructure',
+      'Managed Operations',
     ],
     email: 'contact@hivevaultarc.com',
     telephone: ['+212670431249'],
@@ -177,7 +178,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
           itemOffered: {
             '@type': 'Service',
             name: 'ARC Program',
-            description: 'Full AI & digital transformation engagement: Audit, Roadmap, Craft',
+            description: 'Full technology transformation engagement: Assess, Re-engineer, Command',
           },
         },
         {
@@ -200,7 +201,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     url: SITE_URL,
     name: 'Hive Vault Arc',
     alternateName: BRAND_ALIASES,
-    description: 'AI & digital transformation consulting for Moroccan and global businesses',
+    description: 'Technology transformation partner for Moroccan and global businesses',
     inLanguage: ['en', 'fr', 'ar', 'es'],
     publisher: {
       '@id': `${SITE_URL}/#organization`,

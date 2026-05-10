@@ -13,9 +13,9 @@ import {
 } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Capabilities | 8 Capability Domains and Solution Program Overview',
+  title: 'Capabilities | Six Service Pillars and Solution Program Overview',
   description:
-    'Concise capabilities overview across AI systems, transformation, consulting, engineering, data and growth, cybersecurity, and emerging tech with a BOT delivery model snapshot. Our capabilities are our services.',
+    'Concise capabilities overview across strategy, technology consulting, AI and data, software engineering, cloud infrastructure, and managed operations with an ARC delivery model snapshot.',
   path: '/capabilities',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'technology consulting capabilities Morocco',
@@ -38,10 +38,8 @@ export const metadata: Metadata = buildPageMetadata({
     'team to automate sales and support workflows',
     'consulting-led solution programs',
     'cybersecurity and digital risk consulting',
-    'emerging technologies advisory',
-    'deep tech implementation capabilities',
-    'internet of things consulting and delivery',
-    'build operate transfer model technology projects',
+    'managed operations technology partner',
+    'ARC assess re-engineer command model',
     'digital ecosystems strategy',
     'agile at scale transformation',
     'data and digital platform strategy',
@@ -84,13 +82,14 @@ export default function Page() {
       'Technology Consulting',
       'Business Transformation',
       'Digital Transformation Advisory',
-      'Digital, Technology, and Data',
       'Enterprise Architecture',
       'Digital Strategy',
       'Agile at Scale',
       'Tech Function Design',
       'Roadmap Design',
+      'Strategy and Business Consulting',
       'AI Agent Development',
+      'AI, Data, and Analytics',
       'Workflow Automation',
       'Decision Intelligence',
       'CRM and Systems Engineering',
@@ -102,10 +101,8 @@ export default function Page() {
       'Data Capabilities and Analytics',
       'Marketing Systems',
       'Cybersecurity and Digital Risk',
-      'Emerging Technologies',
-      'Deep Tech',
-      'Internet of Things',
-      'Build-Operate-Transfer Delivery Model',
+      'Operations and Managed Services',
+      'ARC Assess Re-engineer Command Delivery Model',
     ],
     availableLanguage: ['en', 'fr', 'ar', 'es'],
     keywords: mergeKeywords(GLOBAL_KEYWORDS, [

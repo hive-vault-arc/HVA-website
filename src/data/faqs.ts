@@ -8,12 +8,12 @@ export const HOME_FAQS: FaqSet = [
   {
     question: 'What does H.V.A do?',
     answer:
-      'H.V.A is an AI-powered digital transformation and technology consulting firm. We work across three pillars: (1) AI agents and intelligent automation — building systems that handle operations, qualify leads, and run workflows continuously; (2) digital transformation programs — end-to-end modernization of how your business operates through cloud, data, and custom software; and (3) technology consulting — strategic advisory, roadmap design, and architecture decisions that align your technology investments with business outcomes.',
+      'H.V.A is a technology transformation partner combining strategy, AI engineering, software, cloud infrastructure, and managed operations. We advise, build, and operate across six service pillars so organizations can redesign how work happens and keep production systems improving after launch.',
   },
   {
     question: 'What is the ARC Program?',
     answer:
-      'The ARC Program is H.V.A\'s structured engagement model: Audit (assess the current operational state), Roadmap (design the AI and transformation plan), and Craft (build, deploy, and operate the solution). Most ARC engagements run 6–12 weeks and cover strategy through production, with optional managed evolution after go-live.',
+      'The ARC Program is H.V.A\'s structured engagement model: Assess (understand the operating state and constraints), Re-engineer (redesign processes, architecture, and systems), and Command (run, stabilize, and improve the production operation). Most ARC engagements run 6–12 weeks and cover strategy through managed evolution.',
   },
   {
     question: 'Does H.V.A build WhatsApp AI agents?',
@@ -23,7 +23,7 @@ export const HOME_FAQS: FaqSet = [
   {
     question: 'Is H.V.A an AI company, a consulting firm, or a software agency?',
     answer:
-      'All three — and that combination is intentional. We lead with AI and automation because that is where the highest operational leverage is right now. We run it through digital transformation programs so change actually sticks. And we back everything with consulting rigor so strategy and execution stay aligned. We go beyond advising and beyond building — we own delivery and remain accountable through production.',
+      'H.V.A is a technology transformation partner. That means we combine strategy, AI engineering, software delivery, cloud infrastructure, and managed operations in one accountable team. We go beyond advising and beyond building: we own delivery and remain accountable through production.',
   },
   {
     question: 'What kinds of AI solutions does H.V.A build?',
@@ -60,9 +60,9 @@ export const HOME_FAQS: FaqSet = [
 // Capabilities
 export const CAPABILITIES_FAQS: FaqSet = [
   {
-    question: "What are H.V.A's capability domains?",
+    question: "What are H.V.A's six service pillars?",
     answer:
-      'H.V.A operates across eight domains: AI Systems, Business Transformation, Digital/Technology/Data, Consulting, Engineering, Data and Growth, Cybersecurity and Digital Risk, and Emerging Tech. Engagements combine these domains based on business priorities and operating constraints.',
+      'H.V.A operates across six service pillars: Strategy and Business Consulting, Technology Consulting, AI/Data/Analytics, Software Engineering and Product Development, Cloud and Infrastructure, and Operations and Managed Services. Engagements combine these pillars based on business priorities and operating constraints.',
   },
   {
     question: 'What AI and automation solutions do you deliver?',
@@ -85,29 +85,29 @@ export const CAPABILITIES_FAQS: FaqSet = [
       'Yes. We engineer custom web apps, mobile apps, SaaS platforms, cloud systems, APIs, and integrations. We also deliver CRM modernization and operational platform builds matched to your process model.',
   },
   {
-    question: 'What data and growth capabilities are included?',
+    question: 'What AI, data, and analytics capabilities are included?',
     answer:
-      'We provide analytics architecture, KPI dashboards, data pipelines, decision support workflows, and marketing system engineering. The goal is reliable decision intelligence and repeatable growth operations.',
+      'We provide AI agents, generative AI engineering, predictive analytics, data pipelines, warehouses, executive dashboards, and MLOps. The goal is reliable decision intelligence and repeatable operating leverage.',
   },
   {
-    question: 'Do you cover cybersecurity and digital risk?',
+    question: 'Do you cover cloud, infrastructure, cybersecurity, and digital risk?',
     answer:
-      'Yes. Cybersecurity and digital risk are embedded in capability delivery: security architecture, identity controls, monitoring, risk mitigation, and governance for resilient transformation programs.',
+      'Yes. Cloud, infrastructure, cybersecurity, and digital risk are embedded in capability delivery: cloud migration, infrastructure automation, zero-trust design, observability, identity controls, monitoring, and governance for resilient transformation programs.',
   },
   {
-    question: 'Do you work on emerging technologies, deep tech, and IoT?',
+    question: 'Do you provide operations and managed services after go-live?',
     answer:
-      'Yes. We support emerging technology adoption, deep tech prototyping, and IoT architecture/integration when they provide clear operational or commercial advantage.',
+      'Yes. We stay involved after launch through managed operations, application maintenance, performance tuning, AI system management, IT support, and ongoing optimization.',
   },
   {
-    question: 'How does Build-Operate-Transfer (BOT) work with H.V.A?',
+    question: 'How does ARC work with H.V.A?',
     answer:
-      'BOT runs in three phases: Build (implement systems), Operate (stabilize and optimize with H.V.A ownership), and Transfer (handover to your internal team when readiness criteria are met). It is recommended when you need staged capability transfer with low operational risk.',
+      'ARC runs in three phases: Assess (diagnose constraints and readiness), Re-engineer (redesign processes, architecture, and systems), and Command (run, stabilize, and improve production operations). It is recommended when strategy, build, and long-term operating accountability need to stay connected.',
   },
   {
     question: 'Can H.V.A stay involved after launch?',
     answer:
-      'Yes. We provide long-term maintenance, optimization, and scaling support. Engagements can remain fully managed or transition through BOT depending on your operating model goals.',
+      'Yes. We provide long-term maintenance, optimization, and scaling support. Engagements can remain fully managed or evolve through ARC depending on your operating model goals.',
   },
 ];
 
@@ -200,7 +200,7 @@ export const LOCALE_CAPABILITIES_FAQS: Record<SupportedLocale, FaqSet> = {
     {
       question: 'Comment H.V.A se positionne-t-il sur le marché ?',
       answer:
-        "H.V.A est une entreprise d'IA, de transformation digitale et de conseil technologique. Nous combinons agents IA et automatisation intelligente, programmes de transformation digitale, et conseil stratégique — avec une exécution technique intégrée de bout en bout.",
+        "H.V.A est un partenaire de transformation technologique combinant stratégie, ingénierie IA, logiciel, cloud et opérations managées. Nous conseillons, construisons et opérons avec une exécution intégrée de bout en bout.",
     },
     {
       question: "Quels types d'automatisation IA proposez-vous ?",
@@ -225,14 +225,14 @@ export const LOCALE_CAPABILITIES_FAQS: Record<SupportedLocale, FaqSet> = {
     {
       question: 'Comment sont gérées les conditions commerciales ?',
       answer:
-        "Les conditions commerciales sont définies après discovery selon le périmètre, y compris les scénarios Build-Operate-Transfer (BOT), la complexité technique, les intégrations et l'effort de maintenance.",
+        "Les conditions commerciales sont définies après discovery selon le périmètre, y compris les scénarios ARC, la complexité technique, les intégrations et l'effort de maintenance.",
     },
   ],
   ar: [
     {
       question: 'كيف تصف H.V.A موقعها في السوق؟',
       answer:
-        'H.V.A هي شركة ذكاء اصطناعي وتحول رقمي واستشارات تقنية. نجمع بين وكلاء الذكاء الاصطناعي والأتمتة الذكية، وبرامج التحول الرقمي الشامل، والاستشارات الاستراتيجية — مع تنفيذ تقني متكامل من البداية إلى النهاية.',
+        'H.V.A هي شريك للتحول التقني يجمع بين الاستراتيجية وهندسة الذكاء الاصطناعي والبرمجيات والبنية السحابية والعمليات المُدارة. نستشير ونبني وندير بتنفيذ متكامل من البداية إلى الإنتاج.',
     },
     {
       question: 'ما أنواع حلول الذكاء الاصطناعي التي تقدمونها؟',
@@ -257,14 +257,14 @@ export const LOCALE_CAPABILITIES_FAQS: Record<SupportedLocale, FaqSet> = {
     {
       question: 'كيف يتم تحديد الأسعار؟',
       answer:
-        'يتم تحديد السعر بعد جلسة الاكتشاف بناء على نطاق التحول والتنفيذ، بما في ذلك خيارات Build-Operate-Transfer (BOT)، والتعقيد التقني، والتكاملات ومتطلبات الصيانة.',
+        'يتم تحديد السعر بعد جلسة الاكتشاف بناء على نطاق التحول والتنفيذ، بما في ذلك خيارات ARC، والتعقيد التقني، والتكاملات ومتطلبات الصيانة.',
     },
   ],
   es: [
     {
       question: '¿Cómo se posiciona H.V.A en el mercado?',
       answer:
-        'H.V.A es una firma de IA, transformación digital y consultoría tecnológica. Combinamos agentes de IA y automatización inteligente, programas de transformación digital de extremo a extremo, y asesoría estratégica — con ejecución técnica integrada.',
+        'H.V.A es un socio de transformación tecnológica que combina estrategia, ingeniería de IA, software, cloud y operaciones gestionadas. Asesoramos, construimos y operamos con ejecución integrada de extremo a extremo.',
     },
     {
       question: '¿Qué soluciones de automatización e IA ofrecéis?',
@@ -289,8 +289,7 @@ export const LOCALE_CAPABILITIES_FAQS: Record<SupportedLocale, FaqSet> = {
     {
       question: '¿Cómo se define la parte comercial?',
       answer:
-        'La estructura comercial se define después del discovery, incluyendo escenarios Build-Operate-Transfer (BOT), según alcance, complejidad técnica, integraciones y necesidades de mantenimiento.',
+        'La estructura comercial se define después del discovery, incluyendo escenarios ARC, según alcance, complejidad técnica, integraciones y necesidades de mantenimiento.',
     },
   ],
 };
-

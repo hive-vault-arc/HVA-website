@@ -1,50 +1,40 @@
-import { PRODUCT_SYSTEMS } from './proof';
+# Sprint 11 — Capabilities: Six Service Pillars
 
-export type CapabilityDomain = {
-  id: string;
-  title: string;
-  briefLine: string;
-  briefBullets: string[];
-  strategicContext: string;
-  executionContext: string;
-  subCapabilities: string[];
-  relatedOutcomes: string[];
-};
+> **Priority:** HIGH — Must run after Sprint 10 (positioning.ts type changes affect this file).
+> **Estimated effort:** 3–5 hours
+> **Blocking:** Sprint 13 (homepage service cards), Sprint 15 (SEO metadata for capabilities pages)
+> **Blocked by:** Sprint 10 (CapabilityCluster type must be updated first)
 
-export type DeliveryModel = {
-  name: string;
-  phases: { id: string; title: string; detail: string }[];
-  fitCriteria: string[];
-};
+---
 
-export type CapabilityBriefSection = {
-  id: string;
-  title: string;
-  summary: string;
-  bullets: string[];
-  landingLinks: { label: string; href: string }[];
-};
+## What This Sprint Is
 
-export type CapabilityDetailSection = CapabilityDomain;
+`src/lib/capabilities-content.ts` currently defines 8 `CapabilityDomain` entries that don't match H.V.A's new 6 service pillars:
 
-export type EngagementStep = {
-  step: string;
-  title: string;
-  detail: string;
-};
+| Old (8 domains) | New (6 pillars) |
+|---|---|
+| ai-systems | strategy-business |
+| business-transformation | technology-consulting |
+| digital-technology-data | ai-data-analytics |
+| consulting | software-engineering |
+| engineering | cloud-infrastructure |
+| data-growth | operations-managed |
+| cybersecurity-risk | *(folded into cloud-infrastructure)* |
+| emerging-tech | *(folded into ai-data-analytics)* |
 
-export type SolutionProgramDetail = {
-  slug: string;
-  name: string;
-  category: string;
-  summary: string;
-  modules: string[];
-  integrations: string[];
-  deliveryModel: string;
-  outcomes: string[];
-  proofLinks: string[];
-};
+This sprint replaces `CAPABILITY_DOMAINS` with 6 entries aligned to the new pillars, updates `CAPABILITY_BRIEF_SECTIONS` landing links, and verifies that `Capabilities.tsx` and `CapabilitiesInDetail.tsx` render correctly with the new data shape.
 
+---
+
+## Tasks
+
+### Task 11.1 — Replace `CAPABILITY_DOMAINS` array
+
+**File:** `src/lib/capabilities-content.ts`
+
+Find the entire `export const CAPABILITY_DOMAINS: CapabilityDomain[] = [` array (from line 48 to the closing `];`) and replace it entirely with:
+
+```typescript
 export const CAPABILITY_DOMAINS: CapabilityDomain[] = [
   {
     id: 'strategy-business',
@@ -161,7 +151,38 @@ export const CAPABILITY_DOMAINS: CapabilityDomain[] = [
     relatedOutcomes: ['Stable production operations', 'Continuous improvement post-launch', 'Long-term partnership accountability'],
   },
 ];
+```
 
+---
+
+### Task 11.2 — Update `CAPABILITY_BRIEF_SECTIONS` landing links
+
+**File:** `src/lib/capabilities-content.ts`
+
+Find the `CAPABILITY_BRIEF_SECTIONS` mapping:
+
+```typescript
+export const CAPABILITY_BRIEF_SECTIONS: CapabilityBriefSection[] = CAPABILITY_DOMAINS.map((domain) => ({
+  id: domain.id,
+  title: domain.title,
+  summary: domain.briefLine,
+  bullets: domain.briefBullets.slice(0, 3),
+  landingLinks:
+    domain.id === 'ai-systems'
+      ? [
+          { label: 'AI Agents Tangier', href: '/ai-agents-tangier' },
+          { label: 'AI Agents Morocco', href: '/ai-agents-morocco' },
+        ]
+      : domain.id === 'consulting'
+      ? [{ label: 'IT Consulting Tangier', href: '/it-consulting-tangier' }]
+      : domain.id === 'engineering'
+      ? [{ label: 'Custom Software Morocco', href: '/custom-software-morocco' }]
+      : [],
+}));
+```
+
+Replace with:
+```typescript
 export const CAPABILITY_BRIEF_SECTIONS: CapabilityBriefSection[] = CAPABILITY_DOMAINS.map((domain) => ({
   id: domain.id,
   title: domain.title,
@@ -179,81 +200,95 @@ export const CAPABILITY_BRIEF_SECTIONS: CapabilityBriefSection[] = CAPABILITY_DO
       ? [{ label: 'Custom Software Morocco', href: '/custom-software-morocco' }]
       : [],
 }));
+```
 
-export const CAPABILITY_DETAIL_SECTIONS: CapabilityDetailSection[] = CAPABILITY_DOMAINS;
+---
 
+### Task 11.3 — Update `BOT_DELIVERY_MODEL` to reflect ARC language
+
+**File:** `src/lib/capabilities-content.ts`
+
+The `BOT_DELIVERY_MODEL` is fine structurally but should reflect ARC terminology. Find:
+
+```typescript
+export const BOT_DELIVERY_MODEL: DeliveryModel = {
+  name: 'Build-Operate-Transfer',
+```
+
+Replace with:
+```typescript
 export const BOT_DELIVERY_MODEL: DeliveryModel = {
   name: 'ARC — Assess · Re-engineer · Command',
-  phases: [
-    {
-      id: 'assess',
-      title: 'Assess',
-      detail: 'Diagnose operating constraints, technology readiness, business priorities, and the transformation path.',
-    },
-    {
-      id: 're-engineer',
-      title: 'Re-engineer',
-      detail: 'Redesign processes, architecture, systems, and delivery controls around the approved target state.',
-    },
-    {
-      id: 'command',
-      title: 'Command',
-      detail: 'Run, stabilize, monitor, and improve the production operation with long-term accountability.',
-    },
+```
+
+Also update the `fitCriteria` array to match ARC language. Find:
+
+```typescript
+  fitCriteria: [
+    'Internal team needs staged capability transfer',
+    'Operations must stay stable during scale-up',
+    'Leadership wants execution certainty before handover',
   ],
+```
+
+Replace with:
+```typescript
   fitCriteria: [
     'Client needs strategy and build delivered by the same team',
     'Operations must remain stable while transformation scales',
     'Leadership wants execution certainty with long-term operating accountability',
   ],
-};
+```
 
-export const CAPABILITY_ENGAGEMENT_STEPS: EngagementStep[] = [
-  {
-    step: '01',
-    title: 'Assess',
-    detail: 'Assess business constraints, process friction, and system readiness with leadership and operators.',
-  },
-  {
-    step: '02',
-    title: 'Re-engineer',
-    detail: 'Design and implement processes, systems, automations, and controls mapped to the approved roadmap.',
-  },
-  {
-    step: '03',
-    title: 'Command',
-    detail: 'Run production with optimization loops, governance, and KPI-backed performance ownership.',
-  },
-];
+---
 
-const PROGRAM_SUMMARIES: Record<string, string> = {
-  'AI Reception and Lead Operations Program':
-    'Deploy multilingual AI reception and lead operations as a daily operating capability, not a one-off automation.',
-  'Enterprise CRM Modernization Program':
-    'Transform fragmented CRM operations into one governed system with reliable pipeline and process ownership.',
-  'Cloud Delivery Reliability Stack':
-    'Stabilize release velocity with hardened infrastructure, deployment safety, observability, and security controls.',
-};
+### Task 11.4 — Verify views render correctly
 
-const slugify = (value: string): string =>
-  value
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, '')
-    .trim()
-    .replace(/\s+/g, '-');
+Check `src/views/Capabilities.tsx` and `src/views/CapabilitiesInDetail.tsx` for any hardcoded references to old domain IDs. Search:
 
-export const CAPABILITY_SOLUTION_PROGRAM_DETAILS: SolutionProgramDetail[] = PRODUCT_SYSTEMS.map((program) => ({
-  slug: slugify(program.name),
-  name: program.name,
-  category: program.category,
-  summary:
-    PROGRAM_SUMMARIES[program.name] ??
-    'Consulting-led program that combines architecture decisions, delivery execution, and long-term operational ownership.',
-  modules: program.modules,
-  integrations: program.integrations,
-  deliveryModel: program.deliveryModel,
-  outcomes: program.outcomes,
-  proofLinks: program.proofLinks,
-}));
+```bash
+grep -rn "ai-systems\|business-transformation\|digital-technology-data\|data-growth\|cybersecurity-risk\|emerging-tech" src/
+```
 
+For each match found, update the ID reference to the corresponding new pillar ID:
 
+| Old ID | New ID |
+|---|---|
+| `ai-systems` | `ai-data-analytics` |
+| `business-transformation` | `strategy-business` |
+| `digital-technology-data` | `technology-consulting` |
+| `consulting` | `technology-consulting` |
+| `engineering` | `software-engineering` |
+| `data-growth` | `ai-data-analytics` |
+| `cybersecurity-risk` | `cloud-infrastructure` |
+| `emerging-tech` | `ai-data-analytics` |
+
+> Note: If `Capabilities.tsx` or `CapabilitiesInDetail.tsx` are purely data-driven (they map over `CAPABILITY_DOMAINS`), no view changes are needed — the new data will render automatically.
+
+---
+
+### Task 11.5 — Update `PROGRAM_SUMMARIES` keys if needed
+
+**File:** `src/lib/capabilities-content.ts`
+
+Check `CAPABILITY_SOLUTION_PROGRAM_DETAILS` rendering — the `PROGRAM_SUMMARIES` map uses program names as keys (not domain IDs), so this likely needs no change. Verify after build.
+
+---
+
+## Acceptance Criteria
+
+- [ ] `CAPABILITY_DOMAINS` has exactly 6 entries with IDs: `strategy-business`, `technology-consulting`, `ai-data-analytics`, `software-engineering`, `cloud-infrastructure`, `operations-managed`
+- [ ] All 8 old domain IDs are removed from the file
+- [ ] `CAPABILITY_BRIEF_SECTIONS` landing links reference new IDs (`ai-data-analytics`, `technology-consulting`, `software-engineering`)
+- [ ] `BOT_DELIVERY_MODEL.name` reflects ARC terminology
+- [ ] `npx tsc --noEmit` passes with zero errors
+- [ ] `/capabilities` page renders 6 cards (not 8)
+- [ ] `/capabilities/in-detail` page renders 6 sections
+
+---
+
+## Exit Criteria
+
+- [ ] `grep -rn "ai-systems\|cybersecurity-risk\|emerging-tech\|data-growth" src/lib/capabilities-content.ts` returns zero results
+- [ ] `npm run build` completes without errors
+- [ ] Running the dev server and visiting `/capabilities` shows 6 capability cards with correct titles

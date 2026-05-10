@@ -28,6 +28,11 @@ export const metadata: Metadata = {
       'AI automation consulting Morocco',
       'custom software and IT modernization',
       'long-term technology partner',
+      'technology transformation partner Morocco',
+      'technology transformation partner Tangier',
+      'AI engineering firm Morocco',
+      'managed operations Morocco',
+      'strategy AI engineering operations',
       'agence pour creer application sur mesure au Maroc',
       'entreprise pour developper application mobile Tanger',
       "besoin d'une equipe pour application web sur mesure Maroc",
@@ -45,7 +50,7 @@ export const metadata: Metadata = {
     },
   }),
   title: {
-    absolute: 'Hive Vault Arc (H.V.A) | AI & Digital Transformation · Technology Consulting · Tangier',
+    absolute: 'Hive Vault Arc (H.V.A) | Technology Transformation Partner · Strategy · AI Engineering · Tangier',
   },
 };
 
@@ -98,7 +103,7 @@ export default function Page() {
   const capabilitySchema = {
     '@context': 'https://schema.org',
     '@type': ['ProfessionalService', 'Service'],
-    name: 'H.V.A Technology Consulting and Digital Transformation Capabilities',
+    name: 'H.V.A Technology Transformation Partner Capabilities',
     provider: {
       '@id': `${SITE_URL}/#organization`,
     },
@@ -106,7 +111,7 @@ export default function Page() {
       'Consulting-led transformation programs combining strategy, architecture, engineering delivery, and ongoing operations support.',
     serviceType: [
       'Technology Consulting',
-      'Digital Transformation',
+      'Technology Transformation',
       'IT Advisory and Architecture',
       'AI Agent Development',
       'AI Automation',

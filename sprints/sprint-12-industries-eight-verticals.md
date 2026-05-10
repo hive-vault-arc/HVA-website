@@ -1,12 +1,81 @@
-'use client';
+# Sprint 12 — Industries: Eight Verticals
 
-import Link from 'next/link';
-import Image from 'next/image';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { BarChart3, MessageSquare, Network, ShieldCheck, ArrowUpRight } from 'lucide-react';
-import BottomCTA from '../components/BottomCTA';
-import PageAmbientBackground from '../components/PageAmbientBackground';
+> **Priority:** HIGH — The current Industries page shows 6 verticals, 4 of which no longer match H.V.A's strategic vertical structure.
+> **Estimated effort:** 4–6 hours
+> **Blocking:** Sprint 14 (navbar industries dropdown), Sprint 15 (SEO metadata for industry pages)
+> **Blocked by:** None (independent of Sprints 10–11)
 
+---
+
+## What This Sprint Is
+
+The current `Industries.tsx` page has 6 verticals:
+1. Real Estate & Property ✅ (keep, anchor vertical)
+2. Healthcare & Clinical Ops ✅ (keep)
+3. Construction & Projects ✅ (keep — subsumed under Real Estate & Construction)
+4. Logistics & Operations ✅ (keep)
+5. Finance & Brokerage ✅ (keep, rename to Financial Services)
+6. SME & Professional Capabilities ❌ (remove — this is a client segment, not an industry)
+
+New H.V.A 8-vertical structure to implement:
+1. **Real Estate & Construction** — anchor vertical, proven
+2. **Healthcare & Life Sciences** — H2 2026, building
+3. **Financial Services** — 2027 pipeline
+4. **Government & Public Sector** — 2027 strategic opportunity
+5. **Retail & E-Commerce** — 2027 pipeline
+6. **Energy, Utilities & Sustainability** — 2028 identified
+7. **Logistics & Transportation** — 2027 pipeline
+8. **Consumer Goods & Luxury** — 2028 identified
+
+This sprint also requires adding images for the 4 new verticals, updating the `IMGS` map, updating the bento grid layout for 8 cards, and updating the navbar `industriesItems` array.
+
+---
+
+## Tasks
+
+### Task 12.1 — Add images for new verticals
+
+**Directory:** `public/Images/industries/`
+
+Add the following image files (source, generate, or use placeholder webp files for now):
+
+```
+government-digital-transformation-morocco.webp
+retail-ecommerce-platform-morocco.webp
+energy-sustainability-digital-morocco.webp
+consumer-goods-luxury-operations-morocco.webp
+```
+
+> If final images are not ready, use a placeholder by copying an existing image:
+> ```bash
+> cp public/Images/industries/sme-capabilities-it-modernization-morocco.webp public/Images/industries/government-digital-transformation-morocco.webp
+> cp public/Images/industries/sme-capabilities-it-modernization-morocco.webp public/Images/industries/retail-ecommerce-platform-morocco.webp
+> cp public/Images/industries/sme-capabilities-it-modernization-morocco.webp public/Images/industries/energy-sustainability-digital-morocco.webp
+> cp public/Images/industries/sme-capabilities-it-modernization-morocco.webp public/Images/industries/consumer-goods-luxury-operations-morocco.webp
+> ```
+> Replace with properly named, SEO-optimized images before final deployment.
+
+---
+
+### Task 12.2 — Update `IMGS` map in `Industries.tsx`
+
+**File:** `src/views/Industries.tsx`
+
+Find:
+```typescript
+const IMGS = {
+  realEstate:   '/Images/industries/real-estate-crm-lead-operations-morocco.webp',
+  healthcare:   '/Images/industries/healthcare-clinical-operations-dashboard-morocco.webp',
+  construction: '/Images/industries/construction-project-management-automation-morocco.webp',
+  logistics:    '/Images/industries/logistics-dispatch-workflow-automation-morocco.webp',
+  finance:      '/Images/industries/finance-brokerage-deal-pipeline-morocco.webp',
+  sme:          '/Images/industries/sme-capabilities-it-modernization-morocco.webp',
+  rdLab:        '/Images/brand/hva-ai-software-agency-tangier.webp',
+};
+```
+
+Replace with:
+```typescript
 const IMGS = {
   realEstate:    '/Images/industries/real-estate-crm-lead-operations-morocco.webp',
   healthcare:    '/Images/industries/healthcare-clinical-operations-dashboard-morocco.webp',
@@ -19,97 +88,17 @@ const IMGS = {
   consumerGoods: '/Images/industries/consumer-goods-luxury-operations-morocco.webp',
   rdLab:         '/Images/brand/hva-ai-software-agency-tangier.webp',
 };
+```
 
-const approachTracks = [
-  {
-    code: 'IND-001',
-    icon: <BarChart3 className="h-5 w-5" strokeWidth={1.5} />,
-    title: 'Sector-calibrated diagnostics',
-    desc: 'Calibrated to sector economics, cycle times, and bottleneck patterns.',
-    group: 'Methodology',
-  },
-  {
-    code: 'IND-002',
-    icon: <Network className="h-5 w-5" strokeWidth={1.5} />,
-    title: 'Domain-aware architecture',
-    desc: 'Architecture reflects domain language, data structures, and decision hierarchies.',
-    group: 'Methodology',
-  },
-  {
-    code: 'IND-003',
-    icon: <ShieldCheck className="h-5 w-5" strokeWidth={1.5} />,
-    title: 'Regulatory awareness',
-    desc: 'Controls introduced early to reduce delivery risk in sensitive operations.',
-    group: 'Compliance',
-  },
-  {
-    code: 'IND-004',
-    icon: <MessageSquare className="h-5 w-5" strokeWidth={1.5} />,
-    title: 'Stakeholder communication',
-    desc: 'Execution adapted to how leadership and operations actually communicate.',
-    group: 'Compliance',
-  },
-];
+---
 
-const fadeUp = { hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0 } };
+### Task 12.3 — Replace the bento industry grid
 
-export default function Industries() {
-  const { scrollYProgress } = useScroll();
-  const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
+**File:** `src/views/Industries.tsx`
 
-  return (
-    <div className="relative isolate overflow-x-hidden bg-[#f7f9fb] text-[#0F172A]">
-      {/* Scroll progress bar */}
-      <motion.div
-        aria-hidden="true"
-        className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-gradient-to-r from-[#2563EB] via-[#60a5fa] to-[#0ea5e9]"
-        style={{ scaleX: progressScale }}
-      />
+Find the entire `{/* ── Bento Industry Grid ── */}` section (from `<section className="bg-[#f2f4f6] py-24 md:py-32">` to its closing `</section>`) and replace it with:
 
-      {/* ── Hero ─────────────────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden mx-auto max-w-7xl px-8 pt-36 pb-24 md:pb-32">
-        <PageAmbientBackground className="-z-10" />
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          <motion.div
-            className="lg:col-span-8"
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55 }}
-          >
-            <p className="mb-6 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
-              Industries
-            </p>
-            <h1 className="font-headline text-5xl md:text-7xl font-light tracking-tight leading-[1.1]">
-              Industry Context,<br />
-              <em className="italic text-[#475569]">Not Generic Delivery.</em>
-            </h1>
-            <p className="mt-8 max-w-2xl text-xl md:text-2xl font-light leading-relaxed text-[#45464d]">
-              H.V.A operates across 8 industry verticals — combining domain expertise with the full ARC delivery model:
-              strategy, engineering, and operations in one team.
-            </p>
-          </motion.div>
-
-          <motion.div
-            className="lg:col-span-4 flex flex-col justify-end h-full"
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.15 }}
-          >
-            <div className="bg-[#f2f4f6] p-8 border-l-4 border-[#2563EB]">
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#475569] mb-3">
-                Our Mandate
-              </p>
-              <p
-                className="text-lg text-[#0F172A] italic"
-                style={{ fontFamily: 'var(--font-headline)' }}
-              >
-                "Specificity is the antidote to technical debt."
-              </p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
+```tsx
       {/* ── Bento Industry Grid ──────────────────────────────────────────────── */}
       <section className="bg-[#f2f4f6] py-24 md:py-32">
         <div className="max-w-7xl mx-auto px-8">
@@ -120,9 +109,9 @@ export default function Industries() {
             viewport={{ once: true, amount: 0.1 }}
             transition={{ staggerChildren: 0.07 }}
           >
+
+            {/* ── Real Estate — col-span-7, side-by-side ── */}
             <motion.div
-              id="real-estate"
-              data-industry-card="real-estate"
               variants={fadeUp}
               transition={{ duration: 0.5 }}
               className="md:col-span-7 group bg-white overflow-hidden flex flex-col md:flex-row"
@@ -163,9 +152,8 @@ export default function Industries() {
               </div>
             </motion.div>
 
+            {/* ── Healthcare — col-span-5, image + dark overlay ── */}
             <motion.div
-              id="healthcare"
-              data-industry-card="healthcare"
               variants={fadeUp}
               transition={{ duration: 0.5 }}
               className="md:col-span-5 group relative overflow-hidden bg-[#0F172A] flex flex-col justify-between min-h-[320px]"
@@ -201,9 +189,8 @@ export default function Industries() {
               </div>
             </motion.div>
 
+            {/* ── Financial Services — col-span-4, image top ── */}
             <motion.div
-              id="financial-services"
-              data-industry-card="financial-services"
               variants={fadeUp}
               transition={{ duration: 0.5 }}
               className="md:col-span-4 group bg-white overflow-hidden flex flex-col"
@@ -233,9 +220,8 @@ export default function Industries() {
               </div>
             </motion.div>
 
+            {/* ── Government — col-span-4, image top ── */}
             <motion.div
-              id="government"
-              data-industry-card="government"
               variants={fadeUp}
               transition={{ duration: 0.5 }}
               className="md:col-span-4 group bg-white overflow-hidden flex flex-col"
@@ -265,9 +251,8 @@ export default function Industries() {
               </div>
             </motion.div>
 
+            {/* ── Retail — col-span-4, image top ── */}
             <motion.div
-              id="retail"
-              data-industry-card="retail"
               variants={fadeUp}
               transition={{ duration: 0.5 }}
               className="md:col-span-4 group bg-white overflow-hidden flex flex-col"
@@ -292,46 +277,13 @@ export default function Industries() {
                   Retail
                 </h3>
                 <p className="text-sm text-[#475569] leading-relaxed">
-                  Omnichannel commerce, AI personalization, and CRM systems across the Morocco-France corridor.
+                  Omnichannel commerce, AI personalization, and CRM systems across the Morocco–France corridor.
                 </p>
               </div>
             </motion.div>
 
+            {/* ── Logistics — col-span-6, image left ── */}
             <motion.div
-              id="energy"
-              data-industry-card="energy"
-              variants={fadeUp}
-              transition={{ duration: 0.5 }}
-              className="md:col-span-6 group bg-white overflow-hidden flex flex-col md:flex-row"
-            >
-              <div className="relative w-full md:w-2/5 h-52 md:h-auto overflow-hidden shrink-0">
-                <Image
-                  src={IMGS.energy}
-                  alt="Energy sustainability digital Morocco"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 25vw"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
-              <div className="p-8 flex flex-col flex-1 justify-center">
-                <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#2563EB] mb-3">
-                  Energy, Utilities &amp; Sustainability
-                </p>
-                <h3
-                  className="text-2xl text-[#0F172A] mb-3"
-                  style={{ fontFamily: 'var(--font-headline)' }}
-                >
-                  Energy
-                </h3>
-                <p className="text-sm text-[#475569] leading-relaxed">
-                  Smart grids, ESG analytics, and predictive maintenance for Morocco's renewable energy market.
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              id="logistics"
-              data-industry-card="logistics"
               variants={fadeUp}
               transition={{ duration: 0.5 }}
               className="md:col-span-6 group bg-white overflow-hidden flex flex-col md:flex-row"
@@ -356,126 +308,182 @@ export default function Industries() {
                   Logistics
                 </h3>
                 <p className="text-sm text-[#475569] leading-relaxed">
-                  Fleet management, route optimization, and SLA monitoring. Built for Tanger Med, Africa's largest port corridor.
+                  Fleet management, route optimization, and SLA monitoring. Built for Tanger Med — Africa's largest port corridor.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* ── Energy — col-span-6, image left ── */}
+            <motion.div
+              variants={fadeUp}
+              transition={{ duration: 0.5 }}
+              className="md:col-span-6 group bg-white overflow-hidden flex flex-col md:flex-row"
+            >
+              <div className="relative w-full md:w-2/5 h-52 md:h-auto overflow-hidden shrink-0">
+                <Image
+                  src={IMGS.energy}
+                  alt="Energy sustainability digital Morocco"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 25vw"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+              <div className="p-8 flex flex-col flex-1 justify-center">
+                <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#2563EB] mb-3">
+                  Energy &amp; Sustainability
+                </p>
+                <h3
+                  className="text-2xl text-[#0F172A] mb-3"
+                  style={{ fontFamily: 'var(--font-headline)' }}
+                >
+                  Energy
+                </h3>
+                <p className="text-sm text-[#475569] leading-relaxed">
+                  Smart grids, ESG analytics, and predictive maintenance for Morocco's renewable energy market.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* ── Construction & Consumer Goods — col-span-6 each ── */}
+            <motion.div
+              variants={fadeUp}
+              transition={{ duration: 0.5 }}
+              className="md:col-span-6 group bg-white overflow-hidden flex flex-col"
+            >
+              <div className="relative w-full h-52 overflow-hidden shrink-0">
+                <Image
+                  src={IMGS.construction}
+                  alt="Construction project management automation Morocco"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+              <div className="p-8 flex flex-col flex-1">
+                <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#2563EB] mb-3">
+                  Construction &amp; Projects
+                </p>
+                <h3
+                  className="text-2xl text-[#0F172A] mb-3"
+                  style={{ fontFamily: 'var(--font-headline)' }}
+                >
+                  Construction
+                </h3>
+                <p className="text-sm text-[#475569] leading-relaxed">
+                  Operational planning, schedule visibility, and field-to-office process automation.
                 </p>
               </div>
             </motion.div>
 
             <motion.div
-              id="consumer-goods"
-              data-industry-card="consumer-goods"
               variants={fadeUp}
               transition={{ duration: 0.5 }}
-              className="md:col-span-12 group bg-white overflow-hidden flex flex-col md:flex-row"
+              className="md:col-span-6 group bg-white overflow-hidden flex flex-col"
             >
-              <div className="relative w-full md:w-5/12 h-56 md:h-auto overflow-hidden shrink-0">
+              <div className="relative w-full h-52 overflow-hidden shrink-0">
                 <Image
                   src={IMGS.consumerGoods}
                   alt="Consumer goods luxury operations Morocco France"
                   fill
-                  sizes="(max-width: 768px) 100vw, 42vw"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
-              <div className="p-8 md:p-10 flex flex-col flex-1 justify-center">
+              <div className="p-8 flex flex-col flex-1">
                 <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#2563EB] mb-3">
                   Consumer Goods &amp; Luxury
                 </p>
                 <h3
-                  className="text-3xl italic text-[#0F172A] mb-4"
+                  className="text-2xl text-[#0F172A] mb-3"
                   style={{ fontFamily: 'var(--font-headline)' }}
                 >
                   Consumer &amp; Luxury
                 </h3>
-                <p className="max-w-2xl text-sm text-[#475569] leading-relaxed">
-                  Customer analytics, AI marketing, and retail intelligence across the Morocco-France luxury corridor.
+                <p className="text-sm text-[#475569] leading-relaxed">
+                  Customer analytics, AI marketing, and retail intelligence across the Morocco–France luxury corridor.
                 </p>
               </div>
             </motion.div>
+
           </motion.div>
         </div>
       </section>
+```
 
-      {/* ── R&D / Laboratory_Active ──────────────────────────────────────────── */}
-      <section className="max-w-7xl mx-auto px-8 py-24 md:py-32">
-        <div className="flex flex-col lg:flex-row gap-16 items-center">
-          {/* Image left with decorative offset */}
-          <div className="lg:w-1/2">
-            <div className="relative">
-              <Image
-                src={IMGS.rdLab}
-                alt="HVA AI software agency research Tangier Morocco"
-                width={1200}
-                height={800}
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="w-full shadow-2xl relative z-10"
-              />
-              <div className="absolute -top-6 -left-6 w-32 h-32 bg-[#e6e8ea] z-0" />
-            </div>
-          </div>
+---
 
-          {/* Content right */}
-          <div className="lg:w-1/2">
-            <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#2563EB] mb-3">
-              Laboratory_Active
+### Task 12.4 — Update `industriesItems` in `Navbar.tsx`
+
+**File:** `src/components/Navbar.tsx`
+
+Find:
+```typescript
+  const industriesItems = [
+    { path: '/industries#real-estate', label: 'Real Estate' },
+    { path: '/industries#healthcare', label: 'Healthcare' },
+    { path: '/industries#construction', label: 'Construction' },
+    { path: '/industries#logistics', label: 'Logistics' },
+    { path: '/industries#finance-brokerage', label: 'Finance & Brokerage' },
+    { path: '/industries#sme-capabilities', label: 'SME Capabilities' },
+  ];
+```
+
+Replace with:
+```typescript
+  const industriesItems = [
+    { path: '/industries#real-estate', label: 'Real Estate & Construction' },
+    { path: '/industries#healthcare', label: 'Healthcare & Life Sciences' },
+    { path: '/industries#financial-services', label: 'Financial Services' },
+    { path: '/industries#government', label: 'Government & Public Sector' },
+    { path: '/industries#retail', label: 'Retail & E-Commerce' },
+    { path: '/industries#energy', label: 'Energy & Sustainability' },
+    { path: '/industries#logistics', label: 'Logistics & Transportation' },
+    { path: '/industries#consumer-goods', label: 'Consumer Goods & Luxury' },
+  ];
+```
+
+---
+
+### Task 12.5 — Update hero copy on the Industries page
+
+**File:** `src/views/Industries.tsx`
+
+The hero subtext still references the old framing. Find:
+
+```tsx
+            <p className="mt-8 max-w-2xl text-xl md:text-2xl font-light leading-relaxed text-[#45464d]">
+              H.V.A designs transformation programs around sector workflows, operating constraints,
+              and decision models — not copied templates.
             </p>
-            <h2
-              className="text-4xl md:text-5xl mb-8 leading-tight text-[#0F172A]"
-              style={{ fontFamily: 'var(--font-headline)' }}
-            >
-              Active Research &amp; Development —<br />
-              <em className="font-light italic">One Framework. Many Operating Contexts.</em>
-            </h2>
+```
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-              {(['Methodology', 'Compliance'] as const).map((group) => (
-                <div key={group}>
-                  <h4 className="text-[11px] font-bold uppercase tracking-widest mb-4 text-[#2563EB]">
-                    {group}
-                  </h4>
-                  <ul className="space-y-5">
-                    {approachTracks
-                      .filter((t) => t.group === group)
-                      .map((t) => (
-                        <li key={t.code} className="flex gap-3 items-start">
-                          <div className="text-[#2563EB] shrink-0 mt-0.5">{t.icon}</div>
-                          <span className="text-sm text-[#475569] leading-relaxed">{t.title}</span>
-                        </li>
-                      ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
+Replace with:
+```tsx
+            <p className="mt-8 max-w-2xl text-xl md:text-2xl font-light leading-relaxed text-[#45464d]">
+              H.V.A operates across 8 industry verticals — combining domain expertise with the full ARC delivery model: strategy, engineering, and operations in one team.
+            </p>
+```
 
-            {/* Buttons */}
-            <div className="mt-10 flex flex-wrap items-center gap-4">
-              <Link
-                href="/arc"
-                className="inline-block bg-[#0F172A] px-8 py-4 text-sm font-bold uppercase tracking-widest text-white hover:bg-[#2563EB] transition-colors duration-200"
-              >
-                Learn About ARC
-              </Link>
-              <Link
-                href="/capabilities"
-                className="inline-flex items-center gap-1.5 text-sm font-bold uppercase tracking-widest text-[#2563EB] hover:text-[#1d4ed8] transition-colors duration-200"
-              >
-                Explore Capabilities <ArrowUpRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+---
 
-      {/* ── CTA ──────────────────────────────────────────────────────────────── */}
-      <BottomCTA
-        variant="dark"
-        headline="Need an Industry-Specific Transformation Plan?"
-        subtext="Book a discovery call and we'll map the right capability and system program for your sector."
-        primaryLabel="Book Discovery Call"
-        primaryHref="/contact"
-        secondaryLabel="View Capabilities"
-        secondaryHref="/capabilities"
-      />
-    </div>
-  );
-}
+## Acceptance Criteria
+
+- [ ] `IMGS` map has 10 entries (9 industries + rdLab)
+- [ ] All 4 new image files exist in `public/Images/industries/`
+- [ ] Bento grid renders 8 industry cards (no SME Capabilities card)
+- [ ] Real Estate card label reads "Real Estate & Construction"
+- [ ] Healthcare card label reads "Healthcare & Life Sciences"
+- [ ] Finance card reads "Finance & Banking" (not "Finance & Brokerage")
+- [ ] 4 new verticals visible: Government, Retail, Energy, Consumer Goods & Luxury
+- [ ] `industriesItems` in `Navbar.tsx` has 8 entries
+- [ ] `npm run build` completes without errors
+
+---
+
+## Exit Criteria
+
+- [ ] `grep -n "SME" src/views/Industries.tsx` returns zero results
+- [ ] `grep -n "Finance & Brokerage" src/components/Navbar.tsx` returns zero results
+- [ ] Running dev server at `/industries` shows 8 industry cards
+- [ ] Navbar Industries dropdown shows all 8 verticals
+- [ ] No broken image paths — check browser console for 404s

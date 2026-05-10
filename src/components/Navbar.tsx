@@ -40,12 +40,14 @@ const Navbar: React.FC = () => {
   ];
 
   const industriesItems = [
-    { path: '/industries#real-estate', label: 'Real Estate' },
-    { path: '/industries#healthcare', label: 'Healthcare' },
-    { path: '/industries#construction', label: 'Construction' },
-    { path: '/industries#logistics', label: 'Logistics' },
-    { path: '/industries#finance-brokerage', label: 'Finance & Brokerage' },
-    { path: '/industries#sme-capabilities', label: 'SME Capabilities' },
+    { path: '/industries#real-estate', label: 'Real Estate & Construction' },
+    { path: '/industries#healthcare', label: 'Healthcare & Life Sciences' },
+    { path: '/industries#financial-services', label: 'Financial Services' },
+    { path: '/industries#government', label: 'Government & Public Sector' },
+    { path: '/industries#retail', label: 'Retail & E-Commerce' },
+    { path: '/industries#energy', label: 'Energy & Sustainability' },
+    { path: '/industries#logistics', label: 'Logistics & Transportation' },
+    { path: '/industries#consumer-goods', label: 'Consumer Goods & Luxury' },
   ];
 
   const insightsItems = [
@@ -126,7 +128,7 @@ const Navbar: React.FC = () => {
                   <ChevronDown className="h-3.5 w-3.5" />
                 </Link>
                 <div className={`absolute left-0 top-full pt-2 transition duration-200 ${openMenu === 'capabilities' ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`}>
-                  <div className="min-w-[220px] rounded-xl border border-[#1E272E]/10 bg-[#F5F6FA] p-2 shadow-[0_8px_24px_rgba(9,132,227,0.14)]">
+                  <div className="min-w-[270px] rounded-xl border border-[#1E272E]/10 bg-[#F5F6FA] p-2 shadow-[0_8px_24px_rgba(9,132,227,0.14)]">
                     {CapabilitiesItems.map((item) => (
                       <Link
                         key={item.path}
@@ -384,7 +386,7 @@ const Navbar: React.FC = () => {
                 </button>
                 <div
                   className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                    openMobileSection === 'industries' ? 'max-h-80 opacity-100 mt-1' : 'max-h-0 opacity-0'
+                    openMobileSection === 'industries' ? 'max-h-[26rem] opacity-100 mt-1' : 'max-h-0 opacity-0'
                   }`}
                 >
                   <div className="ml-4 border-l-2 border-[#0984E3]/20 pl-3 space-y-0.5 pb-2">

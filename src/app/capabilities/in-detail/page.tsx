@@ -6,9 +6,9 @@ import { CAPABILITIES_FAQS } from '../../../data/faqs';
 import { GLOBAL_KEYWORDS, SITE_URL, absoluteUrl, buildPageMetadata, mergeKeywords } from '../../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Capabilities In Detail | Full Capability Architecture and BOT Delivery Model',
+  title: 'Capabilities In Detail | Six Service Pillars and ARC Delivery Model',
   description:
-    'Full capability depth across 8 capability domains including AI systems, transformation, consulting, engineering, data and growth, cybersecurity, emerging tech, and Build-Operate-Transfer delivery. Our capabilities are our services.',
+    'Full capability depth across six service pillars: strategy, technology consulting, AI and data, software engineering, cloud infrastructure, and managed operations with ARC delivery.',
   path: '/capabilities/in-detail',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'capabilities in detail technology consulting',
@@ -18,8 +18,8 @@ export const metadata: Metadata = buildPageMetadata({
     'consulting and engineering delivery model',
     'cloud and data systems capabilities',
     'cybersecurity digital risk capabilities',
-    'deep tech and IoT capability architecture',
-    'build operate transfer technology delivery',
+    'managed operations capability architecture',
+    'ARC assess re-engineer command technology delivery',
     'digital ecosystems and tech function advisory',
     'agile at scale transformation support',
   ]),
@@ -46,12 +46,14 @@ export default function CapabilitiesInDetailPage() {
       'Technology Consulting',
       'Business Transformation',
       'Digital Transformation Advisory',
-      'Digital, Technology, and Data',
       'Digital Strategy',
       'Agile at Scale',
       'Tech Function Design',
       'Roadmap Architecture',
+      'Strategy and Business Consulting',
+      'Technology Consulting',
       'AI Agent Development',
+      'AI, Data, and Analytics',
       'Workflow Automation',
       'Decision Intelligence',
       'Custom Software Development',
@@ -62,10 +64,8 @@ export default function CapabilitiesInDetailPage() {
       'Data Capabilities and Analytics',
       'Marketing Systems',
       'Cybersecurity and Digital Risk',
-      'Emerging Technologies',
-      'Deep Tech',
-      'Internet of Things',
-      'Build-Operate-Transfer Delivery Model',
+      'Operations and Managed Services',
+      'ARC Assess Re-engineer Command Delivery Model',
     ],
     availableLanguage: ['en', 'fr', 'ar', 'es'],
     url: `${SITE_URL}/capabilities/in-detail`,
@@ -109,4 +109,3 @@ export default function CapabilitiesInDetailPage() {
     </>
   );
 }
-

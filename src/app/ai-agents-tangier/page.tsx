@@ -112,7 +112,6 @@ export default function AIAgentsTangierPage() {
           </div>
 
           <div className="lg:col-span-5 relative h-[520px] lg:h-[620px]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/Images/hero/ai-powered-transformation-operations-tangier-morocco.webp"
               alt="AI-powered business operations in Tangier, Morocco"

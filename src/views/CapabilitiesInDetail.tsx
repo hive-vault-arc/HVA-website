@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { MotionConfig, motion, useScroll, useTransform } from 'framer-motion';
-import { Bot, Briefcase, Building2, ChartColumn, Cpu, Shield, Sparkles, Wrench } from 'lucide-react';
+import { Bot, Building2, Cloud, Cpu, Settings, Sparkles, Wrench } from 'lucide-react';
 import { useAnimationQuality } from '../lib/animationQuality';
 import BottomCTA from '../components/BottomCTA';
 import { BOT_DELIVERY_MODEL, CAPABILITY_DETAIL_SECTIONS } from '../lib/capabilities-content';
@@ -13,20 +13,18 @@ function getDetailIcon(id: string) {
   const sw = 1.6;
 
   switch (id) {
-    case 'ai-systems':
-      return <Bot className={cls} strokeWidth={sw} />;
-    case 'business-transformation':
+    case 'strategy-business':
       return <Building2 className={cls} strokeWidth={sw} />;
-    case 'digital-technology-data':
-      return <Briefcase className={cls} strokeWidth={sw} />;
-    case 'consulting':
+    case 'technology-consulting':
       return <Wrench className={cls} strokeWidth={sw} />;
-    case 'engineering':
+    case 'ai-data-analytics':
+      return <Bot className={cls} strokeWidth={sw} />;
+    case 'software-engineering':
       return <Cpu className={cls} strokeWidth={sw} />;
-    case 'data-growth':
-      return <ChartColumn className={cls} strokeWidth={sw} />;
-    case 'cybersecurity-risk':
-      return <Shield className={cls} strokeWidth={sw} />;
+    case 'cloud-infrastructure':
+      return <Cloud className={cls} strokeWidth={sw} />;
+    case 'operations-managed':
+      return <Settings className={cls} strokeWidth={sw} />;
     default:
       return <Sparkles className={cls} strokeWidth={sw} />;
   }
@@ -81,8 +79,8 @@ const CapabilitiesInDetail: React.FC = () => {
                 className="text-lg leading-relaxed pl-6 text-[#45464d]"
                 style={{ fontFamily: 'var(--font-body)', borderLeft: '2px solid #c6c6cd' }}
               >
-                Eight domains with strategic context, execution context, and full sub-capability coverage —
-                including cybersecurity, deep tech, and IoT.
+                Six service pillars with strategic context, execution context, and full sub-capability coverage —
+                from business strategy to managed operations.
               </p>
               <div className="flex flex-wrap gap-4 pl-6">
                 <Link
@@ -104,7 +102,7 @@ const CapabilitiesInDetail: React.FC = () => {
           </div>
         </section>
 
-        {/* ── Domain Catalog ────────────────────────────────────────────────── */}
+        {/* ── Service Pillar Catalog ─────────────────────────────────────────── */}
         <section className="bg-[#F2F4F6] py-20 md:py-24">
           <div className="mx-auto max-w-7xl px-6 lg:px-14">
             <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
@@ -113,10 +111,10 @@ const CapabilitiesInDetail: React.FC = () => {
                   className="mb-3 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]"
                   style={{ fontFamily: 'var(--font-body)' }}
                 >
-                  Domain Catalog
+                  Service Pillar Catalog
                 </p>
                 <h2 className="font-headline text-3xl font-medium text-[#0F172A] md:text-4xl">
-                  Eight domains with full capability context.
+                  Six pillars with full capability context.
                 </h2>
               </div>
               <div aria-hidden="true" className="hidden h-[2px] w-20 shrink-0 bg-[#2563EB] md:block" />
@@ -142,7 +140,7 @@ const CapabilitiesInDetail: React.FC = () => {
                         className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#94a3b8]"
                         style={{ fontFamily: 'var(--font-body)' }}
                       >
-                        Capability Domain
+                        Service Pillar
                       </p>
                     </div>
                     <span className="font-headline text-4xl text-[#e2e8f0] select-none leading-none">
@@ -220,7 +218,7 @@ const CapabilitiesInDetail: React.FC = () => {
           </div>
         </section>
 
-        {/* ── BOT Delivery Model ────────────────────────────────────────────── */}
+        {/* ── ARC Delivery Model ────────────────────────────────────────────── */}
         <section className="relative bg-[#0F172A] py-20 md:py-24 text-[#F8FAFC] overflow-hidden">
           {/* Blueprint grid */}
           <div
@@ -249,8 +247,8 @@ const CapabilitiesInDetail: React.FC = () => {
                 className="mt-4 max-w-3xl text-sm leading-relaxed text-[#F8FAFC]/70"
                 style={{ fontFamily: 'var(--font-body)' }}
               >
-                Use BOT when leadership needs accelerated capability delivery now, with structured transfer once internal
-                teams are ready to own systems independently.
+                Use ARC when leadership needs strategy and build delivered by the same team, with production operations
+                kept stable while transformation scales.
               </p>
             </div>
 
@@ -276,7 +274,7 @@ const CapabilitiesInDetail: React.FC = () => {
                 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#60a5fa] mb-3"
                 style={{ fontFamily: 'var(--font-body)' }}
               >
-                When BOT Is Recommended
+                When ARC Is Recommended
               </p>
               <ul className="grid grid-cols-1 gap-2 md:grid-cols-3">
                 {BOT_DELIVERY_MODEL.fitCriteria.map((criteria) => (
@@ -297,7 +295,7 @@ const CapabilitiesInDetail: React.FC = () => {
         <BottomCTA
           variant="dark"
           headline="Need this mapped to your business constraints?"
-          subtext="Book a discovery session and we will align capability domains, sub-capabilities, and delivery model to your roadmap."
+          subtext="Book a discovery session and we will align service pillars, sub-capabilities, and delivery model to your roadmap."
           primaryLabel="Book Discovery Call"
           primaryHref="/contact"
           secondaryLabel="View Solution Programs"

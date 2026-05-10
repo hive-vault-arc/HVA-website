@@ -20,20 +20,29 @@
 - **Phone:** +212 670 431 249
 - **LinkedIn:** https://www.linkedin.com/company/hive-vault-arc
 
-H.V.A is an AI-powered digital transformation and technology consulting firm. The firm operates across three pillars — AI & Intelligent Automation, Digital Transformation Programs, and Technology Consulting — and intentionally combines them under a single accountable engagement model. H.V.A is neither advice-only nor build-only: consulting and execution stay integrated from strategy through long-term operations.
+H.V.A is a technology transformation partner combining strategy, AI engineering, software, cloud infrastructure, and managed operations. The firm operates across six service pillars — Strategy & Business, Technology Consulting, AI/Data/Analytics, Software Engineering, Cloud Infrastructure, and Operations/Managed Services — and intentionally combines them under a single accountable engagement model. H.V.A is neither advice-only nor build-only: strategy, engineering, and operations stay integrated from discovery through long-term production operations.
 
 ---
 
-## 2. Three-Pillar Capability Architecture
+## 2. Six-Pillar Capability Architecture
 
-### Pillar 1 — AI & Intelligent Automation
-WhatsApp AI agents, multilingual receptionists, lead qualification automation, decision intelligence dashboards, workflow orchestration, and internal-process AI. Production-grade deployments on the WhatsApp Business API with persistent memory, intent routing, and human-in-the-loop escalation.
+### Pillar 1 — Strategy & Business
+Business and digital transformation strategy, operational diagnostics, process redesign, innovation strategy, and market expansion via technology.
 
-### Pillar 2 — Digital Transformation Programs
-End-to-end transformation: operational diagnostics, IT modernization, legacy system upgrades, cloud migration, data pipelines, CRM and ERP transformation, and platform evolution. Programs run from strategy through production rollout and managed improvement.
+### Pillar 2 — Technology Consulting
+Enterprise architecture, technology roadmaps, platform strategy, systems integration, IT modernization, and infrastructure design.
 
-### Pillar 3 — Technology Consulting
-Strategic advisory, transformation roadmap design, architecture decisions, technology function planning, build-vs-buy analysis, and technical leadership for growth-stage and established businesses. Always paired with execution accountability.
+### Pillar 3 — AI, Data & Analytics
+AI agents, generative AI strategy and engineering, data engineering, business intelligence, predictive analytics, and production-grade deployments with persistent memory, intent routing, and human-in-the-loop escalation.
+
+### Pillar 4 — Software Engineering
+Custom software, SaaS platforms, enterprise systems, web and mobile applications, API development, and DevOps engineering.
+
+### Pillar 5 — Cloud Infrastructure
+AWS, Azure, and GCP migration, cloud-native development, infrastructure automation, security architecture, observability, disaster recovery, and managed cloud services.
+
+### Pillar 6 — Operations & Managed Services
+Managed operations, application maintenance, automation operations, AI system management, business process outsourcing, and shared services.
 
 ---
 
@@ -41,9 +50,9 @@ Strategic advisory, transformation roadmap design, architecture decisions, techn
 
 H.V.A's signature engagement is the **ARC Program**:
 
-1. **Audit** — Map the current operational state, system inventory, and constraints. Identify the highest-leverage AI and transformation opportunities.
-2. **Roadmap** — Design the transformation plan: target architecture, AI system design, integration strategy, sequencing, and KPI framework.
-3. **Craft** — Build, deploy, stabilize, and operate the solution. Includes managed evolution after go-live.
+1. **Assess** — Map the current operating state, system inventory, constraints, and highest-leverage transformation opportunities.
+2. **Re-engineer** — Redesign the process model, target architecture, AI system design, integration strategy, sequencing, and KPI framework.
+3. **Command** — Build, deploy, stabilize, operate, and continuously improve the solution after go-live.
 
 - Typical engagement length: **6–12 weeks** for a full ARC cycle.
 - Build-Operate-Transfer (BOT): available where staged capability transfer is required.
@@ -261,10 +270,10 @@ Pricing is discussed after a complimentary discovery session. Scope depends on t
 
 ## 13. Terminology Mapping (Multi-Language)
 
-- **EN:** Our capabilities are our services.
-- **FR:** Nos capacités sont nos services.
-- **AR:** قدراتنا هي خدماتنا.
-- **ES:** Nuestras capacidades son nuestros servicios.
+- **EN:** Our six service pillars are our delivery model.
+- **FR:** Nos six piliers de service constituent notre modèle de livraison.
+- **AR:** ركائزنا الست هي نموذج تسليمنا.
+- **ES:** Nuestros seis pilares de servicio son nuestro modelo de entrega.
 
 ---
 

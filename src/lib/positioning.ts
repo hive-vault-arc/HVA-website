@@ -9,10 +9,12 @@ export type MarketIdentity = {
 };
 
 export type CapabilityCluster = {
-  strategyConsulting: string[];
-  aiAutomation: string[];
-  customEngineering: string[];
-  modernizationCloudData: string[];
+  strategyBusiness: string[];
+  technologyConsulting: string[];
+  aiDataAnalytics: string[];
+  softwareEngineering: string[];
+  cloudInfrastructure: string[];
+  operationsManaged: string[];
 };
 
 export type MessagingRules = {
@@ -29,139 +31,179 @@ type LocaleMessaging = {
 export const POSITIONING_BY_LOCALE: Record<PositioningLocale, LocaleMessaging> = {
   en: {
     identity: {
-      headline: 'AI & Automation · Digital Transformation · Technology Consulting',
+      headline: 'Technology Transformation Partner · Strategy · AI Engineering · Operations',
       shortDescriptor:
-        'Hive Vault Arc (H.V.A) is an AI-powered digital transformation and technology consulting firm.',
+        'Hive Vault Arc (H.V.A) is a technology transformation partner combining strategy, AI engineering, and managed operations.',
       longDescriptor:
-        'Hive Vault Arc (H.V.A) is an AI-powered digital transformation and technology consulting firm. We design and deploy intelligent automation, build custom software and AI agents, lead end-to-end digital transformation programs, and deliver the cloud and data infrastructure that makes it all run — with consulting rigor at every stage.',
+        'Hive Vault Arc (H.V.A) is a technology transformation partner. We advise, build, and operate — combining strategy and business consulting, technology consulting, AI engineering, custom software development, cloud infrastructure, and managed operations in one firm. From the first whiteboard to production systems running in the market, we own the full delivery arc.',
       proofStatement:
-        'From strategic roadmap to production operations, we own the full delivery arc with measurable outcomes and long-term partnership accountability.',
+        'We redesign how organizations operate using technology — and we stay until it works. Same team. Strategy through production. No handoff.',
     },
     capabilities: {
-      strategyConsulting: [
-        'Digital transformation advisory and roadmap design',
-        'Operational diagnostics and business process redesign',
-        'Technology strategy for growth-stage and established businesses',
+      strategyBusiness: [
+        'Business and digital transformation strategy',
+        'Operational diagnostics and process redesign',
+        'Innovation strategy and market expansion via technology',
       ],
-      aiAutomation: [
+      technologyConsulting: [
+        'Enterprise architecture and technology roadmaps',
+        'Platform strategy and systems integration',
+        'IT modernization and infrastructure design',
+      ],
+      aiDataAnalytics: [
         'AI agents for customer operations, sales, and internal workflows',
-        'Intelligent workflow automation and orchestration',
-        'Decision intelligence, reporting assistants, and AI analytics',
+        'Generative AI strategy and engineering',
+        'Data engineering, business intelligence, and predictive analytics',
       ],
-      customEngineering: [
-        'Custom software, SaaS, and enterprise systems development',
-        'CRM engineering, migration, and deep integration',
+      softwareEngineering: [
+        'Custom software, SaaS platforms, and enterprise systems',
         'Web and mobile application delivery',
+        'API development and DevOps engineering',
       ],
-      modernizationCloudData: [
-        'Legacy modernization and architecture refactoring',
-        'Cloud infrastructure, DevOps, and CI/CD engineering',
-        'Data pipelines, observability, and reliability engineering',
+      cloudInfrastructure: [
+        'AWS, Azure, and GCP cloud migration and native development',
+        'Infrastructure automation, security architecture, and zero-trust design',
+        'Observability, disaster recovery, and managed cloud services',
+      ],
+      operationsManaged: [
+        'Managed operations and application maintenance post-launch',
+        'Automation operations and AI system management',
+        'Business process outsourcing and shared services',
       ],
     },
-    serviceEquivalence: 'Our capabilities are our services.',
+    serviceEquivalence: 'Our six service pillars are our delivery model.',
   },
   fr: {
     identity: {
-      headline: 'IA & Automatisation · Transformation Digitale · Conseil Technologique',
+      headline: 'Partenaire de Transformation Technologique · Stratégie · IA · Opérations',
       shortDescriptor:
-        "Hive Vault Arc (H.V.A) est une entreprise d'IA, de transformation digitale et de conseil technologique.",
+        "Hive Vault Arc (H.V.A) est un partenaire de transformation technologique combinant stratégie, ingénierie IA et opérations managées.",
       longDescriptor:
-        "Hive Vault Arc (H.V.A) est une entreprise d'IA, de transformation digitale et de conseil technologique. Nous concevons et déployons des agents IA et des automatisations intelligentes, développons des logiciels sur mesure, pilotons des programmes de transformation digitale de bout en bout, et mettons en place l'infrastructure cloud et data — avec une rigueur de conseil à chaque étape.",
+        "Hive Vault Arc (H.V.A) est un partenaire de transformation technologique. Nous conseillons, construisons et opérons — en combinant conseil en stratégie, conseil technologique, ingénierie IA, développement logiciel sur mesure, infrastructure cloud et opérations managées dans une seule équipe. De la première réunion stratégique aux systèmes en production, nous pilotons le cycle complet de livraison.",
       proofStatement:
-        'De la feuille de route stratégique à la production, nous pilotons le cycle complet de livraison avec des résultats mesurables et un partenariat long terme.',
+        'Nous redessinons la façon dont les organisations opèrent grâce à la technologie — et nous restons jusqu\'à ce que ça fonctionne. Même équipe. De la stratégie à la production. Sans rupture.',
     },
     capabilities: {
-      strategyConsulting: [
-        'Conseil en transformation digitale et conception de feuille de route',
-        "Diagnostic opérationnel et refonte des processus métier",
-        'Stratégie technologique pour entreprises en croissance et établies',
+      strategyBusiness: [
+        'Stratégie de transformation digitale et d\'entreprise',
+        'Diagnostic opérationnel et refonte des processus métier',
+        'Stratégie d\'innovation et expansion marché par la technologie',
       ],
-      aiAutomation: [
+      technologyConsulting: [
+        'Architecture d\'entreprise et feuilles de route technologiques',
+        'Stratégie de plateformes et intégration des systèmes',
+        'Modernisation IT et conception d\'infrastructure',
+      ],
+      aiDataAnalytics: [
         'Agents IA pour opérations clients, ventes et workflows internes',
-        'Automatisation intelligente des processus et orchestration',
-        "Intelligence décisionnelle, assistants de reporting et analytics IA",
+        'Stratégie et ingénierie IA générative',
+        'Ingénierie de données, business intelligence et analytique prédictive',
       ],
-      customEngineering: [
-        'Développement logiciel sur mesure, SaaS et systèmes d\'entreprise',
-        'Ingénierie CRM, migration et intégration avancée',
+      softwareEngineering: [
+        'Logiciels sur mesure, plateformes SaaS et systèmes d\'entreprise',
         'Applications web et mobile',
+        'Développement d\'API et ingénierie DevOps',
       ],
-      modernizationCloudData: [
-        'Modernisation des systèmes legacy et refactorisation d\'architecture',
-        'Infrastructure cloud, DevOps et pipelines CI/CD',
-        'Pipelines de données, observabilité et ingénierie de fiabilité',
+      cloudInfrastructure: [
+        'Migration cloud AWS, Azure et GCP et développement natif',
+        'Automatisation d\'infrastructure, architecture de sécurité et zero-trust',
+        'Observabilité, reprise après sinistre et services cloud managés',
+      ],
+      operationsManaged: [
+        'Opérations managées et maintenance applicative post-lancement',
+        'Gestion des opérations d\'automatisation et des systèmes IA',
+        'Externalisation des processus métier et services partagés',
       ],
     },
-    serviceEquivalence: 'Nos capacités sont nos services.',
+    serviceEquivalence: 'Nos six piliers de service constituent notre modèle de livraison.',
   },
   ar: {
     identity: {
-      headline: 'الذكاء الاصطناعي والأتمتة · التحول الرقمي · الاستشارات التقنية',
+      headline: 'شريك التحول التقني · الاستراتيجية · هندسة الذكاء الاصطناعي · العمليات',
       shortDescriptor:
-        'Hive Vault Arc \u200F(H.V.A) هي شركة متخصصة في الذكاء الاصطناعي، التحول الرقمي، والاستشارات التقنية.',
+        'Hive Vault Arc ‏(H.V.A) هي شريك للتحول التقني يجمع بين الاستراتيجية وهندسة الذكاء الاصطناعي والعمليات المُدارة.',
       longDescriptor:
-        'Hive Vault Arc \u200F(H.V.A) هي شركة متخصصة في الذكاء الاصطناعي، التحول الرقمي، والاستشارات التقنية. نصمم وننشر وكلاء ذكاء اصطناعي وأتمتة ذكية، نطور برمجيات مخصصة وأنظمة متكاملة، نقود برامج التحول الرقمي الشاملة، ونبني البنية السحابية والبيانية — بمنهجية استشارية في كل مرحلة.',
+        'Hive Vault Arc ‏(H.V.A) هي شريك للتحول التقني. نستشير ونبني وندير — بدمج الاستراتيجية التجارية والاستشارات التقنية وهندسة الذكاء الاصطناعي وتطوير البرمجيات والبنية السحابية والعمليات المُدارة في فريق واحد. من أول اجتماع استراتيجي إلى الأنظمة التشغيلية في الإنتاج، نمتلك دورة التسليم الكاملة.',
       proofStatement:
-        'من خارطة الطريق الاستراتيجية إلى التشغيل الفعلي، نمتلك دورة التسليم الكاملة بنتائج قابلة للقياس وشراكة طويلة الأمد.',
+        'نعيد تصميم طريقة عمل المؤسسات باستخدام التكنولوجيا — ونبقى حتى تنجح. نفس الفريق. من الاستراتيجية إلى الإنتاج. بلا فجوات.',
     },
     capabilities: {
-      strategyConsulting: [
-        'استشارات التحول الرقمي وتصميم خارطة الطريق',
+      strategyBusiness: [
+        'استراتيجية التحول التجاري والرقمي',
         'تشخيص العمليات وإعادة تصميم العمليات التجارية',
-        'استراتيجية تقنية للشركات الناشئة والمؤسسات القائمة',
+        'استراتيجية الابتكار والتوسع في الأسواق عبر التقنية',
       ],
-      aiAutomation: [
+      technologyConsulting: [
+        'هندسة المؤسسات وخرائط الطريق التقنية',
+        'استراتيجية المنصات وتكامل الأنظمة',
+        'تحديث البنية التقنية وتصميم البنية التحتية',
+      ],
+      aiDataAnalytics: [
         'وكلاء ذكاء اصطناعي لعمليات العملاء والمبيعات والعمليات الداخلية',
-        'أتمتة سير العمل الذكية والتنسيق',
-        'الذكاء التحليلي، مساعدو التقارير، وتحليلات الذكاء الاصطناعي',
+        'استراتيجية وهندسة الذكاء الاصطناعي التوليدي',
+        'هندسة البيانات وذكاء الأعمال والتحليلات التنبؤية',
       ],
-      customEngineering: [
-        'تطوير برمجيات مخصصة وأنظمة SaaS وأنظمة المؤسسات',
-        'هندسة أنظمة CRM والترحيل والتكامل المتقدم',
+      softwareEngineering: [
+        'برمجيات مخصصة ومنصات SaaS وأنظمة المؤسسات',
         'تطبيقات الويب والموبايل',
+        'تطوير APIs وهندسة DevOps',
       ],
-      modernizationCloudData: [
-        'تحديث الأنظمة القديمة وإعادة هيكلة البنية التقنية',
-        'البنية السحابية وDevOps وهندسة CI/CD',
-        'خطوط البيانات والمراقبة وهندسة الموثوقية',
+      cloudInfrastructure: [
+        'ترحيل السحابة AWS وAzure وGCP والتطوير السحابي الأصيل',
+        'أتمتة البنية التحتية وهندسة الأمان والثقة الصفرية',
+        'المراقبة والتعافي من الكوارث والخدمات السحابية المُدارة',
+      ],
+      operationsManaged: [
+        'العمليات المُدارة وصيانة التطبيقات بعد الإطلاق',
+        'إدارة عمليات الأتمتة وأنظمة الذكاء الاصطناعي',
+        'الاستعانة بمصادر خارجية للعمليات التجارية والخدمات المشتركة',
       ],
     },
-    serviceEquivalence: 'قدراتنا هي خدماتنا.',
+    serviceEquivalence: 'ركائزنا الست هي نموذج تسليمنا.',
   },
   es: {
     identity: {
-      headline: 'IA y Automatización · Transformación Digital · Consultoría Tecnológica',
+      headline: 'Socio de Transformación Tecnológica · Estrategia · IA · Operaciones',
       shortDescriptor:
-        'Hive Vault Arc (H.V.A) es una firma de IA, transformación digital y consultoría tecnológica.',
+        'Hive Vault Arc (H.V.A) es un socio de transformación tecnológica que combina estrategia, ingeniería de IA y operaciones gestionadas.',
       longDescriptor:
-        'Hive Vault Arc (H.V.A) es una firma de IA, transformación digital y consultoría tecnológica. Diseñamos y desplegamos agentes de IA y automatización inteligente, desarrollamos software a medida, lideramos programas de transformación digital de extremo a extremo, y construimos la infraestructura cloud y de datos — con rigor consultivo en cada etapa.',
+        'Hive Vault Arc (H.V.A) es un socio de transformación tecnológica. Asesoramos, construimos y operamos — combinando consultoría estratégica, consultoría tecnológica, ingeniería de IA, desarrollo de software a medida, infraestructura cloud y operaciones gestionadas en un solo equipo. Desde la primera reunión estratégica hasta los sistemas en producción, gestionamos el ciclo completo de entrega.',
       proofStatement:
-        'Desde la hoja de ruta estratégica hasta la operación en producción, gestionamos el ciclo completo de entrega con resultados medibles y una alianza a largo plazo.',
+        'Rediseñamos cómo operan las organizaciones usando tecnología — y nos quedamos hasta que funciona. El mismo equipo. De la estrategia a la producción. Sin interrupciones.',
     },
     capabilities: {
-      strategyConsulting: [
-        'Consultoría de transformación digital y diseño de hoja de ruta',
+      strategyBusiness: [
+        'Estrategia de transformación empresarial y digital',
         'Diagnóstico operativo y rediseño de procesos de negocio',
-        'Estrategia tecnológica para empresas en crecimiento y consolidadas',
+        'Estrategia de innovación y expansión de mercado mediante tecnología',
       ],
-      aiAutomation: [
+      technologyConsulting: [
+        'Arquitectura empresarial y hojas de ruta tecnológicas',
+        'Estrategia de plataformas e integración de sistemas',
+        'Modernización IT y diseño de infraestructura',
+      ],
+      aiDataAnalytics: [
         'Agentes de IA para operaciones comerciales, ventas y flujos internos',
-        'Automatización inteligente de procesos y orquestación',
-        'Inteligencia operativa, asistentes de reporting y analítica con IA',
+        'Estrategia e ingeniería de IA generativa',
+        'Ingeniería de datos, business intelligence y analítica predictiva',
       ],
-      customEngineering: [
-        'Desarrollo de software a medida, SaaS y sistemas empresariales',
-        'Ingeniería de CRM, migración e integración avanzada',
+      softwareEngineering: [
+        'Software a medida, plataformas SaaS y sistemas empresariales',
         'Aplicaciones web y móviles',
+        'Desarrollo de APIs e ingeniería DevOps',
       ],
-      modernizationCloudData: [
-        'Modernización de sistemas legacy y refactorización de arquitectura',
-        'Infraestructura cloud, DevOps y pipelines CI/CD',
-        'Pipelines de datos, observabilidad e ingeniería de confiabilidad',
+      cloudInfrastructure: [
+        'Migración cloud a AWS, Azure y GCP y desarrollo cloud-native',
+        'Automatización de infraestructura, arquitectura de seguridad y zero-trust',
+        'Observabilidad, recuperación ante desastres y servicios cloud gestionados',
+      ],
+      operationsManaged: [
+        'Operaciones gestionadas y mantenimiento de aplicaciones post-lanzamiento',
+        'Gestión de operaciones de automatización y sistemas de IA',
+        'Externalización de procesos de negocio y servicios compartidos',
       ],
     },
-    serviceEquivalence: 'Nuestras capacidades son nuestros servicios.',
+    serviceEquivalence: 'Nuestros seis pilares de servicio son nuestro modelo de entrega.',
   },
 };
 
@@ -172,13 +214,18 @@ export const MESSAGING_RULES: MessagingRules = {
     'chatbot shop',
     'tool builder only',
     'pure consulting only',
+    'software vendor',
+    'handoff after delivery',
   ],
   allowedSearchIntentPhrases: [
-    'AI agency Morocco',
-    'software agency Tangier',
-    'automation agency Morocco',
+    'technology transformation partner Morocco',
+    'AI engineering firm Morocco',
     'digital transformation company Morocco',
-    'AI automation firm Morocco',
+    'technology consulting firm Tangier',
+    'managed operations Morocco',
+    'AI agency Morocco',
+    'software development Morocco',
+    'IT consulting Tangier',
   ],
 };
 

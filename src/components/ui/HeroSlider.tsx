@@ -25,28 +25,28 @@ type Slide = {
 
 const SLIDES: Slide[] = [
   {
-    eyebrow: 'AI & AUTOMATION',
-    h1Line1: 'AI-Powered Transformation',
-    h1Line2: 'for Operations That Matter.',
+    eyebrow: 'TECHNOLOGY TRANSFORMATION',
+    h1Line1: 'Strategy, AI Engineering,',
+    h1Line2: 'and Operations in One Team.',
     description:
-      'We build AI agents that handle customer inquiries, qualify leads, and automate internal workflows — so your team stops doing repetitive tasks and starts focusing on what actually grows the business.',
+      'H.V.A is a technology transformation partner for teams that need strategy, production engineering, and managed operations to move together.',
     primaryLabel: 'View Case Studies',
     primaryHref: '/case-studies',
-    secondaryLabel: 'Explore AI Solutions',
+    secondaryLabel: 'Explore Capabilities',
     secondaryHref: '/capabilities',
     image: '/Images/hero/ai-powered-transformation-operations-tangier-morocco.webp',
     imageAlt: 'H.V.A AI automation and engineering team in Tangier, Morocco',
     cardIcon: <Bot className="w-8 h-8 text-[#0984E3]" strokeWidth={1.5} />,
-    cardTitle: 'Always-On AI.',
+    cardTitle: 'Advise. Build. Operate.',
     cardDesc:
-      'Agents that qualify leads, handle inquiries, and run workflows 24/7 — with no manual effort required.',
+      'One accountable team from transformation diagnosis to production operation.',
   },
   {
-    eyebrow: 'DIGITAL TRANSFORMATION',
-    h1Line1: 'Turn Manual Processes Into',
-    h1Line2: 'Scalable Digital Systems.',
+    eyebrow: 'ARC DELIVERY MODEL',
+    h1Line1: 'Assess. Re-engineer.',
+    h1Line2: 'Command Production Systems.',
     description:
-      'Many businesses still run on spreadsheets, email chains, and disconnected tools. We replace that fragmented complexity with integrated digital systems — purpose-built for how your business actually works.',
+      'We diagnose operating constraints, rebuild processes and platforms, then stay involved after launch so transformation becomes a working system.',
     primaryLabel: 'Explore Our Programs',
     primaryHref: '/capabilities',
     secondaryLabel: 'See Case Studies',
@@ -56,7 +56,7 @@ const SLIDES: Slide[] = [
     cardIcon: <Layers className="w-8 h-8 text-[#0984E3]" strokeWidth={1.5} />,
     cardTitle: 'End-to-End Programs.',
     cardDesc:
-      'From operational diagnostics to production deployment — one transformation program with full accountability.',
+      'From operating diagnosis to production deployment and managed evolution.',
   },
   {
     eyebrow: 'TECHNOLOGY CONSULTING',

@@ -20,7 +20,7 @@ export const BRAND_ALIASES = [
   'Hive Vault ARC',
 ];
 export const BRAND_SEARCH_VARIANTS = [...BRAND_ALIASES, 'Hive Vault', 'Vault Arc', 'hivevaultarc.com'];
-export const DEFAULT_TITLE = `${SITE_NAME} | AI & Automation · Digital Transformation · Technology Consulting`;
+export const DEFAULT_TITLE = `${SITE_NAME} | Technology Transformation Partner · Strategy · AI Engineering · Operations`;
 export const DEFAULT_DESCRIPTION = CANONICAL_MARKET_IDENTITY.longDescriptor;
 
 export const GLOBAL_KEYWORDS = [

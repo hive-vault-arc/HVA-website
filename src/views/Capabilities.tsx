@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Bot, Briefcase, Building2, ChartColumn, Cloud, Cpu, Database, Send, Settings, Shield, Sparkles, Wrench } from 'lucide-react';
+import { Bot, Building2, Cloud, Cpu, Database, Send, Settings, Sparkles, Wrench } from 'lucide-react';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 import BottomCTA from '../components/BottomCTA';
 import { CAPABILITY_BRIEF_SECTIONS, CAPABILITY_SOLUTION_PROGRAM_DETAILS } from '../lib/capabilities-content';
@@ -18,20 +18,18 @@ function getPillarIcon(id: string) {
   const sw = 1.6;
 
   switch (id) {
-    case 'ai-systems':
-      return <Bot className={cls} strokeWidth={sw} />;
-    case 'business-transformation':
+    case 'strategy-business':
       return <Building2 className={cls} strokeWidth={sw} />;
-    case 'digital-technology-data':
-      return <Briefcase className={cls} strokeWidth={sw} />;
-    case 'consulting':
+    case 'technology-consulting':
       return <Wrench className={cls} strokeWidth={sw} />;
-    case 'engineering':
+    case 'ai-data-analytics':
+      return <Bot className={cls} strokeWidth={sw} />;
+    case 'software-engineering':
       return <Cpu className={cls} strokeWidth={sw} />;
-    case 'data-growth':
-      return <ChartColumn className={cls} strokeWidth={sw} />;
-    case 'cybersecurity-risk':
-      return <Shield className={cls} strokeWidth={sw} />;
+    case 'cloud-infrastructure':
+      return <Cloud className={cls} strokeWidth={sw} />;
+    case 'operations-managed':
+      return <Settings className={cls} strokeWidth={sw} />;
     default:
       return <Sparkles className={cls} strokeWidth={sw} />;
   }
@@ -41,35 +39,35 @@ const BOT_PHASES = [
   {
     step: '01',
     icon: <Wrench className="h-8 w-8" />,
-    title: 'Build',
-    detail: 'Design and implement the target system, controls, and integrations required for production.',
-    objective: 'Create a production-ready foundation with clear architecture, integrations, and security controls.',
-    hvaOwns: 'Solution architecture, build sprints, QA gates, integration reliability, release readiness.',
-    clientRole: 'Validate priorities, provide domain access, approve milestones, and align stakeholders.',
-    checkpoints: ['Define system architecture', 'Implement core integrations', 'Validate production readiness'],
-    outputs: ['Technical blueprint', 'Integrated production stack', 'Release playbook and controls'],
+    title: 'Assess',
+    detail: 'Diagnose operating constraints, technology readiness, business priorities, and the transformation path.',
+    objective: 'Create a clear operating diagnosis before decisions turn into build scope.',
+    hvaOwns: 'Discovery design, constraint mapping, architecture review, opportunity sizing, roadmap framing.',
+    clientRole: 'Share operating reality, align priorities, confirm constraints, identify accountable owners.',
+    checkpoints: ['Map current operations', 'Prioritize transformation constraints', 'Confirm target outcomes'],
+    outputs: ['Operating diagnosis', 'Capability gap map', 'Prioritized transformation roadmap'],
   },
   {
     step: '02',
     icon: <Settings className="h-8 w-8" />,
-    title: 'Operate',
-    detail: 'Run and optimize operations with H.V.A-led execution, governance, and performance management.',
-    objective: 'Stabilize operations and improve performance through measured optimization cycles.',
-    hvaOwns: 'Operational governance, incident response, KPI monitoring, optimization backlog execution.',
-    clientRole: 'Review performance trends, validate business impact, and co-prioritize optimization cycles.',
-    checkpoints: ['Lead day-to-day operations', 'Monitor performance metrics', 'Iterate and optimize continuously'],
-    outputs: ['Weekly performance reporting', 'Optimization releases', 'Operational risk controls'],
+    title: 'Re-engineer',
+    detail: 'Redesign processes, architecture, systems, and delivery controls around the approved target state.',
+    objective: 'Turn the roadmap into production systems and operating changes without losing continuity.',
+    hvaOwns: 'Solution architecture, build sprints, QA gates, integration reliability, release readiness.',
+    clientRole: 'Validate process changes, provide access, approve milestones, and coordinate stakeholders.',
+    checkpoints: ['Design target architecture', 'Build core workflows', 'Validate production readiness'],
+    outputs: ['Technical blueprint', 'Integrated production stack', 'Release playbook and controls'],
   },
   {
     step: '03',
     icon: <Send className="h-8 w-8" />,
-    title: 'Transfer',
-    detail: 'Transfer capabilities, documentation, and operating ownership to the client team when ready.',
-    objective: 'Move ownership without losing quality, speed, or operational continuity.',
-    hvaOwns: 'Documentation framework, knowledge transfer, shadow-to-owner transition plan, readiness validation.',
-    clientRole: 'Assign internal owners, complete enablement, and execute staged handover checkpoints.',
-    checkpoints: ['Document all processes', 'Train internal team', 'Hand over with confidence'],
-    outputs: ['Transfer runbook', 'Team enablement sessions', 'Signed operational handover'],
+    title: 'Command',
+    detail: 'Run, stabilize, monitor, and improve the production operation with long-term accountability.',
+    objective: 'Keep transformation alive after launch through managed operations and measurable improvement loops.',
+    hvaOwns: 'Operational governance, incident response, KPI monitoring, optimization backlog execution.',
+    clientRole: 'Review performance trends, validate business impact, and co-prioritize optimization cycles.',
+    checkpoints: ['Lead production operations', 'Monitor performance metrics', 'Improve continuously'],
+    outputs: ['Performance reporting', 'Optimization releases', 'Operational risk controls'],
   },
 ];
 
@@ -106,7 +104,7 @@ export default function Capabilities() {
               <em className="italic text-[#475569]">Built for fast decision-making.</em>
             </h1>
             <p className="mt-6 max-w-2xl text-lg font-light leading-relaxed text-[#0F172A]/60">
-              A concise capability scan across all eight domains. Full execution depth lives in In Detail.
+              A concise capability scan across six service pillars. Full execution depth lives in In Detail.
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-4">
               <Link
@@ -140,9 +138,9 @@ export default function Capabilities() {
               </p>
               <nav className="relative">
                 {[
-                  { label: 'Capability Pillars', anchor: '#capability-pillars', meta: '8 domains' },
+                  { label: 'Capability Pillars', anchor: '#capability-pillars', meta: '6 pillars' },
                   { label: 'Solution Programs', anchor: '#solution-programs', meta: '3 active' },
-                  { label: 'BOT Engagement Model', anchor: '#bot-model', meta: 'How we work' },
+                  { label: 'ARC Engagement Model', anchor: '#bot-model', meta: 'How we work' },
                 ].map((item) => (
                   <a
                     key={item.anchor}
@@ -179,7 +177,7 @@ export default function Capabilities() {
           >
             <div>
               <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">Capability Pillars</p>
-              <h2 className="font-headline text-3xl font-medium text-[#0F172A] md:text-4xl">Eight concise capability domains.</h2>
+              <h2 className="font-headline text-3xl font-medium text-[#0F172A] md:text-4xl">Six concise service pillars.</h2>
             </div>
             <div aria-hidden="true" className="hidden h-[2px] w-20 shrink-0 bg-[#2563EB] md:block" />
           </motion.div>
@@ -194,6 +192,7 @@ export default function Capabilities() {
             {CAPABILITY_BRIEF_SECTIONS.map((pillar) => (
               <motion.article
                 key={pillar.id}
+                id={pillar.id}
                 variants={fadeUp}
                 transition={{ duration: 0.45 }}
                 className="group relative flex flex-col overflow-hidden bg-white p-5 md:p-6"
@@ -517,15 +516,15 @@ export default function Capabilities() {
             <div>
               <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">How Engagement Works</p>
               <h2 className="font-headline text-4xl leading-[1.02] text-[#0F172A] md:text-5xl">
-                Build-Operate-Transfer in one model.
+                Assess-Re-engineer-Command in one model.
               </h2>
               <p className="mt-4 max-w-3xl text-sm leading-relaxed text-[#475569]">
-                ARC-style execution logic: one accountable sequence from architecture to operational ownership transfer.
+                ARC execution logic: one accountable sequence from diagnosis to redesigned systems and managed operations.
                 Each phase defines what H.V.A owns, what client teams own, and what must be delivered before the next gate.
               </p>
             </div>
             <p className="max-w-xl text-[#475569] leading-relaxed lg:text-right">
-              Recommended when internal teams want staged ownership transfer without operational disruption.
+              Recommended when leadership needs strategy, build, and operating accountability without operational disruption.
             </p>
           </motion.div>
 
@@ -533,7 +532,7 @@ export default function Capabilities() {
             {[
               'Decision gates at every phase transition',
               'Joint governance between H.V.A and client leadership',
-              'Clear handover criteria before transfer',
+              'Clear operating criteria before managed scale',
             ].map((item) => (
               <div key={item} className="bg-white px-5 py-4 text-xs font-semibold uppercase tracking-[0.08em] text-[#2563EB]">
                 {item}
@@ -691,7 +690,7 @@ export default function Capabilities() {
       <BottomCTA
         variant="dark"
         headline="Need the full capability map with delivery depth?"
-        subtext="Use In Detail for strategic context, execution model, and full sub-capability coverage across all domains."
+        subtext="Use In Detail for strategic context, execution model, and full sub-capability coverage across all six service pillars."
         primaryLabel="Explore In Detail"
         primaryHref="/capabilities/in-detail"
         secondaryLabel="Book Discovery Call"

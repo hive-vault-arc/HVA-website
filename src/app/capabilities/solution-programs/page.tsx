@@ -7,7 +7,7 @@ import { GLOBAL_KEYWORDS, SITE_URL, buildPageMetadata, mergeKeywords } from '../
 export const metadata: Metadata = buildPageMetadata({
   title: 'Capability Solution Programs | Consulting-Led Operational Systems',
   description:
-    'Explore H.V.A capability solution programs with modules, integrations, delivery model, outcomes, and proof references for production operations. Our capabilities are our services.',
+    'Explore H.V.A capability solution programs with modules, integrations, delivery model, outcomes, and proof references for production operations. Our six service pillars are our delivery model.',
   path: '/capabilities/solution-programs',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'capability solution programs technology consulting',

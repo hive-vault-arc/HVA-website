@@ -17,11 +17,22 @@ const pageLinks = [
 ];
 
 const expertiseLinks = [
+  { href: '/capabilities#strategy-business', label: 'Strategy & Business Consulting' },
+  { href: '/capabilities#technology-consulting', label: 'Technology Consulting' },
+  { href: '/capabilities#ai-data-analytics', label: 'AI, Data & Analytics' },
+  { href: '/capabilities#software-engineering', label: 'Software Engineering' },
+  { href: '/capabilities#cloud-infrastructure', label: 'Cloud & Infrastructure' },
+  { href: '/capabilities#operations-managed', label: 'Operations & Managed Services' },
   { href: '/capabilities/solution-programs', label: 'Solution Programs' },
-  { href: '/case-studies/multilingual-whatsapp-ai-agent', label: 'WhatsApp Agent Operations' },
-  { href: '/case-studies/zoho-grade-crm-platform', label: 'CRM Modernization' },
-  { href: '/case-studies', label: 'Healthcare Case Studies' },
-  { href: '/insights/research-reports', label: 'Research Reports' },
+];
+
+const industryLinks = [
+  { href: '/industries#real-estate', label: 'Real Estate & Construction' },
+  { href: '/industries#healthcare', label: 'Healthcare & Life Sciences' },
+  { href: '/industries#financial-services', label: 'Financial Services' },
+  { href: '/industries#government', label: 'Government & Public Sector' },
+  { href: '/industries#retail', label: 'Retail & E-Commerce' },
+  { href: '/industries#logistics', label: 'Logistics & Transportation' },
 ];
 
 const legalLinks = [
@@ -60,10 +71,23 @@ export default function SiteFooter() {
               </ul>
             </nav>
 
-            <nav className="site-footer__group" aria-label="Footer expertise">
-              <p className="site-footer__title">Expertise</p>
+            <nav className="site-footer__group" aria-label="Footer services">
+              <p className="site-footer__title">Services</p>
               <ul className="site-footer__list-stack">
                 {expertiseLinks.map((item) => (
+                  <li key={item.href}>
+                    <Link href={item.href} className="site-footer__link">
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            <nav className="site-footer__group" aria-label="Footer industries">
+              <p className="site-footer__title">Industries</p>
+              <ul className="site-footer__list-stack">
+                {industryLinks.map((item) => (
                   <li key={item.href}>
                     <Link href={item.href} className="site-footer__link">
                       {item.label}

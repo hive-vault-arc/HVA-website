@@ -20,9 +20,9 @@ export async function generateMetadata({ params }: LocaleCapabilitiesInDetailPag
   }
 
   const base = buildPageMetadata({
-    title: 'Capabilities In Detail | Full Capability Architecture and BOT Delivery Model',
+    title: 'Capabilities In Detail | Six Service Pillars and ARC Delivery Model',
     description:
-      'Full capability depth across 8 capability domains including AI systems, transformation, consulting, engineering, data and growth, cybersecurity, emerging tech, and Build-Operate-Transfer delivery.',
+      'Full capability depth across six service pillars: strategy, technology consulting, AI and data, software engineering, cloud infrastructure, and managed operations with ARC delivery.',
     path: locale === 'en' ? '/capabilities/in-detail' : `/${locale}/capabilities/in-detail`,
     locale,
     alternates: {

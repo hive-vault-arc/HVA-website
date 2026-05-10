@@ -20,8 +20,8 @@ const capabilitiesContent: Record<
   en: {
     title: 'Technology Consulting Capabilities in Morocco',
     description:
-      'Consulting and engineering capabilities from H.V.A: advisory, architecture, AI automation, custom software, modernization, cloud, and data capabilities.',
-    h1: 'Advisory to Execution Capability Lines',
+      'Six H.V.A service pillars: strategy, technology consulting, AI and data, software engineering, cloud infrastructure, and managed operations.',
+    h1: 'Six Service Pillars from Strategy to Operations',
     intro:
       'Our engagement model spans strategic consulting, architecture, technical execution, and managed evolution so systems continue performing after launch.',
     keywords: [
@@ -50,19 +50,19 @@ const capabilitiesContent: Record<
       'security hardening and reliability engineering morocco',
     ],
     bullets: [
-      'AI systems: agents, automation, and decision intelligence',
-      'Business transformation: modernization and CRM operations redesign',
-      'Consulting: strategy, architecture, roadmaps, and tech function',
-      'Engineering: web, mobile, SaaS, and cloud systems',
-      'Data and growth: analytics, data pipelines, and marketing systems',
-      'Cybersecurity, emerging tech (deep tech + IoT), and BOT delivery model',
+      'Strategy and business consulting: diagnostics, transformation, and operating model design',
+      'Technology consulting: enterprise architecture, roadmaps, and systems integration',
+      'AI, data, and analytics: agents, generative AI, predictive analytics, and BI',
+      'Software engineering and product development: web, mobile, SaaS, APIs, and UX/UI engineering',
+      'Cloud and infrastructure: migration, security architecture, observability, and automation',
+      'Operations and managed services: post-launch ownership, maintenance, and AI system evolution',
     ],
   },
   fr: {
     title: 'Capacités de conseil technologique au Maroc',
     description:
-      'Capacités H.V.A: conseil technologique, transformation digitale, IA, automatisation, logiciel sur mesure, modernisation IT et cloud.',
-    h1: 'Conseil, architecture et exécution',
+      'Six piliers de service H.V.A: stratégie, conseil technologique, IA et data, logiciel, cloud, infrastructure et opérations managées.',
+    h1: 'Six piliers de service de la stratégie aux opérations',
     intro:
       "Nous accompagnons les entreprises de la strategie jusqu'a l'exploitation en production avec un modele de delivery clair et mesurable.",
     keywords: [
@@ -91,12 +91,12 @@ const capabilitiesContent: Record<
       'sécurité applicative et fiabilité cloud maroc',
     ],
     bullets: [
-      'Systemes IA : agents, automatisation et intelligence decisionnelle',
-      'Transformation metier et IT : modernisation et refonte CRM/operations',
-      'Conseil : strategie, architecture, roadmaps et fonction technologique',
-      'Ingenierie : web, mobile, SaaS et systemes cloud',
-      'Data et croissance : analytics, pipelines data et marketing systems',
-      'Cybersecurite, deep tech, IoT et modele Build-Operate-Transfer',
+      'Stratégie et conseil métier : diagnostic, transformation et modèle opérationnel',
+      'Conseil technologique : architecture d entreprise, roadmaps et intégration systèmes',
+      'IA, data et analytics : agents, IA générative, analytique prédictive et BI',
+      'Ingénierie logicielle et produit : web, mobile, SaaS, API et UX/UI',
+      'Cloud et infrastructure : migration, sécurité, observabilité et automatisation',
+      'Opérations managées : ownership post-lancement, maintenance et évolution des systèmes IA',
     ],
   },
   ar: {
@@ -132,19 +132,19 @@ const capabilitiesContent: Record<
       'تقوية أمن التطبيقات وموثوقية البنية السحابية المغرب',
     ],
     bullets: [
-      'أنظمة الذكاء الاصطناعي: وكلاء، أتمتة، وذكاء قراري',
-      'التحول المؤسسي والتقني: تحديث شامل وإعادة تصميم CRM والعمليات',
-      'الاستشارات: استراتيجية، معمارية، خرائط طريق، وتصميم وظيفة التقنية',
-      'الهندسة: تطبيقات ويب وموبايل ومنصات SaaS وأنظمة سحابية',
-      'البيانات والنمو: تحليلات، خطوط بيانات، وأنظمة تسويق',
-      'الأمن السيبراني، التقنيات الناشئة (Deep Tech وIoT)، ونموذج BOT',
+      'استشارات الاستراتيجية والأعمال: التشخيص والتحول وتصميم نموذج التشغيل',
+      'الاستشارات التقنية: معمارية المؤسسات وخرائط الطريق وتكامل الأنظمة',
+      'الذكاء الاصطناعي والبيانات والتحليلات: وكلاء وذكاء اصطناعي توليدي وتحليلات وBI',
+      'هندسة البرمجيات والمنتجات: ويب وموبايل وSaaS وAPI وتجربة المستخدم',
+      'السحابة والبنية التحتية: الترحيل والأمان والمراقبة والأتمتة',
+      'العمليات والخدمات المُدارة: الملكية بعد الإطلاق والصيانة وتطوير أنظمة الذكاء الاصطناعي',
     ],
   },
   es: {
     title: 'Capacidades de consultoria tecnologica en Marruecos',
     description:
-      'Capacidades de H.V.A: consultoria tecnologica, transformacion digital, IA, automatizacion, software a medida, modernizacion IT y cloud.',
-    h1: 'De la estrategia a la ejecucion',
+      'Seis pilares de servicio de H.V.A: estrategia, consultoria tecnologica, IA y datos, software, cloud, infraestructura y operaciones gestionadas.',
+    h1: 'Seis pilares de servicio de la estrategia a operaciones',
     intro:
       'Trabajamos con equipos directivos para disenar la estrategia, ejecutar la ingenieria y mantener la operacion en produccion a largo plazo.',
     keywords: [
@@ -173,12 +173,12 @@ const capabilitiesContent: Record<
       'seguridad de aplicaciones y confiabilidad cloud marruecos',
     ],
     bullets: [
-      'Sistemas de IA: agentes, automatizacion e inteligencia de decision',
-      'Transformacion negocio+IT: modernizacion y rediseño de CRM/operaciones',
-      'Consultoria: estrategia, arquitectura, hojas de ruta y funcion tecnologica',
-      'Ingenieria: web, movil, SaaS y sistemas cloud',
-      'Data y crecimiento: analitica, pipelines de datos y marketing systems',
-      'Ciberseguridad, deep tech, IoT y modelo Build-Operate-Transfer',
+      'Estrategia y consultoria de negocio: diagnostico, transformacion y modelo operativo',
+      'Consultoria tecnologica: arquitectura empresarial, roadmaps e integracion de sistemas',
+      'IA, datos y analitica: agentes, IA generativa, analitica predictiva y BI',
+      'Ingenieria de software y producto: web, movil, SaaS, APIs y UX/UI',
+      'Cloud e infraestructura: migracion, seguridad, observabilidad y automatizacion',
+      'Operaciones gestionadas: ownership post-lanzamiento, mantenimiento y evolucion de sistemas IA',
     ],
   },
 };

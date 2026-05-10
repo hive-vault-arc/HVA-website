@@ -49,7 +49,7 @@ const PANELS = [
     category: 'Data & Intelligence',
     title: 'Analytics',
     description:
-      'Custom data pipelines, dashboards, and AI-powered insights that turn raw signals into decisions your team can act on.',
+      'Custom data pipelines, dashboards, and decision intelligence that turn raw signals into actions your team can trust.',
   },
   {
     num: '07',
