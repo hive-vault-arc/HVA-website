@@ -132,16 +132,16 @@ export default function Arc() {
               Operational Excellence
             </span>
             <h1 className="font-headline text-[clamp(3rem,7vw,6rem)] text-[#0F172A] leading-[1.02] tracking-tight mb-8">
-              The <span className="text-[#2563EB]">ARC</span> Framework:
+              The <span className="text-[#2563EB]">ARC</span> Model:
               <br />
-              <em className="italic font-light text-[var(--on-surface-variant)]">Category</em>
+              <em className="italic font-light text-[var(--on-surface-variant)]">Assess.</em>
               <span className="block md:ml-[0.7em]">
-                <em className="italic font-light text-[var(--on-surface-variant)]">Thinking</em> + Field
+                <em className="italic font-light text-[var(--on-surface-variant)]">Re-engineer.</em>
               </span>
-              <span className="block md:ml-[2.1em]">Execution.</span>
+              <span className="block md:ml-[2.1em]">Command.</span>
             </h1>
             <p className="text-xl text-[var(--on-surface-variant)] font-light max-w-xl leading-relaxed mb-10">
-              A rigorous architectural approach to digital transformation. Strategy, engineering, and operational iteration — in one accountable loop.
+              H.V.A's delivery model. Strategy and consulting. AI engineering and software. Operations and managed services — in one team, across the full lifecycle. No handoff.
             </p>
             <div className="flex flex-wrap items-center gap-5">
               <Link
@@ -175,7 +175,7 @@ export default function Arc() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-            {/* Phase 01 — Diagnose */}
+            {/* Phase 01 — Assess */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -187,7 +187,7 @@ export default function Arc() {
                 <div className="absolute inset-0 flex flex-col justify-between p-5">
                   <div className="flex justify-between items-start">
                     <div className="bg-[#dbeafe] px-2 py-1 text-[8px] font-mono text-[#2563EB] border border-[#2563EB]/20 uppercase tracking-wider">
-                      SCANNING_BOTTLENECKS
+                      ASSESSING_CONSTRAINTS
                     </div>
                     <div className="text-[9px] font-mono text-[#94a3b8]">01011001</div>
                   </div>
@@ -207,13 +207,13 @@ export default function Arc() {
                   01
                 </div>
               </div>
-              <h3 className="font-headline text-3xl text-[#0F172A] mb-3">Diagnose</h3>
+              <h3 className="font-headline text-3xl text-[#0F172A] mb-3">Assess</h3>
               <p className="text-[var(--on-surface-variant)] leading-relaxed text-sm">
-                Map operating friction, decision bottlenecks, and technology constraints with leadership and functional teams.
+                Map operating friction, define target architecture, and sequence the transformation — strategy and technology consulting before a single line of code is written.
               </p>
             </motion.div>
 
-            {/* Phase 02 — Engineer (offset) */}
+            {/* Phase 02 — Re-engineer (offset) */}
             <motion.div
               className="md:mt-14"
               initial={{ opacity: 0, y: 20 }}
@@ -257,13 +257,13 @@ export default function Arc() {
                   02
                 </div>
               </div>
-              <h3 className="font-headline text-3xl text-[#0F172A] mb-3">Engineer</h3>
+              <h3 className="font-headline text-3xl text-[#0F172A] mb-3">Re-engineer</h3>
               <p className="text-[var(--on-surface-variant)] leading-relaxed text-sm">
-                Translate strategy into architecture, workflows, and software modules that run under real production pressure.
+                Build the systems, deploy the intelligence, wire the infrastructure — AI engineering, custom software, and cloud delivered under real production pressure.
               </p>
             </motion.div>
 
-            {/* Phase 03 — Run & Evolve */}
+            {/* Phase 03 — Command */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -301,9 +301,9 @@ export default function Arc() {
                   03
                 </div>
               </div>
-              <h3 className="font-headline text-3xl text-[#0F172A] mb-3">Run &amp; Evolve</h3>
+              <h3 className="font-headline text-3xl text-[#0F172A] mb-3">Command</h3>
               <p className="text-[var(--on-surface-variant)] leading-relaxed text-sm mb-5">
-                Stabilize, monitor, optimize, and extend systems as your business model and scale requirements change.
+                Stabilize, monitor, and evolve — managing operations, AI systems, and applications long-term. Same team. No handoff.
               </p>
               <ul className="space-y-4">
                 <li className="flex items-start gap-3">
@@ -356,7 +356,7 @@ export default function Arc() {
               <em className="italic text-[#2563EB]">Operations.</em>
             </h2>
             <p className="text-white/60 text-base leading-relaxed mb-8">
-              Most transformation programs fail at the handoff. Advisory firms leave after the deck. Agencies ship and disappear. ARC eliminates that gap — permanently.
+              Most transformation programs fail at the handoff. Advisory firms leave after the deck. Agencies ship and disappear. H.V.A eliminates that gap entirely — same team, strategy through production, no drift.
             </p>
             <div className="h-px w-12 bg-[#2563EB]" />
           </motion.div>

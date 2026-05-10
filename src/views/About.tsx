@@ -376,7 +376,7 @@ const About: React.FC = () => {
                       H.V.A Core Creed
                     </p>
                     <blockquote className="font-serif text-2xl md:text-3xl italic text-[#F5F6FA] leading-snug mb-8">
-                      "Real AI and digital transformation is only complete when it works under real operational pressure."
+                      "Real technology transformation is only complete when the systems are running, the team has handed off nothing, and the outcomes are measurable."
                     </blockquote>
                     <div className="h-px bg-gradient-to-r from-[#0984E3]/60 via-[#00CEC9]/40 to-transparent mb-8" />
                     <p className="text-[#F5F6FA]/90 text-sm font-light leading-relaxed max-w-md">
@@ -399,7 +399,7 @@ const About: React.FC = () => {
                 The People Behind H.V.A
               </h2>
               <p className="text-[#1E272E]/64 leading-relaxed">
-                Our founding team blends AI systems, digital transformation strategy, software architecture, and cloud engineering to deliver programs that are practical, resilient, and built for long-term evolution.
+                Our founding team combines strategy consulting, technology architecture, AI engineering, software development, cloud infrastructure, and managed operations — delivering technology transformation programs that are practical, resilient, and built for long-term evolution.
               </p>
             </div>
 
@@ -438,7 +438,7 @@ const About: React.FC = () => {
         <BottomCTA
           variant="dark"
           headline="Ready to Define Your AI and Transformation Roadmap?"
-          subtext="Share your goals and constraints. We will map the right AI automation, digital transformation, and engineering delivery path — then discuss scope after discovery."
+          subtext="Share your goals and constraints. We will map the right strategy, engineering, and operations path — and discuss scope after discovery. No handoff. Same team."
           primaryLabel="Book a Call"
           primaryHref="/contact"
           secondaryLabel="ReView Capabilities"

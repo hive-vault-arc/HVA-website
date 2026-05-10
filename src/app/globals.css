@@ -250,6 +250,14 @@
   }
 }
 
+/* ─── Editorial Grid (12-column, from Capabilities / editorial pages) ─────── */
+
+.editorial-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 2rem;
+}
+
 /* ─── Tailwind Design Tokens (HSL) ────────────────────────────────────────── */
 
 @layer base {

@@ -188,7 +188,7 @@ export const BOT_DELIVERY_MODEL: DeliveryModel = {
     {
       id: 'assess',
       title: 'Assess',
-      detail: 'Diagnose operating constraints, technology readiness, business priorities, and the transformation path.',
+      detail: 'Assess operating constraints, technology readiness, business priorities, and the transformation path.',
     },
     {
       id: 're-engineer',

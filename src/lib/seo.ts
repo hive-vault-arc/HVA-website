@@ -26,22 +26,32 @@ export const DEFAULT_DESCRIPTION = CANONICAL_MARKET_IDENTITY.longDescriptor;
 export const GLOBAL_KEYWORDS = [
   BUSINESS_NAME,
   ...BRAND_SEARCH_VARIANTS,
-  'AI Morocco',
-  'AI consulting Tangier',
-  'WhatsApp AI agent',
+  // Core positioning
+  'technology transformation partner Morocco',
+  'technology transformation partner Tangier',
+  'technology consulting firm Morocco',
+  'AI engineering firm Morocco',
+  'digital transformation company Morocco',
+  'managed operations Morocco',
+  // Service pillar keywords
+  'strategy consulting Morocco',
   'AI agents Morocco',
-  'digital transformation',
+  'WhatsApp AI agent Morocco',
   'custom software Morocco',
-  'CRM Morocco',
+  'cloud infrastructure Morocco',
   'IT consulting Morocco',
-  'ARC program HVA',
+  'IT consulting Tangier',
+  // Industry keywords
+  'real estate technology Morocco',
+  'healthcare technology Morocco',
+  'government digital transformation Morocco',
+  // Local/multilingual
   'digital services Tangier',
   'digital services Morocco',
-  'digital agency Tangier',
   'services digitaux Tanger',
   'agence digitale Tanger',
-  'digital services Tanger',
-  'technology services Tangier',
+  'ARC program HVA',
+  'CRM Morocco',
 ];
 
 type PageMetaInput = {

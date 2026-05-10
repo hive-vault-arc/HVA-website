@@ -4,21 +4,22 @@ import JsonLd from '../../components/JsonLd';
 import { GLOBAL_KEYWORDS, SITE_URL, buildBreadcrumbSchema, buildPageMetadata, mergeKeywords } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Industries | 8 Sector-Focused Transformation Verticals',
+  title: 'Industries | Technology Transformation Across 8 Verticals',
   description:
-    'Explore how H.V.A applies ARC delivery across 8 industry verticals: real estate and construction, healthcare, financial services, government, retail, energy, logistics, and consumer goods.',
+    'Hive Vault Arc (H.V.A) operates across 8 industry verticals — Real Estate, Healthcare, Financial Services, Government, Retail, Energy, Logistics, and Consumer Goods — combining domain expertise with strategy, AI engineering, and managed operations.',
   path: '/industries',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
-    'industry specific digital transformation',
-    'real estate technology consulting Morocco',
-    'healthcare systems consulting Morocco',
-    'logistics automation consulting Morocco',
-    'construction operations digitization',
-    'financial services automation Morocco',
-    'government digital transformation Morocco',
-    'retail ecommerce platform Morocco',
-    'energy sustainability digital Morocco',
-    'consumer goods luxury operations Morocco',
+    'real estate technology transformation Morocco',
+    'healthcare digital transformation Morocco',
+    'financial services technology Morocco',
+    'government digital transformation Morocco Maroc IA 2030',
+    'retail ecommerce technology Morocco',
+    'energy sustainability technology Morocco',
+    'logistics technology Morocco Tanger Med',
+    'consumer goods luxury technology Morocco France',
+    'industry-specific technology consulting Morocco',
+    'secteur immobilier technologie Maroc',
+    'transformation digitale secteur santé Maroc',
   ]),
 });
 

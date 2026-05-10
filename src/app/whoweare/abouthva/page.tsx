@@ -7,9 +7,9 @@ import { GLOBAL_KEYWORDS, SITE_URL, buildBreadcrumbSchema, buildPageMetadata, me
 import { CANONICAL_MARKET_IDENTITY } from '../../../lib/positioning';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'About | Technology Consulting and Transformation Partner',
+  title: 'About H.V.A | Technology Transformation Partner — Tangier, Morocco',
   description:
-    'Meet the H.V.A team: a consulting-led digital transformation firm in Tangier that combines strategy, architecture, engineering delivery, and long-term operations ownership.',
+    'Hive Vault Arc (H.V.A) is a technology transformation partner based in Tangier, Morocco — combining strategy, AI engineering, software development, cloud infrastructure, and managed operations in one team.',
   path: '/whoweare/abouthva',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'software engineering team Tangier',

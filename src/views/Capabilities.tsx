@@ -1,39 +1,18 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Bot, Building2, Cloud, Cpu, Database, Send, Settings, Sparkles, Wrench } from 'lucide-react';
-import PageAmbientBackground from '../components/PageAmbientBackground';
+import { Bot, Building2, Cloud, Cpu, Database, Send, Settings, Wrench } from 'lucide-react';
 import BottomCTA from '../components/BottomCTA';
+import PageAmbientBackground from '../components/PageAmbientBackground';
 import { CAPABILITY_BRIEF_SECTIONS, CAPABILITY_SOLUTION_PROGRAM_DETAILS } from '../lib/capabilities-content';
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 20 },
   show: { opacity: 1, y: 0 },
 };
-
-function getPillarIcon(id: string) {
-  const cls = 'h-5 w-5';
-  const sw = 1.6;
-
-  switch (id) {
-    case 'strategy-business':
-      return <Building2 className={cls} strokeWidth={sw} />;
-    case 'technology-consulting':
-      return <Wrench className={cls} strokeWidth={sw} />;
-    case 'ai-data-analytics':
-      return <Bot className={cls} strokeWidth={sw} />;
-    case 'software-engineering':
-      return <Cpu className={cls} strokeWidth={sw} />;
-    case 'cloud-infrastructure':
-      return <Cloud className={cls} strokeWidth={sw} />;
-    case 'operations-managed':
-      return <Settings className={cls} strokeWidth={sw} />;
-    default:
-      return <Sparkles className={cls} strokeWidth={sw} />;
-  }
-}
 
 const BOT_PHASES = [
   {
@@ -71,475 +50,383 @@ const BOT_PHASES = [
   },
 ];
 
+function getPillarIcon(id: string, cls = 'h-6 w-6', sw = 1.4) {
+  switch (id) {
+    case 'strategy-business': return <Building2 className={cls} strokeWidth={sw} />;
+    case 'technology-consulting': return <Wrench className={cls} strokeWidth={sw} />;
+    case 'ai-data-analytics': return <Bot className={cls} strokeWidth={sw} />;
+    case 'software-engineering': return <Cpu className={cls} strokeWidth={sw} />;
+    case 'cloud-infrastructure': return <Cloud className={cls} strokeWidth={sw} />;
+    case 'operations-managed': return <Settings className={cls} strokeWidth={sw} />;
+    default: return <Wrench className={cls} strokeWidth={sw} />;
+  }
+}
+
 export default function Capabilities() {
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
   const [activeBOTStep, setActiveBOTStep] = useState(0);
   const activeBOTItem = BOT_PHASES[activeBOTStep] ?? BOT_PHASES[0];
 
+  const [pillar0, pillar1, pillar2, pillar3, pillar4, pillar5] = CAPABILITY_BRIEF_SECTIONS;
+
   return (
-    <div className="relative isolate overflow-x-hidden bg-[#F8FAFC] text-[#0F172A]">
+    <div className="relative isolate overflow-x-hidden bg-[#f7f9fb] text-[#191c1e]">
+      {/* Scroll progress bar */}
       <motion.div
         aria-hidden="true"
         className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-gradient-to-r from-[#2563EB] via-[#60a5fa] to-[#0ea5e9]"
         style={{ scaleX: progressScale }}
       />
 
-      <PageAmbientBackground className="-z-10" />
-
-      <section className="mx-auto max-w-7xl px-6 pt-32 pb-10 lg:px-14">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55 }}
-          className="grid grid-cols-1 items-end gap-10 lg:grid-cols-12"
-        >
-          <div className="lg:col-span-7">
-            <p className="mb-6 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
-              Strategy · Consulting · Engineering
-            </p>
-            <h1 className="font-headline text-4xl font-medium leading-[1.04] tracking-tight sm:text-5xl lg:text-[4.2rem]">
-              Capability Coverage at a Glance.
-              <br />
-              <em className="italic text-[#475569]">Built for fast decision-making.</em>
-            </h1>
-            <p className="mt-6 max-w-2xl text-lg font-light leading-relaxed text-[#0F172A]/60">
-              A concise capability scan across six service pillars. Full execution depth lives in In Detail.
-            </p>
-            <div className="mt-7 flex flex-wrap items-center gap-4">
-              <Link
-                href="/capabilities/in-detail"
-                className="sharp-edge inline-flex items-center gap-2 bg-[#2563EB] px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-white transition-colors duration-200 hover:bg-[#1d4ed8]"
-              >
-                Explore In Detail
-              </Link>
-              <Link
-                href="/capabilities/solution-programs"
-                className="text-sm font-bold uppercase tracking-wide text-[#2563EB] transition-colors duration-200 hover:text-[#1d4ed8]"
-              >
-                View Solution Programs →
-              </Link>
-            </div>
-          </div>
-
-          <aside className="lg:col-span-5 lg:self-end">
-            <div className="relative overflow-hidden bg-[#0F172A] p-6">
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0 opacity-[0.05]"
-                style={{
-                  backgroundImage:
-                    'linear-gradient(to right,#60a5fa 1px,transparent 1px),linear-gradient(to bottom,#60a5fa 1px,transparent 1px)',
-                  backgroundSize: '24px 24px',
-                }}
-              />
-              <p className="relative text-[9px] font-mono uppercase tracking-[0.3em] text-[#60a5fa] mb-4">
-                On This Page
+      {/* ── HERO ──────────────────────────────────────────────────────────── */}
+      <section className="relative pt-28 pb-16 px-6 lg:px-12 overflow-hidden">
+        <PageAmbientBackground className="-z-10" />
+        <div className="mx-auto max-w-screen-2xl">
+          <motion.div
+            initial="hidden"
+            animate="show"
+            variants={{ show: { transition: { staggerChildren: 0.1 } } }}
+            className="grid grid-cols-1 md:grid-cols-12 gap-8 items-end"
+          >
+            <motion.div
+              variants={fadeUp}
+              transition={{ duration: 0.65 }}
+              className="md:col-span-7"
+            >
+              <span className="text-[#2563EB] font-bold tracking-[0.24em] text-[10px] uppercase block mb-6">
+                Capabilities &amp; Mastery
+              </span>
+              <h1 className="font-headline font-light text-[3.6rem] sm:text-7xl lg:text-[5.2rem] leading-[1.02] tracking-tight text-[#0F172A]">
+                Six Pillars.
+                <br />
+                <em className="italic text-[#2563EB]">One Accountable</em>
+                <br />
+                Partner.
+              </h1>
+              <p className="mt-6 max-w-xl text-[1.05rem] text-[#45464d]/80 leading-relaxed">
+                H.V.A delivers strategy, engineering, and managed operations across six pillars — one team, one accountability loop, from discovery to production.
               </p>
-              <nav className="relative">
-                {[
-                  { label: 'Capability Pillars', anchor: '#capability-pillars', meta: '6 pillars' },
-                  { label: 'Solution Programs', anchor: '#solution-programs', meta: '3 active' },
-                  { label: 'ARC Engagement Model', anchor: '#bot-model', meta: 'How we work' },
-                ].map((item) => (
-                  <a
-                    key={item.anchor}
-                    href={item.anchor}
-                    className="flex items-center justify-between border-b border-white/8 py-3 last:border-0 group"
-                  >
-                    <span className="text-sm font-medium text-white/70 group-hover:text-white transition-colors duration-200">
-                      {item.label}
-                    </span>
-                    <span className="text-[9px] font-mono text-[#60a5fa]/60 group-hover:text-[#60a5fa] transition-colors">
-                      {item.meta}
-                    </span>
-                  </a>
-                ))}
-              </nav>
-              <div className="relative mt-4 border-t border-white/10 pt-4">
-                <p className="text-[9px] font-mono uppercase tracking-[0.18em] text-white/25">
-                  Full depth → /capabilities/in-detail
-                </p>
+              <div className="mt-8 flex flex-wrap gap-4">
+                <Link href="/capabilities/in-detail" className="sharp-edge btn-primary">
+                  Explore In Detail
+                </Link>
+                <Link
+                  href="/capabilities/solution-programs"
+                  className="inline-flex items-center gap-1.5 text-[0.78rem] font-bold uppercase tracking-[0.14em] text-[#0F172A] border-b border-[#0F172A]/30 pb-0.5 hover:text-[#2563EB] hover:border-[#2563EB] transition-colors"
+                >
+                  Solution Programs →
+                </Link>
               </div>
-            </div>
-          </aside>
-        </motion.div>
+            </motion.div>
+
+            {/* On This Page nav panel */}
+            <motion.aside
+              variants={fadeUp}
+              transition={{ duration: 0.65, delay: 0.08 }}
+              className="md:col-span-5 md:self-end"
+            >
+              <div className="relative overflow-hidden bg-[#0F172A] p-6">
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 opacity-[0.05]"
+                  style={{
+                    backgroundImage:
+                      'linear-gradient(to right,#60a5fa 1px,transparent 1px),linear-gradient(to bottom,#60a5fa 1px,transparent 1px)',
+                    backgroundSize: '24px 24px',
+                  }}
+                />
+                <p className="relative text-[9px] font-mono uppercase tracking-[0.3em] text-[#60a5fa] mb-4">
+                  On This Page
+                </p>
+                <nav className="relative">
+                  {[
+                    { label: 'Capability Pillars', anchor: '#capability-pillars', meta: '6 pillars' },
+                    { label: 'Solution Programs', anchor: '#solution-programs', meta: '3 active' },
+                    { label: 'ARC Engagement Model', anchor: '#bot-model', meta: 'How we work' },
+                  ].map((item) => (
+                    <a
+                      key={item.anchor}
+                      href={item.anchor}
+                      className="flex items-center justify-between border-b border-white/[0.08] py-3 last:border-0 group"
+                    >
+                      <span className="text-sm font-medium text-white/70 group-hover:text-white transition-colors duration-200">
+                        {item.label}
+                      </span>
+                      <span className="text-[9px] font-mono text-[#60a5fa]/60 group-hover:text-[#60a5fa] transition-colors">
+                        {item.meta}
+                      </span>
+                    </a>
+                  ))}
+                </nav>
+                <div className="relative mt-4 border-t border-white/10 pt-4">
+                  <p className="text-[9px] font-mono uppercase tracking-[0.18em] text-white/25">
+                    Full depth → /capabilities/in-detail
+                  </p>
+                </div>
+              </div>
+            </motion.aside>
+          </motion.div>
+        </div>
       </section>
 
-      <section id="capability-pillars" className="scroll-mt-28 bg-[#F2F4F6] py-14">
-        <div className="mx-auto max-w-7xl px-6 lg:px-14">
+      {/* Separator */}
+      <div aria-hidden="true" className="h-px bg-[#e2e8f0] mx-6 lg:mx-12" />
+
+      {/* ── SERVICE PILLARS BENTO GRID ────────────────────────────────────── */}
+      <section id="capability-pillars" className="scroll-mt-28 px-6 lg:px-12 pb-24">
+        <div className="mx-auto max-w-screen-2xl">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-4"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.05 }}
+            transition={{ staggerChildren: 0.07 }}
+          >
+            {/* 1 — Strategy & Business */}
+            <motion.div
+              variants={fadeUp}
+              transition={{ duration: 0.5 }}
+              className="group bg-[#f2f4f6] p-10 flex flex-col justify-between min-h-[420px] hover:bg-[#e6e8ea] transition-colors duration-500"
+            >
+              <div>
+                <div className="mb-8 flex h-12 w-12 items-center justify-center bg-white text-[#2563EB]">
+                  {getPillarIcon('strategy-business')}
+                </div>
+                <h3 className="font-headline text-2xl text-[#0F172A] mb-3">
+                  Strategy &amp; Business
+                </h3>
+                <p className="text-[#45464d] leading-relaxed text-sm">
+                  {pillar0?.summary}
+                </p>
+              </div>
+              <ul className="mt-8 space-y-2">
+                {pillar0?.bullets.map((b) => (
+                  <li key={b} className="text-[0.68rem] font-bold tracking-[0.14em] text-[#45464d]/55 uppercase">
+                    {b}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+
+            {/* 2 — Technology Consulting (2-col wide + image overlay) */}
+            <motion.div
+              variants={fadeUp}
+              transition={{ duration: 0.5 }}
+              className="group relative md:col-span-2 overflow-hidden bg-[#0F172A] min-h-[420px]"
+            >
+              <Image
+                src="/Images/capabilities/hva-technology-consulting-tangier.png"
+                alt="Technology consulting architecture — H.V.A Tangier Morocco"
+                fill
+                sizes="(max-width: 768px) 100vw, 66vw"
+                className="object-cover opacity-30 group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="relative z-10 p-10 flex flex-col justify-between min-h-[420px] bg-gradient-to-t from-[#0F172A]/90 via-[#0F172A]/40 to-transparent">
+                <div>
+                  <div className="mb-8 flex h-12 w-12 items-center justify-center bg-white/10 text-white">
+                    {getPillarIcon('technology-consulting')}
+                  </div>
+                  <h3 className="font-headline text-3xl text-white mb-3">
+                    Technology Consulting
+                  </h3>
+                  <p className="text-white/65 max-w-md text-sm leading-relaxed">
+                    {pillar1?.summary}
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-3 mt-8">
+                  {['Legacy Modernization', 'Stack Optimization', 'Architecture Design'].map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-3 py-1 border border-white/20 text-white text-[0.62rem] tracking-[0.15em] uppercase"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+            {/* 3 — AI & Data */}
+            <motion.div
+              variants={fadeUp}
+              transition={{ duration: 0.5 }}
+              className="group bg-[#e0e3e5] p-10 flex flex-col justify-between min-h-[420px]"
+            >
+              <div>
+                <div className="mb-8 flex h-12 w-12 items-center justify-center bg-white text-[#2563EB]">
+                  {getPillarIcon('ai-data-analytics')}
+                </div>
+                <h3 className="font-headline text-2xl text-[#0F172A] mb-3">AI &amp; Data</h3>
+                <p className="text-[#45464d] leading-relaxed text-sm">{pillar2?.summary}</p>
+              </div>
+              {(pillar2?.landingLinks.length ?? 0) > 0 && (
+                <div className="mt-8 flex flex-col gap-2">
+                  {pillar2?.landingLinks.map((lnk) => (
+                    <Link
+                      key={lnk.href}
+                      href={lnk.href}
+                      className="inline-flex items-center gap-1.5 text-[0.7rem] font-bold uppercase tracking-[0.14em] text-[#2563EB] hover:text-[#1d4ed8] transition-colors group/link"
+                    >
+                      {lnk.label}
+                      <span className="group-hover/link:translate-x-0.5 transition-transform">→</span>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </motion.div>
+
+            {/* 4 — Software Engineering */}
+            <motion.div
+              variants={fadeUp}
+              transition={{ duration: 0.5 }}
+              className="group bg-[#f2f4f6] p-10 flex flex-col justify-between min-h-[420px] hover:bg-[#e6e8ea] transition-colors duration-500"
+            >
+              <div>
+                <div className="mb-8 flex h-12 w-12 items-center justify-center bg-white text-[#2563EB]">
+                  {getPillarIcon('software-engineering')}
+                </div>
+                <h3 className="font-headline text-2xl text-[#0F172A] mb-3">
+                  Software Engineering
+                </h3>
+                <p className="text-[#45464d] leading-relaxed text-sm">{pillar3?.summary}</p>
+              </div>
+              <div className="mt-8 space-y-2">
+                <div className="w-full h-px bg-[#c6c6cd]/40" />
+                <p className="text-[0.62rem] font-bold text-[#45464d]/50 uppercase tracking-[0.16em] py-2">
+                  Full-Stack Sovereignty
+                </p>
+              </div>
+            </motion.div>
+
+            {/* 5 — Cloud & Infrastructure */}
+            <motion.div
+              variants={fadeUp}
+              transition={{ duration: 0.5 }}
+              className="group bg-white p-10 flex flex-col justify-between min-h-[420px] shadow-[0_10px_40px_rgba(25,28,30,0.06)]"
+            >
+              <div>
+                <div className="mb-8 flex h-12 w-12 items-center justify-center bg-[#f2f4f6] text-[#2563EB]">
+                  {getPillarIcon('cloud-infrastructure')}
+                </div>
+                <h3 className="font-headline text-2xl text-[#0F172A] mb-3">
+                  Cloud &amp; Infrastructure
+                </h3>
+                <p className="text-[#45464d] leading-relaxed text-sm">{pillar4?.summary}</p>
+              </div>
+              <div className="flex flex-wrap gap-2 mt-8">
+                {['AWS', 'Azure', 'GCP', 'Hybrid'].map((tag) => (
+                  <span
+                    key={tag}
+                    className="bg-[#eceef0] px-3 py-1 text-[0.6rem] font-bold text-[#45464d] uppercase tracking-[0.12em]"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* 6 — Operations & Managed Services (full-width dark banner) */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5 }}
-            className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between"
+            className="mt-4 bg-[#0F172A] p-10 md:p-12 flex flex-col md:flex-row justify-between items-center gap-8 relative overflow-hidden"
           >
-            <div>
-              <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">Capability Pillars</p>
-              <h2 className="font-headline text-3xl font-medium text-[#0F172A] md:text-4xl">Six concise service pillars.</h2>
-            </div>
-            <div aria-hidden="true" className="hidden h-[2px] w-20 shrink-0 bg-[#2563EB] md:block" />
-          </motion.div>
-
-          <motion.div
-            className="grid grid-cols-1 gap-px bg-[#e2e8f0] md:grid-cols-2 xl:grid-cols-4"
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.1 }}
-            transition={{ staggerChildren: 0.06 }}
-          >
-            {CAPABILITY_BRIEF_SECTIONS.map((pillar) => (
-              <motion.article
-                key={pillar.id}
-                id={pillar.id}
-                variants={fadeUp}
-                transition={{ duration: 0.45 }}
-                className="group relative flex flex-col overflow-hidden bg-white p-5 md:p-6"
-              >
-                {/* Left accent bar */}
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute left-0 top-0 h-full w-[3px] bg-[#2563EB] origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500"
-                />
-
-                {/* Blue tint overlay on hover */}
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 bg-[#2563EB]/[0.04] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                />
-
-                {/* ── Default content — blurs + fades out on hover ── */}
-                <div className="relative flex flex-col transition-all duration-300 group-hover:opacity-0 group-hover:blur-sm">
-                  <div className="mb-3 flex h-9 w-9 items-center justify-center bg-[#dbeafe] text-[#2563EB]">
-                    {getPillarIcon(pillar.id)}
-                  </div>
-                  <h3 className="font-headline text-xl leading-tight text-[#0F172A]">{pillar.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[#475569]">{pillar.summary}</p>
-                  {pillar.landingLinks.length > 0 && (
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {pillar.landingLinks.map((item) => (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#2563EB] hover:text-[#1d4ed8]"
-                        >
-                          {item.label}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                {/* ── Hover overlay — fades in, no layout impact ── */}
-                <div className="absolute inset-0 flex flex-col p-5 opacity-0 group-hover:opacity-100 transition-all duration-300 delay-75 md:p-6">
-                  <div className="mb-3 flex h-9 w-9 items-center justify-center bg-[#2563EB] text-white">
-                    {getPillarIcon(pillar.id)}
-                  </div>
-                  <h3 className="font-headline text-xl leading-tight text-[#2563EB] mb-3">{pillar.title}</h3>
-                  <ul className="space-y-2.5">
-                    {pillar.bullets.map((bullet) => (
-                      <li key={bullet} className="flex items-center gap-2.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[#2563EB]">
-                        <span className="h-1 w-1 shrink-0 bg-[#2563EB]" />
-                        {bullet}
-                      </li>
-                    ))}
-                  </ul>
-                  {pillar.landingLinks.length > 0 && (
-                    <div className="mt-4 border-t border-[#2563EB]/15 pt-3">
-                      <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.18em] text-[#2563EB]/70">
-                        Service Pages
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        {pillar.landingLinks.map((item) => (
-                          <Link
-                            key={`${item.href}-hover`}
-                            href={item.href}
-                            className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#2563EB] hover:text-[#1d4ed8]"
-                          >
-                            {item.label}
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </motion.article>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      <section id="solution-programs" className="scroll-mt-28 relative bg-[#F2F4F6] py-14 md:py-20 overflow-hidden">
-        {/* Blueprint grid background */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage:
-              'linear-gradient(to right, #2563EB 1px, transparent 1px), linear-gradient(to bottom, #2563EB 1px, transparent 1px)',
-            backgroundSize: '44px 44px',
-          }}
-        />
-        <div className="pointer-events-none absolute -top-32 right-0 h-96 w-96 rounded-full bg-[#2563EB]/10 blur-[120px]" />
-
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-14 grid grid-cols-12 gap-8 items-start">
-
-          {/* ── Sticky left panel — no motion transform (breaks position:sticky) ── */}
-          <div className="col-span-12 lg:col-span-4 lg:sticky lg:top-32">
-            <p className="text-[9px] font-mono uppercase tracking-[0.4em] text-[#2563EB] mb-1">
-              STATUS: ACTIVE_PROGRAMS
-            </p>
-            <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#2563EB] mb-3">Solution Programs</p>
-            <h2 className="font-headline text-3xl text-[#0F172A] leading-tight mb-4">
-              Pre-scoped.<br />
-              <em className="italic text-[#2563EB]">Production-ready.</em>
-            </h2>
-            <p className="text-sm text-[#475569] leading-relaxed mb-5">
-              Consulting-led engagements combining architecture decisions, delivery execution, and operational ownership — not a one-off project.
-            </p>
-
-            {/* Quote card */}
-            <div className="relative border border-[#2563EB]/20 bg-[#2563EB]/5 p-5 overflow-hidden mb-5">
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0 opacity-[0.04]"
-                style={{
-                  background:
-                    'repeating-linear-gradient(to bottom, transparent 0px, transparent 3px, #2563EB 3px, #2563EB 4px)',
-                }}
-              />
-              <p className="relative text-sm italic leading-relaxed text-[#0F172A]/70 mb-3">
-                "Programs are complete operating capabilities — not deliverables that need another team to run."
-              </p>
-              <p className="relative text-[9px] font-mono uppercase tracking-[0.24em] text-[#2563EB]">H.V.A ARC Framework</p>
-            </div>
-
-            {/* Program Registry HUD */}
-            <div className="border border-[#e2e8f0] bg-white overflow-hidden mb-6">
-              <div className="px-4 py-2 bg-[#F2F4F6] border-b border-[#e2e8f0] flex items-center justify-between">
-                <span className="text-[8px] font-mono text-[#2563EB] uppercase tracking-widest">PROGRAM_REGISTRY</span>
-                <span className="text-[8px] font-mono text-[#94a3b8]">3 ACTIVE</span>
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 opacity-[0.035]"
+              style={{
+                backgroundImage:
+                  'linear-gradient(to right,#60a5fa 1px,transparent 1px),linear-gradient(to bottom,#60a5fa 1px,transparent 1px)',
+                backgroundSize: '44px 44px',
+              }}
+            />
+            <div className="relative flex items-center gap-8">
+              <div className="flex-shrink-0 flex h-16 w-16 items-center justify-center bg-white/5 text-[#2563EB]">
+                <Settings className="h-8 w-8" strokeWidth={1.2} />
               </div>
-              {CAPABILITY_SOLUTION_PROGRAM_DETAILS.map((prog, i) => (
-                <div key={prog.slug} className="px-4 py-2.5 border-b border-[#e2e8f0] last:border-b-0 flex items-center gap-3">
-                  <div className="h-1.5 w-1.5 rounded-full bg-[#2563EB] animate-pulse" style={{ animationDelay: `${i * 0.3}s` }} />
-                  <span className="text-[10px] font-mono text-[#475569]">PRG-00{i + 1}</span>
-                  <span className="text-[10px] text-[#0F172A] truncate">{prog.name.split(' ').slice(0, 3).join(' ')}</span>
-                </div>
-              ))}
-            </div>
-
-            <Link
-              href="/capabilities/solution-programs"
-              className="sharp-edge inline-flex items-center gap-2 bg-[#0F172A] px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition-colors duration-200 hover:bg-[#2563EB]"
-            >
-              Full Program Catalog →
-            </Link>
-          </div>
-
-          {/* ── Program cards — Arc R&D grid style ── */}
-          <motion.div
-            className="col-span-12 lg:col-span-8 grid grid-cols-1 gap-px bg-[#e2e8f0] border border-[#e2e8f0]"
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.1 }}
-            transition={{ staggerChildren: 0.1 }}
-          >
-            {CAPABILITY_SOLUTION_PROGRAM_DETAILS.map((program, i) => {
-              const programIcons = [
-                <Bot key="bot" className="w-7 h-7" strokeWidth={1.25} />,
-                <Database key="db" className="w-7 h-7" strokeWidth={1.25} />,
-                <Cloud key="cloud" className="w-7 h-7" strokeWidth={1.25} />,
-              ];
-              return (
-                <motion.article
-                  key={program.slug}
-                  variants={fadeUp}
-                  transition={{ duration: 0.5 }}
-                  className="relative p-8 bg-[#F2F4F6] hover:bg-white transition-colors group overflow-hidden"
-                >
-                  {/* Left accent bar */}
-                  <div
-                    aria-hidden="true"
-                    className="pointer-events-none absolute left-0 top-0 h-full w-[3px] bg-[#2563EB] origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-500"
-                  />
-
-                  {/* Top: icon + code */}
-                  <div className="flex items-start justify-between mb-6">
-                    <span className="text-[#2563EB]">{programIcons[i]}</span>
-                    <span className="text-[10px] font-mono text-[#94a3b8] tabular-nums">PRG-00{i + 1}</span>
-                  </div>
-
-                  {/* Category + name */}
-                  <p className="text-[9px] font-bold uppercase tracking-[0.28em] text-[#2563EB] mb-1.5">{program.category}</p>
-                  <h3 className="font-headline text-2xl text-[#0F172A] mb-3 group-hover:text-[#2563EB] transition-colors duration-300">
-                    {program.name}
-                  </h3>
-
-                  {/* Summary */}
-                  <p className="text-sm text-[#475569] leading-relaxed mb-5">{program.summary}</p>
-
-                  {/* Outcome pills */}
-                  <div className="flex flex-wrap gap-1.5 mb-5">
-                    {program.outcomes.map((o) => (
-                      <span key={o} className="px-2 py-1 text-[9px] font-mono uppercase tracking-wide bg-white border border-[#e2e8f0] text-[#475569] group-hover:border-[#2563EB]/20 transition-colors">
-                        {o}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Footer: integrations + case study link */}
-                  <div className="flex items-center justify-between pt-4 border-t border-[#e2e8f0]">
-                    <div className="flex flex-wrap gap-2">
-                      {program.integrations.slice(0, 3).map((intg) => (
-                        <span key={intg} className="text-[9px] font-mono text-[#94a3b8]">{intg}</span>
-                      ))}
-                      {program.integrations.length > 3 && (
-                        <span className="text-[9px] font-mono text-[#94a3b8]">+{program.integrations.length - 3}</span>
-                      )}
-                    </div>
-                    {program.proofLinks.length > 0 && (
-                      <Link
-                        href={program.proofLinks[0]!}
-                        className="text-[10px] font-bold uppercase tracking-wide text-[#2563EB] hover:text-[#1d4ed8] transition-colors shrink-0"
-                      >
-                        Case Study →
-                      </Link>
-                    )}
-                  </div>
-                </motion.article>
-              );
-            })}
-          </motion.div>
-
-        </div>
-      </section>
-
-      {/* ── Program vs. Project — Arc "Difference" dark contrast section ── */}
-      <section className="bg-[#0F172A] py-16 relative overflow-hidden">
-        {/* Blueprint grid */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage:
-              'repeating-linear-gradient(0deg,#60a5fa 0,#60a5fa 1px,transparent 0,transparent 50%),repeating-linear-gradient(90deg,#60a5fa 0,#60a5fa 1px,transparent 0,transparent 50%)',
-            backgroundSize: '48px 48px',
-          }}
-        />
-        <div className="pointer-events-none absolute -top-32 left-1/4 h-96 w-96 rounded-full bg-[#2563EB]/20 blur-3xl" />
-
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-14 grid grid-cols-12 gap-8 items-start">
-          {/* Left — manifesto */}
-          <motion.div
-            className="col-span-12 lg:col-span-5"
-            initial={{ opacity: 0, x: -24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#2563EB] mb-6">Program vs. Project</p>
-            <h2 className="font-headline text-5xl md:text-6xl text-white leading-tight mb-8">
-              Not a project.<br />
-              Not a retainer.<br />
-              <em className="italic text-[#2563EB]">A program.</em>
-            </h2>
-            <p className="text-white/60 text-base leading-relaxed mb-8">
-              Most engagements end at delivery. Programs are different — structured around outcomes, not outputs, with H.V.A accountable through operations.
-            </p>
-            <div className="h-px w-12 bg-[#2563EB]" />
-          </motion.div>
-
-          {/* Right — contrast cards */}
-          <motion.div
-            className="col-span-12 lg:col-span-7 grid grid-cols-1 gap-px bg-white/5 border border-white/5"
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ staggerChildren: 0.1 }}
-          >
-            {[
-              {
-                others: 'Projects end at delivery.',
-                arc: 'Programs run until outcomes are confirmed and owned by your team.',
-              },
-              {
-                others: 'Vendors hand off documentation.',
-                arc: 'H.V.A stays through full operational transfer — no documentation-only handoffs.',
-              },
-              {
-                others: 'Scope is defined by deliverables.',
-                arc: 'Scope is defined by business outcomes. Deliverables follow.',
-              },
-              {
-                others: 'Strategy and engineering are separate teams.',
-                arc: 'One accountable loop — from architecture decision to production operation.',
-              },
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                variants={fadeUp}
-                transition={{ duration: 0.5 }}
-                className="p-8 bg-[#0F172A] hover:bg-slate-900/50 transition-colors"
-              >
-                <p className="text-[10px] uppercase tracking-[0.22em] text-[#94a3b8] mb-2 line-through decoration-[#94a3b8]/40">
-                  {item.others}
+              <div>
+                <h3 className="font-headline text-2xl md:text-3xl text-white mb-2">
+                  Operations &amp; Managed Services
+                </h3>
+                <p className="text-[#7c839b] max-w-xl text-sm leading-relaxed">
+                  {pillar5?.summary}
                 </p>
-                <h3 className="font-headline text-xl text-white">{item.arc}</h3>
-              </motion.div>
-            ))}
+              </div>
+            </div>
+            <Link
+              href="/contact"
+              className="relative inline-flex items-center gap-1.5 sharp-edge whitespace-nowrap px-8 py-3.5 bg-[#2563EB] text-white text-[0.78rem] font-bold uppercase tracking-[0.14em] hover:bg-[#1d4ed8] transition-colors"
+            >
+              Delegate Operations →
+            </Link>
           </motion.div>
         </div>
       </section>
 
-      <section id="bot-model" className="scroll-mt-28 relative overflow-hidden bg-[#F2F4F6] py-14 md:py-20">
+      {/* ── ARC OPERATING MODEL ────────────────────────────────────────────── */}
+      <section id="bot-model" className="scroll-mt-28 bg-[#f2f4f6] py-28 px-6 lg:px-12 overflow-hidden relative">
+        {/* Blueprint grid — subtle structural texture */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.05]"
+          className="pointer-events-none absolute inset-0 opacity-[0.028]"
           style={{
             backgroundImage:
-              'linear-gradient(to right, #2563EB 1px, transparent 1px), linear-gradient(to bottom, #2563EB 1px, transparent 1px)',
-            backgroundSize: '44px 44px',
+              'linear-gradient(to right,#0F172A 1px,transparent 1px),linear-gradient(to bottom,#0F172A 1px,transparent 1px)',
+            backgroundSize: '40px 40px',
           }}
         />
-        <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#2563EB]/10 blur-3xl" />
+        <div className="relative mx-auto max-w-screen-2xl">
 
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-14">
+          {/* Editorial header split */}
           <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.05 }}
-            transition={{ duration: 0.35 }}
-            className="mb-8 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ staggerChildren: 0.1 }}
+            className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-20"
           >
-            <div>
-              <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">How Engagement Works</p>
-              <h2 className="font-headline text-4xl leading-[1.02] text-[#0F172A] md:text-5xl">
-                Assess-Re-engineer-Command in one model.
+            <motion.div
+              variants={fadeUp}
+              transition={{ duration: 0.55 }}
+              className="md:col-span-6"
+            >
+              <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB] block mb-5">
+                Engagement Methodology
+              </span>
+              <h2 className="font-headline text-5xl md:text-6xl text-[#0F172A] leading-[1.05]">
+                The ARC
+                <br />
+                <em className="italic">Operating Model</em>
               </h2>
-              <p className="mt-4 max-w-3xl text-sm leading-relaxed text-[#475569]">
-                ARC execution logic: one accountable sequence from diagnosis to redesigned systems and managed operations.
-                Each phase defines what H.V.A owns, what client teams own, and what must be delivered before the next gate.
-              </p>
-            </div>
-            <p className="max-w-xl text-[#475569] leading-relaxed lg:text-right">
-              Recommended when leadership needs strategy, build, and operating accountability without operational disruption.
-            </p>
+            </motion.div>
+            <motion.div
+              variants={fadeUp}
+              transition={{ duration: 0.55 }}
+              className="md:col-span-6 flex items-end"
+            >
+              <div>
+                <p className="text-[#45464d] text-base leading-relaxed mb-6">
+                  Our proprietary engagement methodology ensures every project is predictable, rigorous, and impactful. One accountable sequence — from diagnosis to managed operations.
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  {['Decision gates at every phase', 'Joint governance', 'Operational accountability'].map((item) => (
+                    <span
+                      key={item}
+                      className="px-3 py-1.5 bg-white text-[0.6rem] font-bold uppercase tracking-[0.12em] text-[#2563EB]"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
 
-          <div className="mb-8 grid grid-cols-1 gap-px bg-[#d8e2f5] md:grid-cols-3">
-            {[
-              'Decision gates at every phase transition',
-              'Joint governance between H.V.A and client leadership',
-              'Clear operating criteria before managed scale',
-            ].map((item) => (
-              <div key={item} className="bg-white px-5 py-4 text-xs font-semibold uppercase tracking-[0.08em] text-[#2563EB]">
-                {item}
-              </div>
-            ))}
-          </div>
-
+          {/* Progress track + phase labels */}
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -547,7 +434,7 @@ export default function Capabilities() {
             transition={{ duration: 0.35 }}
           >
             <div className="mb-7">
-              <div className="relative mb-3 h-px w-full bg-slate-300">
+              <div className="relative mb-3 h-[2px] w-full bg-slate-200">
                 <motion.div
                   className="absolute inset-y-0 left-0 bg-[#2563EB]"
                   animate={{ width: `${((activeBOTStep + 1) / BOT_PHASES.length) * 100}%` }}
@@ -561,6 +448,7 @@ export default function Capabilities() {
               </div>
             </div>
 
+            {/* 3 white selector cards */}
             <div className="grid grid-cols-1 gap-px bg-slate-300 sm:grid-cols-3">
               {BOT_PHASES.map((item, index) => {
                 const isActive = activeBOTStep === index;
@@ -580,7 +468,9 @@ export default function Capabilities() {
                         isActive ? 'bg-[#2563EB]' : 'bg-transparent group-hover:bg-slate-200'
                       }`}
                     />
-                    <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#2563EB]">Phase {item.step}</p>
+                    <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#2563EB]">
+                      Phase {item.step}
+                    </p>
                     <div
                       className={`mb-3 transition-colors duration-300 ${
                         isActive ? 'text-[#2563EB]' : 'text-[#475569] group-hover:text-[#2563EB]'
@@ -593,7 +483,14 @@ export default function Capabilities() {
                         isActive ? 'text-[#0F172A]' : 'text-[#0F172A]/80'
                       }`}
                     >
-                      {item.title}
+                      <span
+                        className={`text-[2.6rem] font-bold transition-colors duration-300 ${
+                          isActive ? 'text-[#2563EB]' : 'text-[#0F172A]/40 group-hover:text-[#2563EB]'
+                        }`}
+                      >
+                        {item.title[0]}
+                      </span>
+                      {item.title.slice(1)}
                     </h3>
                     <p className="mt-3 text-sm leading-relaxed text-[#475569]">{item.objective}</p>
                   </button>
@@ -601,6 +498,7 @@ export default function Capabilities() {
               })}
             </div>
 
+            {/* Dark detail panel */}
             <motion.div
               key={activeBOTItem.step}
               initial={{ opacity: 0, y: 8 }}
@@ -608,7 +506,6 @@ export default function Capabilities() {
               transition={{ duration: 0.28 }}
               className="bg-[#0F172A] p-5 md:p-7"
             >
-              {/* Compact header */}
               <div className="mb-4 flex items-center gap-4">
                 <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center bg-[#2563EB] text-xs font-bold text-white">
                   {activeBOTItem.step}
@@ -617,15 +514,14 @@ export default function Capabilities() {
                 <h3 className="font-headline text-xl text-white">{activeBOTItem.title}</h3>
               </div>
 
-              {/* 4-col bullet grid */}
-              <div className="grid grid-cols-2 gap-px bg-white/8 border border-white/8 md:grid-cols-4">
+              <div className="grid grid-cols-2 gap-px bg-white/[0.08] border border-white/[0.08] md:grid-cols-4">
                 <article className="bg-[#0F172A] p-4">
                   <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#60a5fa] mb-2">H.V.A Owns</p>
                   <ul className="space-y-1.5">
-                    {activeBOTItem.hvaOwns.split(', ').map((item) => (
-                      <li key={item} className="flex items-start gap-1.5 text-xs text-[#94a3b8]">
+                    {activeBOTItem.hvaOwns.split(', ').map((entry) => (
+                      <li key={entry} className="flex items-start gap-1.5 text-xs text-[#94a3b8]">
                         <span className="mt-1.5 h-1 w-1 shrink-0 bg-[#2563EB]" />
-                        {item.replace(/\.$/, '')}
+                        {entry.replace(/\.$/, '')}
                       </li>
                     ))}
                   </ul>
@@ -634,10 +530,10 @@ export default function Capabilities() {
                 <article className="bg-[#0F172A] p-4">
                   <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#60a5fa] mb-2">Client Role</p>
                   <ul className="space-y-1.5">
-                    {activeBOTItem.clientRole.split(', ').map((item) => (
-                      <li key={item} className="flex items-start gap-1.5 text-xs text-[#94a3b8]">
+                    {activeBOTItem.clientRole.split(', ').map((entry) => (
+                      <li key={entry} className="flex items-start gap-1.5 text-xs text-[#94a3b8]">
                         <span className="mt-1.5 h-1 w-1 shrink-0 bg-[#2563EB]" />
-                        {item.replace(/\.$/, '')}
+                        {entry.replace(/\.$/, '')}
                       </li>
                     ))}
                   </ul>
@@ -671,10 +567,7 @@ export default function Capabilities() {
           </motion.div>
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
-            <Link
-              href="/capabilities/in-detail"
-              className="sharp-edge inline-flex items-center gap-2 bg-[#2563EB] px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-white transition-colors duration-200 hover:bg-[#1d4ed8]"
-            >
+            <Link href="/capabilities/in-detail" className="sharp-edge btn-primary">
               Explore In Detail
             </Link>
             <Link
@@ -684,6 +577,171 @@ export default function Capabilities() {
               View Solution Programs →
             </Link>
           </div>
+        </div>
+      </section>
+
+
+      {/* ── EXPERT INSIGHT QUOTE ──────────────────────────────────────────── */}
+      <section className="px-6 lg:px-12 py-28">
+        <div className="mx-auto max-w-screen-2xl">
+          <div className="grid grid-cols-1 md:grid-cols-12">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.65 }}
+              className="col-span-12 md:col-span-10 md:col-start-2 bg-[#e0e3e5] p-12 md:p-16 relative overflow-hidden"
+            >
+              {/* Decorative open-quote mark */}
+              <div
+                aria-hidden="true"
+                className="absolute top-8 left-10 font-headline text-[9rem] leading-none text-[#2563EB]/10 select-none pointer-events-none"
+              >
+                &ldquo;
+              </div>
+
+              <div className="relative z-10 max-w-3xl">
+                <h2 className="font-headline text-3xl md:text-4xl lg:text-[2.8rem] italic leading-tight text-[#0F172A] mb-12">
+                  &ldquo;Transformation succeeds when strategy, engineering, and operations move
+                  together &mdash; from the first decision to the last deployment.&rdquo;
+                </h2>
+                <div className="flex items-center gap-6">
+                  <div className="w-16 h-16 bg-[#0F172A] overflow-hidden flex-shrink-0 relative">
+                    <Image
+                      src="/Images/capabilities/hva-capabilities-expertise.png"
+                      alt="H.V.A ARC expertise"
+                      fill
+                      sizes="64px"
+                      className="object-cover grayscale"
+                    />
+                  </div>
+                  <div>
+                    <p className="font-bold text-[#0F172A] text-sm">H.V.A ARC Framework</p>
+                    <p className="text-[0.7rem] text-[#45464d] uppercase tracking-[0.14em] mt-1">
+                      Strategy · Consulting · Engineering · Operations
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SOLUTION PROGRAMS ─────────────────────────────────────────────── */}
+      <section id="solution-programs" className="scroll-mt-28 bg-[#f7f9fb] py-20 px-6 lg:px-12">
+        <div className="mx-auto max-w-screen-2xl">
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.08 }}
+            transition={{ staggerChildren: 0.08 }}
+          >
+            <motion.div variants={fadeUp} transition={{ duration: 0.5 }} className="mb-12">
+              <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB] mb-3">
+                Solution Programs
+              </p>
+              <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+                <h2 className="font-headline text-4xl md:text-5xl text-[#0F172A] leading-[1.06]">
+                  Pre-scoped.
+                  <br />
+                  <em className="italic">Production-ready.</em>
+                </h2>
+                <p className="max-w-sm text-sm text-[#45464d] leading-relaxed">
+                  Consulting-led engagements combining architecture decisions, delivery execution,
+                  and operational ownership — not a one-off project.
+                </p>
+              </div>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {CAPABILITY_SOLUTION_PROGRAM_DETAILS.map((program, i) => {
+                const programIcons = [
+                  <Bot key="bot" className="w-6 h-6" strokeWidth={1.3} />,
+                  <Database key="db" className="w-6 h-6" strokeWidth={1.3} />,
+                  <Cloud key="cloud" className="w-6 h-6" strokeWidth={1.3} />,
+                ];
+                return (
+                  <motion.article
+                    key={program.slug}
+                    variants={fadeUp}
+                    transition={{ duration: 0.5 }}
+                    className="group bg-[#f2f4f6] p-8 flex flex-col hover:bg-white transition-colors duration-300 border-b-2 border-transparent hover:border-[#2563EB]"
+                  >
+                    <div className="flex items-start justify-between mb-6">
+                      <span className="text-[#2563EB]">{programIcons[i]}</span>
+                      <span className="text-[0.58rem] font-mono text-[#94a3b8]">PRG-00{i + 1}</span>
+                    </div>
+                    <p className="text-[0.6rem] font-bold uppercase tracking-[0.18em] text-[#2563EB] mb-2">
+                      {program.category}
+                    </p>
+                    <h3 className="font-headline text-xl text-[#0F172A] mb-3 group-hover:text-[#2563EB] transition-colors duration-300">
+                      {program.name}
+                    </h3>
+                    <p className="text-sm text-[#45464d] leading-relaxed mb-5 flex-1">
+                      {program.summary}
+                    </p>
+                    <div className="flex flex-wrap gap-1.5 mb-5">
+                      {program.outcomes.slice(0, 3).map((o) => (
+                        <span
+                          key={o}
+                          className="px-2 py-1 text-[0.58rem] font-bold uppercase tracking-[0.1em] bg-white text-[#45464d] border border-[#e2e8f0]"
+                        >
+                          {o}
+                        </span>
+                      ))}
+                    </div>
+                    {program.proofLinks.length > 0 && (
+                      <Link
+                        href={program.proofLinks[0]!}
+                        className="text-[0.68rem] font-bold uppercase tracking-[0.14em] text-[#2563EB] hover:text-[#1d4ed8] transition-colors mt-auto"
+                      >
+                        View Case Study →
+                      </Link>
+                    )}
+                  </motion.article>
+                );
+              })}
+            </div>
+
+            <motion.div
+              variants={fadeUp}
+              transition={{ duration: 0.4 }}
+              className="mt-10 flex justify-center"
+            >
+              <Link href="/capabilities/solution-programs" className="sharp-edge btn-primary">
+                Full Program Catalog →
+              </Link>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── CTA ──────────────────────────────────────────────────────────── */}
+      <section className="px-6 lg:px-12 py-28 text-center">
+        <div className="mx-auto max-w-screen-2xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="font-headline text-4xl md:text-5xl text-[#0F172A] mb-6">
+              Ready to Architect Your Future?
+            </h2>
+            <p className="text-[1.05rem] text-[#45464d] max-w-2xl mx-auto mb-10 leading-relaxed">
+              Schedule a capability deep-dive with our senior partners to explore how the ARC model
+              applies to your specific challenges.
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <Link href="/contact" className="sharp-edge btn-primary">
+                Request Discovery Briefing
+              </Link>
+              <Link href="/capabilities/solution-programs" className="sharp-edge btn-outlined">
+                View Solution Portfolio
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -699,8 +757,3 @@ export default function Capabilities() {
     </div>
   );
 }
-
-
-
-
-
