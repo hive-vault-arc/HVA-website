@@ -13,10 +13,10 @@ const IMGS = {
   construction:  '/Images/industries/construction-project-management-automation-morocco.webp',
   logistics:     '/Images/industries/logistics-dispatch-workflow-automation-morocco.webp',
   finance:       '/Images/industries/finance-brokerage-deal-pipeline-morocco.webp',
-  government:    '/Images/industries/government-digital-transformation-morocco.webp',
-  retail:        '/Images/industries/retail-ecommerce-platform-morocco.webp',
-  energy:        '/Images/industries/energy-sustainability-digital-morocco.webp',
-  consumerGoods: '/Images/industries/consumer-goods-luxury-operations-morocco.webp',
+  government:    '/Images/industries/government-public-sector-digital-services-morocco.webp',
+  retail:        '/Images/industries/retail-ecommerce-operations-platform-morocco.webp',
+  energy:        '/Images/industries/energy-sustainability-monitoring-morocco.webp',
+  consumerGoods: '/Images/industries/consumer-goods-luxury-analytics-morocco.webp',
   rdLab:         '/Images/brand/hva-ai-software-agency-tangier.webp',
 };
 

@@ -262,7 +262,7 @@ export default function CapabilitiesSolutionPrograms() {
                   alt="AI reception and lead operations — H.V.A Morocco"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                  className="object-cover grayscale blur-[2px] group-hover:grayscale-0 group-hover:blur-0 transition-all duration-700"
                 />
                 {/* Scanline overlay on image */}
                 <div
@@ -273,19 +273,19 @@ export default function CapabilitiesSolutionPrograms() {
               </div>
 
               {/* Expert quote card */}
-              <div className="absolute -bottom-8 -left-8 bg-white p-7 shadow-[0_10px_40px_rgba(25,28,30,0.10)] max-w-[270px] hidden xl:block">
-                <p className="font-headline text-lg italic text-[#0F172A] leading-snug mb-4">
+              <div className="absolute -bottom-8 -left-8 bg-white p-9 shadow-[0_10px_40px_rgba(25,28,30,0.12)] max-w-[320px] hidden xl:block">
+                <p className="font-headline text-xl italic text-[#0F172A] leading-snug mb-5">
                   &ldquo;Answers faster than our sales desk — and updates the CRM automatically.&rdquo;
                 </p>
-                <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#45464d]">
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#45464d]">
                   — Nadia El Idrissi, Head of Growth
                 </p>
               </div>
 
               {/* Live status badge */}
-              <div className="absolute top-5 right-5 bg-[#0F172A]/80 backdrop-blur-sm px-3 py-2 flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#2563EB] animate-pulse" />
-                <span className="text-[8px] font-mono text-[#60a5fa] uppercase tracking-widest">Live in Production</span>
+              <div className="absolute top-5 right-5 bg-[#0F172A]/80 backdrop-blur-sm px-4 py-2.5 flex items-center gap-2.5">
+                <span className="h-2 w-2 rounded-full bg-[#2563EB] animate-pulse" />
+                <span className="text-[10px] font-mono text-[#60a5fa] uppercase tracking-widest">Live in Production</span>
               </div>
             </motion.div>
           </div>
@@ -482,20 +482,25 @@ export default function CapabilitiesSolutionPrograms() {
                 ))}
 
                 {/* Spanning image */}
-                <motion.div variants={fadeUp} transition={{ duration: 0.5 }} className="md:col-span-2 h-80 relative overflow-hidden group">
+                <motion.div variants={fadeUp} transition={{ duration: 0.5 }} className="md:col-span-2 h-[520px] relative overflow-hidden group">
                   <Image
                     src="/Images/solution-programs/hva-enterprise-crm-modernization.png"
                     alt="Enterprise CRM modernization — H.V.A Morocco"
                     fill
                     sizes="(max-width: 768px) 100vw, 66vw"
-                    className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                    className="object-cover grayscale blur-[2px] group-hover:grayscale-0 group-hover:blur-0 transition-all duration-700"
                   />
-                  <div className="absolute inset-0 bg-[#0F172A]/30" />
+                  <div className="absolute inset-0 bg-[#0F172A]/25" />
                   <div
                     aria-hidden="true"
                     className="absolute inset-0 pointer-events-none opacity-[0.025]"
                     style={{ background: 'repeating-linear-gradient(to bottom, transparent 0px, transparent 2px, #fff 2px, #fff 3px)' }}
                   />
+                  {/* Live badge */}
+                  <div className="absolute top-5 right-5 bg-[#0F172A]/80 backdrop-blur-sm px-4 py-2.5 flex items-center gap-2.5">
+                    <span className="h-2 w-2 rounded-full bg-[#2563EB] animate-pulse" />
+                    <span className="text-[10px] font-mono text-[#60a5fa] uppercase tracking-widest">Live in Production</span>
+                  </div>
                   <div className="absolute bottom-6 left-6 bg-white/90 backdrop-blur-sm p-5">
                     <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#0F172A] mb-1">Deployment Scale</p>
                     <p className="font-headline text-lg text-[#0F172A]">94 active users · $2.4M pipeline tracked</p>
@@ -633,7 +638,7 @@ export default function CapabilitiesSolutionPrograms() {
                 <div className="absolute inset-0 border border-white/10 translate-x-3 translate-y-3 z-0" />
                 <div className="relative w-full h-full overflow-hidden">
                   <Image
-                    src="/Images/hero/digital-transformation-scalable-systems-tangier-morocco.webp"
+                    src="/Images/solution-programs/hva-cloud-delivery-reliability-stack.png"
                     alt="Cloud delivery reliability infrastructure — H.V.A Morocco"
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
