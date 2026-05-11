@@ -233,7 +233,7 @@ export default function Capabilities() {
             <motion.div
               variants={fadeUp}
               transition={{ duration: 0.5 }}
-              className="group relative overflow-hidden bg-white p-10 flex flex-col justify-between min-h-[420px]"
+              className="group relative h-[420px] overflow-hidden bg-white p-10 flex flex-col justify-between"
             >
               <Image
                 src={CAPABILITY_IMAGES.strategyBusiness}
@@ -267,7 +267,7 @@ export default function Capabilities() {
             <motion.div
               variants={fadeUp}
               transition={{ duration: 0.5 }}
-              className="group relative md:col-span-2 overflow-hidden bg-[#0F172A] min-h-[420px]"
+              className="group relative h-[420px] md:col-span-2 overflow-hidden bg-[#0F172A]"
             >
               <Image
                 src={CAPABILITY_IMAGES.technologyConsulting}
@@ -305,7 +305,7 @@ export default function Capabilities() {
             <motion.div
               variants={fadeUp}
               transition={{ duration: 0.5 }}
-              className="group relative overflow-hidden bg-[#081628] p-10 flex flex-col justify-between min-h-[420px]"
+              className="group relative h-[420px] overflow-hidden bg-[#081628] p-10 flex flex-col justify-between"
             >
               <Image
                 src={CAPABILITY_IMAGES.aiDataAnalytics}
@@ -342,7 +342,7 @@ export default function Capabilities() {
             <motion.div
               variants={fadeUp}
               transition={{ duration: 0.5 }}
-              className="group relative overflow-hidden bg-white p-10 flex flex-col justify-between min-h-[420px]"
+              className="group relative h-[420px] overflow-hidden bg-white p-10 flex flex-col justify-between"
             >
               <Image
                 src={CAPABILITY_IMAGES.softwareEngineering}
@@ -373,7 +373,7 @@ export default function Capabilities() {
             <motion.div
               variants={fadeUp}
               transition={{ duration: 0.5 }}
-              className="group relative overflow-hidden bg-white p-10 flex flex-col justify-between min-h-[420px]"
+              className="group relative h-[420px] overflow-hidden bg-white p-10 flex flex-col justify-between"
             >
               <Image
                 src={CAPABILITY_IMAGES.cloudInfrastructure}
