@@ -51,7 +51,227 @@ const approachTracks = [
   },
 ];
 
+const industryCards = [
+  {
+    id: 'real-estate',
+    category: 'Real Estate & Construction',
+    title: 'Real Estate',
+    description: 'Lead operations, CRM governance, buyer qualification, and AI-assisted client communication for property teams.',
+    image: IMGS.realEstate,
+    imageAlt: 'Real estate CRM lead operations Morocco',
+    href: '/case-studies/zoho-grade-crm-platform',
+    bullets: ['Lead operations & CRM', 'AI client communication', 'Pipeline governance'],
+    className: 'md:col-span-7 lg:col-span-7',
+    layout: 'split',
+    tone: 'light',
+  },
+  {
+    id: 'healthcare',
+    category: 'Healthcare & Life Sciences',
+    title: 'Healthcare',
+    description: 'Clinical dashboards, electronic medical systems, and AI diagnostics for critical care environments.',
+    image: IMGS.healthcare,
+    imageAlt: 'Healthcare clinical operations dashboard Morocco',
+    href: '/case-studies',
+    bullets: ['Clinical dashboards', 'Medical systems', 'Diagnostic intelligence'],
+    className: 'md:col-span-5 lg:col-span-5',
+    layout: 'overlay',
+    tone: 'dark',
+  },
+  {
+    id: 'financial-services',
+    category: 'Financial Services',
+    title: 'Finance & Banking',
+    description: 'Core banking modernization, AI fraud detection, and digital banking platforms.',
+    image: IMGS.finance,
+    imageAlt: 'Financial services deal pipeline Morocco',
+    href: '/case-studies',
+    bullets: ['Fraud detection', 'Deal intelligence', 'Digital banking'],
+    className: 'md:col-span-4',
+    layout: 'stack',
+    tone: 'light',
+  },
+  {
+    id: 'government',
+    category: 'Government & Public Sector',
+    title: 'Government',
+    description: "Digital government platforms, citizen portals, and national AI initiatives under Morocco's Maroc IA 2030 roadmap.",
+    image: IMGS.government,
+    imageAlt: 'Government digital transformation Morocco',
+    href: '/case-studies',
+    bullets: ['Citizen portals', 'Public data systems', 'AI readiness'],
+    className: 'md:col-span-4',
+    layout: 'stack',
+    tone: 'light',
+  },
+  {
+    id: 'retail',
+    category: 'Retail & E-Commerce',
+    title: 'Retail',
+    description: 'Omnichannel commerce, AI personalization, and CRM systems across the Morocco-France corridor.',
+    image: IMGS.retail,
+    imageAlt: 'Retail e-commerce platform Morocco',
+    href: '/case-studies',
+    bullets: ['Omnichannel commerce', 'Personalization', 'Retail CRM'],
+    className: 'md:col-span-4',
+    layout: 'stack',
+    tone: 'dark',
+  },
+  {
+    id: 'energy',
+    category: 'Energy, Utilities & Sustainability',
+    title: 'Energy',
+    description: "Smart grids, ESG analytics, and predictive maintenance for Morocco's renewable energy market.",
+    image: IMGS.energy,
+    imageAlt: 'Energy sustainability digital Morocco',
+    href: '/case-studies',
+    bullets: ['Smart grids', 'ESG analytics', 'Predictive maintenance'],
+    className: 'md:col-span-6',
+    layout: 'split',
+    tone: 'light',
+  },
+  {
+    id: 'logistics',
+    category: 'Logistics & Transportation',
+    title: 'Logistics',
+    description: "Fleet management, route optimization, and SLA monitoring. Built for Tanger Med, Africa's largest port corridor.",
+    image: IMGS.logistics,
+    imageAlt: 'Logistics dispatch workflow automation Morocco',
+    href: '/case-studies',
+    bullets: ['Fleet operations', 'Route optimization', 'SLA monitoring'],
+    className: 'md:col-span-6',
+    layout: 'split',
+    tone: 'dark',
+  },
+  {
+    id: 'consumer-goods',
+    category: 'Consumer Goods & Luxury',
+    title: 'Consumer & Luxury',
+    description: 'Customer analytics, AI marketing, and retail intelligence across the Morocco-France luxury corridor.',
+    image: IMGS.consumerGoods,
+    imageAlt: 'Consumer goods luxury operations Morocco France',
+    href: '/case-studies',
+    bullets: ['Customer analytics', 'AI marketing', 'Luxury intelligence'],
+    className: 'md:col-span-12',
+    layout: 'wide',
+    tone: 'light',
+  },
+];
+
 const fadeUp = { hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0 } };
+
+function IndustryCard({ card, index }: { card: (typeof industryCards)[number]; index: number }) {
+  const isDark = card.tone === 'dark';
+  const isOverlay = card.layout === 'overlay';
+  const isSplit = card.layout === 'split' || card.layout === 'wide';
+  const textColor = isDark || isOverlay ? 'text-white' : 'text-[#0F172A]';
+  const mutedColor = isDark || isOverlay ? 'text-white/70' : 'text-[#475569]';
+  const labelColor = isDark || isOverlay ? 'text-[#93c5fd]' : 'text-[#2563EB]';
+
+  if (isOverlay) {
+    return (
+      <motion.article
+        id={card.id}
+        data-industry-card={card.id}
+        variants={fadeUp}
+        transition={{ duration: 0.5 }}
+        className={`${card.className} group relative min-h-[360px] overflow-hidden bg-[#0F172A]`}
+      >
+        <Image
+          src={card.image}
+          alt={card.imageAlt}
+          fill
+          priority={index < 2}
+          loading={index < 2 ? 'eager' : 'lazy'}
+          sizes="(max-width: 768px) 100vw, 42vw"
+          className="object-cover opacity-70 transition-transform duration-700 group-hover:scale-[1.04]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/95 via-[#0F172A]/46 to-[#0F172A]/10" />
+        <div className="relative z-10 flex min-h-[360px] flex-col justify-between p-7 md:p-8">
+          <div className="flex items-start justify-between gap-4">
+            <p className={`max-w-[15rem] text-[10px] font-bold uppercase tracking-[0.22em] ${labelColor}`}>
+              {card.category}
+            </p>
+            <span className="font-mono text-[10px] text-white/55">0{index + 1}</span>
+          </div>
+          <div>
+            <h3 className={`font-headline text-3xl italic leading-tight ${textColor}`}>{card.title}</h3>
+            <p className={`mt-4 max-w-md text-sm leading-relaxed ${mutedColor}`}>{card.description}</p>
+            <Link
+              href={card.href}
+              className="mt-7 inline-flex min-h-11 items-center gap-1 text-[11px] font-bold uppercase tracking-widest text-[#93c5fd] transition-colors hover:text-white"
+            >
+              See related work <ArrowUpRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+        </div>
+      </motion.article>
+    );
+  }
+
+  return (
+    <motion.article
+      id={card.id}
+      data-industry-card={card.id}
+      variants={fadeUp}
+      transition={{ duration: 0.5 }}
+      className={`${card.className} group overflow-hidden ${
+        isSplit
+          ? `grid min-h-[350px] grid-cols-1 ${card.layout === 'wide' ? 'lg:grid-cols-[0.42fr_1fr]' : 'lg:grid-cols-[0.9fr_1.1fr]'}`
+          : 'flex min-h-[420px] flex-col'
+      } ${isDark ? 'bg-[#0F172A]' : 'bg-white'}`}
+    >
+      <div className={`relative overflow-hidden bg-[#0F172A] ${isSplit ? 'min-h-[240px] lg:min-h-0' : 'h-56'}`}>
+        <Image
+          src={card.image}
+          alt={card.imageAlt}
+          fill
+          priority={index < 2}
+          loading={index < 2 ? 'eager' : 'lazy'}
+          sizes={isSplit ? '(max-width: 1024px) 100vw, 42vw' : '(max-width: 768px) 100vw, 33vw'}
+          className="object-cover opacity-88 transition-transform duration-700 group-hover:scale-[1.04]"
+        />
+        <div className={`absolute inset-0 ${isDark ? 'bg-[#0F172A]/30' : 'bg-white/5'}`} />
+      </div>
+
+      <div className={`flex flex-1 flex-col justify-between p-7 md:p-8 ${isDark ? 'text-white' : 'text-[#0F172A]'}`}>
+        <div>
+          <div className="mb-5 flex items-start justify-between gap-4">
+            <p className={`max-w-[19rem] text-[10px] font-bold uppercase tracking-[0.22em] ${labelColor}`}>
+              {card.category}
+            </p>
+            <span className={`font-mono text-[10px] ${isDark ? 'text-white/45' : 'text-[#94a3b8]'}`}>
+              0{index + 1}
+            </span>
+          </div>
+          <h3 className={`font-headline text-3xl leading-tight ${textColor} ${card.layout === 'wide' ? 'md:text-4xl' : ''}`}>
+            {card.title}
+          </h3>
+          <p className={`mt-4 max-w-2xl text-sm leading-relaxed ${mutedColor}`}>{card.description}</p>
+        </div>
+
+        <div className="mt-7">
+          <ul className={`grid gap-2 ${card.layout === 'wide' ? 'sm:grid-cols-3' : ''}`}>
+            {card.bullets.map((item) => (
+              <li key={item} className={`flex items-start gap-2 text-xs leading-relaxed ${mutedColor}`}>
+                <span className="mt-1.5 h-1 w-1 shrink-0 bg-[#2563EB]" />
+                {item}
+              </li>
+            ))}
+          </ul>
+          <Link
+            href={card.href}
+            className={`mt-7 inline-flex min-h-11 items-center gap-1 text-[11px] font-bold uppercase tracking-widest transition-colors ${
+              isDark ? 'text-[#93c5fd] hover:text-white' : 'text-[#2563EB] hover:text-[#1d4ed8]'
+            }`}
+          >
+            See related work <ArrowUpRight className="h-3.5 w-3.5" />
+          </Link>
+        </div>
+      </div>
+    </motion.article>
+  );
+}
 
 export default function Industries() {
   const { scrollYProgress } = useScroll();
@@ -111,306 +331,62 @@ export default function Industries() {
       </section>
 
       {/* ── Bento Industry Grid ──────────────────────────────────────────────── */}
-      <section className="bg-[#f2f4f6] py-24 md:py-32">
-        <div className="max-w-7xl mx-auto px-8">
+      <section className="bg-[#f2f4f6] pt-16 pb-5 md:pt-20 md:pb-6">
+        <div className="mx-auto max-w-[1720px] px-5 sm:px-6 lg:px-10">
+          <div className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-12 md:items-end">
+            <div className="md:col-span-7">
+              <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
+                Sector Coverage
+              </p>
+              <h2 className="max-w-3xl font-headline text-4xl font-light leading-[1.05] text-[#0F172A] md:text-5xl">
+                Industry cards built around operating reality.
+              </h2>
+            </div>
+            <p className="md:col-span-5 max-w-xl text-base leading-relaxed text-[#45464d]">
+              Each vertical is mapped to the systems, workflows, and governance patterns that usually decide whether transformation holds in production.
+            </p>
+          </div>
+
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8"
+            className="grid grid-cols-1 gap-4 md:grid-cols-12"
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, amount: 0.1 }}
-            transition={{ staggerChildren: 0.07 }}
+            viewport={{ once: true, amount: 0.08 }}
+            transition={{ staggerChildren: 0.06 }}
           >
-            <motion.div
-              id="real-estate"
-              data-industry-card="real-estate"
-              variants={fadeUp}
-              transition={{ duration: 0.5 }}
-              className="md:col-span-7 group bg-white overflow-hidden flex flex-col md:flex-row"
-            >
-              <div className="relative w-full md:w-1/2 h-64 md:h-auto overflow-hidden shrink-0">
-                <Image
-                  src={IMGS.realEstate}
-                  alt="Real estate CRM lead operations Morocco"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
-              <div className="p-8 md:p-10 flex flex-col justify-center">
-                <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#2563EB] mb-3">
-                  Real Estate &amp; Construction
-                </p>
-                <h3
-                  className="text-3xl mb-5 italic text-[#0F172A]"
-                  style={{ fontFamily: 'var(--font-headline)' }}
-                >
-                  Real Estate
-                </h3>
-                <ul className="space-y-2.5 text-sm text-[#475569]">
-                  {['Lead operations & CRM', 'AI agent for client communication', 'Pipeline governance'].map((item) => (
-                    <li key={item} className="flex items-start gap-2.5">
-                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#2563EB] shrink-0" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href="/case-studies/zoho-grade-crm-platform"
-                  className="mt-7 inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-widest text-[#2563EB] hover:text-[#1d4ed8] transition-colors"
-                >
-                  See related work <ArrowUpRight className="h-3.5 w-3.5" />
-                </Link>
-              </div>
-            </motion.div>
-
-            <motion.div
-              id="healthcare"
-              data-industry-card="healthcare"
-              variants={fadeUp}
-              transition={{ duration: 0.5 }}
-              className="md:col-span-5 group relative overflow-hidden bg-[#0F172A] flex flex-col justify-between min-h-[320px]"
-            >
-              <Image
-                src={IMGS.healthcare}
-                alt="Healthcare clinical operations dashboard Morocco"
-                fill
-                sizes="(max-width: 768px) 100vw, 42vw"
-                className="absolute inset-0 w-full h-full object-cover opacity-35 transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="relative z-10 p-10 flex flex-col h-full justify-between">
-                <div>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#93c5fd] mb-4">
-                    Healthcare &amp; Life Sciences
-                  </p>
-                  <h3
-                    className="text-3xl italic text-white mb-4"
-                    style={{ fontFamily: 'var(--font-headline)' }}
-                  >
-                    Healthcare
-                  </h3>
-                  <p className="text-[#bfdbfe] text-sm leading-relaxed">
-                    Clinical dashboards, electronic medical systems, and AI diagnostics for critical care environments.
-                  </p>
-                </div>
-                <Link
-                  href="/case-studies"
-                  className="mt-8 inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-widest text-[#93c5fd] hover:text-white transition-colors"
-                >
-                  See related work <ArrowUpRight className="h-3.5 w-3.5" />
-                </Link>
-              </div>
-            </motion.div>
-
-            <motion.div
-              id="financial-services"
-              data-industry-card="financial-services"
-              variants={fadeUp}
-              transition={{ duration: 0.5 }}
-              className="md:col-span-4 group bg-white overflow-hidden flex flex-col"
-            >
-              <div className="relative w-full h-52 overflow-hidden shrink-0">
-                <Image
-                  src={IMGS.finance}
-                  alt="Financial services deal pipeline Morocco"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
-              <div className="p-8 flex flex-col flex-1">
-                <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#2563EB] mb-3">
-                  Financial Services
-                </p>
-                <h3
-                  className="text-2xl italic text-[#0F172A] mb-3"
-                  style={{ fontFamily: 'var(--font-headline)' }}
-                >
-                  Finance &amp; Banking
-                </h3>
-                <p className="text-sm text-[#475569] leading-relaxed">
-                  Core banking modernization, AI fraud detection, and digital banking platforms.
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              id="government"
-              data-industry-card="government"
-              variants={fadeUp}
-              transition={{ duration: 0.5 }}
-              className="md:col-span-4 group bg-white overflow-hidden flex flex-col"
-            >
-              <div className="relative w-full h-52 overflow-hidden shrink-0">
-                <Image
-                  src={IMGS.government}
-                  alt="Government digital transformation Morocco"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
-              <div className="p-8 flex flex-col flex-1">
-                <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#2563EB] mb-3">
-                  Government &amp; Public Sector
-                </p>
-                <h3
-                  className="text-2xl text-[#0F172A] mb-3"
-                  style={{ fontFamily: 'var(--font-headline)' }}
-                >
-                  Government
-                </h3>
-                <p className="text-sm text-[#475569] leading-relaxed">
-                  Digital government platforms, citizen portals, and national AI initiatives under Morocco's Maroc IA 2030 roadmap.
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              id="retail"
-              data-industry-card="retail"
-              variants={fadeUp}
-              transition={{ duration: 0.5 }}
-              className="md:col-span-4 group bg-white overflow-hidden flex flex-col"
-            >
-              <div className="relative w-full h-52 overflow-hidden shrink-0">
-                <Image
-                  src={IMGS.retail}
-                  alt="Retail e-commerce platform Morocco"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
-              <div className="p-8 flex flex-col flex-1">
-                <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#2563EB] mb-3">
-                  Retail &amp; E-Commerce
-                </p>
-                <h3
-                  className="text-2xl text-[#0F172A] mb-3"
-                  style={{ fontFamily: 'var(--font-headline)' }}
-                >
-                  Retail
-                </h3>
-                <p className="text-sm text-[#475569] leading-relaxed">
-                  Omnichannel commerce, AI personalization, and CRM systems across the Morocco-France corridor.
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              id="energy"
-              data-industry-card="energy"
-              variants={fadeUp}
-              transition={{ duration: 0.5 }}
-              className="md:col-span-6 group bg-white overflow-hidden flex flex-col md:flex-row"
-            >
-              <div className="relative w-full md:w-2/5 h-52 md:h-auto overflow-hidden shrink-0">
-                <Image
-                  src={IMGS.energy}
-                  alt="Energy sustainability digital Morocco"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 25vw"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
-              <div className="p-8 flex flex-col flex-1 justify-center">
-                <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#2563EB] mb-3">
-                  Energy, Utilities &amp; Sustainability
-                </p>
-                <h3
-                  className="text-2xl text-[#0F172A] mb-3"
-                  style={{ fontFamily: 'var(--font-headline)' }}
-                >
-                  Energy
-                </h3>
-                <p className="text-sm text-[#475569] leading-relaxed">
-                  Smart grids, ESG analytics, and predictive maintenance for Morocco's renewable energy market.
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              id="logistics"
-              data-industry-card="logistics"
-              variants={fadeUp}
-              transition={{ duration: 0.5 }}
-              className="md:col-span-6 group bg-white overflow-hidden flex flex-col md:flex-row"
-            >
-              <div className="relative w-full md:w-2/5 h-52 md:h-auto overflow-hidden shrink-0">
-                <Image
-                  src={IMGS.logistics}
-                  alt="Logistics dispatch workflow automation Morocco"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 25vw"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
-              <div className="p-8 flex flex-col flex-1 justify-center">
-                <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#2563EB] mb-3">
-                  Logistics &amp; Transportation
-                </p>
-                <h3
-                  className="text-2xl text-[#0F172A] mb-3"
-                  style={{ fontFamily: 'var(--font-headline)' }}
-                >
-                  Logistics
-                </h3>
-                <p className="text-sm text-[#475569] leading-relaxed">
-                  Fleet management, route optimization, and SLA monitoring. Built for Tanger Med, Africa's largest port corridor.
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              id="consumer-goods"
-              data-industry-card="consumer-goods"
-              variants={fadeUp}
-              transition={{ duration: 0.5 }}
-              className="md:col-span-12 group bg-white overflow-hidden flex flex-col md:flex-row"
-            >
-              <div className="relative w-full md:w-5/12 h-56 md:h-auto overflow-hidden shrink-0">
-                <Image
-                  src={IMGS.consumerGoods}
-                  alt="Consumer goods luxury operations Morocco France"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 42vw"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
-              <div className="p-8 md:p-10 flex flex-col flex-1 justify-center">
-                <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#2563EB] mb-3">
-                  Consumer Goods &amp; Luxury
-                </p>
-                <h3
-                  className="text-3xl italic text-[#0F172A] mb-4"
-                  style={{ fontFamily: 'var(--font-headline)' }}
-                >
-                  Consumer &amp; Luxury
-                </h3>
-                <p className="max-w-2xl text-sm text-[#475569] leading-relaxed">
-                  Customer analytics, AI marketing, and retail intelligence across the Morocco-France luxury corridor.
-                </p>
-              </div>
-            </motion.div>
+            {industryCards.map((card, index) => (
+              <IndustryCard key={card.id} card={card} index={index} />
+            ))}
           </motion.div>
         </div>
       </section>
 
       {/* ── R&D / Laboratory_Active ──────────────────────────────────────────── */}
-      <section className="max-w-7xl mx-auto px-8 py-24 md:py-32">
-        <div className="flex flex-col lg:flex-row gap-16 items-center">
+      <section className="max-w-7xl mx-auto px-8 pt-6 pb-20 md:pt-8 md:pb-24">
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-14 items-center">
           {/* Image left with decorative offset */}
           <div className="lg:w-1/2">
-            <div className="relative">
+            <div className="relative pl-8 pt-8 sm:pl-10 sm:pt-10">
+              <div
+                aria-hidden="true"
+                className="absolute left-0 top-0 z-0 h-44 w-44 border border-[#cbd5e1] bg-white shadow-[0_18px_50px_rgba(15,23,42,0.08)]"
+              >
+                <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(37,99,235,0.10)_1px,transparent_1px),linear-gradient(0deg,rgba(37,99,235,0.10)_1px,transparent_1px)] bg-[size:18px_18px]" />
+                <div className="absolute left-0 top-0 h-full w-1.5 bg-[#2563EB]" />
+                <span className="absolute left-7 top-5 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
+                  R&amp;D
+                </span>
+                <span className="absolute left-7 top-12 block h-px w-20 bg-[#2563EB]/35" />
+              </div>
+              <div aria-hidden="true" className="absolute -left-3 top-16 z-0 h-24 w-24 bg-[#dbeafe]" />
               <Image
                 src={IMGS.rdLab}
                 alt="HVA AI software agency research Tangier Morocco"
                 width={1200}
                 height={800}
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="w-full shadow-2xl relative z-10"
+                className="relative z-10 w-full border border-white/80 shadow-2xl shadow-[#0F172A]/18"
               />
-              <div className="absolute -top-6 -left-6 w-32 h-32 bg-[#e6e8ea] z-0" />
             </div>
           </div>
 

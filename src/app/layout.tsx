@@ -159,7 +159,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
       'https://www.instagram.com/hive.vault.arc/',
       'https://x.com/Hivevaultarc',
       'https://www.tiktok.com/@hivevaultarc',
-      'https://web.facebook.com/profile.php?id=61588911931881',
+      'https://web.facebook.com/hivevaultarc',
     ],
     knowsAbout: [
       'Artificial Intelligence',

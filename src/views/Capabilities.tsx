@@ -518,17 +518,17 @@ export default function Capabilities() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.05 }}
             transition={{ duration: 0.35 }}
-            className="grid grid-cols-1 gap-5 lg:grid-cols-[0.82fr_1.18fr]"
+            className="grid grid-cols-1 gap-5 lg:h-[760px] lg:grid-cols-[0.82fr_1.18fr] lg:items-stretch"
           >
-            <div className="space-y-3">
-              <div className="border border-[#cbd5e1] bg-white p-5">
-                <div className="mb-5 flex items-start justify-between gap-5">
+            <div className="flex flex-col gap-3 lg:min-h-0">
+              <div className="border border-[#cbd5e1] bg-white p-4">
+                <div className="mb-4 flex items-start justify-between gap-4">
                   <div>
                     <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#0F172A]">
                       ARC sequence
                     </p>
-                    <p className="mt-2 max-w-md text-sm leading-relaxed text-[#475569]">
-                      Each phase has a decision gate. Hover a phase to see ownership, outputs, and handoff checks.
+                    <p className="mt-2 max-w-md text-xs leading-relaxed text-[#475569]">
+                      Hover a phase to see ownership, outputs, and decision gates.
                     </p>
                   </div>
                   <span className="border border-[#cbd5e1] px-3 py-2 text-xs font-bold text-[#2563EB]">
@@ -553,7 +553,7 @@ export default function Capabilities() {
                       onMouseEnter={() => setActiveBOTStep(index)}
                       onFocus={() => setActiveBOTStep(index)}
                       aria-pressed={activeBOTStep === index}
-                      className={`bg-white px-3 py-3 text-left transition-colors duration-150 ${
+                      className={`bg-white px-3 py-2.5 text-left transition-colors duration-150 ${
                         activeBOTStep === index ? 'text-[#2563EB]' : 'text-[#64748b] hover:text-[#0F172A]'
                       }`}
                     >
@@ -576,7 +576,7 @@ export default function Capabilities() {
                     onMouseEnter={() => setActiveBOTStep(index)}
                     onFocus={() => setActiveBOTStep(index)}
                     aria-pressed={isActive}
-                    className={`group relative grid w-full overflow-hidden border bg-white text-left transition-colors duration-150 sm:grid-cols-[1fr_164px] ${
+                    className={`group relative grid flex-1 min-h-0 w-full overflow-hidden border bg-white text-left transition-colors duration-150 sm:grid-cols-[1fr_140px] ${
                       isActive ? 'border-[#2563EB]' : 'border-[#d9dee7] hover:border-[#94a3b8]'
                     }`}
                   >
@@ -585,9 +585,9 @@ export default function Capabilities() {
                         isActive ? 'bg-[#2563EB]' : 'bg-transparent group-hover:bg-[#cbd5e1]'
                       }`}
                     />
-                    <div className="flex items-start gap-4 p-6">
+                    <div className="flex items-start gap-4 p-4">
                       <div
-                        className={`flex h-12 w-12 shrink-0 items-center justify-center border transition-colors duration-150 ${
+                        className={`flex h-10 w-10 shrink-0 items-center justify-center border transition-colors duration-150 ${
                           isActive
                             ? 'border-[#2563EB] bg-[#2563EB] text-white'
                             : 'border-[#cbd5e1] text-[#475569] group-hover:text-[#2563EB]'
@@ -599,19 +599,19 @@ export default function Capabilities() {
                         <p className="text-[0.62rem] font-bold uppercase tracking-[0.16em] text-[#2563EB]">
                           Phase {item.step}
                         </p>
-                        <h3 className="mt-2 font-headline text-3xl leading-none text-[#0F172A]">
+                        <h3 className="mt-1.5 font-headline text-2xl leading-none text-[#0F172A]">
                           {item.title}
                         </h3>
-                        <p className="mt-3 text-sm leading-relaxed text-[#475569]">{item.objective}</p>
+                        <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-[#475569]">{item.objective}</p>
                       </div>
                     </div>
-                    <div className="relative min-h-40 border-t border-[#d9dee7] sm:min-h-0 sm:border-l sm:border-t-0">
+                    <div className="relative min-h-32 border-t border-[#d9dee7] sm:min-h-0 sm:border-l sm:border-t-0">
                       <Image
                         src={item.image}
                         alt={item.imageAlt}
                         fill
                         loading="lazy"
-                        sizes="(max-width: 640px) 100vw, 164px"
+                        sizes="(max-width: 640px) 100vw, 140px"
                         className="object-cover opacity-85 transition-transform duration-500 group-hover:scale-105"
                       />
                       <div
@@ -630,9 +630,9 @@ export default function Capabilities() {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.28 }}
-              className="self-start bg-[#0F172A] p-4 md:p-5"
+              className="h-full self-stretch bg-[#0F172A] p-4 md:p-5"
             >
-              <div className="grid gap-4">
+              <div className="grid h-full gap-4">
                 <div className="relative min-h-[220px] overflow-hidden border border-white/[0.08] bg-white/[0.04]">
                   <Image
                     src={activeBOTItem.image}

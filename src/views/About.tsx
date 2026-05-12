@@ -5,20 +5,18 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { MotionConfig, motion, useScroll, useTransform } from 'framer-motion';
 import {
-  CalendarCheck,
+  Compass,
   Globe2,
-  Home,
   Layers3,
-  ListChecks,
-  Search,
+  Settings2,
   ShieldCheck,
   Target,
+  Terminal,
   Workflow,
 } from 'lucide-react';
 import { useAnimationQuality } from '../lib/animationQuality';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 import BottomCTA from '../components/BottomCTA';
-import { CANONICAL_MARKET_IDENTITY } from '../lib/positioning';
 
 type TeamMember = {
   name: string;
@@ -41,24 +39,31 @@ type DeliveryStep = {
   checkpoints: string[];
 };
 
-const proofPoints = ['Based in Morocco', 'Software & Cloud', 'Serving Worldwide'];
+type Pillar = {
+  number: string;
+  title: string;
+  shortTitle: string;
+  description: string;
+};
+
+const proofPoints = ['Based in Tangier, Morocco', 'Strategy · AI · Engineering · Operations', 'Serving Morocco & Europe'];
 
 const teamMembers: TeamMember[] = [
   {
     name: 'Khalid Chalhi',
-    tag: 'Architecture & Delivery',
+    tag: 'Strategy · AI · Software Engineering',
     role: 'Co-Founder & Software Engineer',
     image: '/Images/team/khalid-chalhi-hva-co-founder.webp',
   },
   {
     name: 'Ali Amrani',
-    tag: 'Product & Systems',
+    tag: 'Product · Systems · Full-Stack',
     role: 'Co-Founder & Full-Stack Engineer',
     image: '/Images/team/ali-amrani-hva-co-founder.webp',
   },
   {
     name: 'Oubay Ghamat',
-    tag: 'Cloud & Scale',
+    tag: 'Cloud · Infrastructure · Operations',
     role: 'Co-Founder & Cloud Engineer',
     image: '/Images/team/oubay-ghamat-hva-co-founder.webp',
   },
@@ -67,49 +72,86 @@ const teamMembers: TeamMember[] = [
 const principles: Principle[] = [
   {
     icon: <Target className="h-5 w-5" />,
-    title: 'Outcome-Driven',
-    description: 'Each milestone is tied to measurable business outcomes, not just output.',
+    title: 'No Handoffs',
+    description: 'The same team that defines strategy designs the architecture, writes the code, and operates the system. No agency-to-consultancy drift. No knowledge transfer failure.',
   },
   {
     icon: <ShieldCheck className="h-5 w-5" />,
-    title: 'Quality by Default',
-    description: 'Performance, reliability, and maintainability are built in from day one.',
+    title: 'Outcomes Over Output',
+    description: 'Every milestone is tied to a measurable business result. We do not ship features — we move metrics. Performance, reliability, and maintainability are built in from day one.',
   },
   {
     icon: <Globe2 className="h-5 w-5" />,
-    title: 'Morocco + Worldwide',
-    description: 'Based in Morocco and delivering for clients worldwide with global engineering standards.',
+    title: 'Vertical Depth',
+    description: 'We operate in defined industries — Real Estate, Healthcare, Financial Services, Logistics — because domain knowledge compounds. Generic technology advice does not.',
+  },
+  {
+    icon: <Workflow className="h-5 w-5" />,
+    title: 'Founder Accountability',
+    description: 'H.V.A is founder-led. Khalid, Ali, and Oubay are on every engagement. Decisions are made by the people who understand the full system — not escalated up a management chain.',
+  },
+];
+
+const pillars: Pillar[] = [
+  {
+    number: '01',
+    shortTitle: 'Strategy',
+    title: 'Strategy & Business Consulting',
+    description: 'Diagnose the transformation before any code is written. We redesign operating models, define AI strategy, sequence digital programs, and build the roadmap that connects business outcomes to technical execution.',
+  },
+  {
+    number: '02',
+    shortTitle: 'Technology',
+    title: 'Technology Consulting',
+    description: 'Design the architecture that serves the business 3–5 years out. Enterprise blueprints, technology roadmaps, platform strategy, IT modernization, systems integration, and infrastructure redesign.',
+  },
+  {
+    number: '03',
+    shortTitle: 'AI & Data',
+    title: 'AI, Data & Analytics',
+    description: 'Engineer intelligence into operations. Generative AI systems, autonomous agents, machine learning, data pipelines, business intelligence, MLOps, and conversational AI on WhatsApp and web channels.',
+  },
+  {
+    number: '04',
+    shortTitle: 'Software',
+    title: 'Software Engineering & Product',
+    description: 'Production-grade custom software, web and mobile applications, SaaS platforms, API ecosystems, DevOps pipelines, and UX-wired frontend delivery.',
+  },
+  {
+    number: '05',
+    shortTitle: 'Cloud',
+    title: 'Cloud & Infrastructure',
+    description: 'AWS, Azure, and GCP migration, cloud-native architecture, Terraform-based infrastructure automation, security design, disaster recovery, and production observability.',
+  },
+  {
+    number: '06',
+    shortTitle: 'Operations',
+    title: 'Operations & Managed Services',
+    description: 'Ongoing ownership of the systems H.V.A builds. Managed operations, application evolution, automation maintenance, IT support, and business process management — long after go-live.',
   },
 ];
 
 const deliveryFlow: DeliveryStep[] = [
   {
     step: '01',
-    icon: <Search className="h-8 w-8" />,
-    title: 'Business Discovery',
-    detail: 'Align goals, constraints, and success metrics before scope is locked.',
-    checkpoints: ['Define target outcomes', 'Map current blockers', 'Agree scope boundaries'],
+    icon: <Compass className="h-8 w-8" />,
+    title: 'Assess',
+    detail: 'Map friction, define target architecture, and sequence the transformation before a single line of code is written.',
+    checkpoints: ['Define measurable outcomes', 'Audit current systems and blockers', 'Sequence strategy into milestones'],
   },
   {
     step: '02',
-    icon: <ListChecks className="h-8 w-8" />,
-    title: 'System Design',
-    detail: 'Define architecture, milestones, and risk boundaries with clear ownership.',
-    checkpoints: ['Choose architecture model', 'Split delivery milestones', 'Assign technical ownership'],
+    icon: <Settings2 className="h-8 w-8" />,
+    title: 'Re-engineer',
+    detail: 'Build the systems, deploy the intelligence, and wire the infrastructure — shipped in sprint increments with full transparency.',
+    checkpoints: ['Deliver AI, software, and cloud layers', 'Validate against real outcomes', 'Iterate with demos and QA loops'],
   },
   {
     step: '03',
-    icon: <CalendarCheck className="h-8 w-8" />,
-    title: 'Build & Validate',
-    detail: 'Ship in iterations with demos, QA checkpoints, and transparent decisions.',
-    checkpoints: ['Deliver sprint increments', 'Run QA and review loops', 'Validate against outcomes'],
-  },
-  {
-    step: '04',
-    icon: <Home className="h-8 w-8" />,
-    title: 'Stabilize & Scale',
-    detail: 'Handover, optimize, and support the system as usage and complexity grow.',
-    checkpoints: ['Handover with documentation', 'Monitor production reliability', 'Plan scale roadmap'],
+    icon: <Terminal className="h-8 w-8" />,
+    title: 'Command',
+    detail: 'Stabilize, monitor, and evolve — the same team owns operations long-term. No handoff. No knowledge transfer failure.',
+    checkpoints: ['Operate production systems', 'Monitor reliability and performance', 'Evolve as business requirements grow'],
   },
 ];
 
@@ -145,14 +187,14 @@ const About: React.FC = () => {
                 style={{ y: heroLift }}
               >
                 <span className="inline-block text-[#0984E3] font-bold tracking-[0.22em] text-[10px] uppercase mb-6">
-                  AI · Digital Transformation · Technology Consulting
+                  Technology Transformation Partner · Tangier, Morocco
                 </span>
                 <h1 className="font-serif text-5xl md:text-7xl font-medium leading-[1.08] tracking-tight text-[#1E272E] mb-8">
-                  Long-Term Partners for AI<br />
-                  <em className="italic">and Digital Transformation</em>
+                  We Advise. We Build.<br />
+                  <em className="italic">We Operate.</em>
                 </h1>
                 <p className="text-xl text-[#1E272E]/60 font-light max-w-xl leading-relaxed mb-10">
-                  {CANONICAL_MARKET_IDENTITY.longDescriptor} We do not hand projects off between layers; the same founders stay accountable from discovery to production operations.
+                  H.V.A is a technology transformation partner combining strategy consulting, AI engineering, software development, cloud infrastructure, and managed operations — delivered by one team, from first whiteboard to production. No handoffs. Same founders throughout.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link
@@ -187,9 +229,9 @@ const About: React.FC = () => {
               >
                 {/* Card straddling the top-left image edge — outside overflow-hidden */}
                 <div className="absolute -top-10 left-5 z-10 p-6 bg-white shadow-xl max-w-[240px] hidden md:block">
-                  <p className="text-[10px] font-bold text-[#2563EB] tracking-[0.2em] uppercase mb-2">01. FOUNDATIONS</p>
+                  <p className="text-[10px] font-bold text-[#2563EB] tracking-[0.2em] uppercase mb-2">ARC Framework</p>
                   <p className="text-lg font-serif italic text-[#0F172A] leading-snug">
-                    We align executive strategy with technical execution.
+                    Assess. Re-engineer. Command.
                   </p>
                 </div>
                 <div className="relative aspect-square w-full bg-[#eceef0] overflow-hidden">
@@ -220,12 +262,11 @@ const About: React.FC = () => {
               className="mb-12 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6"
             >
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB] mb-3">Delivery System</p>
-                <h2 className="font-headline text-4xl md:text-5xl text-[#0F172A] leading-[1.02]">How We Work</h2>
+                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB] mb-3">The ARC Loop</p>
+                <h2 className="font-headline text-4xl md:text-5xl text-[#0F172A] leading-[1.02]">How We Deliver</h2>
               </div>
               <p className="max-w-xl text-[#475569] leading-relaxed lg:text-right">
-                The process is transparent, paced, and intentionally designed so stakeholders always understand what is
-                being changed, why it matters, and how outcomes will be measured.
+                The ARC loop — Assess, Re-engineer, Command — is not a handoff chain. It is a single continuous loop operated by the same team. Strategy informs build. Build informs operations. Operations feeds back into strategy.
               </p>
             </motion.div>
 
@@ -245,7 +286,7 @@ const About: React.FC = () => {
               </div>
 
               {/* Step cards — separated by 1px lines */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-slate-300">
+              <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-px bg-slate-300">
                 {deliveryFlow.map((item, index) => {
                   const isActive = activeDeliveryStep === index;
                   return (
@@ -303,7 +344,7 @@ const About: React.FC = () => {
                     <div className="text-[#2563EB]">{activeDeliveryItem.icon}</div>
                   </div>
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#2563EB] mb-1">Current Step</p>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#2563EB] mb-1">ARC Phase</p>
                     <h3 className="font-headline text-2xl text-white">{activeDeliveryItem.title}</h3>
                   </div>
                 </div>
@@ -321,6 +362,49 @@ const About: React.FC = () => {
           </div>
         </section>
 
+        {/* Six Service Pillars */}
+        <section className="relative px-6 lg:px-14 py-16 md:py-24 bg-white">
+          <div className="container mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.05 }}
+              transition={{ duration: 0.35 }}
+              className="mb-14"
+            >
+              <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#0984E3] mb-3">What We Do</p>
+              <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+                <h2 className="font-serif text-4xl md:text-5xl font-medium text-[#1E272E] leading-tight max-w-xl">
+                  Six Integrated<br />Service Pillars
+                </h2>
+                <p className="max-w-md text-[#1E272E]/60 leading-relaxed lg:text-right">
+                  These are not separate departments. They are phases of the same transformation loop — applied in full or in part depending on where the client is.
+                </p>
+              </div>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#e8eaed]">
+              {pillars.map((pillar, index) => (
+                <motion.div
+                  key={pillar.number}
+                  initial={{ opacity: 0, y: 8 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.05 }}
+                  transition={{ duration: 0.35, delay: index * 0.06 }}
+                  className="bg-[#F5F6FA] p-8 group hover:bg-white transition-colors duration-300"
+                >
+                  <p className="font-headline text-[4rem] leading-none text-[#1E272E]/[0.05] select-none mb-4 -ml-1">
+                    {pillar.number}
+                  </p>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#0984E3] mb-2">{pillar.shortTitle}</p>
+                  <h3 className="font-serif text-xl font-medium text-[#1E272E] mb-4 leading-snug">{pillar.title}</h3>
+                  <p className="text-sm text-[#1E272E]/64 leading-relaxed">{pillar.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Operating Principles — redesigned */}
         <section className="relative px-6 lg:px-14 py-16 md:py-24">
           <div className="container mx-auto">
@@ -333,7 +417,7 @@ const About: React.FC = () => {
                   <p className="text-[10px] uppercase tracking-[0.2em] text-[#1E272E]/58">Operating Principles</p>
                 </div>
                 <h2 className="font-serif text-4xl md:text-5xl font-medium text-[#1E272E] mb-12 leading-tight">
-                  The Rules Behind<br />How We Partner
+                  Four Non-Negotiables<br />of Transformation
                 </h2>
                 <div className="space-y-10">
                   {principles.map((principle, index) => (
@@ -380,7 +464,7 @@ const About: React.FC = () => {
                     </blockquote>
                     <div className="h-px bg-gradient-to-r from-[#0984E3]/60 via-[#00CEC9]/40 to-transparent mb-8" />
                     <p className="text-[#F5F6FA]/90 text-sm font-light leading-relaxed max-w-md">
-                      Three non-negotiables that shape planning, quality decisions, and execution pace on every engagement.
+                      Four non-negotiables that shape every engagement — from the first strategy session to the last infrastructure alert.
                     </p>
                   </div>
                 </div>
@@ -399,7 +483,7 @@ const About: React.FC = () => {
                 The People Behind H.V.A
               </h2>
               <p className="text-[#1E272E]/64 leading-relaxed">
-                Our founding team combines strategy consulting, technology architecture, AI engineering, software development, cloud infrastructure, and managed operations — delivering technology transformation programs that are practical, resilient, and built for long-term evolution.
+                Three co-founders. Six service pillars. One team that stays from strategy to operations. H.V.A was founded in Tangier by engineers who wanted to build transformation programs that do not fall apart after the first deployment.
               </p>
             </div>
 
@@ -437,11 +521,11 @@ const About: React.FC = () => {
 
         <BottomCTA
           variant="dark"
-          headline="Ready to Define Your AI and Transformation Roadmap?"
-          subtext="Share your goals and constraints. We will map the right strategy, engineering, and operations path — and discuss scope after discovery. No handoff. Same team."
-          primaryLabel="Book a Call"
+          headline="Ready to Start Your Transformation?"
+          subtext="Tell us where you are and where you need to be. H.V.A will map the right strategy, engineering, and operations path — and stay involved until the outcome is measurable."
+          primaryLabel="Book a Discovery Call"
           primaryHref="/contact"
-          secondaryLabel="ReView Capabilities"
+          secondaryLabel="View Our Capabilities"
           secondaryHref="/capabilities"
         />
       </div>

@@ -44,7 +44,7 @@ const SOCIAL_LINKS: SocialLink[] = [
     icon: FaFacebook,
     label: 'Facebook',
     handle: 'Hive Vault Arc',
-    href: 'https://web.facebook.com/profile.php?id=61588911931881',
+    href: 'https://web.facebook.com/hivevaultarc',
     external: true,
   },
   {

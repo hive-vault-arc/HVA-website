@@ -114,29 +114,34 @@ export const CAPABILITIES_FAQS: FaqSet = [
 // About
 export const ABOUT_FAQS: FaqSet = [
   {
+    question: 'What is Hive Vault Arc (H.V.A)?',
+    answer:
+      'Hive Vault Arc is a technology transformation partner based in Tangier, Morocco. We combine strategy consulting, AI engineering, software development, cloud infrastructure, and managed operations in one founder-led team — delivering transformation programs from strategy through production without handoffs.',
+  },
+  {
+    question: 'What is the ARC framework?',
+    answer:
+      'ARC is the H.V.A delivery model: Assess, Re-engineer, Command. Assess means mapping friction and defining architecture before any code is written. Re-engineer means building AI systems, software, and cloud infrastructure in sprint increments. Command means operating and evolving the systems long-term. The same team runs all three phases — there is no handoff between them.',
+  },
+  {
+    question: "What are H.V.A's six service pillars?",
+    answer:
+      'H.V.A delivers across six integrated pillars: (1) Strategy & Business Consulting — operating model redesign and transformation roadmaps; (2) Technology Consulting — enterprise architecture and platform strategy; (3) AI, Data & Analytics — generative AI, autonomous agents, machine learning, and data engineering; (4) Software Engineering & Product — custom software, SaaS platforms, and mobile apps; (5) Cloud & Infrastructure — AWS, Azure, GCP, and infrastructure automation; (6) Operations & Managed Services — ongoing production ownership and application evolution.',
+  },
+  {
     question: 'Who leads H.V.A engagements?',
     answer:
-      'H.V.A is founder-led. The same engineering leaders who shape AI strategy, automation architecture, and transformation roadmaps stay involved through delivery, deployment, and long-term maintenance.',
-  },
-  {
-    question: 'What makes H.V.A different from a typical consulting firm or AI agency?',
-    answer:
-      'We sit at the intersection of three disciplines that are usually siloed: strategic consulting, AI and intelligent automation, and digital transformation engineering. We do not hand off between advisory and delivery layers — the same team owns strategy through production. That end-to-end accountability is what separates us from advice-only consultants and build-only agencies.',
-  },
-  {
-    question: 'What is your partnership style with client teams?',
-    answer:
-      'We operate as a strategic and technical partner to leadership teams. We co-define AI and transformation priorities, communicate in transparent milestones, and transfer operational clarity across business and engineering stakeholders.',
+      'H.V.A is founder-led. Khalid Chalhi, Ali Amrani, and Oubay Ghamat are directly involved in every engagement — from strategy and architecture to delivery and production operations. Decisions are made by the people who understand the full system, not delegated to junior staff.',
   },
   {
     question: 'Do you stay involved after the initial build?',
     answer:
-      'Yes. We provide stabilization, optimization, and managed evolution so AI systems and digital infrastructure remain reliable and aligned with changing business requirements.',
+      'Yes — that is the Command phase of ARC. We provide managed operations, production monitoring, application evolution, and ongoing optimization. Transformation is only complete when the systems are running and the outcomes are measurable. We do not disappear after go-live.',
   },
   {
-    question: 'What principles guide your delivery?',
+    question: 'What industries does H.V.A serve?',
     answer:
-      'Outcome accountability, architecture quality, and end-to-end ownership guide every engagement. We prioritize intelligent systems that remain measurable, maintainable, and scalable over time.',
+      'H.V.A operates in eight defined verticals: Real Estate & Construction, Healthcare & Life Sciences, Financial Services, Government & Public Sector, Retail & E-Commerce, Energy & Sustainability, Logistics & Transportation, and Consumer Goods & Luxury. We focus on Morocco and the France–MENA corridor.',
   },
 ];
 

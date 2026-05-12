@@ -119,6 +119,35 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
     { target: 2.4, dir: '→', label: 'Revenue pipeline tracked', kind: 'moneyM' as const },
     { target: 94, dir: '↑', label: 'Daily active system operators', kind: 'integer' as const },
   ];
+  const arcPhases = [
+    {
+      phase: '01',
+      title: 'Assess',
+      discipline: 'Strategy & Architecture',
+      icon: <MessageSquare className="h-5 w-5" strokeWidth={1.5} />,
+      summary:
+        'Diagnose operating friction, define target architecture, and sequence the work leadership can execute.',
+      proof: 'Operating diagnosis',
+    },
+    {
+      phase: '02',
+      title: 'Re-engineer',
+      discipline: 'AI, Software & Cloud',
+      icon: <Layers className="h-5 w-5" strokeWidth={1.5} />,
+      summary:
+        'Build the systems, deploy the intelligence, and harden the infrastructure for real operational load.',
+      proof: 'Production systems',
+    },
+    {
+      phase: '03',
+      title: 'Command',
+      discipline: 'Operate & Evolve',
+      icon: <Eye className="h-5 w-5" strokeWidth={1.5} />,
+      summary:
+        'Stabilize, monitor, and evolve the systems long-term so decisions become measurable outcomes.',
+      proof: 'Managed outcomes',
+    },
+  ];
 
   const formatLiveMetric = (target: number, kind: 'percent' | 'moneyM' | 'integer') => {
     if (kind === 'percent') {
@@ -135,6 +164,8 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
       icon: <MessageSquare className="w-5 h-5" strokeWidth={1.5} />,
       title: 'Strategy & Business Consulting',
       desc: 'Diagnose, define, and design transformation before a single line of code is written.',
+      image: '/Images/capabilities/hva-strategy-business-capability.webp',
+      imageAlt: 'Strategy and business consulting operating model design',
       details: [
         'Business and digital transformation strategy',
         'Operational diagnostics and process redesign',
@@ -145,6 +176,8 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
       icon: <Eye className="w-5 h-5" strokeWidth={1.5} />,
       title: 'Technology Consulting',
       desc: 'Architecture decisions made early compound positively. We design systems that last.',
+      image: '/Images/capabilities/hva-technology-consulting-capability.webp',
+      imageAlt: 'Technology consulting architecture and systems planning',
       details: [
         'Enterprise architecture and technology roadmaps',
         'Platform strategy and systems integration',
@@ -155,6 +188,8 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
       icon: <Bot className="w-5 h-5" strokeWidth={1.5} />,
       title: 'AI, Data & Analytics',
       desc: 'AI agents on WhatsApp, web chat, and email — multilingual, always-on, trained on your operations.',
+      image: '/Images/capabilities/hva-ai-data-capability.webp',
+      imageAlt: 'AI and data analytics production intelligence systems',
       details: [
         'AI agent design and deployment',
         'Generative AI strategy and engineering',
@@ -165,6 +200,8 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
       icon: <Layers className="w-5 h-5" strokeWidth={1.5} />,
       title: 'Software Engineering',
       desc: 'Production-grade custom software, SaaS platforms, and web and mobile applications.',
+      image: '/Images/capabilities/hva-software-engineering-capability.webp',
+      imageAlt: 'Software engineering production-grade systems workspace',
       details: [
         'Custom software and SaaS platform development',
         'Web and mobile application delivery',
@@ -175,6 +212,8 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
       icon: <Cloud className="w-5 h-5" strokeWidth={1.5} />,
       title: 'Cloud & Infrastructure',
       desc: 'Built for scale, security, and resilience — zero-trust design and observability from day one.',
+      image: '/Images/capabilities/hva-cloud-infrastructure-capability.webp',
+      imageAlt: 'Cloud infrastructure secure systems and observability',
       details: [
         'AWS, Azure, and GCP cloud migration',
         'Infrastructure automation and security architecture',
@@ -185,6 +224,8 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
       icon: <BarChart3 className="w-5 h-5" strokeWidth={1.5} />,
       title: 'Operations & Managed Services',
       desc: 'We stay after go-live. Same team — strategy through production. No handoff.',
+      image: '/Images/capabilities/hva-operations-managed-capability.webp',
+      imageAlt: 'Operations and managed services monitoring workspace',
       details: [
         'Managed operations and application maintenance',
         'AI system management post-deployment',
@@ -209,53 +250,6 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
     { node: <SiCplusplus />, title: 'C++', href: 'https://isocpp.org' },
     { node: <SiOpenjdk />, title: 'Java', href: 'https://openjdk.org' },
   ];
-
-
-  type CardRect = { top: string; left: string; width: string; height: string };
-  const defaultPos = (idx: number): CardRect => {
-    const r = Math.floor(idx / 2);
-    const c = idx % 2;
-    return { top: `${r * 33.333}%`, left: `${c * 50}%`, width: '50%', height: '33.333%' };
-  };
-  const hoveredRowTop: Record<number, number> = { 0: 0, 1: 25, 2: 50 };
-  const posRow0 = (idx: number, h: number): CardRect => {
-    const remaining = [0, 1, 2, 3, 4, 5].filter((i) => i !== h);
-    const pos = remaining.indexOf(idx);
-    if (pos < 2) return { top: '50%', left: `${pos * 50}%`, width: '50%', height: '25%' };
-    return { top: '75%', left: `${(pos - 2) * 33.333}%`, width: '33.333%', height: '25%' };
-  };
-  const posRow1 = (idx: number, sibling: number): CardRect | null => {
-    const topCards = [0, 1, sibling];
-    const botCards = [4, 5];
-    const posTop = topCards.indexOf(idx);
-    if (posTop !== -1) return { top: '0%', left: `${posTop * 33.333}%`, width: '33.333%', height: '25%' };
-    const posBot = botCards.indexOf(idx);
-    if (posBot !== -1) return { top: '75%', left: `${posBot * 50}%`, width: '50%', height: '25%' };
-    return null;
-  };
-  const posRow2 = (idx: number, sibling: number): CardRect | null => {
-    const topCards = [0, 1];
-    const midCards = [2, 3, sibling];
-    const posTop = topCards.indexOf(idx);
-    if (posTop !== -1) return { top: '0%', left: `${posTop * 50}%`, width: '50%', height: '25%' };
-    const posMid = midCards.indexOf(idx);
-    if (posMid !== -1) return { top: '25%', left: `${posMid * 33.333}%`, width: '33.333%', height: '25%' };
-    return null;
-  };
-
-  // Grid: 6 cards in 3 rows × 2 cols. Hovered card expands full-width in its row zone.
-  // Its row-sibling is displaced upward, creating a 3-card row in the adjacent band.
-  const getCardPos = (idx: number): CardRect => {
-    if (hoveredPillar === null) return defaultPos(idx);
-    const h = hoveredPillar;
-    const hRow = Math.floor(h / 2);
-    const sibling = h % 2 === 0 ? h + 1 : h - 1;
-    if (idx === h) return { top: `${hoveredRowTop[hRow]}%`, left: '0%', width: '100%', height: '50%' };
-    if (hRow === 0) return posRow0(idx, h);
-    if (hRow === 1) return posRow1(idx, sibling) ?? defaultPos(idx);
-    if (hRow === 2) return posRow2(idx, sibling) ?? defaultPos(idx);
-    return defaultPos(idx);
-  };
 
   return (
     <div className="h-full home-reference">
@@ -303,10 +297,10 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
       <InsightsCarousel items={insightsCarouselItems} />
 
       {/* ── Who We Are — Identity Section ──────────────────────────────── */}
-      <section className="relative grid grid-cols-1 lg:grid-cols-12">
+      <section className="relative grid grid-cols-1 bg-[#f7f9fb] lg:grid-cols-12">
 
         {/* Left — dark identity panel */}
-        <div className="lg:col-span-5 relative bg-[#0F172A] px-10 py-16 lg:py-24 flex flex-col justify-between overflow-hidden">
+        <div className="lg:col-span-4 relative bg-[#0F172A] px-8 py-14 md:px-10 lg:py-20 flex flex-col justify-between overflow-hidden">
           {/* Dot grid texture */}
           <div
             aria-hidden="true"
@@ -318,119 +312,145 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
 
           <div className="relative z-10">
             <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#2563EB] mb-10">Our Identity</p>
-            <h2 className="font-headline text-5xl md:text-6xl text-white leading-[1.08] mb-8">
+            <h2 className="font-headline text-5xl md:text-6xl text-white leading-[1.08] mb-7">
               Advise. Build.<br />
-              <em className="font-headline italic text-white/35">Operate.</em>
+              <em className="font-headline italic text-white/40">Operate.</em>
             </h2>
             <p className="text-white/60 font-body leading-relaxed text-base mb-10 max-w-sm">
               H.V.A is a technology transformation partner — combining strategy, AI engineering, software development, and managed operations in one team. We stay until it works.
             </p>
             <div className="h-px w-12 bg-[#2563EB] mb-4" />
-            <p className="text-[9px] font-label font-bold uppercase tracking-[0.28em] text-white/35">
+            <p className="text-[9px] font-label font-bold uppercase tracking-[0.28em] text-white/40">
               Strategy · AI Engineering · Software · Operations
             </p>
           </div>
         </div>
 
-        {/* Right — mobile 2-col grid fallback */}
-        <div className="lg:hidden grid grid-cols-2 gap-px bg-[#e2e8f0]">
+        {/* Right — mobile visual pillar grid */}
+        <div className="lg:hidden grid grid-cols-1 gap-px bg-[#d9dee7] sm:grid-cols-2">
           {capabilityPillars.map((pillar) => (
-            <div key={pillar.title} className="bg-white p-5 flex flex-col gap-3">
-              <div className="w-9 h-9 flex items-center justify-center bg-[#dbeafe] text-[#2563EB] shrink-0">
-                {pillar.icon}
+            <article key={pillar.title} className="bg-white">
+              <div className="relative h-36 overflow-hidden bg-[#0F172A]">
+                <Image
+                  src={pillar.image}
+                  alt={pillar.imageAlt}
+                  fill
+                  loading={pillar.image.includes('hva-technology-consulting-capability') ? 'eager' : 'lazy'}
+                  sizes="(max-width: 640px) 100vw, 50vw"
+                  className="object-cover opacity-64"
+                />
+                <div className="absolute inset-0 bg-[#2563EB]/10" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/95 via-[#0F172A]/40 to-[#0F172A]/10" />
+                <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-[#0F172A]/70 to-transparent" />
+                <div className="absolute bottom-4 left-4 flex h-9 w-9 items-center justify-center bg-white/10 text-white">
+                  {pillar.icon}
+                </div>
               </div>
-              <div>
-                <h3 className="font-headline text-sm text-[#0F172A] mb-1 leading-snug">{pillar.title}</h3>
-                <p className="text-xs text-[#475569] leading-relaxed">{pillar.desc}</p>
+              <div className="border-l-2 border-[#2563EB] p-5">
+                <p className="mb-2 text-[0.58rem] font-bold uppercase tracking-[0.18em] text-[#2563EB]">
+                  Pillar
+                </p>
+                <h3 className="font-headline text-xl leading-tight text-[#0F172A]">{pillar.title}</h3>
+                <p className="mt-2 max-w-sm text-sm leading-relaxed text-[#475569]">{pillar.desc}</p>
               </div>
-            </div>
+            </article>
           ))}
         </div>
 
-        {/* Right — 2×3 Capability Pillars desktop (absolute-positioned for fixed-height section) */}
-        <ul
-          className="lg:col-span-7 relative list-none m-0 p-0 overflow-hidden hidden lg:block"
-          style={{ height: '600px' }}
-          onMouseLeave={() => setHoveredPillar(null)}
-        >
+        {/* Right — six capability pillars */}
+        <div className="hidden lg:col-span-8 lg:grid lg:grid-cols-3 lg:grid-rows-2 gap-px bg-[#d9dee7]">
           {capabilityPillars.map((pillar, idx) => {
             const isHovered = hoveredPillar === idx;
             const isOther = hoveredPillar !== null && hoveredPillar !== idx;
             return (
-              <motion.li
+              <motion.article
                 key={pillar.title}
-                layout
-                transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute bg-white overflow-hidden"
-                style={{
-                  ...getCardPos(idx),
-                  zIndex: isHovered ? 10 : 1,
-                  outline: '1px solid #e2e8f0',
-                  opacity: isOther ? 0.45 : 1,
-                  transition: 'opacity 0.4s ease',
-                }}
+                transition={{ duration: 0.24, ease: 'easeOut' }}
+                className={`group relative h-[330px] overflow-hidden bg-white transition-opacity duration-200 ${
+                  isOther ? 'opacity-65' : 'opacity-100'
+                }`}
                 onMouseEnter={() => setHoveredPillar(idx)}
+                onFocus={() => setHoveredPillar(idx)}
+                onBlur={() => setHoveredPillar(null)}
+                onMouseLeave={() => setHoveredPillar(null)}
+                tabIndex={0}
               >
-                <div className="h-full p-5 flex flex-col relative">
-                  <div className="w-10 h-10 flex items-center justify-center bg-[#dbeafe] text-[#2563EB] shrink-0">
-                    {pillar.icon}
+                <Image
+                  src={pillar.image}
+                  alt={pillar.imageAlt}
+                  fill
+                  loading={idx === 1 ? 'eager' : 'lazy'}
+                  sizes="(max-width: 1024px) 100vw, 22vw"
+                  className="object-cover opacity-54 transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-[#2563EB]/10 mix-blend-multiply" />
+                <div
+                  className={`absolute inset-0 transition-opacity duration-200 ${
+                    isHovered ? 'opacity-100' : 'opacity-80'
+                  } bg-gradient-to-t from-[#07111f]/95 via-[#0F172A]/60 to-[#2563EB]/20`}
+                />
+                <div
+                  className={`absolute inset-x-0 bottom-0 transition-opacity duration-200 ${
+                    isHovered ? 'opacity-100' : 'opacity-75'
+                  } h-3/4 bg-gradient-to-t from-[#020817] via-[#0F172A]/70 to-transparent`}
+                />
+                <div className="relative z-10 flex h-full flex-col justify-between p-6">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex h-10 w-10 items-center justify-center bg-white/10 text-white ring-1 ring-white/20">
+                      {pillar.icon}
+                    </div>
+                    <span className="font-mono text-[0.58rem] text-white/70">0{idx + 1}</span>
                   </div>
-                  <div className="mt-3 pb-12">
-                    <h3 className="font-headline text-lg text-[#0F172A] mb-1.5">{pillar.title}</h3>
-                    <p
-                      className="text-sm text-[#475569] leading-relaxed"
-                      style={{ opacity: isOther ? 0 : 1, transition: 'opacity 0.25s ease' }}
-                    >
+
+                  <div
+                    className={`mt-auto border-l border-[#60a5fa]/60 px-4 py-4 transition-colors duration-200 ${
+                      isHovered ? 'bg-[#020817]/95' : 'bg-[#020817]/80'
+                    }`}
+                  >
+                    <p className="mb-2 text-[0.58rem] font-bold uppercase tracking-[0.18em] text-[#93c5fd]">
+                      Pillar 0{idx + 1}
+                    </p>
+                    <h3 className="max-w-[18rem] font-headline text-[1.72rem] leading-[1.06] text-white">
+                      {pillar.title}
+                    </h3>
+                    <p className="mt-3 max-w-[21rem] text-sm leading-relaxed text-white/90">
                       {pillar.desc}
                     </p>
+                    <ul
+                      className={`list-none overflow-hidden p-0 m-0 transition-all duration-200 ${
+                        isHovered ? 'mt-4 max-h-28 opacity-100' : 'mt-0 max-h-0 opacity-0'
+                      }`}
+                      aria-hidden={!isHovered}
+                    >
+                      {pillar.details.map((detail) => (
+                        <li key={detail} className="flex items-start gap-2 text-xs font-semibold leading-relaxed text-white/90">
+                          <span className="mt-1.5 h-1 w-1 shrink-0 bg-[#60a5fa]" />
+                          {detail}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  {/* Detail bullets — absolute so they never affect card height */}
-                  <ul
-                    className="absolute bottom-5 left-5 right-5 space-y-1.5 list-none p-0 m-0"
-                    aria-hidden={!isHovered}
-                    style={{
-                      opacity: isHovered ? 1 : 0,
-                      transform: isHovered ? 'translateY(0)' : 'translateY(5px)',
-                      transition: 'opacity 0.3s ease 0.1s, transform 0.35s ease 0.1s',
-                    }}
-                  >
-                    {pillar.details.map((detail) => (
-                      <li key={detail} className="flex items-center gap-2 text-xs text-[#2563EB] font-semibold">
-                        <span className="w-1 h-1 rounded-full bg-[#2563EB] shrink-0" />
-                        {detail}
-                      </li>
-                    ))}
-                  </ul>
-                  {/* Bottom accent bar */}
-                  <div
-                    className="absolute bottom-0 left-0 h-[2px] bg-[#2563EB]"
-                    style={{
-                      width: isHovered ? '100%' : '0%',
-                      transition: 'width 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
-                    }}
-                  />
                 </div>
-              </motion.li>
+              </motion.article>
             );
           })}
-        </ul>
-
+        </div>
       </section>
 
-      <section className="bg-white py-24 md:py-28">
+      <section className="bg-white pt-16 pb-14 md:pt-20 md:pb-16">
         <div className="mx-auto max-w-7xl px-6 lg:px-14">
 
           {/* Header — two column */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-end mb-14 pb-12 border-b border-[#e2e8f0]">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-7 items-end mb-10 pb-8 border-b border-[#e2e8f0]">
             <div className="md:col-span-7">
-              <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.28em] text-[#2563EB]">
+              <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.28em] text-[#2563EB]">
                 Proof In Production
               </p>
-              <h2 className="font-headline text-5xl md:text-6xl leading-[1.02] tracking-tight text-[#0F172A]">
+              <h2 className="font-headline text-4xl md:text-5xl leading-[1.02] tracking-tight text-[#0F172A]">
                 Transformation Programs<br className="hidden md:block" /> Running in Production
               </h2>
             </div>
-            <div className="md:col-span-5 flex flex-col gap-5">
+            <div className="md:col-span-5 flex flex-col gap-4">
               <p className="text-base text-[#475569] leading-relaxed">
                 Every program listed is live in a real operating environment — no demos, no projected results.
               </p>
@@ -446,7 +466,7 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
           </div>
 
           {/* Cards — asymmetric: large featured left + 2 stacked right */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:h-[620px]">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:h-[500px] lg:h-[540px]">
 
             {/* Featured card */}
             <motion.article
@@ -474,8 +494,8 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
                 System Built
               </span>
               {/* Bottom content */}
-              <div className="absolute bottom-0 left-0 right-0 p-8 z-10">
-                <h3 className="font-headline text-3xl md:text-4xl text-white leading-tight mb-3">
+              <div className="absolute bottom-0 left-0 right-0 p-6 md:p-7 z-10">
+                <h3 className="font-headline text-3xl text-white leading-tight mb-3">
                   Customer Operations Engine
                 </h3>
                 <p className="text-sm text-white/55 uppercase tracking-[0.14em]">
@@ -509,7 +529,7 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
                   Live Deployment
                 </span>
                 <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
-                  <h3 className="font-headline text-2xl text-white leading-tight mb-2">Revenue Control Module</h3>
+                  <h3 className="font-headline text-xl md:text-2xl text-white leading-tight mb-2">Revenue Control Module</h3>
                   <p className="text-[11px] text-white/55 uppercase tracking-[0.14em]">94 active users · production since May 2025</p>
                   <div className="mt-4 h-[1px] w-0 group-hover:w-full bg-[#2563EB] transition-all duration-700" />
                 </div>
@@ -536,7 +556,7 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
                   Measured Outcomes
                 </span>
                 <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
-                  <h3 className="font-headline text-2xl text-white leading-tight mb-2">Quantified Results</h3>
+                  <h3 className="font-headline text-xl md:text-2xl text-white leading-tight mb-2">Quantified Results</h3>
                   <p className="text-[11px] text-white/55 uppercase tracking-[0.14em]">Manual triage ↓85% · Qualified meetings ↑43%</p>
                   <div className="mt-4 h-[1px] w-0 group-hover:w-full bg-[#2563EB] transition-all duration-700" />
                 </div>
@@ -546,14 +566,14 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
           </div>
 
           {/* Metrics strip */}
-          <div className="mt-5 grid grid-cols-2 md:grid-cols-4 border border-[#e2e8f0] divide-y md:divide-y-0 md:divide-x divide-[#e2e8f0]">
+          <div className="mt-4 grid grid-cols-2 md:grid-cols-4 border border-[#e2e8f0] divide-y md:divide-y-0 md:divide-x divide-[#e2e8f0]">
             {[
               { val: '↓85%', label: 'Manual triage cut' },
               { val: '↑43%', label: 'Qualified meeting lift' },
               { val: '$2.4M', label: 'Revenue pipeline active' },
               { val: '94', label: 'Daily active operators' },
             ].map((m) => (
-              <div key={m.label} className="flex items-center gap-4 px-7 py-5">
+              <div key={m.label} className="flex items-center gap-4 px-6 py-4">
                 <span className="font-headline text-2xl text-[#0F172A]">{m.val}</span>
                 <span className="text-[10px] text-[#94a3b8] uppercase tracking-widest leading-snug">{m.label}</span>
               </div>
@@ -571,7 +591,7 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
       </section>
 
       {/* ── Vision / Trust Section ─────────────────────────────────────── */}
-      <section className="relative bg-[#0F172A] py-24 md:py-32 overflow-hidden">
+      <section className="relative overflow-hidden border-y border-white/10 bg-[#0F172A] py-20 md:py-28">
         {/* Blueprint grid overlay */}
         <div
           aria-hidden="true"
@@ -582,11 +602,10 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
             backgroundSize: '48px 48px',
           }}
         />
-        {/* Ambient glow */}
-        <div className="pointer-events-none absolute -top-32 left-1/4 h-96 w-96 rounded-full bg-[#2563EB]/20 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-24 right-1/4 h-72 w-72 rounded-full bg-[#3b82f6]/15 blur-3xl" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[#2563EB]/70" />
+        <div className="pointer-events-none absolute left-0 top-0 hidden h-full w-px bg-[#2563EB]/60 lg:block" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+        <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-start gap-14 px-8 lg:grid-cols-[minmax(0,1fr)_minmax(420px,0.86fr)] lg:gap-20">
 
           {/* Left — heading + feature list */}
           <motion.div
@@ -595,54 +614,43 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="font-headline text-5xl md:text-6xl text-white leading-tight mb-14">
+            <h2 className="mb-12 max-w-[680px] font-headline text-5xl leading-[0.98] text-white md:text-6xl">
               Lasting Transformation Requires{' '}
               <em className="not-italic text-[#2563EB] font-headline italic">The Full ARC</em>
             </h2>
 
-            <div className="space-y-10">
-              {/* Feature 01 */}
-              <div className="flex gap-6">
-                <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-white/10 border border-white/10">
-                  <MessageSquare className="w-5 h-5 text-white" strokeWidth={1.5} />
+            <div className="relative border-l border-white/20">
+              {arcPhases.map((phase) => (
+                <div key={phase.phase} className="relative pl-7 pb-8 last:pb-0">
+                  <span className="absolute -left-px top-0 h-12 w-px bg-[#2563EB]" aria-hidden="true" />
+                  <div className="flex gap-5">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center border border-white/20 bg-white/10 text-white">
+                      {phase.icon}
+                    </div>
+                    <div className="min-w-0 border-b border-white/10 pb-7 last:border-b-0">
+                      <div className="mb-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+                        <span className="font-label text-[10px] font-bold uppercase tracking-[0.22em] text-[#60a5fa]">
+                          Phase {phase.phase}
+                        </span>
+                        <span className="text-sm text-white/40">{phase.discipline}</span>
+                      </div>
+                      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                        <h4 className="font-headline text-2xl text-white">{phase.title}</h4>
+                        <span className="text-xs font-bold uppercase tracking-[0.18em] text-white/40">
+                          {phase.proof}
+                        </span>
+                      </div>
+                      <p className="mt-3 max-w-[620px] font-body leading-relaxed text-white/70">
+                        {phase.summary}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-headline text-2xl text-white mb-2">Assess — Strategy & Architecture</h4>
-                  <p className="text-white/60 font-body leading-relaxed">
-                    We diagnose operational friction, define target architecture, and sequence the transformation so leadership has a plan they can actually execute.
-                  </p>
-                </div>
-              </div>
-
-              {/* Feature 02 */}
-              <div className="flex gap-6">
-                <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-white/10 border border-white/10">
-                  <Layers className="w-5 h-5 text-white" strokeWidth={1.5} />
-                </div>
-                <div>
-                  <h4 className="font-headline text-2xl text-white mb-2">Re-engineer — AI, Software & Cloud</h4>
-                  <p className="text-white/60 font-body leading-relaxed">
-                    We build the systems, deploy the intelligence, and wire the infrastructure — engineered for reliability under real operational load.
-                  </p>
-                </div>
-              </div>
-
-              {/* Feature 03 */}
-              <div className="flex gap-6">
-                <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-white/10 border border-white/10">
-                  <Eye className="w-5 h-5 text-white" strokeWidth={1.5} />
-                </div>
-                <div>
-                  <h4 className="font-headline text-2xl text-white mb-2">Command — Operate & Evolve</h4>
-                  <p className="text-white/60 font-body leading-relaxed">
-                    We stabilize, monitor, and evolve the systems we build — owning outcomes long-term so strategy decisions translate into measurable operational results.
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
           </motion.div>
 
-          {/* Right — testimonial card */}
+          {/* Right — metrics card */}
           <motion.div
             className="relative"
             initial={{ opacity: 0, x: 24 }}
@@ -650,36 +658,57 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            {/* Glow behind card */}
-            <div className="pointer-events-none absolute -top-12 -left-12 w-64 h-64 bg-[#2563EB]/20 blur-3xl rounded-full" />
-
-            <div ref={liveMetricsRef} className="relative z-10 bg-[#F2F4F6] p-10 md:p-12 overflow-hidden">
-              <div className="flex items-center gap-2 mb-8">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#2563EB] animate-pulse inline-block" />
-                <p className="text-[9px] font-mono uppercase tracking-[0.28em] text-[#2563EB]">Live Program Metrics</p>
+            <div ref={liveMetricsRef} className="relative z-10 overflow-hidden border border-[#cbd5e1] bg-[#F8FAFC]">
+              <div className="grid gap-5 border-b border-[#0F172A]/10 px-7 py-7 md:grid-cols-[1fr_auto] md:items-start">
+                <div>
+                  <div className="mb-3 flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 bg-[#2563EB]" aria-hidden="true" />
+                    <p className="font-mono text-[9px] uppercase tracking-[0.28em] text-[#2563EB]">
+                      Live Program Metrics
+                    </p>
+                  </div>
+                  <p className="max-w-[360px] text-sm leading-6 text-[#475569]">
+                    Measured across active AI, CRM, and cloud programs after launch, where the ARC model stays accountable.
+                  </p>
+                </div>
+                <div className="border border-[#0F172A]/10 px-4 py-3 text-right">
+                  <span className="block font-headline text-3xl leading-none text-[#0F172A]">2025</span>
+                  <span className="mt-1 block text-[9px] font-bold uppercase tracking-[0.2em] text-[#94a3b8]">
+                    Morocco
+                  </span>
+                </div>
               </div>
-              <div className="space-y-0">
-                {liveMetrics.map((metric) => (
-                  <div key={metric.label} className="flex items-baseline justify-between border-b border-[#0F172A]/10 py-4">
-                    <span className="text-sm font-body text-[#475569]">{metric.label}</span>
-                    <div className="flex items-baseline gap-1.5 ml-6 shrink-0">
-                      <span className="text-[#2563EB] text-sm font-bold">{metric.dir}</span>
-                      <span className="font-headline text-3xl text-[#0F172A] font-medium">
+
+              <div className="divide-y divide-[#0F172A]/10">
+                {liveMetrics.map((metric, idx) => (
+                  <div key={metric.label} className="grid grid-cols-[auto_1fr_auto] items-baseline gap-4 px-7 py-5">
+                    <span className="font-mono text-[10px] font-bold text-[#94a3b8]">0{idx + 1}</span>
+                    <span className="text-sm font-body text-[#334155]">{metric.label}</span>
+                    <div className="ml-4 flex shrink-0 items-baseline gap-1.5">
+                      <span className="text-sm font-bold text-[#2563EB]">{metric.dir}</span>
+                      <span className="font-headline text-3xl font-medium leading-none text-[#0F172A]">
                         {formatLiveMetric(metric.target, metric.kind)}
                       </span>
                     </div>
                   </div>
                 ))}
               </div>
-              <p className="mt-6 text-[9px] font-mono uppercase tracking-[0.2em] text-[#94a3b8]">
-                From live deployments in production — Morocco, 2025
-              </p>
+
+              <div className="grid grid-cols-3 border-t border-[#0F172A]/10 bg-white/70">
+                {['Production', 'Managed', 'Measured'].map((item) => (
+                  <div key={item} className="border-r border-[#0F172A]/10 px-5 py-4 last:border-r-0">
+                    <span className="block text-[9px] font-bold uppercase tracking-[0.2em] text-[#94a3b8]">
+                      {item}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* Link to capabilities */}
             <Link
               href="/capabilities"
-              className="mt-6 inline-flex items-center gap-2 border border-white/20 px-6 py-3 text-xs font-label font-bold uppercase tracking-widest text-white/70 hover:text-white hover:border-white/40 transition-colors"
+              className="mt-6 inline-flex items-center gap-2 border border-white/20 px-6 py-3 text-xs font-label font-bold uppercase tracking-widest text-white/70 transition-colors hover:border-white/40 hover:text-white"
             >
               Our Capabilities
               <ArrowRight className="w-4 h-4" />
@@ -695,7 +724,7 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
         bottomBg="#F5F6FA"
       />
 
-      <div style={{ position: 'relative', overflow: 'hidden', color: '#1E272E', marginBottom: '6%' }} className="min-h-[140px] md:min-h-[200px]">
+      <div className="relative overflow-hidden pb-6 text-[#1E272E] md:pb-8">
         <h2 className="text-[#1E272E]/90 text-2xl lg:text-4xl md:text-xl mb-8 mx-auto text-center font-light leading-relaxed">
           CORE TECHNOLOGY STACK
         </h2>
@@ -713,14 +742,14 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
         />
       </div>
 
-      <section ref={worldMapSectionRef} className="sharp-edge w-full pt-12 pb-0 rounded-xl overflow-hidden">
+      <section ref={worldMapSectionRef} className="sharp-edge w-full pt-0 pb-0 rounded-xl overflow-hidden">
         <Suspense fallback={<div className="h-[220px] sm:h-[300px] md:h-[360px] w-full bg-[#ECF5FD]" aria-hidden="true" />}>
           <WorldMapDemo />
         </Suspense>
       </section>
 
       <BottomCTA
-        variant="light"
+        variant="dark"
         headline="Ready to Transform Core Operations End to End?"
         subtext="Share your goals and constraints. We will define the strategy, architecture, and execution path, then discuss pricing after discovery."
         primaryLabel="Book Discovery Call"
