@@ -54,6 +54,63 @@ export const GLOBAL_KEYWORDS = [
   'CRM Morocco',
 ];
 
+export const SITELINK_CANDIDATES = [
+  {
+    href: '/',
+    label: 'Home',
+    anchor: 'Visit the Hive Vault Arc homepage',
+    description: 'Official homepage for H.V.A technology transformation programs.',
+  },
+  {
+    href: '/capabilities',
+    label: 'Capabilities',
+    anchor: 'Explore H.V.A capabilities',
+    description: 'Six service pillars across strategy, AI, software, cloud, and operations.',
+  },
+  {
+    href: '/industries',
+    label: 'Industries',
+    anchor: 'View industries H.V.A serves',
+    description: 'Industry transformation coverage across eight business verticals.',
+  },
+  {
+    href: '/arc',
+    label: 'ARC Framework',
+    anchor: 'Learn the ARC operating model',
+    description: 'Assess, Re-engineer, and Command: H.V.A delivery from strategy to production.',
+  },
+  {
+    href: '/whoweare/abouthva',
+    label: 'Who We Are',
+    anchor: 'Meet the H.V.A founding team',
+    description: 'Founder-led team, operating principles, and transformation philosophy.',
+  },
+  {
+    href: '/case-studies',
+    label: 'Case Studies',
+    anchor: 'Review H.V.A case studies',
+    description: 'Production outcomes from AI operations and CRM modernization programs.',
+  },
+  {
+    href: '/insights',
+    label: 'Insights',
+    anchor: 'Read H.V.A insights',
+    description: 'Blogs, case studies, perspectives, news, and research reports.',
+  },
+  {
+    href: '/contact',
+    label: 'Contact',
+    anchor: 'Start a transformation discovery',
+    description: 'Book a discovery call to scope strategy, engineering, and operations needs.',
+  },
+  {
+    href: '/ai-agents-tangier',
+    label: 'AI Agents Tangier',
+    anchor: 'Explore AI agents in Tangier',
+    description: 'Local AI agent development for WhatsApp, lead operations, and support workflows.',
+  },
+] as const;
+
 type PageMetaInput = {
   title: string;
   description: string;

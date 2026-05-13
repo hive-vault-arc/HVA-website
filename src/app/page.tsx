@@ -8,13 +8,23 @@ import FaqSection from '../components/FaqSection';
 import { HOME_FAQS } from '../data/faqs';
 import { getAllPosts } from '../lib/blog';
 import { getAllCaseStudies } from '../lib/proof';
-import { GLOBAL_KEYWORDS, SITE_URL, buildPageMetadata, mergeKeywords } from '../lib/seo';
-import { CANONICAL_MARKET_IDENTITY } from '../lib/positioning';
+import {
+  GLOBAL_KEYWORDS,
+  SITELINK_CANDIDATES,
+  SITE_URL,
+  absoluteUrl,
+  buildPageMetadata,
+  mergeKeywords,
+} from '../lib/seo';
+
+const HOME_META_TITLE = 'Hive Vault Arc (H.V.A) | Technology Consulting & AI Transformation';
+const HOME_META_DESCRIPTION =
+  'Hive Vault Arc is a technology transformation partner in Tangier, Morocco, combining strategy consulting, AI engineering, software development, cloud infrastructure, and managed operations.';
 
 export const metadata: Metadata = {
   ...buildPageMetadata({
-    title: 'Technology Consulting and Digital Transformation Firm',
-    description: CANONICAL_MARKET_IDENTITY.longDescriptor,
+    title: HOME_META_TITLE,
+    description: HOME_META_DESCRIPTION,
     path: '/',
     keywords: mergeKeywords(GLOBAL_KEYWORDS, [
       'technology consulting firm Tangier',
@@ -50,7 +60,7 @@ export const metadata: Metadata = {
     },
   }),
   title: {
-    absolute: 'Hive Vault Arc (H.V.A) | Technology Transformation Partner · Strategy · AI Engineering · Tangier',
+    absolute: HOME_META_TITLE,
   },
 };
 
@@ -126,9 +136,41 @@ export default function Page() {
     url: `${SITE_URL}/capabilities`,
   };
 
+  const homePageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${SITE_URL}/#homepage`,
+    name: HOME_META_TITLE,
+    description: HOME_META_DESCRIPTION,
+    url: SITE_URL,
+    isPartOf: {
+      '@id': `${SITE_URL}/#website`,
+    },
+    about: {
+      '@id': `${SITE_URL}/#organization`,
+    },
+    primaryImageOfPage: absoluteUrl('/Images/brand/hva-ai-software-agency-tangier.webp'),
+    significantLink: SITELINK_CANDIDATES.filter((item) => item.href !== '/').map((item) =>
+      absoluteUrl(item.href)
+    ),
+  };
+
+  const primaryNavigationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Primary H.V.A website sections',
+    itemListElement: SITELINK_CANDIDATES.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.label,
+      description: item.description,
+      url: absoluteUrl(item.href),
+    })),
+  };
+
   return (
     <>
-      <JsonLd data={capabilitySchema} />
+      <JsonLd data={[homePageSchema, capabilitySchema, primaryNavigationSchema]} />
       <Home insightsCarouselItems={insightsCarouselItems} />
       <section className="relative overflow-hidden bg-[#0F172A] py-20 md:py-28">
         {/* Subtle grid overlay */}

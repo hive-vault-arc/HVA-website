@@ -194,7 +194,7 @@ export default function InsightsSlider() {
                         <h3 className="insights-slide-hover-title">{item.title}</h3>
                         <p className="insights-slide-hover-desc">{item.description}</p>
                         <Link href={item.href} className="insights-slide-learn-more">
-                          Learn more
+                          Read {item.tag} insight
                           <span className="insights-slide-learn-arrow" aria-hidden="true">→</span>
                         </Link>
                       </div>

@@ -10,6 +10,7 @@ import {
   BRAND_ALIASES,
   GLOBAL_KEYWORDS,
   LINKEDIN_URL,
+  SITELINK_CANDIDATES,
   SITE_LOGO_HEIGHT,
   SITE_LOGO_PATH,
   SITE_LOGO_WIDTH,
@@ -122,10 +123,24 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     founders: [
       {
         '@type': 'Person',
-        name: 'Khalid',
+        name: 'Khalid Chalhi',
         jobTitle: 'Founder & CEO',
       },
+      {
+        '@type': 'Person',
+        name: 'Ali Amrani',
+        jobTitle: 'Co-Founder & Full-Stack Engineer',
+      },
+      {
+        '@type': 'Person',
+        name: 'Oubay Ghamat',
+        jobTitle: 'Co-Founder & Cloud Engineer',
+      },
     ],
+    foundingLocation: {
+      '@type': 'Place',
+      name: 'Tangier, Morocco',
+    },
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Tangier',
@@ -153,6 +168,16 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     ],
     email: 'contact@hivevaultarc.com',
     telephone: ['+212670431249'],
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        contactType: 'customer support',
+        email: 'contact@hivevaultarc.com',
+        telephone: '+212670431249',
+        availableLanguage: ['English', 'French', 'Arabic', 'Spanish'],
+        areaServed: ['MA', 'FR', 'EU'],
+      },
+    ],
     sameAs: [
       LINKEDIN_URL,
       'https://github.com/hive-vault-arc',
@@ -206,29 +231,25 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     publisher: {
       '@id': `${SITE_URL}/#organization`,
     },
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: `${SITE_URL}/blog?q={search_term_string}`,
-      },
-      'query-input': 'required name=search_term_string',
-    },
+    hasPart: SITELINK_CANDIDATES.map((item) => ({
+      '@type': 'WebPage',
+      name: item.label,
+      description: item.description,
+      url: absoluteUrl(item.href),
+    })),
   };
 
   const navigationSchema = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     name: 'Hive Vault Arc Site Navigation',
-    itemListElement: [
-      { '@type': 'SiteNavigationElement', position: 1, name: 'Home',         url: `${SITE_URL}/` },
-      { '@type': 'SiteNavigationElement', position: 2, name: 'ARC Framework', url: `${SITE_URL}/arc` },
-      { '@type': 'SiteNavigationElement', position: 3, name: 'Capabilities',  url: `${SITE_URL}/capabilities` },
-      { '@type': 'SiteNavigationElement', position: 4, name: 'Industries',    url: `${SITE_URL}/industries` },
-      { '@type': 'SiteNavigationElement', position: 5, name: 'Who We Are',   url: `${SITE_URL}/whoweare/abouthva` },
-      { '@type': 'SiteNavigationElement', position: 6, name: 'Insights',     url: `${SITE_URL}/insights` },
-      { '@type': 'SiteNavigationElement', position: 7, name: 'Contact',      url: `${SITE_URL}/contact` },
-    ],
+    itemListElement: SITELINK_CANDIDATES.map((item, index) => ({
+      '@type': 'SiteNavigationElement',
+      position: index + 1,
+      name: item.label,
+      description: item.description,
+      url: absoluteUrl(item.href),
+    })),
   };
 
   return (

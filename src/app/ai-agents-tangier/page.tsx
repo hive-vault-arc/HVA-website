@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import FaqSection from '../../components/FaqSection';
 import JsonLd from '../../components/JsonLd';
@@ -112,10 +113,13 @@ export default function AIAgentsTangierPage() {
           </div>
 
           <div className="lg:col-span-5 relative h-[520px] lg:h-[620px]">
-            <img
+            <Image
               src="/Images/hero/ai-powered-transformation-operations-tangier-morocco.webp"
               alt="AI-powered business operations in Tangier, Morocco"
-              className="w-full h-full object-cover"
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 42vw"
+              className="object-cover"
               style={{ filter: 'grayscale(0.35) contrast(1.08)' }}
             />
             <div className="absolute -bottom-5 -left-5 bg-white p-7 w-60 shadow-2xl">

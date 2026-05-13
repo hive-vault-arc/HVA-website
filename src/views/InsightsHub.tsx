@@ -380,7 +380,7 @@ function InsightCard({ item, index }: { readonly item: InsightGridItem; readonly
                      bg-white/10 backdrop-blur-sm hover:bg-[#2563EB] hover:border-[#2563EB]
                      transition-all duration-200"
         >
-          Learn more <span aria-hidden="true">→</span>
+          Open {item.tag} insight <span aria-hidden="true">→</span>
         </Link>
       </motion.div>
     </motion.article>

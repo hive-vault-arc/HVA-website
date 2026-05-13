@@ -13,6 +13,7 @@ import VideoScrollSection from '../components/ui/VideoScrollSection';
 import HeroSlider from '../components/ui/HeroSlider';
 import type { InsightsCarouselItem } from '../components/InsightsCarousel';
 import { useAnimationQuality } from '../lib/animationQuality';
+import { SITELINK_CANDIDATES } from '../lib/seo';
 import {
   SiAndroid,
   SiCplusplus,
@@ -267,6 +268,48 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
       )}
 
       <HeroSlider />
+
+      {/* ── Primary Site Shortcuts ─────────────────────────────────────── */}
+      <nav
+        aria-labelledby="home-site-shortcuts-title"
+        className="border-y border-[#dbe1ea] bg-[#F8FAFC]"
+      >
+        <div className="mx-auto max-w-7xl px-6 py-6 lg:px-14">
+          <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
+                Explore H.V.A
+              </p>
+              <h2
+                id="home-site-shortcuts-title"
+                className="mt-1 font-headline text-2xl leading-tight text-[#0F172A]"
+              >
+                Start with the main sections.
+              </h2>
+            </div>
+            <p className="max-w-md text-sm leading-relaxed text-[#475569]">
+              Direct paths to the pages clients use most when evaluating our work, model, and team.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-px overflow-hidden border border-[#dbe1ea] bg-[#dbe1ea] sm:grid-cols-2 lg:grid-cols-4">
+            {SITELINK_CANDIDATES.filter((item) => item.href !== '/').map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="group flex min-h-[128px] flex-col justify-between bg-white p-5 transition-colors hover:bg-[#0F172A]"
+              >
+                <span className="text-sm font-semibold leading-tight text-[#0F172A] transition-colors group-hover:text-white">
+                  {item.anchor}
+                </span>
+                <span className="mt-4 text-xs leading-relaxed text-[#64748b] transition-colors group-hover:text-white/60">
+                  {` ${item.description}`}
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </nav>
 
       {/* ── Trusted by ─────────────────────────────────────────────────── */}
       <section className="bg-white border-y border-[#e2e8f0]">

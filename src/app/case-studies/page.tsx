@@ -1,7 +1,14 @@
 import type { Metadata } from 'next';
 import JsonLd from '../../components/JsonLd';
 import { getAllCaseStudies } from '../../lib/proof';
-import { SITE_URL, buildPageMetadata, mergeKeywords, GLOBAL_KEYWORDS, absoluteUrl } from '../../lib/seo';
+import {
+  SITE_URL,
+  absoluteUrl,
+  buildBreadcrumbSchema,
+  buildPageMetadata,
+  mergeKeywords,
+  GLOBAL_KEYWORDS,
+} from '../../lib/seo';
 import CaseStudies from '../../views/CaseStudies';
 
 export const metadata: Metadata = buildPageMetadata({
@@ -45,10 +52,14 @@ export default function CaseStudiesPage() {
       '@id': `${SITE_URL}/#website`,
     },
   };
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Case Studies', path: '/case-studies' },
+  ]);
 
   return (
     <>
-      <JsonLd data={[itemListSchema, collectionSchema]} />
+      <JsonLd data={[itemListSchema, collectionSchema, breadcrumbSchema]} />
       <CaseStudies />
     </>
   );
