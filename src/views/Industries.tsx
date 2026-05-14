@@ -17,7 +17,7 @@ const IMGS = {
   retail:        '/Images/industries/retail-ecommerce-operations-platform-morocco.webp',
   energy:        '/Images/industries/energy-sustainability-monitoring-morocco.webp',
   consumerGoods: '/Images/industries/consumer-goods-luxury-analytics-morocco.webp',
-  rdLab:         '/Images/brand/hva-ai-software-agency-tangier.webp',
+  rdLab:         '/Images/industries/hva-industries-research-development-framework.webp',
 };
 
 const approachTracks = [
@@ -381,9 +381,9 @@ export default function Industries() {
               <div aria-hidden="true" className="absolute -left-3 top-16 z-0 h-24 w-24 bg-[#dbeafe]" />
               <Image
                 src={IMGS.rdLab}
-                alt="HVA AI software agency research Tangier Morocco"
-                width={1200}
-                height={800}
+                alt="H.V.A analog research and development framework for industry operating contexts"
+                width={1023}
+                height={1537}
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="relative z-10 w-full border border-white/80 shadow-2xl shadow-[#0F172A]/18"
               />

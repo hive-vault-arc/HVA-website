@@ -171,19 +171,19 @@ export default function Arc() {
           >
             <div className="relative h-[420px] overflow-hidden border border-white/10 bg-white/5">
               <Image
-                src="/Images/brand/hva-ai-software-agency-tangier.webp"
-                alt="H.V.A AI and software operations workspace in Tangier"
+                src="/Images/capabilities/hva-arc-framework-operating-model.webp"
+                alt="H.V.A ARC framework shown through calm operations screens and connected transformation stages"
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 42vw"
-                className="object-cover opacity-80"
+                className="object-cover opacity-90"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/55 to-[#2563EB]/10" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/85 via-[#0F172A]/35 to-[#f97316]/10" />
               <div className="absolute inset-x-0 bottom-0 p-7">
-                <div className="grid grid-cols-3 border border-white/15 bg-[#0F172A]/75">
+                <div className="grid grid-cols-3 border border-white/15 bg-[#111827]/70">
                   {arcPhases.map((phase) => (
                     <div key={phase.step} className="border-r border-white/10 px-4 py-5 last:border-r-0">
-                      <span className="block text-[10px] font-mono text-[#60a5fa]">{phase.step}</span>
+                      <span className="block text-[10px] font-mono text-[#f97316]">{phase.step}</span>
                       <span className="mt-2 block font-headline text-2xl leading-none text-white">{phase.title}</span>
                     </div>
                   ))}
