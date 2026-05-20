@@ -15,15 +15,9 @@ import {
   Workflow,
 } from 'lucide-react';
 import { useAnimationQuality } from '../lib/animationQuality';
+import { HVA_CEO_ANSWER, HVA_CEO_ANSWER_FR, HVA_LEADERSHIP } from '../lib/leadership';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 import BottomCTA from '../components/BottomCTA';
-
-type TeamMember = {
-  name: string;
-  tag: string;
-  role: string;
-  image: string;
-};
 
 type Principle = {
   icon: React.ReactNode;
@@ -47,27 +41,6 @@ type Pillar = {
 };
 
 const proofPoints = ['Based in Tangier, Morocco', 'Strategy · AI · Engineering · Operations', 'Serving Morocco & Europe'];
-
-const teamMembers: TeamMember[] = [
-  {
-    name: 'Khalid Chalhi',
-    tag: 'Strategy · AI · Software Engineering',
-    role: 'Co-Founder & Software Engineer',
-    image: '/Images/team/khalid-chalhi-hva-co-founder.webp',
-  },
-  {
-    name: 'Ali Amrani',
-    tag: 'Product · Systems · Full-Stack',
-    role: 'Co-Founder & Full-Stack Engineer',
-    image: '/Images/team/ali-amrani-hva-co-founder.webp',
-  },
-  {
-    name: 'Oubay Ghamat',
-    tag: 'Cloud · Infrastructure · Operations',
-    role: 'Co-Founder & Cloud Engineer',
-    image: '/Images/team/oubay-ghamat-hva-co-founder.webp',
-  },
-];
 
 const principles: Principle[] = [
   {
@@ -485,14 +458,18 @@ const About: React.FC = () => {
               <p className="text-[#1E272E]/64 leading-relaxed">
                 Three co-founders. Six service pillars. One team that stays from strategy to operations. H.V.A was founded in Tangier by engineers who wanted to build transformation programs that do not fall apart after the first deployment.
               </p>
+              <p className="mt-5 text-sm leading-relaxed text-[#1E272E]/64">
+                {HVA_CEO_ANSWER} In French: {HVA_CEO_ANSWER_FR}
+              </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
-              {teamMembers.map((member, index) => {
+              {HVA_LEADERSHIP.map((member, index) => {
                 return (
                   <motion.div
+                    id={member.slug}
                     key={member.name}
-                    className="group bg-[#F5F6FA]"
+                    className="group scroll-mt-28 bg-[#F5F6FA]"
                     initial={{ opacity: 0, y: 8 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.05 }}
@@ -501,7 +478,7 @@ const About: React.FC = () => {
                     <div className="relative aspect-[4/5] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
                       <Image
                         src={member.image}
-                        alt={member.name}
+                        alt={`${member.name} — ${member.role} at Hive Vault Arc`}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         className="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-700"
@@ -510,7 +487,9 @@ const About: React.FC = () => {
                     <div className="p-8">
                       <p className="text-[10px] font-bold text-[#0984E3] uppercase tracking-[0.18em] mb-1">{member.tag}</p>
                       <h3 className="font-serif text-2xl font-light text-[#1E272E] mb-1">{member.name}</h3>
-                      <p className="text-sm text-[#1E272E]/60">{member.role}</p>
+                      <p className="text-sm text-[#1E272E]/70">{member.role}</p>
+                      <p className="mt-1 text-xs text-[#1E272E]/55">{member.frenchRole}</p>
+                      <p className="mt-4 text-sm leading-relaxed text-[#1E272E]/60">{member.description}</p>
                     </div>
                   </motion.div>
                 );

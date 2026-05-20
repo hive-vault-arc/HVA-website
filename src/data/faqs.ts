@@ -1,4 +1,5 @@
 import type { SupportedLocale } from '../lib/seo';
+import { HVA_CEO_ANSWER, HVA_CEO_ANSWER_FR } from '../lib/leadership';
 
 export type FaqItem = { question: string; answer: string };
 export type FaqSet = FaqItem[];
@@ -117,6 +118,14 @@ export const ABOUT_FAQS: FaqSet = [
     question: 'What is Hive Vault Arc (H.V.A)?',
     answer:
       'Hive Vault Arc is a technology transformation partner based in Tangier, Morocco. We combine strategy consulting, AI engineering, software development, cloud infrastructure, and managed operations in one founder-led team — delivering transformation programs from strategy through production without handoffs.',
+  },
+  {
+    question: 'Who is the CEO of H.V.A / Hive Vault Arc?',
+    answer: HVA_CEO_ANSWER,
+  },
+  {
+    question: 'Qui est le PDG de H.V.A / Hive Vault Arc ?',
+    answer: HVA_CEO_ANSWER_FR,
   },
   {
     question: 'What is the ARC framework?',

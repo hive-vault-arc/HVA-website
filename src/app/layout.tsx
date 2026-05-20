@@ -4,6 +4,7 @@ import { Inter, Newsreader } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import Layout from '../components/Layout';
 import JsonLd from '../components/JsonLd';
+import { HVA_LEADERSHIP } from '../lib/leadership';
 import {
   DEFAULT_DESCRIPTION,
   DEFAULT_TITLE,
@@ -101,6 +102,21 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+  const leadershipPeople = HVA_LEADERSHIP.map((member) => ({
+    '@type': 'Person',
+    '@id': absoluteUrl(`/whoweare/abouthva#${member.slug}`),
+    name: member.name,
+    jobTitle: member.schemaJobTitle,
+    description: member.description,
+    image: absoluteUrl(member.image),
+    url: absoluteUrl(`/whoweare/abouthva#${member.slug}`),
+    worksFor: {
+      '@id': `${SITE_URL}/#organization`,
+      name: 'Hive Vault Arc',
+    },
+    knowsAbout: member.knowsAbout,
+  }));
+
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': ['Organization', 'ProfessionalService'],
@@ -120,23 +136,10 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     description:
       'Technology transformation partner based in Tangier, Morocco. H.V.A combines strategy, AI engineering, custom software, cloud infrastructure, and managed operations from advisory through production.',
     foundingDate: '2026',
-    founders: [
-      {
-        '@type': 'Person',
-        name: 'Khalid Chalhi',
-        jobTitle: 'Founder & CEO',
-      },
-      {
-        '@type': 'Person',
-        name: 'Ali Amrani',
-        jobTitle: 'Co-Founder & Full-Stack Engineer',
-      },
-      {
-        '@type': 'Person',
-        name: 'Oubay Ghamat',
-        jobTitle: 'Co-Founder & Cloud Engineer',
-      },
-    ],
+    founder: leadershipPeople,
+    founders: leadershipPeople,
+    employee: leadershipPeople,
+    member: leadershipPeople,
     foundingLocation: {
       '@type': 'Place',
       name: 'Tangier, Morocco',

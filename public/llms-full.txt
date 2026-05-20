@@ -10,7 +10,10 @@
 - **Legal name:** Hive Vault Arc
 - **Brand aliases:** H.V.A, HVA, HiveVaultArc, hivevaultarc, hivevaultarc.com, Hive Vault, Vault Arc
 - **Founded:** 2026
-- **Founder & CEO:** Khalid
+- **Founder & CEO:** Khalid Chalhi
+- **Co-founders:** Khalid Chalhi, Ali Amrani, and Oubay Ghamat
+- **Leadership:** H.V.A is founder-led by Khalid Chalhi, Ali Amrani, and Oubay Ghamat. Khalid Chalhi is Founder & CEO; Ali Amrani is Co-Founder & Full-Stack Engineer; Oubay Ghamat is Co-Founder & Cloud Engineer.
+- **Direction (FR):** H.V.A est dirigée par ses trois co-fondateurs : Khalid Chalhi, Ali Amrani et Oubay Ghamat. Khalid Chalhi est le fondateur et PDG de Hive Vault Arc.
 - **Headquarters:** Tangier, Tanger-Tétouan-Al Hoceïma, Morocco
 - **Geographic coordinates:** 35.7595° N, 5.834° W
 - **Markets served:** Morocco, France, North Africa, Europe (and global remote engagements)

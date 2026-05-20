@@ -54,7 +54,7 @@ export default function LegalMentions() {
             The publication director of hivevaultarc.com is:
           </p>
           <div className="geo-card card-hover mt-5 space-y-1">
-            <p className="text-sm font-semibold text-[#0f172a]">Khalid</p>
+            <p className="text-sm font-semibold text-[#0f172a]">Khalid Chalhi</p>
             <p className="text-sm text-secondary">Founder &amp; CEO, Hive Vault Arc</p>
             <p className="text-sm text-secondary">
               <a
