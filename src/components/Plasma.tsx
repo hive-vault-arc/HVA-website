@@ -93,7 +93,7 @@ void main() {
 }`;
 
 export const Plasma: React.FC<PlasmaProps> = ({
-  color = '#17195d',
+  color = '#1A2535',
   speed = 1,
   direction = 'forward',
   scale = 1,

@@ -1,4 +1,20 @@
-# Full SEO & Technical Audit — Hive Vault Arc (hiva-nine.vercel.app)
+# Full SEO & Technical Audit - Historical Snapshot
+
+---
+
+## 2026-05-24 Current Baseline Update
+
+This audit was written against the old Vercel staging domain and is no longer the current execution baseline. Use `docs/specs/seo-ai-discovery/` and `sprints/seo-ai-discovery/` for current SEO/AI discovery work.
+
+Current repo and production state:
+
+- Production domain is `https://hivevaultarc.com`.
+- `robots.txt`, `sitemap.xml`, `llms.txt`, and `llms-full.txt` already exist and return `200`.
+- Global Organization/ProfessionalService JSON-LD, WebSite schema, and FAQ schema already exist.
+- `sameAs`, address locality, email, and social/profile fields have changed since this snapshot and must be re-audited before editing.
+- `GET /ai/company` is the main missing machine-readable endpoint and currently returns `404`.
+- `https://hiva-nine.vercel.app/` still returns `200`, so staging/canonical leakage remains an active risk.
+- Public brand naming should use `Hive Vault Arc`; keep `H.V.A` and `HVA` only as aliases/search variants.
 
 ---
 

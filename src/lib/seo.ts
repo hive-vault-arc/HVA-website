@@ -7,20 +7,64 @@ export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
 export const SITE_NAME = 'Hive Vault Arc';
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://hivevaultarc.com';
 export const LINKEDIN_URL = 'https://www.linkedin.com/company/hive-vault-arc';
-export const SITE_LOGO_PATH = '/Images/favico/logo.png';
-export const SITE_LOGO_WIDTH = 359;
-export const SITE_LOGO_HEIGHT = 359;
+export const SITE_LOGO_PATH = '/Images/brand/hva-logo-number-3.png';
+export const SITE_LOGO_WIDTH = 1086;
+export const SITE_LOGO_HEIGHT = 1086;
+export const DEFAULT_OG_IMAGE_PATH = '/Images/brand/hva-ai-software-agency-tangier.webp';
+export const DEFAULT_OG_IMAGE_WIDTH = 1200;
+export const DEFAULT_OG_IMAGE_HEIGHT = 630;
 
 export const BUSINESS_NAME = 'Hive Vault Arc';
+export const DISPLAY_BRAND_NAME = BUSINESS_NAME;
+export const DISPLAY_BRAND_NAME_UPPER = 'HIVE VAULT ARC';
+export const BRAND_ABBREVIATION = 'H.V.A';
+export const BRAND_INITIALISM = 'HVA';
 export const BRAND_ALIASES = [
-  'H.V.A',
-  'HVA',
+  BRAND_ABBREVIATION,
+  BRAND_INITIALISM,
   'HiveVaultArc',
   'hivevaultarc',
   'Hive Vault ARC',
 ];
 export const BRAND_SEARCH_VARIANTS = [...BRAND_ALIASES, 'Hive Vault', 'Vault Arc', 'hivevaultarc.com'];
-export const DEFAULT_TITLE = `${SITE_NAME} | Technology Transformation Partner · Strategy · AI Engineering · Operations`;
+export const CONTACT_EMAIL = 'contact@hivevaultarc.com';
+export const CONTACT_PHONE_E164 = '+212670431249';
+export const CONTACT_PHONE_DISPLAY = '+212 670 431 249';
+export const WHATSAPP_URL = 'https://wa.me/212670431249';
+export const SOCIAL_PROFILES = [
+  {
+    label: 'LinkedIn',
+    handle: 'Hive Vault Arc',
+    url: LINKEDIN_URL,
+  },
+  {
+    label: 'GitHub',
+    handle: 'hive-vault-arc',
+    url: 'https://github.com/hive-vault-arc',
+  },
+  {
+    label: 'Instagram',
+    handle: '@hive.vault.arc',
+    url: 'https://www.instagram.com/hive.vault.arc/',
+  },
+  {
+    label: 'Facebook',
+    handle: 'Hive Vault Arc',
+    url: 'https://www.facebook.com/hivevaultarc',
+  },
+  {
+    label: 'X',
+    handle: '@Hivevaultarc',
+    url: 'https://x.com/Hivevaultarc',
+  },
+  {
+    label: 'TikTok',
+    handle: '@hivevaultarc',
+    url: 'https://www.tiktok.com/@hivevaultarc',
+  },
+] as const;
+export const SOCIAL_PROFILE_URLS = SOCIAL_PROFILES.map((profile) => profile.url);
+export const DEFAULT_TITLE = `${SITE_NAME} | Technology Transformation Partner - Strategy, AI Engineering, Operations`;
 export const DEFAULT_DESCRIPTION = CANONICAL_MARKET_IDENTITY.longDescriptor;
 
 export const GLOBAL_KEYWORDS = [
@@ -59,42 +103,42 @@ export const SITELINK_CANDIDATES = [
     href: '/',
     label: 'Home',
     anchor: 'Visit the Hive Vault Arc homepage',
-    description: 'Official homepage for H.V.A technology transformation programs.',
+    description: 'Official homepage for Hive Vault Arc technology transformation programs.',
   },
   {
     href: '/capabilities',
     label: 'Capabilities',
-    anchor: 'Explore H.V.A capabilities',
+    anchor: 'Explore Hive Vault Arc capabilities',
     description: 'Six service pillars across strategy, AI, software, cloud, and operations.',
   },
   {
     href: '/industries',
     label: 'Industries',
-    anchor: 'View industries H.V.A serves',
+    anchor: 'View industries Hive Vault Arc serves',
     description: 'Industry transformation coverage across eight business verticals.',
   },
   {
     href: '/arc',
     label: 'ARC Framework',
     anchor: 'Learn the ARC operating model',
-    description: 'Assess, Re-engineer, and Command: H.V.A delivery from strategy to production.',
+    description: 'Assess, Re-engineer, and Command: Hive Vault Arc delivery from strategy to production.',
   },
   {
     href: '/whoweare/abouthva',
     label: 'Who We Are',
-    anchor: 'Meet the H.V.A founding team',
+    anchor: 'Meet the Hive Vault Arc founding team',
     description: 'Founder-led team, operating principles, and transformation philosophy.',
   },
   {
     href: '/case-studies',
     label: 'Case Studies',
-    anchor: 'Review H.V.A case studies',
+    anchor: 'Review Hive Vault Arc case studies',
     description: 'Production outcomes from AI operations and CRM modernization programs.',
   },
   {
     href: '/insights',
     label: 'Insights',
-    anchor: 'Read H.V.A insights',
+    anchor: 'Read Hive Vault Arc insights',
     description: 'Blogs, case studies, perspectives, news, and research reports.',
   },
   {
@@ -145,9 +189,9 @@ export function buildPageMetadata(input: PageMetaInput): Metadata {
       locale: input.locale ?? 'en',
       images: [
         {
-          url: new URL('/Images/brand/hva-ai-software-agency-tangier.webp', SITE_URL).toString(),
-          width: 1200,
-          height: 630,
+          url: new URL(DEFAULT_OG_IMAGE_PATH, SITE_URL).toString(),
+          width: DEFAULT_OG_IMAGE_WIDTH,
+          height: DEFAULT_OG_IMAGE_HEIGHT,
           alt: `${input.title} | ${SITE_NAME}`,
         },
       ],
@@ -156,7 +200,7 @@ export function buildPageMetadata(input: PageMetaInput): Metadata {
       card: 'summary_large_image',
       title: input.title,
       description: input.description,
-      images: [new URL('/Images/brand/hva-ai-software-agency-tangier.webp', SITE_URL).toString()],
+      images: [new URL(DEFAULT_OG_IMAGE_PATH, SITE_URL).toString()],
     },
   };
 }

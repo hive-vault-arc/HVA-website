@@ -5,7 +5,7 @@ import { GLOBAL_KEYWORDS, buildPageMetadata, mergeKeywords } from '../../../lib/
 export const metadata: Metadata = buildPageMetadata({
   title: 'Research Reports | Data-Backed Transformation Analysis',
   description:
-    'Research reports from H.V.A covering AI operations, transformation execution benchmarks, and cloud reliability readiness.',
+    'Research reports from Hive Vault Arc covering AI operations, transformation execution benchmarks, and cloud reliability readiness.',
   path: '/insights/research-reports',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'digital transformation research report',

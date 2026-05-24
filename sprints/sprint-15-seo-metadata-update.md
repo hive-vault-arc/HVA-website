@@ -1,4 +1,6 @@
-# Sprint 15 — SEO & Metadata Update
+# Sprint 15 - SEO & Metadata Update
+
+> 2026-05-24 status: historical sprint. Use `sprints/seo-ai-discovery/` for current SEO + AI discovery work. Public-facing brand should now be `Hive Vault Arc`; `H.V.A` and `HVA` remain aliases/search variants.
 
 > **Priority:** HIGH — Metadata is read by Google, LLMs, and social crawlers on every page. Old positioning in titles and descriptions actively works against the new brand.
 > **Estimated effort:** 2–3 hours

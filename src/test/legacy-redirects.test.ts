@@ -22,6 +22,26 @@ describe('Legacy Redirect Rules', () => {
     );
   });
 
+  it('redirects the indexed Vercel staging hostname to production', async () => {
+    const redirects = await (nextConfig.redirects?.() ?? Promise.resolve([]));
+
+    expect(redirects).toEqual(
+      expect.arrayContaining([
+        {
+          source: '/:path*',
+          has: [
+            {
+              type: 'host',
+              value: 'hiva-nine.vercel.app',
+            },
+          ],
+          destination: 'https://hivevaultarc.com/:path*',
+          permanent: true,
+        },
+      ])
+    );
+  });
+
   it('contains permanent redirects from legacy URLs to canonical destinations', async () => {
     const redirects = await (nextConfig.redirects?.() ?? Promise.resolve([]));
 

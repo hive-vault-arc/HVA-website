@@ -5,7 +5,7 @@ export function WorldMapDemo() {
   return (
     <div className="w-full pt-4 pb-12">
       <div className="max-w-7xl mx-auto px-4 text-center">
-        <p className="font-bold text-3xl md:text-7xl text-[#1E272E] mb-6">
+        <p className="font-bold text-3xl md:text-7xl text-[#1A2535] mb-6">
           Global Reach, Local Impact
         </p>
         <p className="text-sm md:text-lg text-neutral-400 max-w-3xl mx-auto py-2">
@@ -16,7 +16,7 @@ export function WorldMapDemo() {
         </p>
       </div>
       <div className="max-w-6xl mx-auto px-4 mt-7">
-        <WorldMap dots={WORLD_MAP_DOTS} lineColor="#0984E3" />
+        <WorldMap dots={WORLD_MAP_DOTS} lineColor="#E8A838" />
       </div>
     </div>
   );

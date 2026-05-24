@@ -14,7 +14,7 @@ import CaseStudies from '../../views/CaseStudies';
 export const metadata: Metadata = buildPageMetadata({
   title: 'Case Studies | Consulting-Led Digital Transformation Outcomes',
   description:
-    'Verified case studies from H.V.A showing consulting strategy translated into real engineering delivery, production deployment, and measurable operating impact.',
+    'Verified case studies from Hive Vault Arc showing consulting strategy translated into real engineering delivery, production deployment, and measurable operating impact.',
   path: '/case-studies',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'digital transformation case studies Morocco',
@@ -32,7 +32,7 @@ export default function CaseStudiesPage() {
   const itemListSchema = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: 'H.V.A Case Studies',
+    name: 'Hive Vault Arc Case Studies',
     itemListElement: studies.map((study, index) => ({
       '@type': 'ListItem',
       position: index + 1,
@@ -44,9 +44,9 @@ export default function CaseStudiesPage() {
   const collectionSchema = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: 'H.V.A Case Studies',
+    name: 'Hive Vault Arc Case Studies',
     description:
-      'Consulting-led transformation deployments delivered by H.V.A across AI operations, CRM architecture, and executive analytics systems.',
+      'Consulting-led transformation deployments delivered by Hive Vault Arc across AI operations, CRM architecture, and executive analytics systems.',
     url: `${SITE_URL}/case-studies`,
     isPartOf: {
       '@id': `${SITE_URL}/#website`,

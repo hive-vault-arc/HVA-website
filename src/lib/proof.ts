@@ -74,7 +74,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     testimonial: {
       quote:
-        'H.V.A shipped a system that answers faster than our sales desk, updates the CRM automatically, and keeps context across conversations.',
+        'Hive Vault Arc shipped a system that answers faster than our sales desk, updates the CRM automatically, and keeps context across conversations.',
       author: 'Nadia El Idrissi',
       role: 'Head of Growth, Atlas Property Group',
     },

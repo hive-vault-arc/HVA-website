@@ -44,12 +44,12 @@ const HeroCurvedShapes: React.FC<HeroCurvedShapesProps> = ({ items, badgeText, c
   return (
     <div className={cn('relative min-h-[255px] md:min-h-[305px]', className)}>
       <div className="pointer-events-none absolute -left-4 top-10 h-28 w-40 rounded-full bg-white/26 blur-3xl" />
-      <div className="pointer-events-none absolute -right-8 bottom-12 h-32 w-32 rounded-full bg-[#0984E3]/22 blur-3xl" />
-      <div className="pointer-events-none absolute right-14 top-16 h-20 w-20 rounded-full bg-[#00CEC9]/16 blur-3xl" />
+      <div className="pointer-events-none absolute -right-8 bottom-12 h-32 w-32 rounded-full bg-[#E8A838]/22 blur-3xl" />
+      <div className="pointer-events-none absolute right-14 top-16 h-20 w-20 rounded-full bg-[#E8A838]/16 blur-3xl" />
 
       {badgeText ? (
-        <div className="absolute right-1 top-5 z-30 inline-flex items-center gap-2 rounded-full bg-white/54 px-3 py-1.5 text-[10px] uppercase tracking-[0.15em] text-[#1E272E]/55 backdrop-blur-md">
-          <span className="h-1.5 w-1.5 rounded-full bg-[#0984E3]" />
+        <div className="absolute right-1 top-5 z-30 inline-flex items-center gap-2 rounded-full bg-white/54 px-3 py-1.5 text-[10px] uppercase tracking-[0.15em] text-[#1A2535]/55 backdrop-blur-md">
+          <span className="h-1.5 w-1.5 rounded-full bg-[#E8A838]" />
           <span>{badgeText}</span>
         </div>
       ) : null}
@@ -63,7 +63,7 @@ const HeroCurvedShapes: React.FC<HeroCurvedShapesProps> = ({ items, badgeText, c
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, delay: 0.08 * index }}
-              className="relative overflow-hidden rounded-[999px] shadow-[0_20px_34px_rgba(9,132,227,0.16)]"
+              className="relative overflow-hidden rounded-[999px] shadow-[0_20px_34px_rgba(232,168,56,0.16)]"
               style={{
                 height: item.height,
                 width: item.width ?? 106,
@@ -89,7 +89,7 @@ const HeroCurvedShapes: React.FC<HeroCurvedShapesProps> = ({ items, badgeText, c
         })}
       </div>
 
-      <div className="pointer-events-none absolute inset-x-1 top-0 z-30 h-16 rounded-full bg-gradient-to-b from-[#0984E3]/18 via-[#4CA6EC]/8 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-1 top-0 z-30 h-16 rounded-full bg-gradient-to-b from-[#E8A838]/18 via-[#E8A838]/8 to-transparent" />
     </div>
   );
 };

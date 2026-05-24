@@ -4,7 +4,7 @@ import JsonLd from '../../components/JsonLd';
 import { SITE_URL, absoluteUrl, buildBreadcrumbSchema, buildPageMetadata } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Legal Mentions | Hive Vault Arc (H.V.A)',
+  title: 'Legal Mentions',
   description:
     'Legal information for hivevaultarc.com — publisher details, hosting, intellectual property, and applicable law in accordance with Moroccan law.',
   path: '/mentions-legales',

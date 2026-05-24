@@ -4,9 +4,9 @@ import JsonLd from '../../components/JsonLd';
 import { SITE_URL, absoluteUrl, buildBreadcrumbSchema, buildPageMetadata } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Privacy Policy — Data Protection | H.V.A',
+  title: 'Privacy Policy — Data Protection',
   description:
-    'Privacy policy of Hive Vault Arc (H.V.A), compliant with Moroccan Law 09-08 (CNDP) and the GDPR. Learn how we collect, use, and protect your personal data.',
+    'Privacy policy of Hive Vault Arc, compliant with Moroccan Law 09-08 (CNDP) and the GDPR. Learn how we collect, use, and protect your personal data.',
   path: '/privacy-policy',
   keywords: [
     'privacy policy Morocco',

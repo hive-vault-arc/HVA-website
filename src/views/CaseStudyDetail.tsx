@@ -20,16 +20,16 @@ function CaseStudySidebar({ study }: { readonly study: CaseStudy }) {
   return (
     <div className="space-y-8">
       {/* Meta fields */}
-      <div className="space-y-5 border-l-2 border-[#2563EB] pl-5">
+      <div className="space-y-5 border-l-2 border-[#E8A838] pl-5">
         {meta.map((item) => (
           <div key={item.label}>
             <p
-              className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#2563EB] mb-0.5"
+              className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#E8A838] mb-0.5"
               style={{ fontFamily: 'var(--font-body)' }}
             >
               {item.label}
             </p>
-            <p className="text-sm text-[#45464d]" style={{ fontFamily: 'var(--font-body)' }}>
+            <p className="text-sm text-[#536070]" style={{ fontFamily: 'var(--font-body)' }}>
               {item.value}
             </p>
           </div>
@@ -37,19 +37,19 @@ function CaseStudySidebar({ study }: { readonly study: CaseStudy }) {
       </div>
 
       {/* Program delivery record */}
-      <div className="relative bg-[#0F172A] p-6 overflow-hidden">
+      <div className="relative bg-[#1A2535] p-6 overflow-hidden">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 opacity-[0.04]"
           style={{
             backgroundImage:
-              'repeating-linear-gradient(0deg,#60a5fa 0,#60a5fa 1px,transparent 0,transparent 48px),repeating-linear-gradient(90deg,#60a5fa 0,#60a5fa 1px,transparent 0,transparent 48px)',
+              'repeating-linear-gradient(0deg,#F0C15A 0,#F0C15A 1px,transparent 0,transparent 48px),repeating-linear-gradient(90deg,#F0C15A 0,#F0C15A 1px,transparent 0,transparent 48px)',
           }}
         />
-        <div className="pointer-events-none absolute -top-8 -right-8 w-32 h-32 bg-[#2563EB]/20 rounded-full blur-2xl" />
+        <div className="pointer-events-none absolute -top-8 -right-8 w-32 h-32 bg-[#E8A838]/20 rounded-full blur-2xl" />
 
         <p
-          className="relative z-10 text-[9px] font-bold uppercase tracking-[0.2em] text-[#2563EB] mb-4"
+          className="relative z-10 text-[9px] font-bold uppercase tracking-[0.2em] text-[#E8A838] mb-4"
           style={{ fontFamily: 'var(--font-body)' }}
         >
           Program Delivery Record
@@ -63,8 +63,8 @@ function CaseStudySidebar({ study }: { readonly study: CaseStudy }) {
           ] as { label: string; value: string; pulse: boolean }[]).map((row) => (
             <div key={row.label} className="flex items-center justify-between border-t border-white/10 py-3">
               <span className="text-xs text-white/50" style={{ fontFamily: 'var(--font-body)' }}>{row.label}</span>
-              <span className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wide text-[#2563EB]" style={{ fontFamily: 'var(--font-body)' }}>
-                {row.pulse && <span className="h-1.5 w-1.5 rounded-full bg-[#2563EB] animate-pulse inline-block" />}
+              <span className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wide text-[#E8A838]" style={{ fontFamily: 'var(--font-body)' }}>
+                {row.pulse && <span className="h-1.5 w-1.5 rounded-full bg-[#E8A838] animate-pulse inline-block" />}
                 {row.value}
               </span>
             </div>
@@ -82,7 +82,7 @@ function CaseStudyBody({ study }: { readonly study: CaseStudy }) {
     <div>
       {/* Metrics strip */}
       <motion.div
-        className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-[#e2e8f0] border border-[#e2e8f0] mb-14"
+        className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-[#DDE3EA] border border-[#DDE3EA] mb-14"
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.3 }}
@@ -93,22 +93,22 @@ function CaseStudyBody({ study }: { readonly study: CaseStudy }) {
             key={metric.label}
             variants={fadeUp}
             transition={{ duration: 0.5 }}
-            className="bg-white px-6 py-7 group hover:bg-[#2563EB] transition-colors duration-300"
+            className="bg-white px-6 py-7 group hover:bg-[#E8A838] transition-colors duration-300"
           >
             <p
-              className="font-headline text-4xl md:text-5xl text-[#0F172A] group-hover:text-white transition-colors duration-300 mb-2"
+              className="font-headline text-4xl md:text-5xl text-[#1A2535] group-hover:text-white transition-colors duration-300 mb-2"
               style={{ fontFamily: 'var(--font-headline)' }}
             >
               {metric.value}
             </p>
             <p
-              className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#2563EB] group-hover:text-white/80 transition-colors duration-300"
+              className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#E8A838] group-hover:text-white/80 transition-colors duration-300"
               style={{ fontFamily: 'var(--font-body)' }}
             >
               {metric.label}
             </p>
             <p
-              className="mt-2 text-xs text-[#94a3b8] group-hover:text-white/60 transition-colors duration-300 leading-relaxed"
+              className="mt-2 text-xs text-[#9AA4B2] group-hover:text-white/60 transition-colors duration-300 leading-relaxed"
               style={{ fontFamily: 'var(--font-body)' }}
             >
               {metric.context}
@@ -129,20 +129,20 @@ function CaseStudyBody({ study }: { readonly study: CaseStudy }) {
         <motion.div variants={fadeUp} transition={{ duration: 0.5 }}>
           <div className="flex items-center gap-4 mb-5">
             <span
-              className="text-5xl select-none text-[#2563EB]"
+              className="text-5xl select-none text-[#E8A838]"
               style={{ fontFamily: 'var(--font-headline)' }}
             >
               01
             </span>
-            <div className="h-px flex-grow bg-[#2563EB]/20" />
+            <div className="h-px flex-grow bg-[#E8A838]/20" />
           </div>
           <h2
-            className="text-3xl text-[#0F172A] mb-4"
+            className="text-3xl text-[#1A2535] mb-4"
             style={{ fontFamily: 'var(--font-headline)' }}
           >
             Business Challenge
           </h2>
-          <p className="text-[#475569] leading-relaxed" style={{ fontFamily: 'var(--font-body)' }}>
+          <p className="text-[#566274] leading-relaxed" style={{ fontFamily: 'var(--font-body)' }}>
             {study.problem}
           </p>
         </motion.div>
@@ -151,20 +151,20 @@ function CaseStudyBody({ study }: { readonly study: CaseStudy }) {
         <motion.div variants={fadeUp} transition={{ duration: 0.5 }}>
           <div className="flex items-center gap-4 mb-5">
             <span
-              className="text-5xl select-none text-[#2563EB]"
+              className="text-5xl select-none text-[#E8A838]"
               style={{ fontFamily: 'var(--font-headline)' }}
             >
               02
             </span>
-            <div className="h-px flex-grow bg-[#2563EB]/20" />
+            <div className="h-px flex-grow bg-[#E8A838]/20" />
           </div>
           <h2
-            className="text-3xl text-[#0F172A] mb-4"
+            className="text-3xl text-[#1A2535] mb-4"
             style={{ fontFamily: 'var(--font-headline)' }}
           >
             Execution Architecture
           </h2>
-          <p className="text-[#475569] leading-relaxed" style={{ fontFamily: 'var(--font-body)' }}>
+          <p className="text-[#566274] leading-relaxed" style={{ fontFamily: 'var(--font-body)' }}>
             {study.systemArchitecture}
           </p>
         </motion.div>
@@ -173,23 +173,23 @@ function CaseStudyBody({ study }: { readonly study: CaseStudy }) {
         <motion.div variants={fadeUp} transition={{ duration: 0.5 }}>
           <div className="flex items-center gap-4 mb-5">
             <span
-              className="text-5xl select-none text-[#2563EB]"
+              className="text-5xl select-none text-[#E8A838]"
               style={{ fontFamily: 'var(--font-headline)' }}
             >
               03
             </span>
-            <div className="h-px flex-grow bg-[#2563EB]/20" />
+            <div className="h-px flex-grow bg-[#E8A838]/20" />
           </div>
           <h2
-            className="text-3xl text-[#0F172A] mb-5"
+            className="text-3xl text-[#1A2535] mb-5"
             style={{ fontFamily: 'var(--font-headline)' }}
           >
             Modules Activated
           </h2>
           <ul className="space-y-2">
             {study.operationalModules.map((mod) => (
-              <li key={mod} className="flex items-start gap-3 text-sm text-[#334155]" style={{ fontFamily: 'var(--font-body)' }}>
-                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#2563EB]" />
+              <li key={mod} className="flex items-start gap-3 text-sm text-[#3D4858]" style={{ fontFamily: 'var(--font-body)' }}>
+                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#E8A838]" />
                 {mod}
               </li>
             ))}
@@ -199,7 +199,7 @@ function CaseStudyBody({ study }: { readonly study: CaseStudy }) {
         {/* Stack & Integrations */}
         <motion.div variants={fadeUp} transition={{ duration: 0.5 }}>
           <p
-            className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#2563EB] mb-4"
+            className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#E8A838] mb-4"
             style={{ fontFamily: 'var(--font-body)' }}
           >
             Stack &amp; Integrations
@@ -208,7 +208,7 @@ function CaseStudyBody({ study }: { readonly study: CaseStudy }) {
             {study.integrations.map((integration) => (
               <span
                 key={integration}
-                className="text-[11px] font-medium bg-[#F0F4FF] text-[#2563EB] border border-[#2563EB]/20 px-3 py-1.5 rounded-full"
+                className="text-[11px] font-medium bg-[#FFF7E8] text-[#E8A838] border border-[#E8A838]/20 px-3 py-1.5 rounded-full"
                 style={{ fontFamily: 'var(--font-body)' }}
               >
                 {integration}

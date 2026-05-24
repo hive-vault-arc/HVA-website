@@ -31,7 +31,7 @@ const POSTS: BlogPost[] = [
     category: 'AI & Automation',
     readTime: '10 min read',
     publishedAt: '2025-03-10',
-    authors: [{ name: 'H.V.A Research Team', role: 'Technology Consulting & Transformation Desk', initials: 'HV' }],
+    authors: [{ name: 'Hive Vault Arc Research Team', role: 'Technology Consulting & Transformation Desk', initials: 'HV' }],
     coverImage: '/Images/blog/custom-ai-agent-morocco.webp',
     excerpt:
       'Agentic AI systems that can plan, reason, and act autonomously are the next major shift in enterprise technology. Backed by Gartner, McKinsey, and PwC research, we explore what this means for businesses in Morocco and how to get ahead.',
@@ -55,7 +55,7 @@ const POSTS: BlogPost[] = [
       {
         question: 'How does a business in Morocco get started with AI agents?',
         answer:
-          'Start by identifying your highest-volume, lowest-variance workflows — these are the best candidates for AI agent deployment. Choose a narrow vertical first: one process, one agent, one measurable outcome. H.V.A builds custom AI agents for businesses in Morocco; contact us for an initial scoping call.',
+          'Start by identifying your highest-volume, lowest-variance workflows — these are the best candidates for AI agent deployment. Choose a narrow vertical first: one process, one agent, one measurable outcome. Hive Vault Arc builds custom AI agents for businesses in Morocco; contact us for an initial scoping call.',
       },
     ],
     sources: [
@@ -178,7 +178,7 @@ const POSTS: BlogPost[] = [
         type: 'pullquote',
         content:
           '"The businesses that treat agentic AI as a cost center will lose to the ones that treat it as the operating system of their company."',
-        attribution: 'H.V.A Research Team',
+        attribution: 'Hive Vault Arc Research Team',
       },
       {
         type: 'heading',
@@ -197,7 +197,7 @@ const POSTS: BlogPost[] = [
       {
         type: 'paragraph',
         content:
-          'Agentic AI is not a distant future. It is a present-tense competitive reality. The question for every business leader in Morocco is not whether to adopt it — it is how fast and how well. At H.V.A, we build these systems: AI receptionists, AI analyst agents, and end-to-end workflow automation for businesses across Morocco. If you want to understand what an agentic AI strategy could look like for your specific business, we are ready to show you.',
+          'Agentic AI is not a distant future. It is a present-tense competitive reality. The question for every business leader in Morocco is not whether to adopt it — it is how fast and how well. At Hive Vault Arc, we build these systems: AI receptionists, AI analyst agents, and end-to-end workflow automation for businesses across Morocco. If you want to understand what an agentic AI strategy could look like for your specific business, we are ready to show you.',
       },
     ],
   },
@@ -209,7 +209,7 @@ const POSTS: BlogPost[] = [
     category: 'Strategy & Execution',
     readTime: '12 min read',
     publishedAt: '2025-03-17',
-    authors: [{ name: 'H.V.A Research Team', role: 'Technology Consulting & Transformation Desk', initials: 'HV' }],
+    authors: [{ name: 'Hive Vault Arc Research Team', role: 'Technology Consulting & Transformation Desk', initials: 'HV' }],
     coverImage: '/Images/blog/custom-crm-system-morocco.webp',
     excerpt:
       'Generic SaaS tools are fast to start but slow to scale. Industry research from Forrester, McKinsey, Deloitte, and HIMSS shows that custom digital solutions consistently deliver higher ROI, lower long-term cost, and measurable operational improvements across real estate, healthcare, construction, and beyond.',
@@ -226,14 +226,14 @@ const POSTS: BlogPost[] = [
           'Forrester research found that custom software delivers an average three-year ROI significantly higher than equivalent SaaS deployments. The gap comes from eliminating friction costs — workarounds, manual exports, broken integrations, and paying for features you never use.',
       },
       {
-        question: 'Can H.V.A build a custom CRM for a real estate or healthcare business in Morocco?',
+        question: 'Can Hive Vault Arc build a custom CRM for a real estate or healthcare business in Morocco?',
         answer:
-          'Yes. H.V.A has built custom CRM systems for real estate agencies and patient management platforms for clinics in Morocco. These systems handle Arabic and French natively, integrate with WhatsApp Business for client communication, and are built around the specific workflows of each business — not a generic international SaaS template.',
+          'Yes. Hive Vault Arc has built custom CRM systems for real estate agencies and patient management platforms for clinics in Morocco. These systems handle Arabic and French natively, integrate with WhatsApp Business for client communication, and are built around the specific workflows of each business — not a generic international SaaS template.',
       },
       {
-        question: 'How long does it take to build a custom software platform with H.V.A?',
+        question: 'How long does it take to build a custom software platform with Hive Vault Arc?',
         answer:
-          'A focused custom platform — CRM, internal portal, or patient management system — typically takes 8 to 20 weeks from discovery to production deployment, depending on scope and integrations. H.V.A delivers in sprints with regular demos so you have full visibility throughout the build.',
+          'A focused custom platform — CRM, internal portal, or patient management system — typically takes 8 to 20 weeks from discovery to production deployment, depending on scope and integrations. Hive Vault Arc delivers in sprints with regular demos so you have full visibility throughout the build.',
       },
     ],
     sources: [
@@ -283,7 +283,7 @@ const POSTS: BlogPost[] = [
         type: 'pullquote',
         content:
           '"Every workaround in your SaaS tool is a tax on your team\'s time. Multiply it by 12 months and you have the cost of building something that actually fits."',
-        attribution: 'H.V.A Engineering Team',
+        attribution: 'Hive Vault Arc Engineering Team',
       },
       {
         type: 'heading',
@@ -377,7 +377,7 @@ const POSTS: BlogPost[] = [
       {
         type: 'paragraph',
         content:
-          'At H.V.A, we have built custom CRM systems for real estate agencies, patient management platforms for clinics, and logistics coordination tools for distribution companies — all in Morocco, all with Arabic and French support, all integrated with the local tools and platforms Moroccan businesses actually use. If you want to understand what a custom solution would look like for your specific business, that conversation starts with a call.',
+          'At Hive Vault Arc, we have built custom CRM systems for real estate agencies, patient management platforms for clinics, and logistics coordination tools for distribution companies — all in Morocco, all with Arabic and French support, all integrated with the local tools and platforms Moroccan businesses actually use. If you want to understand what a custom solution would look like for your specific business, that conversation starts with a call.',
       },
     ],
   },
@@ -389,7 +389,7 @@ const POSTS: BlogPost[] = [
     category: 'Product & Strategy',
     readTime: '11 min read',
     publishedAt: '2026-03-25',
-    authors: [{ name: 'H.V.A Research Team', role: 'Technology Consulting & Transformation Desk', initials: 'HV' }],
+    authors: [{ name: 'Hive Vault Arc Research Team', role: 'Technology Consulting & Transformation Desk', initials: 'HV' }],
     coverImage: '/Images/blog/software-onboarding-guide-morocco.webp',
     excerpt:
       'Research shows that up to 50% of app conversions are decided during onboarding — before users ever reach the core product. Yet most developers treat onboarding as an afterthought. Here are the four rules that separate apps that triple revenue from apps that leave it on the table.',
@@ -629,12 +629,12 @@ const POSTS: BlogPost[] = [
         type: 'pullquote',
         content:
           '"You don\'t need new pages or new content. You need to identify the gaps in what you already have, answer them precisely, and publish. The revenue was always there."',
-        attribution: 'H.V.A Product & Strategy',
+        attribution: 'Hive Vault Arc Product & Strategy',
       },
       {
         type: 'paragraph',
         content:
-          'At H.V.A, we build mobile and web applications where onboarding is treated as a first-class engineering surface, not a post-launch task. Funnel instrumentation, aha-moment mapping, and paywall optimization are part of the build spec — not the post-mortem. If you are building a product and want a development partner who understands the revenue architecture of modern apps, start with a call.',
+          'At Hive Vault Arc, we build mobile and web applications where onboarding is treated as a first-class engineering surface, not a post-launch task. Funnel instrumentation, aha-moment mapping, and paywall optimization are part of the build spec — not the post-mortem. If you are building a product and want a development partner who understands the revenue architecture of modern apps, start with a call.',
       },
     ],
   },
@@ -646,7 +646,7 @@ const POSTS: BlogPost[] = [
     category: 'AI & Automation',
     readTime: '9 min read',
     publishedAt: '2026-03-26',
-    authors: [{ name: 'H.V.A Research Team', role: 'Technology Consulting & Transformation Desk', initials: 'HV' }],
+    authors: [{ name: 'Hive Vault Arc Research Team', role: 'Technology Consulting & Transformation Desk', initials: 'HV' }],
     coverImage: '/Images/blog/ai-agent-development-service.webp',
     excerpt:
       'WhatsApp handles more customer conversations in Morocco than email, phone, and live chat combined. Yet most businesses still manage it manually — missing leads, delaying responses, losing sales. Here is how WhatsApp AI chatbots work, what they cost, and how to deploy one for your business.',
@@ -660,17 +660,17 @@ const POSTS: BlogPost[] = [
       {
         question: 'How much does a WhatsApp AI chatbot cost for a business in Morocco?',
         answer:
-          'The cost depends on complexity and integrations. A focused WhatsApp AI chatbot — covering FAQ resolution, lead qualification, and appointment booking — typically runs 4 to 8 weeks of development. WhatsApp Business API access is free for the first 1,000 conversations per month, after which Meta charges per conversation. H.V.A builds custom WhatsApp AI systems; contact us for a scoped estimate specific to your business.',
+          'The cost depends on complexity and integrations. A focused WhatsApp AI chatbot — covering FAQ resolution, lead qualification, and appointment booking — typically runs 4 to 8 weeks of development. WhatsApp Business API access is free for the first 1,000 conversations per month, after which Meta charges per conversation. Hive Vault Arc builds custom WhatsApp AI systems; contact us for a scoped estimate specific to your business.',
       },
       {
         question: 'Can a WhatsApp AI chatbot handle Arabic and French conversations?',
         answer:
-          'Yes. H.V.A builds WhatsApp AI chatbots with native multilingual support — Arabic (including Moroccan Darija where required), French, Spanish, and English. The chatbot detects the language the customer writes in and responds accordingly, with no manual switching required. This is critical for Moroccan businesses serving both local and international clients.',
+          'Yes. Hive Vault Arc builds WhatsApp AI chatbots with native multilingual support — Arabic (including Moroccan Darija where required), French, Spanish, and English. The chatbot detects the language the customer writes in and responds accordingly, with no manual switching required. This is critical for Moroccan businesses serving both local and international clients.',
       },
       {
         question: 'What is the WhatsApp Business API and do I need it for an AI chatbot?',
         answer:
-          'The WhatsApp Business API is Meta\'s official platform for businesses to send and receive messages at scale, integrate with CRM systems, and connect to automation tools. It is required for any WhatsApp AI chatbot. Unlike the standard WhatsApp Business app, the API supports unlimited agents, automation, and full integration with your existing systems. H.V.A handles the API setup and Business Manager verification as part of the deployment.',
+          'The WhatsApp Business API is Meta\'s official platform for businesses to send and receive messages at scale, integrate with CRM systems, and connect to automation tools. It is required for any WhatsApp AI chatbot. Unlike the standard WhatsApp Business app, the API supports unlimited agents, automation, and full integration with your existing systems. Hive Vault Arc handles the API setup and Business Manager verification as part of the deployment.',
       },
       {
         question: 'What types of Moroccan businesses benefit most from WhatsApp AI chatbots?',
@@ -792,27 +792,27 @@ const POSTS: BlogPost[] = [
       {
         type: 'paragraph',
         content:
-          'Meta charges for WhatsApp Business API conversations above 1,000 per month. Rates are tiered by conversation type (service vs. marketing) and country. For most Moroccan SMEs in the 200–1,000 daily message range, the monthly API cost is modest — and is offset within days by the reduction in manual agent time. H.V.A handles the API setup, Business Manager verification, and phone number registration as part of every chatbot deployment.',
+          'Meta charges for WhatsApp Business API conversations above 1,000 per month. Rates are tiered by conversation type (service vs. marketing) and country. For most Moroccan SMEs in the 200–1,000 daily message range, the monthly API cost is modest — and is offset within days by the reduction in manual agent time. Hive Vault Arc handles the API setup, Business Manager verification, and phone number registration as part of every chatbot deployment.',
       },
       {
         type: 'heading',
-        content: 'How H.V.A Builds WhatsApp AI Chatbots',
+        content: 'How Hive Vault Arc Builds WhatsApp AI Chatbots',
       },
       {
         type: 'paragraph',
         content:
-          'H.V.A builds WhatsApp AI chatbots as custom systems — not configured templates. The process starts with a discovery session: we map your top 20 customer inquiry types, your escalation logic, your booking or sales workflow, and your CRM or calendar integration requirements. From that brief, we design the conversation flows, integrate with the WhatsApp Business API, and connect the AI layer that handles natural-language understanding.',
+          'Hive Vault Arc builds WhatsApp AI chatbots as custom systems — not configured templates. The process starts with a discovery session: we map your top 20 customer inquiry types, your escalation logic, your booking or sales workflow, and your CRM or calendar integration requirements. From that brief, we design the conversation flows, integrate with the WhatsApp Business API, and connect the AI layer that handles natural-language understanding.',
       },
       {
         type: 'paragraph',
         content:
-          'Multilingual support is built in from day one. Every H.V.A WhatsApp AI chatbot handles Arabic, French, Spanish, and English natively — with the option to include Moroccan Darija for businesses whose customer base requires it. Conversations are logged, escalation handoffs are clean, and the system is designed to improve over time as more conversation data is captured.',
+          'Multilingual support is built in from day one. Every Hive Vault Arc WhatsApp AI chatbot handles Arabic, French, Spanish, and English natively — with the option to include Moroccan Darija for businesses whose customer base requires it. Conversations are logged, escalation handoffs are clean, and the system is designed to improve over time as more conversation data is captured.',
       },
       {
         type: 'pullquote',
         content:
           '"The businesses winning in Morocco right now are not the ones with the biggest teams — they are the ones whose systems work while their teams sleep."',
-        attribution: 'H.V.A Research Team',
+        attribution: 'Hive Vault Arc Research Team',
       },
       {
         type: 'heading',
@@ -832,7 +832,7 @@ const POSTS: BlogPost[] = [
       {
         type: 'paragraph',
         content:
-          'If two or more of those apply to your business, a WhatsApp AI chatbot will have a clear, measurable return within the first 60 days. At H.V.A, we build these systems for businesses in Tangier and across Morocco — customized to your workflow, your languages, and your customer base. If you want to understand what deployment would look like for your specific situation, the conversation starts with a call.',
+          'If two or more of those apply to your business, a WhatsApp AI chatbot will have a clear, measurable return within the first 60 days. At Hive Vault Arc, we build these systems for businesses in Tangier and across Morocco — customized to your workflow, your languages, and your customer base. If you want to understand what deployment would look like for your specific situation, the conversation starts with a call.',
       },
     ],
   },
@@ -843,7 +843,7 @@ const POSTS: BlogPost[] = [
     category: 'AI & Automation',
     readTime: '11 min read',
     publishedAt: '2026-03-27',
-    authors: [{ name: 'H.V.A Editorial', role: 'AI Strategy', initials: 'HE' }],
+    authors: [{ name: 'Hive Vault Arc Editorial', role: 'AI Strategy', initials: 'HE' }],
     coverImage: '/Images/blog/ai-agents-integration-2026-enterprise-guide.webp',
     excerpt:
       'The global AI agent market is projected to reach $103.6 billion by 2032, and 52% of executives have already deployed agents in production. Companies that delay are not staying neutral — they are falling behind competitors who are compounding operational advantages every month. This article makes the case for why 2026 is the year to act, and how Morocco\'s businesses can position themselves as smart followers rather than permanent laggards.',
@@ -1021,7 +1021,7 @@ const POSTS: BlogPost[] = [
       {
         type: 'paragraph',
         content:
-          'H.V.A builds AI agents for businesses in Morocco and internationally. Our work spans customer-facing AI receptionists that operate in Arabic, French, and English; internal automation pipelines that connect legacy systems to modern AI tooling; and data analyst agents that turn raw operational data into actionable summaries. We do not propose a solution before we understand the workflow. Every engagement starts with a scoping call to map the specific process, identify the failure modes, and define the success criteria. If you are trying to understand what AI agent integration would actually look like for your business — the timeline, the cost, the risk, the measurable outcome — that conversation is the right place to start.',
+          'Hive Vault Arc builds AI agents for businesses in Morocco and internationally. Our work spans customer-facing AI receptionists that operate in Arabic, French, and English; internal automation pipelines that connect legacy systems to modern AI tooling; and data analyst agents that turn raw operational data into actionable summaries. We do not propose a solution before we understand the workflow. Every engagement starts with a scoping call to map the specific process, identify the failure modes, and define the success criteria. If you are trying to understand what AI agent integration would actually look like for your business — the timeline, the cost, the risk, the measurable outcome — that conversation is the right place to start.',
       },
     ],
   },

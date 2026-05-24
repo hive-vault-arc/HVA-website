@@ -3,7 +3,14 @@ import CapabilitiesInDetail from '../../../views/CapabilitiesInDetail';
 import JsonLd from '../../../components/JsonLd';
 import FaqSection from '../../../components/FaqSection';
 import { CAPABILITIES_FAQS } from '../../../data/faqs';
-import { GLOBAL_KEYWORDS, SITE_URL, absoluteUrl, buildPageMetadata, mergeKeywords } from '../../../lib/seo';
+import {
+  CONTACT_PHONE_E164,
+  GLOBAL_KEYWORDS,
+  SITE_URL,
+  absoluteUrl,
+  buildPageMetadata,
+  mergeKeywords,
+} from '../../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'Capabilities In Detail | Six Service Pillars and ARC Delivery Model',
@@ -29,14 +36,14 @@ export default function CapabilitiesInDetailPage() {
   const capabilitySchema = {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    name: 'H.V.A Capabilities In Detail',
-    alternateName: 'H.V.A Services In Detail',
+    name: 'Hive Vault Arc Capabilities In Detail',
+    alternateName: 'Hive Vault Arc Services In Detail',
     provider: {
       '@type': ['Organization', 'ProfessionalService'],
       '@id': `${SITE_URL}/#organization`,
       name: 'Hive Vault Arc',
       url: SITE_URL,
-      telephone: ['+212670431249'],
+      telephone: CONTACT_PHONE_E164,
       priceRange: '$$',
       image: absoluteUrl('/Images/brand/hva-ai-software-agency-tangier.webp'),
       areaServed: ['Morocco', 'Remote'],

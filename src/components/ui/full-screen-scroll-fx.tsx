@@ -119,7 +119,7 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
         text: "rgba(245,245,245,0.92)",
         overlay: "rgba(0,0,0,0.35)",
         pageBg: "#ffffff",
-        stageBg: "#000000",
+        stageBg: "#1A2535",
       },
 
       videoSrc,
@@ -590,7 +590,7 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
       ["--fx-text" as any]: colors.text ?? "rgba(245,245,245,0.92)",
       ["--fx-overlay" as any]: colors.overlay ?? "rgba(0,0,0,0.35)",
       ["--fx-page-bg" as any]: colors.pageBg ?? "#fff",
-      ["--fx-stage-bg" as any]: colors.stageBg ?? "#000",
+      ["--fx-stage-bg" as any]: colors.stageBg ?? "#1A2535",
       ["--fx-gap" as any]: `${gap}rem`,
       ["--fx-grid-px" as any]: `${gridPaddingX}rem`,
       ["--fx-row-gap" as any]: "10px",
@@ -755,7 +755,7 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
             width: 100%;
             overflow: hidden;
             background: var(--fx-page-bg, #ffffff);
-            color: var(--fx-text, #000000);
+            color: var(--fx-text, #1A2535);
             font-family: var(--fx-font, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif);
             text-transform: uppercase;
             letter-spacing: -0.02em;
@@ -764,7 +764,7 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
           }
 
           .fx-fixed-section { height: ${Math.max(1, total + 1)}00vh; position: relative; }
-          .fx-fixed { position: sticky; top: 0; height: 100vh; width: 100%; overflow: hidden; background: var(--fx-page-bg); }
+          .fx-fixed { position: sticky; top: 0; height: 100dvh; width: 100%; overflow: hidden; background: var(--fx-page-bg); }
 
           .fx-grid {
             display: grid;
@@ -909,8 +909,8 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
           .fx-progress-fill { position: absolute; inset: 0 auto 0 0; width: 0%; background: var(--fx-text); height: 100%; transition: width 0.3s ease; }
           .fx-progress-numbers { position: absolute; inset: auto 0 100% 0; display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--fx-text); }
 
-          .fx-end { height: 100vh; display: grid; place-items: center; }
-          .fx-fin { transform: rotate(90deg); color: #111; }
+          .fx-end { height: 100dvh; display: grid; place-items: center; }
+          .fx-fin { transform: rotate(90deg); color: #1A2535; }
 
           @media (max-width: 900px) {
             .fx-content {

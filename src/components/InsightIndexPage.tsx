@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import BottomCTA from './BottomCTA';
+import SectionBrandMark from './SectionBrandMark';
 
 /* ── Shared item shape ───────────────────────────────────────────────────── */
 
@@ -72,12 +73,12 @@ function fmtShort(iso: string) {
 function ImagePlaceholder({ tag, aspect = 'square' }: { tag: string; aspect?: 'video' | 'square' }) {
   return (
     <div
-      className={`w-full bg-[#f2f4f6] overflow-hidden flex items-center justify-center ${
+      className={`w-full bg-[#F7F8FA] overflow-hidden flex items-center justify-center ${
         aspect === 'video' ? 'aspect-[4/3]' : 'aspect-square'
       }`}
     >
       <span
-        className="text-5xl font-light italic text-[#dde1e7] select-none px-6 text-center leading-tight"
+        className="text-5xl font-light italic text-[#DDE3EA] select-none px-6 text-center leading-tight"
         style={{ fontFamily: 'var(--font-headline)' }}
       >
         {tag}
@@ -98,37 +99,37 @@ function EmptyState({ message, backHref }: { message: string; backHref?: string 
         className="flex flex-col items-center text-center"
       >
         <div className="relative mb-10" aria-hidden>
-          <div className="w-20 h-20 border border-[#c6c6cd] rotate-45" />
+          <div className="w-20 h-20 border border-[#CDD2DA] rotate-45" />
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-10 h-10 border border-[#2563EB]/30 rotate-45" />
+            <div className="w-10 h-10 border border-[#E8A838]/30 rotate-45" />
           </div>
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-2 h-2 bg-[#2563EB] rounded-full" />
+            <div className="w-2 h-2 bg-[#E8A838] rounded-full" />
           </div>
         </div>
-        <p className="text-[10px] font-bold tracking-[0.28em] uppercase text-[#2563EB] mb-5" style={{ fontFamily: 'var(--font-body)' }}>
+        <p className="text-[10px] font-bold tracking-[0.28em] uppercase text-[#E8A838] mb-5" style={{ fontFamily: 'var(--font-body)' }}>
           Coming Soon
         </p>
-        <h2 className="text-3xl md:text-4xl font-light text-[#0F172A] leading-tight mb-5 max-w-lg" style={{ fontFamily: 'var(--font-headline)' }}>
+        <h2 className="text-3xl md:text-4xl font-light text-[#1A2535] leading-tight mb-5 max-w-lg" style={{ fontFamily: 'var(--font-headline)' }}>
           {message}
           <br />
           <span className="italic">prepared for publishing.</span>
         </h2>
-        <p className="text-[#76777d] max-w-md leading-relaxed mb-10" style={{ fontFamily: 'var(--font-body)' }}>
+        <p className="text-[#6B7280] max-w-md leading-relaxed mb-10" style={{ fontFamily: 'var(--font-body)' }}>
           We publish deliberately — only when the content meets our editorial standard. Check back soon or explore other sections in the meantime.
         </p>
         <div className="flex flex-wrap justify-center gap-6">
           {backHref && (
-            <Link href={backHref} className="text-sm font-bold tracking-[0.15em] uppercase pb-1 text-[#0F172A]" style={{ borderBottom: '2px solid #0F172A', fontFamily: 'var(--font-body)' }}>
+            <Link href={backHref} className="inline-flex min-h-11 items-center pb-1 text-sm font-bold uppercase tracking-[0.15em] text-[#1A2535]" style={{ borderBottom: '2px solid #1A2535', fontFamily: 'var(--font-body)' }}>
               ← All Insights
             </Link>
           )}
-          <Link href="/blog" className="text-sm font-bold tracking-[0.15em] uppercase pb-1 text-[#76777d] hover:text-[#2563EB] transition-colors" style={{ borderBottom: '2px solid transparent', fontFamily: 'var(--font-body)' }}>
+          <Link href="/blog" className="inline-flex min-h-11 items-center pb-1 text-sm font-bold uppercase tracking-[0.15em] text-[#6B7280] transition-colors hover:text-[#E8A838]" style={{ borderBottom: '2px solid transparent', fontFamily: 'var(--font-body)' }}>
             Read the Blog →
           </Link>
         </div>
       </motion.div>
-      <div className="mt-24 h-px bg-[#e0e3e5]" />
+      <div className="mt-24 h-px bg-[#E8EBF0]" />
     </section>
   );
 }
@@ -163,26 +164,29 @@ export default function InsightIndexPage({
   const rest = filtered.slice(1);
 
   return (
-    <main className="bg-[#f7f9fb] min-h-screen">
+    <main className="min-h-[100dvh] bg-[#FFFFFF]">
       {/* Scroll progress bar */}
       <motion.div
         aria-hidden="true"
-        className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-gradient-to-r from-[#2563EB] via-[#60a5fa] to-[#0ea5e9]"
+        className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-gradient-to-r from-[#E8A838] via-[#F0C15A] to-[#E8A838]"
         style={{ scaleX: progressScale }}
       />
 
       {/* ── Hero ───────────────────────────────────────────────────────────── */}
-      <section className="bg-[#f2f4f6] pt-36 pb-20 px-4 md:px-8">
+      <section className="bg-[#F7F8FA] px-4 pt-28 pb-16 sm:pt-32 md:px-8 md:pt-36 md:pb-20">
         <div className="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
           <div className="lg:col-span-8">
-            <span
-              className="block text-xs font-bold tracking-[0.2em] uppercase mb-6 text-[#2563EB]"
-              style={{ fontFamily: 'var(--font-body)' }}
-            >
-              {eyebrow}
-            </span>
+            <div className="mb-6 flex items-center gap-3">
+              <SectionBrandMark size="sm" />
+              <span
+                className="block text-xs font-bold tracking-[0.2em] uppercase text-[#E8A838]"
+                style={{ fontFamily: 'var(--font-body)' }}
+              >
+                {eyebrow}
+              </span>
+            </div>
             <h1
-              className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-light leading-tight tracking-tight text-[#0F172A]"
+              className="text-[clamp(2.6rem,12vw,4rem)] font-light leading-[1.04] tracking-tight text-[#1A2535] md:text-6xl lg:text-7xl"
               style={{ fontFamily: 'var(--font-headline)' }}
             >
               {headline}
@@ -192,8 +196,8 @@ export default function InsightIndexPage({
           </div>
           <div className="lg:col-span-4 pb-2">
             <p
-              className="text-lg leading-relaxed pl-6 text-[#45464d]"
-              style={{ fontFamily: 'var(--font-body)', borderLeft: '2px solid #c6c6cd' }}
+              className="text-lg leading-relaxed pl-6 text-[#536070]"
+              style={{ fontFamily: 'var(--font-body)', borderLeft: '2px solid #CDD2DA' }}
             >
               {description}
             </p>
@@ -203,12 +207,12 @@ export default function InsightIndexPage({
 
       {/* ── Filter / nav bar ───────────────────────────────────────────────── */}
       <section className="max-w-[1440px] mx-auto px-4 md:px-8 pt-12 pb-8">
-        <div className="flex flex-wrap items-center gap-8">
+        <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
           {/* Back link */}
           {backHref && (
             <Link
               href={backHref}
-              className="text-xs font-bold tracking-[0.18em] uppercase pb-2 text-[#76777d] hover:text-[#2563EB] transition-colors"
+              className="inline-flex min-h-11 items-center pb-2 text-xs font-bold uppercase tracking-[0.18em] text-[#6B7280] transition-colors hover:text-[#E8A838]"
               style={{ fontFamily: 'var(--font-body)', borderBottom: '2px solid transparent' }}
             >
               {backLabel}
@@ -219,18 +223,18 @@ export default function InsightIndexPage({
             <button
               key={f}
               onClick={() => setActive(f)}
-              className="text-sm font-bold tracking-[0.15em] uppercase pb-2 transition-colors duration-200"
+              className="min-h-11 pb-2 text-sm font-bold uppercase tracking-[0.15em] transition-colors duration-200"
               style={{
                 fontFamily: 'var(--font-body)',
-                color: active === f ? '#0F172A' : '#76777d',
-                borderBottom: active === f ? '2px solid #0F172A' : '2px solid transparent',
+                color: active === f ? '#1A2535' : '#6B7280',
+                borderBottom: active === f ? '2px solid #1A2535' : '2px solid transparent',
               }}
             >
               {f}
             </button>
           ))}
         </div>
-        <div className="mt-4 h-px bg-[#e0e3e5]" />
+        <div className="mt-4 h-px bg-[#E8EBF0]" />
       </section>
 
       {/* ── Empty state ────────────────────────────────────────────────────── */}
@@ -250,7 +254,7 @@ export default function InsightIndexPage({
                 /* ── Image featured: image left, card overlapping right ── */
                 <div className="flex flex-col lg:flex-row items-stretch">
                   <div className="w-full lg:w-[60%] shrink-0 relative">
-                    <div className="aspect-[4/3] relative overflow-hidden bg-[#e0e3e5]">
+                    <div className="aspect-[4/3] relative overflow-hidden bg-[#E8EBF0]">
                       <Image
                         src={featured.coverImage}
                         alt={featured.title}
@@ -261,23 +265,23 @@ export default function InsightIndexPage({
                     </div>
                   </div>
                   <div className="w-full lg:w-[46%] lg:-ml-[6%] z-10 flex items-center relative">
-                    <div className="bg-white p-10 lg:p-14 w-full" style={{ boxShadow: '0 10px 40px rgba(25,28,30,0.08)' }}>
+                    <div className="w-full bg-white p-6 sm:p-8 lg:p-14" style={{ boxShadow: '0 10px 40px rgba(25,28,30,0.08)' }}>
                       <FeaturedCardContent item={featured} />
                     </div>
                   </div>
                 </div>
               ) : (
                 /* ── Text-only featured: full-width card ── */
-                <div className="bg-white p-10 lg:p-16 w-full" style={{ boxShadow: '0 10px 40px rgba(25,28,30,0.06)' }}>
+                <div className="w-full bg-white p-6 sm:p-8 lg:p-16" style={{ boxShadow: '0 10px 40px rgba(25,28,30,0.06)' }}>
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
                     <div className="lg:col-span-8">
                       <FeaturedCardContent item={featured} titleSize="large" />
                     </div>
                     <div className="lg:col-span-4 flex flex-col gap-6">
-                      <p className="text-[#45464d] leading-relaxed" style={{ fontFamily: 'var(--font-body)' }}>
+                      <p className="text-[#536070] leading-relaxed" style={{ fontFamily: 'var(--font-body)' }}>
                         {featured.excerpt}
                       </p>
-                      <div className="flex items-center gap-2 text-sm font-bold text-[#2563EB]" style={{ fontFamily: 'var(--font-body)' }}>
+                      <div className="flex items-center gap-2 text-sm font-bold text-[#E8A838]" style={{ fontFamily: 'var(--font-body)' }}>
                         Read <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                       </div>
                     </div>
@@ -304,7 +308,7 @@ export default function InsightIndexPage({
               >
                 <Link href={item.href} className="block">
                   {/* Image or placeholder */}
-                  <div className="aspect-square bg-[#f2f4f6] mb-7 overflow-hidden relative">
+                  <div className="aspect-square bg-[#F7F8FA] mb-7 overflow-hidden relative">
                     {item.coverImage ? (
                       <Image
                         src={item.coverImage}
@@ -320,31 +324,31 @@ export default function InsightIndexPage({
                   {/* Meta */}
                   <div className="space-y-3">
                     <div
-                      className="flex justify-between items-center text-[10px] font-bold tracking-[0.2em] uppercase text-[#45464d]"
+                      className="flex justify-between items-center text-[10px] font-bold tracking-[0.2em] uppercase text-[#536070]"
                       style={{ fontFamily: 'var(--font-body)' }}
                     >
-                      <span className="text-[#2563EB]">{item.tag}</span>
+                      <span className="text-[#E8A838]">{item.tag}</span>
                       <span>{item.meta ?? (item.date ? fmtShort(item.date) : '')}</span>
                     </div>
                     <h3
-                      className="text-xl leading-snug text-[#191c1e] group-hover:text-[#2563EB] transition-colors"
+                      className="text-xl leading-snug text-[#1A2535] group-hover:text-[#E8A838] transition-colors"
                       style={{ fontFamily: 'var(--font-headline)' }}
                     >
                       {item.title}
                     </h3>
                     <p
-                      className="text-[#45464d] text-sm leading-relaxed line-clamp-2"
+                      className="text-[#536070] text-sm leading-relaxed line-clamp-2"
                       style={{ fontFamily: 'var(--font-body)' }}
                     >
                       {item.excerpt}
                     </p>
                     {/* Metrics row (case studies) */}
                     {item.metrics && item.metrics.length > 0 && (
-                      <div className="flex gap-6 pt-3 border-t border-[#f0f0f3]">
+                      <div className="flex gap-6 pt-3 border-t border-[#F7F8FA]">
                         {item.metrics.slice(0, 2).map((m) => (
                           <div key={m.label}>
-                            <p className="text-lg font-semibold text-[#0F172A]" style={{ fontFamily: 'var(--font-headline)' }}>{m.value}</p>
-                            <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-[#94a3b8] mt-0.5" style={{ fontFamily: 'var(--font-body)' }}>{m.label}</p>
+                            <p className="text-lg font-semibold text-[#1A2535]" style={{ fontFamily: 'var(--font-headline)' }}>{m.value}</p>
+                            <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-[#9AA4B2] mt-0.5" style={{ fontFamily: 'var(--font-body)' }}>{m.label}</p>
                           </div>
                         ))}
                       </div>
@@ -353,14 +357,14 @@ export default function InsightIndexPage({
                       className="pt-4 flex items-center justify-between"
                       style={{ borderTop: item.metrics ? undefined : '1px solid rgba(198,198,205,0.3)' }}
                     >
-                      <span className="text-xs text-[#76777d] italic" style={{ fontFamily: 'var(--font-body)' }}>
+                      <span className="text-xs text-[#6B7280] italic" style={{ fontFamily: 'var(--font-body)' }}>
                         {item.author?.name
                           ? `${item.author.name}${item.date ? ` • ${fmtShort(item.date)}` : ''}`
                           : item.date
                           ? fmtShort(item.date)
                           : item.meta ?? ''}
                       </span>
-                      <ArrowUpRight className="w-4 h-4 text-[#0F172A] opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <ArrowUpRight className="w-4 h-4 text-[#1A2535] opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>
                   </div>
                 </Link>
@@ -400,39 +404,39 @@ function FeaturedCardContent({
       <div className="flex items-center gap-4 mb-5">
         <span
           className="text-xs font-bold tracking-widest uppercase px-3 py-1"
-          style={{ color: '#2563EB', background: 'rgba(37,99,235,0.08)', fontFamily: 'var(--font-body)' }}
+          style={{ color: '#E8A838', background: 'rgba(232,168,56,0.08)', fontFamily: 'var(--font-body)' }}
         >
           {item.tag}
         </span>
         {item.date && (
-          <span className="text-xs font-medium text-[#76777d]" style={{ fontFamily: 'var(--font-body)' }}>
+          <span className="text-xs font-medium text-[#6B7280]" style={{ fontFamily: 'var(--font-body)' }}>
             {fmt(item.date)}
           </span>
         )}
         {!item.date && item.meta && (
-          <span className="text-xs font-medium text-[#76777d]" style={{ fontFamily: 'var(--font-body)' }}>
+          <span className="text-xs font-medium text-[#6B7280]" style={{ fontFamily: 'var(--font-body)' }}>
             {item.meta}
           </span>
         )}
       </div>
       <h2
-        className={`${titleSize === 'large' ? 'text-3xl md:text-4xl lg:text-5xl' : 'text-3xl md:text-4xl'} mb-5 leading-tight text-[#191c1e] group-hover:text-[#2563EB] transition-colors`}
+        className={`${titleSize === 'large' ? 'text-3xl md:text-4xl lg:text-5xl' : 'text-3xl md:text-4xl'} mb-5 leading-tight text-[#1A2535] group-hover:text-[#E8A838] transition-colors`}
         style={{ fontFamily: 'var(--font-headline)' }}
       >
         {item.title}
       </h2>
       {titleSize === 'normal' && (
-        <p className="text-[#45464d] mb-6 leading-relaxed line-clamp-3" style={{ fontFamily: 'var(--font-body)' }}>
+        <p className="text-[#536070] mb-6 leading-relaxed line-clamp-3" style={{ fontFamily: 'var(--font-body)' }}>
           {item.excerpt}
         </p>
       )}
       {/* Metrics (case studies) */}
       {item.metrics && item.metrics.length > 0 && (
-        <div className="flex gap-8 mb-8 pt-5 border-t border-[#f0f0f3]">
+        <div className="flex gap-8 mb-8 pt-5 border-t border-[#F7F8FA]">
           {item.metrics.slice(0, 2).map((m) => (
             <div key={m.label}>
-              <p className="text-xl font-semibold text-[#0F172A]" style={{ fontFamily: 'var(--font-headline)' }}>{m.value}</p>
-              <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-[#94a3b8] mt-0.5" style={{ fontFamily: 'var(--font-body)' }}>{m.label}</p>
+              <p className="text-xl font-semibold text-[#1A2535]" style={{ fontFamily: 'var(--font-headline)' }}>{m.value}</p>
+              <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-[#9AA4B2] mt-0.5" style={{ fontFamily: 'var(--font-body)' }}>{m.label}</p>
             </div>
           ))}
         </div>
@@ -440,20 +444,20 @@ function FeaturedCardContent({
       <div className="flex items-center justify-between">
         {item.author ? (
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 bg-[#e0e3e5] flex items-center justify-center text-xs font-bold text-[#0F172A]">
+            <div className="w-9 h-9 bg-[#E8EBF0] flex items-center justify-center text-xs font-bold text-[#1A2535]">
               {item.author.initials}
             </div>
             <div>
-              <p className="text-sm font-semibold text-[#191c1e]" style={{ fontFamily: 'var(--font-body)' }}>{item.author.name}</p>
-              {item.meta && <p className="text-xs text-[#76777d]" style={{ fontFamily: 'var(--font-body)' }}>{item.meta}</p>}
+              <p className="text-sm font-semibold text-[#1A2535]" style={{ fontFamily: 'var(--font-body)' }}>{item.author.name}</p>
+              {item.meta && <p className="text-xs text-[#6B7280]" style={{ fontFamily: 'var(--font-body)' }}>{item.meta}</p>}
             </div>
           </div>
         ) : (
-          <span className="text-sm font-bold text-[#2563EB]" style={{ fontFamily: 'var(--font-body)' }}>
+          <span className="text-sm font-bold text-[#E8A838]" style={{ fontFamily: 'var(--font-body)' }}>
             {item.metrics ? 'Read Full Case Study' : 'Read →'}
           </span>
         )}
-        <ArrowUpRight className="w-5 h-5 text-[#0F172A] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+        <ArrowUpRight className="w-5 h-5 text-[#1A2535] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
       </div>
     </>
   );

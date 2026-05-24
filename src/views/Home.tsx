@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { ArrowRight, BarChart3, Bot, Cloud, Eye, Layers, MessageSquare } from 'lucide-react';
 import { motion } from 'framer-motion';
 import BottomCTA from '../components/BottomCTA';
+import SectionBrandMark from '../components/SectionBrandMark';
 import Background3d from '../components/Plasma';
 import LogoLoop from '../components/LogoItem';
 import VideoScrollSection from '../components/ui/VideoScrollSection';
@@ -35,7 +36,7 @@ const WorldMapDemo = lazy(() =>
   import('../components/world-map-demo').then((module) => ({ default: module.WorldMapDemo }))
 );
 const InsightsCarousel = dynamic(() => import('../components/InsightsCarousel'), {
-  loading: () => <div className="h-[560px] bg-[#F8FAFC]" aria-hidden="true" />,
+  loading: () => <div className="h-[560px] bg-[#FFFFFF]" aria-hidden="true" />,
 });
 
 type HomeProps = {
@@ -256,7 +257,7 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
     <div className="h-full home-reference">
       {bgReady && showAdvancedEffects && (
         <Background3d
-          color="#0984E3"
+          color="#E8A838"
           speed={0.6}
           direction="forward"
           scale={1.1}
@@ -272,37 +273,40 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
       {/* ── Primary Site Shortcuts ─────────────────────────────────────── */}
       <nav
         aria-labelledby="home-site-shortcuts-title"
-        className="border-y border-[#dbe1ea] bg-[#F8FAFC]"
+        className="border-y border-[#DDE3EA] bg-[#FFFFFF]"
       >
         <div className="mx-auto max-w-7xl px-6 py-6 lg:px-14">
           <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
-                Explore H.V.A
-              </p>
-              <h2
-                id="home-site-shortcuts-title"
-                className="mt-1 font-headline text-2xl leading-tight text-[#0F172A]"
-              >
-                Start with the main sections.
-              </h2>
+            <div className="flex items-start gap-3">
+              <SectionBrandMark size="sm" className="mt-0.5" />
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#E8A838]">
+                  Explore Hive Vault Arc
+                </p>
+                <h2
+                  id="home-site-shortcuts-title"
+                  className="mt-1 font-headline text-2xl leading-tight text-[#1A2535]"
+                >
+                  Start with the main sections.
+                </h2>
+              </div>
             </div>
-            <p className="max-w-md text-sm leading-relaxed text-[#475569]">
+            <p className="max-w-md text-sm leading-relaxed text-[#566274]">
               Direct paths to the pages clients use most when evaluating our work, model, and team.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-px overflow-hidden border border-[#dbe1ea] bg-[#dbe1ea] sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-px overflow-hidden border border-[#DDE3EA] bg-[#DDE3EA] sm:grid-cols-2 lg:grid-cols-4">
             {SITELINK_CANDIDATES.filter((item) => item.href !== '/').map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="group flex min-h-[128px] flex-col justify-between bg-white p-5 transition-colors hover:bg-[#0F172A]"
+                className="group flex min-h-[128px] flex-col justify-between bg-white p-5 transition-colors hover:bg-[#1A2535]"
               >
-                <span className="text-sm font-semibold leading-tight text-[#0F172A] transition-colors group-hover:text-white">
+                <span className="text-sm font-semibold leading-tight text-[#1A2535] transition-colors group-hover:text-white">
                   {item.anchor}
                 </span>
-                <span className="mt-4 text-xs leading-relaxed text-[#64748b] transition-colors group-hover:text-white/60">
+                <span className="mt-4 text-xs leading-relaxed text-[#657384] transition-colors group-hover:text-white/60">
                   {` ${item.description}`}
                 </span>
               </Link>
@@ -312,12 +316,12 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
       </nav>
 
       {/* ── Trusted by ─────────────────────────────────────────────────── */}
-      <section className="bg-white border-y border-[#e2e8f0]">
+      <section className="bg-white border-y border-[#DDE3EA]">
         <div className="mx-auto max-w-7xl px-6 lg:px-14 py-5 flex items-center gap-8">
-          <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#94a3b8] shrink-0 hidden sm:block">
+          <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#9AA4B2] shrink-0 hidden sm:block">
             Trusted by
           </p>
-          <div className="h-5 w-px bg-[#e2e8f0] shrink-0 hidden sm:block" />
+          <div className="h-5 w-px bg-[#DDE3EA] shrink-0 hidden sm:block" />
           <div className="flex items-center gap-10 flex-1">
             <div className="group">
               <Image
@@ -331,7 +335,7 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
           </div>
           <div className="hidden md:flex items-center gap-2 shrink-0">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-[10px] text-[#94a3b8] uppercase tracking-[0.22em]">Active partnership</span>
+            <span className="text-[10px] text-[#9AA4B2] uppercase tracking-[0.22em]">Active partnership</span>
           </div>
         </div>
       </section>
@@ -340,29 +344,32 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
       <InsightsCarousel items={insightsCarouselItems} />
 
       {/* ── Who We Are — Identity Section ──────────────────────────────── */}
-      <section className="relative grid grid-cols-1 bg-[#f7f9fb] lg:grid-cols-12">
+      <section className="relative grid grid-cols-1 bg-[#FFFFFF] lg:grid-cols-12">
 
         {/* Left — dark identity panel */}
-        <div className="lg:col-span-4 relative bg-[#0F172A] px-8 py-14 md:px-10 lg:py-20 flex flex-col justify-between overflow-hidden">
+        <div className="relative flex flex-col justify-between overflow-hidden bg-[#1A2535] px-6 py-14 sm:px-8 md:px-10 lg:col-span-4 lg:py-20">
           {/* Dot grid texture */}
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 opacity-[0.07]"
-            style={{ backgroundImage: 'radial-gradient(#60a5fa 1px, transparent 0)', backgroundSize: '28px 28px' }}
+            style={{ backgroundImage: 'radial-gradient(#F0C15A 1px, transparent 0)', backgroundSize: '28px 28px' }}
           />
           {/* Blue left accent bar */}
-          <div className="pointer-events-none absolute left-0 inset-y-0 w-[3px] bg-[#2563EB]" />
+          <div className="pointer-events-none absolute left-0 inset-y-0 w-[3px] bg-[#E8A838]" />
 
           <div className="relative z-10">
-            <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#2563EB] mb-10">Our Identity</p>
-            <h2 className="font-headline text-5xl md:text-6xl text-white leading-[1.08] mb-7">
+            <div className="mb-10 flex items-center gap-3">
+              <SectionBrandMark surface="dark" size="sm" />
+              <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#E8A838]">Our Identity</p>
+            </div>
+            <h2 className="mb-7 font-headline text-[clamp(3rem,13vw,4rem)] leading-[1.04] text-white md:text-6xl md:leading-[1.08]">
               Advise. Build.<br />
               <em className="font-headline italic text-white/40">Operate.</em>
             </h2>
             <p className="text-white/60 font-body leading-relaxed text-base mb-10 max-w-sm">
-              H.V.A is a technology transformation partner — combining strategy, AI engineering, software development, and managed operations in one team. We stay until it works.
+              Hive Vault Arc is a technology transformation partner — combining strategy, AI engineering, software development, and managed operations in one team. We stay until it works.
             </p>
-            <div className="h-px w-12 bg-[#2563EB] mb-4" />
+            <div className="h-px w-12 bg-[#E8A838] mb-4" />
             <p className="text-[9px] font-label font-bold uppercase tracking-[0.28em] text-white/40">
               Strategy · AI Engineering · Software · Operations
             </p>
@@ -370,10 +377,10 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
         </div>
 
         {/* Right — mobile visual pillar grid */}
-        <div className="lg:hidden grid grid-cols-1 gap-px bg-[#d9dee7] sm:grid-cols-2">
+        <div className="lg:hidden grid grid-cols-1 gap-px bg-[#DDE3EA] sm:grid-cols-2">
           {capabilityPillars.map((pillar) => (
             <article key={pillar.title} className="bg-white">
-              <div className="relative h-36 overflow-hidden bg-[#0F172A]">
+              <div className="relative h-36 overflow-hidden bg-[#1A2535]">
                 <Image
                   src={pillar.image}
                   alt={pillar.imageAlt}
@@ -382,26 +389,26 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
                   sizes="(max-width: 640px) 100vw, 50vw"
                   className="object-cover opacity-64"
                 />
-                <div className="absolute inset-0 bg-[#2563EB]/10" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/95 via-[#0F172A]/40 to-[#0F172A]/10" />
-                <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-[#0F172A]/70 to-transparent" />
+                <div className="absolute inset-0 bg-[#E8A838]/10" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1A2535]/95 via-[#1A2535]/40 to-[#1A2535]/10" />
+                <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-[#1A2535]/70 to-transparent" />
                 <div className="absolute bottom-4 left-4 flex h-9 w-9 items-center justify-center bg-white/10 text-white">
                   {pillar.icon}
                 </div>
               </div>
-              <div className="border-l-2 border-[#2563EB] p-5">
-                <p className="mb-2 text-[0.58rem] font-bold uppercase tracking-[0.18em] text-[#2563EB]">
+              <div className="border-l-2 border-[#E8A838] p-5">
+                <p className="mb-2 text-[0.58rem] font-bold uppercase tracking-[0.18em] text-[#E8A838]">
                   Pillar
                 </p>
-                <h3 className="font-headline text-xl leading-tight text-[#0F172A]">{pillar.title}</h3>
-                <p className="mt-2 max-w-sm text-sm leading-relaxed text-[#475569]">{pillar.desc}</p>
+                <h3 className="font-headline text-xl leading-tight text-[#1A2535]">{pillar.title}</h3>
+                <p className="mt-2 max-w-sm text-sm leading-relaxed text-[#566274]">{pillar.desc}</p>
               </div>
             </article>
           ))}
         </div>
 
         {/* Right — six capability pillars */}
-        <div className="hidden lg:col-span-8 lg:grid lg:grid-cols-3 lg:grid-rows-2 gap-px bg-[#d9dee7]">
+        <div className="hidden lg:col-span-8 lg:grid lg:grid-cols-3 lg:grid-rows-2 gap-px bg-[#DDE3EA]">
           {capabilityPillars.map((pillar, idx) => {
             const isHovered = hoveredPillar === idx;
             const isOther = hoveredPillar !== null && hoveredPillar !== idx;
@@ -426,16 +433,16 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
                   sizes="(max-width: 1024px) 100vw, 22vw"
                   className="object-cover opacity-54 transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-[#2563EB]/10 mix-blend-multiply" />
+                <div className="absolute inset-0 bg-[#E8A838]/10 mix-blend-multiply" />
                 <div
                   className={`absolute inset-0 transition-opacity duration-200 ${
                     isHovered ? 'opacity-100' : 'opacity-80'
-                  } bg-gradient-to-t from-[#07111f]/95 via-[#0F172A]/60 to-[#2563EB]/20`}
+                  } bg-gradient-to-t from-[#1A2535]/95 via-[#1A2535]/60 to-[#E8A838]/20`}
                 />
                 <div
                   className={`absolute inset-x-0 bottom-0 transition-opacity duration-200 ${
                     isHovered ? 'opacity-100' : 'opacity-75'
-                  } h-3/4 bg-gradient-to-t from-[#020817] via-[#0F172A]/70 to-transparent`}
+                  } h-3/4 bg-gradient-to-t from-[#1A2535] via-[#1A2535]/70 to-transparent`}
                 />
                 <div className="relative z-10 flex h-full flex-col justify-between p-6">
                   <div className="flex items-start justify-between gap-4">
@@ -446,11 +453,11 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
                   </div>
 
                   <div
-                    className={`mt-auto border-l border-[#60a5fa]/60 px-4 py-4 transition-colors duration-200 ${
-                      isHovered ? 'bg-[#020817]/95' : 'bg-[#020817]/80'
+                    className={`mt-auto border-l border-[#F0C15A]/60 px-4 py-4 transition-colors duration-200 ${
+                      isHovered ? 'bg-[#1A2535]/95' : 'bg-[#1A2535]/80'
                     }`}
                   >
-                    <p className="mb-2 text-[0.58rem] font-bold uppercase tracking-[0.18em] text-[#93c5fd]">
+                    <p className="mb-2 text-[0.58rem] font-bold uppercase tracking-[0.18em] text-[#F4D27C]">
                       Pillar 0{idx + 1}
                     </p>
                     <h3 className="max-w-[18rem] font-headline text-[1.72rem] leading-[1.06] text-white">
@@ -467,7 +474,7 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
                     >
                       {pillar.details.map((detail) => (
                         <li key={detail} className="flex items-start gap-2 text-xs font-semibold leading-relaxed text-white/90">
-                          <span className="mt-1.5 h-1 w-1 shrink-0 bg-[#60a5fa]" />
+                          <span className="mt-1.5 h-1 w-1 shrink-0 bg-[#F0C15A]" />
                           {detail}
                         </li>
                       ))}
@@ -484,24 +491,29 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
         <div className="mx-auto max-w-7xl px-6 lg:px-14">
 
           {/* Header — two column */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-7 items-end mb-10 pb-8 border-b border-[#e2e8f0]">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-7 items-end mb-10 pb-8 border-b border-[#DDE3EA]">
             <div className="md:col-span-7">
-              <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.28em] text-[#2563EB]">
-                Proof In Production
-              </p>
-              <h2 className="font-headline text-4xl md:text-5xl leading-[1.02] tracking-tight text-[#0F172A]">
-                Transformation Programs<br className="hidden md:block" /> Running in Production
-              </h2>
+              <div className="flex items-start gap-3">
+                <SectionBrandMark size="sm" className="mt-0.5" />
+                <div>
+                  <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.28em] text-[#E8A838]">
+                    Proof In Production
+                  </p>
+                  <h2 className="font-headline text-4xl md:text-5xl leading-[1.02] tracking-tight text-[#1A2535]">
+                    Transformation Programs<br className="hidden md:block" /> Running in Production
+                  </h2>
+                </div>
+              </div>
             </div>
             <div className="md:col-span-5 flex flex-col gap-4">
-              <p className="text-base text-[#475569] leading-relaxed">
+              <p className="text-base text-[#566274] leading-relaxed">
                 Every program listed is live in a real operating environment — no demos, no projected results.
               </p>
               <div className="flex flex-wrap gap-6">
-                <Link href="/case-studies" className="text-xs font-bold uppercase tracking-widest text-[#0F172A] border-b-2 border-[#0F172A]/20 hover:border-[#2563EB] hover:text-[#2563EB] pb-0.5 transition-all">
+                <Link href="/case-studies" className="inline-flex min-h-11 items-center border-b-2 border-[#1A2535]/20 pb-0.5 text-xs font-bold uppercase tracking-widest text-[#1A2535] transition-all hover:border-[#E8A838] hover:text-[#E8A838]">
                   Proof Library →
                 </Link>
-                <Link href="/capabilities/solution-programs" className="text-xs font-bold uppercase tracking-widest text-[#0F172A] border-b-2 border-[#0F172A]/20 hover:border-[#2563EB] hover:text-[#2563EB] pb-0.5 transition-all">
+                <Link href="/capabilities/solution-programs" className="inline-flex min-h-11 items-center border-b-2 border-[#1A2535]/20 pb-0.5 text-xs font-bold uppercase tracking-widest text-[#1A2535] transition-all hover:border-[#E8A838] hover:text-[#E8A838]">
                   Solution Programs →
                 </Link>
               </div>
@@ -527,13 +539,13 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
                 className="object-cover transition-transform duration-700 ease-spring group-hover:scale-[1.03]"
               />
               {/* Dark gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/90 via-[#0F172A]/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1A2535]/90 via-[#1A2535]/20 to-transparent" />
               {/* Sequence number watermark */}
               <span aria-hidden="true" className="absolute top-5 right-6 font-headline text-[120px] leading-none text-white/[0.07] select-none pointer-events-none">
                 01
               </span>
               {/* Eyebrow badge */}
-              <span className="sharp-edge absolute left-5 top-5 z-10 bg-[#2563EB] px-3 py-1 text-[9px] font-bold uppercase tracking-[0.22em] text-white">
+              <span className="sharp-edge absolute left-5 top-5 z-10 bg-[#E8A838] px-3 py-1 text-[9px] font-bold uppercase tracking-[0.22em] text-white">
                 System Built
               </span>
               {/* Bottom content */}
@@ -544,7 +556,7 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
                 <p className="text-sm text-white/55 uppercase tracking-[0.14em]">
                   Zero manual intervention · end-to-end in production
                 </p>
-                <div className="mt-5 h-[1px] w-0 group-hover:w-full bg-[#2563EB] transition-all duration-700 ease-spring" />
+                <div className="mt-5 h-[1px] w-0 group-hover:w-full bg-[#E8A838] transition-all duration-700 ease-spring" />
               </div>
             </motion.article>
 
@@ -566,15 +578,15 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
                   sizes="(max-width: 768px) 100vw, 42vw"
                   className="object-cover transition-transform duration-700 ease-spring group-hover:scale-[1.04]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/90 via-[#0F172A]/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1A2535]/90 via-[#1A2535]/20 to-transparent" />
                 <span aria-hidden="true" className="absolute top-3 right-4 font-headline text-[72px] leading-none text-white/[0.07] select-none pointer-events-none">02</span>
-                <span className="sharp-edge absolute left-4 top-4 z-10 bg-[#0F172A]/80 backdrop-blur-sm border border-white/10 px-3 py-1 text-[9px] font-bold uppercase tracking-[0.22em] text-white">
+                <span className="sharp-edge absolute left-4 top-4 z-10 bg-[#1A2535]/80 backdrop-blur-sm border border-white/10 px-3 py-1 text-[9px] font-bold uppercase tracking-[0.22em] text-white">
                   Live Deployment
                 </span>
                 <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
                   <h3 className="font-headline text-xl md:text-2xl text-white leading-tight mb-2">Revenue Control Module</h3>
                   <p className="text-[11px] text-white/55 uppercase tracking-[0.14em]">94 active users · production since May 2025</p>
-                  <div className="mt-4 h-[1px] w-0 group-hover:w-full bg-[#2563EB] transition-all duration-700" />
+                  <div className="mt-4 h-[1px] w-0 group-hover:w-full bg-[#E8A838] transition-all duration-700" />
                 </div>
               </motion.article>
 
@@ -593,15 +605,15 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
                   sizes="(max-width: 768px) 100vw, 42vw"
                   className="object-cover transition-transform duration-700 ease-spring group-hover:scale-[1.04]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/90 via-[#0F172A]/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1A2535]/90 via-[#1A2535]/20 to-transparent" />
                 <span aria-hidden="true" className="absolute top-3 right-4 font-headline text-[72px] leading-none text-white/[0.07] select-none pointer-events-none">03</span>
-                <span className="sharp-edge absolute left-4 top-4 z-10 bg-[#0F172A]/80 backdrop-blur-sm border border-white/10 px-3 py-1 text-[9px] font-bold uppercase tracking-[0.22em] text-white">
+                <span className="sharp-edge absolute left-4 top-4 z-10 bg-[#1A2535]/80 backdrop-blur-sm border border-white/10 px-3 py-1 text-[9px] font-bold uppercase tracking-[0.22em] text-white">
                   Measured Outcomes
                 </span>
                 <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
                   <h3 className="font-headline text-xl md:text-2xl text-white leading-tight mb-2">Quantified Results</h3>
                   <p className="text-[11px] text-white/55 uppercase tracking-[0.14em]">Manual triage ↓85% · Qualified meetings ↑43%</p>
-                  <div className="mt-4 h-[1px] w-0 group-hover:w-full bg-[#2563EB] transition-all duration-700" />
+                  <div className="mt-4 h-[1px] w-0 group-hover:w-full bg-[#E8A838] transition-all duration-700" />
                 </div>
               </motion.article>
 
@@ -609,7 +621,7 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
           </div>
 
           {/* Metrics strip */}
-          <div className="mt-4 grid grid-cols-2 md:grid-cols-4 border border-[#e2e8f0] divide-y md:divide-y-0 md:divide-x divide-[#e2e8f0]">
+          <div className="mt-4 grid grid-cols-2 md:grid-cols-4 border border-[#DDE3EA] divide-y md:divide-y-0 md:divide-x divide-[#DDE3EA]">
             {[
               { val: '↓85%', label: 'Manual triage cut' },
               { val: '↑43%', label: 'Qualified meeting lift' },
@@ -617,38 +629,38 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
               { val: '94', label: 'Daily active operators' },
             ].map((m) => (
               <div key={m.label} className="flex items-center gap-4 px-6 py-4">
-                <span className="font-headline text-2xl text-[#0F172A]">{m.val}</span>
-                <span className="text-[10px] text-[#94a3b8] uppercase tracking-widest leading-snug">{m.label}</span>
+                <span className="font-headline text-2xl text-[#1A2535]">{m.val}</span>
+                <span className="text-[10px] text-[#9AA4B2] uppercase tracking-widest leading-snug">{m.label}</span>
               </div>
             ))}
           </div>
 
           {/* Production verified */}
           <div className="mt-5 flex items-center gap-3">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#2563EB] animate-pulse inline-block shrink-0" />
-            <span className="text-[9px] font-bold uppercase tracking-[0.24em] text-[#2563EB] shrink-0">Production Verified</span>
-            <span className="h-px flex-1 bg-[#e2e8f0]" />
+            <span className="h-1.5 w-1.5 rounded-full bg-[#E8A838] animate-pulse inline-block shrink-0" />
+            <span className="text-[9px] font-bold uppercase tracking-[0.24em] text-[#E8A838] shrink-0">Production Verified</span>
+            <span className="h-px flex-1 bg-[#DDE3EA]" />
           </div>
 
         </div>
       </section>
 
       {/* ── Vision / Trust Section ─────────────────────────────────────── */}
-      <section className="relative overflow-hidden border-y border-white/10 bg-[#0F172A] py-20 md:py-28">
+      <section className="relative overflow-hidden border-y border-white/10 bg-[#1A2535] py-20 md:py-28">
         {/* Blueprint grid overlay */}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 opacity-[0.04]"
           style={{
             backgroundImage:
-              'repeating-linear-gradient(0deg,#60a5fa 0,#60a5fa 1px,transparent 0,transparent 50%),repeating-linear-gradient(90deg,#60a5fa 0,#60a5fa 1px,transparent 0,transparent 50%)',
+              'repeating-linear-gradient(0deg,#F0C15A 0,#F0C15A 1px,transparent 0,transparent 50%),repeating-linear-gradient(90deg,#F0C15A 0,#F0C15A 1px,transparent 0,transparent 50%)',
             backgroundSize: '48px 48px',
           }}
         />
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[#2563EB]/70" />
-        <div className="pointer-events-none absolute left-0 top-0 hidden h-full w-px bg-[#2563EB]/60 lg:block" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[#E8A838]/70" />
+        <div className="pointer-events-none absolute left-0 top-0 hidden h-full w-px bg-[#E8A838]/60 lg:block" />
 
-        <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-start gap-14 px-8 lg:grid-cols-[minmax(0,1fr)_minmax(420px,0.86fr)] lg:gap-20">
+        <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-start gap-14 px-6 sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(420px,0.86fr)] lg:gap-20">
 
           {/* Left — heading + feature list */}
           <motion.div
@@ -657,22 +669,25 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="mb-12 max-w-[680px] font-headline text-5xl leading-[0.98] text-white md:text-6xl">
-              Lasting Transformation Requires{' '}
-              <em className="not-italic text-[#2563EB] font-headline italic">The Full ARC</em>
-            </h2>
+            <div className="mb-12 flex items-start gap-5">
+              <SectionBrandMark surface="dark" size="md" className="mt-1" />
+              <h2 className="max-w-[680px] font-headline text-[clamp(2.8rem,12vw,3.9rem)] leading-[1.02] text-white md:text-6xl md:leading-[0.98]">
+                Lasting Transformation Requires{' '}
+                <em className="not-italic text-[#E8A838] font-headline italic">The Full ARC</em>
+              </h2>
+            </div>
 
             <div className="relative border-l border-white/20">
               {arcPhases.map((phase) => (
                 <div key={phase.phase} className="relative pl-7 pb-8 last:pb-0">
-                  <span className="absolute -left-px top-0 h-12 w-px bg-[#2563EB]" aria-hidden="true" />
+                  <span className="absolute -left-px top-0 h-12 w-px bg-[#E8A838]" aria-hidden="true" />
                   <div className="flex gap-5">
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center border border-white/20 bg-white/10 text-white">
                       {phase.icon}
                     </div>
                     <div className="min-w-0 border-b border-white/10 pb-7 last:border-b-0">
                       <div className="mb-2 flex flex-wrap items-center gap-x-3 gap-y-1">
-                        <span className="font-label text-[10px] font-bold uppercase tracking-[0.22em] text-[#60a5fa]">
+                        <span className="font-label text-[10px] font-bold uppercase tracking-[0.22em] text-[#F0C15A]">
                           Phase {phase.phase}
                         </span>
                         <span className="text-sm text-white/40">{phase.discipline}</span>
@@ -701,35 +716,35 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <div ref={liveMetricsRef} className="relative z-10 overflow-hidden border border-[#cbd5e1] bg-[#F8FAFC]">
-              <div className="grid gap-5 border-b border-[#0F172A]/10 px-7 py-7 md:grid-cols-[1fr_auto] md:items-start">
+            <div ref={liveMetricsRef} className="relative z-10 overflow-hidden border border-[#C8CED7] bg-[#FFFFFF]">
+              <div className="grid gap-5 border-b border-[#1A2535]/10 px-7 py-7 md:grid-cols-[1fr_auto] md:items-start">
                 <div>
                   <div className="mb-3 flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 bg-[#2563EB]" aria-hidden="true" />
-                    <p className="font-mono text-[9px] uppercase tracking-[0.28em] text-[#2563EB]">
+                    <span className="h-1.5 w-1.5 bg-[#E8A838]" aria-hidden="true" />
+                    <p className="font-mono text-[9px] uppercase tracking-[0.28em] text-[#E8A838]">
                       Live Program Metrics
                     </p>
                   </div>
-                  <p className="max-w-[360px] text-sm leading-6 text-[#475569]">
+                  <p className="max-w-[360px] text-sm leading-6 text-[#566274]">
                     Measured across active AI, CRM, and cloud programs after launch, where the ARC model stays accountable.
                   </p>
                 </div>
-                <div className="border border-[#0F172A]/10 px-4 py-3 text-right">
-                  <span className="block font-headline text-3xl leading-none text-[#0F172A]">2025</span>
-                  <span className="mt-1 block text-[9px] font-bold uppercase tracking-[0.2em] text-[#94a3b8]">
+                <div className="border border-[#1A2535]/10 px-4 py-3 text-right">
+                  <span className="block font-headline text-3xl leading-none text-[#1A2535]">2025</span>
+                  <span className="mt-1 block text-[9px] font-bold uppercase tracking-[0.2em] text-[#9AA4B2]">
                     Morocco
                   </span>
                 </div>
               </div>
 
-              <div className="divide-y divide-[#0F172A]/10">
+              <div className="divide-y divide-[#1A2535]/10">
                 {liveMetrics.map((metric, idx) => (
                   <div key={metric.label} className="grid grid-cols-[auto_1fr_auto] items-baseline gap-4 px-7 py-5">
-                    <span className="font-mono text-[10px] font-bold text-[#94a3b8]">0{idx + 1}</span>
-                    <span className="text-sm font-body text-[#334155]">{metric.label}</span>
+                    <span className="font-mono text-[10px] font-bold text-[#9AA4B2]">0{idx + 1}</span>
+                    <span className="text-sm font-body text-[#3D4858]">{metric.label}</span>
                     <div className="ml-4 flex shrink-0 items-baseline gap-1.5">
-                      <span className="text-sm font-bold text-[#2563EB]">{metric.dir}</span>
-                      <span className="font-headline text-3xl font-medium leading-none text-[#0F172A]">
+                      <span className="text-sm font-bold text-[#E8A838]">{metric.dir}</span>
+                      <span className="font-headline text-3xl font-medium leading-none text-[#1A2535]">
                         {formatLiveMetric(metric.target, metric.kind)}
                       </span>
                     </div>
@@ -737,10 +752,10 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
                 ))}
               </div>
 
-              <div className="grid grid-cols-3 border-t border-[#0F172A]/10 bg-white/70">
+              <div className="grid grid-cols-3 border-t border-[#1A2535]/10 bg-white/70">
                 {['Production', 'Managed', 'Measured'].map((item) => (
-                  <div key={item} className="border-r border-[#0F172A]/10 px-5 py-4 last:border-r-0">
-                    <span className="block text-[9px] font-bold uppercase tracking-[0.2em] text-[#94a3b8]">
+                  <div key={item} className="border-r border-[#1A2535]/10 px-5 py-4 last:border-r-0">
+                    <span className="block text-[9px] font-bold uppercase tracking-[0.2em] text-[#9AA4B2]">
                       {item}
                     </span>
                   </div>
@@ -751,7 +766,7 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
             {/* Link to capabilities */}
             <Link
               href="/capabilities"
-              className="mt-6 inline-flex items-center gap-2 border border-white/20 px-6 py-3 text-xs font-label font-bold uppercase tracking-widest text-white/70 transition-colors hover:border-white/40 hover:text-white"
+              className="mt-6 inline-flex min-h-11 items-center gap-2 border border-white/20 px-6 py-3 text-xs font-label font-bold uppercase tracking-widest text-white/70 transition-colors hover:border-white/40 hover:text-white"
             >
               Our Capabilities
               <ArrowRight className="w-4 h-4" />
@@ -763,12 +778,12 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
 
       <VideoScrollSection
         videoSrc="/Images/media/scrollanimaion.mp4"
-        topBg="#0F172A"
-        bottomBg="#F5F6FA"
+        topBg="#1A2535"
+        bottomBg="#FFFFFF"
       />
 
-      <div className="relative overflow-hidden pb-6 text-[#1E272E] md:pb-8">
-        <h2 className="text-[#1E272E]/90 text-2xl lg:text-4xl md:text-xl mb-8 mx-auto text-center font-light leading-relaxed">
+      <div className="relative overflow-hidden pb-6 text-[#1A2535] md:pb-8">
+        <h2 className="text-[#1A2535]/90 text-2xl lg:text-4xl md:text-xl mb-8 mx-auto text-center font-light leading-relaxed">
           CORE TECHNOLOGY STACK
         </h2>
         <LogoLoop
@@ -780,13 +795,13 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
           pauseOnHover
           scaleOnHover
           fadeOut
-          fadeOutColor="#F5F6FA"
+          fadeOutColor="#FFFFFF"
           ariaLabel="Technology partners"
         />
       </div>
 
       <section ref={worldMapSectionRef} className="sharp-edge w-full pt-0 pb-0 rounded-xl overflow-hidden">
-        <Suspense fallback={<div className="h-[220px] sm:h-[300px] md:h-[360px] w-full bg-[#ECF5FD]" aria-hidden="true" />}>
+        <Suspense fallback={<div className="h-[220px] sm:h-[300px] md:h-[360px] w-full bg-[#FFF7E8]" aria-hidden="true" />}>
           <WorldMapDemo />
         </Suspense>
       </section>
@@ -806,5 +821,3 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
 };
 
 export default Home;
-
-

@@ -50,6 +50,7 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
   const [isPaused, setIsPaused] = useState(false);
   const [hoveredCenter, setHoveredCenter] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [viewportWidth, setViewportWidth] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -65,6 +66,16 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
     );
     observer.observe(el);
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const updateWidth = () => {
+      setViewportWidth(sectionRef.current?.clientWidth ?? window.innerWidth);
+    };
+
+    updateWidth();
+    window.addEventListener('resize', updateWidth);
+    return () => window.removeEventListener('resize', updateWidth);
   }, []);
 
   useEffect(() => {
@@ -93,27 +104,32 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
 
   if (!total) return null;
 
+  const isCompact = viewportWidth > 0 && viewportWidth < 640;
+  const cardW = isCompact ? Math.max(286, Math.min(viewportWidth - 32, 340)) : CARD_W;
+  const cardH = isCompact ? 440 : CARD_H;
+  const cardStep = isCompact ? cardW * 0.82 : CARD_STEP;
+
   return (
-    <section ref={sectionRef} className="bg-white overflow-hidden border-t border-[#e2e8f0]">
+    <section ref={sectionRef} className="bg-white overflow-hidden border-t border-[#DDE3EA]">
 
       {/* ── Centered header ─────────────────────────────────────────── */}
       <div className="text-center pt-10 pb-8 px-6">
         <div className="inline-flex items-center gap-3 mb-4">
-          <span className="block h-px w-8 bg-[#2563EB]/35" />
-          <span className="text-[9px] font-bold uppercase tracking-[0.32em] text-[#2563EB]">Welcome to H.V.A</span>
-          <span className="block h-px w-8 bg-[#2563EB]/35" />
+          <span className="block h-px w-8 bg-[#E8A838]/35" />
+          <span className="text-[9px] font-bold uppercase tracking-[0.32em] text-[#E8A838]">Welcome to Hive Vault Arc</span>
+          <span className="block h-px w-8 bg-[#E8A838]/35" />
         </div>
-        <h2 className="font-headline text-[2.6rem] md:text-5xl leading-[1.06] tracking-tight text-[#0F172A]">
+        <h2 className="font-headline text-[clamp(2rem,11vw,2.6rem)] md:text-5xl leading-[1.06] tracking-tight text-[#1A2535]">
           Thinking, Testing,{' '}
-          <em className="not-italic text-[#0F172A]/40">Shipping.</em>
+          <em className="not-italic text-[#1A2535]/40">Shipping.</em>
         </h2>
-        <p className="mt-3 text-sm text-[#94a3b8] max-w-sm mx-auto leading-relaxed">
+        <p className="mt-3 text-sm text-[#9AA4B2] max-w-sm mx-auto leading-relaxed">
           Field notes from programs we&apos;ve built and teams we&apos;ve transformed.
         </p>
       </div>
 
       {/* ── Edgeless carousel ──────────────────────────────────────── */}
-      <div className="relative overflow-hidden" style={{ height: CARD_H + 40 }}>
+      <div className="relative overflow-hidden" style={{ height: cardH + 40 }}>
         {items.map((item, i) => {
           const offset = circularOffset(i, activeIndex, total);
           const absOffset = Math.abs(offset);
@@ -121,7 +137,7 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
 
           const isCenter = offset === 0;
           const xDir = offset < 0 ? -1 : 1;
-          const x = isCenter ? 0 : xDir * CARD_STEP * absOffset;
+          const x = isCenter ? 0 : xDir * cardStep * absOffset;
           const scale = cardScale(absOffset);
           const opacity = cardOpacity(absOffset);
           const zIndex = 10 - absOffset;
@@ -131,10 +147,10 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
               key={item.id}
               className="absolute top-5"
               style={{
-                width: CARD_W,
-                height: CARD_H,
+                width: cardW,
+                height: cardH,
                 left: '50%',
-                marginLeft: -CARD_W / 2,
+                marginLeft: -cardW / 2,
                 zIndex,
                 cursor: isCenter ? 'default' : 'pointer',
               }}
@@ -153,7 +169,7 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
                   <span
                     className="absolute top-4 left-4 z-10 px-3 py-1.5
                                bg-white/90 backdrop-blur-sm
-                               text-[9px] font-bold uppercase tracking-[0.22em] text-[#0F172A]"
+                               text-[9px] font-bold uppercase tracking-[0.22em] text-[#1A2535]"
                   >
                     {item.tag}
                   </span>
@@ -167,52 +183,52 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
                       transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
                     />
                   ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-[#dbeafe] to-[#e0e7ff]" />
+                    <div className="w-full h-full bg-gradient-to-br from-[#FFF4D8] to-[#FFF4D8]" />
                   )}
                 </div>
 
                 {/* ── Static bottom text panel (28% height) ── */}
                 <div className="absolute bottom-0 left-0 right-0 bg-white px-5 pt-4 pb-5" style={{ height: '28%' }}>
-                  <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#94a3b8] mb-2">
-                    <span className="text-[#0F172A] font-extrabold">
+                  <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#9AA4B2] mb-2">
+                    <span className="text-[#1A2535] font-extrabold">
                       {item.type === 'blog' ? 'Article' : 'Case Study'}
                     </span>
                     {'  '}{item.date}
                   </p>
-                  <h3 className="font-headline text-[1.2rem] leading-snug text-[#0F172A] line-clamp-2">
+                  <h3 className="font-headline text-[1.2rem] leading-snug text-[#1A2535] line-clamp-2">
                     {item.title}
                   </h3>
                 </div>
 
                 {/* ── Hover CTA panel — slides up over text panel ── */}
                 <motion.div
-                  className="absolute left-0 right-0 bottom-0 bg-[#F8FAFC] px-5 pt-5 pb-5 flex flex-col justify-between"
+                  className="absolute left-0 right-0 bottom-0 bg-[#FFFFFF] px-5 pt-5 pb-5 flex flex-col justify-between"
                   style={{
                     height: '52%',
-                    borderTop: '1px solid #e2e8f0',
+                    borderTop: '1px solid #DDE3EA',
                   }}
                   animate={{ y: isCenter && hoveredCenter ? 0 : '100%' }}
                   transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#94a3b8] mb-1">
-                    <span className="text-[#0F172A] font-extrabold">
+                  <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#9AA4B2] mb-1">
+                    <span className="text-[#1A2535] font-extrabold">
                       {item.type === 'blog' ? 'Article' : 'Case Study'}
                     </span>
                     {'  '}{item.date}
                   </p>
-                  <p className="font-headline text-[1.1rem] leading-snug text-[#0F172A] mb-3 line-clamp-2">
+                  <p className="font-headline text-[1.1rem] leading-snug text-[#1A2535] mb-3 line-clamp-2">
                     {item.title}
                   </p>
-                  <p className="text-xs leading-relaxed text-[#475569] line-clamp-3 mb-4">
+                  <p className="text-xs leading-relaxed text-[#566274] line-clamp-3 mb-4">
                     {item.excerpt}
                   </p>
                   <Link
                     href={item.href}
                     className="inline-flex items-center justify-center gap-2
-                               bg-[#2563EB] text-white
-                               px-5 py-3.5 w-full
+                               bg-[#E8A838] text-white
+                               min-h-11 px-5 py-3.5 w-full
                                text-[10px] font-bold uppercase tracking-[0.18em]
-                               hover:bg-[#1d4ed8] transition-colors duration-200"
+                               hover:bg-[#C8891C] transition-colors duration-200"
                   >
                     Learn More →
                   </Link>
@@ -225,11 +241,11 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
       </div>
 
       {/* ── Controls ────────────────────────────────────────────────── */}
-      <div className="px-8 lg:px-14 pb-12 pt-4 flex items-center gap-2">
+      <div className="px-6 lg:px-14 pb-12 pt-4 flex items-center gap-2">
         <button
           onClick={() => setIsPaused((p) => !p)}
-          className="w-9 h-9 border border-[#e2e8f0] flex items-center justify-center
-                     text-[#475569] hover:bg-[#2563EB] hover:text-white hover:border-[#2563EB]
+          className="w-11 h-11 border border-[#DDE3EA] flex items-center justify-center
+                     text-[#566274] hover:bg-[#E8A838] hover:text-white hover:border-[#E8A838]
                      transition-colors duration-200"
           aria-label={isPaused ? 'Play' : 'Pause'}
         >
@@ -237,8 +253,8 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
         </button>
         <button
           onClick={prev}
-          className="w-9 h-9 border border-[#e2e8f0] flex items-center justify-center
-                     text-[#475569] hover:bg-[#2563EB] hover:text-white hover:border-[#2563EB]
+          className="w-11 h-11 border border-[#DDE3EA] flex items-center justify-center
+                     text-[#566274] hover:bg-[#E8A838] hover:text-white hover:border-[#E8A838]
                      transition-colors duration-200"
           aria-label="Previous"
         >
@@ -246,8 +262,8 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
         </button>
         <button
           onClick={next}
-          className="w-9 h-9 border border-[#e2e8f0] flex items-center justify-center
-                     text-[#475569] hover:bg-[#2563EB] hover:text-white hover:border-[#2563EB]
+          className="w-11 h-11 border border-[#DDE3EA] flex items-center justify-center
+                     text-[#566274] hover:bg-[#E8A838] hover:text-white hover:border-[#E8A838]
                      transition-colors duration-200"
           aria-label="Next"
         >

@@ -1,8 +1,23 @@
 # SEO Growth Playbook (Tangier + Morocco IT/AI Queries)
 
 Date: 2026-03-24
-Project: H.V.A website (`migration/nextjs16`)
+Project: Hive Vault Arc website
 Primary market: Tangier, Morocco
+
+## 2026-05-24 Current Baseline Update
+
+This playbook is historical context. Use `docs/specs/seo-ai-discovery/` and `sprints/seo-ai-discovery/` for current execution.
+
+Current repo state:
+
+- Production domain is `https://hivevaultarc.com`.
+- `robots.txt`, `sitemap.xml`, `llms.txt`, and `llms-full.txt` already exist and return `200`.
+- Global Organization/ProfessionalService JSON-LD and FAQ schema already exist.
+- Local pages now exist for AI agents, IT consulting, custom software, and digital services.
+- The main missing machine-readable surface is `GET /ai/company`, which currently returns `404`.
+- The public sitemap needs hardening for `/products-systems`, `/ai/company`, and valid localized alternates.
+- `hiva-nine.vercel.app` remains a staging/canonical leakage risk and should not compete with production.
+- Public brand naming should use `Hive Vault Arc`; keep `H.V.A` and `HVA` only as aliases/search variants.
 
 ## 1) Goal and Reality Check
 
@@ -19,11 +34,11 @@ Important: no one can guarantee "#1" for all terms. Google local and organic ran
 
 ### 2.1 Site-level gaps (from current codebase)
 
-- Global metadata is too generic (`title: H.V.A`, generic description) and not location/service intent-specific.
-- No clear route-level SEO metadata strategy for each target keyword cluster.
-- No dedicated local landing pages for exact high-intent terms (for example, no `/ai-agents-tangier` page).
-- No explicit robots/sitemap setup currently visible in project public assets.
-- Current content already mentions Morocco/Tangier in places, but intent is spread across long pages and not structured around search clusters.
+- Some older docs still assume `H.V.A` is the primary public brand; current public copy should use `Hive Vault Arc`.
+- Route-level SEO exists in many places, but it still needs a full consistency pass against the current brand, canonical domain, and service taxonomy.
+- Dedicated local landing pages now exist, but they need sitemap, schema, crawler, and Search Console verification.
+- Root SEO files already exist; the current work is to harden and complete them, not add them from scratch.
+- Current content already mentions Morocco/Tangier in places, but future pages should map one clear search intent to one page.
 
 ### 2.2 Search landscape snapshot (web reconnaissance)
 
@@ -32,7 +47,7 @@ For Morocco software/IT terms, search results commonly include:
 - Directory/marketplace pages capturing broad commercial terms.
 - Programmatic long-tail pages targeting very specific service + city combinations.
 
-Implication: to outrank, H.V.A needs stronger query-page alignment, local authority signals, and consistent business profile/citation/review strength.
+Implication: to outrank, Hive Vault Arc needs stronger query-page alignment, local authority signals, and consistent business profile/citation/review strength.
 
 Because SERPs change by location, language, and personalization, run a repeatable SERP audit from Morocco/Tangier monthly:
 - Use incognito and logged-out Google sessions.
@@ -86,15 +101,15 @@ Each page should have unique:
 ### 4.1 Metadata rules (must implement per route)
 
 For each target page:
-- Title: `Primary Keyword | H.V.A`
+- Title: `Primary Keyword | Hive Vault Arc`
 - Meta description: 140-160 chars, include service + location + value proposition.
 - Canonical URL set to self.
 - Open Graph/Twitter metadata aligned to same intent.
 
 Example title patterns:
-- `AI Agents in Tangier | H.V.A`
-- `IT Services Consulting in Morocco | H.V.A`
-- `Custom Software Solutions in Morocco | H.V.A`
+- `AI Agents in Tangier | Hive Vault Arc`
+- `IT Services Consulting in Morocco | Hive Vault Arc`
+- `Custom Software Solutions in Morocco | Hive Vault Arc`
 
 ### 4.2 Heading + copy rules
 
@@ -260,7 +275,7 @@ Additional official ecosystem resources:
 - Bing Webmaster Blog (Bing + AI visibility + IndexNow): https://blogs.bing.com/webmaster/June-2025/Start-Using-Bing-Webmaster-Tools-to-Improve-Your-Site-Visibility
 - robots.txt implementation details: https://developers.google.com/crawling/docs/robots-txt/create-robots-txt
 
-## 12) Expert and Influencer Insights (Applied to H.V.A)
+## 12) Expert and Influencer Insights (Applied to Hive Vault Arc)
 
 This section translates advice from trusted SEO practitioners into practical actions for your site.
 
@@ -412,7 +427,7 @@ Consumer behavior and reviews (local trust engine):
 - BrightLocal Local Consumer Review Survey (latest): https://www.brightlocal.com/research/local-consumer-review-survey/
 - BrightLocal AI/local recommendation trend: https://www.brightlocal.com/research/lcrs-ai-trust/
 
-### 14.3 What this changes for H.V.A immediately
+### 14.3 What this changes for Hive Vault Arc immediately
 
 Add these mandatory requirements to every priority landing page:
 - Clear author/business ownership signal (who provides the service).

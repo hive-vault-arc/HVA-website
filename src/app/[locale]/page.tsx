@@ -58,28 +58,28 @@ const homeContent: Record<
     cta: 'Voir les capacites',
   },
   ar: {
-    title: 'استشارات تقنية وتحول رقمي في طنجة، المغرب',
-    h1: 'استشارات استراتيجية وتنفيذ تقني',
-    body: 'نرافق الشركات من الاستراتيجية الى التشغيل الفعلي: استشارات تقنية وهندسة حلول وذكاء اصطناعي واتوماسيون وبرمجيات مخصصة وبنية سحابية وخدمات بيانات.',
+    title: 'Ø§Ø³ØªØ´Ø§Ø±Ø§Øª ØªÙ‚Ù†ÙŠØ© ÙˆØªØ­ÙˆÙ„ Ø±Ù‚Ù…ÙŠ ÙÙŠ Ø·Ù†Ø¬Ø©ØŒ Ø§Ù„Ù…ØºØ±Ø¨',
+    h1: 'Ø§Ø³ØªØ´Ø§Ø±Ø§Øª Ø§Ø³ØªØ±Ø§ØªÙŠØ¬ÙŠØ© ÙˆØªÙ†ÙÙŠØ° ØªÙ‚Ù†ÙŠ',
+    body: 'Ù†Ø±Ø§ÙÙ‚ Ø§Ù„Ø´Ø±ÙƒØ§Øª Ù…Ù† Ø§Ù„Ø§Ø³ØªØ±Ø§ØªÙŠØ¬ÙŠØ© Ø§Ù„Ù‰ Ø§Ù„ØªØ´ØºÙŠÙ„ Ø§Ù„ÙØ¹Ù„ÙŠ: Ø§Ø³ØªØ´Ø§Ø±Ø§Øª ØªÙ‚Ù†ÙŠØ© ÙˆÙ‡Ù†Ø¯Ø³Ø© Ø­Ù„ÙˆÙ„ ÙˆØ°ÙƒØ§Ø¡ Ø§ØµØ·Ù†Ø§Ø¹ÙŠ ÙˆØ§ØªÙˆÙ…Ø§Ø³ÙŠÙˆÙ† ÙˆØ¨Ø±Ù…Ø¬ÙŠØ§Øª Ù…Ø®ØµØµØ© ÙˆØ¨Ù†ÙŠØ© Ø³Ø­Ø§Ø¨ÙŠØ© ÙˆØ®Ø¯Ù…Ø§Øª Ø¨ÙŠØ§Ù†Ø§Øª.',
     keywords: [
-      'استشارات تقنية المغرب',
-      'شركة تحول رقمي طنجة',
-      'استشارات التحول الرقمي المغرب',
-      'تطوير برمجيات مخصصة المغرب',
-      'تطوير تطبيق موبايل مخصص للشركات المغرب',
-      'تطوير تطبيق ويب مخصص طنجة',
-      'خدمات ترحيل CRM المغرب',
-      'تكامل CRM مع ERP المغرب',
-      'أتمتة سير العمل للشركات المغرب',
-      'ترحيل ونشر سحابي المغرب',
-      'استشارات DevOps و CI/CD المغرب',
-      'استشارات الذكاء الاصطناعي والاتمتة للمؤسسات',
-      'خدمات البيانات ولوحات القرار للمؤسسات',
-      'أحتاج فريق لتطوير تطبيقي في المغرب',
-      'افضل فريق برمجة للشركات الناشئة في طنجة',
+      'Ø§Ø³ØªØ´Ø§Ø±Ø§Øª ØªÙ‚Ù†ÙŠØ© Ø§Ù„Ù…ØºØ±Ø¨',
+      'Ø´Ø±ÙƒØ© ØªØ­ÙˆÙ„ Ø±Ù‚Ù…ÙŠ Ø·Ù†Ø¬Ø©',
+      'Ø§Ø³ØªØ´Ø§Ø±Ø§Øª Ø§Ù„ØªØ­ÙˆÙ„ Ø§Ù„Ø±Ù‚Ù…ÙŠ Ø§Ù„Ù…ØºØ±Ø¨',
+      'ØªØ·ÙˆÙŠØ± Ø¨Ø±Ù…Ø¬ÙŠØ§Øª Ù…Ø®ØµØµØ© Ø§Ù„Ù…ØºØ±Ø¨',
+      'ØªØ·ÙˆÙŠØ± ØªØ·Ø¨ÙŠÙ‚ Ù…ÙˆØ¨Ø§ÙŠÙ„ Ù…Ø®ØµØµ Ù„Ù„Ø´Ø±ÙƒØ§Øª Ø§Ù„Ù…ØºØ±Ø¨',
+      'ØªØ·ÙˆÙŠØ± ØªØ·Ø¨ÙŠÙ‚ ÙˆÙŠØ¨ Ù…Ø®ØµØµ Ø·Ù†Ø¬Ø©',
+      'Ø®Ø¯Ù…Ø§Øª ØªØ±Ø­ÙŠÙ„ CRM Ø§Ù„Ù…ØºØ±Ø¨',
+      'ØªÙƒØ§Ù…Ù„ CRM Ù…Ø¹ ERP Ø§Ù„Ù…ØºØ±Ø¨',
+      'Ø£ØªÙ…ØªØ© Ø³ÙŠØ± Ø§Ù„Ø¹Ù…Ù„ Ù„Ù„Ø´Ø±ÙƒØ§Øª Ø§Ù„Ù…ØºØ±Ø¨',
+      'ØªØ±Ø­ÙŠÙ„ ÙˆÙ†Ø´Ø± Ø³Ø­Ø§Ø¨ÙŠ Ø§Ù„Ù…ØºØ±Ø¨',
+      'Ø§Ø³ØªØ´Ø§Ø±Ø§Øª DevOps Ùˆ CI/CD Ø§Ù„Ù…ØºØ±Ø¨',
+      'Ø§Ø³ØªØ´Ø§Ø±Ø§Øª Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ ÙˆØ§Ù„Ø§ØªÙ…ØªØ© Ù„Ù„Ù…Ø¤Ø³Ø³Ø§Øª',
+      'Ø®Ø¯Ù…Ø§Øª Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª ÙˆÙ„ÙˆØ­Ø§Øª Ø§Ù„Ù‚Ø±Ø§Ø± Ù„Ù„Ù…Ø¤Ø³Ø³Ø§Øª',
+      'Ø£Ø­ØªØ§Ø¬ ÙØ±ÙŠÙ‚ Ù„ØªØ·ÙˆÙŠØ± ØªØ·Ø¨ÙŠÙ‚ÙŠ ÙÙŠ Ø§Ù„Ù…ØºØ±Ø¨',
+      'Ø§ÙØ¶Ù„ ÙØ±ÙŠÙ‚ Ø¨Ø±Ù…Ø¬Ø© Ù„Ù„Ø´Ø±ÙƒØ§Øª Ø§Ù„Ù†Ø§Ø´Ø¦Ø© ÙÙŠ Ø·Ù†Ø¬Ø©',
     ],
     primaryHref: '/ar/capabilities',
-    cta: 'استكشف القدرات',
+    cta: 'Ø§Ø³ØªÙƒØ´Ù Ø§Ù„Ù‚Ø¯Ø±Ø§Øª',
   },
   es: {
     title: 'Consultoria tecnologica y transformacion digital en Tanger, Marruecos',
@@ -182,14 +182,14 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       dir={isRtl ? 'rtl' : 'ltr'}
     >
       <JsonLd data={schema} />
-      <p className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-[#2563EB]">{locale.toUpperCase()}</p>
-      <h1 className="mb-6 font-serif text-4xl leading-tight text-[#0F172A] md:text-6xl">{content.h1}</h1>
-      <p className="max-w-3xl text-lg leading-relaxed text-[#334155]">{identity.shortDescriptor}</p>
-      <p className="mt-4 max-w-3xl text-lg leading-relaxed text-[#334155]">{content.body}</p>
-      <p className="mt-4 max-w-3xl text-sm leading-relaxed text-[#475569]">{identity.proofStatement}</p>
+      <p className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-[#E8A838]">{locale.toUpperCase()}</p>
+      <h1 className="mb-6 font-serif text-4xl leading-tight text-[#1A2535] md:text-6xl">{content.h1}</h1>
+      <p className="max-w-3xl text-lg leading-relaxed text-[#3D4858]">{identity.shortDescriptor}</p>
+      <p className="mt-4 max-w-3xl text-lg leading-relaxed text-[#3D4858]">{content.body}</p>
+      <p className="mt-4 max-w-3xl text-sm leading-relaxed text-[#566274]">{identity.proofStatement}</p>
       <Link
         href={content.primaryHref}
-        className="mt-10 inline-flex items-center rounded bg-[#0F172A] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#2563EB]"
+        className="mt-10 inline-flex items-center rounded bg-[#1A2535] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#E8A838]"
       >
         {content.cta}
       </Link>

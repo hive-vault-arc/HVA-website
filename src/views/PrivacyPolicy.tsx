@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { CONTACT_EMAIL, CONTACT_PHONE_DISPLAY, CONTACT_PHONE_E164 } from '../lib/seo';
 
 export default function PrivacyPolicy() {
   return (
@@ -9,7 +10,7 @@ export default function PrivacyPolicy() {
           <p className="editorial-kicker">Compliance &amp; Data Protection</p>
           <h1 className="editorial-title">Privacy Policy</h1>
           <p className="editorial-lead">
-            Hive Vault Arc (H.V.A) is committed to protecting your personal data in compliance
+            Hive Vault Arc is committed to protecting your personal data in compliance
             with Moroccan Law 09-08 on the protection of individuals with regard to the processing
             of personal data (CNDP), as well as the General Data Protection Regulation (GDPR)
             applicable to residents of the European Union under its extraterritorial scope.
@@ -28,18 +29,18 @@ export default function PrivacyPolicy() {
             The data controller for personal data collected via <strong>hivevaultarc.com</strong> is:
           </p>
           <div className="geo-card card-hover mt-5 space-y-1">
-            <p className="text-sm font-semibold text-[#0f172a]">Hive Vault Arc (H.V.A)</p>
+            <p className="text-sm font-semibold text-[#1A2535]">Hive Vault Arc</p>
             <p className="text-sm text-secondary">Tangier, Tanger-Tetouan-Al Hoceima, Morocco</p>
             <p className="text-sm text-secondary">
               Email:{' '}
-              <a href="mailto:contact@hivevaultarc.com" className="text-primary underline underline-offset-2">
-                contact@hivevaultarc.com
+              <a href={`mailto:${CONTACT_EMAIL}`} className="text-primary underline underline-offset-2">
+                {CONTACT_EMAIL}
               </a>
             </p>
             <p className="text-sm text-secondary">
               Phone:{' '}
-              <a href="tel:+212670431249" className="text-primary underline underline-offset-2">
-                +212 670 431 249
+              <a href={`tel:${CONTACT_PHONE_E164}`} className="text-primary underline underline-offset-2">
+                {CONTACT_PHONE_DISPLAY}
               </a>
             </p>
           </div>
@@ -132,8 +133,8 @@ export default function PrivacyPolicy() {
             <table className="w-full border-collapse text-sm text-secondary">
               <thead>
                 <tr className="border-b border-neutral-200 text-left">
-                  <th className="pb-3 pr-6 font-semibold text-[#0f172a]">Data category</th>
-                  <th className="pb-3 font-semibold text-[#0f172a]">Retention period</th>
+                  <th className="pb-3 pr-6 font-semibold text-[#1A2535]">Data category</th>
+                  <th className="pb-3 font-semibold text-[#1A2535]">Retention period</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-neutral-100">
@@ -185,7 +186,7 @@ export default function PrivacyPolicy() {
             Data hosted on Vercel servers (USA) involves a transfer outside the European Economic
             Area, governed by <strong>Standard Contractual Clauses (SCCs)</strong> approved by
             the European Commission under Article 46 of the GDPR. For transfers outside Morocco,
-            H.V.A complies with the requirements of Article 43 of Law 09-08 and applicable
+            Hive Vault Arc complies with the requirements of Article 43 of Law 09-08 and applicable
             authorisations from the CNDP.
           </p>
         </article>
@@ -206,14 +207,14 @@ export default function PrivacyPolicy() {
               { right: "Right to Object", detail: "Object to processing based on legitimate interest." },
             ].map(({ right, detail }) => (
               <div key={right} className="geo-card card-hover space-y-1">
-                <p className="text-sm font-semibold text-[#0f172a]">{right}</p>
+                <p className="text-sm font-semibold text-[#1A2535]">{right}</p>
                 <p className="text-xs leading-relaxed text-secondary">{detail}</p>
               </div>
             ))}
           </div>
           <p className="mt-5 text-sm leading-relaxed text-secondary">
             To exercise your rights, send your request to{' '}
-            <a href="mailto:contact@hivevaultarc.com" className="text-primary underline underline-offset-2">contact@hivevaultarc.com</a>
+            <a href={`mailto:${CONTACT_EMAIL}`} className="text-primary underline underline-offset-2">{CONTACT_EMAIL}</a>
             {'. We are committed to responding within '}<strong>30 days</strong>{'.'}
           </p>
         </article>
@@ -228,7 +229,7 @@ export default function PrivacyPolicy() {
           <div className="mt-5 grid gap-4 sm:grid-cols-2">
             <div className="geo-card card-hover space-y-1">
               <p className="geo-kicker">Users in Morocco</p>
-              <p className="text-sm font-semibold text-[#0f172a]">CNDP</p>
+              <p className="text-sm font-semibold text-[#1A2535]">CNDP</p>
               <p className="text-sm text-secondary">
                 Commission Nationale de contrôle de la Protection des Données Personnelles
               </p>
@@ -243,7 +244,7 @@ export default function PrivacyPolicy() {
             </div>
             <div className="geo-card card-hover space-y-1">
               <p className="geo-kicker">Users in the EU</p>
-              <p className="text-sm font-semibold text-[#0f172a]">CNIL (France) or local DPA</p>
+              <p className="text-sm font-semibold text-[#1A2535]">CNIL (France) or local DPA</p>
               <p className="text-sm text-secondary">
                 Data Protection Authority of your country of residence
               </p>
@@ -263,7 +264,7 @@ export default function PrivacyPolicy() {
         <article className="mb-12">
           <h2 className="services-brief-section-title">11. Data Security</h2>
           <p className="mt-4 text-base leading-relaxed text-secondary">
-            H.V.A implements appropriate technical and organisational measures to protect your
+            Hive Vault Arc implements appropriate technical and organisational measures to protect your
             data against loss, unauthorised access, disclosure, or accidental destruction:
           </p>
           <ul className="mt-4 list-disc space-y-2 pl-6 text-sm leading-relaxed text-secondary">
@@ -288,7 +289,7 @@ export default function PrivacyPolicy() {
         <article className="mb-12">
           <h2 className="services-brief-section-title">13. Changes to This Policy</h2>
           <p className="mt-4 text-base leading-relaxed text-secondary">
-            H.V.A reserves the right to update this Privacy Policy at any time to reflect changes
+            Hive Vault Arc reserves the right to update this Privacy Policy at any time to reflect changes
             in its practices or applicable legal obligations. In the event of a material change,
             you will be notified by email (if you have provided your address) or via a notice on
             the site. The &quot;Last updated&quot; date at the top of this page will always be
@@ -303,11 +304,11 @@ export default function PrivacyPolicy() {
             For any questions regarding this policy or to exercise your rights, contact our team:
           </p>
           <div className="geo-card card-hover mt-5 space-y-1">
-            <p className="text-sm font-semibold text-[#0f172a]">Data Protection Contact</p>
-            <p className="text-sm text-secondary">Hive Vault Arc (H.V.A)</p>
+            <p className="text-sm font-semibold text-[#1A2535]">Data Protection Contact</p>
+            <p className="text-sm text-secondary">Hive Vault Arc</p>
             <p className="text-sm text-secondary">
-              <a href="mailto:contact@hivevaultarc.com" className="text-primary underline underline-offset-2">
-                contact@hivevaultarc.com
+              <a href={`mailto:${CONTACT_EMAIL}`} className="text-primary underline underline-offset-2">
+                {CONTACT_EMAIL}
               </a>
             </p>
             <p className="text-xs text-secondary mt-1">Response time: 30 days maximum</p>
@@ -319,7 +320,7 @@ export default function PrivacyPolicy() {
       {/* ── CTA ── */}
       <div className="border-t border-neutral-200 bg-white px-6 py-14 text-center">
         <p className="text-sm uppercase tracking-widest text-secondary">Have a question?</p>
-        <p className="mt-3 text-2xl font-semibold text-[#0f172a]">
+        <p className="mt-3 text-2xl font-semibold text-[#1A2535]">
           Get in touch with our team directly.
         </p>
         <Link href="/contact" className="editorial-cta sharp-edge mt-6 inline-flex">

@@ -43,7 +43,7 @@ export function Hero3DBackground({
   }, [cursorSensitivity, cursorX, cursorY])
 
   return (
-    <div className={cn("relative w-full h-screen overflow-hidden", className)}>
+    <div className={cn("relative h-[100dvh] w-full overflow-hidden", className)}>
       {/* 3D Background with Parallax Effect */}
       <motion.div 
         className="absolute inset-0 z-0"

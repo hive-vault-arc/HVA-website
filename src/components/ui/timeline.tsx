@@ -122,16 +122,16 @@ return (
           >
             <div className="sticky flex flex-col md:flex-row z-40 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full">
               <motion.div
-                className="h-10 w-10 absolute left-8 -translate-x-1/2 rounded-full bg-black flex items-center justify-center border-2 border-purple-500"
+                className="h-10 w-10 absolute left-8 -translate-x-1/2 rounded-full bg-black flex items-center justify-center border-2 border-primary"
                 variants={dotVariants}
               >
                 <motion.div 
-                  className="h-3 w-3 rounded-full bg-purple-500"
+                  className="h-3 w-3 rounded-full bg-primary"
                   whileHover={{ scale: 1.5 }}
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 />
               </motion.div>
-              <h3 className="hidden md:block text-xl md:pl-20 md:text-5xl font-light text-neutral-200 group-hover:text-purple-300 transition-colors duration-300">
+              <h3 className="hidden md:block text-xl md:pl-20 md:text-5xl font-light text-neutral-200 group-hover:text-primary-300 transition-colors duration-300">
                 {item.title}
               </h3>
             </div>
@@ -154,9 +154,9 @@ return (
         ))}
 
         <motion.div
-          className="absolute top-0 w-[2px] bg-gradient-to-b from-transparent via-purple-500/30 to-transparent left-8 -translate-x-1/2 h-full"
+          className="absolute top-0 w-[2px] bg-gradient-to-b from-transparent via-primary/30 to-transparent left-8 -translate-x-1/2 h-full"
           style={{
-            height: contentHeight > 0 ? contentHeight : "100vh",
+            height: contentHeight > 0 ? contentHeight : "100dvh",
           }}
         >
           <motion.div
@@ -164,7 +164,7 @@ return (
               height: heightTransform,
               opacity: opacityTransform,
             }}
-            className="w-full bg-gradient-to-b from-purple-500 via-purple-500 to-transparent"
+            className="w-full bg-gradient-to-b from-primary via-primary to-transparent"
           />
         </motion.div>
       </div>

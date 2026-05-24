@@ -29,7 +29,7 @@ export default function InsightsCollection({
   return (
     <InsightIndexPage
       eyebrow={eyebrow}
-      headline="The H.V.A"
+      headline="Hive Vault Arc"
       headlineItalic={titleItalic ?? title}
       description={description}
       items={items}

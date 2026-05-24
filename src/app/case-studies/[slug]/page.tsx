@@ -65,7 +65,7 @@ export default async function CaseStudyDetailPage({ params }: Props) {
     itemReviewed: {
       '@type': 'Organization',
       '@id': `${SITE_URL}/#organization`,
-      name: 'H.V.A - Hive Vault Arc',
+      name: 'Hive Vault Arc',
       url: SITE_URL,
     },
     reviewBody: study.testimonial.quote,

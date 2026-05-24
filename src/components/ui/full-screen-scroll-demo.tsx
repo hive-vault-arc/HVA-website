@@ -40,8 +40,8 @@ export function FullScreenScrollDemo() {
         colors={{
           text: "rgba(255,255,255,0.92)",
           overlay: "rgba(0,0,0,0.5)",
-          pageBg: "#0f172a",
-          stageBg: "#1e293b"
+          pageBg: "#1A2535",
+          stageBg: "#253247"
         }}
       />
     </div>

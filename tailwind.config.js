@@ -21,105 +21,105 @@ const config = {
     },
 
     /* ── Color Palette ──────────────────────────────────────────────────────
-       Primary   #2563EB  — blue-600  (brand blue, links, highlights, icons)
-       Secondary #475569  — slate-600 (secondary text, muted UI)
-       Tertiary  #0F172A  — slate-900 (primary CTA buttons, headings, dark bg)
-       Neutral   #F8FAFC  — slate-50  (page background, light surfaces)
+       Primary   #E8A838  — brand gold  (brand gold, links, highlights, icons)
+       Secondary #566274  — slate-600 (secondary text, muted UI)
+       Tertiary  #1A2535  — slate-900 (primary CTA buttons, headings, dark bg)
+       Neutral   #FFFFFF  — slate-50  (page background, light surfaces)
        ─────────────────────────────────────────────────────────────────── */
     colors: {
       transparent: 'transparent',
       current:     'currentColor',
       white:       '#ffffff',
-      black:       '#0F172A',
+      black:       '#1A2535',
 
-      /* Primary blue — #2563EB (Tailwind blue-600) */
+      /* Primary gold — #E8A838 (Tailwind brand gold) */
       primary: {
-        '50':   '#eff6ff',
-        '100':  '#dbeafe',
-        '200':  '#bfdbfe',
-        '300':  '#93c5fd',
-        '400':  '#60a5fa',
-        '500':  '#3b82f6',
-        '600':  '#2563eb',
-        DEFAULT: '#2563EB',
-        dark:    '#1d4ed8',
-        darker:  '#1e40af',
-        '700':  '#1d4ed8',
-        '800':  '#1e40af',
-        '900':  '#1e3a8a',
-        '950':  '#172554',
+        '50':   '#FFF9EA',
+        '100':  '#FFF4D8',
+        '200':  '#F8E1A6',
+        '300':  '#F4D27C',
+        '400':  '#F0C15A',
+        '500':  '#F0C15A',
+        '600':  '#E8A838',
+        DEFAULT: '#E8A838',
+        dark:    '#C8891C',
+        darker:  '#A87316',
+        '700':  '#C8891C',
+        '800':  '#A87316',
+        '900':  '#8B6115',
+        '950':  '#6F4A10',
       },
 
-      /* Secondary slate — #475569 (Tailwind slate-600) */
+      /* Secondary slate — #566274 (Tailwind slate-600) */
       secondary: {
-        '50':   '#f8fafc',
-        '100':  '#f1f5f9',
-        '200':  '#e2e8f0',
-        '300':  '#cbd5e1',
-        '400':  '#94a3b8',
-        '500':  '#64748b',
-        '600':  '#475569',
-        DEFAULT: '#475569',
-        '700':  '#334155',
-        '800':  '#1e293b',
-        '900':  '#0f172a',
+        '50':   '#FFFFFF',
+        '100':  '#F7F8FA',
+        '200':  '#DDE3EA',
+        '300':  '#C8CED7',
+        '400':  '#9AA4B2',
+        '500':  '#657384',
+        '600':  '#566274',
+        DEFAULT: '#566274',
+        '700':  '#3D4858',
+        '800':  '#253247',
+        '900':  '#1A2535',
       },
 
-      /* Tertiary dark navy — #0F172A (Tailwind slate-900) */
+      /* Tertiary dark navy — #1A2535 (Tailwind slate-900) */
       tertiary: {
-        DEFAULT: '#0F172A',
-        mid:     '#1e293b',
-        light:   '#334155',
+        DEFAULT: '#1A2535',
+        mid:     '#253247',
+        light:   '#3D4858',
       },
 
-      /* Neutral / background — #F8FAFC */
+      /* Neutral / background — #FFFFFF */
       neutral: {
-        DEFAULT: '#F8FAFC',
-        dark:    '#e2e8f0',
-        mid:     '#cbd5e1',
+        DEFAULT: '#FFFFFF',
+        dark:    '#DDE3EA',
+        mid:     '#C8CED7',
       },
 
       /* ── Legacy "purple" alias — backward compat with existing pages ──
-         Maps old #0984E3 usage to the new primary blue scale.          */
+         Maps old #E8A838 usage to the new primary gold scale.          */
       purple: {
-        '50':   '#eff6ff',
-        '100':  '#dbeafe',
-        '200':  '#bfdbfe',
-        '300':  '#93c5fd',
-        '400':  '#60a5fa',
-        '500':  '#2563eb',
-        '600':  '#2563eb',
-        '700':  '#1d4ed8',
-        '800':  '#1e40af',
-        '900':  '#1e3a8a',
-        '950':  '#172554',
-        DEFAULT: '#2563EB',
-        dark:    '#1d4ed8',
-        darker:  '#1e40af',
+        '50':   '#FFF9EA',
+        '100':  '#FFF4D8',
+        '200':  '#F8E1A6',
+        '300':  '#F4D27C',
+        '400':  '#F0C15A',
+        '500':  '#E8A838',
+        '600':  '#E8A838',
+        '700':  '#C8891C',
+        '800':  '#A87316',
+        '900':  '#8B6115',
+        '950':  '#6F4A10',
+        DEFAULT: '#E8A838',
+        dark:    '#C8891C',
+        darker:  '#A87316',
       },
 
       /* ── Legacy "dark" / "cloud" aliases ── */
-      dark:  '#0F172A',
-      cloud: '#F8FAFC',
+      dark:  '#1A2535',
+      cloud: '#FFFFFF',
 
-      /* Accent — lighter blue for highlights */
+      /* Accent — lighter gold for highlights */
       cyan: {
-        '500':   '#60a5fa',
-        DEFAULT: '#60a5fa',
+        '500':   '#F0C15A',
+        DEFAULT: '#F0C15A',
       },
 
       /* Grays — Tailwind slate scale */
       gray: {
-        '50':  '#f8fafc',
-        '100': '#f1f5f9',
-        '200': '#e2e8f0',
-        '300': '#cbd5e1',
-        '400': '#94a3b8',
-        '500': '#64748b',
-        '600': '#475569',
-        '700': '#334155',
-        '800': '#1e293b',
-        '900': '#0f172a',
+        '50':  '#FFFFFF',
+        '100': '#F7F8FA',
+        '200': '#DDE3EA',
+        '300': '#C8CED7',
+        '400': '#9AA4B2',
+        '500': '#657384',
+        '600': '#566274',
+        '700': '#3D4858',
+        '800': '#253247',
+        '900': '#1A2535',
       },
     },
 

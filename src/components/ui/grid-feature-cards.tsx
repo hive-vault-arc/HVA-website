@@ -29,7 +29,7 @@ export function FeatureCard({ feature, className, ...props }: FeatureCardPorps) 
 					/>
 				</div>
 			</div>
-			<feature.icon className="text-foreground/75 size-6 text-purple" strokeWidth={2} aria-hidden />
+			<feature.icon className="text-foreground/75 size-6 text-primary" strokeWidth={2} aria-hidden />
 			<h3 className="mt-10 text-xl text-white">{feature.title}</h3>
 			<p className="text-muted-foreground relative z-20 mt-2 text-xs font-light text-white">{feature.description}</p>
 		</div>

@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 import BottomCTA from '../components/BottomCTA';
 import InsightsSlider from '../components/InsightsSlider';
+import SectionBrandMark from '../components/SectionBrandMark';
 import { getAllPosts } from '../lib/blog';
 import { getAllCaseStudies } from '../lib/proof';
 
@@ -80,7 +81,7 @@ function CategoryCards() {
             />
 
             {/* Always-on dark gradient at bottom */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/80 via-[#0f172a]/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#1A2535]/80 via-[#1A2535]/20 to-transparent" />
 
             {/* Default state — small label bottom-left */}
             <motion.div
@@ -110,7 +111,7 @@ function CategoryCards() {
                 href={cat.href}
                 className="inline-flex items-center gap-2 px-4 py-2 text-[10px] font-bold
                            uppercase tracking-[0.14em] text-white border border-white/40
-                           bg-white/10 backdrop-blur-sm hover:bg-[#2563EB] hover:border-[#2563EB]
+                           bg-white/10 backdrop-blur-sm hover:bg-[#E8A838] hover:border-[#E8A838]
                            transition-colors duration-200"
               >
                 Open {cat.label}
@@ -133,11 +134,14 @@ type LatestProps = {
 
 function LatestSection({ latestPost, latestCaseStudy }: LatestProps) {
   return (
-    <section className="py-20 bg-[#F8FAFC]">
+    <section className="py-20 bg-[#FFFFFF]">
       <div className="mx-auto max-w-7xl px-6 lg:px-14">
-        <p className="mb-10 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
-          Latest
-        </p>
+        <div className="mb-10 flex items-center gap-3">
+          <SectionBrandMark size="sm" />
+          <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#E8A838]">
+            Latest
+          </p>
+        </div>
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           {/* ── Featured blog — tall image card ── */}
@@ -147,7 +151,7 @@ function LatestSection({ latestPost, latestCaseStudy }: LatestProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.55 }}
-              className="group relative overflow-hidden bg-[#0F172A]"
+              className="group relative overflow-hidden bg-[#1A2535]"
               style={{ minHeight: 480 }}
             >
               {/* Cover image */}
@@ -161,13 +165,13 @@ function LatestSection({ latestPost, latestCaseStudy }: LatestProps) {
               )}
 
               {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-[#0f172a]/50 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1A2535] via-[#1A2535]/50 to-transparent" />
 
               {/* Content */}
               <div className="relative z-10 flex flex-col justify-end h-full p-8 md:p-10" style={{ minHeight: 480 }}>
                 <div className="mb-auto pt-6 flex items-center gap-2">
-                  <span className="h-[1px] w-6 bg-[#2563EB]" />
-                  <p className="text-[9px] font-bold uppercase tracking-[0.24em] text-[#60a5fa]">
+                  <span className="h-[1px] w-6 bg-[#E8A838]" />
+                  <p className="text-[9px] font-bold uppercase tracking-[0.24em] text-[#F0C15A]">
                     Latest Blog · {latestPost.category}
                   </p>
                 </div>
@@ -184,7 +188,7 @@ function LatestSection({ latestPost, latestCaseStudy }: LatestProps) {
                       href={`/blog/${latestPost.slug}`}
                       className="inline-flex items-center gap-2 px-5 py-2.5 text-[10px] font-bold
                                  uppercase tracking-[0.14em] text-white border border-white/30
-                                 bg-white/10 backdrop-blur-sm hover:bg-[#2563EB] hover:border-[#2563EB]
+                                 bg-white/10 backdrop-blur-sm hover:bg-[#E8A838] hover:border-[#E8A838]
                                  transition-all duration-200"
                     >
                       Read article <span aria-hidden="true">→</span>
@@ -209,7 +213,7 @@ function LatestSection({ latestPost, latestCaseStudy }: LatestProps) {
               style={{ minHeight: 480 }}
             >
               {/* Top image */}
-              <div className="relative overflow-hidden bg-[#0F172A]" style={{ height: 260 }}>
+              <div className="relative overflow-hidden bg-[#1A2535]" style={{ height: 260 }}>
                 {latestCaseStudy.assets.coverImage && (
                   <motion.img
                     src={latestCaseStudy.assets.coverImage}
@@ -218,11 +222,11 @@ function LatestSection({ latestPost, latestCaseStudy }: LatestProps) {
                                transition-transform duration-700 group-hover:scale-105"
                   />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/60 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1A2535]/60 to-transparent" />
                 {/* Industry pill */}
                 <div className="absolute top-5 left-5">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 text-[9px] font-bold
-                                   uppercase tracking-[0.18em] text-white bg-[#2563EB]/80 backdrop-blur-sm">
+                                   uppercase tracking-[0.18em] text-white bg-[#E8A838]/80 backdrop-blur-sm">
                     <span className="w-1.5 h-1.5 rounded-full bg-white/80" />
                     {latestCaseStudy.industry}
                   </span>
@@ -230,26 +234,26 @@ function LatestSection({ latestPost, latestCaseStudy }: LatestProps) {
               </div>
 
               {/* Bottom text panel */}
-              <div className="flex flex-col flex-1 bg-white border border-[#e2e8f0] border-t-0 p-8">
-                <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
+              <div className="flex flex-col flex-1 bg-white border border-[#DDE3EA] border-t-0 p-8">
+                <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.24em] text-[#E8A838]">
                   Latest Case Study
                 </p>
-                <h3 className="font-headline text-2xl font-medium leading-snug text-[#0F172A]">
+                <h3 className="font-headline text-2xl font-medium leading-snug text-[#1A2535]">
                   {latestCaseStudy.title}
                 </h3>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-[#475569] line-clamp-3">
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-[#566274] line-clamp-3">
                   {latestCaseStudy.summary}
                 </p>
                 <div className="mt-6 flex items-center justify-between">
                   <Link
                     href={`/case-studies/${latestCaseStudy.slug}`}
                     className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase
-                               tracking-[0.14em] text-[#0F172A] border border-[#0F172A]
-                               px-4 py-2 hover:bg-[#0F172A] hover:text-white transition-all duration-200"
+                               tracking-[0.14em] text-[#1A2535] border border-[#1A2535]
+                               px-4 py-2 hover:bg-[#1A2535] hover:text-white transition-all duration-200"
                   >
                     Read case study <span aria-hidden="true">→</span>
                   </Link>
-                  <span className="text-[10px] text-[#94a3b8] uppercase tracking-widest">
+                  <span className="text-[10px] text-[#9AA4B2] uppercase tracking-widest">
                     {latestCaseStudy.clientName}
                   </span>
                 </div>
@@ -317,7 +321,7 @@ function InsightCard({ item, index }: { readonly item: InsightGridItem; readonly
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.45, delay: (index % 6) * 0.06 }}
-      className="group relative overflow-hidden bg-[#0F172A] cursor-pointer"
+      className="group relative overflow-hidden bg-[#1A2535] cursor-pointer"
       style={{ height: 320 }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -335,7 +339,7 @@ function InsightCard({ item, index }: { readonly item: InsightGridItem; readonly
       />
 
       {/* Base overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/85 via-[#0f172a]/25 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#1A2535]/85 via-[#1A2535]/25 to-transparent" />
 
       {/* Tag — fades on hover */}
       <motion.div
@@ -343,7 +347,7 @@ function InsightCard({ item, index }: { readonly item: InsightGridItem; readonly
         animate={{ opacity: hovered ? 0 : 1 }}
         transition={{ duration: 0.2 }}
       >
-        <span className="w-1.5 h-1.5 rounded-full bg-[#60a5fa]" />
+        <span className="w-1.5 h-1.5 rounded-full bg-[#F0C15A]" />
         <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-white">
           {item.tag}
         </span>
@@ -377,7 +381,7 @@ function InsightCard({ item, index }: { readonly item: InsightGridItem; readonly
           href={item.href}
           className="inline-flex items-center gap-2 self-start px-4 py-2 text-[9px] font-bold
                      uppercase tracking-[0.14em] text-white border border-white/35
-                     bg-white/10 backdrop-blur-sm hover:bg-[#2563EB] hover:border-[#2563EB]
+                     bg-white/10 backdrop-blur-sm hover:bg-[#E8A838] hover:border-[#E8A838]
                      transition-all duration-200"
         >
           Open {item.tag} insight <span aria-hidden="true">→</span>
@@ -393,18 +397,21 @@ function AllInsightsGrid() {
   const hasMore = ALL_INSIGHTS.length > INITIAL_COUNT && !revealed;
 
   return (
-    <section className="py-20 bg-[#F8FAFC]">
+    <section className="py-20 bg-[#FFFFFF]">
       <div className="mx-auto max-w-7xl px-6 lg:px-14">
         <div className="flex items-end justify-between mb-10">
           <div>
-            <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
-              All Insights
-            </p>
-            <h2 className="font-headline text-2xl font-medium text-[#0F172A]">
+            <div className="mb-2 flex items-center gap-3">
+              <SectionBrandMark size="sm" />
+              <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#E8A838]">
+                All Insights
+              </p>
+            </div>
+            <h2 className="font-headline text-2xl font-medium text-[#1A2535]">
               Everything We've Published
             </h2>
           </div>
-          <span className="text-[10px] text-[#94a3b8] uppercase tracking-widest hidden sm:block">
+          <span className="text-[10px] text-[#9AA4B2] uppercase tracking-widest hidden sm:block">
             {ALL_INSIGHTS.length} items
           </span>
         </div>
@@ -419,9 +426,9 @@ function AllInsightsGrid() {
           <div className="mt-12 flex justify-center">
             <button
               onClick={() => setRevealed(true)}
-              className="inline-flex items-center gap-3 px-8 py-3.5 text-[10px] font-bold
-                         uppercase tracking-[0.18em] text-[#0F172A] border border-[#0F172A]
-                         hover:bg-[#0F172A] hover:text-white transition-all duration-200"
+              className="inline-flex min-h-11 items-center gap-3 px-8 py-3.5 text-[10px] font-bold
+                         uppercase tracking-[0.18em] text-[#1A2535] border border-[#1A2535]
+                         hover:bg-[#1A2535] hover:text-white transition-all duration-200"
             >
               {"Load more "}
               <span aria-hidden="true" className="text-xs">↓</span>
@@ -441,11 +448,11 @@ export default function InsightsHub() {
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
-    <div className="relative isolate overflow-x-hidden bg-[#F8FAFC] text-[#0F172A]">
+    <div className="relative isolate overflow-x-hidden bg-[#FFFFFF] text-[#1A2535]">
       {/* Scroll progress */}
       <motion.div
         aria-hidden="true"
-        className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-gradient-to-r from-[#2563EB] via-[#60a5fa] to-[#0ea5e9]"
+        className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-gradient-to-r from-[#E8A838] via-[#F0C15A] to-[#E8A838]"
         style={{ scaleX: progressScale }}
       />
 
@@ -461,17 +468,20 @@ export default function InsightsHub() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55 }}
           >
-            <p className="mb-5 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
-              Insights
-            </p>
+            <div className="mb-5 flex items-center gap-3">
+              <SectionBrandMark size="sm" />
+              <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#E8A838]">
+                Insights
+              </p>
+            </div>
             <h1 className="font-headline text-4xl font-medium leading-[1.04] tracking-tight sm:text-5xl lg:text-[4.25rem]">
               What We Think,
               <br />
-              <em className="italic text-[#475569]">Test, and Ship.</em>
+              <em className="italic text-[#566274]">Test, and Ship.</em>
             </h1>
             <div className="mt-6 flex items-center gap-4">
-              <span className="block h-px w-8 bg-[#2563EB] flex-shrink-0" />
-              <p className="text-sm leading-relaxed text-[#0F172A]/55 max-w-sm">
+              <span className="block h-px w-8 bg-[#E8A838] flex-shrink-0" />
+              <p className="text-sm leading-relaxed text-[#1A2535]/55 max-w-sm">
                 Blogs, case studies, perspectives &amp; research — grounded in real operational work.
               </p>
             </div>
@@ -493,15 +503,15 @@ export default function InsightsHub() {
               xmlns="http://www.w3.org/2000/svg"
             >
               {/* Outer ring */}
-              <circle cx="110" cy="110" r="104" stroke="#2563EB" strokeWidth="1" strokeOpacity="0.18" />
+              <circle cx="110" cy="110" r="104" stroke="#E8A838" strokeWidth="1" strokeOpacity="0.18" />
               {/* Mid ring */}
-              <circle cx="110" cy="110" r="76" stroke="#2563EB" strokeWidth="1" strokeOpacity="0.28" />
+              <circle cx="110" cy="110" r="76" stroke="#E8A838" strokeWidth="1" strokeOpacity="0.28" />
               {/* Inner ring */}
-              <circle cx="110" cy="110" r="48" stroke="#0F172A" strokeWidth="1" strokeOpacity="0.12" />
+              <circle cx="110" cy="110" r="48" stroke="#1A2535" strokeWidth="1" strokeOpacity="0.12" />
 
               {/* Crosshair lines */}
-              <line x1="6" y1="110" x2="214" y2="110" stroke="#0F172A" strokeWidth="1" strokeOpacity="0.08" />
-              <line x1="110" y1="6" x2="110" y2="214" stroke="#0F172A" strokeWidth="1" strokeOpacity="0.08" />
+              <line x1="6" y1="110" x2="214" y2="110" stroke="#1A2535" strokeWidth="1" strokeOpacity="0.08" />
+              <line x1="110" y1="6" x2="110" y2="214" stroke="#1A2535" strokeWidth="1" strokeOpacity="0.08" />
 
               {/* Tick marks at 12 positions on outer ring */}
               {Array.from({ length: 12 }).map((_, k) => {
@@ -516,7 +526,7 @@ export default function InsightsHub() {
                   <line
                     key={`tick-${k * 30}`}
                     x1={x1} y1={y1} x2={x2} y2={y2}
-                    stroke="#2563EB"
+                    stroke="#E8A838"
                     strokeWidth={k % 3 === 0 ? '1.5' : '1'}
                     strokeOpacity={k % 3 === 0 ? '0.55' : '0.28'}
                   />
@@ -524,15 +534,15 @@ export default function InsightsHub() {
               })}
 
               {/* Centre dot */}
-              <circle cx="110" cy="110" r="3.5" fill="#2563EB" fillOpacity="0.7" />
+              <circle cx="110" cy="110" r="3.5" fill="#E8A838" fillOpacity="0.7" />
 
               {/* Small accent dot — NE quadrant */}
-              <circle cx="152" cy="68" r="3" fill="#2563EB" fillOpacity="0.45" />
+              <circle cx="152" cy="68" r="3" fill="#E8A838" fillOpacity="0.45" />
 
               {/* Dashed arc segment — bottom-left quadrant */}
               <path
                 d="M 34 143 A 80 80 0 0 1 77 34"
-                stroke="#2563EB"
+                stroke="#E8A838"
                 strokeWidth="1"
                 strokeOpacity="0.35"
                 strokeDasharray="4 6"
@@ -546,11 +556,11 @@ export default function InsightsHub() {
                 textAnchor="middle"
                 fontSize="7"
                 letterSpacing="3"
-                fill="#475569"
+                fill="#566274"
                 fillOpacity="0.5"
                 fontFamily="system-ui, sans-serif"
               >
-                H.V.A INSIGHTS
+                HIVE VAULT ARC INSIGHTS
               </text>
             </svg>
           </motion.div>
@@ -561,11 +571,14 @@ export default function InsightsHub() {
       <InsightsSlider />
 
       {/* ── Category Navigation ───────────────────────────────────────────── */}
-      <section className="bg-[#F2F4F6] py-20">
+      <section className="bg-[#F7F8FA] py-20">
         <div className="mx-auto max-w-7xl px-6 lg:px-14">
-          <p className="mb-8 text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB]">
-            Insight Types
-          </p>
+          <div className="mb-8 flex items-center gap-3">
+            <SectionBrandMark size="sm" />
+            <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#E8A838]">
+              Insight Types
+            </p>
+          </div>
           <CategoryCards />
         </div>
       </section>
@@ -588,5 +601,3 @@ export default function InsightsHub() {
     </div>
   );
 }
-
-

@@ -9,7 +9,7 @@ import { getAllCaseStudies } from '../../../lib/proof';
 export const metadata: Metadata = buildPageMetadata({
   title: 'Portfolio | Transformation Engagements and Delivery Outcomes',
   description:
-    'Explore consulting-led transformation engagements delivered by H.V.A across AI operations, CRM modernization, analytics, software engineering, and cloud reliability.',
+    'Explore consulting-led transformation engagements delivered by Hive Vault Arc across AI operations, CRM modernization, analytics, software engineering, and cloud reliability.',
   path: '/whoarewe/portfolio',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'digital transformation portfolio Morocco',
@@ -43,7 +43,7 @@ export default function Page() {
   const caseItemListSchema = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: 'H.V.A Transformation Outcomes',
+    name: 'Hive Vault Arc Transformation Outcomes',
     itemListElement: caseStudies.map((study, index) => ({
       '@type': 'ListItem',
       position: index + 1,

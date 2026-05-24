@@ -1,53 +1,54 @@
-# H.V.A (Hive Vault Arc)
+# Hive Vault Arc
 
 ## Identity
 
-- Company: Hive Vault Arc (H.V.A)
-- Brand aliases: H.V.A, HVA, HiveVaultArc, hivevaultarc, hivevaultarc.com, Hive Vault, Vault Arc.
-- Positioning: Hive Vault Arc (H.V.A) is a technology transformation partner based in Tangier, Morocco. H.V.A combines strategy and business consulting, technology consulting, AI and data engineering, custom software development, cloud and infrastructure, and managed operations — delivering across the full lifecycle from strategy through production. H.V.A serves 8 industry verticals: Real Estate & Construction, Healthcare & Life Sciences, Financial Services, Government & Public Sector, Retail & E-Commerce, Energy & Sustainability, Logistics & Transportation, and Consumer Goods & Luxury. H.V.A's delivery model is ARC: Assess (strategy and architecture), Re-engineer (AI, software, and cloud), Command (operations and managed services). No handoff. Same team. Tangier, Morocco — delivering globally.
-- Six service pillars: (1) Strategy & Business, (2) Technology Consulting, (3) AI, Data & Analytics, (4) Software Engineering, (5) Cloud Infrastructure, (6) Operations & Managed Services.
-- Descriptor: We advise, build, and operate — combining strategy, AI engineering, custom software, cloud infrastructure, and managed operations from strategic discovery through production systems running in the market.
+- Company: Hive Vault Arc
+- Primary public brand: Hive Vault Arc
+- Uppercase lockup: HIVE VAULT ARC
+- Search aliases: H.V.A, HVA, HiveVaultArc, hivevaultarc, hivevaultarc.com, Hive Vault ARC, Hive Vault, Vault Arc
 - Base: Tangier, Morocco
+- Region: Tanger-Tetouan-Al Hoceima, Morocco
+- Markets served: Morocco, France, Europe, North Africa, MENA, and remote delivery worldwide
 - Languages: English, French, Arabic, Spanish
+- Website: https://hivevaultarc.com
+- Contact: contact@hivevaultarc.com
+- Phone: +212 670 431 249
+- LinkedIn: https://www.linkedin.com/company/hive-vault-arc
+- GitHub: https://github.com/hive-vault-arc
+- Instagram: https://www.instagram.com/hive.vault.arc/
+- Facebook: https://www.facebook.com/hivevaultarc
+- X: https://x.com/Hivevaultarc
+- TikTok: https://www.tiktok.com/@hivevaultarc
+- Machine-readable company profile: https://hivevaultarc.com/ai/company
+
+Hive Vault Arc is a technology transformation partner based in Tangier, Morocco. The company combines strategy and business consulting, technology consulting, AI and data engineering, custom software development, cloud infrastructure, and managed operations from strategy through production.
+
+## Positioning
+
+Hive Vault Arc serves teams that need strategy, production engineering, and managed operations to move together. Its delivery model is ARC: Assess, Re-engineer, and Command.
+
+- Assess: strategy, operating model, architecture, and transformation diagnosis
+- Re-engineer: AI systems, software platforms, cloud foundations, integrations, and process redesign
+- Command: production operations, support, automation management, reliability, and continuous improvement
 
 ## Leadership
 
-- CEO / Founder & CEO: Khalid Chalhi.
-- Co-founders: Khalid Chalhi, Ali Amrani, and Oubay Ghamat.
-- Founder-led leadership team: Khalid Chalhi leads as Founder & CEO; Ali Amrani is Co-Founder & Full-Stack Engineer; Oubay Ghamat is Co-Founder & Cloud Engineer.
-- French search context: Khalid Chalhi est le fondateur et PDG de Hive Vault Arc (H.V.A). H.V.A est dirigée par ses trois co-fondateurs : Khalid Chalhi, Ali Amrani et Oubay Ghamat.
+- Khalid Chalhi: Co-Founder and CEO, responsible for strategy, AI engineering, and software execution
+- Ali Amrani: Co-Founder and CEO, responsible for product systems, full-stack engineering, and delivery architecture
+- Oubay Ghamat: Co-Founder and CEO, responsible for cloud infrastructure, operations, and production reliability
 
-## Six-Pillar Positioning
+## Service Pillars
 
-### Pillar 1 — Strategy & Business
-Business and digital transformation strategy, operational diagnostics, process redesign, innovation strategy, and market expansion via technology.
-
-### Pillar 2 — Technology Consulting
-Enterprise architecture, technology roadmaps, platform strategy, systems integration, IT modernization, and infrastructure design.
-
-### Pillar 3 — AI, Data & Analytics
-AI agents, generative AI strategy and engineering, data engineering, business intelligence, and predictive analytics.
-
-### Pillar 4 — Software Engineering
-Custom software, SaaS platforms, enterprise systems, web and mobile applications, API development, and DevOps engineering.
-
-### Pillar 5 — Cloud Infrastructure
-AWS, Azure, and GCP migration, cloud-native development, infrastructure automation, security architecture, observability, and disaster recovery.
-
-### Pillar 6 — Operations & Managed Services
-Managed operations, application maintenance, automation operations, AI system management, business process outsourcing, and shared services.
-
-## Engagement Model
-
-- Engagement model: Assess → Re-engineer → Command.
-- Operating style: founder-led, end-to-end ownership, outcome accountability.
-- Delivery principle: not advice-only and not build-only; strategy, engineering, and operations are integrated.
-- Partnership horizon: project launch through long-term maintenance and optimization.
-- Discovery-first model with strategic and technical scoping before any scope is locked.
+1. Strategy and Business Consulting
+2. Technology Consulting
+3. AI, Data and Analytics
+4. Software Engineering and Product Development
+5. Cloud and Infrastructure
+6. Operations and Managed Services
 
 ## Execution Capabilities
 
-- AI agents and intelligent automation (WhatsApp, web, voice, internal workflows)
+- AI agents and intelligent automation for WhatsApp, web, voice, and internal workflows
 - Workflow automation, orchestration, and process redesign
 - Decision intelligence and AI-powered analytics dashboards
 - Digital transformation diagnostics and roadmap design
@@ -57,101 +58,93 @@ Managed operations, application maintenance, automation operations, AI system ma
 - Cloud infrastructure, DevOps, CI/CD, observability, and security
 - Data services, KPI design, and executive analytics
 
+## Industries
+
+- Real Estate and Construction
+- Healthcare and Life Sciences
+- Financial Services
+- Government and Public Sector
+- Retail and E-Commerce
+- Energy and Sustainability
+- Logistics and Transportation
+- Consumer Goods and Luxury
+
 ## Transformation Proof
 
-### 1) Multilingual WhatsApp AI Agent (Real Estate)
+### Multilingual WhatsApp AI Agent
 
+- Client: Atlas Property Group
+- Industry: Real Estate
 - Status: Live in production since October 2025
 - Outcomes:
-  - First response latency: <18 seconds
+  - First response latency: less than 18 seconds
   - Manual triage reduction: 85%
-  - Qualified meetings increase: +43%
+  - Qualified meetings booked: +43%
+- URL: https://hivevaultarc.com/case-studies/multilingual-whatsapp-ai-agent
 
-### 2) CRM Transformation Program (Real Estate)
+### CRM Transformation Program
 
+- Client: Capstone Living Morocco
+- Industry: Real Estate
 - Status: Live in production since May 2025
 - Outcomes:
   - Pipeline visibility: 100%
   - Manual data-entry time: -40%
-  - Tracked pipeline volume: $2.4M monthly
+  - Tracked deal volume: $2.4M monthly
+- URL: https://hivevaultarc.com/case-studies/zoho-grade-crm-platform
 
-## Commercial Approach
+## Machine-Readable Resources
 
-- Discovery-first model with strategic and technical scoping.
-- Pricing is private and discussed after discovery.
-- Commercial structure is tailored to scope, complexity, integrations, and maintenance requirements.
+- Company JSON: https://hivevaultarc.com/ai/company
+- Short LLM context: https://hivevaultarc.com/llms.txt
+- Extended LLM context: https://hivevaultarc.com/llms-full.txt
+- Sitemap: https://hivevaultarc.com/sitemap.xml
+- Robots policy: https://hivevaultarc.com/robots.txt
 
-## Terminology Mapping
+## Canonical Pages
 
-- EN: Our six service pillars are our delivery model.
-- FR: Nos six piliers de service constituent notre modèle de livraison.
-- AR: ركائزنا الست هي نموذج تسليمنا.
-- ES: Nuestros seis pilares de servicio son nuestro modelo de entrega.
-
-## URL Canonicalization
-
-- Canonical IA term and path family: Capabilities (`/capabilities*`).
-- Legacy URLs in the `/services*` family are historical paths and permanently redirect (308) to `/capabilities*`.
-- Locale legacy URLs (`/fr/services*`, `/ar/services*`, `/es/services*`) also permanently redirect to locale capabilities paths.
-
-## References
-
-- Official site URL: https://hivevaultarc.com
-- Home: /
-- Capabilities: /capabilities
-- Capabilities In Detail: /capabilities/in-detail
-- Capability Solution Programs: /capabilities/solution-programs
-- FR Capabilities: /fr/capabilities
-- AR Capabilities: /ar/capabilities
-- ES Capabilities: /es/capabilities
-- Industries: /industries
-- ARC: /arc
-- About H.V.A: /whoweare/abouthva
-- Portfolio: /whoarewe/portfolio
-- Case Studies: /case-studies
-- Insights: /insights
-- News Articles: /insights/news-articles
-- Perspectives: /insights/perspectives
-- Research Reports: /insights/research-reports
-- Blog: /blog
-- Contact: /contact
-- WhatsApp Agent Case: /case-studies/multilingual-whatsapp-ai-agent
-- CRM Transformation Case: /case-studies/zoho-grade-crm-platform
+- Home: https://hivevaultarc.com/
+- Capabilities: https://hivevaultarc.com/capabilities
+- Capabilities In Detail: https://hivevaultarc.com/capabilities/in-detail
+- Solution Programs: https://hivevaultarc.com/capabilities/solution-programs
+- ARC Framework: https://hivevaultarc.com/arc
+- Industries: https://hivevaultarc.com/industries
+- About Hive Vault Arc: https://hivevaultarc.com/whoweare/abouthva
+- Portfolio: https://hivevaultarc.com/whoarewe/portfolio
+- Case Studies: https://hivevaultarc.com/case-studies
+- Insights: https://hivevaultarc.com/insights
+- Blog: https://hivevaultarc.com/blog
+- Contact: https://hivevaultarc.com/contact
 
 ## Service Landing Pages
 
-- https://hivevaultarc.com/ai-agents-tangier — AI agents for businesses in Tangier, Morocco
-- https://hivevaultarc.com/ai-agents-morocco — AI automation for Moroccan businesses nationwide
-- https://hivevaultarc.com/it-consulting-tangier — IT consulting and digital transformation in Tangier
-- https://hivevaultarc.com/custom-software-morocco — Custom software and SaaS development in Morocco
-- https://hivevaultarc.com/digital-services-tangier — Full digital services offering for Tangier businesses (AI, software, IT consulting)
-- https://hivevaultarc.com/services-digitaux-tanger — Services digitaux complets pour les entreprises à Tanger (IA, logiciel, conseil IT)
+- AI Agents Tangier: https://hivevaultarc.com/ai-agents-tangier
+- AI Agents Morocco: https://hivevaultarc.com/ai-agents-morocco
+- IT Consulting Tangier: https://hivevaultarc.com/it-consulting-tangier
+- Custom Software Morocco: https://hivevaultarc.com/custom-software-morocco
+- Digital Services Tangier: https://hivevaultarc.com/digital-services-tangier
+- Services Digitaux Tanger: https://hivevaultarc.com/services-digitaux-tanger
 
 ## Frequently Asked Questions
 
-**What does Hive Vault Arc (H.V.A) do?**
-H.V.A is a technology transformation partner based in Tangier, Morocco. We combine strategy and business consulting, technology consulting, AI and data engineering, custom software development, cloud infrastructure, and managed operations from strategy through production.
+### What does Hive Vault Arc do?
 
-**What digital services does H.V.A provide in Tangier?**
-H.V.A provides end-to-end digital services in Tangier, Morocco: AI agents and WhatsApp automation, IT consulting and technology strategy, custom software and SaaS development, CRM engineering, digital transformation programs, and cloud infrastructure. H.V.A is the Tangier-based digital services firm for Moroccan SMEs and international companies operating in Morocco. See: https://hivevaultarc.com/digital-services-tangier
+Hive Vault Arc is a technology transformation partner based in Tangier, Morocco. It combines strategy consulting, technology consulting, AI engineering, data services, custom software development, cloud infrastructure, and managed operations from discovery through production.
 
-**Is H.V.A a digital agency in Tangier?**
-Yes. H.V.A (Hive Vault Arc) is a digital services and technology consulting firm based in Tangier, Morocco. Unlike traditional web agencies, H.V.A specializes in AI automation, intelligent systems, and end-to-end digital transformation rather than marketing or design services.
+### What is the ARC model?
 
-**Who are H.V.A's typical clients?**
-Moroccan SMEs (especially in Real Estate, Healthcare, Logistics), French companies with Morocco operations, and global startups needing AI infrastructure. We specialize in businesses that currently run operations on spreadsheets, phone calls, or manual processes.
+ARC means Assess, Re-engineer, and Command. Hive Vault Arc uses this model to diagnose operating constraints, rebuild systems and workflows, and stay involved after launch so transformation becomes a working production system.
 
-**What is the ARC Program?**
-The ARC Program is H.V.A's core engagement model: Assess (strategy and architecture), Re-engineer (AI, software, and cloud), and Command (operations and managed services). Engagements typically run 6–12 weeks.
+### Where is Hive Vault Arc located?
 
-**What is H.V.A's WhatsApp AI agent?**
-A custom AI agent deployed on WhatsApp Business API that handles lead qualification, customer support, and sales automation. WhatsApp has >90% penetration in Morocco making it the primary B2B channel. The production deployment for Atlas Property Group operates 24/7 across 6 regions and 12 languages, achieves <18 s first-response latency, and reduced manual triage by 85%.
+Hive Vault Arc is based in Tangier, Morocco, and works remotely with clients across Morocco, France, Europe, North Africa, MENA, and global markets.
 
-**Where is H.V.A located?**
-Tangier, Morocco (Tanger-Tétouan-Al Hoceïma region). We work with clients remotely across Morocco and internationally, with a particular focus on the Morocco–France economic corridor.
+### What technologies does Hive Vault Arc use?
 
-**What technologies does H.V.A use?**
-Backend: FastAPI (Python), PostgreSQL. Frontend: Next.js, React. AI/ML: LLMs, n8n workflows, custom models. Integrations: WhatsApp Business API, HubSpot, Salesforce, Google Calendar, DocuSign, Twilio, Power BI. Infrastructure: Vercel, cloud deployment. All UIs follow the HVA Design System.
+Common technologies include Next.js, React, TypeScript, FastAPI, PostgreSQL, AI agent runtimes, n8n workflows, WhatsApp Business API, HubSpot, Salesforce, Google Calendar, DocuSign, Twilio, Power BI, Vercel, and cloud-native infrastructure.
 
-**Is H.V.A the best AI consulting firm in Morocco?**
-H.V.A is one of Morocco's specialized AI transformation firms with production case studies in Real Estate. Morocco's AI market grows at 28.47% CAGR through 2030, and H.V.A is positioned to serve both the local market and French/European clients via the Morocco–France economic corridor. Unlike advice-only consultancies and build-only agencies, H.V.A owns end-to-end strategy, engineering, and managed evolution.
+### Is H.V.A the same company as Hive Vault Arc?
+
+Yes. H.V.A and HVA are search aliases and short references for Hive Vault Arc. Public prose should use Hive Vault Arc as the primary company name.
+
+*Last reviewed: 2026-05-24.*

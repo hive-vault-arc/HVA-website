@@ -7,7 +7,7 @@ import { GLOBAL_KEYWORDS, SITE_URL, buildPageMetadata, mergeKeywords } from '../
 export const metadata: Metadata = buildPageMetadata({
   title: 'Capability Solution Programs | Consulting-Led Operational Systems',
   description:
-    'Explore H.V.A capability solution programs with modules, integrations, delivery model, outcomes, and proof references for production operations. Our six service pillars are our delivery model.',
+    'Explore Hive Vault Arc capability solution programs with modules, integrations, delivery model, outcomes, and proof references for production operations. Our six service pillars are our delivery model.',
   path: '/capabilities/solution-programs',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'capability solution programs technology consulting',
@@ -22,8 +22,8 @@ export default function CapabilitiesSolutionProgramsPage() {
   const itemListSchema = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: 'H.V.A Capability Solution Programs',
-    alternateName: 'H.V.A Service Solution Programs',
+    name: 'Hive Vault Arc Capability Solution Programs',
+    alternateName: 'Hive Vault Arc Service Solution Programs',
     itemListElement: CAPABILITY_SOLUTION_PROGRAM_DETAILS.map((program, index) => ({
       '@type': 'ListItem',
       position: index + 1,

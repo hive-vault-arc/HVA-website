@@ -4,61 +4,105 @@ import { getAllPosts } from '../lib/blog';
 import { getAllCaseStudies } from '../lib/proof';
 
 const INDEXABLE_LOCALES = ['fr', 'ar', 'es'] as const;
+const BASE_URL = SITE_URL.replace(/\/$/, '');
 
 const w = (priority: number) => ({ changeFrequency: 'weekly' as const, priority });
 const m = (priority: number) => ({ changeFrequency: 'monthly' as const, priority });
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
+const absoluteUrl = (path: string) => (path === '/' ? BASE_URL : `${BASE_URL}${path}`);
+const localizedSuffix = (path: string) => (path === '/' ? '' : path);
+
+const localizedAlternates = (path: string) => ({
+  en: absoluteUrl(path),
+  ...Object.fromEntries(INDEXABLE_LOCALES.map((locale) => [locale, absoluteUrl(`/${locale}${localizedSuffix(path)}`)])),
+});
+
+type SitemapEntryOptions = {
+  changeFrequency: MetadataRoute.Sitemap[number]['changeFrequency'];
+  priority: number;
+  lastModified?: Date;
+};
+
+const entry = (
+  path: string,
+  now: Date,
+  options: SitemapEntryOptions,
+  languages?: Record<string, string>
+): MetadataRoute.Sitemap[number] => ({
+  url: absoluteUrl(path),
+  lastModified: options.lastModified ?? now,
+  changeFrequency: options.changeFrequency,
+  priority: options.priority,
+  ...(languages ? { alternates: { languages } } : {}),
+});
+
+const localizedEntries = (
+  path: string,
+  now: Date,
+  baseOptions: SitemapEntryOptions,
+  localeOptions: SitemapEntryOptions
+) => {
+  const languages = localizedAlternates(path);
 
   return [
-    // ── Core pages ────────────────────────────────────────────────────────
-    { url: SITE_URL,                                         lastModified: now, ...w(1) },
-    { url: `${SITE_URL}/capabilities`,                       lastModified: now, ...w(0.9) },
-    { url: `${SITE_URL}/capabilities/in-detail`,             lastModified: now, ...w(0.85) },
-    { url: `${SITE_URL}/capabilities/solution-programs`,     lastModified: now, ...w(0.85) },
-    { url: `${SITE_URL}/arc`,                                lastModified: now, ...w(0.85) },
-    { url: `${SITE_URL}/industries`,                         lastModified: now, ...w(0.85) },
-    { url: `${SITE_URL}/insights`,                           lastModified: now, ...w(0.85) },
-    { url: `${SITE_URL}/insights/news-articles`,             lastModified: now, ...m(0.7) },
-    { url: `${SITE_URL}/insights/perspectives`,              lastModified: now, ...m(0.7) },
-    { url: `${SITE_URL}/insights/research-reports`,          lastModified: now, ...m(0.7) },
-    { url: `${SITE_URL}/contact`,                            lastModified: now, ...m(0.8) },
-    { url: `${SITE_URL}/whoweare/abouthva`,                  lastModified: now, ...m(0.7) },
-    { url: `${SITE_URL}/privacy-policy`,                     lastModified: now, ...m(0.5) },
-    { url: `${SITE_URL}/mentions-legales`,                   lastModified: now, ...m(0.5) },
-    { url: `${SITE_URL}/whoarewe/portfolio`,                 lastModified: now, ...w(0.8) },
+    entry(path, now, baseOptions, languages),
+    ...INDEXABLE_LOCALES.map((locale) => entry(`/${locale}${localizedSuffix(path)}`, now, localeOptions, languages)),
+  ];
+};
 
-    // ── Geo landing pages ─────────────────────────────────────────────────
-    { url: `${SITE_URL}/ai-agents-tangier`,                  lastModified: now, ...m(0.8) },
-    { url: `${SITE_URL}/ai-agents-morocco`,                  lastModified: now, ...m(0.8) },
-    { url: `${SITE_URL}/it-consulting-tangier`,              lastModified: now, ...m(0.8) },
-    { url: `${SITE_URL}/custom-software-morocco`,            lastModified: now, ...m(0.8) },
-    { url: `${SITE_URL}/digital-services-tangier`,           lastModified: now, ...m(0.9) },
-    { url: `${SITE_URL}/services-digitaux-tanger`,           lastModified: now, ...m(0.8) },
+export default function sitemap(): MetadataRoute.Sitemap {
+  const now = new Date();
+  const digitalServicesLanguages = {
+    en: absoluteUrl('/digital-services-tangier'),
+    fr: absoluteUrl('/services-digitaux-tanger'),
+  };
 
-    // ── Blog ──────────────────────────────────────────────────────────────
-    { url: `${SITE_URL}/blog`,                               lastModified: now, ...w(0.8) },
+  return [
+    // Localized core pages.
+    ...localizedEntries('/', now, w(1), w(0.85)),
+    ...localizedEntries('/capabilities', now, w(0.9), w(0.8)),
+    ...localizedEntries('/capabilities/in-detail', now, w(0.85), m(0.7)),
+    ...localizedEntries('/capabilities/solution-programs', now, w(0.85), m(0.7)),
+
+    // Core pages.
+    entry('/arc', now, w(0.85)),
+    entry('/industries', now, w(0.85)),
+    entry('/products-systems', now, m(0.6)),
+    entry('/insights', now, w(0.85)),
+    entry('/insights/news-articles', now, m(0.7)),
+    entry('/insights/perspectives', now, m(0.7)),
+    entry('/insights/research-reports', now, m(0.7)),
+    entry('/contact', now, m(0.8)),
+    entry('/whoweare/abouthva', now, m(0.7)),
+    entry('/privacy-policy', now, m(0.5)),
+    entry('/mentions-legales', now, m(0.5)),
+    entry('/whoarewe/portfolio', now, w(0.8)),
+
+    // Geo landing pages.
+    entry('/ai-agents-tangier', now, m(0.8)),
+    entry('/ai-agents-morocco', now, m(0.8)),
+    entry('/it-consulting-tangier', now, m(0.8)),
+    entry('/custom-software-morocco', now, m(0.8)),
+    entry('/digital-services-tangier', now, m(0.9), digitalServicesLanguages),
+    entry('/services-digitaux-tanger', now, m(0.8), digitalServicesLanguages),
+
+    // Blog.
+    entry('/blog', now, w(0.8)),
     ...getAllPosts().map((post) => ({
-      url: `${SITE_URL}/blog/${post.slug}`,
+      url: absoluteUrl(`/blog/${post.slug}`),
       lastModified: new Date(post.publishedAt),
       ...m(0.7),
     })),
 
-    // ── Case studies ──────────────────────────────────────────────────────
-    { url: `${SITE_URL}/case-studies`,                       lastModified: now, ...w(0.9) },
+    // Case studies.
+    entry('/case-studies', now, w(0.9)),
     ...getAllCaseStudies().map((cs) => ({
-      url: `${SITE_URL}/case-studies/${cs.slug}`,
+      url: absoluteUrl(`/case-studies/${cs.slug}`),
       lastModified: new Date(cs.lastUpdated),
       ...m(0.85),
     })),
 
-    // ── Locale pages (fr · ar · es) ───────────────────────────────────────
-    ...INDEXABLE_LOCALES.flatMap((locale) => [
-      { url: `${SITE_URL}/${locale}`,                                  lastModified: now, ...w(0.85) },
-      { url: `${SITE_URL}/${locale}/capabilities`,                     lastModified: now, ...w(0.8) },
-      { url: `${SITE_URL}/${locale}/capabilities/in-detail`,           lastModified: now, ...m(0.7) },
-      { url: `${SITE_URL}/${locale}/capabilities/solution-programs`,   lastModified: now, ...m(0.7) },
-    ]),
+    // Machine-readable company profile.
+    entry('/ai/company', now, m(0.4)),
   ];
 }

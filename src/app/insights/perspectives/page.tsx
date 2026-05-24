@@ -3,9 +3,9 @@ import InsightsCollection from '../../../views/InsightsCollection';
 import { GLOBAL_KEYWORDS, buildPageMetadata, mergeKeywords } from '../../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Perspectives | H.V.A Point of View',
+  title: 'Perspectives | Point of View',
   description:
-    'Strategic perspectives from H.V.A on transformation governance, operating models, and long-term technology execution.',
+    'Strategic perspectives from Hive Vault Arc on transformation governance, operating models, and long-term technology execution.',
   path: '/insights/perspectives',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'digital transformation perspectives',

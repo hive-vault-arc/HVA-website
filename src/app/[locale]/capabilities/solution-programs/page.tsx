@@ -22,7 +22,7 @@ export async function generateMetadata({
   const base = buildPageMetadata({
     title: 'Capability Solution Programs | Consulting-Led Operational Systems',
     description:
-      'Explore H.V.A capability solution programs with modules, integrations, delivery model, outcomes, and proof references for production operations.',
+      'Explore Hive Vault Arc capability solution programs with modules, integrations, delivery model, outcomes, and proof references for production operations.',
     path:
       locale === 'en'
         ? '/capabilities/solution-programs'

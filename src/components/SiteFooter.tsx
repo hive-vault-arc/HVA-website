@@ -1,10 +1,28 @@
 import Link from 'next/link';
 import { ArrowUpRight, Globe, Mail, Phone } from 'lucide-react';
-import { FiLinkedin } from 'react-icons/fi';
+import { FaFacebookF, FaGithub, FaInstagram, FaLinkedinIn, FaTiktok, FaXTwitter } from 'react-icons/fa6';
 import Logo from './Logo';
 import FooterSpotlight from './ui/FooterSpotlight';
-import { BRAND_SEARCH_VARIANTS, BUSINESS_NAME, LINKEDIN_URL, SITE_URL } from '../lib/seo';
+import {
+  BRAND_SEARCH_VARIANTS,
+  BUSINESS_NAME,
+  CONTACT_EMAIL,
+  CONTACT_PHONE_DISPLAY,
+  CONTACT_PHONE_E164,
+  DISPLAY_BRAND_NAME_UPPER,
+  SITE_URL,
+  SOCIAL_PROFILES,
+} from '../lib/seo';
 import { CANONICAL_MARKET_IDENTITY } from '../lib/positioning';
+
+const socialIcons = {
+  LinkedIn: FaLinkedinIn,
+  GitHub: FaGithub,
+  Instagram: FaInstagram,
+  Facebook: FaFacebookF,
+  X: FaXTwitter,
+  TikTok: FaTiktok,
+} as const;
 
 const pageLinks = [
   { href: '/', label: 'Home' },
@@ -49,7 +67,7 @@ export default function SiteFooter() {
         <div className="site-footer__container">
           <div className="site-footer__main">
             <div className="site-footer__brand-col">
-              <Logo className="site-footer__logo" light />
+              <Logo className="site-footer__logo" light size="footer" />
               <p className="site-footer__statement">
                 {CANONICAL_MARKET_IDENTITY.shortDescriptor}
               </p>
@@ -103,18 +121,18 @@ export default function SiteFooter() {
                 <Link
                   href="/contact"
                   aria-label="Book a call"
-                  className="self-start px-4 py-2 bg-[#1E272E] text-[#F5F6FA] text-sm font-medium hover:bg-[#0984E3] transition-all duration-300 flex items-center sharp-edge"
+                  className="sharp-edge flex min-h-11 items-center bg-[#1A2535] px-4 py-2 text-sm font-medium text-[#FFFFFF] transition-all duration-300 hover:bg-[#E8A838] sm:self-start"
                 >
                   Book a Call
                   <ArrowUpRight className="w-3.5 h-3.5 ml-1.5" />
                 </Link>
-                <a href="mailto:contact@hivevaultarc.com" className="site-footer__contact">
+                <a href={`mailto:${CONTACT_EMAIL}`} className="site-footer__contact">
                   <Mail className="h-3.5 w-3.5" />
-                  contact@hivevaultarc.com
+                  {CONTACT_EMAIL}
                 </a>
-                <a href="tel:+212670431249" className="site-footer__contact">
+                <a href={`tel:${CONTACT_PHONE_E164}`} className="site-footer__contact">
                   <Phone className="h-3.5 w-3.5" />
-                  +212 670 431 249
+                  {CONTACT_PHONE_DISPLAY}
                 </a>
               </div>
             </div>
@@ -122,7 +140,7 @@ export default function SiteFooter() {
 
           <div className="site-footer__bar">
             <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
-              <p>© {year} H.V.A. ALL RIGHTS RESERVED. PRECISION IN EXECUTION.</p>
+              <p>© {year} {DISPLAY_BRAND_NAME_UPPER}. ALL RIGHTS RESERVED. PRECISION IN EXECUTION.</p>
               {legalLinks.map((item) => (
                 <Link
                   key={item.href}
@@ -143,15 +161,21 @@ export default function SiteFooter() {
               >
                 <Globe className="h-4 w-4" />
               </a>
-              <a
-                href={LINKEDIN_URL}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="site-footer__icon-link sharp-edge"
-                aria-label="LinkedIn"
-              >
-                <FiLinkedin className="h-4 w-4" />
-              </a>
+              {SOCIAL_PROFILES.map((profile) => {
+                const SocialIcon = socialIcons[profile.label];
+                return (
+                  <a
+                    key={profile.label}
+                    href={profile.url}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="site-footer__icon-link sharp-edge"
+                    aria-label={profile.label}
+                  >
+                    <SocialIcon className="h-4 w-4" />
+                  </a>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -159,5 +183,3 @@ export default function SiteFooter() {
     </footer>
   );
 }
-
-

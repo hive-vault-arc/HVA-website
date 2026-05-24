@@ -20,7 +20,7 @@ const capabilitiesContent: Record<
   en: {
     title: 'Technology Consulting Capabilities in Morocco',
     description:
-      'Six H.V.A service pillars: strategy, technology consulting, AI and data, software engineering, cloud infrastructure, and managed operations.',
+      'Six Hive Vault Arc service pillars: strategy, technology consulting, AI and data, software engineering, cloud infrastructure, and managed operations.',
     h1: 'Six Service Pillars from Strategy to Operations',
     intro:
       'Our engagement model spans strategic consulting, architecture, technical execution, and managed evolution so systems continue performing after launch.',
@@ -61,7 +61,7 @@ const capabilitiesContent: Record<
   fr: {
     title: 'Capacités de conseil technologique au Maroc',
     description:
-      'Six piliers de service H.V.A: stratégie, conseil technologique, IA et data, logiciel, cloud, infrastructure et opérations managées.',
+      'Six piliers de service Hive Vault Arc: stratégie, conseil technologique, IA et data, logiciel, cloud, infrastructure et opérations managées.',
     h1: 'Six piliers de service de la stratégie aux opérations',
     intro:
       "Nous accompagnons les entreprises de la strategie jusqu'a l'exploitation en production avec un modele de delivery clair et mesurable.",
@@ -100,50 +100,50 @@ const capabilitiesContent: Record<
     ],
   },
   ar: {
-    title: 'قدرات الاستشارات التقنية في المغرب',
+    title: 'Ù‚Ø¯Ø±Ø§Øª Ø§Ù„Ø§Ø³ØªØ´Ø§Ø±Ø§Øª Ø§Ù„ØªÙ‚Ù†ÙŠØ© ÙÙŠ Ø§Ù„Ù…ØºØ±Ø¨',
     description:
-      'قدرات H.V.A تشمل الاستشارات التقنية والتحول الرقمي والذكاء الاصطناعي والأتمتة وتطوير البرمجيات وتحديث البنية التقنية والسحابة.',
-    h1: 'من الاستراتيجية الى التنفيذ',
+      'Ù‚Ø¯Ø±Ø§Øª Hive Vault Arc ØªØ´Ù…Ù„ Ø§Ù„Ø§Ø³ØªØ´Ø§Ø±Ø§Øª Ø§Ù„ØªÙ‚Ù†ÙŠØ© ÙˆØ§Ù„ØªØ­ÙˆÙ„ Ø§Ù„Ø±Ù‚Ù…ÙŠ ÙˆØ§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ ÙˆØ§Ù„Ø£ØªÙ…ØªØ© ÙˆØªØ·ÙˆÙŠØ± Ø§Ù„Ø¨Ø±Ù…Ø¬ÙŠØ§Øª ÙˆØªØ­Ø¯ÙŠØ« Ø§Ù„Ø¨Ù†ÙŠØ© Ø§Ù„ØªÙ‚Ù†ÙŠØ© ÙˆØ§Ù„Ø³Ø­Ø§Ø¨Ø©.',
+    h1: 'Ù…Ù† Ø§Ù„Ø§Ø³ØªØ±Ø§ØªÙŠØ¬ÙŠØ© Ø§Ù„Ù‰ Ø§Ù„ØªÙ†ÙÙŠØ°',
     intro:
-      'نعمل مع فرق القيادة لتحديد الاولويات وبناء الانظمة وتشغيلها وصيانتها ضمن دورة تسليم واضحة ومستمرة.',
+      'Ù†Ø¹Ù…Ù„ Ù…Ø¹ ÙØ±Ù‚ Ø§Ù„Ù‚ÙŠØ§Ø¯Ø© Ù„ØªØ­Ø¯ÙŠØ¯ Ø§Ù„Ø§ÙˆÙ„ÙˆÙŠØ§Øª ÙˆØ¨Ù†Ø§Ø¡ Ø§Ù„Ø§Ù†Ø¸Ù…Ø© ÙˆØªØ´ØºÙŠÙ„Ù‡Ø§ ÙˆØµÙŠØ§Ù†ØªÙ‡Ø§ Ø¶Ù…Ù† Ø¯ÙˆØ±Ø© ØªØ³Ù„ÙŠÙ… ÙˆØ§Ø¶Ø­Ø© ÙˆÙ…Ø³ØªÙ…Ø±Ø©.',
     keywords: [
-      'قدرات استشارات تقنية المغرب',
-      'قدرات التحول الرقمي للشركات المغرب',
-      'خدمات الاستشارات التقنية المغرب',
-      'خدمات التحول الرقمي المغرب',
-      'خدمات أتمتة الذكاء الاصطناعي المغرب',
-      'استراتيجية تقنية وهندسة حلول المغرب',
-      'أتمتة سير العمل المغرب',
-      'تطوير برمجيات مخصصة المغرب',
-      'البنية التحتية السحابية المغرب',
-      'شركة تطوير تطبيقات موبايل مخصصة المغرب',
-      'شركة تطوير تطبيقات ويب مخصصة المغرب',
-      'ترحيل وتكامل نظام CRM المغرب',
-      'بناء تطبيق داخلي لإدارة العمليات المغرب',
-      'نشر التطبيقات على السحابة المغرب',
-      'استشارات DevOps للشركات الناشئة المغرب',
-      'إعداد خطوط CI CD لفرق التطوير المغرب',
-      'تنفيذ وكيل ذكاء اصطناعي لعمليات العملاء المغرب',
-      'أتمتة تأهيل العملاء المحتملين المغرب',
-      'تحديث الأنظمة القديمة إلى أنظمة حديثة المغرب',
-      'هندسة منصات SaaS للمؤسسات المغرب',
-      'أتمتة العمليات التجارية طنجة',
-      'تحسين أداء التطبيقات المغرب',
-      'تقوية أمن التطبيقات وموثوقية البنية السحابية المغرب',
+      'Ù‚Ø¯Ø±Ø§Øª Ø§Ø³ØªØ´Ø§Ø±Ø§Øª ØªÙ‚Ù†ÙŠØ© Ø§Ù„Ù…ØºØ±Ø¨',
+      'Ù‚Ø¯Ø±Ø§Øª Ø§Ù„ØªØ­ÙˆÙ„ Ø§Ù„Ø±Ù‚Ù…ÙŠ Ù„Ù„Ø´Ø±ÙƒØ§Øª Ø§Ù„Ù…ØºØ±Ø¨',
+      'Ø®Ø¯Ù…Ø§Øª Ø§Ù„Ø§Ø³ØªØ´Ø§Ø±Ø§Øª Ø§Ù„ØªÙ‚Ù†ÙŠØ© Ø§Ù„Ù…ØºØ±Ø¨',
+      'Ø®Ø¯Ù…Ø§Øª Ø§Ù„ØªØ­ÙˆÙ„ Ø§Ù„Ø±Ù‚Ù…ÙŠ Ø§Ù„Ù…ØºØ±Ø¨',
+      'Ø®Ø¯Ù…Ø§Øª Ø£ØªÙ…ØªØ© Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ Ø§Ù„Ù…ØºØ±Ø¨',
+      'Ø§Ø³ØªØ±Ø§ØªÙŠØ¬ÙŠØ© ØªÙ‚Ù†ÙŠØ© ÙˆÙ‡Ù†Ø¯Ø³Ø© Ø­Ù„ÙˆÙ„ Ø§Ù„Ù…ØºØ±Ø¨',
+      'Ø£ØªÙ…ØªØ© Ø³ÙŠØ± Ø§Ù„Ø¹Ù…Ù„ Ø§Ù„Ù…ØºØ±Ø¨',
+      'ØªØ·ÙˆÙŠØ± Ø¨Ø±Ù…Ø¬ÙŠØ§Øª Ù…Ø®ØµØµØ© Ø§Ù„Ù…ØºØ±Ø¨',
+      'Ø§Ù„Ø¨Ù†ÙŠØ© Ø§Ù„ØªØ­ØªÙŠØ© Ø§Ù„Ø³Ø­Ø§Ø¨ÙŠØ© Ø§Ù„Ù…ØºØ±Ø¨',
+      'Ø´Ø±ÙƒØ© ØªØ·ÙˆÙŠØ± ØªØ·Ø¨ÙŠÙ‚Ø§Øª Ù…ÙˆØ¨Ø§ÙŠÙ„ Ù…Ø®ØµØµØ© Ø§Ù„Ù…ØºØ±Ø¨',
+      'Ø´Ø±ÙƒØ© ØªØ·ÙˆÙŠØ± ØªØ·Ø¨ÙŠÙ‚Ø§Øª ÙˆÙŠØ¨ Ù…Ø®ØµØµØ© Ø§Ù„Ù…ØºØ±Ø¨',
+      'ØªØ±Ø­ÙŠÙ„ ÙˆØªÙƒØ§Ù…Ù„ Ù†Ø¸Ø§Ù… CRM Ø§Ù„Ù…ØºØ±Ø¨',
+      'Ø¨Ù†Ø§Ø¡ ØªØ·Ø¨ÙŠÙ‚ Ø¯Ø§Ø®Ù„ÙŠ Ù„Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„Ø¹Ù…Ù„ÙŠØ§Øª Ø§Ù„Ù…ØºØ±Ø¨',
+      'Ù†Ø´Ø± Ø§Ù„ØªØ·Ø¨ÙŠÙ‚Ø§Øª Ø¹Ù„Ù‰ Ø§Ù„Ø³Ø­Ø§Ø¨Ø© Ø§Ù„Ù…ØºØ±Ø¨',
+      'Ø§Ø³ØªØ´Ø§Ø±Ø§Øª DevOps Ù„Ù„Ø´Ø±ÙƒØ§Øª Ø§Ù„Ù†Ø§Ø´Ø¦Ø© Ø§Ù„Ù…ØºØ±Ø¨',
+      'Ø¥Ø¹Ø¯Ø§Ø¯ Ø®Ø·ÙˆØ· CI CD Ù„ÙØ±Ù‚ Ø§Ù„ØªØ·ÙˆÙŠØ± Ø§Ù„Ù…ØºØ±Ø¨',
+      'ØªÙ†ÙÙŠØ° ÙˆÙƒÙŠÙ„ Ø°ÙƒØ§Ø¡ Ø§ØµØ·Ù†Ø§Ø¹ÙŠ Ù„Ø¹Ù…Ù„ÙŠØ§Øª Ø§Ù„Ø¹Ù…Ù„Ø§Ø¡ Ø§Ù„Ù…ØºØ±Ø¨',
+      'Ø£ØªÙ…ØªØ© ØªØ£Ù‡ÙŠÙ„ Ø§Ù„Ø¹Ù…Ù„Ø§Ø¡ Ø§Ù„Ù…Ø­ØªÙ…Ù„ÙŠÙ† Ø§Ù„Ù…ØºØ±Ø¨',
+      'ØªØ­Ø¯ÙŠØ« Ø§Ù„Ø£Ù†Ø¸Ù…Ø© Ø§Ù„Ù‚Ø¯ÙŠÙ…Ø© Ø¥Ù„Ù‰ Ø£Ù†Ø¸Ù…Ø© Ø­Ø¯ÙŠØ«Ø© Ø§Ù„Ù…ØºØ±Ø¨',
+      'Ù‡Ù†Ø¯Ø³Ø© Ù…Ù†ØµØ§Øª SaaS Ù„Ù„Ù…Ø¤Ø³Ø³Ø§Øª Ø§Ù„Ù…ØºØ±Ø¨',
+      'Ø£ØªÙ…ØªØ© Ø§Ù„Ø¹Ù…Ù„ÙŠØ§Øª Ø§Ù„ØªØ¬Ø§Ø±ÙŠØ© Ø·Ù†Ø¬Ø©',
+      'ØªØ­Ø³ÙŠÙ† Ø£Ø¯Ø§Ø¡ Ø§Ù„ØªØ·Ø¨ÙŠÙ‚Ø§Øª Ø§Ù„Ù…ØºØ±Ø¨',
+      'ØªÙ‚ÙˆÙŠØ© Ø£Ù…Ù† Ø§Ù„ØªØ·Ø¨ÙŠÙ‚Ø§Øª ÙˆÙ…ÙˆØ«ÙˆÙ‚ÙŠØ© Ø§Ù„Ø¨Ù†ÙŠØ© Ø§Ù„Ø³Ø­Ø§Ø¨ÙŠØ© Ø§Ù„Ù…ØºØ±Ø¨',
     ],
     bullets: [
-      'استشارات الاستراتيجية والأعمال: التشخيص والتحول وتصميم نموذج التشغيل',
-      'الاستشارات التقنية: معمارية المؤسسات وخرائط الطريق وتكامل الأنظمة',
-      'الذكاء الاصطناعي والبيانات والتحليلات: وكلاء وذكاء اصطناعي توليدي وتحليلات وBI',
-      'هندسة البرمجيات والمنتجات: ويب وموبايل وSaaS وAPI وتجربة المستخدم',
-      'السحابة والبنية التحتية: الترحيل والأمان والمراقبة والأتمتة',
-      'العمليات والخدمات المُدارة: الملكية بعد الإطلاق والصيانة وتطوير أنظمة الذكاء الاصطناعي',
+      'Ø§Ø³ØªØ´Ø§Ø±Ø§Øª Ø§Ù„Ø§Ø³ØªØ±Ø§ØªÙŠØ¬ÙŠØ© ÙˆØ§Ù„Ø£Ø¹Ù…Ø§Ù„: Ø§Ù„ØªØ´Ø®ÙŠØµ ÙˆØ§Ù„ØªØ­ÙˆÙ„ ÙˆØªØµÙ…ÙŠÙ… Ù†Ù…ÙˆØ°Ø¬ Ø§Ù„ØªØ´ØºÙŠÙ„',
+      'Ø§Ù„Ø§Ø³ØªØ´Ø§Ø±Ø§Øª Ø§Ù„ØªÙ‚Ù†ÙŠØ©: Ù…Ø¹Ù…Ø§Ø±ÙŠØ© Ø§Ù„Ù…Ø¤Ø³Ø³Ø§Øª ÙˆØ®Ø±Ø§Ø¦Ø· Ø§Ù„Ø·Ø±ÙŠÙ‚ ÙˆØªÙƒØ§Ù…Ù„ Ø§Ù„Ø£Ù†Ø¸Ù…Ø©',
+      'Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ ÙˆØ§Ù„Ø¨ÙŠØ§Ù†Ø§Øª ÙˆØ§Ù„ØªØ­Ù„ÙŠÙ„Ø§Øª: ÙˆÙƒÙ„Ø§Ø¡ ÙˆØ°ÙƒØ§Ø¡ Ø§ØµØ·Ù†Ø§Ø¹ÙŠ ØªÙˆÙ„ÙŠØ¯ÙŠ ÙˆØªØ­Ù„ÙŠÙ„Ø§Øª ÙˆBI',
+      'Ù‡Ù†Ø¯Ø³Ø© Ø§Ù„Ø¨Ø±Ù…Ø¬ÙŠØ§Øª ÙˆØ§Ù„Ù…Ù†ØªØ¬Ø§Øª: ÙˆÙŠØ¨ ÙˆÙ…ÙˆØ¨Ø§ÙŠÙ„ ÙˆSaaS ÙˆAPI ÙˆØªØ¬Ø±Ø¨Ø© Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…',
+      'Ø§Ù„Ø³Ø­Ø§Ø¨Ø© ÙˆØ§Ù„Ø¨Ù†ÙŠØ© Ø§Ù„ØªØ­ØªÙŠØ©: Ø§Ù„ØªØ±Ø­ÙŠÙ„ ÙˆØ§Ù„Ø£Ù…Ø§Ù† ÙˆØ§Ù„Ù…Ø±Ø§Ù‚Ø¨Ø© ÙˆØ§Ù„Ø£ØªÙ…ØªØ©',
+      'Ø§Ù„Ø¹Ù…Ù„ÙŠØ§Øª ÙˆØ§Ù„Ø®Ø¯Ù…Ø§Øª Ø§Ù„Ù…ÙØ¯Ø§Ø±Ø©: Ø§Ù„Ù…Ù„ÙƒÙŠØ© Ø¨Ø¹Ø¯ Ø§Ù„Ø¥Ø·Ù„Ø§Ù‚ ÙˆØ§Ù„ØµÙŠØ§Ù†Ø© ÙˆØªØ·ÙˆÙŠØ± Ø£Ù†Ø¸Ù…Ø© Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ',
     ],
   },
   es: {
     title: 'Capacidades de consultoria tecnologica en Marruecos',
     description:
-      'Seis pilares de servicio de H.V.A: estrategia, consultoria tecnologica, IA y datos, software, cloud, infraestructura y operaciones gestionadas.',
+      'Seis pilares de servicio de Hive Vault Arc: estrategia, consultoria tecnologica, IA y datos, software, cloud, infraestructura y operaciones gestionadas.',
     h1: 'Seis pilares de servicio de la estrategia a operaciones',
     intro:
       'Trabajamos con equipos directivos para disenar la estrategia, ejecutar la ingenieria y mantener la operacion en produccion a largo plazo.',
@@ -256,12 +256,12 @@ export default async function LocaleCapabilitiesPage({ params }: LocaleCapabilit
         dir={isRtl ? 'rtl' : 'ltr'}
       >
         <JsonLd data={capabilitySchema} />
-        <p className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-[#2563EB]">{locale.toUpperCase()}</p>
-        <h1 className="mb-6 font-serif text-4xl leading-tight text-[#0F172A] md:text-6xl">{content.h1}</h1>
-        <p className="max-w-3xl text-lg leading-relaxed text-[#334155]">{identity.shortDescriptor}</p>
-        <p className="mt-4 max-w-3xl text-base font-semibold leading-relaxed text-[#0F172A]">{serviceEquivalence}</p>
-        <p className="mt-4 max-w-3xl text-lg leading-relaxed text-[#334155]">{content.intro}</p>
-        <ul className="mt-8 list-disc space-y-2 pl-5 text-[#0F172A]">
+        <p className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-[#E8A838]">{locale.toUpperCase()}</p>
+        <h1 className="mb-6 font-serif text-4xl leading-tight text-[#1A2535] md:text-6xl">{content.h1}</h1>
+        <p className="max-w-3xl text-lg leading-relaxed text-[#3D4858]">{identity.shortDescriptor}</p>
+        <p className="mt-4 max-w-3xl text-base font-semibold leading-relaxed text-[#1A2535]">{serviceEquivalence}</p>
+        <p className="mt-4 max-w-3xl text-lg leading-relaxed text-[#3D4858]">{content.intro}</p>
+        <ul className="mt-8 list-disc space-y-2 pl-5 text-[#1A2535]">
           {content.bullets.map((bullet) => (
             <li key={bullet}>{bullet}</li>
           ))}

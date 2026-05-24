@@ -6,7 +6,7 @@ import { GLOBAL_KEYWORDS, SITE_URL, buildBreadcrumbSchema, buildPageMetadata, me
 export const metadata: Metadata = buildPageMetadata({
   title: 'ARC Framework | Assess · Re-engineer · Command',
   description:
-    'ARC is H.V.A\'s delivery model — Assess (Strategy & Technology Consulting), Re-engineer (AI, Software & Cloud), Command (Operations & Managed Services). Same team. Strategy through production. No handoff.',
+    'ARC is Hive Vault Arc\'s delivery model — Assess (Strategy & Technology Consulting), Re-engineer (AI, Software & Cloud), Command (Operations & Managed Services). Same team. Strategy through production. No handoff.',
   path: '/arc',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'ARC transformation framework',
@@ -24,7 +24,7 @@ export default function ArcPage() {
     '@type': 'WebPage',
     name: 'ARC Framework',
     description:
-      'H.V.A ARC framework: Assess strategy and architecture, Re-engineer AI, software, and cloud systems, and Command operations through managed services.',
+      'Hive Vault Arc framework: Assess strategy and architecture, Re-engineer AI, software, and cloud systems, and Command operations through managed services.',
     url: `${SITE_URL}/arc`,
     isPartOf: { '@id': `${SITE_URL}/#website` },
   };

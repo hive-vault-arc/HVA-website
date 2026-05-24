@@ -6,9 +6,9 @@ import type { FaqItem } from '../../data/faqs';
 import { SITE_URL, absoluteUrl, buildBreadcrumbSchema, buildPageMetadata } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Custom Software Development in Morocco — FastAPI, Next.js, SaaS | H.V.A',
+  title: 'Custom Software Development in Morocco — FastAPI, Next.js, SaaS',
   description:
-    'H.V.A builds custom software for Moroccan businesses. FastAPI backends, Next.js frontends, SaaS platforms, and AI-powered applications. Based in Tangier, serving all of Morocco.',
+    'Hive Vault Arc builds custom software for Moroccan businesses. FastAPI backends, Next.js frontends, SaaS platforms, and AI-powered applications. Based in Tangier, serving all of Morocco.',
   path: '/custom-software-morocco',
   keywords: [
     'custom software Morocco',
@@ -26,12 +26,12 @@ const CUSTOM_SOFTWARE_MOROCCO_FAQS: FaqItem[] = [
       'Custom software is usually the better option when your core workflow is unique, your team is using multiple disconnected tools, or growth is blocked by manual operations and integration gaps.',
   },
   {
-    question: 'What technologies does H.V.A use for custom software projects?',
+    question: 'What technologies does Hive Vault Arc use for custom software projects?',
     answer:
       'Typical stacks include FastAPI for backend services, Next.js for frontends, PostgreSQL for structured data, and optional AI layers when automation or decision intelligence is part of the scope.',
   },
   {
-    question: 'Can H.V.A build both internal tools and customer-facing platforms?',
+    question: 'Can Hive Vault Arc build both internal tools and customer-facing platforms?',
     answer:
       'Yes. We build internal systems, SaaS products, customer portals, and hybrid platforms that combine operations and customer experiences in one architecture.',
   },
@@ -41,7 +41,7 @@ const CUSTOM_SOFTWARE_MOROCCO_FAQS: FaqItem[] = [
       'We deliver in milestones with sprint-based checkpoints, shared visibility, and explicit quality gates so scope and risk stay controlled throughout implementation.',
   },
   {
-    question: 'Does H.V.A support software after launch?',
+    question: 'Does Hive Vault Arc support software after launch?',
     answer:
       'Yes. We provide post-launch optimization and maintenance support to keep performance, reliability, and feature evolution aligned with business growth.',
   },
@@ -79,7 +79,7 @@ export default function CustomSoftwareMoroccoPage() {
             <p className="geo-kicker">National Software Engineering</p>
             <h1 className="editorial-title">Custom Software Built for Moroccan Businesses</h1>
             <p className="editorial-lead max-w-3xl">
-              H.V.A designs and delivers custom software systems that fit how your business really operates. From
+              Hive Vault Arc designs and delivers custom software systems that fit how your business really operates. From
               FastAPI-powered backend services to Next.js frontends and full SaaS platforms, we build production-ready
               applications that replace workflow friction with reliable execution and measurable operational control.
             </p>
@@ -95,7 +95,7 @@ export default function CustomSoftwareMoroccoPage() {
         </section>
 
         {/* ── Feature band ── */}
-        <section className="border-y border-[#e2e8f0] bg-white">
+        <section className="border-y border-[#DDE3EA] bg-white">
           <div className="mx-auto max-w-5xl px-6 py-12 lg:px-12">
             <h2 className="services-brief-section-title">
               What Custom Software Means in Practical Terms
@@ -120,7 +120,7 @@ export default function CustomSoftwareMoroccoPage() {
         {/* ── Body sections ── */}
         <section className="mx-auto max-w-5xl space-y-12 px-6 py-14 lg:px-12">
           <article>
-            <h2 className="services-brief-section-title">H.V.A Technology Stack for Delivery</h2>
+            <h2 className="services-brief-section-title">Hive Vault Arc Technology Stack for Delivery</h2>
             <p className="mt-4 text-base leading-relaxed text-secondary">
               We select technology based on reliability, maintainability, and long-term evolution. FastAPI is often used
               for structured backend services with strong API performance and integration flexibility. Next.js enables
@@ -232,19 +232,19 @@ export default function CustomSoftwareMoroccoPage() {
             <p className="mt-4 text-base leading-relaxed text-secondary">
               The best path is not always full replacement. Sometimes the most effective approach is a hybrid model:
               keep existing tools where they work, and build custom layers where differentiation and control matter most.
-              H.V.A helps define that boundary clearly so investment stays focused.
+              Hive Vault Arc helps define that boundary clearly so investment stays focused.
             </p>
           </article>
         </section>
 
         {/* ── Bottom CTA ── */}
-        <section className="border-t border-[#e2e8f0] bg-white">
+        <section className="border-t border-[#DDE3EA] bg-white">
           <div className="mx-auto max-w-5xl px-6 py-12 lg:px-12">
             <h2 className="services-brief-section-title">
               Build Software That Matches Your Operating Reality
             </h2>
             <p className="mt-4 max-w-3xl text-base leading-relaxed text-secondary">
-              If off-the-shelf tools are slowing your team down, H.V.A can scope a custom platform that fits your
+              If off-the-shelf tools are slowing your team down, Hive Vault Arc can scope a custom platform that fits your
               process, improves control, and scales with your business model.
             </p>
             <div className="editorial-actions mt-7">

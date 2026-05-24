@@ -22,7 +22,7 @@ const createCurvedPath = (
   return `M ${start.x} ${start.y} Q ${midX} ${midY} ${end.x} ${end.y}`;
 };
 
-export function WorldMap({ dots = [], lineColor = "#0ea5e9" }: MapProps) {
+export function WorldMap({ dots = [], lineColor = "#E8A838" }: MapProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const [svgMap, setSvgMap] = useState("");
 
@@ -37,7 +37,7 @@ export function WorldMap({ dots = [], lineColor = "#0ea5e9" }: MapProps) {
       const dottedMap = new DottedMap({ height: 100, grid: "diagonal" });
       const mapSvg = dottedMap.getSVG({
         radius: 0.22,
-        color: isDark ? "#FFFFFF40" : "#00000040",
+        color: isDark ? "#FFFFFF40" : "#1A253540",
         shape: "circle",
         backgroundColor: "white",
       });
@@ -68,7 +68,7 @@ export function WorldMap({ dots = [], lineColor = "#0ea5e9" }: MapProps) {
   );
 
   return (
-    <div className="sharp-edge w-full aspect-[2/1] bg-[#F5F6FA] relative font-sans rounded-2xl border border-[#1E272E]/10">
+    <div className="sharp-edge w-full aspect-[2/1] bg-[#FFFFFF] relative font-sans rounded-2xl border border-[#1A2535]/10">
       <div 
         className="h-full w-full [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)] pointer-events-none select-none"
         dangerouslySetInnerHTML={{ __html: svgMap }}

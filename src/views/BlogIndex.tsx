@@ -24,7 +24,7 @@ export default function BlogIndex() {
   return (
     <InsightIndexPage
       eyebrow="Strategy + Execution Journal"
-      headline="The H.V.A"
+      headline="Hive Vault Arc"
       headlineItalic="Consulting Briefing"
       description="An editorial collection of insights on AI agents, custom software, and the architecture of modern business operations — written for CEOs, COOs, and leadership teams in Morocco and beyond."
       items={items}

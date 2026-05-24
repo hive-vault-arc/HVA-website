@@ -7,27 +7,27 @@ export type FaqSet = FaqItem[];
 // Home
 export const HOME_FAQS: FaqSet = [
   {
-    question: 'What does H.V.A do?',
+    question: 'What does Hive Vault Arc do?',
     answer:
-      'H.V.A is a technology transformation partner combining strategy, AI engineering, software, cloud infrastructure, and managed operations. We advise, build, and operate across six service pillars so organizations can redesign how work happens and keep production systems improving after launch.',
+      'Hive Vault Arc is a technology transformation partner combining strategy, AI engineering, software, cloud infrastructure, and managed operations. We advise, build, and operate across six service pillars so organizations can redesign how work happens and keep production systems improving after launch.',
   },
   {
     question: 'What is the ARC Program?',
     answer:
-      'The ARC Program is H.V.A\'s structured engagement model: Assess (understand the operating state and constraints), Re-engineer (redesign processes, architecture, and systems), and Command (run, stabilize, and improve the production operation). Most ARC engagements run 6–12 weeks and cover strategy through managed evolution.',
+      'The ARC Program is Hive Vault Arc\'s structured engagement model: Assess (understand the operating state and constraints), Re-engineer (redesign processes, architecture, and systems), and Command (run, stabilize, and improve the production operation). Most ARC engagements run 6–12 weeks and cover strategy through managed evolution.',
   },
   {
-    question: 'Does H.V.A build WhatsApp AI agents?',
+    question: 'Does Hive Vault Arc build WhatsApp AI agents?',
     answer:
-      'Yes. WhatsApp AI agents are one of H.V.A\'s core offerings. We build intelligent agents on the WhatsApp Business API that handle lead qualification, customer support, and sales automation. WhatsApp has over 90% penetration in Morocco, making it the primary B2B channel — our production deployments operate 24/7 with multilingual support, persistent memory, and direct CRM integration.',
+      'Yes. WhatsApp AI agents are one of Hive Vault Arc\'s core offerings. We build intelligent agents on the WhatsApp Business API that handle lead qualification, customer support, and sales automation. WhatsApp has over 90% penetration in Morocco, making it the primary B2B channel — our production deployments operate 24/7 with multilingual support, persistent memory, and direct CRM integration.',
   },
   {
-    question: 'Is H.V.A an AI company, a consulting firm, or a software agency?',
+    question: 'Is Hive Vault Arc an AI company, a consulting firm, or a software agency?',
     answer:
-      'H.V.A is a technology transformation partner. That means we combine strategy, AI engineering, software delivery, cloud infrastructure, and managed operations in one accountable team. We go beyond advising and beyond building: we own delivery and remain accountable through production.',
+      'Hive Vault Arc is a technology transformation partner. That means we combine strategy, AI engineering, software delivery, cloud infrastructure, and managed operations in one accountable team. We go beyond advising and beyond building: we own delivery and remain accountable through production.',
   },
   {
-    question: 'What kinds of AI solutions does H.V.A build?',
+    question: 'What kinds of AI solutions does Hive Vault Arc build?',
     answer:
       'We build AI agents for customer-facing operations (WhatsApp, web, voice), internal workflow automation, lead qualification and smart routing systems, AI-powered reporting and decision intelligence dashboards, and full orchestration layers that connect your AI agents with CRM, calendar, and data systems.',
   },
@@ -37,7 +37,7 @@ export const HOME_FAQS: FaqSet = [
       'It starts with a strategic discovery session — we map business goals, operational constraints, and current system realities. From there we define the transformation roadmap, architecture decisions, and delivery scope. Execution runs in clear milestones. We stay involved through deployment, stabilization, and long-term managed evolution.',
   },
   {
-    question: 'Can H.V.A support us after the system is live?',
+    question: 'Can Hive Vault Arc support us after the system is live?',
     answer:
       'Yes. We provide long-term maintenance and managed evolution: reliability monitoring, optimization cycles, roadmap extensions, and architectural guidance as your operations grow. Most clients retain us as a long-term partner.',
   },
@@ -47,7 +47,7 @@ export const HOME_FAQS: FaqSet = [
       'Yes. We publish approved case studies with business challenge context, strategy and architecture decisions, integrations, deployment status, and measured outcomes. Where permitted, we include testimonials and supporting evidence blocks.',
   },
   {
-    question: 'Where is H.V.A based and what markets do you serve?',
+    question: 'Where is Hive Vault Arc based and what markets do you serve?',
     answer:
       'We are based in Tangier, Morocco, and serve clients across Morocco and international markets including Europe, North America, and the Middle East. Our team works in English, French, Arabic, and Spanish.',
   },
@@ -61,9 +61,9 @@ export const HOME_FAQS: FaqSet = [
 // Capabilities
 export const CAPABILITIES_FAQS: FaqSet = [
   {
-    question: "What are H.V.A's six service pillars?",
+    question: "What are Hive Vault Arc's six service pillars?",
     answer:
-      'H.V.A operates across six service pillars: Strategy and Business Consulting, Technology Consulting, AI/Data/Analytics, Software Engineering and Product Development, Cloud and Infrastructure, and Operations and Managed Services. Engagements combine these pillars based on business priorities and operating constraints.',
+      'Hive Vault Arc operates across six service pillars: Strategy and Business Consulting, Technology Consulting, AI/Data/Analytics, Software Engineering and Product Development, Cloud and Infrastructure, and Operations and Managed Services. Engagements combine these pillars based on business priorities and operating constraints.',
   },
   {
     question: 'What AI and automation solutions do you deliver?',
@@ -71,7 +71,7 @@ export const CAPABILITIES_FAQS: FaqSet = [
       'We deliver AI agents, workflow automation, decision intelligence, and AI-enabled reporting systems. Typical deployments include WhatsApp/web/voice agents, orchestration layers, and operational automation linked to CRM and data systems.',
   },
   {
-    question: 'What does consulting include at H.V.A?',
+    question: 'What does consulting include at Hive Vault Arc?',
     answer:
       'Consulting includes strategy, architecture decisions, roadmap design, tech function planning, and transformation sequencing. We align executive priorities with execution milestones and stay accountable during delivery.',
   },
@@ -101,12 +101,12 @@ export const CAPABILITIES_FAQS: FaqSet = [
       'Yes. We stay involved after launch through managed operations, application maintenance, performance tuning, AI system management, IT support, and ongoing optimization.',
   },
   {
-    question: 'How does ARC work with H.V.A?',
+    question: 'How does ARC work with Hive Vault Arc?',
     answer:
       'ARC runs in three phases: Assess (diagnose constraints and readiness), Re-engineer (redesign processes, architecture, and systems), and Command (run, stabilize, and improve production operations). It is recommended when strategy, build, and long-term operating accountability need to stay connected.',
   },
   {
-    question: 'Can H.V.A stay involved after launch?',
+    question: 'Can Hive Vault Arc stay involved after launch?',
     answer:
       'Yes. We provide long-term maintenance, optimization, and scaling support. Engagements can remain fully managed or evolve through ARC depending on your operating model goals.',
   },
@@ -115,32 +115,32 @@ export const CAPABILITIES_FAQS: FaqSet = [
 // About
 export const ABOUT_FAQS: FaqSet = [
   {
-    question: 'What is Hive Vault Arc (H.V.A)?',
+    question: 'What is Hive Vault Arc?',
     answer:
       'Hive Vault Arc is a technology transformation partner based in Tangier, Morocco. We combine strategy consulting, AI engineering, software development, cloud infrastructure, and managed operations in one founder-led team — delivering transformation programs from strategy through production without handoffs.',
   },
   {
-    question: 'Who is the CEO of H.V.A / Hive Vault Arc?',
+    question: 'Who is the CEO of Hive Vault Arc?',
     answer: HVA_CEO_ANSWER,
   },
   {
-    question: 'Qui est le PDG de H.V.A / Hive Vault Arc ?',
+    question: 'Qui est le PDG de Hive Vault Arc ?',
     answer: HVA_CEO_ANSWER_FR,
   },
   {
     question: 'What is the ARC framework?',
     answer:
-      'ARC is the H.V.A delivery model: Assess, Re-engineer, Command. Assess means mapping friction and defining architecture before any code is written. Re-engineer means building AI systems, software, and cloud infrastructure in sprint increments. Command means operating and evolving the systems long-term. The same team runs all three phases — there is no handoff between them.',
+      'ARC is the Hive Vault Arc delivery model: Assess, Re-engineer, Command. Assess means mapping friction and defining architecture before any code is written. Re-engineer means building AI systems, software, and cloud infrastructure in sprint increments. Command means operating and evolving the systems long-term. The same team runs all three phases — there is no handoff between them.',
   },
   {
-    question: "What are H.V.A's six service pillars?",
+    question: "What are Hive Vault Arc's six service pillars?",
     answer:
-      'H.V.A delivers across six integrated pillars: (1) Strategy & Business Consulting — operating model redesign and transformation roadmaps; (2) Technology Consulting — enterprise architecture and platform strategy; (3) AI, Data & Analytics — generative AI, autonomous agents, machine learning, and data engineering; (4) Software Engineering & Product — custom software, SaaS platforms, and mobile apps; (5) Cloud & Infrastructure — AWS, Azure, GCP, and infrastructure automation; (6) Operations & Managed Services — ongoing production ownership and application evolution.',
+      'Hive Vault Arc delivers across six integrated pillars: (1) Strategy & Business Consulting — operating model redesign and transformation roadmaps; (2) Technology Consulting — enterprise architecture and platform strategy; (3) AI, Data & Analytics — generative AI, autonomous agents, machine learning, and data engineering; (4) Software Engineering & Product — custom software, SaaS platforms, and mobile apps; (5) Cloud & Infrastructure — AWS, Azure, GCP, and infrastructure automation; (6) Operations & Managed Services — ongoing production ownership and application evolution.',
   },
   {
-    question: 'Who leads H.V.A engagements?',
+    question: 'Who leads Hive Vault Arc engagements?',
     answer:
-      'H.V.A is founder-led. Khalid Chalhi, Ali Amrani, and Oubay Ghamat are directly involved in every engagement — from strategy and architecture to delivery and production operations. Decisions are made by the people who understand the full system, not delegated to junior staff.',
+      'Hive Vault Arc is founder-led. Khalid Chalhi, Ali Amrani, and Oubay Ghamat are directly involved in every engagement — from strategy and architecture to delivery and production operations. Decisions are made by the people who understand the full system, not delegated to junior staff.',
   },
   {
     question: 'Do you stay involved after the initial build?',
@@ -148,9 +148,9 @@ export const ABOUT_FAQS: FaqSet = [
       'Yes — that is the Command phase of ARC. We provide managed operations, production monitoring, application evolution, and ongoing optimization. Transformation is only complete when the systems are running and the outcomes are measurable. We do not disappear after go-live.',
   },
   {
-    question: 'What industries does H.V.A serve?',
+    question: 'What industries does Hive Vault Arc serve?',
     answer:
-      'H.V.A operates in eight defined verticals: Real Estate & Construction, Healthcare & Life Sciences, Financial Services, Government & Public Sector, Retail & E-Commerce, Energy & Sustainability, Logistics & Transportation, and Consumer Goods & Luxury. We focus on Morocco and the France–MENA corridor.',
+      'Hive Vault Arc operates in eight defined verticals: Real Estate & Construction, Healthcare & Life Sciences, Financial Services, Government & Public Sector, Retail & E-Commerce, Energy & Sustainability, Logistics & Transportation, and Consumer Goods & Luxury. We focus on Morocco and the France–MENA corridor.',
   },
 ];
 
@@ -167,7 +167,7 @@ export const CONTACT_FAQS: FaqSet = [
       'No. Discovery is complimentary. It is designed to validate fit, clarify outcomes across AI, automation, and transformation scope, and define next-step options before formal scoping.',
   },
   {
-    question: 'Can H.V.A sign an NDA before deep discussion?',
+    question: 'Can Hive Vault Arc sign an NDA before deep discussion?',
     answer:
       'Yes. We can sign an NDA before any sensitive system, data, or commercial details are discussed.',
   },
@@ -212,9 +212,9 @@ export const LOCALE_CAPABILITIES_FAQS: Record<SupportedLocale, FaqSet> = {
   en: CAPABILITIES_FAQS,
   fr: [
     {
-      question: 'Comment H.V.A se positionne-t-il sur le marché ?',
+      question: 'Comment Hive Vault Arc se positionne-t-il sur le marché ?',
       answer:
-        "H.V.A est un partenaire de transformation technologique combinant stratégie, ingénierie IA, logiciel, cloud et opérations managées. Nous conseillons, construisons et opérons avec une exécution intégrée de bout en bout.",
+        "Hive Vault Arc est un partenaire de transformation technologique combinant stratégie, ingénierie IA, logiciel, cloud et opérations managées. Nous conseillons, construisons et opérons avec une exécution intégrée de bout en bout.",
     },
     {
       question: "Quels types d'automatisation IA proposez-vous ?",
@@ -222,12 +222,12 @@ export const LOCALE_CAPABILITIES_FAQS: Record<SupportedLocale, FaqSet> = {
         "Nous déployons des agents IA (WhatsApp, web, voix), l'automatisation des workflows, la qualification de leads, et des tableaux de bord décisionnels. Nous couvrons aussi cybersécurité digitale, deep tech et IoT quand ces briques sont nécessaires au programme.",
     },
     {
-      question: 'Que comprend une mission de transformation digitale chez H.V.A ?',
+      question: 'Que comprend une mission de transformation digitale chez Hive Vault Arc ?',
       answer:
         "Une mission couvre le diagnostic opérationnel, la feuille de route de transformation, les décisions d'architecture, puis le pilotage de l'exécution jusqu'à la mise en production et l'évolution long terme.",
     },
     {
-      question: 'H.V.A peut-il livrer puis maintenir les systèmes ?',
+      question: 'Hive Vault Arc peut-il livrer puis maintenir les systèmes ?',
       answer:
         "Oui. Nous assurons la livraison, la stabilisation et la maintenance évolutive pour garder les systèmes IA et les plateformes digitales fiables et alignés avec les objectifs métier.",
     },
@@ -244,9 +244,9 @@ export const LOCALE_CAPABILITIES_FAQS: Record<SupportedLocale, FaqSet> = {
   ],
   ar: [
     {
-      question: 'كيف تصف H.V.A موقعها في السوق؟',
+      question: 'كيف تصف Hive Vault Arc موقعها في السوق؟',
       answer:
-        'H.V.A هي شريك للتحول التقني يجمع بين الاستراتيجية وهندسة الذكاء الاصطناعي والبرمجيات والبنية السحابية والعمليات المُدارة. نستشير ونبني وندير بتنفيذ متكامل من البداية إلى الإنتاج.',
+        'Hive Vault Arc هي شريك للتحول التقني يجمع بين الاستراتيجية وهندسة الذكاء الاصطناعي والبرمجيات والبنية السحابية والعمليات المُدارة. نستشير ونبني وندير بتنفيذ متكامل من البداية إلى الإنتاج.',
     },
     {
       question: 'ما أنواع حلول الذكاء الاصطناعي التي تقدمونها؟',
@@ -276,9 +276,9 @@ export const LOCALE_CAPABILITIES_FAQS: Record<SupportedLocale, FaqSet> = {
   ],
   es: [
     {
-      question: '¿Cómo se posiciona H.V.A en el mercado?',
+      question: '¿Cómo se posiciona Hive Vault Arc en el mercado?',
       answer:
-        'H.V.A es un socio de transformación tecnológica que combina estrategia, ingeniería de IA, software, cloud y operaciones gestionadas. Asesoramos, construimos y operamos con ejecución integrada de extremo a extremo.',
+        'Hive Vault Arc es un socio de transformación tecnológica que combina estrategia, ingeniería de IA, software, cloud y operaciones gestionadas. Asesoramos, construimos y operamos con ejecución integrada de extremo a extremo.',
     },
     {
       question: '¿Qué soluciones de automatización e IA ofrecéis?',
@@ -286,7 +286,7 @@ export const LOCALE_CAPABILITIES_FAQS: Record<SupportedLocale, FaqSet> = {
         'Diseñamos y desplegamos agentes de IA para operaciones comerciales (WhatsApp, web, voz), automatización de flujos internos, calificación de leads, asistentes de reporting e inteligencia operativa, con cobertura de ciberseguridad, deep tech e IoT cuando el programa lo requiere.',
     },
     {
-      question: '¿Qué incluye un programa de transformación digital con H.V.A?',
+      question: '¿Qué incluye un programa de transformación digital con Hive Vault Arc?',
       answer:
         'Incluye diagnóstico operativo, hoja de ruta de transformación, decisiones de arquitectura y acompañamiento de ejecución hasta producción y evolución a largo plazo.',
     },

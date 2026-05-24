@@ -1,4 +1,6 @@
-# Sprint 08 — AEO: llms.txt & AI Search Optimization
+# Sprint 08 - AEO: llms.txt & AI Search Optimization
+
+> 2026-05-24 status: historical sprint. Use `sprints/seo-ai-discovery/sprint-03-machine-readable-company.md` for current LLM context and `/ai/company` work. Current public brand is `Hive Vault Arc`; `H.V.A` and `HVA` are aliases/search variants.
 
 > **Priority:** MEDIUM — AEO (Answer Engine Optimization) is a forward-looking competitive advantage. The `llms.txt` file exists but needs updates. AI search (ChatGPT, Perplexity, Claude) is already a primary B2B discovery channel.
 > **Estimated effort:** 2–3 hours
@@ -173,4 +175,3 @@ Add the FAQ JSON-LD schema alongside this section using the existing `FaqSection
 - [ ] `curl https://hivevaultarc.com/llms-full.txt` — returns file
 - [ ] Ask ChatGPT or Perplexity "Who is Hive Vault Arc?" — monitor for citations over the following weeks (AI crawlers need time to index)
 - [ ] Homepage FAQ renders correctly in browser and passes Rich Results Test
-
