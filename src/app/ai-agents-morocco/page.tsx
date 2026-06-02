@@ -6,9 +6,9 @@ import type { FaqItem } from '../../data/faqs';
 import { SITE_URL, absoluteUrl, buildBreadcrumbSchema, buildPageMetadata } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'AI Agents in Morocco — WhatsApp Automation & Intelligent Systems | H.V.A',
+  title: 'AI Agents in Morocco — WhatsApp Automation & Intelligent Systems',
   description:
-    'H.V.A builds AI agents for Moroccan businesses. WhatsApp lead qualification, automated customer ops, and custom AI systems. Serving all of Morocco from Tangier.',
+    'Hive Vault Arc builds AI agents for Moroccan businesses. WhatsApp lead qualification, automated customer ops, and custom AI systems. Serving all of Morocco from Tangier.',
   path: '/ai-agents-morocco',
   keywords: [
     'AI agents Morocco',
@@ -23,7 +23,7 @@ const AI_AGENTS_MOROCCO_FAQS: FaqItem[] = [
   {
     question: 'Do you only work with companies in Tangier?',
     answer:
-      'No. H.V.A is based in Tangier and serves organizations across Morocco, including Casablanca, Rabat, Marrakech, Agadir, and distributed teams operating nationally.',
+      'No. Hive Vault Arc is based in Tangier and serves organizations across Morocco, including Casablanca, Rabat, Marrakech, Agadir, and distributed teams operating nationally.',
   },
   {
     question: 'What is included in an AI agent implementation?',
@@ -31,7 +31,7 @@ const AI_AGENTS_MOROCCO_FAQS: FaqItem[] = [
       'Typical scope includes discovery, workflow design, conversation logic, integration with tools like CRM or calendars, testing, rollout, and post-launch tuning support.',
   },
   {
-    question: 'Can H.V.A build sector-specific AI agents?',
+    question: 'Can Hive Vault Arc build sector-specific AI agents?',
     answer:
       'Yes. We design agents around sector workflows, especially for real estate, healthcare, logistics, and finance where response discipline and process quality directly affect revenue or service performance.',
   },
@@ -79,7 +79,7 @@ export default function AIAgentsMoroccoPage() {
             <p className="geo-kicker">National AI Services</p>
             <h1 className="editorial-title">Morocco&apos;s AI Agent Partner</h1>
             <p className="editorial-lead max-w-3xl">
-              H.V.A delivers AI agents for companies across Morocco that need faster customer response, cleaner lead
+              Hive Vault Arc delivers AI agents for companies across Morocco that need faster customer response, cleaner lead
               qualification, and more reliable day-to-day operations. We combine consulting, engineering, and deployment
               ownership so the agent is integrated into your real business workflows, not left as a standalone tool.
             </p>
@@ -95,7 +95,7 @@ export default function AIAgentsMoroccoPage() {
         </section>
 
         {/* ── Feature band ── */}
-        <section className="border-y border-[#e2e8f0] bg-white">
+        <section className="border-y border-[#DDE3EA] bg-white">
           <div className="mx-auto max-w-5xl px-6 py-12 lg:px-12">
             <h2 className="services-brief-section-title">The Moroccan AI Opportunity</h2>
             <p className="mt-4 text-base leading-relaxed text-secondary">
@@ -120,7 +120,7 @@ export default function AIAgentsMoroccoPage() {
         {/* ── Body sections ── */}
         <section className="mx-auto max-w-5xl space-y-12 px-6 py-14 lg:px-12">
           <article>
-            <h2 className="services-brief-section-title">H.V.A AI Agent Stack in Morocco</h2>
+            <h2 className="services-brief-section-title">Hive Vault Arc AI Agent Stack in Morocco</h2>
             <p className="mt-4 text-base leading-relaxed text-secondary">
               We build with a stack chosen for production reliability and extensibility. A typical delivery includes
               WhatsApp Business API for customer interaction, orchestration logic through n8n or equivalent workflow
@@ -181,7 +181,7 @@ export default function AIAgentsMoroccoPage() {
           <article>
             <h2 className="services-brief-section-title">Case Study Reference</h2>
             <p className="mt-4 text-base leading-relaxed text-secondary">
-              H.V.A has already deployed multilingual conversational AI in production scenarios where lead quality and
+              Hive Vault Arc has already deployed multilingual conversational AI in production scenarios where lead quality and
               response speed directly affected pipeline performance. You can review a public example in our WhatsApp AI
               case study and see how architecture decisions translated into operational outcomes.
             </p>
@@ -212,7 +212,7 @@ export default function AIAgentsMoroccoPage() {
             </h2>
             <p className="mt-4 text-base leading-relaxed text-secondary">
               Moving from one location to a national operation requires governance discipline. A response flow that works
-              in one branch can fail when multiple teams, regions, and customer segments enter the system. H.V.A
+              in one branch can fail when multiple teams, regions, and customer segments enter the system. Hive Vault Arc
               structures national AI agent programs around shared standards: intent taxonomy, escalation policy, response
               tone controls, and KPI ownership at both central and local levels.
             </p>
@@ -230,11 +230,11 @@ export default function AIAgentsMoroccoPage() {
         </section>
 
         {/* ── Bottom CTA ── */}
-        <section className="border-t border-[#e2e8f0] bg-white">
+        <section className="border-t border-[#DDE3EA] bg-white">
           <div className="mx-auto max-w-5xl px-6 py-12 lg:px-12">
             <h2 className="services-brief-section-title">Build AI Agents That Actually Run in Production</h2>
             <p className="mt-4 max-w-3xl text-base leading-relaxed text-secondary">
-              If your team is ready to move from AI discussions to measurable operations, H.V.A can define a phased
+              If your team is ready to move from AI discussions to measurable operations, Hive Vault Arc can define a phased
               rollout plan tailored to your Moroccan market context and internal capacity.
             </p>
             <div className="editorial-actions mt-7">

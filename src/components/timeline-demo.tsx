@@ -20,14 +20,14 @@ export function TimelineDemo() {
   const timelineData: TimelineEntry[] = [
     {
       title: "Idea & Validation",
-      icon: <Lightbulb className="w-5 h-5 text-purple-400" />,
+      icon: <Lightbulb className="w-5 h-5 text-primary" />,
       content: (
         <div className="relative group">
-          <div className="absolute -inset-1 bg-gradient-to-r from-purple-500/30 to-pink-500/30 rounded-xl opacity-0 group-hover:opacity-100 blur-lg transition-all duration-500" />
-          <div className="relative bg-gradient-to-br from-neutral-900/80 to-neutral-950/80 backdrop-blur-sm p-6 rounded-xl border border-neutral-800 hover:border-purple-500/30 transition-all duration-300 h-full">
+          <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-primary-400/30 rounded-xl opacity-0 group-hover:opacity-100 blur-lg transition-all duration-500" />
+          <div className="relative bg-gradient-to-br from-neutral-900/80 to-neutral-950/80 backdrop-blur-sm p-6 rounded-xl border border-neutral-800 hover:border-primary/30 transition-all duration-300 h-full">
             <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-purple-500/10 rounded-lg">
-                <Lightbulb className="w-5 h-5 text-purple-400" />
+              <div className="p-2 bg-primary/10 rounded-lg">
+                <Lightbulb className="w-5 h-5 text-primary" />
               </div>
               <h3 className="text-lg font-medium text-neutral-200">Idea & Validation</h3>
             </div>
@@ -48,7 +48,7 @@ export function TimelineDemo() {
                   key={i} 
                   className="flex items-center gap-3 p-3 rounded-lg bg-neutral-900/50 hover:bg-neutral-800/50 transition-colors duration-200 group-hover:translate-x-1"
                 >
-                  <div className="p-1.5 bg-purple-500/10 rounded-md text-purple-400">
+                  <div className="p-1.5 bg-primary/10 rounded-md text-primary">
                     {item.icon}
                   </div>
                   <span className="text-sm text-neutral-300 group-hover:text-white transition-colors">
@@ -63,14 +63,14 @@ export function TimelineDemo() {
     },
     {
       title: "Product Development",
-      icon: <Code className="w-5 h-5 text-blue-400" />,
+      icon: <Code className="w-5 h-5 text-primary" />,
       content: (
         <div className="relative group">
-          <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/30 to-cyan-500/30 rounded-xl opacity-0 group-hover:opacity-100 blur-lg transition-all duration-500" />
-          <div className="relative bg-gradient-to-br from-neutral-900/80 to-neutral-950/80 backdrop-blur-sm p-6 rounded-xl border border-neutral-800 hover:border-blue-500/30 transition-all duration-300 h-full">
+          <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-primary-400/30 rounded-xl opacity-0 group-hover:opacity-100 blur-lg transition-all duration-500" />
+          <div className="relative bg-gradient-to-br from-neutral-900/80 to-neutral-950/80 backdrop-blur-sm p-6 rounded-xl border border-neutral-800 hover:border-primary/30 transition-all duration-300 h-full">
             <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-blue-500/10 rounded-lg">
-                <Code className="w-5 h-5 text-blue-400" />
+              <div className="p-2 bg-primary/10 rounded-lg">
+                <Code className="w-5 h-5 text-primary" />
               </div>
               <h3 className="text-lg font-medium text-neutral-200">Product Development</h3>
             </div>
@@ -88,9 +88,9 @@ export function TimelineDemo() {
               ].map((item, i) => (
                 <div 
                   key={i}
-                  className="flex items-center gap-2 p-3 rounded-lg bg-neutral-900/50 hover:bg-blue-900/20 transition-colors duration-200 group-hover:scale-[1.02]"
+                  className="flex items-center gap-2 p-3 rounded-lg bg-neutral-900/50 hover:bg-primary/10 transition-colors duration-200 group-hover:scale-[1.02]"
                 >
-                  <div className="p-1.5 bg-blue-500/10 rounded-md text-blue-400">
+                  <div className="p-1.5 bg-primary/10 rounded-md text-primary">
                     {item.icon}
                   </div>
                   <span className="text-sm text-neutral-300 group-hover:text-white">
@@ -105,14 +105,14 @@ export function TimelineDemo() {
     },
     {
   title: "Growth & Scaling",
-  icon: <Rocket className="w-5 h-5 text-pink-400" />,
+  icon: <Rocket className="w-5 h-5 text-primary" />,
   content: (
     <div className="relative group">
-      <div className="absolute -inset-1 bg-gradient-to-r from-pink-500/30 to-rose-500/30 rounded-xl opacity-0 group-hover:opacity-100 blur-lg transition-all duration-500" />
-      <div className="relative bg-gradient-to-br from-neutral-900/80 to-neutral-950/80 backdrop-blur-sm p-6 rounded-xl border border-neutral-800 hover:border-pink-500/30 transition-all duration-300 h-full">
+      <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-primary-400/30 rounded-xl opacity-0 group-hover:opacity-100 blur-lg transition-all duration-500" />
+      <div className="relative bg-gradient-to-br from-neutral-900/80 to-neutral-950/80 backdrop-blur-sm p-6 rounded-xl border border-neutral-800 hover:border-primary/30 transition-all duration-300 h-full">
         <div className="flex items-center gap-3 mb-4">
-          <div className="p-2 bg-pink-500/10 rounded-lg">
-            <Rocket className="w-5 h-5 text-pink-400" />
+          <div className="p-2 bg-primary/10 rounded-lg">
+            <Rocket className="w-5 h-5 text-primary" />
           </div>
           <h3 className="text-lg font-medium text-neutral-200">Growth & Scaling</h3>
         </div>
@@ -123,9 +123,9 @@ export function TimelineDemo() {
         </p>
         <div className="space-y-4">
           <div className="space-y-2">
-            <h4 className="text-sm font-medium text-pink-400 flex items-center gap-2">
-               <div className="p-2 bg-pink-500/10 rounded-lg">
-            <Gauge className="w-5 h-5 text-pink-400" />
+            <h4 className="text-sm font-medium text-primary flex items-center gap-2">
+               <div className="p-2 bg-primary/10 rounded-lg">
+            <Gauge className="w-5 h-5 text-primary" />
           </div>
               Performance & Infrastructure
             </h4>
@@ -135,9 +135,9 @@ export function TimelineDemo() {
           </div>
           
           <div className="space-y-2">
-            <h4 className="text-sm font-medium text-pink-400 flex items-center gap-2">
-               <div className="p-2 bg-pink-500/10 rounded-lg">
-            <ChartArea className="w-5 h-5 text-pink-400" />
+            <h4 className="text-sm font-medium text-primary flex items-center gap-2">
+               <div className="p-2 bg-primary/10 rounded-lg">
+            <ChartArea className="w-5 h-5 text-primary" />
           </div>
                Data & Analytics
             </h4>
@@ -147,9 +147,9 @@ export function TimelineDemo() {
           </div>
           
           <div className="space-y-2">
-            <h4 className="text-sm font-medium text-pink-400 flex items-center gap-2">
-                <div className="p-2 bg-pink-500/10 rounded-lg">
-            <TrendingUp className="w-5 h-5 text-pink-400" />
+            <h4 className="text-sm font-medium text-primary flex items-center gap-2">
+                <div className="p-2 bg-primary/10 rounded-lg">
+            <TrendingUp className="w-5 h-5 text-primary" />
           </div>
                 Growth Strategy
             </h4>

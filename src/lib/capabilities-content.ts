@@ -85,7 +85,7 @@ export const CAPABILITY_DOMAINS: CapabilityDomain[] = [
   {
     id: 'ai-data-analytics',
     title: 'AI, Data & Analytics',
-    briefLine: 'The intelligence layer — where H.V.A is deepest: AI engineering, not just AI consulting.',
+    briefLine: 'The intelligence layer — where Hive Vault Arc is deepest: AI engineering, not just AI consulting.',
     briefBullets: ['AI agents', 'Generative AI engineering', 'Predictive analytics'],
     strategicContext:
       'AI becomes competitive advantage only when integrated into day-to-day operations at the channel clients already live in — not isolated in a pilot dashboard.',
@@ -148,7 +148,7 @@ export const CAPABILITY_DOMAINS: CapabilityDomain[] = [
     briefLine: 'The evolution layer — we stay after go-live, because that\'s where transformation actually happens.',
     briefBullets: ['Managed operations', 'Application maintenance', 'AI system management'],
     strategicContext:
-      'Most transformation programs fail at the handoff. Advisory firms advise, then leave after the deck. Agencies ship and disappear. H.V.A eliminates the handoff — same team, strategy through production.',
+      'Most transformation programs fail at the handoff. Advisory firms advise, then leave after the deck. Agencies ship and disappear. Hive Vault Arc eliminates the handoff — same team, strategy through production.',
     executionContext:
       'We provide ongoing ownership of the systems we build — monitoring, evolving, and operating them as a long-term partner, not a vendor.',
     subCapabilities: [

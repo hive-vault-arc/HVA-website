@@ -15,52 +15,52 @@ export const HVA_LEADERSHIP: LeadershipMember[] = [
   {
     slug: 'khalid-chalhi',
     name: 'Khalid Chalhi',
-    tag: 'Strategy · AI · Software Engineering',
-    role: 'Founder & CEO',
-    frenchRole: 'Fondateur & PDG',
-    schemaJobTitle: 'Founder & CEO',
+    tag: 'Responsible for Strategy · AI · Software Engineering',
+    role: 'Co-Founder & CEO',
+    frenchRole: 'Co-fondateur & CEO',
+    schemaJobTitle: 'Co-Founder & CEO',
     image: '/Images/team/khalid-chalhi-hva-co-founder.webp',
     description:
-      'Founder & CEO of Hive Vault Arc, leading strategy, AI engineering, and software execution for H.V.A transformation programs.',
+      'Co-Founder & CEO of Hive Vault Arc, responsible for strategy, AI engineering, and software execution for Hive Vault Arc transformation programs.',
     frenchDescription:
-      'Fondateur et PDG de Hive Vault Arc, responsable de la stratégie, de l\'ingénierie IA et de l\'exécution logicielle des programmes H.V.A.',
+      'Co-fondateur & CEO de Hive Vault Arc, responsable de la stratégie, de l\'ingénierie IA et de l\'exécution logicielle des programmes Hive Vault Arc.',
     knowsAbout: ['Strategy Consulting', 'AI Engineering', 'Software Engineering', 'Technology Transformation'],
   },
   {
     slug: 'ali-amrani',
     name: 'Ali Amrani',
-    tag: 'Product · Systems · Full-Stack',
-    role: 'Co-Founder & Full-Stack Engineer',
-    frenchRole: 'Co-fondateur & Ingénieur Full-Stack',
-    schemaJobTitle: 'Co-Founder & Full-Stack Engineer',
-    image: '/Images/team/ali-amrani-hva-co-founder.webp',
+    tag: 'Responsible for Product · Systems · Full-Stack',
+    role: 'Co-Founder & CEO',
+    frenchRole: 'Co-fondateur & CEO',
+    schemaJobTitle: 'Co-Founder & CEO',
+    image: '/Images/team/ali-amrani-hva-co-founder-portrait.jpeg',
     description:
-      'Co-Founder of Hive Vault Arc, leading product systems, full-stack engineering, and delivery architecture for H.V.A.',
+      'Co-Founder & CEO of Hive Vault Arc, responsible for product systems, full-stack engineering, and delivery architecture for Hive Vault Arc.',
     frenchDescription:
-      'Co-fondateur de Hive Vault Arc, responsable des systèmes produit, de l\'ingénierie full-stack et de l\'architecture de livraison H.V.A.',
+      'Co-fondateur & CEO de Hive Vault Arc, responsable des systèmes produit, de l\'ingénierie full-stack et de l\'architecture de livraison Hive Vault Arc.',
     knowsAbout: ['Full-Stack Engineering', 'Product Systems', 'Software Architecture', 'Technology Delivery'],
   },
   {
     slug: 'oubay-ghamat',
     name: 'Oubay Ghamat',
-    tag: 'Cloud · Infrastructure · Operations',
-    role: 'Co-Founder & Cloud Engineer',
-    frenchRole: 'Co-fondateur & Ingénieur Cloud',
-    schemaJobTitle: 'Co-Founder & Cloud Engineer',
+    tag: 'Responsible for Cloud · Infrastructure · Operations',
+    role: 'Co-Founder & CEO',
+    frenchRole: 'Co-fondateur & CEO',
+    schemaJobTitle: 'Co-Founder & CEO',
     image: '/Images/team/oubay-ghamat-hva-co-founder.webp',
     description:
-      'Co-Founder of Hive Vault Arc, leading cloud infrastructure, operations, and production reliability for H.V.A systems.',
+      'Co-Founder & CEO of Hive Vault Arc, responsible for cloud infrastructure, operations, and production reliability for Hive Vault Arc systems.',
     frenchDescription:
-      'Co-fondateur de Hive Vault Arc, responsable de l\'infrastructure cloud, des opérations et de la fiabilité en production des systèmes H.V.A.',
+      'Co-fondateur & CEO de Hive Vault Arc, responsable de l\'infrastructure cloud, des opérations et de la fiabilité en production des systèmes Hive Vault Arc.',
     knowsAbout: ['Cloud Infrastructure', 'Managed Operations', 'Production Reliability', 'DevOps'],
   },
 ];
 
 export const HVA_CEO_ANSWER =
-  'Khalid Chalhi is Founder & CEO of Hive Vault Arc (H.V.A). H.V.A is led by its three co-founders: Khalid Chalhi, Ali Amrani, and Oubay Ghamat.';
+  'Hive Vault Arc is led by three Co-Founders & CEOs: Khalid Chalhi, Ali Amrani, and Oubay Ghamat. Each founder owns a distinct responsibility area across strategy, product/software, and cloud operations.';
 
 export const HVA_CEO_ANSWER_FR =
-  'Khalid Chalhi est le fondateur et PDG de Hive Vault Arc (H.V.A). H.V.A est dirigée par ses trois co-fondateurs : Khalid Chalhi, Ali Amrani et Oubay Ghamat.';
+  'Hive Vault Arc est dirigée par trois co-fondateurs & CEOs : Khalid Chalhi, Ali Amrani et Oubay Ghamat. Chaque fondateur possède un périmètre de responsabilité distinct entre stratégie, produit/logiciel et opérations cloud.';
 
 export const HVA_LEADERSHIP_SEARCH_KEYWORDS = [
   'CEO of HVA',

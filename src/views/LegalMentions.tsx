@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { CONTACT_EMAIL, CONTACT_PHONE_DISPLAY, CONTACT_PHONE_E164 } from '../lib/seo';
 
 export default function LegalMentions() {
   return (
@@ -27,21 +28,21 @@ export default function LegalMentions() {
             The site <strong>hivevaultarc.com</strong> is published by:
           </p>
           <div className="geo-card card-hover mt-5 space-y-1">
-            <p className="text-sm font-semibold text-[#0f172a]">Hive Vault Arc (H.V.A)</p>
+            <p className="text-sm font-semibold text-[#1A2535]">Hive Vault Arc</p>
             <p className="text-sm text-secondary">Tangier, Tanger-Tetouan-Al Hoceima, Morocco</p>
             <p className="text-sm text-secondary">
               Email:{' '}
               <a
-                href="mailto:contact@hivevaultarc.com"
+                href={`mailto:${CONTACT_EMAIL}`}
                 className="text-primary underline underline-offset-2"
               >
-                contact@hivevaultarc.com
+                {CONTACT_EMAIL}
               </a>
             </p>
             <p className="text-sm text-secondary">
               Phone:{' '}
-              <a href="tel:+212670431249" className="text-primary underline underline-offset-2">
-                +212 670 431 249
+              <a href={`tel:${CONTACT_PHONE_E164}`} className="text-primary underline underline-offset-2">
+                {CONTACT_PHONE_DISPLAY}
               </a>
             </p>
           </div>
@@ -54,14 +55,14 @@ export default function LegalMentions() {
             The publication director of hivevaultarc.com is:
           </p>
           <div className="geo-card card-hover mt-5 space-y-1">
-            <p className="text-sm font-semibold text-[#0f172a]">Khalid Chalhi</p>
+            <p className="text-sm font-semibold text-[#1A2535]">Khalid Chalhi</p>
             <p className="text-sm text-secondary">Founder &amp; CEO, Hive Vault Arc</p>
             <p className="text-sm text-secondary">
               <a
-                href="mailto:contact@hivevaultarc.com"
+                href={`mailto:${CONTACT_EMAIL}`}
                 className="text-primary underline underline-offset-2"
               >
-                contact@hivevaultarc.com
+                {CONTACT_EMAIL}
               </a>
             </p>
           </div>
@@ -74,7 +75,7 @@ export default function LegalMentions() {
             The site is hosted by:
           </p>
           <div className="geo-card card-hover mt-5 space-y-1">
-            <p className="text-sm font-semibold text-[#0f172a]">Vercel Inc.</p>
+            <p className="text-sm font-semibold text-[#1A2535]">Vercel Inc.</p>
             <p className="text-sm text-secondary">340 Pine Street Suite 5</p>
             <p className="text-sm text-secondary">San Francisco, CA 94104, United States</p>
             <a
@@ -109,16 +110,16 @@ export default function LegalMentions() {
           <h2 className="services-brief-section-title">5. Limitation of Liability</h2>
           <p className="mt-4 text-base leading-relaxed text-secondary">
             Hive Vault Arc endeavours to keep the information published on this site accurate and
-            up to date. However, H.V.A cannot guarantee the accuracy, completeness, or currency
+            up to date. However, Hive Vault Arc cannot guarantee the accuracy, completeness, or currency
             of this information.
           </p>
           <p className="mt-4 text-base leading-relaxed text-secondary">
-            H.V.A accepts no liability for:
+            Hive Vault Arc accepts no liability for:
           </p>
           <ul className="mt-4 list-disc space-y-2 pl-6 text-sm leading-relaxed text-secondary">
             <li>Errors or omissions in information available on the site.</li>
             <li>
-              The content of third-party sites linked from this site — H.V.A does not control
+              The content of third-party sites linked from this site — Hive Vault Arc does not control
               these sites and is not responsible for them.
             </li>
             <li>
@@ -189,7 +190,7 @@ export default function LegalMentions() {
       {/* ── CTA ── */}
       <div className="border-t border-neutral-200 bg-white px-6 py-14 text-center">
         <p className="text-sm uppercase tracking-widest text-secondary">Legal questions?</p>
-        <p className="mt-3 text-2xl font-semibold text-[#0f172a]">
+        <p className="mt-3 text-2xl font-semibold text-[#1A2535]">
           Our team is available to help.
         </p>
         <Link href="/contact" className="editorial-cta sharp-edge mt-6 inline-flex">

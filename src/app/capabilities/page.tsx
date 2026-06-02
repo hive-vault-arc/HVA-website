@@ -4,6 +4,7 @@ import JsonLd from '../../components/JsonLd';
 import FaqSection from '../../components/FaqSection';
 import { CAPABILITIES_FAQS } from '../../data/faqs';
 import {
+  CONTACT_PHONE_E164,
   GLOBAL_KEYWORDS,
   SITE_URL,
   absoluteUrl,
@@ -15,7 +16,7 @@ import {
 export const metadata: Metadata = buildPageMetadata({
   title: 'Capabilities | Six Service Pillars — Strategy to Operations',
   description:
-    'H.V.A delivers across six integrated service pillars: Strategy & Business Consulting, Technology Consulting, AI & Data Analytics, Software Engineering, Cloud & Infrastructure, and Operations & Managed Services.',
+    'Hive Vault Arc delivers across six integrated service pillars: Strategy & Business Consulting, Technology Consulting, AI & Data Analytics, Software Engineering, Cloud & Infrastructure, and Operations & Managed Services.',
   path: '/capabilities',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'strategy consulting Morocco',
@@ -40,14 +41,14 @@ export default function Page() {
   const capabilitySchema = {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    name: 'H.V.A Capabilities Brief and Solution Preview',
-    alternateName: 'H.V.A Capabilities and Services',
+    name: 'Hive Vault Arc Capabilities Brief and Solution Preview',
+    alternateName: 'Hive Vault Arc Capabilities and Services',
     provider: {
       '@type': ['Organization', 'ProfessionalService'],
       '@id': `${SITE_URL}/#organization`,
       name: 'Hive Vault Arc',
       url: SITE_URL,
-      telephone: ['+212670431249'],
+      telephone: CONTACT_PHONE_E164,
       priceRange: '$$',
       image: absoluteUrl('/Images/brand/hva-ai-software-agency-tangier.webp'),
       areaServed: ['Morocco', 'Remote'],

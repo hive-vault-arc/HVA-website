@@ -3,13 +3,21 @@ import About from '../../../views/About';
 import FaqSection from '../../../components/FaqSection';
 import JsonLd from '../../../components/JsonLd';
 import { ABOUT_FAQS } from '../../../data/faqs';
-import { HVA_CEO_ANSWER, HVA_CEO_ANSWER_FR, HVA_LEADERSHIP, HVA_LEADERSHIP_SEARCH_KEYWORDS } from '../../../lib/leadership';
-import { GLOBAL_KEYWORDS, SITE_URL, absoluteUrl, buildBreadcrumbSchema, buildPageMetadata, mergeKeywords } from '../../../lib/seo';
+import { HVA_CEO_ANSWER, HVA_LEADERSHIP, HVA_LEADERSHIP_SEARCH_KEYWORDS } from '../../../lib/leadership';
+import {
+  BRAND_SEARCH_VARIANTS,
+  GLOBAL_KEYWORDS,
+  SITE_URL,
+  absoluteUrl,
+  buildBreadcrumbSchema,
+  buildPageMetadata,
+  mergeKeywords,
+} from '../../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'About H.V.A | Founder-Led Technology Transformation Team',
+  title: 'About | Founder-Led Technology Transformation Team',
   description:
-    'Hive Vault Arc (H.V.A) is led by Founder & CEO Khalid Chalhi and co-founders Ali Amrani and Oubay Ghamat from Tangier, Morocco.',
+    'Hive Vault Arc is led by Founder & CEO Khalid Chalhi and co-founders Ali Amrani and Oubay Ghamat from Tangier, Morocco.',
   path: '/whoweare/abouthva',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     ...HVA_LEADERSHIP_SEARCH_KEYWORDS,
@@ -47,7 +55,7 @@ export default function Page() {
     url: absoluteUrl(`/whoweare/abouthva#${member.slug}`),
     worksFor: {
       '@type': ['Organization', 'ProfessionalService'],
-      '@id': `${SITE_URL}/#organization`,
+      '@id': absoluteUrl('/#organization'),
       name: 'Hive Vault Arc',
       url: SITE_URL,
     },
@@ -57,17 +65,16 @@ export default function Page() {
   const aboutPageSchema = {
     '@context': 'https://schema.org',
     '@type': 'AboutPage',
-    name: 'About H.V.A — Technology Transformation Partner',
-    url: `${SITE_URL}/whoweare/abouthva`,
-    description:
-      `${HVA_CEO_ANSWER} ${HVA_CEO_ANSWER_FR}`,
+    name: 'About Hive Vault Arc - Technology Transformation Partner',
+    url: absoluteUrl('/whoweare/abouthva'),
+    description: HVA_CEO_ANSWER,
     mainEntity: {
       '@type': ['Organization', 'ProfessionalService'],
-      '@id': `${SITE_URL}/#organization`,
+      '@id': absoluteUrl('/#organization'),
       name: 'Hive Vault Arc',
-      alternateName: 'H.V.A',
+      alternateName: BRAND_SEARCH_VARIANTS,
       description:
-        'Technology transformation partner — strategy consulting, AI engineering, software development, cloud infrastructure, and managed operations delivered by one founder-led team.',
+        'Technology transformation partner for strategy consulting, AI engineering, software development, cloud infrastructure, and managed operations delivered by one founder-led team.',
       founder: leadershipPeople,
       founders: leadershipPeople,
       employee: leadershipPeople,
@@ -87,7 +94,7 @@ export default function Page() {
 
   const breadcrumbSchema = buildBreadcrumbSchema([
     { name: 'Home', path: '/' },
-    { name: 'About H.V.A', path: '/whoweare/abouthva' },
+    { name: 'About Hive Vault Arc', path: '/whoweare/abouthva' },
   ]);
 
   return (

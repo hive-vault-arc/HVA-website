@@ -18,6 +18,7 @@ import { useAnimationQuality } from '../lib/animationQuality';
 import { HVA_CEO_ANSWER, HVA_CEO_ANSWER_FR, HVA_LEADERSHIP } from '../lib/leadership';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 import BottomCTA from '../components/BottomCTA';
+import SectionBrandMark from '../components/SectionBrandMark';
 
 type Principle = {
   icon: React.ReactNode;
@@ -61,7 +62,7 @@ const principles: Principle[] = [
   {
     icon: <Workflow className="h-5 w-5" />,
     title: 'Founder Accountability',
-    description: 'H.V.A is founder-led. Khalid, Ali, and Oubay are on every engagement. Decisions are made by the people who understand the full system — not escalated up a management chain.',
+    description: 'Hive Vault Arc is founder-led. Khalid, Ali, and Oubay are on every engagement. Decisions are made by the people who understand the full system — not escalated up a management chain.',
   },
 ];
 
@@ -100,7 +101,7 @@ const pillars: Pillar[] = [
     number: '06',
     shortTitle: 'Operations',
     title: 'Operations & Managed Services',
-    description: 'Ongoing ownership of the systems H.V.A builds. Managed operations, application evolution, automation maintenance, IT support, and business process management — long after go-live.',
+    description: 'Ongoing ownership of the systems Hive Vault Arc builds. Managed operations, application evolution, automation maintenance, IT support, and business process management — long after go-live.',
   },
 ];
 
@@ -138,10 +139,10 @@ const About: React.FC = () => {
 
   return (
     <MotionConfig reducedMotion={motionReduced ? 'always' : 'never'}>
-      <div className="relative isolate overflow-hidden bg-[#F5F6FA] text-[#1E272E]">
+      <div className="relative isolate overflow-hidden bg-[#FFFFFF] text-[#1A2535]">
         <motion.div
           aria-hidden="true"
-          className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-gradient-to-r from-[#0984E3] via-[#4CA6EC] to-[#00CEC9]"
+          className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-gradient-to-r from-[#E8A838] via-[#E8A838] to-[#E8A838]"
           style={{ scaleX: progressScale }}
         />
         <PageAmbientBackground className="-z-10" />
@@ -159,34 +160,37 @@ const About: React.FC = () => {
                 transition={{ duration: 0.55 }}
                 style={{ y: heroLift }}
               >
-                <span className="inline-block text-[#0984E3] font-bold tracking-[0.22em] text-[10px] uppercase mb-6">
-                  Technology Transformation Partner · Tangier, Morocco
-                </span>
-                <h1 className="font-serif text-5xl md:text-7xl font-medium leading-[1.08] tracking-tight text-[#1E272E] mb-8">
+                <div className="mb-6 flex items-center gap-3">
+                  <SectionBrandMark size="sm" />
+                  <span className="inline-block text-[#E8A838] font-bold tracking-[0.22em] text-[10px] uppercase">
+                    Technology Transformation Partner · Tangier, Morocco
+                  </span>
+                </div>
+                <h1 className="mb-8 font-serif text-[clamp(3rem,13vw,4.2rem)] font-medium leading-[1.04] tracking-tight text-[#1A2535] md:text-7xl md:leading-[1.08]">
                   We Advise. We Build.<br />
                   <em className="italic">We Operate.</em>
                 </h1>
-                <p className="text-xl text-[#1E272E]/60 font-light max-w-xl leading-relaxed mb-10">
-                  H.V.A is a technology transformation partner combining strategy consulting, AI engineering, software development, cloud infrastructure, and managed operations — delivered by one team, from first whiteboard to production. No handoffs. Same founders throughout.
+                <p className="text-xl text-[#1A2535]/60 font-light max-w-xl leading-relaxed mb-10">
+                  Hive Vault Arc is a technology transformation partner combining strategy consulting, AI engineering, software development, cloud infrastructure, and managed operations — delivered by one team, from first whiteboard to production. No handoffs. Same founders throughout.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link
                     href="/contact"
-                    className="sharp-edge bg-[#1E272E] text-[#F5F6FA] px-8 py-4 text-sm font-bold hover:bg-[#0984E3] transition-colors duration-300"
+                    className="sharp-edge min-h-11 bg-[#1A2535] px-8 py-4 text-sm font-bold text-[#FFFFFF] transition-colors duration-300 hover:bg-[#E8A838] w-full sm:w-auto text-center"
                   >
                     Start Discovery
                   </Link>
                   <Link
                     href="/case-studies"
-                    className="sharp-edge inline-flex items-center gap-2 bg-white/90 px-8 py-4 text-sm font-bold text-[#1E272E] shadow-[0_10px_25px_rgba(9,132,227,0.08)] hover:bg-[#ECF5FD] transition-colors duration-300"
+                    className="sharp-edge inline-flex min-h-11 items-center justify-center gap-2 bg-white/90 px-8 py-4 text-sm font-bold text-[#1A2535] shadow-[0_10px_25px_rgba(232,168,56,0.08)] transition-colors duration-300 hover:bg-[#FFF7E8] w-full sm:w-auto"
                   >
                     Explore Case Studies
-                    <Layers3 className="h-4 w-4 text-[#0984E3]" />
+                    <Layers3 className="h-4 w-4 text-[#E8A838]" />
                   </Link>
                 </div>
                 <div className="mt-8 flex flex-wrap gap-2">
                   {proofPoints.map((point) => (
-                    <span key={point} className="rounded-full bg-white/62 px-3 py-1 text-[11px] tracking-[0.13em] text-[#1E272E]/70">
+                    <span key={point} className="rounded-full bg-white/62 px-3 py-1 text-[11px] tracking-[0.13em] text-[#1A2535]/70">
                       {point}
                     </span>
                   ))}
@@ -201,16 +205,16 @@ const About: React.FC = () => {
                 transition={{ duration: 0.7, delay: 0.15 }}
               >
                 {/* Card straddling the top-left image edge — outside overflow-hidden */}
-                <div className="absolute -top-10 left-5 z-10 p-6 bg-white shadow-xl max-w-[240px] hidden md:block">
-                  <p className="text-[10px] font-bold text-[#2563EB] tracking-[0.2em] uppercase mb-2">ARC Framework</p>
-                  <p className="text-lg font-serif italic text-[#0F172A] leading-snug">
+                <div className="absolute -top-10 left-5 z-10 hidden max-w-[240px] bg-white p-6 shadow-xl lg:block">
+                  <p className="text-[10px] font-bold text-[#E8A838] tracking-[0.2em] uppercase mb-2">ARC Framework</p>
+                  <p className="text-lg font-serif italic text-[#1A2535] leading-snug">
                     Assess. Re-engineer. Command.
                   </p>
                 </div>
-                <div className="relative aspect-square w-full bg-[#eceef0] overflow-hidden">
+                <div className="relative aspect-square w-full bg-[#ECEFF3] overflow-hidden">
                   <Image
                     src="/Images/team/hva-team-tangier-morocco.webp"
-                    alt="H.V.A co-founders team in Tangier, Morocco — Khalid Chalhi, Ali Amrani, Oubay Ghamat"
+                    alt="Hive Vault Arc co-founders team in Tangier, Morocco — Khalid Chalhi, Ali Amrani, Oubay Ghamat"
                     fill
                     className="object-cover w-full h-full"
                     sizes="(max-width: 1024px) 100vw, 42vw"
@@ -223,7 +227,7 @@ const About: React.FC = () => {
           </div>
         </section>
 
-        <section className="relative px-6 lg:px-14 py-16 md:py-24 bg-[#f2f4f6]">
+        <section className="relative px-6 lg:px-14 py-16 md:py-24 bg-[#F7F8FA]">
           <div className="container mx-auto">
 
             {/* Header */}
@@ -234,11 +238,14 @@ const About: React.FC = () => {
               transition={{ duration: 0.35 }}
               className="mb-12 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6"
             >
-              <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB] mb-3">The ARC Loop</p>
-                <h2 className="font-headline text-4xl md:text-5xl text-[#0F172A] leading-[1.02]">How We Deliver</h2>
+              <div className="flex items-start gap-3">
+                <SectionBrandMark size="sm" className="mt-0.5" />
+                <div>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#E8A838] mb-3">The ARC Loop</p>
+                  <h2 className="font-headline text-4xl md:text-5xl text-[#1A2535] leading-[1.02]">How We Deliver</h2>
+                </div>
               </div>
-              <p className="max-w-xl text-[#475569] leading-relaxed lg:text-right">
+              <p className="max-w-xl text-[#566274] leading-relaxed lg:text-right">
                 The ARC loop — Assess, Re-engineer, Command — is not a handoff chain. It is a single continuous loop operated by the same team. Strategy informs build. Build informs operations. Operations feeds back into strategy.
               </p>
             </motion.div>
@@ -252,7 +259,7 @@ const About: React.FC = () => {
               {/* Slim progress track */}
               <div className="relative h-px w-full bg-slate-300 mb-8">
                 <motion.div
-                  className="absolute inset-y-0 left-0 bg-[#2563EB]"
+                  className="absolute inset-y-0 left-0 bg-[#E8A838]"
                   animate={{ width: `${((activeDeliveryStep + 1) / deliveryFlow.length) * 100}%` }}
                   transition={{ duration: 0.35, ease: 'easeOut' }}
                 />
@@ -270,32 +277,32 @@ const About: React.FC = () => {
                       onMouseEnter={() => setActiveDeliveryStep(index)}
                       onFocus={() => setActiveDeliveryStep(index)}
                       className={`relative bg-white p-8 text-left transition-all duration-300 group overflow-hidden ${
-                        isActive ? 'bg-white' : 'hover:bg-[#F8FAFC]'
+                        isActive ? 'bg-white' : 'hover:bg-[#FFFFFF]'
                       }`}
                     >
                       {/* Active top-bar */}
                       <div
                         className={`absolute top-0 left-0 right-0 h-[3px] transition-all duration-300 ${
-                          isActive ? 'bg-[#2563EB]' : 'bg-transparent group-hover:bg-slate-200'
+                          isActive ? 'bg-[#E8A838]' : 'bg-transparent group-hover:bg-slate-200'
                         }`}
                       />
 
                       {/* Ghost step number */}
-                      <p className="font-headline text-[5rem] leading-none text-[#0F172A]/[0.05] select-none mb-2 -ml-1">
+                      <p className="font-headline text-[5rem] leading-none text-[#1A2535]/[0.05] select-none mb-2 -ml-1">
                         {item.step}
                       </p>
 
                       {/* Icon */}
-                      <div className={`mb-4 transition-colors duration-300 ${isActive ? 'text-[#2563EB]' : 'text-[#475569] group-hover:text-[#2563EB]'}`}>
+                      <div className={`mb-4 transition-colors duration-300 ${isActive ? 'text-[#E8A838]' : 'text-[#566274] group-hover:text-[#E8A838]'}`}>
                         {item.icon}
                       </div>
 
                       <h3 className={`font-headline text-xl leading-tight mb-2 transition-colors duration-300 ${
-                        isActive ? 'text-[#0F172A]' : 'text-[#0F172A]/70'
+                        isActive ? 'text-[#1A2535]' : 'text-[#1A2535]/70'
                       }`}>
                         {item.title}
                       </h3>
-                      <p className="text-sm leading-relaxed text-[#475569]">{item.detail}</p>
+                      <p className="text-sm leading-relaxed text-[#566274]">{item.detail}</p>
                     </button>
                   );
                 })}
@@ -307,25 +314,25 @@ const About: React.FC = () => {
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.28 }}
-                className="bg-[#0F172A] p-8 md:p-10"
+                className="bg-[#1A2535] p-8 md:p-10"
               >
                 <div className="flex flex-wrap items-start gap-x-8 gap-y-4 mb-6">
                   <div className="flex items-center gap-4">
-                    <span className="inline-flex h-10 w-10 items-center justify-center bg-[#2563EB] text-sm font-bold text-white font-label">
+                    <span className="inline-flex h-10 w-10 items-center justify-center bg-[#E8A838] text-sm font-bold text-white font-label">
                       {activeDeliveryItem.step}
                     </span>
-                    <div className="text-[#2563EB]">{activeDeliveryItem.icon}</div>
+                    <div className="text-[#E8A838]">{activeDeliveryItem.icon}</div>
                   </div>
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#2563EB] mb-1">ARC Phase</p>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#E8A838] mb-1">ARC Phase</p>
                     <h3 className="font-headline text-2xl text-white">{activeDeliveryItem.title}</h3>
                   </div>
                 </div>
-                <p className="text-[#94a3b8] max-w-2xl leading-relaxed mb-6">{activeDeliveryItem.detail}</p>
+                <p className="text-[#9AA4B2] max-w-2xl leading-relaxed mb-6">{activeDeliveryItem.detail}</p>
                 <ul className="grid grid-cols-1 gap-3 md:grid-cols-3 border-t border-white/10 pt-6">
                   {activeDeliveryItem.checkpoints.map((checkpoint) => (
-                    <li key={checkpoint} className="flex items-start gap-3 text-sm text-[#cbd5e1]">
-                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 bg-[#2563EB]" />
+                    <li key={checkpoint} className="flex items-start gap-3 text-sm text-[#C8CED7]">
+                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 bg-[#E8A838]" />
                       <span>{checkpoint}</span>
                     </li>
                   ))}
@@ -345,18 +352,21 @@ const About: React.FC = () => {
               transition={{ duration: 0.35 }}
               className="mb-14"
             >
-              <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#0984E3] mb-3">What We Do</p>
+              <div className="mb-3 flex items-center gap-3">
+                <SectionBrandMark size="sm" />
+                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#E8A838]">What We Do</p>
+              </div>
               <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-                <h2 className="font-serif text-4xl md:text-5xl font-medium text-[#1E272E] leading-tight max-w-xl">
+                <h2 className="font-serif text-4xl md:text-5xl font-medium text-[#1A2535] leading-tight max-w-xl">
                   Six Integrated<br />Service Pillars
                 </h2>
-                <p className="max-w-md text-[#1E272E]/60 leading-relaxed lg:text-right">
+                <p className="max-w-md text-[#1A2535]/60 leading-relaxed lg:text-right">
                   These are not separate departments. They are phases of the same transformation loop — applied in full or in part depending on where the client is.
                 </p>
               </div>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#e8eaed]">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#ECEFF3]">
               {pillars.map((pillar, index) => (
                 <motion.div
                   key={pillar.number}
@@ -364,14 +374,14 @@ const About: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.05 }}
                   transition={{ duration: 0.35, delay: index * 0.06 }}
-                  className="bg-[#F5F6FA] p-8 group hover:bg-white transition-colors duration-300"
+                  className="bg-[#FFFFFF] p-8 group hover:bg-white transition-colors duration-300"
                 >
-                  <p className="font-headline text-[4rem] leading-none text-[#1E272E]/[0.05] select-none mb-4 -ml-1">
+                  <p className="font-headline text-[4rem] leading-none text-[#1A2535]/[0.05] select-none mb-4 -ml-1">
                     {pillar.number}
                   </p>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#0984E3] mb-2">{pillar.shortTitle}</p>
-                  <h3 className="font-serif text-xl font-medium text-[#1E272E] mb-4 leading-snug">{pillar.title}</h3>
-                  <p className="text-sm text-[#1E272E]/64 leading-relaxed">{pillar.description}</p>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#E8A838] mb-2">{pillar.shortTitle}</p>
+                  <h3 className="font-serif text-xl font-medium text-[#1A2535] mb-4 leading-snug">{pillar.title}</h3>
+                  <p className="text-sm text-[#1A2535]/64 leading-relaxed">{pillar.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -386,10 +396,10 @@ const About: React.FC = () => {
               {/* Left: heading + bordered rules */}
               <div className="lg:col-span-5">
                 <div className="inline-flex items-center gap-3 mb-6">
-                  <Workflow className="h-5 w-5 text-[#0984E3]" />
-                  <p className="text-[10px] uppercase tracking-[0.2em] text-[#1E272E]/58">Operating Principles</p>
+                  <Workflow className="h-5 w-5 text-[#E8A838]" />
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-[#1A2535]/58">Operating Principles</p>
                 </div>
-                <h2 className="font-serif text-4xl md:text-5xl font-medium text-[#1E272E] mb-12 leading-tight">
+                <h2 className="font-serif text-4xl md:text-5xl font-medium text-[#1A2535] mb-12 leading-tight">
                   Four Non-Negotiables<br />of Transformation
                 </h2>
                 <div className="space-y-10">
@@ -401,16 +411,16 @@ const About: React.FC = () => {
                       viewport={{ once: true, amount: 0.2 }}
                       transition={{ duration: 0.38, delay: index * 0.08 }}
                       className={`border-l-2 pl-8 py-2 ${
-                        index === 0 ? 'border-[#0984E3]' : 'border-[#1E272E]/20'
+                        index === 0 ? 'border-[#E8A838]' : 'border-[#1A2535]/20'
                       }`}
                     >
                       <h4 className={`text-[10px] font-bold uppercase tracking-[0.2em] mb-2 ${
-                        index === 0 ? 'text-[#0984E3]' : 'text-[#1E272E]/45'
+                        index === 0 ? 'text-[#E8A838]' : 'text-[#1A2535]/45'
                       }`}>
                         {`Rule 0${index + 1}`}
                       </h4>
-                      <h3 className="text-2xl font-medium text-[#1E272E] mb-3">{principle.title}</h3>
-                      <p className="text-[#1E272E]/64 font-light leading-relaxed">{principle.description}</p>
+                      <h3 className="text-2xl font-medium text-[#1A2535] mb-3">{principle.title}</h3>
+                      <p className="text-[#1A2535]/64 font-light leading-relaxed">{principle.description}</p>
                     </motion.div>
                   ))}
                 </div>
@@ -424,19 +434,19 @@ const About: React.FC = () => {
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.5 }}
               >
-                <div className="relative min-h-[320px] md:min-h-[480px] bg-[#1E272E] overflow-hidden flex flex-col justify-end">
-                  <div className="pointer-events-none absolute -right-20 -top-16 h-52 w-52 rounded-full bg-[#0984E3]/35 blur-3xl" />
-                  <div className="pointer-events-none absolute -bottom-20 left-[8%] h-56 w-56 rounded-full bg-[#00CEC9]/20 blur-3xl" />
-                  <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#0984E3]/50 to-transparent" />
+                <div className="relative min-h-[320px] md:min-h-[480px] bg-[#1A2535] overflow-hidden flex flex-col justify-end">
+                  <div className="pointer-events-none absolute -right-20 -top-16 h-52 w-52 rounded-full bg-[#E8A838]/35 blur-3xl" />
+                  <div className="pointer-events-none absolute -bottom-20 left-[8%] h-56 w-56 rounded-full bg-[#E8A838]/20 blur-3xl" />
+                  <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#E8A838]/50 to-transparent" />
                   <div className="relative z-10 p-10 md:p-14">
-                    <p className="text-[#0984E3] text-[10px] font-bold tracking-[0.24em] uppercase mb-8">
-                      H.V.A Core Creed
+                    <p className="text-[#E8A838] text-[10px] font-bold tracking-[0.24em] uppercase mb-8">
+                      Hive Vault Arc Core Creed
                     </p>
-                    <blockquote className="font-serif text-2xl md:text-3xl italic text-[#F5F6FA] leading-snug mb-8">
+                    <blockquote className="font-serif text-2xl md:text-3xl italic text-[#FFFFFF] leading-snug mb-8">
                       "Real technology transformation is only complete when the systems are running, the team has handed off nothing, and the outcomes are measurable."
                     </blockquote>
-                    <div className="h-px bg-gradient-to-r from-[#0984E3]/60 via-[#00CEC9]/40 to-transparent mb-8" />
-                    <p className="text-[#F5F6FA]/90 text-sm font-light leading-relaxed max-w-md">
+                    <div className="h-px bg-gradient-to-r from-[#E8A838]/60 via-[#E8A838]/40 to-transparent mb-8" />
+                    <p className="text-[#FFFFFF]/90 text-sm font-light leading-relaxed max-w-md">
                       Four non-negotiables that shape every engagement — from the first strategy session to the last infrastructure alert.
                     </p>
                   </div>
@@ -448,28 +458,36 @@ const About: React.FC = () => {
         </section>
 
         {/* Team Section — improved design */}
-        <section className="relative px-6 lg:px-14 py-16 md:py-24 bg-[#eceef0]">
+        <section className="relative px-6 lg:px-14 py-16 md:py-24 bg-[#ECEFF3]">
           <div className="container mx-auto">
             <div className="mb-16 text-center max-w-3xl mx-auto">
-              <p className="text-[10px] font-bold tracking-[0.2em] text-[#1E272E]/58 uppercase mb-4">Our Team</p>
-              <h2 className="font-serif text-4xl md:text-5xl font-medium text-[#1E272E] mb-6">
-                The People Behind H.V.A
+              <div className="mb-4 flex items-center justify-center gap-3">
+                <SectionBrandMark size="sm" />
+                <p className="text-[10px] font-bold tracking-[0.2em] text-[#1A2535]/58 uppercase">Our Team</p>
+              </div>
+              <h2 className="font-serif text-4xl md:text-5xl font-medium text-[#1A2535] mb-6">
+                The People Behind Hive Vault Arc
               </h2>
-              <p className="text-[#1E272E]/64 leading-relaxed">
-                Three co-founders. Six service pillars. One team that stays from strategy to operations. H.V.A was founded in Tangier by engineers who wanted to build transformation programs that do not fall apart after the first deployment.
+              <p className="text-[#1A2535]/64 leading-relaxed">
+                Three co-founders. Six service pillars. One team that stays from strategy to operations. Hive Vault Arc was founded in Tangier by engineers who wanted to build transformation programs that do not fall apart after the first deployment.
               </p>
-              <p className="mt-5 text-sm leading-relaxed text-[#1E272E]/64">
+              <p className="mt-5 text-sm leading-relaxed text-[#1A2535]/64">
                 {HVA_CEO_ANSWER} In French: {HVA_CEO_ANSWER_FR}
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
               {HVA_LEADERSHIP.map((member, index) => {
+                const portraitClassName =
+                  member.slug === 'ali-amrani'
+                    ? 'w-full h-full object-cover object-[52%_38%] scale-[1.58] group-hover:scale-[1.66] transition-transform duration-700'
+                    : 'w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-700';
+
                 return (
                   <motion.div
                     id={member.slug}
                     key={member.name}
-                    className="group scroll-mt-28 bg-[#F5F6FA]"
+                    className="group scroll-mt-28 bg-[#FFFFFF]"
                     initial={{ opacity: 0, y: 8 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.05 }}
@@ -481,15 +499,15 @@ const About: React.FC = () => {
                         alt={`${member.name} — ${member.role} at Hive Vault Arc`}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        className="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-700"
+                        className={portraitClassName}
                       />
                     </div>
                     <div className="p-8">
-                      <p className="text-[10px] font-bold text-[#0984E3] uppercase tracking-[0.18em] mb-1">{member.tag}</p>
-                      <h3 className="font-serif text-2xl font-light text-[#1E272E] mb-1">{member.name}</h3>
-                      <p className="text-sm text-[#1E272E]/70">{member.role}</p>
-                      <p className="mt-1 text-xs text-[#1E272E]/55">{member.frenchRole}</p>
-                      <p className="mt-4 text-sm leading-relaxed text-[#1E272E]/60">{member.description}</p>
+                      <p className="text-[10px] font-bold text-[#E8A838] uppercase tracking-[0.18em] mb-1">{member.tag}</p>
+                      <h3 className="font-serif text-2xl font-light text-[#1A2535] mb-1">{member.name}</h3>
+                      <p className="text-sm text-[#1A2535]/70">{member.role}</p>
+                      <p className="mt-1 text-xs text-[#1A2535]/55">{member.frenchRole}</p>
+                      <p className="mt-4 text-sm leading-relaxed text-[#1A2535]/60">{member.description}</p>
                     </div>
                   </motion.div>
                 );
@@ -501,7 +519,7 @@ const About: React.FC = () => {
         <BottomCTA
           variant="dark"
           headline="Ready to Start Your Transformation?"
-          subtext="Tell us where you are and where you need to be. H.V.A will map the right strategy, engineering, and operations path — and stay involved until the outcome is measurable."
+          subtext="Tell us where you are and where you need to be. Hive Vault Arc will map the right strategy, engineering, and operations path — and stay involved until the outcome is measurable."
           primaryLabel="Book a Discovery Call"
           primaryHref="/contact"
           secondaryLabel="View Our Capabilities"
@@ -513,5 +531,3 @@ const About: React.FC = () => {
 };
 
 export default About;
-
-

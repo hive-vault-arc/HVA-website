@@ -6,7 +6,7 @@ import { GLOBAL_KEYWORDS, SITE_URL, buildBreadcrumbSchema, buildPageMetadata, me
 export const metadata: Metadata = buildPageMetadata({
   title: 'Insights | Blogs, Case Studies, News, Perspectives, Research Reports',
   description:
-    'Explore H.V.A Insights: blogs, case studies, news articles, perspectives, and research reports on technology consulting and digital transformation.',
+    'Explore Hive Vault Arc Insights: blogs, case studies, news articles, perspectives, and research reports on technology consulting and digital transformation.',
   path: '/insights',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'technology consulting insights',
@@ -20,7 +20,7 @@ export default function InsightsPage() {
   const pageSchema = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: 'H.V.A Insights',
+    name: 'Hive Vault Arc Insights',
     description:
       'Insight hub containing blogs, case studies, news articles, perspectives, and research reports.',
     url: `${SITE_URL}/insights`,

@@ -33,9 +33,9 @@ export const POSITIONING_BY_LOCALE: Record<PositioningLocale, LocaleMessaging> =
     identity: {
       headline: 'Technology Transformation Partner · Strategy · AI Engineering · Operations',
       shortDescriptor:
-        'Hive Vault Arc (H.V.A) is a technology transformation partner combining strategy, AI engineering, and managed operations.',
+        'Hive Vault Arc is a technology transformation partner combining strategy, AI engineering, and managed operations.',
       longDescriptor:
-        'Hive Vault Arc (H.V.A) is a technology transformation partner. We advise, build, and operate — combining strategy and business consulting, technology consulting, AI engineering, custom software development, cloud infrastructure, and managed operations in one firm. From the first whiteboard to production systems running in the market, we own the full delivery arc.',
+        'Hive Vault Arc is a technology transformation partner. We advise, build, and operate — combining strategy and business consulting, technology consulting, AI engineering, custom software development, cloud infrastructure, and managed operations in one firm. From the first whiteboard to production systems running in the market, we own the full delivery arc.',
       proofStatement:
         'We redesign how organizations operate using technology — and we stay until it works. Same team. Strategy through production. No handoff.',
     },
@@ -77,9 +77,9 @@ export const POSITIONING_BY_LOCALE: Record<PositioningLocale, LocaleMessaging> =
     identity: {
       headline: 'Partenaire de Transformation Technologique · Stratégie · IA · Opérations',
       shortDescriptor:
-        "Hive Vault Arc (H.V.A) est un partenaire de transformation technologique combinant stratégie, ingénierie IA et opérations managées.",
+        "Hive Vault Arc est un partenaire de transformation technologique combinant stratégie, ingénierie IA et opérations managées.",
       longDescriptor:
-        "Hive Vault Arc (H.V.A) est un partenaire de transformation technologique. Nous conseillons, construisons et opérons — en combinant conseil en stratégie, conseil technologique, ingénierie IA, développement logiciel sur mesure, infrastructure cloud et opérations managées dans une seule équipe. De la première réunion stratégique aux systèmes en production, nous pilotons le cycle complet de livraison.",
+        "Hive Vault Arc est un partenaire de transformation technologique. Nous conseillons, construisons et opérons — en combinant conseil en stratégie, conseil technologique, ingénierie IA, développement logiciel sur mesure, infrastructure cloud et opérations managées dans une seule équipe. De la première réunion stratégique aux systèmes en production, nous pilotons le cycle complet de livraison.",
       proofStatement:
         'Nous redessinons la façon dont les organisations opèrent grâce à la technologie — et nous restons jusqu\'à ce que ça fonctionne. Même équipe. De la stratégie à la production. Sans rupture.',
     },
@@ -121,9 +121,9 @@ export const POSITIONING_BY_LOCALE: Record<PositioningLocale, LocaleMessaging> =
     identity: {
       headline: 'شريك التحول التقني · الاستراتيجية · هندسة الذكاء الاصطناعي · العمليات',
       shortDescriptor:
-        'Hive Vault Arc ‏(H.V.A) هي شريك للتحول التقني يجمع بين الاستراتيجية وهندسة الذكاء الاصطناعي والعمليات المُدارة.',
+        'Hive Vault Arc هي شريك للتحول التقني يجمع بين الاستراتيجية وهندسة الذكاء الاصطناعي والعمليات المُدارة.',
       longDescriptor:
-        'Hive Vault Arc ‏(H.V.A) هي شريك للتحول التقني. نستشير ونبني وندير — بدمج الاستراتيجية التجارية والاستشارات التقنية وهندسة الذكاء الاصطناعي وتطوير البرمجيات والبنية السحابية والعمليات المُدارة في فريق واحد. من أول اجتماع استراتيجي إلى الأنظمة التشغيلية في الإنتاج، نمتلك دورة التسليم الكاملة.',
+        'Hive Vault Arc هي شريك للتحول التقني. نستشير ونبني وندير — بدمج الاستراتيجية التجارية والاستشارات التقنية وهندسة الذكاء الاصطناعي وتطوير البرمجيات والبنية السحابية والعمليات المُدارة في فريق واحد. من أول اجتماع استراتيجي إلى الأنظمة التشغيلية في الإنتاج، نمتلك دورة التسليم الكاملة.',
       proofStatement:
         'نعيد تصميم طريقة عمل المؤسسات باستخدام التكنولوجيا — ونبقى حتى تنجح. نفس الفريق. من الاستراتيجية إلى الإنتاج. بلا فجوات.',
     },
@@ -165,9 +165,9 @@ export const POSITIONING_BY_LOCALE: Record<PositioningLocale, LocaleMessaging> =
     identity: {
       headline: 'Socio de Transformación Tecnológica · Estrategia · IA · Operaciones',
       shortDescriptor:
-        'Hive Vault Arc (H.V.A) es un socio de transformación tecnológica que combina estrategia, ingeniería de IA y operaciones gestionadas.',
+        'Hive Vault Arc es un socio de transformación tecnológica que combina estrategia, ingeniería de IA y operaciones gestionadas.',
       longDescriptor:
-        'Hive Vault Arc (H.V.A) es un socio de transformación tecnológica. Asesoramos, construimos y operamos — combinando consultoría estratégica, consultoría tecnológica, ingeniería de IA, desarrollo de software a medida, infraestructura cloud y operaciones gestionadas en un solo equipo. Desde la primera reunión estratégica hasta los sistemas en producción, gestionamos el ciclo completo de entrega.',
+        'Hive Vault Arc es un socio de transformación tecnológica. Asesoramos, construimos y operamos — combinando consultoría estratégica, consultoría tecnológica, ingeniería de IA, desarrollo de software a medida, infraestructura cloud y operaciones gestionadas en un solo equipo. Desde la primera reunión estratégica hasta los sistemas en producción, gestionamos el ciclo completo de entrega.',
       proofStatement:
         'Rediseñamos cómo operan las organizaciones usando tecnología — y nos quedamos hasta que funciona. El mismo equipo. De la estrategia a la producción. Sin interrupciones.',
     },

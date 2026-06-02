@@ -3,12 +3,21 @@ import Contact from '../../views/Contact';
 import JsonLd from '../../components/JsonLd';
 import FaqSection from '../../components/FaqSection';
 import { CONTACT_FAQS } from '../../data/faqs';
-import { GLOBAL_KEYWORDS, SITE_URL, buildBreadcrumbSchema, buildPageMetadata, mergeKeywords } from '../../lib/seo';
+import {
+  CONTACT_EMAIL,
+  CONTACT_PHONE_E164,
+  GLOBAL_KEYWORDS,
+  SITE_URL,
+  absoluteUrl,
+  buildBreadcrumbSchema,
+  buildPageMetadata,
+  mergeKeywords,
+} from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'Contact | Start a Technology and Transformation Discovery',
   description:
-    'Start a strategic discovery call with H.V.A to scope your transformation priorities, technical roadmap, and delivery model. Pricing is discussed after discovery.',
+    'Start a strategic discovery call with Hive Vault Arc to scope your transformation priorities, technical roadmap, and delivery model. Pricing is discussed after discovery.',
   path: '/contact',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'contact digital transformation consulting Morocco',
@@ -32,9 +41,20 @@ export default function Page() {
   const contactSchema = {
     '@context': 'https://schema.org',
     '@type': 'ContactPage',
-    name: 'Contact H.V.A',
+    name: 'Contact Hive Vault Arc',
     url: `${SITE_URL}/contact`,
     inLanguage: ['en', 'fr', 'ar', 'es'],
+    mainEntity: {
+      '@id': absoluteUrl('/#organization'),
+    },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'sales',
+      email: CONTACT_EMAIL,
+      telephone: CONTACT_PHONE_E164,
+      availableLanguage: ['English', 'French', 'Arabic', 'Spanish'],
+      areaServed: ['MA', 'FR', 'EU'],
+    },
     keywords: mergeKeywords(GLOBAL_KEYWORDS, [
       'book transformation strategy call',
       'technology consulting discovery',

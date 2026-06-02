@@ -137,7 +137,7 @@ export function InteractiveSpline({
     <div 
       ref={containerRef}
       className={cn(
-        "relative w-full h-screen overflow-hidden",
+        "relative h-[100dvh] w-full overflow-hidden",
         "pointer-events-auto", // Ensure this element receives pointer events
         className
       )}
@@ -159,7 +159,7 @@ export function InteractiveSpline({
             renderOnDemand
           />
         ) : (
-          <div className="w-full h-full bg-[linear-gradient(180deg,#F5F6FA_0%,#ECF5FD_100%)]" aria-hidden="true" />
+          <div className="w-full h-full bg-[linear-gradient(180deg,#FFFFFF_0%,#FFF7E8_100%)]" aria-hidden="true" />
         )}
         <div 
           className="absolute inset-0" 

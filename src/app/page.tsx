@@ -17,7 +17,7 @@ import {
   mergeKeywords,
 } from '../lib/seo';
 
-const HOME_META_TITLE = 'Hive Vault Arc (H.V.A) | Technology Consulting & AI Transformation';
+const HOME_META_TITLE = 'Hive Vault Arc | Technology Consulting & AI Transformation';
 const HOME_META_DESCRIPTION =
   'Hive Vault Arc is a technology transformation partner in Tangier, Morocco, combining strategy consulting, AI engineering, software development, cloud infrastructure, and managed operations.';
 
@@ -46,8 +46,8 @@ export const metadata: Metadata = {
       'agence pour creer application sur mesure au Maroc',
       'entreprise pour developper application mobile Tanger',
       "besoin d'une equipe pour application web sur mesure Maroc",
-      'شركة لتطوير تطبيق مخصص في المغرب',
-      'شركة لبناء تطبيق موبايل للشركات طنجة',
+      'Ø´Ø±ÙƒØ© Ù„ØªØ·ÙˆÙŠØ± ØªØ·Ø¨ÙŠÙ‚ Ù…Ø®ØµØµ ÙÙŠ Ø§Ù„Ù…ØºØ±Ø¨',
+      'Ø´Ø±ÙƒØ© Ù„Ø¨Ù†Ø§Ø¡ ØªØ·Ø¨ÙŠÙ‚ Ù…ÙˆØ¨Ø§ÙŠÙ„ Ù„Ù„Ø´Ø±ÙƒØ§Øª Ø·Ù†Ø¬Ø©',
       'agencia para crear app personalizada en marruecos',
       'empresa para desarrollar app movil a medida en tanger',
     ]),
@@ -113,7 +113,7 @@ export default function Page() {
   const capabilitySchema = {
     '@context': 'https://schema.org',
     '@type': ['ProfessionalService', 'Service'],
-    name: 'H.V.A Technology Transformation Partner Capabilities',
+    name: 'Hive Vault Arc Technology Transformation Partner Capabilities',
     provider: {
       '@id': `${SITE_URL}/#organization`,
     },
@@ -158,7 +158,7 @@ export default function Page() {
   const primaryNavigationSchema = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: 'Primary H.V.A website sections',
+    name: 'Primary Hive Vault Arc website sections',
     itemListElement: SITELINK_CANDIDATES.map((item, index) => ({
       '@type': 'ListItem',
       position: index + 1,
@@ -172,21 +172,21 @@ export default function Page() {
     <>
       <JsonLd data={[homePageSchema, capabilitySchema, primaryNavigationSchema]} />
       <Home insightsCarouselItems={insightsCarouselItems} />
-      <section className="relative overflow-hidden bg-[#0F172A] py-20 md:py-28">
+      <section className="relative overflow-hidden bg-[#1A2535] py-20 md:py-28">
         {/* Subtle grid overlay */}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 opacity-[0.06]"
           style={{
             backgroundImage:
-              'linear-gradient(to right, #2563EB 1px, transparent 1px), linear-gradient(to bottom, #2563EB 1px, transparent 1px)',
+              'linear-gradient(to right, #E8A838 1px, transparent 1px), linear-gradient(to bottom, #E8A838 1px, transparent 1px)',
             backgroundSize: '42px 42px',
           }}
         />
         {/* Radial glow */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -top-24 right-0 h-[36rem] w-[36rem] rounded-full bg-[#2563EB]/10 blur-3xl"
+          className="pointer-events-none absolute -top-24 right-0 h-[36rem] w-[36rem] rounded-full bg-[#E8A838]/10 blur-3xl"
         />
 
         <div className="relative mx-auto max-w-7xl px-6 lg:px-14">
@@ -194,7 +194,7 @@ export default function Page() {
 
             {/* Left — editorial column */}
             <div className="lg:col-span-4 flex flex-col justify-center">
-              <p className="mb-5 text-[10px] font-bold uppercase tracking-[0.28em] text-[#2563EB]">
+              <p className="mb-5 text-[10px] font-bold uppercase tracking-[0.28em] text-[#E8A838]">
                 Service Landing Pages
               </p>
               <h2 className="font-headline text-4xl leading-[1.04] tracking-tight text-white md:text-5xl">
@@ -204,7 +204,7 @@ export default function Page() {
                 In-depth guides for businesses in Morocco seeking specific AI, consulting,
                 and software capabilities in their market.
               </p>
-              <div className="mt-8 h-px bg-[#2563EB]/25" />
+              <div className="mt-8 h-px bg-[#E8A838]/25" />
               <p className="mt-4 font-mono text-[9px] uppercase tracking-[0.22em] text-white/25">
                 Morocco · Tangier · Remote
               </p>
@@ -223,14 +223,14 @@ export default function Page() {
                 <Link
                   key={href}
                   href={href}
-                  className="group relative overflow-hidden border border-white/10 bg-white/[0.04] p-6 transition-all duration-300 hover:border-[#2563EB]/50 hover:bg-white/[0.08]"
+                  className="group relative min-h-32 overflow-hidden border border-white/10 bg-white/[0.04] p-6 transition-all duration-300 hover:border-[#E8A838]/50 hover:bg-white/[0.08]"
                 >
                   {/* Top row: tag + arrow */}
                   <div className="mb-8 flex items-start justify-between">
-                    <span className="border border-[#2563EB]/30 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.24em] text-[#2563EB]/70">
+                    <span className="border border-[#E8A838]/30 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.24em] text-[#E8A838]/70">
                       {tag}
                     </span>
-                    <ArrowRight className="h-4 w-4 translate-x-0 text-white/20 transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#2563EB]" />
+                    <ArrowRight className="h-4 w-4 translate-x-0 text-white/20 transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#E8A838]" />
                   </div>
 
                   {/* Bottom row: title + icon */}
@@ -238,13 +238,13 @@ export default function Page() {
                     <h3 className="font-headline pr-4 text-xl leading-tight text-white">
                       {label}
                     </h3>
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center bg-[#2563EB]/10 text-[#2563EB]/50 transition-all duration-300 group-hover:bg-[#2563EB]/20 group-hover:text-[#2563EB]">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center bg-[#E8A838]/10 text-[#E8A838]/50 transition-all duration-300 group-hover:bg-[#E8A838]/20 group-hover:text-[#E8A838]">
                       <Icon className="h-4 w-4" />
                     </div>
                   </div>
 
                   {/* Animated bottom bar */}
-                  <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-[#2563EB] transition-all duration-500 ease-spring group-hover:w-full" />
+                  <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-[#E8A838] transition-all duration-500 ease-spring group-hover:w-full" />
                 </Link>
               ))}
             </div>

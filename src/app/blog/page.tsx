@@ -27,7 +27,7 @@ export default function BlogPage() {
   const itemListSchema = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: 'H.V.A Blog',
+    name: 'Hive Vault Arc Blog',
     url: `${SITE_URL}/blog`,
     numberOfItems: posts.length,
     itemListElement: posts.map((post, index) => ({
@@ -41,7 +41,7 @@ export default function BlogPage() {
   const blogSchema = {
     '@context': 'https://schema.org',
     '@type': 'Blog',
-    name: 'H.V.A Blog',
+    name: 'Hive Vault Arc Blog',
     url: `${SITE_URL}/blog`,
     description:
       'Strategy and execution insights on digital transformation, AI automation, and engineering delivery.',

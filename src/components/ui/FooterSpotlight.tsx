@@ -11,10 +11,10 @@ export default function FooterSpotlight({ children }: Readonly<{ children: React
     setPos({ x: e.clientX - r.left, y: e.clientY - r.top });
   };
 
-  // Radial glow centered on cursor — lighter blue circle that fades out
+  // Radial glow centered on cursor — lighter gold circle that fades out
   const spotlightStyle = pos
     ? {
-        background: `radial-gradient(circle 480px at ${pos.x}px ${pos.y}px, rgba(56, 130, 255, 0.18) 0%, rgba(37, 99, 235, 0.07) 50%, transparent 100%)`,
+        background: `radial-gradient(circle 480px at ${pos.x}px ${pos.y}px, rgba(232, 168, 56, 0.18) 0%, rgba(232, 168, 56, 0.07) 50%, transparent 100%)`,
         opacity: 1,
       }
     : { opacity: 0 };

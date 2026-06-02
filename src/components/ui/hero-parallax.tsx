@@ -103,7 +103,7 @@ export const HeroParallax = ({
 export const Header = () => {
   return (
     <div className="max-w-7xl relative mx-auto py-20 md:py-40 px-4 w-full left-0 top-0">
-      <h1 className="text-4xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
+      <h1 className="text-4xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#E8A838] to-[#F0C15A]">
         Transform Your <br /> Digital Presence
       </h1>
       <p className="max-w-2xl text-lg md:text-xl mt-8 text-white/80">

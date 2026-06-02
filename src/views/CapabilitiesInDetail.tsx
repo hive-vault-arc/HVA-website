@@ -8,6 +8,7 @@ import { Bot, Building2, Cloud, Cpu, Settings, Wrench, ArrowUpRight, ArrowRight 
 import { useAnimationQuality } from '../lib/animationQuality';
 import BottomCTA from '../components/BottomCTA';
 import PageAmbientBackground from '../components/PageAmbientBackground';
+import SectionBrandMark from '../components/SectionBrandMark';
 import { BOT_DELIVERY_MODEL, CAPABILITY_DETAIL_SECTIONS } from '../lib/capabilities-content';
 
 /* ── Icons ────────────────────────────────────────────────────────────────── */
@@ -56,17 +57,17 @@ const CapabilitiesInDetail: React.FC = () => {
 
   return (
     <MotionConfig reducedMotion={motionReduced ? 'always' : 'never'}>
-      <div className="relative isolate overflow-x-hidden bg-[#f7f9fb] text-[#191c1e]">
+      <div className="relative isolate overflow-x-hidden bg-[#FFFFFF] text-[#1A2535]">
 
         {/* Scroll progress */}
         <motion.div
           aria-hidden="true"
-          className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-gradient-to-r from-[#2563EB] via-[#60a5fa] to-[#0ea5e9]"
+          className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-gradient-to-r from-[#E8A838] via-[#F0C15A] to-[#E8A838]"
           style={{ scaleX: progressScale }}
         />
 
         {/* ── HERO ──────────────────────────────────────────────────────────── */}
-        <section className="relative min-h-[78vh] flex items-center pt-28 pb-20 px-6 md:px-12 overflow-hidden">
+        <section className="relative flex min-h-[calc(100dvh-4rem)] items-center overflow-hidden px-6 pt-28 pb-20 md:px-12 lg:min-h-[78vh]">
           <PageAmbientBackground className="-z-10" />
 
           {/* Background image */}
@@ -79,7 +80,7 @@ const CapabilitiesInDetail: React.FC = () => {
               className="object-cover grayscale opacity-[0.09]"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#f7f9fb] via-[#f7f9fb]/92 to-[#f7f9fb]/35" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#FFFFFF] via-[#FFFFFF]/92 to-[#FFFFFF]/35" />
           </div>
 
           {/* Cursor spotlight */}
@@ -95,7 +96,7 @@ const CapabilitiesInDetail: React.FC = () => {
             className="pointer-events-none absolute inset-0 z-[2] transition-opacity duration-300"
             style={
               heroSpot
-                ? { background: `radial-gradient(circle 260px at ${heroSpot.x}px ${heroSpot.y}px, rgba(37,99,235,0.12) 0%, transparent 100%)`, opacity: 1 }
+                ? { background: `radial-gradient(circle 260px at ${heroSpot.x}px ${heroSpot.y}px, rgba(232,168,56,0.12) 0%, transparent 100%)`, opacity: 1 }
                 : { opacity: 0 }
             }
           />
@@ -103,25 +104,28 @@ const CapabilitiesInDetail: React.FC = () => {
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 z-[2] opacity-[0.018]"
-            style={{ background: 'repeating-linear-gradient(to bottom, transparent 0px, transparent 3px, #2563EB 3px, #2563EB 4px)' }}
+            style={{ background: 'repeating-linear-gradient(to bottom, transparent 0px, transparent 3px, #E8A838 3px, #E8A838 4px)' }}
           />
 
           <div className="relative z-10 max-w-screen-2xl mx-auto w-full">
             <motion.div
-              className="grid grid-cols-1 md:grid-cols-12 gap-8 items-end"
+              className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end"
               initial="hidden"
               animate="show"
               variants={{ show: { transition: { staggerChildren: 0.09 } } }}
             >
               {/* Left — headline */}
-              <motion.div variants={fadeUp} transition={{ duration: 0.6 }} className="md:col-span-8">
-                <span className="inline-block text-[10px] font-bold tracking-[0.24em] uppercase mb-8 text-[#2563EB] bg-[#dbeafe] px-3 py-1">
-                  Capabilities In Detail
-                </span>
-                <h1 className="font-headline font-light text-[clamp(2.8rem,6vw,6rem)] leading-[1.04] tracking-tight text-[#0F172A]">
+              <motion.div variants={fadeUp} transition={{ duration: 0.6 }} className="lg:col-span-8">
+                <div className="mb-8 flex items-center gap-3">
+                  <SectionBrandMark size="sm" />
+                  <span className="inline-block bg-[#FFF4D8] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.24em] text-[#E8A838]">
+                    Capabilities In Detail
+                  </span>
+                </div>
+                <h1 className="font-headline font-light text-[clamp(2.8rem,6vw,6rem)] leading-[1.04] tracking-tight text-[#1A2535]">
                   Full capability depth:
                   <br />
-                  <em className="italic font-light text-[#45464d]">strategy, execution,</em>
+                  <em className="italic font-light text-[#536070]">strategy, execution,</em>
                   <br />
                   and operating ownership.
                 </h1>
@@ -132,8 +136,8 @@ const CapabilitiesInDetail: React.FC = () => {
                     { n: '30+', label: 'Sub-Capabilities' },
                   ].map((stat) => (
                     <div key={stat.label} className="flex items-baseline gap-2">
-                      <span className="font-headline text-3xl text-[#2563EB]">{stat.n}</span>
-                      <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#45464d]">{stat.label}</span>
+                      <span className="font-headline text-3xl text-[#E8A838]">{stat.n}</span>
+                      <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#536070]">{stat.label}</span>
                     </div>
                   ))}
                 </div>
@@ -143,7 +147,7 @@ const CapabilitiesInDetail: React.FC = () => {
                   </Link>
                   <Link
                     href="/capabilities"
-                    className="text-sm font-bold uppercase tracking-widest text-[#2563EB] border-b-2 border-[#2563EB]/20 hover:border-[#2563EB] transition-all pb-0.5"
+                    className="inline-flex min-h-11 items-center border-b-2 border-[#E8A838]/20 pb-0.5 text-sm font-bold uppercase tracking-widest text-[#E8A838] transition-all hover:border-[#E8A838]"
                   >
                     Back to Capabilities →
                   </Link>
@@ -154,18 +158,18 @@ const CapabilitiesInDetail: React.FC = () => {
               <motion.aside
                 variants={fadeUp}
                 transition={{ duration: 0.6, delay: 0.08 }}
-                className="md:col-span-4 md:self-end"
+                className="lg:col-span-4 lg:self-end"
               >
-                <div className="relative overflow-hidden bg-[#0F172A] p-6">
+                <div className="relative overflow-hidden bg-[#1A2535] p-6">
                   <div
                     aria-hidden="true"
                     className="pointer-events-none absolute inset-0 opacity-[0.05]"
                     style={{
-                      backgroundImage: 'linear-gradient(to right,#2563EB 1px,transparent 1px),linear-gradient(to bottom,#2563EB 1px,transparent 1px)',
+                      backgroundImage: 'linear-gradient(to right,#E8A838 1px,transparent 1px),linear-gradient(to bottom,#E8A838 1px,transparent 1px)',
                       backgroundSize: '28px 28px',
                     }}
                   />
-                  <p className="relative text-[9px] font-mono uppercase tracking-[0.3em] text-[#60a5fa] mb-4">
+                  <p className="relative text-[9px] font-mono uppercase tracking-[0.3em] text-[#F0C15A] mb-4">
                     Six Service Pillars
                   </p>
                   <nav className="relative">
@@ -176,14 +180,14 @@ const CapabilitiesInDetail: React.FC = () => {
                         className="flex items-center justify-between border-b border-white/[0.08] py-2.5 last:border-0 group"
                       >
                         <div className="flex items-center gap-3">
-                          <span className="font-mono text-[9px] text-[#2563EB]/50 group-hover:text-[#2563EB] transition-colors">
+                          <span className="font-mono text-[9px] text-[#E8A838]/50 group-hover:text-[#E8A838] transition-colors">
                             {String(i + 1).padStart(2, '0')}
                           </span>
                           <span className="text-sm font-medium text-white/65 group-hover:text-white transition-colors duration-200">
                             {item.short}
                           </span>
                         </div>
-                        <ArrowRight className="w-3 h-3 text-[#60a5fa]/30 group-hover:text-[#60a5fa] group-hover:translate-x-0.5 transition-all" />
+                        <ArrowRight className="w-3 h-3 text-[#F0C15A]/30 group-hover:text-[#F0C15A] group-hover:translate-x-0.5 transition-all" />
                       </a>
                     ))}
                   </nav>
@@ -199,23 +203,23 @@ const CapabilitiesInDetail: React.FC = () => {
         </section>
 
         {/* ── PILLAR QUICK-NAV STRIP ────────────────────────────────────────── */}
-        <div className="border-y border-[#e2e8f0] bg-white overflow-x-auto">
+        <div className="overflow-x-auto border-y border-[#DDE3EA] bg-white [scrollbar-width:none]">
           <div className="max-w-screen-2xl mx-auto">
-            <div className="flex min-w-max md:min-w-0 md:grid md:grid-cols-6 divide-x divide-[#e2e8f0]">
+            <div className="flex min-w-max md:min-w-0 md:grid md:grid-cols-6 divide-x divide-[#DDE3EA]">
               {pillarAnchors.map((item, i) => (
                 <a
                   key={item.id}
                   href={`#pillar-${item.id}`}
-                  className="group flex items-center gap-3 px-6 py-5 hover:bg-[#f7f9fb] transition-colors duration-200"
+                  className="group flex items-center gap-3 px-6 py-5 hover:bg-[#FFFFFF] transition-colors duration-200"
                 >
-                  <span className="text-[#2563EB] shrink-0 group-hover:scale-110 transition-transform duration-200">
+                  <span className="text-[#E8A838] shrink-0 group-hover:scale-110 transition-transform duration-200">
                     {getDetailIcon(item.id, 'h-4 w-4')}
                   </span>
                   <div className="min-w-0">
-                    <p className="text-[8px] font-bold uppercase tracking-[0.18em] text-[#94a3b8] mb-0.5">
+                    <p className="text-[8px] font-bold uppercase tracking-[0.18em] text-[#9AA4B2] mb-0.5">
                       {String(i + 1).padStart(2, '0')}
                     </p>
-                    <p className="text-sm font-medium text-[#0F172A] group-hover:text-[#2563EB] transition-colors whitespace-nowrap">
+                    <p className="text-sm font-medium text-[#1A2535] transition-colors group-hover:text-[#E8A838]">
                       {item.short}
                     </p>
                   </div>
@@ -226,7 +230,7 @@ const CapabilitiesInDetail: React.FC = () => {
         </div>
 
         {/* ── SERVICE PILLAR CATALOG ────────────────────────────────────────── */}
-        <section className="bg-[#f2f4f6] py-24 md:py-32 px-6 md:px-12">
+        <section className="bg-[#F7F8FA] py-24 md:py-32 px-6 md:px-12">
           <div className="max-w-screen-2xl mx-auto">
 
             {/* Section header */}
@@ -238,20 +242,23 @@ const CapabilitiesInDetail: React.FC = () => {
               className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-20"
             >
               <motion.div variants={fadeUp} transition={{ duration: 0.55 }} className="md:col-span-6">
-                <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB] block mb-5">
-                  Service Pillar Catalog
-                </span>
-                <h2 className="font-headline text-5xl md:text-6xl text-[#0F172A] leading-[1.05]">
+                <div className="mb-5 flex items-center gap-3">
+                  <SectionBrandMark size="sm" />
+                  <span className="block text-[10px] font-bold uppercase tracking-[0.24em] text-[#E8A838]">
+                    Service Pillar Catalog
+                  </span>
+                </div>
+                <h2 className="font-headline text-5xl md:text-6xl text-[#1A2535] leading-[1.05]">
                   Six pillars.<br />
                   <em className="italic">Full context.</em>
                 </h2>
               </motion.div>
               <motion.div variants={fadeUp} transition={{ duration: 0.55 }} className="md:col-span-6 flex items-end">
                 <div>
-                  <p className="text-[#45464d] text-base leading-relaxed mb-5 max-w-lg">
+                  <p className="text-[#536070] text-base leading-relaxed mb-5 max-w-lg">
                     Strategic context, execution context, and full sub-capability coverage — from business strategy to managed operations.
                   </p>
-                  <div className="w-16 h-[2px] bg-[#2563EB]" />
+                  <div className="w-16 h-[2px] bg-[#E8A838]" />
                 </div>
               </motion.div>
             </motion.div>
@@ -271,62 +278,62 @@ const CapabilitiesInDetail: React.FC = () => {
                   {/* Card header */}
                   <div className="flex items-start justify-between p-8 pb-0">
                     <div className="flex items-center gap-4">
-                      <div className="flex h-11 w-11 items-center justify-center bg-[#dbeafe] text-[#2563EB] shrink-0">
+                      <div className="flex h-11 w-11 items-center justify-center bg-[#FFF4D8] text-[#E8A838] shrink-0">
                         {getDetailIcon(domain.id)}
                       </div>
-                      <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#94a3b8]">
+                      <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#9AA4B2]">
                         Service Pillar
                       </p>
                     </div>
-                    <span className="font-headline text-[4rem] text-[#f2f4f6] select-none leading-none -mt-2">
+                    <span className="font-headline text-[4rem] text-[#F7F8FA] select-none leading-none -mt-2">
                       {String(index + 1).padStart(2, '0')}
                     </span>
                   </div>
 
                   {/* Title */}
-                  <div className="px-8 pt-3 pb-6 border-b border-[#f0f0f3]">
-                    <h3 className="font-headline text-3xl text-[#0F172A] leading-tight">{domain.title}</h3>
+                  <div className="border-b border-[#F7F8FA] px-6 pt-3 pb-6 sm:px-8">
+                    <h3 className="font-headline text-3xl text-[#1A2535] leading-tight">{domain.title}</h3>
                     {/* Strategic context — italic quote treatment */}
                     <p
-                      className="mt-5 text-[0.95rem] italic text-[#45464d] leading-relaxed pl-5"
-                      style={{ borderLeft: '2px solid #c6c6cd' }}
+                      className="mt-5 text-[0.95rem] italic text-[#536070] leading-relaxed pl-5"
+                      style={{ borderLeft: '2px solid #CDD2DA' }}
                     >
                       {domain.strategicContext}
                     </p>
                   </div>
 
                   {/* Execution context */}
-                  <div className="px-8 py-6 border-b border-[#f0f0f3]">
-                    <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#2563EB] mb-3">
+                  <div className="border-b border-[#F7F8FA] px-6 py-6 sm:px-8">
+                    <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#E8A838] mb-3">
                       Execution Approach
                     </p>
-                    <p className="text-sm text-[#45464d] leading-relaxed">{domain.executionContext}</p>
+                    <p className="text-sm text-[#536070] leading-relaxed">{domain.executionContext}</p>
                   </div>
 
                   {/* Sub-caps + outcomes */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-0 divide-y md:divide-y-0 md:divide-x divide-[#f0f0f3]">
-                    <div className="px-8 py-6">
-                      <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#2563EB] mb-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-0 divide-y md:divide-y-0 md:divide-x divide-[#F7F8FA]">
+                    <div className="px-6 py-6 sm:px-8">
+                      <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#E8A838] mb-4">
                         Sub-Capabilities
                       </p>
                       <ul className="space-y-2">
                         {domain.subCapabilities.map((sub) => (
-                          <li key={sub} className="flex items-start gap-2.5 text-[0.8rem] text-[#0F172A] leading-snug">
-                            <span className="mt-[5px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#2563EB]" />
+                          <li key={sub} className="flex items-start gap-2.5 text-[0.8rem] text-[#1A2535] leading-snug">
+                            <span className="mt-[5px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#E8A838]" />
                             {sub}
                           </li>
                         ))}
                       </ul>
                     </div>
-                    <div className="px-8 py-6 bg-[#fafbfc]">
-                      <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#2563EB] mb-4">
+                    <div className="bg-[#FFFFFF] px-6 py-6 sm:px-8">
+                      <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#E8A838] mb-4">
                         Related Outcomes
                       </p>
                       <div className="flex flex-col gap-2.5">
                         {domain.relatedOutcomes.map((outcome) => (
                           <div key={outcome} className="flex items-start gap-2.5">
-                            <ArrowUpRight className="w-3.5 h-3.5 text-[#2563EB] shrink-0 mt-[2px]" />
-                            <span className="text-[0.8rem] font-medium text-[#0F172A]">{outcome}</span>
+                            <ArrowUpRight className="w-3.5 h-3.5 text-[#E8A838] shrink-0 mt-[2px]" />
+                            <span className="text-[0.8rem] font-medium text-[#1A2535]">{outcome}</span>
                           </div>
                         ))}
                       </div>
@@ -345,40 +352,43 @@ const CapabilitiesInDetail: React.FC = () => {
 
               {/* Rotated testimonial card */}
               <div className="lg:col-span-5 relative">
-                <div className="bg-[#e0e3e5] p-10 md:p-12 relative overflow-hidden -rotate-1">
+                <div className="bg-[#E8EBF0] p-10 md:p-12 relative overflow-hidden -rotate-1">
                   <div
                     aria-hidden="true"
-                    className="absolute top-6 left-8 font-headline text-[8rem] leading-none text-[#2563EB]/10 select-none pointer-events-none"
+                    className="absolute top-6 left-8 font-headline text-[8rem] leading-none text-[#E8A838]/10 select-none pointer-events-none"
                   >
                     &ldquo;
                   </div>
-                  <p className="relative font-headline text-2xl md:text-3xl italic text-[#0F172A] leading-snug mb-8">
+                  <p className="relative font-headline text-2xl md:text-3xl italic text-[#1A2535] leading-snug mb-8">
                     &ldquo;Transformation succeeds when strategy, engineering, and operations move together — from the first decision to the last deployment.&rdquo;
                   </p>
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 bg-[#0F172A] flex items-center justify-center shrink-0">
-                      <span className="text-white text-[10px] font-bold tracking-wider">HVA</span>
+                    <div className="w-10 h-10 bg-[#1A2535] flex items-center justify-center shrink-0">
+                      <SectionBrandMark surface="dark" size="sm" className="h-7 w-7" />
                     </div>
                     <div>
-                      <p className="font-bold text-sm text-[#0F172A]">H.V.A ARC Framework</p>
-                      <p className="text-[10px] text-[#45464d] uppercase tracking-[0.14em] mt-0.5">
+                      <p className="font-bold text-sm text-[#1A2535]">ARC Framework</p>
+                      <p className="text-[10px] text-[#536070] uppercase tracking-[0.14em] mt-0.5">
                         Strategy · Engineering · Operations
                       </p>
                     </div>
                   </div>
                 </div>
                 {/* Decorative offset element */}
-                <div className="absolute -top-10 -right-10 w-56 h-56 bg-[#2563EB]/5 -z-10" />
+                <div className="absolute -top-10 -right-10 w-56 h-56 bg-[#E8A838]/5 -z-10" />
               </div>
 
               {/* Right side — program links */}
               <div className="lg:col-span-7">
-                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#2563EB] mb-5">
-                  Where Depth Goes to Work
-                </p>
-                <h2 className="font-headline text-4xl md:text-5xl text-[#0F172A] mb-8 leading-tight">
+                <div className="mb-5 flex items-center gap-3">
+                  <SectionBrandMark size="sm" />
+                  <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#E8A838]">
+                    Where Depth Goes to Work
+                  </p>
+                </div>
+                <h2 className="font-headline text-4xl md:text-5xl text-[#1A2535] mb-8 leading-tight">
                   Capability without execution<br />
-                  <em className="italic font-light text-[#45464d]">is just strategy.</em>
+                  <em className="italic font-light text-[#536070]">is just strategy.</em>
                 </h2>
                 <div className="space-y-px">
                   {[
@@ -404,20 +414,20 @@ const CapabilitiesInDetail: React.FC = () => {
                     <Link
                       key={item.num}
                       href={item.href}
-                      className="group flex items-start justify-between gap-6 bg-[#f7f9fb] hover:bg-[#f2f4f6] px-6 py-5 transition-colors duration-200"
+                      className="group flex items-start justify-between gap-6 bg-[#FFFFFF] hover:bg-[#F7F8FA] px-6 py-5 transition-colors duration-200"
                     >
                       <div className="flex items-start gap-5">
-                        <span className="font-headline text-2xl text-[#e2e8f0] group-hover:text-[#dbeafe] transition-colors leading-none mt-1">
+                        <span className="font-headline text-2xl text-[#DDE3EA] group-hover:text-[#FFF4D8] transition-colors leading-none mt-1">
                           {item.num}
                         </span>
                         <div>
-                          <p className="font-bold text-sm text-[#0F172A] group-hover:text-[#2563EB] transition-colors mb-1">
+                          <p className="font-bold text-sm text-[#1A2535] group-hover:text-[#E8A838] transition-colors mb-1">
                             {item.label}
                           </p>
-                          <p className="text-xs text-[#45464d]">{item.desc}</p>
+                          <p className="text-xs text-[#536070]">{item.desc}</p>
                         </div>
                       </div>
-                      <ArrowUpRight className="w-4 h-4 text-[#c6c6cd] group-hover:text-[#2563EB] shrink-0 mt-1 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                      <ArrowUpRight className="w-4 h-4 text-[#CDD2DA] group-hover:text-[#E8A838] shrink-0 mt-1 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                     </Link>
                   ))}
                 </div>
@@ -427,19 +437,19 @@ const CapabilitiesInDetail: React.FC = () => {
         </section>
 
         {/* ── ARC DELIVERY MODEL — dark section, keep bg + squares ─────────── */}
-        <section className="relative bg-[#0F172A] py-24 md:py-32 px-6 md:px-12 text-white overflow-hidden">
+        <section className="relative bg-[#1A2535] py-24 md:py-32 px-6 md:px-12 text-white overflow-hidden">
           {/* Blueprint grid — keep as requested */}
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 opacity-[0.035]"
             style={{
               backgroundImage:
-                'repeating-linear-gradient(0deg,#60a5fa 0,#60a5fa 1px,transparent 0,transparent 48px),repeating-linear-gradient(90deg,#60a5fa 0,#60a5fa 1px,transparent 0,transparent 48px)',
+                'repeating-linear-gradient(0deg,#F0C15A 0,#F0C15A 1px,transparent 0,transparent 48px),repeating-linear-gradient(90deg,#F0C15A 0,#F0C15A 1px,transparent 0,transparent 48px)',
             }}
           />
           {/* Ambient glow — keep */}
-          <div className="pointer-events-none absolute -top-32 right-0 w-[500px] h-[500px] bg-[#2563EB]/15 rounded-full blur-[120px]" aria-hidden="true" />
-          <div className="pointer-events-none absolute bottom-0 left-1/4 w-[300px] h-[300px] bg-[#2563EB]/10 rounded-full blur-[80px]" aria-hidden="true" />
+          <div className="pointer-events-none absolute -top-32 right-0 w-[500px] h-[500px] bg-[#E8A838]/15 rounded-full blur-[120px]" aria-hidden="true" />
+          <div className="pointer-events-none absolute bottom-0 left-1/4 w-[300px] h-[300px] bg-[#E8A838]/10 rounded-full blur-[80px]" aria-hidden="true" />
 
           <div className="relative max-w-screen-2xl mx-auto">
 
@@ -452,9 +462,12 @@ const CapabilitiesInDetail: React.FC = () => {
               className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-16"
             >
               <motion.div variants={fadeUp} transition={{ duration: 0.55 }} className="md:col-span-8">
-                <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#60a5fa] mb-5">
-                  Delivery Model
-                </p>
+                <div className="mb-5 flex items-center gap-3">
+                  <SectionBrandMark surface="dark" size="sm" />
+                  <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#F0C15A]">
+                    Delivery Model
+                  </p>
+                </div>
                 <h2 className="font-headline text-5xl md:text-6xl text-white leading-[1.05]">
                   {BOT_DELIVERY_MODEL.name}
                   <br />
@@ -462,7 +475,7 @@ const CapabilitiesInDetail: React.FC = () => {
                 </h2>
               </motion.div>
               <motion.div variants={fadeUp} transition={{ duration: 0.55 }} className="md:col-span-4 flex items-end">
-                <p className="text-[#7c839b] text-base leading-relaxed">
+                <p className="text-[#778192] text-base leading-relaxed">
                   Use ARC when leadership needs strategy and build delivered by the same team, with production operations kept stable while transformation scales.
                 </p>
               </motion.div>
@@ -476,18 +489,18 @@ const CapabilitiesInDetail: React.FC = () => {
               transition={{ duration: 0.4 }}
               className="mb-3"
             >
-              <div className="flex items-center justify-between text-[9px] font-bold uppercase tracking-[0.22em] text-[#60a5fa]/50 mb-2">
+              <div className="flex items-center justify-between text-[9px] font-bold uppercase tracking-[0.22em] text-[#F0C15A]/50 mb-2">
                 {BOT_DELIVERY_MODEL.phases.map((p) => (
                   <span key={p.id}>{p.title}</span>
                 ))}
               </div>
               <div className="h-[2px] w-full bg-white/[0.08] relative">
-                <div className="absolute inset-y-0 left-0 right-0 bg-gradient-to-r from-[#2563EB] via-[#60a5fa] to-[#2563EB]/30" />
+                <div className="absolute inset-y-0 left-0 right-0 bg-gradient-to-r from-[#E8A838] via-[#F0C15A] to-[#E8A838]/30" />
               </div>
             </motion.div>
 
             {/* 3 Phase cards — keep the squares layout */}
-            <div className="grid grid-cols-1 gap-px bg-[#334155] md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-px bg-[#3D4858] md:grid-cols-3">
               {BOT_DELIVERY_MODEL.phases.map((phase, index) => (
                 <motion.article
                   key={phase.id}
@@ -495,21 +508,21 @@ const CapabilitiesInDetail: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.45, delay: index * 0.08 }}
-                  className="bg-[#111827] p-8 md:p-10 relative overflow-hidden group hover:bg-[#141e30] transition-colors duration-300"
+                  className="bg-[#1A2535] p-8 md:p-10 relative overflow-hidden group hover:bg-[#1A2535] transition-colors duration-300"
                 >
                   {/* Phase number — large decorative */}
                   <div className="absolute top-5 right-6 font-headline text-[5rem] text-white/[0.03] leading-none select-none">
                     {String(index + 1).padStart(2, '0')}
                   </div>
                   {/* Top accent bar */}
-                  <div className="h-[2px] w-12 bg-[#2563EB] mb-8 group-hover:w-20 transition-all duration-500" />
-                  <p className="text-[9px] font-bold uppercase tracking-[0.28em] text-[#60a5fa] mb-3">
+                  <div className="h-[2px] w-12 bg-[#E8A838] mb-8 group-hover:w-20 transition-all duration-500" />
+                  <p className="text-[9px] font-bold uppercase tracking-[0.28em] text-[#F0C15A] mb-3">
                     Phase {index + 1}
                   </p>
                   <h3 className="font-headline text-4xl text-white mb-4 leading-tight">
                     {phase.title}
                   </h3>
-                  <p className="text-sm leading-relaxed text-[#7c839b] group-hover:text-[#94a3b8] transition-colors">
+                  <p className="text-sm leading-relaxed text-[#778192] group-hover:text-[#9AA4B2] transition-colors">
                     {phase.detail}
                   </p>
                 </motion.article>
@@ -524,16 +537,16 @@ const CapabilitiesInDetail: React.FC = () => {
               transition={{ duration: 0.45, delay: 0.15 }}
               className="mt-6"
             >
-              <p className="text-[9px] font-bold uppercase tracking-[0.28em] text-[#60a5fa] mb-4">
+              <p className="text-[9px] font-bold uppercase tracking-[0.28em] text-[#F0C15A] mb-4">
                 When ARC Is Recommended
               </p>
               <ul className="grid grid-cols-1 gap-px bg-white/[0.06] md:grid-cols-3">
                 {BOT_DELIVERY_MODEL.fitCriteria.map((criteria) => (
                   <li
                     key={criteria}
-                    className="flex items-start gap-3 bg-[#0a101f] px-6 py-5 text-sm text-white/75"
+                    className="flex items-start gap-3 bg-[#1A2535] px-6 py-5 text-sm text-white/75"
                   >
-                    <span className="mt-[6px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#60a5fa]" />
+                    <span className="mt-[6px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#F0C15A]" />
                     {criteria}
                   </li>
                 ))}
@@ -553,7 +566,7 @@ const CapabilitiesInDetail: React.FC = () => {
               </Link>
               <Link
                 href="/capabilities/solution-programs"
-                className="text-sm font-bold uppercase tracking-widest text-[#60a5fa] border-b-2 border-[#60a5fa]/20 hover:border-[#60a5fa] transition-all pb-0.5"
+                className="text-sm font-bold uppercase tracking-widest text-[#F0C15A] border-b-2 border-[#F0C15A]/20 hover:border-[#F0C15A] transition-all pb-0.5"
               >
                 View Solution Programs →
               </Link>

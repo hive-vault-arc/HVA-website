@@ -24,7 +24,7 @@ const PageAmbientBackground: React.FC<PageAmbientBackgroundProps> = ({ className
     <div aria-hidden="true" className={cn('pointer-events-none absolute inset-0', className)}>
       {isMounted && tier === 'high' && !motionReduced ? (
         <Plasma
-          color="#0984E3"
+          color="#E8A838"
           speed={0.6}
           direction="forward"
           scale={1.1}

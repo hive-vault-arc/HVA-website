@@ -70,8 +70,8 @@ interface Props {
 
 export default function VideoScrollSection({
   videoSrc,
-  topBg = '#0F172A',
-  bottomBg = '#F5F6FA',
+  topBg = '#1A2535',
+  bottomBg = '#FFFFFF',
 }: Props) {
   const [activeVideoSrc, setActiveVideoSrc] = useState<string | null>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -280,11 +280,11 @@ export default function VideoScrollSection({
       <div
         ref={stickyRef}
         style={{
-          height: '100vh',
+          height: '100dvh',
           width: '100%',
           position: 'relative',
           overflow: 'hidden',
-          backgroundColor: '#050505',
+          backgroundColor: '#1A2535',
         }}
       >
         {/* Canvas — receives blended video frames */}
@@ -409,7 +409,7 @@ export default function VideoScrollSection({
                     fontWeight: 700,
                     letterSpacing: '0.24em',
                     textTransform: 'uppercase',
-                    color: '#3b82f6',
+                    color: '#F0C15A',
                     marginBottom: '0.9rem',
                     fontFamily: 'var(--font-inter), Inter, system-ui, sans-serif',
                   }}
@@ -477,4 +477,3 @@ export default function VideoScrollSection({
     </div>
   );
 }
-

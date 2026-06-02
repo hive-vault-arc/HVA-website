@@ -6,9 +6,14 @@ import Layout from '../components/Layout';
 import JsonLd from '../components/JsonLd';
 import { HVA_LEADERSHIP } from '../lib/leadership';
 import {
+  CONTACT_EMAIL,
+  CONTACT_PHONE_E164,
+  DEFAULT_OG_IMAGE_HEIGHT,
+  DEFAULT_OG_IMAGE_PATH,
+  DEFAULT_OG_IMAGE_WIDTH,
   DEFAULT_DESCRIPTION,
   DEFAULT_TITLE,
-  BRAND_ALIASES,
+  BRAND_SEARCH_VARIANTS,
   GLOBAL_KEYWORDS,
   LINKEDIN_URL,
   SITELINK_CANDIDATES,
@@ -17,6 +22,7 @@ import {
   SITE_LOGO_WIDTH,
   SITE_NAME,
   SITE_URL,
+  SOCIAL_PROFILE_URLS,
   absoluteUrl,
 } from '../lib/seo';
 import './globals.css';
@@ -60,10 +66,10 @@ export const metadata: Metadata = {
     url: '/',
     images: [
       {
-        url: '/Images/brand/hva-ai-software-agency-tangier.webp',
-        width: 1200,
-        height: 630,
-        alt: 'H.V.A — Technology Transformation Partner · Strategy · AI Engineering · Operations',
+        url: DEFAULT_OG_IMAGE_PATH,
+        width: DEFAULT_OG_IMAGE_WIDTH,
+        height: DEFAULT_OG_IMAGE_HEIGHT,
+        alt: 'Hive Vault Arc - Technology Transformation Partner, Strategy, AI Engineering, Operations',
       },
     ],
   },
@@ -71,7 +77,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: DEFAULT_TITLE,
     description: DEFAULT_DESCRIPTION,
-    images: ['/Images/brand/hva-ai-software-agency-tangier.webp'],
+    images: [DEFAULT_OG_IMAGE_PATH],
   },
   icons: {
     shortcut: [{ url: '/favicon.ico', type: 'image/x-icon' }],
@@ -91,14 +97,14 @@ export const metadata: Metadata = {
   },
   other: {
     'article:publisher': LINKEDIN_URL,
-    'msapplication-TileColor': '#F5F6FA',
+    'msapplication-TileColor': '#1A2535',
   },
 };
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#F5F6FA',
+  themeColor: '#1A2535',
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
@@ -111,7 +117,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     image: absoluteUrl(member.image),
     url: absoluteUrl(`/whoweare/abouthva#${member.slug}`),
     worksFor: {
-      '@id': `${SITE_URL}/#organization`,
+      '@id': absoluteUrl('/#organization'),
       name: 'Hive Vault Arc',
     },
     knowsAbout: member.knowsAbout,
@@ -120,9 +126,9 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': ['Organization', 'ProfessionalService'],
-    '@id': `${SITE_URL}/#organization`,
+    '@id': absoluteUrl('/#organization'),
     name: 'Hive Vault Arc',
-    alternateName: BRAND_ALIASES,
+    alternateName: BRAND_SEARCH_VARIANTS,
     legalName: 'Hive Vault Arc',
     url: SITE_URL,
     logo: {
@@ -134,7 +140,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     },
     image: absoluteUrl('/Images/media/og-default.png'),
     description:
-      'Technology transformation partner based in Tangier, Morocco. H.V.A combines strategy, AI engineering, custom software, cloud infrastructure, and managed operations from advisory through production.',
+      'Technology transformation partner based in Tangier, Morocco. Hive Vault Arc combines strategy, AI engineering, custom software, cloud infrastructure, and managed operations from advisory through production.',
     foundingDate: '2026',
     founder: leadershipPeople,
     founders: leadershipPeople,
@@ -169,25 +175,38 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
       'Cloud Infrastructure',
       'Managed Operations',
     ],
-    email: 'contact@hivevaultarc.com',
-    telephone: ['+212670431249'],
+    email: CONTACT_EMAIL,
+    telephone: CONTACT_PHONE_E164,
     contactPoint: [
       {
         '@type': 'ContactPoint',
         contactType: 'customer support',
-        email: 'contact@hivevaultarc.com',
-        telephone: '+212670431249',
+        email: CONTACT_EMAIL,
+        telephone: CONTACT_PHONE_E164,
         availableLanguage: ['English', 'French', 'Arabic', 'Spanish'],
         areaServed: ['MA', 'FR', 'EU'],
       },
     ],
-    sameAs: [
-      LINKEDIN_URL,
-      'https://github.com/hive-vault-arc',
-      'https://www.instagram.com/hive.vault.arc/',
-      'https://x.com/Hivevaultarc',
-      'https://www.tiktok.com/@hivevaultarc',
-      'https://web.facebook.com/hivevaultarc',
+    sameAs: SOCIAL_PROFILE_URLS,
+    subjectOf: [
+      {
+        '@type': 'WebAPI',
+        name: 'Hive Vault Arc machine-readable company profile',
+        url: absoluteUrl('/ai/company'),
+        inLanguage: 'en',
+      },
+      {
+        '@type': 'DigitalDocument',
+        name: 'Hive Vault Arc LLM context',
+        url: absoluteUrl('/llms.txt'),
+        inLanguage: 'en',
+      },
+      {
+        '@type': 'DigitalDocument',
+        name: 'Hive Vault Arc extended LLM context',
+        url: absoluteUrl('/llms-full.txt'),
+        inLanguage: 'en',
+      },
     ],
     knowsAbout: [
       'Artificial Intelligence',
@@ -199,7 +218,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     ],
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
-      name: 'H.V.A Services',
+      name: 'Hive Vault Arc Services',
       itemListElement: [
         {
           '@type': 'Offer',
@@ -225,14 +244,17 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
   const websiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    '@id': `${SITE_URL}/#website`,
+    '@id': absoluteUrl('/#website'),
     url: SITE_URL,
     name: 'Hive Vault Arc',
-    alternateName: BRAND_ALIASES,
+    alternateName: BRAND_SEARCH_VARIANTS,
     description: 'Technology transformation partner for Moroccan and global businesses',
     inLanguage: ['en', 'fr', 'ar', 'es'],
     publisher: {
-      '@id': `${SITE_URL}/#organization`,
+      '@id': absoluteUrl('/#organization'),
+    },
+    about: {
+      '@id': absoluteUrl('/#organization'),
     },
     hasPart: SITELINK_CANDIDATES.map((item) => ({
       '@type': 'WebPage',

@@ -29,14 +29,14 @@ const SLIDES: Slide[] = [
     h1Line1: 'Strategy, AI Engineering,',
     h1Line2: 'and Operations in One Team.',
     description:
-      'H.V.A is a technology transformation partner for teams that need strategy, production engineering, and managed operations to move together.',
+      'Hive Vault Arc is a technology transformation partner for teams that need strategy, production engineering, and managed operations to move together.',
     primaryLabel: 'View Case Studies',
     primaryHref: '/case-studies',
     secondaryLabel: 'Explore Capabilities',
     secondaryHref: '/capabilities',
-    image: '/Images/hero/ai-powered-transformation-operations-tangier-morocco.webp',
-    imageAlt: 'H.V.A AI automation and engineering team in Tangier, Morocco',
-    cardIcon: <Bot className="w-8 h-8 text-[#0984E3]" strokeWidth={1.5} />,
+    image: '/Images/capabilities/hva-operations-managed-capability.webp',
+    imageAlt: 'Operations command workspace with dashboards and production monitoring screens',
+    cardIcon: <Bot className="w-8 h-8 text-[#E8A838]" strokeWidth={1.5} />,
     cardTitle: 'Advise. Build. Operate.',
     cardDesc:
       'One accountable team from transformation diagnosis to production operation.',
@@ -52,8 +52,8 @@ const SLIDES: Slide[] = [
     secondaryLabel: 'See Case Studies',
     secondaryHref: '/case-studies',
     image: '/Images/hero/digital-transformation-scalable-systems-tangier-morocco.webp',
-    imageAlt: 'Custom CRM and digital transformation system built by H.V.A',
-    cardIcon: <Layers className="w-8 h-8 text-[#0984E3]" strokeWidth={1.5} />,
+    imageAlt: 'Technology consultant reviewing digital operations dashboards on a laptop',
+    cardIcon: <Layers className="w-8 h-8 text-[#E8A838]" strokeWidth={1.5} />,
     cardTitle: 'End-to-End Programs.',
     cardDesc:
       'From operating diagnosis to production deployment and managed evolution.',
@@ -68,9 +68,9 @@ const SLIDES: Slide[] = [
     primaryHref: '/contact',
     secondaryLabel: 'Meet Our Team',
     secondaryHref: '/whoweare/abouthva',
-    image: '/Images/hero/strategic-technology-consulting-tangier-morocco.webp',
-    imageAlt: 'H.V.A consulting and engineering team in Tangier, Morocco',
-    cardIcon: <Eye className="w-8 h-8 text-[#0984E3]" strokeWidth={1.5} />,
+    image: '/Images/capabilities/hva-strategy-business-capability.webp',
+    imageAlt: 'Executive strategy workspace with operating model diagrams and city view',
+    cardIcon: <Eye className="w-8 h-8 text-[#E8A838]" strokeWidth={1.5} />,
     cardTitle: 'Consulting That Delivers.',
     cardDesc:
       'The same founders who design the strategy stay accountable through delivery, release, and long-term results.',
@@ -115,7 +115,7 @@ export default function HeroSlider() {
 
   return (
     <section
-      className="relative group px-6 pt-20 pb-14 lg:px-14 lg:pt-36 lg:pb-28 overflow-visible"
+      className="relative group overflow-hidden px-4 pt-20 pb-14 sm:px-6 md:pt-24 lg:overflow-visible lg:px-14 lg:pt-36 lg:pb-28"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
@@ -126,7 +126,7 @@ export default function HeroSlider() {
         aria-label="Previous slide"
         className="absolute left-2 lg:left-6 top-1/2 -translate-y-1/2 z-20
                    hidden lg:flex opacity-0 group-hover:opacity-100 transition-opacity duration-300
-                   p-2 text-[#1E272E]/30 hover:text-[#0984E3]"
+                   p-2 text-[#1A2535]/30 hover:text-[#E8A838]"
       >
         <ChevronLeft className="w-7 h-7" />
       </button>
@@ -137,7 +137,7 @@ export default function HeroSlider() {
         aria-label="Next slide"
         className="absolute right-2 lg:right-6 top-1/2 -translate-y-1/2 z-20
                    hidden lg:flex opacity-0 group-hover:opacity-100 transition-opacity duration-300
-                   p-2 text-[#1E272E]/30 hover:text-[#0984E3]"
+                   p-2 text-[#1A2535]/30 hover:text-[#E8A838]"
       >
         <ChevronRight className="w-7 h-7" />
       </button>
@@ -153,55 +153,55 @@ export default function HeroSlider() {
             animate="center"
             exit="exit"
             transition={{ duration: 0.45, ease: 'easeInOut' }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-3 lg:gap-12 items-center"
+            className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12 lg:items-center"
           >
-            {/* Left: copy — second on mobile, first on desktop */}
-            <div className="lg:col-span-7 z-10 order-2 lg:order-1">
-              <span className="home-hero-eyebrow inline-block px-3 py-1 bg-[#0984E3]/10 text-[#0984E3] text-[10px] uppercase tracking-[0.22em] font-bold mb-6 lg:mb-8">
+            {/* Left: copy */}
+            <div className="z-10 order-1 lg:col-span-7">
+              <span className="home-hero-eyebrow inline-block px-3 py-1 bg-[#E8A838]/10 text-[#E8A838] text-[10px] uppercase tracking-[0.22em] font-bold mb-6 lg:mb-8">
                 {slide.eyebrow}
               </span>
-              <h1 className="home-hero-title font-serif text-3xl sm:text-4xl md:text-7xl xl:text-[5.5rem] font-medium leading-[1.04] tracking-tight text-[#1E272E] mb-6 lg:mb-8">
+              <h1 className="home-hero-title mb-6 overflow-visible font-serif text-[clamp(2.75rem,13vw,4.15rem)] font-medium leading-[1.02] tracking-tight text-[#1A2535] sm:text-5xl md:text-6xl lg:mb-8 lg:text-7xl lg:leading-[1.1] xl:text-[5.35rem]">
                 {slide.h1Line1}<br />
-                <em className="italic bg-gradient-to-r from-[#0984E3] to-[#2563EB] bg-clip-text text-transparent pl-[0.08em] -ml-[0.08em]">{slide.h1Line2}</em>
+                <em className="italic text-[#E8A838]">{slide.h1Line2}</em>
               </h1>
-              <p className="home-hero-copy text-base lg:text-xl text-[#1E272E]/60 max-w-xl mb-8 lg:mb-12 font-light leading-relaxed line-clamp-3 lg:line-clamp-none">
+              <p className="home-hero-copy text-base lg:text-xl text-[#1A2535]/60 max-w-xl mb-8 lg:mb-12 font-light leading-relaxed line-clamp-3 lg:line-clamp-none">
                 {slide.description}
               </p>
               <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-6">
                 <Link
                   href={slide.primaryHref}
-                  className="home-hero-primary sharp-edge bg-[#1E272E] text-[#F5F6FA] px-8 py-4 text-sm font-bold hover:bg-[#0984E3] transition-colors duration-300 w-full sm:w-auto text-center"
+                  className="home-hero-primary sharp-edge min-h-11 bg-[#1A2535] px-8 py-4 text-center text-sm font-bold text-[#FFFFFF] transition-colors duration-300 hover:bg-[#E8A838] w-full sm:w-auto"
                 >
                   {slide.primaryLabel}
                 </Link>
                 <Link
                   href={slide.secondaryHref}
-                  className="home-hero-secondary flex items-center justify-center sm:justify-start gap-2 px-8 py-4 text-sm font-bold text-[#1E272E] hover:gap-4 transition-all duration-300"
+                  className="home-hero-secondary flex min-h-11 items-center justify-center gap-2 px-8 py-4 text-sm font-bold text-[#1A2535] transition-all duration-300 hover:gap-4 sm:justify-start"
                 >
                   {slide.secondaryLabel} <ChevronRight className="w-4 h-4" />
                 </Link>
               </div>
             </div>
 
-            {/* Right: image + floating card — first on mobile, second on desktop */}
-            <div className="lg:col-span-5 relative order-1 lg:order-2 -mx-6 lg:mx-0">
-              <div className="relative aspect-[9/10] lg:aspect-[4/5] overflow-hidden shadow-2xl">
+            {/* Right: image + floating card */}
+            <div className="relative order-2 lg:col-span-5">
+              <div className="relative h-[220px] overflow-hidden border border-[#1A2535]/10 bg-[#1A2535] shadow-[0_18px_45px_-32px_rgba(26,37,53,0.45)] sm:h-[260px] md:h-[340px] lg:aspect-[4/5] lg:h-auto lg:border-0 lg:shadow-2xl">
                 <Image
                   src={slide.image}
                   alt={slide.imageAlt}
                   fill
-                  className="w-full h-full object-cover hero-image-animate"
+                  className="h-full w-full object-cover hero-image-animate"
                   sizes="(max-width: 1024px) 100vw, 40vw"
                   priority={active === 0}
                 />
               </div>
               {/* Asymmetric floating card — desktop only */}
-              <div className="absolute -bottom-16 -left-6 md:-left-14 bg-white p-8 max-w-[17rem] shadow-xl hidden md:block">
+              <div className="absolute -bottom-16 -left-14 hidden max-w-[17rem] bg-white p-8 shadow-xl lg:block">
                 {slide.cardIcon}
-                <h3 className="home-float-title font-serif text-xl mt-4 mb-3 italic font-medium text-[#1E272E]">
+                <h3 className="home-float-title font-serif text-xl mt-4 mb-3 italic font-medium text-[#1A2535]">
                   {slide.cardTitle}
                 </h3>
-                <p className="home-float-copy text-sm text-[#1E272E]/60 leading-relaxed">
+                <p className="home-float-copy text-sm text-[#1A2535]/60 leading-relaxed">
                   {slide.cardDesc}
                 </p>
               </div>
@@ -216,15 +216,19 @@ export default function HeroSlider() {
               key={s.eyebrow}
               onClick={() => goTo(i)}
               aria-label={`Go to slide ${i + 1}`}
-              className={`h-[3px] rounded-full transition-all duration-300 ${
-                i === active
-                  ? 'w-8 bg-[#0984E3]'
-                  : 'w-5 bg-[#1E272E]/20 hover:bg-[#1E272E]/40'
-              }`}
-            />
+              className="flex min-h-11 min-w-11 items-center justify-center"
+            >
+              <span
+                className={`h-[3px] rounded-full transition-all duration-300 ${
+                  i === active
+                    ? 'w-8 bg-[#E8A838]'
+                    : 'w-5 bg-[#1A2535]/20 hover:bg-[#1A2535]/40'
+                }`}
+              />
+            </button>
           ))}
         </div>
-        <p className="lg:hidden mt-3 text-center text-[10px] uppercase tracking-widest text-[#1E272E]/30">
+        <p className="lg:hidden mt-3 text-center text-[10px] uppercase tracking-widest text-[#1A2535]/30">
           Swipe to explore
         </p>
 

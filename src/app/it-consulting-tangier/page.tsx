@@ -6,9 +6,9 @@ import type { FaqItem } from '../../data/faqs';
 import { SITE_URL, absoluteUrl, buildBreadcrumbSchema, buildPageMetadata } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'IT Consulting in Tangier — Technology Strategy & Digital Transformation | H.V.A',
+  title: 'IT Consulting in Tangier — Technology Strategy & Digital Transformation',
   description:
-    'H.V.A provides IT consulting and digital transformation services to businesses in Tangier and across all Moroccan cities. Technology audits, architecture design, system integration, and AI strategy.',
+    'Hive Vault Arc provides IT consulting and digital transformation services to businesses in Tangier and across all Moroccan cities. Technology audits, architecture design, system integration, and AI strategy.',
   path: '/it-consulting-tangier',
   keywords: [
     'IT consulting Tangier',
@@ -21,14 +21,14 @@ export const metadata: Metadata = buildPageMetadata({
 
 const IT_CONSULTING_TANGIER_FAQS: FaqItem[] = [
   {
-    question: 'What does IT consulting include at H.V.A?',
+    question: 'What does IT consulting include at Hive Vault Arc?',
     answer:
       'It includes technology audits, roadmap definition, architecture planning, execution governance, and hands-on delivery support so strategic decisions become working systems.',
   },
   {
     question: 'Do you only advise, or do you also implement?',
     answer:
-      'H.V.A does both. We provide consulting and stay accountable through implementation, stabilization, and optimization rather than stopping at slide decks.',
+      'Hive Vault Arc does both. We provide consulting and stay accountable through implementation, stabilization, and optimization rather than stopping at slide decks.',
   },
   {
     question: 'Can you help modernize a fragmented legacy setup?',
@@ -91,7 +91,7 @@ export default function ITConsultingTangierPage() {
             <p className="geo-kicker">Tangier Technology Advisory</p>
             <h1 className="editorial-title">IT Consulting for Tangier&apos;s Growing Businesses</h1>
             <p className="editorial-lead max-w-3xl">
-              H.V.A supports leadership teams in Tangier with consulting that connects strategy to execution. We help you
+              Hive Vault Arc supports leadership teams in Tangier with consulting that connects strategy to execution. We help you
               decide what to modernize, when to invest, and how to deliver without creating operational instability. We
               support organizations in Tangier, Casablanca, Rabat, Marrakech, Fes, Agadir, and other Moroccan cities. The
               goal is not simply to choose technology; it is to build a reliable operating model for growth.
@@ -108,13 +108,13 @@ export default function ITConsultingTangierPage() {
         </section>
 
         {/* ── Feature band ── */}
-        <section className="border-y border-[#e2e8f0] bg-white">
+        <section className="border-y border-[#DDE3EA] bg-white">
           <div className="mx-auto max-w-5xl px-6 py-12 lg:px-12">
             <h2 className="services-brief-section-title">
-              What H.V.A Delivers as Your IT Consulting Partner
+              What Hive Vault Arc Delivers as Your IT Consulting Partner
             </h2>
             <p className="mt-4 text-base leading-relaxed text-secondary">
-              IT consulting should reduce decision uncertainty, not add theoretical complexity. H.V.A starts by
+              IT consulting should reduce decision uncertainty, not add theoretical complexity. Hive Vault Arc starts by
               diagnosing your current architecture, operational bottlenecks, and governance gaps, then translates that
               into a clear roadmap with execution priorities. This includes technical sequencing, ownership boundaries,
               and business impact checkpoints.
@@ -147,7 +147,7 @@ export default function ITConsultingTangierPage() {
           <article>
             <h2 className="services-brief-section-title">ARC Framework: Audit → Roadmap → Craft</h2>
             <p className="mt-4 text-base leading-relaxed text-secondary">
-              H.V.A uses ARC as a practical consulting-to-delivery path. In the <strong>Audit</strong> phase, we assess
+              Hive Vault Arc uses ARC as a practical consulting-to-delivery path. In the <strong>Audit</strong> phase, we assess
               current systems, process friction, and decision bottlenecks. In <strong>Roadmap</strong>, we structure
               milestones, define architecture principles, and align executive priorities with delivery reality. In{' '}
               <strong>Craft</strong>, we execute with controlled rollout, governance checkpoints, and post-launch
@@ -198,7 +198,7 @@ export default function ITConsultingTangierPage() {
               action because context is understood directly, not inferred remotely.
             </p>
             <p className="mt-4 text-base leading-relaxed text-secondary">
-              H.V.A combines this local understanding with global engineering standards. You get technical depth that can
+              Hive Vault Arc combines this local understanding with global engineering standards. You get technical depth that can
               scale beyond local boundaries while still respecting market-specific realities such as regulatory
               sensitivity, bilingual operations, and cross-functional coordination patterns.
             </p>
@@ -228,7 +228,7 @@ export default function ITConsultingTangierPage() {
         </section>
 
         {/* ── Bottom CTA ── */}
-        <section className="border-t border-[#e2e8f0] bg-white">
+        <section className="border-t border-[#DDE3EA] bg-white">
           <div className="mx-auto max-w-5xl px-6 py-12 lg:px-12">
             <h2 className="services-brief-section-title">Need an IT Strategy You Can Actually Execute?</h2>
             <p className="mt-4 max-w-3xl text-base leading-relaxed text-secondary">
@@ -240,7 +240,7 @@ export default function ITConsultingTangierPage() {
                 Explore ARC
               </Link>
               <Link href="/contact" className="editorial-link">
-                Talk to H.V.A →
+                Talk to Hive Vault Arc →
               </Link>
               <Link href="/digital-services-tangier" className="editorial-link">
                 Explore All Digital Services →

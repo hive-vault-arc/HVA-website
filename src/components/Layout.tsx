@@ -11,7 +11,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen w-full">
+      <main className="min-h-[100dvh] w-full">
         {children}
       </main>
       <SiteFooter />

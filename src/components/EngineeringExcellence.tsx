@@ -9,7 +9,7 @@ export default function EngineeringExcellence() {
           <div className="text-center w-full px-4 sm:px-6">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-light text-white">
               Engineering Excellence with <br />
-              <span className="text-3xl sm:text-5xl md:text-7xl font-light mt-1 leading-tight md:leading-none bg-gradient-to-r from-purple-400 to-blue-400 text-transparent bg-clip-text">
+              <span className="text-3xl sm:text-5xl md:text-7xl font-light mt-1 leading-tight md:leading-none bg-gradient-to-r from-[#E8A838] to-[#F0C15A] text-transparent bg-clip-text">
                 Modern Web Technologies
               </span>
             </h1>
@@ -22,7 +22,7 @@ export default function EngineeringExcellence() {
         <div className="relative mx-auto h-full w-full overflow-hidden rounded-2xl">
           <Image
             src="/Images/brand/ai-analytics-dashboard-business.jpg"
-            alt="AI analytics dashboard built by H.V.A for business intelligence"
+            alt="AI analytics dashboard built by Hive Vault Arc for business intelligence"
             fill
             className="object-contain"
             sizes="(max-width: 1024px) 100vw, 80vw"

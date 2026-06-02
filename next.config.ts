@@ -75,6 +75,17 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'hiva-nine.vercel.app',
+          },
+        ],
+        destination: 'https://hivevaultarc.com/:path*',
+        permanent: true,
+      },
+      {
         source: '/insights/blogs',
         destination: '/blog',
         permanent: true,

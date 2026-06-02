@@ -1,5 +1,7 @@
 # HVA Website — Sprint Backlog
 
+> 2026-05-24 note: this is the older general SEO/content backlog. For current SEO + AI discovery work, use `sprints/seo-ai-discovery/README.md`. Public-facing copy should now use `Hive Vault Arc`; `H.V.A` and `HVA` are aliases/search variants unless a historical sprint explicitly says otherwise.
+
 > All remaining work on the hiva-website, organized as sprint files for AI coding agent execution.
 > Last updated: 2026-04-28
 
@@ -54,4 +56,3 @@ Tasks that require manual action in Vercel, Google, LinkedIn, and other external
 | `src/components/FaqSection.tsx` | FAQ component with built-in FAQ schema |
 | `src/views/BlogPost.tsx` | Blog post rendering (Sprint 03 target) |
 | `src/components/ArticleDetailPage.tsx` | Article layout component (Sprint 03 target) |
-

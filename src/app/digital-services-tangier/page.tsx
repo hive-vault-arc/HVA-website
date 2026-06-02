@@ -7,9 +7,9 @@ import type { FaqItem } from '../../data/faqs';
 import { SITE_URL, absoluteUrl, buildBreadcrumbSchema, buildPageMetadata } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Digital Services in Tangier — AI, Software & IT Consulting | H.V.A',
+  title: 'Digital Services in Tangier — AI, Software & IT Consulting',
   description:
-    'H.V.A delivers end-to-end digital services in Tangier: AI agents, custom software, IT consulting, and digital transformation programs. Tangier-based team, global engineering standards.',
+    'Hive Vault Arc delivers end-to-end digital services in Tangier: AI agents, custom software, IT consulting, and digital transformation programs. Tangier-based team, global engineering standards.',
   path: '/digital-services-tangier',
   keywords: [
     'digital services Tangier',
@@ -27,22 +27,22 @@ export const metadata: Metadata = buildPageMetadata({
 
 const DIGITAL_SERVICES_TANGIER_FAQS: FaqItem[] = [
   {
-    question: 'What digital services does H.V.A offer in Tangier?',
+    question: 'What digital services does Hive Vault Arc offer in Tangier?',
     answer:
-      'H.V.A delivers AI agents and WhatsApp automation, IT consulting and technology strategy, custom software and SaaS development, digital transformation programs, CRM engineering, and cloud infrastructure — all from a team based in Tangier, Morocco.',
+      'Hive Vault Arc delivers AI agents and WhatsApp automation, IT consulting and technology strategy, custom software and SaaS development, digital transformation programs, CRM engineering, and cloud infrastructure — all from a team based in Tangier, Morocco.',
   },
   {
-    question: 'Is H.V.A just an advice firm or do you also build and deliver?',
+    question: 'Is Hive Vault Arc just an advice firm or do you also build and deliver?',
     answer:
-      'Both. H.V.A consults and builds. Every engagement includes strategy, architecture, and hands-on delivery. We stay accountable through production launch and ongoing optimization — not just the advisory phase.',
+      'Both. Hive Vault Arc consults and builds. Every engagement includes strategy, architecture, and hands-on delivery. We stay accountable through production launch and ongoing optimization — not just the advisory phase.',
   },
   {
     question: 'How do digital services from a Tangier firm differ from international agencies?',
     answer:
-      'A Tangier-based team brings local business context, Arabic and French fluency, alignment with Moroccan regulatory requirements, and direct communication without timezone delays. H.V.A pairs that local presence with international engineering standards and production case studies.',
+      'A Tangier-based team brings local business context, Arabic and French fluency, alignment with Moroccan regulatory requirements, and direct communication without timezone delays. Hive Vault Arc pairs that local presence with international engineering standards and production case studies.',
   },
   {
-    question: 'What types of businesses in Tangier does H.V.A work with?',
+    question: 'What types of businesses in Tangier does Hive Vault Arc work with?',
     answer:
       'Primarily Moroccan SMEs in Real Estate, Healthcare, Logistics, and Finance, plus French companies with Morocco operations and global startups that need AI or software infrastructure. We have production case studies in Real Estate.',
   },
@@ -127,7 +127,7 @@ export default function DigitalServicesTangierPage() {
     ],
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
-      name: 'H.V.A Digital Services',
+      name: 'Hive Vault Arc Digital Services',
       itemListElement: [
         { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'AI Agent Development' } },
         { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'IT Consulting' } },
@@ -139,7 +139,7 @@ export default function DigitalServicesTangierPage() {
     availableLanguage: ['en', 'fr', 'ar', 'es'],
     url: `${SITE_URL}/digital-services-tangier`,
     description:
-      'H.V.A delivers end-to-end digital services in Tangier: AI agents, custom software, IT consulting, and digital transformation programs.',
+      'Hive Vault Arc delivers end-to-end digital services in Tangier: AI agents, custom software, IT consulting, and digital transformation programs.',
     image: absoluteUrl('/Images/brand/hva-ai-software-agency-tangier.webp'),
   };
 
@@ -159,7 +159,7 @@ export default function DigitalServicesTangierPage() {
               <p className="geo-kicker">Digital Services Tangier</p>
               <h1 className="editorial-title">Digital Services Built for Tangier Businesses</h1>
               <p className="editorial-lead max-w-3xl">
-                H.V.A is a Tangier-based digital services firm for businesses that need more than a website vendor. We
+                Hive Vault Arc is a Tangier-based digital services firm for businesses that need more than a website vendor. We
                 combine <Link href="/ai-agents-tangier" className="editorial-link">AI agents</Link>, IT consulting,
                 custom software, cloud infrastructure, and digital transformation delivery into one accountable
                 engagement model. Moroccan SMEs, French companies operating locally, and global teams use us when
@@ -174,10 +174,10 @@ export default function DigitalServicesTangierPage() {
                 </Link>
               </div>
             </div>
-            <div className="relative min-h-[18rem] overflow-hidden bg-[#e0e3e5] md:min-h-[25rem]">
+            <div className="relative min-h-[18rem] overflow-hidden bg-[#E8EBF0] md:min-h-[25rem]">
               <Image
                 src="/Images/brand/hva-ai-software-agency-tangier.webp"
-                alt="H.V.A digital services team in Tangier, Morocco"
+                alt="Hive Vault Arc digital services team in Tangier, Morocco"
                 fill
                 priority
                 className="object-cover grayscale"
@@ -188,10 +188,10 @@ export default function DigitalServicesTangierPage() {
         </section>
 
         <section className="bg-white">
-          <div className="mx-auto grid max-w-6xl gap-px bg-[#e2e8f0] px-6 py-12 md:grid-cols-3 lg:px-12">
+          <div className="mx-auto grid max-w-6xl gap-px bg-[#DDE3EA] px-6 py-12 md:grid-cols-3 lg:px-12">
             {pillars.map((pillar) => (
-              <Link key={pillar.href} href={pillar.href} className="group bg-white p-6 transition-colors hover:bg-[#f2f4f6]">
-                <h2 className="font-headline text-2xl leading-tight text-[#0F172A]">{pillar.title}</h2>
+              <Link key={pillar.href} href={pillar.href} className="group bg-white p-6 transition-colors hover:bg-[#F7F8FA]">
+                <h2 className="font-headline text-2xl leading-tight text-[#1A2535]">{pillar.title}</h2>
                 <p className="mt-4 text-sm leading-relaxed text-secondary">{pillar.text}</p>
                 <span className="mt-6 inline-flex text-sm font-bold text-primary">Explore →</span>
               </Link>
@@ -215,17 +215,17 @@ export default function DigitalServicesTangierPage() {
               reliability.
             </p>
             <p className="mt-4 text-base leading-relaxed text-secondary">
-              H.V.A frames digital services as one connected operating layer: consulting, architecture, engineering,
+              Hive Vault Arc frames digital services as one connected operating layer: consulting, architecture, engineering,
               rollout, and long-term improvement. The goal is practical transformation, not disconnected tools.
             </p>
           </article>
 
           <article>
-            <h2 className="services-brief-section-title">H.V.A&apos;s Full Digital Services Offering</h2>
+            <h2 className="services-brief-section-title">Hive Vault Arc&apos;s Full Digital Services Offering</h2>
             <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {services.map((service) => (
                 <div key={service} className="geo-card">
-                  <h3 className="font-headline text-xl leading-tight text-[#0F172A]">{service}</h3>
+                  <h3 className="font-headline text-xl leading-tight text-[#1A2535]">{service}</h3>
                   <p className="mt-3 text-sm leading-relaxed text-secondary">
                     Delivered through discovery, architecture, implementation, and production support so each service
                     connects to business outcomes.
@@ -236,24 +236,24 @@ export default function DigitalServicesTangierPage() {
           </article>
 
           <article>
-            <h2 className="services-brief-section-title">Why Tangier Businesses Choose H.V.A</h2>
+            <h2 className="services-brief-section-title">Why Tangier Businesses Choose Hive Vault Arc</h2>
             <div className="mt-6 grid gap-5 lg:grid-cols-3">
               <div className="geo-card">
-                <h3 className="font-headline text-xl text-[#0F172A]">Local Context</h3>
+                <h3 className="font-headline text-xl text-[#1A2535]">Local Context</h3>
                 <p className="mt-3 text-sm leading-relaxed text-secondary">
                   We understand Tangier business rhythms, Arabic and French communication, Moroccan compliance
                   sensitivity, and the speed required by local commercial teams.
                 </p>
               </div>
               <div className="geo-card">
-                <h3 className="font-headline text-xl text-[#0F172A]">Global Standard</h3>
+                <h3 className="font-headline text-xl text-[#1A2535]">Global Standard</h3>
                 <p className="mt-3 text-sm leading-relaxed text-secondary">
                   Our work uses production-grade engineering, clear delivery checkpoints, and case-study-backed
                   operating results instead of theoretical advisory only.
                 </p>
               </div>
               <div className="geo-card">
-                <h3 className="font-headline text-xl text-[#0F172A]">Full Spectrum</h3>
+                <h3 className="font-headline text-xl text-[#1A2535]">Full Spectrum</h3>
                 <p className="mt-3 text-sm leading-relaxed text-secondary">
                   Strategy, implementation, integrations, software, AI, cloud, and maintenance stay under one accountable
                   team, reducing handoff risk.
@@ -275,7 +275,7 @@ export default function DigitalServicesTangierPage() {
                   <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-primary">
                     0{index + 1}
                   </p>
-                  <h3 className="mt-3 font-headline text-2xl text-[#0F172A]">{item.step}</h3>
+                  <h3 className="mt-3 font-headline text-2xl text-[#1A2535]">{item.step}</h3>
                   <p className="mt-3 text-sm leading-relaxed text-secondary">{item.text}</p>
                 </li>
               ))}
@@ -292,7 +292,7 @@ export default function DigitalServicesTangierPage() {
             <div className="mt-6 grid gap-5 md:grid-cols-2">
               {caseStudies.map((study) => (
                 <Link key={study.href} href={study.href} className="group grid bg-white md:grid-cols-[0.95fr_1.05fr]">
-                  <div className="relative min-h-[14rem] overflow-hidden bg-[#e0e3e5]">
+                  <div className="relative min-h-[14rem] overflow-hidden bg-[#E8EBF0]">
                     <Image
                       src={study.image}
                       alt={study.title}
@@ -302,7 +302,7 @@ export default function DigitalServicesTangierPage() {
                     />
                   </div>
                   <div className="p-6">
-                    <h3 className="font-headline text-2xl leading-tight text-[#0F172A] group-hover:text-primary">
+                    <h3 className="font-headline text-2xl leading-tight text-[#1A2535] group-hover:text-primary">
                       {study.title}
                     </h3>
                     <ul className="mt-5 space-y-3">

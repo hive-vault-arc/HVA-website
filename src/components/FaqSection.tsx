@@ -44,30 +44,30 @@ export default function FaqSection({
   return (
     <section
       dir={dir}
-      className={`border-t border-[#e2e8f0] bg-[#F8FAFC] py-20 ${className}`}
+      className={`border-t border-[#DDE3EA] bg-[#FFFFFF] py-20 ${className}`}
     >
       {/* Inject FAQPage schema — server-rendered, zero hydration cost */}
       <JsonLd data={faqSchema} />
 
       <div className="mx-auto max-w-4xl px-6 lg:px-14">
-        <h2 className="mb-12 font-serif text-3xl font-semibold tracking-tight text-[#0F172A] lg:text-4xl">
+        <h2 className="mb-12 font-serif text-3xl font-semibold tracking-tight text-[#1A2535] lg:text-4xl">
           {heading}
         </h2>
 
-        <dl className="divide-y divide-[#e2e8f0]">
+        <dl className="divide-y divide-[#DDE3EA]">
           {faqs.map((item) => (
             <details
               key={item.question}
               className="group py-5 [&_summary::-webkit-details-marker]:hidden"
             >
               <summary className="flex cursor-pointer list-none items-start justify-between gap-6 text-left">
-                <dt className="text-base font-medium text-[#0F172A] lg:text-lg">
+                <dt className="text-base font-medium text-[#1A2535] lg:text-lg">
                   {item.question}
                 </dt>
                 {/* Plus / minus indicator — pure CSS, no JS */}
                 <span
                   aria-hidden="true"
-                  className="mt-0.5 flex-shrink-0 text-[#2563EB] transition-transform duration-200 group-open:rotate-45"
+                  className="mt-0.5 flex-shrink-0 text-[#E8A838] transition-transform duration-200 group-open:rotate-45"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +80,7 @@ export default function FaqSection({
                 </span>
               </summary>
 
-              <dd className="mt-4 pr-12 text-sm leading-relaxed text-[#475569] lg:text-base">
+              <dd className="mt-4 pr-12 text-sm leading-relaxed text-[#566274] lg:text-base">
                 {item.answer}
               </dd>
             </details>

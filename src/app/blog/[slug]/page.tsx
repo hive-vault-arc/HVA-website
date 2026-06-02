@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     ...base,
-    authors: [{ name: 'H.V.A Research Team', url: absoluteUrl('/whoweare/abouthva') }],
+    authors: [{ name: 'Hive Vault Arc Research Team', url: absoluteUrl('/whoweare/abouthva') }],
     openGraph: {
       ...base.openGraph,
       type: 'article',
@@ -70,7 +70,7 @@ export default async function BlogPostPage({ params }: Props) {
     description: post.excerpt,
     author: {
       '@type': 'Person',
-      name: 'H.V.A Research Team',
+      name: 'Hive Vault Arc Research Team',
       url: absoluteUrl('/whoweare/abouthva'),
     },
     publisher: {

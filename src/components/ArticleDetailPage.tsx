@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import BottomCTA from './BottomCTA';
+import SectionBrandMark from './SectionBrandMark';
 
 /* ── Types ───────────────────────────────────────────────────────────────── */
 
@@ -127,21 +128,21 @@ export default function ArticleDetailPage({
         ];
 
   return (
-    <main className="bg-[#f7f9fb]">
+    <main className="bg-[#FFFFFF]">
       {/* Scroll progress bar */}
       <motion.div
         aria-hidden="true"
-        className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-gradient-to-r from-[#2563EB] via-[#60a5fa] to-[#0ea5e9]"
+        className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-gradient-to-r from-[#E8A838] via-[#F0C15A] to-[#E8A838]"
         style={{ scaleX: progressScale }}
       />
 
       {/* ── Hero ───────────────────────────────────────────────────────────── */}
-      <section className="bg-[#f2f4f6] pt-36 pb-16 px-4 md:px-8">
+      <section className="bg-[#F7F8FA] pt-28 pb-14 px-4 sm:pt-32 md:px-8 md:pt-36 md:pb-16">
         <div className="max-w-5xl mx-auto">
 
           {/* Breadcrumb */}
           <nav aria-label="Breadcrumb" className="mb-8">
-            <ol className="flex flex-wrap items-center gap-2 text-sm text-[#76777d]">
+            <ol className="flex flex-wrap items-center gap-2 text-sm text-[#6B7280]">
               {resolvedBreadcrumbs.map((crumb, index) => {
                 const isCurrent = index === resolvedBreadcrumbs.length - 1;
                 return (
@@ -149,7 +150,7 @@ export default function ArticleDetailPage({
                     {index === 1 && crumb.href ? (
                       <Link
                         href={crumb.href}
-                        className="inline-flex items-center gap-2 hover:text-[#0F172A] transition-colors"
+                        className="inline-flex items-center gap-2 hover:text-[#1A2535] transition-colors"
                         style={{ fontFamily: 'var(--font-body)' }}
                       >
                         <ArrowLeft className="w-4 h-4" />
@@ -158,7 +159,7 @@ export default function ArticleDetailPage({
                     ) : crumb.href && !isCurrent ? (
                       <Link
                         href={crumb.href}
-                        className="hover:text-[#0F172A] transition-colors"
+                        className="hover:text-[#1A2535] transition-colors"
                         style={{ fontFamily: 'var(--font-body)' }}
                       >
                         {crumb.label}
@@ -166,13 +167,13 @@ export default function ArticleDetailPage({
                     ) : (
                       <span
                         aria-current={isCurrent ? 'page' : undefined}
-                        className={isCurrent ? 'font-medium text-[#191c1e] truncate max-w-[240px]' : undefined}
+                        className={isCurrent ? 'font-medium text-[#1A2535] truncate max-w-[12rem] sm:max-w-[240px]' : undefined}
                         style={{ fontFamily: 'var(--font-body)' }}
                       >
                         {crumb.label}
                       </span>
                     )}
-                    {!isCurrent && <span aria-hidden="true" className="text-[#c6c6cd] text-xs">/</span>}
+                    {!isCurrent && <span aria-hidden="true" className="text-[#CDD2DA] text-xs">/</span>}
                   </li>
                 );
               })}
@@ -184,32 +185,33 @@ export default function ArticleDetailPage({
             className="flex flex-wrap items-center gap-4 mb-7 text-xs font-bold tracking-widest uppercase"
             style={{ fontFamily: 'var(--font-body)' }}
           >
-            <span style={{ color: '#2563EB' }}>{eyebrow}</span>
+            <SectionBrandMark size="sm" className="mr-1" />
+            <span style={{ color: '#E8A838' }}>{eyebrow}</span>
             {isoDate && (
               <>
-                <span className="w-1 h-1 rounded-full bg-[#c6c6cd]" />
-                <time dateTime={isoDate} className="text-[#76777d]">
+                <span className="w-1 h-1 rounded-full bg-[#CDD2DA]" />
+                <time dateTime={isoDate} className="text-[#6B7280]">
                   {fmtDate(isoDate)}
                 </time>
               </>
             )}
             {readTime && (
               <>
-                <span className="w-1 h-1 rounded-full bg-[#c6c6cd]" />
-                <span className="text-[#76777d]">{readTime}</span>
+                <span className="w-1 h-1 rounded-full bg-[#CDD2DA]" />
+                <span className="text-[#6B7280]">{readTime}</span>
               </>
             )}
             {!readTime && metaLabel && (
               <>
-                <span className="w-1 h-1 rounded-full bg-[#c6c6cd]" />
-                <span className="text-[#76777d]">{metaLabel}</span>
+                <span className="w-1 h-1 rounded-full bg-[#CDD2DA]" />
+                <span className="text-[#6B7280]">{metaLabel}</span>
               </>
             )}
           </div>
 
           {/* Title */}
           <motion.h1
-            className="text-4xl md:text-6xl leading-tight tracking-tight text-[#0F172A] mb-6"
+            className="mb-6 text-[clamp(2.4rem,11vw,3.8rem)] leading-tight tracking-tight text-[#1A2535] md:text-6xl"
             style={{ fontFamily: 'var(--font-headline)' }}
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -221,7 +223,7 @@ export default function ArticleDetailPage({
           {/* Subtitle */}
           {subtitle && (
             <motion.p
-              className="text-lg text-[#45464d] leading-relaxed max-w-2xl mb-10"
+              className="text-lg text-[#536070] leading-relaxed max-w-2xl mb-10"
               style={{ fontFamily: 'var(--font-body)' }}
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
@@ -239,17 +241,17 @@ export default function ArticleDetailPage({
               animate={{ opacity: 1 }}
               transition={{ duration: 0.4, delay: 0.2 }}
             >
-              <div className="w-10 h-10 bg-[#0F172A] flex items-center justify-center text-white text-xs font-bold shrink-0">
+              <div className="w-10 h-10 bg-[#1A2535] flex items-center justify-center text-white text-xs font-bold shrink-0">
                 {author.initials}
               </div>
               <address className="not-italic">
-                <p className="text-sm text-[#191c1e]" style={{ fontFamily: 'var(--font-body)' }}>
+                <p className="text-sm text-[#1A2535]" style={{ fontFamily: 'var(--font-body)' }}>
                   <span>By </span>
-                  <Link rel="author" href={authorHref} className="text-[#2563EB] hover:underline">
+                  <Link rel="author" href={authorHref} className="text-[#E8A838] hover:underline">
                     {author.name}
                   </Link>
                 </p>
-                <p className="text-xs text-[#76777d]" style={{ fontFamily: 'var(--font-body)' }}>
+                <p className="text-xs text-[#6B7280]" style={{ fontFamily: 'var(--font-body)' }}>
                   {author.role}
                 </p>
               </address>
@@ -261,7 +263,7 @@ export default function ArticleDetailPage({
       {/* ── Cover image ────────────────────────────────────────────────────── */}
       {coverImage && (
         <div className="max-w-5xl mx-auto px-4 md:px-8 -mt-1">
-          <div className="relative w-full aspect-[21/9] overflow-hidden bg-[#e0e3e5]">
+          <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#E8EBF0] sm:aspect-[16/9] lg:aspect-[21/9]">
             <Image
               src={coverImage}
               alt={coverAlt ?? title}
@@ -270,25 +272,25 @@ export default function ArticleDetailPage({
               priority
               sizes="(max-width: 1024px) 100vw, 1024px"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#f7f9fb] via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#FFFFFF] via-transparent to-transparent" />
           </div>
         </div>
       )}
 
       {/* ── Body + Sidebar ─────────────────────────────────────────────────── */}
       <section className="max-w-5xl mx-auto px-4 md:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
           {/* Sticky Sidebar — 3 cols */}
           {sidebar && (
-            <aside className="md:col-span-3 order-2 md:order-1">
-              <div className="sticky top-28">
+            <aside className="order-2 lg:order-1 lg:col-span-3">
+              <div className="lg:sticky lg:top-28">
                 {sidebar}
               </div>
             </aside>
           )}
 
           {/* Main content — 9 cols (or full 12 if no sidebar) */}
-          <div className={sidebar ? 'md:col-span-9 order-1 md:order-2' : 'md:col-span-12'}>
+          <div className={sidebar ? 'order-1 lg:order-2 lg:col-span-9' : 'lg:col-span-12'}>
             {contentAsArticle ? (
               <motion.article
                 initial={{ opacity: 0, y: 8 }}
@@ -312,29 +314,27 @@ export default function ArticleDetailPage({
         </div>
       </section>
 
-      {/* ── About H.V.A strip ──────────────────────────────────────────────── */}
+      {/* ── About Hive Vault Arc strip ──────────────────────────────────────────────── */}
       {showAboutStrip && (
-        <section className="bg-[#f2f4f6] py-16 px-4 md:px-8">
+        <section className="bg-[#F7F8FA] py-16 px-4 md:px-8">
           <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-10 items-center md:items-start">
-            <div className="w-16 h-16 bg-[#0F172A] flex items-center justify-center text-white text-sm font-bold shrink-0">
-              HV
-            </div>
+            <SectionBrandMark size="lg" />
             <div className="flex-1 text-center md:text-left">
               <h3
-                className="text-2xl mb-3 text-[#191c1e]"
+                className="text-2xl mb-3 text-[#1A2535]"
                 style={{ fontFamily: 'var(--font-headline)' }}
               >
                 About Hive Vault Arc
               </h3>
               <p
-                className="text-[#45464d] leading-relaxed mb-6 max-w-xl"
+                className="text-[#536070] leading-relaxed mb-6 max-w-xl"
                 style={{ fontFamily: 'var(--font-body)' }}
               >
-                H.V.A is a technology consulting and digital transformation firm based in Tangier, Morocco. We advise, engineer, build, ship, and maintain intelligent systems across AI, automation, custom software, IT modernization, cloud infrastructure, and data capabilities.
+                Hive Vault Arc is a technology consulting and digital transformation firm based in Tangier, Morocco. We advise, engineer, build, ship, and maintain intelligent systems across AI, automation, custom software, IT modernization, cloud infrastructure, and data capabilities.
               </p>
               <Link
                 href="/case-studies"
-                className="inline-flex items-center gap-2 text-sm font-bold tracking-widest uppercase text-[#2563EB] hover:gap-4 transition-all"
+              className="inline-flex min-h-11 items-center gap-2 text-sm font-bold uppercase tracking-widest text-[#E8A838] transition-all hover:gap-4"
                 style={{ fontFamily: 'var(--font-body)' }}
               >
                 Explore case studies
@@ -349,16 +349,16 @@ export default function ArticleDetailPage({
       {relatedItems.length > 0 && (
         <section className="py-20 px-4 md:px-8">
           <div className="max-w-7xl mx-auto">
-            <div className="flex justify-between items-end mb-12">
+            <div className="mb-12 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <p
-                  className="text-xs font-bold uppercase tracking-widest text-[#76777d] mb-3"
+                  className="text-xs font-bold uppercase tracking-widest text-[#6B7280] mb-3"
                   style={{ fontFamily: 'var(--font-body)' }}
                 >
                   Continue Reading
                 </p>
                 <h2
-                  className="text-4xl text-[#191c1e]"
+                  className="text-4xl text-[#1A2535]"
                   style={{ fontFamily: 'var(--font-headline)' }}
                 >
                   {relatedTitle}
@@ -367,8 +367,8 @@ export default function ArticleDetailPage({
               {relatedAllHref && (
                 <Link
                   href={relatedAllHref}
-                  className="hidden md:inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-[#0F172A] hover:text-[#2563EB] transition-colors pb-1"
-                  style={{ fontFamily: 'var(--font-body)', borderBottom: '2px solid #0F172A' }}
+                  className="hidden md:inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-[#1A2535] hover:text-[#E8A838] transition-colors pb-1"
+                  style={{ fontFamily: 'var(--font-body)', borderBottom: '2px solid #1A2535' }}
                 >
                   {relatedAllLabel}
                 </Link>
@@ -386,7 +386,7 @@ export default function ArticleDetailPage({
                   transition={{ duration: 0.5, delay: i * 0.08, ease: 'easeOut' }}
                 >
                   <Link href={item.href} className="block">
-                    <div className="aspect-[4/3] mb-5 overflow-hidden bg-[#e0e3e5] relative">
+                    <div className="aspect-[4/3] mb-5 overflow-hidden bg-[#E8EBF0] relative">
                       {item.coverImage ? (
                         <Image
                           src={item.coverImage}
@@ -398,7 +398,7 @@ export default function ArticleDetailPage({
                       ) : (
                         <div className="w-full h-full flex items-center justify-center">
                           <span
-                            className="text-3xl font-light italic text-[#c6c6cd] select-none"
+                            className="text-3xl font-light italic text-[#CDD2DA] select-none"
                             style={{ fontFamily: 'var(--font-headline)' }}
                           >
                             {item.tag}
@@ -408,12 +408,12 @@ export default function ArticleDetailPage({
                     </div>
                     <p
                       className="text-xs font-bold uppercase tracking-widest mb-3"
-                      style={{ color: '#2563EB', fontFamily: 'var(--font-body)' }}
+                      style={{ color: '#E8A838', fontFamily: 'var(--font-body)' }}
                     >
                       {item.tag}
                     </p>
                     <h3
-                      className="text-xl text-[#191c1e] group-hover:text-[#2563EB] transition-colors leading-snug"
+                      className="text-xl text-[#1A2535] group-hover:text-[#E8A838] transition-colors leading-snug"
                       style={{ fontFamily: 'var(--font-headline)' }}
                     >
                       {item.title}

@@ -1,4 +1,6 @@
-# Sprint 17 — About Page Full Remake
+# Sprint 17 - About Page Full Remake
+
+> 2026-05-24 status: historical sprint. Current public brand is `Hive Vault Arc`; use `H.V.A` and `HVA` only as aliases/search variants. For SEO + AI discovery execution, start from `sprints/seo-ai-discovery/README.md`.
 
 > **Priority:** HIGH — This is the highest-intent evaluation page. Prospects land here to decide if H.V.A is serious. Every word must earn its place.
 > **Estimated effort:** 4–6 hours
