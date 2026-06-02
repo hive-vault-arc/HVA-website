@@ -95,23 +95,23 @@ const Contact: React.FC = () => {
         />
 
         {/* ── Hero ─────────────────────────────────────────────────────── */}
-        <section className="relative mx-auto max-w-7xl px-6 pt-28 pb-16 sm:px-8 md:pt-36 md:pb-20">
+        <section className="contact-hero relative mx-auto max-w-7xl px-6 pt-28 pb-16 sm:px-8 md:pt-36 md:pb-20">
           <motion.div
-            className="max-w-3xl"
+            className="contact-hero__content max-w-3xl"
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55 }}
           >
-            <SectionBrandMark size="md" className="mb-6" />
-            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-headline tracking-tight text-[#1A2535] mb-8 leading-[1.1]">
+            <SectionBrandMark size="md" className="contact-hero__mark mb-6" />
+            <h1 className="contact-hero__title font-headline text-[#1A2535] mb-8">
               Start your transformation discovery.
             </h1>
-            <p className="text-xl font-body text-[#566274] max-w-xl leading-relaxed">
+            <p className="contact-hero__lead font-body text-[#566274]">
               Share your goals, constraints, and current bottlenecks. We reply within 24 hours and guide the next step.
             </p>
           </motion.div>
           {/* Architectural accent line */}
-          <div className="absolute top-24 right-8 hidden lg:block w-px h-64 bg-slate-200/60" />
+          <div className="contact-hero__rail absolute top-24 right-8 hidden lg:block w-px h-64 bg-slate-200/60" />
         </section>
 
         {/* ── Main grid ────────────────────────────────────────────────── */}
