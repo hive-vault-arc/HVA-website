@@ -107,7 +107,7 @@ const Contact: React.FC = () => {
               Start your transformation discovery.
             </h1>
             <p className="contact-hero__lead font-body text-[#566274]">
-              Share your goals, constraints, and current bottlenecks. We reply within 24 hours and guide the next step.
+              Share your goals, constraints, and current bottlenecks. We reply within 24 hours and guide your next step.
             </p>
           </motion.div>
           {/* Architectural accent line */}
