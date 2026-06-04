@@ -9,6 +9,7 @@ type Props = {
   titleItalic?: string;
   description: string;
   cards: InsightCard[];
+  basePath?: string;
 };
 
 export default function InsightsCollection({
@@ -17,13 +18,16 @@ export default function InsightsCollection({
   titleItalic,
   description,
   cards,
+  basePath = '/insights',
 }: Readonly<Props>) {
   const items: PageItem[] = cards.map((c) => ({
-    href: `/insights/${c.slug}`,
+    href: `${basePath}/${c.slug}`,
     title: c.title,
     excerpt: c.summary,
     tag: c.tag,
     date: c.publishedAt,
+    meta: c.readTime,
+    coverImage: c.coverImage,
   }));
 
   return (

@@ -2,6 +2,8 @@ import type { MetadataRoute } from 'next';
 import { SITE_URL } from '../lib/seo';
 import { getAllPosts } from '../lib/blog';
 import { getAllCaseStudies } from '../lib/proof';
+import { getAllNewsArticles } from '../lib/insights';
+import { getAllPerspectives } from '../lib/perspectives';
 
 const INDEXABLE_LOCALES = ['fr', 'ar', 'es'] as const;
 const BASE_URL = SITE_URL.replace(/\/$/, '');
@@ -70,7 +72,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry('/products-systems', now, m(0.6)),
     entry('/insights', now, w(0.85)),
     entry('/insights/news-articles', now, m(0.7)),
+    ...getAllNewsArticles().map((article) => ({
+      url: absoluteUrl(`/insights/news-articles/${article.slug}`),
+      lastModified: new Date(article.publishedAt),
+      ...m(0.7),
+    })),
     entry('/insights/perspectives', now, m(0.7)),
+    ...getAllPerspectives().map((perspective) => ({
+      url: absoluteUrl(`/insights/perspectives/${perspective.slug}`),
+      lastModified: new Date(perspective.publishedAt),
+      ...m(0.7),
+    })),
     entry('/insights/research-reports', now, m(0.7)),
     entry('/contact', now, m(0.8)),
     entry('/whoweare/abouthva', now, m(0.7)),

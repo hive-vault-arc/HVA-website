@@ -210,6 +210,26 @@ Measured outcomes:
 - Manual data-entry time: -40%
 - Tracked deal volume: $2.4M per month
 
+## 9A. Public Perspectives
+
+### Fix the Workflow Before You Add AI
+
+- URL: https://hivevaultarc.com/insights/perspectives/fix-the-workflow-before-ai
+- Type: Perspective
+- Published: 2026-06-04
+- Summary: Hive Vault Arc's point of view that AI implementation should follow workflow assessment, data clarity, ownership design, escalation rules, and measurable success criteria.
+- Direct answer: A business should not add AI before it understands the workflow it wants to improve. AI works best when process, data, decision rights, escalation rules, and success metrics are clear.
+- Related framework: ARC - Assess, Re-engineer, Command.
+
+### Consulting and Engineering Must Stay in One Loop
+
+- URL: https://hivevaultarc.com/insights/perspectives/consulting-engineering-one-loop
+- Type: Perspective
+- Published: 2026-06-04
+- Summary: Hive Vault Arc's point of view that consulting, engineering, and operations should remain connected from diagnosis to production to reduce execution drift.
+- Direct answer: Consulting and engineering should stay connected because transformation depends on context; handoffs between strategy, architecture, delivery, and operations can cause technically correct systems to miss the business outcome.
+- Related framework: ARC - Assess, Re-engineer, Command.
+
 ## 10. AI Agent Architecture
 
 Hive Vault Arc's typical AI agent architecture uses an event-driven orchestration pattern.
@@ -275,6 +295,8 @@ Important market signals:
 - Case Studies: https://hivevaultarc.com/case-studies
 - Insights: https://hivevaultarc.com/insights
 - Blog: https://hivevaultarc.com/blog
+- Perspective - Fix the Workflow Before You Add AI: https://hivevaultarc.com/insights/perspectives/fix-the-workflow-before-ai
+- Perspective - Consulting and Engineering Must Stay in One Loop: https://hivevaultarc.com/insights/perspectives/consulting-engineering-one-loop
 - Contact: https://hivevaultarc.com/contact
 
 ### Localized Capability Pages

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import InsightsCollection from '../../../views/InsightsCollection';
+import { getAllPerspectives } from '../../../lib/perspectives';
 import { GLOBAL_KEYWORDS, buildPageMetadata, mergeKeywords } from '../../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
@@ -15,12 +16,24 @@ export const metadata: Metadata = buildPageMetadata({
 });
 
 export default function InsightsPerspectivesPage() {
+  const perspectives = getAllPerspectives().map((perspective) => ({
+    title: perspective.title,
+    slug: perspective.slug,
+    summary: perspective.summary,
+    publishedAt: perspective.publishedAt,
+    tag: perspective.tag,
+    readTime: perspective.readTime,
+    coverImage: perspective.coverImage,
+    coverAlt: perspective.coverAlt,
+  }));
+
   return (
     <InsightsCollection
       eyebrow="Insights / Perspectives"
       title="Perspectives"
       description="Editorial viewpoints on how strategy, architecture, and execution should be governed in modern organizations."
-      cards={[]}
+      cards={perspectives}
+      basePath="/insights/perspectives"
     />
   );
 }

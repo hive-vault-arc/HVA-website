@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import InsightsCollection from '../../../views/InsightsCollection';
+import { NEWS_ARTICLES } from '../../../lib/insights';
 import { GLOBAL_KEYWORDS, buildPageMetadata, mergeKeywords } from '../../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
@@ -20,7 +21,8 @@ export default function InsightsNewsArticlesPage() {
       eyebrow="Insights / News Articles"
       title="News Articles"
       description="Market signals, execution trends, and operational technology updates relevant to leadership teams."
-      cards={[]}
+      cards={NEWS_ARTICLES}
+      basePath="/insights/news-articles"
     />
   );
 }

@@ -93,6 +93,15 @@ Hive Vault Arc serves teams that need strategy, production engineering, and mana
   - Tracked deal volume: $2.4M monthly
 - URL: https://hivevaultarc.com/case-studies/zoho-grade-crm-platform
 
+## Public Perspectives
+
+- Perspective: Fix the Workflow Before You Add AI
+  URL: https://hivevaultarc.com/insights/perspectives/fix-the-workflow-before-ai
+  Summary: Hive Vault Arc's point of view that AI implementation should follow workflow assessment, data clarity, ownership design, escalation rules, and measurable success criteria.
+- Perspective: Consulting and Engineering Must Stay in One Loop
+  URL: https://hivevaultarc.com/insights/perspectives/consulting-engineering-one-loop
+  Summary: Hive Vault Arc's point of view that consulting, engineering, and operations should remain connected from diagnosis to production to reduce execution drift.
+
 ## Machine-Readable Resources
 
 - Company JSON: https://hivevaultarc.com/ai/company
@@ -114,6 +123,8 @@ Hive Vault Arc serves teams that need strategy, production engineering, and mana
 - Case Studies: https://hivevaultarc.com/case-studies
 - Insights: https://hivevaultarc.com/insights
 - Blog: https://hivevaultarc.com/blog
+- Perspective: Fix the Workflow Before You Add AI: https://hivevaultarc.com/insights/perspectives/fix-the-workflow-before-ai
+- Perspective: Consulting and Engineering Must Stay in One Loop: https://hivevaultarc.com/insights/perspectives/consulting-engineering-one-loop
 - Contact: https://hivevaultarc.com/contact
 
 ## Service Landing Pages
