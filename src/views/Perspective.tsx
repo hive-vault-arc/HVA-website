@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { ArrowUpRight, ExternalLink } from 'lucide-react';
 import ArticleDetailPage from '../components/ArticleDetailPage';
 import type { Perspective, PerspectiveSection } from '../lib/perspectives';
-import { getRelatedPerspectives } from '../lib/perspectives';
 
 function RenderSection({ section, index }: { section: PerspectiveSection; index: number }) {
   switch (section.type) {
@@ -199,9 +198,13 @@ function PerspectiveSidebar({ perspective }: { perspective: Perspective }) {
   );
 }
 
-export default function PerspectiveView({ perspective }: { perspective: Perspective }) {
-  const related = getRelatedPerspectives(perspective.slug);
-
+export default function PerspectiveView({
+  perspective,
+  relatedPerspectives,
+}: {
+  readonly perspective: Perspective;
+  readonly relatedPerspectives: Perspective[];
+}) {
   return (
     <ArticleDetailPage
       backHref="/insights/perspectives"
@@ -223,7 +226,7 @@ export default function PerspectiveView({ perspective }: { perspective: Perspect
       coverAlt={perspective.coverAlt}
       contentAsArticle
       showAboutStrip
-      relatedItems={related.map((item) => ({
+      relatedItems={relatedPerspectives.map((item) => ({
         href: `/insights/perspectives/${item.slug}`,
         title: item.title,
         tag: item.tag,

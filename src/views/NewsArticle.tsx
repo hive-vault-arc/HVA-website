@@ -5,7 +5,6 @@ import { ArrowUpRight, ExternalLink } from 'lucide-react';
 import ArticleDetailPage from '../components/ArticleDetailPage';
 import type { ContentSection } from '../lib/blog';
 import type { NewsArticle } from '../lib/insights';
-import { getRelatedNewsArticles } from '../lib/insights';
 
 function RenderSection({ section, index }: { section: ContentSection; index: number }) {
   switch (section.type) {
@@ -185,9 +184,13 @@ function NewsSidebar({ sources, tags }: { sources: NewsArticle['sources']; tags:
   );
 }
 
-export default function NewsArticleView({ article }: { article: NewsArticle }) {
-  const related = getRelatedNewsArticles(article.slug);
-
+export default function NewsArticleView({
+  article,
+  relatedArticles,
+}: {
+  readonly article: NewsArticle;
+  readonly relatedArticles: NewsArticle[];
+}) {
   return (
     <ArticleDetailPage
       backHref="/insights/news-articles"
@@ -207,7 +210,7 @@ export default function NewsArticleView({ article }: { article: NewsArticle }) {
       coverAlt={article.coverAlt}
       contentAsArticle
       showAboutStrip
-      relatedItems={related.map((item) => ({
+      relatedItems={relatedArticles.map((item) => ({
         href: `/insights/news-articles/${item.slug}`,
         title: item.title,
         tag: item.tag,

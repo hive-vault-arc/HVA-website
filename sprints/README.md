@@ -3,7 +3,7 @@
 > 2026-05-24 note: this is the older general SEO/content backlog. For current SEO + AI discovery work, use `sprints/seo-ai-discovery/README.md`. Public-facing copy should now use `Hive Vault Arc`; `H.V.A` and `HVA` are aliases/search variants unless a historical sprint explicitly says otherwise.
 
 > All remaining work on the hiva-website, organized as sprint files for AI coding agent execution.
-> Last updated: 2026-04-28
+> Last updated: 2026-06-04
 
 ---
 
@@ -21,6 +21,17 @@ Run sprints in this order. Each sprint's exit criteria must pass before the next
 | 06 | `sprint-06-seo-landing-pages.md` | 🟡 MEDIUM | Build 4 keyword-targeted landing pages | 4–6h |
 | 07 | `sprint-07-locale-content-audit.md` | 🟡 MEDIUM | Audit /fr /ar /es, add hreflang, deindex incomplete locales | 4–8h |
 | 08 | `sprint-08-llms-txt-aeo.md` | 🟡 MEDIUM | Update llms.txt, add Q&A block, create llms-full.txt | 2–3h |
+| 09 | `sprint-09-digital-services-tangier.md` | 🔴 HIGH | Rank for "Digital Services Tangier" keyword cluster | 3–5h |
+| 10 | `sprint-10-positioning-core-update.md` | 🔴 CRITICAL | Update core brand positioning language | 1–2h |
+| 11 | `sprint-11-capabilities-six-pillars.md` | 🔴 HIGH | Rebuild capabilities around six service pillars | 3–5h |
+| 12 | `sprint-12-industries-eight-verticals.md` | 🔴 HIGH | Update industries page to eight strategic verticals | 4–6h |
+| 13 | `sprint-13-homepage-positioning-refresh.md` | 🔴 HIGH | Refresh homepage positioning and service language | 2–3h |
+| 14 | `sprint-14-navigation-footer-update.md` | 🟡 MEDIUM | Update navigation and footer labels | 1–2h |
+| 15 | `sprint-15-seo-metadata-update.md` | 🔴 HIGH | Update SEO metadata for new positioning | 2–3h |
+| 16 | `sprint-16-arc-about-pages.md` | 🟡 MEDIUM | Update ARC and About page language | 2–3h |
+| 17 | `sprint-17-about-page-remake.md` | 🔴 HIGH | Full About page remake around H.V.A identity | 4–6h |
+| 18 | `sprint-18-perspective-workflow-before-ai.md` | 🔴 HIGH | Publish Perspective 01: Fix the Workflow Before You Add AI | 4–6h |
+| 19 | `sprint-19-perspective-consulting-engineering-loop.md` | 🔴 HIGH | Publish Perspective 02: Consulting and Engineering Must Stay in One Loop | 3–5h |
 
 ---
 

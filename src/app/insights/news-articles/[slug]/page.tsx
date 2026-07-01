@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import JsonLd from '../../../../components/JsonLd';
 import NewsArticleView from '../../../../views/NewsArticle';
-import { getAllNewsArticles, getNewsArticleBySlug } from '../../../../lib/insights';
+import { getAllNewsArticles, getNewsArticleBySlug, getRelatedNewsArticles } from '../../../../lib/insights';
 import {
   SITE_LOGO_HEIGHT,
   SITE_LOGO_PATH,
@@ -15,13 +15,14 @@ import {
 
 type Props = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
-  return getAllNewsArticles().map((article) => ({ slug: article.slug }));
+export async function generateStaticParams() {
+  const articles = await getAllNewsArticles();
+  return articles.map((article) => ({ slug: article.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const article = getNewsArticleBySlug(slug);
+  const article = await getNewsArticleBySlug(slug);
   if (!article) return {};
 
   const base = buildPageMetadata({
@@ -54,8 +55,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function NewsArticlePage({ params }: Props) {
   const { slug } = await params;
-  const article = getNewsArticleBySlug(slug);
+  const article = await getNewsArticleBySlug(slug);
   if (!article) notFound();
+  const relatedArticles = await getRelatedNewsArticles(article.slug);
 
   const isoDate = article.publishedAt.includes('T') ? article.publishedAt : `${article.publishedAt}T00:00:00Z`;
 
@@ -109,7 +111,7 @@ export default async function NewsArticlePage({ params }: Props) {
   return (
     <>
       <JsonLd data={[newsArticleSchema, breadcrumbSchema]} />
-      <NewsArticleView article={article} />
+      <NewsArticleView article={article} relatedArticles={relatedArticles} />
     </>
   );
 }

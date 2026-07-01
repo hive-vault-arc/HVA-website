@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import JsonLd from '../../../../components/JsonLd';
 import PerspectiveView from '../../../../views/Perspective';
-import { getAllPerspectives, getPerspectiveBySlug } from '../../../../lib/perspectives';
+import { getAllPerspectives, getPerspectiveBySlug, getRelatedPerspectives, type Perspective } from '../../../../lib/perspectives';
 import {
   SITE_LOGO_HEIGHT,
   SITE_LOGO_PATH,
@@ -15,25 +15,18 @@ import {
 
 type Props = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
-  return getAllPerspectives().map((perspective) => ({ slug: perspective.slug }));
+export async function generateStaticParams() {
+  const perspectives = await getAllPerspectives();
+  return perspectives.map((perspective) => ({ slug: perspective.slug }));
 }
 
-function findPerspective(slug: string) {
-  try {
-    return getPerspectiveBySlug(slug);
-  } catch {
-    return undefined;
-  }
-}
-
-function getFaqItems(perspective: ReturnType<typeof getPerspectiveBySlug>) {
+function getFaqItems(perspective: Perspective) {
   return perspective.sections.flatMap((section) => (section.type === 'faq' ? section.items : []));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const perspective = findPerspective(slug);
+  const perspective = await getPerspectiveBySlug(slug).catch(() => null);
   if (!perspective) return {};
 
   const base = buildPageMetadata({
@@ -72,8 +65,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function PerspectivePage({ params }: Props) {
   const { slug } = await params;
-  const perspective = findPerspective(slug);
+  const perspective = await getPerspectiveBySlug(slug).catch(() => null);
   if (!perspective) notFound();
+  const relatedPerspectives = await getRelatedPerspectives(perspective.slug);
 
   const isoDate = perspective.publishedAt.includes('T')
     ? perspective.publishedAt
@@ -146,7 +140,7 @@ export default async function PerspectivePage({ params }: Props) {
   return (
     <>
       <JsonLd data={faqSchema ? [articleSchema, breadcrumbSchema, faqSchema] : [articleSchema, breadcrumbSchema]} />
-      <PerspectiveView perspective={perspective} />
+      <PerspectiveView perspective={perspective} relatedPerspectives={relatedPerspectives} />
     </>
   );
 }

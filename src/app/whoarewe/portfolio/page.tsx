@@ -28,8 +28,8 @@ export const metadata: Metadata = buildPageMetadata({
   ]),
 });
 
-export default function Page() {
-  const caseStudies = getAllCaseStudies();
+export default async function Page() {
+  const caseStudies = await getAllCaseStudies();
 
   const breadcrumbSchema = {
     '@context': 'https://schema.org',

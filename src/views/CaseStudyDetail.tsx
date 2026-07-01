@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import type { CaseStudy } from '../lib/proof';
-import { getAllCaseStudies } from '../lib/proof';
 import ArticleDetailPage from '../components/ArticleDetailPage';
 
 const fadeUp = { hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0 } };
@@ -223,12 +222,14 @@ function CaseStudyBody({ study }: { readonly study: CaseStudy }) {
 
 /* ── Main view ───────────────────────────────────────────────────────────── */
 
-export default function CaseStudyDetail({ study }: { readonly study: CaseStudy }) {
-  const allStudies = getAllCaseStudies();
-  const related = allStudies
-    .filter((s) => s.slug !== study.slug)
-    .slice(0, 3)
-    .map((s) => ({
+export default function CaseStudyDetail({
+  study,
+  relatedStudies,
+}: {
+  readonly study: CaseStudy;
+  readonly relatedStudies: CaseStudy[];
+}) {
+  const related = relatedStudies.map((s) => ({
       href: `/case-studies/${s.slug}`,
       title: s.title,
       tag: s.industry,
@@ -249,7 +250,7 @@ export default function CaseStudyDetail({ study }: { readonly study: CaseStudy }
       title={study.title}
       subtitle={study.summary}
       coverImage={study.assets.coverImage || undefined}
-      coverAlt={study.title}
+      coverAlt={study.assets.coverAlt ?? study.title}
       showAboutStrip={false}
       relatedItems={related}
       relatedTitle="More Case Studies"

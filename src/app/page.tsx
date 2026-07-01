@@ -6,8 +6,8 @@ import JsonLd from '../components/JsonLd';
 import type { InsightsCarouselItem } from '../components/InsightsCarousel';
 import FaqSection from '../components/FaqSection';
 import { HOME_FAQS } from '../data/faqs';
-import { getAllPosts } from '../lib/blog';
-import { getAllCaseStudies } from '../lib/proof';
+import { getAllPosts, type BlogPost } from '../lib/blog';
+import { getAllCaseStudies, type CaseStudy } from '../lib/proof';
 import {
   GLOBAL_KEYWORDS,
   SITELINK_CANDIDATES,
@@ -64,8 +64,12 @@ export const metadata: Metadata = {
   },
 };
 
-function buildInsightsCarouselItems(limit = 9): InsightsCarouselItem[] {
-  const posts = getAllPosts()
+function buildInsightsCarouselItems(
+  posts: BlogPost[],
+  studies: CaseStudy[],
+  limit = 9
+): InsightsCarouselItem[] {
+  const postItems = posts
     .filter((post) => Boolean(post.coverImage))
     .slice(0, 10)
     .map((post) => ({
@@ -79,7 +83,7 @@ function buildInsightsCarouselItems(limit = 9): InsightsCarouselItem[] {
       date: post.publishedAt,
     }));
 
-  const studies = getAllCaseStudies()
+  const studyItems = studies
     .filter((study) => Boolean(study.assets.coverImage))
     .slice(0, 8)
     .map((study) => ({
@@ -97,19 +101,20 @@ function buildInsightsCarouselItems(limit = 9): InsightsCarouselItem[] {
   const result: InsightsCarouselItem[] = [];
   let blogIndex = 0;
   let studyIndex = 0;
-  while (result.length < limit && (blogIndex < posts.length || studyIndex < studies.length)) {
-    if (blogIndex < posts.length) result.push(posts[blogIndex++]);
+  while (result.length < limit && (blogIndex < postItems.length || studyIndex < studyItems.length)) {
+    if (blogIndex < postItems.length) result.push(postItems[blogIndex++]);
     if (result.length >= limit) break;
-    if (blogIndex < posts.length) result.push(posts[blogIndex++]);
+    if (blogIndex < postItems.length) result.push(postItems[blogIndex++]);
     if (result.length >= limit) break;
-    if (studyIndex < studies.length) result.push(studies[studyIndex++]);
+    if (studyIndex < studyItems.length) result.push(studyItems[studyIndex++]);
   }
 
   return result.slice(0, limit);
 }
 
-export default function Page() {
-  const insightsCarouselItems = buildInsightsCarouselItems();
+export default async function Page() {
+  const [posts, caseStudies] = await Promise.all([getAllPosts(), getAllCaseStudies()]);
+  const insightsCarouselItems = buildInsightsCarouselItems(posts, caseStudies);
   const capabilitySchema = {
     '@context': 'https://schema.org',
     '@type': ['ProfessionalService', 'Service'],

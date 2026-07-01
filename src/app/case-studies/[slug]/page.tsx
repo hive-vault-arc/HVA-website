@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import JsonLd from '../../../components/JsonLd';
-import { getAllCaseStudies } from '../../../lib/proof';
+import { getAllCaseStudies, getCaseStudyBySlug, getRelatedCaseStudies } from '../../../lib/proof';
 import { SITE_URL, absoluteUrl, buildBreadcrumbSchema, buildPageMetadata } from '../../../lib/seo';
 import CaseStudyDetail from '../../../views/CaseStudyDetail';
 
@@ -9,13 +9,14 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
-export function generateStaticParams() {
-  return getAllCaseStudies().map((study) => ({ slug: study.slug }));
+export async function generateStaticParams() {
+  const studies = await getAllCaseStudies();
+  return studies.map((study) => ({ slug: study.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const study = getAllCaseStudies().find((item) => item.slug === slug);
+  const study = await getCaseStudyBySlug(slug).catch(() => null);
   if (!study) return {};
 
   return buildPageMetadata({
@@ -35,8 +36,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CaseStudyDetailPage({ params }: Props) {
   const { slug } = await params;
-  const study = getAllCaseStudies().find((item) => item.slug === slug);
+  const study = await getCaseStudyBySlug(slug).catch(() => null);
   if (!study) notFound();
+  const relatedStudies = await getRelatedCaseStudies(study.slug);
 
   const articleSchema = {
     '@context': 'https://schema.org',
@@ -84,7 +86,7 @@ export default async function CaseStudyDetailPage({ params }: Props) {
   return (
     <>
       <JsonLd data={[articleSchema, reviewSchema, breadcrumbSchema]} />
-      <CaseStudyDetail study={study} />
+      <CaseStudyDetail study={study} relatedStudies={relatedStudies} />
     </>
   );
 }

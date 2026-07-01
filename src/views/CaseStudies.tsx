@@ -1,12 +1,10 @@
 'use client';
 
-import { getAllCaseStudies } from '../lib/proof';
+import type { CaseStudy } from '../lib/proof';
 import InsightIndexPage, { type PageItem } from '../components/InsightIndexPage';
 
-export default function CaseStudies() {
-  const allStudies = getAllCaseStudies();
-
-  const items: PageItem[] = allStudies.map((s) => ({
+export default function CaseStudies({ studies }: { readonly studies: CaseStudy[] }) {
+  const items: PageItem[] = studies.map((s) => ({
     href: `/case-studies/${s.slug}`,
     title: s.title,
     excerpt: s.summary,
@@ -16,7 +14,7 @@ export default function CaseStudies() {
     metrics: s.measuredOutcomes,
   }));
 
-  const industries = Array.from(new Set(allStudies.map((s) => s.industry)));
+  const industries = Array.from(new Set(studies.map((s) => s.industry)));
 
   return (
     <InsightIndexPage

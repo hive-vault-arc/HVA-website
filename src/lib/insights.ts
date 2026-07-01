@@ -1,4 +1,11 @@
 import type { ContentSection } from './blog';
+import {
+  getAllSanityNewsArticles,
+  getAllSanityResearchReports,
+  getRelatedSanityNewsArticles,
+  getSanityNewsArticleBySlug,
+  getSanityResearchReportBySlug,
+} from './sanity-content';
 
 export type InsightCard = {
   title: string;
@@ -241,14 +248,22 @@ export const INSIGHTS_CATEGORIES = [
   { label: 'Research Reports', href: '/insights/research-reports' },
 ] as const;
 
-export function getAllNewsArticles(): NewsArticle[] {
-  return NEWS_ARTICLES;
+export function getAllNewsArticles(): Promise<NewsArticle[]> {
+  return getAllSanityNewsArticles();
 }
 
-export function getNewsArticleBySlug(slug: string): NewsArticle | undefined {
-  return NEWS_ARTICLES.find((article) => article.slug === slug);
+export function getNewsArticleBySlug(slug: string): Promise<NewsArticle | null> {
+  return getSanityNewsArticleBySlug(slug);
 }
 
-export function getRelatedNewsArticles(currentSlug: string, limit = 3): NewsArticle[] {
-  return NEWS_ARTICLES.filter((article) => article.slug !== currentSlug).slice(0, limit);
+export function getRelatedNewsArticles(currentSlug: string, limit = 3): Promise<NewsArticle[]> {
+  return getRelatedSanityNewsArticles(currentSlug, limit);
+}
+
+export function getAllResearchReports(): Promise<InsightCard[]> {
+  return getAllSanityResearchReports();
+}
+
+export function getResearchReportBySlug(slug: string): Promise<InsightCard | null> {
+  return getSanityResearchReportBySlug(slug);
 }

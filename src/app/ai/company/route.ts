@@ -1,7 +1,10 @@
 import { NextResponse } from 'next/server';
 import { CAPABILITY_DOMAINS, CAPABILITY_SOLUTION_PROGRAM_DETAILS } from '../../../lib/capabilities-content';
 import { HVA_LEADERSHIP } from '../../../lib/leadership';
-import { CASE_STUDIES } from '../../../lib/proof';
+import { getAllPosts } from '../../../lib/blog';
+import { getAllNewsArticles, getAllResearchReports } from '../../../lib/insights';
+import { getAllPerspectives } from '../../../lib/perspectives';
+import { getAllCaseStudies } from '../../../lib/proof';
 import {
   absoluteUrl,
   BRAND_ABBREVIATION,
@@ -60,6 +63,13 @@ const importantPages = {
 };
 
 export async function GET() {
+  const [caseStudies, posts, newsArticles, perspectives, researchReports] = await Promise.all([
+    getAllCaseStudies(),
+    getAllPosts(),
+    getAllNewsArticles(),
+    getAllPerspectives(),
+    getAllResearchReports(),
+  ]);
   const aliases = Array.from(new Set([BRAND_ABBREVIATION, BRAND_INITIALISM, ...BRAND_ALIASES, ...BRAND_SEARCH_VARIANTS]));
 
   return NextResponse.json(
@@ -118,7 +128,7 @@ export async function GET() {
           outcomes: program.outcomes,
           proofLinks: program.proofLinks.map((path) => absoluteUrl(path)),
         })),
-        caseStudies: CASE_STUDIES.map((study) => ({
+        caseStudies: caseStudies.map((study) => ({
           slug: study.slug,
           title: study.title,
           clientName: study.clientName,
@@ -132,6 +142,45 @@ export async function GET() {
             context: outcome.context,
           })),
         })),
+        insights: {
+          blogPosts: posts.map((post) => ({
+            type: 'blog',
+            slug: post.slug,
+            title: post.title,
+            summary: post.excerpt,
+            category: post.category,
+            publishedAt: post.publishedAt,
+            url: absoluteUrl(`/blog/${post.slug}`),
+            tags: post.tags,
+          })),
+          newsArticles: newsArticles.map((article) => ({
+            type: 'newsArticle',
+            slug: article.slug,
+            title: article.title,
+            summary: article.summary,
+            category: article.category,
+            publishedAt: article.publishedAt,
+            url: absoluteUrl(`/insights/news-articles/${article.slug}`),
+            tags: article.tags,
+          })),
+          perspectives: perspectives.map((perspective) => ({
+            type: 'perspective',
+            slug: perspective.slug,
+            title: perspective.title,
+            summary: perspective.summary,
+            publishedAt: perspective.publishedAt,
+            url: absoluteUrl(`/insights/perspectives/${perspective.slug}`),
+            keywords: perspective.keywords,
+          })),
+          researchReports: researchReports.map((report) => ({
+            type: 'researchReport',
+            slug: report.slug,
+            title: report.title,
+            summary: report.summary,
+            publishedAt: report.publishedAt,
+            url: absoluteUrl('/insights/research-reports'),
+          })),
+        },
         industries: [
           'Real Estate & Construction',
           'Healthcare & Life Sciences',

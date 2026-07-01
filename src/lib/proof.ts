@@ -1,3 +1,9 @@
+import {
+  getAllSanityCaseStudies,
+  getRelatedSanityCaseStudies,
+  getSanityCaseStudyBySlug,
+} from './sanity-content';
+
 export type CaseStudyMetric = {
   label: string;
   value: string;
@@ -25,6 +31,7 @@ export type CaseStudy = {
   assets: {
     coverImage: string;
     logoLabel: string;
+    coverAlt?: string;
   };
   lastUpdated: string;
 };
@@ -160,15 +167,19 @@ export const PRODUCT_SYSTEMS: ProductSystem[] = [
   },
 ];
 
-export function getAllCaseStudies(): CaseStudy[] {
-  return CASE_STUDIES;
+export function getAllCaseStudies(): Promise<CaseStudy[]> {
+  return getAllSanityCaseStudies();
 }
 
-export function getCaseStudyBySlug(slug: string): CaseStudy {
-  const caseStudy = CASE_STUDIES.find((item) => item.slug === slug);
+export async function getCaseStudyBySlug(slug: string): Promise<CaseStudy> {
+  const caseStudy = await getSanityCaseStudyBySlug(slug);
   if (!caseStudy) {
     throw new Error(`Case study not found: ${slug}`);
   }
   return caseStudy;
+}
+
+export function getRelatedCaseStudies(currentSlug: string, limit = 3): Promise<CaseStudy[]> {
+  return getRelatedSanityCaseStudies(currentSlug, limit);
 }
 

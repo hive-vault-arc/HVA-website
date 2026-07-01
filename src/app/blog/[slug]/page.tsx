@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getAllPosts } from '../../../lib/blog';
+import { getAllPosts, getPostBySlug, getRelatedPosts } from '../../../lib/blog';
 import {
   SITE_LOGO_HEIGHT,
   SITE_LOGO_PATH,
@@ -16,14 +16,14 @@ import BlogPostView from '../../../views/BlogPost';
 
 type Props = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
-  return getAllPosts().map((post) => ({ slug: post.slug }));
+export async function generateStaticParams() {
+  const posts = await getAllPosts();
+  return posts.map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const posts = getAllPosts();
-  const post = posts.find((p) => p.slug === slug);
+  const post = await getPostBySlug(slug).catch(() => null);
   if (!post) return {};
 
   const base = buildPageMetadata({
@@ -46,7 +46,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       modifiedTime: isoDate,
       authors: [absoluteUrl('/whoweare/abouthva')],
       section: post.category,
-      images: [{ url: coverUrl, width: 1200, height: 630, alt: post.title }],
+      images: [{ url: coverUrl, width: 1200, height: 630, alt: post.coverAlt ?? post.title }],
     },
     twitter: {
       ...base.twitter,
@@ -57,9 +57,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const posts = getAllPosts();
-  const post = posts.find((p) => p.slug === slug);
+  const post = await getPostBySlug(slug).catch(() => null);
   if (!post) notFound();
+  const relatedPosts = await getRelatedPosts(post.slug);
 
   const isoDate = post.publishedAt.includes('T') ? post.publishedAt : `${post.publishedAt}T00:00:00Z`;
 
@@ -109,7 +109,7 @@ export default async function BlogPostPage({ params }: Props) {
   return (
     <>
       <JsonLd data={[articleSchema, breadcrumbSchema]} />
-      <BlogPostView post={post} />
+      <BlogPostView post={post} relatedPosts={relatedPosts} />
       {post.faqs && post.faqs.length > 0 && (
         <FaqSection faqs={post.faqs} heading="Questions About This Article" />
       )}

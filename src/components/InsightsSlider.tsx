@@ -4,12 +4,10 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { getAllPosts } from '../lib/blog';
-import { getAllCaseStudies } from '../lib/proof';
 
 /* ─── Types ───────────────────────────────────────────────────────────────── */
 
-type SlideItem = {
+export type SlideItem = {
   id: string;
   tag: string;
   title: string;
@@ -17,40 +15,6 @@ type SlideItem = {
   image: string;
   href: string;
 };
-
-/* ─── Build pool — only items that have a real cover image ────────────────── */
-
-function buildPool(): SlideItem[] {
-  const items: SlideItem[] = [];
-
-  getAllPosts()
-    .filter((p) => !!p.coverImage)
-    .forEach((p) =>
-      items.push({
-        id: `blog-${p.slug}`,
-        tag: p.category,
-        title: p.title,
-        description: p.excerpt,
-        image: p.coverImage,
-        href: `/blog/${p.slug}`,
-      })
-    );
-
-  getAllCaseStudies()
-    .filter((s) => !!s.assets.coverImage)
-    .forEach((s) =>
-      items.push({
-        id: `case-${s.slug}`,
-        tag: s.industry,
-        title: s.title,
-        description: s.summary,
-        image: s.assets.coverImage,
-        href: `/case-studies/${s.slug}`,
-      })
-    );
-
-  return items;
-}
 
 /* ─── Seeded deterministic shuffle — consistent SSR/CSR ───────────────────── */
 
@@ -63,23 +27,24 @@ function deterministicShuffle(arr: SlideItem[], count: number): SlideItem[] {
   return copy.slice(0, count);
 }
 
-const SLIDES = deterministicShuffle(buildPool(), 6);
-const TOTAL = SLIDES.length;
 const AUTOPLAY_MS = 10_000;
 
 /* ─── Component ───────────────────────────────────────────────────────────── */
 
-export default function InsightsSlider() {
+export default function InsightsSlider({ items }: { readonly items: SlideItem[] }) {
+  const slides = deterministicShuffle(items, 6);
+  const total = slides.length;
   const [current, setCurrent] = useState(0);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const resetTimer = useCallback(() => {
     if (timerRef.current) clearTimeout(timerRef.current);
+    if (total < 2) return;
     timerRef.current = setTimeout(() => {
-      setCurrent((p) => (p + 1) % TOTAL);
+      setCurrent((p) => (p + 1) % total);
     }, AUTOPLAY_MS);
-  }, []);
+  }, [total]);
 
   // Autoplay
   useEffect(() => {
@@ -89,13 +54,21 @@ export default function InsightsSlider() {
     };
   }, [current, resetTimer]);
 
+  useEffect(() => {
+    if (current >= total) setCurrent(0);
+  }, [current, total]);
+
   const prev = useCallback(() => {
-    setCurrent((p) => (p - 1 + TOTAL) % TOTAL);
-  }, []);
+    if (total === 0) return;
+    setCurrent((p) => (p - 1 + total) % total);
+  }, [total]);
 
   const next = useCallback(() => {
-    setCurrent((p) => (p + 1) % TOTAL);
-  }, []);
+    if (total === 0) return;
+    setCurrent((p) => (p + 1) % total);
+  }, [total]);
+
+  if (total === 0) return null;
 
   return (
     <section className="insights-slider-section">
@@ -111,7 +84,7 @@ export default function InsightsSlider() {
           <div className="insights-slider-counter" aria-live="polite" aria-atomic="true">
             <span className="insights-slider-counter-current">{current + 1}</span>
             <span className="insights-slider-counter-sep" aria-hidden="true" />
-            <span className="insights-slider-counter-total">{TOTAL}</span>
+            <span className="insights-slider-counter-total">{total}</span>
           </div>
 
           <div className="insights-slider-nav">
@@ -139,7 +112,7 @@ export default function InsightsSlider() {
             animate={{ x: `calc(-${current} * (var(--card-w) + var(--card-gap)))` }}
             transition={{ duration: 0.72, ease: [0.16, 1, 0.3, 1] }}
           >
-            {SLIDES.map((item, i) => {
+            {slides.map((item, i) => {
               const isHovered = hoveredIndex === i;
               return (
                 <div
@@ -209,7 +182,7 @@ export default function InsightsSlider() {
 
       {/* ── Dot indicators ── */}
       <div className="insights-slider-dots" role="tablist" aria-label="Slide indicators">
-        {SLIDES.map((_, i) => (
+        {slides.map((_, i) => (
           <button
             key={i}
             role="tab"

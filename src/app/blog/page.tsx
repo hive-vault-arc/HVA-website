@@ -21,8 +21,8 @@ export const metadata: Metadata = buildPageMetadata({
   ]),
 });
 
-export default function BlogPage() {
-  const posts = getAllPosts();
+export default async function BlogPage() {
+  const posts = await getAllPosts();
 
   const itemListSchema = {
     '@context': 'https://schema.org',
@@ -65,7 +65,7 @@ export default function BlogPage() {
   return (
     <>
       <JsonLd data={[itemListSchema, blogSchema, breadcrumbSchema]} />
-      <BlogIndex />
+      <BlogIndex posts={posts} />
     </>
   );
 }

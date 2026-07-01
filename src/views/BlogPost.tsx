@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { ArrowUpRight, ExternalLink } from 'lucide-react';
 import type { BlogPost, ContentSection } from '../lib/blog';
-import { getRelatedPosts } from '../lib/blog';
 import ArticleDetailPage from '../components/ArticleDetailPage';
 
 /* ── Content renderer ────────────────────────────────────────────────────── */
@@ -193,9 +192,13 @@ function BlogSidebar({ sources, tags }: { sources: BlogPost['sources']; tags: Bl
 
 /* ── Main view ───────────────────────────────────────────────────────────── */
 
-export default function BlogPostView({ post }: { post: BlogPost }) {
-  const related = getRelatedPosts(post.slug);
-
+export default function BlogPostView({
+  post,
+  relatedPosts,
+}: {
+  readonly post: BlogPost;
+  readonly relatedPosts: BlogPost[];
+}) {
   return (
     <ArticleDetailPage
       backHref="/blog"
@@ -213,10 +216,10 @@ export default function BlogPostView({ post }: { post: BlogPost }) {
       author={post.authors[0]}
       authorHref="/whoweare/abouthva"
       coverImage={post.coverImage}
-      coverAlt={post.title}
+      coverAlt={post.coverAlt ?? post.title}
       contentAsArticle
       showAboutStrip
-      relatedItems={related.map((p) => ({
+      relatedItems={relatedPosts.map((p) => ({
         href: `/blog/${p.slug}`,
         title: p.title,
         tag: p.category,

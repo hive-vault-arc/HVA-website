@@ -52,7 +52,13 @@ const localizedEntries = (
   ];
 };
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const [posts, caseStudies, newsArticles, perspectives] = await Promise.all([
+    getAllPosts(),
+    getAllCaseStudies(),
+    getAllNewsArticles(),
+    getAllPerspectives(),
+  ]);
   const now = new Date();
   const digitalServicesLanguages = {
     en: absoluteUrl('/digital-services-tangier'),
@@ -72,13 +78,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry('/products-systems', now, m(0.6)),
     entry('/insights', now, w(0.85)),
     entry('/insights/news-articles', now, m(0.7)),
-    ...getAllNewsArticles().map((article) => ({
+    ...newsArticles.map((article) => ({
       url: absoluteUrl(`/insights/news-articles/${article.slug}`),
       lastModified: new Date(article.publishedAt),
       ...m(0.7),
     })),
     entry('/insights/perspectives', now, m(0.7)),
-    ...getAllPerspectives().map((perspective) => ({
+    ...perspectives.map((perspective) => ({
       url: absoluteUrl(`/insights/perspectives/${perspective.slug}`),
       lastModified: new Date(perspective.publishedAt),
       ...m(0.7),
@@ -100,7 +106,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // Blog.
     entry('/blog', now, w(0.8)),
-    ...getAllPosts().map((post) => ({
+    ...posts.map((post) => ({
       url: absoluteUrl(`/blog/${post.slug}`),
       lastModified: new Date(post.publishedAt),
       ...m(0.7),
@@ -108,7 +114,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // Case studies.
     entry('/case-studies', now, w(0.9)),
-    ...getAllCaseStudies().map((cs) => ({
+    ...caseStudies.map((cs) => ({
       url: absoluteUrl(`/case-studies/${cs.slug}`),
       lastModified: new Date(cs.lastUpdated),
       ...m(0.85),

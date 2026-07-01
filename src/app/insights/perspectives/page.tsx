@@ -15,8 +15,9 @@ export const metadata: Metadata = buildPageMetadata({
   ]),
 });
 
-export default function InsightsPerspectivesPage() {
-  const perspectives = getAllPerspectives().map((perspective) => ({
+export default async function InsightsPerspectivesPage() {
+  const allPerspectives = await getAllPerspectives();
+  const perspectives = allPerspectives.map((perspective) => ({
     title: perspective.title,
     slug: perspective.slug,
     summary: perspective.summary,

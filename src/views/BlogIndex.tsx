@@ -1,12 +1,10 @@
 'use client';
 
-import { getAllPosts } from '../lib/blog';
+import type { BlogPost } from '../lib/blog';
 import InsightIndexPage, { type PageItem } from '../components/InsightIndexPage';
 
-export default function BlogIndex() {
-  const allPosts = getAllPosts();
-
-  const items: PageItem[] = allPosts.map((p) => ({
+export default function BlogIndex({ posts }: { readonly posts: BlogPost[] }) {
+  const items: PageItem[] = posts.map((p) => ({
     href: `/blog/${p.slug}`,
     title: p.title,
     excerpt: p.excerpt,
@@ -19,7 +17,7 @@ export default function BlogIndex() {
       : undefined,
   }));
 
-  const categories = Array.from(new Set(allPosts.map((p) => p.category)));
+  const categories = Array.from(new Set(posts.map((p) => p.category)));
 
   return (
     <InsightIndexPage

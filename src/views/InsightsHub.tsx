@@ -5,10 +5,10 @@ import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 import BottomCTA from '../components/BottomCTA';
-import InsightsSlider from '../components/InsightsSlider';
+import InsightsSlider, { type SlideItem } from '../components/InsightsSlider';
 import SectionBrandMark from '../components/SectionBrandMark';
-import { getAllPosts } from '../lib/blog';
-import { getAllCaseStudies } from '../lib/proof';
+import type { BlogPost } from '../lib/blog';
+import type { CaseStudy } from '../lib/proof';
 
 const CATEGORY_CARDS = [
   {
@@ -128,8 +128,8 @@ function CategoryCards() {
 /* ── Latest section ───────────────────────────────────────────────────────── */
 
 type LatestProps = {
-  readonly latestPost: ReturnType<typeof getAllPosts>[number] | undefined;
-  readonly latestCaseStudy: ReturnType<typeof getAllCaseStudies>[number] | undefined;
+  readonly latestPost: BlogPost | undefined;
+  readonly latestCaseStudy: CaseStudy | undefined;
 };
 
 function LatestSection({ latestPost, latestCaseStudy }: LatestProps) {
@@ -278,8 +278,8 @@ type InsightGridItem = {
   date: string;
 };
 
-function buildAllInsights(): InsightGridItem[] {
-  const posts = getAllPosts().map((p) => ({
+function buildAllInsights(posts: BlogPost[], studies: CaseStudy[]): InsightGridItem[] {
+  const blogItems = posts.map((p) => ({
     id: `blog-${p.slug}`,
     tag: p.category,
     title: p.title,
@@ -289,7 +289,7 @@ function buildAllInsights(): InsightGridItem[] {
     date: p.publishedAt,
   }));
 
-  const studies = getAllCaseStudies().map((s) => ({
+  const caseItems = studies.map((s) => ({
     id: `case-${s.slug}`,
     tag: s.industry,
     title: s.title,
@@ -302,16 +302,26 @@ function buildAllInsights(): InsightGridItem[] {
   // interleave: blog, blog, case study
   const result: InsightGridItem[] = [];
   let bi = 0, si = 0;
-  while (bi < posts.length || si < studies.length) {
-    if (bi < posts.length) result.push(posts[bi++]);
-    if (bi < posts.length) result.push(posts[bi++]);
-    if (si < studies.length) result.push(studies[si++]);
+  while (bi < blogItems.length || si < caseItems.length) {
+    if (bi < blogItems.length) result.push(blogItems[bi++]);
+    if (bi < blogItems.length) result.push(blogItems[bi++]);
+    if (si < caseItems.length) result.push(caseItems[si++]);
   }
   return result.filter((x) => !!x.image);
 }
 
-const ALL_INSIGHTS = buildAllInsights();
 const INITIAL_COUNT = 6;
+
+function buildSliderItems(posts: BlogPost[], studies: CaseStudy[]): SlideItem[] {
+  return buildAllInsights(posts, studies).map((item) => ({
+    id: item.id,
+    tag: item.tag,
+    title: item.title,
+    description: item.excerpt,
+    image: item.image,
+    href: item.href,
+  }));
+}
 
 function InsightCard({ item, index }: { readonly item: InsightGridItem; readonly index: number }) {
   const [hovered, setHovered] = useState(false);
@@ -391,10 +401,10 @@ function InsightCard({ item, index }: { readonly item: InsightGridItem; readonly
   );
 }
 
-function AllInsightsGrid() {
+function AllInsightsGrid({ items }: { readonly items: InsightGridItem[] }) {
   const [revealed, setRevealed] = useState(false);
-  const visible = revealed ? ALL_INSIGHTS : ALL_INSIGHTS.slice(0, INITIAL_COUNT);
-  const hasMore = ALL_INSIGHTS.length > INITIAL_COUNT && !revealed;
+  const visible = revealed ? items : items.slice(0, INITIAL_COUNT);
+  const hasMore = items.length > INITIAL_COUNT && !revealed;
 
   return (
     <section className="py-20 bg-[#FFFFFF]">
@@ -412,7 +422,7 @@ function AllInsightsGrid() {
             </h2>
           </div>
           <span className="text-[10px] text-[#9AA4B2] uppercase tracking-widest hidden sm:block">
-            {ALL_INSIGHTS.length} items
+            {items.length} items
           </span>
         </div>
 
@@ -440,9 +450,17 @@ function AllInsightsGrid() {
   );
 }
 
-export default function InsightsHub() {
-  const latestPost = getAllPosts()[0];
-  const latestCaseStudy = getAllCaseStudies()[0];
+export default function InsightsHub({
+  posts,
+  caseStudies,
+}: {
+  readonly posts: BlogPost[];
+  readonly caseStudies: CaseStudy[];
+}) {
+  const latestPost = posts[0];
+  const latestCaseStudy = caseStudies[0];
+  const allInsights = buildAllInsights(posts, caseStudies);
+  const sliderItems = buildSliderItems(posts, caseStudies);
 
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
@@ -568,7 +586,7 @@ export default function InsightsHub() {
       </section>
 
       {/* ── Insights Slider ──────────────────────────────────────────────── */}
-      <InsightsSlider />
+      <InsightsSlider items={sliderItems} />
 
       {/* ── Category Navigation ───────────────────────────────────────────── */}
       <section className="bg-[#F7F8FA] py-20">
@@ -587,7 +605,7 @@ export default function InsightsHub() {
       <LatestSection latestPost={latestPost} latestCaseStudy={latestCaseStudy} />
 
       {/* ── All Insights Grid ────────────────────────────────────────────── */}
-      <AllInsightsGrid />
+      <AllInsightsGrid items={allInsights} />
 
       <BottomCTA
         variant="dark"

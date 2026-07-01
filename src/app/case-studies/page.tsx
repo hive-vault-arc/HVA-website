@@ -26,8 +26,8 @@ export const metadata: Metadata = buildPageMetadata({
   ]),
 });
 
-export default function CaseStudiesPage() {
-  const studies = getAllCaseStudies();
+export default async function CaseStudiesPage() {
+  const studies = await getAllCaseStudies();
 
   const itemListSchema = {
     '@context': 'https://schema.org',
@@ -60,7 +60,7 @@ export default function CaseStudiesPage() {
   return (
     <>
       <JsonLd data={[itemListSchema, collectionSchema, breadcrumbSchema]} />
-      <CaseStudies />
+      <CaseStudies studies={studies} />
     </>
   );
 }

@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import InsightsHub from '../../views/InsightsHub';
 import JsonLd from '../../components/JsonLd';
+import { getAllPosts } from '../../lib/blog';
+import { getAllCaseStudies } from '../../lib/proof';
 import { GLOBAL_KEYWORDS, SITE_URL, buildBreadcrumbSchema, buildPageMetadata, mergeKeywords } from '../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
@@ -16,7 +18,9 @@ export const metadata: Metadata = buildPageMetadata({
   ]),
 });
 
-export default function InsightsPage() {
+export default async function InsightsPage() {
+  const [posts, caseStudies] = await Promise.all([getAllPosts(), getAllCaseStudies()]);
+
   const pageSchema = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
@@ -33,7 +37,7 @@ export default function InsightsPage() {
   return (
     <>
       <JsonLd data={[pageSchema, breadcrumbSchema]} />
-      <InsightsHub />
+      <InsightsHub posts={posts} caseStudies={caseStudies} />
     </>
   );
 }

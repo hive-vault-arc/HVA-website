@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import InsightsCollection from '../../../views/InsightsCollection';
+import { getAllResearchReports } from '../../../lib/insights';
 import { GLOBAL_KEYWORDS, buildPageMetadata, mergeKeywords } from '../../../lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
@@ -14,13 +15,16 @@ export const metadata: Metadata = buildPageMetadata({
   ]),
 });
 
-export default function InsightsResearchReportsPage() {
+export default async function InsightsResearchReportsPage() {
+  const researchReports = await getAllResearchReports();
+
   return (
     <InsightsCollection
       eyebrow="Insights / Research Reports"
       title="Research Reports"
       description="Data-backed reports designed to help executives evaluate technology strategy and execution maturity."
-      cards={[]}
+      cards={researchReports}
+      basePath="/insights/research-reports"
     />
   );
 }

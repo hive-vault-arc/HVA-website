@@ -1,3 +1,9 @@
+import {
+  getAllSanityPerspectives,
+  getRelatedSanityPerspectives,
+  getSanityPerspectiveBySlug,
+} from './sanity-content';
+
 export type PerspectiveSection =
   | { type: 'paragraph'; content: string }
   | { type: 'heading'; content: string }
@@ -478,12 +484,12 @@ const PERSPECTIVES: Perspective[] = [
   },
 ];
 
-export function getAllPerspectives(): Perspective[] {
-  return PERSPECTIVES;
+export function getAllPerspectives(): Promise<Perspective[]> {
+  return getAllSanityPerspectives();
 }
 
-export function getPerspectiveBySlug(slug: string): Perspective {
-  const perspective = PERSPECTIVES.find((item) => item.slug === slug);
+export async function getPerspectiveBySlug(slug: string): Promise<Perspective> {
+  const perspective = await getSanityPerspectiveBySlug(slug);
   if (!perspective) {
     throw new Error(`Perspective not found: ${slug}`);
   }
@@ -491,6 +497,6 @@ export function getPerspectiveBySlug(slug: string): Perspective {
   return perspective;
 }
 
-export function getRelatedPerspectives(currentSlug: string, limit = 3): Perspective[] {
-  return PERSPECTIVES.filter((item) => item.slug !== currentSlug).slice(0, limit);
+export function getRelatedPerspectives(currentSlug: string, limit = 3): Promise<Perspective[]> {
+  return getRelatedSanityPerspectives(currentSlug, limit);
 }
