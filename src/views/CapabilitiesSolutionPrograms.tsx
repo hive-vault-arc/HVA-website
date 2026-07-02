@@ -663,16 +663,8 @@ export default function CapabilitiesSolutionPrograms() {
       </section>
 
       {/* ── FINAL CTA ────────────────────────────────────────────────────── */}
-      <section className="bg-[#E8EBF0] py-24 px-6 md:px-12 text-center relative overflow-hidden">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: 'linear-gradient(to right,#1A2535 1px,transparent 1px),linear-gradient(to bottom,#1A2535 1px,transparent 1px)',
-            backgroundSize: '40px 40px',
-          }}
-        />
-        <div className="relative max-w-screen-2xl mx-auto">
+      <section className="soft-grid-cta px-6 py-24 text-center md:px-12">
+        <div className="relative mx-auto max-w-screen-2xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

@@ -57,7 +57,7 @@ const industryCards = [
     id: 'real-estate',
     category: 'Real Estate & Construction',
     title: 'Real Estate',
-    description: 'Lead operations, CRM governance, buyer qualification, and AI-assisted client communication for property teams.',
+    description: 'CRM, lead qualification, and AI-assisted client communication for property teams.',
     image: IMGS.realEstate,
     imageAlt: 'Real estate CRM lead operations Morocco',
     href: '/case-studies/zoho-grade-crm-platform',
@@ -70,7 +70,7 @@ const industryCards = [
     id: 'healthcare',
     category: 'Healthcare & Life Sciences',
     title: 'Healthcare',
-    description: 'Clinical dashboards, electronic medical systems, and AI diagnostics for critical care environments.',
+    description: 'Clinical dashboards, medical systems, and diagnostic intelligence.',
     image: IMGS.healthcare,
     imageAlt: 'Healthcare clinical operations dashboard Morocco',
     href: '/case-studies',
@@ -83,7 +83,7 @@ const industryCards = [
     id: 'financial-services',
     category: 'Financial Services',
     title: 'Finance & Banking',
-    description: 'Core banking modernization, AI fraud detection, and digital banking platforms.',
+    description: 'Modern banking systems, fraud signals, and deal intelligence.',
     image: IMGS.finance,
     imageAlt: 'Financial services deal pipeline Morocco',
     href: '/case-studies',
@@ -96,7 +96,7 @@ const industryCards = [
     id: 'government',
     category: 'Government & Public Sector',
     title: 'Government',
-    description: "Digital government platforms, citizen portals, and national AI initiatives under Morocco's Maroc IA 2030 roadmap.",
+    description: 'Citizen portals, public data systems, and AI-ready services.',
     image: IMGS.government,
     imageAlt: 'Government digital transformation Morocco',
     href: '/case-studies',
@@ -109,7 +109,7 @@ const industryCards = [
     id: 'retail',
     category: 'Retail & E-Commerce',
     title: 'Retail',
-    description: 'Omnichannel commerce, AI personalization, and CRM systems across the Morocco-France corridor.',
+    description: 'Commerce, personalization, and CRM across the Morocco-France corridor.',
     image: IMGS.retail,
     imageAlt: 'Retail e-commerce platform Morocco',
     href: '/case-studies',
@@ -122,7 +122,7 @@ const industryCards = [
     id: 'energy',
     category: 'Energy, Utilities & Sustainability',
     title: 'Energy',
-    description: "Smart grids, ESG analytics, and predictive maintenance for Morocco's renewable energy market.",
+    description: 'Smart grids, ESG analytics, and maintenance intelligence.',
     image: IMGS.energy,
     imageAlt: 'Energy sustainability digital Morocco',
     href: '/case-studies',
@@ -135,7 +135,7 @@ const industryCards = [
     id: 'logistics',
     category: 'Logistics & Transportation',
     title: 'Logistics',
-    description: "Fleet management, route optimization, and SLA monitoring. Built for Tanger Med, Africa's largest port corridor.",
+    description: 'Fleet workflows, route optimization, and SLA monitoring.',
     image: IMGS.logistics,
     imageAlt: 'Logistics dispatch workflow automation Morocco',
     href: '/case-studies',
@@ -148,7 +148,7 @@ const industryCards = [
     id: 'consumer-goods',
     category: 'Consumer Goods & Luxury',
     title: 'Consumer & Luxury',
-    description: 'Customer analytics, AI marketing, and retail intelligence across the Morocco-France luxury corridor.',
+    description: 'Customer analytics, AI marketing, and luxury retail intelligence.',
     image: IMGS.consumerGoods,
     imageAlt: 'Consumer goods luxury operations Morocco France',
     href: '/case-studies',
@@ -162,114 +162,51 @@ const industryCards = [
 const fadeUp = { hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0 } };
 
 function IndustryCard({ card, index }: { card: (typeof industryCards)[number]; index: number }) {
-  const isDark = card.tone === 'dark';
-  const isOverlay = card.layout === 'overlay';
-  const isSplit = card.layout === 'split' || card.layout === 'wide';
-  const textColor = isDark || isOverlay ? 'text-white' : 'text-[#1A2535]';
-  const mutedColor = isDark || isOverlay ? 'text-white/70' : 'text-[#566274]';
-  const labelColor = isDark || isOverlay ? 'text-[#F4D27C]' : 'text-[#E8A838]';
-
-  if (isOverlay) {
-    return (
-      <motion.article
-        id={card.id}
-        data-industry-card={card.id}
-        variants={fadeUp}
-        transition={{ duration: 0.5 }}
-        className={`${card.className} group relative min-h-[360px] overflow-hidden bg-[#1A2535]`}
-      >
-        <Image
-          src={card.image}
-          alt={card.imageAlt}
-          fill
-          priority={index < 2}
-          loading={index < 2 ? 'eager' : 'lazy'}
-          sizes="(max-width: 768px) 100vw, 42vw"
-          className="object-cover opacity-70 transition-transform duration-700 group-hover:scale-[1.04]"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1A2535]/95 via-[#1A2535]/46 to-[#1A2535]/10" />
-        <div className="relative z-10 flex min-h-[360px] flex-col justify-between p-7 md:p-8">
-          <div className="flex items-start justify-between gap-4">
-            <p className={`max-w-[15rem] text-[10px] font-bold uppercase tracking-[0.22em] ${labelColor}`}>
-              {card.category}
-            </p>
-            <span className="font-mono text-[10px] text-white/55">0{index + 1}</span>
-          </div>
-          <div>
-            <h3 className={`font-headline text-3xl italic leading-tight ${textColor}`}>{card.title}</h3>
-            <p className={`mt-4 max-w-md text-sm leading-relaxed ${mutedColor}`}>{card.description}</p>
-            <Link
-              href={card.href}
-              className="mt-7 inline-flex min-h-11 items-center gap-1 text-[11px] font-bold uppercase tracking-widest text-[#F4D27C] transition-colors hover:text-white"
-            >
-              See related work <ArrowUpRight className="h-3.5 w-3.5" />
-            </Link>
-          </div>
-        </div>
-      </motion.article>
-    );
-  }
-
   return (
     <motion.article
       id={card.id}
       data-industry-card={card.id}
       variants={fadeUp}
       transition={{ duration: 0.5 }}
-      className={`${card.className} group overflow-hidden ${
-        isSplit
-          ? `grid min-h-[350px] grid-cols-1 ${card.layout === 'wide' ? 'lg:grid-cols-[0.42fr_1fr]' : 'lg:grid-cols-[0.9fr_1.1fr]'}`
-          : 'flex min-h-[420px] flex-col'
-      } ${isDark ? 'bg-[#1A2535]' : 'bg-white'}`}
+      className={`industry-card industry-card--${card.layout} industry-card--${card.tone}`}
     >
-      <div className={`relative overflow-hidden bg-[#1A2535] ${isSplit ? 'min-h-[240px] lg:min-h-0' : 'h-56'}`}>
-        <Image
-          src={card.image}
-          alt={card.imageAlt}
-          fill
-          priority={index < 2}
-          loading={index < 2 ? 'eager' : 'lazy'}
-          sizes={isSplit ? '(max-width: 1024px) 100vw, 42vw' : '(max-width: 768px) 100vw, 33vw'}
-          className="object-cover opacity-88 transition-transform duration-700 group-hover:scale-[1.04]"
-        />
-        <div className={`absolute inset-0 ${isDark ? 'bg-[#1A2535]/30' : 'bg-white/5'}`} />
-      </div>
-
-      <div className={`flex flex-1 flex-col justify-between p-7 md:p-8 ${isDark ? 'text-white' : 'text-[#1A2535]'}`}>
-        <div>
-          <div className="mb-5 flex items-start justify-between gap-4">
-            <p className={`max-w-[19rem] text-[10px] font-bold uppercase tracking-[0.22em] ${labelColor}`}>
-              {card.category}
-            </p>
-            <span className={`font-mono text-[10px] ${isDark ? 'text-white/45' : 'text-[#9AA4B2]'}`}>
-              0{index + 1}
-            </span>
-          </div>
-          <h3 className={`font-headline text-3xl leading-tight ${textColor} ${card.layout === 'wide' ? 'md:text-4xl' : ''}`}>
-            {card.title}
-          </h3>
-          <p className={`mt-4 max-w-2xl text-sm leading-relaxed ${mutedColor}`}>{card.description}</p>
+      <Link href={card.href} className="industry-card-link" aria-label={`See related work for ${card.title}`}>
+        <div className="industry-card-image">
+          <Image
+            src={card.image}
+            alt={card.imageAlt}
+            fill
+            priority={index < 2}
+            loading={index < 2 ? 'eager' : 'lazy'}
+            sizes={
+              card.layout === 'split'
+                ? '(max-width: 768px) 100vw, 46vw'
+                : card.layout === 'overlay'
+                  ? '(max-width: 768px) 100vw, 40vw'
+                  : '(max-width: 768px) 100vw, 33vw'
+            }
+            className="object-cover"
+          />
         </div>
 
-        <div className="mt-7">
-          <ul className={`grid gap-2 ${card.layout === 'wide' ? 'sm:grid-cols-3' : ''}`}>
-            {card.bullets.map((item) => (
-              <li key={item} className={`flex items-start gap-2 text-xs leading-relaxed ${mutedColor}`}>
-                <span className="mt-1.5 h-1 w-1 shrink-0 bg-[#E8A838]" />
-                {item}
-              </li>
+        <div className="industry-card-body">
+          <div className="industry-card-topline">
+            <span>{card.category}</span>
+            <span>0{index + 1}</span>
+          </div>
+          <h3>{card.title}</h3>
+          <p className="industry-card-summary">{card.description}</p>
+          <ul>
+            {card.bullets.slice(0, 2).map((item) => (
+              <li key={item}>{item}</li>
             ))}
           </ul>
-          <Link
-            href={card.href}
-            className={`mt-7 inline-flex min-h-11 items-center gap-1 text-[11px] font-bold uppercase tracking-widest transition-colors ${
-              isDark ? 'text-[#F4D27C] hover:text-white' : 'text-[#E8A838] hover:text-[#C8891C]'
-            }`}
-          >
-            See related work <ArrowUpRight className="h-3.5 w-3.5" />
-          </Link>
+          <span className="industry-card-cta">
+            See related work
+            <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" strokeWidth={1.8} />
+          </span>
         </div>
-      </div>
+      </Link>
     </motion.article>
   );
 }
@@ -335,7 +272,7 @@ export default function Industries() {
       </section>
 
       {/* ── Bento Industry Grid ──────────────────────────────────────────────── */}
-      <section className="bg-[#F7F8FA] pt-16 pb-5 md:pt-20 md:pb-6">
+      <section className="soft-grid-section pt-16 pb-5 md:pt-20 md:pb-6">
         <div className="mx-auto max-w-[1720px] px-5 sm:px-6 lg:px-10">
           <div className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-12 md:items-end">
             <div className="md:col-span-7">
@@ -355,7 +292,7 @@ export default function Industries() {
           </div>
 
           <motion.div
-            className="grid grid-cols-1 gap-4 md:grid-cols-12"
+            className="industry-card-grid"
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.08 }}
@@ -454,7 +391,7 @@ export default function Industries() {
 
       {/* ── CTA ──────────────────────────────────────────────────────────────── */}
       <BottomCTA
-        variant="dark"
+        variant="light"
         headline="Need an Industry-Specific Transformation Plan?"
         subtext="Book a discovery call and we'll map the right capability and system program for your sector."
         primaryLabel="Book Discovery Call"

@@ -8,6 +8,8 @@ import BottomCTA from '../components/BottomCTA';
 import InsightsSlider, { type SlideItem } from '../components/InsightsSlider';
 import SectionBrandMark from '../components/SectionBrandMark';
 import type { BlogPost } from '../lib/blog';
+import type { InsightCard as ResearchReport, NewsArticle } from '../lib/insights';
+import type { Perspective } from '../lib/perspectives';
 import type { CaseStudy } from '../lib/proof';
 
 const CATEGORY_CARDS = [
@@ -127,14 +129,37 @@ function CategoryCards() {
 
 /* ── Latest section ───────────────────────────────────────────────────────── */
 
-type LatestProps = {
-  readonly latestPost: BlogPost | undefined;
-  readonly latestCaseStudy: CaseStudy | undefined;
+type InsightGridItem = {
+  id: string;
+  type: 'blog' | 'case-study' | 'news-article' | 'perspective' | 'research-report';
+  typeLabel: string;
+  tag: string;
+  title: string;
+  excerpt: string;
+  image: string;
+  href: string;
+  date: string;
+  readTime?: string;
+  meta?: string;
 };
 
-function LatestSection({ latestPost, latestCaseStudy }: LatestProps) {
+type LatestProps = {
+  readonly items: InsightGridItem[];
+};
+
+function ctaLabelFor(item: InsightGridItem) {
+  if (item.type === 'case-study') return 'Read case study';
+  if (item.type === 'research-report') return 'Open report';
+  return 'Read insight';
+}
+
+function LatestSection({ items }: LatestProps) {
+  const [latestPrimary, latestSecondary] = items;
+
+  if (!latestPrimary && !latestSecondary) return null;
+
   return (
-    <section className="py-20 bg-[#FFFFFF]">
+    <section className="soft-grid-section py-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-14">
         <div className="mb-10 flex items-center gap-3">
           <SectionBrandMark size="sm" />
@@ -144,8 +169,8 @@ function LatestSection({ latestPost, latestCaseStudy }: LatestProps) {
         </div>
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          {/* ── Featured blog — tall image card ── */}
-          {latestPost && (
+          {/* ── Latest item — tall image card ── */}
+          {latestPrimary && (
             <motion.article
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -155,10 +180,10 @@ function LatestSection({ latestPost, latestCaseStudy }: LatestProps) {
               style={{ minHeight: 480 }}
             >
               {/* Cover image */}
-              {latestPost.coverImage && (
+              {latestPrimary.image && (
                 <motion.img
-                  src={latestPost.coverImage}
-                  alt={latestPost.title}
+                  src={latestPrimary.image}
+                  alt={latestPrimary.title}
                   className="absolute inset-0 w-full h-full object-cover opacity-60
                              transition-transform duration-700 group-hover:scale-105"
                 />
@@ -172,38 +197,40 @@ function LatestSection({ latestPost, latestCaseStudy }: LatestProps) {
                 <div className="mb-auto pt-6 flex items-center gap-2">
                   <span className="h-[1px] w-6 bg-[#E8A838]" />
                   <p className="text-[9px] font-bold uppercase tracking-[0.24em] text-[#F0C15A]">
-                    Latest Blog · {latestPost.category}
+                    Latest {latestPrimary.typeLabel} · {latestPrimary.tag}
                   </p>
                 </div>
 
                 <div>
                   <h3 className="font-headline text-3xl font-medium leading-tight text-white md:text-4xl">
-                    {latestPost.title}
+                    {latestPrimary.title}
                   </h3>
                   <p className="mt-4 text-sm leading-relaxed text-white/60 line-clamp-3 max-w-lg">
-                    {latestPost.excerpt}
+                    {latestPrimary.excerpt}
                   </p>
                   <div className="mt-6 flex items-center gap-4">
                     <Link
-                      href={`/blog/${latestPost.slug}`}
+                      href={latestPrimary.href}
                       className="inline-flex items-center gap-2 px-5 py-2.5 text-[10px] font-bold
                                  uppercase tracking-[0.14em] text-white border border-white/30
                                  bg-white/10 backdrop-blur-sm hover:bg-[#E8A838] hover:border-[#E8A838]
                                  transition-all duration-200"
                     >
-                      Read article <span aria-hidden="true">→</span>
+                      {ctaLabelFor(latestPrimary)} <span aria-hidden="true">→</span>
                     </Link>
-                    <span className="text-[10px] text-white/35 uppercase tracking-widest">
-                      {latestPost.readTime}
-                    </span>
+                    {(latestPrimary.readTime || latestPrimary.date) && (
+                      <span className="text-[10px] text-white/35 uppercase tracking-widest">
+                        {latestPrimary.readTime ?? latestPrimary.date}
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
             </motion.article>
           )}
 
-          {/* ── Case study — split layout ── */}
-          {latestCaseStudy && (
+          {/* ── Second latest item — split layout ── */}
+          {latestSecondary && (
             <motion.article
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -214,10 +241,10 @@ function LatestSection({ latestPost, latestCaseStudy }: LatestProps) {
             >
               {/* Top image */}
               <div className="relative overflow-hidden bg-[#1A2535]" style={{ height: 260 }}>
-                {latestCaseStudy.assets.coverImage && (
+                {latestSecondary.image && (
                   <motion.img
-                    src={latestCaseStudy.assets.coverImage}
-                    alt={latestCaseStudy.title}
+                    src={latestSecondary.image}
+                    alt={latestSecondary.title}
                     className="absolute inset-0 w-full h-full object-cover opacity-80
                                transition-transform duration-700 group-hover:scale-105"
                   />
@@ -228,7 +255,7 @@ function LatestSection({ latestPost, latestCaseStudy }: LatestProps) {
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 text-[9px] font-bold
                                    uppercase tracking-[0.18em] text-white bg-[#E8A838]/80 backdrop-blur-sm">
                     <span className="w-1.5 h-1.5 rounded-full bg-white/80" />
-                    {latestCaseStudy.industry}
+                    {latestSecondary.tag}
                   </span>
                 </div>
               </div>
@@ -236,26 +263,28 @@ function LatestSection({ latestPost, latestCaseStudy }: LatestProps) {
               {/* Bottom text panel */}
               <div className="flex flex-col flex-1 bg-white border border-[#DDE3EA] border-t-0 p-8">
                 <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.24em] text-[#E8A838]">
-                  Latest Case Study
+                  Latest {latestSecondary.typeLabel}
                 </p>
                 <h3 className="font-headline text-2xl font-medium leading-snug text-[#1A2535]">
-                  {latestCaseStudy.title}
+                  {latestSecondary.title}
                 </h3>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-[#566274] line-clamp-3">
-                  {latestCaseStudy.summary}
+                  {latestSecondary.excerpt}
                 </p>
                 <div className="mt-6 flex items-center justify-between">
                   <Link
-                    href={`/case-studies/${latestCaseStudy.slug}`}
+                    href={latestSecondary.href}
                     className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase
                                tracking-[0.14em] text-[#1A2535] border border-[#1A2535]
                                px-4 py-2 hover:bg-[#1A2535] hover:text-white transition-all duration-200"
                   >
-                    Read case study <span aria-hidden="true">→</span>
+                    {ctaLabelFor(latestSecondary)} <span aria-hidden="true">→</span>
                   </Link>
-                  <span className="text-[10px] text-[#9AA4B2] uppercase tracking-widest">
-                    {latestCaseStudy.clientName}
-                  </span>
+                  {(latestSecondary.meta || latestSecondary.readTime || latestSecondary.date) && (
+                    <span className="text-[10px] text-[#9AA4B2] uppercase tracking-widest">
+                      {latestSecondary.meta ?? latestSecondary.readTime ?? latestSecondary.date}
+                    </span>
+                  )}
                 </div>
               </div>
             </motion.article>
@@ -268,52 +297,100 @@ function LatestSection({ latestPost, latestCaseStudy }: LatestProps) {
 
 /* ── All Insights grid ────────────────────────────────────────────────────── */
 
-type InsightGridItem = {
-  id: string;
-  tag: string;
-  title: string;
-  excerpt: string;
-  image: string;
-  href: string;
-  date: string;
-};
+function timeValue(date: string) {
+  const value = Date.parse(date);
+  return Number.isNaN(value) ? 0 : value;
+}
 
-function buildAllInsights(posts: BlogPost[], studies: CaseStudy[]): InsightGridItem[] {
+function sortLatestFirst(items: InsightGridItem[]) {
+  return [...items].sort((a, b) => timeValue(b.date) - timeValue(a.date));
+}
+
+function buildAllInsights(
+  posts: BlogPost[],
+  studies: CaseStudy[],
+  newsArticles: NewsArticle[],
+  perspectives: Perspective[],
+  researchReports: ResearchReport[],
+): InsightGridItem[] {
   const blogItems = posts.map((p) => ({
     id: `blog-${p.slug}`,
+    type: 'blog' as const,
+    typeLabel: 'Blog',
     tag: p.category,
     title: p.title,
     excerpt: p.excerpt,
     image: p.coverImage ?? '',
     href: `/blog/${p.slug}`,
     date: p.publishedAt,
+    readTime: p.readTime,
   }));
 
   const caseItems = studies.map((s) => ({
     id: `case-${s.slug}`,
+    type: 'case-study' as const,
+    typeLabel: 'Case Study',
     tag: s.industry,
     title: s.title,
     excerpt: s.summary,
     image: s.assets.coverImage ?? '',
     href: `/case-studies/${s.slug}`,
     date: s.lastUpdated,
+    meta: s.clientName,
   }));
 
-  // interleave: blog, blog, case study
-  const result: InsightGridItem[] = [];
-  let bi = 0, si = 0;
-  while (bi < blogItems.length || si < caseItems.length) {
-    if (bi < blogItems.length) result.push(blogItems[bi++]);
-    if (bi < blogItems.length) result.push(blogItems[bi++]);
-    if (si < caseItems.length) result.push(caseItems[si++]);
-  }
-  return result.filter((x) => !!x.image);
+  const newsItems = newsArticles.map((article) => ({
+    id: `news-${article.slug}`,
+    type: 'news-article' as const,
+    typeLabel: 'News Article',
+    tag: article.category || article.tag,
+    title: article.title,
+    excerpt: article.summary,
+    image: article.coverImage ?? '',
+    href: `/insights/news-articles/${article.slug}`,
+    date: article.publishedAt,
+    readTime: article.readTime,
+  }));
+
+  const perspectiveItems = perspectives.map((perspective) => ({
+    id: `perspective-${perspective.slug}`,
+    type: 'perspective' as const,
+    typeLabel: 'Perspective',
+    tag: perspective.tag,
+    title: perspective.title,
+    excerpt: perspective.summary,
+    image: perspective.coverImage ?? '',
+    href: `/insights/perspectives/${perspective.slug}`,
+    date: perspective.publishedAt,
+    readTime: perspective.readTime,
+  }));
+
+  const reportItems = researchReports.map((report) => ({
+    id: `research-${report.slug}`,
+    type: 'research-report' as const,
+    typeLabel: 'Research Report',
+    tag: report.tag,
+    title: report.title,
+    excerpt: report.summary,
+    image: report.coverImage ?? '',
+    href: '/insights/research-reports',
+    date: report.publishedAt,
+    readTime: report.readTime,
+  }));
+
+  return sortLatestFirst([
+    ...blogItems,
+    ...caseItems,
+    ...newsItems,
+    ...perspectiveItems,
+    ...reportItems,
+  ]);
 }
 
 const INITIAL_COUNT = 6;
 
-function buildSliderItems(posts: BlogPost[], studies: CaseStudy[]): SlideItem[] {
-  return buildAllInsights(posts, studies).map((item) => ({
+function buildSliderItems(items: InsightGridItem[]): SlideItem[] {
+  return items.map((item) => ({
     id: item.id,
     tag: item.tag,
     title: item.title,
@@ -323,7 +400,7 @@ function buildSliderItems(posts: BlogPost[], studies: CaseStudy[]): SlideItem[] 
   }));
 }
 
-function InsightCard({ item, index }: { readonly item: InsightGridItem; readonly index: number }) {
+function InsightGridCard({ item, index }: { readonly item: InsightGridItem; readonly index: number }) {
   const [hovered, setHovered] = useState(false);
   return (
     <motion.article
@@ -337,16 +414,18 @@ function InsightCard({ item, index }: { readonly item: InsightGridItem; readonly
       onMouseLeave={() => setHovered(false)}
     >
       {/* Image */}
-      <motion.img
-        src={item.image}
-        alt={item.title}
-        className="absolute inset-0 w-full h-full object-cover"
-        animate={{
-          scale: hovered ? 1.07 : 1,
-          filter: hovered ? 'blur(6px)' : 'blur(0px)',
-        }}
-        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-      />
+      {item.image && (
+        <motion.img
+          src={item.image}
+          alt={item.title}
+          className="absolute inset-0 w-full h-full object-cover"
+          animate={{
+            scale: hovered ? 1.07 : 1,
+            filter: hovered ? 'blur(6px)' : 'blur(0px)',
+          }}
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        />
+      )}
 
       {/* Base overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#1A2535]/85 via-[#1A2535]/25 to-transparent" />
@@ -394,7 +473,7 @@ function InsightCard({ item, index }: { readonly item: InsightGridItem; readonly
                      bg-white/10 backdrop-blur-sm hover:bg-[#E8A838] hover:border-[#E8A838]
                      transition-all duration-200"
         >
-          Open {item.tag} insight <span aria-hidden="true">→</span>
+          Open {item.typeLabel.toLowerCase()} <span aria-hidden="true">→</span>
         </Link>
       </motion.div>
     </motion.article>
@@ -428,7 +507,7 @@ function AllInsightsGrid({ items }: { readonly items: InsightGridItem[] }) {
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {visible.map((item, i) => (
-            <InsightCard key={item.id} item={item} index={i} />
+            <InsightGridCard key={item.id} item={item} index={i} />
           ))}
         </div>
 
@@ -453,14 +532,18 @@ function AllInsightsGrid({ items }: { readonly items: InsightGridItem[] }) {
 export default function InsightsHub({
   posts,
   caseStudies,
+  newsArticles,
+  perspectives,
+  researchReports,
 }: {
   readonly posts: BlogPost[];
   readonly caseStudies: CaseStudy[];
+  readonly newsArticles: NewsArticle[];
+  readonly perspectives: Perspective[];
+  readonly researchReports: ResearchReport[];
 }) {
-  const latestPost = posts[0];
-  const latestCaseStudy = caseStudies[0];
-  const allInsights = buildAllInsights(posts, caseStudies);
-  const sliderItems = buildSliderItems(posts, caseStudies);
+  const allInsights = buildAllInsights(posts, caseStudies, newsArticles, perspectives, researchReports);
+  const sliderItems = buildSliderItems(allInsights);
 
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
@@ -589,7 +672,7 @@ export default function InsightsHub({
       <InsightsSlider items={sliderItems} />
 
       {/* ── Category Navigation ───────────────────────────────────────────── */}
-      <section className="bg-[#F7F8FA] py-20">
+      <section className="soft-grid-section py-20">
         <div className="mx-auto max-w-7xl px-6 lg:px-14">
           <div className="mb-8 flex items-center gap-3">
             <SectionBrandMark size="sm" />
@@ -602,13 +685,13 @@ export default function InsightsHub({
       </section>
 
       {/* ── Latest Featured ───────────────────────────────────────────────── */}
-      <LatestSection latestPost={latestPost} latestCaseStudy={latestCaseStudy} />
+      <LatestSection items={allInsights.slice(0, 2)} />
 
       {/* ── All Insights Grid ────────────────────────────────────────────── */}
       <AllInsightsGrid items={allInsights} />
 
       <BottomCTA
-        variant="dark"
+        variant="light"
         headline="Need Insights Mapped to Your Operations?"
         subtext="We can translate these insights into a practical transformation roadmap for your team."
         primaryLabel="Book Discovery Call"

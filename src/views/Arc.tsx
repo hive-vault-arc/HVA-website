@@ -22,6 +22,7 @@ const arcPhases = [
     imageAlt: 'Consulting team assessing operating constraints and transformation priorities',
     summary:
       'Map the current operation, expose constraints, and define the target architecture before build scope begins.',
+    short: 'Diagnose constraints before build.',
     owns: ['Operating diagnosis', 'Constraint map', 'Prioritized roadmap'],
     gate: 'Decision gate before build',
   },
@@ -34,6 +35,7 @@ const arcPhases = [
     imageAlt: 'Engineering workspace for re-engineering systems and operating workflows',
     summary:
       'Turn the roadmap into production systems, integrated workflows, release controls, and reliable infrastructure.',
+    short: 'Build the operating system.',
     owns: ['Solution architecture', 'Integrated stack', 'Release controls'],
     gate: 'Production readiness',
   },
@@ -46,6 +48,7 @@ const arcPhases = [
     imageAlt: 'Managed operations room monitoring production systems and performance',
     summary:
       'Run the operation after launch with monitoring, optimization cycles, reporting, and managed accountability.',
+    short: 'Operate, measure, improve.',
     owns: ['Managed operations', 'Performance reporting', 'Optimization releases'],
     gate: 'Continuous improvement',
   },
@@ -76,10 +79,9 @@ const proofCards = [
 ];
 
 const differenceContrasts = [
-  { others: 'Advisory ends at recommendations', arc: 'ARC connects diagnosis, build, and operations in one accountable team.' },
-  { others: 'Agencies hand over after launch', arc: 'ARC stays in production and improves the operating system over time.' },
-  { others: 'Engineering starts before clarity', arc: 'ARC creates decision gates before expensive build decisions are locked.' },
-  { others: 'Technology is treated as a project', arc: 'ARC treats systems as compounding operational assets.' },
+  { title: 'One team', text: 'Diagnosis, build, and operations stay connected.' },
+  { title: 'Production ownership', text: 'The system keeps improving after launch.' },
+  { title: 'Decision gates', text: 'Build decisions wait until constraints are clear.' },
 ];
 
 const innovationTracks = [
@@ -143,16 +145,14 @@ export default function Arc() {
           >
             <div className="mb-6 flex items-center gap-3">
               <SectionBrandMark surface="dark" size="sm" />
-              <span className="block text-[10px] font-bold uppercase tracking-[0.28em] text-[#F0C15A]">
-                ARC Framework
+              <span className="arc-hero-label">
+                ARC framework
               </span>
             </div>
-            <h1 className="max-w-4xl font-headline text-[clamp(3rem,14vw,7.4rem)] font-light leading-[0.94] tracking-tight md:leading-[0.92]">
-              Assess.
-              <br />
-              Re-engineer.
-              <br />
-              <em className="font-headline italic text-[#F0C15A]">Command.</em>
+            <h1 className="arc-hero-title">
+              <span>Assess.</span>
+              <span>Re-engineer.</span>
+              <span>Command.</span>
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-relaxed text-white/70">
               Hive Vault Arc's operating model for transformation work: strategy, AI engineering, software delivery, cloud, and managed operations in one continuous accountability loop.
@@ -173,48 +173,28 @@ export default function Arc() {
             transition={{ duration: 0.65, delay: 0.08 }}
             className="lg:col-span-5"
           >
-            <div className="relative h-[320px] overflow-hidden border border-white/10 bg-white/5 sm:h-[380px] lg:h-[420px]">
+            <div className="arc-hero-media">
               <Image
                 src="/Images/capabilities/hva-arc-framework-operating-model.webp"
                 alt="Hive Vault Arc framework shown through calm operations screens and connected transformation stages"
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 42vw"
-                className="object-cover opacity-90"
+                className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1A2535]/85 via-[#1A2535]/35 to-[#E8A838]/10" />
-              <div className="absolute inset-x-0 bottom-0 p-4 sm:p-7">
-                <div className="grid grid-cols-3 border border-white/15 bg-[#1A2535]/70">
-                  {arcPhases.map((phase) => (
-                    <div key={phase.step} className="border-r border-white/10 px-3 py-4 last:border-r-0 sm:px-4 sm:py-5">
-                      <span className="block text-[10px] font-mono text-[#E8A838]">{phase.step}</span>
-                      <span className="mt-2 block font-headline text-lg leading-none text-white sm:text-2xl">{phase.title}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
             </div>
           </motion.div>
         </div>
       </section>
 
-      <section className="bg-white py-16 md:py-20">
-        <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
-          <div className="mb-10 grid grid-cols-1 gap-7 border-b border-[#DDE3EA] pb-8 md:grid-cols-12 md:items-end">
-            <div className="md:col-span-7">
-              <div className="mb-3 flex items-center gap-3">
-                <SectionBrandMark size="sm" />
-                <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#E8A838]">
-                  Engagement Method
-                </p>
-              </div>
-              <h2 className="max-w-3xl font-headline text-4xl font-light leading-[1.02] text-[#1A2535] md:text-6xl">
-                A transformation model built around decision gates.
-              </h2>
+      <section className="arc-method-section">
+        <div className="arc-method-shell">
+          <div className="arc-method-header">
+            <div className="arc-method-mark">
+              <SectionBrandMark size="sm" />
+              <span>ARC method</span>
             </div>
-            <p className="md:col-span-5 text-base leading-relaxed text-[#566274]">
-              ARC turns transformation into a governed sequence. Each phase has ownership, outputs, and a clear handoff into the next operating state.
-            </p>
+            <h2>Three gates. One loop.</h2>
           </div>
 
           <motion.div
@@ -222,51 +202,29 @@ export default function Arc() {
             whileInView="show"
             viewport={{ once: true, amount: 0.15 }}
             transition={{ staggerChildren: 0.08 }}
-            className="grid grid-cols-1 gap-px bg-[#DDE3EA] lg:grid-cols-3"
+            className="arc-method-grid"
           >
             {arcPhases.map((phase, idx) => (
-              <motion.article key={phase.step} variants={fadeUp} transition={{ duration: 0.5 }} className="bg-white">
-                <div className="relative h-64 overflow-hidden bg-[#1A2535]">
+              <motion.article key={phase.step} variants={fadeUp} transition={{ duration: 0.5 }} className="arc-method-card">
+                <div className="arc-method-image">
                   <Image
                     src={phase.image}
                     alt={phase.imageAlt}
                     fill
                     loading={idx === 0 ? 'eager' : 'lazy'}
                     sizes="(max-width: 1024px) 100vw, 33vw"
-                    className="object-cover opacity-80 transition-transform duration-500 hover:scale-[1.03]"
+                    className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#1A2535]/95 via-[#1A2535]/40 to-transparent" />
-                  <span className="absolute left-5 top-5 bg-[#E8A838] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-white">
-                    Phase {phase.step}
-                  </span>
-                  <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4">
-                    <h3 className="font-headline text-4xl leading-none text-white">{phase.title}</h3>
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-white/20 bg-white/10 text-white">
-                      {phase.icon}
-                    </div>
-                  </div>
                 </div>
 
-                <div className="p-6 md:p-7">
-                  <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-[#E8A838]">
-                    {phase.layer}
-                  </p>
-                  <p className="min-h-[84px] text-sm leading-relaxed text-[#566274]">{phase.summary}</p>
-                  <div className="mt-6 border-t border-[#DDE3EA] pt-5">
-                    <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.18em] text-[#9AA4B2]">
-                      Outputs
-                    </p>
-                    <ul className="space-y-2">
-                      {phase.owns.map((item) => (
-                        <li key={item} className="flex items-start gap-2 text-sm text-[#1A2535]">
-                          <span className="mt-2 h-1 w-1 shrink-0 bg-[#E8A838]" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
+                <div className="arc-method-content">
+                  <div>
+                    <h3>{phase.title}</h3>
+                    <p>{phase.short}</p>
                   </div>
-                  <div className="mt-6 border border-[#DDE3EA] bg-[#FFFFFF] px-4 py-3 text-xs font-bold uppercase tracking-[0.14em] text-[#566274]">
-                    {phase.gate}
+                  <div className="arc-method-meta">
+                    <span>{phase.layer}</span>
+                    <strong>{phase.gate}</strong>
                   </div>
                 </div>
               </motion.article>
@@ -275,7 +233,7 @@ export default function Arc() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#1A2535] py-16 text-white md:py-20">
+      <section className="arc-difference-section">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 opacity-[0.04]"
@@ -286,20 +244,15 @@ export default function Arc() {
           }}
         />
 
-        <div className="relative z-10 mx-auto grid max-w-screen-2xl grid-cols-1 gap-10 px-6 lg:grid-cols-12 lg:px-12">
-          <div className="lg:col-span-5">
-            <div className="mb-4 flex items-center gap-3">
+        <div className="arc-difference-shell">
+          <div className="arc-difference-copy">
+            <div className="arc-difference-mark">
               <SectionBrandMark surface="dark" size="sm" />
-              <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#F0C15A]">
-                Why ARC Is Different
-              </p>
+              <span>Why ARC is different</span>
             </div>
-            <h2 className="max-w-xl font-headline text-4xl font-light leading-[1.03] md:text-6xl">
-              The hard part is not launching. It is staying accountable after launch.
+            <h2>
+              Accountability after launch.
             </h2>
-            <p className="mt-6 max-w-lg text-base leading-relaxed text-white/65">
-              ARC removes the familiar fracture between advisory, build, and operations. The same partner that diagnoses the constraint is accountable for making the system work in production.
-            </p>
           </div>
 
           <motion.div
@@ -307,16 +260,12 @@ export default function Arc() {
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
             transition={{ staggerChildren: 0.08 }}
-            className="lg:col-span-7 grid grid-cols-1 gap-px bg-white/10"
+            className="arc-difference-grid"
           >
             {differenceContrasts.map((item) => (
-              <motion.div key={item.others} variants={fadeUp} transition={{ duration: 0.45 }} className="grid gap-4 bg-[#1A2535] p-6 md:grid-cols-[0.9fr_1.1fr] md:p-7">
-                <p className="text-sm leading-relaxed text-white/40 line-through decoration-white/20">
-                  {item.others}
-                </p>
-                <p className="font-headline text-xl leading-snug text-white md:text-2xl">
-                  {item.arc}
-                </p>
+              <motion.div key={item.title} variants={fadeUp} transition={{ duration: 0.45 }} className="arc-difference-card">
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -377,18 +326,11 @@ export default function Arc() {
         </div>
       </section>
 
-      <section className="bg-white py-16 md:py-20">
-        <div className="mx-auto grid max-w-screen-2xl grid-cols-1 gap-px bg-[#DDE3EA] px-6 lg:grid-cols-[0.82fr_1.18fr] lg:px-12">
-          <div className="bg-[#1A2535] p-8 text-white md:p-10">
-            <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.28em] text-[#F0C15A]">
-              Active R&amp;D
-            </p>
-            <h2 className="font-headline text-4xl font-light leading-tight md:text-5xl">
-              The framework keeps absorbing new technology.
-            </h2>
-            <p className="mt-5 max-w-lg text-sm leading-relaxed text-white/65">
-              Hive Vault Arc tracks the technologies that change operating models first, then folds the useful ones into ARC delivery patterns.
-            </p>
+      <section className="arc-rd-section">
+        <div className="arc-rd-shell">
+          <div className="arc-rd-header">
+            <span>Active R&amp;D</span>
+            <h2>New technology, filtered into delivery patterns.</h2>
           </div>
 
           <motion.div
@@ -396,18 +338,17 @@ export default function Arc() {
             whileInView="show"
             viewport={{ once: true, amount: 0.15 }}
             transition={{ staggerChildren: 0.08 }}
-            className="grid grid-cols-1 gap-px bg-[#DDE3EA] md:grid-cols-2"
+            className="arc-rd-grid"
           >
             {innovationTracks.map((track) => (
-              <motion.article key={track.code} variants={fadeUp} transition={{ duration: 0.45 }} className="bg-white p-7">
-                <div className="mb-6 flex items-center justify-between">
-                  <div className="flex h-11 w-11 items-center justify-center bg-[#FFF4D8] text-[#E8A838]">
-                    {track.icon}
-                  </div>
-                  <span className="font-mono text-[10px] text-[#9AA4B2]">{track.code}</span>
+              <motion.article key={track.code} variants={fadeUp} transition={{ duration: 0.45 }} className="arc-rd-item">
+                <div className="arc-rd-icon" aria-hidden="true">
+                  {track.icon}
                 </div>
-                <h3 className="font-headline text-2xl text-[#1A2535]">{track.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-[#566274]">{track.desc}</p>
+                <div>
+                  <h3>{track.title}</h3>
+                  <p>{track.desc}</p>
+                </div>
               </motion.article>
             ))}
           </motion.div>

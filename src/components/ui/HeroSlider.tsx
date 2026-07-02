@@ -192,6 +192,7 @@ export default function HeroSlider() {
                   fill
                   className="h-full w-full object-cover hero-image-animate"
                   sizes="(max-width: 1024px) 100vw, 40vw"
+                  loading={active === 0 ? 'eager' : 'lazy'}
                   priority={active === 0}
                 />
               </div>

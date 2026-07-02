@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import InsightsHub from '../../views/InsightsHub';
 import JsonLd from '../../components/JsonLd';
 import { getAllPosts } from '../../lib/blog';
+import { getAllNewsArticles, getAllResearchReports } from '../../lib/insights';
+import { getAllPerspectives } from '../../lib/perspectives';
 import { getAllCaseStudies } from '../../lib/proof';
 import { GLOBAL_KEYWORDS, SITE_URL, buildBreadcrumbSchema, buildPageMetadata, mergeKeywords } from '../../lib/seo';
 
@@ -19,7 +21,13 @@ export const metadata: Metadata = buildPageMetadata({
 });
 
 export default async function InsightsPage() {
-  const [posts, caseStudies] = await Promise.all([getAllPosts(), getAllCaseStudies()]);
+  const [posts, caseStudies, newsArticles, perspectives, researchReports] = await Promise.all([
+    getAllPosts(),
+    getAllCaseStudies(),
+    getAllNewsArticles(),
+    getAllPerspectives(),
+    getAllResearchReports(),
+  ]);
 
   const pageSchema = {
     '@context': 'https://schema.org',
@@ -37,7 +45,13 @@ export default async function InsightsPage() {
   return (
     <>
       <JsonLd data={[pageSchema, breadcrumbSchema]} />
-      <InsightsHub posts={posts} caseStudies={caseStudies} />
+      <InsightsHub
+        posts={posts}
+        caseStudies={caseStudies}
+        newsArticles={newsArticles}
+        perspectives={perspectives}
+        researchReports={researchReports}
+      />
     </>
   );
 }

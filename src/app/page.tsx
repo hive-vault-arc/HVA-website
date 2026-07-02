@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight, Bot, Cloud, Layers } from 'lucide-react';
 import Home from '../views/Home';
 import JsonLd from '../components/JsonLd';
 import type { InsightsCarouselItem } from '../components/InsightsCarousel';
@@ -20,6 +19,21 @@ import {
 const HOME_META_TITLE = 'Hive Vault Arc | Technology Consulting & AI Transformation';
 const HOME_META_DESCRIPTION =
   'Hive Vault Arc is a technology transformation partner in Tangier, Morocco, combining strategy consulting, AI engineering, software development, cloud infrastructure, and managed operations.';
+
+const serviceGuides = [
+  {
+    href: '/digital-services-tangier',
+    label: 'Digital Services in Tangier',
+    region: 'Tangier',
+    summary: 'A practical guide for teams evaluating AI, software, consulting, and delivery partners in Tangier.',
+  },
+  {
+    href: '/ai-agents-morocco',
+    label: 'AI Agents in Morocco',
+    region: 'Morocco',
+    summary: 'How Moroccan businesses can use multilingual AI agents for sales, support, and operational workflows.',
+  },
+];
 
 export const metadata: Metadata = {
   ...buildPageMetadata({
@@ -177,83 +191,32 @@ export default async function Page() {
     <>
       <JsonLd data={[homePageSchema, capabilitySchema, primaryNavigationSchema]} />
       <Home insightsCarouselItems={insightsCarouselItems} />
-      <section className="relative overflow-hidden bg-[#1A2535] py-20 md:py-28">
-        {/* Subtle grid overlay */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.06]"
-          style={{
-            backgroundImage:
-              'linear-gradient(to right, #E8A838 1px, transparent 1px), linear-gradient(to bottom, #E8A838 1px, transparent 1px)',
-            backgroundSize: '42px 42px',
-          }}
-        />
-        {/* Radial glow */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -top-24 right-0 h-[36rem] w-[36rem] rounded-full bg-[#E8A838]/10 blur-3xl"
-        />
+      <section className="service-guides-section">
+        <div className="service-guides-shell">
+          <div className="service-guides-copy">
+            <h2>Service guides for Morocco</h2>
+            <p>
+              Two focused entry points for teams comparing AI, consulting, and software delivery options.
+            </p>
+          </div>
 
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-14">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-20">
-
-            {/* Left — editorial column */}
-            <div className="lg:col-span-4 flex flex-col justify-center">
-              <p className="mb-5 text-[10px] font-bold uppercase tracking-[0.28em] text-[#E8A838]">
-                Service Landing Pages
-              </p>
-              <h2 className="font-headline text-4xl leading-[1.04] tracking-tight text-white md:text-5xl">
-                Explore Local and National Service Guides
-              </h2>
-              <p className="mt-5 text-sm leading-relaxed text-white/50">
-                In-depth guides for businesses in Morocco seeking specific AI, consulting,
-                and software capabilities in their market.
-              </p>
-              <div className="mt-8 h-px bg-[#E8A838]/25" />
-              <p className="mt-4 font-mono text-[9px] uppercase tracking-[0.22em] text-white/25">
-                Morocco · Tangier · Remote
-              </p>
-            </div>
-
-            {/* Right — card grid */}
-            <div className="lg:col-span-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
-              {[
-                { href: '/digital-services-tangier', label: 'Digital Services in Tangier', tag: 'Tangier', Icon: Layers },
-                { href: '/services-digitaux-tanger', label: 'Services Digitaux à Tanger', tag: 'Tanger', Icon: Layers },
-                { href: '/ai-agents-tangier',     label: 'AI Agents in Tangier',         tag: 'Tangier', Icon: Bot    },
-                { href: '/ai-agents-morocco',      label: 'AI Agents in Morocco',          tag: 'Morocco', Icon: Bot    },
-                { href: '/it-consulting-tangier',  label: 'IT Consulting in Tangier',      tag: 'Tangier', Icon: Layers },
-                { href: '/custom-software-morocco',label: 'Custom Software in Morocco',    tag: 'Morocco', Icon: Cloud  },
-              ].map(({ href, label, tag, Icon }) => (
+          <div className="service-guides-carousel" aria-label="Service guide links">
+            <div className="service-guides-track">
+              {[...serviceGuides, serviceGuides[0]].map((guide, index) => (
                 <Link
-                  key={href}
-                  href={href}
-                  className="group relative min-h-32 overflow-hidden border border-white/10 bg-white/[0.04] p-6 transition-all duration-300 hover:border-[#E8A838]/50 hover:bg-white/[0.08]"
+                  key={`${guide.href}-${index}`}
+                  href={guide.href}
+                  aria-hidden={index === serviceGuides.length}
+                  tabIndex={index === serviceGuides.length ? -1 : undefined}
+                  className="service-guide-card"
                 >
-                  {/* Top row: tag + arrow */}
-                  <div className="mb-8 flex items-start justify-between">
-                    <span className="border border-[#E8A838]/30 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.24em] text-[#E8A838]/70">
-                      {tag}
-                    </span>
-                    <ArrowRight className="h-4 w-4 translate-x-0 text-white/20 transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#E8A838]" />
-                  </div>
-
-                  {/* Bottom row: title + icon */}
-                  <div className="flex items-end justify-between">
-                    <h3 className="font-headline pr-4 text-xl leading-tight text-white">
-                      {label}
-                    </h3>
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center bg-[#E8A838]/10 text-[#E8A838]/50 transition-all duration-300 group-hover:bg-[#E8A838]/20 group-hover:text-[#E8A838]">
-                      <Icon className="h-4 w-4" />
-                    </div>
-                  </div>
-
-                  {/* Animated bottom bar */}
-                  <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-[#E8A838] transition-all duration-500 ease-spring group-hover:w-full" />
+                  <span className="service-guide-region">{guide.region}</span>
+                  <span className="service-guide-title">{guide.label}</span>
+                  <span className="service-guide-summary">{guide.summary}</span>
+                  <span className="service-guide-link">Open guide</span>
                 </Link>
               ))}
             </div>
-
           </div>
         </div>
       </section>

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Bot, Building2, Cloud, Cpu, Database, Send, Settings, Wrench } from 'lucide-react';
+import { ArrowRight, Bot, Cloud, Database, Send, Settings, Wrench } from 'lucide-react';
 import BottomCTA from '../components/BottomCTA';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 import SectionBrandMark from '../components/SectionBrandMark';
@@ -66,18 +66,6 @@ const CAPABILITY_IMAGES = {
   operationsManaged: '/Images/capabilities/hva-operations-managed-capability.webp',
 };
 
-function getPillarIcon(id: string, cls = 'h-6 w-6', sw = 1.4) {
-  switch (id) {
-    case 'strategy-business': return <Building2 className={cls} strokeWidth={sw} />;
-    case 'technology-consulting': return <Wrench className={cls} strokeWidth={sw} />;
-    case 'ai-data-analytics': return <Bot className={cls} strokeWidth={sw} />;
-    case 'software-engineering': return <Cpu className={cls} strokeWidth={sw} />;
-    case 'cloud-infrastructure': return <Cloud className={cls} strokeWidth={sw} />;
-    case 'operations-managed': return <Settings className={cls} strokeWidth={sw} />;
-    default: return <Wrench className={cls} strokeWidth={sw} />;
-  }
-}
-
 export default function Capabilities() {
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
@@ -100,22 +88,63 @@ export default function Capabilities() {
       secondary: activeBOTItem.checkpoints[0],
     },
   ];
-  const activeBOTExecutionDetail = [
+  const [pillar0, pillar1, pillar2, pillar3, pillar4, pillar5] = CAPABILITY_BRIEF_SECTIONS;
+  const capabilityCards = [
     {
-      label: 'Hive Vault Arc Owns',
-      items: activeBOTItem.hvaOwns.split(', ').slice(2).map((entry) => entry.replace(/\.$/, '')),
+      id: 'ai-data-analytics',
+      title: 'AI & Data',
+      image: CAPABILITY_IMAGES.aiDataAnalytics,
+      alt: 'AI and data analytics production intelligence systems',
+      summary: pillar2?.summary ?? '',
+      href: '/capabilities/in-detail#pillar-ai-data-analytics',
+      variant: 'image' as const,
     },
     {
-      label: 'Outputs',
-      items: activeBOTItem.outputs.slice(1),
+      id: 'technology-consulting',
+      title: 'Technology Consulting',
+      image: CAPABILITY_IMAGES.technologyConsulting,
+      alt: 'Technology consulting architecture and systems planning',
+      summary: pillar1?.summary ?? '',
+      href: '/capabilities/in-detail#pillar-technology-consulting',
+      variant: 'image' as const,
     },
     {
-      label: 'Gate Checks',
-      items: activeBOTItem.checkpoints.slice(1),
+      id: 'strategy-business',
+      title: 'Strategy & Business',
+      image: CAPABILITY_IMAGES.strategyBusiness,
+      alt: 'Strategy and business consulting operating model design',
+      summary: pillar0?.summary ?? '',
+      href: '/capabilities/in-detail#pillar-strategy-business',
+      variant: 'text' as const,
+    },
+    {
+      id: 'software-engineering',
+      title: 'Software Engineering',
+      image: CAPABILITY_IMAGES.softwareEngineering,
+      alt: 'Software engineering production-grade systems workspace',
+      summary: pillar3?.summary ?? '',
+      href: '/capabilities/in-detail#pillar-software-engineering',
+      variant: 'image' as const,
+    },
+    {
+      id: 'cloud-infrastructure',
+      title: 'Cloud & Infrastructure',
+      image: CAPABILITY_IMAGES.cloudInfrastructure,
+      alt: 'Cloud infrastructure secure systems and observability',
+      summary: pillar4?.summary ?? '',
+      href: '/capabilities/in-detail#pillar-cloud-infrastructure',
+      variant: 'image' as const,
+    },
+    {
+      id: 'operations-managed',
+      title: 'Operations & Managed Services',
+      image: CAPABILITY_IMAGES.operationsManaged,
+      alt: 'Operations and managed services monitoring workspace',
+      summary: pillar5?.summary ?? '',
+      href: '/capabilities/in-detail#pillar-operations-managed',
+      variant: 'image' as const,
     },
   ];
-
-  const [pillar0, pillar1, pillar2, pillar3, pillar4, pillar5] = CAPABILITY_BRIEF_SECTIONS;
 
   return (
     <div className="relative isolate overflow-x-hidden bg-[#FFFFFF] text-[#1A2535]">
@@ -224,352 +253,102 @@ export default function Capabilities() {
       <div aria-hidden="true" className="h-px bg-[#DDE3EA] mx-6 lg:mx-12" />
 
       {/* ── SERVICE PILLARS BENTO GRID ────────────────────────────────────── */}
-      <section id="capability-pillars" className="scroll-mt-28 px-6 lg:px-12 pb-24">
-        <div className="mx-auto max-w-screen-2xl">
+      <section id="capability-pillars" className="capability-showcase-section scroll-mt-28">
+        <div className="capability-showcase-shell">
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-4"
+            className="capability-card-grid"
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.05 }}
             transition={{ staggerChildren: 0.07 }}
           >
-            {/* 1 — Strategy & Business */}
-            <motion.div
-              variants={fadeUp}
-              transition={{ duration: 0.5 }}
-              className="group relative flex min-h-[340px] flex-col justify-between overflow-hidden bg-white p-6 sm:min-h-[380px] sm:p-8 lg:h-[420px] lg:p-10"
-            >
-              <Image
-                src={CAPABILITY_IMAGES.strategyBusiness}
-                alt="Strategy and business consulting operating model design"
-                fill
-                sizes="(max-width: 768px) 100vw, 33vw"
-                className="object-cover opacity-55 transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-white via-white/82 to-white/35" />
-              <div className="relative z-10">
-                <div className="mb-8 flex h-12 w-12 items-center justify-center bg-white/78 text-[#E8A838] ring-1 ring-[#1A2535]/10">
-                  {getPillarIcon('strategy-business')}
-                </div>
-                <h3 className="font-headline text-2xl text-[#1A2535] mb-3">
-                  Strategy &amp; Business
-                </h3>
-                <p className="text-[#3D4858] leading-relaxed text-sm">
-                  {pillar0?.summary}
-                </p>
-              </div>
-              <ul className="relative z-10 mt-8 space-y-2">
-                {pillar0?.bullets.map((b) => (
-                  <li key={b} className="text-[0.68rem] font-bold tracking-[0.14em] text-[#566274]/75 uppercase">
-                    {b}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-
-            {/* 2 — Technology Consulting (2-col wide + image overlay) */}
-            <motion.div
-              variants={fadeUp}
-              transition={{ duration: 0.5 }}
-              className="group relative min-h-[360px] overflow-hidden bg-[#1A2535] md:col-span-2 lg:h-[420px]"
-            >
-              <Image
-                src={CAPABILITY_IMAGES.technologyConsulting}
-                alt="Technology consulting architecture — Hive Vault Arc Tangier Morocco"
-                fill
-                sizes="(max-width: 768px) 100vw, 66vw"
-                className="object-cover opacity-34 group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="relative z-10 flex min-h-[360px] flex-col justify-between bg-gradient-to-t from-[#1A2535]/95 via-[#1A2535]/58 to-[#E8A838]/12 p-6 sm:p-8 lg:min-h-[420px] lg:p-10">
-                <div>
-                  <div className="mb-8 flex h-12 w-12 items-center justify-center bg-white/10 text-white">
-                    {getPillarIcon('technology-consulting')}
+            {capabilityCards.map((card) => (
+              <motion.article
+                key={card.id}
+                variants={fadeUp}
+                transition={{ duration: 0.5 }}
+                className="capability-card"
+              >
+                <Link
+                  href={card.href}
+                  className="capability-card-link-shell"
+                  aria-label={`View ${card.title}: ${card.summary}`}
+                >
+                  <div className="capability-card-image">
+                    <Image
+                      src={card.image}
+                      alt={card.alt}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover"
+                    />
                   </div>
-                  <h3 className="font-headline text-3xl text-white mb-3">
-                    Technology Consulting
-                  </h3>
-                  <p className="text-white/65 max-w-md text-sm leading-relaxed">
-                    {pillar1?.summary}
-                  </p>
-                </div>
-                <div className="flex flex-wrap gap-3 mt-8">
-                  {['Legacy Modernization', 'Stack Optimization', 'Architecture Design'].map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 border border-white/20 text-white text-[0.62rem] tracking-[0.15em] uppercase"
-                    >
-                      {tag}
+                  <div className="capability-card-body">
+                    <h3>{card.title}</h3>
+                  </div>
+                  <div className="capability-card-hover" aria-hidden="true">
+                    <div>
+                      <h3>{card.title}</h3>
+                      <p>{card.summary}</p>
+                    </div>
+                    <span className="capability-card-hover-link">
+                      Learn more <ArrowRight className="h-5 w-5" strokeWidth={1.7} />
                     </span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-
-            {/* 3 — AI & Data */}
-            <motion.div
-              variants={fadeUp}
-              transition={{ duration: 0.5 }}
-              className="group relative flex min-h-[340px] flex-col justify-between overflow-hidden bg-[#1A2535] p-6 sm:min-h-[380px] sm:p-8 lg:h-[420px] lg:p-10"
-            >
-              <Image
-                src={CAPABILITY_IMAGES.aiDataAnalytics}
-                alt="AI and data analytics production intelligence systems"
-                fill
-                sizes="(max-width: 768px) 100vw, 33vw"
-                className="object-cover opacity-35 transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1A2535]/95 via-[#1A2535]/64 to-[#E8A838]/14" />
-              <div className="relative z-10">
-                <div className="mb-8 flex h-12 w-12 items-center justify-center bg-white/10 text-white">
-                  {getPillarIcon('ai-data-analytics')}
-                </div>
-                <h3 className="font-headline text-2xl text-white mb-3">AI &amp; Data</h3>
-                <p className="text-white/65 leading-relaxed text-sm">{pillar2?.summary}</p>
-              </div>
-              {(pillar2?.landingLinks.length ?? 0) > 0 && (
-                <div className="relative z-10 mt-8 flex flex-col gap-2">
-                  {pillar2?.landingLinks.map((lnk) => (
-                    <Link
-                      key={lnk.href}
-                      href={lnk.href}
-                      className="inline-flex items-center gap-1.5 text-[0.7rem] font-bold uppercase tracking-[0.14em] text-[#F4D27C] hover:text-white transition-colors group/link"
-                    >
-                      {lnk.label}
-                      <span className="group-hover/link:translate-x-0.5 transition-transform">→</span>
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </motion.div>
-
-            {/* 4 — Software Engineering */}
-            <motion.div
-              variants={fadeUp}
-              transition={{ duration: 0.5 }}
-              className="group relative flex min-h-[340px] flex-col justify-between overflow-hidden bg-white p-6 sm:min-h-[380px] sm:p-8 lg:h-[420px] lg:p-10"
-            >
-              <Image
-                src={CAPABILITY_IMAGES.softwareEngineering}
-                alt="Software engineering production-grade systems workspace"
-                fill
-                sizes="(max-width: 768px) 100vw, 33vw"
-                className="object-cover opacity-55 transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-white/32" />
-              <div className="relative z-10">
-                <div className="mb-8 flex h-12 w-12 items-center justify-center bg-white/78 text-[#E8A838] ring-1 ring-[#1A2535]/10">
-                  {getPillarIcon('software-engineering')}
-                </div>
-                <h3 className="font-headline text-2xl text-[#1A2535] mb-3">
-                  Software Engineering
-                </h3>
-                <p className="text-[#3D4858] leading-relaxed text-sm">{pillar3?.summary}</p>
-              </div>
-              <div className="relative z-10 mt-8 space-y-2">
-                <div className="w-full h-px bg-[#1A2535]/15" />
-                <p className="text-[0.62rem] font-bold text-[#566274]/75 uppercase tracking-[0.16em] py-2">
-                  Full-Stack Sovereignty
-                </p>
-              </div>
-            </motion.div>
-
-            {/* 5 — Cloud & Infrastructure */}
-            <motion.div
-              variants={fadeUp}
-              transition={{ duration: 0.5 }}
-              className="group relative flex min-h-[340px] flex-col justify-between overflow-hidden bg-white p-6 sm:min-h-[380px] sm:p-8 lg:h-[420px] lg:p-10"
-            >
-              <Image
-                src={CAPABILITY_IMAGES.cloudInfrastructure}
-                alt="Cloud infrastructure secure systems and observability"
-                fill
-                sizes="(max-width: 768px) 100vw, 33vw"
-                className="object-cover opacity-52 transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-white via-white/82 to-white/34" />
-              <div className="relative z-10">
-                <div className="mb-8 flex h-12 w-12 items-center justify-center bg-white/78 text-[#E8A838] ring-1 ring-[#1A2535]/10">
-                  {getPillarIcon('cloud-infrastructure')}
-                </div>
-                <h3 className="font-headline text-2xl text-[#1A2535] mb-3">
-                  Cloud &amp; Infrastructure
-                </h3>
-                <p className="text-[#3D4858] leading-relaxed text-sm">{pillar4?.summary}</p>
-              </div>
-              <div className="relative z-10 flex flex-wrap gap-2 mt-8">
-                {['AWS', 'Azure', 'GCP', 'Hybrid'].map((tag) => (
-                  <span
-                    key={tag}
-                    className="border border-[#1A2535]/15 bg-white/70 px-3 py-1 text-[0.6rem] font-bold text-[#3D4858] uppercase tracking-[0.12em]"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          </motion.div>
-
-          {/* 6 — Operations & Managed Services (full-width dark banner) */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.5 }}
-            className="mt-4 bg-[#1A2535] p-10 md:p-12 flex flex-col md:flex-row justify-between items-center gap-8 relative overflow-hidden"
-          >
-            <Image
-              src={CAPABILITY_IMAGES.operationsManaged}
-              alt="Operations and managed services monitoring workspace"
-              fill
-              sizes="100vw"
-              className="object-cover opacity-34"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#1A2535]/95 via-[#1A2535]/76 to-[#E8A838]/20" />
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-0 opacity-[0.045]"
-              style={{
-                backgroundImage:
-                  'linear-gradient(to right,#F0C15A 1px,transparent 1px),linear-gradient(to bottom,#F0C15A 1px,transparent 1px)',
-                backgroundSize: '44px 44px',
-              }}
-            />
-            <div className="relative z-10 flex items-center gap-8">
-              <div className="flex-shrink-0 flex h-16 w-16 items-center justify-center bg-white/5 text-[#E8A838]">
-                <Settings className="h-8 w-8" strokeWidth={1.2} />
-              </div>
-              <div>
-                <h3 className="font-headline text-2xl md:text-3xl text-white mb-2">
-                  Operations &amp; Managed Services
-                </h3>
-                <p className="text-[#778192] max-w-xl text-sm leading-relaxed">
-                  {pillar5?.summary}
-                </p>
-              </div>
-            </div>
-            <Link
-              href="/contact"
-              className="sharp-edge relative z-10 inline-flex min-h-11 items-center justify-center gap-1.5 bg-[#E8A838] px-8 py-3.5 text-[0.78rem] font-bold uppercase tracking-[0.14em] text-white transition-colors hover:bg-[#C8891C] w-full sm:w-auto"
-            >
-              Delegate Operations →
-            </Link>
+                  </div>
+                </Link>
+              </motion.article>
+            ))}
           </motion.div>
         </div>
       </section>
 
       {/* ── ARC OPERATING MODEL ────────────────────────────────────────────── */}
-      <section id="bot-model" className="scroll-mt-28 bg-[#F7F8FA] py-28 px-6 lg:px-12 overflow-hidden relative">
-        {/* Blueprint grid — subtle structural texture */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.028]"
-          style={{
-            backgroundImage:
-              'linear-gradient(to right,#1A2535 1px,transparent 1px),linear-gradient(to bottom,#1A2535 1px,transparent 1px)',
-            backgroundSize: '40px 40px',
-          }}
-        />
+      <section id="bot-model" className="soft-grid-section scroll-mt-28 px-6 py-28 lg:px-12">
         <div className="relative mx-auto max-w-screen-2xl">
 
-          {/* Editorial header split */}
           <motion.div
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.1 }}
             transition={{ staggerChildren: 0.1 }}
-            className="mb-14 grid grid-cols-1 gap-8 md:grid-cols-12"
+            className="arc-operating-header"
           >
-            <motion.div
-              variants={fadeUp}
-              transition={{ duration: 0.55 }}
-              className="md:col-span-6"
-            >
-              <div className="mb-5 flex items-center gap-3">
+            <motion.div variants={fadeUp} transition={{ duration: 0.55 }} className="arc-operating-title">
+              <div className="arc-operating-mark">
                 <SectionBrandMark size="sm" />
-                <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#E8A838] block">
-                  Engagement Methodology
-                </span>
+                <span>ARC model</span>
               </div>
-              <h2 className="font-headline text-5xl md:text-6xl text-[#1A2535] leading-[1.05]">
-                The ARC
+              <h2>
+                Assess.
                 <br />
-                <em className="italic">Operating Model</em>
+                Build.
+                <br />
+                Operate.
               </h2>
             </motion.div>
-            <motion.div
-              variants={fadeUp}
-              transition={{ duration: 0.55 }}
-              className="md:col-span-6 flex items-end"
-            >
-              <div className="w-full">
-                <p className="text-[#536070] text-base leading-relaxed mb-6">
-                  Our proprietary engagement methodology ensures every project is predictable, rigorous, and impactful. One accountable sequence — from diagnosis to managed operations.
-                </p>
-                <div className="grid grid-cols-1 gap-px bg-[#C8CED7] sm:grid-cols-3">
-                  {['Decision gates', 'Joint governance', 'Managed continuity'].map((item, index) => (
-                    <div key={item} className="bg-white px-4 py-3">
-                      <p className="text-[0.62rem] font-bold uppercase tracking-[0.14em] text-[#E8A838]">
-                        0{index + 1}
-                      </p>
-                      <p className="mt-1 text-xs font-semibold text-[#3D4858]">{item}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
+            <motion.div variants={fadeUp} transition={{ duration: 0.55 }} className="arc-operating-keys">
+              {['Decision gates', 'Joint ownership', 'Managed continuity'].map((item) => (
+                <span key={item}>{item}</span>
+              ))}
             </motion.div>
           </motion.div>
 
-          {/* Interactive ARC sequence */}
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.05 }}
             transition={{ duration: 0.35 }}
-            className="grid grid-cols-1 gap-5 lg:h-[760px] lg:grid-cols-[0.82fr_1.18fr] lg:items-stretch"
+            className="arc-operating-layout"
           >
-            <div className="flex flex-col gap-3 lg:min-h-0">
-              <div className="border border-[#C8CED7] bg-white p-4">
-                <div className="mb-4 flex items-start justify-between gap-4">
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#1A2535]">
-                      ARC sequence
-                    </p>
-                    <p className="mt-2 max-w-md text-xs leading-relaxed text-[#566274]">
-                      Hover a phase to see ownership, outputs, and decision gates.
-                    </p>
-                  </div>
-                  <span className="border border-[#C8CED7] px-3 py-2 text-xs font-bold text-[#E8A838]">
-                    {activeBOTItem.step}/03
-                  </span>
-                </div>
-
-                <div className="relative h-2 bg-[#DDE3EA]">
+            <div className="arc-operating-rail">
+              <div className="arc-operating-progress">
+                <span>{activeBOTItem.step}/03</span>
+                <div>
                   <motion.div
-                    className="absolute inset-y-0 left-0 bg-[#E8A838]"
+                    className="arc-operating-progress-fill"
                     animate={{ width: `${((activeBOTStep + 1) / BOT_PHASES.length) * 100}%` }}
                     transition={{ duration: 0.25, ease: 'easeOut' }}
                   />
-                </div>
-
-                <div className="mt-4 grid grid-cols-3 gap-px bg-[#C8CED7]">
-                  {BOT_PHASES.map((item, index) => (
-                    <button
-                      key={`arc-rail-${item.step}`}
-                      type="button"
-                      onClick={() => setActiveBOTStep(index)}
-                      onMouseEnter={() => setActiveBOTStep(index)}
-                      onFocus={() => setActiveBOTStep(index)}
-                      aria-pressed={activeBOTStep === index}
-                      className={`bg-white px-3 py-2.5 text-left transition-colors duration-150 ${
-                        activeBOTStep === index ? 'text-[#E8A838]' : 'text-[#657384] hover:text-[#1A2535]'
-                      }`}
-                    >
-                      <span className="block text-[0.6rem] font-bold uppercase tracking-[0.14em]">
-                        Phase {item.step}
-                      </span>
-                      <span className="mt-1 block text-sm font-semibold">{item.title}</span>
-                    </button>
-                  ))}
                 </div>
               </div>
 
@@ -583,50 +362,16 @@ export default function Capabilities() {
                     onMouseEnter={() => setActiveBOTStep(index)}
                     onFocus={() => setActiveBOTStep(index)}
                     aria-pressed={isActive}
-                    className={`group relative grid flex-1 min-h-0 w-full overflow-hidden border bg-white text-left transition-colors duration-150 sm:grid-cols-[1fr_140px] ${
-                      isActive ? 'border-[#E8A838]' : 'border-[#DDE3EA] hover:border-[#9AA4B2]'
-                    }`}
+                    className={`arc-operating-step ${isActive ? 'is-active' : ''}`}
                   >
-                    <div
-                      className={`absolute bottom-0 left-0 top-0 w-[3px] transition-colors duration-150 ${
-                        isActive ? 'bg-[#E8A838]' : 'bg-transparent group-hover:bg-[#C8CED7]'
-                      }`}
-                    />
-                    <div className="flex items-start gap-4 p-4">
-                      <div
-                        className={`flex h-10 w-10 shrink-0 items-center justify-center border transition-colors duration-150 ${
-                          isActive
-                            ? 'border-[#E8A838] bg-[#E8A838] text-white'
-                            : 'border-[#C8CED7] text-[#566274] group-hover:text-[#E8A838]'
-                        }`}
-                      >
+                    <span className="arc-operating-step-icon">
                         {item.icon}
-                      </div>
-                      <div>
-                        <p className="text-[0.62rem] font-bold uppercase tracking-[0.16em] text-[#E8A838]">
-                          Phase {item.step}
-                        </p>
-                        <h3 className="mt-1.5 font-headline text-2xl leading-none text-[#1A2535]">
-                          {item.title}
-                        </h3>
-                        <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-[#566274]">{item.objective}</p>
-                      </div>
-                    </div>
-                    <div className="relative min-h-32 border-t border-[#DDE3EA] sm:min-h-0 sm:border-l sm:border-t-0">
-                      <Image
-                        src={item.image}
-                        alt={item.imageAlt}
-                        fill
-                        loading="lazy"
-                        sizes="(max-width: 640px) 100vw, 140px"
-                        className="object-cover opacity-85 transition-transform duration-500 group-hover:scale-105"
-                      />
-                      <div
-                        className={`absolute inset-0 transition-colors duration-150 ${
-                          isActive ? 'bg-[#E8A838]/10' : 'bg-[#1A2535]/18 group-hover:bg-[#1A2535]/8'
-                        }`}
-                      />
-                    </div>
+                    </span>
+                    <span className="arc-operating-step-text">
+                      <span>{item.step}</span>
+                      <strong>{item.title}</strong>
+                      <em>{item.outputs[0]}</em>
+                    </span>
                   </button>
                 );
               })}
@@ -637,110 +382,29 @@ export default function Capabilities() {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.28 }}
-              className="h-full self-stretch bg-[#1A2535] p-4 md:p-5"
+              className="arc-operating-panel"
             >
-              <div className="grid h-full gap-4">
-                <div className="relative min-h-[220px] overflow-hidden border border-white/[0.08] bg-white/[0.04]">
+              <div className="arc-operating-media">
                   <Image
                     src={activeBOTItem.image}
                     alt={activeBOTItem.imageAlt}
                     fill
                     loading="lazy"
                     sizes="(max-width: 1024px) 100vw, 58vw"
-                    className="object-cover opacity-78"
+                  className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#1A2535]/92 via-[#1A2535]/46 to-[#1A2535]/8" />
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#1A2535] to-transparent p-4 md:p-5">
-                    <div className="flex flex-wrap items-end justify-between gap-4">
-                      <div>
-                        <p className="text-[0.62rem] font-bold uppercase tracking-[0.18em] text-[#F4D27C]">
-                          Phase {activeBOTItem.step}
-                        </p>
-                        <p className="mt-2 font-headline text-3xl leading-none text-white md:text-4xl">
-                          {activeBOTItem.title}
-                        </p>
-                      </div>
-                      <p className="max-w-sm text-sm leading-relaxed text-white/70">
-                        {activeBOTItem.outputs[0]}
-                      </p>
-                    </div>
-                  </div>
+                <div className="arc-operating-media-copy">
+                  <span>Phase {activeBOTItem.step}</span>
+                  <h3>{activeBOTItem.title}</h3>
                 </div>
+              </div>
 
-                <div className="grid gap-px border border-white/[0.08] bg-white/[0.08] md:grid-cols-[1fr_220px]">
-                  <div className="bg-[#1A2535] p-4">
-                    <div className="mb-3 flex items-center gap-3">
-                      <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center bg-[#E8A838] text-xs font-bold text-white">
-                        {activeBOTItem.step}
-                      </span>
-                      <div className="text-[#F0C15A] shrink-0">{activeBOTItem.icon}</div>
-                    </div>
-                    <p className="max-w-2xl text-base leading-relaxed text-white">
-                      {activeBOTItem.objective}
-                    </p>
-                  </div>
-
-                  <div className="grid grid-cols-3 bg-white/[0.03] md:grid-cols-1">
-                    {BOT_PHASES.map((item, index) => (
-                      <button
-                        key={`arc-panel-${item.step}`}
-                        type="button"
-                        onClick={() => setActiveBOTStep(index)}
-                        onMouseEnter={() => setActiveBOTStep(index)}
-                        onFocus={() => setActiveBOTStep(index)}
-                        aria-pressed={activeBOTStep === index}
-                        className={`flex min-h-11 items-center justify-between border-r border-white/[0.08] px-3 py-3 text-left text-[0.65rem] font-bold uppercase tracking-[0.12em] last:border-r-0 md:border-b md:border-r-0 md:last:border-b-0 transition-colors duration-150 ${
-                          activeBOTStep === index
-                            ? 'bg-[#E8A838] text-white'
-                            : 'text-[#9AA4B2] hover:bg-white/[0.06] hover:text-white'
-                        }`}
-                      >
-                        <span>{item.title}</span>
-                        <span>{item.step}</span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 gap-px border border-white/[0.08] bg-white/[0.08] md:grid-cols-3">
+              <div className="arc-operating-panel-copy">
+                <p>{activeBOTItem.objective}</p>
+                <div className="arc-operating-chip-row">
                   {activeBOTSnapshot.map((section) => (
-                    <article key={section.label} className="bg-[#1A2535] p-4">
-                      <p className="mb-3 text-[0.62rem] font-bold uppercase tracking-[0.18em] text-[#F0C15A]">
-                        {section.label}
-                      </p>
-                      <p className="text-sm font-semibold leading-relaxed text-white">
-                        {section.primary.replace(/\.$/, '')}
-                      </p>
-                      <p className="mt-1.5 text-xs leading-relaxed text-[#9AA4B2]">
-                        {section.secondary.replace(/\.$/, '')}
-                      </p>
-                    </article>
+                    <span key={section.label}>{section.primary.replace(/\.$/, '')}</span>
                   ))}
-                </div>
-
-                <div className="border border-white/[0.08] bg-[#1A2535]">
-                  <div className="border-b border-white/[0.08] px-4 py-3">
-                    <p className="text-[0.62rem] font-bold uppercase tracking-[0.18em] text-[#F4D27C]">
-                      Execution detail
-                    </p>
-                  </div>
-                  <div className="grid grid-cols-1 gap-px bg-white/[0.08] md:grid-cols-3">
-                    {activeBOTExecutionDetail.map((section) => (
-                      <article key={section.label} className="bg-[#1A2535] p-4">
-                        <p className="mb-3 text-[0.62rem] font-bold uppercase tracking-[0.16em] text-[#F0C15A]">
-                          {section.label}
-                        </p>
-                        <ul className="space-y-2">
-                          {section.items.map((item) => (
-                            <li key={`${section.label}-${item}`} className="flex items-start gap-2 text-xs leading-relaxed text-[#AEB7C4]">
-                              <span className="mt-1.5 h-1 w-1 shrink-0 bg-[#E8A838]" />
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                      </article>
-                    ))}
-                  </div>
                 </div>
               </div>
             </motion.div>
@@ -817,43 +481,16 @@ export default function Capabilities() {
             viewport={{ once: true, amount: 0.08 }}
             transition={{ staggerChildren: 0.08 }}
           >
-            <motion.div variants={fadeUp} transition={{ duration: 0.5 }} className="mb-10 border-t border-[#C8CED7] pt-8">
-              <div className="grid grid-cols-1 gap-6 md:grid-cols-12 md:items-end">
-                <div className="md:col-span-7">
-                  <div className="flex items-start gap-3">
-                    <SectionBrandMark size="sm" className="mt-0.5" />
-                    <div>
-                      <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.24em] text-[#E8A838]">
-                        Solution Programs
-                      </p>
-                      <h2 className="font-headline text-4xl leading-[1.06] text-[#1A2535] md:text-5xl">
-                        Pre-scoped.
-                        <br />
-                        <em className="italic">Production-ready.</em>
-                      </h2>
-                    </div>
-                  </div>
-                </div>
-                <div className="md:col-span-5">
-                  <p className="max-w-md text-sm leading-relaxed text-[#536070]">
-                    Consulting-led engagements combining architecture decisions, delivery execution,
-                    and operational ownership — not a one-off project.
-                  </p>
-                  <div className="mt-5 grid grid-cols-3 gap-px bg-[#C8CED7]">
-                    {['Scoped', 'Built', 'Operated'].map((item, index) => (
-                      <div key={item} className="bg-white px-3 py-2.5">
-                        <p className="text-[0.58rem] font-bold uppercase tracking-[0.14em] text-[#E8A838]">
-                          0{index + 1}
-                        </p>
-                        <p className="mt-1 text-xs font-semibold text-[#3D4858]">{item}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+            <motion.div variants={fadeUp} transition={{ duration: 0.5 }} className="programs-header">
+              <div className="programs-mark">
+                <SectionBrandMark size="sm" />
+                <span>Solution programs</span>
               </div>
+              <h2>Choose the starting point.</h2>
+              <p>Three focused programs. Each one is scoped, built, and operated with one accountable team.</p>
             </motion.div>
 
-            <div className="grid grid-cols-1 gap-px border border-[#DDE3EA] bg-[#DDE3EA] md:grid-cols-3">
+            <div className="programs-grid">
               {CAPABILITY_SOLUTION_PROGRAM_DETAILS.map((program, i) => {
                 const programIcons = [
                   <Bot key="bot" className="h-5 w-5" strokeWidth={1.3} />,
@@ -879,71 +516,38 @@ export default function Capabilities() {
                     key={program.slug}
                     variants={fadeUp}
                     transition={{ duration: 0.5 }}
-                    className="group flex min-h-[440px] flex-col bg-white transition-colors duration-200 hover:bg-[#FFFFFF] md:min-h-[520px]"
+                    className="program-card"
                   >
-                    <div className="relative h-40 overflow-hidden bg-[#1A2535]">
+                    <div className="program-card-media">
                       <Image
                         src={programMedia[i]!.src}
                         alt={programMedia[i]!.alt}
                         fill
                         loading="lazy"
                         sizes="(max-width: 768px) 100vw, 33vw"
-                        className="object-cover opacity-62 transition-transform duration-500 group-hover:scale-105"
+                        className="object-cover"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#1A2535]/88 via-[#1A2535]/36 to-transparent" />
-                      <div className="absolute inset-x-0 bottom-0 flex items-center justify-between p-5">
-                        <span className="text-white">{programIcons[i]}</span>
-                        <span className="font-mono text-[0.58rem] text-white/70">PRG-00{i + 1}</span>
-                      </div>
                     </div>
 
-                    <div className="flex flex-1 flex-col p-7">
-                      <p className="mb-2 text-[0.6rem] font-bold uppercase tracking-[0.18em] text-[#E8A838]">
-                        {program.category}
-                      </p>
-                      <h3 className="mb-3 font-headline text-xl leading-tight text-[#1A2535] transition-colors duration-200 group-hover:text-[#E8A838]">
-                        {program.name}
-                      </h3>
-                      <p className="mb-5 flex-1 text-sm leading-relaxed text-[#536070]">
-                        {program.summary}
-                      </p>
-
-                      <div className="mb-5 grid grid-cols-1 gap-px bg-[#DDE3EA]">
-                        <div className="bg-[#FFFFFF] p-3">
-                          <p className="mb-2 text-[0.58rem] font-bold uppercase tracking-[0.14em] text-[#657384]">
-                            Build Scope
-                          </p>
-                          <p className="text-xs leading-relaxed text-[#3D4858]">
-                            {program.modules.slice(0, 2).join(' · ')}
-                          </p>
-                        </div>
-                        <div className="bg-[#FFFFFF] p-3">
-                          <p className="mb-2 text-[0.58rem] font-bold uppercase tracking-[0.14em] text-[#657384]">
-                            Operating Gain
-                          </p>
-                          <p className="text-xs leading-relaxed text-[#3D4858]">
-                            {program.outcomes.slice(0, 2).join(' · ')}
-                          </p>
-                        </div>
+                    <div className="program-card-body">
+                      <div className="program-card-topline">
+                        <span>{programIcons[i]}</span>
+                        <span>Program 0{i + 1}</span>
                       </div>
-
-                      <div className="mb-5 flex flex-wrap gap-1.5">
-                        {program.integrations.slice(0, 3).map((integration) => (
-                          <span
-                            key={integration}
-                            className="border border-[#DDE3EA] bg-white px-2 py-1 text-[0.58rem] font-bold uppercase tracking-[0.1em] text-[#566274]"
-                          >
-                            {integration}
-                          </span>
+                      <h3>{program.name}</h3>
+                      <p>{program.summary}</p>
+                      <div className="program-card-chips">
+                        {program.outcomes.slice(0, 2).map((outcome) => (
+                          <span key={outcome}>{outcome}</span>
                         ))}
                       </div>
 
                       {program.proofLinks.length > 0 && (
                         <Link
                           href={program.proofLinks[0]!}
-                          className="mt-auto inline-flex min-h-11 items-center text-[0.68rem] font-bold uppercase tracking-[0.14em] text-[#E8A838] transition-colors hover:text-[#C8891C]"
+                          className="program-card-link"
                         >
-                          View Case Study →
+                          Case study →
                         </Link>
                       )}
                     </div>

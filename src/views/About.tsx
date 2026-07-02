@@ -39,6 +39,8 @@ type Pillar = {
   title: string;
   shortTitle: string;
   description: string;
+  outcome: string;
+  phase: 'Assess' | 'Build' | 'Operate';
 };
 
 const proofPoints = ['Based in Tangier, Morocco', 'Strategy · AI · Engineering · Operations', 'Serving Morocco & Europe'];
@@ -47,22 +49,22 @@ const principles: Principle[] = [
   {
     icon: <Target className="h-5 w-5" />,
     title: 'No Handoffs',
-    description: 'The same team that defines strategy designs the architecture, writes the code, and operates the system. No agency-to-consultancy drift. No knowledge transfer failure.',
+    description: 'Strategy, build, and operations stay with one accountable team.',
   },
   {
     icon: <ShieldCheck className="h-5 w-5" />,
     title: 'Outcomes Over Output',
-    description: 'Every milestone is tied to a measurable business result. We do not ship features — we move metrics. Performance, reliability, and maintainability are built in from day one.',
+    description: 'Work is judged by measurable business movement.',
   },
   {
     icon: <Globe2 className="h-5 w-5" />,
     title: 'Vertical Depth',
-    description: 'We operate in defined industries — Real Estate, Healthcare, Financial Services, Logistics — because domain knowledge compounds. Generic technology advice does not.',
+    description: 'Industry context shapes the system before technology choices.',
   },
   {
     icon: <Workflow className="h-5 w-5" />,
     title: 'Founder Accountability',
-    description: 'Hive Vault Arc is founder-led. Khalid, Ali, and Oubay are on every engagement. Decisions are made by the people who understand the full system — not escalated up a management chain.',
+    description: 'Senior decisions stay close to the people doing the work.',
   },
 ];
 
@@ -72,36 +74,48 @@ const pillars: Pillar[] = [
     shortTitle: 'Strategy',
     title: 'Strategy & Business Consulting',
     description: 'Diagnose the transformation before any code is written. We redesign operating models, define AI strategy, sequence digital programs, and build the roadmap that connects business outcomes to technical execution.',
+    outcome: 'Shape the operating roadmap before build starts.',
+    phase: 'Assess',
   },
   {
     number: '02',
     shortTitle: 'Technology',
     title: 'Technology Consulting',
     description: 'Design the architecture that serves the business 3–5 years out. Enterprise blueprints, technology roadmaps, platform strategy, IT modernization, systems integration, and infrastructure redesign.',
+    outcome: 'Decide the architecture and integration path.',
+    phase: 'Assess',
   },
   {
     number: '03',
     shortTitle: 'AI & Data',
     title: 'AI, Data & Analytics',
     description: 'Engineer intelligence into operations. Generative AI systems, autonomous agents, machine learning, data pipelines, business intelligence, MLOps, and conversational AI on WhatsApp and web channels.',
+    outcome: 'Turn data and workflows into useful intelligence.',
+    phase: 'Build',
   },
   {
     number: '04',
     shortTitle: 'Software',
     title: 'Software Engineering & Product',
     description: 'Production-grade custom software, web and mobile applications, SaaS platforms, API ecosystems, DevOps pipelines, and UX-wired frontend delivery.',
+    outcome: 'Ship the product layer people actually use.',
+    phase: 'Build',
   },
   {
     number: '05',
     shortTitle: 'Cloud',
     title: 'Cloud & Infrastructure',
     description: 'AWS, Azure, and GCP migration, cloud-native architecture, Terraform-based infrastructure automation, security design, disaster recovery, and production observability.',
+    outcome: 'Make the system reliable, secure, and observable.',
+    phase: 'Build',
   },
   {
     number: '06',
     shortTitle: 'Operations',
     title: 'Operations & Managed Services',
     description: 'Ongoing ownership of the systems Hive Vault Arc builds. Managed operations, application evolution, automation maintenance, IT support, and business process management — long after go-live.',
+    outcome: 'Keep production improving after launch.',
+    phase: 'Operate',
   },
 ];
 
@@ -343,117 +357,99 @@ const About: React.FC = () => {
         </section>
 
         {/* Six Service Pillars */}
-        <section className="relative px-6 lg:px-14 py-16 md:py-24 bg-white">
-          <div className="container mx-auto">
+        <section id="service-map" className="about-service-map-section soft-grid-section">
+          <div className="about-service-map-shell">
             <motion.div
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.05 }}
               transition={{ duration: 0.35 }}
-              className="mb-14"
+              className="about-service-map-panel"
             >
-              <div className="mb-3 flex items-center gap-3">
-                <SectionBrandMark size="sm" />
-                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#E8A838]">What We Do</p>
-              </div>
-              <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-                <h2 className="font-serif text-4xl md:text-5xl font-medium text-[#1A2535] leading-tight max-w-xl">
-                  Six Integrated<br />Service Pillars
-                </h2>
-                <p className="max-w-md text-[#1A2535]/60 leading-relaxed lg:text-right">
-                  These are not separate departments. They are phases of the same transformation loop — applied in full or in part depending on where the client is.
+              <div className="about-service-map-copy">
+                <div className="about-service-map-media">
+                  <Image
+                    src="/Images/capabilities/hva-arc-framework-operating-model.webp"
+                    alt="ARC operating model workspace"
+                    fill
+                    sizes="(max-width: 1040px) 100vw, 32vw"
+                    className="object-cover"
+                  />
+                </div>
+                <div className="about-service-map-mark">
+                  <SectionBrandMark size="sm" />
+                  <span>What We Do</span>
+                </div>
+                <h2>Six pillars. One loop.</h2>
+                <p>
+                  Diagnose the work. Build the system. Keep it running.
                 </p>
+                <Link href="/capabilities#capability-pillars" className="about-service-map-link">
+                  View full map <span aria-hidden="true">→</span>
+                </Link>
+              </div>
+
+              <div className="about-service-map-grid">
+                {pillars.map((pillar) => (
+                  <Link
+                    key={pillar.number}
+                    href="/capabilities#capability-pillars"
+                    aria-label={`View capability details for ${pillar.title}`}
+                    className="about-service-map-item"
+                  >
+                    <span className="about-service-map-number">{pillar.number}</span>
+                    <span className="about-service-map-text">
+                      <span className="about-service-map-phase">{pillar.phase}</span>
+                      <strong>{pillar.shortTitle}</strong>
+                      <em>{pillar.outcome}</em>
+                    </span>
+                    <span className="about-service-map-arrow" aria-hidden="true">
+                      →
+                    </span>
+                    <span className="sr-only">{pillar.description}</span>
+                  </Link>
+                ))}
               </div>
             </motion.div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#ECEFF3]">
-              {pillars.map((pillar, index) => (
-                <motion.div
-                  key={pillar.number}
-                  initial={{ opacity: 0, y: 8 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.05 }}
-                  transition={{ duration: 0.35, delay: index * 0.06 }}
-                  className="bg-[#FFFFFF] p-8 group hover:bg-white transition-colors duration-300"
-                >
-                  <p className="font-headline text-[4rem] leading-none text-[#1A2535]/[0.05] select-none mb-4 -ml-1">
-                    {pillar.number}
-                  </p>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#E8A838] mb-2">{pillar.shortTitle}</p>
-                  <h3 className="font-serif text-xl font-medium text-[#1A2535] mb-4 leading-snug">{pillar.title}</h3>
-                  <p className="text-sm text-[#1A2535]/64 leading-relaxed">{pillar.description}</p>
-                </motion.div>
-              ))}
-            </div>
           </div>
         </section>
 
-        {/* Operating Principles — redesigned */}
-        <section className="relative px-6 lg:px-14 py-16 md:py-24">
-          <div className="container mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-
-              {/* Left: heading + bordered rules */}
-              <div className="lg:col-span-5">
-                <div className="inline-flex items-center gap-3 mb-6">
-                  <Workflow className="h-5 w-5 text-[#E8A838]" />
-                  <p className="text-[10px] uppercase tracking-[0.2em] text-[#1A2535]/58">Operating Principles</p>
+        {/* Operating Principles */}
+        <section id="operating-principles" className="about-principles-section">
+          <div className="about-principles-shell">
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.08 }}
+              transition={{ duration: 0.35 }}
+              className="about-principles-panel"
+            >
+              <div className="about-principles-copy">
+                <div className="about-principles-mark">
+                  <Workflow className="h-4 w-4" />
+                  <span>Operating Principles</span>
                 </div>
-                <h2 className="font-serif text-4xl md:text-5xl font-medium text-[#1A2535] mb-12 leading-tight">
-                  Four Non-Negotiables<br />of Transformation
-                </h2>
-                <div className="space-y-10">
-                  {principles.map((principle, index) => (
-                    <motion.div
-                      key={principle.title}
-                      initial={{ opacity: 0, x: -12 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true, amount: 0.2 }}
-                      transition={{ duration: 0.38, delay: index * 0.08 }}
-                      className={`border-l-2 pl-8 py-2 ${
-                        index === 0 ? 'border-[#E8A838]' : 'border-[#1A2535]/20'
-                      }`}
-                    >
-                      <h4 className={`text-[10px] font-bold uppercase tracking-[0.2em] mb-2 ${
-                        index === 0 ? 'text-[#E8A838]' : 'text-[#1A2535]/45'
-                      }`}>
-                        {`Rule 0${index + 1}`}
-                      </h4>
-                      <h3 className="text-2xl font-medium text-[#1A2535] mb-3">{principle.title}</h3>
-                      <p className="text-[#1A2535]/64 font-light leading-relaxed">{principle.description}</p>
-                    </motion.div>
-                  ))}
-                </div>
+                <h2>Four rules for accountable delivery.</h2>
+                <p>No handoff chain. No vague success metric. No detached ownership.</p>
               </div>
 
-              {/* Right: dark quote card */}
-              <motion.div
-                className="lg:col-span-7"
-                initial={{ opacity: 0, x: 18 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.5 }}
-              >
-                <div className="relative min-h-[320px] md:min-h-[480px] bg-[#1A2535] overflow-hidden flex flex-col justify-end">
-                  <div className="pointer-events-none absolute -right-20 -top-16 h-52 w-52 rounded-full bg-[#E8A838]/35 blur-3xl" />
-                  <div className="pointer-events-none absolute -bottom-20 left-[8%] h-56 w-56 rounded-full bg-[#E8A838]/20 blur-3xl" />
-                  <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#E8A838]/50 to-transparent" />
-                  <div className="relative z-10 p-10 md:p-14">
-                    <p className="text-[#E8A838] text-[10px] font-bold tracking-[0.24em] uppercase mb-8">
-                      Hive Vault Arc Core Creed
-                    </p>
-                    <blockquote className="font-serif text-2xl md:text-3xl italic text-[#FFFFFF] leading-snug mb-8">
-                      "Real technology transformation is only complete when the systems are running, the team has handed off nothing, and the outcomes are measurable."
-                    </blockquote>
-                    <div className="h-px bg-gradient-to-r from-[#E8A838]/60 via-[#E8A838]/40 to-transparent mb-8" />
-                    <p className="text-[#FFFFFF]/90 text-sm font-light leading-relaxed max-w-md">
-                      Four non-negotiables that shape every engagement — from the first strategy session to the last infrastructure alert.
-                    </p>
+              <div className="about-principles-list">
+                {principles.map((principle, index) => (
+                  <div key={principle.title} className="about-principles-item">
+                    <span className="about-principles-number">{`0${index + 1}`}</span>
+                    <span className="about-principles-icon" aria-hidden="true">
+                      {principle.icon}
+                    </span>
+                    <strong>{principle.title}</strong>
+                    <em>{principle.description}</em>
                   </div>
-                </div>
-              </motion.div>
+                ))}
+              </div>
 
-            </div>
+              <p className="about-principles-creed">
+                Complete means running, owned, and measurable.
+              </p>
+            </motion.div>
           </div>
         </section>
 
@@ -517,7 +513,7 @@ const About: React.FC = () => {
         </section>
 
         <BottomCTA
-          variant="dark"
+          variant="light"
           headline="Ready to Start Your Transformation?"
           subtext="Tell us where you are and where you need to be. Hive Vault Arc will map the right strategy, engineering, and operations path — and stay involved until the outcome is measurable."
           primaryLabel="Book a Discovery Call"

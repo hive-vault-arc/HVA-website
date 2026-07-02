@@ -4,32 +4,61 @@ import React, { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import { ArrowRight, BarChart3, Bot, Cloud, Eye, Layers, MessageSquare } from 'lucide-react';
+import {
+  ArrowRight,
+  BarChart3,
+  BookOpen,
+  Bot,
+  Building2,
+  CalendarCheck,
+  Cloud,
+  Eye,
+  Layers,
+  MapPin,
+  MessageSquare,
+  Route,
+  Users,
+  type LucideIcon,
+} from 'lucide-react';
 import { motion } from 'framer-motion';
 import BottomCTA from '../components/BottomCTA';
 import SectionBrandMark from '../components/SectionBrandMark';
 import Background3d from '../components/Plasma';
 import LogoLoop from '../components/LogoItem';
-import VideoScrollSection from '../components/ui/VideoScrollSection';
 import HeroSlider from '../components/ui/HeroSlider';
 import type { InsightsCarouselItem } from '../components/InsightsCarousel';
 import { useAnimationQuality } from '../lib/animationQuality';
-import { SITELINK_CANDIDATES } from '../lib/seo';
 import {
   SiAndroid,
   SiCplusplus,
+  SiCloudflare,
+  SiDatadog,
   SiDocker,
+  SiElasticsearch,
   SiFirebase,
   SiFlutter,
   SiGithub,
   SiGoogle,
   SiGooglecloud,
+  SiGrafana,
+  SiKibana,
+  SiKubernetes,
+  SiLinux,
+  SiMongodb,
   SiNextdotjs,
+  SiNginx,
   SiOpenjdk,
+  SiOpenai,
   SiPostgresql,
+  SiPrometheus,
   SiPython,
   SiReact,
+  SiRedis,
+  SiSentry,
+  SiSupabase,
   SiTensorflow,
+  SiTerraform,
+  SiVercel,
 } from 'react-icons/si';
 
 const WorldMapDemo = lazy(() =>
@@ -38,6 +67,74 @@ const WorldMapDemo = lazy(() =>
 const InsightsCarousel = dynamic(() => import('../components/InsightsCarousel'), {
   loading: () => <div className="h-[560px] bg-[#FFFFFF]" aria-hidden="true" />,
 });
+
+const HOME_NAV_PRIMARY_LINKS: Array<{
+  href: string;
+  question: string;
+  title: string;
+  description: string;
+  icon: LucideIcon;
+}> = [
+  {
+    href: '/capabilities',
+    question: 'What can HVA do?',
+    title: 'Capabilities',
+    description: 'Strategy, AI, software, cloud, and operations.',
+    icon: Layers,
+  },
+  {
+    href: '/industries',
+    question: 'Do you work in my sector?',
+    title: 'Industries',
+    description: 'Real estate, healthcare, finance, public sector, retail.',
+    icon: Building2,
+  },
+  {
+    href: '/case-studies',
+    question: 'Can I see proof?',
+    title: 'Case Studies',
+    description: 'CRM modernization and AI operations already shipped.',
+    icon: BarChart3,
+  },
+];
+
+const HOME_NAV_SECONDARY_LINKS: Array<{
+  href: string;
+  title: string;
+  description: string;
+  icon: LucideIcon;
+}> = [
+  {
+    href: '/arc',
+    title: 'ARC Framework',
+    description: 'How the work is run.',
+    icon: Route,
+  },
+  {
+    href: '/insights',
+    title: 'Insights',
+    description: 'Articles, news, and reports.',
+    icon: BookOpen,
+  },
+  {
+    href: '/whoweare/abouthva',
+    title: 'Who We Are',
+    description: 'Team and principles.',
+    icon: Users,
+  },
+  {
+    href: '/ai-agents-tangier',
+    title: 'AI Agents Tangier',
+    description: 'Local AI service path.',
+    icon: MapPin,
+  },
+  {
+    href: '/contact',
+    title: 'Book a Call',
+    description: 'Start the conversation.',
+    icon: CalendarCheck,
+  },
+];
 
 type HomeProps = {
   insightsCarouselItems: InsightsCarouselItem[];
@@ -241,12 +338,28 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
     { node: <SiNextdotjs />, title: 'Next.js', href: 'https://nextjs.org' },
     { node: <SiDocker />, title: 'Docker', href: 'https://www.docker.com' },
     { node: <SiGooglecloud />, title: 'Cloud', href: 'https://cloud.google.com' },
+    { node: <SiKubernetes />, title: 'Kubernetes', href: 'https://kubernetes.io' },
+    { node: <SiTerraform />, title: 'Terraform', href: 'https://www.terraform.io' },
+    { node: <SiVercel />, title: 'Vercel', href: 'https://vercel.com' },
+    { node: <SiCloudflare />, title: 'Cloudflare', href: 'https://www.cloudflare.com' },
     { node: <SiFirebase />, title: 'Firebase', href: 'https://firebase.google.com' },
+    { node: <SiSupabase />, title: 'Supabase', href: 'https://supabase.com' },
     { node: <SiGoogle />, title: 'Google', href: 'https://www.google.com' },
     { node: <SiGithub />, title: 'GitHub', href: 'https://www.github.com' },
     { node: <SiPython />, title: 'Python', href: 'https://www.python.org' },
     { node: <SiFlutter />, title: 'Flutter', href: 'https://flutter.dev' },
     { node: <SiTensorflow />, title: 'AI', href: 'https://www.tensorflow.org' },
+    { node: <SiOpenai />, title: 'OpenAI', href: 'https://openai.com' },
+    { node: <SiGrafana />, title: 'Grafana', href: 'https://grafana.com' },
+    { node: <SiPrometheus />, title: 'Prometheus', href: 'https://prometheus.io' },
+    { node: <SiSentry />, title: 'Sentry', href: 'https://sentry.io' },
+    { node: <SiDatadog />, title: 'Datadog', href: 'https://www.datadoghq.com' },
+    { node: <SiElasticsearch />, title: 'Elasticsearch', href: 'https://www.elastic.co/elasticsearch' },
+    { node: <SiKibana />, title: 'Kibana', href: 'https://www.elastic.co/kibana' },
+    { node: <SiRedis />, title: 'Redis', href: 'https://redis.io' },
+    { node: <SiMongodb />, title: 'MongoDB', href: 'https://www.mongodb.com' },
+    { node: <SiNginx />, title: 'Nginx', href: 'https://nginx.org' },
+    { node: <SiLinux />, title: 'Linux', href: 'https://www.linux.org' },
     { node: <SiAndroid />, title: 'Mobile App', href: 'https://developer.android.com' },
     { node: <SiPostgresql />, title: 'Postgres', href: 'https://www.postgresql.org' },
     { node: <SiCplusplus />, title: 'C++', href: 'https://isocpp.org' },
@@ -273,44 +386,67 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
       {/* ── Primary Site Shortcuts ─────────────────────────────────────── */}
       <nav
         aria-labelledby="home-site-shortcuts-title"
-        className="border-y border-[#DDE3EA] bg-[#FFFFFF]"
+        className="home-pathfinder"
       >
-        <div className="mx-auto max-w-7xl px-6 py-6 lg:px-14">
-          <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-            <div className="flex items-start gap-3">
-              <SectionBrandMark size="sm" className="mt-0.5" />
+        <div className="home-pathfinder-shell">
+          <div className="home-pathfinder-header">
+            <div className="home-pathfinder-title">
+              <SectionBrandMark size="sm" />
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#E8A838]">
-                  Explore Hive Vault Arc
-                </p>
-                <h2
-                  id="home-site-shortcuts-title"
-                  className="mt-1 font-headline text-2xl leading-tight text-[#1A2535]"
-                >
-                  Start with the main sections.
-                </h2>
+                <span>Website guide</span>
+                <h2 id="home-site-shortcuts-title">Where should I go?</h2>
               </div>
             </div>
-            <p className="max-w-md text-sm leading-relaxed text-[#566274]">
-              Direct paths to the pages clients use most when evaluating our work, model, and team.
+            <p>
+              Choose the page that matches what you need right now.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-px overflow-hidden border border-[#DDE3EA] bg-[#DDE3EA] sm:grid-cols-2 lg:grid-cols-4">
-            {SITELINK_CANDIDATES.filter((item) => item.href !== '/').map((item) => (
+          <div className="home-pathfinder-primary">
+            {HOME_NAV_PRIMARY_LINKS.map((item) => {
+              const Icon = item.icon;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="home-pathfinder-card home-pathfinder-card--primary"
+                >
+                  <span className="home-pathfinder-icon" aria-hidden="true">
+                    <Icon className="h-4 w-4" strokeWidth={1.5} />
+                  </span>
+                  <span className="home-pathfinder-question">{item.question}</span>
+                  <strong>{item.title}</strong>
+                  <span className="home-pathfinder-description">{item.description}</span>
+                  <span className="home-pathfinder-arrow" aria-hidden="true">
+                    <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+
+          <div className="home-pathfinder-secondary" aria-label="More direct pages">
+            {HOME_NAV_SECONDARY_LINKS.map((item) => {
+              const Icon = item.icon;
+              return (
               <Link
                 key={item.href}
                 href={item.href}
-                className="group flex min-h-[128px] flex-col justify-between bg-white p-5 transition-colors hover:bg-[#1A2535]"
+                className="home-pathfinder-card home-pathfinder-card--secondary"
               >
-                <span className="text-sm font-semibold leading-tight text-[#1A2535] transition-colors group-hover:text-white">
-                  {item.anchor}
+                <span className="home-pathfinder-icon" aria-hidden="true">
+                  <Icon className="h-4 w-4" strokeWidth={1.5} />
                 </span>
-                <span className="mt-4 text-xs leading-relaxed text-[#657384] transition-colors group-hover:text-white/60">
-                  {` ${item.description}`}
+                <span>
+                  <strong>{item.title}</strong>
+                  <em>{item.description}</em>
+                </span>
+                <span className="home-pathfinder-arrow" aria-hidden="true">
+                  <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
                 </span>
               </Link>
-            ))}
+              );
+            })}
           </div>
         </div>
       </nav>
@@ -646,7 +782,7 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
       </section>
 
       {/* ── Vision / Trust Section ─────────────────────────────────────── */}
-      <section className="relative overflow-hidden border-y border-white/10 bg-[#1A2535] py-20 md:py-28">
+      <section className="relative overflow-hidden border-t border-white/10 bg-[#1A2535] py-20 md:py-28">
         {/* Blueprint grid overlay */}
         <div
           aria-hidden="true"
@@ -776,16 +912,7 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
         </div>
       </section>
 
-      <VideoScrollSection
-        videoSrc="/Images/media/scrollanimaion.mp4"
-        topBg="#1A2535"
-        bottomBg="#FFFFFF"
-      />
-
-      <div className="relative overflow-hidden pb-6 text-[#1A2535] md:pb-8">
-        <h2 className="text-[#1A2535]/90 text-2xl lg:text-4xl md:text-xl mb-8 mx-auto text-center font-light leading-relaxed">
-          CORE TECHNOLOGY STACK
-        </h2>
+      <div className="home-technology-marquee relative overflow-hidden pt-16 pb-6 text-[#1A2535] md:pt-20 md:pb-8">
         <LogoLoop
           logos={techLogos}
           speed={100}

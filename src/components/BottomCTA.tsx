@@ -62,37 +62,32 @@ export default function BottomCTA({
 
   if (variant === 'light') {
     return (
-      <section className="cta-banner relative pt-4 pb-12 mb-10">
-        <div className="container mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.5 }}
-            className="max-w-4xl mx-auto rounded-2xl border border-[#1A2535]/10 bg-gradient-to-r from-white/10 to-white/5 p-8 md:p-12"
-          >
-            <SectionBrandMark size="sm" className="mx-auto mb-5" />
-            <h2 className="text-3xl md:text-5xl text-[#1A2535] font-semibold">{headline}</h2>
-            <p className="text-[#1A2535]/75 mt-4 max-w-2xl mx-auto">{subtext}</p>
-            <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-              <Link
-                href={primaryHref}
-                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-white px-8 py-4 font-medium text-black transition-colors duration-300 hover:bg-[#FFF7E8] w-full sm:w-auto"
-              >
-                {primaryLabel}
-                <ArrowRight className="w-4 h-4" />
+      <section className="cta-banner soft-grid-cta px-6 py-20 text-center md:px-12 md:py-24">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.5 }}
+          className="mx-auto max-w-4xl"
+        >
+          <SectionBrandMark size="sm" className="mx-auto mb-6" />
+          <h2 className="mx-auto max-w-2xl font-headline text-4xl font-medium leading-tight text-[#1A2535] md:text-5xl">
+            {headline}
+          </h2>
+          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-[#536070] md:text-lg">
+            {subtext}
+          </p>
+          <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
+            <Link href={primaryHref} className="sharp-edge btn-primary w-full sm:w-auto">
+              {primaryLabel}
+            </Link>
+            {secondaryLabel && secondaryHref && (
+              <Link href={secondaryHref} className="sharp-edge btn-outlined w-full sm:w-auto">
+                {secondaryLabel}
               </Link>
-              {secondaryLabel && secondaryHref && (
-                <Link
-                  href={secondaryHref}
-                  className="inline-flex min-h-11 items-center justify-center rounded-lg border border-[#1A2535]/20 bg-[#E8A838]/10 px-8 py-4 font-medium text-[#1A2535] transition-colors duration-300 hover:bg-[#E8A838]/20 w-full sm:w-auto"
-                >
-                  {secondaryLabel}
-                </Link>
-              )}
-            </div>
-          </motion.div>
-        </div>
+            )}
+          </div>
+        </motion.div>
       </section>
     );
   }

@@ -201,6 +201,7 @@ const ProductsSystems: React.FC = () => {
       </section>
 
       <BottomCTA
+        variant="light"
         headline="Ready to Scope the Right Operational Program?"
         subtext="Start with a discovery call. We align on goals, constraints, and the right consulting-led system path before scope is locked."
         primaryLabel="Start Discovery"
