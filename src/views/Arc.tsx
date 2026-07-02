@@ -164,15 +164,6 @@ export default function Arc() {
                 View Capabilities <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
-            <div className="arc-hero-steps" aria-label="ARC framework steps">
-              {arcPhases.map((phase) => (
-                <div key={phase.step} className="arc-hero-step">
-                  <span>{phase.step}</span>
-                  <strong>{phase.title}</strong>
-                  <em>{phase.short}</em>
-                </div>
-              ))}
-            </div>
           </motion.div>
 
           <motion.div
