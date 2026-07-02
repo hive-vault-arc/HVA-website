@@ -4,8 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, Bot, Cloud, Database, Send, Settings, Wrench } from 'lucide-react';
-import BottomCTA from '../components/BottomCTA';
+import { ArrowRight, Send, Settings, Wrench } from 'lucide-react';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 import SectionBrandMark from '../components/SectionBrandMark';
 import { CAPABILITY_BRIEF_SECTIONS, CAPABILITY_SOLUTION_PROGRAM_DETAILS } from '../lib/capabilities-content';
@@ -156,43 +155,44 @@ export default function Capabilities() {
       />
 
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
-      <section className="relative pt-28 pb-16 px-6 lg:px-12 overflow-hidden">
-        <PageAmbientBackground className="-z-10" />
-        <div className="mx-auto max-w-screen-2xl">
+      <section className="capabilities-hero">
+        <PageAmbientBackground className="capabilities-hero-ambient" />
+        <div aria-hidden="true" className="capabilities-hero-wash" />
+        <div className="capabilities-hero-shell">
           <motion.div
             initial="hidden"
             animate="show"
             variants={{ show: { transition: { staggerChildren: 0.1 } } }}
-            className="grid grid-cols-1 md:grid-cols-12 gap-8 items-end"
+            className="capabilities-hero-grid"
           >
             <motion.div
               variants={fadeUp}
               transition={{ duration: 0.65 }}
-              className="md:col-span-7"
+              className="capabilities-hero-copy"
             >
-              <div className="mb-6 flex items-center gap-3">
+              <div className="capabilities-hero-mark">
                 <SectionBrandMark size="sm" />
-                <span className="text-[#E8A838] font-bold tracking-[0.24em] text-[10px] uppercase block">
+                <span>
                   Capabilities &amp; Mastery
                 </span>
               </div>
-              <h1 className="font-headline text-[clamp(2.75rem,13vw,3.9rem)] font-light leading-[1.02] tracking-tight text-[#1A2535] sm:text-6xl lg:text-[5.2rem]">
+              <h1 className="capabilities-hero-title">
                 Six Pillars.
                 <br />
-                <em className="italic text-[#E8A838]">One Accountable</em>
+                <em>One Accountable</em>
                 <br />
                 Partner.
               </h1>
-              <p className="mt-6 max-w-xl text-[1.05rem] text-[#536070]/80 leading-relaxed">
+              <p className="capabilities-hero-lede">
                 Hive Vault Arc delivers strategy, engineering, and managed operations across six pillars — one team, one accountability loop, from discovery to production.
               </p>
-              <div className="mt-8 flex flex-wrap gap-4">
+              <div className="capabilities-hero-actions">
                 <Link href="/capabilities/in-detail" className="sharp-edge btn-primary">
                   Explore In Detail
                 </Link>
                 <Link
                   href="/capabilities/solution-programs"
-                  className="inline-flex min-h-11 items-center gap-1.5 border-b border-[#1A2535]/30 pb-0.5 text-[0.78rem] font-bold uppercase tracking-[0.14em] text-[#1A2535] transition-colors hover:border-[#E8A838] hover:text-[#E8A838]"
+                  className="capabilities-hero-secondary"
                 >
                   Solution Programs →
                 </Link>
@@ -203,22 +203,13 @@ export default function Capabilities() {
             <motion.aside
               variants={fadeUp}
               transition={{ duration: 0.65, delay: 0.08 }}
-              className="md:col-span-5 md:self-end"
+              className="capabilities-hero-aside"
             >
-              <div className="relative overflow-hidden bg-[#1A2535] p-6">
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 opacity-[0.05]"
-                  style={{
-                    backgroundImage:
-                      'linear-gradient(to right,#F0C15A 1px,transparent 1px),linear-gradient(to bottom,#F0C15A 1px,transparent 1px)',
-                    backgroundSize: '24px 24px',
-                  }}
-                />
-                <p className="relative text-[9px] font-mono uppercase tracking-[0.3em] text-[#F0C15A] mb-4">
+              <div className="capabilities-page-card">
+                <p className="capabilities-page-card-title">
                   On This Page
                 </p>
-                <nav className="relative">
+                <nav>
                   {[
                     { label: 'Capability Pillars', anchor: '#capability-pillars', meta: '6 pillars' },
                     { label: 'Solution Programs', anchor: '#solution-programs', meta: '3 active' },
@@ -227,22 +218,16 @@ export default function Capabilities() {
                     <a
                       key={item.anchor}
                       href={item.anchor}
-                      className="flex items-center justify-between border-b border-white/[0.08] py-3 last:border-0 group"
+                      className="capabilities-page-card-link"
                     >
-                      <span className="text-sm font-medium text-white/70 group-hover:text-white transition-colors duration-200">
-                        {item.label}
-                      </span>
-                      <span className="text-[9px] font-mono text-[#F0C15A]/60 group-hover:text-[#F0C15A] transition-colors">
-                        {item.meta}
-                      </span>
+                      <span>{item.label}</span>
+                      <span>{item.meta}</span>
                     </a>
                   ))}
                 </nav>
-                <div className="relative mt-4 border-t border-white/10 pt-4">
-                  <p className="text-[9px] font-mono uppercase tracking-[0.18em] text-white/25">
-                    Full depth → /capabilities/in-detail
-                  </p>
-                </div>
+                <Link href="/capabilities/in-detail" className="capabilities-page-card-depth">
+                  Full depth <ArrowRight className="h-4 w-4" strokeWidth={1.6} /> /capabilities/in-detail
+                </Link>
               </div>
             </motion.aside>
           </motion.div>
@@ -250,7 +235,7 @@ export default function Capabilities() {
       </section>
 
       {/* Separator */}
-      <div aria-hidden="true" className="h-px bg-[#DDE3EA] mx-6 lg:mx-12" />
+      <div aria-hidden="true" className="capabilities-separator" />
 
       {/* ── SERVICE PILLARS BENTO GRID ────────────────────────────────────── */}
       <section id="capability-pillars" className="capability-showcase-section scroll-mt-28">
@@ -303,7 +288,7 @@ export default function Capabilities() {
       </section>
 
       {/* ── ARC OPERATING MODEL ────────────────────────────────────────────── */}
-      <section id="bot-model" className="soft-grid-section scroll-mt-28 px-6 py-28 lg:px-12">
+      <section id="bot-model" className="capabilities-arc-section soft-grid-section scroll-mt-28 px-6 py-28 lg:px-12">
         <div className="relative mx-auto max-w-screen-2xl">
 
           <motion.div
@@ -426,7 +411,7 @@ export default function Capabilities() {
 
 
       {/* ── EXPERT INSIGHT QUOTE ──────────────────────────────────────────── */}
-      <section className="px-6 lg:px-12 py-28">
+      <section className="capabilities-quote-section px-6 lg:px-12 py-28">
         <div className="mx-auto max-w-screen-2xl">
           <div className="grid grid-cols-1 md:grid-cols-12">
             <motion.div
@@ -434,7 +419,7 @@ export default function Capabilities() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.65 }}
-              className="col-span-12 md:col-span-10 md:col-start-2 bg-[#E8EBF0] p-12 md:p-16 relative overflow-hidden"
+              className="capabilities-quote-card col-span-12 md:col-span-10 md:col-start-2 bg-[#E8EBF0] p-12 md:p-16 relative overflow-hidden"
             >
               {/* Decorative open-quote mark */}
               <div
@@ -445,7 +430,7 @@ export default function Capabilities() {
               </div>
 
               <div className="relative z-10 max-w-3xl">
-                <h2 className="font-headline text-3xl md:text-4xl lg:text-[2.8rem] italic leading-tight text-[#1A2535] mb-12">
+                <h2 className="capabilities-quote-text font-headline text-3xl md:text-4xl lg:text-[2.8rem] italic leading-tight text-[#1A2535] mb-12">
                   &ldquo;Transformation succeeds when strategy, engineering, and operations move
                   together &mdash; from the first decision to the last deployment.&rdquo;
                 </h2>
@@ -492,11 +477,7 @@ export default function Capabilities() {
 
             <div className="programs-grid">
               {CAPABILITY_SOLUTION_PROGRAM_DETAILS.map((program, i) => {
-                const programIcons = [
-                  <Bot key="bot" className="h-5 w-5" strokeWidth={1.3} />,
-                  <Database key="db" className="h-5 w-5" strokeWidth={1.3} />,
-                  <Cloud key="cloud" className="h-5 w-5" strokeWidth={1.3} />,
-                ];
+                const programCodes = ['A', 'B', 'C'];
                 const programMedia = [
                   {
                     src: CAPABILITY_IMAGES.aiDataAnalytics,
@@ -527,12 +508,15 @@ export default function Capabilities() {
                         sizes="(max-width: 768px) 100vw, 33vw"
                         className="object-cover"
                       />
+                      <div className="program-card-media-label">
+                        <span>{programCodes[i]}</span>
+                        <em>PRG-00{i + 1}</em>
+                      </div>
                     </div>
 
                     <div className="program-card-body">
                       <div className="program-card-topline">
-                        <span>{programIcons[i]}</span>
-                        <span>Program 0{i + 1}</span>
+                        <span>{program.category}</span>
                       </div>
                       <h3>{program.name}</h3>
                       <p>{program.summary}</p>
@@ -569,15 +553,34 @@ export default function Capabilities() {
         </div>
       </section>
 
-      <BottomCTA
-        variant="dark"
-        headline="Need the full capability map with delivery depth?"
-        subtext="Use In Detail for strategic context, execution model, and full sub-capability coverage across all six service pillars."
-        primaryLabel="Explore In Detail"
-        primaryHref="/capabilities/in-detail"
-        secondaryLabel="Book Discovery Call"
-        secondaryHref="/contact"
-      />
+      <section className="capabilities-depth-cta-section">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.5 }}
+          className="capabilities-depth-cta"
+        >
+          <div className="capabilities-depth-cta-copy">
+            <div className="capabilities-depth-cta-mark">
+              <SectionBrandMark surface="dark" size="sm" />
+              <span>Next step</span>
+            </div>
+            <h2>Need the full capability map with delivery depth?</h2>
+            <p>
+              Use In Detail for strategic context, execution model, and full sub-capability coverage across all six service pillars.
+            </p>
+          </div>
+          <div className="capabilities-depth-cta-actions">
+            <Link href="/capabilities/in-detail" className="sharp-edge btn-primary">
+              Explore In Detail <ArrowRight className="h-4 w-4" strokeWidth={1.7} />
+            </Link>
+            <Link href="/contact" className="capabilities-depth-cta-secondary">
+              Book Discovery Call
+            </Link>
+          </div>
+        </motion.div>
+      </section>
     </div>
   );
 }

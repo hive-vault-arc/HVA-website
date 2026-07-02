@@ -3,8 +3,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, BarChart3, Bot, Cloud, Database, Send, Settings, Wrench } from 'lucide-react';
+import { ArrowRight, BarChart3, Bot, Database, GitBranch, Send, Settings, ShieldCheck, UsersRound, Wrench } from 'lucide-react';
 import BottomCTA from '../components/BottomCTA';
+import PageAmbientBackground from '../components/PageAmbientBackground';
 import SectionBrandMark from '../components/SectionBrandMark';
 
 const fadeUp = {
@@ -79,9 +80,21 @@ const proofCards = [
 ];
 
 const differenceContrasts = [
-  { title: 'One team', text: 'Diagnosis, build, and operations stay connected.' },
-  { title: 'Production ownership', text: 'The system keeps improving after launch.' },
-  { title: 'Decision gates', text: 'Build decisions wait until constraints are clear.' },
+  {
+    title: 'One team',
+    text: 'Diagnosis, build, and operations stay connected.',
+    icon: <UsersRound className="h-7 w-7" strokeWidth={1.4} />,
+  },
+  {
+    title: 'Production ownership',
+    text: 'The system keeps improving after launch.',
+    icon: <ShieldCheck className="h-7 w-7" strokeWidth={1.4} />,
+  },
+  {
+    title: 'Decision gates',
+    text: 'Build decisions wait until constraints are clear.',
+    icon: <GitBranch className="h-7 w-7" strokeWidth={1.4} />,
+  },
 ];
 
 const innovationTracks = [
@@ -103,12 +116,6 @@ const innovationTracks = [
     title: 'Modern CRM',
     desc: 'Customer systems designed around intent, revenue control, and lifetime value.',
   },
-  {
-    code: 'ARC-004',
-    icon: <Cloud className="h-5 w-5" strokeWidth={1.5} />,
-    title: 'Cloud Governance',
-    desc: 'Secure deployment foundations built for scale, observability, and control.',
-  },
 ];
 
 export default function Arc() {
@@ -123,28 +130,20 @@ export default function Arc() {
         style={{ scaleX: progressScale }}
       />
 
-      <section className="relative overflow-hidden bg-[#FFFFFF] px-6 pb-16 pt-36 text-white lg:px-12 lg:pb-20">
-        <div aria-hidden="true" className="absolute inset-x-0 bottom-0 top-28 bg-[#1A2535]" />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 bottom-0 top-28 opacity-[0.05]"
-          style={{
-            backgroundImage:
-              'linear-gradient(to right,#F0C15A 1px,transparent 1px),linear-gradient(to bottom,#F0C15A 1px,transparent 1px)',
-            backgroundSize: '40px 40px',
-          }}
-        />
+      <section className="arc-hero-section">
+        <PageAmbientBackground className="arc-hero-ambient" />
+        <div aria-hidden="true" className="arc-hero-light-wash" />
 
-        <div className="relative z-10 mx-auto grid max-w-screen-2xl grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end">
+        <div className="arc-hero-shell">
           <motion.div
             initial="hidden"
             animate="show"
             variants={fadeUp}
             transition={{ duration: 0.65 }}
-            className="lg:col-span-7"
+            className="arc-hero-copy"
           >
             <div className="mb-6 flex items-center gap-3">
-              <SectionBrandMark surface="dark" size="sm" />
+              <SectionBrandMark size="sm" />
               <span className="arc-hero-label">
                 ARC framework
               </span>
@@ -154,16 +153,25 @@ export default function Arc() {
               <span>Re-engineer.</span>
               <span>Command.</span>
             </h1>
-            <p className="mt-7 max-w-2xl text-lg leading-relaxed text-white/70">
+            <p className="arc-hero-lede">
               Hive Vault Arc's operating model for transformation work: strategy, AI engineering, software delivery, cloud, and managed operations in one continuous accountability loop.
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-4">
-              <Link href="/contact" className="sharp-edge inline-flex min-h-11 items-center justify-center bg-[#E8A838] px-7 py-4 text-sm font-bold uppercase tracking-[0.14em] text-white transition-colors hover:bg-[#C8891C] w-full sm:w-auto">
+              <Link href="/contact" className="arc-hero-primary">
                 Book Discovery Call
               </Link>
-              <Link href="/capabilities" className="inline-flex min-h-11 items-center gap-2 border-b border-white/25 pb-1 text-sm font-bold uppercase tracking-[0.14em] text-white/80 transition-colors hover:border-[#F0C15A] hover:text-white">
+              <Link href="/capabilities" className="arc-hero-secondary">
                 View Capabilities <ArrowRight className="h-4 w-4" />
               </Link>
+            </div>
+            <div className="arc-hero-steps" aria-label="ARC framework steps">
+              {arcPhases.map((phase) => (
+                <div key={phase.step} className="arc-hero-step">
+                  <span>{phase.step}</span>
+                  <strong>{phase.title}</strong>
+                  <em>{phase.short}</em>
+                </div>
+              ))}
             </div>
           </motion.div>
 
@@ -171,7 +179,7 @@ export default function Arc() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.08 }}
-            className="lg:col-span-5"
+            className="arc-hero-media-wrap"
           >
             <div className="arc-hero-media">
               <Image
@@ -234,15 +242,7 @@ export default function Arc() {
       </section>
 
       <section className="arc-difference-section">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage:
-              'repeating-linear-gradient(0deg,#F0C15A 0,#F0C15A 1px,transparent 0,transparent 48px),repeating-linear-gradient(90deg,#F0C15A 0,#F0C15A 1px,transparent 0,transparent 48px)',
-            backgroundSize: '48px 48px',
-          }}
-        />
+        <div aria-hidden="true" className="arc-dark-grid" />
 
         <div className="arc-difference-shell">
           <div className="arc-difference-copy">
@@ -264,36 +264,41 @@ export default function Arc() {
           >
             {differenceContrasts.map((item) => (
               <motion.div key={item.title} variants={fadeUp} transition={{ duration: 0.45 }} className="arc-difference-card">
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
+                <span className="arc-difference-icon" aria-hidden="true">
+                  {item.icon}
+                </span>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                </div>
               </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      <section className="bg-[#FFFFFF] py-16 md:py-20">
-        <div className="mx-auto max-w-screen-2xl px-6 lg:px-12">
-          <div className="mb-10 grid grid-cols-1 gap-7 md:grid-cols-12 md:items-end">
-            <div className="md:col-span-7">
-              <div className="mb-3 flex items-center gap-3">
+      <section className="arc-proof-section">
+        <div className="arc-proof-shell">
+          <div className="arc-proof-header">
+            <div>
+              <div className="arc-proof-mark">
                 <SectionBrandMark size="sm" />
-                <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#E8A838]">
+                <p>
                   Proof In Production
                 </p>
               </div>
-              <h2 className="font-headline text-4xl font-light leading-[1.02] text-[#1A2535] md:text-6xl">
+              <h2>
                 ARC shows up where systems carry real operating load.
               </h2>
             </div>
-            <div className="md:col-span-5">
-              <p className="max-w-xl text-base leading-relaxed text-[#566274]">
+            <div>
+              <p>
                 The model is designed for production environments - measurable work, governed handoffs, and practical systems that teams actually use.
               </p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          <div className="arc-proof-grid">
             {proofCards.map((card, idx) => (
               <motion.article
                 key={card.title}
@@ -301,7 +306,7 @@ export default function Arc() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.08 }}
-                className="group relative h-[360px] overflow-hidden bg-[#1A2535]"
+                className="arc-proof-card group"
               >
                 <Image
                   src={card.image}
@@ -309,16 +314,16 @@ export default function Arc() {
                   fill
                   loading="lazy"
                   sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover opacity-80 transition-transform duration-700 group-hover:scale-[1.04]"
+                  className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1A2535]/95 via-[#1A2535]/45 to-transparent" />
-                <span className="absolute left-5 top-5 bg-white/10 px-3 py-1 text-[9px] font-bold uppercase tracking-[0.22em] text-white ring-1 ring-white/15">
+                <div className="arc-proof-overlay" />
+                <span className="arc-proof-label">
                   {card.label}
                 </span>
-                <span className="absolute right-5 top-5 font-mono text-[10px] text-white/55">0{idx + 1}</span>
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="font-headline text-3xl leading-tight text-white">{card.title}</h3>
-                  <p className="mt-3 text-[11px] font-bold uppercase tracking-[0.16em] text-white/60">{card.metric}</p>
+                <span className="arc-proof-number">0{idx + 1}</span>
+                <div className="arc-proof-copy">
+                  <h3>{card.title}</h3>
+                  <p>{card.metric}</p>
                 </div>
               </motion.article>
             ))}
@@ -328,30 +333,35 @@ export default function Arc() {
 
       <section className="arc-rd-section">
         <div className="arc-rd-shell">
-          <div className="arc-rd-header">
-            <span>Active R&amp;D</span>
-            <h2>New technology, filtered into delivery patterns.</h2>
-          </div>
+          <div className="arc-rd-panel">
+            <div className="arc-rd-header">
+              <div className="arc-rd-mark">
+                <SectionBrandMark surface="dark" size="sm" />
+                <span>Active R&amp;D</span>
+              </div>
+              <h2>New technology, filtered into delivery patterns.</h2>
+            </div>
 
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.15 }}
-            transition={{ staggerChildren: 0.08 }}
-            className="arc-rd-grid"
-          >
-            {innovationTracks.map((track) => (
-              <motion.article key={track.code} variants={fadeUp} transition={{ duration: 0.45 }} className="arc-rd-item">
-                <div className="arc-rd-icon" aria-hidden="true">
-                  {track.icon}
-                </div>
-                <div>
-                  <h3>{track.title}</h3>
-                  <p>{track.desc}</p>
-                </div>
-              </motion.article>
-            ))}
-          </motion.div>
+            <motion.div
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ staggerChildren: 0.08 }}
+              className="arc-rd-grid"
+            >
+              {innovationTracks.map((track) => (
+                <motion.article key={track.code} variants={fadeUp} transition={{ duration: 0.45 }} className="arc-rd-item">
+                  <div className="arc-rd-icon" aria-hidden="true">
+                    {track.icon}
+                  </div>
+                  <div>
+                    <h3>{track.title}</h3>
+                    <p>{track.desc}</p>
+                  </div>
+                </motion.article>
+              ))}
+            </motion.div>
+          </div>
         </div>
       </section>
 
