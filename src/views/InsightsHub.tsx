@@ -94,9 +94,9 @@ function CategoryCards() {
               <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-white/50 mb-1">
                 Insight Type
               </p>
-              <h2 className="font-headline text-lg font-medium text-white leading-tight">
+              <span className="insights-category-title">
                 {cat.label}
-              </h2>
+              </span>
             </motion.div>
 
             {/* Hover state — bigger title + button */}
@@ -106,9 +106,9 @@ function CategoryCards() {
               transition={{ duration: 0.28 }}
               style={{ pointerEvents: isHovered ? 'auto' : 'none' }}
             >
-              <h2 className="font-headline text-2xl font-medium text-white leading-tight mb-5">
+              <span className="insights-category-title insights-category-title--hover">
                 {cat.label}
-              </h2>
+              </span>
               <Link
                 href={cat.href}
                 className="inline-flex items-center gap-2 px-4 py-2 text-[10px] font-bold
@@ -597,22 +597,22 @@ export default function InsightsHub({
             aria-hidden="true"
           >
             <svg
-              width="220"
-              height="220"
+              width="260"
+              height="260"
               viewBox="0 0 220 220"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
               {/* Outer ring */}
-              <circle cx="110" cy="110" r="104" stroke="#E8A838" strokeWidth="1" strokeOpacity="0.18" />
+              <circle cx="110" cy="110" r="104" stroke="#E8A838" strokeWidth="1.4" strokeOpacity="0.38" />
               {/* Mid ring */}
-              <circle cx="110" cy="110" r="76" stroke="#E8A838" strokeWidth="1" strokeOpacity="0.28" />
+              <circle cx="110" cy="110" r="76" stroke="#E8A838" strokeWidth="1.6" strokeOpacity="0.52" />
               {/* Inner ring */}
-              <circle cx="110" cy="110" r="48" stroke="#1A2535" strokeWidth="1" strokeOpacity="0.12" />
+              <circle cx="110" cy="110" r="48" stroke="#1A2535" strokeWidth="1.25" strokeOpacity="0.22" />
 
               {/* Crosshair lines */}
-              <line x1="6" y1="110" x2="214" y2="110" stroke="#1A2535" strokeWidth="1" strokeOpacity="0.08" />
-              <line x1="110" y1="6" x2="110" y2="214" stroke="#1A2535" strokeWidth="1" strokeOpacity="0.08" />
+              <line x1="6" y1="110" x2="214" y2="110" stroke="#1A2535" strokeWidth="1.15" strokeOpacity="0.16" />
+              <line x1="110" y1="6" x2="110" y2="214" stroke="#1A2535" strokeWidth="1.15" strokeOpacity="0.16" />
 
               {/* Tick marks at 12 positions on outer ring */}
               {Array.from({ length: 12 }).map((_, k) => {
@@ -628,25 +628,25 @@ export default function InsightsHub({
                     key={`tick-${k * 30}`}
                     x1={x1} y1={y1} x2={x2} y2={y2}
                     stroke="#E8A838"
-                    strokeWidth={k % 3 === 0 ? '1.5' : '1'}
-                    strokeOpacity={k % 3 === 0 ? '0.55' : '0.28'}
+                    strokeWidth={k % 3 === 0 ? '2' : '1.35'}
+                    strokeOpacity={k % 3 === 0 ? '0.78' : '0.45'}
                   />
                 );
               })}
 
               {/* Centre dot */}
-              <circle cx="110" cy="110" r="3.5" fill="#E8A838" fillOpacity="0.7" />
+              <circle cx="110" cy="110" r="4.5" fill="#E8A838" fillOpacity="0.95" />
 
               {/* Small accent dot — NE quadrant */}
-              <circle cx="152" cy="68" r="3" fill="#E8A838" fillOpacity="0.45" />
+              <circle cx="152" cy="68" r="4" fill="#E8A838" fillOpacity="0.72" />
 
               {/* Dashed arc segment — bottom-left quadrant */}
               <path
                 d="M 34 143 A 80 80 0 0 1 77 34"
                 stroke="#E8A838"
-                strokeWidth="1"
-                strokeOpacity="0.35"
-                strokeDasharray="4 6"
+                strokeWidth="1.6"
+                strokeOpacity="0.58"
+                strokeDasharray="5 7"
                 fill="none"
               />
 
@@ -655,10 +655,10 @@ export default function InsightsHub({
                 x="110"
                 y="198"
                 textAnchor="middle"
-                fontSize="7"
+                fontSize="8"
                 letterSpacing="3"
                 fill="#566274"
-                fillOpacity="0.5"
+                fillOpacity="0.72"
                 fontFamily="system-ui, sans-serif"
               >
                 HIVE VAULT ARC INSIGHTS

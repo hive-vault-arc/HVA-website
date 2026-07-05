@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
-import { Inter, Newsreader } from 'next/font/google';
+import { Manrope, Newsreader } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import Layout from '../components/Layout';
 import JsonLd from '../components/JsonLd';
@@ -27,9 +27,9 @@ import {
 } from '../lib/seo';
 import './globals.css';
 
-const inter = Inter({
+const manrope = Manrope({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-manrope',
   display: 'swap',
 });
 
@@ -278,7 +278,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
   };
 
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} ${newsreader.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${manrope.variable} ${newsreader.variable}`}>
       <head>
         {/* Warm up third-party connections used for 3D assets */}
         <link rel="preconnect" href="https://prod.spline.design" />

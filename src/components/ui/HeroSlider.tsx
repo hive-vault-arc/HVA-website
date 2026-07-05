@@ -11,6 +11,7 @@ type Slide = {
   eyebrow: string;
   h1Line1: string;
   h1Line2: string;
+  titleVariant?: 'compact';
   description: string;
   primaryLabel: string;
   primaryHref: string;
@@ -25,17 +26,35 @@ type Slide = {
 
 const SLIDES: Slide[] = [
   {
-    eyebrow: 'TECHNOLOGY TRANSFORMATION',
+    eyebrow: 'TECHNOLOGY CONSULTING',
+    h1Line1: 'Strategic Guidance.',
+    h1Line2: 'Accountable Execution.',
+    description:
+      "We don't just advise and walk away. We sit at the table through architecture decisions, engineering delivery, and long-term operations — so your strategy actually reaches production.",
+    primaryLabel: 'Book Discovery Call',
+    primaryHref: '/contact',
+    secondaryLabel: 'Meet Our Team',
+    secondaryHref: '/whoweare/abouthva',
+    image: '/Images/hero/hva-home-hero-strategic-guidance-accountable-execution.webp',
+    imageAlt: 'Executive strategy workspace with operating model diagrams and city view',
+    cardIcon: <Eye className="w-8 h-8 text-[#E8A838]" strokeWidth={1.5} />,
+    cardTitle: 'Consulting That Delivers.',
+    cardDesc:
+      'The same founders who design the strategy stay accountable through delivery, release, and long-term results.',
+  },
+  {
+    eyebrow: 'AI ENGINEERING & OPERATIONS',
     h1Line1: 'Strategy, AI Engineering,',
     h1Line2: 'and Operations in One Team.',
+    titleVariant: 'compact',
     description:
       'Hive Vault Arc is a technology transformation partner for teams that need strategy, production engineering, and managed operations to move together.',
     primaryLabel: 'View Case Studies',
     primaryHref: '/case-studies',
     secondaryLabel: 'Explore Capabilities',
     secondaryHref: '/capabilities',
-    image: '/Images/capabilities/hva-operations-managed-capability.webp',
-    imageAlt: 'Operations command workspace with dashboards and production monitoring screens',
+    image: '/Images/capabilities/hva-ai-data-capability.webp',
+    imageAlt: 'AI engineering workspace with model orchestration and analytics monitors',
     cardIcon: <Bot className="w-8 h-8 text-[#E8A838]" strokeWidth={1.5} />,
     cardTitle: 'Advise. Build. Operate.',
     cardDesc:
@@ -45,6 +64,7 @@ const SLIDES: Slide[] = [
     eyebrow: 'ARC DELIVERY MODEL',
     h1Line1: 'Assess. Re-engineer.',
     h1Line2: 'Command Production Systems.',
+    titleVariant: 'compact',
     description:
       'We diagnose operating constraints, rebuild processes and platforms, then stay involved after launch so transformation becomes a working system.',
     primaryLabel: 'Explore Our Programs',
@@ -57,23 +77,6 @@ const SLIDES: Slide[] = [
     cardTitle: 'End-to-End Programs.',
     cardDesc:
       'From operating diagnosis to production deployment and managed evolution.',
-  },
-  {
-    eyebrow: 'TECHNOLOGY CONSULTING',
-    h1Line1: 'Strategic Guidance.',
-    h1Line2: 'Accountable Execution.',
-    description:
-      "We don't just advise and walk away. We sit at the table through architecture decisions, engineering delivery, and long-term operations — so your strategy actually reaches production.",
-    primaryLabel: 'Book Discovery Call',
-    primaryHref: '/contact',
-    secondaryLabel: 'Meet Our Team',
-    secondaryHref: '/whoweare/abouthva',
-    image: '/Images/capabilities/hva-strategy-business-capability.webp',
-    imageAlt: 'Executive strategy workspace with operating model diagrams and city view',
-    cardIcon: <Eye className="w-8 h-8 text-[#E8A838]" strokeWidth={1.5} />,
-    cardTitle: 'Consulting That Delivers.',
-    cardDesc:
-      'The same founders who design the strategy stay accountable through delivery, release, and long-term results.',
   },
 ];
 
@@ -115,34 +118,27 @@ export default function HeroSlider() {
 
   return (
     <section
-      className="relative group overflow-hidden px-4 pt-20 pb-14 sm:px-6 md:pt-24 lg:overflow-visible lg:px-14 lg:pt-36 lg:pb-28"
+      className="home-hero-redesign group"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-
-      {/* Left arrow — desktop only */}
       <button
         onClick={() => navigate(-1)}
         aria-label="Previous slide"
-        className="absolute left-2 lg:left-6 top-1/2 -translate-y-1/2 z-20
-                   hidden lg:flex opacity-0 group-hover:opacity-100 transition-opacity duration-300
-                   p-2 text-[#1A2535]/30 hover:text-[#E8A838]"
+        className="home-hero-arrow home-hero-arrow--prev"
       >
-        <ChevronLeft className="w-7 h-7" />
+        <ChevronLeft className="h-7 w-7" />
       </button>
 
-      {/* Right arrow — desktop only */}
       <button
         onClick={() => navigate(1)}
         aria-label="Next slide"
-        className="absolute right-2 lg:right-6 top-1/2 -translate-y-1/2 z-20
-                   hidden lg:flex opacity-0 group-hover:opacity-100 transition-opacity duration-300
-                   p-2 text-[#1A2535]/30 hover:text-[#E8A838]"
+        className="home-hero-arrow home-hero-arrow--next"
       >
-        <ChevronRight className="w-7 h-7" />
+        <ChevronRight className="h-7 w-7" />
       </button>
 
-      <div className="container mx-auto">
+      <div className="home-hero-shell">
 
         <AnimatePresence initial={false} mode="wait" custom={direction}>
           <motion.div
@@ -153,56 +149,53 @@ export default function HeroSlider() {
             animate="center"
             exit="exit"
             transition={{ duration: 0.45, ease: 'easeInOut' }}
-            className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12 lg:items-center"
+            className="home-hero-layout"
           >
-            {/* Left: copy */}
-            <div className="z-10 order-1 lg:col-span-7">
-              <span className="home-hero-eyebrow inline-block px-3 py-1 bg-[#E8A838]/10 text-[#E8A838] text-[10px] uppercase tracking-[0.22em] font-bold mb-6 lg:mb-8">
+            <div className="home-hero-content">
+              <span className="home-hero-eyebrow">
                 {slide.eyebrow}
               </span>
-              <h1 className="home-hero-title mb-6 overflow-visible font-serif text-[clamp(2.75rem,13vw,4.15rem)] font-medium leading-[1.02] tracking-tight text-[#1A2535] sm:text-5xl md:text-6xl lg:mb-8 lg:text-7xl lg:leading-[1.1] xl:text-[5.35rem]">
-                {slide.h1Line1}<br />
-                <em className="italic text-[#E8A838]">{slide.h1Line2}</em>
+              <h1 className={slide.titleVariant === 'compact' ? 'home-hero-title home-hero-title--compact' : 'home-hero-title'}>
+                <span>{slide.h1Line1}</span>
+                <em>{slide.h1Line2}</em>
               </h1>
-              <p className="home-hero-copy text-base lg:text-xl text-[#1A2535]/60 max-w-xl mb-8 lg:mb-12 font-light leading-relaxed line-clamp-3 lg:line-clamp-none">
+              <p className="home-hero-copy">
                 {slide.description}
               </p>
-              <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-6">
+              <div className="home-hero-actions">
                 <Link
                   href={slide.primaryHref}
-                  className="home-hero-primary sharp-edge min-h-11 bg-[#1A2535] px-8 py-4 text-center text-sm font-bold text-[#FFFFFF] transition-colors duration-300 hover:bg-[#E8A838] w-full sm:w-auto"
+                  className="home-hero-primary sharp-edge"
                 >
                   {slide.primaryLabel}
                 </Link>
                 <Link
                   href={slide.secondaryHref}
-                  className="home-hero-secondary flex min-h-11 items-center justify-center gap-2 px-8 py-4 text-sm font-bold text-[#1A2535] transition-all duration-300 hover:gap-4 sm:justify-start"
+                  className="home-hero-secondary"
                 >
-                  {slide.secondaryLabel} <ChevronRight className="w-4 h-4" />
+                  {slide.secondaryLabel} <ChevronRight className="h-4 w-4" />
                 </Link>
               </div>
             </div>
 
-            {/* Right: image + floating card */}
-            <div className="relative order-2 lg:col-span-5">
-              <div className="relative h-[220px] overflow-hidden border border-[#1A2535]/10 bg-[#1A2535] shadow-[0_18px_45px_-32px_rgba(26,37,53,0.45)] sm:h-[260px] md:h-[340px] lg:aspect-[4/5] lg:h-auto lg:border-0 lg:shadow-2xl">
+            <div className="home-hero-media">
+              <div className="home-hero-image-frame">
                 <Image
                   src={slide.image}
                   alt={slide.imageAlt}
                   fill
                   className="h-full w-full object-cover hero-image-animate"
-                  sizes="(max-width: 1024px) 100vw, 40vw"
-                  loading={active === 0 ? 'eager' : 'lazy'}
-                  priority={active === 0}
+                  sizes="(max-width: 1024px) 92vw, 56vw"
+                  loading="eager"
+                  fetchPriority={active === 0 ? 'high' : 'auto'}
                 />
               </div>
-              {/* Asymmetric floating card — desktop only */}
-              <div className="absolute -bottom-16 -left-14 hidden max-w-[17rem] bg-white p-8 shadow-xl lg:block">
+              <div className="home-hero-floating-card">
                 {slide.cardIcon}
-                <h3 className="home-float-title font-serif text-xl mt-4 mb-3 italic font-medium text-[#1A2535]">
+                <h3 className="home-float-title">
                   {slide.cardTitle}
                 </h3>
-                <p className="home-float-copy text-sm text-[#1A2535]/60 leading-relaxed">
+                <p className="home-float-copy">
                   {slide.cardDesc}
                 </p>
               </div>
@@ -210,26 +203,21 @@ export default function HeroSlider() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Slide indicators */}
-        <div className="flex items-center justify-center gap-3 mt-10 lg:mt-24">
+        <div className="home-hero-dots">
           {SLIDES.map((s, i) => (
             <button
               key={s.eyebrow}
               onClick={() => goTo(i)}
               aria-label={`Go to slide ${i + 1}`}
-              className="flex min-h-11 min-w-11 items-center justify-center"
+              className="home-hero-dot-button"
             >
               <span
-                className={`h-[3px] rounded-full transition-all duration-300 ${
-                  i === active
-                    ? 'w-8 bg-[#E8A838]'
-                    : 'w-5 bg-[#1A2535]/20 hover:bg-[#1A2535]/40'
-                }`}
+                className={i === active ? 'home-hero-dot home-hero-dot--active' : 'home-hero-dot'}
               />
             </button>
           ))}
         </div>
-        <p className="lg:hidden mt-3 text-center text-[10px] uppercase tracking-widest text-[#1A2535]/30">
+        <p className="home-hero-swipe">
           Swipe to explore
         </p>
 

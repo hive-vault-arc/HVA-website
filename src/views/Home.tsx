@@ -73,6 +73,9 @@ const HOME_NAV_PRIMARY_LINKS: Array<{
   question: string;
   title: string;
   description: string;
+  action: string;
+  image: string;
+  imageAlt: string;
   icon: LucideIcon;
 }> = [
   {
@@ -80,6 +83,9 @@ const HOME_NAV_PRIMARY_LINKS: Array<{
     question: 'What can HVA do?',
     title: 'Capabilities',
     description: 'Strategy, AI, software, cloud, and operations.',
+    action: 'Explore services',
+    image: '/Images/page-heroes/hva-capabilities-hero-background.webp',
+    imageAlt: 'Abstract systems map for Hive Vault Arc capabilities',
     icon: Layers,
   },
   {
@@ -87,6 +93,9 @@ const HOME_NAV_PRIMARY_LINKS: Array<{
     question: 'Do you work in my sector?',
     title: 'Industries',
     description: 'Real estate, healthcare, finance, public sector, retail.',
+    action: 'See sectors',
+    image: '/Images/page-heroes/hva-industries-hero-background.webp',
+    imageAlt: 'Abstract sector coverage map for Hive Vault Arc industries',
     icon: Building2,
   },
   {
@@ -94,6 +103,9 @@ const HOME_NAV_PRIMARY_LINKS: Array<{
     question: 'Can I see proof?',
     title: 'Case Studies',
     description: 'CRM modernization and AI operations already shipped.',
+    action: 'View proof',
+    image: '/Images/home/pathfinder/pathfinder-proof.webp',
+    imageAlt: 'Abstract performance chart for Hive Vault Arc proof in production',
     icon: BarChart3,
   },
 ];
@@ -107,31 +119,31 @@ const HOME_NAV_SECONDARY_LINKS: Array<{
   {
     href: '/arc',
     title: 'ARC Framework',
-    description: 'How the work is run.',
+    description: 'Delivery method',
     icon: Route,
   },
   {
     href: '/insights',
     title: 'Insights',
-    description: 'Articles, news, and reports.',
+    description: 'Articles and reports',
     icon: BookOpen,
   },
   {
     href: '/whoweare/abouthva',
     title: 'Who We Are',
-    description: 'Team and principles.',
+    description: 'Team and principles',
     icon: Users,
   },
   {
     href: '/ai-agents-tangier',
     title: 'AI Agents Tangier',
-    description: 'Local AI service path.',
+    description: 'AI services in Tangier',
     icon: MapPin,
   },
   {
     href: '/contact',
     title: 'Book a Call',
-    description: 'Start the conversation.',
+    description: 'Talk with HVA',
     icon: CalendarCheck,
   },
 ];
@@ -223,7 +235,6 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
       phase: '01',
       title: 'Assess',
       discipline: 'Strategy & Architecture',
-      icon: <MessageSquare className="h-5 w-5" strokeWidth={1.5} />,
       summary:
         'Diagnose operating friction, define target architecture, and sequence the work leadership can execute.',
       proof: 'Operating diagnosis',
@@ -232,7 +243,6 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
       phase: '02',
       title: 'Re-engineer',
       discipline: 'AI, Software & Cloud',
-      icon: <Layers className="h-5 w-5" strokeWidth={1.5} />,
       summary:
         'Build the systems, deploy the intelligence, and harden the infrastructure for real operational load.',
       proof: 'Production systems',
@@ -241,7 +251,6 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
       phase: '03',
       title: 'Command',
       discipline: 'Operate & Evolve',
-      icon: <Eye className="h-5 w-5" strokeWidth={1.5} />,
       summary:
         'Stabilize, monitor, and evolve the systems long-term so decisions become measurable outcomes.',
       proof: 'Managed outcomes',
@@ -398,55 +407,67 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
               </div>
             </div>
             <p>
-              Choose the page that matches what you need right now.
+              Pick a starting point. Direct routes stay close.
             </p>
           </div>
 
-          <div className="home-pathfinder-primary">
-            {HOME_NAV_PRIMARY_LINKS.map((item) => {
+          <div className="home-pathfinder-board">
+            <div className="home-pathfinder-primary">
+              {HOME_NAV_PRIMARY_LINKS.map((item, index) => {
               const Icon = item.icon;
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="home-pathfinder-card home-pathfinder-card--primary"
+                  className={`home-pathfinder-card home-pathfinder-card--primary ${
+                    index === 0 ? 'home-pathfinder-card--featured' : ''
+                  }`}
+                  style={{ '--pathfinder-index': index } as React.CSSProperties}
                 >
-                  <span className="home-pathfinder-icon" aria-hidden="true">
-                    <Icon className="h-4 w-4" strokeWidth={1.5} />
+                  <span className="home-pathfinder-card-media">
+                    <Image
+                      src={item.image}
+                      alt={item.imageAlt}
+                      fill
+                      sizes={index === 0 ? '(max-width: 1040px) 100vw, 44vw' : '(max-width: 1040px) 50vw, 26vw'}
+                      className="object-cover"
+                    />
                   </span>
-                  <span className="home-pathfinder-question">{item.question}</span>
-                  <strong>{item.title}</strong>
-                  <span className="home-pathfinder-description">{item.description}</span>
-                  <span className="home-pathfinder-arrow" aria-hidden="true">
-                    <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+                  <span className="home-pathfinder-card-body">
+                    <span className="home-pathfinder-icon" aria-hidden="true">
+                      <Icon className="h-4 w-4" strokeWidth={1.5} />
+                    </span>
+                    <span className="home-pathfinder-question">{item.question}</span>
+                    <strong>{item.title}</strong>
+                    <span className="home-pathfinder-description">{item.description}</span>
+                    <span className="home-pathfinder-action">
+                      {item.action}
+                      <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+                    </span>
                   </span>
                 </Link>
               );
-            })}
-          </div>
+              })}
+            </div>
 
-          <div className="home-pathfinder-secondary" aria-label="More direct pages">
-            {HOME_NAV_SECONDARY_LINKS.map((item) => {
-              const Icon = item.icon;
+            <div className="home-pathfinder-secondary" aria-label="More direct pages">
+              <span className="home-pathfinder-secondary-label">Direct routes</span>
+              {HOME_NAV_SECONDARY_LINKS.map((item, index) => {
               return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="home-pathfinder-card home-pathfinder-card--secondary"
-              >
-                <span className="home-pathfinder-icon" aria-hidden="true">
-                  <Icon className="h-4 w-4" strokeWidth={1.5} />
-                </span>
-                <span>
-                  <strong>{item.title}</strong>
-                  <em>{item.description}</em>
-                </span>
-                <span className="home-pathfinder-arrow" aria-hidden="true">
-                  <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
-                </span>
-              </Link>
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="home-pathfinder-card home-pathfinder-card--secondary"
+                  style={{ '--pathfinder-index': index + HOME_NAV_PRIMARY_LINKS.length } as React.CSSProperties}
+                >
+                  <span className="home-pathfinder-secondary-copy">
+                    <strong>{item.title}</strong>
+                    <em>{item.description}</em>
+                  </span>
+                </Link>
               );
-            })}
+              })}
+            </div>
           </div>
         </div>
       </nav>
@@ -521,7 +542,12 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
                   src={pillar.image}
                   alt={pillar.imageAlt}
                   fill
-                  loading={pillar.image.includes('hva-technology-consulting-capability') ? 'eager' : 'lazy'}
+                  loading={
+                    pillar.image.includes('hva-strategy-business-capability') ||
+                    pillar.image.includes('hva-technology-consulting-capability')
+                      ? 'eager'
+                      : 'lazy'
+                  }
                   sizes="(max-width: 640px) 100vw, 50vw"
                   className="object-cover opacity-64"
                 />
@@ -565,7 +591,7 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
                   src={pillar.image}
                   alt={pillar.imageAlt}
                   fill
-                  loading={idx === 1 ? 'eager' : 'lazy'}
+                  loading={idx <= 1 ? 'eager' : 'lazy'}
                   sizes="(max-width: 1024px) 100vw, 22vw"
                   className="object-cover opacity-54 transition-transform duration-500 group-hover:scale-105"
                 />
@@ -623,292 +649,165 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
         </div>
       </section>
 
-      <section className="bg-white pt-16 pb-14 md:pt-20 md:pb-16">
-        <div className="mx-auto max-w-7xl px-6 lg:px-14">
-
-          {/* Header — two column */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-7 items-end mb-10 pb-8 border-b border-[#DDE3EA]">
-            <div className="md:col-span-7">
-              <div className="flex items-start gap-3">
-                <SectionBrandMark size="sm" className="mt-0.5" />
-                <div>
-                  <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.28em] text-[#E8A838]">
-                    Proof In Production
-                  </p>
-                  <h2 className="font-headline text-4xl md:text-5xl leading-[1.02] tracking-tight text-[#1A2535]">
-                    Transformation Programs<br className="hidden md:block" /> Running in Production
-                  </h2>
-                </div>
+      <section className="home-proof-section">
+        <div className="home-proof-shell">
+          <div className="home-proof-header">
+            <div className="home-proof-title">
+              <SectionBrandMark size="sm" className="mt-0.5" />
+              <div>
+                <p>Proof in production</p>
+                <h2>Transformation programs running in production.</h2>
               </div>
             </div>
-            <div className="md:col-span-5 flex flex-col gap-4">
-              <p className="text-base text-[#566274] leading-relaxed">
-                Every program listed is live in a real operating environment — no demos, no projected results.
-              </p>
-              <div className="flex flex-wrap gap-6">
-                <Link href="/case-studies" className="inline-flex min-h-11 items-center border-b-2 border-[#1A2535]/20 pb-0.5 text-xs font-bold uppercase tracking-widest text-[#1A2535] transition-all hover:border-[#E8A838] hover:text-[#E8A838]">
-                  Proof Library →
-                </Link>
-                <Link href="/capabilities/solution-programs" className="inline-flex min-h-11 items-center border-b-2 border-[#1A2535]/20 pb-0.5 text-xs font-bold uppercase tracking-widest text-[#1A2535] transition-all hover:border-[#E8A838] hover:text-[#E8A838]">
-                  Solution Programs →
-                </Link>
+            <div className="home-proof-intro">
+              <p>Real operating environments. Real users. Measured after launch.</p>
+              <div className="home-proof-actions">
+                <Link href="/case-studies">Proof library -&gt;</Link>
+                <Link href="/capabilities/solution-programs">Solution programs -&gt;</Link>
               </div>
             </div>
           </div>
 
-          {/* Cards — asymmetric: large featured left + 2 stacked right */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:h-[500px] lg:h-[540px]">
-
-            {/* Featured card */}
-            <motion.article
-              className="md:col-span-7 relative overflow-hidden sharp-edge aspect-[4/3] md:aspect-auto md:h-full group"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.55 }}
+          <div className="home-proof-layout">
+            <div
+              className="home-proof-visual"
             >
-              <Image
-                src="/Images/home/proof-in-production/customer-operations-engine-live-deployment.webp"
-                alt="Customer operations engine dashboard and workflow system in production"
-                fill
-                sizes="(max-width: 768px) 100vw, 58vw"
-                className="object-cover transition-transform duration-700 ease-spring group-hover:scale-[1.03]"
-              />
-              {/* Dark gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1A2535]/90 via-[#1A2535]/20 to-transparent" />
-              {/* Sequence number watermark */}
-              <span aria-hidden="true" className="absolute top-5 right-6 font-headline text-[120px] leading-none text-white/[0.07] select-none pointer-events-none">
-                01
-              </span>
-              {/* Eyebrow badge */}
-              <span className="sharp-edge absolute left-5 top-5 z-10 bg-[#E8A838] px-3 py-1 text-[9px] font-bold uppercase tracking-[0.22em] text-white">
-                System Built
-              </span>
-              {/* Bottom content */}
-              <div className="absolute bottom-0 left-0 right-0 p-6 md:p-7 z-10">
-                <h3 className="font-headline text-3xl text-white leading-tight mb-3">
-                  Customer Operations Engine
-                </h3>
-                <p className="text-sm text-white/55 uppercase tracking-[0.14em]">
-                  Zero manual intervention · end-to-end in production
-                </p>
-                <div className="mt-5 h-[1px] w-0 group-hover:w-full bg-[#E8A838] transition-all duration-700 ease-spring" />
+              <div className="home-proof-photo home-proof-photo--main">
+                <Image
+                  src="/Images/case-studies/zoho-crm-transformation-case-study-morocco.webp"
+                  alt="CRM transformation program reviewed by real estate operators"
+                  fill
+                  sizes="(max-width: 900px) 100vw, 48vw"
+                  className="object-cover"
+                />
               </div>
-            </motion.article>
-
-            {/* Right: 2 stacked cards */}
-            <div className="md:col-span-5 grid grid-rows-1 md:grid-rows-2 gap-4 md:h-full">
-
-              {/* Card 2 */}
-              <motion.article
-                className="relative overflow-hidden sharp-edge aspect-[4/3] md:aspect-auto group"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.55, delay: 0.1 }}
-              >
+              <div className="home-proof-photo home-proof-photo--support">
                 <Image
-                  src="/Images/home/proof-in-production/revenue-control-module-live-operations.webp"
-                  alt="Revenue control module interface for live business operations"
+                  src="/Images/case-studies/whatsapp-ai-agent-operations-case-study-morocco.webp"
+                  alt="AI agent operations case study in production"
                   fill
-                  sizes="(max-width: 768px) 100vw, 42vw"
-                  className="object-cover transition-transform duration-700 ease-spring group-hover:scale-[1.04]"
+                  sizes="(max-width: 900px) 70vw, 22vw"
+                  className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1A2535]/90 via-[#1A2535]/20 to-transparent" />
-                <span aria-hidden="true" className="absolute top-3 right-4 font-headline text-[72px] leading-none text-white/[0.07] select-none pointer-events-none">02</span>
-                <span className="sharp-edge absolute left-4 top-4 z-10 bg-[#1A2535]/80 backdrop-blur-sm border border-white/10 px-3 py-1 text-[9px] font-bold uppercase tracking-[0.22em] text-white">
-                  Live Deployment
-                </span>
-                <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
-                  <h3 className="font-headline text-xl md:text-2xl text-white leading-tight mb-2">Revenue Control Module</h3>
-                  <p className="text-[11px] text-white/55 uppercase tracking-[0.14em]">94 active users · production since May 2025</p>
-                  <div className="mt-4 h-[1px] w-0 group-hover:w-full bg-[#E8A838] transition-all duration-700" />
-                </div>
-              </motion.article>
+              </div>
+              <div className="home-proof-caption">
+                <strong>Live systems, not slideware.</strong>
+                <span>CRM modernization and AI lead operations already operating with clients.</span>
+              </div>
+            </div>
 
-              {/* Card 3 */}
-              <motion.article
-                className="relative overflow-hidden sharp-edge aspect-[4/3] md:aspect-auto group"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.55, delay: 0.2 }}
-              >
-                <Image
-                  src="/Images/home/proof-in-production/quantified-results-growth-dashboard.webp"
-                  alt="Quantified business results and growth metrics visualization"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 42vw"
-                  className="object-cover transition-transform duration-700 ease-spring group-hover:scale-[1.04]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1A2535]/90 via-[#1A2535]/20 to-transparent" />
-                <span aria-hidden="true" className="absolute top-3 right-4 font-headline text-[72px] leading-none text-white/[0.07] select-none pointer-events-none">03</span>
-                <span className="sharp-edge absolute left-4 top-4 z-10 bg-[#1A2535]/80 backdrop-blur-sm border border-white/10 px-3 py-1 text-[9px] font-bold uppercase tracking-[0.22em] text-white">
-                  Measured Outcomes
-                </span>
-                <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
-                  <h3 className="font-headline text-xl md:text-2xl text-white leading-tight mb-2">Quantified Results</h3>
-                  <p className="text-[11px] text-white/55 uppercase tracking-[0.14em]">Manual triage ↓85% · Qualified meetings ↑43%</p>
-                  <div className="mt-4 h-[1px] w-0 group-hover:w-full bg-[#E8A838] transition-all duration-700" />
-                </div>
-              </motion.article>
-
+            <div
+              className="home-proof-list"
+            >
+              {[
+                {
+                  label: 'System built',
+                  title: 'Customer Operations Engine',
+                  proof: 'End-to-end workflow live in production.',
+                },
+                {
+                  label: 'Live deployment',
+                  title: 'Revenue Control Module',
+                  proof: 'Sales and follow-up operations running from one workflow.',
+                },
+                {
+                  label: 'Measured outcomes',
+                  title: 'Quantified Results',
+                  proof: 'Manual triage down. Qualified meetings up.',
+                },
+              ].map((item) => (
+                <article key={item.title} className="home-proof-row">
+                  <div>
+                    <em>{item.label}</em>
+                    <h3>{item.title}</h3>
+                    <p>{item.proof}</p>
+                  </div>
+                </article>
+              ))}
             </div>
           </div>
-
-          {/* Metrics strip */}
-          <div className="mt-4 grid grid-cols-2 md:grid-cols-4 border border-[#DDE3EA] divide-y md:divide-y-0 md:divide-x divide-[#DDE3EA]">
-            {[
-              { val: '↓85%', label: 'Manual triage cut' },
-              { val: '↑43%', label: 'Qualified meeting lift' },
-              { val: '$2.4M', label: 'Revenue pipeline active' },
-              { val: '94', label: 'Daily active operators' },
-            ].map((m) => (
-              <div key={m.label} className="flex items-center gap-4 px-6 py-4">
-                <span className="font-headline text-2xl text-[#1A2535]">{m.val}</span>
-                <span className="text-[10px] text-[#9AA4B2] uppercase tracking-widest leading-snug">{m.label}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* Production verified */}
-          <div className="mt-5 flex items-center gap-3">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#E8A838] animate-pulse inline-block shrink-0" />
-            <span className="text-[9px] font-bold uppercase tracking-[0.24em] text-[#E8A838] shrink-0">Production Verified</span>
-            <span className="h-px flex-1 bg-[#DDE3EA]" />
-          </div>
-
         </div>
       </section>
 
-      {/* ── Vision / Trust Section ─────────────────────────────────────── */}
-      <section className="relative overflow-hidden border-t border-white/10 bg-[#1A2535] py-20 md:py-28">
-        {/* Blueprint grid overlay */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage:
-              'repeating-linear-gradient(0deg,#F0C15A 0,#F0C15A 1px,transparent 0,transparent 50%),repeating-linear-gradient(90deg,#F0C15A 0,#F0C15A 1px,transparent 0,transparent 50%)',
-            backgroundSize: '48px 48px',
-          }}
-        />
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[#E8A838]/70" />
-        <div className="pointer-events-none absolute left-0 top-0 hidden h-full w-px bg-[#E8A838]/60 lg:block" />
-
-        <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-start gap-14 px-6 sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(420px,0.86fr)] lg:gap-20">
-
-          {/* Left — heading + feature list */}
-          <motion.div
-            initial={{ opacity: 0, x: -24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="mb-12 flex items-start gap-5">
-              <SectionBrandMark surface="dark" size="md" className="mt-1" />
-              <h2 className="max-w-[680px] font-headline text-[clamp(2.8rem,12vw,3.9rem)] leading-[1.02] text-white md:text-6xl md:leading-[0.98]">
-                Lasting Transformation Requires{' '}
-                <em className="not-italic text-[#E8A838] font-headline italic">The Full ARC</em>
-              </h2>
-            </div>
-
-            <div className="relative border-l border-white/20">
-              {arcPhases.map((phase) => (
-                <div key={phase.phase} className="relative pl-7 pb-8 last:pb-0">
-                  <span className="absolute -left-px top-0 h-12 w-px bg-[#E8A838]" aria-hidden="true" />
-                  <div className="flex gap-5">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center border border-white/20 bg-white/10 text-white">
-                      {phase.icon}
-                    </div>
-                    <div className="min-w-0 border-b border-white/10 pb-7 last:border-b-0">
-                      <div className="mb-2 flex flex-wrap items-center gap-x-3 gap-y-1">
-                        <span className="font-label text-[10px] font-bold uppercase tracking-[0.22em] text-[#F0C15A]">
-                          Phase {phase.phase}
-                        </span>
-                        <span className="text-sm text-white/40">{phase.discipline}</span>
-                      </div>
-                      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                        <h4 className="font-headline text-2xl text-white">{phase.title}</h4>
-                        <span className="text-xs font-bold uppercase tracking-[0.18em] text-white/40">
-                          {phase.proof}
-                        </span>
-                      </div>
-                      <p className="mt-3 max-w-[620px] font-body leading-relaxed text-white/70">
-                        {phase.summary}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Right — metrics card */}
-          <motion.div
-            className="relative"
-            initial={{ opacity: 0, x: 24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            <div ref={liveMetricsRef} className="relative z-10 overflow-hidden border border-[#C8CED7] bg-[#FFFFFF]">
-              <div className="grid gap-5 border-b border-[#1A2535]/10 px-7 py-7 md:grid-cols-[1fr_auto] md:items-start">
-                <div>
-                  <div className="mb-3 flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 bg-[#E8A838]" aria-hidden="true" />
-                    <p className="font-mono text-[9px] uppercase tracking-[0.28em] text-[#E8A838]">
-                      Live Program Metrics
-                    </p>
-                  </div>
-                  <p className="max-w-[360px] text-sm leading-6 text-[#566274]">
-                    Measured across active AI, CRM, and cloud programs after launch, where the ARC model stays accountable.
-                  </p>
-                </div>
-                <div className="border border-[#1A2535]/10 px-4 py-3 text-right">
-                  <span className="block font-headline text-3xl leading-none text-[#1A2535]">2025</span>
-                  <span className="mt-1 block text-[9px] font-bold uppercase tracking-[0.2em] text-[#9AA4B2]">
-                    Morocco
-                  </span>
-                </div>
-              </div>
-
-              <div className="divide-y divide-[#1A2535]/10">
-                {liveMetrics.map((metric, idx) => (
-                  <div key={metric.label} className="grid grid-cols-[auto_1fr_auto] items-baseline gap-4 px-7 py-5">
-                    <span className="font-mono text-[10px] font-bold text-[#9AA4B2]">0{idx + 1}</span>
-                    <span className="text-sm font-body text-[#3D4858]">{metric.label}</span>
-                    <div className="ml-4 flex shrink-0 items-baseline gap-1.5">
-                      <span className="text-sm font-bold text-[#E8A838]">{metric.dir}</span>
-                      <span className="font-headline text-3xl font-medium leading-none text-[#1A2535]">
-                        {formatLiveMetric(metric.target, metric.kind)}
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="grid grid-cols-3 border-t border-[#1A2535]/10 bg-white/70">
-                {['Production', 'Managed', 'Measured'].map((item) => (
-                  <div key={item} className="border-r border-[#1A2535]/10 px-5 py-4 last:border-r-0">
-                    <span className="block text-[9px] font-bold uppercase tracking-[0.2em] text-[#9AA4B2]">
-                      {item}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Link to capabilities */}
-            <Link
-              href="/capabilities"
-              className="mt-6 inline-flex min-h-11 items-center gap-2 border border-white/20 px-6 py-3 text-xs font-label font-bold uppercase tracking-widest text-white/70 transition-colors hover:border-white/40 hover:text-white"
+      <section className="home-arc-loop-section">
+        <div className="home-arc-loop-shell">
+          <div className="home-arc-loop-feature">
+            <motion.div
+              className="home-arc-loop-copy"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55 }}
             >
-              Our Capabilities
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </motion.div>
+              <div className="home-arc-loop-mark">
+                <SectionBrandMark surface="light" size="md" />
+                <span>The ARC loop</span>
+              </div>
+              <h2>
+                Lasting transformation requires the full ARC.
+              </h2>
+              <p>
+                Assess the constraint. Build the operating system. Keep production accountable after launch.
+              </p>
+              <Link href="/capabilities" className="home-arc-loop-link">
+                Our capabilities
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </motion.div>
 
+            <motion.div
+              className="home-arc-loop-visual"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, delay: 0.08 }}
+            >
+              <Image
+                src="/Images/capabilities/hva-operations-managed-capability.webp"
+                alt="Operations command workspace with dashboards and production monitoring screens"
+                fill
+                sizes="(min-width: 1024px) 48vw, 100vw"
+                className="object-cover"
+              />
+              <div className="home-arc-loop-visual-card">
+                <span>Featured operating story</span>
+                <strong>One accountable team from diagnosis to production.</strong>
+              </div>
+            </motion.div>
+          </div>
+
+          <div className="home-arc-loop-phases">
+            {arcPhases.map((phase) => (
+              <article key={phase.phase} className="home-arc-loop-phase">
+                <div className="home-arc-loop-phase-head">
+                  <span>{phase.phase}</span>
+                  <em>{phase.discipline}</em>
+                </div>
+                <div className="home-arc-loop-phase-title">
+                  <h3>{phase.title}</h3>
+                </div>
+                <strong>{phase.proof}</strong>
+                <p>{phase.summary}</p>
+              </article>
+            ))}
+          </div>
+
+          <div ref={liveMetricsRef} className="home-arc-loop-metrics" aria-label="Live ARC program metrics">
+            <div className="home-arc-loop-metrics-intro">
+              <span>Live program metrics</span>
+              <strong>2025 Morocco</strong>
+              <p>Measured after launch across active AI, CRM, and cloud programs.</p>
+            </div>
+            {liveMetrics.map((metric) => (
+              <div key={metric.label} className="home-arc-loop-metric">
+                <strong>
+                  <span>{metric.dir}</span>
+                  {formatLiveMetric(metric.target, metric.kind)}
+                </strong>
+                <em>{metric.label}</em>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

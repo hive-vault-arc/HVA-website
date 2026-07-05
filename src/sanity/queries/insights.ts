@@ -124,14 +124,19 @@ const perspectiveFields = `
 const researchReportFields = `
   title,
   "slug": slug.current,
+  subtitle,
   summary,
   publishedAt,
   tag,
   readTime,
+  ${authorFields},
+  keywords,
+  ${sourceFields},
   coverImage {
     ${imageFields}
   },
-  coverAlt
+  coverAlt,
+  ${sectionFields}
 `;
 
 const caseStudyFields = `

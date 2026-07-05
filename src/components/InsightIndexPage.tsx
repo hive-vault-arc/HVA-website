@@ -91,7 +91,7 @@ function ImagePlaceholder({ tag, aspect = 'square' }: { tag: string; aspect?: 'v
 
 function EmptyState({ message, backHref }: { message: string; backHref?: string }) {
   return (
-    <section className="max-w-[1440px] mx-auto px-4 md:px-8 py-32">
+    <section className="max-w-[var(--site-frame)] mx-auto px-4 md:px-8 py-32">
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -174,7 +174,7 @@ export default function InsightIndexPage({
 
       {/* ── Hero ───────────────────────────────────────────────────────────── */}
       <section className="bg-[#F7F8FA] px-4 pt-28 pb-16 sm:pt-32 md:px-8 md:pt-36 md:pb-20">
-        <div className="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+        <div className="max-w-[var(--site-frame)] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
           <div className="lg:col-span-8">
             <div className="mb-6 flex items-center gap-3">
               <SectionBrandMark size="sm" />
@@ -206,7 +206,7 @@ export default function InsightIndexPage({
       </section>
 
       {/* ── Filter / nav bar ───────────────────────────────────────────────── */}
-      <section className="max-w-[1440px] mx-auto px-4 md:px-8 pt-12 pb-8">
+      <section className="max-w-[var(--site-frame)] mx-auto px-4 md:px-8 pt-12 pb-8">
         <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
           {/* Back link */}
           {backHref && (
@@ -242,7 +242,7 @@ export default function InsightIndexPage({
 
       {/* ── Featured item ──────────────────────────────────────────────────── */}
       {featured && (
-        <section className="max-w-[1440px] mx-auto px-4 md:px-8 mb-24">
+        <section className="max-w-[var(--site-frame)] mx-auto px-4 md:px-8 mb-24">
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -295,7 +295,7 @@ export default function InsightIndexPage({
 
       {/* ── Grid ───────────────────────────────────────────────────────────── */}
       {rest.length > 0 && (
-        <section className="max-w-[1440px] mx-auto px-4 md:px-8 pb-32">
+        <section className="max-w-[var(--site-frame)] mx-auto px-4 md:px-8 pb-32">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-16">
             {rest.map((item, i) => (
               <motion.article

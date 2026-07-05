@@ -10,7 +10,8 @@ export type ContentSection =
   | { type: 'subheading'; content: string }
   | { type: 'pullquote'; content: string; attribution?: string }
   | { type: 'stat-block'; stats: { value: string; label: string; source: string }[] }
-  | { type: 'list'; items: string[] };
+  | { type: 'list'; items: string[] }
+  | { type: 'faq'; items: { question: string; answer: string }[] };
 
 export type BlogPost = {
   slug: string;

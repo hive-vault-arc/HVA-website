@@ -9,15 +9,15 @@ const config = {
   theme: {
     /* ── Fonts ─────────────────────────────────────────────────────────────
        Headline / Serif : Newsreader  (editorial serif  — from design system)
-       Body / Sans      : Inter       (clean sans-serif — from design system)
-       Label            : Inter       (same as body)
+       Body / Sans      : Manrope     (precise sans-serif — from design system)
+       Label            : Manrope     (same as body)
        ─────────────────────────────────────────────────────────────────── */
     fontFamily: {
       serif:    ['var(--font-newsreader)', 'Georgia', 'serif'],
-      sans:     ['var(--font-inter)', 'system-ui', 'sans-serif'],
+      sans:     ['var(--font-manrope)', 'system-ui', 'sans-serif'],
       headline: ['var(--font-newsreader)', 'Georgia', 'serif'],
-      body:     ['var(--font-inter)', 'system-ui', 'sans-serif'],
-      label:    ['var(--font-inter)', 'system-ui', 'sans-serif'],
+      body:     ['var(--font-manrope)', 'system-ui', 'sans-serif'],
+      label:    ['var(--font-manrope)', 'system-ui', 'sans-serif'],
     },
 
     /* ── Color Palette ──────────────────────────────────────────────────────

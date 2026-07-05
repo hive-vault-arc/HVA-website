@@ -1,10 +1,10 @@
 'use client';
 
+import type { CSSProperties } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { BarChart3, MessageSquare, Network, ShieldCheck, ArrowUpRight } from 'lucide-react';
-import BottomCTA from '../components/BottomCTA';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 import SectionBrandMark from '../components/SectionBrandMark';
 
@@ -20,6 +20,8 @@ const IMGS = {
   consumerGoods: '/Images/industries/consumer-goods-luxury-analytics-morocco.webp',
   rdLab:         '/Images/industries/hva-industries-research-development-framework.webp',
 };
+
+const INDUSTRIES_PAGE_HERO_IMAGE = '/Images/page-heroes/hva-industries-hero-background.webp';
 
 const approachTracks = [
   {
@@ -225,54 +227,67 @@ export default function Industries() {
       />
 
       {/* ── Hero ─────────────────────────────────────────────────────────────── */}
-      <section className="relative mx-auto max-w-7xl overflow-hidden px-6 pt-28 pb-20 sm:px-8 md:pt-36 md:pb-32">
-        <PageAmbientBackground className="-z-10" />
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <section
+        className="industries-hero"
+        style={{ '--page-hero-image': `url(${INDUSTRIES_PAGE_HERO_IMAGE})` } as CSSProperties}
+      >
+        <PageAmbientBackground className="industries-hero-ambient" />
+        <div aria-hidden="true" className="industries-hero-wash" />
+        <div className="industries-hero-shell">
           <motion.div
-            className="lg:col-span-8"
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55 }}
+            className="industries-hero-grid"
+            initial="hidden"
+            animate="show"
+            variants={{ show: { transition: { staggerChildren: 0.1 } } }}
           >
-            <div className="mb-6 flex items-center gap-3">
-              <SectionBrandMark size="sm" />
-              <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#E8A838]">
-                Industries
+            <motion.div
+              className="industries-hero-copy"
+              variants={fadeUp}
+              transition={{ duration: 0.65 }}
+            >
+              <div className="industries-hero-mark">
+                <SectionBrandMark size="sm" eager />
+                <span>
+                  Industries
+                </span>
+              </div>
+              <h1 className="industries-hero-title">
+                Industry Context,
+                <br />
+                <em>Not Generic Delivery.</em>
+              </h1>
+              <p className="industries-hero-lede">
+                Hive Vault Arc operates across 8 industry verticals, combining domain expertise with strategy, engineering, and operations in one team.
               </p>
-            </div>
-            <h1 className="font-headline text-[clamp(3rem,13vw,4.6rem)] font-light leading-[1.06] tracking-tight md:text-7xl md:leading-[1.1]">
-              Industry Context,<br />
-              <em className="italic text-[#566274]">Not Generic Delivery.</em>
-            </h1>
-            <p className="mt-8 max-w-2xl text-xl md:text-2xl font-light leading-relaxed text-[#536070]">
-              Hive Vault Arc operates across 8 industry verticals — combining domain expertise with the full ARC delivery model:
-              strategy, engineering, and operations in one team.
-            </p>
-          </motion.div>
+              <div className="industries-hero-actions">
+                <Link href="#industry-verticals" className="sharp-edge btn-primary">
+                  View Sectors
+                </Link>
+                <Link href="/case-studies" className="industries-hero-secondary">
+                  See Proof <ArrowUpRight aria-hidden="true" className="h-4 w-4" strokeWidth={1.7} />
+                </Link>
+              </div>
+            </motion.div>
 
-          <motion.div
-            className="lg:col-span-4 flex flex-col justify-end h-full"
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.15 }}
-          >
-            <div className="bg-[#F7F8FA] p-8 border-l-4 border-[#E8A838]">
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#566274] mb-3">
-                Our Mandate
-              </p>
-              <p
-                className="text-lg text-[#1A2535] italic"
-                style={{ fontFamily: 'var(--font-headline)' }}
-              >
-                "Specificity is the antidote to technical debt."
-              </p>
-            </div>
+            <motion.aside
+              className="industries-hero-aside"
+              variants={fadeUp}
+              transition={{ duration: 0.65, delay: 0.08 }}
+            >
+              <div className="industries-hero-wordmark">
+                <strong data-label="Industries">
+                  <span>Ind</span><span>ustries</span>
+                </strong>
+                <span aria-hidden="true" />
+              </div>
+            </motion.aside>
           </motion.div>
         </div>
       </section>
+      <div aria-hidden="true" className="capabilities-separator industries-separator" />
 
       {/* ── Bento Industry Grid ──────────────────────────────────────────────── */}
-      <section className="soft-grid-section pt-16 pb-5 md:pt-20 md:pb-6">
+      <section id="industry-verticals" className="soft-grid-section pt-16 pb-5 md:pt-20 md:pb-6 scroll-mt-28">
         <div className="mx-auto max-w-[1720px] px-5 sm:px-6 lg:px-10">
           <div className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-12 md:items-end">
             <div className="md:col-span-7">
@@ -346,7 +361,7 @@ export default function Industries() {
               className="mb-8 text-[clamp(2.25rem,11vw,3rem)] leading-tight text-[#1A2535] md:text-5xl"
               style={{ fontFamily: 'var(--font-headline)' }}
             >
-              Active Research &amp; Development —<br />
+              Active Research &amp; Development:<br />
               <em className="font-light italic">One Framework. Many Operating Contexts.</em>
             </h2>
 
@@ -389,16 +404,39 @@ export default function Industries() {
         </div>
       </section>
 
-      {/* ── CTA ──────────────────────────────────────────────────────────────── */}
-      <BottomCTA
-        variant="light"
-        headline="Need an Industry-Specific Transformation Plan?"
-        subtext="Book a discovery call and we'll map the right capability and system program for your sector."
-        primaryLabel="Book Discovery Call"
-        primaryHref="/contact"
-        secondaryLabel="View Capabilities"
-        secondaryHref="/capabilities"
-      />
+      <section className="industries-mandate-section">
+        <motion.div
+          className="industries-mandate-card"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.28 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="industries-mandate-mark">
+            <SectionBrandMark surface="dark" size="sm" />
+            <span>Our Mandate</span>
+          </div>
+          <div className="industries-mandate-content">
+            <p className="industries-mandate-quote">
+              "Specificity is the antidote to technical debt."
+            </p>
+            <div className="industries-mandate-cta">
+              <h2>Need an Industry-Specific Transformation Plan?</h2>
+              <p>
+                Book a discovery call and we&apos;ll map the right capability and system program for your sector.
+              </p>
+              <div className="industries-mandate-actions">
+                <Link href="/contact" className="industries-mandate-primary">
+                  Book Discovery Call
+                </Link>
+                <Link href="/capabilities" className="industries-mandate-secondary">
+                  View Capabilities <ArrowUpRight className="h-4 w-4" strokeWidth={1.7} />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </section>
     </div>
   );
 }

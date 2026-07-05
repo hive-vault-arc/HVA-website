@@ -137,8 +137,8 @@ export default function ArticleDetailPage({
       />
 
       {/* ── Hero ───────────────────────────────────────────────────────────── */}
-      <section className="bg-[#F7F8FA] pt-28 pb-14 px-4 sm:pt-32 md:px-8 md:pt-36 md:pb-16">
-        <div className="max-w-5xl mx-auto">
+      <section className="bg-[#F7F8FA] pt-28 pb-14 sm:pt-32 md:pt-36 md:pb-16">
+        <div className="site-frame-narrow">
 
           {/* Breadcrumb */}
           <nav aria-label="Breadcrumb" className="mb-8">
@@ -262,7 +262,7 @@ export default function ArticleDetailPage({
 
       {/* ── Cover image ────────────────────────────────────────────────────── */}
       {coverImage && (
-        <div className="max-w-5xl mx-auto px-4 md:px-8 -mt-1">
+        <div className="site-frame-narrow -mt-1">
           <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#E8EBF0] sm:aspect-[16/9] lg:aspect-[21/9]">
             <Image
               src={coverImage}
@@ -270,7 +270,7 @@ export default function ArticleDetailPage({
               fill
               className="object-cover"
               priority
-              sizes="(max-width: 1024px) 100vw, 1024px"
+              sizes="(max-width: 1024px) calc(100vw - 2rem), min(1640px, calc(100vw - 5rem))"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#FFFFFF] via-transparent to-transparent" />
           </div>
@@ -278,7 +278,7 @@ export default function ArticleDetailPage({
       )}
 
       {/* ── Body + Sidebar ─────────────────────────────────────────────────── */}
-      <section className="max-w-5xl mx-auto px-4 md:px-8 py-16">
+      <section className="site-frame-narrow py-16">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
           {/* Sticky Sidebar — 3 cols */}
           {sidebar && (
@@ -316,8 +316,8 @@ export default function ArticleDetailPage({
 
       {/* ── About Hive Vault Arc strip ──────────────────────────────────────────────── */}
       {showAboutStrip && (
-        <section className="bg-[#F7F8FA] py-16 px-4 md:px-8">
-          <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-10 items-center md:items-start">
+        <section className="bg-[#F7F8FA] py-16">
+          <div className="site-frame-narrow flex flex-col md:flex-row gap-10 items-center md:items-start">
             <SectionBrandMark size="lg" />
             <div className="flex-1 text-center md:text-left">
               <h3

@@ -1,6 +1,6 @@
 import type { SanityImageSource } from '@sanity/image-url';
 import type { BlogPost } from './blog';
-import type { InsightCard, NewsArticle } from './insights';
+import type { InsightCard, NewsArticle, ResearchReport } from './insights';
 import type { Perspective } from './perspectives';
 import type { CaseStudy } from './proof';
 import { sanityFetch } from '../sanity/lib/fetch';
@@ -26,7 +26,7 @@ type SanityImageValue = SanityImageSource | null | undefined;
 type SanityPost = Omit<BlogPost, 'coverImage'> & { coverImage?: SanityImageValue };
 type SanityNewsArticle = Omit<NewsArticle, 'coverImage'> & { coverImage?: SanityImageValue };
 type SanityPerspective = Omit<Perspective, 'coverImage'> & { coverImage?: SanityImageValue };
-type SanityResearchReport = Omit<InsightCard, 'coverImage'> & { coverImage?: SanityImageValue };
+type SanityResearchReport = Omit<ResearchReport, 'coverImage'> & { coverImage?: SanityImageValue };
 type SanityCaseStudy = Omit<CaseStudy, 'assets'> & {
   assets?: Omit<CaseStudy['assets'], 'coverImage'> & {
     coverImage?: SanityImageValue;
@@ -81,9 +81,13 @@ function normalizePerspective(perspective: SanityPerspective): Perspective {
   };
 }
 
-function normalizeResearchReport(report: SanityResearchReport): InsightCard {
+function normalizeResearchReport(report: SanityResearchReport): ResearchReport {
   return {
     ...report,
+    authors: report.authors ?? [],
+    keywords: report.keywords ?? [],
+    sources: report.sources ?? [],
+    sections: report.sections ?? [],
     coverImage: imageUrlFromSource(report.coverImage),
     coverAlt: report.coverAlt ?? report.title,
   };
@@ -182,7 +186,7 @@ export async function getRelatedSanityPerspectives(currentSlug: string, limit = 
   return perspectives.filter((perspective) => perspective.slug !== currentSlug).slice(0, limit);
 }
 
-export async function getAllSanityResearchReports(): Promise<InsightCard[]> {
+export async function getAllSanityResearchReports(): Promise<ResearchReport[]> {
   const reports = await sanityFetch<SanityResearchReport[]>({
     query: allResearchReportsQuery,
     tags: [INSIGHTS_TAG, 'researchReports'],
@@ -191,7 +195,7 @@ export async function getAllSanityResearchReports(): Promise<InsightCard[]> {
   return reports.map(normalizeResearchReport);
 }
 
-export async function getSanityResearchReportBySlug(slug: string): Promise<InsightCard | null> {
+export async function getSanityResearchReportBySlug(slug: string): Promise<ResearchReport | null> {
   const report = await sanityFetch<SanityResearchReport | null>({
     query: researchReportBySlugQuery,
     params: { slug },

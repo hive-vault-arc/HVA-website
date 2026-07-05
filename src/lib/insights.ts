@@ -26,6 +26,14 @@ export type NewsArticle = InsightCard & {
   sections: ContentSection[];
 };
 
+export type ResearchReport = InsightCard & {
+  subtitle?: string;
+  authors: { name: string; role: string; initials: string }[];
+  keywords: string[];
+  sources: { label: string; url: string }[];
+  sections: ContentSection[];
+};
+
 export const NEWS_ARTICLES: NewsArticle[] = [
   {
     title: 'NVIDIA RTX Spark: The Local AI Superchip That Could Change Private Agents',
@@ -260,10 +268,16 @@ export function getRelatedNewsArticles(currentSlug: string, limit = 3): Promise<
   return getRelatedSanityNewsArticles(currentSlug, limit);
 }
 
-export function getAllResearchReports(): Promise<InsightCard[]> {
+export function getAllResearchReports(): Promise<ResearchReport[]> {
   return getAllSanityResearchReports();
 }
 
-export function getResearchReportBySlug(slug: string): Promise<InsightCard | null> {
+export function getResearchReportBySlug(slug: string): Promise<ResearchReport | null> {
   return getSanityResearchReportBySlug(slug);
+}
+
+export function getRelatedResearchReports(currentSlug: string, limit = 3): Promise<ResearchReport[]> {
+  return getAllSanityResearchReports().then((reports) =>
+    reports.filter((report) => report.slug !== currentSlug).slice(0, limit)
+  );
 }

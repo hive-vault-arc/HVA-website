@@ -4,6 +4,7 @@ type SectionBrandMarkProps = {
   surface?: 'light' | 'dark';
   size?: 'sm' | 'md' | 'lg';
   className?: string;
+  eager?: boolean;
 };
 
 const LOGO_ON_LIGHT_SRC = '/Images/brand/hva-logo-number-3.png';
@@ -19,6 +20,7 @@ export default function SectionBrandMark({
   surface = 'light',
   size = 'md',
   className = '',
+  eager = false,
 }: SectionBrandMarkProps) {
   const src = surface === 'dark' ? LOGO_ON_DARK_SRC : LOGO_ON_LIGHT_SRC;
 
@@ -35,6 +37,8 @@ export default function SectionBrandMark({
         width={1086}
         height={1086}
         className="h-full w-full object-contain"
+        loading={eager ? 'eager' : 'lazy'}
+        fetchPriority={eager ? 'high' : 'auto'}
       />
     </span>
   );

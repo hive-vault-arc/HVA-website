@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { type CSSProperties, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
@@ -64,6 +64,14 @@ const CAPABILITY_IMAGES = {
   cloudInfrastructure: '/Images/capabilities/hva-cloud-infrastructure-capability.webp',
   operationsManaged: '/Images/capabilities/hva-operations-managed-capability.webp',
 };
+
+const CAPABILITIES_PAGE_HERO_IMAGE = '/Images/page-heroes/hva-capabilities-hero-background.webp';
+
+const CAPABILITIES_PAGE_LINKS = [
+  { label: 'Capability Pillars', anchor: '#capability-pillars', meta: '6 pillars' },
+  { label: 'Solution Programs', anchor: '#solution-programs', meta: '3 active' },
+  { label: 'ARC Engagement Model', anchor: '#bot-model', meta: 'How we work' },
+];
 
 export default function Capabilities() {
   const { scrollYProgress } = useScroll();
@@ -155,7 +163,10 @@ export default function Capabilities() {
       />
 
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
-      <section className="capabilities-hero">
+      <section
+        className="capabilities-hero"
+        style={{ '--page-hero-image': `url(${CAPABILITIES_PAGE_HERO_IMAGE})` } as CSSProperties}
+      >
         <PageAmbientBackground className="capabilities-hero-ambient" />
         <div aria-hidden="true" className="capabilities-hero-wash" />
         <div className="capabilities-hero-shell">
@@ -171,7 +182,7 @@ export default function Capabilities() {
               className="capabilities-hero-copy"
             >
               <div className="capabilities-hero-mark">
-                <SectionBrandMark size="sm" />
+                <SectionBrandMark size="sm" eager />
                 <span>
                   Capabilities &amp; Mastery
                 </span>
@@ -184,7 +195,7 @@ export default function Capabilities() {
                 Partner.
               </h1>
               <p className="capabilities-hero-lede">
-                Hive Vault Arc delivers strategy, engineering, and managed operations across six pillars — one team, one accountability loop, from discovery to production.
+                Hive Vault Arc delivers strategy, engineering, and managed operations across six pillars, one team, one accountability loop, from discovery to production.
               </p>
               <div className="capabilities-hero-actions">
                 <Link href="/capabilities/in-detail" className="sharp-edge btn-primary">
@@ -199,35 +210,16 @@ export default function Capabilities() {
               </div>
             </motion.div>
 
-            {/* On This Page nav panel */}
             <motion.aside
               variants={fadeUp}
               transition={{ duration: 0.65, delay: 0.08 }}
               className="capabilities-hero-aside"
             >
-              <div className="capabilities-page-card">
-                <p className="capabilities-page-card-title">
-                  On This Page
-                </p>
-                <nav>
-                  {[
-                    { label: 'Capability Pillars', anchor: '#capability-pillars', meta: '6 pillars' },
-                    { label: 'Solution Programs', anchor: '#solution-programs', meta: '3 active' },
-                    { label: 'ARC Engagement Model', anchor: '#bot-model', meta: 'How we work' },
-                  ].map((item) => (
-                    <a
-                      key={item.anchor}
-                      href={item.anchor}
-                      className="capabilities-page-card-link"
-                    >
-                      <span>{item.label}</span>
-                      <span>{item.meta}</span>
-                    </a>
-                  ))}
-                </nav>
-                <Link href="/capabilities/in-detail" className="capabilities-page-card-depth">
-                  Full depth <ArrowRight className="h-4 w-4" strokeWidth={1.6} /> /capabilities/in-detail
-                </Link>
+              <div className="capabilities-hero-wordmark">
+                <strong data-label="Capabilities">
+                  <span>Cap</span><span>abilities</span>
+                </strong>
+                <span aria-hidden="true" />
               </div>
             </motion.aside>
           </motion.div>
@@ -295,8 +287,8 @@ export default function Capabilities() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ staggerChildren: 0.1 }}
-            className="arc-operating-header"
+            transition={{ staggerChildren: 0.08 }}
+            className="arc-operating-stage"
           >
             <motion.div variants={fadeUp} transition={{ duration: 0.55 }} className="arc-operating-title">
               <div className="arc-operating-mark">
@@ -316,15 +308,7 @@ export default function Capabilities() {
                 <span key={item}>{item}</span>
               ))}
             </motion.div>
-          </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.05 }}
-            transition={{ duration: 0.35 }}
-            className="arc-operating-layout"
-          >
             <div className="arc-operating-rail">
               <div className="arc-operating-progress">
                 <span>{activeBOTItem.step}/03</span>
@@ -350,7 +334,7 @@ export default function Capabilities() {
                     className={`arc-operating-step ${isActive ? 'is-active' : ''}`}
                   >
                     <span className="arc-operating-step-icon">
-                        {item.icon}
+                      {item.icon}
                     </span>
                     <span className="arc-operating-step-text">
                       <span>{item.step}</span>
@@ -370,14 +354,14 @@ export default function Capabilities() {
               className="arc-operating-panel"
             >
               <div className="arc-operating-media">
-                  <Image
-                    src={activeBOTItem.image}
-                    alt={activeBOTItem.imageAlt}
-                    fill
-                    loading="lazy"
-                    sizes="(max-width: 1024px) 100vw, 58vw"
+                <Image
+                  src={activeBOTItem.image}
+                  alt={activeBOTItem.imageAlt}
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 1024px) 100vw, 58vw"
                   className="object-cover"
-                  />
+                />
                 <div className="arc-operating-media-copy">
                   <span>Phase {activeBOTItem.step}</span>
                   <h3>{activeBOTItem.title}</h3>
@@ -393,19 +377,19 @@ export default function Capabilities() {
                 </div>
               </div>
             </motion.div>
-          </motion.div>
 
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <Link href="/capabilities/in-detail" className="sharp-edge btn-primary">
-              Explore In Detail
-            </Link>
-            <Link
-              href="/capabilities/solution-programs"
-              className="text-sm font-bold uppercase tracking-wide text-[#E8A838] transition-colors duration-200 hover:text-[#C8891C]"
-            >
-              View Solution Programs →
-            </Link>
-          </div>
+            <div className="arc-operating-actions">
+              <Link href="/capabilities/in-detail" className="sharp-edge btn-primary">
+                Explore In Detail
+              </Link>
+              <Link
+                href="/capabilities/solution-programs"
+                className="text-sm font-bold uppercase tracking-wide text-[#E8A838] transition-colors duration-200 hover:text-[#C8891C]"
+              >
+                View Solution Programs →
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -431,8 +415,7 @@ export default function Capabilities() {
 
               <div className="relative z-10 max-w-3xl">
                 <h2 className="capabilities-quote-text font-headline text-3xl md:text-4xl lg:text-[2.8rem] italic leading-tight text-[#1A2535] mb-12">
-                  &ldquo;Transformation succeeds when strategy, engineering, and operations move
-                  together &mdash; from the first decision to the last deployment.&rdquo;
+                  &ldquo;Transformation succeeds when strategy, engineering, and operations move together, from the first decision to the last deployment.&rdquo;
                 </h2>
                 <div className="flex items-center gap-6">
                   <div className="w-16 h-16 bg-[#1A2535] overflow-hidden flex-shrink-0 relative">
@@ -447,7 +430,7 @@ export default function Capabilities() {
                   <div>
                     <p className="font-bold text-[#1A2535] text-sm">ARC Framework</p>
                     <p className="text-[0.7rem] text-[#536070] uppercase tracking-[0.14em] mt-1">
-                      Strategy · Consulting · Engineering · Operations
+                      Strategy / Consulting / Engineering / Operations
                     </p>
                   </div>
                 </div>
@@ -577,6 +560,26 @@ export default function Capabilities() {
             </Link>
             <Link href="/contact" className="capabilities-depth-cta-secondary">
               Book Discovery Call
+            </Link>
+          </div>
+          <div className="capabilities-page-card capabilities-page-card--end">
+            <p className="capabilities-page-card-title">
+              On This Page
+            </p>
+            <nav>
+              {CAPABILITIES_PAGE_LINKS.map((item) => (
+                <a
+                  key={item.anchor}
+                  href={item.anchor}
+                  className="capabilities-page-card-link"
+                >
+                  <span>{item.label}</span>
+                  <span>{item.meta}</span>
+                </a>
+              ))}
+            </nav>
+            <Link href="/capabilities/in-detail" className="capabilities-page-card-depth">
+              Full depth <ArrowRight className="h-4 w-4" strokeWidth={1.6} /> /capabilities/in-detail
             </Link>
           </div>
         </motion.div>

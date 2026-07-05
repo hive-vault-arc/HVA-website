@@ -96,7 +96,7 @@ const Navbar: React.FC = () => {
     pathname === path || (path !== '/' && pathname?.startsWith(`${path}/`));
 
   return (
-    <header className="navbar-sharp fixed left-2 right-2 top-2 z-50 w-auto max-w-none lg:left-1/2 lg:right-auto lg:w-[90%] lg:max-w-6xl lg:-translate-x-1/2">
+    <header className="navbar-sharp fixed left-2 right-2 top-2 z-50 w-auto max-w-none lg:left-1/2 lg:right-auto lg:w-[94%] lg:max-w-6xl lg:-translate-x-1/2">
       <nav
         className={`transition-all duration-300 ${
           isScrolled ? 'py-1.5 md:py-2' : 'py-2 md:py-4'
@@ -114,7 +114,7 @@ const Navbar: React.FC = () => {
             <Logo />
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-1">
+            <div className="absolute left-1/2 hidden -translate-x-1/2 items-center space-x-1 lg:flex">
               <Link href="/arc" aria-label="ARC" className={desktopLinkClass(isRouteActive('/arc'))}>
                 <span className="flex items-baseline gap-1.5">
                   <span>ARC</span>
@@ -237,15 +237,16 @@ const Navbar: React.FC = () => {
                   </div>
                 </div>
               </div>
-              <Link
-                href="/contact"
-                aria-label="Book a call"
-                className="ml-2 flex min-h-11 items-center rounded-full bg-[#1A2535] px-4 py-2 text-sm font-medium text-[#FFFFFF] transition-all duration-300 hover:bg-[#E8A838]"
-              >
-                Book a Call
-                <ArrowUpRight className="w-3.5 h-3.5 ml-1.5" />
-              </Link>
             </div>
+
+            <Link
+              href="/contact"
+              aria-label="Book a call"
+              className="ml-auto hidden min-h-11 items-center rounded-full bg-[#1A2535] px-4 py-2 text-sm font-medium text-[#FFFFFF] transition-all duration-300 hover:bg-[#E8A838] lg:flex"
+            >
+              Book a Call
+              <ArrowUpRight className="w-3.5 h-3.5 ml-1.5" />
+            </Link>
 
             {/* Mobile menu button */}
             <div className="flex items-center lg:hidden">

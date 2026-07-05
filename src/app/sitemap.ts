@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 import { SITE_URL } from '../lib/seo';
 import { getAllPosts } from '../lib/blog';
 import { getAllCaseStudies } from '../lib/proof';
-import { getAllNewsArticles } from '../lib/insights';
+import { getAllNewsArticles, getAllResearchReports } from '../lib/insights';
 import { getAllPerspectives } from '../lib/perspectives';
 
 const INDEXABLE_LOCALES = ['fr', 'ar', 'es'] as const;
@@ -53,11 +53,12 @@ const localizedEntries = (
 };
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [posts, caseStudies, newsArticles, perspectives] = await Promise.all([
+  const [posts, caseStudies, newsArticles, perspectives, researchReports] = await Promise.all([
     getAllPosts(),
     getAllCaseStudies(),
     getAllNewsArticles(),
     getAllPerspectives(),
+    getAllResearchReports(),
   ]);
   const now = new Date();
   const digitalServicesLanguages = {
@@ -90,6 +91,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       ...m(0.7),
     })),
     entry('/insights/research-reports', now, m(0.7)),
+    ...researchReports.map((report) => ({
+      url: absoluteUrl(`/insights/research-reports/${report.slug}`),
+      lastModified: new Date(report.publishedAt),
+      ...m(0.7),
+    })),
     entry('/contact', now, m(0.8)),
     entry('/whoweare/abouthva', now, m(0.7)),
     entry('/privacy-policy', now, m(0.5)),
