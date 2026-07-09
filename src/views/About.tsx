@@ -36,6 +36,7 @@ type DeliveryStep = {
 
 type Pillar = {
   number: string;
+  slug: string;
   title: string;
   shortTitle: string;
   description: string;
@@ -71,6 +72,7 @@ const principles: Principle[] = [
 const pillars: Pillar[] = [
   {
     number: '01',
+    slug: 'strategy-business',
     shortTitle: 'Strategy',
     title: 'Strategy & Business Consulting',
     description: 'Diagnose the transformation before any code is written. We redesign operating models, define AI strategy, sequence digital programs, and build the roadmap that connects business outcomes to technical execution.',
@@ -79,6 +81,7 @@ const pillars: Pillar[] = [
   },
   {
     number: '02',
+    slug: 'technology-consulting',
     shortTitle: 'Technology',
     title: 'Technology Consulting',
     description: 'Design the architecture that serves the business 3–5 years out. Enterprise blueprints, technology roadmaps, platform strategy, IT modernization, systems integration, and infrastructure redesign.',
@@ -87,6 +90,7 @@ const pillars: Pillar[] = [
   },
   {
     number: '03',
+    slug: 'ai-data-analytics',
     shortTitle: 'AI & Data',
     title: 'AI, Data & Analytics',
     description: 'Engineer intelligence into operations. Generative AI systems, autonomous agents, machine learning, data pipelines, business intelligence, MLOps, and conversational AI on WhatsApp and web channels.',
@@ -95,6 +99,7 @@ const pillars: Pillar[] = [
   },
   {
     number: '04',
+    slug: 'software-engineering',
     shortTitle: 'Software',
     title: 'Software Engineering & Product',
     description: 'Production-grade custom software, web and mobile applications, SaaS platforms, API ecosystems, DevOps pipelines, and UX-wired frontend delivery.',
@@ -103,6 +108,7 @@ const pillars: Pillar[] = [
   },
   {
     number: '05',
+    slug: 'cloud-infrastructure',
     shortTitle: 'Cloud',
     title: 'Cloud & Infrastructure',
     description: 'AWS, Azure, and GCP migration, cloud-native architecture, Terraform-based infrastructure automation, security design, disaster recovery, and production observability.',
@@ -111,6 +117,7 @@ const pillars: Pillar[] = [
   },
   {
     number: '06',
+    slug: 'operations-managed',
     shortTitle: 'Operations',
     title: 'Operations & Managed Services',
     description: 'Ongoing ownership of the systems Hive Vault Arc builds. Managed operations, application evolution, automation maintenance, IT support, and business process management — long after go-live.',
@@ -153,7 +160,7 @@ const About: React.FC = () => {
 
   return (
     <MotionConfig reducedMotion={motionReduced ? 'always' : 'never'}>
-      <div className="relative isolate overflow-hidden bg-[#FFFFFF] text-[#1A2535]">
+      <div className="about-hva-page relative isolate overflow-hidden bg-[#FFFFFF] text-[#1A2535]">
         <motion.div
           aria-hidden="true"
           className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-gradient-to-r from-[#E8A838] via-[#E8A838] to-[#E8A838]"
@@ -393,7 +400,7 @@ const About: React.FC = () => {
                 {pillars.map((pillar) => (
                   <Link
                     key={pillar.number}
-                    href="/capabilities#capability-pillars"
+                    href={`/capabilities/${pillar.slug}`}
                     aria-label={`View capability details for ${pillar.title}`}
                     className="about-service-map-item"
                   >
@@ -478,6 +485,7 @@ const About: React.FC = () => {
                   member.slug === 'ali-amrani'
                     ? 'w-full h-full object-cover object-[52%_38%] scale-[1.58] group-hover:scale-[1.66] transition-transform duration-700'
                     : 'w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-700';
+                const profileTransitionName = `employee-profile-${member.slug}`;
 
                 return (
                   <motion.div
@@ -489,22 +497,34 @@ const About: React.FC = () => {
                     viewport={{ once: true, amount: 0.05 }}
                     transition={{ duration: 0.35, delay: index * 0.07 }}
                   >
-                    <div className="relative aspect-[4/5] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
-                      <Image
-                        src={member.image}
-                        alt={`${member.name} — ${member.role} at Hive Vault Arc`}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        className={portraitClassName}
-                      />
-                    </div>
-                    <div className="p-8">
-                      <p className="text-[10px] font-bold text-[var(--section-label-color)] uppercase tracking-[0.18em] mb-1">{member.tag}</p>
-                      <h3 className="font-serif text-2xl font-light text-[#1A2535] mb-1">{member.name}</h3>
-                      <p className="text-sm text-[#1A2535]/70">{member.role}</p>
-                      <p className="mt-1 text-xs text-[#1A2535]/55">{member.frenchRole}</p>
-                      <p className="mt-4 text-sm leading-relaxed text-[#1A2535]/60">{member.description}</p>
-                    </div>
+                    <a
+                      href={`/abouthva/people/${member.slug}`}
+                      aria-label={`Read ${member.name}'s Hive Vault Arc profile`}
+                      className="block h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A838] focus-visible:ring-offset-4"
+                    >
+                      <div
+                        className="relative aspect-[4/5] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700"
+                        style={{ viewTransitionName: profileTransitionName } as React.CSSProperties}
+                      >
+                        <Image
+                          src={member.image}
+                          alt={`${member.name} — ${member.role} at Hive Vault Arc`}
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          className={portraitClassName}
+                        />
+                      </div>
+                      <div className="p-8">
+                        <p className="text-[10px] font-bold text-[var(--section-label-color)] uppercase tracking-[0.18em] mb-1">{member.tag}</p>
+                        <h3 className="font-serif text-2xl font-light text-[#1A2535] mb-1 transition-colors duration-200 group-hover:text-[#E8A838]">{member.name}</h3>
+                        <p className="text-sm text-[#1A2535]/70">{member.role}</p>
+                        <p className="mt-1 text-xs text-[#1A2535]/55">{member.frenchRole}</p>
+                        <p className="mt-4 text-sm leading-relaxed text-[#1A2535]/60">{member.description}</p>
+                        <span className="mt-5 inline-flex text-xs font-bold uppercase tracking-[0.16em] text-[#1A2535] transition-colors duration-200 group-hover:text-[#E8A838]">
+                          Read profile →
+                        </span>
+                      </div>
+                    </a>
                   </motion.div>
                 );
               })}

@@ -1,7 +1,9 @@
 import type { MetadataRoute } from 'next';
 import { SITE_URL } from '../lib/seo';
 import { getAllPosts } from '../lib/blog';
+import { getAllCapabilityProfiles } from '../lib/capabilities';
 import { getAllCaseStudies } from '../lib/proof';
+import { getAllEmployeeProfiles } from '../lib/employee-profiles';
 import { getAllNewsArticles, getAllResearchReports } from '../lib/insights';
 import { getAllPerspectives } from '../lib/perspectives';
 
@@ -53,12 +55,22 @@ const localizedEntries = (
 };
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [posts, caseStudies, newsArticles, perspectives, researchReports] = await Promise.all([
+  const [
+    posts,
+    capabilityProfiles,
+    caseStudies,
+    newsArticles,
+    perspectives,
+    researchReports,
+    employeeProfiles,
+  ] = await Promise.all([
     getAllPosts(),
+    getAllCapabilityProfiles(),
     getAllCaseStudies(),
     getAllNewsArticles(),
     getAllPerspectives(),
     getAllResearchReports(),
+    getAllEmployeeProfiles(),
   ]);
   const now = new Date();
   const digitalServicesLanguages = {
@@ -72,6 +84,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...localizedEntries('/capabilities', now, w(0.9), w(0.8)),
     ...localizedEntries('/capabilities/in-detail', now, w(0.85), m(0.7)),
     ...localizedEntries('/capabilities/solution-programs', now, w(0.85), m(0.7)),
+    ...capabilityProfiles.map((capability) => entry(`/capabilities/${capability.slug}`, now, m(0.78))),
 
     // Core pages.
     entry('/arc', now, w(0.85)),
@@ -98,6 +111,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
     entry('/contact', now, m(0.8)),
     entry('/whoweare/abouthva', now, m(0.7)),
+    ...employeeProfiles.map((profile) => entry(`/abouthva/people/${profile.slug}`, now, m(0.65))),
     entry('/privacy-policy', now, m(0.5)),
     entry('/mentions-legales', now, m(0.5)),
     entry('/whoarewe/portfolio', now, w(0.8)),

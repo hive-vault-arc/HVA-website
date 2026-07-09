@@ -215,6 +215,11 @@ const CapabilitiesInDetail: React.FC = () => {
                         </ul>
                       </div>
                     </details>
+
+                    <Link href={`/capabilities/${domain.id}`} className="cap-detail-card-link">
+                      Open capability
+                      <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={1.7} />
+                    </Link>
                   </div>
                 </motion.article>
               ))}

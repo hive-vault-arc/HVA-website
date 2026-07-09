@@ -15,6 +15,18 @@ const listTagByType: Record<string, string> = {
   perspective: 'perspectives',
   researchReport: 'researchReports',
   caseStudy: 'caseStudies',
+  employeeProfile: 'employeeProfiles',
+  capability: 'capabilityProfiles',
+};
+
+const groupTagByType: Record<string, string> = {
+  post: 'insights',
+  newsArticle: 'insights',
+  perspective: 'insights',
+  researchReport: 'insights',
+  caseStudy: 'insights',
+  employeeProfile: 'people',
+  capability: 'capabilities',
 };
 
 function slugValue(slug: SanityWebhookBody['slug']): string | undefined {
@@ -27,7 +39,7 @@ function tagsForPayload(body: SanityWebhookBody): string[] {
     return Array.from(new Set(body.tags.filter(Boolean)));
   }
 
-  const tags = ['insights'];
+  const tags = [body._type ? groupTagByType[body._type] ?? 'insights' : 'insights'];
 
   if (body._type && listTagByType[body._type]) {
     tags.push(listTagByType[body._type]);

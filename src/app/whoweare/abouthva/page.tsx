@@ -47,12 +47,12 @@ export const metadata: Metadata = buildPageMetadata({
 export default function Page() {
   const leadershipPeople = HVA_LEADERSHIP.map((member) => ({
     '@type': 'Person',
-    '@id': absoluteUrl(`/whoweare/abouthva#${member.slug}`),
+    '@id': absoluteUrl(`/abouthva/people/${member.slug}#person`),
     name: member.name,
     jobTitle: member.schemaJobTitle,
     description: member.description,
     image: absoluteUrl(member.image),
-    url: absoluteUrl(`/whoweare/abouthva#${member.slug}`),
+    url: absoluteUrl(`/abouthva/people/${member.slug}`),
     worksFor: {
       '@type': ['Organization', 'ProfessionalService'],
       '@id': absoluteUrl('/#organization'),

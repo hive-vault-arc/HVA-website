@@ -3,6 +3,7 @@ import Capabilities from '../../views/Capabilities';
 import JsonLd from '../../components/JsonLd';
 import FaqSection from '../../components/FaqSection';
 import { CAPABILITIES_FAQS } from '../../data/faqs';
+import { getFeaturedCapabilityProfiles } from '../../lib/capabilities';
 import {
   CONTACT_PHONE_E164,
   GLOBAL_KEYWORDS,
@@ -37,7 +38,8 @@ export const metadata: Metadata = buildPageMetadata({
   },
 });
 
-export default function Page() {
+export default async function Page() {
+  const capabilities = await getFeaturedCapabilityProfiles();
   const capabilitySchema = {
     '@context': 'https://schema.org',
     '@type': 'Service',
@@ -54,32 +56,23 @@ export default function Page() {
       areaServed: ['Morocco', 'Remote'],
     },
     areaServed: ['Morocco', 'Remote'],
-    serviceType: [
-      'Technology Consulting',
-      'Business Transformation',
-      'Digital Transformation Advisory',
-      'Enterprise Architecture',
-      'Digital Strategy',
-      'Agile at Scale',
-      'Tech Function Design',
-      'Roadmap Design',
-      'Strategy and Business Consulting',
-      'AI Agent Development',
-      'AI, Data, and Analytics',
-      'Workflow Automation',
-      'Decision Intelligence',
-      'CRM and Systems Engineering',
-      'Custom Software Development',
-      'Mobile and Web App Engineering',
-      'IT Modernization',
-      'Cloud Infrastructure and Reliability',
-      'CI/CD and DevOps',
-      'Data Capabilities and Analytics',
-      'Marketing Systems',
-      'Cybersecurity and Digital Risk',
-      'Operations and Managed Services',
-      'ARC Assess Re-engineer Command Delivery Model',
-    ],
+    serviceType: capabilities.map((capability) => capability.title),
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Hive Vault Arc Capability Pillars',
+      itemListElement: capabilities.map((capability, index) => ({
+        '@type': 'Offer',
+        position: index + 1,
+        itemOffered: {
+          '@type': 'Service',
+          name: capability.title,
+          description: capability.briefLine,
+          url: `${SITE_URL}/capabilities/${capability.slug}`,
+          serviceType: capability.briefBullets,
+          provider: { '@id': `${SITE_URL}/#organization` },
+        },
+      })),
+    },
     availableLanguage: ['en', 'fr', 'ar', 'es'],
     keywords: mergeKeywords(GLOBAL_KEYWORDS, [
       'technology consulting and execution',
@@ -93,6 +86,7 @@ export default function Page() {
       `${SITE_URL}/case-studies/top-tier-crm-transformation-program-real-estate-operations`,
       `${SITE_URL}/capabilities/solution-programs`,
       `${SITE_URL}/capabilities/in-detail`,
+      ...capabilities.map((capability) => `${SITE_URL}/capabilities/${capability.slug}`),
     ],
   };
 
@@ -104,7 +98,7 @@ export default function Page() {
   return (
     <>
       <JsonLd data={[capabilitySchema, breadcrumbSchema]} />
-      <Capabilities />
+      <Capabilities capabilities={capabilities} />
       <FaqSection faqs={CAPABILITIES_FAQS} />
     </>
   );

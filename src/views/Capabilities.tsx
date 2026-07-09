@@ -8,6 +8,7 @@ import { ArrowRight, Send, Settings, Wrench } from 'lucide-react';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 import SectionBrandMark from '../components/SectionBrandMark';
 import { CAPABILITY_BRIEF_SECTIONS, CAPABILITY_SOLUTION_PROGRAM_DETAILS } from '../lib/capabilities-content';
+import type { CapabilityProfile } from '../lib/capabilities';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -73,7 +74,20 @@ const CAPABILITIES_PAGE_LINKS = [
   { label: 'ARC Engagement Model', anchor: '#bot-model', meta: 'How we work' },
 ];
 
-export default function Capabilities() {
+type CapabilitiesProps = {
+  capabilities?: CapabilityProfile[];
+};
+
+const CARD_ORDER = [
+  'ai-data-analytics',
+  'technology-consulting',
+  'strategy-business',
+  'software-engineering',
+  'cloud-infrastructure',
+  'operations-managed',
+];
+
+export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
   const [activeBOTStep, setActiveBOTStep] = useState(0);
@@ -96,14 +110,14 @@ export default function Capabilities() {
     },
   ];
   const [pillar0, pillar1, pillar2, pillar3, pillar4, pillar5] = CAPABILITY_BRIEF_SECTIONS;
-  const capabilityCards = [
+  const fallbackCapabilityCards = [
     {
       id: 'ai-data-analytics',
       title: 'AI & Data',
       image: CAPABILITY_IMAGES.aiDataAnalytics,
       alt: 'AI and data analytics production intelligence systems',
       summary: pillar2?.summary ?? '',
-      href: '/capabilities/in-detail#pillar-ai-data-analytics',
+      href: '/capabilities/ai-data-analytics',
       variant: 'image' as const,
     },
     {
@@ -112,7 +126,7 @@ export default function Capabilities() {
       image: CAPABILITY_IMAGES.technologyConsulting,
       alt: 'Technology consulting architecture and systems planning',
       summary: pillar1?.summary ?? '',
-      href: '/capabilities/in-detail#pillar-technology-consulting',
+      href: '/capabilities/technology-consulting',
       variant: 'image' as const,
     },
     {
@@ -121,7 +135,7 @@ export default function Capabilities() {
       image: CAPABILITY_IMAGES.strategyBusiness,
       alt: 'Strategy and business consulting operating model design',
       summary: pillar0?.summary ?? '',
-      href: '/capabilities/in-detail#pillar-strategy-business',
+      href: '/capabilities/strategy-business',
       variant: 'text' as const,
     },
     {
@@ -130,7 +144,7 @@ export default function Capabilities() {
       image: CAPABILITY_IMAGES.softwareEngineering,
       alt: 'Software engineering production-grade systems workspace',
       summary: pillar3?.summary ?? '',
-      href: '/capabilities/in-detail#pillar-software-engineering',
+      href: '/capabilities/software-engineering',
       variant: 'image' as const,
     },
     {
@@ -139,7 +153,7 @@ export default function Capabilities() {
       image: CAPABILITY_IMAGES.cloudInfrastructure,
       alt: 'Cloud infrastructure secure systems and observability',
       summary: pillar4?.summary ?? '',
-      href: '/capabilities/in-detail#pillar-cloud-infrastructure',
+      href: '/capabilities/cloud-infrastructure',
       variant: 'image' as const,
     },
     {
@@ -148,10 +162,28 @@ export default function Capabilities() {
       image: CAPABILITY_IMAGES.operationsManaged,
       alt: 'Operations and managed services monitoring workspace',
       summary: pillar5?.summary ?? '',
-      href: '/capabilities/in-detail#pillar-operations-managed',
+      href: '/capabilities/operations-managed',
       variant: 'image' as const,
     },
   ];
+  const fallbackCardById = new Map(fallbackCapabilityCards.map((card) => [card.id, card]));
+  const capabilityBySlug = new Map(capabilities.map((capability) => [capability.slug, capability]));
+  const capabilityCards = CARD_ORDER.map((slug) => {
+    const fallback = fallbackCardById.get(slug);
+    const capability = capabilityBySlug.get(slug);
+
+    if (!capability) return fallback;
+
+    return {
+      id: capability.slug,
+      title: capability.shortTitle || fallback?.title || capability.title,
+      image: capability.heroImage || fallback?.image || CAPABILITY_IMAGES.aiDataAnalytics,
+      alt: capability.heroImageAlt || fallback?.alt || `${capability.title} capability`,
+      summary: capability.briefLine,
+      href: `/capabilities/${capability.slug}`,
+      variant: fallback?.variant ?? ('image' as const),
+    };
+  }).filter((card): card is NonNullable<typeof card> => Boolean(card));
 
   return (
     <div className="relative isolate overflow-x-hidden bg-[#FFFFFF] text-[#1A2535]">

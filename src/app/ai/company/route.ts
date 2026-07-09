@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
-import { CAPABILITY_DOMAINS, CAPABILITY_SOLUTION_PROGRAM_DETAILS } from '../../../lib/capabilities-content';
-import { HVA_LEADERSHIP } from '../../../lib/leadership';
+import { CAPABILITY_SOLUTION_PROGRAM_DETAILS } from '../../../lib/capabilities-content';
 import { getAllPosts } from '../../../lib/blog';
+import { getAllCapabilityProfiles } from '../../../lib/capabilities';
+import { getAllEmployeeProfiles } from '../../../lib/employee-profiles';
 import { getAllNewsArticles, getAllResearchReports } from '../../../lib/insights';
 import { getAllPerspectives } from '../../../lib/perspectives';
 import { getAllCaseStudies } from '../../../lib/proof';
@@ -21,22 +22,7 @@ import {
 
 export const revalidate = 86400;
 
-const LAST_UPDATED = '2026-05-24';
-
-const serviceSummaries: Record<string, string> = {
-  'strategy-business':
-    'Business and digital transformation strategy, operating model design, diagnostics, process redesign, and transformation sequencing.',
-  'technology-consulting':
-    'Enterprise architecture, technology roadmaps, platform strategy, systems integration, IT modernization, and infrastructure design.',
-  'ai-data-analytics':
-    'Production AI agents, generative AI engineering, data pipelines, business intelligence, predictive analytics, and AI operations.',
-  'software-engineering':
-    'Custom software, SaaS platforms, enterprise applications, web and mobile products, APIs, integrations, and DevOps engineering.',
-  'cloud-infrastructure':
-    'Cloud migration, infrastructure automation, security architecture, observability, resilience, and cloud operations.',
-  'operations-managed-services':
-    'Managed operations, application maintenance, automation operations, AI system management, support workflows, and shared services.',
-};
+const LAST_UPDATED = '2026-07-09';
 
 const importantPages = {
   home: absoluteUrl('/'),
@@ -63,14 +49,36 @@ const importantPages = {
 };
 
 export async function GET() {
-  const [caseStudies, posts, newsArticles, perspectives, researchReports] = await Promise.all([
+  const [
+    caseStudies,
+    posts,
+    capabilityProfiles,
+    newsArticles,
+    perspectives,
+    researchReports,
+    employeeProfiles,
+  ] = await Promise.all([
     getAllCaseStudies(),
     getAllPosts(),
+    getAllCapabilityProfiles(),
     getAllNewsArticles(),
     getAllPerspectives(),
     getAllResearchReports(),
+    getAllEmployeeProfiles(),
   ]);
   const aliases = Array.from(new Set([BRAND_ABBREVIATION, BRAND_INITIALISM, ...BRAND_ALIASES, ...BRAND_SEARCH_VARIANTS]));
+  const founderProfiles = employeeProfiles.filter((member) => member.profileType === 'coFounder');
+  const people = employeeProfiles.map((member) => ({
+    name: member.name,
+    slug: member.slug,
+    role: member.position,
+    profileType: member.profileType,
+    responsibility: member.summary,
+    image: absoluteUrl(member.profileImage),
+    profileUrl: absoluteUrl(`/abouthva/people/${member.slug}`),
+    linkedinUrl: member.linkedinUrl,
+    knowsAbout: member.expertise,
+  }));
 
   return NextResponse.json(
     {
@@ -100,22 +108,30 @@ export async function GET() {
         },
         marketsServed: ['Morocco', 'France', 'Europe', 'North Africa', 'MENA', 'Remote delivery worldwide'],
         languages: ['English', 'French', 'Arabic', 'Spanish'],
-        founders: HVA_LEADERSHIP.map((member) => ({
+        founders: founderProfiles.map((member) => ({
           name: member.name,
           slug: member.slug,
-          role: member.role,
-          schemaJobTitle: member.schemaJobTitle,
-          responsibility: member.description,
-          image: absoluteUrl(member.image),
-          profileUrl: `${absoluteUrl('/whoweare/abouthva')}#${member.slug}`,
-          knowsAbout: member.knowsAbout,
+          role: member.position,
+          schemaJobTitle: member.position,
+          profileType: member.profileType,
+          responsibility: member.summary,
+          image: absoluteUrl(member.profileImage),
+          profileUrl: absoluteUrl(`/abouthva/people/${member.slug}`),
+          linkedinUrl: member.linkedinUrl,
+          knowsAbout: member.expertise,
         })),
-        services: CAPABILITY_DOMAINS.map((domain) => ({
-          id: domain.id,
-          name: domain.title,
-          summary: serviceSummaries[domain.id] ?? domain.strategicContext,
-          capabilities: domain.subCapabilities,
-          relatedOutcomes: domain.relatedOutcomes,
+        people,
+        services: capabilityProfiles.map((capability) => ({
+          id: capability.slug,
+          name: capability.title,
+          shortName: capability.shortTitle,
+          summary: capability.briefLine,
+          strategicContext: capability.strategicContext,
+          executionContext: capability.executionContext,
+          capabilities: capability.subCapabilities,
+          relatedOutcomes: capability.relatedOutcomes,
+          url: absoluteUrl(`/capabilities/${capability.slug}`),
+          image: absoluteUrl(capability.heroImage),
         })),
         solutionPrograms: CAPABILITY_SOLUTION_PROGRAM_DETAILS.map((program) => ({
           slug: program.slug,

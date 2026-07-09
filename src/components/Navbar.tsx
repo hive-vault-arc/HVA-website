@@ -72,7 +72,10 @@ const Navbar: React.FC = () => {
     pathname?.startsWith('/insights') || pathname?.startsWith('/blog') || pathname?.startsWith('/case-studies');
   const isCapabilitiesActive = pathname?.startsWith('/capabilities');
   const isIndustriesActive = pathname?.startsWith('/industries');
-  const isWhoWeAreActive = pathname?.startsWith('/whoweare') || pathname?.startsWith('/whoarewe');
+  const isWhoWeAreActive =
+    pathname?.startsWith('/whoweare') ||
+    pathname?.startsWith('/whoarewe') ||
+    pathname?.startsWith('/abouthva');
 
   const desktopLinkClass = (isActive: boolean) =>
     `px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200 ${

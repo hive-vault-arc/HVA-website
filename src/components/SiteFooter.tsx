@@ -35,12 +35,12 @@ const pageLinks = [
 ];
 
 const expertiseLinks = [
-  { href: '/capabilities#strategy-business', label: 'Strategy & Business Consulting' },
-  { href: '/capabilities#technology-consulting', label: 'Technology Consulting' },
-  { href: '/capabilities#ai-data-analytics', label: 'AI, Data & Analytics' },
-  { href: '/capabilities#software-engineering', label: 'Software Engineering' },
-  { href: '/capabilities#cloud-infrastructure', label: 'Cloud & Infrastructure' },
-  { href: '/capabilities#operations-managed', label: 'Operations & Managed Services' },
+  { href: '/capabilities/strategy-business', label: 'Strategy & Business Consulting' },
+  { href: '/capabilities/technology-consulting', label: 'Technology Consulting' },
+  { href: '/capabilities/ai-data-analytics', label: 'AI, Data & Analytics' },
+  { href: '/capabilities/software-engineering', label: 'Software Engineering' },
+  { href: '/capabilities/cloud-infrastructure', label: 'Cloud & Infrastructure' },
+  { href: '/capabilities/operations-managed', label: 'Operations & Managed Services' },
   { href: '/capabilities/solution-programs', label: 'Solution Programs' },
 ];
 

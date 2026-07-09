@@ -110,12 +110,12 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   const leadershipPeople = HVA_LEADERSHIP.map((member) => ({
     '@type': 'Person',
-    '@id': absoluteUrl(`/whoweare/abouthva#${member.slug}`),
+    '@id': absoluteUrl(`/abouthva/people/${member.slug}#person`),
     name: member.name,
     jobTitle: member.schemaJobTitle,
     description: member.description,
     image: absoluteUrl(member.image),
-    url: absoluteUrl(`/whoweare/abouthva#${member.slug}`),
+    url: absoluteUrl(`/abouthva/people/${member.slug}`),
     worksFor: {
       '@id': absoluteUrl('/#organization'),
       name: 'Hive Vault Arc',
@@ -283,6 +283,38 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         {/* Warm up third-party connections used for 3D assets */}
         <link rel="preconnect" href="https://prod.spline.design" />
         <link rel="dns-prefetch" href="https://prod.spline.design" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(() => {
+  const employeeHashes = new Set(['khalid-chalhi', 'ali-amrani', 'oubay-ghamat']);
+  function revealEmployeeHashTarget() {
+    const id = window.location.hash.slice(1);
+    if (!employeeHashes.has(id)) return false;
+    const target = document.getElementById(id);
+    if (!target) return false;
+    const rect = target.getBoundingClientRect();
+    const currentScroll = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    const top = Math.max(0, rect.top + currentScroll - Math.max(96, (window.innerHeight - rect.height) / 2));
+    window.scrollTo(0, top);
+    document.documentElement.scrollTop = top;
+    document.body.scrollTop = top;
+    return true;
+  }
+  function scheduleEmployeeHashReveal() {
+    revealEmployeeHashTarget();
+    requestAnimationFrame(revealEmployeeHashTarget);
+    requestAnimationFrame(() => requestAnimationFrame(revealEmployeeHashTarget));
+    [80, 180, 360, 700, 1200].forEach((delay) => {
+      window.setTimeout(revealEmployeeHashTarget, delay);
+    });
+  }
+  scheduleEmployeeHashReveal();
+  window.addEventListener('pagereveal', scheduleEmployeeHashReveal, { capture: true });
+  window.addEventListener('pageshow', scheduleEmployeeHashReveal, { capture: true });
+  window.addEventListener('DOMContentLoaded', scheduleEmployeeHashReveal, { capture: true });
+})();`,
+          }}
+        />
       </head>
       <body>
         <JsonLd data={organizationSchema} />
