@@ -90,7 +90,7 @@ export default function Page() {
     url: `${SITE_URL}/capabilities`,
     subjectOf: [
       `${SITE_URL}/case-studies/multilingual-whatsapp-ai-agent`,
-      `${SITE_URL}/case-studies/zoho-grade-crm-platform`,
+      `${SITE_URL}/case-studies/top-tier-crm-transformation-program-real-estate-operations`,
       `${SITE_URL}/capabilities/solution-programs`,
       `${SITE_URL}/capabilities/in-detail`,
     ],

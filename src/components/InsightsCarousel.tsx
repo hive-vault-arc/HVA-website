@@ -116,7 +116,7 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
       <div className="text-center pt-10 pb-8 px-6">
         <div className="inline-flex items-center gap-3 mb-4">
           <span className="block h-px w-8 bg-[#E8A838]/35" />
-          <span className="text-[9px] font-bold uppercase tracking-[0.32em] text-[#E8A838]">Welcome to Hive Vault Arc</span>
+          <span className="text-[9px] font-bold uppercase tracking-[0.32em] text-[var(--section-label-color)]">Welcome to Hive Vault Arc</span>
           <span className="block h-px w-8 bg-[#E8A838]/35" />
         </div>
         <h2 className="font-headline text-[clamp(2rem,11vw,2.6rem)] md:text-5xl leading-[1.06] tracking-tight text-[#1A2535]">

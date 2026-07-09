@@ -98,7 +98,7 @@ const Portfolio: React.FC = () => {
             >
               <div className="mb-6 flex items-center gap-3">
                 <SectionBrandMark size="sm" />
-                <span className="inline-block bg-[#E8A838]/10 px-4 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#E8A838]">
+                <span className="inline-block bg-[#E8A838]/10 px-4 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--section-label-color)]">
                   Transformation Portfolio
                 </span>
               </div>
@@ -261,12 +261,12 @@ const Portfolio: React.FC = () => {
                   </div>
                 </div>
                 <div className="border-l-4 border-[#E8A838] bg-[#FFFFFF] px-4 py-3">
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-[#1A2535]">Program status: Live in production</p>
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--section-label-color)]">Program status: Live in production</p>
                   <p className="text-[9px] text-[#9AA4B2] mt-0.5">Full-stack CRM · BI reporting layer · real-time lead sync</p>
                 </div>
                 <div className="pt-3">
                   <Link
-                    href="/case-studies/zoho-grade-crm-platform"
+                    href="/case-studies/top-tier-crm-transformation-program-real-estate-operations"
                     className="inline-flex min-h-11 items-center gap-2 border-b-2 border-[#E8A838] pb-1 font-bold text-[#E8A838] transition-all hover:border-[#C8891C] hover:text-[#C8891C] group"
                   >
                     Read Case Study
@@ -318,7 +318,7 @@ const Portfolio: React.FC = () => {
               </h2>
               <div className="mt-10 flex items-center justify-center gap-3">
                 <SectionBrandMark size="sm" />
-                <p className="text-xs uppercase tracking-[0.2em] text-[#1A2535]/58">Delivery Signature</p>
+                <p className="text-xs uppercase tracking-[0.2em] text-[var(--section-label-color)]">Delivery Signature</p>
               </div>
               <h3 className="mt-3 font-serif text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold leading-[1.02] text-[#1A2535]">Power. Speed. Control.</h3>
               <p className="mx-auto mt-3 max-w-4xl text-base leading-relaxed text-[#1A2535]/72 md:text-[1.55rem]">

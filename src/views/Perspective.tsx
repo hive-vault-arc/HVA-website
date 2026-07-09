@@ -52,7 +52,7 @@ function RenderSection({ section, index }: { section: PerspectiveSection; index:
           </blockquote>
           {section.attribution && (
             <cite
-              className="text-xs font-bold tracking-widest uppercase not-italic text-[#536070]"
+              className="text-xs font-bold tracking-widest uppercase not-italic text-[var(--section-label-color)]"
               style={{ fontFamily: 'var(--font-body)' }}
             >
               - {section.attribution}
@@ -112,7 +112,7 @@ function PerspectiveSidebar({ perspective }: { perspective: Perspective }) {
           { href: '/capabilities', label: 'Capabilities' },
           { href: '/whoweare/abouthva', label: 'About Hive Vault Arc' },
           { href: '/case-studies', label: 'Case studies' },
-          { href: '/case-studies/zoho-grade-crm-platform', label: 'CRM transformation proof' },
+          { href: '/case-studies/top-tier-crm-transformation-program-real-estate-operations', label: 'CRM transformation proof' },
           { href: '/contact', label: 'Start a discovery call' },
         ]
       : [
@@ -128,7 +128,7 @@ function PerspectiveSidebar({ perspective }: { perspective: Perspective }) {
       {perspective.sources.length > 0 && (
         <div>
           <h4
-            className="text-xs font-bold uppercase tracking-widest text-[#6B7280] mb-4"
+            className="text-xs font-bold uppercase tracking-widest text-[var(--section-label-color)] mb-4"
             style={{ fontFamily: 'var(--font-body)' }}
           >
             Sources
@@ -154,7 +154,7 @@ function PerspectiveSidebar({ perspective }: { perspective: Perspective }) {
 
       <div>
         <h4
-          className="text-xs font-bold uppercase tracking-widest text-[#6B7280] mb-4"
+          className="text-xs font-bold uppercase tracking-widest text-[var(--section-label-color)] mb-4"
           style={{ fontFamily: 'var(--font-body)' }}
         >
           Related H.V.A Resources
@@ -177,7 +177,7 @@ function PerspectiveSidebar({ perspective }: { perspective: Perspective }) {
 
       <div>
         <h4
-          className="text-xs font-bold uppercase tracking-widest text-[#6B7280] mb-4"
+          className="text-xs font-bold uppercase tracking-widest text-[var(--section-label-color)] mb-4"
           style={{ fontFamily: 'var(--font-body)' }}
         >
           Topics

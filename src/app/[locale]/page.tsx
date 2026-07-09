@@ -182,7 +182,7 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       dir={isRtl ? 'rtl' : 'ltr'}
     >
       <JsonLd data={schema} />
-      <p className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-[#E8A838]">{locale.toUpperCase()}</p>
+      <p className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-[var(--section-label-color)]">{locale.toUpperCase()}</p>
       <h1 className="mb-6 font-serif text-4xl leading-tight text-[#1A2535] md:text-6xl">{content.h1}</h1>
       <p className="max-w-3xl text-lg leading-relaxed text-[#3D4858]">{identity.shortDescriptor}</p>
       <p className="mt-4 max-w-3xl text-lg leading-relaxed text-[#3D4858]">{content.body}</p>

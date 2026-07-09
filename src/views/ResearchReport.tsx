@@ -53,7 +53,7 @@ function RenderSection({ section, index }: { section: ContentSection; index: num
           </blockquote>
           {section.attribution && (
             <cite
-              className="text-xs font-bold tracking-widest uppercase not-italic text-[#536070]"
+              className="text-xs font-bold tracking-widest uppercase not-italic text-[var(--section-label-color)]"
               style={{ fontFamily: 'var(--font-body)' }}
             >
               - {section.attribution}
@@ -79,7 +79,7 @@ function RenderSection({ section, index }: { section: ContentSection; index: num
                 {stat.label}
               </p>
               <p
-                className="text-[10px] font-bold tracking-widest uppercase text-[#6B7280]"
+                className="text-[10px] font-bold tracking-widest uppercase text-[var(--section-label-color)]"
                 style={{ fontFamily: 'var(--font-body)' }}
               >
                 {stat.source}
@@ -138,7 +138,7 @@ function ResearchReportSidebar({ report }: { report: ResearchReport }) {
       {report.sources.length > 0 && (
         <div>
           <h4
-            className="text-xs font-bold uppercase tracking-widest text-[#6B7280] mb-4"
+            className="text-xs font-bold uppercase tracking-widest text-[var(--section-label-color)] mb-4"
             style={{ fontFamily: 'var(--font-body)' }}
           >
             Sources
@@ -165,7 +165,7 @@ function ResearchReportSidebar({ report }: { report: ResearchReport }) {
       {report.keywords.length > 0 && (
         <div>
           <h4
-            className="text-xs font-bold uppercase tracking-widest text-[#6B7280] mb-4"
+            className="text-xs font-bold uppercase tracking-widest text-[var(--section-label-color)] mb-4"
             style={{ fontFamily: 'var(--font-body)' }}
           >
             Topics

@@ -92,8 +92,8 @@ export const CASE_STUDIES: CaseStudy[] = [
     lastUpdated: '2026-03-27',
   },
   {
-    slug: 'zoho-grade-crm-platform',
-    title: 'Zoho-Grade CRM Transformation Program for Real Estate Operations',
+    slug: 'top-tier-crm-transformation-program-real-estate-operations',
+    title: 'TOP TIER CRM Transformation Program for Real Estate Operations',
     clientName: 'Capstone Living Morocco',
     industry: 'Real Estate',
     summary:
@@ -154,7 +154,7 @@ export const PRODUCT_SYSTEMS: ProductSystem[] = [
     integrations: ['Meta Ads', 'DocuSign', 'Email automation suites', 'BI connectors'],
     deliveryModel: 'Domain mapping, phased migration, production rollout, and managed improvement.',
     outcomes: ['Unified data ownership', 'Reduced manual processing', 'Faster sales operations'],
-    proofLinks: ['/case-studies/zoho-grade-crm-platform'],
+    proofLinks: ['/case-studies/top-tier-crm-transformation-program-real-estate-operations'],
   },
   {
     name: 'Cloud Delivery Reliability Stack',

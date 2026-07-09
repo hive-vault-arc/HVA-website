@@ -144,7 +144,7 @@ Managed operations, application maintenance, automation operations, AI system ma
 - Integrations: Meta Ads, DocuSign, email automation suites, BI connectors
 - Delivery model: domain mapping, phased migration, production rollout, managed improvement
 - Outcomes: unified data ownership, reduced manual processing, faster sales operations
-- Proof: https://hivevaultarc.com/case-studies/zoho-grade-crm-platform
+- Proof: https://hivevaultarc.com/case-studies/top-tier-crm-transformation-program-real-estate-operations
 
 ### Cloud Delivery Reliability Stack
 
@@ -189,9 +189,9 @@ Measured outcomes:
 - Manual triage reduction: 85%
 - Qualified meetings booked: +43%
 
-### Zoho-Grade CRM Transformation Program
+### TOP TIER CRM Transformation Program
 
-- URL: https://hivevaultarc.com/case-studies/zoho-grade-crm-platform
+- URL: https://hivevaultarc.com/case-studies/top-tier-crm-transformation-program-real-estate-operations
 - Client: Capstone Living Morocco
 - Industry: Real Estate
 - Status: Live in production since May 2025

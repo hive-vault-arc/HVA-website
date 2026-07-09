@@ -186,7 +186,7 @@ export default function ArticleDetailPage({
             style={{ fontFamily: 'var(--font-body)' }}
           >
             <SectionBrandMark size="sm" className="mr-1" />
-            <span style={{ color: '#E8A838' }}>{eyebrow}</span>
+            <span style={{ color: 'var(--section-label-color)' }}>{eyebrow}</span>
             {isoDate && (
               <>
                 <span className="w-1 h-1 rounded-full bg-[#CDD2DA]" />
@@ -352,7 +352,7 @@ export default function ArticleDetailPage({
             <div className="mb-12 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <p
-                  className="text-xs font-bold uppercase tracking-widest text-[#6B7280] mb-3"
+                  className="text-xs font-bold uppercase tracking-widest text-[var(--section-label-color)] mb-3"
                   style={{ fontFamily: 'var(--font-body)' }}
                 >
                   Continue Reading

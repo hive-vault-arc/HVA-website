@@ -79,7 +79,7 @@ export default function CapabilitiesInDetailPage() {
     subjectOf: [
       `${SITE_URL}/capabilities/solution-programs`,
       `${SITE_URL}/case-studies/multilingual-whatsapp-ai-agent`,
-      `${SITE_URL}/case-studies/zoho-grade-crm-platform`,
+      `${SITE_URL}/case-studies/top-tier-crm-transformation-program-real-estate-operations`,
     ],
   };
 

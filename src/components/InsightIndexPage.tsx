@@ -107,7 +107,7 @@ function EmptyState({ message, backHref }: { message: string; backHref?: string 
             <div className="w-2 h-2 bg-[#E8A838] rounded-full" />
           </div>
         </div>
-        <p className="text-[10px] font-bold tracking-[0.28em] uppercase text-[#E8A838] mb-5" style={{ fontFamily: 'var(--font-body)' }}>
+        <p className="text-[10px] font-bold tracking-[0.28em] uppercase text-[var(--section-label-color)] mb-5" style={{ fontFamily: 'var(--font-body)' }}>
           Coming Soon
         </p>
         <h2 className="text-3xl md:text-4xl font-light text-[#1A2535] leading-tight mb-5 max-w-lg" style={{ fontFamily: 'var(--font-headline)' }}>
@@ -179,7 +179,7 @@ export default function InsightIndexPage({
             <div className="mb-6 flex items-center gap-3">
               <SectionBrandMark size="sm" />
               <span
-                className="block text-xs font-bold tracking-[0.2em] uppercase text-[#E8A838]"
+                className="block text-xs font-bold tracking-[0.2em] uppercase text-[var(--section-label-color)]"
                 style={{ fontFamily: 'var(--font-body)' }}
               >
                 {eyebrow}

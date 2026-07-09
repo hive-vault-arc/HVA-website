@@ -251,7 +251,7 @@ export default function CustomSoftwareMoroccoPage() {
               <Link href="/contact" className="editorial-cta sharp-edge">
                 Book Discovery Call
               </Link>
-              <Link href="/case-studies/zoho-grade-crm-platform" className="editorial-link">
+              <Link href="/case-studies/top-tier-crm-transformation-program-real-estate-operations" className="editorial-link">
                 Review CRM Case Study →
               </Link>
               <Link href="/digital-services-tangier" className="editorial-link">

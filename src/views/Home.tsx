@@ -451,8 +451,12 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
             </div>
 
             <div className="home-pathfinder-secondary" aria-label="More direct pages">
-              <span className="home-pathfinder-secondary-label">Direct routes</span>
+              <div className="home-pathfinder-secondary-intro">
+                <span>Direct routes</span>
+                <strong>Jump to a specific page.</strong>
+              </div>
               {HOME_NAV_SECONDARY_LINKS.map((item, index) => {
+              const Icon = item.icon;
               return (
                 <Link
                   key={item.href}
@@ -460,10 +464,14 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
                   className="home-pathfinder-card home-pathfinder-card--secondary"
                   style={{ '--pathfinder-index': index + HOME_NAV_PRIMARY_LINKS.length } as React.CSSProperties}
                 >
+                  <span className="home-pathfinder-secondary-icon" aria-hidden="true">
+                    <Icon className="h-4 w-4" strokeWidth={1.55} />
+                  </span>
                   <span className="home-pathfinder-secondary-copy">
                     <strong>{item.title}</strong>
                     <em>{item.description}</em>
                   </span>
+                  <ArrowRight className="home-pathfinder-secondary-arrow h-4 w-4" strokeWidth={1.55} aria-hidden="true" />
                 </Link>
               );
               })}
@@ -517,7 +525,7 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
           <div className="relative z-10">
             <div className="mb-10 flex items-center gap-3">
               <SectionBrandMark surface="dark" size="sm" />
-              <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#E8A838]">Our Identity</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[var(--section-label-color)]">Our Identity</p>
             </div>
             <h2 className="mb-7 font-headline text-[clamp(3rem,13vw,4rem)] leading-[1.04] text-white md:text-6xl md:leading-[1.08]">
               Advise. Build.<br />
@@ -559,7 +567,7 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
                 </div>
               </div>
               <div className="border-l-2 border-[#E8A838] p-5">
-                <p className="mb-2 text-[0.58rem] font-bold uppercase tracking-[0.18em] text-[#E8A838]">
+                <p className="mb-2 text-[0.58rem] font-bold uppercase tracking-[0.18em] text-[var(--section-label-color)]">
                   Pillar
                 </p>
                 <h3 className="font-headline text-xl leading-tight text-[#1A2535]">{pillar.title}</h3>
@@ -778,7 +786,7 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
 
           <div className="home-arc-loop-phases">
             {arcPhases.map((phase) => (
-              <article key={phase.phase} className="home-arc-loop-phase">
+              <article key={phase.phase} className="home-arc-loop-phase" data-phase={phase.phase}>
                 <div className="home-arc-loop-phase-head">
                   <span>{phase.phase}</span>
                   <em>{phase.discipline}</em>

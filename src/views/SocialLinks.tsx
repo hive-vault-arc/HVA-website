@@ -71,7 +71,7 @@ export default function SocialLinks() {
     <main className="bg-[#FFFFFF] text-[#1A2535]">
       <div className="mx-auto max-w-lg px-6 pb-16 pt-28 lg:pt-32">
         <header className="mb-10 text-center">
-          <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.28em] text-[#E8A838]">
+          <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.28em] text-[var(--section-label-color)]">
             H . V . A
           </p>
           <h1 className="font-headline text-4xl font-medium leading-tight tracking-tight text-[#1A2535]">

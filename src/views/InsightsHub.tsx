@@ -163,7 +163,7 @@ function LatestSection({ items }: LatestProps) {
       <div className="mx-auto max-w-7xl px-6 lg:px-14">
         <div className="mb-10 flex items-center gap-3">
           <SectionBrandMark size="sm" />
-          <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#E8A838]">
+          <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)]">
             Latest
           </p>
         </div>
@@ -196,7 +196,7 @@ function LatestSection({ items }: LatestProps) {
               <div className="relative z-10 flex flex-col justify-end h-full p-8 md:p-10" style={{ minHeight: 480 }}>
                 <div className="mb-auto pt-6 flex items-center gap-2">
                   <span className="h-[1px] w-6 bg-[#E8A838]" />
-                  <p className="text-[9px] font-bold uppercase tracking-[0.24em] text-[#F0C15A]">
+                  <p className="text-[9px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color-dark)]">
                     Latest {latestPrimary.typeLabel} · {latestPrimary.tag}
                   </p>
                 </div>
@@ -262,7 +262,7 @@ function LatestSection({ items }: LatestProps) {
 
               {/* Bottom text panel */}
               <div className="flex flex-col flex-1 bg-white border border-[#DDE3EA] border-t-0 p-8">
-                <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.24em] text-[#E8A838]">
+                <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)]">
                   Latest {latestSecondary.typeLabel}
                 </p>
                 <h3 className="font-headline text-2xl font-medium leading-snug text-[#1A2535]">
@@ -492,7 +492,7 @@ function AllInsightsGrid({ items }: { readonly items: InsightGridItem[] }) {
           <div>
             <div className="mb-2 flex items-center gap-3">
               <SectionBrandMark size="sm" />
-              <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#E8A838]">
+              <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)]">
                 All Insights
               </p>
             </div>
@@ -571,7 +571,7 @@ export default function InsightsHub({
           >
             <div className="mb-5 flex items-center gap-3">
               <SectionBrandMark size="sm" />
-              <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#E8A838]">
+              <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)]">
                 Insights
               </p>
             </div>
@@ -676,7 +676,7 @@ export default function InsightsHub({
         <div className="mx-auto max-w-7xl px-6 lg:px-14">
           <div className="mb-8 flex items-center gap-3">
             <SectionBrandMark size="sm" />
-            <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#E8A838]">
+            <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)]">
               Insight Types
             </p>
           </div>

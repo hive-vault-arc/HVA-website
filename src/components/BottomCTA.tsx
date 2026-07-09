@@ -120,7 +120,7 @@ export default function BottomCTA({
             <div>
               <div className="mb-5 flex items-center gap-3">
                 <SectionBrandMark surface="dark" size="sm" />
-                <p className="text-[#E8A838] text-[10px] font-bold tracking-[0.22em] uppercase">
+                <p className="text-[var(--section-label-color-dark)] text-[10px] font-bold tracking-[0.22em] uppercase">
                   Next Step
                 </p>
               </div>

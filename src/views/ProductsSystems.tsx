@@ -38,7 +38,7 @@ const ProductsSystems: React.FC = () => {
           >
             <div className="mb-6 flex items-center gap-3">
               <SectionBrandMark size="sm" />
-              <span className="inline-block text-[10px] font-bold uppercase tracking-[0.22em] text-[#E8A838]">
+              <span className="inline-block text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--section-label-color)]">
                 Consulting-Led System Programs
               </span>
             </div>
@@ -103,7 +103,7 @@ const ProductsSystems: React.FC = () => {
             >
               <div className="mb-6 flex items-center gap-3">
                 <SectionBrandMark surface="dark" size="sm" />
-                <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#E8A838]">
+                <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[var(--section-label-color-dark)]">
                   Why modular systems
                 </p>
               </div>

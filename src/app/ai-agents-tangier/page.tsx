@@ -86,7 +86,7 @@ export default function AIAgentsTangierPage() {
         {/* ── Hero ── */}
         <section className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-10 px-6 pt-28 pb-20 md:pt-36 md:pb-28 lg:grid-cols-12 lg:gap-12 lg:px-14">
           <div className="lg:col-span-7 z-10">
-            <span className="inline-block px-3 py-1 bg-[#E8EBF0] text-[#E8A838] font-body text-[10px] tracking-[0.2em] uppercase font-bold mb-6">
+            <span className="inline-block px-3 py-1 bg-[#E8EBF0] text-[var(--section-label-color)] font-body text-[10px] tracking-[0.2em] uppercase font-bold mb-6">
               Local Enterprise Innovation
             </span>
             <h1 className="mb-8 font-headline text-[clamp(2.8rem,13vw,3.8rem)] leading-[0.98] tracking-tight text-[#1A2535] md:text-[5.5rem] md:leading-[0.95]">
@@ -186,7 +186,7 @@ export default function AIAgentsTangierPage() {
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 mt-4 border-t border-[#DDE3EA] pt-10">
                 <div>
-                  <h4 className="font-body text-xs tracking-widest uppercase font-bold mb-4 text-[#E8A838]">
+                  <h4 className="font-body text-xs tracking-widest uppercase font-bold mb-4 text-[var(--section-label-color)]">
                     01. Autonomous Execution
                   </h4>
                   <p className="text-[#566274] font-body text-sm leading-relaxed">
@@ -195,7 +195,7 @@ export default function AIAgentsTangierPage() {
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-body text-xs tracking-widest uppercase font-bold mb-4 text-[#E8A838]">
+                  <h4 className="font-body text-xs tracking-widest uppercase font-bold mb-4 text-[var(--section-label-color)]">
                     02. Tool Integration
                   </h4>
                   <p className="text-[#566274] font-body text-sm leading-relaxed">
@@ -345,7 +345,7 @@ export default function AIAgentsTangierPage() {
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col lg:flex-row gap-16 items-start">
               <div className="lg:w-2/5">
-                <span className="font-body text-[10px] tracking-[0.22em] uppercase font-bold text-[#E8A838] mb-4 block">
+                <span className="font-body text-[10px] tracking-[0.22em] uppercase font-bold text-[var(--section-label-color)] mb-4 block">
                   Before You Deploy
                 </span>
                 <h2 className="font-headline text-4xl leading-tight text-[#1A2535] mb-6">
@@ -392,7 +392,7 @@ export default function AIAgentsTangierPage() {
           <div className="pointer-events-none absolute -right-24 -top-20 h-64 w-64 rounded-full bg-[#E8A838]/20 blur-3xl" />
           <div className="pointer-events-none absolute -bottom-20 left-[8%] h-56 w-56 rounded-full bg-[#F0C15A]/15 blur-3xl" />
           <div className="relative z-10 max-w-3xl mx-auto">
-            <p className="font-body text-[10px] tracking-[0.22em] uppercase font-bold text-[#E8A838] mb-6">Next Step</p>
+            <p className="font-body text-[10px] tracking-[0.22em] uppercase font-bold text-[var(--section-label-color-dark)] mb-6">Next Step</p>
             <h2 className="mb-8 font-headline text-[clamp(2.6rem,12vw,3.5rem)] leading-[0.98] md:text-[5rem] md:leading-[0.95]">
               Ready to{' '}
               <em className="italic text-white/60">Launch?</em>

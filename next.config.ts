@@ -100,6 +100,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: '/case-studies/zoho-grade-crm-platform',
+        destination: '/case-studies/top-tier-crm-transformation-program-real-estate-operations',
+        permanent: true,
+      },
+      {
         source: '/services',
         destination: '/capabilities',
         permanent: true,

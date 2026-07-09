@@ -62,7 +62,7 @@ const industryCards = [
     description: 'CRM, lead qualification, and AI-assisted client communication for property teams.',
     image: IMGS.realEstate,
     imageAlt: 'Real estate CRM lead operations Morocco',
-    href: '/case-studies/zoho-grade-crm-platform',
+    href: '/case-studies/top-tier-crm-transformation-program-real-estate-operations',
     bullets: ['Lead operations & CRM', 'AI client communication', 'Pipeline governance'],
     className: 'md:col-span-7 lg:col-span-7',
     layout: 'split',
@@ -293,7 +293,7 @@ export default function Industries() {
             <div className="md:col-span-7">
               <div className="mb-3 flex items-center gap-3">
                 <SectionBrandMark size="sm" />
-                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#E8A838]">
+                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)]">
                   Sector Coverage
                 </p>
               </div>
@@ -332,7 +332,7 @@ export default function Industries() {
               >
                 <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(232,168,56,0.10)_1px,transparent_1px),linear-gradient(0deg,rgba(232,168,56,0.10)_1px,transparent_1px)] bg-[size:18px_18px]" />
                 <div className="absolute left-0 top-0 h-full w-1.5 bg-[#E8A838]" />
-                <span className="absolute left-7 top-5 text-[10px] font-bold uppercase tracking-[0.24em] text-[#E8A838]">
+                <span className="absolute left-7 top-5 text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)]">
                   R&amp;D
                 </span>
                 <span className="absolute left-7 top-12 block h-px w-20 bg-[#E8A838]/35" />
@@ -353,7 +353,7 @@ export default function Industries() {
           <div className="lg:w-1/2">
             <div className="mb-3 flex items-center gap-3">
               <SectionBrandMark size="sm" />
-              <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#E8A838]">
+              <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-[var(--section-label-color)]">
                 Laboratory_Active
               </p>
             </div>
@@ -368,7 +368,7 @@ export default function Industries() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               {(['Methodology', 'Compliance'] as const).map((group) => (
                 <div key={group}>
-                  <h4 className="text-[11px] font-bold uppercase tracking-widest mb-4 text-[#E8A838]">
+                  <h4 className="text-[11px] font-bold uppercase tracking-widest mb-4 text-[var(--section-label-color)]">
                     {group}
                   </h4>
                   <ul className="space-y-5">

@@ -101,7 +101,7 @@ export default function CapabilitiesSolutionPrograms() {
             <motion.div variants={fadeUp} transition={{ duration: 0.6 }} className="lg:col-span-8">
               <div className="mb-8 flex items-center gap-3">
                 <SectionBrandMark size="sm" />
-                <span className="inline-block bg-[#FFF4D8] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.24em] text-[#E8A838]">
+                <span className="inline-block bg-[#FFF4D8] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)]">
                   Capabilities / Solution Programs
                 </span>
               </div>
@@ -136,7 +136,7 @@ export default function CapabilitiesSolutionPrograms() {
             >
               <div className="relative overflow-hidden bg-[#1A2535] p-6">
                 <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.05]" style={blueprintGrid} />
-                <p className="relative text-[9px] font-mono uppercase tracking-[0.3em] text-[#F0C15A] mb-4">
+                <p className="relative text-[9px] font-mono uppercase tracking-[0.3em] text-[var(--section-label-color-dark)] mb-4">
                   Program Index
                 </p>
                 <nav className="relative">
@@ -212,7 +212,7 @@ export default function CapabilitiesSolutionPrograms() {
               <motion.div variants={fadeUp} transition={{ duration: 0.5 }} className="mb-8 flex items-center gap-4">
                 <SectionBrandMark size="sm" />
                 <span className="h-px w-10 bg-[#1A2535]" />
-                <span className="text-[10px] font-bold tracking-[0.28em] uppercase text-[#1A2535]">Program 01</span>
+                <span className="text-[10px] font-bold tracking-[0.28em] uppercase text-[var(--section-label-color)]">Program 01</span>
               </motion.div>
               <motion.h2 variants={fadeUp} transition={{ duration: 0.5 }} className="font-headline text-4xl md:text-5xl text-[#1A2535] mb-6 leading-tight">
                 {p1?.name}
@@ -223,7 +223,7 @@ export default function CapabilitiesSolutionPrograms() {
 
               <motion.div variants={fadeUp} transition={{ duration: 0.5 }} className="mb-10 grid grid-cols-1 gap-8 sm:grid-cols-2">
                 <div>
-                  <h4 className="text-[9px] font-bold uppercase tracking-[0.24em] text-[#536070] mb-4">Core Modules</h4>
+                  <h4 className="text-[9px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)] mb-4">Core Modules</h4>
                   <ul className="space-y-2">
                     {p1?.modules.map((mod) => (
                       <li key={mod} className="flex items-start gap-2 text-sm text-[#1A2535] font-medium">
@@ -234,10 +234,10 @@ export default function CapabilitiesSolutionPrograms() {
                   </ul>
                 </div>
                 <div>
-                  <h4 className="text-[9px] font-bold uppercase tracking-[0.24em] text-[#536070] mb-4">Primary Stack</h4>
+                  <h4 className="text-[9px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)] mb-4">Primary Stack</h4>
                   <p className="text-sm text-[#1A2535] font-medium leading-relaxed">{p1?.integrations.join(', ')}</p>
                   <div className="mt-5 pt-5 border-t border-[#CDD2DA]/40">
-                    <h4 className="text-[9px] font-bold uppercase tracking-[0.24em] text-[#536070] mb-2">Delivery</h4>
+                    <h4 className="text-[9px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)] mb-2">Delivery</h4>
                     <p className="text-xs text-[#536070] leading-relaxed">{p1?.deliveryModel}</p>
                   </div>
                 </div>
@@ -337,7 +337,7 @@ export default function CapabilitiesSolutionPrograms() {
           >
             <div className="mb-4 flex items-center gap-3">
               <SectionBrandMark surface="dark" size="sm" />
-              <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#F0C15A]">Why a Program</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[var(--section-label-color-dark)]">Why a Program</p>
             </div>
             <h2 className="font-headline text-5xl md:text-6xl text-white leading-tight mb-6">
               A Program,<br />
@@ -403,7 +403,7 @@ export default function CapabilitiesSolutionPrograms() {
                 <motion.div variants={fadeUp} transition={{ duration: 0.5 }} className="mb-8 flex items-center gap-4">
                   <SectionBrandMark size="sm" />
                   <span className="h-px w-10 bg-[#1A2535]" />
-                  <span className="text-[10px] font-bold tracking-[0.28em] uppercase text-[#1A2535]">Program 02</span>
+                  <span className="text-[10px] font-bold tracking-[0.28em] uppercase text-[var(--section-label-color)]">Program 02</span>
                 </motion.div>
                 <motion.h2 variants={fadeUp} transition={{ duration: 0.5 }} className="font-headline text-4xl md:text-5xl text-[#1A2535] mb-6 leading-tight">
                   {p2?.name}
@@ -412,7 +412,7 @@ export default function CapabilitiesSolutionPrograms() {
                   {p2?.summary}
                 </motion.p>
                 <motion.div variants={fadeUp} transition={{ duration: 0.5 }}>
-                  <h4 className="text-[9px] font-bold uppercase tracking-[0.24em] text-[#536070] mb-2">Delivery Model</h4>
+                  <h4 className="text-[9px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)] mb-2">Delivery Model</h4>
                   <p className="text-sm text-[#536070] leading-relaxed mb-3">{p2?.deliveryModel}</p>
                   {/* Stack tags */}
                   <div className="flex flex-wrap gap-1.5 mb-8">
@@ -439,7 +439,7 @@ export default function CapabilitiesSolutionPrograms() {
                   ].map((s) => (
                     <div key={s.l}>
                       <p className="font-headline text-2xl text-[#E8A838] leading-none mb-1">{s.v}</p>
-                      <p className="text-[9px] uppercase tracking-[0.14em] text-[#536070] leading-tight">{s.l}</p>
+                      <p className="text-[9px] uppercase tracking-[0.14em] text-[var(--section-label-color)] leading-tight">{s.l}</p>
                     </div>
                   ))}
                 </motion.div>
@@ -484,7 +484,7 @@ export default function CapabilitiesSolutionPrograms() {
                       <p className="text-[#536070] text-sm leading-relaxed">{card.desc}</p>
                     </div>
                     <div className="pt-6 border-t border-[#DDE3EA] flex justify-between items-center">
-                      <span className="text-[9px] font-bold text-[#E8A838] uppercase tracking-[0.18em]">{card.outcome}</span>
+                      <span className="text-[9px] font-bold text-[var(--section-label-color)] uppercase tracking-[0.18em]">{card.outcome}</span>
                       <ArrowUpRight className="w-3.5 h-3.5 text-[#9AA4B2]" />
                     </div>
                   </motion.div>
@@ -547,7 +547,7 @@ export default function CapabilitiesSolutionPrograms() {
               <motion.div variants={fadeUp} transition={{ duration: 0.5 }} className="mb-8 flex items-center gap-4">
                 <SectionBrandMark surface="dark" size="sm" />
                 <span className="h-px w-10 bg-[#F0C15A]/40" />
-                <span className="text-[10px] font-bold tracking-[0.28em] uppercase text-[#F0C15A]">Program 03</span>
+                <span className="text-[10px] font-bold tracking-[0.28em] uppercase text-[var(--section-label-color-dark)]">Program 03</span>
               </motion.div>
               <motion.h2 variants={fadeUp} transition={{ duration: 0.5 }} className="font-headline text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight">
                 {p3?.name}
@@ -574,7 +574,7 @@ export default function CapabilitiesSolutionPrograms() {
 
               {/* Modules */}
               <motion.div variants={fadeUp} transition={{ duration: 0.5 }}>
-                <h4 className="text-[9px] font-bold uppercase tracking-[0.24em] text-[#778192] mb-4">Core Modules</h4>
+                <h4 className="text-[9px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color-dark)] mb-4">Core Modules</h4>
                 <ul className="mb-8 grid grid-cols-1 gap-2 sm:grid-cols-2">
                   {p3?.modules.map((mod) => (
                     <li key={mod} className="flex items-start gap-2 text-sm text-[#9AA4B2]">
@@ -612,7 +612,7 @@ export default function CapabilitiesSolutionPrograms() {
                 <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.06]" style={blueprintGrid} />
                 <div className="relative p-6 h-full">
                   <div className="flex justify-between items-center mb-5">
-                    <div className="bg-[#FFF4D8]/10 px-2 py-1 text-[8px] font-mono text-[#F0C15A] border border-[#F0C15A]/20 uppercase tracking-wider">
+                    <div className="bg-[#FFF4D8]/10 px-2 py-1 text-[8px] font-mono text-[var(--section-label-color-dark)] border border-[#F0C15A]/20 uppercase tracking-wider">
                       RELIABILITY_STACK
                     </div>
                     <div className="text-[9px] font-mono text-[#566274]">ARC/03</div>

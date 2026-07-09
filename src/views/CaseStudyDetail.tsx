@@ -23,7 +23,7 @@ function CaseStudySidebar({ study }: { readonly study: CaseStudy }) {
         {meta.map((item) => (
           <div key={item.label}>
             <p
-              className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#E8A838] mb-0.5"
+              className="text-[9px] font-bold uppercase tracking-[0.22em] text-[var(--section-label-color)] mb-0.5"
               style={{ fontFamily: 'var(--font-body)' }}
             >
               {item.label}
@@ -48,7 +48,7 @@ function CaseStudySidebar({ study }: { readonly study: CaseStudy }) {
         <div className="pointer-events-none absolute -top-8 -right-8 w-32 h-32 bg-[#E8A838]/20 rounded-full blur-2xl" />
 
         <p
-          className="relative z-10 text-[9px] font-bold uppercase tracking-[0.2em] text-[#E8A838] mb-4"
+          className="relative z-10 text-[9px] font-bold uppercase tracking-[0.2em] text-[var(--section-label-color-dark)] mb-4"
           style={{ fontFamily: 'var(--font-body)' }}
         >
           Program Delivery Record
@@ -62,7 +62,7 @@ function CaseStudySidebar({ study }: { readonly study: CaseStudy }) {
           ] as { label: string; value: string; pulse: boolean }[]).map((row) => (
             <div key={row.label} className="flex items-center justify-between border-t border-white/10 py-3">
               <span className="text-xs text-white/50" style={{ fontFamily: 'var(--font-body)' }}>{row.label}</span>
-              <span className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wide text-[#E8A838]" style={{ fontFamily: 'var(--font-body)' }}>
+              <span className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wide text-[var(--section-label-color-dark)]" style={{ fontFamily: 'var(--font-body)' }}>
                 {row.pulse && <span className="h-1.5 w-1.5 rounded-full bg-[#E8A838] animate-pulse inline-block" />}
                 {row.value}
               </span>
@@ -101,7 +101,7 @@ function CaseStudyBody({ study }: { readonly study: CaseStudy }) {
               {metric.value}
             </p>
             <p
-              className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#E8A838] group-hover:text-white/80 transition-colors duration-300"
+              className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--section-label-color)] group-hover:text-white/80 transition-colors duration-300"
               style={{ fontFamily: 'var(--font-body)' }}
             >
               {metric.label}
@@ -198,7 +198,7 @@ function CaseStudyBody({ study }: { readonly study: CaseStudy }) {
         {/* Stack & Integrations */}
         <motion.div variants={fadeUp} transition={{ duration: 0.5 }}>
           <p
-            className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#E8A838] mb-4"
+            className="text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--section-label-color)] mb-4"
             style={{ fontFamily: 'var(--font-body)' }}
           >
             Stack &amp; Integrations

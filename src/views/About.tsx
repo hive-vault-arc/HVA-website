@@ -176,7 +176,7 @@ const About: React.FC = () => {
               >
                 <div className="mb-6 flex items-center gap-3">
                   <SectionBrandMark size="sm" />
-                  <span className="inline-block text-[#E8A838] font-bold tracking-[0.22em] text-[10px] uppercase">
+                  <span className="inline-block text-[var(--section-label-color)] font-bold tracking-[0.22em] text-[10px] uppercase">
                     Technology Transformation Partner · Tangier, Morocco
                   </span>
                 </div>
@@ -220,7 +220,7 @@ const About: React.FC = () => {
               >
                 {/* Card straddling the top-left image edge — outside overflow-hidden */}
                 <div className="absolute -top-10 left-5 z-10 hidden max-w-[240px] bg-white p-6 shadow-xl lg:block">
-                  <p className="text-[10px] font-bold text-[#E8A838] tracking-[0.2em] uppercase mb-2">ARC Framework</p>
+                  <p className="text-[10px] font-bold text-[var(--section-label-color)] tracking-[0.2em] uppercase mb-2">ARC Framework</p>
                   <p className="text-lg font-serif italic text-[#1A2535] leading-snug">
                     Assess. Re-engineer. Command.
                   </p>
@@ -255,7 +255,7 @@ const About: React.FC = () => {
               <div className="flex items-start gap-3">
                 <SectionBrandMark size="sm" className="mt-0.5" />
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#E8A838] mb-3">The ARC Loop</p>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)] mb-3">The ARC Loop</p>
                   <h2 className="font-headline text-4xl md:text-5xl text-[#1A2535] leading-[1.02]">How We Deliver</h2>
                 </div>
               </div>
@@ -338,7 +338,7 @@ const About: React.FC = () => {
                     <div className="text-[#E8A838]">{activeDeliveryItem.icon}</div>
                   </div>
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#E8A838] mb-1">ARC Phase</p>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--section-label-color-dark)] mb-1">ARC Phase</p>
                     <h3 className="font-headline text-2xl text-white">{activeDeliveryItem.title}</h3>
                   </div>
                 </div>
@@ -459,7 +459,7 @@ const About: React.FC = () => {
             <div className="mb-16 text-center max-w-3xl mx-auto">
               <div className="mb-4 flex items-center justify-center gap-3">
                 <SectionBrandMark size="sm" />
-                <p className="text-[10px] font-bold tracking-[0.2em] text-[#1A2535]/58 uppercase">Our Team</p>
+                <p className="text-[10px] font-bold tracking-[0.2em] text-[var(--section-label-color)] uppercase">Our Team</p>
               </div>
               <h2 className="font-serif text-4xl md:text-5xl font-medium text-[#1A2535] mb-6">
                 The People Behind Hive Vault Arc
@@ -499,7 +499,7 @@ const About: React.FC = () => {
                       />
                     </div>
                     <div className="p-8">
-                      <p className="text-[10px] font-bold text-[#E8A838] uppercase tracking-[0.18em] mb-1">{member.tag}</p>
+                      <p className="text-[10px] font-bold text-[var(--section-label-color)] uppercase tracking-[0.18em] mb-1">{member.tag}</p>
                       <h3 className="font-serif text-2xl font-light text-[#1A2535] mb-1">{member.name}</h3>
                       <p className="text-sm text-[#1A2535]/70">{member.role}</p>
                       <p className="mt-1 text-xs text-[#1A2535]/55">{member.frenchRole}</p>
