@@ -368,9 +368,9 @@ export default function Industries() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               {(['Methodology', 'Compliance'] as const).map((group) => (
                 <div key={group}>
-                  <h4 className="text-[11px] font-bold uppercase tracking-widest mb-4 text-[var(--section-label-color)]">
+                  <p className="text-[11px] font-bold uppercase tracking-widest mb-4 text-[var(--section-label-color)]">
                     {group}
-                  </h4>
+                  </p>
                   <ul className="space-y-5">
                     {approachTracks
                       .filter((t) => t.group === group)

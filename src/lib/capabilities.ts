@@ -257,17 +257,21 @@ async function fetchCapabilityData<T>(options: Parameters<typeof sanityFetch<T>>
 }
 
 export function toCapabilityProfileSummary(profile: CapabilityProfile): CapabilityProfileSummary {
-  const {
-    strategicContext: _strategicContext,
-    executionContext: _executionContext,
-    subCapabilities: _subCapabilities,
-    relatedOutcomes: _relatedOutcomes,
-    landingLinks: _landingLinks,
-    relatedCapabilities: _relatedCapabilities,
-    ...summary
-  } = profile;
-
-  return summary;
+  return {
+    _id: profile._id,
+    title: profile.title,
+    slug: profile.slug,
+    shortTitle: profile.shortTitle,
+    kicker: profile.kicker,
+    briefLine: profile.briefLine,
+    briefBullets: profile.briefBullets,
+    heroImage: profile.heroImage,
+    heroImageAlt: profile.heroImageAlt,
+    displayOrder: profile.displayOrder,
+    featuredOnCapabilities: profile.featuredOnCapabilities,
+    visibility: profile.visibility,
+    seo: profile.seo,
+  };
 }
 
 export async function getAllCapabilityProfiles(): Promise<CapabilityProfile[]> {

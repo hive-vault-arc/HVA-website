@@ -223,7 +223,7 @@ export default function CapabilitiesSolutionPrograms() {
 
               <motion.div variants={fadeUp} transition={{ duration: 0.5 }} className="mb-10 grid grid-cols-1 gap-8 sm:grid-cols-2">
                 <div>
-                  <h4 className="text-[9px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)] mb-4">Core Modules</h4>
+                  <p className="text-[9px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)] mb-4">Core Modules</p>
                   <ul className="space-y-2">
                     {p1?.modules.map((mod) => (
                       <li key={mod} className="flex items-start gap-2 text-sm text-[#1A2535] font-medium">
@@ -234,10 +234,10 @@ export default function CapabilitiesSolutionPrograms() {
                   </ul>
                 </div>
                 <div>
-                  <h4 className="text-[9px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)] mb-4">Primary Stack</h4>
+                  <p className="text-[9px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)] mb-4">Primary Stack</p>
                   <p className="text-sm text-[#1A2535] font-medium leading-relaxed">{p1?.integrations.join(', ')}</p>
                   <div className="mt-5 pt-5 border-t border-[#CDD2DA]/40">
-                    <h4 className="text-[9px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)] mb-2">Delivery</h4>
+                    <p className="text-[9px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)] mb-2">Delivery</p>
                     <p className="text-xs text-[#536070] leading-relaxed">{p1?.deliveryModel}</p>
                   </div>
                 </div>
@@ -412,7 +412,7 @@ export default function CapabilitiesSolutionPrograms() {
                   {p2?.summary}
                 </motion.p>
                 <motion.div variants={fadeUp} transition={{ duration: 0.5 }}>
-                  <h4 className="text-[9px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)] mb-2">Delivery Model</h4>
+                  <p className="text-[9px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)] mb-2">Delivery Model</p>
                   <p className="text-sm text-[#536070] leading-relaxed mb-3">{p2?.deliveryModel}</p>
                   {/* Stack tags */}
                   <div className="flex flex-wrap gap-1.5 mb-8">
@@ -574,7 +574,7 @@ export default function CapabilitiesSolutionPrograms() {
 
               {/* Modules */}
               <motion.div variants={fadeUp} transition={{ duration: 0.5 }}>
-                <h4 className="text-[9px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color-dark)] mb-4">Core Modules</h4>
+                <p className="text-[9px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color-dark)] mb-4">Core Modules</p>
                 <ul className="mb-8 grid grid-cols-1 gap-2 sm:grid-cols-2">
                   {p3?.modules.map((mod) => (
                     <li key={mod} className="flex items-start gap-2 text-sm text-[#9AA4B2]">

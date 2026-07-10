@@ -1,6 +1,6 @@
 import type { SanityImageSource } from '@sanity/image-url';
 import type { BlogPost } from './blog';
-import type { InsightCard, NewsArticle, ResearchReport } from './insights';
+import type { NewsArticle, ResearchReport } from './insights';
 import type { Perspective } from './perspectives';
 import type { CaseStudy } from './proof';
 import { sanityFetch } from '../sanity/lib/fetch';

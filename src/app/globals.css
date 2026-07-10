@@ -33,6 +33,21 @@
     mix-blend-mode: normal;
   }
 
+  .navbar-sharp {
+    view-transition-name: hva-navbar;
+  }
+
+  ::view-transition-group(hva-navbar) {
+    animation-duration: 1ms;
+    z-index: 200;
+  }
+
+  ::view-transition-old(hva-navbar),
+  ::view-transition-new(hva-navbar) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+
   ::view-transition-group(employee-profile-khalid-chalhi),
   ::view-transition-group(employee-profile-ali-amrani),
   ::view-transition-group(employee-profile-oubay-ghamat) {
@@ -1081,17 +1096,6 @@
   font-size: clamp(1.05rem, 2vw, 1.35rem);
   line-height: 1.55;
   color: rgba(226, 232, 240, 0.85);
-}
-
-.site-footer__brand-aliases {
-  margin: 1rem 0 0;
-  font-family: var(--font-body);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  line-height: 1.65;
-  text-transform: uppercase;
-  color: rgba(154, 164, 178, 0.62);
 }
 
 .site-footer__list-grid,
@@ -2668,7 +2672,8 @@
   padding: 1.25rem 1.35rem;
 }
 
-.capability-card h3 {
+.capability-card h2,
+.capability-card-hover-title {
   margin: 0;
   color: var(--color-tertiary);
   font-family: var(--font-headline);
@@ -2678,8 +2683,8 @@
   line-height: 1.02;
 }
 
-.capability-card-body h3::after,
-.capability-card-hover h3::after {
+.capability-card-body h2::after,
+.capability-card-hover-title::after {
   content: '';
   display: block;
   width: 1.45rem;

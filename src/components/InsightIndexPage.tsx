@@ -259,6 +259,7 @@ export default function InsightIndexPage({
                         src={featured.coverImage}
                         alt={featured.title}
                         fill
+                        priority
                         className="object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
                         sizes="(max-width: 1024px) 100vw, 60vw"
                       />

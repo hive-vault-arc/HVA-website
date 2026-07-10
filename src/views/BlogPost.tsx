@@ -115,12 +115,12 @@ function BlogSidebar({ sources, tags }: { sources: BlogPost['sources']; tags: Bl
       {/* Sources */}
       {sources.length > 0 && (
         <div>
-          <h4
+          <h2
             className="text-xs font-bold uppercase tracking-widest text-[var(--section-label-color)] mb-4"
             style={{ fontFamily: 'var(--font-body)' }}
           >
             Sources
-          </h4>
+          </h2>
           <ul className="space-y-3">
             {sources.map((src, i) => (
               <li key={i}>
@@ -143,12 +143,12 @@ function BlogSidebar({ sources, tags }: { sources: BlogPost['sources']; tags: Bl
       {/* Tags */}
       {tags.length > 0 && (
         <div>
-          <h4
+          <h2
             className="text-xs font-bold uppercase tracking-widest text-[var(--section-label-color)] mb-4"
             style={{ fontFamily: 'var(--font-body)' }}
           >
             Topics
-          </h4>
+          </h2>
           <div className="flex flex-wrap gap-2">
             {tags.map((tag) => (
               <span

@@ -163,9 +163,9 @@ function LatestSection({ items }: LatestProps) {
       <div className="mx-auto max-w-7xl px-6 lg:px-14">
         <div className="mb-10 flex items-center gap-3">
           <SectionBrandMark size="sm" />
-          <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)]">
+          <h2 className="text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)]">
             Latest
-          </p>
+          </h2>
         </div>
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">

@@ -74,7 +74,7 @@ export default function InsightsSlider({ items }: { readonly items: SlideItem[] 
     <section className="insights-slider-section">
       {/* ── Header ── */}
       <div className="insights-slider-header">
-        <p className="insights-slider-eyebrow">Latest Publications</p>
+        <h2 className="insights-slider-eyebrow">Latest Publications</h2>
       </div>
 
       {/* ── Main layout: controls + track ── */}
@@ -121,6 +121,13 @@ export default function InsightsSlider({ items }: { readonly items: SlideItem[] 
                   onMouseEnter={() => setHoveredIndex(i)}
                   onMouseLeave={() => setHoveredIndex(null)}
                 >
+                  <Link
+                    href={item.href}
+                    aria-label={`Read ${item.title}`}
+                    className="block h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A838] focus-visible:ring-inset"
+                    onFocus={() => setHoveredIndex(i)}
+                    onBlur={() => setHoveredIndex(null)}
+                  >
                   {/* Background image */}
                   <div className="insights-slide-bg">
                     <motion.img
@@ -164,15 +171,16 @@ export default function InsightsSlider({ items }: { readonly items: SlideItem[] 
                       style={{ pointerEvents: isHovered ? 'auto' : 'none' }}
                     >
                       <div className="insights-slide-hover-content">
-                        <h3 className="insights-slide-hover-title">{item.title}</h3>
+                        <p className="insights-slide-hover-title">{item.title}</p>
                         <p className="insights-slide-hover-desc">{item.description}</p>
-                        <Link href={item.href} className="insights-slide-learn-more">
+                        <span className="insights-slide-learn-more">
                           Read {item.tag} insight
                           <span className="insights-slide-learn-arrow" aria-hidden="true">→</span>
-                        </Link>
+                        </span>
                       </div>
                     </motion.div>
                   </div>
+                  </Link>
                 </div>
               );
             })}

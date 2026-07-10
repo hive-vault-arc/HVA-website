@@ -293,11 +293,11 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
                     />
                   </div>
                   <div className="capability-card-body">
-                    <h3>{card.title}</h3>
+                    <h2>{card.title}</h2>
                   </div>
                   <div className="capability-card-hover" aria-hidden="true">
                     <div>
-                      <h3>{card.title}</h3>
+                      <p className="capability-card-hover-title">{card.title}</p>
                       <p>{card.summary}</p>
                     </div>
                     <span className="capability-card-hover-link">

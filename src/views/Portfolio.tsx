@@ -53,7 +53,7 @@ const proofBlocks = [
   },
   {
     icon: <ShieldCheck className="h-5 w-5" />,
-    title: 'Secure By Default',
+    title: 'Secure by Default',
     detail: 'Validation, rate limits, and control layers are included from day one.',
   },
   {
@@ -83,43 +83,53 @@ const Portfolio: React.FC = () => {
         <PageAmbientBackground className="-z-10" />
 
         {/* ── Hero ──────────────────────────────────────────────────────────── */}
-        <section className="relative min-h-[420px] sm:min-h-[560px] lg:min-h-[680px] flex items-center overflow-hidden bg-white">
-          {/* Blueprint grid overlay */}
-          <div className="absolute inset-0 opacity-60" style={blueprintGrid} />
-          {/* Right-side decorative skewed panel */}
-          <div className="absolute top-0 right-0 w-1/2 h-full bg-[#F7F8FA] skew-x-12 translate-x-32 hidden lg:block" />
+        <section className="relative flex min-h-[650px] items-end overflow-hidden bg-[#F7F8FA] md:min-h-[680px] lg:items-center">
+          <Image
+            src="/Images/blog/custom-crm-system-morocco.webp"
+            alt="A production CRM operating system used in a Hive Vault Arc transformation program"
+            fill
+            priority
+            loading="eager"
+            sizes="100vw"
+            className="object-cover object-[62%_center]"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(247,248,250,0.42)_0%,rgba(247,248,250,0.98)_58%,#F7F8FA_100%)] md:bg-[linear-gradient(90deg,#F7F8FA_0%,rgba(247,248,250,0.97)_38%,rgba(247,248,250,0.52)_64%,rgba(247,248,250,0.12)_100%)]" />
+          <div className="absolute inset-0 opacity-25" style={blueprintGrid} />
 
-          <div className="relative mx-auto w-full max-w-7xl px-6 py-28 sm:px-8 md:py-32">
+          <div className="relative mx-auto w-full max-w-7xl px-6 pb-12 pt-28 sm:px-8 md:py-28">
             <motion.div
               className="max-w-3xl"
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
             >
-              <div className="mb-6 flex items-center gap-3">
+              <div className="mb-5 flex items-center gap-3">
                 <SectionBrandMark size="sm" />
-                <span className="inline-block bg-[#E8A838]/10 px-4 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--section-label-color)]">
+                <span className="inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--section-label-color)]">
                   Transformation Portfolio
                 </span>
               </div>
-              <h1 className="mb-8 font-serif text-[clamp(2.6rem,12vw,4.1rem)] leading-[1.02] text-[#1A2535] sm:text-5xl md:text-6xl lg:text-8xl">
-                Consulting-Led Programs in Production
+              <h1 className="mb-6 max-w-[13ch] font-serif text-[clamp(2.65rem,12vw,4.5rem)] leading-[0.98] text-[#1A2535] md:text-7xl lg:text-7xl">
+                <span className="block">Consulting-Led</span>{' '}
+                <span className="block">Programs in Production</span>
               </h1>
-              <p className="text-xl text-[#566274] max-w-xl leading-relaxed font-light">
-                These are not isolated builds. Each engagement shows how Hive Vault Arc turns strategic priorities into measurable operational impact.
+              <p className="max-w-lg text-lg font-medium leading-relaxed text-[#3D4858] md:text-xl">
+                See how strategy, engineering, and operations become measurable production systems under one accountable team.
               </p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <Link href="#portfolio-projects" className="sharp-edge inline-flex min-h-12 items-center justify-center bg-[#1A2535] px-7 py-3 text-sm font-bold text-white transition-colors hover:bg-[#E8A838]">
+                  Explore the Work
+                </Link>
+                <Link href="/contact" className="sharp-edge inline-flex min-h-12 items-center justify-center border border-[#1A2535]/24 bg-white/88 px-7 py-3 text-sm font-bold text-[#1A2535] transition-colors hover:border-[#E8A838] hover:text-[#C8891C]">
+                  Book a Call
+                </Link>
+              </div>
             </motion.div>
-
-            {/* Scroll cue */}
-            <div className="absolute bottom-12 right-12 hidden md:flex items-center gap-4 text-[#566274]">
-              <span className="text-sm font-bold tracking-[0.2em] uppercase">Scroll to explore</span>
-              <div className="w-12 h-px bg-[#566274]/40" />
-            </div>
           </div>
         </section>
 
         {/* ── Projects ──────────────────────────────────────────────────────── */}
-        <section className="space-y-24 py-20 md:space-y-32 md:py-24">
+        <section id="portfolio-projects" className="scroll-mt-24 space-y-24 pb-20 pt-12 md:space-y-32 md:py-24">
 
           {/* Project 1 — AI Assistant (image left, content right) */}
           <motion.div
@@ -155,7 +165,7 @@ const Portfolio: React.FC = () => {
               {/* Content */}
               <div className="lg:col-span-5 space-y-5">
                 <h2 className="font-serif text-4xl text-[#1A2535] leading-tight">
-                  Smart WhatsApp AI Assistant
+                  Multilingual WhatsApp AI Agent
                 </h2>
                 <div className="flex flex-wrap gap-2">
                   {['Multilingual', 'CRM Integration', 'Automated Scheduling'].map((tag) => (
@@ -177,7 +187,7 @@ const Portfolio: React.FC = () => {
                 <ul className="space-y-3 text-sm text-[#566274]">
                   {[
                     '85% reduction in manual qualification time',
-                    '24/7 lead capture across timezones',
+                    '24/7 lead capture across time zones',
                     'Direct HubSpot & Salesforce synchronization',
                   ].map((item) => (
                     <li key={item} className="flex items-center gap-3">
@@ -203,7 +213,7 @@ const Portfolio: React.FC = () => {
                     href="/case-studies/multilingual-whatsapp-ai-agent"
                     className="inline-flex min-h-11 items-center gap-2 border-b-2 border-[#E8A838] pb-1 font-bold text-[#E8A838] transition-all hover:border-[#C8891C] hover:text-[#C8891C] group"
                   >
-                    View Technical Breakdown
+                    Read Case Study
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </div>
@@ -226,7 +236,7 @@ const Portfolio: React.FC = () => {
                 {/* Content */}
                 <div className="lg:col-span-5 space-y-5 order-2 lg:order-1">
                   <h2 className="font-serif text-4xl text-[#1A2535] leading-tight">
-                    Real-Estate CRM Transformation Program
+                    Real Estate CRM Transformation Program
                   </h2>
                   <div className="flex flex-wrap gap-2">
                     {['Custom SaaS', 'Team Collaboration', 'Pipeline Automation'].map((tag) => (
@@ -312,15 +322,15 @@ const Portfolio: React.FC = () => {
               className="text-center"
             >
               <h2 className="mx-auto max-w-5xl font-serif text-3xl sm:text-4xl md:text-5xl lg:text-8xl font-semibold leading-[0.96] text-[#1A2535]">
-                Redefining Modern
+                From Operating Problem
                 <br />
-                Transformation Delivery
+                to Production System
               </h2>
               <div className="mt-10 flex items-center justify-center gap-3">
                 <SectionBrandMark size="sm" />
                 <p className="text-xs uppercase tracking-[0.2em] text-[var(--section-label-color)]">Delivery Signature</p>
               </div>
-              <h3 className="mt-3 font-serif text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold leading-[1.02] text-[#1A2535]">Power. Speed. Control.</h3>
+              <h3 className="mt-3 font-serif text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold leading-[1.02] text-[#1A2535]">Strategy. Engineering. Operations.</h3>
               <p className="mx-auto mt-3 max-w-4xl text-base leading-relaxed text-[#1A2535]/72 md:text-[1.55rem]">
                 Everything needed to advise, engineer, deploy, and maintain reliable digital operations.
               </p>
@@ -363,7 +373,7 @@ const Portfolio: React.FC = () => {
           variant="dark"
           headline="Ready to Move from Fragmented Projects to Guided Transformation?"
           subtext="Share your constraints and we will map the right consulting and engineering path for your operating model."
-          primaryLabel="Book Discovery Call"
+          primaryLabel="Book a Call"
           primaryHref="/contact"
           secondaryLabel="View Case Studies"
           secondaryHref="/case-studies"

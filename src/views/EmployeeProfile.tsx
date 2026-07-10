@@ -79,7 +79,7 @@ export default function EmployeeProfileView({ profile, relatedProfiles }: Props)
                 </a>
               )}
               <Link href="/contact">
-                Start a Conversation
+                Book a Call
                 <ArrowUpRight className="h-4 w-4" />
               </Link>
             </div>
@@ -219,7 +219,7 @@ export default function EmployeeProfileView({ profile, relatedProfiles }: Props)
         variant="light"
         headline="Work With The People Who Own The Outcome"
         subtext="Hive Vault Arc keeps strategy, engineering, and operations close to the same senior team from discovery through production."
-        primaryLabel="Book a Discovery Call"
+        primaryLabel="Book a Call"
         primaryHref="/contact"
         secondaryLabel="Meet the Team"
         secondaryHref="/whoweare/abouthva"

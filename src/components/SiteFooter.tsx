@@ -4,8 +4,6 @@ import { FaFacebookF, FaGithub, FaInstagram, FaLinkedinIn, FaTiktok, FaXTwitter 
 import Logo from './Logo';
 import FooterSpotlight from './ui/FooterSpotlight';
 import {
-  BRAND_SEARCH_VARIANTS,
-  BUSINESS_NAME,
   CONTACT_EMAIL,
   CONTACT_PHONE_DISPLAY,
   CONTACT_PHONE_E164,
@@ -70,9 +68,6 @@ export default function SiteFooter() {
               <Logo className="site-footer__logo" light size="footer" />
               <p className="site-footer__statement">
                 {CANONICAL_MARKET_IDENTITY.shortDescriptor}
-              </p>
-              <p className="site-footer__brand-aliases">
-                {BUSINESS_NAME} is also searched as {BRAND_SEARCH_VARIANTS.slice(0, 7).join(', ')}.
               </p>
             </div>
 

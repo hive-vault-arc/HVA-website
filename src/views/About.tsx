@@ -15,7 +15,7 @@ import {
   Workflow,
 } from 'lucide-react';
 import { useAnimationQuality } from '../lib/animationQuality';
-import { HVA_CEO_ANSWER, HVA_CEO_ANSWER_FR, HVA_LEADERSHIP } from '../lib/leadership';
+import { HVA_LEADERSHIP } from '../lib/leadership';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 import BottomCTA from '../components/BottomCTA';
 import SectionBrandMark from '../components/SectionBrandMark';
@@ -43,8 +43,6 @@ type Pillar = {
   outcome: string;
   phase: 'Assess' | 'Build' | 'Operate';
 };
-
-const proofPoints = ['Based in Tangier, Morocco', 'Strategy · AI · Engineering · Operations', 'Serving Morocco & Europe'];
 
 const principles: Principle[] = [
   {
@@ -169,9 +167,9 @@ const About: React.FC = () => {
         <PageAmbientBackground className="-z-10" />
 
         {/* Hero Section */}
-        <section className="relative pt-28 pb-10 md:pt-36 md:pb-14 px-6 lg:px-14">
+        <section className="relative px-6 pb-10 pt-24 md:pb-14 md:pt-32 lg:px-14">
           <div className="container mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="grid grid-cols-1 items-start gap-9 lg:grid-cols-12 lg:items-center lg:gap-12">
 
               {/* Left: content */}
               <motion.div
@@ -181,46 +179,39 @@ const About: React.FC = () => {
                 transition={{ duration: 0.55 }}
                 style={{ y: heroLift }}
               >
-                <div className="mb-6 flex items-center gap-3">
+                <div className="mb-5 flex items-center gap-3">
                   <SectionBrandMark size="sm" />
                   <span className="inline-block text-[var(--section-label-color)] font-bold tracking-[0.22em] text-[10px] uppercase">
-                    Technology Transformation Partner · Tangier, Morocco
+                    Founder-Led Technology Transformation
                   </span>
                 </div>
-                <h1 className="mb-8 font-serif text-[clamp(3rem,13vw,4.2rem)] font-medium leading-[1.04] tracking-tight text-[#1A2535] md:text-7xl md:leading-[1.08]">
+                <h1 className="mb-6 font-serif text-[clamp(3rem,13vw,4.2rem)] font-medium leading-[1.04] tracking-tight text-[#1A2535] md:text-7xl md:leading-[1.08]">
                   We Advise. We Build.<br />
                   <em className="italic">We Operate.</em>
                 </h1>
-                <p className="text-xl text-[#1A2535]/60 font-light max-w-xl leading-relaxed mb-10">
-                  Hive Vault Arc is a technology transformation partner combining strategy consulting, AI engineering, software development, cloud infrastructure, and managed operations — delivered by one team, from first whiteboard to production. No handoffs. Same founders throughout.
+                <p className="mb-8 max-w-xl text-lg font-light leading-relaxed text-[#1A2535]/68 md:text-xl">
+                  Founder-led strategy, AI engineering, software, cloud, and operations. One accountable team from first whiteboard to production.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link
                     href="/contact"
                     className="sharp-edge min-h-11 bg-[#1A2535] px-8 py-4 text-sm font-bold text-[#FFFFFF] transition-colors duration-300 hover:bg-[#E8A838] w-full sm:w-auto text-center"
                   >
-                    Start Discovery
+                    Book a Call
                   </Link>
                   <Link
                     href="/case-studies"
                     className="sharp-edge inline-flex min-h-11 items-center justify-center gap-2 bg-white/90 px-8 py-4 text-sm font-bold text-[#1A2535] shadow-[0_10px_25px_rgba(232,168,56,0.08)] transition-colors duration-300 hover:bg-[#FFF7E8] w-full sm:w-auto"
                   >
-                    Explore Case Studies
+                    View Case Studies
                     <Layers3 className="h-4 w-4 text-[#E8A838]" />
                   </Link>
-                </div>
-                <div className="mt-8 flex flex-wrap gap-2">
-                  {proofPoints.map((point) => (
-                    <span key={point} className="rounded-full bg-white/62 px-3 py-1 text-[11px] tracking-[0.13em] text-[#1A2535]/70">
-                      {point}
-                    </span>
-                  ))}
                 </div>
               </motion.div>
 
               {/* Right: image + floating card (part in, part out) */}
               <motion.div
-                className="lg:col-span-5 relative mt-20 lg:mt-12"
+                className="relative mt-1 lg:col-span-5 lg:mt-12"
                 initial={{ opacity: 0, x: 28 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.7, delay: 0.15 }}
@@ -235,7 +226,7 @@ const About: React.FC = () => {
                 <div className="relative aspect-square w-full bg-[#ECEFF3] overflow-hidden">
                   <Image
                     src="/Images/team/hva-team-tangier-morocco.webp"
-                    alt="Hive Vault Arc co-founders team in Tangier, Morocco — Khalid Chalhi, Ali Amrani, Oubay Ghamat"
+                    alt="Archival engineering workshop representing accountable systems delivery"
                     fill
                     className="object-cover w-full h-full"
                     sizes="(max-width: 1024px) 100vw, 42vw"
@@ -474,9 +465,6 @@ const About: React.FC = () => {
               <p className="text-[#1A2535]/64 leading-relaxed">
                 Three co-founders. Six service pillars. One team that stays from strategy to operations. Hive Vault Arc was founded in Tangier by engineers who wanted to build transformation programs that do not fall apart after the first deployment.
               </p>
-              <p className="mt-5 text-sm leading-relaxed text-[#1A2535]/64">
-                {HVA_CEO_ANSWER} In French: {HVA_CEO_ANSWER_FR}
-              </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
@@ -518,7 +506,6 @@ const About: React.FC = () => {
                         <p className="text-[10px] font-bold text-[var(--section-label-color)] uppercase tracking-[0.18em] mb-1">{member.tag}</p>
                         <h3 className="font-serif text-2xl font-light text-[#1A2535] mb-1 transition-colors duration-200 group-hover:text-[#E8A838]">{member.name}</h3>
                         <p className="text-sm text-[#1A2535]/70">{member.role}</p>
-                        <p className="mt-1 text-xs text-[#1A2535]/55">{member.frenchRole}</p>
                         <p className="mt-4 text-sm leading-relaxed text-[#1A2535]/60">{member.description}</p>
                         <span className="mt-5 inline-flex text-xs font-bold uppercase tracking-[0.16em] text-[#1A2535] transition-colors duration-200 group-hover:text-[#E8A838]">
                           Read profile →
@@ -536,7 +523,7 @@ const About: React.FC = () => {
           variant="light"
           headline="Ready to Start Your Transformation?"
           subtext="Tell us where you are and where you need to be. Hive Vault Arc will map the right strategy, engineering, and operations path — and stay involved until the outcome is measurable."
-          primaryLabel="Book a Discovery Call"
+          primaryLabel="Book a Call"
           primaryHref="/contact"
           secondaryLabel="View Our Capabilities"
           secondaryHref="/capabilities"

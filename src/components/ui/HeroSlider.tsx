@@ -192,9 +192,9 @@ export default function HeroSlider() {
               </div>
               <div className="home-hero-floating-card">
                 {slide.cardIcon}
-                <h3 className="home-float-title">
+                <p className="home-float-title">
                   {slide.cardTitle}
-                </h3>
+                </p>
                 <p className="home-float-copy">
                   {slide.cardDesc}
                 </p>

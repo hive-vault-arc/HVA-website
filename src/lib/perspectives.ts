@@ -28,7 +28,7 @@ export type Perspective = {
   sections: PerspectiveSection[];
 };
 
-const PERSPECTIVES: Perspective[] = [
+export const PERSPECTIVES: Perspective[] = [
   {
     slug: 'consulting-engineering-one-loop',
     title: 'Consulting and Engineering Must Stay in One Loop',

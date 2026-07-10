@@ -30,7 +30,7 @@ export type BlogPost = {
   sections: ContentSection[];
 };
 
-const POSTS: BlogPost[] = [
+export const POSTS: BlogPost[] = [
   {
     slug: 'agentic-ai-autonomous-revolution',
     title: 'Agentic AI: The Autonomous Revolution Reshaping Business',

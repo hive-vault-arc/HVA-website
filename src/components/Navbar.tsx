@@ -7,7 +7,6 @@ import { ArrowUpRight, ChevronDown, Menu, X } from 'lucide-react';
 import Logo from './Logo';
 
 const Navbar: React.FC = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [openMobileSection, setOpenMobileSection] = useState<string | null>(null);
@@ -31,15 +30,6 @@ const Navbar: React.FC = () => {
     setOpenMobileSection(null);
   }, [pathname]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   const CapabilitiesItems = [
     { path: '/capabilities/solution-programs', label: 'Solution Programs' },
     { path: '/capabilities/in-detail', label: 'In Detail' },
@@ -57,14 +47,14 @@ const Navbar: React.FC = () => {
   ];
 
   const insightsItems = [
-    { path: '/blog', label: 'Blogs' },
+    { path: '/blog', label: 'Blog' },
     { path: '/case-studies', label: 'Case Studies' },
     { path: '/insights/news-articles', label: 'News Articles' },
     { path: '/insights/perspectives', label: 'Perspectives' },
     { path: '/insights/research-reports', label: 'Research Reports' },
   ];
   const whoWeAreItems = [
-    { path: '/whoweare/abouthva', label: 'About H.V.A' },
+    { path: '/whoweare/abouthva', label: 'About HVA' },
     { path: '/whoarewe/portfolio', label: 'Portfolio' },
   ];
 
@@ -78,7 +68,7 @@ const Navbar: React.FC = () => {
     pathname?.startsWith('/abouthva');
 
   const desktopLinkClass = (isActive: boolean) =>
-    `px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200 ${
+    `px-4 py-2 text-sm font-medium transition-colors duration-150 ${
       isActive ? 'text-[#FFFFFF] bg-[#E8A838]' : 'text-[#1A2535]/72 hover:text-[#1A2535] hover:bg-[#E8A838]/10'
     }`;
 
@@ -100,18 +90,10 @@ const Navbar: React.FC = () => {
 
   return (
     <header className="navbar-sharp fixed left-2 right-2 top-2 z-50 w-auto max-w-none lg:left-1/2 lg:right-auto lg:w-[94%] lg:max-w-6xl lg:-translate-x-1/2">
-      <nav
-        className={`transition-all duration-300 ${
-          isScrolled ? 'py-1.5 md:py-2' : 'py-2 md:py-4'
-        }`}
-      >
+      <nav className="py-2 md:py-3">
         <div className="container mx-auto px-0 md:px-4 lg:px-8">
           <div
-            className={`flex h-14 w-full items-center justify-between rounded-full px-3 transition-all duration-300 sm:px-4 md:h-16 md:px-6 ${
-              isScrolled
-                ? 'bg-[#FFFFFF]/90 backdrop-blur-md border border-[#1A2535]/12 shadow-[0_8px_24px_rgba(232,168,56,0.12)]'
-                : 'bg-transparent'
-            }`}
+            className="flex h-14 w-full items-center justify-between border border-[#1A2535]/10 bg-[#FFFFFF]/92 px-3 shadow-[0_8px_24px_rgba(26,37,53,0.06)] backdrop-blur-md sm:px-4 md:h-16 md:px-6"
           >
             {/* Logo */}
             <Logo />
@@ -128,15 +110,22 @@ const Navbar: React.FC = () => {
                 className="relative"
                 onMouseEnter={() => setOpenMenu('capabilities')}
                 onMouseLeave={() => setOpenMenu(null)}
+                onFocus={() => setOpenMenu('capabilities')}
+                onBlur={(event) => {
+                  if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setOpenMenu(null);
+                }}
               >
                 <Link
                   href="/capabilities"
+                  aria-haspopup="menu"
+                  aria-expanded={openMenu === 'capabilities'}
                   className={`${desktopLinkClass(!!isCapabilitiesActive)} inline-flex items-center gap-1.5`}
                 >
                   Capabilities
                   <ChevronDown className="h-3.5 w-3.5" />
                 </Link>
-                <div className={`absolute left-0 top-full pt-2 transition duration-200 ${openMenu === 'capabilities' ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`}>
+                {openMenu === 'capabilities' && (
+                <div className="absolute left-0 top-full pt-2">
                   <div className="min-w-[270px] rounded-xl border border-[#1A2535]/10 bg-[#FFFFFF] p-2 shadow-[0_8px_24px_rgba(232,168,56,0.14)]">
                     {CapabilitiesItems.map((item) => (
                       <Link
@@ -153,20 +142,28 @@ const Navbar: React.FC = () => {
                     ))}
                   </div>
                 </div>
+                )}
               </div>
               <div
                 className="relative"
                 onMouseEnter={() => setOpenMenu('industries')}
                 onMouseLeave={() => setOpenMenu(null)}
+                onFocus={() => setOpenMenu('industries')}
+                onBlur={(event) => {
+                  if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setOpenMenu(null);
+                }}
               >
                 <Link
                   href="/industries"
+                  aria-haspopup="menu"
+                  aria-expanded={openMenu === 'industries'}
                   className={`${desktopLinkClass(!!isIndustriesActive)} inline-flex items-center gap-1.5`}
                 >
                   Industries
                   <ChevronDown className="h-3.5 w-3.5" />
                 </Link>
-                <div className={`absolute left-0 top-full pt-2 transition duration-200 ${openMenu === 'industries' ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`}>
+                {openMenu === 'industries' && (
+                <div className="absolute left-0 top-full pt-2">
                   <div className="min-w-[220px] rounded-xl border border-[#1A2535]/10 bg-[#FFFFFF] p-2 shadow-[0_8px_24px_rgba(232,168,56,0.14)]">
                     {industriesItems.map((item) => (
                       <Link
@@ -179,20 +176,28 @@ const Navbar: React.FC = () => {
                     ))}
                   </div>
                 </div>
+                )}
               </div>
               <div
                 className="relative"
                 onMouseEnter={() => setOpenMenu('who-we-are')}
                 onMouseLeave={() => setOpenMenu(null)}
+                onFocus={() => setOpenMenu('who-we-are')}
+                onBlur={(event) => {
+                  if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setOpenMenu(null);
+                }}
               >
                 <Link
                   href="/whoweare/abouthva"
+                  aria-haspopup="menu"
+                  aria-expanded={openMenu === 'who-we-are'}
                   className={`${desktopLinkClass(!!isWhoWeAreActive)} inline-flex items-center gap-1.5`}
                 >
                   Who We Are
                   <ChevronDown className="h-3.5 w-3.5" />
                 </Link>
-                <div className={`absolute left-0 top-full pt-2 transition duration-200 ${openMenu === 'who-we-are' ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`}>
+                {openMenu === 'who-we-are' && (
+                <div className="absolute left-0 top-full pt-2">
                   <div className="min-w-[220px] rounded-xl border border-[#1A2535]/10 bg-[#FFFFFF] p-2 shadow-[0_8px_24px_rgba(232,168,56,0.14)]">
                     {whoWeAreItems.map((item) => (
                       <Link
@@ -209,20 +214,28 @@ const Navbar: React.FC = () => {
                     ))}
                   </div>
                 </div>
+                )}
               </div>
               <div
                 className="relative"
                 onMouseEnter={() => setOpenMenu('insights')}
                 onMouseLeave={() => setOpenMenu(null)}
+                onFocus={() => setOpenMenu('insights')}
+                onBlur={(event) => {
+                  if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setOpenMenu(null);
+                }}
               >
                 <Link
                   href="/insights"
+                  aria-haspopup="menu"
+                  aria-expanded={openMenu === 'insights'}
                   className={`${desktopLinkClass(!!isInsightsActive)} inline-flex items-center gap-1.5`}
                 >
                   Insights
                   <ChevronDown className="h-3.5 w-3.5" />
                 </Link>
-                <div className={`absolute left-0 top-full pt-2 transition duration-200 ${openMenu === 'insights' ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`}>
+                {openMenu === 'insights' && (
+                <div className="absolute left-0 top-full pt-2">
                   <div className="min-w-[220px] rounded-xl border border-[#1A2535]/10 bg-[#FFFFFF] p-2 shadow-[0_8px_24px_rgba(232,168,56,0.14)]">
                     {insightsItems.map((item) => (
                       <Link
@@ -239,13 +252,14 @@ const Navbar: React.FC = () => {
                     ))}
                   </div>
                 </div>
+                )}
               </div>
             </div>
 
             <Link
               href="/contact"
               aria-label="Book a call"
-              className="ml-auto hidden min-h-11 items-center rounded-full bg-[#1A2535] px-4 py-2 text-sm font-medium text-[#FFFFFF] transition-all duration-300 hover:bg-[#E8A838] lg:flex"
+              className="ml-auto hidden min-h-11 items-center bg-[#1A2535] px-4 py-2 text-sm font-medium text-[#FFFFFF] transition-colors duration-150 hover:bg-[#E8A838] lg:flex"
             >
               Book a Call
               <ArrowUpRight className="w-3.5 h-3.5 ml-1.5" />
@@ -332,7 +346,6 @@ const Navbar: React.FC = () => {
                     }`}
                   >
                     <span className="flex items-center gap-2.5">
-                      {isCapabilitiesActive && <span className="h-1.5 w-1.5 rounded-full bg-white" />}
                       Capabilities
                     </span>
                   </Link>
@@ -354,11 +367,8 @@ const Navbar: React.FC = () => {
                     />
                   </button>
                 </div>
-                <div
-                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                    openMobileSection === 'capabilities' ? 'max-h-64 opacity-100 mt-1' : 'max-h-0 opacity-0'
-                  }`}
-                >
+                {openMobileSection === 'capabilities' && (
+                <div className="mt-1 overflow-hidden">
                   <div className="ml-4 border-l-2 border-[#E8A838]/20 pl-3 space-y-0.5 pb-2">
                     <Link
                       href="/capabilities"
@@ -384,6 +394,7 @@ const Navbar: React.FC = () => {
                     ))}
                   </div>
                 </div>
+                )}
               </div>
 
               {/* Industries accordion */}
@@ -399,7 +410,6 @@ const Navbar: React.FC = () => {
                     }`}
                   >
                     <span className="flex items-center gap-2.5">
-                      {isIndustriesActive && <span className="h-1.5 w-1.5 rounded-full bg-white" />}
                       Industries
                     </span>
                   </Link>
@@ -421,11 +431,8 @@ const Navbar: React.FC = () => {
                     />
                   </button>
                 </div>
-                <div
-                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                    openMobileSection === 'industries' ? 'max-h-[26rem] opacity-100 mt-1' : 'max-h-0 opacity-0'
-                  }`}
-                >
+                {openMobileSection === 'industries' && (
+                <div className="mt-1 overflow-hidden">
                   <div className="ml-4 border-l-2 border-[#E8A838]/20 pl-3 space-y-0.5 pb-2">
                     {industriesItems.map((item) => (
                       <Link
@@ -440,6 +447,7 @@ const Navbar: React.FC = () => {
                     ))}
                   </div>
                 </div>
+                )}
               </div>
 
               {/* Who We Are accordion */}
@@ -455,7 +463,6 @@ const Navbar: React.FC = () => {
                     }`}
                   >
                     <span className="flex items-center gap-2.5">
-                      {isWhoWeAreActive && <span className="h-1.5 w-1.5 rounded-full bg-white" />}
                       Who We Are
                     </span>
                   </Link>
@@ -477,11 +484,8 @@ const Navbar: React.FC = () => {
                     />
                   </button>
                 </div>
-                <div
-                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                    openMobileSection === 'who-we-are' ? 'max-h-64 opacity-100 mt-1' : 'max-h-0 opacity-0'
-                  }`}
-                >
+                {openMobileSection === 'who-we-are' && (
+                <div className="mt-1 overflow-hidden">
                   <div className="ml-4 border-l-2 border-[#E8A838]/20 pl-3 space-y-0.5 pb-2">
                     {whoWeAreItems.map((item) => (
                       <Link
@@ -500,6 +504,7 @@ const Navbar: React.FC = () => {
                     ))}
                   </div>
                 </div>
+                )}
               </div>
 
               {/* Insights accordion */}
@@ -515,7 +520,6 @@ const Navbar: React.FC = () => {
                     }`}
                   >
                     <span className="flex items-center gap-2.5">
-                      {isInsightsActive && <span className="h-1.5 w-1.5 rounded-full bg-white" />}
                       Insights
                     </span>
                   </Link>
@@ -537,11 +541,8 @@ const Navbar: React.FC = () => {
                     />
                   </button>
                 </div>
-                <div
-                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                    openMobileSection === 'insights' ? 'max-h-80 opacity-100 mt-1' : 'max-h-0 opacity-0'
-                  }`}
-                >
+                {openMobileSection === 'insights' && (
+                <div className="mt-1 overflow-hidden">
                   <div className="ml-4 border-l-2 border-[#E8A838]/20 pl-3 space-y-0.5 pb-2">
                     {insightsItems.map((item) => (
                       <Link
@@ -560,6 +561,7 @@ const Navbar: React.FC = () => {
                     ))}
                   </div>
                 </div>
+                )}
               </div>
 
               {/* Divider */}
