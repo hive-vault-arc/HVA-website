@@ -121,7 +121,7 @@ export default function CapabilitiesSolutionPrograms() {
                 </Link>
                 <Link
                   href="/capabilities/in-detail"
-                  className="inline-flex min-h-11 items-center border-b-2 border-[#E8A838]/20 pb-0.5 text-sm font-bold uppercase tracking-widest text-[#E8A838] transition-all hover:border-[#E8A838]"
+                  className="inline-flex min-h-11 items-center border-b-2 border-[#E8A838]/40 pb-0.5 text-sm font-bold uppercase tracking-widest text-[var(--section-label-color)] transition-colors hover:border-[#1A2535] hover:text-[#1A2535]"
                 >
                   Explore In Detail →
                 </Link>
@@ -183,14 +183,14 @@ export default function CapabilitiesSolutionPrograms() {
                 href={item.anchor}
                 className="group flex min-h-11 items-start gap-4 px-6 py-6 transition-colors duration-300 hover:bg-[#FFFFFF] sm:px-8"
               >
-                <span className="mt-0.5 text-[#E8A838] shrink-0 group-hover:scale-110 transition-transform duration-300">{item.icon}</span>
+                <span className="mt-0.5 shrink-0 text-[var(--section-label-color)]">{item.icon}</span>
                 <div className="min-w-0">
-                  <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-[#9AA4B2] mb-1">{item.tag}</p>
-                  <p className="font-headline text-base text-[#1A2535] leading-snug group-hover:text-[#E8A838] transition-colors duration-300">
+                  <p className="mb-1 text-[9px] font-bold uppercase tracking-[0.18em] text-[#566274]">{item.tag}</p>
+                  <p className="font-headline text-base leading-snug text-[#1A2535] transition-colors duration-300 group-hover:text-[var(--section-label-color)]">
                     {item.label}
                   </p>
                 </div>
-                <ArrowUpRight className="w-3.5 h-3.5 text-[#CDD2DA] group-hover:text-[#E8A838] ml-auto shrink-0 mt-1 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                <ArrowUpRight className="ml-auto mt-1 h-3.5 w-3.5 shrink-0 text-[#566274] transition-colors group-hover:text-[var(--section-label-color)]" />
               </a>
             ))}
           </div>
@@ -245,7 +245,7 @@ export default function CapabilitiesSolutionPrograms() {
 
               <motion.div variants={fadeUp} transition={{ duration: 0.5 }}>
                 {p1?.proofLinks[0] && (
-                  <Link href={p1.proofLinks[0]} className="group inline-flex items-center gap-3 font-bold text-[#1A2535] hover:text-[#E8A838] transition-colors text-sm uppercase tracking-[0.12em]">
+                  <Link href={p1.proofLinks[0]} className="group inline-flex items-center gap-3 text-sm font-bold uppercase tracking-[0.12em] text-[#1A2535] transition-colors hover:text-[var(--section-label-color)]">
                     View Case Study
                     <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </Link>
@@ -305,7 +305,7 @@ export default function CapabilitiesSolutionPrograms() {
               { value: '+43%', label: 'Qualified Meetings', desc: 'QoQ increase in sales-qualified appointments' },
             ].map((stat) => (
               <div key={stat.label}>
-                <p className="font-headline text-4xl md:text-5xl text-[#E8A838] mb-1 leading-none">{stat.value}</p>
+                <p className="font-headline mb-1 text-4xl leading-none text-[var(--section-label-color)] md:text-5xl">{stat.value}</p>
                 <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#1A2535] mt-2 mb-1">{stat.label}</p>
                 <p className="text-[11px] text-[#536070] leading-snug">{stat.desc}</p>
               </div>
@@ -423,7 +423,7 @@ export default function CapabilitiesSolutionPrograms() {
                     ))}
                   </div>
                   {p2?.proofLinks[0] && (
-                    <Link href={p2.proofLinks[0]} className="group inline-flex items-center gap-3 font-bold text-[#1A2535] hover:text-[#E8A838] transition-colors text-sm uppercase tracking-[0.12em]">
+                    <Link href={p2.proofLinks[0]} className="group inline-flex items-center gap-3 text-sm font-bold uppercase tracking-[0.12em] text-[#1A2535] transition-colors hover:text-[var(--section-label-color)]">
                       View Case Study
                       <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </Link>
@@ -438,7 +438,7 @@ export default function CapabilitiesSolutionPrograms() {
                     { v: '$2.4M', l: 'Pipeline Tracked' },
                   ].map((s) => (
                     <div key={s.l}>
-                      <p className="font-headline text-2xl text-[#E8A838] leading-none mb-1">{s.v}</p>
+                      <p className="font-headline mb-1 text-2xl leading-none text-[var(--section-label-color)]">{s.v}</p>
                       <p className="text-[9px] uppercase tracking-[0.14em] text-[var(--section-label-color)] leading-tight">{s.l}</p>
                     </div>
                   ))}
@@ -478,14 +478,14 @@ export default function CapabilitiesSolutionPrograms() {
                   >
                     <div>
                       <div className="w-12 h-12 bg-[#F7F8FA] flex items-center justify-center mb-8 group-hover:bg-[#1A2535] transition-colors duration-300">
-                        <span className="text-[#E8A838] group-hover:text-white transition-colors duration-300">{card.icon}</span>
+                        <span className="text-[var(--section-label-color)] transition-colors duration-300 group-hover:text-white">{card.icon}</span>
                       </div>
                       <h3 className="font-headline text-2xl text-[#1A2535] mb-3">{card.title}</h3>
                       <p className="text-[#536070] text-sm leading-relaxed">{card.desc}</p>
                     </div>
                     <div className="pt-6 border-t border-[#DDE3EA] flex justify-between items-center">
                       <span className="text-[9px] font-bold text-[var(--section-label-color)] uppercase tracking-[0.18em]">{card.outcome}</span>
-                      <ArrowUpRight className="w-3.5 h-3.5 text-[#9AA4B2]" />
+                      <ArrowUpRight className="h-3.5 w-3.5 text-[#566274]" />
                     </div>
                   </motion.div>
                 ))}

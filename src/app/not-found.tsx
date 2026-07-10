@@ -20,7 +20,7 @@ export default function NotFound() {
                 Navigation Error / 404
               </p>
             </div>
-            <p className="font-headline text-7xl font-light leading-none text-[#E8A838] md:text-8xl" aria-hidden="true">
+            <p className="font-headline text-7xl font-light leading-none text-[var(--section-label-color)] md:text-8xl" aria-hidden="true">
               404
             </p>
           </div>
@@ -36,14 +36,14 @@ export default function NotFound() {
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/"
-                className="sharp-edge inline-flex min-h-12 items-center justify-center gap-2 bg-[#1A2535] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[#E8A838]"
+                className="sharp-edge inline-flex min-h-12 items-center justify-center gap-2 bg-[#1A2535] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[#E8A838] hover:text-[#1A2535]"
               >
                 <ArrowLeft className="h-4 w-4" aria-hidden="true" />
                 Return Home
               </Link>
               <Link
                 href="/contact"
-                className="sharp-edge inline-flex min-h-12 items-center justify-center gap-2 border border-[#1A2535]/20 bg-white px-6 py-3 text-sm font-bold text-[#1A2535] transition-colors hover:border-[#E8A838] hover:text-[#C8891C]"
+                className="sharp-edge inline-flex min-h-12 items-center justify-center gap-2 border border-[#1A2535]/20 bg-white px-6 py-3 text-sm font-bold text-[#1A2535] transition-colors hover:border-[#E8A838] hover:text-[var(--section-label-color)]"
               >
                 Contact the Team
                 <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
@@ -57,7 +57,7 @@ export default function NotFound() {
             <Link
               key={item.href}
               href={item.href}
-              className="inline-flex min-h-11 items-center gap-2 border-b border-[#1A2535]/20 text-xs font-bold uppercase tracking-[0.14em] text-[#1A2535] transition-colors hover:border-[#E8A838] hover:text-[#C8891C]"
+              className="inline-flex min-h-11 items-center gap-2 border-b border-[#1A2535]/20 text-xs font-bold uppercase tracking-[0.14em] text-[#1A2535] transition-colors hover:border-[#E8A838] hover:text-[var(--section-label-color)]"
             >
               {item.label}
               <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />

@@ -60,14 +60,14 @@ export default function FaqSection({
               key={item.question}
               className="group py-5 [&_summary::-webkit-details-marker]:hidden"
             >
-              <summary className="flex cursor-pointer list-none items-start justify-between gap-6 text-left">
+              <summary className="flex cursor-pointer list-none items-start justify-between gap-6 text-start">
                 <h3 className="text-base font-medium text-[#1A2535] lg:text-lg">
                   {item.question}
                 </h3>
                 {/* Plus / minus indicator — pure CSS, no JS */}
                 <span
                   aria-hidden="true"
-                  className="mt-0.5 flex-shrink-0 text-[#E8A838] transition-transform duration-200 group-open:rotate-45"
+                  className="mt-0.5 flex-shrink-0 text-[var(--section-label-color)] transition-transform duration-200 group-open:rotate-45"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +80,7 @@ export default function FaqSection({
                 </span>
               </summary>
 
-              <p className="mt-4 pr-12 text-sm leading-relaxed text-[#566274] lg:text-base">
+              <p className="mt-4 pe-12 text-sm leading-relaxed text-[#566274] lg:text-base">
                 {item.answer}
               </p>
             </details>

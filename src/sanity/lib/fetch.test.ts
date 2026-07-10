@@ -1,10 +1,24 @@
 import { describe, expect, it, vi } from 'vitest';
-import { isRecoverableSanityFetchError, withSanityFallback } from './fetch';
+import {
+  getSanityFetchErrorSummary,
+  isRecoverableSanityFetchError,
+  withSanityFallback,
+} from './fetch';
 
 describe('Sanity fetch resilience', () => {
   it('recognizes common network failures', () => {
     expect(isRecoverableSanityFetchError(new TypeError('fetch failed'))).toBe(true);
     expect(isRecoverableSanityFetchError({ cause: { code: 'ENOTFOUND' } })).toBe(true);
+  });
+
+  it('summarizes network failures without serializing request details', () => {
+    expect(
+      getSanityFetchErrorSummary({
+        message: 'fetch failed',
+        cause: { code: 'UND_ERR_CONNECT_TIMEOUT' },
+        request: { url: 'https://example.invalid/private-query' },
+      })
+    ).toBe('fetch failed, UND_ERR_CONNECT_TIMEOUT');
   });
 
   it('uses fallback content for a network failure', async () => {
@@ -20,7 +34,9 @@ describe('Sanity fetch resilience', () => {
       )
     ).resolves.toEqual(['local']);
 
-    expect(warning).toHaveBeenCalledOnce();
+    expect(warning).toHaveBeenCalledWith(
+      'Sanity test content fetch failed (fetch failed); using local fallback content.'
+    );
     warning.mockRestore();
   });
 

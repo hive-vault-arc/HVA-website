@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { LifeBuoy, MessageSquare, Search } from 'lucide-react';
 import FaqSection from '../../components/FaqSection';
 import JsonLd from '../../components/JsonLd';
 import type { FaqItem } from '../../data/faqs';
@@ -91,7 +92,7 @@ export default function AIAgentsTangierPage() {
             </span>
             <h1 className="mb-8 font-headline text-[clamp(2.8rem,13vw,3.8rem)] leading-[0.98] tracking-tight text-[#1A2535] md:text-[5.5rem] md:leading-[0.95]">
               AI Agents Built for{' '}
-              <em className="italic text-[#E8A838]">Tangier</em>{' '}
+              <em className="italic text-[var(--section-label-color)]">Tangier</em>{' '}
               Businesses
             </h1>
             <p className="text-xl font-body font-light text-[#566274] max-w-xl leading-relaxed mb-10">
@@ -160,7 +161,7 @@ export default function AIAgentsTangierPage() {
                 className="bg-white p-12 hover:-translate-y-1 transition-transform duration-300"
               >
                 <div className="w-10 h-10 bg-[#E8A838]/10 flex items-center justify-center mb-8">
-                  <span className="font-body text-xs font-bold text-[#E8A838] tracking-widest">{card.number}</span>
+                  <span className="font-body text-xs font-bold tracking-widest text-[var(--section-label-color)]">{card.number}</span>
                 </div>
                 <h3 className="font-headline text-2xl mb-4 text-[#1A2535]">{card.title}</h3>
                 <p className="text-[#566274] font-body leading-relaxed text-sm">{card.body}</p>
@@ -175,7 +176,7 @@ export default function AIAgentsTangierPage() {
             <div className="md:w-1/3">
               <h2 className="font-headline text-5xl leading-tight sticky top-32 text-[#1A2535]">
                 What Is an<br />{' '}
-                <span className="italic text-[#E8A838]">AI Agent?</span>
+                <span className="italic text-[var(--section-label-color)]">AI Agent?</span>
               </h2>
             </div>
             <div className="md:w-2/3">
@@ -224,7 +225,7 @@ export default function AIAgentsTangierPage() {
               </div>
               <Link
                 href="/capabilities"
-                className="font-body text-xs tracking-widest uppercase font-bold border-b border-[#1A2535] pb-1 text-[#1A2535] hover:text-[#E8A838] hover:border-[#E8A838] transition-colors duration-200"
+                className="font-body border-b border-[#1A2535] pb-1 text-xs font-bold uppercase tracking-widest text-[#1A2535] transition-colors duration-200 hover:border-[#E8A838] hover:text-[var(--section-label-color)]"
               >
                 View Full Capabilities →
               </Link>
@@ -242,10 +243,8 @@ export default function AIAgentsTangierPage() {
                   }}
                 />
                 <div className="relative z-10">
-                  <div className="w-10 h-10 bg-[#E8A838]/10 flex items-center justify-center mb-6">
-                    <svg className="w-5 h-5 text-[#E8A838]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-                    </svg>
+                  <div className="mb-6 flex h-10 w-10 items-center justify-center bg-[#E8A838]/10">
+                    <MessageSquare className="h-5 w-5 text-[var(--section-label-color)]" strokeWidth={1.5} aria-hidden="true" />
                   </div>
                   <h3 className="font-headline text-4xl mb-4 text-[#1A2535]">WhatsApp Automation</h3>
                   <p className="text-[#566274] font-body max-w-md text-sm leading-relaxed">
@@ -257,10 +256,8 @@ export default function AIAgentsTangierPage() {
 
               {/* Lead Gen — dark */}
               <div className="flex min-h-[320px] flex-col justify-between bg-[#1A2535] p-6 text-white sm:p-8 md:col-span-4 md:min-h-[380px] lg:p-12">
-                <div className="w-10 h-10 border border-white/20 flex items-center justify-center mb-6">
-                  <svg className="w-5 h-5 text-white/70" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
+                <div className="mb-6 flex h-10 w-10 items-center justify-center border border-white/20">
+                  <Search className="h-5 w-5 text-white/70" strokeWidth={1.5} aria-hidden="true" />
                 </div>
                 <div>
                   <h3 className="font-headline text-3xl mb-4 text-white">Lead Generation</h3>
@@ -273,10 +270,8 @@ export default function AIAgentsTangierPage() {
 
               {/* Support — light */}
               <div className="md:col-span-4 bg-[#F7F8FA] p-12 flex flex-col justify-between">
-                <div className="w-10 h-10 bg-[#E8A838]/10 flex items-center justify-center mb-6">
-                  <svg className="w-5 h-5 text-[#E8A838]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
-                  </svg>
+                <div className="mb-6 flex h-10 w-10 items-center justify-center bg-[#E8A838]/10">
+                  <LifeBuoy className="h-5 w-5 text-[var(--section-label-color)]" strokeWidth={1.5} aria-hidden="true" />
                 </div>
                 <div>
                   <h3 className="font-headline text-3xl mb-4 text-[#1A2535]">Customer Support</h3>
@@ -300,7 +295,7 @@ export default function AIAgentsTangierPage() {
                   </p>
                   <Link
                     href="/contact"
-                    className="font-body text-xs tracking-widest font-bold uppercase border border-[#DDE3EA] px-6 py-3 inline-block hover:border-[#E8A838] hover:text-[#E8A838] transition-colors duration-200"
+                    className="font-body inline-block border border-[#DDE3EA] px-6 py-3 text-xs font-bold uppercase tracking-widest transition-colors duration-200 hover:border-[#E8A838] hover:text-[var(--section-label-color)]"
                   >
                     Inquire for R&amp;D
                   </Link>

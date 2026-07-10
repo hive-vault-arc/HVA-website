@@ -124,7 +124,7 @@ function EmptyState({ message, backHref }: { message: string; backHref?: string 
               ← All Insights
             </Link>
           )}
-          <Link href="/blog" className="inline-flex min-h-11 items-center pb-1 text-sm font-bold uppercase tracking-[0.15em] text-[#6B7280] transition-colors hover:text-[#E8A838]" style={{ borderBottom: '2px solid transparent', fontFamily: 'var(--font-body)' }}>
+          <Link href="/blog" className="inline-flex min-h-11 items-center pb-1 text-sm font-bold uppercase tracking-[0.15em] text-[#6B7280] transition-colors hover:text-[var(--section-label-color)]" style={{ borderBottom: '2px solid transparent', fontFamily: 'var(--font-body)' }}>
             Read the Blog →
           </Link>
         </div>
@@ -168,7 +168,7 @@ export default function InsightIndexPage({
       {/* Scroll progress bar */}
       <motion.div
         aria-hidden="true"
-        className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-gradient-to-r from-[#E8A838] via-[#F0C15A] to-[#E8A838]"
+        className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-[#E8A838]"
         style={{ scaleX: progressScale }}
       />
 
@@ -212,7 +212,7 @@ export default function InsightIndexPage({
           {backHref && (
             <Link
               href={backHref}
-              className="inline-flex min-h-11 items-center pb-2 text-xs font-bold uppercase tracking-[0.18em] text-[#6B7280] transition-colors hover:text-[#E8A838]"
+              className="inline-flex min-h-11 items-center pb-2 text-xs font-bold uppercase tracking-[0.18em] text-[#6B7280] transition-colors hover:text-[var(--section-label-color)]"
               style={{ fontFamily: 'var(--font-body)', borderBottom: '2px solid transparent' }}
             >
               {backLabel}
@@ -282,7 +282,7 @@ export default function InsightIndexPage({
                       <p className="text-[#536070] leading-relaxed" style={{ fontFamily: 'var(--font-body)' }}>
                         {featured.excerpt}
                       </p>
-                      <div className="flex items-center gap-2 text-sm font-bold text-[#E8A838]" style={{ fontFamily: 'var(--font-body)' }}>
+                      <div className="flex items-center gap-2 text-sm font-bold text-[var(--section-label-color)]" style={{ fontFamily: 'var(--font-body)' }}>
                         Read <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                       </div>
                     </div>
@@ -328,11 +328,11 @@ export default function InsightIndexPage({
                       className="flex justify-between items-center text-[10px] font-bold tracking-[0.2em] uppercase text-[#536070]"
                       style={{ fontFamily: 'var(--font-body)' }}
                     >
-                      <span className="text-[#E8A838]">{item.tag}</span>
+                      <span className="text-[var(--section-label-color)]">{item.tag}</span>
                       <span>{item.meta ?? (item.date ? fmtShort(item.date) : '')}</span>
                     </div>
                     <h3
-                      className="text-xl leading-snug text-[#1A2535] group-hover:text-[#E8A838] transition-colors"
+                      className="text-xl leading-snug text-[#1A2535] transition-colors group-hover:text-[var(--section-label-color)]"
                       style={{ fontFamily: 'var(--font-headline)' }}
                     >
                       {item.title}
@@ -349,7 +349,7 @@ export default function InsightIndexPage({
                         {item.metrics.slice(0, 2).map((m) => (
                           <div key={m.label}>
                             <p className="text-lg font-semibold text-[#1A2535]" style={{ fontFamily: 'var(--font-headline)' }}>{m.value}</p>
-                            <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-[#9AA4B2] mt-0.5" style={{ fontFamily: 'var(--font-body)' }}>{m.label}</p>
+                            <p className="mt-0.5 text-[9px] font-bold uppercase tracking-[0.15em] text-[#566274]" style={{ fontFamily: 'var(--font-body)' }}>{m.label}</p>
                           </div>
                         ))}
                       </div>
@@ -405,7 +405,7 @@ function FeaturedCardContent({
       <div className="flex items-center gap-4 mb-5">
         <span
           className="text-xs font-bold tracking-widest uppercase px-3 py-1"
-          style={{ color: '#E8A838', background: 'rgba(232,168,56,0.08)', fontFamily: 'var(--font-body)' }}
+          style={{ color: 'var(--section-label-color)', background: 'rgba(232,168,56,0.08)', fontFamily: 'var(--font-body)' }}
         >
           {item.tag}
         </span>
@@ -421,7 +421,7 @@ function FeaturedCardContent({
         )}
       </div>
       <h2
-        className={`${titleSize === 'large' ? 'text-3xl md:text-4xl lg:text-5xl' : 'text-3xl md:text-4xl'} mb-5 leading-tight text-[#1A2535] group-hover:text-[#E8A838] transition-colors`}
+        className={`${titleSize === 'large' ? 'text-3xl md:text-4xl lg:text-5xl' : 'text-3xl md:text-4xl'} mb-5 leading-tight text-[#1A2535] transition-colors group-hover:text-[var(--section-label-color)]`}
         style={{ fontFamily: 'var(--font-headline)' }}
       >
         {item.title}
@@ -437,7 +437,7 @@ function FeaturedCardContent({
           {item.metrics.slice(0, 2).map((m) => (
             <div key={m.label}>
               <p className="text-xl font-semibold text-[#1A2535]" style={{ fontFamily: 'var(--font-headline)' }}>{m.value}</p>
-              <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-[#9AA4B2] mt-0.5" style={{ fontFamily: 'var(--font-body)' }}>{m.label}</p>
+              <p className="mt-0.5 text-[9px] font-bold uppercase tracking-[0.15em] text-[#566274]" style={{ fontFamily: 'var(--font-body)' }}>{m.label}</p>
             </div>
           ))}
         </div>
@@ -454,7 +454,7 @@ function FeaturedCardContent({
             </div>
           </div>
         ) : (
-          <span className="text-sm font-bold text-[#E8A838]" style={{ fontFamily: 'var(--font-body)' }}>
+          <span className="text-sm font-bold text-[var(--section-label-color)]" style={{ fontFamily: 'var(--font-body)' }}>
             {item.metrics ? 'Read Full Case Study' : 'Read →'}
           </span>
         )}

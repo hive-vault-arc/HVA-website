@@ -25,6 +25,17 @@ export function isRecoverableSanityFetchError(error: unknown): boolean {
   );
 }
 
+export function getSanityFetchErrorSummary(error: unknown): string {
+  const candidate = error as {
+    message?: string;
+    cause?: { code?: string };
+  };
+  const message = candidate?.message?.trim();
+  const causeCode = candidate?.cause?.code?.trim();
+
+  return [message, causeCode].filter(Boolean).join(', ') || 'network error';
+}
+
 export async function withSanityFallback<T>(
   operation: () => Promise<T>,
   fallback: () => T | Promise<T>,
@@ -35,7 +46,9 @@ export async function withSanityFallback<T>(
   } catch (error) {
     if (!isRecoverableSanityFetchError(error)) throw error;
 
-    console.warn(`Sanity ${contentLabel} fetch failed; using local fallback content.`, error);
+    console.warn(
+      `Sanity ${contentLabel} fetch failed (${getSanityFetchErrorSummary(error)}); using local fallback content.`
+    );
     return fallback();
   }
 }

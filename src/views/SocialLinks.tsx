@@ -93,7 +93,7 @@ export default function SocialLinks() {
                   rel={external ? 'noreferrer noopener' : undefined}
                   className="group flex items-center gap-5 border border-[#DDE3EA] bg-white p-5 transition-colors hover:bg-[#FFF7E8]"
                 >
-                  <Icon className="h-5 w-5 shrink-0 text-[#1A2535] transition-colors group-hover:text-[#E8A838]" />
+                  <Icon className="h-5 w-5 shrink-0 text-[#1A2535] transition-colors group-hover:text-[var(--section-label-color)]" />
                   <div className="min-w-0 flex-1">
                     <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#1A2535]">
                       {label}
@@ -101,7 +101,7 @@ export default function SocialLinks() {
                     <p className="mt-0.5 truncate text-sm text-[#566274]">{handle}</p>
                   </div>
                   <ArrowUpRight
-                    className="h-4 w-4 text-[#E8A838] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    className="h-4 w-4 text-[var(--section-label-color)]"
                     aria-hidden="true"
                   />
                 </a>
@@ -110,7 +110,7 @@ export default function SocialLinks() {
           </ul>
         </nav>
 
-        <p className="mt-10 text-center text-[11px] text-[#9AA4B2]">
+        <p className="mt-10 text-center text-[11px] text-[#566274]">
           hivevaultarc.com
         </p>
       </div>

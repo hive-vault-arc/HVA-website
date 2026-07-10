@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { ArrowUpRight } from 'lucide-react';
 import JsonLd from '../../../components/JsonLd';
 import FaqSection from '../../../components/FaqSection';
 import LocaleDocumentAttributes from '../../../components/LocaleDocumentAttributes';
@@ -22,7 +24,15 @@ const capabilitiesContent: Record<
     h1: string;
     intro: string;
     keywords: string[];
-    bullets: string[];
+    serviceHeading: string;
+    serviceIntro: string;
+    primaryCta: string;
+    secondaryCta: string;
+    services: Array<{
+      title: string;
+      description: string;
+      slug: string;
+    }>;
   }
 > = {
   en: {
@@ -32,6 +42,11 @@ const capabilitiesContent: Record<
     h1: 'Six Service Pillars from Strategy to Operations',
     intro:
       'Our engagement model spans strategic consulting, architecture, technical execution, and managed evolution so systems continue performing after launch.',
+    serviceHeading: 'The Service Model',
+    serviceIntro:
+      'Each pillar can stand alone or combine into one accountable transformation program, from first decision through production ownership.',
+    primaryCta: 'Discuss a Program',
+    secondaryCta: 'See Case Studies',
     keywords: [
       'technology consulting capabilities morocco',
       'digital transformation capabilities morocco',
@@ -57,13 +72,37 @@ const capabilitiesContent: Record<
       'application performance optimization morocco',
       'security hardening and reliability engineering morocco',
     ],
-    bullets: [
-      'Strategy and business consulting: diagnostics, transformation, and operating model design',
-      'Technology consulting: enterprise architecture, roadmaps, and systems integration',
-      'AI, data, and analytics: agents, generative AI, predictive analytics, and BI',
-      'Software engineering and product development: web, mobile, SaaS, APIs, and UX/UI engineering',
-      'Cloud and infrastructure: migration, security architecture, observability, and automation',
-      'Operations and managed services: post-launch ownership, maintenance, and AI system evolution',
+    services: [
+      {
+        title: 'Strategy and Business Consulting',
+        description: 'Diagnostics, transformation roadmaps, and operating model design.',
+        slug: 'strategy-business',
+      },
+      {
+        title: 'Technology Consulting',
+        description: 'Enterprise architecture, technical roadmaps, and systems integration.',
+        slug: 'technology-consulting',
+      },
+      {
+        title: 'AI, Data, and Analytics',
+        description: 'Agents, generative AI, predictive analytics, decision systems, and BI.',
+        slug: 'ai-data-analytics',
+      },
+      {
+        title: 'Software Engineering and Product',
+        description: 'Web, mobile, SaaS, APIs, internal platforms, and UX/UI engineering.',
+        slug: 'software-engineering',
+      },
+      {
+        title: 'Cloud and Infrastructure',
+        description: 'Migration, security architecture, observability, automation, and reliability.',
+        slug: 'cloud-infrastructure',
+      },
+      {
+        title: 'Operations and Managed Services',
+        description: 'Post-launch ownership, maintenance, monitoring, and AI system evolution.',
+        slug: 'operations-managed',
+      },
     ],
   },
   fr: {
@@ -73,6 +112,11 @@ const capabilitiesContent: Record<
     h1: 'Six piliers de service de la stratégie aux opérations',
     intro:
       "Nous accompagnons les entreprises de la stratégie jusqu'à l'exploitation en production avec un modèle de livraison clair et mesurable.",
+    serviceHeading: 'Le modèle de services',
+    serviceIntro:
+      "Chaque pilier peut être engagé séparément ou intégré dans un programme de transformation piloté par une seule équipe responsable.",
+    primaryCta: 'Parler de votre programme',
+    secondaryCta: 'Voir les cas clients',
     keywords: [
       'capacites conseil technologique maroc',
       'transformation digitale entreprise maroc',
@@ -98,13 +142,37 @@ const capabilitiesContent: Record<
       'optimisation performance application maroc',
       'sécurité applicative et fiabilité cloud maroc',
     ],
-    bullets: [
-      'Stratégie et conseil métier : diagnostic, transformation et modèle opérationnel',
-      'Conseil technologique : architecture d’entreprise, feuilles de route et intégration des systèmes',
-      'IA, data et analytics : agents, IA générative, analytique prédictive et BI',
-      'Ingénierie logicielle et produit : web, mobile, SaaS, API et UX/UI',
-      'Cloud et infrastructure : migration, sécurité, observabilité et automatisation',
-      'Opérations managées : responsabilité post-lancement, maintenance et évolution des systèmes IA',
+    services: [
+      {
+        title: 'Stratégie et conseil métier',
+        description: 'Diagnostic, feuille de route de transformation et modèle opérationnel.',
+        slug: 'strategy-business',
+      },
+      {
+        title: 'Conseil technologique',
+        description: "Architecture d'entreprise, trajectoires techniques et intégration des systèmes.",
+        slug: 'technology-consulting',
+      },
+      {
+        title: 'IA, data et analytics',
+        description: 'Agents, IA générative, analytique prédictive, systèmes de décision et BI.',
+        slug: 'ai-data-analytics',
+      },
+      {
+        title: 'Ingénierie logicielle et produit',
+        description: 'Web, mobile, SaaS, API, plateformes internes et ingénierie UX/UI.',
+        slug: 'software-engineering',
+      },
+      {
+        title: 'Cloud et infrastructure',
+        description: 'Migration, sécurité, observabilité, automatisation et fiabilité.',
+        slug: 'cloud-infrastructure',
+      },
+      {
+        title: 'Opérations managées',
+        description: 'Responsabilité post-lancement, maintenance, suivi et évolution des systèmes IA.',
+        slug: 'operations-managed',
+      },
     ],
   },
   ar: {
@@ -114,6 +182,11 @@ const capabilitiesContent: Record<
     h1: 'ست ركائز للخدمات من الاستراتيجية إلى العمليات',
     intro:
       'نعمل مع فرق القيادة لتحديد الأولويات، وبناء الأنظمة، وتشغيلها وصيانتها ضمن دورة تسليم واضحة ومستمرّة.',
+    serviceHeading: 'نموذج الخدمات',
+    serviceIntro:
+      'يمكن تنفيذ كل ركيزة بشكل مستقل أو دمجها في برنامج تحول واحد تتولى مسؤوليته جهة تنفيذية واحدة.',
+    primaryCta: 'ناقش برنامجك معنا',
+    secondaryCta: 'اطلع على دراسات الحالة',
     keywords: [
       'قدرات الاستشارات التقنية في المغرب',
       'خدمات التحول الرقمي في المغرب',
@@ -128,13 +201,37 @@ const capabilitiesContent: Record<
       'تحديث الأنظمة القديمة',
       'أمن التطبيقات وموثوقية السحابة',
     ],
-    bullets: [
-      'استشارات الاستراتيجية والأعمال: التشخيص والتحول وتصميم نموذج التشغيل',
-      'الاستشارات التقنية: معمارية المؤسسات وخرائط الطريق وتكامل الأنظمة',
-      'الذكاء الاصطناعي والبيانات والتحليلات: الوكلاء والذكاء التوليدي والتحليلات وذكاء الأعمال',
-      'هندسة البرمجيات والمنتجات: الويب والموبايل ومنصات SaaS وواجهات API وتجربة المستخدم',
-      'السحابة والبنية التحتية: الترحيل والأمان والمراقبة والأتمتة',
-      'العمليات والخدمات المُدارة: الملكية بعد الإطلاق والصيانة وتطوير أنظمة الذكاء الاصطناعي',
+    services: [
+      {
+        title: 'استشارات الاستراتيجية والأعمال',
+        description: 'التشخيص وخرائط طريق التحول وتصميم نموذج التشغيل.',
+        slug: 'strategy-business',
+      },
+      {
+        title: 'الاستشارات التقنية',
+        description: 'معمارية المؤسسات والمسارات التقنية وتكامل الأنظمة.',
+        slug: 'technology-consulting',
+      },
+      {
+        title: 'الذكاء الاصطناعي والبيانات والتحليلات',
+        description: 'الوكلاء والذكاء التوليدي والتحليلات التنبؤية وأنظمة القرار وذكاء الأعمال.',
+        slug: 'ai-data-analytics',
+      },
+      {
+        title: 'هندسة البرمجيات والمنتجات',
+        description: 'الويب والموبايل ومنصات SaaS وواجهات API والمنصات الداخلية وتجربة المستخدم.',
+        slug: 'software-engineering',
+      },
+      {
+        title: 'السحابة والبنية التحتية',
+        description: 'الترحيل والأمان والمراقبة والأتمتة والموثوقية.',
+        slug: 'cloud-infrastructure',
+      },
+      {
+        title: 'العمليات والخدمات المُدارة',
+        description: 'الملكية بعد الإطلاق والصيانة والمراقبة وتطوير أنظمة الذكاء الاصطناعي.',
+        slug: 'operations-managed',
+      },
     ],
   },
   es: {
@@ -144,6 +241,11 @@ const capabilitiesContent: Record<
     h1: 'Seis pilares de servicio, de la estrategia a las operaciones',
     intro:
       'Trabajamos con equipos directivos para diseñar la estrategia, ejecutar la ingeniería y mantener la operación en producción a largo plazo.',
+    serviceHeading: 'El modelo de servicios',
+    serviceIntro:
+      'Cada pilar puede contratarse por separado o integrarse en un programa de transformación dirigido por un único equipo responsable.',
+    primaryCta: 'Hablemos de su programa',
+    secondaryCta: 'Ver casos de éxito',
     keywords: [
       'capacidades de consultoria tecnologica marruecos',
       'transformacion digital para empresas marruecos',
@@ -169,13 +271,37 @@ const capabilitiesContent: Record<
       'optimizacion de rendimiento de aplicaciones marruecos',
       'seguridad de aplicaciones y confiabilidad cloud marruecos',
     ],
-    bullets: [
-      'Consultoría estratégica y de negocio: diagnóstico, transformación y diseño del modelo operativo',
-      'Consultoría tecnológica: arquitectura empresarial, hojas de ruta e integración de sistemas',
-      'IA, datos y analítica: agentes, IA generativa, analítica predictiva y BI',
-      'Ingeniería de software y producto: web, móvil, SaaS, APIs y UX/UI',
-      'Cloud e infraestructura: migración, seguridad, observabilidad y automatización',
-      'Operaciones gestionadas: responsabilidad posterior al lanzamiento, mantenimiento y evolución de sistemas de IA',
+    services: [
+      {
+        title: 'Consultoría estratégica y de negocio',
+        description: 'Diagnóstico, hoja de ruta de transformación y diseño del modelo operativo.',
+        slug: 'strategy-business',
+      },
+      {
+        title: 'Consultoría tecnológica',
+        description: 'Arquitectura empresarial, trayectorias técnicas e integración de sistemas.',
+        slug: 'technology-consulting',
+      },
+      {
+        title: 'IA, datos y analítica',
+        description: 'Agentes, IA generativa, analítica predictiva, sistemas de decisión y BI.',
+        slug: 'ai-data-analytics',
+      },
+      {
+        title: 'Ingeniería de software y producto',
+        description: 'Web, móvil, SaaS, APIs, plataformas internas e ingeniería UX/UI.',
+        slug: 'software-engineering',
+      },
+      {
+        title: 'Cloud e infraestructura',
+        description: 'Migración, seguridad, observabilidad, automatización y fiabilidad.',
+        slug: 'cloud-infrastructure',
+      },
+      {
+        title: 'Operaciones gestionadas',
+        description: 'Responsabilidad posterior al lanzamiento, mantenimiento, monitorización y evolución de sistemas de IA.',
+        slug: 'operations-managed',
+      },
     ],
   },
 };
@@ -249,21 +375,100 @@ export default async function LocaleCapabilitiesPage({ params }: LocaleCapabilit
     <>
       <LocaleDocumentAttributes locale={locale} direction={isRtl ? 'rtl' : 'ltr'} />
       <section
-        className="mx-auto max-w-6xl px-6 py-28 md:py-36"
+        className="relative overflow-hidden border-b border-[#DDE3EA] bg-[#F7F8FA] px-6 pb-16 pt-28 md:px-8 md:pb-24 md:pt-36"
         lang={locale}
         dir={isRtl ? 'rtl' : 'ltr'}
       >
         <JsonLd data={capabilitySchema} />
-        <p className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-[var(--section-label-color)]">{locale.toUpperCase()}</p>
-        <h1 className="mb-6 font-serif text-4xl leading-tight text-[#1A2535] md:text-6xl">{content.h1}</h1>
-        <p className="max-w-3xl text-lg leading-relaxed text-[#3D4858]">{identity.shortDescriptor}</p>
-        <p className="mt-4 max-w-3xl text-base font-semibold leading-relaxed text-[#1A2535]">{serviceEquivalence}</p>
-        <p className="mt-4 max-w-3xl text-lg leading-relaxed text-[#3D4858]">{content.intro}</p>
-        <ul className="mt-8 list-disc space-y-2 pl-5 text-[#1A2535]">
-          {content.bullets.map((bullet) => (
-            <li key={bullet}>{bullet}</li>
-          ))}
-        </ul>
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 opacity-50"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(26,37,53,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(26,37,53,0.035) 1px, transparent 1px)',
+            backgroundSize: '48px 48px',
+          }}
+        />
+
+        <div className="relative mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(22rem,0.75fr)] lg:items-end lg:gap-16">
+          <div>
+            <p className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-[var(--section-label-color)]">
+              {locale.toUpperCase()}
+            </p>
+            <h1 className="max-w-[14ch] font-serif text-[clamp(2.75rem,7vw,5.75rem)] leading-[0.98] text-[#1A2535]">
+              {content.h1}
+            </h1>
+          </div>
+
+          <div className="max-w-2xl lg:pb-1">
+            <p className="text-lg font-medium leading-relaxed text-[#3D4858] md:text-xl">
+              {content.intro}
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="/contact"
+                className="inline-flex min-h-12 items-center justify-center gap-2 bg-[#1A2535] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[#E8A838] hover:text-[#1A2535]"
+              >
+                <span>{content.primaryCta}</span>
+                <ArrowUpRight
+                  aria-hidden="true"
+                  className={`h-4 w-4 shrink-0 ${isRtl ? '-scale-x-100' : ''}`}
+                />
+              </Link>
+              <Link
+                href="/case-studies"
+                className="inline-flex min-h-12 items-center justify-center border border-[#B8C0CB] bg-white px-6 py-3 text-sm font-bold text-[#1A2535] transition-colors hover:border-[#1A2535]"
+              >
+                {content.secondaryCta}
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        aria-labelledby="localized-capability-index"
+        className="bg-white px-6 py-20 md:px-8 md:py-28"
+        lang={locale}
+        dir={isRtl ? 'rtl' : 'ltr'}
+      >
+        <div className="mx-auto max-w-7xl">
+          <header className="mb-12 max-w-3xl md:mb-16">
+            <h2
+              id="localized-capability-index"
+              className="font-serif text-4xl leading-tight text-[#1A2535] md:text-6xl"
+            >
+              {content.serviceHeading}
+            </h2>
+            <p className="mt-5 text-base leading-relaxed text-[#566274] md:text-lg">
+              {content.serviceIntro}
+            </p>
+          </header>
+
+          <div className="border-y border-[#B8C0CB]">
+            {content.services.map((service, index) => (
+              <Link
+                key={service.slug}
+                href={`/capabilities/${service.slug}`}
+                className="group grid min-h-32 grid-cols-[2.75rem_minmax(0,1fr)_1.5rem] items-start gap-4 border-b border-[#DDE3EA] py-7 transition-colors last:border-b-0 hover:bg-[#F7F8FA] md:grid-cols-[4rem_minmax(15rem,0.7fr)_minmax(0,1fr)_2rem] md:items-center md:gap-8 md:px-5"
+              >
+                <span className="pt-1 text-xs font-bold tabular-nums text-[var(--section-label-color)] md:pt-0">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <h3 className="font-serif text-2xl leading-tight text-[#1A2535] md:text-3xl">
+                  {service.title}
+                </h3>
+                <p className="col-start-2 text-sm leading-relaxed text-[#566274] md:col-start-3 md:text-base">
+                  {service.description}
+                </p>
+                <ArrowUpRight
+                  aria-hidden="true"
+                  className={`col-start-3 row-start-1 mt-1 h-5 w-5 text-[#566274] transition-colors group-hover:text-[var(--section-label-color)] md:col-start-4 md:row-start-auto md:mt-0 ${isRtl ? '-scale-x-100' : ''}`}
+                />
+              </Link>
+            ))}
+          </div>
+        </div>
       </section>
       <FaqSection
         faqs={LOCALE_CAPABILITIES_FAQS[locale as SupportedLocale]}

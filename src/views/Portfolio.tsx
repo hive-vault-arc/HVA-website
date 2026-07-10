@@ -77,7 +77,7 @@ const Portfolio: React.FC = () => {
         {/* Scroll progress bar */}
         <motion.div
           aria-hidden="true"
-          className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-gradient-to-r from-[#E8A838] via-[#F0C15A] to-[#F0C15A]"
+          className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-[#E8A838]"
           style={{ scaleX: progressScale }}
         />
         <PageAmbientBackground className="-z-10" />
@@ -109,7 +109,7 @@ const Portfolio: React.FC = () => {
                   Transformation Portfolio
                 </span>
               </div>
-              <h1 className="mb-6 max-w-[13ch] font-serif text-[clamp(2.65rem,12vw,4.5rem)] leading-[0.98] text-[#1A2535] md:text-7xl lg:text-7xl">
+              <h1 className="mb-6 max-w-[13ch] font-serif text-[clamp(2.65rem,12vw,4.5rem)] leading-[0.98] text-[#1A2535] md:text-7xl lg:max-w-3xl lg:text-7xl">
                 <span className="block">Consulting-Led</span>{' '}
                 <span className="block">Programs in Production</span>
               </h1>
@@ -120,7 +120,7 @@ const Portfolio: React.FC = () => {
                 <Link href="#portfolio-projects" className="sharp-edge inline-flex min-h-12 items-center justify-center bg-[#1A2535] px-7 py-3 text-sm font-bold text-white transition-colors hover:bg-[#E8A838]">
                   Explore the Work
                 </Link>
-                <Link href="/contact" className="sharp-edge inline-flex min-h-12 items-center justify-center border border-[#1A2535]/24 bg-white/88 px-7 py-3 text-sm font-bold text-[#1A2535] transition-colors hover:border-[#E8A838] hover:text-[#C8891C]">
+                <Link href="/contact" className="sharp-edge inline-flex min-h-12 items-center justify-center border border-[#1A2535]/24 bg-white/88 px-7 py-3 text-sm font-bold text-[#1A2535] transition-colors hover:border-[#E8A838] hover:text-[var(--section-label-color)]">
                   Book a Call
                 </Link>
               </div>
@@ -155,7 +155,7 @@ const Portfolio: React.FC = () => {
                 </div>
                 {/* Floating info card */}
                 <div className="absolute -bottom-4 -right-4 hidden w-52 bg-white p-6 shadow-xl lg:block">
-                  <Bot className="h-8 w-8 text-[#E8A838] mb-3" />
+                  <Bot className="mb-3 h-8 w-8 text-[var(--section-label-color)]" />
                   <p className="text-[10px] font-bold text-[#566274] uppercase tracking-wider leading-relaxed">
                     Program Stream 01: Conversational Intelligence
                   </p>
@@ -191,7 +191,7 @@ const Portfolio: React.FC = () => {
                     'Direct HubSpot & Salesforce synchronization',
                   ].map((item) => (
                     <li key={item} className="flex items-center gap-3">
-                      <CheckCircle2 className="h-4 w-4 text-[#E8A838] shrink-0" />
+                      <CheckCircle2 className="h-4 w-4 shrink-0 text-[var(--section-label-color)]" />
                       {item}
                     </li>
                   ))}
@@ -203,7 +203,7 @@ const Portfolio: React.FC = () => {
                     { value: '12', label: 'Languages' },
                   ].map((m, i) => (
                     <div key={m.label} className={`flex-1 text-center py-4 ${i < 2 ? 'border-r border-[#DDE3EA]' : ''}`}>
-                      <p className="font-serif text-2xl text-[#E8A838]">{m.value}</p>
+                      <p className="font-serif text-2xl text-[var(--section-label-color)]">{m.value}</p>
                       <p className="text-[9px] font-bold uppercase tracking-wider text-[#566274] mt-0.5">{m.label}</p>
                     </div>
                   ))}
@@ -211,7 +211,7 @@ const Portfolio: React.FC = () => {
                 <div className="pt-3">
                   <Link
                     href="/case-studies/multilingual-whatsapp-ai-agent"
-                    className="inline-flex min-h-11 items-center gap-2 border-b-2 border-[#E8A838] pb-1 font-bold text-[#E8A838] transition-all hover:border-[#C8891C] hover:text-[#C8891C] group"
+                    className="group inline-flex min-h-11 items-center gap-2 border-b-2 border-[#E8A838] pb-1 font-bold text-[var(--section-label-color)] transition-colors hover:border-[#1A2535] hover:text-[#1A2535]"
                   >
                     Read Case Study
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -258,13 +258,13 @@ const Portfolio: React.FC = () => {
                 {/* Stats */}
                 <div className="grid grid-cols-2 gap-4">
                     <div className="bg-white p-4 border-l-4 border-[#E8A838]">
-                      <p className="font-serif text-2xl text-[#E8A838]">40%</p>
+                      <p className="font-serif text-2xl text-[var(--section-label-color)]">40%</p>
                       <p className="text-[10px] font-bold text-[#566274] uppercase tracking-wider">
                         Efficiency Gain
                       </p>
                     </div>
                     <div className="bg-white p-4 border-l-4 border-[#E8A838]">
-                      <p className="font-serif text-2xl text-[#E8A838]">$2.4M</p>
+                      <p className="font-serif text-2xl text-[var(--section-label-color)]">$2.4M</p>
                       <p className="text-[10px] font-bold text-[#566274] uppercase tracking-wider">
                         Tracked Pipeline
                       </p>
@@ -272,12 +272,12 @@ const Portfolio: React.FC = () => {
                 </div>
                 <div className="border-l-4 border-[#E8A838] bg-[#FFFFFF] px-4 py-3">
                   <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--section-label-color)]">Program status: Live in production</p>
-                  <p className="text-[9px] text-[#9AA4B2] mt-0.5">Full-stack CRM · BI reporting layer · real-time lead sync</p>
+                  <p className="mt-0.5 text-[9px] text-[#566274]">Full-stack CRM · BI reporting layer · real-time lead sync</p>
                 </div>
                 <div className="pt-3">
                   <Link
                     href="/case-studies/top-tier-crm-transformation-program-real-estate-operations"
-                    className="inline-flex min-h-11 items-center gap-2 border-b-2 border-[#E8A838] pb-1 font-bold text-[#E8A838] transition-all hover:border-[#C8891C] hover:text-[#C8891C] group"
+                    className="group inline-flex min-h-11 items-center gap-2 border-b-2 border-[#E8A838] pb-1 font-bold text-[var(--section-label-color)] transition-colors hover:border-[#1A2535] hover:text-[#1A2535]"
                   >
                     Read Case Study
                       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -353,7 +353,7 @@ const Portfolio: React.FC = () => {
                   >
                     <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_28%_24%,rgba(232,168,56,0.09),transparent_52%)]" />
                     <div className="relative z-10">
-                      <div className="inline-flex text-[#E8A838]">{block.icon}</div>
+                      <div className="inline-flex text-[var(--section-label-color)]">{block.icon}</div>
                       <h4 className="mt-3 text-3xl font-semibold tracking-tight text-[#1A2535] md:text-[2.1rem]">
                         {block.title}
                       </h4>

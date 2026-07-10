@@ -376,7 +376,7 @@ export default function Industries() {
                       .filter((t) => t.group === group)
                       .map((t) => (
                         <li key={t.code} className="flex gap-3 items-start">
-                          <div className="text-[#E8A838] shrink-0 mt-0.5">{t.icon}</div>
+                          <div className="mt-0.5 shrink-0 text-[var(--section-label-color)]">{t.icon}</div>
                           <span className="text-sm text-[#566274] leading-relaxed">{t.title}</span>
                         </li>
                       ))}
@@ -395,7 +395,7 @@ export default function Industries() {
               </Link>
               <Link
                 href="/capabilities"
-                className="inline-flex min-h-11 items-center gap-1.5 text-sm font-bold uppercase tracking-widest text-[#E8A838] transition-colors duration-200 hover:text-[#C8891C]"
+                className="inline-flex min-h-11 items-center gap-1.5 text-sm font-bold uppercase tracking-widest text-[var(--section-label-color)] transition-colors duration-200 hover:text-[#1A2535]"
               >
                 Explore Capabilities <ArrowUpRight className="h-4 w-4" />
               </Link>
