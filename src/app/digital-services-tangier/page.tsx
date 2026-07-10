@@ -152,7 +152,7 @@ export default function DigitalServicesTangierPage() {
     <>
       <JsonLd data={[professionalServiceSchema, breadcrumbSchema]} />
 
-      <main className="bg-neutral text-tertiary">
+      <div className="bg-neutral text-tertiary">
         <section className="editorial-hero">
           <div className="editorial-shell grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
             <div>
@@ -338,7 +338,7 @@ export default function DigitalServicesTangierPage() {
             </div>
           </div>
         </section>
-      </main>
+      </div>
 
       <FaqSection
         faqs={DIGITAL_SERVICES_TANGIER_FAQS}

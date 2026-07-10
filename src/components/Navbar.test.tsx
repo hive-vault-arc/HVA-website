@@ -7,7 +7,7 @@ vi.mock('next/navigation', () => ({
 }));
 
 const coreLinks = [
-  ['ARC', '/arc'],
+  ['ARC Framework', '/arc'],
   ['Capabilities', '/capabilities'],
   ['Industries', '/industries'],
   ['Who We Are', '/whoweare/abouthva'],
@@ -63,7 +63,7 @@ describe('Navbar', () => {
   it('routes Book a Call CTA to contact page', () => {
     render(<Navbar />);
 
-    const ctaLinks = screen.getAllByRole('link', { name: 'Book a call' });
+    const ctaLinks = screen.getAllByRole('link', { name: 'Book a Call' });
     expect(ctaLinks.length).toBeGreaterThan(0);
     ctaLinks.forEach((link) => {
       expect(link).toHaveAttribute('href', '/contact');

@@ -483,7 +483,7 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
       {/* ── Trusted by ─────────────────────────────────────────────────── */}
       <section className="bg-white border-y border-[#DDE3EA]">
         <div className="mx-auto max-w-7xl px-6 lg:px-14 py-5 flex items-center gap-8">
-          <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#9AA4B2] shrink-0 hidden sm:block">
+          <p className="hidden shrink-0 text-[10px] font-bold uppercase tracking-[0.28em] text-[#566274] sm:block">
             Trusted by
           </p>
           <div className="h-5 w-px bg-[#DDE3EA] shrink-0 hidden sm:block" />
@@ -500,7 +500,7 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
           </div>
           <div className="hidden md:flex items-center gap-2 shrink-0">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-[10px] text-[#9AA4B2] uppercase tracking-[0.22em]">Active partnership</span>
+            <span className="text-[10px] uppercase tracking-[0.22em] text-[#566274]">Active partnership</span>
           </div>
         </div>
       </section>
@@ -528,7 +528,7 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
               <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[var(--section-label-color)]">Our Identity</p>
             </div>
             <h2 className="mb-7 font-headline text-[clamp(3rem,13vw,4rem)] leading-[1.04] text-white md:text-6xl md:leading-[1.08]">
-              Advise. Build.<br />
+              Advise. Build.<br />{' '}
               <em className="font-headline italic text-white/40">Operate.</em>
             </h2>
             <p className="text-white/60 font-body leading-relaxed text-base mb-10 max-w-sm">

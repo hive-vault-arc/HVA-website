@@ -2,10 +2,10 @@ import type { ContentSection } from './blog';
 import {
   getAllSanityNewsArticles,
   getAllSanityResearchReports,
-  getRelatedSanityNewsArticles,
   getSanityNewsArticleBySlug,
   getSanityResearchReportBySlug,
 } from './sanity-content';
+import { withSanityFallback } from '../sanity/lib/fetch';
 
 export type InsightCard = {
   title: string;
@@ -173,7 +173,7 @@ export const NEWS_ARTICLES: NewsArticle[] = [
       },
       {
         type: 'heading',
-        content: 'What H.V.A Is Watching',
+        content: 'What Hive Vault Arc Is Watching',
       },
       {
         type: 'paragraph',
@@ -248,6 +248,15 @@ export const RESEARCH_REPORTS: InsightCard[] = [
   },
 ];
 
+const FALLBACK_RESEARCH_REPORTS: ResearchReport[] = RESEARCH_REPORTS.map((report) => ({
+  ...report,
+  subtitle: report.summary,
+  authors: [],
+  keywords: [],
+  sources: [],
+  sections: [{ type: 'paragraph', content: report.summary }],
+}));
+
 export const INSIGHTS_CATEGORIES = [
   { label: 'Blogs', href: '/blog' },
   { label: 'Case Studies', href: '/case-studies' },
@@ -257,27 +266,39 @@ export const INSIGHTS_CATEGORIES = [
 ] as const;
 
 export function getAllNewsArticles(): Promise<NewsArticle[]> {
-  return getAllSanityNewsArticles();
+  return withSanityFallback(getAllSanityNewsArticles, () => NEWS_ARTICLES, 'news article');
 }
 
 export function getNewsArticleBySlug(slug: string): Promise<NewsArticle | null> {
-  return getSanityNewsArticleBySlug(slug);
+  return withSanityFallback(
+    () => getSanityNewsArticleBySlug(slug),
+    () => NEWS_ARTICLES.find((article) => article.slug === slug) ?? null,
+    'news article'
+  );
 }
 
-export function getRelatedNewsArticles(currentSlug: string, limit = 3): Promise<NewsArticle[]> {
-  return getRelatedSanityNewsArticles(currentSlug, limit);
+export async function getRelatedNewsArticles(currentSlug: string, limit = 3): Promise<NewsArticle[]> {
+  const articles = await getAllNewsArticles();
+  return articles.filter((article) => article.slug !== currentSlug).slice(0, limit);
 }
 
 export function getAllResearchReports(): Promise<ResearchReport[]> {
-  return getAllSanityResearchReports();
+  return withSanityFallback(
+    getAllSanityResearchReports,
+    () => FALLBACK_RESEARCH_REPORTS,
+    'research report'
+  );
 }
 
 export function getResearchReportBySlug(slug: string): Promise<ResearchReport | null> {
-  return getSanityResearchReportBySlug(slug);
+  return withSanityFallback(
+    () => getSanityResearchReportBySlug(slug),
+    () => FALLBACK_RESEARCH_REPORTS.find((report) => report.slug === slug) ?? null,
+    'research report'
+  );
 }
 
-export function getRelatedResearchReports(currentSlug: string, limit = 3): Promise<ResearchReport[]> {
-  return getAllSanityResearchReports().then((reports) =>
-    reports.filter((report) => report.slug !== currentSlug).slice(0, limit)
-  );
+export async function getRelatedResearchReports(currentSlug: string, limit = 3): Promise<ResearchReport[]> {
+  const reports = await getAllResearchReports();
+  return reports.filter((report) => report.slug !== currentSlug).slice(0, limit);
 }

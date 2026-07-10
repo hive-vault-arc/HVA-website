@@ -107,9 +107,9 @@ export default function CapabilitiesSolutionPrograms() {
               </div>
               <h1 className="font-headline font-light text-[clamp(3rem,7vw,6.5rem)] leading-[1.03] tracking-tight text-[#1A2535]">
                 Solution Programs:
-                <br />
+                <br />{' '}
                 <em className="italic text-[#536070] font-light">Consulting-Led Systems</em>
-                <br />
+                <br />{' '}
                 at Full Depth.
               </h1>
               <p className="mt-7 text-[1.1rem] text-[#536070] leading-relaxed max-w-xl">
@@ -340,7 +340,7 @@ export default function CapabilitiesSolutionPrograms() {
               <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[var(--section-label-color-dark)]">Why a Program</p>
             </div>
             <h2 className="font-headline text-5xl md:text-6xl text-white leading-tight mb-6">
-              A Program,<br />
+              A Program,<br />{' '}
               <em className="italic font-light text-white/60">Not a Project.</em>
             </h2>
             <div className="w-16 h-[2px] bg-[#E8A838] mb-8" />

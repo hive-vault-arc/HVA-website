@@ -43,7 +43,7 @@ export default function EmployeeProfileView({ profile, relatedProfiles }: Props)
   );
 
   return (
-    <main className={`employee-profile-page${isLeavingForTeam ? ' employee-profile-page--leaving-team' : ''}`}>
+    <div className={`employee-profile-page${isLeavingForTeam ? ' employee-profile-page--leaving-team' : ''}`}>
       <motion.div
         aria-hidden="true"
         className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-[#E8A838]"
@@ -197,7 +197,7 @@ export default function EmployeeProfileView({ profile, relatedProfiles }: Props)
         <section className="employee-profile-related">
           <div className="site-frame">
             <div className="employee-profile-related__heading">
-              <h2>More From The Team</h2>
+              <h2>More from the Team</h2>
               <a href={teamHref} onClick={handleTeamBackClick}>
                 Back to team
               </a>
@@ -224,6 +224,6 @@ export default function EmployeeProfileView({ profile, relatedProfiles }: Props)
         secondaryLabel="Meet the Team"
         secondaryHref="/whoweare/abouthva"
       />
-    </main>
+    </div>
   );
 }

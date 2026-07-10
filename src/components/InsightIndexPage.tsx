@@ -164,7 +164,7 @@ export default function InsightIndexPage({
   const rest = filtered.slice(1);
 
   return (
-    <main className="min-h-[100dvh] bg-[#FFFFFF]">
+    <div className="min-h-[100dvh] bg-[#FFFFFF]">
       {/* Scroll progress bar */}
       <motion.div
         aria-hidden="true"
@@ -190,7 +190,7 @@ export default function InsightIndexPage({
               style={{ fontFamily: 'var(--font-headline)' }}
             >
               {headline}
-              <br />
+              <br />{' '}
               <span className="italic">{headlineItalic}</span>
             </h1>
           </div>
@@ -387,7 +387,7 @@ export default function InsightIndexPage({
           secondaryHref={bottomCta.secondaryHref}
         />
       )}
-    </main>
+    </div>
   );
 }
 

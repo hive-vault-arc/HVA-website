@@ -186,7 +186,7 @@ const About: React.FC = () => {
                   </span>
                 </div>
                 <h1 className="mb-6 font-serif text-[clamp(3rem,13vw,4.2rem)] font-medium leading-[1.04] tracking-tight text-[#1A2535] md:text-7xl md:leading-[1.08]">
-                  We Advise. We Build.<br />
+                  We Advise. We Build.<br />{' '}
                   <em className="italic">We Operate.</em>
                 </h1>
                 <p className="mb-8 max-w-xl text-lg font-light leading-relaxed text-[#1A2535]/68 md:text-xl">
@@ -392,7 +392,6 @@ const About: React.FC = () => {
                   <Link
                     key={pillar.number}
                     href={`/capabilities/${pillar.slug}`}
-                    aria-label={`View capability details for ${pillar.title}`}
                     className="about-service-map-item"
                   >
                     <span className="about-service-map-number">{pillar.number}</span>
@@ -487,7 +486,6 @@ const About: React.FC = () => {
                   >
                     <a
                       href={`/abouthva/people/${member.slug}`}
-                      aria-label={`Read ${member.name}'s Hive Vault Arc profile`}
                       className="block h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A838] focus-visible:ring-offset-4"
                     >
                       <div

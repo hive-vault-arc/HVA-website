@@ -72,7 +72,7 @@ export default function CustomSoftwareMoroccoPage() {
     <>
       <JsonLd data={[professionalServiceSchema, breadcrumbSchema]} />
 
-      <main className="bg-neutral text-tertiary">
+      <div className="bg-neutral text-tertiary">
 
         {/* ── Hero ── */}
         <section className="editorial-hero">
@@ -273,7 +273,7 @@ export default function CustomSoftwareMoroccoPage() {
             </div>
           </div>
         </section>
-      </main>
+      </div>
 
       <FaqSection
         faqs={CUSTOM_SOFTWARE_MOROCCO_FAQS}

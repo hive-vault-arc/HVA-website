@@ -1,8 +1,8 @@
 import {
   getAllSanityCaseStudies,
-  getRelatedSanityCaseStudies,
   getSanityCaseStudyBySlug,
 } from './sanity-content';
+import { withSanityFallback } from '../sanity/lib/fetch';
 
 export type CaseStudyMetric = {
   label: string;
@@ -168,18 +168,23 @@ export const PRODUCT_SYSTEMS: ProductSystem[] = [
 ];
 
 export function getAllCaseStudies(): Promise<CaseStudy[]> {
-  return getAllSanityCaseStudies();
+  return withSanityFallback(getAllSanityCaseStudies, () => CASE_STUDIES, 'case study');
 }
 
 export async function getCaseStudyBySlug(slug: string): Promise<CaseStudy> {
-  const caseStudy = await getSanityCaseStudyBySlug(slug);
+  const caseStudy = await withSanityFallback(
+    () => getSanityCaseStudyBySlug(slug),
+    () => CASE_STUDIES.find((item) => item.slug === slug) ?? null,
+    'case study'
+  );
   if (!caseStudy) {
     throw new Error(`Case study not found: ${slug}`);
   }
   return caseStudy;
 }
 
-export function getRelatedCaseStudies(currentSlug: string, limit = 3): Promise<CaseStudy[]> {
-  return getRelatedSanityCaseStudies(currentSlug, limit);
+export async function getRelatedCaseStudies(currentSlug: string, limit = 3): Promise<CaseStudy[]> {
+  const caseStudies = await getAllCaseStudies();
+  return caseStudies.filter((study) => study.slug !== currentSlug).slice(0, limit);
 }
 

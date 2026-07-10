@@ -54,16 +54,16 @@ export default function FaqSection({
           {heading}
         </h2>
 
-        <dl className="divide-y divide-[#DDE3EA]">
+        <div className="divide-y divide-[#DDE3EA]">
           {faqs.map((item) => (
             <details
               key={item.question}
               className="group py-5 [&_summary::-webkit-details-marker]:hidden"
             >
               <summary className="flex cursor-pointer list-none items-start justify-between gap-6 text-left">
-                <dt className="text-base font-medium text-[#1A2535] lg:text-lg">
+                <h3 className="text-base font-medium text-[#1A2535] lg:text-lg">
                   {item.question}
-                </dt>
+                </h3>
                 {/* Plus / minus indicator — pure CSS, no JS */}
                 <span
                   aria-hidden="true"
@@ -80,12 +80,12 @@ export default function FaqSection({
                 </span>
               </summary>
 
-              <dd className="mt-4 pr-12 text-sm leading-relaxed text-[#566274] lg:text-base">
+              <p className="mt-4 pr-12 text-sm leading-relaxed text-[#566274] lg:text-base">
                 {item.answer}
-              </dd>
+              </p>
             </details>
           ))}
-        </dl>
+        </div>
       </div>
     </section>
   );

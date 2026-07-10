@@ -123,7 +123,6 @@ export default function InsightsSlider({ items }: { readonly items: SlideItem[] 
                 >
                   <Link
                     href={item.href}
-                    aria-label={`Read ${item.title}`}
                     className="block h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A838] focus-visible:ring-inset"
                     onFocus={() => setHoveredIndex(i)}
                     onBlur={() => setHoveredIndex(null)}

@@ -115,8 +115,7 @@ export default function SiteFooter() {
               <div className="site-footer__contacts">
                 <Link
                   href="/contact"
-                  aria-label="Book a call"
-                  className="sharp-edge flex min-h-11 items-center bg-[#1A2535] px-4 py-2 text-sm font-medium text-[#FFFFFF] transition-all duration-300 hover:bg-[#E8A838] sm:self-start"
+                  className="sharp-edge flex min-h-11 items-center bg-[#1A2535] px-4 py-2 text-sm font-medium text-[#FFFFFF] transition-all duration-300 hover:bg-[#E8A838] hover:text-[#1A2535] sm:self-start"
                 >
                   Book a Call
                   <ArrowUpRight className="w-3.5 h-3.5 ml-1.5" />

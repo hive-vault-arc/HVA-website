@@ -69,7 +69,7 @@ const Navbar: React.FC = () => {
 
   const desktopLinkClass = (isActive: boolean) =>
     `px-4 py-2 text-sm font-medium transition-colors duration-150 ${
-      isActive ? 'text-[#FFFFFF] bg-[#E8A838]' : 'text-[#1A2535]/72 hover:text-[#1A2535] hover:bg-[#E8A838]/10'
+      isActive ? 'bg-[#E8A838] text-[#1A2535]' : 'text-[#1A2535]/72 hover:text-[#1A2535] hover:bg-[#E8A838]/10'
     }`;
 
   const isRouteActive = (path: string) => pathname === path || (path !== '/' && pathname?.startsWith(`${path}/`));
@@ -100,9 +100,9 @@ const Navbar: React.FC = () => {
 
             {/* Desktop Navigation */}
             <div className="absolute left-1/2 hidden -translate-x-1/2 items-center space-x-1 lg:flex">
-              <Link href="/arc" aria-label="ARC" className={desktopLinkClass(isRouteActive('/arc'))}>
+              <Link href="/arc" className={desktopLinkClass(isRouteActive('/arc'))}>
                 <span className="flex items-baseline gap-1.5">
-                  <span>ARC</span>
+                  <span>ARC</span>{' '}
                   <span className="text-[8px] tracking-[0.18em] uppercase opacity-50 font-medium">Framework</span>
                 </span>
               </Link>
@@ -133,7 +133,7 @@ const Navbar: React.FC = () => {
                         href={item.path}
                         className={`block rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
                           isCapabilitiesItemActive(item.path)
-                            ? 'bg-[#E8A838] text-[#FFFFFF]'
+                            ? 'bg-[#E8A838] text-[#1A2535]'
                             : 'text-[#1A2535]/75 hover:bg-[#E8A838]/10 hover:text-[#1A2535]'
                         }`}
                       >
@@ -205,7 +205,7 @@ const Navbar: React.FC = () => {
                         href={item.path}
                         className={`block rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
                           isWhoWeAreItemActive(item.path)
-                            ? 'bg-[#E8A838] text-[#FFFFFF]'
+                            ? 'bg-[#E8A838] text-[#1A2535]'
                             : 'text-[#1A2535]/75 hover:bg-[#E8A838]/10 hover:text-[#1A2535]'
                         }`}
                       >
@@ -243,7 +243,7 @@ const Navbar: React.FC = () => {
                         href={item.path}
                         className={`block rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
                           isInsightsItemActive(item.path)
-                            ? 'bg-[#E8A838] text-[#FFFFFF]'
+                            ? 'bg-[#E8A838] text-[#1A2535]'
                             : 'text-[#1A2535]/75 hover:bg-[#E8A838]/10 hover:text-[#1A2535]'
                         }`}
                       >
@@ -258,8 +258,7 @@ const Navbar: React.FC = () => {
 
             <Link
               href="/contact"
-              aria-label="Book a call"
-              className="ml-auto hidden min-h-11 items-center bg-[#1A2535] px-4 py-2 text-sm font-medium text-[#FFFFFF] transition-colors duration-150 hover:bg-[#E8A838] lg:flex"
+              className="ml-auto hidden min-h-11 items-center bg-[#1A2535] px-4 py-2 text-sm font-medium text-[#FFFFFF] transition-colors duration-150 hover:bg-[#E8A838] hover:text-[#1A2535] lg:flex"
             >
               Book a Call
               <ArrowUpRight className="w-3.5 h-3.5 ml-1.5" />
@@ -325,7 +324,7 @@ const Navbar: React.FC = () => {
                 onClick={closeMobileMenu}
                 className={`flex items-center justify-between px-4 py-3.5 rounded-xl text-[15px] font-semibold transition-colors mb-1 ${
                   isRouteActive('/arc')
-                    ? 'bg-[#E8A838] text-white'
+                    ? 'bg-[#E8A838] text-[#1A2535]'
                     : 'text-[#1A2535] hover:bg-[#E8A838]/8'
                 }`}
               >
@@ -341,7 +340,7 @@ const Navbar: React.FC = () => {
                     onClick={closeMobileMenu}
                     className={`flex min-h-11 flex-1 items-center px-4 text-[15px] font-semibold transition-colors ${
                       isCapabilitiesActive
-                        ? 'bg-[#E8A838] text-white'
+                        ? 'bg-[#E8A838] text-[#1A2535]'
                         : 'text-[#1A2535] hover:bg-[#E8A838]/8'
                     }`}
                   >
@@ -354,7 +353,7 @@ const Navbar: React.FC = () => {
                     onClick={() => toggleMobileSection('capabilities')}
                     className={`flex min-h-11 w-12 items-center justify-center border-l transition-colors ${
                       isCapabilitiesActive
-                        ? 'border-white/20 bg-[#E8A838] text-white'
+                        ? 'border-[#1A2535]/10 bg-[#E8A838] text-[#1A2535]'
                         : 'border-[#1A2535]/8 text-[#1A2535]/45 hover:bg-[#E8A838]/8 hover:text-[#E8A838]'
                     }`}
                     aria-label="Toggle capabilities submenu"
@@ -405,7 +404,7 @@ const Navbar: React.FC = () => {
                     onClick={closeMobileMenu}
                     className={`flex min-h-11 flex-1 items-center px-4 text-[15px] font-semibold transition-colors ${
                       isIndustriesActive
-                        ? 'bg-[#E8A838] text-white'
+                        ? 'bg-[#E8A838] text-[#1A2535]'
                         : 'text-[#1A2535] hover:bg-[#E8A838]/8'
                     }`}
                   >
@@ -418,7 +417,7 @@ const Navbar: React.FC = () => {
                     onClick={() => toggleMobileSection('industries')}
                     className={`flex min-h-11 w-12 items-center justify-center border-l transition-colors ${
                       isIndustriesActive
-                        ? 'border-white/20 bg-[#E8A838] text-white'
+                        ? 'border-[#1A2535]/10 bg-[#E8A838] text-[#1A2535]'
                         : 'border-[#1A2535]/8 text-[#1A2535]/45 hover:bg-[#E8A838]/8 hover:text-[#E8A838]'
                     }`}
                     aria-label="Toggle industries submenu"
@@ -458,7 +457,7 @@ const Navbar: React.FC = () => {
                     onClick={closeMobileMenu}
                     className={`flex min-h-11 flex-1 items-center px-4 text-[15px] font-semibold transition-colors ${
                       isWhoWeAreActive
-                        ? 'bg-[#E8A838] text-white'
+                        ? 'bg-[#E8A838] text-[#1A2535]'
                         : 'text-[#1A2535] hover:bg-[#E8A838]/8'
                     }`}
                   >
@@ -471,7 +470,7 @@ const Navbar: React.FC = () => {
                     onClick={() => toggleMobileSection('who-we-are')}
                     className={`flex min-h-11 w-12 items-center justify-center border-l transition-colors ${
                       isWhoWeAreActive
-                        ? 'border-white/20 bg-[#E8A838] text-white'
+                        ? 'border-[#1A2535]/10 bg-[#E8A838] text-[#1A2535]'
                         : 'border-[#1A2535]/8 text-[#1A2535]/45 hover:bg-[#E8A838]/8 hover:text-[#E8A838]'
                     }`}
                     aria-label="Toggle who we are submenu"
@@ -515,7 +514,7 @@ const Navbar: React.FC = () => {
                     onClick={closeMobileMenu}
                     className={`flex min-h-11 flex-1 items-center px-4 text-[15px] font-semibold transition-colors ${
                       isInsightsActive
-                        ? 'bg-[#E8A838] text-white'
+                        ? 'bg-[#E8A838] text-[#1A2535]'
                         : 'text-[#1A2535] hover:bg-[#E8A838]/8'
                     }`}
                   >
@@ -528,7 +527,7 @@ const Navbar: React.FC = () => {
                     onClick={() => toggleMobileSection('insights')}
                     className={`flex min-h-11 w-12 items-center justify-center border-l transition-colors ${
                       isInsightsActive
-                        ? 'border-white/20 bg-[#E8A838] text-white'
+                        ? 'border-[#1A2535]/10 bg-[#E8A838] text-[#1A2535]'
                         : 'border-[#1A2535]/8 text-[#1A2535]/45 hover:bg-[#E8A838]/8 hover:text-[#E8A838]'
                     }`}
                     aria-label="Toggle insights submenu"
@@ -571,8 +570,7 @@ const Navbar: React.FC = () => {
               <Link
                 href="/contact"
                 onClick={closeMobileMenu}
-                aria-label="Book a call"
-                className="flex items-center justify-center gap-2 w-full px-6 py-4 bg-[#1A2535] text-[#FFFFFF] rounded-xl text-[15px] font-semibold hover:bg-[#E8A838] transition-colors duration-200"
+                className="flex items-center justify-center gap-2 w-full px-6 py-4 bg-[#1A2535] text-[#FFFFFF] rounded-xl text-[15px] font-semibold hover:bg-[#E8A838] hover:text-[#1A2535] transition-colors duration-200"
               >
                 Book a Call
                 <ArrowUpRight className="h-4 w-4" />

@@ -14,7 +14,7 @@ export default function LegalMentions() {
             consumer protection, Code de Commerce) and standard digital publishing practice,
             the following legal information applies to the site hivevaultarc.com.
           </p>
-          <p className="geo-kicker mt-6">Last updated: May 3, 2026</p>
+          <p className="geo-kicker mt-6">Last updated: July 10, 2026</p>
         </div>
       </section>
 
@@ -76,8 +76,8 @@ export default function LegalMentions() {
           </p>
           <div className="geo-card card-hover mt-5 space-y-1">
             <p className="text-sm font-semibold text-[#1A2535]">Vercel Inc.</p>
-            <p className="text-sm text-secondary">340 Pine Street Suite 5</p>
-            <p className="text-sm text-secondary">San Francisco, CA 94104, United States</p>
+            <p className="text-sm text-secondary">440 N Barranca Avenue #4133</p>
+            <p className="text-sm text-secondary">Covina, CA 91723, United States</p>
             <a
               href="https://vercel.com"
               target="_blank"
@@ -174,10 +174,10 @@ export default function LegalMentions() {
         <article className="mb-12">
           <h2 className="services-brief-section-title">8. Cookies</h2>
           <p className="mt-4 text-base leading-relaxed text-secondary">
-            hivevaultarc.com uses essential technical cookies required for site operation, as well
-            as analytics cookies subject to your prior consent. For more information and to manage
-            your preferences, see the &quot;Cookies and Tracking Technologies&quot; section of
-            our{' '}
+            hivevaultarc.com does not currently use advertising or analytics cookies. Audience
+            measurement is provided through Vercel Web Analytics, which records anonymised,
+            aggregated page-view data without cookies or a persistent cross-site identifier. For
+            more information, see the &quot;Cookies and Tracking Technologies&quot; section of our{' '}
             <Link href="/privacy-policy" className="text-primary underline underline-offset-2">
               Privacy Policy
             </Link>

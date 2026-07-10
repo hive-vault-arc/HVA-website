@@ -172,7 +172,7 @@ function IndustryCard({ card, index }: { card: (typeof industryCards)[number]; i
       transition={{ duration: 0.5 }}
       className={`industry-card industry-card--${card.layout} industry-card--${card.tone}`}
     >
-      <Link href={card.href} className="industry-card-link" aria-label={`See related work for ${card.title}`}>
+      <Link href={card.href} className="industry-card-link">
         <div className="industry-card-image">
           <Image
             src={card.image}
@@ -253,7 +253,7 @@ export default function Industries() {
               </div>
               <h1 className="industries-hero-title">
                 Industry Context,
-                <br />
+                <br />{' '}
                 <em>Not Generic Delivery.</em>
               </h1>
               <p className="industries-hero-lede">
@@ -361,7 +361,7 @@ export default function Industries() {
               className="mb-8 text-[clamp(2.25rem,11vw,3rem)] leading-tight text-[#1A2535] md:text-5xl"
               style={{ fontFamily: 'var(--font-headline)' }}
             >
-              Active Research &amp; Development:<br />
+              Active Research &amp; Development:<br />{' '}
               <em className="font-light italic">One Framework. Many Operating Contexts.</em>
             </h2>
 

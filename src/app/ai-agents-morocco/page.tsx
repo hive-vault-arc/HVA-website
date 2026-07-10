@@ -72,7 +72,7 @@ export default function AIAgentsMoroccoPage() {
     <>
       <JsonLd data={[professionalServiceSchema, breadcrumbSchema]} />
 
-      <main className="bg-neutral text-tertiary">
+      <div className="bg-neutral text-tertiary">
 
         {/* ── Hero ── */}
         <section className="editorial-hero">
@@ -263,7 +263,7 @@ export default function AIAgentsMoroccoPage() {
             </div>
           </div>
         </section>
-      </main>
+      </div>
 
       <FaqSection faqs={AI_AGENTS_MOROCCO_FAQS} heading="AI Agents in Morocco: Frequently Asked Questions" />
     </>

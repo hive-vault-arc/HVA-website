@@ -149,8 +149,8 @@ export default function Arc() {
               </span>
             </div>
             <h1 className="arc-hero-title">
-              <span>Assess.</span>
-              <span>Re-engineer.</span>
+              <span>Assess.</span>{' '}
+              <span>Re-engineer.</span>{' '}
               <span>Command.</span>
             </h1>
             <p className="arc-hero-lede">

@@ -1,5 +1,5 @@
 import type { SanityImageSource } from '@sanity/image-url';
-import { sanityFetch } from '../sanity/lib/fetch';
+import { sanityFetch, withSanityFallback } from '../sanity/lib/fetch';
 import { urlForImage } from '../sanity/lib/image';
 import {
   allEmployeeProfilesQuery,
@@ -288,31 +288,8 @@ function publishedProfiles(profiles: EmployeeProfile[]): EmployeeProfile[] {
   return sortProfiles(profiles.filter((profile) => profile.visibility !== 'hidden'));
 }
 
-function isRecoverableSanityFetchError(error: unknown): boolean {
-  const candidate = error as {
-    isNetworkError?: boolean;
-    message?: string;
-    cause?: { code?: string };
-  };
-
-  return Boolean(
-    candidate?.isNetworkError ||
-      candidate?.message === 'fetch failed' ||
-      candidate?.cause?.code?.startsWith('UND_')
-  );
-}
-
 async function fetchEmployeeData<T>(options: Parameters<typeof sanityFetch<T>>[0], fallback: T): Promise<T> {
-  try {
-    return await sanityFetch<T>(options);
-  } catch (error) {
-    if (isRecoverableSanityFetchError(error)) {
-      console.warn('Sanity employee profile fetch failed; using local fallback content.', error);
-      return fallback;
-    }
-
-    throw error;
-  }
+  return withSanityFallback(() => sanityFetch<T>(options), () => fallback, 'employee profile');
 }
 
 export async function getAllEmployeeProfiles(): Promise<EmployeeProfile[]> {

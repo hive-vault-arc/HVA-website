@@ -156,7 +156,7 @@ export default function ServicesDigitauxTangerPage() {
       <LocaleDocumentAttributes locale="fr" />
       <JsonLd data={[professionalServiceSchema, breadcrumbSchema]} />
 
-      <main className="bg-neutral text-tertiary" lang="fr">
+      <div className="bg-neutral text-tertiary" lang="fr">
         <section className="editorial-hero">
           <div className="editorial-shell grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
             <div>
@@ -342,7 +342,7 @@ export default function ServicesDigitauxTangerPage() {
             </div>
           </div>
         </section>
-      </main>
+      </div>
 
       <FaqSection
         faqs={SERVICES_DIGITAUX_TANGER_FAQS}

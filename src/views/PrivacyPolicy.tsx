@@ -15,7 +15,7 @@ export default function PrivacyPolicy() {
             of personal data (CNDP), as well as the General Data Protection Regulation (GDPR)
             applicable to residents of the European Union under its extraterritorial scope.
           </p>
-          <p className="geo-kicker mt-6">Last updated: May 3, 2026</p>
+          <p className="geo-kicker mt-6">Last updated: July 10, 2026</p>
         </div>
       </section>
 
@@ -62,8 +62,9 @@ export default function PrivacyPolicy() {
               request timestamps.
             </li>
             <li>
-              <strong>Analytics data</strong> — aggregated navigation metrics (page views, session
-              duration) collected via Vercel Analytics.
+              <strong>Analytics data</strong> — anonymised page paths, referrers, device and browser
+              categories, and coarse location data collected through Vercel Web Analytics. The
+              analytics service does not store IP addresses or use cookies to identify visitors.
             </li>
           </ul>
         </article>
@@ -99,8 +100,8 @@ export default function PrivacyPolicy() {
               agreed service engagement.
             </li>
             <li>
-              <strong>Legitimate interest</strong> — server logs and anonymised analytics for
-              site security and improvement.
+              <strong>Legitimate interest</strong> — security logs and aggregated, cookieless
+              analytics used to protect and improve the site.
             </li>
           </ul>
         </article>
@@ -109,20 +110,11 @@ export default function PrivacyPolicy() {
         <article className="mb-12">
           <h2 className="services-brief-section-title">5. Cookies and Tracking Technologies</h2>
           <p className="mt-4 text-base leading-relaxed text-secondary">
-            The site uses two categories of cookies:
-          </p>
-          <ul className="mt-4 list-disc space-y-2 pl-6 text-sm leading-relaxed text-secondary">
-            <li>
-              <strong>Essential cookies</strong> — technically required for site operation
-              (security, navigation). Active by default; no consent required.
-            </li>
-            <li>
-              <strong>Analytics cookies</strong> — audience measurement via Vercel Analytics.
-              These cookies are disabled until you have given explicit consent.
-            </li>
-          </ul>
-          <p className="mt-4 text-sm leading-relaxed text-secondary">
-            You can modify your cookie preferences at any time through your browser settings.
+            The public site does not currently use advertising or analytics cookies. Vercel Web
+            Analytics measures page views with anonymised, aggregated data and does not place a
+            cookie or retain a persistent identifier that follows a visitor across websites or
+            days. If a future site feature requires optional cookies, this policy and the consent
+            controls will be updated before those cookies are enabled.
           </p>
         </article>
 
@@ -144,15 +136,15 @@ export default function PrivacyPolicy() {
                 </tr>
                 <tr>
                   <td className="py-3 pr-6">Server logs</td>
-                  <td className="py-3">12 months</td>
+                  <td className="py-3">According to the hosting provider&apos;s security-log retention settings</td>
                 </tr>
                 <tr>
                   <td className="py-3 pr-6">Client data (active contracts)</td>
                   <td className="py-3">5 years after end of commercial relationship</td>
                 </tr>
                 <tr>
-                  <td className="py-3 pr-6">Cookie consent</td>
-                  <td className="py-3">3 years</td>
+                  <td className="py-3 pr-6">Anonymised analytics reports</td>
+                  <td className="py-3">For the reporting window available under the active Vercel plan</td>
                 </tr>
               </tbody>
             </table>
@@ -168,7 +160,7 @@ export default function PrivacyPolicy() {
           </p>
           <ul className="mt-4 list-disc space-y-2 pl-6 text-sm leading-relaxed text-secondary">
             <li>
-              <strong>Vercel Inc.</strong> — site hosting and deployment (San Francisco, CA, USA).
+              <strong>Vercel Inc.</strong> — site hosting and deployment (Covina, CA, USA).
             </li>
             <li>
               <strong>Vercel Analytics</strong> — anonymised audience measurement.
@@ -268,7 +260,7 @@ export default function PrivacyPolicy() {
             data against loss, unauthorised access, disclosure, or accidental destruction:
           </p>
           <ul className="mt-4 list-disc space-y-2 pl-6 text-sm leading-relaxed text-secondary">
-            <li>Encryption of data in transit via HTTPS / TLS 1.3.</li>
+            <li>Encryption of data in transit via HTTPS/TLS.</li>
             <li>Strict access controls on systems holding personal data.</li>
             <li>Documented security incident response procedures.</li>
             <li>Regular review of user access rights.</li>

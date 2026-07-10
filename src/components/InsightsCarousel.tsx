@@ -121,9 +121,9 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
         </div>
         <h2 className="font-headline text-[clamp(2rem,11vw,2.6rem)] md:text-5xl leading-[1.06] tracking-tight text-[#1A2535]">
           Thinking, Testing,{' '}
-          <em className="not-italic text-[#1A2535]/40">Shipping.</em>
+          <em className="not-italic text-[#566274]">Shipping.</em>
         </h2>
-        <p className="mt-3 text-sm text-[#9AA4B2] max-w-sm mx-auto leading-relaxed">
+        <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-[#566274]">
           Field notes from programs we&apos;ve built and teams we&apos;ve transformed.
         </p>
       </div>
@@ -152,13 +152,15 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
                 left: '50%',
                 marginLeft: -cardW / 2,
                 zIndex,
-                cursor: isCenter ? 'default' : 'pointer',
+                cursor: 'pointer',
               }}
               animate={{ x, scale, opacity }}
               transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
               onClick={() => { if (!isCenter) setActiveIndex(i); }}
               onMouseEnter={() => { if (isCenter) setHoveredCenter(true); }}
               onMouseLeave={() => { if (isCenter) setHoveredCenter(false); }}
+              aria-hidden={!isCenter}
+              inert={!isCenter}
             >
               {/* Card shell */}
               <div className="relative w-full h-full overflow-hidden bg-white shadow-[0_4px_24px_rgba(15,23,42,0.10)]">
@@ -188,8 +190,12 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
                 </div>
 
                 {/* ── Static bottom text panel (28% height) ── */}
-                <div className="absolute bottom-0 left-0 right-0 bg-white px-5 pt-4 pb-5" style={{ height: '28%' }}>
-                  <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#9AA4B2] mb-2">
+                <Link
+                  href={item.href}
+                  className="absolute bottom-0 left-0 right-0 bg-white px-5 pt-4 pb-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#E8A838]"
+                  style={{ height: '28%' }}
+                >
+                  <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.22em] text-[#566274]">
                     <span className="text-[#1A2535] font-extrabold">
                       {item.type === 'blog' ? 'Article' : 'Case Study'}
                     </span>
@@ -198,7 +204,7 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
                   <h3 className="font-headline text-[1.2rem] leading-snug text-[#1A2535] line-clamp-2">
                     {item.title}
                   </h3>
-                </div>
+                </Link>
 
                 {/* ── Hover CTA panel — slides up over text panel ── */}
                 <motion.div
@@ -210,7 +216,7 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
                   animate={{ y: isCenter && hoveredCenter ? 0 : '100%' }}
                   transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-[#9AA4B2] mb-1">
+                  <p className="mb-1 text-[9px] font-bold uppercase tracking-[0.22em] text-[#566274]">
                     <span className="text-[#1A2535] font-extrabold">
                       {item.type === 'blog' ? 'Article' : 'Case Study'}
                     </span>
@@ -224,8 +230,9 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
                   </p>
                   <Link
                     href={item.href}
+                    tabIndex={-1}
                     className="inline-flex items-center justify-center gap-2
-                               bg-[#E8A838] text-white
+                               bg-[#E8A838] text-[#1A2535]
                                min-h-11 px-5 py-3.5 w-full
                                text-[10px] font-bold uppercase tracking-[0.18em]
                                hover:bg-[#C8891C] transition-colors duration-200"
@@ -245,7 +252,7 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
         <button
           onClick={() => setIsPaused((p) => !p)}
           className="w-11 h-11 border border-[#DDE3EA] flex items-center justify-center
-                     text-[#566274] hover:bg-[#E8A838] hover:text-white hover:border-[#E8A838]
+                     text-[#566274] hover:bg-[#E8A838] hover:text-[#1A2535] hover:border-[#E8A838]
                      transition-colors duration-200"
           aria-label={isPaused ? 'Play' : 'Pause'}
         >
@@ -254,7 +261,7 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
         <button
           onClick={prev}
           className="w-11 h-11 border border-[#DDE3EA] flex items-center justify-center
-                     text-[#566274] hover:bg-[#E8A838] hover:text-white hover:border-[#E8A838]
+                     text-[#566274] hover:bg-[#E8A838] hover:text-[#1A2535] hover:border-[#E8A838]
                      transition-colors duration-200"
           aria-label="Previous"
         >
@@ -263,7 +270,7 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
         <button
           onClick={next}
           className="w-11 h-11 border border-[#DDE3EA] flex items-center justify-center
-                     text-[#566274] hover:bg-[#E8A838] hover:text-white hover:border-[#E8A838]
+                     text-[#566274] hover:bg-[#E8A838] hover:text-[#1A2535] hover:border-[#E8A838]
                      transition-colors duration-200"
           aria-label="Next"
         >

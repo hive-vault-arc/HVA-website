@@ -1,8 +1,8 @@
 import {
   getAllSanityPosts,
-  getRelatedSanityPosts,
   getSanityPostBySlug,
 } from './sanity-content';
+import { withSanityFallback } from '../sanity/lib/fetch';
 
 export type ContentSection =
   | { type: 'paragraph'; content: string }
@@ -1036,16 +1036,21 @@ export const POSTS: BlogPost[] = [
 ];
 
 export function getAllPosts(): Promise<BlogPost[]> {
-  return getAllSanityPosts();
+  return withSanityFallback(getAllSanityPosts, () => POSTS, 'blog post');
 }
 
 export async function getPostBySlug(slug: string): Promise<BlogPost> {
-  const post = await getSanityPostBySlug(slug);
+  const post = await withSanityFallback(
+    () => getSanityPostBySlug(slug),
+    () => POSTS.find((item) => item.slug === slug) ?? null,
+    'blog post'
+  );
   if (!post) throw new Error(`Blog post not found: ${slug}`);
   return post;
 }
 
-export function getRelatedPosts(currentSlug: string, limit = 3): Promise<BlogPost[]> {
-  return getRelatedSanityPosts(currentSlug, limit);
+export async function getRelatedPosts(currentSlug: string, limit = 3): Promise<BlogPost[]> {
+  const posts = await getAllPosts();
+  return posts.filter((post) => post.slug !== currentSlug).slice(0, limit);
 }
 

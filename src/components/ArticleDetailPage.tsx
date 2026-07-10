@@ -128,7 +128,7 @@ export default function ArticleDetailPage({
         ];
 
   return (
-    <main className="bg-[#FFFFFF]">
+    <div className="bg-[#FFFFFF]">
       {/* Scroll progress bar */}
       <motion.div
         aria-hidden="true"
@@ -247,7 +247,7 @@ export default function ArticleDetailPage({
               <address className="not-italic">
                 <p className="text-sm text-[#1A2535]" style={{ fontFamily: 'var(--font-body)' }}>
                   <span>By </span>
-                  <Link rel="author" href={authorHref} className="text-[#E8A838] hover:underline">
+                  <Link rel="author" href={authorHref} className="text-[var(--section-label-color)] hover:underline">
                     {author.name}
                   </Link>
                 </p>
@@ -334,7 +334,7 @@ export default function ArticleDetailPage({
               </p>
               <Link
                 href="/case-studies"
-              className="inline-flex min-h-11 items-center gap-2 text-sm font-bold uppercase tracking-widest text-[#E8A838] transition-all hover:gap-4"
+              className="inline-flex min-h-11 items-center gap-2 text-sm font-bold uppercase tracking-widest text-[var(--section-label-color)] transition-all hover:gap-4"
                 style={{ fontFamily: 'var(--font-body)' }}
               >
                 Explore case studies
@@ -438,6 +438,6 @@ export default function ArticleDetailPage({
           secondaryHref={bottomCta.secondaryHref}
         />
       )}
-    </main>
+    </div>
   );
 }

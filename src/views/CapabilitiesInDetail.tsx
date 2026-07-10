@@ -74,7 +74,7 @@ const CapabilitiesInDetail: React.FC = () => {
 
   return (
     <MotionConfig reducedMotion={motionReduced ? 'always' : 'never'}>
-      <main className="cap-detail-page">
+      <div className="cap-detail-page">
         <motion.div
           aria-hidden="true"
           className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-[#E8A838]"
@@ -317,7 +317,7 @@ const CapabilitiesInDetail: React.FC = () => {
           secondaryLabel="Back to Capabilities"
           secondaryHref="/capabilities"
         />
-      </main>
+      </div>
     </MotionConfig>
   );
 };

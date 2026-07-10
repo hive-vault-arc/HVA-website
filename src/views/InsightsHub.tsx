@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import PageAmbientBackground from '../components/PageAmbientBackground';
+import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import BottomCTA from '../components/BottomCTA';
 import InsightsSlider, { type SlideItem } from '../components/InsightsSlider';
 import SectionBrandMark from '../components/SectionBrandMark';
@@ -61,66 +61,60 @@ function CategoryCards() {
       {CATEGORY_CARDS.map((cat) => {
         const isHovered = hovered === cat.href;
         return (
-          <motion.div
+          <Link
             key={cat.href}
-            variants={fadeUp}
-            transition={{ duration: 0.5 }}
-            className="relative overflow-hidden"
-            style={{ height: 300 }}
+            href={cat.href}
+            className="group block focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A838] focus-visible:ring-offset-4"
             onMouseEnter={() => setHovered(cat.href)}
             onMouseLeave={() => setHovered(null)}
+            onFocus={() => setHovered(cat.href)}
+            onBlur={() => setHovered(null)}
           >
-            {/* Image */}
-            <motion.img
-              src={cat.image}
-              alt={cat.label}
-              className="absolute inset-0 w-full h-full object-cover"
-              animate={{
-                scale: isHovered ? 1.07 : 1,
-                filter: isHovered ? 'blur(6px)' : 'blur(0px)',
-              }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            />
-
-            {/* Always-on dark gradient at bottom */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#1A2535]/80 via-[#1A2535]/20 to-transparent" />
-
-            {/* Default state — small label bottom-left */}
             <motion.div
-              className="absolute bottom-0 left-0 right-0 p-5"
-              animate={{ opacity: isHovered ? 0 : 1, y: isHovered ? 6 : 0 }}
-              transition={{ duration: 0.22 }}
+              variants={fadeUp}
+              transition={{ duration: 0.5 }}
+              className="relative h-[300px] overflow-hidden"
             >
-              <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-white/50 mb-1">
-                Insight Type
-              </p>
-              <span className="insights-category-title">
-                {cat.label}
-              </span>
-            </motion.div>
+              <motion.img
+                src={cat.image}
+                alt=""
+                className="absolute inset-0 h-full w-full object-cover"
+                animate={{
+                  scale: isHovered ? 1.07 : 1,
+                  filter: isHovered ? 'blur(6px)' : 'blur(0px)',
+                }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              />
 
-            {/* Hover state — bigger title + button */}
-            <motion.div
-              className="absolute inset-0 flex flex-col justify-center items-start p-6"
-              animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 10 }}
-              transition={{ duration: 0.28 }}
-              style={{ pointerEvents: isHovered ? 'auto' : 'none' }}
-            >
-              <span className="insights-category-title insights-category-title--hover">
-                {cat.label}
-              </span>
-              <Link
-                href={cat.href}
-                className="inline-flex items-center gap-2 px-4 py-2 text-[10px] font-bold
-                           uppercase tracking-[0.14em] text-white border border-white/40
-                           bg-white/10 backdrop-blur-sm hover:bg-[#E8A838] hover:border-[#E8A838]
-                           transition-colors duration-200"
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1A2535]/80 via-[#1A2535]/20 to-transparent" />
+
+              <motion.div
+                className="absolute bottom-0 left-0 right-0 p-5"
+                animate={{ opacity: isHovered ? 0 : 1, y: isHovered ? 6 : 0 }}
+                transition={{ duration: 0.22 }}
               >
-                Open {cat.label}
-                <span aria-hidden="true">→</span>
-              </Link>
+                <p className="mb-1 text-[9px] font-bold uppercase tracking-[0.22em] text-white/50">
+                  Insight Type
+                </p>
+                <span className="insights-category-title">{cat.label}</span>
+              </motion.div>
+
+              <motion.div
+                className="absolute inset-0 flex flex-col items-start justify-center p-6"
+                animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 10 }}
+                transition={{ duration: 0.28 }}
+                aria-hidden={!isHovered}
+              >
+                <span className="insights-category-title insights-category-title--hover">
+                  {cat.label}
+                </span>
+                <span className="inline-flex items-center gap-2 border border-white/40 bg-white/10 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-white backdrop-blur-sm transition-colors duration-200 group-hover:border-[#E8A838] group-hover:bg-[#E8A838]">
+                  Open {cat.label}
+                  <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+                </span>
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </Link>
         );
       })}
     </motion.div>
@@ -373,7 +367,7 @@ function buildAllInsights(
     title: report.title,
     excerpt: report.summary,
     image: report.coverImage ?? '',
-    href: '/insights/research-reports',
+    href: `/insights/research-reports/${report.slug}`,
     date: report.publishedAt,
     readTime: report.readTime,
   }));
@@ -408,74 +402,72 @@ function InsightGridCard({ item, index }: { readonly item: InsightGridItem; read
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.45, delay: (index % 6) * 0.06 }}
-      className="group relative overflow-hidden bg-[#1A2535] cursor-pointer"
+      className="group relative overflow-hidden bg-[#1A2535]"
       style={{ height: 320 }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onFocusCapture={() => setHovered(true)}
+      onBlurCapture={() => setHovered(false)}
     >
-      {/* Image */}
-      {item.image && (
-        <motion.img
-          src={item.image}
-          alt={item.title}
-          className="absolute inset-0 w-full h-full object-cover"
-          animate={{
-            scale: hovered ? 1.07 : 1,
-            filter: hovered ? 'blur(6px)' : 'blur(0px)',
-          }}
-          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        />
-      )}
-
-      {/* Base overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#1A2535]/85 via-[#1A2535]/25 to-transparent" />
-
-      {/* Tag — fades on hover */}
-      <motion.div
-        className="absolute top-4 left-4 flex items-center gap-1.5"
-        animate={{ opacity: hovered ? 0 : 1 }}
-        transition={{ duration: 0.2 }}
+      <Link
+        href={item.href}
+        className="absolute inset-0 block focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#E8A838]"
       >
-        <span className="w-1.5 h-1.5 rounded-full bg-[#F0C15A]" />
-        <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-white">
-          {item.tag}
-        </span>
-      </motion.div>
+        {item.image && (
+          <motion.img
+            src={item.image}
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover"
+            animate={{
+              scale: hovered ? 1.07 : 1,
+              filter: hovered ? 'blur(6px)' : 'blur(0px)',
+            }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          />
+        )}
 
-      {/* Default bottom title */}
-      <motion.div
-        className="absolute bottom-0 left-0 right-0 p-5"
-        animate={{ opacity: hovered ? 0 : 1 }}
-        transition={{ duration: 0.2 }}
-      >
-        <p className="font-headline text-lg font-medium text-white leading-snug line-clamp-2">
-          {item.title}
-        </p>
-      </motion.div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1A2535]/85 via-[#1A2535]/25 to-transparent" />
 
-      {/* Hover overlay */}
-      <motion.div
-        className="absolute inset-0 flex flex-col justify-start p-5 pt-8"
-        animate={{ opacity: hovered ? 1 : 0 }}
-        transition={{ duration: 0.28 }}
-        style={{ pointerEvents: hovered ? 'auto' : 'none', background: 'rgba(15,23,42,0.72)', backdropFilter: 'blur(2px)' }}
-      >
-        <h3 className="font-headline text-xl font-medium text-white leading-snug mb-3">
-          {item.title}
-        </h3>
-        <p className="text-xs leading-relaxed text-white/65 line-clamp-3 mb-5">
-          {item.excerpt}
-        </p>
-        <Link
-          href={item.href}
-          className="inline-flex items-center gap-2 self-start px-4 py-2 text-[9px] font-bold
-                     uppercase tracking-[0.14em] text-white border border-white/35
-                     bg-white/10 backdrop-blur-sm hover:bg-[#E8A838] hover:border-[#E8A838]
-                     transition-all duration-200"
+        <motion.div
+          className="absolute left-4 top-4 flex items-center gap-1.5"
+          animate={{ opacity: hovered ? 0 : 1 }}
+          transition={{ duration: 0.2 }}
         >
-          Open {item.typeLabel.toLowerCase()} <span aria-hidden="true">→</span>
-        </Link>
-      </motion.div>
+          <span className="h-1.5 w-1.5 rounded-full bg-[#F0C15A]" />
+          <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-white">
+            {item.tag}
+          </span>
+        </motion.div>
+
+        <motion.div
+          className="absolute bottom-0 left-0 right-0 p-5"
+          animate={{ opacity: hovered ? 0 : 1 }}
+          transition={{ duration: 0.2 }}
+        >
+          <h3 className="line-clamp-2 font-headline text-lg font-medium leading-snug text-white">
+            {item.title}
+          </h3>
+        </motion.div>
+
+        <motion.div
+          className="absolute inset-0 flex flex-col justify-start p-5 pt-8"
+          animate={{ opacity: hovered ? 1 : 0 }}
+          transition={{ duration: 0.28 }}
+          aria-hidden={!hovered}
+          style={{ background: 'rgba(15,23,42,0.72)', backdropFilter: 'blur(2px)' }}
+        >
+          <p className="mb-3 font-headline text-xl font-medium leading-snug text-white">
+            {item.title}
+          </p>
+          <p className="mb-5 line-clamp-3 text-xs leading-relaxed text-white/65">
+            {item.excerpt}
+          </p>
+          <span className="inline-flex items-center gap-2 self-start border border-white/35 bg-white/10 px-4 py-2 text-[9px] font-bold uppercase tracking-[0.14em] text-white transition-all duration-200 group-hover:border-[#E8A838] group-hover:bg-[#E8A838]">
+            Open {item.typeLabel.toLowerCase()}
+            <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+          </span>
+        </motion.div>
+      </Link>
     </motion.article>
   );
 }
@@ -500,7 +492,7 @@ function AllInsightsGrid({ items }: { readonly items: InsightGridItem[] }) {
               Everything We've Published
             </h2>
           </div>
-          <span className="text-[10px] text-[#9AA4B2] uppercase tracking-widest hidden sm:block">
+          <span className="hidden text-[10px] uppercase tracking-widest text-[#566274] sm:block">
             {items.length} items
           </span>
         </div>
@@ -520,7 +512,7 @@ function AllInsightsGrid({ items }: { readonly items: InsightGridItem[] }) {
                          hover:bg-[#1A2535] hover:text-white transition-all duration-200"
             >
               {"Load more "}
-              <span aria-hidden="true" className="text-xs">↓</span>
+              <ArrowDown className="h-3.5 w-3.5" aria-hidden="true" />
             </button>
           </div>
         )}
@@ -557,8 +549,6 @@ export default function InsightsHub({
         style={{ scaleX: progressScale }}
       />
 
-      <PageAmbientBackground className="-z-10" />
-
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
       <section className="mx-auto max-w-7xl px-6 pt-28 pb-10 lg:px-14">
         <div className="flex items-center justify-between gap-12">
@@ -577,12 +567,12 @@ export default function InsightsHub({
             </div>
             <h1 className="font-headline text-4xl font-medium leading-[1.04] tracking-tight sm:text-5xl lg:text-[4.25rem]">
               What We Think,
-              <br />
+              <br />{' '}
               <em className="italic text-[#566274]">Test, and Ship.</em>
             </h1>
             <div className="mt-6 flex items-center gap-4">
               <span className="block h-px w-8 bg-[#E8A838] flex-shrink-0" />
-              <p className="text-sm leading-relaxed text-[#1A2535]/55 max-w-sm">
+              <p className="max-w-sm text-sm leading-relaxed text-[#566274]">
                 Blogs, case studies, perspectives &amp; research — grounded in real operational work.
               </p>
             </div>

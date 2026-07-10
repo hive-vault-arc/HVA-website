@@ -1,6 +1,6 @@
 import type { SanityImageSource } from '@sanity/image-url';
 import { CAPABILITY_BRIEF_SECTIONS, CAPABILITY_DOMAINS } from './capabilities-content';
-import { sanityFetch } from '../sanity/lib/fetch';
+import { sanityFetch, withSanityFallback } from '../sanity/lib/fetch';
 import { urlForImage } from '../sanity/lib/image';
 import {
   allCapabilityProfilesQuery,
@@ -229,31 +229,8 @@ function publishedCapabilities(profiles: CapabilityProfile[]): CapabilityProfile
   return sortCapabilityProfiles(profiles.filter((profile) => profile.visibility !== 'hidden'));
 }
 
-function isRecoverableSanityFetchError(error: unknown): boolean {
-  const candidate = error as {
-    isNetworkError?: boolean;
-    message?: string;
-    cause?: { code?: string };
-  };
-
-  return Boolean(
-    candidate?.isNetworkError ||
-      candidate?.message === 'fetch failed' ||
-      candidate?.cause?.code?.startsWith('UND_')
-  );
-}
-
 async function fetchCapabilityData<T>(options: Parameters<typeof sanityFetch<T>>[0], fallback: T): Promise<T> {
-  try {
-    return await sanityFetch<T>(options);
-  } catch (error) {
-    if (isRecoverableSanityFetchError(error)) {
-      console.warn('Sanity capability fetch failed; using local fallback content.', error);
-      return fallback;
-    }
-
-    throw error;
-  }
+  return withSanityFallback(() => sanityFetch<T>(options), () => fallback, 'capability');
 }
 
 export function toCapabilityProfileSummary(profile: CapabilityProfile): CapabilityProfileSummary {

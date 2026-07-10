@@ -156,7 +156,7 @@ export default function HeroSlider() {
                 {slide.eyebrow}
               </span>
               <h1 className={slide.titleVariant === 'compact' ? 'home-hero-title home-hero-title--compact' : 'home-hero-title'}>
-                <span>{slide.h1Line1}</span>
+                <span>{slide.h1Line1}</span>{' '}
                 <em>{slide.h1Line2}</em>
               </h1>
               <p className="home-hero-copy">

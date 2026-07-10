@@ -1,8 +1,8 @@
 import {
   getAllSanityPerspectives,
-  getRelatedSanityPerspectives,
   getSanityPerspectiveBySlug,
 } from './sanity-content';
+import { withSanityFallback } from '../sanity/lib/fetch';
 
 export type PerspectiveSection =
   | { type: 'paragraph'; content: string }
@@ -35,7 +35,7 @@ export const PERSPECTIVES: Perspective[] = [
     subtitle:
       'Transformation fails when strategy, architecture, delivery, and operations are treated as separate handoffs instead of one accountable system.',
     summary:
-      "H.V.A's perspective on why modern transformation needs consulting, engineering, and operations connected from diagnosis to production.",
+      "Hive Vault Arc's perspective on why modern transformation needs consulting, engineering, and operations connected from diagnosis to production.",
     publishedAt: '2026-06-04',
     readTime: '7 min read',
     tag: 'Perspective',
@@ -223,7 +223,7 @@ export const PERSPECTIVES: Perspective[] = [
       {
         type: 'paragraph',
         content:
-          'The future belongs to firms that can think and ship in the same loop. H.V.A was built around that belief: advise, build, operate, and keep learning from the system after it goes live.',
+          'The future belongs to firms that can think and ship in the same loop. Hive Vault Arc was built around that belief: advise, build, operate, and keep learning from the system after it goes live.',
       },
       {
         type: 'paragraph',
@@ -263,7 +263,7 @@ export const PERSPECTIVES: Perspective[] = [
     subtitle:
       'AI creates value only when the workflow, data, ownership, and escalation path are clear. Otherwise, automation turns operational confusion into faster confusion.',
     summary:
-      "H.V.A's perspective on why businesses should diagnose workflows, data, ownership, and success metrics before deploying AI agents or automation.",
+      "Hive Vault Arc's perspective on why businesses should diagnose workflows, data, ownership, and success metrics before deploying AI agents or automation.",
     publishedAt: '2026-06-04',
     readTime: '7 min read',
     tag: 'Perspective',
@@ -485,11 +485,15 @@ export const PERSPECTIVES: Perspective[] = [
 ];
 
 export function getAllPerspectives(): Promise<Perspective[]> {
-  return getAllSanityPerspectives();
+  return withSanityFallback(getAllSanityPerspectives, () => PERSPECTIVES, 'perspective');
 }
 
 export async function getPerspectiveBySlug(slug: string): Promise<Perspective> {
-  const perspective = await getSanityPerspectiveBySlug(slug);
+  const perspective = await withSanityFallback(
+    () => getSanityPerspectiveBySlug(slug),
+    () => PERSPECTIVES.find((item) => item.slug === slug) ?? null,
+    'perspective'
+  );
   if (!perspective) {
     throw new Error(`Perspective not found: ${slug}`);
   }
@@ -497,6 +501,7 @@ export async function getPerspectiveBySlug(slug: string): Promise<Perspective> {
   return perspective;
 }
 
-export function getRelatedPerspectives(currentSlug: string, limit = 3): Promise<Perspective[]> {
-  return getRelatedSanityPerspectives(currentSlug, limit);
+export async function getRelatedPerspectives(currentSlug: string, limit = 3): Promise<Perspective[]> {
+  const perspectives = await getAllPerspectives();
+  return perspectives.filter((perspective) => perspective.slug !== currentSlug).slice(0, limit);
 }

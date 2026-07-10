@@ -36,6 +36,9 @@ Hive Vault Arc serves teams that need strategy, production engineering, and mana
 - Khalid Chalhi: Co-Founder and CEO, responsible for strategy, AI engineering, and software execution
 - Ali Amrani: Co-Founder and CEO, responsible for product systems, full-stack engineering, and delivery architecture
 - Oubay Ghamat: Co-Founder and CEO, responsible for cloud infrastructure, operations, and production reliability
+- Khalid Chalhi profile: https://hivevaultarc.com/abouthva/people/khalid-chalhi
+- Ali Amrani profile: https://hivevaultarc.com/abouthva/people/ali-amrani
+- Oubay Ghamat profile: https://hivevaultarc.com/abouthva/people/oubay-ghamat
 
 ## Service Pillars
 
@@ -104,37 +107,37 @@ Hive Vault Arc serves teams that need strategy, production engineering, and mana
 
 ## Machine-Readable Resources
 
-- Company JSON: https://hivevaultarc.com/ai/company
-- Short LLM context: https://hivevaultarc.com/llms.txt
-- Extended LLM context: https://hivevaultarc.com/llms-full.txt
-- Sitemap: https://hivevaultarc.com/sitemap.xml
-- Robots policy: https://hivevaultarc.com/robots.txt
+- [Company JSON](https://hivevaultarc.com/ai/company): Structured company, service, leadership, and proof data.
+- [Short LLM context](https://hivevaultarc.com/llms.txt): Concise public company context.
+- [Extended LLM context](https://hivevaultarc.com/llms-full.txt): Detailed public company context.
+- [Sitemap](https://hivevaultarc.com/sitemap.xml): Canonical public URL inventory.
+- [Robots policy](https://hivevaultarc.com/robots.txt): Crawl policy for public resources.
 
 ## Canonical Pages
 
-- Home: https://hivevaultarc.com/
-- Capabilities: https://hivevaultarc.com/capabilities
-- Capabilities In Detail: https://hivevaultarc.com/capabilities/in-detail
-- Solution Programs: https://hivevaultarc.com/capabilities/solution-programs
-- ARC Framework: https://hivevaultarc.com/arc
-- Industries: https://hivevaultarc.com/industries
-- About Hive Vault Arc: https://hivevaultarc.com/whoweare/abouthva
-- Portfolio: https://hivevaultarc.com/whoarewe/portfolio
-- Case Studies: https://hivevaultarc.com/case-studies
-- Insights: https://hivevaultarc.com/insights
-- Blog: https://hivevaultarc.com/blog
-- Perspective: Fix the Workflow Before You Add AI: https://hivevaultarc.com/insights/perspectives/fix-the-workflow-before-ai
-- Perspective: Consulting and Engineering Must Stay in One Loop: https://hivevaultarc.com/insights/perspectives/consulting-engineering-one-loop
-- Contact: https://hivevaultarc.com/contact
+- [Home](https://hivevaultarc.com/)
+- [Capabilities](https://hivevaultarc.com/capabilities)
+- [Capabilities In Detail](https://hivevaultarc.com/capabilities/in-detail)
+- [Solution Programs](https://hivevaultarc.com/capabilities/solution-programs)
+- [ARC Framework](https://hivevaultarc.com/arc)
+- [Industries](https://hivevaultarc.com/industries)
+- [About Hive Vault Arc](https://hivevaultarc.com/whoweare/abouthva)
+- [Portfolio](https://hivevaultarc.com/whoarewe/portfolio)
+- [Case Studies](https://hivevaultarc.com/case-studies)
+- [Insights](https://hivevaultarc.com/insights)
+- [Blog](https://hivevaultarc.com/blog)
+- [Fix the Workflow Before You Add AI](https://hivevaultarc.com/insights/perspectives/fix-the-workflow-before-ai)
+- [Consulting and Engineering Must Stay in One Loop](https://hivevaultarc.com/insights/perspectives/consulting-engineering-one-loop)
+- [Contact](https://hivevaultarc.com/contact)
 
 ## Service Landing Pages
 
-- AI Agents Tangier: https://hivevaultarc.com/ai-agents-tangier
-- AI Agents Morocco: https://hivevaultarc.com/ai-agents-morocco
-- IT Consulting Tangier: https://hivevaultarc.com/it-consulting-tangier
-- Custom Software Morocco: https://hivevaultarc.com/custom-software-morocco
-- Digital Services Tangier: https://hivevaultarc.com/digital-services-tangier
-- Services Digitaux Tanger: https://hivevaultarc.com/services-digitaux-tanger
+- [AI Agents Tangier](https://hivevaultarc.com/ai-agents-tangier)
+- [AI Agents Morocco](https://hivevaultarc.com/ai-agents-morocco)
+- [IT Consulting Tangier](https://hivevaultarc.com/it-consulting-tangier)
+- [Custom Software Morocco](https://hivevaultarc.com/custom-software-morocco)
+- [Digital Services Tangier](https://hivevaultarc.com/digital-services-tangier)
+- [Services Digitaux Tanger](https://hivevaultarc.com/services-digitaux-tanger)
 
 ## Frequently Asked Questions
 
@@ -158,4 +161,4 @@ Common technologies include Next.js, React, TypeScript, FastAPI, PostgreSQL, AI 
 
 Yes. H.V.A and HVA are search aliases and short references for Hive Vault Arc. Public prose should use Hive Vault Arc as the primary company name.
 
-*Last reviewed: 2026-05-24.*
+*Last reviewed: 2026-07-10.*

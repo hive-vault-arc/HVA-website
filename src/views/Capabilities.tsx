@@ -221,9 +221,9 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
               </div>
               <h1 className="capabilities-hero-title">
                 Six Pillars.
-                <br />
+                <br />{' '}
                 <em>One Accountable</em>
-                <br />
+                <br />{' '}
                 Partner.
               </h1>
               <p className="capabilities-hero-lede">
@@ -281,7 +281,6 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
                 <Link
                   href={card.href}
                   className="capability-card-link-shell"
-                  aria-label={`View ${card.title}: ${card.summary}`}
                 >
                   <div className="capability-card-image">
                     <Image
@@ -329,9 +328,9 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
               </div>
               <h2>
                 Assess.
-                <br />
+                <br />{' '}
                 Build.
-                <br />
+                <br />{' '}
                 Operate.
               </h2>
             </motion.div>

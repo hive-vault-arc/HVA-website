@@ -10,6 +10,7 @@ import {
   FaWhatsapp,
   FaXTwitter,
 } from 'react-icons/fa6';
+import { ArrowUpRight } from 'lucide-react';
 import {
   CONTACT_EMAIL,
   CONTACT_PHONE_DISPLAY,
@@ -68,17 +69,17 @@ const SOCIAL_LINKS: SocialLink[] = [
 
 export default function SocialLinks() {
   return (
-    <main className="bg-[#FFFFFF] text-[#1A2535]">
+    <div className="bg-[#FFFFFF] text-[#1A2535]">
       <div className="mx-auto max-w-lg px-6 pb-16 pt-28 lg:pt-32">
         <header className="mb-10 text-center">
           <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.28em] text-[var(--section-label-color)]">
-            H . V . A
+            HVA / Connect
           </p>
           <h1 className="font-headline text-4xl font-medium leading-tight tracking-tight text-[#1A2535]">
             Hive Vault Arc
           </h1>
           <p className="mt-3 text-sm leading-relaxed text-[#566274]">
-            AI &amp; Digital Transformation - Tangier, Morocco
+            AI &amp; Digital Transformation in Tangier, Morocco
           </p>
         </header>
 
@@ -99,12 +100,10 @@ export default function SocialLinks() {
                     </p>
                     <p className="mt-0.5 truncate text-sm text-[#566274]">{handle}</p>
                   </div>
-                  <span
-                    className="text-sm font-bold text-[#E8A838] transition-transform group-hover:translate-x-0.5"
+                  <ArrowUpRight
+                    className="h-4 w-4 text-[#E8A838] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                     aria-hidden="true"
-                  >
-                    -&gt;
-                  </span>
+                  />
                 </a>
               </li>
             ))}
@@ -115,6 +114,6 @@ export default function SocialLinks() {
           hivevaultarc.com
         </p>
       </div>
-    </main>
+    </div>
   );
 }

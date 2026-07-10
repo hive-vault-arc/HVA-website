@@ -84,7 +84,7 @@ export default function ITConsultingTangierPage() {
     <>
       <JsonLd data={[professionalServiceSchema, breadcrumbSchema]} />
 
-      <main className="bg-neutral text-tertiary">
+      <div className="bg-neutral text-tertiary">
 
         {/* ── Hero ── */}
         <section className="editorial-hero">
@@ -260,7 +260,7 @@ export default function ITConsultingTangierPage() {
             </div>
           </div>
         </section>
-      </main>
+      </div>
 
       <FaqSection faqs={IT_CONSULTING_TANGIER_FAQS} heading="IT Consulting in Tangier: Frequently Asked Questions" />
     </>

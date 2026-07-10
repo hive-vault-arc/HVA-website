@@ -193,7 +193,7 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
     <>
       <LocaleDocumentAttributes locale={locale} direction={direction} />
       <JsonLd data={schema} />
-      <main lang={locale} dir={direction} className="bg-white text-[#1A2535]">
+      <div lang={locale} dir={direction} className="bg-white text-[#1A2535]">
         <section className="editorial-hero">
           <div className="editorial-shell grid gap-10 lg:grid-cols-[1.12fr_0.88fr] lg:items-end">
             <div>
@@ -230,7 +230,7 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
             <ul className="grid gap-px bg-[#DDE3EA] sm:grid-cols-3" aria-label="Delivery coverage">
               {content.proofPoints.map((point, index) => (
                 <li key={point} className="bg-white px-5 py-4">
-                  <span className="block text-[10px] font-bold tracking-[0.18em] text-[#C8891C]">
+                  <span className="block text-[10px] font-bold tracking-[0.18em] text-[var(--section-label-color)]">
                     0{index + 1}
                   </span>
                   <span className="mt-2 block text-sm font-semibold text-[#1A2535]">{point}</span>
@@ -242,7 +242,7 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
             </p>
           </div>
         </section>
-      </main>
+      </div>
     </>
   );
 }

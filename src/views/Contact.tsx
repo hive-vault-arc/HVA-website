@@ -116,6 +116,7 @@ const Contact: React.FC = () => {
 
         {/* ── Main grid ────────────────────────────────────────────────── */}
         <section className="mx-auto max-w-7xl px-6 pb-24 sm:px-8 md:pb-32">
+          <h2 className="sr-only">Contact details and discovery form</h2>
           <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-10 xl:gap-24">
 
             {/* Left column — contact info + map */}
@@ -135,7 +136,7 @@ const Contact: React.FC = () => {
                     <h3 className="text-xs font-label font-bold uppercase tracking-widest text-[#566274]">Operating Region</h3>
                   </div>
                   <p className="text-lg font-body leading-relaxed text-[#1A2535]">
-                    Tangier, Morocco<br />
+                    Tangier, Morocco<br />{' '}
                     Remote delivery worldwide
                   </p>
                 </div>

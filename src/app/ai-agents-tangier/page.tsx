@@ -81,7 +81,7 @@ export default function AIAgentsTangierPage() {
     <>
       <JsonLd data={[professionalServiceSchema, breadcrumbSchema]} />
 
-      <main className="bg-[#FFFFFF] text-[#1A2535]">
+      <div className="bg-[#FFFFFF] text-[#1A2535]">
 
         {/* ── Hero ── */}
         <section className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-10 px-6 pt-28 pb-20 md:pt-36 md:pb-28 lg:grid-cols-12 lg:gap-12 lg:px-14">
@@ -174,7 +174,7 @@ export default function AIAgentsTangierPage() {
           <div className="flex flex-col md:flex-row gap-16 lg:gap-24">
             <div className="md:w-1/3">
               <h2 className="font-headline text-5xl leading-tight sticky top-32 text-[#1A2535]">
-                What Is an<br />
+                What Is an<br />{' '}
                 <span className="italic text-[#E8A838]">AI Agent?</span>
               </h2>
             </div>
@@ -423,7 +423,7 @@ export default function AIAgentsTangierPage() {
             </div>
           </div>
         </section>
-      </main>
+      </div>
 
       <FaqSection faqs={AI_AGENTS_TANGIER_FAQS} heading="AI Agents in Tangier: Frequently Asked Questions" />
     </>

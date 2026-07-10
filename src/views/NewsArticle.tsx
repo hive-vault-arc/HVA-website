@@ -67,7 +67,7 @@ function RenderSection({ section, index }: { section: ContentSection; index: num
           {section.stats.map((stat) => (
             <div key={`${stat.value}-${stat.label}`} className="bg-[#F7F8FA] p-6">
               <p
-                className="text-3xl font-bold text-[#E8A838] mb-1"
+                className="mb-1 text-3xl font-bold text-[var(--section-label-color)]"
                 style={{ fontFamily: 'var(--font-body)' }}
               >
                 {stat.value}
@@ -173,7 +173,7 @@ function NewsSidebar({ sources, tags }: { sources: NewsArticle['sources']; tags:
         </p>
         <Link
           href="/contact"
-          className="inline-flex items-center gap-1.5 text-xs font-bold tracking-widest uppercase text-[#E8A838] hover:gap-3 transition-all"
+          className="inline-flex items-center gap-1.5 text-xs font-bold tracking-widest uppercase text-[var(--section-label-color-dark)] hover:gap-3 transition-all"
           style={{ fontFamily: 'var(--font-body)' }}
         >
           Discuss AI architecture

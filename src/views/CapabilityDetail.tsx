@@ -84,7 +84,7 @@ export default function CapabilityDetail({ capability, relatedCapabilities }: Ca
 
   return (
     <MotionConfig reducedMotion={motionReduced ? 'always' : 'never'}>
-      <main className="capability-profile-page">
+      <div className="capability-profile-page">
         <motion.div
           aria-hidden="true"
           className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-[#E8A838]"
@@ -320,7 +320,7 @@ export default function CapabilityDetail({ capability, relatedCapabilities }: Ca
           secondaryLabel="Back to Capabilities"
           secondaryHref="/capabilities"
         />
-      </main>
+      </div>
     </MotionConfig>
   );
 }
