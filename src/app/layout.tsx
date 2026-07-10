@@ -321,7 +321,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         <JsonLd data={websiteSchema} />
         <JsonLd data={navigationSchema} />
         <Layout>{children}</Layout>
-        <Analytics />
+        {process.env.VERCEL === '1' && <Analytics />}
       </body>
     </html>
   );

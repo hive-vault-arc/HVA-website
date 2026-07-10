@@ -82,14 +82,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Localized core pages.
     ...localizedEntries('/', now, w(1), w(0.85)),
     ...localizedEntries('/capabilities', now, w(0.9), w(0.8)),
-    ...localizedEntries('/capabilities/in-detail', now, w(0.85), m(0.7)),
-    ...localizedEntries('/capabilities/solution-programs', now, w(0.85), m(0.7)),
+    entry('/capabilities/in-detail', now, w(0.85)),
+    entry('/capabilities/solution-programs', now, w(0.85)),
     ...capabilityProfiles.map((capability) => entry(`/capabilities/${capability.slug}`, now, m(0.78))),
 
     // Core pages.
     entry('/arc', now, w(0.85)),
     entry('/industries', now, w(0.85)),
-    entry('/products-systems', now, m(0.6)),
     entry('/insights', now, w(0.85)),
     entry('/insights/news-articles', now, m(0.7)),
     ...newsArticles.map((article) => ({

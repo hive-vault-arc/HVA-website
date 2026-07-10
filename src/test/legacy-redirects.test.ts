@@ -73,18 +73,33 @@ describe('Legacy Redirect Rules', () => {
           permanent: true,
         },
         {
+          source: '/products-systems',
+          destination: '/capabilities/solution-programs',
+          permanent: true,
+        },
+        {
           source: '/:locale(en|fr|ar|es)/services',
           destination: '/:locale/capabilities',
           permanent: true,
         },
         {
           source: '/:locale(en|fr|ar|es)/services/in-detail',
-          destination: '/:locale/capabilities/in-detail',
+          destination: '/capabilities/in-detail',
           permanent: true,
         },
         {
           source: '/:locale(en|fr|ar|es)/services/solution-programs',
-          destination: '/:locale/capabilities/solution-programs',
+          destination: '/capabilities/solution-programs',
+          permanent: true,
+        },
+        {
+          source: '/:locale(en|fr|ar|es)/capabilities/in-detail',
+          destination: '/capabilities/in-detail',
+          permanent: true,
+        },
+        {
+          source: '/:locale(en|fr|ar|es)/capabilities/solution-programs',
+          destination: '/capabilities/solution-programs',
           permanent: true,
         },
       ])

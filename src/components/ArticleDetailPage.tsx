@@ -269,7 +269,7 @@ export default function ArticleDetailPage({
               alt={coverAlt ?? title}
               fill
               className="object-cover"
-              priority
+              loading="eager"
               sizes="(max-width: 1024px) calc(100vw - 2rem), min(1640px, calc(100vw - 5rem))"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#FFFFFF] via-transparent to-transparent" />
@@ -320,12 +320,12 @@ export default function ArticleDetailPage({
           <div className="site-frame-narrow flex flex-col md:flex-row gap-10 items-center md:items-start">
             <SectionBrandMark size="lg" />
             <div className="flex-1 text-center md:text-left">
-              <h3
+              <h2
                 className="text-2xl mb-3 text-[#1A2535]"
                 style={{ fontFamily: 'var(--font-headline)' }}
               >
                 About Hive Vault Arc
-              </h3>
+              </h2>
               <p
                 className="text-[#536070] leading-relaxed mb-6 max-w-xl"
                 style={{ fontFamily: 'var(--font-body)' }}

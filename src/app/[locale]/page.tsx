@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import JsonLd from '../../components/JsonLd';
+import LocaleDocumentAttributes from '../../components/LocaleDocumentAttributes';
 import { SITE_NAME, SITE_URL, SUPPORTED_LOCALES, type SupportedLocale, buildPageMetadata } from '../../lib/seo';
 import { getLocaleMessaging } from '../../lib/positioning';
 
@@ -14,6 +16,9 @@ const homeContent: Record<
     keywords: string[];
     primaryHref: string;
     cta: string;
+    secondaryLabel: string;
+    proofPoints: string[];
+    locationLabel: string;
   }
 > = {
   en: {
@@ -32,11 +37,14 @@ const homeContent: Record<
     ],
     primaryHref: '/case-studies',
     cta: 'View Case Studies',
+    secondaryLabel: 'Explore ARC',
+    proofPoints: ['Strategy', 'AI Engineering', 'Managed Operations'],
+    locationLabel: 'Tangier, Morocco',
   },
   fr: {
     title: 'Conseil technologique et transformation digitale à Tanger, Maroc',
-    h1: 'Conseil stratégique et execution technique',
-    body: "Nous accompagnons les entreprises de la strategie a la production: conseil, architecture, IA, automatisation, logiciel sur mesure, cloud et capacites data.",
+    h1: 'Conseil stratégique et exécution technique',
+    body: "Nous accompagnons les entreprises de la stratégie à la production : conseil, architecture, IA, automatisation, logiciel sur mesure, cloud et capacités data.",
     keywords: [
       'conseil technologique maroc',
       'cabinet transformation digitale tanger',
@@ -55,36 +63,37 @@ const homeContent: Record<
       'meilleure equipe software pour startup à Tanger',
     ],
     primaryHref: '/fr/capabilities',
-    cta: 'Voir les capacites',
+    cta: 'Voir les capacités',
+    secondaryLabel: 'Découvrir ARC',
+    proofPoints: ['Stratégie', 'Ingénierie IA', 'Opérations managées'],
+    locationLabel: 'Tanger, Maroc',
   },
   ar: {
-    title: 'Ø§Ø³ØªØ´Ø§Ø±Ø§Øª ØªÙ‚Ù†ÙŠØ© ÙˆØªØ­ÙˆÙ„ Ø±Ù‚Ù…ÙŠ ÙÙŠ Ø·Ù†Ø¬Ø©ØŒ Ø§Ù„Ù…ØºØ±Ø¨',
-    h1: 'Ø§Ø³ØªØ´Ø§Ø±Ø§Øª Ø§Ø³ØªØ±Ø§ØªÙŠØ¬ÙŠØ© ÙˆØªÙ†ÙÙŠØ° ØªÙ‚Ù†ÙŠ',
-    body: 'Ù†Ø±Ø§ÙÙ‚ Ø§Ù„Ø´Ø±ÙƒØ§Øª Ù…Ù† Ø§Ù„Ø§Ø³ØªØ±Ø§ØªÙŠØ¬ÙŠØ© Ø§Ù„Ù‰ Ø§Ù„ØªØ´ØºÙŠÙ„ Ø§Ù„ÙØ¹Ù„ÙŠ: Ø§Ø³ØªØ´Ø§Ø±Ø§Øª ØªÙ‚Ù†ÙŠØ© ÙˆÙ‡Ù†Ø¯Ø³Ø© Ø­Ù„ÙˆÙ„ ÙˆØ°ÙƒØ§Ø¡ Ø§ØµØ·Ù†Ø§Ø¹ÙŠ ÙˆØ§ØªÙˆÙ…Ø§Ø³ÙŠÙˆÙ† ÙˆØ¨Ø±Ù…Ø¬ÙŠØ§Øª Ù…Ø®ØµØµØ© ÙˆØ¨Ù†ÙŠØ© Ø³Ø­Ø§Ø¨ÙŠØ© ÙˆØ®Ø¯Ù…Ø§Øª Ø¨ÙŠØ§Ù†Ø§Øª.',
+    title: 'استشارات تقنية وتحول رقمي في طنجة، المغرب',
+    h1: 'استشارات استراتيجية وتنفيذ تقني',
+    body: 'نرافق الشركات من الاستراتيجية إلى التشغيل الفعلي عبر الاستشارات التقنية، وهندسة الحلول، والذكاء الاصطناعي، والأتمتة، والبرمجيات المخصصة، والبنية السحابية، وخدمات البيانات.',
     keywords: [
-      'Ø§Ø³ØªØ´Ø§Ø±Ø§Øª ØªÙ‚Ù†ÙŠØ© Ø§Ù„Ù…ØºØ±Ø¨',
-      'Ø´Ø±ÙƒØ© ØªØ­ÙˆÙ„ Ø±Ù‚Ù…ÙŠ Ø·Ù†Ø¬Ø©',
-      'Ø§Ø³ØªØ´Ø§Ø±Ø§Øª Ø§Ù„ØªØ­ÙˆÙ„ Ø§Ù„Ø±Ù‚Ù…ÙŠ Ø§Ù„Ù…ØºØ±Ø¨',
-      'ØªØ·ÙˆÙŠØ± Ø¨Ø±Ù…Ø¬ÙŠØ§Øª Ù…Ø®ØµØµØ© Ø§Ù„Ù…ØºØ±Ø¨',
-      'ØªØ·ÙˆÙŠØ± ØªØ·Ø¨ÙŠÙ‚ Ù…ÙˆØ¨Ø§ÙŠÙ„ Ù…Ø®ØµØµ Ù„Ù„Ø´Ø±ÙƒØ§Øª Ø§Ù„Ù…ØºØ±Ø¨',
-      'ØªØ·ÙˆÙŠØ± ØªØ·Ø¨ÙŠÙ‚ ÙˆÙŠØ¨ Ù…Ø®ØµØµ Ø·Ù†Ø¬Ø©',
-      'Ø®Ø¯Ù…Ø§Øª ØªØ±Ø­ÙŠÙ„ CRM Ø§Ù„Ù…ØºØ±Ø¨',
-      'ØªÙƒØ§Ù…Ù„ CRM Ù…Ø¹ ERP Ø§Ù„Ù…ØºØ±Ø¨',
-      'Ø£ØªÙ…ØªØ© Ø³ÙŠØ± Ø§Ù„Ø¹Ù…Ù„ Ù„Ù„Ø´Ø±ÙƒØ§Øª Ø§Ù„Ù…ØºØ±Ø¨',
-      'ØªØ±Ø­ÙŠÙ„ ÙˆÙ†Ø´Ø± Ø³Ø­Ø§Ø¨ÙŠ Ø§Ù„Ù…ØºØ±Ø¨',
-      'Ø§Ø³ØªØ´Ø§Ø±Ø§Øª DevOps Ùˆ CI/CD Ø§Ù„Ù…ØºØ±Ø¨',
-      'Ø§Ø³ØªØ´Ø§Ø±Ø§Øª Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ ÙˆØ§Ù„Ø§ØªÙ…ØªØ© Ù„Ù„Ù…Ø¤Ø³Ø³Ø§Øª',
-      'Ø®Ø¯Ù…Ø§Øª Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª ÙˆÙ„ÙˆØ­Ø§Øª Ø§Ù„Ù‚Ø±Ø§Ø± Ù„Ù„Ù…Ø¤Ø³Ø³Ø§Øª',
-      'Ø£Ø­ØªØ§Ø¬ ÙØ±ÙŠÙ‚ Ù„ØªØ·ÙˆÙŠØ± ØªØ·Ø¨ÙŠÙ‚ÙŠ ÙÙŠ Ø§Ù„Ù…ØºØ±Ø¨',
-      'Ø§ÙØ¶Ù„ ÙØ±ÙŠÙ‚ Ø¨Ø±Ù…Ø¬Ø© Ù„Ù„Ø´Ø±ÙƒØ§Øª Ø§Ù„Ù†Ø§Ø´Ø¦Ø© ÙÙŠ Ø·Ù†Ø¬Ø©',
+      'استشارات تقنية في المغرب',
+      'شركة تحول رقمي في طنجة',
+      'استشارات التحول الرقمي في المغرب',
+      'تطوير برمجيات مخصصة في المغرب',
+      'تطوير تطبيقات للشركات في المغرب',
+      'خدمات ترحيل نظام CRM في المغرب',
+      'أتمتة سير العمل للشركات',
+      'استشارات الذكاء الاصطناعي في المغرب',
+      'خدمات البيانات والتحليلات للشركات',
+      'فريق برمجة للشركات الناشئة في طنجة',
     ],
     primaryHref: '/ar/capabilities',
-    cta: 'Ø§Ø³ØªÙƒØ´Ù Ø§Ù„Ù‚Ø¯Ø±Ø§Øª',
+    cta: 'استكشف القدرات',
+    secondaryLabel: 'اكتشف إطار ARC',
+    proofPoints: ['الاستراتيجية', 'هندسة الذكاء الاصطناعي', 'العمليات المُدارة'],
+    locationLabel: 'طنجة، المغرب',
   },
   es: {
-    title: 'Consultoria tecnologica y transformacion digital en Tanger, Marruecos',
-    h1: 'Consultoria estrategica y ejecucion tecnica',
-    body: 'Acompanamos a empresas desde la estrategia hasta la operacion en produccion con IA, automatizacion, software a medida, modernizacion IT, cloud y datos.',
+    title: 'Consultoría tecnológica y transformación digital en Tánger, Marruecos',
+    h1: 'Consultoría estratégica y ejecución técnica',
+    body: 'Acompañamos a las empresas desde la estrategia hasta la operación en producción con IA, automatización, software a medida, modernización tecnológica, cloud y datos.',
     keywords: [
       'consultoria tecnologica marruecos',
       'transformacion digital tanger',
@@ -104,6 +113,9 @@ const homeContent: Record<
     ],
     primaryHref: '/es/capabilities',
     cta: 'Ver capacidades',
+    secondaryLabel: 'Descubrir ARC',
+    proofPoints: ['Estrategia', 'Ingeniería de IA', 'Operaciones gestionadas'],
+    locationLabel: 'Tánger, Marruecos',
   },
 };
 
@@ -175,25 +187,63 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
     },
   };
 
+  const direction = isRtl ? 'rtl' : 'ltr';
+
   return (
-    <section
-      className="mx-auto max-w-6xl px-6 py-28 md:py-36"
-      lang={locale}
-      dir={isRtl ? 'rtl' : 'ltr'}
-    >
+    <>
+      <LocaleDocumentAttributes locale={locale} direction={direction} />
       <JsonLd data={schema} />
-      <p className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-[var(--section-label-color)]">{locale.toUpperCase()}</p>
-      <h1 className="mb-6 font-serif text-4xl leading-tight text-[#1A2535] md:text-6xl">{content.h1}</h1>
-      <p className="max-w-3xl text-lg leading-relaxed text-[#3D4858]">{identity.shortDescriptor}</p>
-      <p className="mt-4 max-w-3xl text-lg leading-relaxed text-[#3D4858]">{content.body}</p>
-      <p className="mt-4 max-w-3xl text-sm leading-relaxed text-[#566274]">{identity.proofStatement}</p>
-      <Link
-        href={content.primaryHref}
-        className="mt-10 inline-flex items-center rounded bg-[#1A2535] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#E8A838]"
-      >
-        {content.cta}
-      </Link>
-    </section>
+      <main lang={locale} dir={direction} className="bg-white text-[#1A2535]">
+        <section className="editorial-hero">
+          <div className="editorial-shell grid gap-10 lg:grid-cols-[1.12fr_0.88fr] lg:items-end">
+            <div>
+              <p className="geo-kicker">{locale.toUpperCase()} · {content.locationLabel}</p>
+              <h1 className="editorial-title max-w-[13ch]">{content.h1}</h1>
+              <p className="editorial-lead max-w-3xl">{identity.shortDescriptor}</p>
+              <p className="mt-5 max-w-3xl text-base leading-relaxed text-[#536070] md:text-lg">
+                {content.body}
+              </p>
+              <div className="editorial-actions">
+                <Link href={content.primaryHref} className="editorial-cta sharp-edge">
+                  {content.cta}
+                </Link>
+                <Link href="/arc" className="editorial-link">
+                  {content.secondaryLabel}
+                </Link>
+              </div>
+            </div>
+            <div className="relative min-h-[18rem] overflow-hidden bg-[#E8EBF0] md:min-h-[25rem]">
+              <Image
+                src="/Images/brand/hva-ai-software-agency-tangier.webp"
+                alt={content.title}
+                fill
+                priority
+                className="object-cover grayscale"
+                sizes="(max-width: 1024px) 100vw, 42vw"
+              />
+            </div>
+          </div>
+        </section>
+
+        <section className="border-y border-[#DDE3EA] bg-white">
+          <div className="mx-auto grid max-w-6xl gap-8 px-6 py-10 lg:grid-cols-[0.9fr_1.1fr] lg:px-12">
+            <ul className="grid gap-px bg-[#DDE3EA] sm:grid-cols-3" aria-label="Delivery coverage">
+              {content.proofPoints.map((point, index) => (
+                <li key={point} className="bg-white px-5 py-4">
+                  <span className="block text-[10px] font-bold tracking-[0.18em] text-[#C8891C]">
+                    0{index + 1}
+                  </span>
+                  <span className="mt-2 block text-sm font-semibold text-[#1A2535]">{point}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="self-center text-sm leading-relaxed text-[#536070] md:text-base">
+              {identity.proofStatement}
+            </p>
+          </div>
+        </section>
+      </main>
+    </>
   );
 }
 

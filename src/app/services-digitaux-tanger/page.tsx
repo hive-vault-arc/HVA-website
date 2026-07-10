@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import FaqSection from '../../components/FaqSection';
 import JsonLd from '../../components/JsonLd';
+import LocaleDocumentAttributes from '../../components/LocaleDocumentAttributes';
 import type { FaqItem } from '../../data/faqs';
 import { SITE_URL, absoluteUrl, buildBreadcrumbSchema, buildPageMetadata } from '../../lib/seo';
 
@@ -83,16 +84,16 @@ const services = [
 
 const arcSteps = [
   {
-    step: 'Audit',
+    step: 'Assess',
     text: "Cartographier les objectifs, les outils existants, les frictions opérationnelles, la qualité des données et les premiers workflows à transformer.",
   },
   {
-    step: 'Roadmap',
-    text: "Définir la séquence de transformation, l'architecture, les jalons, les risques d'intégration et le modèle de responsabilité interne.",
+    step: 'Re-engineer',
+    text: "Repenser les workflows prioritaires, définir l'architecture et construire par jalons avec des décisions explicites sur l'intégration et la responsabilité.",
   },
   {
-    step: 'Craft',
-    text: "Construire, déployer, stabiliser et améliorer le système en production avec des points de contrôle concrets.",
+    step: 'Command',
+    text: "Déployer, stabiliser, mesurer et améliorer le système en production avec des points de contrôle et une responsabilité durable.",
   },
 ];
 
@@ -152,6 +153,7 @@ export default function ServicesDigitauxTangerPage() {
 
   return (
     <>
+      <LocaleDocumentAttributes locale="fr" />
       <JsonLd data={[professionalServiceSchema, breadcrumbSchema]} />
 
       <main className="bg-neutral text-tertiary" lang="fr">

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import FaqSection from '../../components/FaqSection';
 import JsonLd from '../../components/JsonLd';
@@ -87,22 +88,34 @@ export default function ITConsultingTangierPage() {
 
         {/* ── Hero ── */}
         <section className="editorial-hero">
-          <div className="editorial-shell">
-            <p className="geo-kicker">Tangier Technology Advisory</p>
-            <h1 className="editorial-title">IT Consulting for Tangier&apos;s Growing Businesses</h1>
-            <p className="editorial-lead max-w-3xl">
-              Hive Vault Arc supports leadership teams in Tangier with consulting that connects strategy to execution. We help you
-              decide what to modernize, when to invest, and how to deliver without creating operational instability. We
-              support organizations in Tangier, Casablanca, Rabat, Marrakech, Fes, Agadir, and other Moroccan cities. The
-              goal is not simply to choose technology; it is to build a reliable operating model for growth.
-            </p>
-            <div className="editorial-actions">
-              <Link href="/contact" className="editorial-cta sharp-edge">
-                Book IT Discovery
-              </Link>
-              <Link href="/arc" className="editorial-link">
-                View ARC Framework →
-              </Link>
+          <div className="editorial-shell grid gap-10 lg:grid-cols-[1.12fr_0.88fr] lg:items-end">
+            <div>
+              <p className="geo-kicker">Tangier Technology Advisory</p>
+              <h1 className="editorial-title">IT Consulting for Tangier&apos;s Growing Businesses</h1>
+              <p className="editorial-lead max-w-3xl">
+                Hive Vault Arc supports leadership teams in Tangier with consulting that connects strategy to execution. We help you
+                decide what to modernize, when to invest, and how to deliver without creating operational instability. We
+                support organizations in Tangier, Casablanca, Rabat, Marrakech, Fes, Agadir, and other Moroccan cities. The
+                goal is not simply to choose technology; it is to build a reliable operating model for growth.
+              </p>
+              <div className="editorial-actions">
+                <Link href="/contact" className="editorial-cta sharp-edge">
+                  Book an IT Discovery
+                </Link>
+                <Link href="/arc" className="editorial-link">
+                  View ARC Framework →
+                </Link>
+              </div>
+            </div>
+            <div className="relative min-h-[18rem] overflow-hidden bg-[#E8EBF0] md:min-h-[25rem]">
+              <Image
+                src="/Images/capabilities/hva-technology-consulting-capability.webp"
+                alt="Technology consultants reviewing architecture, workflow, and operating signals"
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 42vw"
+              />
             </div>
           </div>
         </section>
@@ -145,13 +158,12 @@ export default function ITConsultingTangierPage() {
         {/* ── Body sections ── */}
         <section className="mx-auto max-w-5xl space-y-12 px-6 py-14 lg:px-12">
           <article>
-            <h2 className="services-brief-section-title">ARC Framework: Audit → Roadmap → Craft</h2>
+            <h2 className="services-brief-section-title">ARC Framework: Assess → Re-engineer → Command</h2>
             <p className="mt-4 text-base leading-relaxed text-secondary">
-              Hive Vault Arc uses ARC as a practical consulting-to-delivery path. In the <strong>Audit</strong> phase, we assess
-              current systems, process friction, and decision bottlenecks. In <strong>Roadmap</strong>, we structure
-              milestones, define architecture principles, and align executive priorities with delivery reality. In{' '}
-              <strong>Craft</strong>, we execute with controlled rollout, governance checkpoints, and post-launch
-              optimization.
+              Hive Vault Arc uses ARC as a practical consulting-to-delivery path. In <strong>Assess</strong>, we map
+              current systems, process friction, and decision bottlenecks. In <strong>Re-engineer</strong>, we redesign
+              workflows, define architecture principles, and execute the prioritized build. In <strong>Command</strong>,
+              we stabilize production, track operating outcomes, and improve the system over time.
             </p>
             <p className="mt-4 text-base leading-relaxed text-secondary">
               This structure prevents a common failure pattern in consulting engagements: strategy that never becomes

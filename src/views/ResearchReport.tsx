@@ -137,12 +137,12 @@ function ResearchReportSidebar({ report }: { report: ResearchReport }) {
     <div className="space-y-10">
       {report.sources.length > 0 && (
         <div>
-          <h4
+          <h2
             className="text-xs font-bold uppercase tracking-widest text-[var(--section-label-color)] mb-4"
             style={{ fontFamily: 'var(--font-body)' }}
           >
             Sources
-          </h4>
+          </h2>
           <ul className="space-y-3">
             {report.sources.map((source) => (
               <li key={source.url}>
@@ -164,12 +164,12 @@ function ResearchReportSidebar({ report }: { report: ResearchReport }) {
 
       {report.keywords.length > 0 && (
         <div>
-          <h4
+          <h2
             className="text-xs font-bold uppercase tracking-widest text-[var(--section-label-color)] mb-4"
             style={{ fontFamily: 'var(--font-body)' }}
           >
             Topics
-          </h4>
+          </h2>
           <div className="flex flex-wrap gap-2">
             {report.keywords.slice(0, 8).map((keyword) => (
               <span
@@ -192,7 +192,7 @@ function ResearchReportSidebar({ report }: { report: ResearchReport }) {
           Need the report translated into an operating plan?
         </p>
         <p className="text-white/60 text-xs mb-4 leading-relaxed" style={{ fontFamily: 'var(--font-body)' }}>
-          H.V.A turns benchmarks, delivery signals, and cloud readiness findings into practical transformation work.
+          Hive Vault Arc turns benchmarks, delivery signals, and cloud readiness findings into practical transformation work.
         </p>
         <Link
           href="/contact"
@@ -251,7 +251,7 @@ export default function ResearchReportView({
         headline: 'Turn research into production decisions.',
         subtext:
           'Hive Vault Arc helps teams map research findings into roadmap, architecture, and operating controls.',
-        primaryLabel: 'Start a discovery call',
+        primaryLabel: 'Book a Discovery Call',
         primaryHref: '/contact',
         secondaryLabel: 'Explore capabilities',
         secondaryHref: '/capabilities',

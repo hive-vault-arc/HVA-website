@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import FaqSection from '../../components/FaqSection';
 import JsonLd from '../../components/JsonLd';
@@ -75,21 +76,33 @@ export default function CustomSoftwareMoroccoPage() {
 
         {/* ── Hero ── */}
         <section className="editorial-hero">
-          <div className="editorial-shell">
-            <p className="geo-kicker">National Software Engineering</p>
-            <h1 className="editorial-title">Custom Software Built for Moroccan Businesses</h1>
-            <p className="editorial-lead max-w-3xl">
-              Hive Vault Arc designs and delivers custom software systems that fit how your business really operates. From
-              FastAPI-powered backend services to Next.js frontends and full SaaS platforms, we build production-ready
-              applications that replace workflow friction with reliable execution and measurable operational control.
-            </p>
-            <div className="editorial-actions">
-              <Link href="/contact" className="editorial-cta sharp-edge">
-                Scope a Software Build
-              </Link>
-              <Link href="/it-consulting-tangier" className="editorial-link">
-                IT Consulting Guide →
-              </Link>
+          <div className="editorial-shell grid gap-10 lg:grid-cols-[1.12fr_0.88fr] lg:items-end">
+            <div>
+              <p className="geo-kicker">National Software Engineering</p>
+              <h1 className="editorial-title">Custom Software Built for Moroccan Businesses</h1>
+              <p className="editorial-lead max-w-3xl">
+                Hive Vault Arc designs and delivers custom software systems that fit how your business really operates. From
+                FastAPI-powered backend services to Next.js frontends and full SaaS platforms, we build production-ready
+                applications that replace workflow friction with reliable execution and measurable operational control.
+              </p>
+              <div className="editorial-actions">
+                <Link href="/contact" className="editorial-cta sharp-edge">
+                  Scope a Software Build
+                </Link>
+                <Link href="/it-consulting-tangier" className="editorial-link">
+                  IT Consulting Guide →
+                </Link>
+              </div>
+            </div>
+            <div className="relative min-h-[18rem] overflow-hidden bg-[#E8EBF0] md:min-h-[25rem]">
+              <Image
+                src="/Images/blog/custom-crm-system-morocco.webp"
+                alt="Production custom CRM interface built around a Moroccan business workflow"
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 42vw"
+              />
             </div>
           </div>
         </section>

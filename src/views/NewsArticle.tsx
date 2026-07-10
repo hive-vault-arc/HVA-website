@@ -111,12 +111,12 @@ function NewsSidebar({ sources, tags }: { sources: NewsArticle['sources']; tags:
     <div className="space-y-10">
       {sources.length > 0 && (
         <div>
-          <h4
+          <h2
             className="text-xs font-bold uppercase tracking-widest text-[var(--section-label-color)] mb-4"
             style={{ fontFamily: 'var(--font-body)' }}
           >
             Sources
-          </h4>
+          </h2>
           <ul className="space-y-3">
             {sources.map((src) => (
               <li key={src.url}>
@@ -138,12 +138,12 @@ function NewsSidebar({ sources, tags }: { sources: NewsArticle['sources']; tags:
 
       {tags.length > 0 && (
         <div>
-          <h4
+          <h2
             className="text-xs font-bold uppercase tracking-widest text-[var(--section-label-color)] mb-4"
             style={{ fontFamily: 'var(--font-body)' }}
           >
             Topics
-          </h4>
+          </h2>
           <div className="flex flex-wrap gap-2">
             {tags.map((tag) => (
               <span
@@ -169,7 +169,7 @@ function NewsSidebar({ sources, tags }: { sources: NewsArticle['sources']; tags:
           className="text-white/60 text-xs mb-4 leading-relaxed"
           style={{ fontFamily: 'var(--font-body)' }}
         >
-          H.V.A helps teams decide what should run locally, what should remain in the cloud, and how to govern agent access safely.
+          Hive Vault Arc helps teams decide what should run locally, what should remain in the cloud, and how to govern agent access safely.
         </p>
         <Link
           href="/contact"

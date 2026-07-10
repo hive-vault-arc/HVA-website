@@ -82,16 +82,16 @@ const services = [
 
 const arcSteps = [
   {
-    step: 'Audit',
+    step: 'Assess',
     text: 'Map business goals, existing tools, process friction, data quality, and the workflows where digital services can create measurable value first.',
   },
   {
-    step: 'Roadmap',
-    text: 'Define the transformation sequence, architecture, delivery milestones, integration risks, and internal ownership model before implementation starts.',
+    step: 'Re-engineer',
+    text: 'Redesign the priority workflows, define the architecture, and build through controlled milestones with explicit integration and ownership decisions.',
   },
   {
-    step: 'Craft',
-    text: 'Build, deploy, stabilize, and improve the system in production with clear checkpoints instead of handing over a document and disappearing.',
+    step: 'Command',
+    text: 'Deploy, stabilize, measure, and improve the production system with clear operating checkpoints and long-term accountability.',
   },
 ];
 

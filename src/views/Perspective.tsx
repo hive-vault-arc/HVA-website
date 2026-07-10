@@ -113,26 +113,26 @@ function PerspectiveSidebar({ perspective }: { perspective: Perspective }) {
           { href: '/whoweare/abouthva', label: 'About Hive Vault Arc' },
           { href: '/case-studies', label: 'Case studies' },
           { href: '/case-studies/top-tier-crm-transformation-program-real-estate-operations', label: 'CRM transformation proof' },
-          { href: '/contact', label: 'Start a discovery call' },
+          { href: '/contact', label: 'Book a Discovery Call' },
         ]
       : [
           { href: '/arc', label: 'ARC framework' },
           { href: '/capabilities', label: 'Capabilities' },
           { href: '/case-studies', label: 'Case studies' },
           { href: '/case-studies/multilingual-whatsapp-ai-agent', label: 'WhatsApp AI agent proof' },
-          { href: '/contact', label: 'Start a discovery call' },
+          { href: '/contact', label: 'Book a Discovery Call' },
         ];
 
   return (
     <div className="space-y-10">
       {perspective.sources.length > 0 && (
         <div>
-          <h4
+          <h2
             className="text-xs font-bold uppercase tracking-widest text-[var(--section-label-color)] mb-4"
             style={{ fontFamily: 'var(--font-body)' }}
           >
             Sources
-          </h4>
+          </h2>
           <ul className="space-y-3">
             {perspective.sources.map((source) => (
               <li key={source.url}>
@@ -153,12 +153,12 @@ function PerspectiveSidebar({ perspective }: { perspective: Perspective }) {
       )}
 
       <div>
-        <h4
+        <h2
           className="text-xs font-bold uppercase tracking-widest text-[var(--section-label-color)] mb-4"
           style={{ fontFamily: 'var(--font-body)' }}
         >
-          Related H.V.A Resources
-        </h4>
+          Related Hive Vault Arc Resources
+        </h2>
         <ul className="space-y-3">
           {relatedLinks.map((link) => (
             <li key={link.href}>
@@ -176,12 +176,12 @@ function PerspectiveSidebar({ perspective }: { perspective: Perspective }) {
       </div>
 
       <div>
-        <h4
+        <h2
           className="text-xs font-bold uppercase tracking-widest text-[var(--section-label-color)] mb-4"
           style={{ fontFamily: 'var(--font-body)' }}
         >
           Topics
-        </h4>
+        </h2>
         <div className="flex flex-wrap gap-2">
           {perspective.keywords.slice(0, 8).map((keyword) => (
             <span

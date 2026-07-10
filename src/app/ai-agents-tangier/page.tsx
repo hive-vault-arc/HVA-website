@@ -104,7 +104,7 @@ export default function AIAgentsTangierPage() {
                 href="/contact"
                 className="editorial-cta sharp-edge"
               >
-                Start AI Discovery
+                Book an AI Discovery
               </Link>
               <Link href="/capabilities" className="editorial-link">
                 Explore Capabilities →
@@ -123,14 +123,20 @@ export default function AIAgentsTangierPage() {
               style={{ filter: 'grayscale(0.35) contrast(1.08)' }}
             />
             <div className="absolute -bottom-5 -left-5 hidden w-60 bg-white p-7 shadow-2xl lg:block">
-              <p className="font-headline italic text-xl mb-2 text-[#1A2535]">&ldquo;The curator&apos;s touch.&rdquo;</p>
-              <p className="font-body text-[10px] tracking-widest uppercase text-[#566274]">ARC Phase 01: Insights</p>
+              <p className="font-headline italic text-xl mb-2 text-[#1A2535]">&ldquo;Configured for the workflow.&rdquo;</p>
+              <p className="font-body text-[10px] tracking-widest uppercase text-[#566274]">ARC Phase 01: Assess</p>
             </div>
           </div>
         </section>
 
         {/* ── Value Props ── */}
         <section className="bg-[#F7F8FA] px-6 lg:px-14 py-24">
+          <div className="mx-auto mb-12 max-w-7xl">
+            <p className="geo-kicker">Built for the operating environment</p>
+            <h2 className="mt-3 max-w-3xl font-headline text-4xl leading-tight text-[#1A2535] md:text-5xl">
+              Local context, production controls, and accountable delivery.
+            </h2>
+          </div>
           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
@@ -146,7 +152,7 @@ export default function AIAgentsTangierPage() {
               {
                 number: '03',
                 title: 'Delivery Model',
-                body: 'ARC-style execution from audit to rollout, with measurable KPIs and post-launch optimization support. Zero-friction integration with existing legacy systems.',
+                body: 'ARC-style execution from audit to rollout, with measurable KPIs, post-launch optimization, and planned integration with existing systems.',
               },
             ].map((card) => (
               <div
@@ -186,18 +192,18 @@ export default function AIAgentsTangierPage() {
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 mt-4 border-t border-[#DDE3EA] pt-10">
                 <div>
-                  <h4 className="font-body text-xs tracking-widest uppercase font-bold mb-4 text-[var(--section-label-color)]">
+                  <h3 className="font-body text-xs tracking-widest uppercase font-bold mb-4 text-[var(--section-label-color)]">
                     01. Autonomous Execution
-                  </h4>
+                  </h3>
                   <p className="text-[#566274] font-body text-sm leading-relaxed">
                     The agent determines the best sequence of actions to achieve a goal — whether scheduling a shipment
                     or qualifying a high-value lead — without constant human input.
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-body text-xs tracking-widest uppercase font-bold mb-4 text-[var(--section-label-color)]">
+                  <h3 className="font-body text-xs tracking-widest uppercase font-bold mb-4 text-[var(--section-label-color)]">
                     02. Tool Integration
-                  </h4>
+                  </h3>
                   <p className="text-[#566274] font-body text-sm leading-relaxed">
                     Our agents connect directly to your CRM, WhatsApp Business API, and inventory systems to act as a
                     digital extension of your team — with clean data output.
@@ -332,7 +338,7 @@ export default function AIAgentsTangierPage() {
                   <div className="w-12 h-12 bg-[#1A2535] text-white flex items-center justify-center mx-auto mb-6 font-body text-xs font-bold tracking-widest">
                     {item.step}
                   </div>
-                  <h4 className="font-headline text-xl mb-2 text-[#1A2535]">{item.title}</h4>
+                  <h3 className="font-headline text-xl mb-2 text-[#1A2535]">{item.title}</h3>
                   <p className="text-[#566274] text-sm font-body leading-relaxed">{item.body}</p>
                 </div>
               ))}

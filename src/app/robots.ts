@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 import { SITE_URL } from '../lib/seo';
 
 const crawlAllowPaths = ['/', '/llms.txt', '/llms-full.txt', '/ai/company'];
-const crawlDisallowPaths = ['/links', '/admin/', '/api/private/'];
+const crawlDisallowPaths = ['/admin/', '/api/private/'];
 
 const searchAndAiCrawlerAgents = [
   // Search engines and AI search/indexing crawlers.

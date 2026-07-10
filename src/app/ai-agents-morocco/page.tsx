@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import FaqSection from '../../components/FaqSection';
 import JsonLd from '../../components/JsonLd';
@@ -75,21 +76,33 @@ export default function AIAgentsMoroccoPage() {
 
         {/* ── Hero ── */}
         <section className="editorial-hero">
-          <div className="editorial-shell">
-            <p className="geo-kicker">National AI Services</p>
-            <h1 className="editorial-title">Morocco&apos;s AI Agent Partner</h1>
-            <p className="editorial-lead max-w-3xl">
-              Hive Vault Arc delivers AI agents for companies across Morocco that need faster customer response, cleaner lead
-              qualification, and more reliable day-to-day operations. We combine consulting, engineering, and deployment
-              ownership so the agent is integrated into your real business workflows, not left as a standalone tool.
-            </p>
-            <div className="editorial-actions">
-              <Link href="/contact" className="editorial-cta sharp-edge">
-                Request National Rollout Plan
-              </Link>
-              <Link href="/ai-agents-tangier" className="editorial-link">
-                See Tangier Guide →
-              </Link>
+          <div className="editorial-shell grid gap-10 lg:grid-cols-[1.12fr_0.88fr] lg:items-end">
+            <div>
+              <p className="geo-kicker">National AI Services</p>
+              <h1 className="editorial-title">Morocco&apos;s AI Agent Partner</h1>
+              <p className="editorial-lead max-w-3xl">
+                Hive Vault Arc delivers AI agents for companies across Morocco that need faster customer response, cleaner lead
+                qualification, and more reliable day-to-day operations. We combine consulting, engineering, and deployment
+                ownership so the agent is integrated into your real business workflows, not left as a standalone tool.
+              </p>
+              <div className="editorial-actions">
+                <Link href="/contact" className="editorial-cta sharp-edge">
+                  Plan an AI Rollout
+                </Link>
+                <Link href="/ai-agents-tangier" className="editorial-link">
+                  See Tangier Guide →
+                </Link>
+              </div>
+            </div>
+            <div className="relative min-h-[18rem] overflow-hidden bg-[#E8EBF0] md:min-h-[25rem]">
+              <Image
+                src="/Images/hero/ai-powered-transformation-operations-tangier-morocco.webp"
+                alt="A human operator collaborating with an AI agent for multilingual business workflows"
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 42vw"
+              />
             </div>
           </div>
         </section>

@@ -164,8 +164,20 @@ type PageMetaInput = {
   alternates?: Record<string, string>;
 };
 
+export function compactMetaDescription(description: string, maxLength = 160): string {
+  const normalized = description.replace(/\s+/g, ' ').trim();
+  if (normalized.length <= maxLength) return normalized;
+
+  const candidate = normalized.slice(0, Math.max(1, maxLength - 3));
+  const wordBoundary = candidate.lastIndexOf(' ');
+  const shortened = wordBoundary > maxLength * 0.65 ? candidate.slice(0, wordBoundary) : candidate;
+
+  return `${shortened.replace(/[.,;:!?-]+$/, '')}...`;
+}
+
 export function buildPageMetadata(input: PageMetaInput): Metadata {
   const canonical = new URL(input.path, SITE_URL).toString();
+  const description = compactMetaDescription(input.description);
   const languages =
     input.alternates &&
     Object.fromEntries(
@@ -174,7 +186,7 @@ export function buildPageMetadata(input: PageMetaInput): Metadata {
 
   return {
     title: input.title,
-    description: input.description,
+    description,
     keywords: input.keywords,
     alternates: {
       canonical,
@@ -184,7 +196,7 @@ export function buildPageMetadata(input: PageMetaInput): Metadata {
       type: 'website',
       url: canonical,
       title: input.title,
-      description: input.description,
+      description,
       siteName: SITE_NAME,
       locale: input.locale ?? 'en',
       images: [
@@ -199,7 +211,7 @@ export function buildPageMetadata(input: PageMetaInput): Metadata {
     twitter: {
       card: 'summary_large_image',
       title: input.title,
-      description: input.description,
+      description,
       images: [new URL(DEFAULT_OG_IMAGE_PATH, SITE_URL).toString()],
     },
   };

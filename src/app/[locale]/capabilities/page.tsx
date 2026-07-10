@@ -2,9 +2,17 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import JsonLd from '../../../components/JsonLd';
 import FaqSection from '../../../components/FaqSection';
+import LocaleDocumentAttributes from '../../../components/LocaleDocumentAttributes';
 import { LOCALE_CAPABILITIES_FAQS } from '../../../data/faqs';
 import { SITE_URL, SUPPORTED_LOCALES, type SupportedLocale, buildPageMetadata } from '../../../lib/seo';
 import { getLocaleMessaging } from '../../../lib/positioning';
+
+const faqHeadings: Record<SupportedLocale, string> = {
+  en: 'Technology Consulting Capabilities: Frequently Asked Questions',
+  fr: 'Capacités de conseil technologique : questions fréquentes',
+  ar: 'الأسئلة الشائعة حول قدرات الاستشارات التقنية',
+  es: 'Capacidades de consultoría tecnológica: preguntas frecuentes',
+};
 
 const capabilitiesContent: Record<
   SupportedLocale,
@@ -64,7 +72,7 @@ const capabilitiesContent: Record<
       'Six piliers de service Hive Vault Arc: stratégie, conseil technologique, IA et data, logiciel, cloud, infrastructure et opérations managées.',
     h1: 'Six piliers de service de la stratégie aux opérations',
     intro:
-      "Nous accompagnons les entreprises de la strategie jusqu'a l'exploitation en production avec un modele de delivery clair et mesurable.",
+      "Nous accompagnons les entreprises de la stratégie jusqu'à l'exploitation en production avec un modèle de livraison clair et mesurable.",
     keywords: [
       'capacites conseil technologique maroc',
       'transformation digitale entreprise maroc',
@@ -92,61 +100,50 @@ const capabilitiesContent: Record<
     ],
     bullets: [
       'Stratégie et conseil métier : diagnostic, transformation et modèle opérationnel',
-      'Conseil technologique : architecture d entreprise, roadmaps et intégration systèmes',
+      'Conseil technologique : architecture d’entreprise, feuilles de route et intégration des systèmes',
       'IA, data et analytics : agents, IA générative, analytique prédictive et BI',
       'Ingénierie logicielle et produit : web, mobile, SaaS, API et UX/UI',
       'Cloud et infrastructure : migration, sécurité, observabilité et automatisation',
-      'Opérations managées : ownership post-lancement, maintenance et évolution des systèmes IA',
+      'Opérations managées : responsabilité post-lancement, maintenance et évolution des systèmes IA',
     ],
   },
   ar: {
-    title: 'Ù‚Ø¯Ø±Ø§Øª Ø§Ù„Ø§Ø³ØªØ´Ø§Ø±Ø§Øª Ø§Ù„ØªÙ‚Ù†ÙŠØ© ÙÙŠ Ø§Ù„Ù…ØºØ±Ø¨',
+    title: 'قدرات الاستشارات التقنية في المغرب',
     description:
-      'Ù‚Ø¯Ø±Ø§Øª Hive Vault Arc ØªØ´Ù…Ù„ Ø§Ù„Ø§Ø³ØªØ´Ø§Ø±Ø§Øª Ø§Ù„ØªÙ‚Ù†ÙŠØ© ÙˆØ§Ù„ØªØ­ÙˆÙ„ Ø§Ù„Ø±Ù‚Ù…ÙŠ ÙˆØ§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ ÙˆØ§Ù„Ø£ØªÙ…ØªØ© ÙˆØªØ·ÙˆÙŠØ± Ø§Ù„Ø¨Ø±Ù…Ø¬ÙŠØ§Øª ÙˆØªØ­Ø¯ÙŠØ« Ø§Ù„Ø¨Ù†ÙŠØ© Ø§Ù„ØªÙ‚Ù†ÙŠØ© ÙˆØ§Ù„Ø³Ø­Ø§Ø¨Ø©.',
-    h1: 'Ù…Ù† Ø§Ù„Ø§Ø³ØªØ±Ø§ØªÙŠØ¬ÙŠØ© Ø§Ù„Ù‰ Ø§Ù„ØªÙ†ÙÙŠØ°',
+      'تغطي قدرات Hive Vault Arc الاستراتيجية والاستشارات التقنية والذكاء الاصطناعي والبيانات وهندسة البرمجيات والبنية السحابية والعمليات المُدارة.',
+    h1: 'ست ركائز للخدمات من الاستراتيجية إلى العمليات',
     intro:
-      'Ù†Ø¹Ù…Ù„ Ù…Ø¹ ÙØ±Ù‚ Ø§Ù„Ù‚ÙŠØ§Ø¯Ø© Ù„ØªØ­Ø¯ÙŠØ¯ Ø§Ù„Ø§ÙˆÙ„ÙˆÙŠØ§Øª ÙˆØ¨Ù†Ø§Ø¡ Ø§Ù„Ø§Ù†Ø¸Ù…Ø© ÙˆØªØ´ØºÙŠÙ„Ù‡Ø§ ÙˆØµÙŠØ§Ù†ØªÙ‡Ø§ Ø¶Ù…Ù† Ø¯ÙˆØ±Ø© ØªØ³Ù„ÙŠÙ… ÙˆØ§Ø¶Ø­Ø© ÙˆÙ…Ø³ØªÙ…Ø±Ø©.',
+      'نعمل مع فرق القيادة لتحديد الأولويات، وبناء الأنظمة، وتشغيلها وصيانتها ضمن دورة تسليم واضحة ومستمرّة.',
     keywords: [
-      'Ù‚Ø¯Ø±Ø§Øª Ø§Ø³ØªØ´Ø§Ø±Ø§Øª ØªÙ‚Ù†ÙŠØ© Ø§Ù„Ù…ØºØ±Ø¨',
-      'Ù‚Ø¯Ø±Ø§Øª Ø§Ù„ØªØ­ÙˆÙ„ Ø§Ù„Ø±Ù‚Ù…ÙŠ Ù„Ù„Ø´Ø±ÙƒØ§Øª Ø§Ù„Ù…ØºØ±Ø¨',
-      'Ø®Ø¯Ù…Ø§Øª Ø§Ù„Ø§Ø³ØªØ´Ø§Ø±Ø§Øª Ø§Ù„ØªÙ‚Ù†ÙŠØ© Ø§Ù„Ù…ØºØ±Ø¨',
-      'Ø®Ø¯Ù…Ø§Øª Ø§Ù„ØªØ­ÙˆÙ„ Ø§Ù„Ø±Ù‚Ù…ÙŠ Ø§Ù„Ù…ØºØ±Ø¨',
-      'Ø®Ø¯Ù…Ø§Øª Ø£ØªÙ…ØªØ© Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ Ø§Ù„Ù…ØºØ±Ø¨',
-      'Ø§Ø³ØªØ±Ø§ØªÙŠØ¬ÙŠØ© ØªÙ‚Ù†ÙŠØ© ÙˆÙ‡Ù†Ø¯Ø³Ø© Ø­Ù„ÙˆÙ„ Ø§Ù„Ù…ØºØ±Ø¨',
-      'Ø£ØªÙ…ØªØ© Ø³ÙŠØ± Ø§Ù„Ø¹Ù…Ù„ Ø§Ù„Ù…ØºØ±Ø¨',
-      'ØªØ·ÙˆÙŠØ± Ø¨Ø±Ù…Ø¬ÙŠØ§Øª Ù…Ø®ØµØµØ© Ø§Ù„Ù…ØºØ±Ø¨',
-      'Ø§Ù„Ø¨Ù†ÙŠØ© Ø§Ù„ØªØ­ØªÙŠØ© Ø§Ù„Ø³Ø­Ø§Ø¨ÙŠØ© Ø§Ù„Ù…ØºØ±Ø¨',
-      'Ø´Ø±ÙƒØ© ØªØ·ÙˆÙŠØ± ØªØ·Ø¨ÙŠÙ‚Ø§Øª Ù…ÙˆØ¨Ø§ÙŠÙ„ Ù…Ø®ØµØµØ© Ø§Ù„Ù…ØºØ±Ø¨',
-      'Ø´Ø±ÙƒØ© ØªØ·ÙˆÙŠØ± ØªØ·Ø¨ÙŠÙ‚Ø§Øª ÙˆÙŠØ¨ Ù…Ø®ØµØµØ© Ø§Ù„Ù…ØºØ±Ø¨',
-      'ØªØ±Ø­ÙŠÙ„ ÙˆØªÙƒØ§Ù…Ù„ Ù†Ø¸Ø§Ù… CRM Ø§Ù„Ù…ØºØ±Ø¨',
-      'Ø¨Ù†Ø§Ø¡ ØªØ·Ø¨ÙŠÙ‚ Ø¯Ø§Ø®Ù„ÙŠ Ù„Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„Ø¹Ù…Ù„ÙŠØ§Øª Ø§Ù„Ù…ØºØ±Ø¨',
-      'Ù†Ø´Ø± Ø§Ù„ØªØ·Ø¨ÙŠÙ‚Ø§Øª Ø¹Ù„Ù‰ Ø§Ù„Ø³Ø­Ø§Ø¨Ø© Ø§Ù„Ù…ØºØ±Ø¨',
-      'Ø§Ø³ØªØ´Ø§Ø±Ø§Øª DevOps Ù„Ù„Ø´Ø±ÙƒØ§Øª Ø§Ù„Ù†Ø§Ø´Ø¦Ø© Ø§Ù„Ù…ØºØ±Ø¨',
-      'Ø¥Ø¹Ø¯Ø§Ø¯ Ø®Ø·ÙˆØ· CI CD Ù„ÙØ±Ù‚ Ø§Ù„ØªØ·ÙˆÙŠØ± Ø§Ù„Ù…ØºØ±Ø¨',
-      'ØªÙ†ÙÙŠØ° ÙˆÙƒÙŠÙ„ Ø°ÙƒØ§Ø¡ Ø§ØµØ·Ù†Ø§Ø¹ÙŠ Ù„Ø¹Ù…Ù„ÙŠØ§Øª Ø§Ù„Ø¹Ù…Ù„Ø§Ø¡ Ø§Ù„Ù…ØºØ±Ø¨',
-      'Ø£ØªÙ…ØªØ© ØªØ£Ù‡ÙŠÙ„ Ø§Ù„Ø¹Ù…Ù„Ø§Ø¡ Ø§Ù„Ù…Ø­ØªÙ…Ù„ÙŠÙ† Ø§Ù„Ù…ØºØ±Ø¨',
-      'ØªØ­Ø¯ÙŠØ« Ø§Ù„Ø£Ù†Ø¸Ù…Ø© Ø§Ù„Ù‚Ø¯ÙŠÙ…Ø© Ø¥Ù„Ù‰ Ø£Ù†Ø¸Ù…Ø© Ø­Ø¯ÙŠØ«Ø© Ø§Ù„Ù…ØºØ±Ø¨',
-      'Ù‡Ù†Ø¯Ø³Ø© Ù…Ù†ØµØ§Øª SaaS Ù„Ù„Ù…Ø¤Ø³Ø³Ø§Øª Ø§Ù„Ù…ØºØ±Ø¨',
-      'Ø£ØªÙ…ØªØ© Ø§Ù„Ø¹Ù…Ù„ÙŠØ§Øª Ø§Ù„ØªØ¬Ø§Ø±ÙŠØ© Ø·Ù†Ø¬Ø©',
-      'ØªØ­Ø³ÙŠÙ† Ø£Ø¯Ø§Ø¡ Ø§Ù„ØªØ·Ø¨ÙŠÙ‚Ø§Øª Ø§Ù„Ù…ØºØ±Ø¨',
-      'ØªÙ‚ÙˆÙŠØ© Ø£Ù…Ù† Ø§Ù„ØªØ·Ø¨ÙŠÙ‚Ø§Øª ÙˆÙ…ÙˆØ«ÙˆÙ‚ÙŠØ© Ø§Ù„Ø¨Ù†ÙŠØ© Ø§Ù„Ø³Ø­Ø§Ø¨ÙŠØ© Ø§Ù„Ù…ØºØ±Ø¨',
+      'قدرات الاستشارات التقنية في المغرب',
+      'خدمات التحول الرقمي في المغرب',
+      'خدمات الذكاء الاصطناعي والأتمتة',
+      'استراتيجية تقنية وهندسة حلول',
+      'أتمتة سير العمل في المغرب',
+      'تطوير برمجيات مخصصة',
+      'البنية التحتية السحابية في المغرب',
+      'ترحيل وتكامل نظام CRM',
+      'بناء تطبيقات داخلية للشركات',
+      'استشارات DevOps في المغرب',
+      'تحديث الأنظمة القديمة',
+      'أمن التطبيقات وموثوقية السحابة',
     ],
     bullets: [
-      'Ø§Ø³ØªØ´Ø§Ø±Ø§Øª Ø§Ù„Ø§Ø³ØªØ±Ø§ØªÙŠØ¬ÙŠØ© ÙˆØ§Ù„Ø£Ø¹Ù…Ø§Ù„: Ø§Ù„ØªØ´Ø®ÙŠØµ ÙˆØ§Ù„ØªØ­ÙˆÙ„ ÙˆØªØµÙ…ÙŠÙ… Ù†Ù…ÙˆØ°Ø¬ Ø§Ù„ØªØ´ØºÙŠÙ„',
-      'Ø§Ù„Ø§Ø³ØªØ´Ø§Ø±Ø§Øª Ø§Ù„ØªÙ‚Ù†ÙŠØ©: Ù…Ø¹Ù…Ø§Ø±ÙŠØ© Ø§Ù„Ù…Ø¤Ø³Ø³Ø§Øª ÙˆØ®Ø±Ø§Ø¦Ø· Ø§Ù„Ø·Ø±ÙŠÙ‚ ÙˆØªÙƒØ§Ù…Ù„ Ø§Ù„Ø£Ù†Ø¸Ù…Ø©',
-      'Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ ÙˆØ§Ù„Ø¨ÙŠØ§Ù†Ø§Øª ÙˆØ§Ù„ØªØ­Ù„ÙŠÙ„Ø§Øª: ÙˆÙƒÙ„Ø§Ø¡ ÙˆØ°ÙƒØ§Ø¡ Ø§ØµØ·Ù†Ø§Ø¹ÙŠ ØªÙˆÙ„ÙŠØ¯ÙŠ ÙˆØªØ­Ù„ÙŠÙ„Ø§Øª ÙˆBI',
-      'Ù‡Ù†Ø¯Ø³Ø© Ø§Ù„Ø¨Ø±Ù…Ø¬ÙŠØ§Øª ÙˆØ§Ù„Ù…Ù†ØªØ¬Ø§Øª: ÙˆÙŠØ¨ ÙˆÙ…ÙˆØ¨Ø§ÙŠÙ„ ÙˆSaaS ÙˆAPI ÙˆØªØ¬Ø±Ø¨Ø© Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…',
-      'Ø§Ù„Ø³Ø­Ø§Ø¨Ø© ÙˆØ§Ù„Ø¨Ù†ÙŠØ© Ø§Ù„ØªØ­ØªÙŠØ©: Ø§Ù„ØªØ±Ø­ÙŠÙ„ ÙˆØ§Ù„Ø£Ù…Ø§Ù† ÙˆØ§Ù„Ù…Ø±Ø§Ù‚Ø¨Ø© ÙˆØ§Ù„Ø£ØªÙ…ØªØ©',
-      'Ø§Ù„Ø¹Ù…Ù„ÙŠØ§Øª ÙˆØ§Ù„Ø®Ø¯Ù…Ø§Øª Ø§Ù„Ù…ÙØ¯Ø§Ø±Ø©: Ø§Ù„Ù…Ù„ÙƒÙŠØ© Ø¨Ø¹Ø¯ Ø§Ù„Ø¥Ø·Ù„Ø§Ù‚ ÙˆØ§Ù„ØµÙŠØ§Ù†Ø© ÙˆØªØ·ÙˆÙŠØ± Ø£Ù†Ø¸Ù…Ø© Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ',
+      'استشارات الاستراتيجية والأعمال: التشخيص والتحول وتصميم نموذج التشغيل',
+      'الاستشارات التقنية: معمارية المؤسسات وخرائط الطريق وتكامل الأنظمة',
+      'الذكاء الاصطناعي والبيانات والتحليلات: الوكلاء والذكاء التوليدي والتحليلات وذكاء الأعمال',
+      'هندسة البرمجيات والمنتجات: الويب والموبايل ومنصات SaaS وواجهات API وتجربة المستخدم',
+      'السحابة والبنية التحتية: الترحيل والأمان والمراقبة والأتمتة',
+      'العمليات والخدمات المُدارة: الملكية بعد الإطلاق والصيانة وتطوير أنظمة الذكاء الاصطناعي',
     ],
   },
   es: {
-    title: 'Capacidades de consultoria tecnologica en Marruecos',
+    title: 'Capacidades de consultoría tecnológica en Marruecos',
     description:
-      'Seis pilares de servicio de Hive Vault Arc: estrategia, consultoria tecnologica, IA y datos, software, cloud, infraestructura y operaciones gestionadas.',
-    h1: 'Seis pilares de servicio de la estrategia a operaciones',
+      'Seis pilares de servicio de Hive Vault Arc: estrategia, consultoría tecnológica, IA y datos, software, cloud, infraestructura y operaciones gestionadas.',
+    h1: 'Seis pilares de servicio, de la estrategia a las operaciones',
     intro:
-      'Trabajamos con equipos directivos para disenar la estrategia, ejecutar la ingenieria y mantener la operacion en produccion a largo plazo.',
+      'Trabajamos con equipos directivos para diseñar la estrategia, ejecutar la ingeniería y mantener la operación en producción a largo plazo.',
     keywords: [
       'capacidades de consultoria tecnologica marruecos',
       'transformacion digital para empresas marruecos',
@@ -173,12 +170,12 @@ const capabilitiesContent: Record<
       'seguridad de aplicaciones y confiabilidad cloud marruecos',
     ],
     bullets: [
-      'Estrategia y consultoria de negocio: diagnostico, transformacion y modelo operativo',
-      'Consultoria tecnologica: arquitectura empresarial, roadmaps e integracion de sistemas',
-      'IA, datos y analitica: agentes, IA generativa, analitica predictiva y BI',
-      'Ingenieria de software y producto: web, movil, SaaS, APIs y UX/UI',
-      'Cloud e infraestructura: migracion, seguridad, observabilidad y automatizacion',
-      'Operaciones gestionadas: ownership post-lanzamiento, mantenimiento y evolucion de sistemas IA',
+      'Consultoría estratégica y de negocio: diagnóstico, transformación y diseño del modelo operativo',
+      'Consultoría tecnológica: arquitectura empresarial, hojas de ruta e integración de sistemas',
+      'IA, datos y analítica: agentes, IA generativa, analítica predictiva y BI',
+      'Ingeniería de software y producto: web, móvil, SaaS, APIs y UX/UI',
+      'Cloud e infraestructura: migración, seguridad, observabilidad y automatización',
+      'Operaciones gestionadas: responsabilidad posterior al lanzamiento, mantenimiento y evolución de sistemas de IA',
     ],
   },
 };
@@ -250,6 +247,7 @@ export default async function LocaleCapabilitiesPage({ params }: LocaleCapabilit
 
   return (
     <>
+      <LocaleDocumentAttributes locale={locale} direction={isRtl ? 'rtl' : 'ltr'} />
       <section
         className="mx-auto max-w-6xl px-6 py-28 md:py-36"
         lang={locale}
@@ -269,6 +267,7 @@ export default async function LocaleCapabilitiesPage({ params }: LocaleCapabilit
       </section>
       <FaqSection
         faqs={LOCALE_CAPABILITIES_FAQS[locale as SupportedLocale]}
+        heading={faqHeadings[locale as SupportedLocale]}
         dir={isRtl ? 'rtl' : 'ltr'}
       />
     </>
