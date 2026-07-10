@@ -3,7 +3,8 @@ import About from '../../../views/About';
 import FaqSection from '../../../components/FaqSection';
 import JsonLd from '../../../components/JsonLd';
 import { ABOUT_FAQS } from '../../../data/faqs';
-import { HVA_CEO_ANSWER, HVA_LEADERSHIP, HVA_LEADERSHIP_SEARCH_KEYWORDS } from '../../../lib/leadership';
+import { getFeaturedEmployeeProfiles } from '../../../lib/employee-profiles';
+import { HVA_CEO_ANSWER, HVA_LEADERSHIP_SEARCH_KEYWORDS } from '../../../lib/leadership';
 import {
   BRAND_SEARCH_VARIANTS,
   GLOBAL_KEYWORDS,
@@ -44,14 +45,15 @@ export const metadata: Metadata = buildPageMetadata({
   ]),
 });
 
-export default function Page() {
-  const leadershipPeople = HVA_LEADERSHIP.map((member) => ({
+export default async function Page() {
+  const teamMembers = await getFeaturedEmployeeProfiles();
+  const leadershipPeople = teamMembers.map((member) => ({
     '@type': 'Person',
     '@id': absoluteUrl(`/abouthva/people/${member.slug}#person`),
     name: member.name,
-    jobTitle: member.schemaJobTitle,
-    description: member.description,
-    image: absoluteUrl(member.image),
+    jobTitle: member.position,
+    description: member.summary,
+    image: absoluteUrl(member.profileImage),
     url: absoluteUrl(`/abouthva/people/${member.slug}`),
     worksFor: {
       '@type': ['Organization', 'ProfessionalService'],
@@ -59,7 +61,7 @@ export default function Page() {
       name: 'Hive Vault Arc',
       url: SITE_URL,
     },
-    knowsAbout: member.knowsAbout,
+    knowsAbout: member.expertise,
   }));
 
   const aboutPageSchema = {
@@ -100,7 +102,7 @@ export default function Page() {
   return (
     <>
       <JsonLd data={[aboutPageSchema, ...leadershipPeople, breadcrumbSchema]} />
-      <About />
+      <About teamMembers={teamMembers} />
       <FaqSection faqs={ABOUT_FAQS} />
     </>
   );

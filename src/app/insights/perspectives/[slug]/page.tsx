@@ -30,11 +30,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!perspective) return {};
 
   const base = buildPageMetadata({
-    title: perspective.title,
-    description:
-      'A Hive Vault Arc perspective on why companies should fix workflows, data, ownership, and success metrics before deploying AI agents or automation.',
+    title: perspective.seo?.title ?? perspective.title,
+    description: perspective.seo?.description ?? perspective.summary,
     path: `/insights/perspectives/${perspective.slug}`,
-    keywords: perspective.keywords,
+    keywords: perspective.seo?.keywords?.length ? perspective.seo.keywords : perspective.keywords,
   });
   const isoDate = perspective.publishedAt.includes('T')
     ? perspective.publishedAt
@@ -43,6 +42,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     ...base,
+    robots: {
+      index: !perspective.seo?.noIndex,
+      follow: !perspective.seo?.noIndex,
+    },
     authors: perspective.authors.map((author) => ({
       name: author.name,
       url: absoluteUrl('/whoweare/abouthva'),

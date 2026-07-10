@@ -27,10 +27,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post) return {};
 
   const base = buildPageMetadata({
-    title: post.title,
-    description: post.excerpt,
+    title: post.seo?.title ?? post.title,
+    description: post.seo?.description ?? post.excerpt,
     path: `/blog/${post.slug}`,
-    keywords: post.tags,
+    keywords: post.seo?.keywords?.length ? post.seo.keywords : post.tags,
   });
 
   const isoDate = post.publishedAt.includes('T') ? post.publishedAt : `${post.publishedAt}T00:00:00Z`;
@@ -38,6 +38,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     ...base,
+    robots: {
+      index: !post.seo?.noIndex,
+      follow: !post.seo?.noIndex,
+    },
     authors: [{ name: 'Hive Vault Arc Research Team', url: absoluteUrl('/whoweare/abouthva') }],
     openGraph: {
       ...base.openGraph,

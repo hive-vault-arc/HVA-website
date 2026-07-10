@@ -15,7 +15,7 @@ import {
   Workflow,
 } from 'lucide-react';
 import { useAnimationQuality } from '../lib/animationQuality';
-import { HVA_LEADERSHIP } from '../lib/leadership';
+import type { EmployeeProfile } from '../lib/employee-profiles';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 import BottomCTA from '../components/BottomCTA';
 import SectionBrandMark from '../components/SectionBrandMark';
@@ -42,6 +42,21 @@ type Pillar = {
   description: string;
   outcome: string;
   phase: 'Assess' | 'Build' | 'Operate';
+};
+
+type TeamMember = Pick<
+  EmployeeProfile,
+  | 'name'
+  | 'slug'
+  | 'position'
+  | 'responsibilityTag'
+  | 'summary'
+  | 'profileImage'
+  | 'profileImageAlt'
+>;
+
+type AboutProps = {
+  readonly teamMembers: readonly TeamMember[];
 };
 
 const principles: Principle[] = [
@@ -148,7 +163,7 @@ const deliveryFlow: DeliveryStep[] = [
   },
 ];
 
-const About: React.FC = () => {
+const About: React.FC<AboutProps> = ({ teamMembers }) => {
   const { motionReduced } = useAnimationQuality();
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
@@ -189,7 +204,7 @@ const About: React.FC = () => {
                   We Advise. We Build.<br />{' '}
                   <em className="italic">We Operate.</em>
                 </h1>
-                <p className="mb-8 max-w-xl text-lg font-light leading-relaxed text-[#1A2535]/68 md:text-xl">
+                <p className="mb-8 max-w-xl text-lg font-light leading-relaxed text-[#1A2535]/[0.68] md:text-xl">
                   Founder-led strategy, AI engineering, software, cloud, and operations. One accountable team from first whiteboard to production.
                 </p>
                 <div className="flex flex-wrap gap-4">
@@ -461,13 +476,13 @@ const About: React.FC = () => {
               <h2 className="font-serif text-4xl md:text-5xl font-medium text-[#1A2535] mb-6">
                 The People Behind Hive Vault Arc
               </h2>
-              <p className="text-[#1A2535]/64 leading-relaxed">
+              <p className="text-[#1A2535]/[0.68] leading-relaxed">
                 Three co-founders. Six service pillars. One team that stays from strategy to operations. Hive Vault Arc was founded in Tangier by engineers who wanted to build transformation programs that do not fall apart after the first deployment.
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
-              {HVA_LEADERSHIP.map((member, index) => {
+              {teamMembers.map((member, index) => {
                 const portraitClassName =
                   member.slug === 'ali-amrani'
                     ? 'w-full h-full object-cover object-[52%_38%] scale-[1.58] group-hover:scale-[1.66] transition-transform duration-700'
@@ -493,18 +508,18 @@ const About: React.FC = () => {
                         style={{ viewTransitionName: profileTransitionName } as React.CSSProperties}
                       >
                         <Image
-                          src={member.image}
-                          alt={`${member.name} — ${member.role} at Hive Vault Arc`}
+                          src={member.profileImage}
+                          alt={member.profileImageAlt}
                           fill
                           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                           className={portraitClassName}
                         />
                       </div>
                       <div className="p-8">
-                        <p className="text-[10px] font-bold text-[var(--section-label-color)] uppercase tracking-[0.18em] mb-1">{member.tag}</p>
+                        <p className="text-[10px] font-bold text-[var(--section-label-color)] uppercase tracking-[0.18em] mb-1">{member.responsibilityTag}</p>
                         <h3 className="font-serif text-2xl font-light text-[#1A2535] mb-1 transition-colors duration-200 group-hover:text-[#E8A838]">{member.name}</h3>
-                        <p className="text-sm text-[#1A2535]/70">{member.role}</p>
-                        <p className="mt-4 text-sm leading-relaxed text-[#1A2535]/60">{member.description}</p>
+                        <p className="text-sm text-[#1A2535]/70">{member.position}</p>
+                        <p className="mt-4 text-sm leading-relaxed text-[#1A2535]/60">{member.summary}</p>
                         <span className="mt-5 inline-flex text-xs font-bold uppercase tracking-[0.16em] text-[#1A2535] transition-colors duration-200 group-hover:text-[#E8A838]">
                           Read profile →
                         </span>

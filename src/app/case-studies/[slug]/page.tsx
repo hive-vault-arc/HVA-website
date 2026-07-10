@@ -19,19 +19,29 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const study = await getCaseStudyBySlug(slug).catch(() => null);
   if (!study) return {};
 
-  return buildPageMetadata({
-    title: `${study.title} | Case Study`,
-    description: study.summary,
+  const metadata = buildPageMetadata({
+    title: study.seo?.title ?? `${study.title} | Case Study`,
+    description: study.seo?.description ?? study.summary,
     path: `/case-studies/${study.slug}`,
-    keywords: [
-      study.industry,
-      ...study.integrations,
-      ...study.operationalModules,
-      'case study',
-      'digital transformation consulting',
-      'technology consulting outcomes',
-    ],
+    keywords: study.seo?.keywords?.length
+      ? study.seo.keywords
+      : [
+          study.industry,
+          ...study.integrations,
+          ...study.operationalModules,
+          'case study',
+          'digital transformation consulting',
+          'technology consulting outcomes',
+        ],
   });
+
+  return {
+    ...metadata,
+    robots: {
+      index: !study.seo?.noIndex,
+      follow: !study.seo?.noIndex,
+    },
+  };
 }
 
 export default async function CaseStudyDetailPage({ params }: Props) {

@@ -3,6 +3,7 @@ import {
   getSanityCaseStudyBySlug,
 } from './sanity-content';
 import { withSanityFallback } from '../sanity/lib/fetch';
+import type { ContentSeo } from './content-seo';
 
 export type CaseStudyMetric = {
   label: string;
@@ -34,6 +35,7 @@ export type CaseStudy = {
     coverAlt?: string;
   };
   lastUpdated: string;
+  seo?: ContentSeo;
 };
 
 export type ProductSystem = {

@@ -6,6 +6,7 @@ import JsonLd from '../../../components/JsonLd';
 import FaqSection from '../../../components/FaqSection';
 import LocaleDocumentAttributes from '../../../components/LocaleDocumentAttributes';
 import { LOCALE_CAPABILITIES_FAQS } from '../../../data/faqs';
+import { NOT_FOUND_METADATA } from '../../../lib/not-found';
 import { SITE_URL, SUPPORTED_LOCALES, type SupportedLocale, buildPageMetadata } from '../../../lib/seo';
 import { getLocaleMessaging } from '../../../lib/positioning';
 
@@ -317,7 +318,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: LocaleCapabilitiesPageProps): Promise<Metadata> {
   const { locale } = await params;
   if (!SUPPORTED_LOCALES.includes(locale as SupportedLocale)) {
-    return {};
+    return NOT_FOUND_METADATA;
   }
 
   const content = capabilitiesContent[locale as SupportedLocale];

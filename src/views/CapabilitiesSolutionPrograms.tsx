@@ -152,7 +152,7 @@ export default function CapabilitiesSolutionPrograms() {
                     >
                       <div className="flex items-center gap-3">
                         <span className="font-mono text-[10px] text-[#E8A838]/60 group-hover:text-[#E8A838] transition-colors">{item.num}</span>
-                        <span className="text-sm font-medium text-white/65 group-hover:text-white transition-colors duration-200">{item.label}</span>
+                        <span className="text-sm font-medium text-white/[0.65] group-hover:text-white transition-colors duration-200">{item.label}</span>
                       </div>
                       <ArrowRight className="w-3 h-3 text-[#F0C15A]/40 group-hover:text-[#F0C15A] group-hover:translate-x-0.5 transition-all" />
                     </a>
@@ -532,7 +532,7 @@ export default function CapabilitiesSolutionPrograms() {
             backgroundSize: '44px 44px',
           }}
         />
-        <div className="pointer-events-none absolute -bottom-20 right-1/4 h-80 w-80 rounded-full bg-[#E8A838]/15 blur-3xl" aria-hidden="true" />
+        <div className="pointer-events-none absolute -bottom-20 right-1/4 h-80 w-80 rounded-full bg-[#E8A838]/[0.15] blur-3xl" aria-hidden="true" />
 
         <div className="relative z-10 max-w-screen-2xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">

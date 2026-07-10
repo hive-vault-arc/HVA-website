@@ -120,7 +120,7 @@ const Portfolio: React.FC = () => {
                 <Link href="#portfolio-projects" className="sharp-edge inline-flex min-h-12 items-center justify-center bg-[#1A2535] px-7 py-3 text-sm font-bold text-white transition-colors hover:bg-[#E8A838]">
                   Explore the Work
                 </Link>
-                <Link href="/contact" className="sharp-edge inline-flex min-h-12 items-center justify-center border border-[#1A2535]/24 bg-white/88 px-7 py-3 text-sm font-bold text-[#1A2535] transition-colors hover:border-[#E8A838] hover:text-[var(--section-label-color)]">
+                <Link href="/contact" className="sharp-edge inline-flex min-h-12 items-center justify-center border border-[#1A2535]/[0.24] bg-white/[0.88] px-7 py-3 text-sm font-bold text-[#1A2535] transition-colors hover:border-[#E8A838] hover:text-[var(--section-label-color)]">
                   Book a Call
                 </Link>
               </div>
@@ -331,12 +331,12 @@ const Portfolio: React.FC = () => {
                 <p className="text-xs uppercase tracking-[0.2em] text-[var(--section-label-color)]">Delivery Signature</p>
               </div>
               <h3 className="mt-3 font-serif text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold leading-[1.02] text-[#1A2535]">Strategy. Engineering. Operations.</h3>
-              <p className="mx-auto mt-3 max-w-4xl text-base leading-relaxed text-[#1A2535]/72 md:text-[1.55rem]">
+              <p className="mx-auto mt-3 max-w-4xl text-base leading-relaxed text-[#1A2535]/[0.72] md:text-[1.55rem]">
                 Everything needed to advise, engineer, deploy, and maintain reliable digital operations.
               </p>
             </motion.div>
 
-            <div className="mt-10 overflow-hidden border border-[#1A2535]/12 bg-white/84">
+            <div className="mt-10 overflow-hidden border border-[#1A2535]/[0.12] bg-white/[0.84]">
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
                 {proofBlocks.map((block, index) => (
                   <motion.article
@@ -357,7 +357,7 @@ const Portfolio: React.FC = () => {
                       <h4 className="mt-3 text-3xl font-semibold tracking-tight text-[#1A2535] md:text-[2.1rem]">
                         {block.title}
                       </h4>
-                      <p className="mt-2 max-w-md text-base leading-relaxed text-[#1A2535]/82 md:text-xl">
+                      <p className="mt-2 max-w-md text-base leading-relaxed text-[#1A2535]/[0.82] md:text-xl">
                         {block.detail}
                       </p>
                     </div>

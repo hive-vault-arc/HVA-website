@@ -26,16 +26,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!article) return {};
 
   const base = buildPageMetadata({
-    title: article.title,
-    description: article.summary,
+    title: article.seo?.title ?? article.title,
+    description: article.seo?.description ?? article.summary,
     path: `/insights/news-articles/${article.slug}`,
-    keywords: article.tags,
+    keywords: article.seo?.keywords?.length ? article.seo.keywords : article.tags,
   });
   const coverUrl = absoluteUrl(article.coverImage ?? '/Images/media/og-default.png');
   const isoDate = article.publishedAt.includes('T') ? article.publishedAt : `${article.publishedAt}T00:00:00Z`;
 
   return {
     ...base,
+    robots: {
+      index: !article.seo?.noIndex,
+      follow: !article.seo?.noIndex,
+    },
     authors: [{ name: 'Hive Vault Arc Research Team', url: absoluteUrl('/whoweare/abouthva') }],
     openGraph: {
       ...base.openGraph,

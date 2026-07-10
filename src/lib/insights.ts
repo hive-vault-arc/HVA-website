@@ -6,6 +6,7 @@ import {
   getSanityResearchReportBySlug,
 } from './sanity-content';
 import { withSanityFallback } from '../sanity/lib/fetch';
+import type { ContentSeo } from './content-seo';
 
 export type InsightCard = {
   title: string;
@@ -16,6 +17,7 @@ export type InsightCard = {
   readTime?: string;
   coverImage?: string;
   coverAlt?: string;
+  seo?: ContentSeo;
 };
 
 export type NewsArticle = InsightCard & {

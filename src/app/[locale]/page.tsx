@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import JsonLd from '../../components/JsonLd';
 import LocaleDocumentAttributes from '../../components/LocaleDocumentAttributes';
 import { SITE_NAME, SITE_URL, SUPPORTED_LOCALES, type SupportedLocale, buildPageMetadata } from '../../lib/seo';
+import { NOT_FOUND_METADATA } from '../../lib/not-found';
 import { getLocaleMessaging } from '../../lib/positioning';
 
 const homeContent: Record<
@@ -130,7 +131,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: LocalePageProps): Promise<Metadata> {
   const { locale } = await params;
   if (!SUPPORTED_LOCALES.includes(locale as SupportedLocale)) {
-    return {};
+    return NOT_FOUND_METADATA;
   }
 
   const content = homeContent[locale as SupportedLocale];

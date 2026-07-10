@@ -53,6 +53,9 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  experimental: {
+    globalNotFound: true,
+  },
   images: {
     remotePatterns: [
       {

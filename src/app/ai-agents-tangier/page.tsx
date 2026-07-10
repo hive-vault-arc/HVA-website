@@ -261,7 +261,7 @@ export default function AIAgentsTangierPage() {
                 </div>
                 <div>
                   <h3 className="font-headline text-3xl mb-4 text-white">Lead Generation</h3>
-                  <p className="text-white/65 font-body text-sm leading-relaxed">
+                  <p className="text-white/[0.65] font-body text-sm leading-relaxed">
                     Proactive identification and qualification of high-intent prospects across digital channels, with
                     structured context passed directly to your sales team.
                   </p>
@@ -391,14 +391,14 @@ export default function AIAgentsTangierPage() {
             }}
           />
           <div className="pointer-events-none absolute -right-24 -top-20 h-64 w-64 rounded-full bg-[#E8A838]/20 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-20 left-[8%] h-56 w-56 rounded-full bg-[#F0C15A]/15 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-20 left-[8%] h-56 w-56 rounded-full bg-[#F0C15A]/[0.15] blur-3xl" />
           <div className="relative z-10 max-w-3xl mx-auto">
             <p className="font-body text-[10px] tracking-[0.22em] uppercase font-bold text-[var(--section-label-color-dark)] mb-6">Next Step</p>
             <h2 className="mb-8 font-headline text-[clamp(2.6rem,12vw,3.5rem)] leading-[0.98] md:text-[5rem] md:leading-[0.95]">
               Ready to{' '}
               <em className="italic text-white/60">Launch?</em>
             </h2>
-            <p className="text-xl font-body font-light text-white/65 mb-12 max-w-xl mx-auto leading-relaxed">
+            <p className="text-xl font-body font-light text-white/[0.65] mb-12 max-w-xl mx-auto leading-relaxed">
               Join the vanguard of Tangier businesses leveraging the ARC framework. Start your diagnostic phase today
               and move from manual triage to autonomous execution.
             </p>

@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
-import { Manrope, Newsreader } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import Layout from '../components/Layout';
 import JsonLd from '../components/JsonLd';
 import { HVA_LEADERSHIP } from '../lib/leadership';
+import { manrope, newsreader } from '../lib/fonts';
 import {
   CONTACT_EMAIL,
   CONTACT_PHONE_E164,
@@ -26,20 +26,6 @@ import {
   absoluteUrl,
 } from '../lib/seo';
 import './globals.css';
-
-const manrope = Manrope({
-  subsets: ['latin'],
-  variable: '--font-manrope',
-  display: 'swap',
-});
-
-const newsreader = Newsreader({
-  subsets: ['latin'],
-  variable: '--font-newsreader',
-  display: 'swap',
-  style: ['normal', 'italic'],
-  axes: ['opsz'],
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

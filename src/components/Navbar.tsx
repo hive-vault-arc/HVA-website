@@ -69,7 +69,7 @@ const Navbar: React.FC = () => {
 
   const desktopLinkClass = (isActive: boolean) =>
     `px-4 py-2 text-sm font-medium transition-colors duration-150 ${
-      isActive ? 'bg-[#E8A838] text-[#1A2535]' : 'text-[#1A2535]/72 hover:text-[#1A2535] hover:bg-[#E8A838]/10'
+      isActive ? 'bg-[#E8A838] text-[#1A2535]' : 'text-[#1A2535]/[0.72] hover:text-[#1A2535] hover:bg-[#E8A838]/10'
     }`;
 
   const isRouteActive = (path: string) => pathname === path || (path !== '/' && pathname?.startsWith(`${path}/`));
@@ -93,7 +93,7 @@ const Navbar: React.FC = () => {
       <nav className="py-2 md:py-3">
         <div className="container mx-auto px-0 md:px-4 lg:px-8">
           <div
-            className="flex h-14 w-full items-center justify-between border border-[#1A2535]/10 bg-[#FFFFFF]/92 px-3 shadow-[0_8px_24px_rgba(26,37,53,0.06)] backdrop-blur-md sm:px-4 md:h-16 md:px-6"
+            className="flex h-14 w-full items-center justify-between border border-[#1A2535]/10 bg-white px-3 shadow-[0_8px_24px_rgba(26,37,53,0.06)] sm:px-4 md:h-16 md:px-6"
           >
             {/* Logo */}
             <Logo />
@@ -303,12 +303,12 @@ const Navbar: React.FC = () => {
             className="absolute inset-x-0 top-0 translate-y-0 bg-[#FFFFFF] shadow-2xl max-h-[100dvh] overflow-y-auto transition-transform duration-300 ease-out"
           >
             {/* Panel header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-[#1A2535]/10 sticky top-0 bg-[#FFFFFF]/95 backdrop-blur-md z-10">
+            <div className="sticky top-0 z-10 flex items-center justify-between border-b border-[#1A2535]/10 bg-white px-6 py-4">
               <Logo />
               <button
                 type="button"
                 onClick={closeMobileMenu}
-                className="flex h-11 w-11 items-center justify-center rounded-full bg-[#1A2535]/8 text-[#1A2535]/60 transition-colors hover:bg-[#E8A838]/12 hover:text-[#E8A838]"
+                className="flex h-11 w-11 items-center justify-center rounded-full bg-[#1A2535]/[0.08] text-[#1A2535]/60 transition-colors hover:bg-[#E8A838]/[0.12] hover:text-[#E8A838]"
                 aria-label="Close menu"
               >
                 <X className="h-5 w-5" />
@@ -325,7 +325,7 @@ const Navbar: React.FC = () => {
                 className={`flex items-center justify-between px-4 py-3.5 rounded-xl text-[15px] font-semibold transition-colors mb-1 ${
                   isRouteActive('/arc')
                     ? 'bg-[#E8A838] text-[#1A2535]'
-                    : 'text-[#1A2535] hover:bg-[#E8A838]/8'
+                    : 'text-[#1A2535] hover:bg-[#E8A838]/[0.08]'
                 }`}
               >
                 ARC
@@ -341,7 +341,7 @@ const Navbar: React.FC = () => {
                     className={`flex min-h-11 flex-1 items-center px-4 text-[15px] font-semibold transition-colors ${
                       isCapabilitiesActive
                         ? 'bg-[#E8A838] text-[#1A2535]'
-                        : 'text-[#1A2535] hover:bg-[#E8A838]/8'
+                        : 'text-[#1A2535] hover:bg-[#E8A838]/[0.08]'
                     }`}
                   >
                     <span className="flex items-center gap-2.5">
@@ -354,7 +354,7 @@ const Navbar: React.FC = () => {
                     className={`flex min-h-11 w-12 items-center justify-center border-l transition-colors ${
                       isCapabilitiesActive
                         ? 'border-[#1A2535]/10 bg-[#E8A838] text-[#1A2535]'
-                        : 'border-[#1A2535]/8 text-[#1A2535]/45 hover:bg-[#E8A838]/8 hover:text-[#E8A838]'
+                        : 'border-[#1A2535]/[0.08] text-[#1A2535]/[0.45] hover:bg-[#E8A838]/[0.08] hover:text-[#E8A838]'
                     }`}
                     aria-label="Toggle capabilities submenu"
                     aria-expanded={openMobileSection === 'capabilities'}
@@ -372,7 +372,7 @@ const Navbar: React.FC = () => {
                     <Link
                       href="/capabilities"
                       onClick={closeMobileMenu}
-                      className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm text-[#1A2535]/50 hover:text-[#E8A838] hover:bg-[#E8A838]/6 transition-colors"
+                      className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm text-[#1A2535]/50 hover:text-[#E8A838] hover:bg-[#E8A838]/[0.06] transition-colors"
                     >
                       All Capabilities
                     </Link>
@@ -384,7 +384,7 @@ const Navbar: React.FC = () => {
                         className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                           isCapabilitiesItemActive(item.path)
                             ? 'bg-[#E8A838]/10 text-[#E8A838] font-semibold'
-                            : 'text-[#1A2535]/65 hover:text-[#E8A838] hover:bg-[#E8A838]/6'
+                            : 'text-[#1A2535]/[0.65] hover:text-[#E8A838] hover:bg-[#E8A838]/[0.06]'
                         }`}
                       >
                         {item.label}
@@ -405,7 +405,7 @@ const Navbar: React.FC = () => {
                     className={`flex min-h-11 flex-1 items-center px-4 text-[15px] font-semibold transition-colors ${
                       isIndustriesActive
                         ? 'bg-[#E8A838] text-[#1A2535]'
-                        : 'text-[#1A2535] hover:bg-[#E8A838]/8'
+                        : 'text-[#1A2535] hover:bg-[#E8A838]/[0.08]'
                     }`}
                   >
                     <span className="flex items-center gap-2.5">
@@ -418,7 +418,7 @@ const Navbar: React.FC = () => {
                     className={`flex min-h-11 w-12 items-center justify-center border-l transition-colors ${
                       isIndustriesActive
                         ? 'border-[#1A2535]/10 bg-[#E8A838] text-[#1A2535]'
-                        : 'border-[#1A2535]/8 text-[#1A2535]/45 hover:bg-[#E8A838]/8 hover:text-[#E8A838]'
+                        : 'border-[#1A2535]/[0.08] text-[#1A2535]/[0.45] hover:bg-[#E8A838]/[0.08] hover:text-[#E8A838]'
                     }`}
                     aria-label="Toggle industries submenu"
                     aria-expanded={openMobileSection === 'industries'}
@@ -438,7 +438,7 @@ const Navbar: React.FC = () => {
                         key={item.path}
                         href={item.path}
                         onClick={closeMobileMenu}
-                        className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-[#1A2535]/65 hover:text-[#E8A838] hover:bg-[#E8A838]/6 transition-colors"
+                        className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-[#1A2535]/[0.65] hover:text-[#E8A838] hover:bg-[#E8A838]/[0.06] transition-colors"
                       >
                         {item.label}
                         <ArrowUpRight className="h-3.5 w-3.5 opacity-35" />
@@ -458,7 +458,7 @@ const Navbar: React.FC = () => {
                     className={`flex min-h-11 flex-1 items-center px-4 text-[15px] font-semibold transition-colors ${
                       isWhoWeAreActive
                         ? 'bg-[#E8A838] text-[#1A2535]'
-                        : 'text-[#1A2535] hover:bg-[#E8A838]/8'
+                        : 'text-[#1A2535] hover:bg-[#E8A838]/[0.08]'
                     }`}
                   >
                     <span className="flex items-center gap-2.5">
@@ -471,7 +471,7 @@ const Navbar: React.FC = () => {
                     className={`flex min-h-11 w-12 items-center justify-center border-l transition-colors ${
                       isWhoWeAreActive
                         ? 'border-[#1A2535]/10 bg-[#E8A838] text-[#1A2535]'
-                        : 'border-[#1A2535]/8 text-[#1A2535]/45 hover:bg-[#E8A838]/8 hover:text-[#E8A838]'
+                        : 'border-[#1A2535]/[0.08] text-[#1A2535]/[0.45] hover:bg-[#E8A838]/[0.08] hover:text-[#E8A838]'
                     }`}
                     aria-label="Toggle who we are submenu"
                     aria-expanded={openMobileSection === 'who-we-are'}
@@ -494,7 +494,7 @@ const Navbar: React.FC = () => {
                         className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                           isWhoWeAreItemActive(item.path)
                             ? 'bg-[#E8A838]/10 text-[#E8A838] font-semibold'
-                            : 'text-[#1A2535]/65 hover:text-[#E8A838] hover:bg-[#E8A838]/6'
+                            : 'text-[#1A2535]/[0.65] hover:text-[#E8A838] hover:bg-[#E8A838]/[0.06]'
                         }`}
                       >
                         {item.label}
@@ -515,7 +515,7 @@ const Navbar: React.FC = () => {
                     className={`flex min-h-11 flex-1 items-center px-4 text-[15px] font-semibold transition-colors ${
                       isInsightsActive
                         ? 'bg-[#E8A838] text-[#1A2535]'
-                        : 'text-[#1A2535] hover:bg-[#E8A838]/8'
+                        : 'text-[#1A2535] hover:bg-[#E8A838]/[0.08]'
                     }`}
                   >
                     <span className="flex items-center gap-2.5">
@@ -528,7 +528,7 @@ const Navbar: React.FC = () => {
                     className={`flex min-h-11 w-12 items-center justify-center border-l transition-colors ${
                       isInsightsActive
                         ? 'border-[#1A2535]/10 bg-[#E8A838] text-[#1A2535]'
-                        : 'border-[#1A2535]/8 text-[#1A2535]/45 hover:bg-[#E8A838]/8 hover:text-[#E8A838]'
+                        : 'border-[#1A2535]/[0.08] text-[#1A2535]/[0.45] hover:bg-[#E8A838]/[0.08] hover:text-[#E8A838]'
                     }`}
                     aria-label="Toggle insights submenu"
                     aria-expanded={openMobileSection === 'insights'}
@@ -551,7 +551,7 @@ const Navbar: React.FC = () => {
                         className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                           isInsightsItemActive(item.path)
                             ? 'bg-[#E8A838]/10 text-[#E8A838] font-semibold'
-                            : 'text-[#1A2535]/65 hover:text-[#E8A838] hover:bg-[#E8A838]/6'
+                            : 'text-[#1A2535]/[0.65] hover:text-[#E8A838] hover:bg-[#E8A838]/[0.06]'
                         }`}
                       >
                         {item.label}

@@ -127,7 +127,7 @@ export default function BottomCTA({
               <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-6xl leading-tight mb-6">
                 {headline}
               </h2>
-              <p className="text-[#FFFFFF]/65 text-lg font-light leading-relaxed max-w-xl">
+              <p className="text-[#FFFFFF]/[0.65] text-lg font-light leading-relaxed max-w-xl">
                 {subtext}
               </p>
             </div>

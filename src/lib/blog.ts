@@ -3,6 +3,7 @@ import {
   getSanityPostBySlug,
 } from './sanity-content';
 import { withSanityFallback } from '../sanity/lib/fetch';
+import type { ContentSeo } from './content-seo';
 
 export type ContentSection =
   | { type: 'paragraph'; content: string }
@@ -25,6 +26,7 @@ export type BlogPost = {
   coverAlt?: string;
   excerpt: string;
   tags: string[];
+  seo?: ContentSeo;
   faqs?: { question: string; answer: string }[];
   sources: { label: string; url: string }[];
   sections: ContentSection[];

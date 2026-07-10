@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const metadata = buildPageMetadata({
-    title: capability.seo?.title ?? `${capability.title} | Hive Vault Arc`,
+    title: capability.seo?.title ?? capability.title,
     description: capability.seo?.description ?? capability.briefLine,
     path: `/capabilities/${capability.slug}`,
     keywords: mergeKeywords(GLOBAL_KEYWORDS, capability.seo?.keywords ?? [], [

@@ -117,7 +117,7 @@ const FALLBACK_EMPLOYEE_PROFILES: EmployeeProfile[] = [
     featuredOnAbout: true,
     visibility: 'published',
     seo: {
-      title: 'Khalid Chalhi | Co-Founder & CEO at Hive Vault Arc',
+      title: 'Khalid Chalhi | Co-Founder & CEO',
       description:
         'Khalid Chalhi leads strategy, AI engineering, and software execution for Hive Vault Arc transformation programs in Tangier, Morocco.',
       keywords: ['Khalid Chalhi', 'Hive Vault Arc', 'AI Software Engineer', 'Co-Founder CEO'],
@@ -177,7 +177,7 @@ const FALLBACK_EMPLOYEE_PROFILES: EmployeeProfile[] = [
     featuredOnAbout: true,
     visibility: 'published',
     seo: {
-      title: 'Ali Amrani | Co-Founder & CEO at Hive Vault Arc',
+      title: 'Ali Amrani | Co-Founder & CEO',
       description:
         'Ali Amrani leads product systems, full-stack engineering, and delivery architecture for Hive Vault Arc.',
       keywords: ['Ali Amrani', 'Hive Vault Arc', 'Full-Stack Engineering', 'AI Transformation'],
@@ -236,7 +236,7 @@ const FALLBACK_EMPLOYEE_PROFILES: EmployeeProfile[] = [
     featuredOnAbout: true,
     visibility: 'published',
     seo: {
-      title: 'Oubay Ghamat | Co-Founder & CEO at Hive Vault Arc',
+      title: 'Oubay Ghamat | Co-Founder & CEO',
       description:
         'Oubay Ghamat leads cloud infrastructure, managed operations, and production reliability for Hive Vault Arc.',
       keywords: ['Oubay Ghamat', 'Hive Vault Arc', 'Cloud Infrastructure', 'Managed Operations'],

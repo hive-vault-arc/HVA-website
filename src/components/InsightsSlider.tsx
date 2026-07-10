@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 /* ─── Types ───────────────────────────────────────────────────────────────── */
@@ -27,8 +27,6 @@ function deterministicShuffle(arr: SlideItem[], count: number): SlideItem[] {
   return copy.slice(0, count);
 }
 
-const AUTOPLAY_MS = 10_000;
-
 /* ─── Component ───────────────────────────────────────────────────────────── */
 
 export default function InsightsSlider({ items }: { readonly items: SlideItem[] }) {
@@ -36,23 +34,7 @@ export default function InsightsSlider({ items }: { readonly items: SlideItem[] 
   const total = slides.length;
   const [current, setCurrent] = useState(0);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const resetTimer = useCallback(() => {
-    if (timerRef.current) clearTimeout(timerRef.current);
-    if (total < 2) return;
-    timerRef.current = setTimeout(() => {
-      setCurrent((p) => (p + 1) % total);
-    }, AUTOPLAY_MS);
-  }, [total]);
-
-  // Autoplay
-  useEffect(() => {
-    resetTimer();
-    return () => {
-      if (timerRef.current) clearTimeout(timerRef.current);
-    };
-  }, [current, resetTimer]);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     if (current >= total) setCurrent(0);
@@ -71,7 +53,11 @@ export default function InsightsSlider({ items }: { readonly items: SlideItem[] 
   if (total === 0) return null;
 
   return (
-    <section className="insights-slider-section">
+    <section
+      className="insights-slider-section"
+      aria-label="Latest publications carousel"
+      aria-roledescription="carousel"
+    >
       {/* ── Header ── */}
       <div className="insights-slider-header">
         <h2 className="insights-slider-eyebrow">Latest Publications</h2>
@@ -110,7 +96,7 @@ export default function InsightsSlider({ items }: { readonly items: SlideItem[] 
           <motion.div
             className="insights-slider-track"
             animate={{ x: `calc(-${current} * (var(--card-w) + var(--card-gap)))` }}
-            transition={{ duration: 0.72, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: shouldReduceMotion ? 0 : 0.72, ease: [0.16, 1, 0.3, 1] }}
           >
             {slides.map((item, i) => {
               const isHovered = hoveredIndex === i;
@@ -118,12 +104,21 @@ export default function InsightsSlider({ items }: { readonly items: SlideItem[] 
                 <div
                   key={item.id}
                   className="insights-slide-card"
-                  onMouseEnter={() => setHoveredIndex(i)}
-                  onMouseLeave={() => setHoveredIndex(null)}
+                  role="group"
+                  aria-roledescription="slide"
+                  aria-label={`${i + 1} of ${total}`}
+                  onPointerEnter={(event) => {
+                    if (event.pointerType === 'mouse') setHoveredIndex(i);
+                  }}
+                  onPointerLeave={(event) => {
+                    if (event.pointerType === 'mouse') setHoveredIndex(null);
+                  }}
                 >
                   <Link
                     href={item.href}
                     className="block h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A838] focus-visible:ring-inset"
+                    tabIndex={i === current ? 0 : -1}
+                    aria-current={i === current ? 'true' : undefined}
                     onFocus={() => setHoveredIndex(i)}
                     onBlur={() => setHoveredIndex(null)}
                   >
@@ -167,7 +162,7 @@ export default function InsightsSlider({ items }: { readonly items: SlideItem[] 
                       className="insights-slide-hover-overlay"
                       animate={{ opacity: isHovered ? 1 : 0 }}
                       transition={{ duration: 0.3 }}
-                      style={{ pointerEvents: isHovered ? 'auto' : 'none' }}
+                      style={{ pointerEvents: 'none' }}
                     >
                       <div className="insights-slide-hover-content">
                         <p className="insights-slide-hover-title">{item.title}</p>
@@ -188,12 +183,11 @@ export default function InsightsSlider({ items }: { readonly items: SlideItem[] 
       </div>
 
       {/* ── Dot indicators ── */}
-      <div className="insights-slider-dots" role="tablist" aria-label="Slide indicators">
+      <div className="insights-slider-dots" role="group" aria-label="Choose a publication">
         {slides.map((_, i) => (
           <button
             key={i}
-            role="tab"
-            aria-selected={i === current}
+            aria-pressed={i === current}
             aria-label={`Go to slide ${i + 1}`}
             onClick={() => setCurrent(i)}
             className={`insights-slider-dot${i === current ? ' insights-slider-dot--active' : ''}`}

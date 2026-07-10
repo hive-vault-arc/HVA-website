@@ -545,7 +545,7 @@ export default function InsightsHub({
       {/* Scroll progress */}
       <motion.div
         aria-hidden="true"
-        className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-gradient-to-r from-[#E8A838] via-[#F0C15A] to-[#E8A838]"
+        className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-[#E8A838]"
         style={{ scaleX: progressScale }}
       />
 
@@ -565,7 +565,7 @@ export default function InsightsHub({
                 Insights
               </p>
             </div>
-            <h1 className="font-headline text-4xl font-medium leading-[1.04] tracking-tight sm:text-5xl lg:text-[4.25rem]">
+            <h1 className="font-headline text-4xl font-medium leading-[1.04] sm:text-5xl lg:text-[4.25rem]">
               What We Think,
               <br />{' '}
               <em className="italic text-[#566274]">Test, and Ship.</em>
@@ -573,7 +573,7 @@ export default function InsightsHub({
             <div className="mt-6 flex items-center gap-4">
               <span className="block h-px w-8 bg-[#E8A838] flex-shrink-0" />
               <p className="max-w-sm text-sm leading-relaxed text-[#566274]">
-                Blogs, case studies, perspectives &amp; research — grounded in real operational work.
+                Blogs, case studies, perspectives, and research grounded in real operational work.
               </p>
             </div>
           </motion.div>

@@ -3,6 +3,7 @@ import {
   getSanityPerspectiveBySlug,
 } from './sanity-content';
 import { withSanityFallback } from '../sanity/lib/fetch';
+import type { ContentSeo } from './content-seo';
 
 export type PerspectiveSection =
   | { type: 'paragraph'; content: string }
@@ -25,6 +26,7 @@ export type Perspective = {
   sources: { label: string; url: string }[];
   coverImage: string;
   coverAlt: string;
+  seo?: ContentSeo;
   sections: PerspectiveSection[];
 };
 

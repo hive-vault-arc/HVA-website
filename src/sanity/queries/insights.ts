@@ -21,6 +21,15 @@ const imageFields = `
   hotspot
 `;
 
+const seoFields = `
+  seo{
+    title,
+    description,
+    keywords,
+    noIndex
+  }
+`;
+
 const sectionFields = `
   sections[]{
     _key,
@@ -77,6 +86,7 @@ const postFields = `
   coverAlt,
   excerpt,
   tags,
+  ${seoFields},
   faqs[]{
     question,
     answer
@@ -100,6 +110,7 @@ const newsArticleFields = `
   category,
   ${sourceFields},
   tags,
+  ${seoFields},
   ${sectionFields}
 `;
 
@@ -118,6 +129,7 @@ const perspectiveFields = `
     ${imageFields}
   },
   coverAlt,
+  ${seoFields},
   ${sectionFields}
 `;
 
@@ -136,6 +148,7 @@ const researchReportFields = `
     ${imageFields}
   },
   coverAlt,
+  ${seoFields},
   ${sectionFields}
 `;
 
@@ -168,7 +181,8 @@ const caseStudyFields = `
     logoLabel,
     coverAlt
   },
-  lastUpdated
+  lastUpdated,
+  ${seoFields}
 `;
 
 export const allPostsQuery = defineQuery(`

@@ -30,16 +30,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!report) return {};
 
   const base = buildPageMetadata({
-    title: report.title,
-    description: report.summary,
+    title: report.seo?.title ?? report.title,
+    description: report.seo?.description ?? report.summary,
     path: `/insights/research-reports/${report.slug}`,
-    keywords: report.keywords,
+    keywords: report.seo?.keywords?.length ? report.seo.keywords : report.keywords,
   });
   const coverUrl = absoluteUrl(report.coverImage ?? '/Images/media/og-default.png');
   const isoDate = report.publishedAt.includes('T') ? report.publishedAt : `${report.publishedAt}T00:00:00Z`;
 
   return {
     ...base,
+    robots: {
+      index: !report.seo?.noIndex,
+      follow: !report.seo?.noIndex,
+    },
     authors:
       report.authors.length > 0
         ? report.authors.map((author) => ({ name: author.name, url: absoluteUrl('/whoweare/abouthva') }))

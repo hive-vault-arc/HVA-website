@@ -147,7 +147,7 @@ const FALLBACK_CAPABILITY_PROFILES: CapabilityProfile[] = CAPABILITY_DOMAINS.map
     featuredOnCapabilities: true,
     visibility: 'published',
     seo: {
-      title: `${domain.title} | Hive Vault Arc Capabilities`,
+      title: domain.title,
       description: domain.briefLine,
       keywords: [
         domain.title,
