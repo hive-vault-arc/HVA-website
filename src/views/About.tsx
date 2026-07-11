@@ -1,48 +1,27 @@
 'use client';
 
-import React, { useState } from 'react';
-import Link from 'next/link';
+import type { CSSProperties, ElementType } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { MotionConfig, motion, useScroll, useTransform } from 'framer-motion';
 import {
-  Compass,
-  Globe2,
-  Layers3,
+  ArrowUpRight,
+  BrainCircuit,
+  BriefcaseBusiness,
+  Cloud,
+  Code2,
+  Cpu,
+  Gauge,
+  Network,
   Settings2,
   ShieldCheck,
   Target,
-  Terminal,
-  Workflow,
+  UserRoundCheck,
 } from 'lucide-react';
+import SectionBrandMark from '../components/SectionBrandMark';
+import BottomCTA from '../components/BottomCTA';
 import { useAnimationQuality } from '../lib/animationQuality';
 import type { EmployeeProfile } from '../lib/employee-profiles';
-import PageAmbientBackground from '../components/PageAmbientBackground';
-import BottomCTA from '../components/BottomCTA';
-import SectionBrandMark from '../components/SectionBrandMark';
-
-type Principle = {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-};
-
-type DeliveryStep = {
-  step: string;
-  icon: React.ReactNode;
-  title: string;
-  detail: string;
-  checkpoints: string[];
-};
-
-type Pillar = {
-  number: string;
-  slug: string;
-  title: string;
-  shortTitle: string;
-  description: string;
-  outcome: string;
-  phase: 'Assess' | 'Build' | 'Operate';
-};
 
 type TeamMember = Pick<
   EmployeeProfile,
@@ -59,473 +38,316 @@ type AboutProps = {
   readonly teamMembers: readonly TeamMember[];
 };
 
-const principles: Principle[] = [
-  {
-    icon: <Target className="h-5 w-5" />,
-    title: 'No Handoffs',
-    description: 'Strategy, build, and operations stay with one accountable team.',
-  },
-  {
-    icon: <ShieldCheck className="h-5 w-5" />,
-    title: 'Outcomes Over Output',
-    description: 'Work is judged by measurable business movement.',
-  },
-  {
-    icon: <Globe2 className="h-5 w-5" />,
-    title: 'Vertical Depth',
-    description: 'Industry context shapes the system before technology choices.',
-  },
-  {
-    icon: <Workflow className="h-5 w-5" />,
-    title: 'Founder Accountability',
-    description: 'Senior decisions stay close to the people doing the work.',
-  },
-];
+type DeliveryStep = {
+  number: string;
+  title: string;
+  description: string;
+};
 
-const pillars: Pillar[] = [
+type CapabilityPillar = {
+  slug: string;
+  title: string;
+  description: string;
+  icon: ElementType;
+};
+
+type Principle = {
+  title: string;
+  description: string;
+  icon: ElementType;
+};
+
+const deliverySteps: DeliveryStep[] = [
   {
     number: '01',
-    slug: 'strategy-business',
-    shortTitle: 'Strategy',
-    title: 'Strategy & Business Consulting',
-    description: 'Diagnose the transformation before any code is written. We redesign operating models, define AI strategy, sequence digital programs, and build the roadmap that connects business outcomes to technical execution.',
-    outcome: 'Shape the operating roadmap before build starts.',
-    phase: 'Assess',
+    title: 'Assess',
+    description: 'We diagnose the current state, define outcomes, and build the case for change with clarity.',
   },
   {
     number: '02',
-    slug: 'technology-consulting',
-    shortTitle: 'Technology',
-    title: 'Technology Consulting',
-    description: 'Design the architecture that serves the business 3–5 years out. Enterprise blueprints, technology roadmaps, platform strategy, IT modernization, systems integration, and infrastructure redesign.',
-    outcome: 'Decide the architecture and integration path.',
-    phase: 'Assess',
+    title: 'Re-engineer',
+    description: 'We redesign systems, data, and processes into scalable, production-ready solutions.',
   },
   {
     number: '03',
-    slug: 'ai-data-analytics',
-    shortTitle: 'AI & Data',
-    title: 'AI, Data & Analytics',
-    description: 'Engineer intelligence into operations. Generative AI systems, autonomous agents, machine learning, data pipelines, business intelligence, MLOps, and conversational AI on WhatsApp and web channels.',
-    outcome: 'Turn data and workflows into useful intelligence.',
-    phase: 'Build',
-  },
-  {
-    number: '04',
-    slug: 'software-engineering',
-    shortTitle: 'Software',
-    title: 'Software Engineering & Product',
-    description: 'Production-grade custom software, web and mobile applications, SaaS platforms, API ecosystems, DevOps pipelines, and UX-wired frontend delivery.',
-    outcome: 'Ship the product layer people actually use.',
-    phase: 'Build',
-  },
-  {
-    number: '05',
-    slug: 'cloud-infrastructure',
-    shortTitle: 'Cloud',
-    title: 'Cloud & Infrastructure',
-    description: 'AWS, Azure, and GCP migration, cloud-native architecture, Terraform-based infrastructure automation, security design, disaster recovery, and production observability.',
-    outcome: 'Make the system reliable, secure, and observable.',
-    phase: 'Build',
-  },
-  {
-    number: '06',
-    slug: 'operations-managed',
-    shortTitle: 'Operations',
-    title: 'Operations & Managed Services',
-    description: 'Ongoing ownership of the systems Hive Vault Arc builds. Managed operations, application evolution, automation maintenance, IT support, and business process management — long after go-live.',
-    outcome: 'Keep production improving after launch.',
-    phase: 'Operate',
-  },
-];
-
-const deliveryFlow: DeliveryStep[] = [
-  {
-    step: '01',
-    icon: <Compass className="h-8 w-8" />,
-    title: 'Assess',
-    detail: 'Map friction, define target architecture, and sequence the transformation before a single line of code is written.',
-    checkpoints: ['Define measurable outcomes', 'Audit current systems and blockers', 'Sequence strategy into milestones'],
-  },
-  {
-    step: '02',
-    icon: <Settings2 className="h-8 w-8" />,
-    title: 'Re-engineer',
-    detail: 'Build the systems, deploy the intelligence, and wire the infrastructure — shipped in sprint increments with full transparency.',
-    checkpoints: ['Deliver AI, software, and cloud layers', 'Validate against real outcomes', 'Iterate with demos and QA loops'],
-  },
-  {
-    step: '03',
-    icon: <Terminal className="h-8 w-8" />,
     title: 'Command',
-    detail: 'Stabilize, monitor, and evolve — the same team owns operations long-term. No handoff. No knowledge transfer failure.',
-    checkpoints: ['Operate production systems', 'Monitor reliability and performance', 'Evolve as business requirements grow'],
+    description: 'We operate, automate, and continuously improve the systems that carry the business forward.',
   },
 ];
 
-const About: React.FC<AboutProps> = ({ teamMembers }) => {
+const capabilityPillars: CapabilityPillar[] = [
+  {
+    slug: 'strategy-business',
+    title: 'Strategy',
+    description: 'Enterprise strategy, operating models, and transformation roadmaps.',
+    icon: BriefcaseBusiness,
+  },
+  {
+    slug: 'technology-consulting',
+    title: 'Technology',
+    description: 'Architecture, platforms, integration, and emerging technology decisions.',
+    icon: Cpu,
+  },
+  {
+    slug: 'ai-data-analytics',
+    title: 'AI & Data',
+    description: 'AI engineering, data strategy, analytics, and intelligent automation.',
+    icon: BrainCircuit,
+  },
+  {
+    slug: 'software-engineering',
+    title: 'Software',
+    description: 'Custom software, product engineering, and digital experiences.',
+    icon: Code2,
+  },
+  {
+    slug: 'cloud-infrastructure',
+    title: 'Cloud',
+    description: 'Cloud platforms, DevOps, security, and infrastructure modernization.',
+    icon: Cloud,
+  },
+  {
+    slug: 'operations-managed',
+    title: 'Operations',
+    description: 'Managed services, automation, support, and continuous performance improvement.',
+    icon: Settings2,
+  },
+];
+
+const principles: Principle[] = [
+  {
+    title: 'No Handoffs',
+    description: 'One team, end to end, accountable for every outcome.',
+    icon: Network,
+  },
+  {
+    title: 'Outcomes Over Output',
+    description: 'We align on business impact, not activity or deliverables.',
+    icon: Target,
+  },
+  {
+    title: 'Vertical Depth',
+    description: 'Deep expertise in key sectors and technical domains.',
+    icon: Gauge,
+  },
+  {
+    title: 'Founder Accountability',
+    description: 'Senior leadership stays engaged from strategy to scale.',
+    icon: UserRoundCheck,
+  },
+  {
+    title: 'Production Ownership',
+    description: 'We design, build, and operate with long-term ownership.',
+    icon: ShieldCheck,
+  },
+];
+
+const reveal = {
+  initial: { opacity: 0, y: 18 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.12 },
+  transition: { duration: 0.5 },
+};
+
+const About = ({ teamMembers }: AboutProps) => {
   const { motionReduced } = useAnimationQuality();
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const heroLift = useTransform(scrollYProgress, [0, 0.4], [0, -30]);
-  const [activeDeliveryStep, setActiveDeliveryStep] = useState(0);
-  const activeDeliveryItem = deliveryFlow[activeDeliveryStep] ?? deliveryFlow[0];
 
   return (
     <MotionConfig reducedMotion={motionReduced ? 'always' : 'never'}>
-      <div className="about-hva-page relative isolate overflow-hidden bg-[#FFFFFF] text-[#1A2535]">
+      <div className="about-hva-page about-redesign">
         <motion.div
           aria-hidden="true"
-          className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-gradient-to-r from-[#E8A838] via-[#E8A838] to-[#E8A838]"
+          className="about-scroll-progress"
           style={{ scaleX: progressScale }}
         />
-        <PageAmbientBackground className="-z-10" />
 
-        {/* Hero Section */}
-        <section className="relative px-6 pb-10 pt-24 md:pb-14 md:pt-32 lg:px-14">
-          <div className="container mx-auto">
-            <div className="grid grid-cols-1 items-start gap-9 lg:grid-cols-12 lg:items-center lg:gap-12">
-
-              {/* Left: content */}
-              <motion.div
-                className="lg:col-span-7 z-10"
-                initial={{ opacity: 0, y: 22 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55 }}
-                style={{ y: heroLift }}
-              >
-                <div className="mb-5 flex items-center gap-3">
-                  <SectionBrandMark size="sm" />
-                  <span className="inline-block text-[var(--section-label-color)] font-bold tracking-[0.22em] text-[10px] uppercase">
-                    Founder-Led Technology Transformation
-                  </span>
-                </div>
-                <h1 className="mb-6 font-serif text-[clamp(3rem,13vw,4.2rem)] font-medium leading-[1.04] tracking-tight text-[#1A2535] md:text-7xl md:leading-[1.08]">
-                  We Advise. We Build.<br />{' '}
-                  <em className="italic">We Operate.</em>
-                </h1>
-                <p className="mb-8 max-w-xl text-lg font-light leading-relaxed text-[#1A2535]/[0.68] md:text-xl">
-                  Founder-led strategy, AI engineering, software, cloud, and operations. One accountable team from first whiteboard to production.
-                </p>
-                <div className="flex flex-wrap gap-4">
-                  <Link
-                    href="/contact"
-                    className="sharp-edge min-h-11 bg-[#1A2535] px-8 py-4 text-sm font-bold text-[#FFFFFF] transition-colors duration-300 hover:bg-[#E8A838] w-full sm:w-auto text-center"
-                  >
-                    Book a Call
-                  </Link>
-                  <Link
-                    href="/case-studies"
-                    className="sharp-edge inline-flex min-h-11 items-center justify-center gap-2 bg-white/90 px-8 py-4 text-sm font-bold text-[#1A2535] shadow-[0_10px_25px_rgba(232,168,56,0.08)] transition-colors duration-300 hover:bg-[#FFF7E8] w-full sm:w-auto"
-                  >
-                    View Case Studies
-                    <Layers3 className="h-4 w-4 text-[#E8A838]" />
-                  </Link>
-                </div>
-              </motion.div>
-
-              {/* Right: image + floating card (part in, part out) */}
-              <motion.div
-                className="relative mt-1 lg:col-span-5 lg:mt-12"
-                initial={{ opacity: 0, x: 28 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7, delay: 0.15 }}
-              >
-                {/* Card straddling the top-left image edge — outside overflow-hidden */}
-                <div className="absolute -top-10 left-5 z-10 hidden max-w-[240px] bg-white p-6 shadow-xl lg:block">
-                  <p className="text-[10px] font-bold text-[var(--section-label-color)] tracking-[0.2em] uppercase mb-2">ARC Framework</p>
-                  <p className="text-lg font-serif italic text-[#1A2535] leading-snug">
-                    Assess. Re-engineer. Command.
-                  </p>
-                </div>
-                <div className="relative aspect-square w-full bg-[#ECEFF3] overflow-hidden">
-                  <Image
-                    src="/Images/team/hva-team-tangier-morocco.webp"
-                    alt="Archival engineering workshop representing accountable systems delivery"
-                    fill
-                    className="object-cover w-full h-full"
-                    sizes="(max-width: 1024px) 100vw, 42vw"
-                    priority
-                  />
-                </div>
-              </motion.div>
-
-            </div>
-          </div>
-        </section>
-
-        <section className="relative px-6 lg:px-14 py-16 md:py-24 bg-[#F7F8FA]">
-          <div className="container mx-auto">
-
-            {/* Header */}
+        <section className="about-editorial-hero">
+          <div className="about-editorial-shell about-editorial-hero-grid">
             <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.05 }}
-              transition={{ duration: 0.35 }}
-              className="mb-12 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6"
+              className="about-editorial-hero-copy"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55 }}
             >
-              <div className="flex items-start gap-3">
-                <SectionBrandMark size="sm" className="mt-0.5" />
-                <div>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)] mb-3">The ARC Loop</p>
-                  <h2 className="font-headline text-4xl md:text-5xl text-[#1A2535] leading-[1.02]">How We Deliver</h2>
-                </div>
+              <div className="about-kicker">
+                <SectionBrandMark size="sm" />
+                <span>Who We Are</span>
               </div>
-              <p className="max-w-xl text-[#566274] leading-relaxed lg:text-right">
-                The ARC loop — Assess, Re-engineer, Command — is not a handoff chain. It is a single continuous loop operated by the same team. Strategy informs build. Build informs operations. Operations feeds back into strategy.
+              <h1>
+                We advise. We build.
+                <br />
+                We operate.
+                <em>One accountable partner.</em>
+              </h1>
+              <p>
+                Hive Vault Arc is a technology transformation partner combining strategy, AI
+                engineering, software, cloud, and managed operations into one production-minded
+                delivery model.
               </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.05 }}
-              transition={{ duration: 0.35 }}
-            >
-              {/* Slim progress track */}
-              <div className="relative h-px w-full bg-slate-300 mb-8">
-                <motion.div
-                  className="absolute inset-y-0 left-0 bg-[#E8A838]"
-                  animate={{ width: `${((activeDeliveryStep + 1) / deliveryFlow.length) * 100}%` }}
-                  transition={{ duration: 0.35, ease: 'easeOut' }}
-                />
-              </div>
-
-              {/* Step cards — separated by 1px lines */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-px bg-slate-300">
-                {deliveryFlow.map((item, index) => {
-                  const isActive = activeDeliveryStep === index;
-                  return (
-                    <button
-                      key={item.step}
-                      type="button"
-                      onClick={() => setActiveDeliveryStep(index)}
-                      onMouseEnter={() => setActiveDeliveryStep(index)}
-                      onFocus={() => setActiveDeliveryStep(index)}
-                      className={`relative bg-white p-8 text-left transition-all duration-300 group overflow-hidden ${
-                        isActive ? 'bg-white' : 'hover:bg-[#FFFFFF]'
-                      }`}
-                    >
-                      {/* Active top-bar */}
-                      <div
-                        className={`absolute top-0 left-0 right-0 h-[3px] transition-all duration-300 ${
-                          isActive ? 'bg-[#E8A838]' : 'bg-transparent group-hover:bg-slate-200'
-                        }`}
-                      />
-
-                      {/* Ghost step number */}
-                      <p className="font-headline text-[5rem] leading-none text-[#1A2535]/[0.05] select-none mb-2 -ml-1">
-                        {item.step}
-                      </p>
-
-                      {/* Icon */}
-                      <div className={`mb-4 transition-colors duration-300 ${isActive ? 'text-[#E8A838]' : 'text-[#566274] group-hover:text-[#E8A838]'}`}>
-                        {item.icon}
-                      </div>
-
-                      <h3 className={`font-headline text-xl leading-tight mb-2 transition-colors duration-300 ${
-                        isActive ? 'text-[#1A2535]' : 'text-[#1A2535]/70'
-                      }`}>
-                        {item.title}
-                      </h3>
-                      <p className="text-sm leading-relaxed text-[#566274]">{item.detail}</p>
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Active step detail — dark panel */}
-              <motion.div
-                key={activeDeliveryItem.step}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.28 }}
-                className="bg-[#1A2535] p-8 md:p-10"
-              >
-                <div className="flex flex-wrap items-start gap-x-8 gap-y-4 mb-6">
-                  <div className="flex items-center gap-4">
-                    <span className="inline-flex h-10 w-10 items-center justify-center bg-[#E8A838] text-sm font-bold text-white font-label">
-                      {activeDeliveryItem.step}
-                    </span>
-                    <div className="text-[#E8A838]">{activeDeliveryItem.icon}</div>
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--section-label-color-dark)] mb-1">ARC Phase</p>
-                    <h3 className="font-headline text-2xl text-white">{activeDeliveryItem.title}</h3>
-                  </div>
-                </div>
-                <p className="text-[#9AA4B2] max-w-2xl leading-relaxed mb-6">{activeDeliveryItem.detail}</p>
-                <ul className="grid grid-cols-1 gap-3 md:grid-cols-3 border-t border-white/10 pt-6">
-                  {activeDeliveryItem.checkpoints.map((checkpoint) => (
-                    <li key={checkpoint} className="flex items-start gap-3 text-sm text-[#C8CED7]">
-                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 bg-[#E8A838]" />
-                      <span>{checkpoint}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Six Service Pillars */}
-        <section id="service-map" className="about-service-map-section soft-grid-section">
-          <div className="about-service-map-shell">
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.05 }}
-              transition={{ duration: 0.35 }}
-              className="about-service-map-panel"
-            >
-              <div className="about-service-map-copy">
-                <div className="about-service-map-media">
-                  <Image
-                    src="/Images/capabilities/hva-arc-framework-operating-model.webp"
-                    alt="ARC operating model workspace"
-                    fill
-                    sizes="(max-width: 1040px) 100vw, 32vw"
-                    className="object-cover"
-                  />
-                </div>
-                <div className="about-service-map-mark">
-                  <SectionBrandMark size="sm" />
-                  <span>What We Do</span>
-                </div>
-                <h2>Six pillars. One loop.</h2>
-                <p>
-                  Diagnose the work. Build the system. Keep it running.
-                </p>
-                <Link href="/capabilities#capability-pillars" className="about-service-map-link">
-                  View full map <span aria-hidden="true">→</span>
+              <div className="about-hero-actions">
+                <Link href="/contact" className="about-button about-button-primary">
+                  Book a Call <ArrowUpRight aria-hidden="true" />
+                </Link>
+                <Link href="/capabilities" className="about-button about-button-secondary">
+                  View Capabilities <ArrowUpRight aria-hidden="true" />
                 </Link>
               </div>
-
-              <div className="about-service-map-grid">
-                {pillars.map((pillar) => (
-                  <Link
-                    key={pillar.number}
-                    href={`/capabilities/${pillar.slug}`}
-                    className="about-service-map-item"
-                  >
-                    <span className="about-service-map-number">{pillar.number}</span>
-                    <span className="about-service-map-text">
-                      <span className="about-service-map-phase">{pillar.phase}</span>
-                      <strong>{pillar.shortTitle}</strong>
-                      <em>{pillar.outcome}</em>
-                    </span>
-                    <span className="about-service-map-arrow" aria-hidden="true">
-                      →
-                    </span>
-                    <span className="sr-only">{pillar.description}</span>
-                  </Link>
-                ))}
-              </div>
             </motion.div>
-          </div>
-        </section>
 
-        {/* Operating Principles */}
-        <section id="operating-principles" className="about-principles-section">
-          <div className="about-principles-shell">
             <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.08 }}
-              transition={{ duration: 0.35 }}
-              className="about-principles-panel"
+              className="about-editorial-hero-media"
+              initial={{ opacity: 0, x: 24 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.65, delay: 0.1 }}
             >
-              <div className="about-principles-copy">
-                <div className="about-principles-mark">
-                  <Workflow className="h-4 w-4" />
-                  <span>Operating Principles</span>
-                </div>
-                <h2>Four rules for accountable delivery.</h2>
-                <p>No handoff chain. No vague success metric. No detached ownership.</p>
+              <Image
+                src="/Images/about/hva-team-strategy-room.webp"
+                alt="Technology leadership team reviewing global operations in a strategy room at night"
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 52vw"
+                className="object-cover"
+              />
+              <div className="about-hero-media-caption">
+                <SectionBrandMark size="sm" />
+                <span>Strategy to production</span>
               </div>
-
-              <div className="about-principles-list">
-                {principles.map((principle, index) => (
-                  <div key={principle.title} className="about-principles-item">
-                    <span className="about-principles-number">{`0${index + 1}`}</span>
-                    <span className="about-principles-icon" aria-hidden="true">
-                      {principle.icon}
-                    </span>
-                    <strong>{principle.title}</strong>
-                    <em>{principle.description}</em>
-                  </div>
-                ))}
-              </div>
-
-              <p className="about-principles-creed">
-                Complete means running, owned, and measurable.
-              </p>
             </motion.div>
           </div>
         </section>
 
-        {/* Team Section — improved design */}
-        <section className="relative px-6 lg:px-14 py-16 md:py-24 bg-[#ECEFF3]">
-          <div className="container mx-auto">
-            <div className="mb-16 text-center max-w-3xl mx-auto">
-              <div className="mb-4 flex items-center justify-center gap-3">
-                <SectionBrandMark size="sm" />
-                <p className="text-[10px] font-bold tracking-[0.2em] text-[var(--section-label-color)] uppercase">Our Team</p>
-              </div>
-              <h2 className="font-serif text-4xl md:text-5xl font-medium text-[#1A2535] mb-6">
-                The People Behind Hive Vault Arc
-              </h2>
-              <p className="text-[#1A2535]/[0.68] leading-relaxed">
-                Three co-founders. Six service pillars. One team that stays from strategy to operations. Hive Vault Arc was founded in Tangier by engineers who wanted to build transformation programs that do not fall apart after the first deployment.
-              </p>
+        <section className="about-delivery-section">
+          <div className="about-editorial-shell">
+            <motion.div className="about-section-heading" {...reveal}>
+              <span>Our Operating Model</span>
+              <h2>How We Deliver</h2>
+            </motion.div>
+            <div className="about-delivery-grid">
+              {deliverySteps.map((step, index) => (
+                <motion.article
+                  key={step.number}
+                  className={`about-delivery-step ${index === 1 ? 'about-delivery-step-featured' : ''}`}
+                  {...reveal}
+                  transition={{ duration: 0.5, delay: index * 0.08 }}
+                >
+                  <span className="about-delivery-number">{step.number}</span>
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                </motion.article>
+              ))}
             </div>
+          </div>
+        </section>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
-              {teamMembers.map((member, index) => {
-                const portraitClassName =
-                  member.slug === 'ali-amrani'
-                    ? 'w-full h-full object-cover object-[52%_38%] scale-[1.58] group-hover:scale-[1.66] transition-transform duration-700'
-                    : 'w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-700';
-                const profileTransitionName = `employee-profile-${member.slug}`;
+        <section className="about-capability-section">
+          <div className="about-editorial-shell about-capability-layout">
+            <motion.div className="about-capability-intro" {...reveal}>
+              <span>Our Capabilities</span>
+              <h2>Six pillars.<br />One loop.</h2>
+              <p>
+                Our capabilities are integrated across the full transformation lifecycle, designed
+                to move together from strategy to scale.
+              </p>
+              <Link href="/capabilities" className="about-text-link">
+                Explore Capabilities <ArrowUpRight aria-hidden="true" />
+              </Link>
+            </motion.div>
 
+            <div className="about-capability-grid">
+              {capabilityPillars.map((pillar, index) => {
+                const Icon = pillar.icon;
                 return (
                   <motion.div
-                    id={member.slug}
-                    key={member.name}
-                    className="group scroll-mt-28 bg-[#FFFFFF]"
-                    initial={{ opacity: 0, y: 8 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.05 }}
-                    transition={{ duration: 0.35, delay: index * 0.07 }}
+                    key={pillar.slug}
+                    {...reveal}
+                    transition={{ duration: 0.45, delay: index * 0.05 }}
                   >
-                    <a
-                      href={`/abouthva/people/${member.slug}`}
-                      className="block h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A838] focus-visible:ring-offset-4"
-                    >
+                    <Link href={`/capabilities/${pillar.slug}`} className="about-capability-item">
+                      <Icon aria-hidden="true" />
+                      <h3>{pillar.title}</h3>
+                      <p>{pillar.description}</p>
+                      <ArrowUpRight className="about-capability-arrow" aria-hidden="true" />
+                    </Link>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section className="about-principles-band">
+          <div className="about-editorial-shell">
+            <motion.div className="about-principles-heading" {...reveal}>
+              <span>Our Principles</span>
+              <h2>The principles behind accountable delivery.</h2>
+            </motion.div>
+            <div className="about-principles-grid">
+              {principles.map((principle, index) => {
+                const Icon = principle.icon;
+                return (
+                  <motion.article
+                    key={principle.title}
+                    className="about-principle-item"
+                    {...reveal}
+                    transition={{ duration: 0.45, delay: index * 0.06 }}
+                  >
+                    <Icon aria-hidden="true" />
+                    <h3>{principle.title}</h3>
+                    <p>{principle.description}</p>
+                  </motion.article>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section className="about-team-section">
+          <div className="about-editorial-shell">
+            <motion.div className="about-team-heading" {...reveal}>
+              <span>Our Team</span>
+              <h2>The People Behind Hive Vault Arc</h2>
+              <p>
+                Operators, engineers, and builders with deep expertise and a shared commitment to
+                solving complex problems that matter.
+              </p>
+            </motion.div>
+
+            <div className="about-team-grid">
+              {teamMembers.map((member, index) => {
+                const profileTransitionName = `employee-profile-${member.slug}`;
+                return (
+                  <motion.article
+                    id={member.slug}
+                    key={member.slug}
+                    className="about-team-card"
+                    {...reveal}
+                    transition={{ duration: 0.5, delay: index * 0.08 }}
+                  >
+                    <a href={`/abouthva/people/${member.slug}`} className="about-team-card-link">
                       <div
-                        className="relative aspect-[4/5] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700"
-                        style={{ viewTransitionName: profileTransitionName } as React.CSSProperties}
+                        className={`about-team-portrait about-team-portrait-${member.slug}`}
+                        style={{ viewTransitionName: profileTransitionName } as CSSProperties}
                       >
                         <Image
                           src={member.profileImage}
                           alt={member.profileImageAlt}
                           fill
-                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                          className={portraitClassName}
+                          sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                          className="object-cover"
                         />
                       </div>
-                      <div className="p-8">
-                        <p className="text-[10px] font-bold text-[var(--section-label-color)] uppercase tracking-[0.18em] mb-1">{member.responsibilityTag}</p>
-                        <h3 className="font-serif text-2xl font-light text-[#1A2535] mb-1 transition-colors duration-200 group-hover:text-[#E8A838]">{member.name}</h3>
-                        <p className="text-sm text-[#1A2535]/70">{member.position}</p>
-                        <p className="mt-4 text-sm leading-relaxed text-[#1A2535]/60">{member.summary}</p>
-                        <span className="mt-5 inline-flex text-xs font-bold uppercase tracking-[0.16em] text-[#1A2535] transition-colors duration-200 group-hover:text-[#E8A838]">
-                          Read profile →
-                        </span>
+                      <div className="about-team-card-copy">
+                        <h3>{member.name}</h3>
+                        <span>{member.position}</span>
+                        <p>{member.summary}</p>
+                        <strong>
+                          View Profile <ArrowUpRight aria-hidden="true" />
+                        </strong>
                       </div>
                     </a>
-                  </motion.div>
+                  </motion.article>
                 );
               })}
             </div>
@@ -535,7 +357,7 @@ const About: React.FC<AboutProps> = ({ teamMembers }) => {
         <BottomCTA
           variant="light"
           headline="Ready to Start Your Transformation?"
-          subtext="Tell us where you are and where you need to be. Hive Vault Arc will map the right strategy, engineering, and operations path — and stay involved until the outcome is measurable."
+          subtext="Tell us where you are and where you need to be. Hive Vault Arc will map the right strategy, engineering, and operations path - and stay involved until the outcome is measurable."
           primaryLabel="Book a Call"
           primaryHref="/contact"
           secondaryLabel="View Our Capabilities"
