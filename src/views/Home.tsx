@@ -484,14 +484,14 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
       <section className="bg-white border-y border-[#DDE3EA]">
         <div className="mx-auto max-w-7xl px-6 lg:px-14 py-5 flex items-center gap-8">
           <p className="hidden shrink-0 text-[10px] font-bold uppercase tracking-[0.28em] text-[#566274] sm:block">
-            Trusted by
+            Selected client
           </p>
           <div className="h-5 w-px bg-[#DDE3EA] shrink-0 hidden sm:block" />
           <div className="flex items-center gap-10 flex-1">
             <div className="group">
               <Image
                 src="/Images/trustedby/logo.png"
-                alt="Trusted partner logo"
+                alt="ImmoWorld Luxury Real Estate logo"
                 width={140}
                 height={40}
                 className="h-7 w-auto object-contain grayscale opacity-50 transition duration-300 group-hover:opacity-75 group-hover:grayscale-0"
@@ -500,7 +500,7 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
           </div>
           <div className="hidden md:flex items-center gap-2 shrink-0">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-[10px] uppercase tracking-[0.22em] text-[#566274]">Active partnership</span>
+            <span className="text-[10px] uppercase tracking-[0.22em] text-[#566274]">Real estate CRM engagement</span>
           </div>
         </div>
       </section>
@@ -682,8 +682,8 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
             >
               <div className="home-proof-photo home-proof-photo--main">
                 <Image
-                  src="/Images/case-studies/zoho-crm-transformation-case-study-morocco.webp"
-                  alt="CRM transformation program reviewed by real estate operators"
+                  src="/Images/case-studies/immoworld-crm-transformation-case-study-morocco.webp"
+                  alt="ImmoWorld CRM operating system engagement"
                   fill
                   sizes="(max-width: 900px) 100vw, 48vw"
                   className="object-cover"

@@ -5,7 +5,6 @@ import {
   getSanityNewsArticleBySlug,
   getSanityResearchReportBySlug,
 } from './sanity-content';
-import { withSanityFallback } from '../sanity/lib/fetch';
 import type { ContentSeo } from './content-seo';
 
 export type InsightCard = {
@@ -250,15 +249,6 @@ export const RESEARCH_REPORTS: InsightCard[] = [
   },
 ];
 
-const FALLBACK_RESEARCH_REPORTS: ResearchReport[] = RESEARCH_REPORTS.map((report) => ({
-  ...report,
-  subtitle: report.summary,
-  authors: [],
-  keywords: [],
-  sources: [],
-  sections: [{ type: 'paragraph', content: report.summary }],
-}));
-
 export const INSIGHTS_CATEGORIES = [
   { label: 'Blogs', href: '/blog' },
   { label: 'Case Studies', href: '/case-studies' },
@@ -268,15 +258,11 @@ export const INSIGHTS_CATEGORIES = [
 ] as const;
 
 export function getAllNewsArticles(): Promise<NewsArticle[]> {
-  return withSanityFallback(getAllSanityNewsArticles, () => NEWS_ARTICLES, 'news article');
+  return getAllSanityNewsArticles();
 }
 
 export function getNewsArticleBySlug(slug: string): Promise<NewsArticle | null> {
-  return withSanityFallback(
-    () => getSanityNewsArticleBySlug(slug),
-    () => NEWS_ARTICLES.find((article) => article.slug === slug) ?? null,
-    'news article'
-  );
+  return getSanityNewsArticleBySlug(slug);
 }
 
 export async function getRelatedNewsArticles(currentSlug: string, limit = 3): Promise<NewsArticle[]> {
@@ -285,19 +271,11 @@ export async function getRelatedNewsArticles(currentSlug: string, limit = 3): Pr
 }
 
 export function getAllResearchReports(): Promise<ResearchReport[]> {
-  return withSanityFallback(
-    getAllSanityResearchReports,
-    () => FALLBACK_RESEARCH_REPORTS,
-    'research report'
-  );
+  return getAllSanityResearchReports();
 }
 
 export function getResearchReportBySlug(slug: string): Promise<ResearchReport | null> {
-  return withSanityFallback(
-    () => getSanityResearchReportBySlug(slug),
-    () => FALLBACK_RESEARCH_REPORTS.find((report) => report.slug === slug) ?? null,
-    'research report'
-  );
+  return getSanityResearchReportBySlug(slug);
 }
 
 export async function getRelatedResearchReports(currentSlug: string, limit = 3): Promise<ResearchReport[]> {

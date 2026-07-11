@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import Layout from '../components/Layout';
 import JsonLd from '../components/JsonLd';
-import { HVA_LEADERSHIP } from '../lib/leadership';
+import { getAllEmployeeProfiles } from '../lib/employee-profiles';
 import { manrope, newsreader } from '../lib/fonts';
 import {
   CONTACT_EMAIL,
@@ -93,20 +93,23 @@ export const viewport: Viewport = {
   themeColor: '#1A2535',
 };
 
-export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
-  const leadershipPeople = HVA_LEADERSHIP.map((member) => ({
+export default async function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+  const founders = (await getAllEmployeeProfiles()).filter(
+    (profile) => profile.profileType === 'coFounder'
+  );
+  const leadershipPeople = founders.map((member) => ({
     '@type': 'Person',
     '@id': absoluteUrl(`/abouthva/people/${member.slug}#person`),
     name: member.name,
-    jobTitle: member.schemaJobTitle,
-    description: member.description,
-    image: absoluteUrl(member.image),
+    jobTitle: member.position,
+    description: member.summary,
+    image: absoluteUrl(member.profileImage),
     url: absoluteUrl(`/abouthva/people/${member.slug}`),
     worksFor: {
       '@id': absoluteUrl('/#organization'),
       name: 'Hive Vault Arc',
     },
-    knowsAbout: member.knowsAbout,
+    knowsAbout: member.expertise,
   }));
 
   const organizationSchema = {

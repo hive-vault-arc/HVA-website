@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import BottomCTA from '../components/BottomCTA';
 import InsightsSlider, { type SlideItem } from '../components/InsightsSlider';
+import PageAmbientBackground from '../components/PageAmbientBackground';
 import SectionBrandMark from '../components/SectionBrandMark';
 import type { BlogPost } from '../lib/blog';
 import type { InsightCard as ResearchReport, NewsArticle } from '../lib/insights';
@@ -550,11 +551,13 @@ export default function InsightsHub({
       />
 
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
-      <section className="mx-auto max-w-7xl px-6 pt-28 pb-10 lg:px-14">
-        <div className="flex items-center justify-between gap-12">
-          {/* Left — text */}
+      <section className="relative isolate overflow-hidden border-b border-[#DDE3EA]">
+        <PageAmbientBackground className="opacity-[0.92]" />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-white/50" />
+
+        <div className="relative z-10 mx-auto flex min-h-[340px] max-w-7xl items-end px-6 pb-14 pt-32 lg:px-14 lg:pb-16">
           <motion.div
-            className="flex-1 min-w-0"
+            className="max-w-3xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55 }}
@@ -576,84 +579,6 @@ export default function InsightsHub({
                 Blogs, case studies, perspectives, and research grounded in real operational work.
               </p>
             </div>
-          </motion.div>
-
-          {/* Right — decorative geometric mark */}
-          <motion.div
-            className="hidden lg:flex flex-shrink-0 items-center justify-center"
-            initial={{ opacity: 0, scale: 0.92 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.15 }}
-            aria-hidden="true"
-          >
-            <svg
-              width="260"
-              height="260"
-              viewBox="0 0 220 220"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              {/* Outer ring */}
-              <circle cx="110" cy="110" r="104" stroke="#E8A838" strokeWidth="1.4" strokeOpacity="0.38" />
-              {/* Mid ring */}
-              <circle cx="110" cy="110" r="76" stroke="#E8A838" strokeWidth="1.6" strokeOpacity="0.52" />
-              {/* Inner ring */}
-              <circle cx="110" cy="110" r="48" stroke="#1A2535" strokeWidth="1.25" strokeOpacity="0.22" />
-
-              {/* Crosshair lines */}
-              <line x1="6" y1="110" x2="214" y2="110" stroke="#1A2535" strokeWidth="1.15" strokeOpacity="0.16" />
-              <line x1="110" y1="6" x2="110" y2="214" stroke="#1A2535" strokeWidth="1.15" strokeOpacity="0.16" />
-
-              {/* Tick marks at 12 positions on outer ring */}
-              {Array.from({ length: 12 }).map((_, k) => {
-                const angle = (k * 30 * Math.PI) / 180;
-                const r1 = 98;
-                const r2 = k % 3 === 0 ? 86 : 92;
-                const x1 = 110 + r1 * Math.cos(angle);
-                const y1 = 110 + r1 * Math.sin(angle);
-                const x2 = 110 + r2 * Math.cos(angle);
-                const y2 = 110 + r2 * Math.sin(angle);
-                return (
-                  <line
-                    key={`tick-${k * 30}`}
-                    x1={x1} y1={y1} x2={x2} y2={y2}
-                    stroke="#E8A838"
-                    strokeWidth={k % 3 === 0 ? '2' : '1.35'}
-                    strokeOpacity={k % 3 === 0 ? '0.78' : '0.45'}
-                  />
-                );
-              })}
-
-              {/* Centre dot */}
-              <circle cx="110" cy="110" r="4.5" fill="#E8A838" fillOpacity="0.95" />
-
-              {/* Small accent dot — NE quadrant */}
-              <circle cx="152" cy="68" r="4" fill="#E8A838" fillOpacity="0.72" />
-
-              {/* Dashed arc segment — bottom-left quadrant */}
-              <path
-                d="M 34 143 A 80 80 0 0 1 77 34"
-                stroke="#E8A838"
-                strokeWidth="1.6"
-                strokeOpacity="0.58"
-                strokeDasharray="5 7"
-                fill="none"
-              />
-
-              {/* Label text */}
-              <text
-                x="110"
-                y="198"
-                textAnchor="middle"
-                fontSize="8"
-                letterSpacing="3"
-                fill="#566274"
-                fillOpacity="0.72"
-                fontFamily="system-ui, sans-serif"
-              >
-                HIVE VAULT ARC INSIGHTS
-              </text>
-            </svg>
           </motion.div>
         </div>
       </section>

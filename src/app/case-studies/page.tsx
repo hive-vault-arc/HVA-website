@@ -14,7 +14,7 @@ import CaseStudies from '../../views/CaseStudies';
 export const metadata: Metadata = buildPageMetadata({
   title: 'Case Studies | Consulting-Led Digital Transformation Outcomes',
   description:
-    'Verified case studies from Hive Vault Arc showing consulting strategy translated into real engineering delivery, production deployment, and measurable operating impact.',
+      'Case studies from Hive Vault Arc documenting consulting strategy, engineering delivery, and reported operating impact.',
   path: '/case-studies',
   keywords: mergeKeywords(GLOBAL_KEYWORDS, [
     'digital transformation case studies Morocco',

@@ -43,6 +43,19 @@ const submenuLinks = {
 } as const;
 
 describe('Navbar', () => {
+  it('adds its framed surface only after the page is scrolled', () => {
+    Object.defineProperty(window, 'scrollY', { configurable: true, value: 0 });
+    const { container } = render(<Navbar />);
+    const navSurface = container.querySelector('[data-scrolled]');
+
+    expect(navSurface).toHaveAttribute('data-scrolled', 'false');
+
+    Object.defineProperty(window, 'scrollY', { configurable: true, value: 40 });
+    fireEvent.scroll(window);
+
+    expect(navSurface).toHaveAttribute('data-scrolled', 'true');
+  });
+
   it('routes core links and exposes submenu links on keyboard focus', () => {
     render(<Navbar />);
 

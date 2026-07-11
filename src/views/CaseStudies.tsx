@@ -21,7 +21,7 @@ export default function CaseStudies({ studies }: { readonly studies: CaseStudy[]
       eyebrow="Transformation Proof"
       headline="Consulting-Led"
       headlineItalic="Case Studies"
-      description="Each case documents the business challenge, execution architecture, and measurable operating impact — no marketing, just production proof."
+      description="Each case documents the business challenge, execution architecture, and reported operating context, with evidence notes where documentation is still being completed."
       items={items}
       filters={industries}
       filterKey={(item) => item.tag}

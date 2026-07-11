@@ -71,24 +71,6 @@ export default async function CaseStudyDetailPage({ params }: Props) {
     },
   };
 
-  const reviewSchema = study.testimonial
-    ? {
-        '@context': 'https://schema.org',
-        '@type': 'Review',
-        itemReviewed: {
-          '@type': 'Organization',
-          '@id': `${SITE_URL}/#organization`,
-          name: 'Hive Vault Arc',
-          url: SITE_URL,
-        },
-        reviewBody: study.testimonial.quote,
-        author: {
-          '@type': 'Person',
-          name: study.testimonial.author,
-        },
-      }
-    : null;
-
   const breadcrumbSchema = buildBreadcrumbSchema([
     { name: 'Home', path: '/' },
     { name: 'Case Studies', path: '/case-studies' },
@@ -97,7 +79,7 @@ export default async function CaseStudyDetailPage({ params }: Props) {
 
   return (
     <>
-      <JsonLd data={[articleSchema, ...(reviewSchema ? [reviewSchema] : []), breadcrumbSchema]} />
+      <JsonLd data={[articleSchema, breadcrumbSchema]} />
       <CaseStudyDetail study={study} relatedStudies={relatedStudies} />
     </>
   );

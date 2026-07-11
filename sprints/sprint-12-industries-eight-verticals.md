@@ -144,7 +144,7 @@ Find the entire `{/* ── Bento Industry Grid ── */}` section (from `<sect
                   ))}
                 </ul>
                 <Link
-                  href="/case-studies/zoho-grade-crm-platform"
+                  href="/case-studies/top-tier-crm-transformation-program-real-estate-operations"
                   className="mt-7 inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-widest text-[#2563EB] hover:text-[#1d4ed8] transition-colors"
                 >
                   See related work <ArrowUpRight className="h-3.5 w-3.5" />

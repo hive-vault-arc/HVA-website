@@ -164,6 +164,7 @@ const caseStudyFields = `
   integrations,
   deploymentScale,
   deploymentStatus,
+  reportingNote,
   measuredOutcomes[]{
     label,
     value,
@@ -179,7 +180,12 @@ const caseStudyFields = `
       ${imageFields}
     },
     logoLabel,
-    coverAlt
+    coverAlt,
+    clientLogo {
+      ${imageFields}
+    },
+    clientLogoAlt,
+    clientWebsite
   },
   lastUpdated,
   ${seoFields}

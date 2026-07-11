@@ -2,7 +2,6 @@ import {
   getAllSanityCaseStudies,
   getSanityCaseStudyBySlug,
 } from './sanity-content';
-import { withSanityFallback } from '../sanity/lib/fetch';
 import type { ContentSeo } from './content-seo';
 
 export type CaseStudyMetric = {
@@ -23,8 +22,9 @@ export type CaseStudy = {
   integrations: string[];
   deploymentScale: string;
   deploymentStatus: string;
+  reportingNote?: string;
   measuredOutcomes: CaseStudyMetric[];
-  testimonial: {
+  testimonial?: {
     quote: string;
     author: string;
     role: string;
@@ -33,6 +33,9 @@ export type CaseStudy = {
     coverImage: string;
     logoLabel: string;
     coverAlt?: string;
+    clientLogo?: string;
+    clientLogoAlt?: string;
+    clientWebsite?: string;
   };
   lastUpdated: string;
   seo?: ContentSeo;
@@ -95,47 +98,54 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
   {
     slug: 'top-tier-crm-transformation-program-real-estate-operations',
-    title: 'TOP TIER CRM Transformation Program for Real Estate Operations',
-    clientName: 'Capstone Living Morocco',
-    industry: 'Real Estate',
+    title: 'ImmoWorld CRM Operating System for Real Estate Operations',
+    clientName: 'ImmoWorld',
+    industry: 'Luxury Real Estate',
     summary:
-      'Engineered a full CRM operating system with pipeline stages, role-based workflows, audit trails, and automated follow-up orchestration.',
+      'A CRM operating system for ImmoWorld that centralizes lead intake, buyer-journey pipeline work, team workflows, and operational reporting.',
     problem:
       'Three disconnected tools created data duplication, missed follow-ups, and no reliable reporting layer for leadership decisions.',
     systemArchitecture:
-      'Modular CRM architecture with domain-driven entities, workflow engine, event logs, and permissions by department.',
-    operationalModules: ['Revenue and Pipeline Control', 'Automation and Orchestration Layer', 'Executive Decision Intelligence'],
-    integrations: ['Meta Ads Lead Sync', 'HubSpot migration bridge', 'DocuSign', 'Twilio', 'Power BI'],
+      'A unified CRM operating system with role-based workflows, pipeline stages, follow-up automation, and a reporting layer for the sales and operations teams.',
+    operationalModules: ['Lead Intake and Routing', 'Buyer-Journey Pipeline', 'Team Workflow Coordination', 'Operational Reporting'],
+    integrations: ['Meta Lead Sync', 'DocuSign', 'Pipeline Automation', 'BI Reporting'],
     deploymentScale: '94 active users across sales, operations, and management',
-    deploymentStatus: 'Live in production since May 2025',
+    deploymentStatus: 'Live operational rollout since May 2025',
+    reportingNote:
+      'Reported figures describe the current operating record. Supporting measurement definitions and source artifacts will be added as this case-study record is finalized.',
     measuredOutcomes: [
       {
-        label: 'Pipeline Visibility',
-        value: '100%',
-        context: 'All active deals tracked from first touch to closing.',
+        label: 'Active Users',
+        value: '94',
+        context: 'Active user footprint across sales, operations, and management.',
       },
       {
-        label: 'Data Entry Time',
-        value: '-40%',
-        context: 'Time saved through workflow automation and templates.',
-      },
-      {
-        label: 'Tracked Deal Volume',
+        label: 'Monthly Pipeline Tracked',
         value: '$2.4M',
-        context: 'Monthly pipeline volume monitored in the operational dashboard.',
+        context: 'Pipeline value monitored in the operational dashboard each month.',
+      },
+      {
+        label: 'Manual Data Entry',
+        value: '-40%',
+        context: 'Reported reduction after workflow templates and automated follow-up.',
       },
     ],
-    testimonial: {
-      quote:
-        'This is the first time our sales and operations teams work from one trusted system. Forecast meetings are now based on real-time numbers.',
-      author: 'Youssef Bakkali',
-      role: 'COO, Capstone Living Morocco',
-    },
     assets: {
-      coverImage: '/Images/case-studies/zoho-crm-transformation-case-study-morocco.webp',
-      logoLabel: 'Capstone Living Morocco',
+      coverImage: '/Images/case-studies/immoworld-crm-transformation-case-study-morocco.webp',
+      coverAlt: 'ImmoWorld real estate CRM operating system engagement',
+      logoLabel: 'ImmoWorld Luxury Real Estate',
+      clientLogo: '/Images/trustedby/logo.png',
+      clientLogoAlt: 'ImmoWorld Luxury Real Estate logo',
+      clientWebsite: 'https://immoworld.ma/',
     },
-    lastUpdated: '2026-03-27',
+    lastUpdated: '2026-07-10',
+    seo: {
+      title: 'ImmoWorld CRM Operating System | Case Study',
+      description:
+        'How Hive Vault Arc supported ImmoWorld with a unified CRM operating system for lead intake, pipeline management, team workflows, and reporting.',
+      keywords: ['ImmoWorld', 'real estate CRM', 'CRM operating system', 'case study'],
+      noIndex: false,
+    },
   },
 ];
 
@@ -170,15 +180,11 @@ export const PRODUCT_SYSTEMS: ProductSystem[] = [
 ];
 
 export function getAllCaseStudies(): Promise<CaseStudy[]> {
-  return withSanityFallback(getAllSanityCaseStudies, () => CASE_STUDIES, 'case study');
+  return getAllSanityCaseStudies();
 }
 
 export async function getCaseStudyBySlug(slug: string): Promise<CaseStudy> {
-  const caseStudy = await withSanityFallback(
-    () => getSanityCaseStudyBySlug(slug),
-    () => CASE_STUDIES.find((item) => item.slug === slug) ?? null,
-    'case study'
-  );
+  const caseStudy = await getSanityCaseStudyBySlug(slug);
   if (!caseStudy) {
     throw new Error(`Case study not found: ${slug}`);
   }

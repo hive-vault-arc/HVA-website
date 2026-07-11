@@ -107,7 +107,7 @@ const etudes = [
   {
     title: 'Transformation CRM',
     href: '/case-studies/top-tier-crm-transformation-program-real-estate-operations',
-    image: '/Images/case-studies/zoho-crm-transformation-case-study-morocco.webp',
+    image: '/Images/case-studies/immoworld-crm-transformation-case-study-morocco.webp',
     stats: ['$2.4M de pipeline visible', '40% de saisie manuelle en moins'],
   },
 ];

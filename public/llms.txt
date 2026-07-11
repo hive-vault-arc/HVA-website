@@ -85,15 +85,16 @@ Hive Vault Arc serves teams that need strategy, production engineering, and mana
   - Qualified meetings booked: +43%
 - URL: https://hivevaultarc.com/case-studies/multilingual-whatsapp-ai-agent
 
-### TOP TIER CRM Transformation Program
+### ImmoWorld CRM Operating System for Real Estate Operations
 
-- Client: Capstone Living Morocco
-- Industry: Real Estate
-- Status: Live in production since May 2025
+- Client: ImmoWorld
+- Industry: Luxury Real Estate
+- Status: Live operational rollout since May 2025
 - Outcomes:
-  - Pipeline visibility: 100%
-  - Manual data-entry time: -40%
-  - Tracked deal volume: $2.4M monthly
+  - Active users: 94 across sales, operations, and management
+  - Monthly pipeline tracked: $2.4M
+  - Reported manual data-entry reduction: 40%
+- Reporting note: Supporting measurement definitions and source artifacts are being added to the case-study record.
 - URL: https://hivevaultarc.com/case-studies/top-tier-crm-transformation-program-real-estate-operations
 
 ## Public Perspectives

@@ -2,7 +2,6 @@ import {
   getAllSanityPosts,
   getSanityPostBySlug,
 } from './sanity-content';
-import { withSanityFallback } from '../sanity/lib/fetch';
 import type { ContentSeo } from './content-seo';
 
 export type ContentSection =
@@ -1038,15 +1037,11 @@ export const POSTS: BlogPost[] = [
 ];
 
 export function getAllPosts(): Promise<BlogPost[]> {
-  return withSanityFallback(getAllSanityPosts, () => POSTS, 'blog post');
+  return getAllSanityPosts();
 }
 
 export async function getPostBySlug(slug: string): Promise<BlogPost> {
-  const post = await withSanityFallback(
-    () => getSanityPostBySlug(slug),
-    () => POSTS.find((item) => item.slug === slug) ?? null,
-    'blog post'
-  );
+  const post = await getSanityPostBySlug(slug);
   if (!post) throw new Error(`Blog post not found: ${slug}`);
   return post;
 }

@@ -7,6 +7,7 @@ import { ArrowUpRight, ChevronDown, Menu, X } from 'lucide-react';
 import Logo from './Logo';
 
 const Navbar: React.FC = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [openMobileSection, setOpenMobileSection] = useState<string | null>(null);
@@ -29,6 +30,14 @@ const Navbar: React.FC = () => {
     setOpenMenu(null);
     setOpenMobileSection(null);
   }, [pathname]);
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const CapabilitiesItems = [
     { path: '/capabilities/solution-programs', label: 'Solution Programs' },
@@ -68,8 +77,8 @@ const Navbar: React.FC = () => {
     pathname?.startsWith('/abouthva');
 
   const desktopLinkClass = (isActive: boolean) =>
-    `px-4 py-2 text-sm font-medium transition-colors duration-150 ${
-      isActive ? 'bg-[#E8A838] text-[#1A2535]' : 'text-[#1A2535]/[0.72] hover:text-[#1A2535] hover:bg-[#E8A838]/10'
+    `px-4 py-2 text-sm font-semibold transition-colors duration-150 ${
+      isActive ? 'bg-[#E8A838] text-[#1A2535]' : 'text-[#1A2535]/[0.88] hover:bg-[#E8A838]/10 hover:text-[#1A2535]'
     }`;
 
   const isRouteActive = (path: string) => pathname === path || (path !== '/' && pathname?.startsWith(`${path}/`));
@@ -90,10 +99,15 @@ const Navbar: React.FC = () => {
 
   return (
     <header className="navbar-sharp fixed left-2 right-2 top-2 z-50 w-auto max-w-none lg:left-1/2 lg:right-auto lg:w-[94%] lg:max-w-6xl lg:-translate-x-1/2">
-      <nav className="py-2 md:py-3">
+      <nav className={`transition-[padding] duration-300 ${isScrolled ? 'py-1.5 md:py-2' : 'py-2 md:py-4'}`}>
         <div className="container mx-auto px-0 md:px-4 lg:px-8">
           <div
-            className="flex h-14 w-full items-center justify-between border border-[#1A2535]/10 bg-white px-3 shadow-[0_8px_24px_rgba(26,37,53,0.06)] sm:px-4 md:h-16 md:px-6"
+            data-scrolled={isScrolled}
+            className={`flex h-14 w-full items-center justify-between border px-3 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 sm:px-4 md:h-16 md:px-6 ${
+              isScrolled
+                ? 'border-[#1A2535]/10 bg-white/95 shadow-[0_8px_24px_rgba(26,37,53,0.08)] backdrop-blur-md'
+                : 'border-transparent bg-transparent shadow-none'
+            }`}
           >
             {/* Logo */}
             <Logo />
@@ -103,7 +117,7 @@ const Navbar: React.FC = () => {
               <Link href="/arc" className={desktopLinkClass(isRouteActive('/arc'))}>
                 <span className="flex items-baseline gap-1.5">
                   <span>ARC</span>{' '}
-                  <span className="text-[8px] tracking-[0.18em] uppercase opacity-50 font-medium">Framework</span>
+                  <span className="text-[8px] font-semibold uppercase tracking-[0.18em] opacity-60">Framework</span>
                 </span>
               </Link>
               <div
@@ -258,7 +272,7 @@ const Navbar: React.FC = () => {
 
             <Link
               href="/contact"
-              className="ml-auto hidden min-h-11 items-center bg-[#1A2535] px-4 py-2 text-sm font-medium text-[#FFFFFF] transition-colors duration-150 hover:bg-[#E8A838] hover:text-[#1A2535] lg:flex"
+              className="ml-auto hidden min-h-11 items-center bg-[#1A2535] px-4 py-2 text-sm font-semibold text-[#FFFFFF] transition-colors duration-150 hover:bg-[#E8A838] hover:text-[#1A2535] lg:flex"
             >
               Book a Call
               <ArrowUpRight className="w-3.5 h-3.5 ml-1.5" />

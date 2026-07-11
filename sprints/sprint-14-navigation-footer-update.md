@@ -28,7 +28,7 @@ Find:
 const expertiseLinks = [
   { href: '/capabilities/solution-programs', label: 'Solution Programs' },
   { href: '/case-studies/multilingual-whatsapp-ai-agent', label: 'WhatsApp Agent Operations' },
-  { href: '/case-studies/zoho-grade-crm-platform', label: 'CRM Modernization' },
+  { href: '/case-studies/top-tier-crm-transformation-program-real-estate-operations', label: 'CRM Modernization' },
   { href: '/case-studies', label: 'Healthcare Case Studies' },
   { href: '/insights/research-reports', label: 'Research Reports' },
 ];

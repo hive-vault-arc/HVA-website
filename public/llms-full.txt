@@ -192,26 +192,28 @@ Measured outcomes:
 - Manual triage reduction: 85%
 - Qualified meetings booked: +43%
 
-### TOP TIER CRM Transformation Program
+### ImmoWorld CRM Operating System for Real Estate Operations
 
 - URL: https://hivevaultarc.com/case-studies/top-tier-crm-transformation-program-real-estate-operations
-- Client: Capstone Living Morocco
-- Industry: Real Estate
-- Status: Live in production since May 2025
+- Client: ImmoWorld
+- Industry: Luxury Real Estate
+- Status: Live operational rollout since May 2025
 
 Problem: disconnected tools created duplicate data, missed follow-ups, and no reliable reporting layer for leadership decisions.
 
-Solution: a full CRM operating system with pipeline stages, role-based workflows, audit trails, and automated follow-up orchestration.
+Solution: a unified CRM operating system with role-based workflows, pipeline stages, follow-up automation, and a reporting layer for the sales and operations teams.
 
-Architecture: modular CRM architecture with domain-driven entities, workflow engine, event logs, and per-department permissions.
+Architecture: a CRM operating system supporting lead intake, buyer-journey pipeline work, team workflows, and operational reporting.
 
-Integrations: Meta Ads Lead Sync, HubSpot migration bridge, DocuSign, Twilio, Power BI, FastAPI, and PostgreSQL.
+Integrations: Meta Lead Sync, DocuSign, pipeline automation, and BI reporting.
 
-Measured outcomes:
+Reported operating indicators:
 
-- Pipeline visibility: 100%
-- Manual data-entry time: -40%
-- Tracked deal volume: $2.4M per month
+- Active users: 94 across sales, operations, and management
+- Monthly pipeline tracked: $2.4M
+- Reported manual data-entry reduction: 40%
+
+Reporting note: Supporting measurement definitions and source artifacts are being added to the case-study record.
 
 ## 9A. Public Perspectives
 

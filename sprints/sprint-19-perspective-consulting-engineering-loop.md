@@ -402,7 +402,7 @@ Use 4-6 links total:
 /capabilities
 /whoweare/abouthva
 /case-studies
-/case-studies/zoho-grade-crm-platform
+/case-studies/top-tier-crm-transformation-program-real-estate-operations
 /contact
 ```
 

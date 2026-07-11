@@ -2,7 +2,6 @@ import {
   getAllSanityPerspectives,
   getSanityPerspectiveBySlug,
 } from './sanity-content';
-import { withSanityFallback } from '../sanity/lib/fetch';
 import type { ContentSeo } from './content-seo';
 
 export type PerspectiveSection =
@@ -487,15 +486,11 @@ export const PERSPECTIVES: Perspective[] = [
 ];
 
 export function getAllPerspectives(): Promise<Perspective[]> {
-  return withSanityFallback(getAllSanityPerspectives, () => PERSPECTIVES, 'perspective');
+  return getAllSanityPerspectives();
 }
 
 export async function getPerspectiveBySlug(slug: string): Promise<Perspective> {
-  const perspective = await withSanityFallback(
-    () => getSanityPerspectiveBySlug(slug),
-    () => PERSPECTIVES.find((item) => item.slug === slug) ?? null,
-    'perspective'
-  );
+  const perspective = await getSanityPerspectiveBySlug(slug);
   if (!perspective) {
     throw new Error(`Perspective not found: ${slug}`);
   }

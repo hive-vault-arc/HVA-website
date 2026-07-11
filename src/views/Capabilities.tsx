@@ -444,7 +444,7 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
                 &ldquo;
               </div>
 
-              <div className="relative z-10 max-w-3xl">
+              <div className="relative z-10 w-full">
                 <h2 className="capabilities-quote-text font-headline text-3xl md:text-4xl lg:text-[2.8rem] italic leading-tight text-[#1A2535] mb-12">
                   &ldquo;Transformation succeeds when strategy, engineering, and operations move together, from the first decision to the last deployment.&rdquo;
                 </h2>

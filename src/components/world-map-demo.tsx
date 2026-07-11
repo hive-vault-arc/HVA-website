@@ -15,7 +15,7 @@ export function WorldMapDemo() {
           Based in Morocco, delivering for clients worldwide.
         </p>
       </div>
-      <div className="max-w-6xl mx-auto px-4 mt-7">
+      <div className="mx-auto mt-6 w-[92%] max-w-5xl">
         <WorldMap dots={WORLD_MAP_DOTS} lineColor="#E8A838" />
       </div>
     </div>

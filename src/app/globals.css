@@ -5252,7 +5252,7 @@
 }
 
 .capabilities-quote-text {
-  max-width: 62rem;
+  max-width: 74rem;
   margin-bottom: 2rem !important;
   font-size: clamp(2rem, 3.1vw, 3rem) !important;
 }

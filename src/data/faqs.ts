@@ -1,5 +1,4 @@
 import type { SupportedLocale } from '../lib/seo';
-import { HVA_CEO_ANSWER, HVA_CEO_ANSWER_FR } from '../lib/leadership';
 
 export type FaqItem = { question: string; answer: string };
 export type FaqSet = FaqItem[];
@@ -121,11 +120,13 @@ export const ABOUT_FAQS: FaqSet = [
   },
   {
     question: 'Who is the CEO of Hive Vault Arc?',
-    answer: HVA_CEO_ANSWER,
+    answer:
+      'Hive Vault Arc is founder-led. The current founders and their responsibility areas are maintained on the About page.',
   },
   {
     question: 'Qui est le PDG de Hive Vault Arc ?',
-    answer: HVA_CEO_ANSWER_FR,
+    answer:
+      'Hive Vault Arc est dirigee par ses cofondateurs. Les profils et perimetres de responsabilite actuels sont maintenus sur la page A propos.',
   },
   {
     question: 'What is the ARC framework?',
@@ -140,7 +141,7 @@ export const ABOUT_FAQS: FaqSet = [
   {
     question: 'Who leads Hive Vault Arc engagements?',
     answer:
-      'Hive Vault Arc is founder-led. Khalid Chalhi, Ali Amrani, and Oubay Ghamat are directly involved in every engagement — from strategy and architecture to delivery and production operations. Decisions are made by the people who understand the full system, not delegated to junior staff.',
+      'Hive Vault Arc is founder-led. The current leadership team and responsibility areas are maintained on the About page.',
   },
   {
     question: 'Do you stay involved after the initial build?',

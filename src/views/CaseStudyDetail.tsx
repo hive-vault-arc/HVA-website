@@ -1,6 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { ExternalLink } from 'lucide-react';
 import type { CaseStudy } from '../lib/proof';
 import ArticleDetailPage from '../components/ArticleDetailPage';
 
@@ -10,14 +12,49 @@ const fadeUp = { hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0 } };
 
 function CaseStudySidebar({ study }: { readonly study: CaseStudy }) {
   const meta = [
-    { label: 'Client', value: study.clientName },
     { label: 'Industry', value: study.industry },
     { label: 'Status', value: study.deploymentStatus },
-    { label: 'Scale', value: study.deploymentScale },
+    { label: 'User footprint', value: study.deploymentScale },
   ];
 
   return (
     <div className="space-y-8">
+      {(study.assets.clientLogo || study.assets.clientWebsite) && (
+        <div className="border border-[#DDE3EA] bg-white p-5">
+          <p
+            className="mb-4 text-[9px] font-bold uppercase tracking-[0.22em] text-[var(--section-label-color)]"
+            style={{ fontFamily: 'var(--font-body)' }}
+          >
+            Client
+          </p>
+          {study.assets.clientLogo && (
+            <div className="mb-5 flex h-20 items-center bg-[#1A2535] px-4">
+              <Image
+                src={study.assets.clientLogo}
+                alt={study.assets.clientLogoAlt ?? `${study.clientName} logo`}
+                width={210}
+                height={64}
+                className="max-h-11 w-auto max-w-full object-contain object-left"
+              />
+            </div>
+          )}
+          <p className="text-base font-semibold text-[#1A2535]" style={{ fontFamily: 'var(--font-body)' }}>
+            {study.clientName}
+          </p>
+          {study.assets.clientWebsite && (
+            <a
+              href={study.assets.clientWebsite}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex min-h-11 items-center gap-2 text-xs font-bold text-[var(--section-label-color)] transition-colors hover:text-[#1A2535]"
+              style={{ fontFamily: 'var(--font-body)' }}
+            >
+              Visit client website <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+            </a>
+          )}
+        </div>
+      )}
+
       {/* Meta fields */}
       <div className="space-y-5 border-l-2 border-[#E8A838] pl-5">
         {meta.map((item) => (
@@ -35,41 +72,19 @@ function CaseStudySidebar({ study }: { readonly study: CaseStudy }) {
         ))}
       </div>
 
-      {/* Program delivery record */}
-      <div className="relative bg-[#1A2535] p-6 overflow-hidden">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage:
-              'repeating-linear-gradient(0deg,#F0C15A 0,#F0C15A 1px,transparent 0,transparent 48px),repeating-linear-gradient(90deg,#F0C15A 0,#F0C15A 1px,transparent 0,transparent 48px)',
-          }}
-        />
-        <div className="pointer-events-none absolute -top-8 -right-8 w-32 h-32 bg-[#E8A838]/20 rounded-full blur-2xl" />
-
-        <p
-          className="relative z-10 text-[9px] font-bold uppercase tracking-[0.2em] text-[var(--section-label-color-dark)] mb-4"
-          style={{ fontFamily: 'var(--font-body)' }}
-        >
-          Program Delivery Record
-        </p>
-        <div className="relative z-10 space-y-0">
-          {([
-            { label: 'Deployment status', value: 'Live', pulse: true },
-            { label: 'Architecture review', value: 'Passed', pulse: false },
-            { label: 'Delivery framework', value: 'ARC', pulse: false },
-            { label: 'Accountability model', value: 'End-to-end', pulse: false },
-          ] as { label: string; value: string; pulse: boolean }[]).map((row) => (
-            <div key={row.label} className="flex items-center justify-between border-t border-white/10 py-3">
-              <span className="text-xs text-white/50" style={{ fontFamily: 'var(--font-body)' }}>{row.label}</span>
-              <span className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wide text-[var(--section-label-color-dark)]" style={{ fontFamily: 'var(--font-body)' }}>
-                {row.pulse && <span className="h-1.5 w-1.5 rounded-full bg-[#E8A838] animate-pulse inline-block" />}
-                {row.value}
-              </span>
-            </div>
-          ))}
+      {study.reportingNote && (
+        <div className="border-l-2 border-[#E8A838] bg-[#1A2535] px-5 py-5 text-white">
+          <p
+            className="mb-2 text-[9px] font-bold uppercase tracking-[0.2em] text-[var(--section-label-color-dark)]"
+            style={{ fontFamily: 'var(--font-body)' }}
+          >
+            Reporting note
+          </p>
+          <p className="text-sm leading-relaxed text-white/72" style={{ fontFamily: 'var(--font-body)' }}>
+            {study.reportingNote}
+          </p>
         </div>
-      </div>
+      )}
     </div>
   );
 }
@@ -87,6 +102,14 @@ function CaseStudyBody({ study }: { readonly study: CaseStudy }) {
         viewport={{ once: true, amount: 0.3 }}
         transition={{ staggerChildren: 0.1 }}
       >
+        <div className="bg-[#1A2535] px-6 py-4 sm:col-span-3">
+          <p
+            className="text-[9px] font-bold uppercase tracking-[0.22em] text-[var(--section-label-color-dark)]"
+            style={{ fontFamily: 'var(--font-body)' }}
+          >
+            Reported operating indicators
+          </p>
+        </div>
         {study.measuredOutcomes.map((metric) => (
           <motion.div
             key={metric.label}
@@ -215,6 +238,24 @@ function CaseStudyBody({ study }: { readonly study: CaseStudy }) {
             ))}
           </div>
         </motion.div>
+
+        {study.reportingNote && (
+          <motion.aside
+            variants={fadeUp}
+            transition={{ duration: 0.5 }}
+            className="border-y border-[#DDE3EA] py-6"
+          >
+            <p
+              className="mb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--section-label-color)]"
+              style={{ fontFamily: 'var(--font-body)' }}
+            >
+              Documentation status
+            </p>
+            <p className="max-w-2xl text-sm leading-relaxed text-[#566274]" style={{ fontFamily: 'var(--font-body)' }}>
+              {study.reportingNote}
+            </p>
+          </motion.aside>
+        )}
       </motion.div>
     </div>
   );

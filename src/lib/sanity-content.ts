@@ -45,6 +45,13 @@ function imageUrlFromSource(image: SanityImageValue): string {
     .url();
 }
 
+function logoUrlFromSource(image: SanityImageValue): string {
+  if (!image) return '';
+  if (typeof image === 'string') return image;
+
+  return urlForImage(image).width(600).fit('max').auto('format').url();
+}
+
 function normalizePost(post: SanityPost): BlogPost {
   return {
     ...post,
@@ -98,6 +105,9 @@ function normalizeCaseStudy(study: SanityCaseStudy): CaseStudy {
     coverImage?: SanityImageValue;
     coverAlt?: string;
     logoLabel?: string;
+    clientLogo?: SanityImageValue;
+    clientLogoAlt?: string;
+    clientWebsite?: string;
   } = study.assets ?? { logoLabel: study.clientName };
 
   return {
@@ -110,6 +120,9 @@ function normalizeCaseStudy(study: SanityCaseStudy): CaseStudy {
       coverImage: imageUrlFromSource(assets.coverImage),
       coverAlt: assets.coverAlt ?? study.title,
       logoLabel: assets.logoLabel ?? study.clientName,
+      clientLogo: logoUrlFromSource(assets.clientLogo),
+      clientLogoAlt: assets.clientLogoAlt ?? `${study.clientName} logo`,
+      clientWebsite: assets.clientWebsite,
     },
   };
 }
