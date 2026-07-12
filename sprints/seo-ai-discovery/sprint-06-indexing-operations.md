@@ -47,7 +47,7 @@ Potential files:
    - `/capabilities/solution-programs`
    - `/industries`
    - `/products-systems`
-   - `/whoweare/abouthva`
+   - `/aboutus`
    - `/contact`
    - `/ai-agents-tangier`
    - `/ai-agents-morocco`

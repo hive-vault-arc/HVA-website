@@ -34,7 +34,7 @@ const SLIDES: Slide[] = [
     primaryLabel: 'Book Discovery Call',
     primaryHref: '/contact',
     secondaryLabel: 'Meet Our Team',
-    secondaryHref: '/whoweare/abouthva',
+    secondaryHref: '/aboutus',
     image: '/Images/hero/hva-home-hero-strategic-guidance-accountable-execution.webp',
     imageAlt: 'Executive strategy workspace with operating model diagrams and city view',
     cardIcon: <Eye className="w-8 h-8 text-[#E8A838]" strokeWidth={1.5} />,

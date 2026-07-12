@@ -102,7 +102,7 @@ export default function ArticleDetailPage({
   title,
   subtitle,
   author,
-  authorHref = '/whoweare/abouthva',
+  authorHref = '/aboutus',
   coverImage,
   coverAlt,
   children,

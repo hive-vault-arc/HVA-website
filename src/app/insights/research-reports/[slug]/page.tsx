@@ -46,14 +46,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     authors:
       report.authors.length > 0
-        ? report.authors.map((author) => ({ name: author.name, url: absoluteUrl('/whoweare/abouthva') }))
-        : [{ name: 'Hive Vault Arc Research Team', url: absoluteUrl('/whoweare/abouthva') }],
+        ? report.authors.map((author) => ({ name: author.name, url: absoluteUrl('/aboutus') }))
+        : [{ name: 'Hive Vault Arc Research Team', url: absoluteUrl('/aboutus') }],
     openGraph: {
       ...base.openGraph,
       type: 'article',
       publishedTime: isoDate,
       modifiedTime: isoDate,
-      authors: [absoluteUrl('/whoweare/abouthva')],
+      authors: [absoluteUrl('/aboutus')],
       section: report.tag,
       images: [{ url: coverUrl, width: 1200, height: 630, alt: report.coverAlt ?? report.title }],
     },

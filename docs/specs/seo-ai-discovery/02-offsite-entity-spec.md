@@ -35,7 +35,7 @@ Tasks:
    - `https://hivevaultarc.com/`
    - `https://hivevaultarc.com/capabilities`
    - `https://hivevaultarc.com/arc`
-   - `https://hivevaultarc.com/whoweare/abouthva`
+   - `https://hivevaultarc.com/aboutus`
    - `https://hivevaultarc.com/contact`
    - `https://hivevaultarc.com/ai-agents-tangier`
    - `https://hivevaultarc.com/ai-agents-morocco`

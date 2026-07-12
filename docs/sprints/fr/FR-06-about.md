@@ -1,8 +1,8 @@
 # FR-06 — About HVA Page (French)
 
-**Route:** `/fr/whoweare/abouthva`
+**Canonical route:** `/aboutus`
 **View file:** `src/views/About.tsx`
-**App page:** `src/app/whoweare/abouthva/page.tsx`
+**App page:** `src/app/aboutus/page.tsx`
 **Depends on:** FR-00
 
 ---
@@ -76,7 +76,7 @@ Current steps: `"Business Discovery"`, `"System Design"`, `"Build & Validate"`, 
 
 ## Metadata to translate
 
-In `src/app/whoweare/abouthva/page.tsx`:
+In `src/app/aboutus/page.tsx`:
 - `title`
 - `description`
 - `keywords` — `"qui est H.V.A"`, `"équipe technologie Maroc"`, `"entreprise IA Tanger"`, etc.
@@ -95,6 +95,6 @@ In `src/app/whoweare/abouthva/page.tsx`:
 - [ ] All hardcoded EN strings in `About.tsx` extracted
 - [ ] Brand name, team member names, and technical terms preserved in English where appropriate
 - [ ] `messages/fr.json` `"about"` section fully translated
-- [ ] `/fr/whoweare/abouthva` renders correctly
+- [ ] `/aboutus` renders correctly
 - [ ] Copy reviewed against `docs/brand-copy-checklist.md`
 - [ ] No TypeScript errors

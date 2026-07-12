@@ -110,7 +110,7 @@ function PerspectiveSidebar({ perspective }: { perspective: Perspective }) {
       ? [
           { href: '/arc', label: 'ARC framework' },
           { href: '/capabilities', label: 'Capabilities' },
-          { href: '/whoweare/abouthva', label: 'About Hive Vault Arc' },
+          { href: '/aboutus', label: 'About Hive Vault Arc' },
           { href: '/case-studies', label: 'Case studies' },
           { href: '/case-studies/top-tier-crm-transformation-program-real-estate-operations', label: 'CRM transformation proof' },
           { href: '/contact', label: 'Book a Discovery Call' },
@@ -221,7 +221,7 @@ export default function PerspectiveView({
       title={perspective.title}
       subtitle={perspective.subtitle}
       author={perspective.authors[0]}
-      authorHref="/whoweare/abouthva"
+      authorHref="/aboutus"
       coverImage={perspective.coverImage}
       coverAlt={perspective.coverAlt}
       contentAsArticle

@@ -27,7 +27,7 @@ const pageLinks = [
   { href: '/arc', label: 'ARC' },
   { href: '/capabilities', label: 'Capabilities' },
   { href: '/industries', label: 'Industries' },
-  { href: '/whoweare/abouthva', label: 'Who We Are' },
+  { href: '/aboutus', label: 'Who We Are' },
   { href: '/insights', label: 'Insights' },
   { href: '/contact', label: 'Contact' },
 ];

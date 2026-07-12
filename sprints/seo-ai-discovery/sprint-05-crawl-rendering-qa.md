@@ -82,5 +82,5 @@ npm run build
 
 Manual QA:
 
-- Browser QA on `/`, `/arc`, `/capabilities`, `/whoweare/abouthva`, `/contact`, `/insights`, `/blog`, `/privacy-policy`, and geo pages.
+- Browser QA on `/`, `/arc`, `/capabilities`, `/aboutus`, `/contact`, `/insights`, `/blog`, `/privacy-policy`, and geo pages.
 - Search Console URL Inspection after deploy.

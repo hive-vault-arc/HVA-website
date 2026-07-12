@@ -83,7 +83,7 @@ Below the post title and date, add a visible author byline:
   <span>By </span>
   <a
     rel="author"
-    href="/whoweare/abouthva"
+    href="/aboutus"
     className="text-[#2563EB] hover:underline"
   >
     H.V.A Research Team
@@ -132,7 +132,7 @@ In the `generateMetadata` function, add an `authors` field:
 ```typescript
 return {
   ...base,
-  authors: [{ name: 'H.V.A Research Team', url: absoluteUrl('/whoweare/abouthva') }],
+  authors: [{ name: 'H.V.A Research Team', url: absoluteUrl('/aboutus') }],
   // ... rest of existing openGraph, twitter
 };
 ```
@@ -186,7 +186,7 @@ Use `priority={true}` for the cover image since it is above the fold (LCP elemen
 
 - [ ] Open a blog post in browser DevTools → Elements panel shows `<article>` wrapping content
 - [ ] `<time>` element has a valid `dateTime` attribute (check in DevTools)
-- [ ] Author name is visible and links to `/whoweare/abouthva`
+- [ ] Author name is visible and links to `/aboutus`
 - [ ] Breadcrumb trail is visible above the post title
 - [ ] Google Rich Results Test on a blog post URL shows Article schema valid with `datePublished`, `author`, `headline`
 - [ ] Lighthouse accessibility score does not decrease

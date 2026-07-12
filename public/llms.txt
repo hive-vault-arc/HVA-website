@@ -36,9 +36,9 @@ Hive Vault Arc serves teams that need strategy, production engineering, and mana
 - Khalid Chalhi: Co-Founder and CEO, responsible for strategy, AI engineering, and software execution
 - Ali Amrani: Co-Founder and CEO, responsible for product systems, full-stack engineering, and delivery architecture
 - Oubay Ghamat: Co-Founder and CEO, responsible for cloud infrastructure, operations, and production reliability
-- Khalid Chalhi profile: https://hivevaultarc.com/abouthva/people/khalid-chalhi
-- Ali Amrani profile: https://hivevaultarc.com/abouthva/people/ali-amrani
-- Oubay Ghamat profile: https://hivevaultarc.com/abouthva/people/oubay-ghamat
+- Khalid Chalhi profile: https://hivevaultarc.com/aboutus/our-people/khalid-chalhi
+- Ali Amrani profile: https://hivevaultarc.com/aboutus/our-people/ali-amrani
+- Oubay Ghamat profile: https://hivevaultarc.com/aboutus/our-people/oubay-ghamat
 
 ## Service Pillars
 
@@ -122,7 +122,7 @@ Hive Vault Arc serves teams that need strategy, production engineering, and mana
 - [Solution Programs](https://hivevaultarc.com/capabilities/solution-programs)
 - [ARC Framework](https://hivevaultarc.com/arc)
 - [Industries](https://hivevaultarc.com/industries)
-- [About Hive Vault Arc](https://hivevaultarc.com/whoweare/abouthva)
+- [About Hive Vault Arc](https://hivevaultarc.com/aboutus)
 - [Portfolio](https://hivevaultarc.com/whoarewe/portfolio)
 - [Case Studies](https://hivevaultarc.com/case-studies)
 - [Insights](https://hivevaultarc.com/insights)

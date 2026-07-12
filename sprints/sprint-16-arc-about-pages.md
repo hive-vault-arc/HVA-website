@@ -269,5 +269,5 @@ Replace with:
 - [ ] `grep -n "Diagnose\|Category Thinking\|Field Execution\|Run & Evolve" src/views/Arc.tsx` returns zero results
 - [ ] `grep -n "AI systems, digital transformation strategy" src/views/About.tsx` returns zero results
 - [ ] Running dev server at `/arc` shows "Assess. Re-engineer. Command." in hero
-- [ ] Running dev server at `/whoweare/abouthva` shows updated founder descriptor
+- [ ] Running dev server at `/aboutus` shows updated founder descriptor
 - [ ] Build passes locally

@@ -210,7 +210,7 @@ export const metadata: Metadata = buildPageMetadata({
 
 ### Task 15.6 — Update the About page metadata
 
-**File:** `src/app/whoweare/abouthva/page.tsx`
+**File:** `src/app/aboutus/page.tsx`
 
 Find:
 ```typescript

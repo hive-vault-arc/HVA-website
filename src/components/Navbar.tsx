@@ -63,7 +63,7 @@ const Navbar: React.FC = () => {
     { path: '/insights/research-reports', label: 'Research Reports' },
   ];
   const whoWeAreItems = [
-    { path: '/whoweare/abouthva', label: 'About HVA' },
+    { path: '/aboutus', label: 'About Us' },
     { path: '/whoarewe/portfolio', label: 'Portfolio' },
   ];
 
@@ -72,9 +72,7 @@ const Navbar: React.FC = () => {
   const isCapabilitiesActive = pathname?.startsWith('/capabilities');
   const isIndustriesActive = pathname?.startsWith('/industries');
   const isWhoWeAreActive =
-    pathname?.startsWith('/whoweare') ||
-    pathname?.startsWith('/whoarewe') ||
-    pathname?.startsWith('/abouthva');
+    pathname?.startsWith('/aboutus') || pathname?.startsWith('/whoarewe');
 
   const desktopLinkClass = (isActive: boolean) =>
     `px-4 py-2 text-sm font-semibold transition-colors duration-150 ${
@@ -202,7 +200,7 @@ const Navbar: React.FC = () => {
                 }}
               >
                 <Link
-                  href="/whoweare/abouthva"
+                  href="/aboutus"
                   aria-haspopup="menu"
                   aria-expanded={openMenu === 'who-we-are'}
                   className={`${desktopLinkClass(!!isWhoWeAreActive)} inline-flex items-center gap-1.5`}
@@ -467,7 +465,7 @@ const Navbar: React.FC = () => {
               <div className="mb-1">
                 <div className="mb-1 flex overflow-hidden rounded-xl">
                   <Link
-                    href="/whoweare/abouthva"
+                    href="/aboutus"
                     onClick={closeMobileMenu}
                     className={`flex min-h-11 flex-1 items-center px-4 text-[15px] font-semibold transition-colors ${
                       isWhoWeAreActive

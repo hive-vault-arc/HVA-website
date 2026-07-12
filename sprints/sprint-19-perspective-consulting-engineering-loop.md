@@ -265,7 +265,7 @@ Soft CTA:
 
 - `/arc`
 - `/capabilities`
-- `/whoweare/abouthva`
+- `/aboutus`
 - `/case-studies`
 - `/contact`
 
@@ -280,7 +280,7 @@ Soft CTA:
 - Include internal links to:
   - `/arc`
   - `/capabilities`
-  - `/whoweare/abouthva`
+  - `/aboutus`
   - `/case-studies`
   - `/contact`
 - Use a concise title and metadata.
@@ -400,7 +400,7 @@ Use 4-6 links total:
 ```text
 /arc
 /capabilities
-/whoweare/abouthva
+/aboutus
 /case-studies
 /case-studies/top-tier-crm-transformation-program-real-estate-operations
 /contact

@@ -7363,7 +7363,11 @@
 }
 
 .about-service-map-link {
+  display: inline-flex;
   width: fit-content;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.45rem;
   color: var(--color-tertiary);
   font-size: 0.8rem;
   font-weight: 800;
@@ -7460,6 +7464,8 @@
   color: var(--color-secondary);
   font-size: 1rem;
   line-height: 1;
+  width: 1rem;
+  height: 1rem;
 }
 
 .about-service-map-item:hover .about-service-map-arrow,
@@ -9019,16 +9025,28 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
 }
 
 .about-editorial-shell {
-  width: min(100% - 2rem, 80rem);
+  width: min(var(--site-frame), calc(100% - (var(--site-gutter) * 2)));
   margin-inline: auto;
 }
 
 .about-editorial-hero {
-  background: var(--about-paper);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 22% 82%, rgba(232, 168, 56, 0.24), transparent 34rem),
+    var(--about-paper);
   padding: 7.5rem 0 3.5rem;
 }
 
+.about-editorial-hero-ambient {
+  z-index: -1;
+  opacity: 0.82;
+}
+
 .about-editorial-hero-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
   gap: 2.5rem;
 }
@@ -9127,13 +9145,47 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
 
 .about-editorial-hero-media {
   position: relative;
+  isolation: isolate;
   min-height: 23rem;
-  overflow: hidden;
   background: #081421;
 }
 
 .about-editorial-hero-media img {
   object-position: 52% 52%;
+}
+
+.about-hero-framework-card {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 2;
+  display: grid;
+  width: min(17rem, calc(100% - 2rem));
+  gap: 0.75rem;
+  border: 1px solid rgba(13, 29, 49, 0.12);
+  background: rgba(255, 255, 255, 0.76);
+  padding: 1.25rem;
+  box-shadow: 0 8px 18px rgba(13, 29, 49, 0.08);
+  backdrop-filter: blur(12px) saturate(0.82);
+  -webkit-backdrop-filter: blur(12px) saturate(0.82);
+}
+
+.about-hero-framework-card span {
+  color: #9a6a0f;
+  font-size: 0.875rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.about-hero-framework-card strong {
+  color: var(--about-ink);
+  font-family: var(--font-headline);
+  font-size: 1.55rem;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.2;
 }
 
 .about-hero-media-caption {
@@ -9151,7 +9203,6 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
 }
 
 .about-delivery-section,
-.about-capability-section,
 .about-team-section {
   padding: 4rem 0;
 }
@@ -9162,7 +9213,6 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
 }
 
 .about-section-heading > span,
-.about-capability-intro > span,
 .about-principles-heading > span,
 .about-team-heading > span {
   display: block;
@@ -9175,7 +9225,6 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
 }
 
 .about-section-heading h2,
-.about-capability-intro h2,
 .about-principles-heading h2,
 .about-team-heading h2 {
   margin: 0;
@@ -9190,23 +9239,78 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
   line-height: 1;
 }
 
+.about-delivery-header {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.about-delivery-header > p {
+  max-width: 43rem;
+  margin: 0;
+  color: #5c6877;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.about-delivery-progress {
+  height: 1px;
+  margin-top: 2.25rem;
+  background: var(--about-line);
+}
+
+.about-delivery-progress span {
+  display: block;
+  height: 100%;
+  background: var(--about-gold);
+}
+
 .about-delivery-grid {
   display: grid;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   border: 1px solid var(--about-line);
   background: var(--about-line);
   gap: 1px;
 }
 
 .about-delivery-step {
-  min-height: 16rem;
+  position: relative;
+  min-height: 17rem;
+  border: 0;
   background: #ffffff;
-  padding: 1.5rem;
+  padding: 1.65rem;
+  color: var(--about-ink);
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 180ms ease;
 }
 
-.about-delivery-step-featured {
-  background: var(--about-ink);
-  color: #ffffff;
+.about-delivery-step::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 3px;
+  background: transparent;
+  content: '';
+  transition: background-color 180ms ease;
+}
+
+.about-delivery-step:hover,
+.about-delivery-step:focus-visible,
+.about-delivery-step-active {
+  background: #fffdf8;
+}
+
+.about-delivery-step:hover::before,
+.about-delivery-step:focus-visible::before,
+.about-delivery-step-active::before {
+  background: var(--about-gold);
+}
+
+.about-delivery-step:focus-visible {
+  z-index: 1;
+  outline: 2px solid var(--about-gold);
+  outline-offset: -2px;
 }
 
 .about-delivery-number {
@@ -9217,7 +9321,19 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
   line-height: 1;
 }
 
-.about-delivery-step-featured .about-delivery-number {
+.about-delivery-step-active .about-delivery-number {
+  color: var(--about-gold);
+}
+
+.about-delivery-icon {
+  width: 1.7rem;
+  height: 1.7rem;
+  margin-top: 1.4rem;
+  color: #667181;
+  stroke-width: 1.6;
+}
+
+.about-delivery-step-active .about-delivery-icon {
   color: var(--about-gold);
 }
 
@@ -9238,118 +9354,90 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
   line-height: 1.6;
 }
 
-.about-delivery-step-featured p {
-  color: rgba(255, 255, 255, 0.7);
+.about-delivery-detail {
+  background: var(--about-ink);
+  padding: 1.75rem;
+  color: #ffffff;
 }
 
-.about-capability-section {
-  background: var(--about-paper);
-}
-
-.about-capability-layout {
-  display: grid;
-  gap: 2.5rem;
-}
-
-.about-capability-intro {
-  align-self: center;
-}
-
-.about-capability-intro h2 {
-  color: var(--about-ink);
-  font-size: 3rem;
-  line-height: 0.96;
-}
-
-.about-capability-intro p {
-  max-width: 31rem;
-  margin: 1.25rem 0 0;
-  color: #5c6877;
-  font-size: 1rem;
-  line-height: 1.7;
-}
-
-.about-text-link {
-  display: inline-flex;
-  min-height: 2.75rem;
+.about-delivery-detail-header {
+  display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-top: 1.35rem;
-  color: #9a6a0f;
+  gap: 1rem;
+}
+
+.about-delivery-detail-header > span {
+  display: inline-flex;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  background: var(--about-gold);
+  color: var(--about-ink);
   font-size: 0.875rem;
   font-weight: 800;
 }
 
-.about-text-link svg {
-  width: 1rem;
-  height: 1rem;
-  transition: transform 180ms ease;
-}
-
-.about-text-link:hover svg {
-  transform: translate(0.18rem, -0.18rem);
-}
-
-.about-capability-grid {
-  display: grid;
-  border: 1px solid var(--about-line);
-  background: var(--about-line);
-  gap: 1px;
-}
-
-.about-capability-item {
-  position: relative;
-  display: block;
-  min-height: 13rem;
-  background: #ffffff;
-  padding: 1.35rem;
-  color: var(--about-ink);
-  transition: background-color 180ms ease, color 180ms ease;
-}
-
-.about-capability-item > svg:first-child {
-  width: 1.55rem;
-  height: 1.55rem;
+.about-delivery-detail-header > svg {
+  width: 1.75rem;
+  height: 1.75rem;
+  flex: 0 0 auto;
   color: var(--about-gold);
   stroke-width: 1.6;
 }
 
-.about-capability-item h3 {
-  margin: 2rem 0 0;
+.about-delivery-detail-header div > span {
+  display: block;
+  color: var(--about-gold);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.about-delivery-detail-header h3 {
+  margin: 0.2rem 0 0;
   font-family: var(--font-headline);
-  font-size: 1.55rem;
+  font-size: 1.65rem;
   font-weight: 400;
   letter-spacing: 0;
   line-height: 1;
 }
 
-.about-capability-item p {
-  max-width: 17rem;
-  margin: 0.7rem 0 0;
-  color: #667181;
+.about-delivery-detail > p {
+  max-width: 52rem;
+  margin: 1.5rem 0 0;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.about-delivery-detail ul {
+  display: grid;
+  gap: 0.85rem;
+  margin: 1.5rem 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 1.5rem 0 0;
+  list-style: none;
+}
+
+.about-delivery-detail li {
+  position: relative;
+  padding-left: 1.15rem;
+  color: rgba(255, 255, 255, 0.78);
   font-size: 0.9rem;
-  line-height: 1.55;
+  line-height: 1.5;
 }
 
-.about-capability-arrow {
+.about-delivery-detail li::before {
   position: absolute;
-  top: 1.25rem;
-  right: 1.25rem;
-  width: 1rem;
-  height: 1rem;
-  opacity: 0;
-  transition: opacity 180ms ease, transform 180ms ease;
-}
-
-.about-capability-item:hover,
-.about-capability-item:focus-visible {
-  background: #fff8e9;
-}
-
-.about-capability-item:hover .about-capability-arrow,
-.about-capability-item:focus-visible .about-capability-arrow {
-  opacity: 1;
-  transform: translate(0.15rem, -0.15rem);
+  top: 0.55rem;
+  left: 0;
+  width: 0.35rem;
+  height: 0.35rem;
+  background: var(--about-gold);
+  content: '';
 }
 
 .about-principles-band {
@@ -9358,6 +9446,15 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
   background: var(--about-ink);
   padding: 4rem 0;
   color: #ffffff;
+}
+
+.about-principles-band .about-editorial-shell {
+  position: relative;
+  z-index: 1;
+}
+
+.about-principles-band .arc-dark-grid {
+  opacity: 0.07;
 }
 
 .about-principles-heading h2 {
@@ -9403,7 +9500,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
 }
 
 .about-team-section {
-  background: var(--about-paper);
+  background: #eceff3;
 }
 
 .about-team-heading {
@@ -9428,13 +9525,13 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
 
 .about-team-grid {
   display: grid;
-  gap: 1rem;
+  gap: 1px;
   margin-top: 2.5rem;
+  background: #d7dce3;
 }
 
 .about-team-card {
   background: #ffffff;
-  border: 1px solid var(--about-line);
 }
 
 .about-team-card-link {
@@ -9451,7 +9548,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
 .about-team-portrait {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 1;
+  aspect-ratio: 4 / 5;
   background: #e7e8ea;
 }
 
@@ -9467,35 +9564,33 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
   transform: scale(1.035);
 }
 
-.about-team-portrait-ali-amrani img {
-  object-position: 50% 34%;
-  transform: scale(1.3);
-}
-
-.about-team-card-link:hover .about-team-portrait-ali-amrani img,
-.about-team-card-link:focus-visible .about-team-portrait-ali-amrani img {
-  transform: scale(1.34);
-}
-
 .about-team-card-copy {
-  padding: 1.35rem;
+  padding: clamp(1.35rem, 2vw, 2rem);
 }
 
 .about-team-card-copy h3 {
-  margin: 0;
+  margin: 0.45rem 0 0;
   font-family: var(--font-headline);
-  font-size: 1.55rem;
+  font-size: 1.75rem;
   font-weight: 400;
   letter-spacing: 0;
   line-height: 1;
 }
 
-.about-team-card-copy > span {
+.about-team-responsibility {
   display: block;
-  margin-top: 0.45rem;
   color: #9a6a0f;
   font-size: 0.875rem;
   font-weight: 800;
+  text-transform: uppercase;
+}
+
+.about-team-position {
+  display: block;
+  margin-top: 0.65rem;
+  color: #667181;
+  font-size: 0.95rem;
+  font-weight: 500;
 }
 
 .about-team-card-copy p {
@@ -9532,10 +9627,6 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
 }
 
 @media (min-width: 768px) {
-  .about-editorial-shell {
-    width: min(100% - 3rem, 80rem);
-  }
-
   .about-editorial-hero {
     padding-top: 8.5rem;
     padding-bottom: 4.5rem;
@@ -9550,18 +9641,34 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
   }
 
   .about-delivery-section,
-  .about-capability-section,
   .about-team-section,
   .about-principles-band {
     padding-top: 5rem;
     padding-bottom: 5rem;
   }
 
+  .about-delivery-header {
+    grid-template-columns: minmax(0, 0.8fr) minmax(20rem, 1.2fr);
+    align-items: end;
+  }
+
+  .about-delivery-header > p {
+    justify-self: end;
+    text-align: right;
+  }
+
   .about-delivery-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .about-capability-grid,
+  .about-delivery-detail {
+    padding: 2.25rem;
+  }
+
+  .about-delivery-detail ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .about-team-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -9579,6 +9686,10 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
 }
 
 @media (min-width: 1024px) {
+  .about-editorial-hero {
+    padding-top: 10rem;
+  }
+
   .about-editorial-hero-grid {
     grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
     align-items: center;
@@ -9596,17 +9707,18 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
   }
 
   .about-editorial-hero-media {
-    min-height: 35rem;
+    min-height: 38rem;
   }
 
-  .about-capability-layout {
-    grid-template-columns: minmax(15rem, 0.34fr) minmax(0, 0.66fr);
-    align-items: stretch;
-    gap: 3rem;
+  .about-hero-framework-card {
+    top: -2.25rem;
+    left: -2.25rem;
+    width: 17.5rem;
+    padding: 1.25rem;
   }
 
-  .about-capability-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .about-hero-framework-card strong {
+    font-size: 1.55rem;
   }
 
   .about-principles-grid {
@@ -9620,9 +9732,8 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
 
 @media (prefers-reduced-motion: reduce) {
   .about-team-portrait img,
-  .about-capability-arrow,
   .about-team-card-copy strong svg,
-  .about-text-link svg {
+  .about-service-map-arrow {
     transition: none;
   }
 }

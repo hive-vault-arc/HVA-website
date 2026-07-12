@@ -103,6 +103,26 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: '/whoweare/abouthva',
+        destination: '/aboutus',
+        permanent: true,
+      },
+      {
+        source: '/abouthva/people/:employee',
+        destination: '/aboutus/our-people/:employee',
+        permanent: true,
+      },
+      {
+        source: '/:locale(en|fr|ar|es)/whoweare/abouthva',
+        destination: '/aboutus',
+        permanent: true,
+      },
+      {
+        source: '/:locale(en|fr|ar|es)/abouthva/people/:employee',
+        destination: '/aboutus/our-people/:employee',
+        permanent: true,
+      },
+      {
         source: '/services',
         destination: '/capabilities',
         permanent: true,

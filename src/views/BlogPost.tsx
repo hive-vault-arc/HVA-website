@@ -214,7 +214,7 @@ export default function BlogPostView({
       title={post.title}
       subtitle={post.subtitle}
       author={post.authors[0]}
-      authorHref="/whoweare/abouthva"
+      authorHref="/aboutus"
       coverImage={post.coverImage}
       coverAlt={post.coverAlt ?? post.title}
       contentAsArticle

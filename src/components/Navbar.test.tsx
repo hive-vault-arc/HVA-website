@@ -10,7 +10,7 @@ const coreLinks = [
   ['ARC Framework', '/arc'],
   ['Capabilities', '/capabilities'],
   ['Industries', '/industries'],
-  ['Who We Are', '/whoweare/abouthva'],
+  ['Who We Are', '/aboutus'],
   ['Insights', '/insights'],
 ] as const;
 
@@ -30,7 +30,7 @@ const submenuLinks = {
     ['Consumer Goods & Luxury', '/industries#consumer-goods'],
   ],
   'Who We Are': [
-    ['About HVA', '/whoweare/abouthva'],
+    ['About Us', '/aboutus'],
     ['Portfolio', '/whoarewe/portfolio'],
   ],
   Insights: [

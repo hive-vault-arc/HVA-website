@@ -233,7 +233,7 @@ export default function ResearchReportView({
       title={report.title}
       subtitle={report.subtitle ?? report.summary}
       author={report.authors[0]}
-      authorHref="/whoweare/abouthva"
+      authorHref="/aboutus"
       coverImage={report.coverImage}
       coverAlt={report.coverAlt}
       contentAsArticle

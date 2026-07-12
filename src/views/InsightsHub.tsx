@@ -555,9 +555,9 @@ export default function InsightsHub({
         <PageAmbientBackground className="opacity-[0.92]" />
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-white/50" />
 
-        <div className="relative z-10 mx-auto flex min-h-[340px] max-w-7xl items-end px-6 pb-14 pt-32 lg:px-14 lg:pb-16">
+        <div className="relative z-10 mx-auto flex min-h-[340px] max-w-7xl items-end justify-between gap-12 px-6 pb-14 pt-32 lg:px-14 lg:pb-16">
           <motion.div
-            className="max-w-3xl"
+            className="min-w-0 flex-1 max-w-3xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55 }}
@@ -579,6 +579,77 @@ export default function InsightsHub({
                 Blogs, case studies, perspectives, and research grounded in real operational work.
               </p>
             </div>
+          </motion.div>
+
+          <motion.div
+            className="hidden flex-shrink-0 items-center justify-center lg:flex"
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            aria-hidden="true"
+          >
+            <svg
+              width="260"
+              height="260"
+              viewBox="0 0 220 220"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="110" cy="110" r="104" stroke="#E8A838" strokeWidth="1.4" strokeOpacity="0.38" />
+              <circle cx="110" cy="110" r="76" stroke="#E8A838" strokeWidth="1.6" strokeOpacity="0.52" />
+              <circle cx="110" cy="110" r="48" stroke="#1A2535" strokeWidth="1.25" strokeOpacity="0.22" />
+
+              <line x1="6" y1="110" x2="214" y2="110" stroke="#1A2535" strokeWidth="1.15" strokeOpacity="0.16" />
+              <line x1="110" y1="6" x2="110" y2="214" stroke="#1A2535" strokeWidth="1.15" strokeOpacity="0.16" />
+
+              {Array.from({ length: 12 }).map((_, index) => {
+                const angle = (index * 30 * Math.PI) / 180;
+                const outerRadius = 98;
+                const innerRadius = index % 3 === 0 ? 86 : 92;
+                const x1 = 110 + outerRadius * Math.cos(angle);
+                const y1 = 110 + outerRadius * Math.sin(angle);
+                const x2 = 110 + innerRadius * Math.cos(angle);
+                const y2 = 110 + innerRadius * Math.sin(angle);
+
+                return (
+                  <line
+                    key={`tick-${index * 30}`}
+                    x1={x1}
+                    y1={y1}
+                    x2={x2}
+                    y2={y2}
+                    stroke="#E8A838"
+                    strokeWidth={index % 3 === 0 ? '2' : '1.35'}
+                    strokeOpacity={index % 3 === 0 ? '0.78' : '0.45'}
+                  />
+                );
+              })}
+
+              <circle cx="110" cy="110" r="4.5" fill="#E8A838" fillOpacity="0.95" />
+              <circle cx="152" cy="68" r="4" fill="#E8A838" fillOpacity="0.72" />
+
+              <path
+                d="M 34 143 A 80 80 0 0 1 77 34"
+                stroke="#E8A838"
+                strokeWidth="1.6"
+                strokeOpacity="0.58"
+                strokeDasharray="5 7"
+                fill="none"
+              />
+
+              <text
+                x="110"
+                y="198"
+                textAnchor="middle"
+                fontSize="8"
+                letterSpacing="3"
+                fill="#566274"
+                fillOpacity="0.72"
+                fontFamily="system-ui, sans-serif"
+              >
+                HIVE VAULT ARC INSIGHTS
+              </text>
+            </svg>
           </motion.div>
         </div>
       </section>

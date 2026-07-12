@@ -129,7 +129,7 @@ const HOME_NAV_SECONDARY_LINKS: Array<{
     icon: BookOpen,
   },
   {
-    href: '/whoweare/abouthva',
+    href: '/aboutus',
     title: 'Who We Are',
     description: 'Team and principles',
     icon: Users,

@@ -99,12 +99,12 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   );
   const leadershipPeople = founders.map((member) => ({
     '@type': 'Person',
-    '@id': absoluteUrl(`/abouthva/people/${member.slug}#person`),
+    '@id': absoluteUrl(`/aboutus/our-people/${member.slug}#person`),
     name: member.name,
     jobTitle: member.position,
     description: member.summary,
     image: absoluteUrl(member.profileImage),
-    url: absoluteUrl(`/abouthva/people/${member.slug}`),
+    url: absoluteUrl(`/aboutus/our-people/${member.slug}`),
     worksFor: {
       '@id': absoluteUrl('/#organization'),
       name: 'Hive Vault Arc',

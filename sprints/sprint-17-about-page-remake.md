@@ -11,7 +11,7 @@
 
 ## What This Sprint Is
 
-The About page (`/whoweare/abouthva`) carries old framing across every section. As of this sprint the page says:
+The About page (`/aboutus`) carries old framing across every section. As of this sprint the page says:
 - Hero eyebrow: "AI · Digital Transformation · Technology Consulting" — generic, pre-repositioning
 - Hero h1: "Long-Term Partners for AI and Digital Transformation" — old identity
 - Floating card: "01. FOUNDATIONS — We align executive strategy with technical execution" — vague
@@ -689,7 +689,7 @@ export const ABOUT_FAQS: FaqSet = [
 
 ### Task 17.8 — Update page.tsx metadata and JSON-LD schema
 
-**File:** `src/app/whoweare/abouthva/page.tsx`
+**File:** `src/app/aboutus/page.tsx`
 
 **17.8a — Update the metadata description**
 
@@ -758,7 +758,7 @@ Find:
     '@context': 'https://schema.org',
     '@type': 'AboutPage',
     name: 'About H.V.A',
-    url: `${SITE_URL}/whoweare/abouthva`,
+    url: `${SITE_URL}/aboutus`,
     description: CANONICAL_MARKET_IDENTITY.longDescriptor,
     mainEntity: {
       '@type': ['Organization', 'ProfessionalService'],
@@ -773,7 +773,7 @@ Replace with:
     '@context': 'https://schema.org',
     '@type': 'AboutPage',
     name: 'About H.V.A — Technology Transformation Partner',
-    url: `${SITE_URL}/whoweare/abouthva`,
+    url: `${SITE_URL}/aboutus`,
     description:
       'Hive Vault Arc (H.V.A) is a technology transformation partner based in Tangier, Morocco combining strategy, AI engineering, software development, cloud infrastructure, and managed operations.',
     mainEntity: {
@@ -824,7 +824,7 @@ Replace with:
 ## Exit Criteria
 
 Sprint 17 is done when:
-1. The About page at `/whoweare/abouthva` renders without errors in dev mode
+1. The About page at `/aboutus` renders without errors in dev mode
 2. All 6 service pillars are visible in their grid
 3. The ARC 3-phase section replaces the old 4-step flow — all interactive states work
 4. FAQs answer the six questions above

@@ -57,7 +57,7 @@ The generated sitemap must include all important canonical public routes:
 - `/industries`
 - `/products-systems`
 - `/whoarewe/portfolio`
-- `/whoweare/abouthva`
+- `/aboutus`
 - `/contact`
 - `/insights`
 - `/insights/news-articles`

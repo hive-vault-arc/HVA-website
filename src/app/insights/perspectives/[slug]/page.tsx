@@ -48,14 +48,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     authors: perspective.authors.map((author) => ({
       name: author.name,
-      url: absoluteUrl('/whoweare/abouthva'),
+      url: absoluteUrl('/aboutus'),
     })),
     openGraph: {
       ...base.openGraph,
       type: 'article',
       publishedTime: isoDate,
       modifiedTime: isoDate,
-      authors: [absoluteUrl('/whoweare/abouthva')],
+      authors: [absoluteUrl('/aboutus')],
       section: perspective.tag,
       images: [{ url: coverUrl, width: 1200, height: 630, alt: perspective.coverAlt }],
     },

@@ -42,13 +42,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       index: !post.seo?.noIndex,
       follow: !post.seo?.noIndex,
     },
-    authors: [{ name: 'Hive Vault Arc Research Team', url: absoluteUrl('/whoweare/abouthva') }],
+    authors: [{ name: 'Hive Vault Arc Research Team', url: absoluteUrl('/aboutus') }],
     openGraph: {
       ...base.openGraph,
       type: 'article',
       publishedTime: isoDate,
       modifiedTime: isoDate,
-      authors: [absoluteUrl('/whoweare/abouthva')],
+      authors: [absoluteUrl('/aboutus')],
       section: post.category,
       images: [{ url: coverUrl, width: 1200, height: 630, alt: post.coverAlt ?? post.title }],
     },
@@ -75,7 +75,7 @@ export default async function BlogPostPage({ params }: Props) {
     author: {
       '@type': 'Person',
       name: 'Hive Vault Arc Research Team',
-      url: absoluteUrl('/whoweare/abouthva'),
+      url: absoluteUrl('/aboutus'),
     },
     publisher: {
       '@type': 'Organization',

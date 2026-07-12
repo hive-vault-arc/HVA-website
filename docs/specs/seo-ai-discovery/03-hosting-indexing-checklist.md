@@ -98,7 +98,7 @@ https://hivevaultarc.com/sitemap.xml
 - `https://hivevaultarc.com/capabilities/solution-programs`
 - `https://hivevaultarc.com/arc`
 - `https://hivevaultarc.com/industries`
-- `https://hivevaultarc.com/whoweare/abouthva`
+- `https://hivevaultarc.com/aboutus`
 - `https://hivevaultarc.com/contact`
 - `https://hivevaultarc.com/ai-agents-tangier`
 - `https://hivevaultarc.com/ai-agents-morocco`

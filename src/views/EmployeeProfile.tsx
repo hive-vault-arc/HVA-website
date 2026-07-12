@@ -24,7 +24,7 @@ export default function EmployeeProfileView({ profile, relatedProfiles }: Props)
   const [isLeavingForTeam, setIsLeavingForTeam] = useState(false);
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const teamHref = `/whoweare/abouthva#${profile.slug}`;
+  const teamHref = `/aboutus#${profile.slug}`;
   const handleTeamBackClick = useCallback(
     (event: MouseEvent<HTMLAnchorElement>) => {
       if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
@@ -204,7 +204,7 @@ export default function EmployeeProfileView({ profile, relatedProfiles }: Props)
             </div>
             <div className="employee-profile-related__grid">
               {relatedProfiles.map((item) => (
-                <Link key={item.slug} href={`/abouthva/people/${item.slug}`} className="employee-profile-related__item">
+                <Link key={item.slug} href={`/aboutus/our-people/${item.slug}`} className="employee-profile-related__item">
                   <span>{item.name}</span>
                   <em>{item.position}</em>
                   <ArrowUpRight className="h-4 w-4" />
@@ -222,7 +222,7 @@ export default function EmployeeProfileView({ profile, relatedProfiles }: Props)
         primaryLabel="Book a Call"
         primaryHref="/contact"
         secondaryLabel="Meet the Team"
-        secondaryHref="/whoweare/abouthva"
+        secondaryHref="/aboutus"
       />
     </div>
   );

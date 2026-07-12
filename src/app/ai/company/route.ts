@@ -22,7 +22,7 @@ import {
 
 export const revalidate = 86400;
 
-const LAST_UPDATED = '2026-07-09';
+const LAST_UPDATED = '2026-07-12';
 
 const importantPages = {
   home: absoluteUrl('/'),
@@ -32,7 +32,7 @@ const importantPages = {
   arcFramework: absoluteUrl('/arc'),
   industries: absoluteUrl('/industries'),
   portfolio: absoluteUrl('/whoarewe/portfolio'),
-  about: absoluteUrl('/whoweare/abouthva'),
+  about: absoluteUrl('/aboutus'),
   contact: absoluteUrl('/contact'),
   insights: absoluteUrl('/insights'),
   blog: absoluteUrl('/blog'),
@@ -75,7 +75,7 @@ export async function GET() {
     profileType: member.profileType,
     responsibility: member.summary,
     image: absoluteUrl(member.profileImage),
-    profileUrl: absoluteUrl(`/abouthva/people/${member.slug}`),
+    profileUrl: absoluteUrl(`/aboutus/our-people/${member.slug}`),
     linkedinUrl: member.linkedinUrl,
     knowsAbout: member.expertise,
   }));
@@ -116,7 +116,7 @@ export async function GET() {
           profileType: member.profileType,
           responsibility: member.summary,
           image: absoluteUrl(member.profileImage),
-          profileUrl: absoluteUrl(`/abouthva/people/${member.slug}`),
+          profileUrl: absoluteUrl(`/aboutus/our-people/${member.slug}`),
           linkedinUrl: member.linkedinUrl,
           knowsAbout: member.expertise,
         })),

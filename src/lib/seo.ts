@@ -124,7 +124,7 @@ export const SITELINK_CANDIDATES = [
     description: 'Assess, Re-engineer, and Command: Hive Vault Arc delivery from strategy to production.',
   },
   {
-    href: '/whoweare/abouthva',
+    href: '/aboutus',
     label: 'Who We Are',
     anchor: 'Meet the Hive Vault Arc founding team',
     description: 'Founder-led team, operating principles, and transformation philosophy.',

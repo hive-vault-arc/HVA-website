@@ -1,25 +1,23 @@
 'use client';
 
-import type { CSSProperties, ElementType } from 'react';
+import { useState, type CSSProperties, type ElementType } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { MotionConfig, motion, useScroll, useTransform } from 'framer-motion';
 import {
   ArrowUpRight,
-  BrainCircuit,
-  BriefcaseBusiness,
-  Cloud,
-  Code2,
-  Cpu,
+  Compass,
   Gauge,
   Network,
   Settings2,
   ShieldCheck,
   Target,
+  Terminal,
   UserRoundCheck,
 } from 'lucide-react';
 import SectionBrandMark from '../components/SectionBrandMark';
 import BottomCTA from '../components/BottomCTA';
+import PageAmbientBackground from '../components/PageAmbientBackground';
 import { useAnimationQuality } from '../lib/animationQuality';
 import type { EmployeeProfile } from '../lib/employee-profiles';
 
@@ -42,13 +40,17 @@ type DeliveryStep = {
   number: string;
   title: string;
   description: string;
+  icon: ElementType;
+  checkpoints: string[];
 };
 
 type CapabilityPillar = {
+  number: string;
   slug: string;
   title: string;
   description: string;
-  icon: ElementType;
+  outcome: string;
+  phase: 'Assess' | 'Build' | 'Operate';
 };
 
 type Principle = {
@@ -61,56 +63,74 @@ const deliverySteps: DeliveryStep[] = [
   {
     number: '01',
     title: 'Assess',
-    description: 'We diagnose the current state, define outcomes, and build the case for change with clarity.',
+    description: 'Map friction, define target architecture, and sequence the transformation before a single line of code is written.',
+    icon: Compass,
+    checkpoints: ['Define measurable outcomes', 'Audit current systems and blockers', 'Sequence strategy into milestones'],
   },
   {
     number: '02',
     title: 'Re-engineer',
-    description: 'We redesign systems, data, and processes into scalable, production-ready solutions.',
+    description: 'Build the systems, deploy the intelligence, and wire the infrastructure in transparent sprint increments.',
+    icon: Settings2,
+    checkpoints: ['Deliver AI, software, and cloud layers', 'Validate against real outcomes', 'Iterate through demos and QA loops'],
   },
   {
     number: '03',
     title: 'Command',
-    description: 'We operate, automate, and continuously improve the systems that carry the business forward.',
+    description: 'Stabilize, monitor, and evolve the operation with the same team retaining long-term ownership.',
+    icon: Terminal,
+    checkpoints: ['Operate production systems', 'Monitor reliability and performance', 'Evolve as requirements grow'],
   },
 ];
 
 const capabilityPillars: CapabilityPillar[] = [
   {
+    number: '01',
     slug: 'strategy-business',
     title: 'Strategy',
     description: 'Enterprise strategy, operating models, and transformation roadmaps.',
-    icon: BriefcaseBusiness,
+    outcome: 'Shape the operating roadmap before build starts.',
+    phase: 'Assess',
   },
   {
+    number: '02',
     slug: 'technology-consulting',
     title: 'Technology',
     description: 'Architecture, platforms, integration, and emerging technology decisions.',
-    icon: Cpu,
+    outcome: 'Decide the architecture and integration path.',
+    phase: 'Assess',
   },
   {
+    number: '03',
     slug: 'ai-data-analytics',
     title: 'AI & Data',
     description: 'AI engineering, data strategy, analytics, and intelligent automation.',
-    icon: BrainCircuit,
+    outcome: 'Turn data and workflows into useful intelligence.',
+    phase: 'Build',
   },
   {
+    number: '04',
     slug: 'software-engineering',
     title: 'Software',
     description: 'Custom software, product engineering, and digital experiences.',
-    icon: Code2,
+    outcome: 'Ship the product layer people actually use.',
+    phase: 'Build',
   },
   {
+    number: '05',
     slug: 'cloud-infrastructure',
     title: 'Cloud',
     description: 'Cloud platforms, DevOps, security, and infrastructure modernization.',
-    icon: Cloud,
+    outcome: 'Make the system reliable, secure, and observable.',
+    phase: 'Build',
   },
   {
+    number: '06',
     slug: 'operations-managed',
     title: 'Operations',
     description: 'Managed services, automation, support, and continuous performance improvement.',
-    icon: Settings2,
+    outcome: 'Keep production improving after launch.',
+    phase: 'Operate',
   },
 ];
 
@@ -153,6 +173,9 @@ const About = ({ teamMembers }: AboutProps) => {
   const { motionReduced } = useAnimationQuality();
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const [activeDeliveryStep, setActiveDeliveryStep] = useState(0);
+  const activeDelivery = deliverySteps[activeDeliveryStep] ?? deliverySteps[0];
+  const ActiveDeliveryIcon = activeDelivery.icon;
 
   return (
     <MotionConfig reducedMotion={motionReduced ? 'always' : 'never'}>
@@ -164,6 +187,7 @@ const About = ({ teamMembers }: AboutProps) => {
         />
 
         <section className="about-editorial-hero">
+          <PageAmbientBackground className="about-editorial-hero-ambient" />
           <div className="about-editorial-shell about-editorial-hero-grid">
             <motion.div
               className="about-editorial-hero-copy"
@@ -202,6 +226,10 @@ const About = ({ teamMembers }: AboutProps) => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.65, delay: 0.1 }}
             >
+              <div className="about-hero-framework-card">
+                <span>ARC Framework</span>
+                <strong>Assess. Re-engineer. Command.</strong>
+              </div>
               <Image
                 src="/Images/about/hva-team-strategy-room.webp"
                 alt="Technology leadership team reviewing global operations in a strategy room at night"
@@ -211,7 +239,7 @@ const About = ({ teamMembers }: AboutProps) => {
                 className="object-cover"
               />
               <div className="about-hero-media-caption">
-                <SectionBrandMark size="sm" />
+                <SectionBrandMark surface="dark" size="sm" />
                 <span>Strategy to production</span>
               </div>
             </motion.div>
@@ -220,64 +248,122 @@ const About = ({ teamMembers }: AboutProps) => {
 
         <section className="about-delivery-section">
           <div className="about-editorial-shell">
-            <motion.div className="about-section-heading" {...reveal}>
-              <span>Our Operating Model</span>
-              <h2>How We Deliver</h2>
-            </motion.div>
-            <div className="about-delivery-grid">
-              {deliverySteps.map((step, index) => (
-                <motion.article
-                  key={step.number}
-                  className={`about-delivery-step ${index === 1 ? 'about-delivery-step-featured' : ''}`}
-                  {...reveal}
-                  transition={{ duration: 0.5, delay: index * 0.08 }}
-                >
-                  <span className="about-delivery-number">{step.number}</span>
-                  <h3>{step.title}</h3>
-                  <p>{step.description}</p>
-                </motion.article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="about-capability-section">
-          <div className="about-editorial-shell about-capability-layout">
-            <motion.div className="about-capability-intro" {...reveal}>
-              <span>Our Capabilities</span>
-              <h2>Six pillars.<br />One loop.</h2>
+            <motion.div className="about-delivery-header" {...reveal}>
+              <div className="about-section-heading">
+                <span>The ARC Loop</span>
+                <h2>How We Deliver</h2>
+              </div>
               <p>
-                Our capabilities are integrated across the full transformation lifecycle, designed
-                to move together from strategy to scale.
+                Assess, Re-engineer, and Command form one continuous loop operated by the same
+                team. Strategy informs build, build informs operations, and operations feeds back
+                into strategy.
               </p>
-              <Link href="/capabilities" className="about-text-link">
-                Explore Capabilities <ArrowUpRight aria-hidden="true" />
-              </Link>
             </motion.div>
-
-            <div className="about-capability-grid">
-              {capabilityPillars.map((pillar, index) => {
-                const Icon = pillar.icon;
+            <div className="about-delivery-progress" aria-hidden="true">
+              <motion.span
+                animate={{ width: `${((activeDeliveryStep + 1) / deliverySteps.length) * 100}%` }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
+              />
+            </div>
+            <div className="about-delivery-grid">
+              {deliverySteps.map((step, index) => {
+                const Icon = step.icon;
+                const isActive = activeDeliveryStep === index;
                 return (
-                  <motion.div
-                    key={pillar.slug}
+                  <motion.button
+                    key={step.number}
+                    type="button"
+                    className={`about-delivery-step ${isActive ? 'about-delivery-step-active' : ''}`}
+                    onMouseEnter={() => setActiveDeliveryStep(index)}
+                    onFocus={() => setActiveDeliveryStep(index)}
+                    onClick={() => setActiveDeliveryStep(index)}
+                    aria-expanded={isActive}
+                    aria-controls="about-delivery-detail"
                     {...reveal}
-                    transition={{ duration: 0.45, delay: index * 0.05 }}
+                    transition={{ duration: 0.5, delay: index * 0.08 }}
                   >
-                    <Link href={`/capabilities/${pillar.slug}`} className="about-capability-item">
-                      <Icon aria-hidden="true" />
-                      <h3>{pillar.title}</h3>
-                      <p>{pillar.description}</p>
-                      <ArrowUpRight className="about-capability-arrow" aria-hidden="true" />
-                    </Link>
-                  </motion.div>
+                    <span className="about-delivery-number">{step.number}</span>
+                    <Icon className="about-delivery-icon" aria-hidden="true" />
+                    <h3>{step.title}</h3>
+                    <p>{step.description}</p>
+                  </motion.button>
                 );
               })}
             </div>
+            <motion.div
+              id="about-delivery-detail"
+              key={activeDelivery.number}
+              className="about-delivery-detail"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.28 }}
+            >
+              <div className="about-delivery-detail-header">
+                <span>{activeDelivery.number}</span>
+                <ActiveDeliveryIcon aria-hidden="true" />
+                <div>
+                  <span>ARC Phase</span>
+                  <h3>{activeDelivery.title}</h3>
+                </div>
+              </div>
+              <p>{activeDelivery.description}</p>
+              <ul>
+                {activeDelivery.checkpoints.map((checkpoint) => (
+                  <li key={checkpoint}>{checkpoint}</li>
+                ))}
+              </ul>
+            </motion.div>
+          </div>
+        </section>
+
+        <section id="service-map" className="about-service-map-section soft-grid-section">
+          <div className="about-service-map-shell">
+            <motion.div className="about-service-map-panel" {...reveal}>
+              <div className="about-service-map-copy">
+                <div className="about-service-map-media">
+                  <Image
+                    src="/Images/capabilities/hva-arc-framework-operating-model.webp"
+                    alt="ARC operating model workspace"
+                    fill
+                    sizes="(max-width: 1040px) 100vw, 32vw"
+                    className="object-cover"
+                  />
+                </div>
+                <div className="about-service-map-mark">
+                  <SectionBrandMark size="sm" />
+                  <span>What We Do</span>
+                </div>
+                <h2>Six pillars. One loop.</h2>
+                <p>Diagnose the work. Build the system. Keep it running.</p>
+                <Link href="/capabilities#capability-pillars" className="about-service-map-link">
+                  View full map <ArrowUpRight aria-hidden="true" />
+                </Link>
+              </div>
+
+              <div className="about-service-map-grid">
+                {capabilityPillars.map((pillar) => (
+                  <Link
+                    key={pillar.number}
+                    href={`/capabilities/${pillar.slug}`}
+                    className="about-service-map-item"
+                  >
+                    <span className="about-service-map-number">{pillar.number}</span>
+                    <span className="about-service-map-text">
+                      <span className="about-service-map-phase">{pillar.phase}</span>
+                      <strong>{pillar.title}</strong>
+                      <em>{pillar.outcome}</em>
+                    </span>
+                    <ArrowUpRight className="about-service-map-arrow" aria-hidden="true" />
+                    <span className="sr-only">{pillar.description}</span>
+                  </Link>
+                ))}
+              </div>
+            </motion.div>
           </div>
         </section>
 
         <section className="about-principles-band">
+          <div aria-hidden="true" className="arc-dark-grid" />
           <div className="about-editorial-shell">
             <motion.div className="about-principles-heading" {...reveal}>
               <span>Our Principles</span>
@@ -325,7 +411,7 @@ const About = ({ teamMembers }: AboutProps) => {
                     {...reveal}
                     transition={{ duration: 0.5, delay: index * 0.08 }}
                   >
-                    <a href={`/abouthva/people/${member.slug}`} className="about-team-card-link">
+                    <a href={`/aboutus/our-people/${member.slug}`} className="about-team-card-link">
                       <div
                         className={`about-team-portrait about-team-portrait-${member.slug}`}
                         style={{ viewTransitionName: profileTransitionName } as CSSProperties}
@@ -339,8 +425,9 @@ const About = ({ teamMembers }: AboutProps) => {
                         />
                       </div>
                       <div className="about-team-card-copy">
+                        <span className="about-team-responsibility">{member.responsibilityTag}</span>
                         <h3>{member.name}</h3>
-                        <span>{member.position}</span>
+                        <span className="about-team-position">{member.position}</span>
                         <p>{member.summary}</p>
                         <strong>
                           View Profile <ArrowUpRight aria-hidden="true" />

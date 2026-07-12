@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
-import About from '../../../views/About';
-import FaqSection from '../../../components/FaqSection';
-import JsonLd from '../../../components/JsonLd';
-import { ABOUT_FAQS, type FaqItem } from '../../../data/faqs';
-import { getFeaturedEmployeeProfiles, type EmployeeProfile } from '../../../lib/employee-profiles';
+import About from '../../views/About';
+import FaqSection from '../../components/FaqSection';
+import JsonLd from '../../components/JsonLd';
+import { ABOUT_FAQS, type FaqItem } from '../../data/faqs';
+import { getFeaturedEmployeeProfiles, type EmployeeProfile } from '../../lib/employee-profiles';
 import {
   BRAND_SEARCH_VARIANTS,
   GLOBAL_KEYWORDS,
@@ -12,7 +12,7 @@ import {
   buildBreadcrumbSchema,
   buildPageMetadata,
   mergeKeywords,
-} from '../../../lib/seo';
+} from '../../lib/seo';
 
 const DYNAMIC_FOUNDER_FAQ_QUESTIONS = new Set([
   'Who is the CEO of Hive Vault Arc?',
@@ -56,12 +56,12 @@ function founderFaqs(founders: EmployeeProfile[]): FaqItem[] {
 function personSchema(member: EmployeeProfile) {
   return {
     '@type': 'Person',
-    '@id': absoluteUrl(`/abouthva/people/${member.slug}#person`),
+    '@id': absoluteUrl(`/aboutus/our-people/${member.slug}#person`),
     name: member.name,
     jobTitle: member.position,
     description: member.summary,
     image: absoluteUrl(member.profileImage),
-    url: absoluteUrl(`/abouthva/people/${member.slug}`),
+    url: absoluteUrl(`/aboutus/our-people/${member.slug}`),
     worksFor: {
       '@type': ['Organization', 'ProfessionalService'],
       '@id': absoluteUrl('/#organization'),
@@ -78,7 +78,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return buildPageMetadata({
     title: 'About | Founder-Led Technology Transformation Team',
     description: founderDescription(founders),
-    path: '/whoweare/abouthva',
+    path: '/aboutus',
     keywords: mergeKeywords(GLOBAL_KEYWORDS, [
       ...founders.flatMap((member) => [member.name, member.position, ...member.expertise]),
       'CEO of HVA',
@@ -118,7 +118,7 @@ export default async function Page() {
     '@context': 'https://schema.org',
     '@type': 'AboutPage',
     name: 'About Hive Vault Arc - Technology Transformation Partner',
-    url: absoluteUrl('/whoweare/abouthva'),
+    url: absoluteUrl('/aboutus'),
     description: founderDescription(founders),
     mainEntity: {
       '@type': ['Organization', 'ProfessionalService'],
@@ -146,7 +146,7 @@ export default async function Page() {
 
   const breadcrumbSchema = buildBreadcrumbSchema([
     { name: 'Home', path: '/' },
-    { name: 'About Hive Vault Arc', path: '/whoweare/abouthva' },
+    { name: 'About Hive Vault Arc', path: '/aboutus' },
   ]);
 
   return (

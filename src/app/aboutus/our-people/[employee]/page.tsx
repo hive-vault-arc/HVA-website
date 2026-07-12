@@ -18,17 +18,17 @@ import {
 } from '../../../../lib/seo';
 
 type Props = {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ employee: string }>;
 };
 
 export async function generateStaticParams() {
   const profiles = await getAllEmployeeProfiles();
-  return profiles.map((profile) => ({ slug: profile.slug }));
+  return profiles.map((profile) => ({ employee: profile.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const profile = await getEmployeeProfileBySlug(slug);
+  const { employee } = await params;
+  const profile = await getEmployeeProfileBySlug(employee);
 
   if (!profile) {
     return {
@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const metadata = buildPageMetadata({
     title: profile.seo?.title ?? `${profile.name} | ${profile.position}`,
     description: profile.seo?.description ?? profile.summary,
-    path: `/abouthva/people/${profile.slug}`,
+    path: `/aboutus/our-people/${profile.slug}`,
     keywords: mergeKeywords(GLOBAL_KEYWORDS, profile.seo?.keywords ?? [], [
       profile.name,
       `${profile.name} Hive Vault Arc`,
@@ -59,13 +59,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function EmployeeProfilePage({ params }: Props) {
-  const { slug } = await params;
-  const profile = await getEmployeeProfileBySlug(slug);
+  const { employee } = await params;
+  const profile = await getEmployeeProfileBySlug(employee);
 
   if (!profile) notFound();
 
   const relatedProfiles = await getRelatedEmployeeProfiles(profile.slug);
-  const profileUrl = absoluteUrl(`/abouthva/people/${profile.slug}`);
+  const profileUrl = absoluteUrl(`/aboutus/our-people/${profile.slug}`);
   const personSchema = {
     '@context': 'https://schema.org',
     '@type': 'Person',
@@ -102,8 +102,8 @@ export default async function EmployeeProfilePage({ params }: Props) {
 
   const breadcrumbSchema = buildBreadcrumbSchema([
     { name: 'Home', path: '/' },
-    { name: 'About Hive Vault Arc', path: '/whoweare/abouthva' },
-    { name: profile.name, path: `/abouthva/people/${profile.slug}` },
+    { name: 'About Hive Vault Arc', path: '/aboutus' },
+    { name: profile.name, path: `/aboutus/our-people/${profile.slug}` },
   ]);
 
   return (
