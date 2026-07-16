@@ -1,5 +1,6 @@
 import {
   getAllSanityCaseStudies,
+  getSanityClientEvidenceShowcase,
   getSanityCaseStudyBySlug,
 } from './sanity-content';
 import type { ContentSeo } from './content-seo';
@@ -8,6 +9,37 @@ export type CaseStudyMetric = {
   label: string;
   value: string;
   context: string;
+};
+
+export type ClientEvidencePdf = {
+  url: string;
+  mimeType: string;
+  size: number;
+};
+
+export type ClientEvidence = {
+  documentTitle: string;
+  documentLanguage: string;
+  issuedOn?: string;
+  quoteExcerpt?: string;
+  signatoryName?: string;
+  signatoryRole?: string;
+  testimonialPdf: ClientEvidencePdf;
+};
+
+export type ClientEvidenceSummary = {
+  slug: string;
+  caseStudyTitle: string;
+  clientName: string;
+  industry: string;
+  documentTitle: string;
+  documentLanguage: string;
+  issuedOn?: string;
+  quoteExcerpt?: string;
+  signatoryName?: string;
+  signatoryRole?: string;
+  clientLogo?: string;
+  clientLogoAlt: string;
 };
 
 export type CaseStudy = {
@@ -24,11 +56,8 @@ export type CaseStudy = {
   deploymentStatus: string;
   reportingNote?: string;
   measuredOutcomes: CaseStudyMetric[];
-  testimonial?: {
-    quote: string;
-    author: string;
-    role: string;
-  };
+  hasClientEvidence: boolean;
+  clientEvidence?: ClientEvidence;
   assets: {
     coverImage: string;
     logoLabel: string;
@@ -84,12 +113,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         context: 'Quarter-over-quarter increase in sales-qualified appointments.',
       },
     ],
-    testimonial: {
-      quote:
-        'Hive Vault Arc shipped a system that answers faster than our sales desk, updates the CRM automatically, and keeps context across conversations.',
-      author: 'Nadia El Idrissi',
-      role: 'Head of Growth, Atlas Property Group',
-    },
+    hasClientEvidence: false,
     assets: {
       coverImage: '/Images/case-studies/whatsapp-ai-agent-operations-case-study-morocco.webp',
       logoLabel: 'Atlas Property Group',
@@ -130,6 +154,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         context: 'Reported reduction after workflow templates and automated follow-up.',
       },
     ],
+    hasClientEvidence: false,
     assets: {
       coverImage: '/Images/case-studies/immoworld-crm-transformation-case-study-morocco.webp',
       coverAlt: 'ImmoWorld real estate CRM operating system engagement',
@@ -181,6 +206,10 @@ export const PRODUCT_SYSTEMS: ProductSystem[] = [
 
 export function getAllCaseStudies(): Promise<CaseStudy[]> {
   return getAllSanityCaseStudies();
+}
+
+export function getClientEvidenceShowcase(): Promise<ClientEvidenceSummary[]> {
+  return getSanityClientEvidenceShowcase();
 }
 
 export async function getCaseStudyBySlug(slug: string): Promise<CaseStudy> {

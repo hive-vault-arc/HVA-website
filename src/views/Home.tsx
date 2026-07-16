@@ -22,12 +22,14 @@ import {
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import BottomCTA from '../components/BottomCTA';
+import ClientEvidenceRail from '../components/ClientEvidenceRail';
 import SectionBrandMark from '../components/SectionBrandMark';
 import Background3d from '../components/Plasma';
 import LogoLoop from '../components/LogoItem';
 import HeroSlider from '../components/ui/HeroSlider';
 import type { InsightsCarouselItem } from '../components/InsightsCarousel';
 import { useAnimationQuality } from '../lib/animationQuality';
+import type { ClientEvidenceSummary } from '../lib/proof';
 import {
   SiAndroid,
   SiCplusplus,
@@ -150,9 +152,10 @@ const HOME_NAV_SECONDARY_LINKS: Array<{
 
 type HomeProps = {
   insightsCarouselItems: InsightsCarouselItem[];
+  clientEvidence: ClientEvidenceSummary[];
 };
 
-const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
+const Home: React.FC<HomeProps> = ({ insightsCarouselItems, clientEvidence }) => {
   const { tier, motionReduced } = useAnimationQuality();
   const showAdvancedEffects = tier === 'high' && !motionReduced;
   const worldMapSectionRef = useRef<HTMLElement | null>(null);
@@ -480,30 +483,7 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
         </div>
       </nav>
 
-      {/* ── Trusted by ─────────────────────────────────────────────────── */}
-      <section className="bg-white border-y border-[#DDE3EA]">
-        <div className="mx-auto max-w-7xl px-6 lg:px-14 py-5 flex items-center gap-8">
-          <p className="hidden shrink-0 text-[10px] font-bold uppercase tracking-[0.28em] text-[#566274] sm:block">
-            Selected client
-          </p>
-          <div className="h-5 w-px bg-[#DDE3EA] shrink-0 hidden sm:block" />
-          <div className="flex items-center gap-10 flex-1">
-            <div className="group">
-              <Image
-                src="/Images/trustedby/logo.png"
-                alt="ImmoWorld Luxury Real Estate logo"
-                width={140}
-                height={40}
-                className="h-7 w-auto object-contain grayscale opacity-50 transition duration-300 group-hover:opacity-75 group-hover:grayscale-0"
-              />
-            </div>
-          </div>
-          <div className="hidden md:flex items-center gap-2 shrink-0">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-[10px] uppercase tracking-[0.22em] text-[#566274]">Real estate CRM engagement</span>
-          </div>
-        </div>
-      </section>
+      <ClientEvidenceRail evidence={clientEvidence} />
 
       {/* ── Insights Carousel ──────────────────────────────────────────── */}
       <InsightsCarousel items={insightsCarouselItems} />
@@ -654,86 +634,6 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems }) => {
               </motion.article>
             );
           })}
-        </div>
-      </section>
-
-      <section className="home-proof-section">
-        <div className="home-proof-shell">
-          <div className="home-proof-header">
-            <div className="home-proof-title">
-              <SectionBrandMark size="sm" className="mt-0.5" />
-              <div>
-                <p>Proof in production</p>
-                <h2>Transformation programs running in production.</h2>
-              </div>
-            </div>
-            <div className="home-proof-intro">
-              <p>Real operating environments. Real users. Measured after launch.</p>
-              <div className="home-proof-actions">
-                <Link href="/case-studies">Proof library -&gt;</Link>
-                <Link href="/capabilities/solution-programs">Solution programs -&gt;</Link>
-              </div>
-            </div>
-          </div>
-
-          <div className="home-proof-layout">
-            <div
-              className="home-proof-visual"
-            >
-              <div className="home-proof-photo home-proof-photo--main">
-                <Image
-                  src="/Images/case-studies/immoworld-crm-transformation-case-study-morocco.webp"
-                  alt="ImmoWorld CRM operating system engagement"
-                  fill
-                  sizes="(max-width: 900px) 100vw, 48vw"
-                  className="object-cover"
-                />
-              </div>
-              <div className="home-proof-photo home-proof-photo--support">
-                <Image
-                  src="/Images/case-studies/whatsapp-ai-agent-operations-case-study-morocco.webp"
-                  alt="AI agent operations case study in production"
-                  fill
-                  sizes="(max-width: 900px) 70vw, 22vw"
-                  className="object-cover"
-                />
-              </div>
-              <div className="home-proof-caption">
-                <strong>Live systems, not slideware.</strong>
-                <span>CRM modernization and AI lead operations already operating with clients.</span>
-              </div>
-            </div>
-
-            <div
-              className="home-proof-list"
-            >
-              {[
-                {
-                  label: 'System built',
-                  title: 'Customer Operations Engine',
-                  proof: 'End-to-end workflow live in production.',
-                },
-                {
-                  label: 'Live deployment',
-                  title: 'Revenue Control Module',
-                  proof: 'Sales and follow-up operations running from one workflow.',
-                },
-                {
-                  label: 'Measured outcomes',
-                  title: 'Quantified Results',
-                  proof: 'Manual triage down. Qualified meetings up.',
-                },
-              ].map((item) => (
-                <article key={item.title} className="home-proof-row">
-                  <div>
-                    <em>{item.label}</em>
-                    <h3>{item.title}</h3>
-                    <p>{item.proof}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 

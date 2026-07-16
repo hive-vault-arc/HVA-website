@@ -20,6 +20,7 @@ export type PageItem = {
   coverImage?: string;    // optional — shows image card; omit for text-only card
   author?: { name: string; initials: string };
   metrics?: { value: string; label: string }[];
+  evidenceLabel?: string;
 };
 
 /* ── Props ───────────────────────────────────────────────────────────────── */
@@ -343,6 +344,9 @@ export default function InsightIndexPage({
                     >
                       {item.excerpt}
                     </p>
+                    {item.evidenceLabel ? (
+                      <span className="case-evidence-marker">{item.evidenceLabel}</span>
+                    ) : null}
                     {/* Metrics row (case studies) */}
                     {item.metrics && item.metrics.length > 0 && (
                       <div className="flex gap-6 pt-3 border-t border-[#F7F8FA]">
@@ -431,6 +435,11 @@ function FeaturedCardContent({
           {item.excerpt}
         </p>
       )}
+      {item.evidenceLabel ? (
+        <span className="case-evidence-marker case-evidence-marker--featured">
+          {item.evidenceLabel}
+        </span>
+      ) : null}
       {/* Metrics (case studies) */}
       {item.metrics && item.metrics.length > 0 && (
         <div className="flex gap-8 mb-8 pt-5 border-t border-[#F7F8FA]">

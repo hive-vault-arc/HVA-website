@@ -71,8 +71,10 @@ export async function POST(request: NextRequest) {
       return new Response('Invalid signature', { status: 401 });
     }
 
-    const tags = tagsForPayload(body ?? {});
-    tags.forEach((tag) => revalidateTag(tag, 'max'));
+    const payload = body ?? {};
+    const tags = tagsForPayload(payload);
+    const profile = payload._type === 'caseStudy' ? { expire: 0 } : 'max';
+    tags.forEach((tag) => revalidateTag(tag, profile));
 
     return NextResponse.json({ revalidated: tags });
   } catch (error) {

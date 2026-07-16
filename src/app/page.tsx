@@ -6,7 +6,7 @@ import type { InsightsCarouselItem } from '../components/InsightsCarousel';
 import FaqSection from '../components/FaqSection';
 import { HOME_FAQS } from '../data/faqs';
 import { getAllPosts, type BlogPost } from '../lib/blog';
-import { getAllCaseStudies, type CaseStudy } from '../lib/proof';
+import { getAllCaseStudies, getClientEvidenceShowcase, type CaseStudy } from '../lib/proof';
 import {
   GLOBAL_KEYWORDS,
   SITELINK_CANDIDATES,
@@ -127,7 +127,11 @@ function buildInsightsCarouselItems(
 }
 
 export default async function Page() {
-  const [posts, caseStudies] = await Promise.all([getAllPosts(), getAllCaseStudies()]);
+  const [posts, caseStudies, clientEvidence] = await Promise.all([
+    getAllPosts(),
+    getAllCaseStudies(),
+    getClientEvidenceShowcase(),
+  ]);
   const insightsCarouselItems = buildInsightsCarouselItems(posts, caseStudies);
   const capabilitySchema = {
     '@context': 'https://schema.org',
@@ -190,7 +194,7 @@ export default async function Page() {
   return (
     <>
       <JsonLd data={[homePageSchema, capabilitySchema, primaryNavigationSchema]} />
-      <Home insightsCarouselItems={insightsCarouselItems} />
+      <Home insightsCarouselItems={insightsCarouselItems} clientEvidence={clientEvidence} />
       <section className="service-guides-section">
         <div className="service-guides-shell">
           <div className="service-guides-copy">

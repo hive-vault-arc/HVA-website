@@ -12,6 +12,7 @@ export default function CaseStudies({ studies }: { readonly studies: CaseStudy[]
     meta: s.deploymentStatus,
     coverImage: s.assets.coverImage || undefined,
     metrics: s.measuredOutcomes,
+    evidenceLabel: s.hasClientEvidence ? 'Client letter available' : undefined,
   }));
 
   const industries = Array.from(new Set(studies.map((s) => s.industry)));

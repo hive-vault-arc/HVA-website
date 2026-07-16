@@ -152,6 +152,20 @@ const researchReportFields = `
   ${sectionFields}
 `;
 
+const approvedClientEvidencePredicate = `
+  clientEvidence.publicationStatus == "approved" &&
+  defined(clientEvidence.permissionConfirmedOn) &&
+  length(clientEvidence.documentTitle) > 0 &&
+  length(clientEvidence.documentLanguage) > 0 &&
+  defined(clientEvidence.testimonialPdf.asset._ref) &&
+  clientEvidence.testimonialPdf.asset._ref in *[
+    _type == "sanity.fileAsset" &&
+    mimeType == "application/pdf" &&
+    size > 0 &&
+    size <= 3145728
+  ]._id
+`;
+
 const caseStudyFields = `
   "slug": slug.current,
   title,
@@ -170,11 +184,7 @@ const caseStudyFields = `
     value,
     context
   },
-  testimonial{
-    quote,
-    author,
-    role
-  },
+  "hasClientEvidence": (${approvedClientEvidencePredicate}),
   assets{
     coverImage {
       ${imageFields}
@@ -189,6 +199,24 @@ const caseStudyFields = `
   },
   lastUpdated,
   ${seoFields}
+`;
+
+const approvedClientEvidenceDetailField = `
+  "clientEvidence": select(
+    (${approvedClientEvidencePredicate}) => clientEvidence{
+      documentTitle,
+      documentLanguage,
+      issuedOn,
+      quoteExcerpt,
+      signatoryName,
+      signatoryRole,
+      "testimonialPdf": testimonialPdf.asset->{
+        url,
+        mimeType,
+        size
+      }
+    }
+  )
 `;
 
 export const allPostsQuery = defineQuery(`
@@ -245,8 +273,34 @@ export const allCaseStudiesQuery = defineQuery(`
   }
 `);
 
+export const clientEvidenceShowcaseQuery = defineQuery(`
+  *[
+    _type == "caseStudy" &&
+    defined(slug.current) &&
+    (${approvedClientEvidencePredicate})
+  ]
+  | order(coalesce(clientEvidence.evidencePriority, 2147483647) asc, lastUpdated desc, _updatedAt desc)
+  [0...6] {
+    "slug": slug.current,
+    "caseStudyTitle": title,
+    clientName,
+    industry,
+    "documentTitle": clientEvidence.documentTitle,
+    "documentLanguage": clientEvidence.documentLanguage,
+    "issuedOn": clientEvidence.issuedOn,
+    "quoteExcerpt": clientEvidence.quoteExcerpt,
+    "signatoryName": clientEvidence.signatoryName,
+    "signatoryRole": clientEvidence.signatoryRole,
+    "clientLogo": assets.clientLogo {
+      ${imageFields}
+    },
+    "clientLogoAlt": assets.clientLogoAlt
+  }
+`);
+
 export const caseStudyBySlugQuery = defineQuery(`
   *[_type == "caseStudy" && slug.current == $slug][0] {
-    ${caseStudyFields}
+    ${caseStudyFields},
+    ${approvedClientEvidenceDetailField}
   }
 `);

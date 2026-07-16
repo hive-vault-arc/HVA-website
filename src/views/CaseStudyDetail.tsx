@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { ExternalLink } from 'lucide-react';
 import type { CaseStudy } from '../lib/proof';
 import ArticleDetailPage from '../components/ArticleDetailPage';
+import ClientEvidenceCard from '../components/ClientEvidenceCard';
 
 const fadeUp = { hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0 } };
 
@@ -55,6 +56,20 @@ function CaseStudySidebar({ study }: { readonly study: CaseStudy }) {
         </div>
       )}
 
+      {study.clientEvidence ? (
+        <ClientEvidenceCard
+          evidence={{
+            ...study.clientEvidence,
+            clientName: study.clientName,
+            clientLogo: study.assets.clientLogo || undefined,
+            clientLogoAlt: study.assets.clientLogoAlt ?? `${study.clientName} logo`,
+          }}
+          industry={study.industry}
+          showQuote
+          className="hidden lg:block"
+        />
+      ) : null}
+
       {/* Meta fields */}
       <div className="space-y-5 border-l-2 border-[#E8A838] pl-5">
         {meta.map((item) => (
@@ -94,6 +109,20 @@ function CaseStudySidebar({ study }: { readonly study: CaseStudy }) {
 function CaseStudyBody({ study }: { readonly study: CaseStudy }) {
   return (
     <div>
+      {study.clientEvidence ? (
+        <ClientEvidenceCard
+          evidence={{
+            ...study.clientEvidence,
+            clientName: study.clientName,
+            clientLogo: study.assets.clientLogo || undefined,
+            clientLogoAlt: study.assets.clientLogoAlt ?? `${study.clientName} logo`,
+          }}
+          industry={study.industry}
+          showQuote
+          className="mb-10 lg:hidden"
+        />
+      ) : null}
+
       {/* Metrics strip */}
       <motion.div
         className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-[#DDE3EA] border border-[#DDE3EA] mb-14"

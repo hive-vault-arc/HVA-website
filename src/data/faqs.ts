@@ -116,7 +116,7 @@ export const ABOUT_FAQS: FaqSet = [
   {
     question: 'What is Hive Vault Arc?',
     answer:
-      'Hive Vault Arc is a technology transformation partner based in Tangier, Morocco. We combine strategy consulting, AI engineering, software development, cloud infrastructure, and managed operations in one founder-led team — delivering transformation programs from strategy through production without handoffs.',
+      'Hive Vault Arc is a technology transformation partner based in Tangier, Morocco. We combine strategy consulting, AI engineering, software development, cloud infrastructure, and managed operations in one founder-led team, delivering transformation programs from strategy through production without handoffs.',
   },
   {
     question: 'Who is the CEO of Hive Vault Arc?',
@@ -131,7 +131,7 @@ export const ABOUT_FAQS: FaqSet = [
   {
     question: 'What is the ARC framework?',
     answer:
-      'ARC is the Hive Vault Arc delivery model: Assess, Re-engineer, Command. Assess means mapping friction and defining architecture before any code is written. Re-engineer means building AI systems, software, and cloud infrastructure in sprint increments. Command means operating and evolving the systems long-term. The same team runs all three phases — there is no handoff between them.',
+      'ARC is the Hive Vault Arc delivery model: Assess, Re-engineer, Command. Assess means mapping friction and defining architecture before any code is written. Re-engineer means building AI systems, software, and cloud infrastructure in sprint increments. Command means operating and evolving the systems long-term. The same team runs all three phases, with no handoff between them.',
   },
   {
     question: "What are Hive Vault Arc's six service pillars?",
@@ -146,12 +146,12 @@ export const ABOUT_FAQS: FaqSet = [
   {
     question: 'Do you stay involved after the initial build?',
     answer:
-      'Yes — that is the Command phase of ARC. We provide managed operations, production monitoring, application evolution, and ongoing optimization. Transformation is only complete when the systems are running and the outcomes are measurable. We do not disappear after go-live.',
+      'Yes. That is the Command phase of ARC. We provide managed operations, production monitoring, application evolution, and ongoing optimization. Transformation is only complete when the systems are running and the outcomes are measurable. We do not disappear after go-live.',
   },
   {
     question: 'What industries does Hive Vault Arc serve?',
     answer:
-      'Hive Vault Arc operates in eight defined verticals: Real Estate & Construction, Healthcare & Life Sciences, Financial Services, Government & Public Sector, Retail & E-Commerce, Energy & Sustainability, Logistics & Transportation, and Consumer Goods & Luxury. We focus on Morocco and the France–MENA corridor.',
+      'Hive Vault Arc operates in eight defined verticals: Real Estate & Construction, Healthcare & Life Sciences, Financial Services, Government & Public Sector, Retail & E-Commerce, Energy & Sustainability, Logistics & Transportation, and Consumer Goods & Luxury. We focus on Morocco and the France-MENA corridor.',
   },
 ];
 

@@ -14,23 +14,12 @@ import {
   mergeKeywords,
 } from '../../lib/seo';
 
-const DYNAMIC_FOUNDER_FAQ_QUESTIONS = new Set([
-  'Who is the CEO of Hive Vault Arc?',
-  'Qui est le PDG de Hive Vault Arc ?',
-  'Who leads Hive Vault Arc engagements?',
-]);
-
 function foundersFrom(teamMembers: EmployeeProfile[]): EmployeeProfile[] {
   return teamMembers.filter((member) => member.profileType === 'coFounder');
 }
 
-function founderDescription(founders: EmployeeProfile[]): string {
-  const names = founders.map((member) => member.name).filter(Boolean);
-  if (names.length === 0) {
-    return 'Hive Vault Arc is a founder-led technology transformation team based in Tangier, Morocco.';
-  }
-
-  return `Hive Vault Arc is led by ${names.join(', ')} from Tangier, Morocco.`;
+function founderDescription(): string {
+  return 'About Hive Vault Arc, a founder-led technology transformation firm in Tangier delivering strategy, AI, software, cloud, and managed operations.';
 }
 
 function founderFaqs(founders: EmployeeProfile[]): FaqItem[] {
@@ -77,7 +66,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return buildPageMetadata({
     title: 'About | Founder-Led Technology Transformation Team',
-    description: founderDescription(founders),
+    description: founderDescription(),
     path: '/aboutus',
     keywords: mergeKeywords(GLOBAL_KEYWORDS, [
       ...founders.flatMap((member) => [member.name, member.position, ...member.expertise]),
@@ -109,9 +98,15 @@ export default async function Page() {
   const teamMembers = await getFeaturedEmployeeProfiles();
   const founders = foundersFrom(teamMembers);
   const leadershipPeople = founders.map(personSchema);
+  const priorityQuestions = new Set([
+    'What is Hive Vault Arc?',
+    'What is the ARC framework?',
+    'Do you stay involved after the initial build?',
+    'What industries does Hive Vault Arc serve?',
+  ]);
   const aboutFaqs = [
-    ...ABOUT_FAQS.filter((faq) => !DYNAMIC_FOUNDER_FAQ_QUESTIONS.has(faq.question)),
-    ...founderFaqs(founders),
+    ...ABOUT_FAQS.filter((faq) => priorityQuestions.has(faq.question)),
+    ...founderFaqs(founders).filter((faq) => faq.question === 'Who leads Hive Vault Arc engagements?'),
   ];
 
   const aboutPageSchema = {
@@ -119,7 +114,7 @@ export default async function Page() {
     '@type': 'AboutPage',
     name: 'About Hive Vault Arc - Technology Transformation Partner',
     url: absoluteUrl('/aboutus'),
-    description: founderDescription(founders),
+    description: founderDescription(),
     mainEntity: {
       '@type': ['Organization', 'ProfessionalService'],
       '@id': absoluteUrl('/#organization'),
