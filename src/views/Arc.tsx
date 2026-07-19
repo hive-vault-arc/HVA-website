@@ -214,11 +214,11 @@ export default function Arc({ studies, children }: ArcProps) {
     <MotionConfig reducedMotion="user">
       <div
         ref={pageRef}
-        className="about-redesign relative isolate overflow-x-hidden bg-[#FFFFFF] text-[#1A2535]"
+        className="arc-redesign about-redesign relative isolate overflow-x-hidden bg-[#FFFFFF] text-[#1A2535]"
       >
         <motion.div
           aria-hidden="true"
-          className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-[#E8A838]"
+          className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-[#CD9F40]"
           style={{ scaleX: progressScale }}
         />
 
@@ -307,8 +307,8 @@ export default function Arc({ studies, children }: ArcProps) {
             >
               <div className="arc-hero-media">
                 <Image
-                  src="/Images/capabilities/hva-arc-framework-operating-model.webp"
-                  alt="ARC operating loop connecting assessment, system delivery, and measurable production outcomes"
+                  src="/Images/capabilities/hva-arc-operating-model-business-workspace.png"
+                  alt="ARC operating model workspace connecting diagnostic evidence, a modular workflow, and an ordered command state"
                   fill
                   priority
                   sizes="(max-width: 1024px) 100vw, 42vw"
@@ -330,28 +330,51 @@ export default function Arc({ studies, children }: ArcProps) {
 
         {immoWorldStudy && immediateProof.length === 4 && (
           <section
-            className="about-proof-strip"
+            className="arc-record-section"
             aria-labelledby="arc-proof-strip-title"
             data-arc-section="immediate-proof"
           >
-            <div className="about-editorial-shell">
+            <div className="arc-record-shell">
               <h2 id="arc-proof-strip-title" className="sr-only">
                 Published ImmoWorld operating record
               </h2>
-              <div className="about-proof-grid">
+
+              <motion.div
+                className="arc-record-intro"
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.38 }}
+              >
+                <div className="arc-record-intro__identity">
+                  <SectionBrandMark surface="dark" size="sm" />
+                  <span>
+                    <small>Published operating record</small>
+                    <strong>{immoWorldStudy.clientName}</strong>
+                  </span>
+                </div>
+                <Link href={`/case-studies/${immoWorldStudy.slug}`}>
+                  Open case study
+                  <ArrowRight aria-hidden="true" />
+                </Link>
+              </motion.div>
+
+              <div className="arc-record-grid">
                 {immediateProof.map((item, index) => (
                   <motion.article
                     key={item.label}
-                    className="about-proof-item"
+                    className="arc-record-item"
                     initial={{ opacity: 0, y: 12 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.3 }}
                     transition={{ duration: 0.38, delay: index * 0.05 }}
                   >
+                    <span className="arc-record-item__index" aria-hidden="true">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span className="arc-record-item__label">{item.label}</span>
                     <strong>{item.value}</strong>
-                    <p>
-                      {item.label}. {item.context}
-                    </p>
+                    <p>{item.context}</p>
                   </motion.article>
                 ))}
               </div>

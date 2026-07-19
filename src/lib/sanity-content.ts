@@ -52,6 +52,8 @@ type SanityClientEvidenceSummary = {
   signatoryRole?: string;
   clientLogo?: SanityImageValue;
   clientLogoAlt?: string;
+  coverImage?: SanityImageValue;
+  coverImageAlt?: string;
 };
 
 function imageUrlFromSource(image: SanityImageValue): string {
@@ -138,6 +140,8 @@ function normalizeClientEvidenceSummary(
   const signatoryName = nonEmptyString(evidence.signatoryName);
   const signatoryRole = nonEmptyString(evidence.signatoryRole);
   const clientLogo = logoUrlFromSource(evidence.clientLogo);
+  const coverImage = imageUrlFromSource(evidence.coverImage);
+  const coverImageAlt = nonEmptyString(evidence.coverImageAlt);
 
   return {
     slug,
@@ -152,6 +156,8 @@ function normalizeClientEvidenceSummary(
     ...(signatoryRole ? { signatoryRole } : {}),
     ...(clientLogo ? { clientLogo } : {}),
     clientLogoAlt: nonEmptyString(evidence.clientLogoAlt) ?? `${clientName} logo`,
+    ...(coverImage ? { coverImage } : {}),
+    ...(coverImageAlt ? { coverImageAlt } : {}),
   };
 }
 

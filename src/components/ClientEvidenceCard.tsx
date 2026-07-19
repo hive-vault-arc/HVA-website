@@ -90,9 +90,8 @@ export default function ClientEvidenceCard({
             <Image
               src={evidence.clientLogo}
               alt={evidence.clientLogoAlt}
-              width={180}
-              height={56}
-              sizes="(max-width: 767px) 9rem, 10rem"
+              fill
+              sizes="6rem"
             />
           ) : (
             <span>{evidence.clientName.slice(0, 2).toUpperCase()}</span>

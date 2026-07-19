@@ -40,6 +40,8 @@ export type ClientEvidenceSummary = {
   signatoryRole?: string;
   clientLogo?: string;
   clientLogoAlt: string;
+  coverImage?: string;
+  coverImageAlt?: string;
 };
 
 export type CaseStudy = {
@@ -68,6 +70,16 @@ export type CaseStudy = {
   };
   lastUpdated: string;
   seo?: ContentSeo;
+};
+
+export type CaseStudyShowcaseSummary = Pick<
+  CaseStudy,
+  'slug' | 'title' | 'clientName' | 'industry' | 'summary'
+> & {
+  assets: Pick<
+    CaseStudy['assets'],
+    'coverImage' | 'coverAlt' | 'clientLogo' | 'clientLogoAlt'
+  >;
 };
 
 export type ProductSystem = {

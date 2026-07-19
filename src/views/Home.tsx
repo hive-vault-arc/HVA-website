@@ -7,29 +7,24 @@ import Image from 'next/image';
 import {
   ArrowRight,
   BarChart3,
-  BookOpen,
   Bot,
-  Building2,
-  CalendarCheck,
   Cloud,
   Eye,
   Layers,
-  MapPin,
   MessageSquare,
-  Route,
-  Users,
-  type LucideIcon,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import BottomCTA from '../components/BottomCTA';
-import ClientEvidenceRail from '../components/ClientEvidenceRail';
+import HomeDecisionGuide from '../components/HomeDecisionGuide';
 import SectionBrandMark from '../components/SectionBrandMark';
+import TrustedByBar from '../components/TrustedByBar';
 import Background3d from '../components/Plasma';
 import LogoLoop from '../components/LogoItem';
 import HeroSlider from '../components/ui/HeroSlider';
 import type { InsightsCarouselItem } from '../components/InsightsCarousel';
 import { useAnimationQuality } from '../lib/animationQuality';
-import type { ClientEvidenceSummary } from '../lib/proof';
+import type { CaseStudyShowcaseSummary, ClientEvidenceSummary } from '../lib/proof';
+import type { HomeHeroMetric, HomeTrustedPartner } from '../lib/home-hero';
 import {
   SiAndroid,
   SiCplusplus,
@@ -70,92 +65,21 @@ const InsightsCarousel = dynamic(() => import('../components/InsightsCarousel'),
   loading: () => <div className="h-[560px] bg-[#FFFFFF]" aria-hidden="true" />,
 });
 
-const HOME_NAV_PRIMARY_LINKS: Array<{
-  href: string;
-  question: string;
-  title: string;
-  description: string;
-  action: string;
-  image: string;
-  imageAlt: string;
-  icon: LucideIcon;
-}> = [
-  {
-    href: '/capabilities',
-    question: 'What can HVA do?',
-    title: 'Capabilities',
-    description: 'Strategy, AI, software, cloud, and operations.',
-    action: 'Explore services',
-    image: '/Images/page-heroes/hva-capabilities-hero-background.webp',
-    imageAlt: 'Abstract systems map for Hive Vault Arc capabilities',
-    icon: Layers,
-  },
-  {
-    href: '/industries',
-    question: 'Do you work in my sector?',
-    title: 'Industries',
-    description: 'Real estate, healthcare, finance, public sector, retail.',
-    action: 'See sectors',
-    image: '/Images/page-heroes/hva-industries-hero-background.webp',
-    imageAlt: 'Abstract sector coverage map for Hive Vault Arc industries',
-    icon: Building2,
-  },
-  {
-    href: '/case-studies',
-    question: 'Can I see proof?',
-    title: 'Case Studies',
-    description: 'CRM modernization and AI operations already shipped.',
-    action: 'View proof',
-    image: '/Images/home/pathfinder/pathfinder-proof.webp',
-    imageAlt: 'Abstract performance chart for Hive Vault Arc proof in production',
-    icon: BarChart3,
-  },
-];
-
-const HOME_NAV_SECONDARY_LINKS: Array<{
-  href: string;
-  title: string;
-  description: string;
-  icon: LucideIcon;
-}> = [
-  {
-    href: '/arc',
-    title: 'ARC Framework',
-    description: 'Delivery method',
-    icon: Route,
-  },
-  {
-    href: '/insights',
-    title: 'Insights',
-    description: 'Articles and reports',
-    icon: BookOpen,
-  },
-  {
-    href: '/aboutus',
-    title: 'Who We Are',
-    description: 'Team and principles',
-    icon: Users,
-  },
-  {
-    href: '/ai-agents-tangier',
-    title: 'AI Agents Tangier',
-    description: 'AI services in Tangier',
-    icon: MapPin,
-  },
-  {
-    href: '/contact',
-    title: 'Book a Call',
-    description: 'Talk with HVA',
-    icon: CalendarCheck,
-  },
-];
-
 type HomeProps = {
   insightsCarouselItems: InsightsCarouselItem[];
   clientEvidence: ClientEvidenceSummary[];
+  caseStudies: CaseStudyShowcaseSummary[];
+  heroMetrics: HomeHeroMetric[];
+  trustedPartners: HomeTrustedPartner[];
 };
 
-const Home: React.FC<HomeProps> = ({ insightsCarouselItems, clientEvidence }) => {
+const Home: React.FC<HomeProps> = ({
+  insightsCarouselItems,
+  clientEvidence,
+  caseStudies,
+  heroMetrics,
+  trustedPartners,
+}) => {
   const { tier, motionReduced } = useAnimationQuality();
   const showAdvancedEffects = tier === 'high' && !motionReduced;
   const worldMapSectionRef = useRef<HTMLElement | null>(null);
@@ -393,97 +317,13 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems, clientEvidence }) =>
         />
       )}
 
-      <HeroSlider />
-
-      {/* ── Primary Site Shortcuts ─────────────────────────────────────── */}
-      <nav
-        aria-labelledby="home-site-shortcuts-title"
-        className="home-pathfinder"
-      >
-        <div className="home-pathfinder-shell">
-          <div className="home-pathfinder-header">
-            <div className="home-pathfinder-title">
-              <SectionBrandMark size="sm" />
-              <div>
-                <span>Website guide</span>
-                <h2 id="home-site-shortcuts-title">Where should I go?</h2>
-              </div>
-            </div>
-            <p>
-              Pick a starting point. Direct routes stay close.
-            </p>
-          </div>
-
-          <div className="home-pathfinder-board">
-            <div className="home-pathfinder-primary">
-              {HOME_NAV_PRIMARY_LINKS.map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`home-pathfinder-card home-pathfinder-card--primary ${
-                    index === 0 ? 'home-pathfinder-card--featured' : ''
-                  }`}
-                  style={{ '--pathfinder-index': index } as React.CSSProperties}
-                >
-                  <span className="home-pathfinder-card-media">
-                    <Image
-                      src={item.image}
-                      alt={item.imageAlt}
-                      fill
-                      sizes={index === 0 ? '(max-width: 1040px) 100vw, 44vw' : '(max-width: 1040px) 50vw, 26vw'}
-                      className="object-cover"
-                    />
-                  </span>
-                  <span className="home-pathfinder-card-body">
-                    <span className="home-pathfinder-icon" aria-hidden="true">
-                      <Icon className="h-4 w-4" strokeWidth={1.5} />
-                    </span>
-                    <span className="home-pathfinder-question">{item.question}</span>
-                    <strong>{item.title}</strong>
-                    <span className="home-pathfinder-description">{item.description}</span>
-                    <span className="home-pathfinder-action">
-                      {item.action}
-                      <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
-                    </span>
-                  </span>
-                </Link>
-              );
-              })}
-            </div>
-
-            <div className="home-pathfinder-secondary" aria-label="More direct pages">
-              <div className="home-pathfinder-secondary-intro">
-                <span>Direct routes</span>
-                <strong>Jump to a specific page.</strong>
-              </div>
-              {HOME_NAV_SECONDARY_LINKS.map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="home-pathfinder-card home-pathfinder-card--secondary"
-                  style={{ '--pathfinder-index': index + HOME_NAV_PRIMARY_LINKS.length } as React.CSSProperties}
-                >
-                  <span className="home-pathfinder-secondary-icon" aria-hidden="true">
-                    <Icon className="h-4 w-4" strokeWidth={1.55} />
-                  </span>
-                  <span className="home-pathfinder-secondary-copy">
-                    <strong>{item.title}</strong>
-                    <em>{item.description}</em>
-                  </span>
-                  <ArrowRight className="home-pathfinder-secondary-arrow h-4 w-4" strokeWidth={1.55} aria-hidden="true" />
-                </Link>
-              );
-              })}
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      <ClientEvidenceRail evidence={clientEvidence} />
+      <HeroSlider metrics={heroMetrics} />
+      <TrustedByBar partners={trustedPartners} />
+      <HomeDecisionGuide
+        evidence={clientEvidence}
+        caseStudies={caseStudies}
+        metrics={heroMetrics}
+      />
 
       {/* ── Insights Carousel ──────────────────────────────────────────── */}
       <InsightsCarousel items={insightsCarouselItems} />
@@ -530,12 +370,7 @@ const Home: React.FC<HomeProps> = ({ insightsCarouselItems, clientEvidence }) =>
                   src={pillar.image}
                   alt={pillar.imageAlt}
                   fill
-                  loading={
-                    pillar.image.includes('hva-strategy-business-capability') ||
-                    pillar.image.includes('hva-technology-consulting-capability')
-                      ? 'eager'
-                      : 'lazy'
-                  }
+                  loading="lazy"
                   sizes="(max-width: 640px) 100vw, 50vw"
                   className="object-cover opacity-64"
                 />

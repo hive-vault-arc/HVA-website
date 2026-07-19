@@ -32,7 +32,7 @@ const securityHeaders = [
   //   script-src 'unsafe-eval'    — required by GSAP and Framer Motion internals
   //   style-src  'unsafe-inline'  — required by Framer Motion / Tailwind inline style props
   //   connect-src https:          — covers Spline CDN (prod.spline.design) + dynamic contact API URL
-  //   font-src 'self'             — next/font self-hosts Google Fonts at build time; no external font requests
+  //   font-src Fontshare          - Satoshi is delivered from Fontshare's official webfont CDN
   {
     key: 'Content-Security-Policy',
     value: [
@@ -40,7 +40,7 @@ const securityHeaders = [
       "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com",
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob: https:",
-      "font-src 'self' data:",
+      "font-src 'self' data: https://cdn.fontshare.com",
       "connect-src 'self' https:",
       "frame-src 'none'",
       "worker-src 'self' blob:",

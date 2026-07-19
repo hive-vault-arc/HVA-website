@@ -6,7 +6,13 @@ import type { InsightsCarouselItem } from '../components/InsightsCarousel';
 import FaqSection from '../components/FaqSection';
 import { HOME_FAQS } from '../data/faqs';
 import { getAllPosts, type BlogPost } from '../lib/blog';
-import { getAllCaseStudies, getClientEvidenceShowcase, type CaseStudy } from '../lib/proof';
+import { buildHomeHeroProof } from '../lib/home-hero';
+import {
+  getAllCaseStudies,
+  getClientEvidenceShowcase,
+  type CaseStudy,
+  type CaseStudyShowcaseSummary,
+} from '../lib/proof';
 import {
   GLOBAL_KEYWORDS,
   SITELINK_CANDIDATES,
@@ -133,6 +139,20 @@ export default async function Page() {
     getClientEvidenceShowcase(),
   ]);
   const insightsCarouselItems = buildInsightsCarouselItems(posts, caseStudies);
+  const { metrics: heroMetrics, trustedPartners } = buildHomeHeroProof(caseStudies);
+  const caseStudyShowcase: CaseStudyShowcaseSummary[] = caseStudies.map((study) => ({
+    slug: study.slug,
+    title: study.title,
+    clientName: study.clientName,
+    industry: study.industry,
+    summary: study.summary,
+    assets: {
+      coverImage: study.assets.coverImage,
+      coverAlt: study.assets.coverAlt,
+      clientLogo: study.assets.clientLogo,
+      clientLogoAlt: study.assets.clientLogoAlt,
+    },
+  }));
   const capabilitySchema = {
     '@context': 'https://schema.org',
     '@type': ['ProfessionalService', 'Service'],
@@ -194,7 +214,13 @@ export default async function Page() {
   return (
     <>
       <JsonLd data={[homePageSchema, capabilitySchema, primaryNavigationSchema]} />
-      <Home insightsCarouselItems={insightsCarouselItems} clientEvidence={clientEvidence} />
+      <Home
+        insightsCarouselItems={insightsCarouselItems}
+        clientEvidence={clientEvidence}
+        caseStudies={caseStudyShowcase}
+        heroMetrics={heroMetrics}
+        trustedPartners={trustedPartners}
+      />
       <section className="service-guides-section">
         <div className="service-guides-shell">
           <div className="service-guides-copy">

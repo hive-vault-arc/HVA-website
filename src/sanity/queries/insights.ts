@@ -294,7 +294,11 @@ export const clientEvidenceShowcaseQuery = defineQuery(`
     "clientLogo": assets.clientLogo {
       ${imageFields}
     },
-    "clientLogoAlt": assets.clientLogoAlt
+    "clientLogoAlt": assets.clientLogoAlt,
+    "coverImage": assets.coverImage {
+      ${imageFields}
+    },
+    "coverImageAlt": assets.coverAlt
   }
 `);
 
