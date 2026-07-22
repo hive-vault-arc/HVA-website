@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ArrowRight } from '@/components/icons';
 import FaqSection from '../../components/FaqSection';
 import JsonLd from '../../components/JsonLd';
 import type { FaqItem } from '../../data/faqs';
@@ -90,7 +91,7 @@ export default function CustomSoftwareMoroccoPage() {
                   Scope a Software Build
                 </Link>
                 <Link href="/it-consulting-tangier" className="editorial-link">
-                  IT Consulting Guide →
+                  IT Consulting Guide <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
             </div>
@@ -265,10 +266,10 @@ export default function CustomSoftwareMoroccoPage() {
                 Book Discovery Call
               </Link>
               <Link href="/case-studies/top-tier-crm-transformation-program-real-estate-operations" className="editorial-link">
-                Review CRM Case Study →
+                Review CRM Case Study <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
               <Link href="/digital-services-tangier" className="editorial-link">
-                View Full Digital Services Portfolio →
+                View Full Digital Services Portfolio <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
           </div>

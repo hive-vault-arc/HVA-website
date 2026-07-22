@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowLeft, ArrowUpRight } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight } from '@/components/icons';
 import SectionBrandMark from './SectionBrandMark';
 
 const RECOVERY_LINKS = [
@@ -72,4 +72,3 @@ export default function NotFoundContent() {
     </section>
   );
 }
-

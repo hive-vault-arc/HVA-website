@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight } from '@/components/icons';
 import SectionBrandMark from './SectionBrandMark';
 
 interface BottomCTAProps {
@@ -138,7 +138,7 @@ export default function BottomCTA({
                 className="sharp-edge inline-flex min-h-11 items-center justify-center gap-2 bg-[#E8A838] px-10 py-5 text-sm font-bold uppercase tracking-wide text-white transition-colors duration-200 hover:bg-[#C8891C] active:scale-95 w-full sm:w-auto"
               >
                 {primaryLabel}
-                <ArrowRight className="h-4 w-4" />
+                <ArrowRight className="h-4 w-4" motion="nudge" aria-hidden="true" />
               </Link>
               {secondaryLabel && secondaryHref && (
                 <Link

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ArrowRight } from '@/components/icons';
 import FaqSection from '../../components/FaqSection';
 import JsonLd from '../../components/JsonLd';
 import type { FaqItem } from '../../data/faqs';
@@ -90,7 +91,7 @@ export default function AIAgentsMoroccoPage() {
                   Plan an AI Rollout
                 </Link>
                 <Link href="/ai-agents-tangier" className="editorial-link">
-                  See Tangier Guide →
+                  See Tangier Guide <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
             </div>
@@ -200,7 +201,7 @@ export default function AIAgentsMoroccoPage() {
             </p>
             <p className="mt-5">
               <Link href="/case-studies/multilingual-whatsapp-ai-agent" className="editorial-link">
-                Read WhatsApp AI Case Study →
+                Read WhatsApp AI Case Study <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </p>
           </article>
@@ -255,10 +256,10 @@ export default function AIAgentsMoroccoPage() {
                 Book Discovery Call
               </Link>
               <Link href="/capabilities/in-detail" className="editorial-link">
-                Explore In Detail →
+                Explore In Detail <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
               <Link href="/digital-services-tangier" className="editorial-link">
-                Digital Services in Tangier →
+                Digital Services in Tangier <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
           </div>

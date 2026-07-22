@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ArrowRight } from '@/components/icons';
 import FaqSection from '../../components/FaqSection';
 import JsonLd from '../../components/JsonLd';
 import type { FaqItem } from '../../data/faqs';
@@ -103,7 +104,7 @@ export default function ITConsultingTangierPage() {
                   Book an IT Discovery
                 </Link>
                 <Link href="/arc" className="editorial-link">
-                  View ARC Framework →
+                  View ARC Framework <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
             </div>
@@ -252,10 +253,10 @@ export default function ITConsultingTangierPage() {
                 Explore ARC
               </Link>
               <Link href="/contact" className="editorial-link">
-                Talk to Hive Vault Arc →
+                Talk to Hive Vault Arc <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
               <Link href="/digital-services-tangier" className="editorial-link">
-                Explore All Digital Services →
+                Explore All Digital Services <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
           </div>

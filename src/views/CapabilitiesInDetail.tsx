@@ -15,7 +15,7 @@ import {
   Layers3,
   Settings,
   Wrench,
-} from 'lucide-react';
+} from '@/components/icons';
 import { useAnimationQuality } from '../lib/animationQuality';
 import BottomCTA from '../components/BottomCTA';
 import SectionBrandMark from '../components/SectionBrandMark';

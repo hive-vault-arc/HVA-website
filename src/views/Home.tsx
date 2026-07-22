@@ -12,7 +12,7 @@ import {
   Eye,
   Layers,
   MessageSquare,
-} from 'lucide-react';
+} from '@/components/icons';
 import { motion } from 'framer-motion';
 import BottomCTA from '../components/BottomCTA';
 import HomeDecisionGuide from '../components/HomeDecisionGuide';

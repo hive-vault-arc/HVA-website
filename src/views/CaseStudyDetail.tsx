@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink } from '@/components/icons';
 import type { CaseStudy } from '../lib/proof';
 import ArticleDetailPage from '../components/ArticleDetailPage';
 import ClientEvidenceCard from '../components/ClientEvidenceCard';

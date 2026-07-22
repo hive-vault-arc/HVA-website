@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Pause, Play, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, Pause, Play, ChevronLeft, ChevronRight } from '@/components/icons';
 
 export type InsightsCarouselItem = {
   id: string;
@@ -237,7 +237,7 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
                                text-[10px] font-bold uppercase tracking-[0.18em]
                                hover:bg-[#C8891C] transition-colors duration-200"
                   >
-                    Learn More →
+                    Learn More <ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </Link>
                 </motion.div>
 

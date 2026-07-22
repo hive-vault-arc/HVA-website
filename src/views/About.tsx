@@ -13,7 +13,7 @@ import {
   Settings2,
   Terminal,
   UsersRound,
-} from 'lucide-react';
+} from '@/components/icons';
 import SectionBrandMark from '../components/SectionBrandMark';
 import BottomCTA from '../components/BottomCTA';
 import PageAmbientBackground from '../components/PageAmbientBackground';

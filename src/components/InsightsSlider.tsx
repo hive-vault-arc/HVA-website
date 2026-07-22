@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight } from '@/components/icons';
 
 /* ─── Types ───────────────────────────────────────────────────────────────── */
 
@@ -169,7 +169,7 @@ export default function InsightsSlider({ items }: { readonly items: SlideItem[] 
                         <p className="insights-slide-hover-desc">{item.description}</p>
                         <span className="insights-slide-learn-more">
                           Read {item.tag} insight
-                          <span className="insights-slide-learn-arrow" aria-hidden="true">→</span>
+                          <ArrowRight className="insights-slide-learn-arrow h-4 w-4" aria-hidden="true" />
                         </span>
                       </div>
                     </motion.div>

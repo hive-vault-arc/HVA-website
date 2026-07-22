@@ -11,8 +11,8 @@ import {
   ChevronRight,
   Gauge,
   Users,
-  type LucideIcon,
-} from 'lucide-react';
+  type IconsaxIconComponent,
+} from '@/components/icons';
 
 import type { HomeHeroMetric } from '../../lib/home-hero';
 
@@ -42,7 +42,7 @@ type ParsedMetric = {
   target: number;
 };
 
-const METRIC_ICONS: LucideIcon[] = [ChartNoAxesCombined, Gauge, Users];
+const METRIC_ICONS: IconsaxIconComponent[] = [ChartNoAxesCombined, Gauge, Users];
 
 const SLIDE_VARIANTS = {
   enter: (direction: number) => ({
@@ -87,8 +87,10 @@ const SLIDES: Slide[] = [
     primaryHref: '/contact',
     secondaryLabel: 'Meet Our Team',
     secondaryHref: '/aboutus',
-    image: '/Images/hero/hva-home-hero-strategic-guidance-accountable-execution.webp',
-    imageAlt: 'Executive strategy workspace with operating model diagrams and city view',
+    image: '/Images/hero/hva-strategic-guidance-3d-transparent.webp',
+    imageAlt:
+      'Floating layered strategy system with operating model diagrams and city planning geometry',
+    imageMode: 'contain',
   },
   {
     eyebrow: 'AI ENGINEERING & OPERATIONS',
@@ -101,8 +103,10 @@ const SLIDES: Slide[] = [
     primaryHref: '/case-studies',
     secondaryLabel: 'Explore Capabilities',
     secondaryHref: '/capabilities',
-    image: '/Images/capabilities/hva-ai-data-capability.webp',
-    imageAlt: 'AI engineering workspace with model orchestration and analytics monitors',
+    image: '/Images/hero/hva-ai-orchestration-3d-transparent.webp',
+    imageAlt:
+      'Floating layered AI orchestration system with a neural core and connected data streams',
+    imageMode: 'contain',
   },
   {
     eyebrow: 'ARC DELIVERY MODEL',
@@ -115,8 +119,10 @@ const SLIDES: Slide[] = [
     primaryHref: '/capabilities',
     secondaryLabel: 'See Case Studies',
     secondaryHref: '/case-studies',
-    image: '/Images/hero/digital-transformation-scalable-systems-tangier-morocco.webp',
-    imageAlt: 'Technology consultant reviewing digital operations dashboards on a laptop',
+    image: '/Images/hero/hva-arc-production-command-3d-transparent.webp',
+    imageAlt:
+      'Floating layered production command system with operational dashboards and workflow controls',
+    imageMode: 'contain',
   },
 ];
 
@@ -282,7 +288,7 @@ export default function HeroSlider({ metrics }: HeroSliderProps) {
                 <div className="home-hero-actions home-hero-reveal">
                   <Link href={slide.primaryHref} className="home-hero-primary sharp-edge">
                     {slide.primaryLabel}
-                    <ChevronRight className="h-4 w-4" aria-hidden="true" />
+                    <ChevronRight className="h-4 w-4" motion="nudge" aria-hidden="true" />
                   </Link>
                   <Link href={slide.secondaryHref} className="home-hero-secondary sharp-edge">
                     {slide.secondaryLabel}

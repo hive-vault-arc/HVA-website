@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight } from '@/components/icons';
 import JsonLd from '../../../components/JsonLd';
 import FaqSection from '../../../components/FaqSection';
 import LocaleDocumentAttributes from '../../../components/LocaleDocumentAttributes';

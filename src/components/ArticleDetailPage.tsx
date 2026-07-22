@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowLeft, ArrowUpRight } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight } from '@/components/icons';
 import BottomCTA from './BottomCTA';
 import SectionBrandMark from './SectionBrandMark';
 

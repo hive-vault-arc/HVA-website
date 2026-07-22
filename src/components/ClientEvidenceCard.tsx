@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { ExternalLink, FileText } from 'lucide-react';
+import { ExternalLink, FileText } from '@/components/icons';
 import type { ClientEvidence, ClientEvidenceSummary } from '../lib/proof';
 
 type EvidenceDisplay = Pick<

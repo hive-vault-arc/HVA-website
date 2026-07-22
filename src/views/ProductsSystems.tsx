@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2 } from '@/components/icons';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 import BottomCTA from '../components/BottomCTA';
@@ -191,7 +191,7 @@ const ProductsSystems: React.FC = () => {
               <div className="system-card__proof-links">
                 {system.proofLinks.map((link) => (
                   <Link key={link} href={link} className="editorial-link editorial-link--strong">
-                    View Proof &rarr;
+                    View Proof <ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </Link>
                 ))}
               </div>

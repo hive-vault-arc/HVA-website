@@ -1,5 +1,5 @@
 'use client';
-import { Zap, Cpu, Fingerprint, Pencil, Settings2, Sparkles } from 'lucide-react';
+import { Zap, Cpu, Fingerprint, Pencil, Settings2, Sparkles } from '@/components/icons';
 import { motion, useReducedMotion } from 'framer-motion';
 import { FeatureCard } from './grid-feature-cards';
 

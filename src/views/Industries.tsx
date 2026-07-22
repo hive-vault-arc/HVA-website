@@ -4,7 +4,7 @@ import type { CSSProperties } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { BarChart3, MessageSquare, Network, ShieldCheck, ArrowUpRight } from 'lucide-react';
+import { BarChart3, MessageSquare, Network, ShieldCheck, ArrowUpRight } from '@/components/icons';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 import SectionBrandMark from '../components/SectionBrandMark';
 

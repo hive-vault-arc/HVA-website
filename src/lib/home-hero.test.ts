@@ -65,8 +65,35 @@ describe('buildHomeHeroProof', () => {
         logo: 'https://cdn.sanity.io/immoworld.png',
         logoAlt: 'ImmoWorld logo',
         href: '/case-studies/immoworld',
+        surface: 'dark',
+      },
+      {
+        name: 'Tarik Rami Immobilier',
+        logo: '/Images/trustedby/tarik-rami-immobilier-logo.webp',
+        logoAlt: 'Tarik Rami Immobilier logo',
+        surface: 'light',
       },
     ]);
+  });
+
+  it('uses the high-resolution local Premium Advice logo in the trusted bar', () => {
+    const result = buildHomeHeroProof([
+      study({
+        slug: 'premium-advice-training',
+        clientName: 'Premium Advice & Training',
+        assets: {
+          coverImage: '/cover.png',
+          logoLabel: 'Premium Advice & Training',
+          clientLogo: 'https://cdn.sanity.io/low-resolution-premium-logo.jpg',
+        },
+      }),
+    ]);
+
+    expect(result.trustedPartners[0]).toMatchObject({
+      name: 'Premium Advice & Training',
+      logo: '/Images/trustedby/premium-advice-training-logo-hq.webp',
+      surface: 'light',
+    });
   });
 
   it('falls back to documented aggregate counts when fewer than three numeric outcomes exist', () => {

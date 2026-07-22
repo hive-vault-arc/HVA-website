@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowDown, ArrowUpRight } from 'lucide-react';
+import { ArrowDown, ArrowRight, ArrowUpRight } from '@/components/icons';
 import BottomCTA from '../components/BottomCTA';
 import InsightsSlider, { type SlideItem } from '../components/InsightsSlider';
 import PageAmbientBackground from '../components/PageAmbientBackground';
@@ -211,7 +211,7 @@ function LatestSection({ items }: LatestProps) {
                                  bg-white/10 backdrop-blur-sm hover:bg-[#E8A838] hover:border-[#E8A838]
                                  transition-all duration-200"
                     >
-                      {ctaLabelFor(latestPrimary)} <span aria-hidden="true">→</span>
+                      {ctaLabelFor(latestPrimary)} <ArrowRight className="h-4 w-4" aria-hidden="true" />
                     </Link>
                     {(latestPrimary.readTime || latestPrimary.date) && (
                       <span className="text-[10px] text-white/35 uppercase tracking-widest">
@@ -273,7 +273,7 @@ function LatestSection({ items }: LatestProps) {
                                tracking-[0.14em] text-[#1A2535] border border-[#1A2535]
                                px-4 py-2 hover:bg-[#1A2535] hover:text-white transition-all duration-200"
                   >
-                    {ctaLabelFor(latestSecondary)} <span aria-hidden="true">→</span>
+                    {ctaLabelFor(latestSecondary)} <ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </Link>
                   {(latestSecondary.meta || latestSecondary.readTime || latestSecondary.date) && (
                     <span className="text-[10px] text-[#9AA4B2] uppercase tracking-widest">

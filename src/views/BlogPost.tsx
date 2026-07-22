@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowUpRight, ExternalLink } from 'lucide-react';
+import { ArrowUpRight, ExternalLink } from '@/components/icons';
 import type { BlogPost, ContentSection } from '../lib/blog';
 import ArticleDetailPage from '../components/ArticleDetailPage';
 

@@ -15,7 +15,7 @@ import {
   Settings2,
   ShieldCheck,
   UsersRound,
-} from 'lucide-react';
+} from '@/components/icons';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 import SectionBrandMark from '../components/SectionBrandMark';
 import type { CaseStudy } from '../lib/proof';

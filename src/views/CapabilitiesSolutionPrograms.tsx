@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowUpRight, ArrowRight, Bot, Database, Cloud, Zap } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, Bot, Database, Cloud, Zap } from '@/components/icons';
 import BottomCTA from '../components/BottomCTA';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 import SectionBrandMark from '../components/SectionBrandMark';
@@ -123,7 +123,7 @@ export default function CapabilitiesSolutionPrograms() {
                   href="/capabilities/in-detail"
                   className="inline-flex min-h-11 items-center border-b-2 border-[#E8A838]/40 pb-0.5 text-sm font-bold uppercase tracking-widest text-[var(--section-label-color)] transition-colors hover:border-[#1A2535] hover:text-[#1A2535]"
                 >
-                  Explore In Detail →
+                  Explore In Detail <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
             </motion.div>

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ArrowUpRight } from '@/components/icons';
 import BottomCTA from './BottomCTA';
 import SectionBrandMark from './SectionBrandMark';
 
@@ -122,11 +122,11 @@ function EmptyState({ message, backHref }: { message: string; backHref?: string 
         <div className="flex flex-wrap justify-center gap-6">
           {backHref && (
             <Link href={backHref} className="inline-flex min-h-11 items-center pb-1 text-sm font-bold uppercase tracking-[0.15em] text-[#1A2535]" style={{ borderBottom: '2px solid #1A2535', fontFamily: 'var(--font-body)' }}>
-              ← All Insights
+              <ArrowLeft className="mr-2 h-4 w-4" aria-hidden="true" /> All Insights
             </Link>
           )}
           <Link href="/blog" className="inline-flex min-h-11 items-center pb-1 text-sm font-bold uppercase tracking-[0.15em] text-[#6B7280] transition-colors hover:text-[var(--section-label-color)]" style={{ borderBottom: '2px solid transparent', fontFamily: 'var(--font-body)' }}>
-            Read the Blog →
+            Read the Blog <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
           </Link>
         </div>
       </motion.div>
@@ -146,7 +146,7 @@ export default function InsightIndexPage({
   filters,
   filterKey,
   backHref,
-  backLabel = '← All Insights',
+  backLabel = 'All Insights',
   emptyMessage = 'These articles are being',
   bottomCta,
 }: Props) {
@@ -216,7 +216,7 @@ export default function InsightIndexPage({
               className="inline-flex min-h-11 items-center pb-2 text-xs font-bold uppercase tracking-[0.18em] text-[#6B7280] transition-colors hover:text-[var(--section-label-color)]"
               style={{ fontFamily: 'var(--font-body)', borderBottom: '2px solid transparent' }}
             >
-              {backLabel}
+              <ArrowLeft className="mr-2 h-4 w-4" aria-hidden="true" /> {backLabel}
             </Link>
           )}
           {/* Filter tabs */}
@@ -464,7 +464,7 @@ function FeaturedCardContent({
           </div>
         ) : (
           <span className="text-sm font-bold text-[var(--section-label-color)]" style={{ fontFamily: 'var(--font-body)' }}>
-            {item.metrics ? 'Read Full Case Study' : 'Read →'}
+            {item.metrics ? 'Read Full Case Study' : 'Read'}
           </span>
         )}
         <ArrowUpRight className="w-5 h-5 text-[#1A2535] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />

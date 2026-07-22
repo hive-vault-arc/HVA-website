@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { LifeBuoy, MessageSquare, Search } from 'lucide-react';
+import { ArrowRight, LifeBuoy, MessageSquare, Search } from '@/components/icons';
 import FaqSection from '../../components/FaqSection';
 import JsonLd from '../../components/JsonLd';
 import type { FaqItem } from '../../data/faqs';
@@ -108,7 +108,7 @@ export default function AIAgentsTangierPage() {
                 Book an AI Discovery
               </Link>
               <Link href="/capabilities" className="editorial-link">
-                Explore Capabilities →
+                Explore Capabilities <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
           </div>
@@ -227,7 +227,7 @@ export default function AIAgentsTangierPage() {
                 href="/capabilities"
                 className="font-body border-b border-[#1A2535] pb-1 text-xs font-bold uppercase tracking-widest text-[#1A2535] transition-colors duration-200 hover:border-[#E8A838] hover:text-[var(--section-label-color)]"
               >
-                View Full Capabilities →
+                View Full Capabilities <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
 

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ArrowRight } from '@/components/icons';
 import FaqSection from '../../components/FaqSection';
 import JsonLd from '../../components/JsonLd';
 import type { FaqItem } from '../../data/faqs';
@@ -170,7 +171,7 @@ export default function DigitalServicesTangierPage() {
                   Start with a Discovery Call
                 </Link>
                 <Link href="/services-digitaux-tanger" className="editorial-link">
-                  Version Française →
+                  Version Française <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
             </div>
@@ -193,7 +194,9 @@ export default function DigitalServicesTangierPage() {
               <Link key={pillar.href} href={pillar.href} className="group bg-white p-6 transition-colors hover:bg-[#F7F8FA]">
                 <h2 className="font-headline text-2xl leading-tight text-[#1A2535]">{pillar.title}</h2>
                 <p className="mt-4 text-sm leading-relaxed text-secondary">{pillar.text}</p>
-                <span className="mt-6 inline-flex text-sm font-bold text-primary">Explore →</span>
+                <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-primary">
+                  Explore <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </span>
               </Link>
             ))}
           </div>
@@ -266,7 +269,7 @@ export default function DigitalServicesTangierPage() {
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <h2 className="services-brief-section-title">The ARC Process Snapshot</h2>
               <Link href="/arc" className="editorial-link">
-                View ARC Framework →
+                View ARC Framework <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
             <ol className="mt-6 grid gap-4 md:grid-cols-3">
@@ -286,7 +289,7 @@ export default function DigitalServicesTangierPage() {
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <h2 className="services-brief-section-title">Production Results</h2>
               <Link href="/case-studies" className="editorial-link">
-                View All Case Studies →
+                View All Case Studies <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
             <div className="mt-6 grid gap-5 md:grid-cols-2">
@@ -312,7 +315,9 @@ export default function DigitalServicesTangierPage() {
                         </li>
                       ))}
                     </ul>
-                    <span className="mt-6 inline-flex text-sm font-bold text-primary">Read proof →</span>
+                    <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-primary">
+                      Read proof <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                    </span>
                   </div>
                 </Link>
               ))}
@@ -333,7 +338,7 @@ export default function DigitalServicesTangierPage() {
                 Book Discovery Call
               </Link>
               <Link href="/capabilities" className="editorial-link">
-                Explore Capabilities →
+                Explore Capabilities <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
           </div>

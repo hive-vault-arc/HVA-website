@@ -14,8 +14,8 @@ import {
   Layers3,
   Route,
   Users,
-  type LucideProps,
-} from 'lucide-react';
+  type IconsaxGlyphProps,
+} from '@/components/icons';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import type { HomeHeroMetric } from '../lib/home-hero';
@@ -29,7 +29,7 @@ type RouteItem = {
   href: string;
   label: string;
   title: string;
-  icon: ComponentType<LucideProps>;
+  icon: ComponentType<IconsaxGlyphProps>;
   image?: {
     src: string;
     alt: string;
@@ -430,7 +430,7 @@ export default function HomeDecisionGuide({
             <Link href="/capabilities" className="decision-guide__start">
               <Compass aria-hidden="true" />
               Find my starting point
-              <ArrowRight aria-hidden="true" />
+              <ArrowRight motion="nudge" aria-hidden="true" />
             </Link>
           </header>
 

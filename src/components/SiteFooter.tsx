@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { ArrowUpRight, Globe, Mail, Phone } from 'lucide-react';
-import { FaFacebookF, FaGithub, FaInstagram, FaLinkedinIn, FaTiktok, FaXTwitter } from 'react-icons/fa6';
+import { ArrowUpRight, Facebook, Globe, Instagram, Mail, Phone } from '@/components/icons';
+import { FaGithub, FaLinkedinIn, FaTiktok, FaXTwitter } from 'react-icons/fa6';
 import Logo from './Logo';
 import FooterSpotlight from './ui/FooterSpotlight';
 import {
@@ -16,8 +16,8 @@ import { CANONICAL_MARKET_IDENTITY } from '../lib/positioning';
 const socialIcons = {
   LinkedIn: FaLinkedinIn,
   GitHub: FaGithub,
-  Instagram: FaInstagram,
-  Facebook: FaFacebookF,
+  Instagram,
+  Facebook,
   X: FaXTwitter,
   TikTok: FaTiktok,
 } as const;
@@ -118,14 +118,14 @@ export default function SiteFooter() {
                   className="sharp-edge flex min-h-11 items-center bg-[#1A2535] px-4 py-2 text-sm font-medium text-[#FFFFFF] transition-all duration-300 hover:bg-[#E8A838] hover:text-[#1A2535] sm:self-start"
                 >
                   Book a Call
-                  <ArrowUpRight className="w-3.5 h-3.5 ml-1.5" />
+                  <ArrowUpRight className="w-3.5 h-3.5 ml-1.5" motion="nudge" aria-hidden="true" />
                 </Link>
                 <a href={`mailto:${CONTACT_EMAIL}`} className="site-footer__contact">
-                  <Mail className="h-3.5 w-3.5" />
+                  <Mail className="h-3.5 w-3.5" aria-hidden="true" />
                   {CONTACT_EMAIL}
                 </a>
                 <a href={`tel:${CONTACT_PHONE_E164}`} className="site-footer__contact">
-                  <Phone className="h-3.5 w-3.5" />
+                  <Phone className="h-3.5 w-3.5" aria-hidden="true" />
                   {CONTACT_PHONE_DISPLAY}
                 </a>
               </div>
@@ -153,7 +153,7 @@ export default function SiteFooter() {
                 className="site-footer__icon-link sharp-edge"
                 aria-label="Website"
               >
-                <Globe className="h-4 w-4" />
+                <Globe className="h-4 w-4" aria-hidden="true" />
               </a>
               {SOCIAL_PROFILES.map((profile) => {
                 const SocialIcon = socialIcons[profile.label];
@@ -166,7 +166,7 @@ export default function SiteFooter() {
                     className="site-footer__icon-link sharp-edge"
                     aria-label={profile.label}
                   >
-                    <SocialIcon className="h-4 w-4" />
+                    <SocialIcon className="h-4 w-4" aria-hidden="true" />
                   </a>
                 );
               })}

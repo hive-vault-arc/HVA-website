@@ -12,9 +12,9 @@ import {
   Rocket,
   Gauge,
   TrendingUp,
-} from 'lucide-react';
+} from '@/components/icons';
 import { Timeline, TimelineEntry } from './ui/timeline';
-import { ChartArea } from 'dicons';
+import { ChartArea } from '@/components/icons';
 
 export function TimelineDemo() {
   const timelineData: TimelineEntry[] = [

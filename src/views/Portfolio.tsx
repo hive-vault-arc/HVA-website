@@ -13,7 +13,7 @@ import {
   ShieldCheck,
   Sparkles,
   Workflow,
-} from 'lucide-react';
+} from '@/components/icons';
 import { useAnimationQuality } from '../lib/animationQuality';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 import BottomCTA from '../components/BottomCTA';

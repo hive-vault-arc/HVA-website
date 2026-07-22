@@ -4,7 +4,7 @@ import { type CSSProperties, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, Send, Settings, Wrench } from 'lucide-react';
+import { ArrowRight, Send, Settings, Wrench } from '@/components/icons';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 import SectionBrandMark from '../components/SectionBrandMark';
 import { CAPABILITY_BRIEF_SECTIONS, CAPABILITY_SOLUTION_PROGRAM_DETAILS } from '../lib/capabilities-content';
@@ -237,7 +237,7 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
                   href="/capabilities/solution-programs"
                   className="capabilities-hero-secondary"
                 >
-                  Solution Programs →
+                  Solution Programs <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
             </motion.div>
@@ -417,7 +417,7 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
                 href="/capabilities/solution-programs"
                 className="text-sm font-bold uppercase tracking-wide text-[#E8A838] transition-colors duration-200 hover:text-[#C8891C]"
               >
-                View Solution Programs →
+                View Solution Programs <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
           </motion.div>
@@ -545,7 +545,7 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
                           href={program.proofLinks[0]!}
                           className="program-card-link"
                         >
-                          Case study →
+                          Case study <ArrowRight className="h-4 w-4" aria-hidden="true" />
                         </Link>
                       )}
                     </div>
@@ -560,7 +560,7 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
               className="mt-10 flex justify-center"
             >
               <Link href="/capabilities/solution-programs" className="sharp-edge btn-primary">
-                Full Program Catalog →
+                Full Program Catalog <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </motion.div>
           </motion.div>

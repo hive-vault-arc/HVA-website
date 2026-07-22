@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowLeft, ArrowUpRight, ExternalLink } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, ExternalLink } from '@/components/icons';
 import { useCallback, useState, type CSSProperties, type MouseEvent } from 'react';
 import type { EmployeeProfile } from '../lib/employee-profiles';
 import BottomCTA from '../components/BottomCTA';

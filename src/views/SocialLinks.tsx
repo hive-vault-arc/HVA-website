@@ -1,16 +1,18 @@
-import type { IconType } from 'react-icons';
+import type { ElementType } from 'react';
 import {
-  FaEnvelope,
-  FaFacebook,
   FaGithub,
-  FaInstagram,
   FaLinkedin,
-  FaPhone,
   FaTiktok,
-  FaWhatsapp,
   FaXTwitter,
 } from 'react-icons/fa6';
-import { ArrowUpRight } from 'lucide-react';
+import {
+  ArrowUpRight,
+  Facebook,
+  Instagram,
+  Mail,
+  Phone,
+  Whatsapp,
+} from '@/components/icons';
 import {
   CONTACT_EMAIL,
   CONTACT_PHONE_DISPLAY,
@@ -20,32 +22,32 @@ import {
 } from '../lib/seo';
 
 interface SocialLink {
-  icon: IconType;
+  icon: ElementType;
   label: string;
   handle: string;
   href: string;
   external: boolean;
 }
 
-const socialIcons: Record<string, IconType> = {
+const socialIcons: Record<string, ElementType> = {
   LinkedIn: FaLinkedin,
   GitHub: FaGithub,
-  Instagram: FaInstagram,
-  Facebook: FaFacebook,
+  Instagram,
+  Facebook,
   X: FaXTwitter,
   TikTok: FaTiktok,
 };
 
 const SOCIAL_LINKS: SocialLink[] = [
   {
-    icon: FaEnvelope,
+    icon: Mail,
     label: 'Email',
     handle: CONTACT_EMAIL,
     href: `mailto:${CONTACT_EMAIL}`,
     external: false,
   },
   {
-    icon: FaPhone,
+    icon: Phone,
     label: 'Call',
     handle: CONTACT_PHONE_DISPLAY,
     href: `tel:${CONTACT_PHONE_E164}`,
@@ -59,7 +61,7 @@ const SOCIAL_LINKS: SocialLink[] = [
     external: true,
   })),
   {
-    icon: FaWhatsapp,
+    icon: Whatsapp,
     label: 'WhatsApp',
     handle: CONTACT_PHONE_DISPLAY,
     href: WHATSAPP_URL,
@@ -93,7 +95,10 @@ export default function SocialLinks() {
                   rel={external ? 'noreferrer noopener' : undefined}
                   className="group flex items-center gap-5 border border-[#DDE3EA] bg-white p-5 transition-colors hover:bg-[#FFF7E8]"
                 >
-                  <Icon className="h-5 w-5 shrink-0 text-[#1A2535] transition-colors group-hover:text-[var(--section-label-color)]" />
+                  <Icon
+                    className="h-5 w-5 shrink-0 text-[#1A2535] transition-colors group-hover:text-[var(--section-label-color)]"
+                    aria-hidden="true"
+                  />
                   <div className="min-w-0 flex-1">
                     <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#1A2535]">
                       {label}

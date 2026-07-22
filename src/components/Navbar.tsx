@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ArrowUpRight, ChevronDown, Menu, X } from 'lucide-react';
+import { ArrowUpRight, ChevronDown, Menu, X } from '@/components/icons';
 import Logo from './Logo';
 
 const Navbar: React.FC = () => {

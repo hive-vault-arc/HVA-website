@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from 'react';
 import Image from 'next/image';
-import { ArrowRight, Globe2, Mail, Phone } from 'lucide-react';
+import { ArrowRight, Globe2, Mail, Phone } from '@/components/icons';
 import { MotionConfig, motion, useScroll, useTransform } from 'framer-motion';
 import { useAnimationQuality } from '../lib/animationQuality';
 import SectionBrandMark from '../components/SectionBrandMark';

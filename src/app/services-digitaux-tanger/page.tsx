@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ArrowRight } from '@/components/icons';
 import FaqSection from '../../components/FaqSection';
 import JsonLd from '../../components/JsonLd';
 import LocaleDocumentAttributes from '../../components/LocaleDocumentAttributes';
@@ -174,7 +175,7 @@ export default function ServicesDigitauxTangerPage() {
                   Démarrer par un Appel Découverte
                 </Link>
                 <Link href="/digital-services-tangier" className="editorial-link">
-                  English Version →
+                  English Version <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
             </div>
@@ -197,7 +198,9 @@ export default function ServicesDigitauxTangerPage() {
               <Link key={pilier.href} href={pilier.href} className="group bg-white p-6 transition-colors hover:bg-[#F7F8FA]">
                 <h2 className="font-headline text-2xl leading-tight text-[#1A2535]">{pilier.title}</h2>
                 <p className="mt-4 text-sm leading-relaxed text-secondary">{pilier.text}</p>
-                <span className="mt-6 inline-flex text-sm font-bold text-primary">Explorer →</span>
+                <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-primary">
+                  Explorer <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </span>
               </Link>
             ))}
           </div>
@@ -270,7 +273,7 @@ export default function ServicesDigitauxTangerPage() {
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <h2 className="services-brief-section-title">Aperçu du Processus ARC</h2>
               <Link href="/arc" className="editorial-link">
-                Voir le Framework ARC →
+                Voir le Framework ARC <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
             <ol className="mt-6 grid gap-4 md:grid-cols-3">
@@ -290,7 +293,7 @@ export default function ServicesDigitauxTangerPage() {
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <h2 className="services-brief-section-title">Résultats en Production</h2>
               <Link href="/case-studies" className="editorial-link">
-                Voir les Études de Cas →
+                Voir les Études de Cas <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
             <div className="mt-6 grid gap-5 md:grid-cols-2">
@@ -316,7 +319,9 @@ export default function ServicesDigitauxTangerPage() {
                         </li>
                       ))}
                     </ul>
-                    <span className="mt-6 inline-flex text-sm font-bold text-primary">Lire la preuve →</span>
+                    <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-primary">
+                      Lire la preuve <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                    </span>
                   </div>
                 </Link>
               ))}
@@ -337,7 +342,7 @@ export default function ServicesDigitauxTangerPage() {
                 Réserver un Appel
               </Link>
               <Link href="/capabilities" className="editorial-link">
-                Explorer les Capacités →
+                Explorer les Capacités <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
           </div>
