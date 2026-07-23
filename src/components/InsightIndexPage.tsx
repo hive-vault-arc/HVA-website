@@ -19,7 +19,6 @@ export type PageItem = {
   meta?: string;          // free-text secondary label (readTime, status, etc.)
   coverImage?: string;    // optional — shows image card; omit for text-only card
   author?: { name: string; initials: string };
-  metrics?: { value: string; label: string }[];
   evidenceLabel?: string;
 };
 
@@ -347,20 +346,9 @@ export default function InsightIndexPage({
                     {item.evidenceLabel ? (
                       <span className="case-evidence-marker">{item.evidenceLabel}</span>
                     ) : null}
-                    {/* Metrics row (case studies) */}
-                    {item.metrics && item.metrics.length > 0 && (
-                      <div className="flex gap-6 pt-3 border-t border-[#F7F8FA]">
-                        {item.metrics.slice(0, 2).map((m) => (
-                          <div key={m.label}>
-                            <p className="text-lg font-semibold text-[#1A2535]" style={{ fontFamily: 'var(--font-headline)' }}>{m.value}</p>
-                            <p className="mt-0.5 text-[9px] font-bold uppercase tracking-[0.15em] text-[#566274]" style={{ fontFamily: 'var(--font-body)' }}>{m.label}</p>
-                          </div>
-                        ))}
-                      </div>
-                    )}
                     <div
                       className="pt-4 flex items-center justify-between"
-                      style={{ borderTop: item.metrics ? undefined : '1px solid rgba(198,198,205,0.3)' }}
+                      style={{ borderTop: '1px solid rgba(198,198,205,0.3)' }}
                     >
                       <span className="text-xs text-[#6B7280] italic" style={{ fontFamily: 'var(--font-body)' }}>
                         {item.author?.name
@@ -440,17 +428,6 @@ function FeaturedCardContent({
           {item.evidenceLabel}
         </span>
       ) : null}
-      {/* Metrics (case studies) */}
-      {item.metrics && item.metrics.length > 0 && (
-        <div className="flex gap-8 mb-8 pt-5 border-t border-[#F7F8FA]">
-          {item.metrics.slice(0, 2).map((m) => (
-            <div key={m.label}>
-              <p className="text-xl font-semibold text-[#1A2535]" style={{ fontFamily: 'var(--font-headline)' }}>{m.value}</p>
-              <p className="mt-0.5 text-[9px] font-bold uppercase tracking-[0.15em] text-[#566274]" style={{ fontFamily: 'var(--font-body)' }}>{m.label}</p>
-            </div>
-          ))}
-        </div>
-      )}
       <div className="flex items-center justify-between">
         {item.author ? (
           <div className="flex items-center gap-3">
@@ -464,7 +441,7 @@ function FeaturedCardContent({
           </div>
         ) : (
           <span className="text-sm font-bold text-[var(--section-label-color)]" style={{ fontFamily: 'var(--font-body)' }}>
-            {item.metrics ? 'Read Full Case Study' : 'Read'}
+            Read
           </span>
         )}
         <ArrowUpRight className="w-5 h-5 text-[#1A2535] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />

@@ -15,7 +15,6 @@ export type InsightPageItemDTO = {
   meta?: string;
   coverImage?: string;
   author?: InsightAuthorDTO;
-  metrics?: { value: string; label: string }[];
 };
 
 export type BlogPostPreviewDTO = {
@@ -38,7 +37,6 @@ export type CaseStudyPreviewDTO = {
   deploymentStatus: string;
   coverImage?: string;
   lastUpdated: string;
-  measuredOutcomes: { value: string; label: string }[];
 };
 
 export type InsightsSliderItemDTO = {
@@ -111,10 +109,6 @@ export function toCaseStudyPreview(study: CaseStudy): CaseStudyPreviewDTO {
     deploymentStatus: study.deploymentStatus,
     coverImage: study.assets.coverImage || undefined,
     lastUpdated: study.lastUpdated,
-    measuredOutcomes: study.measuredOutcomes.map((metric) => ({
-      value: metric.value,
-      label: metric.label,
-    })),
   };
 }
 
@@ -144,10 +138,6 @@ export function toCaseStudyIndexItems(studies: CaseStudy[]): InsightPageItemDTO[
     tag: study.industry,
     meta: study.deploymentStatus,
     coverImage: study.assets.coverImage || undefined,
-    metrics: study.measuredOutcomes.map((metric) => ({
-      value: metric.value,
-      label: metric.label,
-    })),
   }));
 }
 

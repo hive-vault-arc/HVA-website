@@ -165,11 +165,6 @@ const featuredProof = {
   status: 'Live operational rollout since May 2025',
   image: '/Images/case-studies/immoworld-crm-transformation-case-study-morocco.webp',
   imageAlt: 'ImmoWorld real estate CRM operating system engagement',
-  metrics: [
-    { value: '94', label: 'active users' },
-    { value: '$2.4M', label: 'monthly pipeline tracked' },
-    { value: '-40%', label: 'reported manual data entry' },
-  ],
 } as const;
 
 const trustSignals: TrustSignal[] = [
@@ -182,7 +177,7 @@ const trustSignals: TrustSignal[] = [
   },
   {
     title: 'Published delivery proof',
-    description: 'The ImmoWorld case records the business challenge, production status, and reported operating figures.',
+    description: 'The ImmoWorld case records the business challenge, delivered system, and production status.',
     href: `/case-studies/${featuredProof.slug}`,
     linkLabel: 'Read the case study',
     icon: FileCheck2,
@@ -436,15 +431,7 @@ const About = ({ teamMembers }: AboutProps) => {
               </div>
               <h2 id="about-proof-case-title">{featuredProof.title}</h2>
               <p>{featuredProof.summary}</p>
-              <dl className="about-proof-case-metrics">
-                {featuredProof.metrics.map((metric) => (
-                  <div key={metric.label}>
-                    <dt>{metric.label}</dt>
-                    <dd>{metric.value}</dd>
-                  </div>
-                ))}
-              </dl>
-              <p className="about-proof-case-status">{featuredProof.status}. Figures reflect the current reported operating record.</p>
+              <p className="about-proof-case-status">{featuredProof.status}.</p>
               <Link href={`/case-studies/${featuredProof.slug}`} className="about-proof-case-link">
                 Read the ImmoWorld case study <ArrowUpRight aria-hidden="true" />
               </Link>

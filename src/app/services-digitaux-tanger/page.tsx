@@ -103,13 +103,13 @@ const etudes = [
     title: 'Agent IA WhatsApp Multilingue',
     href: '/case-studies/multilingual-whatsapp-ai-agent',
     image: '/Images/case-studies/whatsapp-ai-agent-operations-case-study-morocco.webp',
-    stats: ['< 18s de temps de réponse', '85% de tri manuel en moins'],
+    scope: 'Qualification multilingue, planification, mises à jour CRM et transfert à un conseiller.',
   },
   {
     title: 'Transformation CRM',
     href: '/case-studies/top-tier-crm-transformation-program-real-estate-operations',
     image: '/Images/case-studies/immoworld-crm-transformation-case-study-morocco.webp',
-    stats: ['$2.4M de pipeline visible', '40% de saisie manuelle en moins'],
+    scope: 'Collecte centralisée, parcours acheteur, automatisation du pipeline et reporting.',
   },
 ];
 
@@ -312,13 +312,7 @@ export default function ServicesDigitauxTangerPage() {
                     <h3 className="font-headline text-2xl leading-tight text-[#1A2535] group-hover:text-primary">
                       {etude.title}
                     </h3>
-                    <ul className="mt-5 space-y-3">
-                      {etude.stats.map((stat) => (
-                        <li key={stat} className="text-sm font-semibold text-secondary">
-                          {stat}
-                        </li>
-                      ))}
-                    </ul>
+                    <p className="mt-5 text-sm leading-relaxed text-secondary">{etude.scope}</p>
                     <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-primary">
                       Lire la preuve <ArrowRight className="h-4 w-4" aria-hidden="true" />
                     </span>

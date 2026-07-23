@@ -248,7 +248,7 @@ export default function AIAgentsTangierPage() {
                   </div>
                   <h3 className="font-headline text-4xl mb-4 text-[#1A2535]">WhatsApp Automation</h3>
                   <p className="text-[#566274] font-body max-w-md text-sm leading-relaxed">
-                    24/7 customer engagement on the platform Tangier uses most. Automate inquiries, bookings, and
+                    Always-on customer engagement on the platform Tangier uses most. Automate inquiries, bookings, and
                     customer support with native-level fluency in Arabic, French, and English.
                   </p>
                 </div>
@@ -276,7 +276,7 @@ export default function AIAgentsTangierPage() {
                 <div>
                   <h3 className="font-headline text-3xl mb-4 text-[#1A2535]">Customer Support</h3>
                   <p className="text-[#566274] font-body text-sm leading-relaxed">
-                    Resolve 80% of routine tickets instantly, freeing your team for high-complexity cases that require
+                    Resolve routine tickets immediately when automation is appropriate, freeing your team for complex cases that require
                     human judgment and relationship management.
                   </p>
                 </div>

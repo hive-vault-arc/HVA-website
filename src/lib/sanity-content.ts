@@ -230,7 +230,6 @@ function normalizeCaseStudy(study: SanityCaseStudy): CaseStudy {
     ...baseStudy,
     operationalModules: study.operationalModules ?? [],
     integrations: study.integrations ?? [],
-    measuredOutcomes: study.measuredOutcomes ?? [],
     hasClientEvidence: Boolean(rawHasClientEvidence || clientEvidence),
     ...(clientEvidence ? { clientEvidence } : {}),
     assets: {

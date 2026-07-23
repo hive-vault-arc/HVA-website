@@ -14,9 +14,7 @@ function study(overrides: Partial<CaseStudy>): CaseStudy {
     systemArchitecture: 'Architecture',
     operationalModules: [],
     integrations: [],
-    deploymentScale: 'Production',
     deploymentStatus: 'Live',
-    measuredOutcomes: [],
     hasClientEvidence: false,
     assets: {
       coverImage: '/cover.png',
@@ -28,16 +26,11 @@ function study(overrides: Partial<CaseStudy>): CaseStudy {
 }
 
 describe('buildHomeHeroProof', () => {
-  it('selects real high-signal metrics and only CMS-backed client logos', () => {
+  it('returns only CMS-backed client logos and the independent partner logo', () => {
     const result = buildHomeHeroProof([
       study({
         slug: 'immoworld',
         clientName: 'ImmoWorld',
-        measuredOutcomes: [
-          { label: 'Active Users', value: '94', context: 'Production users' },
-          { label: 'Monthly Pipeline Tracked', value: '$2.4M', context: 'CRM pipeline' },
-          { label: 'Manual Data Entry', value: '-40%', context: 'Reduction after launch' },
-        ],
         assets: {
           coverImage: '/cover.png',
           logoLabel: 'ImmoWorld',
@@ -48,17 +41,9 @@ describe('buildHomeHeroProof', () => {
       study({
         slug: 'atlas',
         clientName: 'Atlas Property Group',
-        measuredOutcomes: [
-          { label: 'Manual Triage Reduction', value: '85%', context: 'Lead operations' },
-          { label: 'Qualified Meetings Booked', value: '+43%', context: 'Lead operations' },
-        ],
       }),
     ]);
 
-    expect(result.metrics).toHaveLength(3);
-    expect(result.metrics.map((metric) => metric.value)).toEqual(
-      expect.arrayContaining(['$2.4M', '85%', '+43%'])
-    );
     expect(result.trustedPartners).toEqual([
       {
         name: 'ImmoWorld',
@@ -96,18 +81,22 @@ describe('buildHomeHeroProof', () => {
     });
   });
 
-  it('falls back to documented aggregate counts when fewer than three numeric outcomes exist', () => {
+  it('deduplicates repeated client records', () => {
+    const repeatedClient = study({
+      slug: 'premium-advice-second-record',
+      clientName: 'Premium Advice & Training',
+      assets: {
+        coverImage: '/cover.png',
+        logoLabel: 'Premium Advice & Training',
+        clientLogo: 'https://cdn.sanity.io/premium-logo.jpg',
+      },
+    });
+
     const result = buildHomeHeroProof([
-      study({
-        industry: 'Education',
-        measuredOutcomes: [{ label: 'Journey Coverage', value: 'End-to-end', context: 'Scope' }],
-      }),
+      repeatedClient,
+      { ...repeatedClient, slug: 'premium-advice-third-record' },
     ]);
 
-    expect(result.metrics).toEqual([
-      { value: '1', label: 'Published case studies' },
-      { value: '1', label: 'Industries represented' },
-      { value: '1', label: 'Measured outcomes documented' },
-    ]);
+    expect(result.trustedPartners.filter((partner) => partner.name === 'Premium Advice & Training')).toHaveLength(1);
   });
 });

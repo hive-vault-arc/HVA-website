@@ -80,7 +80,7 @@ export const CAPABILITY_DOMAINS: CapabilityDomain[] = [
       'Systems integration and digital workplace design',
       'Infrastructure modernization for cloud, AI, and scale',
     ],
-    relatedOutcomes: ['Systems built to last', 'Reduced integration debt', 'Technology that serves the business 3–5 years out'],
+    relatedOutcomes: ['Systems built to last', 'Reduced integration debt', 'Technology that serves the business over the long term'],
   },
   {
     id: 'ai-data-analytics',
@@ -100,7 +100,7 @@ export const CAPABILITY_DOMAINS: CapabilityDomain[] = [
       'Conversational AI and WhatsApp agent systems',
       'MLOps and AI production operations',
     ],
-    relatedOutcomes: ['Faster decisions', 'Lower manual load', '24/7 operational continuity'],
+    relatedOutcomes: ['Faster decisions', 'Lower manual load', 'Continuous operational coverage'],
   },
   {
     id: 'software-engineering',

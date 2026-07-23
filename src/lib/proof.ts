@@ -5,12 +5,6 @@ import {
 } from './sanity-content';
 import type { ContentSeo } from './content-seo';
 
-export type CaseStudyMetric = {
-  label: string;
-  value: string;
-  context: string;
-};
-
 export type ClientEvidencePdf = {
   url: string;
   mimeType: string;
@@ -54,10 +48,7 @@ export type CaseStudy = {
   systemArchitecture: string;
   operationalModules: string[];
   integrations: string[];
-  deploymentScale: string;
   deploymentStatus: string;
-  reportingNote?: string;
-  measuredOutcomes: CaseStudyMetric[];
   hasClientEvidence: boolean;
   clientEvidence?: ClientEvidence;
   assets: {
@@ -106,25 +97,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       'Event-driven AI orchestration with multilingual NLU, memory store, intent routing, and escalation policies for human takeover.',
     operationalModules: ['Customer Operations Engine', 'Automation and Orchestration Layer', 'Revenue and Pipeline Control'],
     integrations: ['WhatsApp Business API', 'HubSpot', 'Google Calendar', 'n8n workflow runner', 'PostgreSQL'],
-    deploymentScale: '6 regions, 24/7 operation, 12-language support',
     deploymentStatus: 'Live in production since October 2025',
-    measuredOutcomes: [
-      {
-        label: 'Lead Response Time',
-        value: '< 18 seconds',
-        context: 'Average first-response latency measured over last 90 days.',
-      },
-      {
-        label: 'Manual Triage Reduction',
-        value: '85%',
-        context: 'Measured from baseline support workload before launch.',
-      },
-      {
-        label: 'Qualified Meetings Booked',
-        value: '+43%',
-        context: 'Quarter-over-quarter increase in sales-qualified appointments.',
-      },
-    ],
     hasClientEvidence: false,
     assets: {
       coverImage: '/Images/case-studies/whatsapp-ai-agent-operations-case-study-morocco.webp',
@@ -145,27 +118,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       'A unified CRM operating system with role-based workflows, pipeline stages, follow-up automation, and a reporting layer for the sales and operations teams.',
     operationalModules: ['Lead Intake and Routing', 'Buyer-Journey Pipeline', 'Team Workflow Coordination', 'Operational Reporting'],
     integrations: ['Meta Lead Sync', 'DocuSign', 'Pipeline Automation', 'BI Reporting'],
-    deploymentScale: '94 active users across sales, operations, and management',
     deploymentStatus: 'Live operational rollout since May 2025',
-    reportingNote:
-      'Reported figures describe the current operating record. Supporting measurement definitions and source artifacts will be added as this case-study record is finalized.',
-    measuredOutcomes: [
-      {
-        label: 'Active Users',
-        value: '94',
-        context: 'Active user footprint across sales, operations, and management.',
-      },
-      {
-        label: 'Monthly Pipeline Tracked',
-        value: '$2.4M',
-        context: 'Pipeline value monitored in the operational dashboard each month.',
-      },
-      {
-        label: 'Manual Data Entry',
-        value: '-40%',
-        context: 'Reported reduction after workflow templates and automated follow-up.',
-      },
-    ],
     hasClientEvidence: false,
     assets: {
       coverImage: '/Images/case-studies/immoworld-crm-transformation-case-study-morocco.webp',
@@ -193,7 +146,7 @@ export const PRODUCT_SYSTEMS: ProductSystem[] = [
     modules: ['Multilingual agent runtime', 'Memory and context layer', 'Lead scoring', 'Human escalation workflows'],
     integrations: ['WhatsApp Business API', 'HubSpot', 'Salesforce', 'Google Calendar'],
     deliveryModel: 'Strategy workshops, build and deployment sprints, then ongoing optimization cycles.',
-    outcomes: ['24/7 lead capture', 'Lower response latency', 'Higher qualified meeting rates'],
+    outcomes: ['Always-on lead capture', 'Lower response latency', 'Higher qualified meeting quality'],
     proofLinks: ['/case-studies/multilingual-whatsapp-ai-agent'],
   },
   {

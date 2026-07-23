@@ -176,14 +176,7 @@ const caseStudyFields = `
   systemArchitecture,
   operationalModules,
   integrations,
-  deploymentScale,
   deploymentStatus,
-  reportingNote,
-  measuredOutcomes[]{
-    label,
-    value,
-    context
-  },
   "hasClientEvidence": (${approvedClientEvidencePredicate}),
   assets{
     coverImage {

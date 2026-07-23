@@ -1,20 +1,13 @@
 'use client';
 
-import { useCallback, useLayoutEffect, useRef, useState, type TouchEvent } from 'react';
+import { useCallback, useRef, useState, type TouchEvent } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { gsap } from 'gsap';
 import {
-  ChartNoAxesCombined,
   ChevronLeft,
   ChevronRight,
-  Gauge,
-  Users,
-  type IconsaxIconComponent,
 } from '@/components/icons';
-
-import type { HomeHeroMetric } from '../../lib/home-hero';
 
 type Slide = {
   eyebrow: string;
@@ -30,19 +23,6 @@ type Slide = {
   imageAlt: string;
   imageMode?: 'contain';
 };
-
-type HeroSliderProps = {
-  metrics: HomeHeroMetric[];
-};
-
-type ParsedMetric = {
-  decimals: number;
-  prefix: string;
-  suffix: string;
-  target: number;
-};
-
-const METRIC_ICONS: IconsaxIconComponent[] = [ChartNoAxesCombined, Gauge, Users];
 
 const SLIDE_VARIANTS = {
   enter: (direction: number) => ({
@@ -126,72 +106,7 @@ const SLIDES: Slide[] = [
   },
 ];
 
-function parseMetric(value: string): ParsedMetric | null {
-  const match = value.trim().match(/^([^0-9]*)(\d+(?:\.(\d+))?)(.*)$/);
-  if (!match) return null;
-
-  return {
-    prefix: match[1] ?? '',
-    target: Number(match[2]),
-    decimals: match[3]?.length ?? 0,
-    suffix: match[4] ?? '',
-  };
-}
-
-function AnimatedMetric({
-  animationKey,
-  index,
-  metric,
-}: {
-  animationKey: number;
-  index: number;
-  metric: HomeHeroMetric;
-}) {
-  const valueRef = useRef<HTMLSpanElement>(null);
-  const Icon = METRIC_ICONS[index % METRIC_ICONS.length] ?? ChartNoAxesCombined;
-
-  useLayoutEffect(() => {
-    const node = valueRef.current;
-    const parsed = parseMetric(metric.value);
-    if (!node || !parsed || !Number.isFinite(parsed.target)) return;
-
-    const renderValue = (current: number) => {
-      node.textContent = `${parsed.prefix}${current.toFixed(parsed.decimals)}${parsed.suffix}`;
-    };
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (reduceMotion) {
-      renderValue(parsed.target);
-      return;
-    }
-
-    const progress = { current: 0 };
-    const tween = gsap.to(progress, {
-      current: parsed.target,
-      duration: 1.25,
-      ease: 'power3.out',
-      onUpdate: () => renderValue(progress.current),
-    });
-
-    return () => {
-      tween.kill();
-    };
-  }, [animationKey, metric.value]);
-
-  return (
-    <div className="home-hero-metric">
-      <Icon className="home-hero-metric-icon" aria-hidden="true" strokeWidth={1.55} />
-      <div>
-        <strong>
-          <span ref={valueRef}>{metric.value}</span>
-        </strong>
-        <span>{metric.label}</span>
-      </div>
-    </div>
-  );
-}
-
-export default function HeroSlider({ metrics }: HeroSliderProps) {
+export default function HeroSlider() {
   const [active, setActive] = useState(0);
   const [direction, setDirection] = useState(1);
   const shouldReduceMotion = useReducedMotion();
@@ -295,21 +210,6 @@ export default function HeroSlider({ metrics }: HeroSliderProps) {
                     <ChevronRight className="h-4 w-4" aria-hidden="true" />
                   </Link>
                 </div>
-                {metrics.length > 0 ? (
-                  <div
-                    className="home-hero-metrics home-hero-reveal"
-                    aria-label="Case study outcomes"
-                  >
-                    {metrics.map((metric, index) => (
-                      <AnimatedMetric
-                        key={`${metric.label}-${active}`}
-                        animationKey={active}
-                        index={index}
-                        metric={metric}
-                      />
-                    ))}
-                  </div>
-                ) : null}
               </div>
 
               <div className="home-hero-media">

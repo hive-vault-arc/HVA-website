@@ -125,7 +125,7 @@ export default function CustomSoftwareMoroccoPage() {
               for decision-making because the workflow is captured correctly from the first interaction.
             </p>
             <p className="mt-4 text-base leading-relaxed text-secondary">
-              The ROI is not only in feature customization. It is in compounding execution quality: faster team handoff,
+              The value is not only in feature customization. It is in compounding execution quality: faster team handoff,
               cleaner process governance, and less time wasted on non-value-adding tasks.
             </p>
           </div>
@@ -231,7 +231,7 @@ export default function CustomSoftwareMoroccoPage() {
           </article>
 
           <article>
-            <h2 className="services-brief-section-title">Build vs Buy: A Practical ROI Lens</h2>
+            <h2 className="services-brief-section-title">Build vs Buy: A Practical Decision Lens</h2>
             <p className="mt-4 text-base leading-relaxed text-secondary">
               Many leadership teams hesitate between buying another SaaS tool and funding a custom build. The right
               decision depends on process criticality. If the workflow directly affects revenue, service quality, or
@@ -239,7 +239,7 @@ export default function CustomSoftwareMoroccoPage() {
               development.
             </p>
             <p className="mt-4 text-base leading-relaxed text-secondary">
-              We typically model ROI around three dimensions: manual hours eliminated, error/rework reduction, and
+              We evaluate the decision through manual effort, error and rework, and
               conversion or fulfillment performance gains. When a process is high-frequency and operationally central, a
               custom system often wins because it removes hidden inefficiencies that generic tools cannot address.
             </p>

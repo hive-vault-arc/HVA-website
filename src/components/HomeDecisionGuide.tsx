@@ -13,12 +13,10 @@ import {
   Compass,
   Layers3,
   Route,
-  Users,
   type IconsaxGlyphProps,
 } from '@/components/icons';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import type { HomeHeroMetric } from '../lib/home-hero';
 import type { CaseStudyShowcaseSummary, ClientEvidenceSummary } from '../lib/proof';
 
 if (typeof window !== 'undefined') {
@@ -76,8 +74,6 @@ const ROUTES: Record<'industries' | 'caseStudies' | 'arc' | 'insights' | 'contac
     icon: CalendarCheck,
   },
 };
-
-const METRIC_ICONS = [BarChart3, Users, Building2] as const;
 
 function RouteArrow() {
   return (
@@ -247,11 +243,9 @@ function CaseStudyPreview({
 export default function HomeDecisionGuide({
   evidence,
   caseStudies,
-  metrics,
 }: {
   readonly evidence: readonly ClientEvidenceSummary[];
   readonly caseStudies: readonly CaseStudyShowcaseSummary[];
-  readonly metrics: readonly HomeHeroMetric[];
 }) {
   const rootRef = useRef<HTMLDivElement | null>(null);
   const featuredEvidence = evidence[0];
@@ -509,24 +503,7 @@ export default function HomeDecisionGuide({
               Proof in <span>motion.</span>
             </h2>
             <span className="decision-intro-rule" aria-hidden="true" />
-            <p className="decision-intro-copy">Real outcomes. Measurable impact.</p>
-
-            {metrics.length > 0 ? (
-              <div className="decision-proof__metrics" aria-label="Measured case study outcomes">
-                {metrics.slice(0, 3).map((metric, index) => {
-                  const Icon = METRIC_ICONS[index] ?? BarChart3;
-                  return (
-                    <div key={`${metric.value}-${metric.label}`} className="decision-proof__metric">
-                      <span aria-hidden="true">
-                        <Icon />
-                      </span>
-                      <strong>{metric.value}</strong>
-                      <small>{metric.label}</small>
-                    </div>
-                  );
-                })}
-              </div>
-            ) : null}
+            <p className="decision-intro-copy">Documented delivery work and client-approved evidence.</p>
           </header>
 
           <div className="decision-proof__board">

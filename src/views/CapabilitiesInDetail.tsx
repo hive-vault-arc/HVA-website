@@ -56,7 +56,7 @@ const capabilityImages: Record<string, string> = {
 const heroStats = [
   { value: '6', label: 'Service pillars' },
   { value: '3', label: 'ARC phases' },
-  { value: '30+', label: 'Sub-capabilities' },
+  { value: 'Comprehensive', label: 'Capability coverage' },
 ];
 
 const arcSignals = ['Clear diagnosis', 'Production build', 'Ongoing ownership'];

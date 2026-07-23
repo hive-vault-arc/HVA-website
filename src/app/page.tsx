@@ -139,7 +139,7 @@ export default async function Page() {
     getClientEvidenceShowcase(),
   ]);
   const insightsCarouselItems = buildInsightsCarouselItems(posts, caseStudies);
-  const { metrics: heroMetrics, trustedPartners } = buildHomeHeroProof(caseStudies);
+  const { trustedPartners } = buildHomeHeroProof(caseStudies);
   const caseStudyShowcase: CaseStudyShowcaseSummary[] = caseStudies.map((study) => ({
     slug: study.slug,
     title: study.title,
@@ -218,7 +218,6 @@ export default async function Page() {
         insightsCarouselItems={insightsCarouselItems}
         clientEvidence={clientEvidence}
         caseStudies={caseStudyShowcase}
-        heroMetrics={heroMetrics}
         trustedPartners={trustedPartners}
       />
       <section className="service-guides-section">

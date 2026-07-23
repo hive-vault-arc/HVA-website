@@ -11,7 +11,6 @@ export default function CaseStudies({ studies }: { readonly studies: CaseStudy[]
     tag: s.industry,
     meta: s.deploymentStatus,
     coverImage: s.assets.coverImage || undefined,
-    metrics: s.measuredOutcomes,
     evidenceLabel: s.hasClientEvidence ? 'Client letter available' : undefined,
   }));
 
@@ -22,7 +21,7 @@ export default function CaseStudies({ studies }: { readonly studies: CaseStudy[]
       eyebrow="Transformation Proof"
       headline="Consulting-Led"
       headlineItalic="Case Studies"
-      description="Each case documents the business challenge, execution architecture, and reported operating context, with evidence notes where documentation is still being completed."
+      description="Each case documents the business challenge, execution architecture, and production context without publishing unverified performance claims."
       items={items}
       filters={industries}
       filterKey={(item) => item.tag}

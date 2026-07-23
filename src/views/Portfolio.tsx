@@ -178,7 +178,7 @@ const Portfolio: React.FC = () => {
                   ))}
                 </div>
                 <p className="text-[#566274] leading-relaxed font-light">
-                  Delivered a consulting-led AI transformation stream for global lead management. The system handles initial inquiries in 12 languages, qualifies prospects with custom logic, and updates CRM records automatically.
+                  Delivered a consulting-led AI transformation stream for global lead management. The system handles multilingual initial inquiries, qualifies prospects with custom logic, and updates CRM records automatically.
                 </p>
                 <div className="border border-[#DDE3EA] bg-[#FFFFFF] p-4 text-sm text-[#3D4858]">
                   <p><span className="font-semibold">Deployment status:</span> Live in production since October 2025.</p>
@@ -186,8 +186,8 @@ const Portfolio: React.FC = () => {
                 </div>
                 <ul className="space-y-3 text-sm text-[#566274]">
                   {[
-                    '85% reduction in manual qualification time',
-                    '24/7 lead capture across time zones',
+                    'Automated lead qualification and routing',
+                    'Always-on lead capture across time zones',
                     'Direct HubSpot & Salesforce synchronization',
                   ].map((item) => (
                     <li key={item} className="flex items-center gap-3">
@@ -196,18 +196,6 @@ const Portfolio: React.FC = () => {
                     </li>
                   ))}
                 </ul>
-                <div className="flex gap-0 border border-[#DDE3EA] overflow-hidden">
-                  {[
-                    { value: '85%', label: 'Triage cut' },
-                    { value: '24/7', label: 'Autonomous' },
-                    { value: '12', label: 'Languages' },
-                  ].map((m, i) => (
-                    <div key={m.label} className={`flex-1 text-center py-4 ${i < 2 ? 'border-r border-[#DDE3EA]' : ''}`}>
-                      <p className="font-serif text-2xl text-[var(--section-label-color)]">{m.value}</p>
-                      <p className="text-[9px] font-bold uppercase tracking-wider text-[#566274] mt-0.5">{m.label}</p>
-                    </div>
-                  ))}
-                </div>
                 <div className="pt-3">
                   <Link
                     href="/case-studies/multilingual-whatsapp-ai-agent"
@@ -254,21 +242,6 @@ const Portfolio: React.FC = () => {
                 <div className="border border-[#DDE3EA] bg-white p-4 text-sm text-[#3D4858]">
                   <p><span className="font-semibold">Deployment status:</span> Live in production since May 2025 across sales and operations.</p>
                   <p className="mt-1"><span className="font-semibold">Stack/integrations:</span> CRM core, DocuSign, Meta Lead Sync, pipeline automation, BI reporting.</p>
-                </div>
-                {/* Stats */}
-                <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-white p-4 border-l-4 border-[#E8A838]">
-                      <p className="font-serif text-2xl text-[var(--section-label-color)]">40%</p>
-                      <p className="text-[10px] font-bold text-[#566274] uppercase tracking-wider">
-                        Efficiency Gain
-                      </p>
-                    </div>
-                    <div className="bg-white p-4 border-l-4 border-[#E8A838]">
-                      <p className="font-serif text-2xl text-[var(--section-label-color)]">$2.4M</p>
-                      <p className="text-[10px] font-bold text-[#566274] uppercase tracking-wider">
-                        Tracked Pipeline
-                      </p>
-                  </div>
                 </div>
                 <div className="border-l-4 border-[#E8A838] bg-[#FFFFFF] px-4 py-3">
                   <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--section-label-color)]">Program status: Live in production</p>

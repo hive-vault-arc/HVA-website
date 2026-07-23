@@ -15,7 +15,6 @@ function CaseStudySidebar({ study }: { readonly study: CaseStudy }) {
   const meta = [
     { label: 'Industry', value: study.industry },
     { label: 'Status', value: study.deploymentStatus },
-    { label: 'User footprint', value: study.deploymentScale },
   ];
 
   return (
@@ -87,19 +86,6 @@ function CaseStudySidebar({ study }: { readonly study: CaseStudy }) {
         ))}
       </div>
 
-      {study.reportingNote && (
-        <div className="border-l-2 border-[#E8A838] bg-[#1A2535] px-5 py-5 text-white">
-          <p
-            className="mb-2 text-[9px] font-bold uppercase tracking-[0.2em] text-[var(--section-label-color-dark)]"
-            style={{ fontFamily: 'var(--font-body)' }}
-          >
-            Reporting note
-          </p>
-          <p className="text-sm leading-relaxed text-white/72" style={{ fontFamily: 'var(--font-body)' }}>
-            {study.reportingNote}
-          </p>
-        </div>
-      )}
     </div>
   );
 }
@@ -122,51 +108,6 @@ function CaseStudyBody({ study }: { readonly study: CaseStudy }) {
           className="mb-10 lg:hidden"
         />
       ) : null}
-
-      {/* Metrics strip */}
-      <motion.div
-        className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-[#DDE3EA] border border-[#DDE3EA] mb-14"
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ staggerChildren: 0.1 }}
-      >
-        <div className="bg-[#1A2535] px-6 py-4 sm:col-span-3">
-          <p
-            className="text-[9px] font-bold uppercase tracking-[0.22em] text-[var(--section-label-color-dark)]"
-            style={{ fontFamily: 'var(--font-body)' }}
-          >
-            Reported operating indicators
-          </p>
-        </div>
-        {study.measuredOutcomes.map((metric) => (
-          <motion.div
-            key={metric.label}
-            variants={fadeUp}
-            transition={{ duration: 0.5 }}
-            className="bg-white px-6 py-7 group hover:bg-[#E8A838] transition-colors duration-300"
-          >
-            <p
-              className="font-headline text-4xl md:text-5xl text-[#1A2535] group-hover:text-white transition-colors duration-300 mb-2"
-              style={{ fontFamily: 'var(--font-headline)' }}
-            >
-              {metric.value}
-            </p>
-            <p
-              className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--section-label-color)] group-hover:text-white/80 transition-colors duration-300"
-              style={{ fontFamily: 'var(--font-body)' }}
-            >
-              {metric.label}
-            </p>
-            <p
-              className="mt-2 text-xs text-[#9AA4B2] group-hover:text-white/60 transition-colors duration-300 leading-relaxed"
-              style={{ fontFamily: 'var(--font-body)' }}
-            >
-              {metric.context}
-            </p>
-          </motion.div>
-        ))}
-      </motion.div>
 
       {/* Numbered sections */}
       <motion.div
@@ -268,23 +209,6 @@ function CaseStudyBody({ study }: { readonly study: CaseStudy }) {
           </div>
         </motion.div>
 
-        {study.reportingNote && (
-          <motion.aside
-            variants={fadeUp}
-            transition={{ duration: 0.5 }}
-            className="border-y border-[#DDE3EA] py-6"
-          >
-            <p
-              className="mb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--section-label-color)]"
-              style={{ fontFamily: 'var(--font-body)' }}
-            >
-              Documentation status
-            </p>
-            <p className="max-w-2xl text-sm leading-relaxed text-[#566274]" style={{ fontFamily: 'var(--font-body)' }}>
-              {study.reportingNote}
-            </p>
-          </motion.aside>
-        )}
       </motion.div>
     </div>
   );

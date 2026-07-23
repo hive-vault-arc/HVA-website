@@ -107,11 +107,6 @@ const differenceSignals = [
 const differenceStatement =
   'Strategy, build, and operations stay connected under one accountable model, so decisions are made against real constraints and post-launch performance.';
 
-const preferredMetricLabel: Record<string, string> = {
-  'top-tier-crm-transformation-program-real-estate-operations': 'Manual Data Entry',
-  'multilingual-whatsapp-ai-agent': 'Manual Triage Reduction',
-};
-
 const caseDisplayTitle: Record<string, string> = {
   'top-tier-crm-transformation-program-real-estate-operations':
     'One CRM system for live real estate operations.',
@@ -123,11 +118,6 @@ function recordArcEvent(name: string, properties: Record<string, string> = {}) {
     content_group: 'ARC',
     ...properties,
   });
-}
-
-function getMonthYear(status: string) {
-  const match = status.match(/(?:since|from)\s+([A-Za-z]+\s+\d{4})/i);
-  return match?.[1] ?? 'Live';
 }
 
 export default function Arc({ studies, children }: ArcProps) {
@@ -148,25 +138,6 @@ export default function Arc({ studies, children }: ArcProps) {
       .map((slug) => studies.find((study) => study.slug === slug))
       .filter((study): study is CaseStudy => Boolean(study));
   }, [studies]);
-
-  const immoWorldStudy = orderedStudies.find(
-    (study) => study.slug === 'top-tier-crm-transformation-program-real-estate-operations'
-  );
-
-  const immediateProof = immoWorldStudy
-    ? [
-        ...immoWorldStudy.measuredOutcomes.slice(0, 3).map((metric) => ({
-          value: metric.value,
-          label: metric.label,
-          context: metric.context,
-        })),
-        {
-          value: getMonthYear(immoWorldStudy.deploymentStatus),
-          label: 'Live rollout',
-          context: immoWorldStudy.deploymentStatus,
-        },
-      ]
-    : [];
 
   useEffect(() => {
     const root = pageRef.current;
@@ -328,60 +299,6 @@ export default function Arc({ studies, children }: ArcProps) {
           </div>
         </section>
 
-        {immoWorldStudy && immediateProof.length === 4 && (
-          <section
-            className="arc-record-section"
-            aria-labelledby="arc-proof-strip-title"
-            data-arc-section="immediate-proof"
-          >
-            <div className="arc-record-shell">
-              <h2 id="arc-proof-strip-title" className="sr-only">
-                Published ImmoWorld operating record
-              </h2>
-
-              <motion.div
-                className="arc-record-intro"
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.38 }}
-              >
-                <div className="arc-record-intro__identity">
-                  <SectionBrandMark surface="dark" size="sm" />
-                  <span>
-                    <small>Published operating record</small>
-                    <strong>{immoWorldStudy.clientName}</strong>
-                  </span>
-                </div>
-                <Link href={`/case-studies/${immoWorldStudy.slug}`}>
-                  Open case study
-                  <ArrowRight aria-hidden="true" />
-                </Link>
-              </motion.div>
-
-              <div className="arc-record-grid">
-                {immediateProof.map((item, index) => (
-                  <motion.article
-                    key={item.label}
-                    className="arc-record-item"
-                    initial={{ opacity: 0, y: 12 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.38, delay: index * 0.05 }}
-                  >
-                    <span className="arc-record-item__index" aria-hidden="true">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                    <span className="arc-record-item__label">{item.label}</span>
-                    <strong>{item.value}</strong>
-                    <p>{item.context}</p>
-                  </motion.article>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
-
         <section
           className="about-delivery-section"
           aria-labelledby="arc-process-title"
@@ -539,13 +456,13 @@ export default function Arc({ studies, children }: ArcProps) {
                   <SectionBrandMark size="sm" className="mt-0.5" />
                   <div>
                     <p>Proof in production</p>
-                    <h2 id="arc-cases-title">Two operating records. Context before claims.</h2>
+                    <h2 id="arc-cases-title">Operating records. Delivery before claims.</h2>
                   </div>
                 </div>
                 <div className="home-proof-intro">
                   <p>
-                    Each result stays attached to the business problem, the system delivered, the
-                    deployment scope, and its published measurement context.
+                    Each record stays attached to the business problem, the system delivered, and
+                    its production status. Performance figures remain unpublished until audited.
                   </p>
                   <div className="home-proof-actions">
                     {orderedStudies.map((study) => (
@@ -596,19 +513,13 @@ export default function Arc({ studies, children }: ArcProps) {
                   <div className="home-proof-caption">
                     <strong>Live systems, not slideware.</strong>
                     <span>
-                      Named operating records with deployment scope and measurement context.
+                      Named operating records with delivery scope and production context.
                     </span>
                   </div>
                 </div>
 
                 <div className="home-proof-list">
                   {orderedStudies.map((study) => {
-                    const preferredLabel = preferredMetricLabel[study.slug];
-                    const metric =
-                      study.measuredOutcomes.find(
-                        (outcome) => outcome.label === preferredLabel
-                      ) ?? study.measuredOutcomes[0];
-
                     return (
                       <article
                         key={study.slug}
@@ -622,13 +533,6 @@ export default function Arc({ studies, children }: ArcProps) {
                         <p>
                           <strong>Problem:</strong> {study.problem}{' '}
                           <strong>What changed:</strong> {study.summary}{' '}
-                          {metric && (
-                            <>
-                              <strong>Reported result:</strong> {metric.value} {metric.label}.{' '}
-                              {metric.context}{' '}
-                            </>
-                          )}
-                          <strong>Scope:</strong> {study.deploymentScale}.{' '}
                           <strong>Status:</strong> {study.deploymentStatus}.
                         </p>
                         <Link

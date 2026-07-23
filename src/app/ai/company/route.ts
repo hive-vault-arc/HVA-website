@@ -152,11 +152,6 @@ export async function GET() {
           summary: study.summary,
           status: study.deploymentStatus,
           url: absoluteUrl(`/case-studies/${study.slug}`),
-          outcomes: study.measuredOutcomes.map((outcome) => ({
-            label: outcome.label,
-            value: outcome.value,
-            context: outcome.context,
-          })),
         })),
         insights: {
           blogPosts: posts.map((post) => ({

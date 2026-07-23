@@ -18,7 +18,7 @@ export const HOME_FAQS: FaqSet = [
   {
     question: 'Does Hive Vault Arc build WhatsApp AI agents?',
     answer:
-      'Yes. WhatsApp AI agents are one of Hive Vault Arc\'s core offerings. We build intelligent agents on the WhatsApp Business API that handle lead qualification, customer support, and sales automation. WhatsApp has over 90% penetration in Morocco, making it the primary B2B channel — our production deployments operate 24/7 with multilingual support, persistent memory, and direct CRM integration.',
+      'Yes. WhatsApp AI agents are one of Hive Vault Arc\'s core offerings. We build intelligent agents on the WhatsApp Business API that handle lead qualification, customer support, and sales automation. Our production deployments support always-on multilingual workflows, persistent memory, and direct CRM integration.',
   },
   {
     question: 'Is Hive Vault Arc an AI company, a consulting firm, or a software agency?',

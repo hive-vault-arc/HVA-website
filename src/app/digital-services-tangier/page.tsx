@@ -101,13 +101,13 @@ const caseStudies = [
     title: 'Multilingual WhatsApp AI Agent',
     href: '/case-studies/multilingual-whatsapp-ai-agent',
     image: '/Images/case-studies/whatsapp-ai-agent-operations-case-study-morocco.webp',
-    stats: ['< 18s response time', '85% manual triage reduction'],
+    scope: 'Multilingual lead qualification, scheduling, CRM updates, and human escalation.',
   },
   {
     title: 'CRM Transformation Program',
     href: '/case-studies/top-tier-crm-transformation-program-real-estate-operations',
     image: '/Images/case-studies/immoworld-crm-transformation-case-study-morocco.webp',
-    stats: ['$2.4M pipeline visible', '40% less manual data entry'],
+    scope: 'Unified lead intake, buyer-journey workflows, pipeline automation, and reporting.',
   },
 ];
 
@@ -308,13 +308,7 @@ export default function DigitalServicesTangierPage() {
                     <h3 className="font-headline text-2xl leading-tight text-[#1A2535] group-hover:text-primary">
                       {study.title}
                     </h3>
-                    <ul className="mt-5 space-y-3">
-                      {study.stats.map((stat) => (
-                        <li key={stat} className="text-sm font-semibold text-secondary">
-                          {stat}
-                        </li>
-                      ))}
-                    </ul>
+                    <p className="mt-5 text-sm leading-relaxed text-secondary">{study.scope}</p>
                     <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-primary">
                       Read proof <ArrowRight className="h-4 w-4" aria-hidden="true" />
                     </span>

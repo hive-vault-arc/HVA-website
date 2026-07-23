@@ -79,10 +79,7 @@ Hive Vault Arc serves teams that need strategy, production engineering, and mana
 - Client: Atlas Property Group
 - Industry: Real Estate
 - Status: Live in production since October 2025
-- Outcomes:
-  - First response latency: less than 18 seconds
-  - Manual triage reduction: 85%
-  - Qualified meetings booked: +43%
+- Delivery scope: multilingual lead qualification, scheduling, CRM updates, and human escalation.
 - URL: https://hivevaultarc.com/case-studies/multilingual-whatsapp-ai-agent
 
 ### ImmoWorld CRM Operating System for Real Estate Operations
@@ -90,11 +87,7 @@ Hive Vault Arc serves teams that need strategy, production engineering, and mana
 - Client: ImmoWorld
 - Industry: Luxury Real Estate
 - Status: Live operational rollout since May 2025
-- Outcomes:
-  - Active users: 94 across sales, operations, and management
-  - Monthly pipeline tracked: $2.4M
-  - Reported manual data-entry reduction: 40%
-- Reporting note: Supporting measurement definitions and source artifacts are being added to the case-study record.
+- Delivery scope: unified lead intake, buyer-journey workflows, pipeline automation, and operational reporting.
 - URL: https://hivevaultarc.com/case-studies/top-tier-crm-transformation-program-real-estate-operations
 
 ## Public Perspectives

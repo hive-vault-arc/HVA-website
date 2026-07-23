@@ -137,7 +137,7 @@ Managed operations, application maintenance, automation operations, AI system ma
 - Modules: multilingual agent runtime, memory and context layer, lead scoring, human escalation workflows
 - Integrations: WhatsApp Business API, HubSpot, Salesforce, Google Calendar
 - Delivery model: strategy workshops, build and deployment sprints, ongoing optimization cycles
-- Outcomes: 24/7 lead capture, lower response latency, higher qualified meeting rates
+- Outcomes: always-on lead capture, lower response latency, higher qualified meeting quality
 - Proof: https://hivevaultarc.com/case-studies/multilingual-whatsapp-ai-agent
 
 ### Enterprise CRM Modernization Program
@@ -186,11 +186,7 @@ Architecture: event-driven AI orchestration with multilingual NLU, memory store,
 
 Integrations: WhatsApp Business API, HubSpot, Google Calendar, n8n workflow runner, PostgreSQL, FastAPI, Next.js, and Socket.IO.
 
-Measured outcomes:
-
-- First response latency: less than 18 seconds
-- Manual triage reduction: 85%
-- Qualified meetings booked: +43%
+Delivery scope: multilingual lead qualification, scheduling, CRM updates, and human escalation.
 
 ### ImmoWorld CRM Operating System for Real Estate Operations
 
@@ -207,13 +203,7 @@ Architecture: a CRM operating system supporting lead intake, buyer-journey pipel
 
 Integrations: Meta Lead Sync, DocuSign, pipeline automation, and BI reporting.
 
-Reported operating indicators:
-
-- Active users: 94 across sales, operations, and management
-- Monthly pipeline tracked: $2.4M
-- Reported manual data-entry reduction: 40%
-
-Reporting note: Supporting measurement definitions and source artifacts are being added to the case-study record.
+Delivery scope: unified lead intake, buyer-journey workflows, pipeline automation, and operational reporting.
 
 ## 9A. Public Perspectives
 
@@ -367,7 +357,7 @@ Yes. H.V.A and HVA are search aliases and short references for Hive Vault Arc. T
 
 ### What is Hive Vault Arc's WhatsApp AI agent?
 
-It is a custom AI agent deployed through WhatsApp Business API to handle lead qualification, customer support, scheduling, sales automation, CRM updates, and human escalation. The Atlas Property Group deployment operates 24/7 and reduced manual triage by 85%.
+It is a custom AI agent deployed through WhatsApp Business API to handle lead qualification, customer support, scheduling, sales automation, CRM updates, and human escalation.
 
 ### What technologies does Hive Vault Arc use?
 

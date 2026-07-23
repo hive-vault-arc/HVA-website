@@ -296,22 +296,6 @@ export default function CapabilitiesSolutionPrograms() {
           </div>
         </div>
 
-        {/* Outcomes metrics strip */}
-        <div className="max-w-screen-2xl mx-auto mt-16 border-t border-[#CDD2DA]/40 pt-12">
-          <div className="grid grid-cols-3 gap-8">
-            {[
-              { value: '< 18s', label: 'Lead Response Time', desc: 'Avg. first-response over last 90 days' },
-              { value: '85%', label: 'Triage Reduction', desc: 'Manual workload eliminated post-launch' },
-              { value: '+43%', label: 'Qualified Meetings', desc: 'QoQ increase in sales-qualified appointments' },
-            ].map((stat) => (
-              <div key={stat.label}>
-                <p className="font-headline mb-1 text-4xl leading-none text-[var(--section-label-color)] md:text-5xl">{stat.value}</p>
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#1A2535] mt-2 mb-1">{stat.label}</p>
-                <p className="text-[11px] text-[#536070] leading-snug">{stat.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
       </section>
 
       {/* ── WHY A PROGRAM — dark contrast section (like ARC difference) ──── */}
@@ -430,19 +414,6 @@ export default function CapabilitiesSolutionPrograms() {
                   )}
                 </motion.div>
 
-                {/* Proof metrics */}
-                <motion.div variants={fadeUp} transition={{ duration: 0.5 }} className="mt-10 pt-8 border-t border-[#DDE3EA] grid grid-cols-3 gap-4">
-                  {[
-                    { v: '100%', l: 'Pipeline Visibility' },
-                    { v: '−40%', l: 'Data Entry' },
-                    { v: '$2.4M', l: 'Pipeline Tracked' },
-                  ].map((s) => (
-                    <div key={s.l}>
-                      <p className="font-headline mb-1 text-2xl leading-none text-[var(--section-label-color)]">{s.v}</p>
-                      <p className="text-[9px] uppercase tracking-[0.14em] text-[var(--section-label-color)] leading-tight">{s.l}</p>
-                    </div>
-                  ))}
-                </motion.div>
               </div>
             </motion.div>
 
@@ -467,7 +438,7 @@ export default function CapabilitiesSolutionPrograms() {
                     icon: <Zap className="w-5 h-5" strokeWidth={1.25} />,
                     title: 'Predictive Reporting',
                     desc: 'BI connectors and executive dashboards surfacing real-time revenue intelligence across teams.',
-                    outcome: 'OUTCOME: −40% DATA ENTRY TIME',
+                    outcome: 'OUTCOME: AUTOMATED PIPELINE OPERATIONS',
                   },
                 ].map((card) => (
                   <motion.div
@@ -511,8 +482,8 @@ export default function CapabilitiesSolutionPrograms() {
                     <span className="text-[10px] font-mono text-[#F0C15A] uppercase tracking-widest">Live in Production</span>
                   </div>
                   <div className="absolute inset-x-4 bottom-4 bg-white/90 p-4 backdrop-blur-sm sm:inset-x-auto sm:left-6 sm:bottom-6 sm:p-5">
-                    <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#1A2535] mb-1">Deployment Scale</p>
-                    <p className="font-headline text-lg text-[#1A2535]">94 active users · $2.4M pipeline tracked</p>
+                    <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#1A2535] mb-1">Production Scope</p>
+                    <p className="font-headline text-lg text-[#1A2535]">Role-based CRM operations and pipeline reporting</p>
                   </div>
                 </motion.div>
               </div>
@@ -556,17 +527,16 @@ export default function CapabilitiesSolutionPrograms() {
                 {p3?.summary}
               </motion.p>
 
-              {/* Metrics */}
+              {/* Reliability disciplines */}
               <motion.div variants={fadeUp} transition={{ duration: 0.5 }} className="space-y-5 mb-10">
                 {[
-                  { value: '99.99%', label: 'SLA Architecture', desc: 'Multi-region failover with RTO/RPO planning and active-active redundancy.' },
-                  { value: '<2ms', label: 'Deployment Latency', desc: 'Blue-green deployments with automated rollback and health-check gates.' },
-                ].map((metric) => (
-                  <div key={metric.label} className="flex gap-6 pb-5 border-b border-white/10">
-                    <span className="font-headline text-3xl md:text-4xl text-[#F0C15A] shrink-0">{metric.value}</span>
+                  { label: 'Resilient Architecture', desc: 'Multi-region failover with recovery planning and active redundancy.' },
+                  { label: 'Controlled Deployment', desc: 'Blue-green releases with automated rollback and health-check gates.' },
+                ].map((discipline) => (
+                  <div key={discipline.label} className="pb-5 border-b border-white/10">
                     <div>
-                      <p className="font-bold text-white text-sm mb-1">{metric.label}</p>
-                      <p className="text-[#778192] text-sm leading-relaxed">{metric.desc}</p>
+                      <p className="font-bold text-white text-sm mb-1">{discipline.label}</p>
+                      <p className="text-[#778192] text-sm leading-relaxed">{discipline.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -638,7 +608,7 @@ export default function CapabilitiesSolutionPrograms() {
                     <div className="h-[1px] flex-1 bg-[#E8A838]/20 relative">
                       <div className="absolute top-0 left-0 h-[1px] w-16 bg-[#F0C15A] animate-pulse" />
                     </div>
-                    <span className="text-[7px] font-mono text-[#F0C15A] tracking-wider">SLA: 99.99%</span>
+                    <span className="text-[7px] font-mono text-[#F0C15A] tracking-wider">RESILIENCE CONTROLS ACTIVE</span>
                   </div>
                 </div>
               </div>

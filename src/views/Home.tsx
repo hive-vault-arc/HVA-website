@@ -24,7 +24,7 @@ import HeroSlider from '../components/ui/HeroSlider';
 import type { InsightsCarouselItem } from '../components/InsightsCarousel';
 import { useAnimationQuality } from '../lib/animationQuality';
 import type { CaseStudyShowcaseSummary, ClientEvidenceSummary } from '../lib/proof';
-import type { HomeHeroMetric, HomeTrustedPartner } from '../lib/home-hero';
+import type { HomeTrustedPartner } from '../lib/home-hero';
 import {
   SiAndroid,
   SiCplusplus,
@@ -69,7 +69,6 @@ type HomeProps = {
   insightsCarouselItems: InsightsCarouselItem[];
   clientEvidence: ClientEvidenceSummary[];
   caseStudies: CaseStudyShowcaseSummary[];
-  heroMetrics: HomeHeroMetric[];
   trustedPartners: HomeTrustedPartner[];
 };
 
@@ -77,16 +76,12 @@ const Home: React.FC<HomeProps> = ({
   insightsCarouselItems,
   clientEvidence,
   caseStudies,
-  heroMetrics,
   trustedPartners,
 }) => {
   const { tier, motionReduced } = useAnimationQuality();
   const showAdvancedEffects = tier === 'high' && !motionReduced;
   const worldMapSectionRef = useRef<HTMLElement | null>(null);
-  const liveMetricsRef = useRef<HTMLDivElement | null>(null);
-  const metricsRafRef = useRef<number | null>(null);
   const [bgReady, setBgReady] = useState(false);
-  const [liveMetricsProgress, setLiveMetricsProgress] = useState(0);
 
   // Defer WebGL background until after first paint so UI renders immediately
   // requestIdleCallback is not available on iOS Safari < 16.4 — fallback to setTimeout
@@ -106,57 +101,7 @@ const Home: React.FC<HomeProps> = ({
     };
   }, []);
 
-  useEffect(() => {
-    if (motionReduced) {
-      setLiveMetricsProgress(1);
-      return;
-    }
-
-    const node = liveMetricsRef.current;
-    if (!node) return;
-
-    let hasStarted = false;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (!entries[0]?.isIntersecting || hasStarted) return;
-        hasStarted = true;
-        observer.disconnect();
-
-        const durationMs = 1400;
-        const start = performance.now();
-
-        const tick = (now: number) => {
-          const elapsed = Math.min((now - start) / durationMs, 1);
-          const eased = 1 - Math.pow(1 - elapsed, 3);
-          setLiveMetricsProgress(eased);
-
-          if (elapsed < 1) {
-            metricsRafRef.current = requestAnimationFrame(tick);
-          }
-        };
-
-        metricsRafRef.current = requestAnimationFrame(tick);
-      },
-      { threshold: 0.4 }
-    );
-
-    observer.observe(node);
-
-    return () => {
-      observer.disconnect();
-      if (metricsRafRef.current !== null) {
-        cancelAnimationFrame(metricsRafRef.current);
-      }
-    };
-  }, [motionReduced]);
-
   const [hoveredPillar, setHoveredPillar] = useState<number | null>(null);
-  const liveMetrics = [
-    { target: 85, dir: '↓', label: 'Reduction in manual triage', kind: 'percent' as const },
-    { target: 43, dir: '↑', label: 'Increase in qualified meetings', kind: 'percent' as const },
-    { target: 2.4, dir: '→', label: 'Revenue pipeline tracked', kind: 'moneyM' as const },
-    { target: 94, dir: '↑', label: 'Daily active system operators', kind: 'integer' as const },
-  ];
   const arcPhases = [
     {
       phase: '01',
@@ -183,16 +128,6 @@ const Home: React.FC<HomeProps> = ({
       proof: 'Managed outcomes',
     },
   ];
-
-  const formatLiveMetric = (target: number, kind: 'percent' | 'moneyM' | 'integer') => {
-    if (kind === 'percent') {
-      return `${Math.round(target * liveMetricsProgress)}%`;
-    }
-    if (kind === 'moneyM') {
-      return `$${(target * liveMetricsProgress).toFixed(1)}M`;
-    }
-    return `${Math.round(target * liveMetricsProgress)}`;
-  };
 
   const capabilityPillars = [
     {
@@ -317,13 +252,9 @@ const Home: React.FC<HomeProps> = ({
         />
       )}
 
-      <HeroSlider metrics={heroMetrics} />
+      <HeroSlider />
       <TrustedByBar partners={trustedPartners} />
-      <HomeDecisionGuide
-        evidence={clientEvidence}
-        caseStudies={caseStudies}
-        metrics={heroMetrics}
-      />
+      <HomeDecisionGuide evidence={clientEvidence} caseStudies={caseStudies} />
 
       {/* ── Insights Carousel ──────────────────────────────────────────── */}
       <InsightsCarousel items={insightsCarouselItems} />
@@ -535,22 +466,6 @@ const Home: React.FC<HomeProps> = ({
             ))}
           </div>
 
-          <div ref={liveMetricsRef} className="home-arc-loop-metrics" aria-label="Live ARC program metrics">
-            <div className="home-arc-loop-metrics-intro">
-              <span>Live program metrics</span>
-              <strong>2025 Morocco</strong>
-              <p>Measured after launch across active AI, CRM, and cloud programs.</p>
-            </div>
-            {liveMetrics.map((metric) => (
-              <div key={metric.label} className="home-arc-loop-metric">
-                <strong>
-                  <span>{metric.dir}</span>
-                  {formatLiveMetric(metric.target, metric.kind)}
-                </strong>
-                <em>{metric.label}</em>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
