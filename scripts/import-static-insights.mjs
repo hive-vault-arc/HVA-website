@@ -179,12 +179,13 @@ async function upsertBySlug(doc) {
   })
 
   if (existing?._id) {
-    const {_type, ...fields} = doc
-    await client.patch(existing._id).set(fields).commit()
+    const {_type, _unset = [], ...fields} = doc
+    await client.patch(existing._id).set(fields).unset(_unset).commit()
     return {action: 'updated', id: existing._id}
   }
 
-  const created = await client.create(doc)
+  const {_unset, ...createDocument} = doc
+  const created = await client.create(createDocument)
   return {action: 'created', id: created._id}
 }
 
@@ -273,24 +274,24 @@ async function toCaseStudyDocument(study) {
     systemArchitecture: study.systemArchitecture,
     operationalModules: study.operationalModules,
     integrations: study.integrations,
-    deploymentScale: study.deploymentScale,
     deploymentStatus: study.deploymentStatus,
-    measuredOutcomes: withKeys(study.measuredOutcomes, 'metric'),
-    testimonial: {
-      _type: 'testimonial',
-      ...study.testimonial,
-    },
+    _unset: ['deploymentScale', 'measuredOutcomes', 'reportingNote'],
     assets: {
       _type: 'object',
       coverImage: await sanityImageFromStaticPath(study.assets.coverImage),
       coverAlt: study.assets.coverAlt || study.title,
       logoLabel: study.assets.logoLabel,
+      ...(study.assets.clientLogo
+        ? {clientLogo: await sanityImageFromStaticPath(study.assets.clientLogo)}
+        : {}),
+      ...(study.assets.clientLogoAlt ? {clientLogoAlt: study.assets.clientLogoAlt} : {}),
+      ...(study.assets.clientWebsite ? {clientWebsite: study.assets.clientWebsite} : {}),
     },
     lastUpdated: study.lastUpdated,
     seo: toSeo({
-      title: study.title,
-      description: study.summary,
-      keywords: [study.industry, study.clientName, 'case study'],
+      title: study.seo?.title || study.title,
+      description: study.seo?.description || study.summary,
+      keywords: study.seo?.keywords || [study.industry, study.clientName, 'case study'],
     }),
   }
 }

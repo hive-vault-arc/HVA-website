@@ -9,17 +9,25 @@
     "deploy": "sanity deploy",
     "deploy-graphql": "sanity graphql deploy",
     "dev": "sanity dev",
+    "lint": "eslint .",
+    "format:check": "prettier --check \"**/*.{ts,mjs,md,json}\"",
+    "import:capabilities": "sanity exec scripts/import-capabilities.mjs --with-user-token",
+    "import:employee-profiles": "sanity exec scripts/import-employee-profiles.mjs --with-user-token",
     "import:insights": "sanity exec scripts/import-static-insights.mjs --with-user-token",
+    "migrate:immoworld-case-study": "sanity exec scripts/update-immoworld-case-study.mjs --with-user-token",
+    "remove:unverified-case-study-metrics": "sanity exec scripts/remove-unverified-case-study-metrics.mjs --with-user-token",
+    "upload:founder-portraits": "sanity exec scripts/upload-founder-portraits.mjs --with-user-token",
+    "upload:insight-covers": "sanity exec scripts/upload-supplied-insight-covers.mjs --with-user-token",
     "start": "sanity start"
   },
   "keywords": [
     "sanity"
   ],
   "dependencies": {
-    "@sanity/vision": "^6.3.0",
+    "@sanity/vision": "^6.5.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "sanity": "^6.3.0",
+    "sanity": "^6.5.0",
     "styled-components": "^6.1.18"
   },
   "devDependencies": {

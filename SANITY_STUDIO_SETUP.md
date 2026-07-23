@@ -1,8 +1,8 @@
 # HVA Website Studio Setup Notes
 
-Verified on: 2026-07-01
+Verified on: 2026-07-10
 
-This file documents the current Sanity Studio setup for the HVA website and collects the official Sanity resources needed to finish the Insights content model.
+This file documents the current Sanity Studio setup, content model, import workflow, and frontend integration for the HVA website.
 
 ## Current Studio Status
 
@@ -14,22 +14,22 @@ hva-website-studio
 
 It is a standalone Sanity Studio, separate from the Next.js frontend. This matches the recommended setup for a website where the Studio is managed as its own app.
 
-Current package versions checked from npm on 2026-07-01:
+Current package versions checked from npm on 2026-07-10:
 
 ```text
-sanity: 6.3.0
-@sanity/vision: 6.3.0
+sanity: 6.4.0
+@sanity/vision: 6.4.0
 @sanity/eslint-config-studio: 6.0.0
 ```
 
 The local `package.json` already uses:
 
 ```json
-"sanity": "^6.3.0",
-"@sanity/vision": "^6.3.0"
+"sanity": "^6.4.0",
+"@sanity/vision": "^6.4.0"
 ```
 
-That means the Studio is already on the latest Sanity Studio package version available at the time of this check.
+The local packages match the auto-update runtime used by the deployed Studio.
 
 Local Node version checked:
 
@@ -64,26 +64,32 @@ plugins: [structureTool(), visionTool()]
 
 This means:
 
-- Structure Tool is available for editing documents once schemas exist.
+- Structure Tool uses the custom `Capabilities`, `People`, and `Insights` desk organization.
 - Vision Tool is available for testing GROQ queries against the dataset.
 
 ## Current Schema Status
 
-The Studio currently has no registered schema types:
+The Studio registers these document types:
 
-```ts
-export const schemaTypes = []
+```text
+capability
+employeeProfile
+post
+newsArticle
+perspective
+researchReport
+caseStudy
 ```
 
-This means the Studio can run and build, but editors cannot create HVA Insights documents yet.
+Shared object types cover authors, SEO, sources, FAQs, metrics, testimonials, and the structured article-section model used by the frontend.
 
-The next required step is to create schema files inside:
+Schemas are organized inside:
 
 ```text
 schemaTypes/
 ```
 
-Then import and register them in:
+Document and object schemas are registered through:
 
 ```text
 schemaTypes/index.ts
@@ -202,9 +208,9 @@ export const schemaTypes = [postType]
 
 For HVA, this simple example is only a starting reference. The actual Insights model needs to match the existing frontend content types.
 
-## HVA Insights Content Sources In The Frontend
+## HVA Content Sources In The Frontend
 
-The frontend already has strong static content structures. These should guide the Studio schemas.
+The frontend keeps typed fallback content for resilience while treating published Sanity documents as the primary source.
 
 Frontend folder:
 
@@ -232,19 +238,20 @@ Case studies: src/lib/proof.ts
 Research report cards: src/lib/insights.ts
 ```
 
-The website currently reads these static arrays directly. It is not yet connected to Sanity with GROQ or a Sanity client.
+The website is connected to Sanity through projected GROQ queries, normalized image helpers, tagged revalidation, static generation, and typed fallback datasets.
 
-## Recommended HVA Schema Plan
+## Current HVA Schema Model
 
-Minimum document schemas for Insights:
+Registered editorial and company document schemas:
 
 ```text
+capability
+employeeProfile
 post
 newsArticle
 perspective
 caseStudy
 researchReport
-author
 ```
 
 Reusable object schemas:
@@ -259,7 +266,7 @@ testimonial
 seo
 ```
 
-Recommended content fields shared across article-like documents:
+Content fields shared across article-like documents:
 
 ```text
 title
@@ -295,26 +302,25 @@ In Sanity, this can be modeled either as:
 - Portable Text with custom blocks, better for rich editing.
 - A structured `sections` array with explicit object types, closer to the existing frontend code.
 
-For the fastest migration from the current website, use a structured `sections` array first. Portable Text can be introduced later if the editing experience needs more flexibility.
+The current implementation uses a structured `sections` array to preserve the frontend content contract. Portable Text can be introduced later through a migration if editors need more free-form composition.
 
 ## Website Integration Checklist
 
-After schemas exist, the Next.js frontend still needs the integration layer.
+The Next.js integration is complete for Insights, Case Studies, Capabilities, and People.
 
-Required frontend work:
+Implemented integration:
 
 ```text
-Install next-sanity or @sanity/client.
-Create a Sanity client config using projectId 0zprc9fo and dataset production.
-Create GROQ queries for each content type.
-Replace static helpers such as getAllPosts() with Sanity-backed fetch functions.
-Update generateStaticParams() for dynamic routes.
-Update metadata generation to fetch Sanity content.
-Add cdn.sanity.io to next.config.ts images.remotePatterns if using Sanity images with next/image.
-Set CORS origins for localhost and production website domains in Sanity Manage.
+Sanity client configuration for project 0zprc9fo and the production dataset.
+Projected GROQ queries for every registered public document type.
+Sanity-backed content helpers with typed local fallbacks.
+generateStaticParams and dynamic metadata for document routes.
+cdn.sanity.io in Next.js image remote patterns.
+Tag-based revalidation through /api/revalidate/sanity.
+CORS origins for localhost, production domains, and Vercel previews.
 ```
 
-Routes that currently depend on static insight data:
+Routes backed by Sanity content helpers:
 
 ```text
 /blog
@@ -327,6 +333,8 @@ Routes that currently depend on static insight data:
 /insights/research-reports
 /case-studies
 /case-studies/[slug]
+/aboutus
+/aboutus/our-people/[employee]
 /sitemap.xml
 /ai/company
 /
@@ -334,15 +342,12 @@ Routes that currently depend on static insight data:
 
 ## Recommended Order Of Work
 
-1. Create schemas in `schemaTypes/`.
-2. Register schemas in `schemaTypes/index.ts`.
-3. Run `npm run dev` and confirm document types appear in Studio.
-4. Create or import the existing static content.
-5. Add Sanity client and GROQ queries to the Next.js frontend.
-6. Replace static content readers route by route.
-7. Add CORS origins in Sanity Manage.
-8. Deploy Studio with `npm run deploy`.
-9. Deploy the frontend after confirming Sanity data renders.
+1. Update schemas with backward-compatible fields and validation.
+2. Run `npm run build` in the Studio.
+3. Import or edit content and verify document previews.
+4. Run frontend lint, tests, and production build.
+5. Verify changed routes against published and fallback content.
+6. Deploy the Studio, then deploy the frontend when required.
 
 ## Official Sanity Resources
 
@@ -383,6 +388,4 @@ Package/version references:
 
 ## Final Readiness Note
 
-The Studio is installed, connected, current, and buildable.
-
-It is not ready for HVA editors yet because no schemas are registered. Once the schemas above are created and registered, the Studio will become usable for authoring the Insights content.
+The Studio is installed, connected, schema-complete for the current public content surface, and buildable. Editors can manage Capabilities, People, Blogs, News Articles, Perspectives, Research Reports, and Case Studies from the custom desk structure.

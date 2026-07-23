@@ -77,9 +77,13 @@ export const caseStudy = defineType({
     }),
     defineField({
       name: 'deploymentScale',
-      title: 'Deployment Scale',
+      title: 'Deployment Scale (Deprecated)',
       type: 'string',
-      validation: (rule) => rule.required(),
+      deprecated: {
+        reason: 'Removed from public case studies until delivery scope is audited and approved.',
+      },
+      readOnly: true,
+      hidden: ({value}) => value === undefined,
     }),
     defineField({
       name: 'deploymentStatus',
@@ -89,16 +93,47 @@ export const caseStudy = defineType({
     }),
     defineField({
       name: 'measuredOutcomes',
-      title: 'Measured Outcomes',
+      title: 'Measured Outcomes (Deprecated)',
       type: 'array',
       of: [defineArrayMember({type: 'caseStudyMetric'})],
-      validation: (rule) => rule.required().min(1),
+      deprecated: {
+        reason: 'Performance figures are unpublished until a formal audit confirms them.',
+      },
+      readOnly: true,
+      hidden: ({value}) => value === undefined,
+    }),
+    defineField({
+      name: 'reportingNote',
+      title: 'Reporting Note (Deprecated)',
+      description: 'Legacy context for unpublished performance figures.',
+      type: 'text',
+      rows: 3,
+      deprecated: {
+        reason: 'The associated performance figures have been removed pending audit.',
+      },
+      readOnly: true,
+      hidden: ({value}) => value === undefined,
+    }),
+    defineField({
+      name: 'clientEvidence',
+      title: 'Client Evidence',
+      type: 'clientEvidence',
+      description:
+        'Publication-controlled client reference letter and optional exact quote for this case study.',
+      initialValue: {
+        publicationStatus: 'notCleared',
+      },
     }),
     defineField({
       name: 'testimonial',
-      title: 'Testimonial',
+      title: 'Testimonial (Deprecated)',
       type: 'testimonial',
-      validation: (rule) => rule.required(),
+      deprecated: {
+        reason:
+          'Do not publish testimonials without written client permission. Use the reporting note for evidence context instead.',
+      },
+      readOnly: true,
+      hidden: ({value}) => value === undefined,
     }),
     defineField({
       name: 'assets',
@@ -123,6 +158,29 @@ export const caseStudy = defineType({
           title: 'Logo Label',
           type: 'string',
           validation: (rule) => rule.required(),
+        }),
+        defineField({
+          name: 'clientLogo',
+          title: 'Client Logo',
+          type: 'image',
+          options: {hotspot: false},
+        }),
+        defineField({
+          name: 'clientLogoAlt',
+          title: 'Client Logo Alt Text',
+          type: 'string',
+          hidden: ({parent}) => !parent?.clientLogo,
+          validation: (rule) =>
+            rule.custom((value, context) => {
+              if (!context.parent?.clientLogo || value) return true
+              return 'Add alt text when a client logo is present.'
+            }),
+        }),
+        defineField({
+          name: 'clientWebsite',
+          title: 'Client Website',
+          type: 'url',
+          validation: (rule) => rule.uri({scheme: ['http', 'https']}),
         }),
       ],
       validation: (rule) => rule.required(),

@@ -1,4 +1,5 @@
 import {author} from './author'
+import {clientEvidence} from './clientEvidence'
 import {caseStudyMetric} from './caseStudyMetric'
 import {faqSection} from './faqSection'
 import {faqItem} from './faqItem'
@@ -20,6 +21,7 @@ export const sharedObjectTypes = [
   statItem,
   faqItem,
   caseStudyMetric,
+  clientEvidence,
   testimonial,
   paragraphSection,
   headingSection,

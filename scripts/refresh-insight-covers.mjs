@@ -38,8 +38,8 @@ const covers = [
   {
     id: 'IuK2abzZBGOYd51ySRR7RH',
     type: 'caseStudy',
-    slug: 'zoho-grade-crm-platform',
-    filename: 'zoho-crm-real-estate-operations-dashboard.webp',
+    slug: 'top-tier-crm-transformation-program-real-estate-operations',
+    filename: 'immoworld-crm-real-estate-operations-dashboard.webp',
     alt: 'Real estate CRM operating dashboard with property pipeline stages and lead follow-up signals',
     svg: realEstateCrmCover(),
   },

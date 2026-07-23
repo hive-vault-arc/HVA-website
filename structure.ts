@@ -1,10 +1,34 @@
-import {DocumentTextIcon} from '@sanity/icons'
+import {DocumentTextIcon, UserIcon} from '@sanity/icons'
 import type {StructureResolver} from 'sanity/structure'
 
 export const structure: StructureResolver = (S) =>
   S.list()
     .title('Content')
     .items([
+      S.listItem()
+        .title('Capabilities')
+        .icon(DocumentTextIcon)
+        .child(
+          S.documentTypeList('capability')
+            .title('Capabilities')
+            .defaultOrdering([
+              {field: 'displayOrder', direction: 'asc'},
+              {field: 'title', direction: 'asc'},
+            ]),
+        ),
+      S.divider(),
+      S.listItem()
+        .title('People')
+        .icon(UserIcon)
+        .child(
+          S.documentTypeList('employeeProfile')
+            .title('People')
+            .defaultOrdering([
+              {field: 'displayOrder', direction: 'asc'},
+              {field: 'name', direction: 'asc'},
+            ]),
+        ),
+      S.divider(),
       S.listItem()
         .title('Insights')
         .icon(DocumentTextIcon)
