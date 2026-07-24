@@ -2,8 +2,9 @@
 
 import { gsap } from 'gsap';
 import Image from 'next/image';
-import Link from 'next/link';
+import {Link} from '@/i18n/navigation';
 import { useCallback, useLayoutEffect, useRef } from 'react';
+import {useTranslations} from 'next-intl';
 
 import type { HomeTrustedPartner } from '../lib/home-hero';
 
@@ -13,6 +14,7 @@ type TrustedByBarProps = {
 
 type TrustedPartnerLogoProps = {
   partner: HomeTrustedPartner;
+  caseStudyLabel: string;
 };
 
 function partnerSlug(name: string): string {
@@ -22,7 +24,7 @@ function partnerSlug(name: string): string {
     .replace(/(^-|-$)/g, '');
 }
 
-function TrustedPartnerLogo({ partner }: TrustedPartnerLogoProps) {
+function TrustedPartnerLogo({ partner, caseStudyLabel }: TrustedPartnerLogoProps) {
   const monochromeRef = useRef<HTMLSpanElement>(null);
   const colorRef = useRef<HTMLSpanElement>(null);
   const pointerActiveRef = useRef(false);
@@ -139,7 +141,7 @@ function TrustedPartnerLogo({ partner }: TrustedPartnerLogoProps) {
       href={partner.href}
       className={className}
       data-partner={partnerSlug(partner.name)}
-      aria-label={`Read the ${partner.name} case study`}
+      aria-label={caseStudyLabel}
       {...interactionProps}
     >
       {media}
@@ -148,17 +150,22 @@ function TrustedPartnerLogo({ partner }: TrustedPartnerLogoProps) {
 }
 
 export default function TrustedByBar({ partners }: TrustedByBarProps) {
+  const t = useTranslations('TrustedBy');
   if (partners.length === 0) return null;
 
   return (
     <section className="home-trusted" aria-labelledby="home-trusted-title">
       <div className="home-trusted-shell">
         <div className="home-trusted-heading">
-          <h2 id="home-trusted-title">Trusted by teams building for scale</h2>
+          <h2 id="home-trusted-title">{t('title')}</h2>
         </div>
         <div className="home-trusted-logos">
           {partners.map((partner) => (
-            <TrustedPartnerLogo key={partner.name} partner={partner} />
+            <TrustedPartnerLogo
+              key={partner.name}
+              partner={partner}
+              caseStudyLabel={t('caseStudyLabel', {client: partner.name})}
+            />
           ))}
         </div>
       </div>

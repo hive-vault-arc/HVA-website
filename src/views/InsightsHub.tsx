@@ -1,8 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
+import {Link} from '@/i18n/navigation';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import {useTranslations} from 'next-intl';
 import { ArrowDown, ArrowRight, ArrowUpRight } from '@/components/icons';
 import BottomCTA from '../components/BottomCTA';
 import InsightsSlider, { type SlideItem } from '../components/InsightsSlider';
@@ -15,27 +16,27 @@ import type { CaseStudy } from '../lib/proof';
 
 const CATEGORY_CARDS = [
   {
-    label: 'Blogs',
+    key: 'blog',
     href: '/blog',
     image: '/Images/insights/hva-insights-blog-articles-tangier-morocco.webp',
   },
   {
-    label: 'Case Studies',
+    key: 'caseStudy',
     href: '/case-studies',
     image: '/Images/insights/hva-case-studies-ai-transformation-morocco.webp',
   },
   {
-    label: 'News Articles',
+    key: 'news',
     href: '/insights/news-articles',
     image: '/Images/insights/hva-news-articles-ai-industry-updates.webp',
   },
   {
-    label: 'Perspectives',
+    key: 'perspective',
     href: '/insights/perspectives',
     image: '/Images/insights/hva-perspectives-strategic-ai-insights.webp',
   },
   {
-    label: 'Research Reports',
+    key: 'research',
     href: '/insights/research-reports',
     image: '/Images/insights/hva-research-reports-ai-technology-morocco.webp',
   },
@@ -49,6 +50,7 @@ const fadeUp = {
 /* ── Image category cards ─────────────────────────────────────────────────── */
 
 function CategoryCards() {
+  const t = useTranslations('InsightsHub');
   const [hovered, setHovered] = useState<string | null>(null);
 
   return (
@@ -60,6 +62,7 @@ function CategoryCards() {
       transition={{ staggerChildren: 0.07 }}
     >
       {CATEGORY_CARDS.map((cat) => {
+        const label = t(`types.${cat.key}`);
         const isHovered = hovered === cat.href;
         return (
           <Link
@@ -95,9 +98,9 @@ function CategoryCards() {
                 transition={{ duration: 0.22 }}
               >
                 <p className="mb-1 text-[9px] font-bold uppercase tracking-[0.22em] text-white/50">
-                  Insight Type
+                  {t('categories.typeLabel')}
                 </p>
-                <span className="insights-category-title">{cat.label}</span>
+                <span className="insights-category-title">{label}</span>
               </motion.div>
 
               <motion.div
@@ -107,10 +110,10 @@ function CategoryCards() {
                 aria-hidden={!isHovered}
               >
                 <span className="insights-category-title insights-category-title--hover">
-                  {cat.label}
+                  {label}
                 </span>
                 <span className="inline-flex items-center gap-2 border border-white/40 bg-white/10 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-white backdrop-blur-sm transition-colors duration-200 group-hover:border-[#E8A838] group-hover:bg-[#E8A838]">
-                  Open {cat.label}
+                  {t('categories.open', {type: label})}
                   <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
                 </span>
               </motion.div>
@@ -142,14 +145,14 @@ type LatestProps = {
   readonly items: InsightGridItem[];
 };
 
-function ctaLabelFor(item: InsightGridItem) {
-  if (item.type === 'case-study') return 'Read case study';
-  if (item.type === 'research-report') return 'Open report';
-  return 'Read insight';
-}
-
 function LatestSection({ items }: LatestProps) {
+  const t = useTranslations('InsightsHub');
   const [latestPrimary, latestSecondary] = items;
+  const ctaLabelFor = (item: InsightGridItem) => {
+    if (item.type === 'case-study') return t('latest.readCaseStudy');
+    if (item.type === 'research-report') return t('latest.openReport');
+    return t('latest.readInsight');
+  };
 
   if (!latestPrimary && !latestSecondary) return null;
 
@@ -159,7 +162,7 @@ function LatestSection({ items }: LatestProps) {
         <div className="mb-10 flex items-center gap-3">
           <SectionBrandMark size="sm" />
           <h2 className="text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)]">
-            Latest
+            {t('latest.eyebrow')}
           </h2>
         </div>
 
@@ -192,7 +195,7 @@ function LatestSection({ items }: LatestProps) {
                 <div className="mb-auto pt-6 flex items-center gap-2">
                   <span className="h-[1px] w-6 bg-[#E8A838]" />
                   <p className="text-[9px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color-dark)]">
-                    Latest {latestPrimary.typeLabel} · {latestPrimary.tag}
+                    {t('latest.label', {type: latestPrimary.typeLabel})} · {latestPrimary.tag}
                   </p>
                 </div>
 
@@ -258,7 +261,7 @@ function LatestSection({ items }: LatestProps) {
               {/* Bottom text panel */}
               <div className="flex flex-col flex-1 bg-white border border-[#DDE3EA] border-t-0 p-8">
                 <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)]">
-                  Latest {latestSecondary.typeLabel}
+                  {t('latest.label', {type: latestSecondary.typeLabel})}
                 </p>
                 <h3 className="font-headline text-2xl font-medium leading-snug text-[#1A2535]">
                   {latestSecondary.title}
@@ -307,11 +310,12 @@ function buildAllInsights(
   newsArticles: NewsArticle[],
   perspectives: Perspective[],
   researchReports: ResearchReport[],
+  typeLabels: Record<InsightGridItem['type'], string>,
 ): InsightGridItem[] {
   const blogItems = posts.map((p) => ({
     id: `blog-${p.slug}`,
     type: 'blog' as const,
-    typeLabel: 'Blog',
+    typeLabel: typeLabels.blog,
     tag: p.category,
     title: p.title,
     excerpt: p.excerpt,
@@ -324,7 +328,7 @@ function buildAllInsights(
   const caseItems = studies.map((s) => ({
     id: `case-${s.slug}`,
     type: 'case-study' as const,
-    typeLabel: 'Case Study',
+    typeLabel: typeLabels['case-study'],
     tag: s.industry,
     title: s.title,
     excerpt: s.summary,
@@ -337,7 +341,7 @@ function buildAllInsights(
   const newsItems = newsArticles.map((article) => ({
     id: `news-${article.slug}`,
     type: 'news-article' as const,
-    typeLabel: 'News Article',
+    typeLabel: typeLabels['news-article'],
     tag: article.category || article.tag,
     title: article.title,
     excerpt: article.summary,
@@ -350,7 +354,7 @@ function buildAllInsights(
   const perspectiveItems = perspectives.map((perspective) => ({
     id: `perspective-${perspective.slug}`,
     type: 'perspective' as const,
-    typeLabel: 'Perspective',
+    typeLabel: typeLabels.perspective,
     tag: perspective.tag,
     title: perspective.title,
     excerpt: perspective.summary,
@@ -363,7 +367,7 @@ function buildAllInsights(
   const reportItems = researchReports.map((report) => ({
     id: `research-${report.slug}`,
     type: 'research-report' as const,
-    typeLabel: 'Research Report',
+    typeLabel: typeLabels['research-report'],
     tag: report.tag,
     title: report.title,
     excerpt: report.summary,
@@ -396,6 +400,7 @@ function buildSliderItems(items: InsightGridItem[]): SlideItem[] {
 }
 
 function InsightGridCard({ item, index }: { readonly item: InsightGridItem; readonly index: number }) {
+  const t = useTranslations('InsightsHub');
   const [hovered, setHovered] = useState(false);
   return (
     <motion.article
@@ -464,7 +469,7 @@ function InsightGridCard({ item, index }: { readonly item: InsightGridItem; read
             {item.excerpt}
           </p>
           <span className="inline-flex items-center gap-2 self-start border border-white/35 bg-white/10 px-4 py-2 text-[9px] font-bold uppercase tracking-[0.14em] text-white transition-all duration-200 group-hover:border-[#E8A838] group-hover:bg-[#E8A838]">
-            Open {item.typeLabel.toLowerCase()}
+            {t('grid.open', {type: item.typeLabel.toLocaleLowerCase()})}
             <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
           </span>
         </motion.div>
@@ -474,6 +479,7 @@ function InsightGridCard({ item, index }: { readonly item: InsightGridItem; read
 }
 
 function AllInsightsGrid({ items }: { readonly items: InsightGridItem[] }) {
+  const t = useTranslations('InsightsHub');
   const [revealed, setRevealed] = useState(false);
   const visible = revealed ? items : items.slice(0, INITIAL_COUNT);
   const hasMore = items.length > INITIAL_COUNT && !revealed;
@@ -486,15 +492,15 @@ function AllInsightsGrid({ items }: { readonly items: InsightGridItem[] }) {
             <div className="mb-2 flex items-center gap-3">
               <SectionBrandMark size="sm" />
               <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)]">
-                All Insights
+                {t('grid.eyebrow')}
               </p>
             </div>
             <h2 className="font-headline text-2xl font-medium text-[#1A2535]">
-              Everything We've Published
+              {t('grid.title')}
             </h2>
           </div>
           <span className="hidden text-[10px] uppercase tracking-widest text-[#566274] sm:block">
-            {items.length} items
+            {t('grid.itemCount', {count: items.length})}
           </span>
         </div>
 
@@ -512,7 +518,7 @@ function AllInsightsGrid({ items }: { readonly items: InsightGridItem[] }) {
                          uppercase tracking-[0.18em] text-[#1A2535] border border-[#1A2535]
                          hover:bg-[#1A2535] hover:text-white transition-all duration-200"
             >
-              {"Load more "}
+              {t('grid.loadMore')}
               <ArrowDown className="h-3.5 w-3.5" aria-hidden="true" />
             </button>
           </div>
@@ -535,7 +541,21 @@ export default function InsightsHub({
   readonly perspectives: Perspective[];
   readonly researchReports: ResearchReport[];
 }) {
-  const allInsights = buildAllInsights(posts, caseStudies, newsArticles, perspectives, researchReports);
+  const t = useTranslations('InsightsHub');
+  const allInsights = buildAllInsights(
+    posts,
+    caseStudies,
+    newsArticles,
+    perspectives,
+    researchReports,
+    {
+      blog: t('types.blog'),
+      'case-study': t('types.caseStudy'),
+      'news-article': t('types.news'),
+      perspective: t('types.perspective'),
+      'research-report': t('types.research'),
+    },
+  );
   const sliderItems = buildSliderItems(allInsights);
 
   const { scrollYProgress } = useScroll();
@@ -565,18 +585,18 @@ export default function InsightsHub({
             <div className="mb-5 flex items-center gap-3">
               <SectionBrandMark size="sm" />
               <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)]">
-                Insights
+                {t('hero.eyebrow')}
               </p>
             </div>
             <h1 className="font-headline text-4xl font-medium leading-[1.04] sm:text-5xl lg:text-[4.25rem]">
-              What We Think,
+              {t('hero.title')}
               <br />{' '}
-              <em className="italic text-[#566274]">Test, and Ship.</em>
+              <em className="italic text-[#566274]">{t('hero.emphasis')}</em>
             </h1>
             <div className="mt-6 flex items-center gap-4">
               <span className="block h-px w-8 bg-[#E8A838] flex-shrink-0" />
               <p className="max-w-sm text-sm leading-relaxed text-[#566274]">
-                Blogs, case studies, perspectives, and research grounded in real operational work.
+                {t('hero.description')}
               </p>
             </div>
           </motion.div>
@@ -647,7 +667,7 @@ export default function InsightsHub({
                 fillOpacity="0.72"
                 fontFamily="system-ui, sans-serif"
               >
-                HIVE VAULT ARC INSIGHTS
+                {t('hero.diagramLabel')}
               </text>
             </svg>
           </motion.div>
@@ -663,7 +683,7 @@ export default function InsightsHub({
           <div className="mb-8 flex items-center gap-3">
             <SectionBrandMark size="sm" />
             <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)]">
-              Insight Types
+              {t('categories.eyebrow')}
             </p>
           </div>
           <CategoryCards />
@@ -678,11 +698,11 @@ export default function InsightsHub({
 
       <BottomCTA
         variant="light"
-        headline="Need Insights Mapped to Your Operations?"
-        subtext="We can translate these insights into a practical transformation roadmap for your team."
-        primaryLabel="Book Discovery Call"
+        headline={t('bottomCta.title')}
+        subtext={t('bottomCta.description')}
+        primaryLabel={t('bottomCta.primary')}
         primaryHref="/contact"
-        secondaryLabel="View Capabilities"
+        secondaryLabel={t('bottomCta.secondary')}
         secondaryHref="/capabilities"
       />
     </div>

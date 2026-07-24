@@ -1,10 +1,11 @@
 'use client';
 
-import Link from 'next/link';
+import {Link} from '@/i18n/navigation';
 import { ArrowUpRight, ExternalLink } from '@/components/icons';
 import ArticleDetailPage from '../components/ArticleDetailPage';
 import type { ContentSection } from '../lib/blog';
 import type { NewsArticle } from '../lib/insights';
+import {useTranslations} from 'next-intl';
 
 function RenderSection({ section, index }: { section: ContentSection; index: number }) {
   switch (section.type) {
@@ -107,6 +108,7 @@ function RenderSection({ section, index }: { section: ContentSection; index: num
 }
 
 function NewsSidebar({ sources, tags }: { sources: NewsArticle['sources']; tags: NewsArticle['tags'] }) {
+  const t = useTranslations('DynamicContent');
   return (
     <div className="space-y-10">
       {sources.length > 0 && (
@@ -115,7 +117,7 @@ function NewsSidebar({ sources, tags }: { sources: NewsArticle['sources']; tags:
             className="text-xs font-bold uppercase tracking-widest text-[var(--section-label-color)] mb-4"
             style={{ fontFamily: 'var(--font-body)' }}
           >
-            Sources
+            {t('sources')}
           </h2>
           <ul className="space-y-3">
             {sources.map((src) => (
@@ -142,7 +144,7 @@ function NewsSidebar({ sources, tags }: { sources: NewsArticle['sources']; tags:
             className="text-xs font-bold uppercase tracking-widest text-[var(--section-label-color)] mb-4"
             style={{ fontFamily: 'var(--font-body)' }}
           >
-            Topics
+            {t('topics')}
           </h2>
           <div className="flex flex-wrap gap-2">
             {tags.map((tag) => (
@@ -163,20 +165,20 @@ function NewsSidebar({ sources, tags }: { sources: NewsArticle['sources']; tags:
           className="text-white text-sm font-semibold mb-3 leading-snug"
           style={{ fontFamily: 'var(--font-headline)', fontStyle: 'italic' }}
         >
-          Evaluating local AI for your organization?
+          {t('newsSidebar.title')}
         </p>
         <p
           className="text-white/60 text-xs mb-4 leading-relaxed"
           style={{ fontFamily: 'var(--font-body)' }}
         >
-          Hive Vault Arc helps teams decide what should run locally, what should remain in the cloud, and how to govern agent access safely.
+          {t('newsSidebar.description')}
         </p>
         <Link
           href="/contact"
           className="inline-flex items-center gap-1.5 text-xs font-bold tracking-widest uppercase text-[var(--section-label-color-dark)] hover:gap-3 transition-all"
           style={{ fontFamily: 'var(--font-body)' }}
         >
-          Discuss AI architecture
+          {t('newsSidebar.cta')}
           <ArrowUpRight className="w-3 h-3" />
         </Link>
       </div>
@@ -191,14 +193,15 @@ export default function NewsArticleView({
   readonly article: NewsArticle;
   readonly relatedArticles: NewsArticle[];
 }) {
+  const t = useTranslations('DynamicContent');
   return (
     <ArticleDetailPage
       backHref="/insights/news-articles"
-      backLabel="All news articles"
+      backLabel={t('allNews')}
       breadcrumbs={[
-        { label: 'Home', href: '/' },
-        { label: 'Insights', href: '/insights' },
-        { label: 'News Articles', href: '/insights/news-articles' },
+        { label: t('home'), href: '/' },
+        { label: t('insights'), href: '/insights' },
+        { label: t('newsArticles'), href: '/insights/news-articles' },
         { label: article.title },
       ]}
       eyebrow={`${article.tag} / ${article.category}`}
@@ -217,15 +220,14 @@ export default function NewsArticleView({
         coverImage: item.coverImage,
       }))}
       relatedAllHref="/insights/news-articles"
-      relatedAllLabel="All News Articles"
+      relatedAllLabel={t('allNews')}
       bottomCta={{
         variant: 'blue',
-        headline: 'Build private AI with the right operating model.',
-        subtext:
-          'We help leadership teams translate AI hardware, model strategy, and privacy requirements into systems that are ready for production.',
-        primaryLabel: 'Talk to Hive Vault Arc',
+        headline: t('newsCta.title'),
+        subtext: t('newsCta.description'),
+        primaryLabel: t('newsCta.primary'),
         primaryHref: '/contact',
-        secondaryLabel: 'Explore capabilities',
+        secondaryLabel: t('exploreCapabilities'),
         secondaryHref: '/capabilities',
       }}
       sidebar={<NewsSidebar sources={article.sources} tags={article.tags} />}

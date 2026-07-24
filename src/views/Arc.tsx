@@ -2,10 +2,11 @@
 
 import type { ElementType, ReactNode } from 'react';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import {useTranslations} from 'next-intl';
 import { track } from '@vercel/analytics/react';
 import { MotionConfig, motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
-import Link from 'next/link';
+import {Link} from '@/i18n/navigation';
 import {
   ArrowRight,
   ArrowUpRight,
@@ -40,78 +41,21 @@ const fadeUp = {
   show: { opacity: 1, y: 0 },
 };
 
-const arcPhases: readonly ArcPhase[] = [
+const phaseIcons = [Compass, Settings2, Gauge] as const;
+const differenceSignalConfig = [
   {
-    step: '01',
-    title: 'Assess',
-    purpose: 'Find the constraint before funding the build.',
-    output: 'Constraint map',
-    description:
-      'We map the operating workflow, system dependencies, decision owners, and measurable target before build scope is approved.',
-    checkpoints: ['Current-state evidence', 'Constraint priority', 'Decision-ready roadmap'],
-    icon: Compass,
-  },
-  {
-    step: '02',
-    title: 'Re-engineer',
-    purpose: 'Design and deliver the operating system.',
-    output: 'Production-ready system',
-    description:
-      'We redesign the workflow and stack together, then validate integrations, controls, and release readiness against the approved outcome.',
-    checkpoints: ['Target workflow', 'Integrated stack', 'Production gate'],
-    icon: Settings2,
-  },
-  {
-    step: '03',
-    title: 'Command',
-    purpose: 'Run, measure, and improve in production.',
-    output: 'Live operating metrics',
-    description:
-      'The same accountable team monitors reliability, reports performance, and turns production evidence into the next improvement cycle.',
-    checkpoints: ['Operating telemetry', 'Managed response', 'Improvement backlog'],
-    icon: Gauge,
-  },
-];
-
-const buyerFit = [
-  'Fragmented operations',
-  'Legacy bottlenecks',
-  'AI workflow rollout',
-  'Production accountability gaps',
-] as const;
-
-const differenceSignals = [
-  {
-    title: 'One team',
-    description: 'Diagnosis, delivery, and live operations stay connected.',
     href: '/aboutus#founders',
-    linkLabel: 'Meet the founders',
     icon: UsersRound,
   },
   {
-    title: 'Production ownership',
-    description: 'Launch is a control point, not the end of the engagement.',
     href: '/capabilities/operations-managed',
-    linkLabel: 'See managed operations',
     icon: ShieldCheck,
   },
   {
-    title: 'Decision gates',
-    description: 'Scope advances only when constraints and evidence are clear.',
     href: '/capabilities/in-detail',
-    linkLabel: 'Review delivery depth',
     icon: GitBranch,
   },
 ] as const;
-
-const differenceStatement =
-  'Strategy, build, and operations stay connected under one accountable model, so decisions are made against real constraints and post-launch performance.';
-
-const caseDisplayTitle: Record<string, string> = {
-  'top-tier-crm-transformation-program-real-estate-operations':
-    'One CRM system for live real estate operations.',
-  'multilingual-whatsapp-ai-agent': 'AI lead operations across WhatsApp and CRM.',
-};
 
 function recordArcEvent(name: string, properties: Record<string, string> = {}) {
   track(name, {
@@ -121,6 +65,26 @@ function recordArcEvent(name: string, properties: Record<string, string> = {}) {
 }
 
 export default function Arc({ studies, children }: ArcProps) {
+  const t = useTranslations('Arc');
+  const phaseCopy = t.raw('phases') as Array<Omit<ArcPhase, 'icon'>>;
+  const arcPhases: readonly ArcPhase[] = phaseCopy.map((phase, index) => ({
+    ...phase,
+    icon: phaseIcons[index] ?? Compass,
+  }));
+  const buyerFit = t.raw('buyerFit') as string[];
+  const signalCopy = t.raw('signals') as Array<{
+    title: string;
+    description: string;
+    linkLabel: string;
+  }>;
+  const differenceSignals = differenceSignalConfig.map((signal, index) => ({
+    ...signal,
+    ...signalCopy[index],
+  }));
+  const caseDisplayTitle: Record<string, string> = {
+    'top-tier-crm-transformation-program-real-estate-operations': t('caseTitles.crm'),
+    'multilingual-whatsapp-ai-agent': t('caseTitles.whatsapp'),
+  };
   const [activePhaseIndex, setActivePhaseIndex] = useState(0);
   const pageRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
@@ -214,7 +178,7 @@ export default function Arc({ studies, children }: ArcProps) {
                 className="arc-hero-label"
               >
                 <SectionBrandMark size="sm" eager />
-                <span>ARC operating model</span>
+                <span>{t('label')}</span>
               </motion.div>
 
               <motion.h1
@@ -223,9 +187,7 @@ export default function Arc({ studies, children }: ArcProps) {
                 transition={{ duration: 0.55 }}
                 className="arc-hero-title"
               >
-                <span>Assess the constraint.</span>
-                <span>Re-engineer the system.</span>
-                <span>Command the outcome.</span>
+                {(t.raw('heroLines') as string[]).map((line) => <span key={line}>{line}</span>)}
               </motion.h1>
 
               <motion.p
@@ -233,10 +195,7 @@ export default function Arc({ studies, children }: ArcProps) {
                 transition={{ duration: 0.55 }}
                 className="arc-hero-lede"
               >
-                ARC is a closed-loop operating model for technology transformation. We diagnose
-                operational constraints, rebuild the workflow and stack, and stay accountable in
-                live production until results hold. Strategy, engineering, and operations remain
-                under one accountable team.
+                {t('heroDescription')}
               </motion.p>
 
               <motion.div
@@ -253,7 +212,7 @@ export default function Arc({ studies, children }: ArcProps) {
                     })
                   }
                 >
-                  Book ARC Diagnostic
+                  {t('bookDiagnostic')}
                 </Link>
                 <Link
                   href="#proof-in-production"
@@ -264,7 +223,7 @@ export default function Arc({ studies, children }: ArcProps) {
                     })
                   }
                 >
-                  See ARC in Production
+                  {t('seeProduction')}
                   <ArrowRight aria-hidden="true" className="h-4 w-4" />
                 </Link>
               </motion.div>
@@ -279,7 +238,7 @@ export default function Arc({ studies, children }: ArcProps) {
               <div className="arc-hero-media">
                 <Image
                   src="/Images/capabilities/hva-arc-operating-model-business-workspace.png"
-                  alt="ARC operating model workspace connecting diagnostic evidence, a modular workflow, and an ordered command state"
+                  alt={t('heroAlt')}
                   fill
                   priority
                   sizes="(max-width: 1024px) 100vw, 42vw"
@@ -307,13 +266,11 @@ export default function Arc({ studies, children }: ArcProps) {
           <div className="about-editorial-shell">
             <div className="about-delivery-header">
               <div className="about-section-heading">
-                <span>How ARC works</span>
-                <h2 id="arc-process-title">Three connected decisions. One operating loop.</h2>
+                <span>{t('how')}</span>
+                <h2 id="arc-process-title">{t('processTitle')}</h2>
               </div>
               <p>
-                Each phase ends with a concrete output and a decision gate before the next
-                commitment. The model is designed for complex operational change that must hold in
-                production.
+                {t('processDescription')}
               </p>
             </div>
 
@@ -324,7 +281,7 @@ export default function Arc({ studies, children }: ArcProps) {
               />
             </div>
 
-            <div className="about-delivery-grid" role="group" aria-label="ARC operating phases">
+            <div className="about-delivery-grid" role="group" aria-label={t('phasesLabel')}>
               {arcPhases.map((phase, index) => {
                 const Icon = phase.icon;
                 const isActive = activePhaseIndex === index;
@@ -363,7 +320,7 @@ export default function Arc({ studies, children }: ArcProps) {
               <div className="about-delivery-detail-summary">
                 <div className="about-delivery-detail-label">
                   <span>{activePhase.step}</span>
-                  <em>{activePhase.title} output</em>
+                  <em>{t('output', {phase: activePhase.title})}</em>
                 </div>
                 <div className="about-delivery-detail-title">
                   <ActivePhaseIcon aria-hidden="true" />
@@ -378,8 +335,8 @@ export default function Arc({ studies, children }: ArcProps) {
               </ul>
             </motion.div>
 
-            <div className="arc-operating-keys mt-6" aria-label="ARC is designed for">
-              <span>Best for</span>
+            <div className="arc-operating-keys mt-6" aria-label={t('bestFor')}>
+              <span>{t('bestFor')}</span>
               {buyerFit.map((item) => (
                 <span key={item}>{item}</span>
               ))}
@@ -401,15 +358,12 @@ export default function Arc({ studies, children }: ArcProps) {
               viewport={{ once: true, amount: 0.25 }}
               transition={{ duration: 0.45 }}
             >
-              <span>Why ARC is different</span>
-              <h2 id="arc-difference-title">One loop, not three disconnected vendors.</h2>
-              <p>{differenceStatement}</p>
-              <p>
-                Traditional delivery advises, hands off, then supports. ARC diagnoses, builds, and
-                operates against the same outcome.
-              </p>
+              <span>{t('differenceEyebrow')}</span>
+              <h2 id="arc-difference-title">{t('differenceTitle')}</h2>
+              <p>{t('differenceStatement')}</p>
+              <p>{t('differenceDescription')}</p>
               <Link href="/aboutus#founders" className="about-trust-primary-link">
-                Meet the team accountable for delivery
+                {t('meetTeam')}
                 <ArrowUpRight aria-hidden="true" />
               </Link>
             </motion.div>
@@ -455,14 +409,13 @@ export default function Arc({ studies, children }: ArcProps) {
                 <div className="home-proof-title">
                   <SectionBrandMark size="sm" className="mt-0.5" />
                   <div>
-                    <p>Proof in production</p>
-                    <h2 id="arc-cases-title">Operating records. Delivery before claims.</h2>
+                    <p>{t('proofEyebrow')}</p>
+                    <h2 id="arc-cases-title">{t('proofTitle')}</h2>
                   </div>
                 </div>
                 <div className="home-proof-intro">
                   <p>
-                    Each record stays attached to the business problem, the system delivered, and
-                    its production status. Performance figures remain unpublished until audited.
+                    {t('proofDescription')}
                   </p>
                   <div className="home-proof-actions">
                     {orderedStudies.map((study) => (
@@ -475,7 +428,7 @@ export default function Arc({ studies, children }: ArcProps) {
                           })
                         }
                       >
-                        {`${study.clientName} record ->`}
+                        {t('record', {client: study.clientName})}
                       </Link>
                     ))}
                   </div>
@@ -511,10 +464,8 @@ export default function Arc({ studies, children }: ArcProps) {
                     />
                   </div>
                   <div className="home-proof-caption">
-                    <strong>Live systems, not slideware.</strong>
-                    <span>
-                      Named operating records with delivery scope and production context.
-                    </span>
+                    <strong>{t('liveSystems')}</strong>
+                    <span>{t('liveSystemsDescription')}</span>
                   </div>
                 </div>
 
@@ -531,9 +482,9 @@ export default function Arc({ studies, children }: ArcProps) {
                         </em>
                         <h3>{caseDisplayTitle[study.slug] ?? study.title}</h3>
                         <p>
-                          <strong>Problem:</strong> {study.problem}{' '}
-                          <strong>What changed:</strong> {study.summary}{' '}
-                          <strong>Status:</strong> {study.deploymentStatus}.
+                          <strong>{t('problem')}</strong> {study.problem}{' '}
+                          <strong>{t('whatChanged')}</strong> {study.summary}{' '}
+                          <strong>{t('status')}</strong> {study.deploymentStatus}.
                         </p>
                         <Link
                           href={`/case-studies/${study.slug}`}
@@ -544,7 +495,7 @@ export default function Arc({ studies, children }: ArcProps) {
                             })
                           }
                         >
-                          View case snapshot
+                          {t('viewSnapshot')}
                           <ArrowUpRight aria-hidden="true" />
                         </Link>
                       </article>
@@ -572,18 +523,15 @@ export default function Arc({ studies, children }: ArcProps) {
           >
             <div className="industries-mandate-mark">
               <SectionBrandMark surface="dark" size="sm" />
-              <span>Apply ARC</span>
+              <span>{t('apply')}</span>
             </div>
             <div className="industries-mandate-content">
               <p className="industries-mandate-quote">
-                One accountable team from constraint to production.
+                {t('closingQuote')}
               </p>
               <div className="industries-mandate-cta">
-                <h2 id="arc-closing-title">Want ARC applied to your operations?</h2>
-                <p>
-                  Share the constraint, target outcome, and current stack. We&apos;ll map the
-                  fastest path to operational gain.
-                </p>
+                <h2 id="arc-closing-title">{t('closingTitle')}</h2>
+                <p>{t('closingDescription')}</p>
                 <div className="industries-mandate-actions">
                   <Link
                     href="/contact"
@@ -594,7 +542,7 @@ export default function Arc({ studies, children }: ArcProps) {
                       })
                     }
                   >
-                    Request ARC Assessment
+                    {t('requestAssessment')}
                   </Link>
                   <Link
                     href="/case-studies"
@@ -605,7 +553,7 @@ export default function Arc({ studies, children }: ArcProps) {
                       })
                     }
                   >
-                    See Case Studies
+                    {t('seeCaseStudies')}
                     <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
                   </Link>
                 </div>

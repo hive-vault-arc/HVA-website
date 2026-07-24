@@ -3,6 +3,8 @@ import {
   getSanityPerspectiveBySlug,
 } from './sanity-content';
 import type { ContentSeo } from './content-seo';
+import type {AppLocale} from '@/i18n/config';
+import type {LocalizedContentMeta} from './localized-content';
 
 export type PerspectiveSection =
   | { type: 'paragraph'; content: string }
@@ -12,7 +14,7 @@ export type PerspectiveSection =
   | { type: 'pullquote'; content: string; attribution?: string }
   | { type: 'faq'; items: { question: string; answer: string }[] };
 
-export type Perspective = {
+export type Perspective = LocalizedContentMeta & {
   slug: string;
   title: string;
   subtitle: string;
@@ -485,12 +487,15 @@ export const PERSPECTIVES: Perspective[] = [
   },
 ];
 
-export function getAllPerspectives(): Promise<Perspective[]> {
-  return getAllSanityPerspectives();
+export function getAllPerspectives(locale: AppLocale = 'en'): Promise<Perspective[]> {
+  return getAllSanityPerspectives(locale);
 }
 
-export async function getPerspectiveBySlug(slug: string): Promise<Perspective> {
-  const perspective = await getSanityPerspectiveBySlug(slug);
+export async function getPerspectiveBySlug(
+  slug: string,
+  locale: AppLocale = 'en'
+): Promise<Perspective> {
+  const perspective = await getSanityPerspectiveBySlug(slug, locale);
   if (!perspective) {
     throw new Error(`Perspective not found: ${slug}`);
   }
@@ -498,7 +503,11 @@ export async function getPerspectiveBySlug(slug: string): Promise<Perspective> {
   return perspective;
 }
 
-export async function getRelatedPerspectives(currentSlug: string, limit = 3): Promise<Perspective[]> {
-  const perspectives = await getAllPerspectives();
+export async function getRelatedPerspectives(
+  currentSlug: string,
+  limit = 3,
+  locale: AppLocale = 'en'
+): Promise<Perspective[]> {
+  const perspectives = await getAllPerspectives(locale);
   return perspectives.filter((perspective) => perspective.slug !== currentSlug).slice(0, limit);
 }

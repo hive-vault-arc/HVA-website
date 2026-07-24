@@ -2,8 +2,9 @@
 
 import { useState, type CSSProperties, type ElementType } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
+import {Link} from '@/i18n/navigation';
 import { MotionConfig, motion, useScroll, useTransform } from 'framer-motion';
+import {useLocale, useTranslations} from 'next-intl';
 import {
   ArrowUpRight,
   Compass,
@@ -36,124 +37,30 @@ type AboutProps = {
   readonly teamMembers: readonly TeamMember[];
 };
 
-type DeliveryStep = {
+type DeliveryStepCopy = {
   number: string;
   title: string;
   description: string;
-  icon: ElementType;
   checkpoints: string[];
 };
 
-type CapabilityPillar = {
+type CapabilityPillarCopy = {
   number: string;
   slug: string;
   title: string;
   description: string;
   outcome: string;
-  phase: 'Assess' | 'Build' | 'Operate';
+  phase: string;
 };
 
-type TrustSignal = {
+type TrustSignalCopy = {
+  id: string;
   title: string;
   description: string;
-  href: string;
   linkLabel: string;
-  icon: ElementType;
 };
 
-const deliverySteps: DeliveryStep[] = [
-  {
-    number: '01',
-    title: 'Assess',
-    description: 'Map friction, define target architecture, and sequence the transformation before a single line of code is written.',
-    icon: Compass,
-    checkpoints: ['Define measurable outcomes', 'Audit current systems and blockers', 'Sequence strategy into milestones'],
-  },
-  {
-    number: '02',
-    title: 'Re-engineer',
-    description: 'Build the systems, deploy the intelligence, and wire the infrastructure in transparent sprint increments.',
-    icon: Settings2,
-    checkpoints: ['Deliver AI, software, and cloud layers', 'Validate against real outcomes', 'Iterate through demos and QA loops'],
-  },
-  {
-    number: '03',
-    title: 'Command',
-    description: 'Stabilize, monitor, and evolve the operation with the same team retaining long-term ownership.',
-    icon: Terminal,
-    checkpoints: ['Operate production systems', 'Monitor reliability and performance', 'Evolve as requirements grow'],
-  },
-];
-
-const capabilityPillars: CapabilityPillar[] = [
-  {
-    number: '01',
-    slug: 'strategy-business',
-    title: 'Strategy',
-    description: 'Enterprise strategy, operating models, and transformation roadmaps.',
-    outcome: 'Shape the operating roadmap before build starts.',
-    phase: 'Assess',
-  },
-  {
-    number: '02',
-    slug: 'technology-consulting',
-    title: 'Technology',
-    description: 'Architecture, platforms, integration, and emerging technology decisions.',
-    outcome: 'Decide the architecture and integration path.',
-    phase: 'Assess',
-  },
-  {
-    number: '03',
-    slug: 'ai-data-analytics',
-    title: 'AI & Data',
-    description: 'AI engineering, data strategy, analytics, and intelligent automation.',
-    outcome: 'Turn data and workflows into useful intelligence.',
-    phase: 'Build',
-  },
-  {
-    number: '04',
-    slug: 'software-engineering',
-    title: 'Software',
-    description: 'Custom software, product engineering, and digital experiences.',
-    outcome: 'Ship the product layer people actually use.',
-    phase: 'Build',
-  },
-  {
-    number: '05',
-    slug: 'cloud-infrastructure',
-    title: 'Cloud',
-    description: 'Cloud platforms, DevOps, security, and infrastructure modernization.',
-    outcome: 'Make the system reliable, secure, and observable.',
-    phase: 'Build',
-  },
-  {
-    number: '06',
-    slug: 'operations-managed',
-    title: 'Operations',
-    description: 'Managed services, automation, support, and continuous performance improvement.',
-    outcome: 'Keep production improving after launch.',
-    phase: 'Operate',
-  },
-];
-
-const companyFacts = [
-  {
-    value: 'Founder-led',
-    label: 'Senior ownership from first decision to live operation',
-  },
-  {
-    value: 'Tangier, Morocco',
-    label: 'Serving organizations across Morocco, France, and MENA',
-  },
-  {
-    value: 'Six capabilities',
-    label: 'Strategy, technology, AI, software, cloud, and operations',
-  },
-  {
-    value: 'One operating loop',
-    label: 'Assess, Re-engineer, and Command without a delivery handoff',
-  },
-] as const;
+const deliveryStepIcons: ElementType[] = [Compass, Settings2, Terminal];
 
 const featuredProof = {
   slug: 'top-tier-crm-transformation-program-real-estate-operations',
@@ -167,36 +74,28 @@ const featuredProof = {
   imageAlt: 'ImmoWorld real estate CRM operating system engagement',
 } as const;
 
-const trustSignals: TrustSignal[] = [
+const trustSignalConfig = [
   {
-    title: 'Named leadership',
-    description: 'Founder profiles show who owns strategy, engineering, product systems, cloud, and production reliability.',
+    id: 'leadership',
     href: '#founders',
-    linkLabel: 'Meet the founders',
     icon: UsersRound,
   },
   {
-    title: 'Published delivery proof',
-    description: 'The ImmoWorld case records the business challenge, delivered system, and production status.',
+    id: 'proof',
     href: `/case-studies/${featuredProof.slug}`,
-    linkLabel: 'Read the case study',
     icon: FileCheck2,
   },
   {
-    title: 'Public legal information',
-    description: 'Our publisher, Tangier location, publication director, hosting provider, and official contacts are documented.',
+    id: 'legal',
     href: '/mentions-legales',
-    linkLabel: 'View legal information',
     icon: Landmark,
   },
   {
-    title: 'Clear data practices',
-    description: 'Our privacy policy explains what we collect, why we collect it, and how Law 09-08 and GDPR obligations are addressed.',
+    id: 'privacy',
     href: '/privacy-policy',
-    linkLabel: 'Read the privacy policy',
     icon: LockKeyhole,
   },
-];
+] as const;
 
 const reveal = {
   initial: { opacity: 0, y: 18 },
@@ -206,10 +105,25 @@ const reveal = {
 };
 
 const About = ({ teamMembers }: AboutProps) => {
+  const t = useTranslations('About');
+  const locale = useLocale();
   const { motionReduced } = useAnimationQuality();
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
   const [activeDeliveryStep, setActiveDeliveryStep] = useState(0);
+  const deliveryStepCopy = t.raw('delivery.steps') as DeliveryStepCopy[];
+  const deliverySteps = deliveryStepCopy.map((step, index) => ({
+    ...step,
+    icon: deliveryStepIcons[index] ?? Compass,
+  }));
+  const capabilityPillars = t.raw('capabilities.items') as CapabilityPillarCopy[];
+  const companyFacts = t.raw('facts') as Array<{value: string; label: string}>;
+  const trustSignalCopy = t.raw('trust.items') as TrustSignalCopy[];
+  const trustSignals = trustSignalConfig.map((signal) => ({
+    ...signal,
+    ...trustSignalCopy.find((item) => item.id === signal.id)!,
+    href: signal.id === 'proof' && locale === 'fr' ? '/case-studies' : signal.href,
+  }));
   const activeDelivery = deliverySteps[activeDeliveryStep] ?? deliverySteps[0];
   const ActiveDeliveryIcon = activeDelivery.icon;
 
@@ -233,25 +147,21 @@ const About = ({ teamMembers }: AboutProps) => {
             >
               <div className="about-kicker">
                 <SectionBrandMark size="sm" eager />
-                <span>Who We Are</span>
+                <span>{t('hero.eyebrow')}</span>
               </div>
               <h1>
-                We advise. We build.
+                {t('hero.titleLineOne')}
                 <br />
-                We operate.
-                <em>One accountable partner.</em>
+                {t('hero.titleLineTwo')}
+                <em>{t('hero.emphasis')}</em>
               </h1>
-              <p>
-                Hive Vault Arc is a technology transformation partner combining strategy, AI
-                engineering, software, cloud, and managed operations into one production-minded
-                delivery model.
-              </p>
+              <p>{t('hero.description')}</p>
               <div className="about-hero-actions">
                 <Link href="/contact" className="about-button about-button-primary">
-                  Book a Call <ArrowUpRight aria-hidden="true" />
+                  {t('hero.primaryCta')} <ArrowUpRight aria-hidden="true" />
                 </Link>
                 <Link href="/capabilities" className="about-button about-button-secondary">
-                  View Capabilities <ArrowUpRight aria-hidden="true" />
+                  {t('hero.secondaryCta')} <ArrowUpRight aria-hidden="true" />
                 </Link>
               </div>
             </motion.div>
@@ -263,12 +173,12 @@ const About = ({ teamMembers }: AboutProps) => {
               transition={{ duration: 0.65, delay: 0.1 }}
             >
               <div className="about-hero-framework-card">
-                <span>ARC Framework</span>
-                <strong>Assess. Re-engineer. Command.</strong>
+                <span>{t('hero.frameworkLabel')}</span>
+                <strong>{t('hero.frameworkLoop')}</strong>
               </div>
               <Image
                 src="/Images/about/hva-team-strategy-room.webp"
-                alt="Technology leadership team reviewing global operations in a strategy room at night"
+                alt={t('hero.imageAlt')}
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 52vw"
@@ -276,7 +186,7 @@ const About = ({ teamMembers }: AboutProps) => {
               />
               <div className="about-hero-media-caption">
                 <SectionBrandMark surface="dark" size="sm" />
-                <span>Strategy to production</span>
+                <span>{t('hero.imageCaption')}</span>
               </div>
             </motion.div>
           </div>
@@ -284,7 +194,7 @@ const About = ({ teamMembers }: AboutProps) => {
 
         <section className="about-proof-strip" aria-labelledby="about-proof-heading">
           <div className="about-editorial-shell">
-            <h2 id="about-proof-heading" className="sr-only">Hive Vault Arc at a glance</h2>
+            <h2 id="about-proof-heading" className="sr-only">{t('factsHeading')}</h2>
             <div className="about-proof-grid">
               {companyFacts.map((fact) => (
                 <motion.article key={fact.value} className="about-proof-item" {...reveal}>
@@ -303,12 +213,12 @@ const About = ({ teamMembers }: AboutProps) => {
                 <div aria-hidden="true" className="arc-dark-grid" />
                 <div className="about-service-map-mark">
                   <SectionBrandMark surface="dark" size="sm" />
-                  <span>What We Do</span>
+                  <span>{t('capabilities.eyebrow')}</span>
                 </div>
-                <h2>What we do, in one view.</h2>
-                <p>Six connected capabilities move from business decision to reliable operation.</p>
+                <h2>{t('capabilities.title')}</h2>
+                <p>{t('capabilities.description')}</p>
                 <Link href="/capabilities#capability-pillars" className="about-service-map-link">
-                  Explore all capabilities <ArrowUpRight aria-hidden="true" />
+                  {t('capabilities.cta')} <ArrowUpRight aria-hidden="true" />
                 </Link>
               </div>
 
@@ -333,7 +243,7 @@ const About = ({ teamMembers }: AboutProps) => {
               <div className="about-service-map-media">
                 <Image
                   src="/Images/capabilities/hva-arc-framework-operating-model.webp"
-                  alt="ARC operating model workspace"
+                  alt={t('capabilities.imageAlt')}
                   fill
                   sizes="(max-width: 1040px) 100vw, 92vw"
                   className="object-cover"
@@ -341,9 +251,9 @@ const About = ({ teamMembers }: AboutProps) => {
                 <div className="about-service-map-media-caption">
                   <div>
                     <SectionBrandMark surface="dark" size="sm" />
-                    <span>ARC operating model</span>
+                    <span>{t('capabilities.imageLabel')}</span>
                   </div>
-                  <p>Strategy connected to delivery and operations</p>
+                  <p>{t('capabilities.imageCaption')}</p>
                 </div>
               </div>
             </motion.div>
@@ -354,10 +264,10 @@ const About = ({ teamMembers }: AboutProps) => {
           <div className="about-editorial-shell">
             <motion.div className="about-delivery-header" {...reveal}>
               <div className="about-section-heading">
-                <span>How We Deliver</span>
-                <h2>One team through every phase.</h2>
+                <span>{t('delivery.eyebrow')}</span>
+                <h2>{t('delivery.title')}</h2>
               </div>
-              <p>ARC turns strategy, engineering, and operations into one continuous accountability loop.</p>
+              <p>{t('delivery.description')}</p>
             </motion.div>
             <div className="about-delivery-progress" aria-hidden="true">
               <motion.span
@@ -418,7 +328,7 @@ const About = ({ teamMembers }: AboutProps) => {
             <motion.div className="about-proof-case-media" {...reveal}>
               <Image
                 src={featuredProof.image}
-                alt={featuredProof.imageAlt}
+                alt={t('proof.imageAlt')}
                 fill
                 sizes="(max-width: 767px) 100vw, 52vw"
                 className="object-cover"
@@ -427,13 +337,16 @@ const About = ({ teamMembers }: AboutProps) => {
             <motion.div className="about-proof-case-copy" {...reveal}>
               <div className="about-proof-case-client">
                 <span>{featuredProof.client}</span>
-                <span>{featuredProof.industry}</span>
+                <span>{t('proof.industry')}</span>
               </div>
-              <h2 id="about-proof-case-title">{featuredProof.title}</h2>
-              <p>{featuredProof.summary}</p>
-              <p className="about-proof-case-status">{featuredProof.status}.</p>
-              <Link href={`/case-studies/${featuredProof.slug}`} className="about-proof-case-link">
-                Read the ImmoWorld case study <ArrowUpRight aria-hidden="true" />
+              <h2 id="about-proof-case-title">{t('proof.title')}</h2>
+              <p>{t('proof.summary')}</p>
+              <p className="about-proof-case-status">{t('proof.status')}</p>
+              <Link
+                href={locale === 'fr' ? '/case-studies' : `/case-studies/${featuredProof.slug}`}
+                className="about-proof-case-link"
+              >
+                {t('proof.cta')} <ArrowUpRight aria-hidden="true" />
               </Link>
             </motion.div>
           </div>
@@ -443,11 +356,11 @@ const About = ({ teamMembers }: AboutProps) => {
           <div aria-hidden="true" className="arc-dark-grid" />
           <div className="about-editorial-shell about-trust-grid">
             <motion.div className="about-trust-copy" {...reveal}>
-              <span>Why buyers trust HVA</span>
-              <h2 id="about-trust-title">Trust should be verifiable.</h2>
-              <p>See who is responsible, what has shipped, how we operate, and how your information is handled.</p>
+              <span>{t('trust.eyebrow')}</span>
+              <h2 id="about-trust-title">{t('trust.title')}</h2>
+              <p>{t('trust.description')}</p>
               <Link href="/case-studies" className="about-trust-primary-link">
-                Review delivery proof <ArrowUpRight aria-hidden="true" />
+                {t('trust.cta')} <ArrowUpRight aria-hidden="true" />
               </Link>
             </motion.div>
             <div className="about-trust-ledger">
@@ -478,12 +391,9 @@ const About = ({ teamMembers }: AboutProps) => {
         <section id="founders" className="about-team-section">
           <div className="about-editorial-shell">
             <motion.div className="about-team-heading" {...reveal}>
-              <span>Our Team</span>
-              <h2>The People Behind Hive Vault Arc</h2>
-              <p>
-                Operators, engineers, and builders with deep expertise and a shared commitment to
-                solving complex problems that matter.
-              </p>
+              <span>{t('team.eyebrow')}</span>
+              <h2>{t('team.title')}</h2>
+              <p>{t('team.description')}</p>
             </motion.div>
 
             <div className="about-team-grid">
@@ -497,7 +407,7 @@ const About = ({ teamMembers }: AboutProps) => {
                     {...reveal}
                     transition={{ duration: 0.5, delay: index * 0.08 }}
                   >
-                    <a href={`/aboutus/our-people/${member.slug}`} className="about-team-card-link">
+                    <Link href={`/aboutus/our-people/${member.slug}`} className="about-team-card-link">
                       <div
                         className={`about-team-portrait about-team-portrait-${member.slug}`}
                         style={{ viewTransitionName: profileTransitionName } as CSSProperties}
@@ -517,10 +427,10 @@ const About = ({ teamMembers }: AboutProps) => {
                         <span className="about-team-position">{member.position}</span>
                         <p>{member.summary}</p>
                         <strong>
-                          View Profile <ArrowUpRight aria-hidden="true" />
+                          {t('team.viewProfile')} <ArrowUpRight aria-hidden="true" />
                         </strong>
                       </div>
-                    </a>
+                    </Link>
                   </motion.article>
                 );
               })}
@@ -531,11 +441,11 @@ const About = ({ teamMembers }: AboutProps) => {
         <section className="about-contact-strip" aria-labelledby="about-contact-title">
           <div className="about-editorial-shell about-contact-grid">
             <div>
-              <h2 id="about-contact-title">Start in Tangier. Work across borders.</h2>
-              <p>Direct access to the team responsible for the decision, delivery, and operation.</p>
+              <h2 id="about-contact-title">{t('contact.title')}</h2>
+              <p>{t('contact.description')}</p>
             </div>
             <address>
-              <span>Tangier, Morocco</span>
+              <span>{t('contact.location')}</span>
               <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
               <a href={`tel:${CONTACT_PHONE_E164}`}>{CONTACT_PHONE_DISPLAY}</a>
             </address>
@@ -544,11 +454,11 @@ const About = ({ teamMembers }: AboutProps) => {
 
         <BottomCTA
           variant="light"
-          headline="Bring us the outcome, not a prewritten solution."
-          subtext="We will map the right strategy, engineering, and operations path, then stay accountable through production."
-          primaryLabel="Book a Call"
+          headline={t('bottomCta.title')}
+          subtext={t('bottomCta.description')}
+          primaryLabel={t('bottomCta.primary')}
           primaryHref="/contact"
-          secondaryLabel="View Our Capabilities"
+          secondaryLabel={t('bottomCta.secondary')}
           secondaryHref="/capabilities"
         />
       </div>

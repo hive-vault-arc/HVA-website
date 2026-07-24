@@ -8,6 +8,8 @@ const imageFields = `
 
 const capabilitySummaryFields = `
   _id,
+  language,
+  translationStatus,
   title,
   "slug": slug.current,
   shortTitle,
@@ -26,7 +28,15 @@ const capabilitySummaryFields = `
     description,
     keywords,
     noIndex
-  }
+  },
+  "translationTargets": *[
+    _type == "translation.metadata" &&
+    references(^._id)
+  ][0].translations[].value->{
+    language,
+    translationStatus,
+    "slug": slug.current
+  }[translationStatus == "approved"]
 `;
 
 const capabilityFields = `
@@ -46,7 +56,12 @@ const capabilityFields = `
 `;
 
 export const allCapabilityProfilesQuery = defineQuery(`
-  *[_type == "capability" && defined(slug.current)]
+  *[
+    _type == "capability" &&
+    language == $locale &&
+    ($preview == true || translationStatus == "approved") &&
+    defined(slug.current)
+  ]
   | order(displayOrder asc, title asc) {
     ${capabilityFields}
   }
@@ -55,6 +70,8 @@ export const allCapabilityProfilesQuery = defineQuery(`
 export const featuredCapabilityProfilesQuery = defineQuery(`
   *[
     _type == "capability" &&
+    language == $locale &&
+    ($preview == true || translationStatus == "approved") &&
     defined(slug.current) &&
     featuredOnCapabilities == true
   ] | order(displayOrder asc, title asc) {
@@ -63,7 +80,12 @@ export const featuredCapabilityProfilesQuery = defineQuery(`
 `);
 
 export const capabilityProfileBySlugQuery = defineQuery(`
-  *[_type == "capability" && slug.current == $slug][0] {
+  *[
+    _type == "capability" &&
+    language == $locale &&
+    ($preview == true || translationStatus == "approved") &&
+    slug.current == $slug
+  ][0] {
     ${capabilityFields}
   }
 `);

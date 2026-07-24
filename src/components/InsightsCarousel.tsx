@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
-import Link from 'next/link';
+import {useTranslations} from 'next-intl';
+import {Link} from '@/i18n/navigation';
 import { motion } from 'framer-motion';
 import { ArrowRight, Pause, Play, ChevronLeft, ChevronRight } from '@/components/icons';
 
@@ -45,6 +46,7 @@ type InsightsCarouselProps = {
 };
 
 export default function InsightsCarousel({ items }: InsightsCarouselProps) {
+  const t = useTranslations('InsightsCarousel');
   const total = items.length;
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -116,15 +118,15 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
       <div className="text-center pt-10 pb-8 px-6">
         <div className="inline-flex items-center gap-3 mb-4">
           <span className="block h-px w-8 bg-[#E8A838]/[0.35]" />
-          <span className="text-[9px] font-bold uppercase tracking-[0.32em] text-[var(--section-label-color)]">Welcome to Hive Vault Arc</span>
+          <span className="text-[9px] font-bold uppercase tracking-[0.32em] text-[var(--section-label-color)]">{t('eyebrow')}</span>
           <span className="block h-px w-8 bg-[#E8A838]/[0.35]" />
         </div>
         <h2 className="font-headline text-[clamp(2rem,11vw,2.6rem)] md:text-5xl leading-[1.06] tracking-tight text-[#1A2535]">
-          Thinking, Testing,{' '}
-          <em className="not-italic text-[#566274]">Shipping.</em>
+          {t('title')}{' '}
+          <em className="not-italic text-[#566274]">{t('titleAccent')}</em>
         </h2>
         <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-[#566274]">
-          Field notes from programs we&apos;ve built and teams we&apos;ve transformed.
+          {t('description')}
         </p>
       </div>
 
@@ -197,7 +199,7 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
                 >
                   <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.22em] text-[#566274]">
                     <span className="text-[#1A2535] font-extrabold">
-                      {item.type === 'blog' ? 'Article' : 'Case Study'}
+                      {item.type === 'blog' ? t('article') : t('caseStudy')}
                     </span>
                     {'  '}{item.date}
                   </p>
@@ -218,7 +220,7 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
                 >
                   <p className="mb-1 text-[9px] font-bold uppercase tracking-[0.22em] text-[#566274]">
                     <span className="text-[#1A2535] font-extrabold">
-                      {item.type === 'blog' ? 'Article' : 'Case Study'}
+                      {item.type === 'blog' ? t('article') : t('caseStudy')}
                     </span>
                     {'  '}{item.date}
                   </p>
@@ -237,7 +239,7 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
                                text-[10px] font-bold uppercase tracking-[0.18em]
                                hover:bg-[#C8891C] transition-colors duration-200"
                   >
-                    Learn More <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                    {t('learnMore')} <ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </Link>
                 </motion.div>
 
@@ -254,7 +256,7 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
           className="w-11 h-11 border border-[#DDE3EA] flex items-center justify-center
                      text-[#566274] hover:bg-[#E8A838] hover:text-[#1A2535] hover:border-[#E8A838]
                      transition-colors duration-200"
-          aria-label={isPaused ? 'Play' : 'Pause'}
+          aria-label={isPaused ? t('play') : t('pause')}
         >
           {isPaused ? <Play className="w-3.5 h-3.5" /> : <Pause className="w-3.5 h-3.5" />}
         </button>
@@ -263,7 +265,7 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
           className="w-11 h-11 border border-[#DDE3EA] flex items-center justify-center
                      text-[#566274] hover:bg-[#E8A838] hover:text-[#1A2535] hover:border-[#E8A838]
                      transition-colors duration-200"
-          aria-label="Previous"
+          aria-label={t('previous')}
         >
           <ChevronLeft className="w-4 h-4" />
         </button>
@@ -272,7 +274,7 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
           className="w-11 h-11 border border-[#DDE3EA] flex items-center justify-center
                      text-[#566274] hover:bg-[#E8A838] hover:text-[#1A2535] hover:border-[#E8A838]
                      transition-colors duration-200"
-          aria-label="Next"
+          aria-label={t('next')}
         >
           <ChevronRight className="w-4 h-4" />
         </button>

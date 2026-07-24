@@ -2,8 +2,10 @@
 
 import type { CaseStudy } from '../lib/proof';
 import InsightIndexPage, { type PageItem } from '../components/InsightIndexPage';
+import {useTranslations} from 'next-intl';
 
 export default function CaseStudies({ studies }: { readonly studies: CaseStudy[] }) {
+  const t = useTranslations('CaseStudiesIndex');
   const items: PageItem[] = studies.map((s) => ({
     href: `/case-studies/${s.slug}`,
     title: s.title,
@@ -11,27 +13,27 @@ export default function CaseStudies({ studies }: { readonly studies: CaseStudy[]
     tag: s.industry,
     meta: s.deploymentStatus,
     coverImage: s.assets.coverImage || undefined,
-    evidenceLabel: s.hasClientEvidence ? 'Client letter available' : undefined,
+    evidenceLabel: s.hasClientEvidence ? t('evidenceAvailable') : undefined,
   }));
 
   const industries = Array.from(new Set(studies.map((s) => s.industry)));
 
   return (
     <InsightIndexPage
-      eyebrow="Transformation Proof"
-      headline="Consulting-Led"
-      headlineItalic="Case Studies"
-      description="Each case documents the business challenge, execution architecture, and production context without publishing unverified performance claims."
+      eyebrow={t('eyebrow')}
+      headline={t('headline')}
+      headlineItalic={t('headlineItalic')}
+      description={t('description')}
       items={items}
       filters={industries}
       filterKey={(item) => item.tag}
-      emptyMessage="No case studies in this category yet."
+      emptyMessage={t('empty')}
       bottomCta={{
-        headline: 'Ready to See How Transformation Looks in Production?',
-        subtext: "Start with a discovery call. We'll show you exactly how strategy, architecture, and delivery are aligned in real environments.",
-        primaryLabel: 'Start Discovery',
+        headline: t('bottomCta.title'),
+        subtext: t('bottomCta.description'),
+        primaryLabel: t('bottomCta.primary'),
         primaryHref: '/contact',
-        secondaryLabel: 'View Solution Programs',
+        secondaryLabel: t('bottomCta.secondary'),
         secondaryHref: '/capabilities/solution-programs',
       }}
     />

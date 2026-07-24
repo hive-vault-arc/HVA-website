@@ -3,6 +3,8 @@ import {
   getSanityPostBySlug,
 } from './sanity-content';
 import type { ContentSeo } from './content-seo';
+import type {AppLocale} from '@/i18n/config';
+import type {LocalizedContentMeta} from './localized-content';
 
 export type ContentSection =
   | { type: 'paragraph'; content: string }
@@ -13,7 +15,7 @@ export type ContentSection =
   | { type: 'list'; items: string[] }
   | { type: 'faq'; items: { question: string; answer: string }[] };
 
-export type BlogPost = {
+export type BlogPost = LocalizedContentMeta & {
   slug: string;
   title: string;
   subtitle: string;
@@ -1036,18 +1038,22 @@ export const POSTS: BlogPost[] = [
   },
 ];
 
-export function getAllPosts(): Promise<BlogPost[]> {
-  return getAllSanityPosts();
+export function getAllPosts(locale: AppLocale = 'en'): Promise<BlogPost[]> {
+  return getAllSanityPosts(locale);
 }
 
-export async function getPostBySlug(slug: string): Promise<BlogPost> {
-  const post = await getSanityPostBySlug(slug);
+export async function getPostBySlug(slug: string, locale: AppLocale = 'en'): Promise<BlogPost> {
+  const post = await getSanityPostBySlug(slug, locale);
   if (!post) throw new Error(`Blog post not found: ${slug}`);
   return post;
 }
 
-export async function getRelatedPosts(currentSlug: string, limit = 3): Promise<BlogPost[]> {
-  const posts = await getAllPosts();
+export async function getRelatedPosts(
+  currentSlug: string,
+  limit = 3,
+  locale: AppLocale = 'en'
+): Promise<BlogPost[]> {
+  const posts = await getAllPosts(locale);
   return posts.filter((post) => post.slug !== currentSlug).slice(0, limit);
 }
 

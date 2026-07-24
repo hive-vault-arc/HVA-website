@@ -68,13 +68,13 @@ describe('Legacy Redirect Rules', () => {
           permanent: true,
         },
         {
-          source: '/:locale(en|fr|ar|es)/whoweare/abouthva',
-          destination: '/aboutus',
+          source: '/fr/whoweare/abouthva',
+          destination: '/fr/qui-sommes-nous',
           permanent: true,
         },
         {
-          source: '/:locale(en|fr|ar|es)/abouthva/people/:employee',
-          destination: '/aboutus/our-people/:employee',
+          source: '/fr/abouthva/people/:employee',
+          destination: '/fr/qui-sommes-nous/equipe/:employee',
           permanent: true,
         },
         {
@@ -98,28 +98,43 @@ describe('Legacy Redirect Rules', () => {
           permanent: true,
         },
         {
-          source: '/:locale(en|fr|ar|es)/services',
-          destination: '/:locale/capabilities',
+          source: '/fr/services',
+          destination: '/fr/expertises',
           permanent: true,
         },
         {
-          source: '/:locale(en|fr|ar|es)/services/in-detail',
-          destination: '/capabilities/in-detail',
+          source: '/fr/services/in-detail',
+          destination: '/fr/expertises/en-detail',
           permanent: true,
         },
         {
-          source: '/:locale(en|fr|ar|es)/services/solution-programs',
-          destination: '/capabilities/solution-programs',
+          source: '/fr/services/solution-programs',
+          destination: '/fr/expertises/programmes-solutions',
           permanent: true,
         },
         {
-          source: '/:locale(en|fr|ar|es)/capabilities/in-detail',
-          destination: '/capabilities/in-detail',
+          source: '/fr/capabilities/in-detail',
+          destination: '/fr/expertises/en-detail',
           permanent: true,
         },
         {
-          source: '/:locale(en|fr|ar|es)/capabilities/solution-programs',
-          destination: '/capabilities/solution-programs',
+          source: '/fr/capabilities/solution-programs',
+          destination: '/fr/expertises/programmes-solutions',
+          permanent: true,
+        },
+        {
+          source: '/fr/capabilities/:slug',
+          destination: '/fr/expertises/:slug',
+          permanent: true,
+        },
+        {
+          source: '/en/:path*',
+          destination: '/:path*',
+          permanent: true,
+        },
+        {
+          source: '/services-digitaux-tanger',
+          destination: '/fr/services-digitaux-tanger',
           permanent: true,
         },
       ])

@@ -1,9 +1,10 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
+import {Link} from '@/i18n/navigation';
 import Image from 'next/image';
 import { MotionConfig, motion, useScroll, useTransform } from 'framer-motion';
+import {useTranslations} from 'next-intl';
 import {
   ArrowRight,
   ArrowUpRight,
@@ -20,10 +21,9 @@ import { useAnimationQuality } from '../lib/animationQuality';
 import BottomCTA from '../components/BottomCTA';
 import SectionBrandMark from '../components/SectionBrandMark';
 import {
-  BOT_DELIVERY_MODEL,
-  CAPABILITY_DETAIL_SECTIONS,
   CAPABILITY_SOLUTION_PROGRAM_DETAILS,
 } from '../lib/capabilities-content';
+import type {CapabilityDetailSection} from '../lib/capabilities-content';
 
 function getDetailIcon(id: string, cls = 'h-5 w-5', sw = 1.5) {
   switch (id) {
@@ -53,14 +53,8 @@ const capabilityImages: Record<string, string> = {
   'operations-managed': '/Images/capabilities/hva-operations-managed-capability.webp',
 };
 
-const heroStats = [
-  { value: '6', label: 'Service pillars' },
-  { value: '3', label: 'ARC phases' },
-  { value: 'Comprehensive', label: 'Capability coverage' },
-];
-
-const arcSignals = ['Clear diagnosis', 'Production build', 'Ongoing ownership'];
-const featuredPrograms = CAPABILITY_SOLUTION_PROGRAM_DETAILS.slice(0, 3);
+type ProgramCopy = {category: string; name: string; summary: string};
+type PhaseCopy = {title: string; detail: string};
 
 const fadeUp = {
   hidden: { opacity: 0, y: 18 },
@@ -68,9 +62,20 @@ const fadeUp = {
 };
 
 const CapabilitiesInDetail: React.FC = () => {
+  const t = useTranslations('CapabilitiesDetail');
+  const capabilitiesT = useTranslations('Capabilities');
   const { motionReduced } = useAnimationQuality();
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const detailSections = t.raw('pillars.items') as CapabilityDetailSection[];
+  const heroStats = t.raw('hero.stats') as Array<{value: string; label: string}>;
+  const arcSignals = t.raw('arc.signals') as string[];
+  const arcPhases = capabilitiesT.raw('botPhases') as PhaseCopy[];
+  const programCopy = capabilitiesT.raw('programs') as ProgramCopy[];
+  const featuredPrograms = CAPABILITY_SOLUTION_PROGRAM_DETAILS.slice(0, 3).map((program, index) => ({
+    ...program,
+    ...programCopy[index],
+  }));
 
   return (
     <MotionConfig reducedMotion={motionReduced ? 'always' : 'never'}>
@@ -90,23 +95,23 @@ const CapabilitiesInDetail: React.FC = () => {
             >
               <motion.div variants={fadeUp} transition={{ duration: 0.45 }} className="cap-detail-mark">
                 <SectionBrandMark size="sm" />
-                <span>Capabilities in detail</span>
+                <span>{t('hero.eyebrow')}</span>
               </motion.div>
 
               <motion.h1 variants={fadeUp} transition={{ duration: 0.5 }}>
-                Capability depth, without the consulting maze.
+                {t('hero.title')}
               </motion.h1>
 
               <motion.p variants={fadeUp} transition={{ duration: 0.5 }} className="cap-detail-hero-copy">
-                Six service pillars mapped to the decisions clients actually need: what to scope, what to build, and what HVA keeps accountable after launch.
+                {t('hero.description')}
               </motion.p>
 
               <motion.div variants={fadeUp} transition={{ duration: 0.5 }} className="cap-detail-actions">
                 <Link href="#capability-map" className="sharp-edge btn-primary">
-                  View the map
+                  {t('hero.primaryCta')}
                 </Link>
                 <Link href="/capabilities/solution-programs" className="sharp-edge btn-outlined">
-                  Solution programs
+                  {t('hero.secondaryCta')}
                 </Link>
               </motion.div>
             </motion.div>
@@ -119,7 +124,7 @@ const CapabilitiesInDetail: React.FC = () => {
             >
               <div className="cap-detail-hero-panel-head">
                 <Layers3 className="h-5 w-5" strokeWidth={1.5} />
-                <strong>At a glance</strong>
+                <strong>{t('hero.panelTitle')}</strong>
               </div>
               <div className="cap-detail-stat-grid">
                 {heroStats.map((stat) => (
@@ -130,15 +135,15 @@ const CapabilitiesInDetail: React.FC = () => {
                 ))}
               </div>
               <p>
-                Start with a pillar, then move into ARC delivery when the scope is ready to become production work.
+                {t('hero.panelDescription')}
               </p>
             </motion.aside>
           </div>
         </section>
 
-        <nav className="cap-detail-index" aria-label="Capability sections">
+        <nav className="cap-detail-index" aria-label={t('indexAria')}>
           <div className="cap-detail-shell cap-detail-index-grid">
-            {CAPABILITY_DETAIL_SECTIONS.map((domain, index) => (
+            {detailSections.map((domain, index) => (
               <a key={domain.id} href={`#pillar-${domain.id}`} className="cap-detail-index-item">
                 <span>{String(index + 1).padStart(2, '0')}</span>
                 {getDetailIcon(domain.id, 'h-4 w-4')}
@@ -153,16 +158,14 @@ const CapabilitiesInDetail: React.FC = () => {
             <div className="cap-detail-section-head">
               <div className="cap-detail-mark">
                 <SectionBrandMark size="sm" />
-                <span>Capability map</span>
+                <span>{t('pillars.eyebrow')}</span>
               </div>
-              <h2>Choose the layer that matches the problem.</h2>
-              <p>
-                Each card keeps the promise short. Open coverage only when you need the deeper list.
-              </p>
+              <h2>{t('pillars.title')}</h2>
+              <p>{t('pillars.description')}</p>
             </div>
 
             <div className="cap-detail-pillar-grid">
-              {CAPABILITY_DETAIL_SECTIONS.map((domain, index) => (
+              {detailSections.map((domain, index) => (
                 <motion.article
                   key={domain.id}
                   id={`pillar-${domain.id}`}
@@ -175,7 +178,7 @@ const CapabilitiesInDetail: React.FC = () => {
                   <div className="cap-detail-card-media">
                     <Image
                       src={capabilityImages[domain.id]}
-                      alt={`${domain.title} capability`}
+                      alt={t('pillars.imageAlt', {title: domain.title})}
                       fill
                       sizes="(max-width: 900px) 100vw, 50vw"
                       className="object-cover"
@@ -190,20 +193,20 @@ const CapabilitiesInDetail: React.FC = () => {
                     </div>
                     <p>{domain.briefLine}</p>
 
-                    <ul className="cap-detail-chip-list" aria-label={`${domain.title} core areas`}>
+                    <ul className="cap-detail-chip-list" aria-label={t('pillars.coreAreas', {title: domain.title})}>
                       {domain.briefBullets.map((item) => (
                         <li key={item}>{item}</li>
                       ))}
                     </ul>
 
                     <div className="cap-detail-outcome">
-                      <span>Primary outcome</span>
+                      <span>{t('pillars.primaryOutcome')}</span>
                       <strong>{domain.relatedOutcomes[0]}</strong>
                     </div>
 
                     <details className="cap-detail-more">
                       <summary>
-                        Full coverage
+                        {t('pillars.fullCoverage')}
                         <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.7} />
                       </summary>
                       <div className="cap-detail-more-content">
@@ -217,7 +220,7 @@ const CapabilitiesInDetail: React.FC = () => {
                     </details>
 
                     <Link href={`/capabilities/${domain.id}`} className="cap-detail-card-link">
-                      Open capability
+                      {t('pillars.openCapability')}
                       <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={1.7} />
                     </Link>
                   </div>
@@ -238,12 +241,10 @@ const CapabilitiesInDetail: React.FC = () => {
             >
               <div className="cap-detail-mark cap-detail-mark-dark">
                 <SectionBrandMark surface="dark" size="sm" />
-                <span>ARC delivery</span>
+                <span>{t('arc.eyebrow')}</span>
               </div>
-              <h2>Capability only matters when it reaches production</h2>
-              <p>
-                HVA connects diagnosis, engineering, and managed operations in one accountable loop.
-              </p>
+              <h2>{t('arc.title')}</h2>
+              <p>{t('arc.description')}</p>
             </motion.div>
 
             <motion.div
@@ -253,8 +254,8 @@ const CapabilitiesInDetail: React.FC = () => {
               transition={{ duration: 0.45, delay: 0.08 }}
               className="cap-detail-arc-panel"
             >
-              {BOT_DELIVERY_MODEL.phases.map((phase, index) => (
-                <article key={phase.id} className="cap-detail-arc-phase">
+              {arcPhases.map((phase, index) => (
+                <article key={phase.title} className="cap-detail-arc-phase">
                   <span>{String(index + 1).padStart(2, '0')}</span>
                   <h3>{phase.title}</h3>
                   <p>{phase.detail}</p>
@@ -284,9 +285,9 @@ const CapabilitiesInDetail: React.FC = () => {
             <div className="cap-detail-section-head cap-detail-section-head-center">
               <div className="cap-detail-mark">
                 <SectionBrandMark size="sm" />
-                <span>From capability to program</span>
+                <span>{t('programs.eyebrow')}</span>
               </div>
-              <h2>When scope is clear, use a ready delivery path.</h2>
+              <h2>{t('programs.title')}</h2>
             </div>
 
             <div className="cap-detail-program-grid">
@@ -300,7 +301,7 @@ const CapabilitiesInDetail: React.FC = () => {
                   <strong>{program.name}</strong>
                   <em>{program.summary}</em>
                   <span className="cap-detail-program-link">
-                    View program <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={1.7} />
+                    {t('programs.view')} <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={1.7} />
                   </span>
                 </Link>
               ))}
@@ -310,11 +311,11 @@ const CapabilitiesInDetail: React.FC = () => {
 
         <BottomCTA
           variant="light"
-          headline="Need this mapped to your business constraints?"
-          subtext="We align the right pillar, program, and operating model before execution starts."
-          primaryLabel="Book Discovery Call"
+          headline={t('bottomCta.title')}
+          subtext={t('bottomCta.description')}
+          primaryLabel={t('bottomCta.primary')}
           primaryHref="/contact"
-          secondaryLabel="Back to Capabilities"
+          secondaryLabel={t('bottomCta.secondary')}
           secondaryHref="/capabilities"
         />
       </div>

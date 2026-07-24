@@ -1,6 +1,7 @@
 'use client';
 
-import Link from 'next/link';
+import {Link} from '@/i18n/navigation';
+import {useTranslations} from 'next-intl';
 import { motion } from 'framer-motion';
 import { ArrowRight, ArrowUpRight } from '@/components/icons';
 import SectionBrandMark from './SectionBrandMark';
@@ -24,6 +25,7 @@ export default function BottomCTA({
   secondaryHref,
   variant = 'dark',
 }: BottomCTAProps) {
+  const t = useTranslations('Common');
   if (variant === 'blue') {
     return (
       <section className="cta-banner bg-[#E8A838] py-20 px-6 md:px-8">
@@ -121,7 +123,7 @@ export default function BottomCTA({
               <div className="mb-5 flex items-center gap-3">
                 <SectionBrandMark surface="dark" size="sm" />
                 <p className="text-[var(--section-label-color-dark)] text-[10px] font-bold tracking-[0.22em] uppercase">
-                  Next Step
+                  {t('nextStep')}
                 </p>
               </div>
               <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-6xl leading-tight mb-6">

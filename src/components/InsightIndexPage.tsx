@@ -1,9 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
+import {Link} from '@/i18n/navigation';
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import {useLocale, useTranslations} from 'next-intl';
 import { ArrowLeft, ArrowRight, ArrowUpRight } from '@/components/icons';
 import BottomCTA from './BottomCTA';
 import SectionBrandMark from './SectionBrandMark';
@@ -53,16 +54,16 @@ type Props = {
 
 /* ── Helpers ─────────────────────────────────────────────────────────────── */
 
-function fmt(iso: string) {
-  return new Date(iso).toLocaleDateString('en-GB', {
+function fmt(iso: string, locale: string) {
+  return new Date(iso).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-GB', {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
   });
 }
 
-function fmtShort(iso: string) {
-  return new Date(iso).toLocaleDateString('en-GB', {
+function fmtShort(iso: string, locale: string) {
+  return new Date(iso).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-GB', {
     day: 'numeric',
     month: 'short',
   });
@@ -90,6 +91,7 @@ function ImagePlaceholder({ tag, aspect = 'square' }: { tag: string; aspect?: 'v
 /* ── Empty state ─────────────────────────────────────────────────────────── */
 
 function EmptyState({ message, backHref }: { message: string; backHref?: string }) {
+  const t = useTranslations('CollectionUi');
   return (
     <section className="max-w-[var(--site-frame)] mx-auto px-4 md:px-8 py-32">
       <motion.div
@@ -108,24 +110,24 @@ function EmptyState({ message, backHref }: { message: string; backHref?: string 
           </div>
         </div>
         <p className="text-[10px] font-bold tracking-[0.28em] uppercase text-[var(--section-label-color)] mb-5" style={{ fontFamily: 'var(--font-body)' }}>
-          Coming Soon
+          {t('comingSoon')}
         </p>
         <h2 className="text-3xl md:text-4xl font-light text-[#1A2535] leading-tight mb-5 max-w-lg" style={{ fontFamily: 'var(--font-headline)' }}>
           {message}
           <br />
-          <span className="italic">prepared for publishing.</span>
+          <span className="italic">{t('prepared')}</span>
         </h2>
         <p className="text-[#6B7280] max-w-md leading-relaxed mb-10" style={{ fontFamily: 'var(--font-body)' }}>
-          We publish deliberately — only when the content meets our editorial standard. Check back soon or explore other sections in the meantime.
+          {t('emptyDescription')}
         </p>
         <div className="flex flex-wrap justify-center gap-6">
           {backHref && (
             <Link href={backHref} className="inline-flex min-h-11 items-center pb-1 text-sm font-bold uppercase tracking-[0.15em] text-[#1A2535]" style={{ borderBottom: '2px solid #1A2535', fontFamily: 'var(--font-body)' }}>
-              <ArrowLeft className="mr-2 h-4 w-4" aria-hidden="true" /> All Insights
+              <ArrowLeft className="mr-2 h-4 w-4" aria-hidden="true" /> {t('allInsights')}
             </Link>
           )}
           <Link href="/blog" className="inline-flex min-h-11 items-center pb-1 text-sm font-bold uppercase tracking-[0.15em] text-[#6B7280] transition-colors hover:text-[var(--section-label-color)]" style={{ borderBottom: '2px solid transparent', fontFamily: 'var(--font-body)' }}>
-            Read the Blog <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+            {t('readBlog')} <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
           </Link>
         </div>
       </motion.div>
@@ -145,18 +147,21 @@ export default function InsightIndexPage({
   filters,
   filterKey,
   backHref,
-  backLabel = 'All Insights',
-  emptyMessage = 'These articles are being',
+  backLabel,
+  emptyMessage,
   bottomCta,
 }: Props) {
+  const t = useTranslations('CollectionUi');
+  const locale = useLocale();
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
-  const allFilters = filters ? ['All', ...filters.filter((f) => f !== 'All')] : [];
-  const [active, setActive] = useState('All');
+  const allLabel = t('all');
+  const allFilters = filters ? [allLabel, ...filters.filter((f) => f !== 'All' && f !== allLabel)] : [];
+  const [active, setActive] = useState(allLabel);
 
   const filtered =
-    allFilters.length === 0 || active === 'All'
+    allFilters.length === 0 || active === allLabel
       ? items
       : items.filter((item) => filterKey?.(item) === active);
 
@@ -215,7 +220,7 @@ export default function InsightIndexPage({
               className="inline-flex min-h-11 items-center pb-2 text-xs font-bold uppercase tracking-[0.18em] text-[#6B7280] transition-colors hover:text-[var(--section-label-color)]"
               style={{ fontFamily: 'var(--font-body)', borderBottom: '2px solid transparent' }}
             >
-              <ArrowLeft className="mr-2 h-4 w-4" aria-hidden="true" /> {backLabel}
+              <ArrowLeft className="mr-2 h-4 w-4" aria-hidden="true" /> {backLabel ?? t('allInsights')}
             </Link>
           )}
           {/* Filter tabs */}
@@ -238,7 +243,7 @@ export default function InsightIndexPage({
       </section>
 
       {/* ── Empty state ────────────────────────────────────────────────────── */}
-      {filtered.length === 0 && <EmptyState message={emptyMessage} backHref={backHref} />}
+      {filtered.length === 0 && <EmptyState message={emptyMessage ?? t('defaultEmpty')} backHref={backHref} />}
 
       {/* ── Featured item ──────────────────────────────────────────────────── */}
       {featured && (
@@ -283,7 +288,7 @@ export default function InsightIndexPage({
                         {featured.excerpt}
                       </p>
                       <div className="flex items-center gap-2 text-sm font-bold text-[var(--section-label-color)]" style={{ fontFamily: 'var(--font-body)' }}>
-                        Read <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                        {t('read')} <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                       </div>
                     </div>
                   </div>
@@ -329,7 +334,7 @@ export default function InsightIndexPage({
                       style={{ fontFamily: 'var(--font-body)' }}
                     >
                       <span className="text-[var(--section-label-color)]">{item.tag}</span>
-                      <span>{item.meta ?? (item.date ? fmtShort(item.date) : '')}</span>
+                      <span>{item.meta ?? (item.date ? fmtShort(item.date, locale) : '')}</span>
                     </div>
                     <h3
                       className="text-xl leading-snug text-[#1A2535] transition-colors group-hover:text-[var(--section-label-color)]"
@@ -352,9 +357,9 @@ export default function InsightIndexPage({
                     >
                       <span className="text-xs text-[#6B7280] italic" style={{ fontFamily: 'var(--font-body)' }}>
                         {item.author?.name
-                          ? `${item.author.name}${item.date ? ` • ${fmtShort(item.date)}` : ''}`
+                          ? `${item.author.name}${item.date ? ` • ${fmtShort(item.date, locale)}` : ''}`
                           : item.date
-                          ? fmtShort(item.date)
+                          ? fmtShort(item.date, locale)
                           : item.meta ?? ''}
                       </span>
                       <ArrowUpRight className="w-4 h-4 text-[#1A2535] opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -392,6 +397,8 @@ function FeaturedCardContent({
   item: PageItem;
   titleSize?: 'normal' | 'large';
 }) {
+  const t = useTranslations('CollectionUi');
+  const locale = useLocale();
   return (
     <>
       <div className="flex items-center gap-4 mb-5">
@@ -403,7 +410,7 @@ function FeaturedCardContent({
         </span>
         {item.date && (
           <span className="text-xs font-medium text-[#6B7280]" style={{ fontFamily: 'var(--font-body)' }}>
-            {fmt(item.date)}
+            {fmt(item.date, locale)}
           </span>
         )}
         {!item.date && item.meta && (
@@ -441,7 +448,7 @@ function FeaturedCardContent({
           </div>
         ) : (
           <span className="text-sm font-bold text-[var(--section-label-color)]" style={{ fontFamily: 'var(--font-body)' }}>
-            Read
+            {t('read')}
           </span>
         )}
         <ArrowUpRight className="w-5 h-5 text-[#1A2535] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />

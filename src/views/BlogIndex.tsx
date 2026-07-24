@@ -2,8 +2,10 @@
 
 import type { BlogPost } from '../lib/blog';
 import InsightIndexPage, { type PageItem } from '../components/InsightIndexPage';
+import {useTranslations} from 'next-intl';
 
 export default function BlogIndex({ posts }: { readonly posts: BlogPost[] }) {
+  const t = useTranslations('BlogIndex');
   const items: PageItem[] = posts.map((p) => ({
     href: `/blog/${p.slug}`,
     title: p.title,
@@ -21,14 +23,14 @@ export default function BlogIndex({ posts }: { readonly posts: BlogPost[] }) {
 
   return (
     <InsightIndexPage
-      eyebrow="Strategy + Execution Journal"
-      headline="Hive Vault Arc"
-      headlineItalic="Consulting Briefing"
-      description="An editorial collection of insights on AI agents, custom software, and the architecture of modern business operations — written for CEOs, COOs, and leadership teams in Morocco and beyond."
+      eyebrow={t('eyebrow')}
+      headline={t('headline')}
+      headlineItalic={t('headlineItalic')}
+      description={t('description')}
       items={items}
       filters={categories}
       filterKey={(item) => item.tag}
-      emptyMessage="No articles in this category yet."
+      emptyMessage={t('empty')}
     />
   );
 }

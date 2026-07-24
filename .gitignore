@@ -5,6 +5,8 @@
 
 # testing
 /coverage
+test-results/
+playwright-report/
 /.playwright-cli
 .skills-lock.json
 skills-lock.json

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
+import {Link} from '@/i18n/navigation';
 import { ArrowRight, CheckCircle2 } from '@/components/icons';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import PageAmbientBackground from '../components/PageAmbientBackground';

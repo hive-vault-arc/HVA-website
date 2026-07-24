@@ -1,6 +1,9 @@
+'use client';
+
 import Image from 'next/image';
 import { ExternalLink, FileText } from '@/components/icons';
 import type { ClientEvidence, ClientEvidenceSummary } from '../lib/proof';
+import {useLocale, useTranslations} from 'next-intl';
 
 type EvidenceDisplay = Pick<
   ClientEvidenceSummary,
@@ -25,13 +28,6 @@ type ClientEvidenceCardProps = {
   className?: string;
 };
 
-const LANGUAGE_NAMES: Record<string, string> = {
-  ar: 'Arabic',
-  en: 'English',
-  es: 'Spanish',
-  fr: 'French',
-};
-
 const RTL_LANGUAGES = new Set(['ar', 'fa', 'he', 'ur']);
 
 export function getEvidenceLanguageCode(language: string) {
@@ -42,26 +38,21 @@ export function getEvidenceDirection(language: string): 'ltr' | 'rtl' {
   return RTL_LANGUAGES.has(getEvidenceLanguageCode(language)) ? 'rtl' : 'ltr';
 }
 
-function getLanguageName(language: string) {
-  const code = getEvidenceLanguageCode(language);
-  return LANGUAGE_NAMES[code] ?? language;
-}
-
-function formatIssueDate(isoDate?: string) {
+function formatIssueDate(isoDate: string | undefined, locale: string) {
   if (!isoDate) return undefined;
 
   const date = new Date(`${isoDate}T00:00:00Z`);
   if (Number.isNaN(date.getTime())) return isoDate;
 
-  return new Intl.DateTimeFormat('en-GB', {
+  return new Intl.DateTimeFormat(locale === 'fr' ? 'fr-FR' : 'en-GB', {
     month: 'long',
     timeZone: 'UTC',
     year: 'numeric',
   }).format(date);
 }
 
-function formatFileSize(bytes: number) {
-  if (!Number.isFinite(bytes) || bytes <= 0) return 'size unavailable';
+function formatFileSize(bytes: number, unavailable: string) {
+  if (!Number.isFinite(bytes) || bytes <= 0) return unavailable;
   if (bytes < 1024 * 1024) return `${Math.max(1, Math.round(bytes / 1024))} KB`;
 
   const megabytes = bytes / (1024 * 1024);
@@ -75,11 +66,17 @@ export default function ClientEvidenceCard({
   showQuote = false,
   className = '',
 }: ClientEvidenceCardProps) {
+  const t = useTranslations('Evidence');
+  const locale = useLocale();
   const languageCode = getEvidenceLanguageCode(evidence.documentLanguage);
   const direction = getEvidenceDirection(evidence.documentLanguage);
-  const languageName = getLanguageName(evidence.documentLanguage);
-  const issuedOn = formatIssueDate(evidence.issuedOn);
-  const pdfSize = evidence.testimonialPdf ? formatFileSize(evidence.testimonialPdf.size) : undefined;
+  const languageName = t.has(`languages.${languageCode}`)
+    ? t(`languages.${languageCode}`)
+    : evidence.documentLanguage;
+  const issuedOn = formatIssueDate(evidence.issuedOn, locale);
+  const pdfSize = evidence.testimonialPdf
+    ? formatFileSize(evidence.testimonialPdf.size, t('sizeUnavailable'))
+    : undefined;
   const meta = [languageName, issuedOn].filter(Boolean).join(' · ');
 
   return (
@@ -100,7 +97,7 @@ export default function ClientEvidenceCard({
         <div>
           {industry ? <span className="client-evidence-card__industry">{industry}</span> : null}
           <strong>{evidence.clientName}</strong>
-          <span className="client-evidence-card__available">Client letter available</span>
+          <span className="client-evidence-card__available">{t('available')}</span>
         </div>
       </div>
 
@@ -110,7 +107,7 @@ export default function ClientEvidenceCard({
           <span>PDF</span>
         </div>
         <div className="client-evidence-card__document-copy">
-          <span>Client reference letter</span>
+          <span>{t('referenceLetter')}</span>
           <strong>{evidence.documentTitle}</strong>
           {meta ? <span className="client-evidence-card__meta">{meta}</span> : null}
         </div>
@@ -134,12 +131,12 @@ export default function ClientEvidenceCard({
             href={evidence.testimonialPdf.url}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`Open client reference letter for ${evidence.clientName} — PDF, ${pdfSize} (opens in a new tab)`}
+            aria-label={t('openAria', {client: evidence.clientName, size: pdfSize ?? t('sizeUnavailable')})}
           >
-            <span>Open client reference letter — PDF, {pdfSize}</span>
+            <span>{t('open', {size: pdfSize ?? t('sizeUnavailable')})}</span>
             <ExternalLink aria-hidden="true" strokeWidth={1.6} />
           </a>
-          <span className="client-evidence-card__new-tab">Opens in a new tab</span>
+          <span className="client-evidence-card__new-tab">{t('newTab')}</span>
         </div>
       ) : null}
     </article>

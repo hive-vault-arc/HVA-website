@@ -1,5 +1,3 @@
-import type { SupportedLocale } from '../lib/seo';
-
 export type FaqItem = { question: string; answer: string };
 export type FaqSet = FaqItem[];
 
@@ -209,7 +207,7 @@ export const PORTFOLIO_FAQS: FaqSet = [
 ];
 
 // Locale Capabilities
-export const LOCALE_CAPABILITIES_FAQS: Record<SupportedLocale, FaqSet> = {
+export const LOCALE_CAPABILITIES_FAQS: Record<string, FaqSet> = {
   en: CAPABILITIES_FAQS,
   fr: [
     {

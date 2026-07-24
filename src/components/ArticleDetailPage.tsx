@@ -1,8 +1,9 @@
 'use client';
 
-import Link from 'next/link';
+import {Link} from '@/i18n/navigation';
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import {useLocale, useTranslations} from 'next-intl';
 import { ArrowLeft, ArrowUpRight } from '@/components/icons';
 import BottomCTA from './BottomCTA';
 import SectionBrandMark from './SectionBrandMark';
@@ -80,8 +81,8 @@ function toIsoDateTime(input: string) {
   return input.includes('T') ? input : `${input}T00:00:00Z`;
 }
 
-function fmtDate(isoDateTime: string) {
-  return new Date(isoDateTime).toLocaleDateString('en-US', {
+function fmtDate(isoDateTime: string, locale: string) {
+  return new Date(isoDateTime).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-US', {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
@@ -110,11 +111,13 @@ export default function ArticleDetailPage({
   contentAsArticle = false,
   showAboutStrip = false,
   relatedItems = [],
-  relatedTitle = 'Related Insights',
+  relatedTitle,
   relatedAllHref,
-  relatedAllLabel = 'All Articles',
+  relatedAllLabel,
   bottomCta,
 }: Props) {
+  const t = useTranslations('ArticleUi');
+  const locale = useLocale();
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
   const isoDate = publishedAt ? toIsoDateTime(publishedAt) : undefined;
@@ -122,7 +125,7 @@ export default function ArticleDetailPage({
     breadcrumbs && breadcrumbs.length > 0
       ? breadcrumbs
       : [
-          { label: 'Home', href: '/' },
+          { label: t('home'), href: '/' },
           { label: backLabel, href: backHref },
           { label: crumbText ?? title },
         ];
@@ -141,7 +144,7 @@ export default function ArticleDetailPage({
         <div className="site-frame-narrow">
 
           {/* Breadcrumb */}
-          <nav aria-label="Breadcrumb" className="mb-8">
+          <nav aria-label={t('breadcrumb')} className="mb-8">
             <ol className="flex flex-wrap items-center gap-2 text-sm text-[#6B7280]">
               {resolvedBreadcrumbs.map((crumb, index) => {
                 const isCurrent = index === resolvedBreadcrumbs.length - 1;
@@ -191,7 +194,7 @@ export default function ArticleDetailPage({
               <>
                 <span className="w-1 h-1 rounded-full bg-[#CDD2DA]" />
                 <time dateTime={isoDate} className="text-[#6B7280]">
-                  {fmtDate(isoDate)}
+                  {fmtDate(isoDate, locale)}
                 </time>
               </>
             )}
@@ -246,7 +249,7 @@ export default function ArticleDetailPage({
               </div>
               <address className="not-italic">
                 <p className="text-sm text-[#1A2535]" style={{ fontFamily: 'var(--font-body)' }}>
-                  <span>By </span>
+                  <span>{t('by')} </span>
                   <Link rel="author" href={authorHref} className="text-[var(--section-label-color)] hover:underline">
                     {author.name}
                   </Link>
@@ -324,20 +327,20 @@ export default function ArticleDetailPage({
                 className="text-2xl mb-3 text-[#1A2535]"
                 style={{ fontFamily: 'var(--font-headline)' }}
               >
-                About Hive Vault Arc
+                {t('aboutTitle')}
               </h2>
               <p
                 className="text-[#536070] leading-relaxed mb-6 max-w-xl"
                 style={{ fontFamily: 'var(--font-body)' }}
               >
-                Hive Vault Arc is a technology consulting and digital transformation firm based in Tangier, Morocco. We advise, engineer, build, ship, and maintain intelligent systems across AI, automation, custom software, IT modernization, cloud infrastructure, and data capabilities.
+                {t('aboutDescription')}
               </p>
               <Link
                 href="/case-studies"
               className="inline-flex min-h-11 items-center gap-2 text-sm font-bold uppercase tracking-widest text-[var(--section-label-color)] transition-all hover:gap-4"
                 style={{ fontFamily: 'var(--font-body)' }}
               >
-                Explore case studies
+                {t('aboutCta')}
                 <ArrowUpRight className="w-4 h-4" />
               </Link>
             </div>
@@ -355,13 +358,13 @@ export default function ArticleDetailPage({
                   className="text-xs font-bold uppercase tracking-widest text-[var(--section-label-color)] mb-3"
                   style={{ fontFamily: 'var(--font-body)' }}
                 >
-                  Continue Reading
+                  {t('continueReading')}
                 </p>
                 <h2
                   className="text-4xl text-[#1A2535]"
                   style={{ fontFamily: 'var(--font-headline)' }}
                 >
-                  {relatedTitle}
+                  {relatedTitle ?? t('related')}
                 </h2>
               </div>
               {relatedAllHref && (
@@ -370,7 +373,7 @@ export default function ArticleDetailPage({
                   className="hidden md:inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-[#1A2535] hover:text-[#E8A838] transition-colors pb-1"
                   style={{ fontFamily: 'var(--font-body)', borderBottom: '2px solid #1A2535' }}
                 >
-                  {relatedAllLabel}
+                  {relatedAllLabel ?? t('allArticles')}
                 </Link>
               )}
             </div>

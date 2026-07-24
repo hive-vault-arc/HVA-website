@@ -1,0 +1,2114 @@
+{
+  "Locale": {
+    "english": "English",
+    "french": "French",
+    "switchTo": "View this page in {language}",
+    "unavailable": "This page is not available in {language}"
+  },
+  "Navigation": {
+    "home": "Home",
+    "arc": "ARC Framework",
+    "capabilities": "Capabilities",
+    "industries": "Industries",
+    "whoWeAre": "Who We Are",
+    "insights": "Insights",
+    "caseStudies": "Case Studies",
+    "contact": "Contact",
+    "bookCall": "Book a Call",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu",
+    "mobileNavigation": "Mobile navigation",
+    "allCapabilities": "All capabilities",
+    "toggleCapabilities": "Toggle capabilities submenu",
+    "toggleIndustries": "Toggle industries submenu",
+    "toggleWhoWeAre": "Toggle who we are submenu",
+    "toggleInsights": "Toggle insights submenu",
+    "framework": "Framework",
+    "solutionPrograms": "Solution Programs",
+    "inDetail": "In Detail",
+    "aboutUs": "About Us",
+    "portfolio": "Portfolio",
+    "blog": "Blog",
+    "newsArticles": "News Articles",
+    "perspectives": "Perspectives",
+    "researchReports": "Research Reports",
+    "realEstate": "Real Estate & Construction",
+    "healthcare": "Healthcare & Life Sciences",
+    "financialServices": "Financial Services",
+    "government": "Government & Public Sector",
+    "retail": "Retail & E-Commerce",
+    "energy": "Energy & Sustainability",
+    "logistics": "Logistics & Transportation",
+    "consumerGoods": "Consumer Goods & Luxury",
+    "tagline": "Hive Vault Arc — Strategy — Engineering — Operations"
+  },
+  "Footer": {
+    "description": "Strategy, engineering, and operations under one accountable team.",
+    "explore": "Explore",
+    "company": "Company",
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "legalMentions": "Legal Mentions",
+    "rights": "All rights reserved.",
+    "location": "Tangier, Morocco",
+    "pages": "Pages",
+    "services": "Services",
+    "industries": "Industries",
+    "connect": "Connect",
+    "website": "Website",
+    "precision": "Precision in execution.",
+    "strategyBusiness": "Strategy & Business Consulting",
+    "technologyConsulting": "Technology Consulting",
+    "aiData": "AI, Data & Analytics",
+      "softwareEngineering": "Software Engineering",
+      "cloudInfrastructure": "Cloud & Infrastructure",
+      "managedOperations": "Operations & Managed Services",
+      "solutionPrograms": "Solution Programs"
+  },
+  "Common": {
+    "learnMore": "Learn more",
+    "readMore": "Read more",
+    "viewAll": "View all",
+    "viewCaseStudy": "Read case study",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "loading": "Loading",
+    "notAvailable": "Not available",
+    "originalLanguage": "Original language",
+    "downloadDocument": "Download document",
+    "verifiedEvidence": "Verified evidence",
+    "nextStep": "Next step"
+  },
+  "Errors": {
+    "title": "Something went wrong",
+    "description": "We could not load this page. Please try again.",
+    "retry": "Try again",
+    "notFoundTitle": "Page not found",
+    "notFoundDescription": "The page you requested does not exist or is no longer available.",
+    "returnHome": "Return home",
+    "temporaryTitle": "Page temporarily unavailable",
+    "temporaryDescription": "The page could not load cleanly. Retry the request or return to the homepage.",
+    "loading": "Loading Hive Vault Arc",
+    "navigationError": "Navigation error / 404",
+    "movedTitle": "This page is no longer at this address.",
+    "movedDescription": "The link may be outdated, or the page may have moved. Return to the main site or continue through one of the sections below.",
+    "contactTeam": "Contact the team",
+    "suggestedPages": "Suggested pages"
+  },
+  "Contact": {
+    "formLocale": "English",
+    "success": "Thank you. Your message has been received.",
+    "error": "We could not send your message. Please try again.",
+    "rateLimit": "Please wait {seconds}s before submitting again.",
+    "emailOpened": "Your email client was opened. Please send the drafted message.",
+    "directError": "We could not send your message right now. Please try again or email us directly.",
+    "eyebrow": "Contact",
+    "title": "Start your transformation discovery.",
+    "lead": "Share your goals, constraints, and current bottlenecks. We review the request and guide you toward the most appropriate next step.",
+    "sectionLabel": "Contact details and discovery form",
+    "operatingRegion": "Operating Region",
+    "location": "Tangier, Morocco",
+    "remote": "Remote delivery worldwide",
+    "inquiries": "Inquiries",
+    "directLine": "Direct Line",
+    "mapAlt": "Map of Tangier, Morocco — Hive Vault Arc operating region",
+    "mapLabel": "Morocco + Remote",
+    "name": "Name",
+    "namePlaceholder": "Your full name",
+    "email": "Email Address",
+    "emailPlaceholder": "name@company.com",
+    "company": "Company Name",
+    "companyPlaceholder": "Your company",
+    "industry": "Industry",
+    "industryPlaceholder": "e.g. Real Estate, Healthcare",
+    "teamSize": "Team / Company Size",
+    "brief": "Transformation Brief",
+    "briefPlaceholder": "Tell us about your objectives, timeline, and scope…",
+    "privacyNote": "We use this information to scope strategy, architecture, and delivery options for your team.",
+    "sending": "Sending…",
+    "send": "Send Message",
+    "quote": "The value is not only in code delivery. The value is in building a reliable operating capability your business can grow on.",
+    "quoteAttribution": "Managing Partner, Hive Vault Arc",
+    "subject": "Project Inquiry"
+  },
+  "Collections": {
+    "news": {
+      "eyebrow": "Insights / News Articles",
+      "title": "News Articles",
+      "description": "Market signals, execution trends, and operational technology updates relevant to leadership teams."
+    },
+    "perspectives": {
+      "eyebrow": "Insights / Perspectives",
+      "title": "Perspectives",
+      "description": "Editorial viewpoints on how strategy, architecture, and execution should be governed in modern organizations."
+    },
+    "research": {
+      "eyebrow": "Insights / Research Reports",
+      "title": "Research Reports",
+      "description": "Data-backed reports designed to help executives evaluate technology strategy and execution maturity."
+    }
+  },
+  "HomeHero": {
+    "carouselLabel": "Hive Vault Arc overview",
+    "previous": "Previous slide",
+    "next": "Next slide",
+    "choose": "Choose a hero slide",
+    "goTo": "Go to slide {number}",
+    "slides": [
+      {
+        "eyebrow": "STRATEGY / TECHNOLOGY / OPERATIONS",
+        "titleLead": ["We architect", "what moves"],
+        "titleAccent": "your business",
+        "description": "From strategy to systems, we help ambitious teams build measurable progress.",
+        "primaryLabel": "Start a Project",
+        "secondaryLabel": "Explore Capabilities",
+        "imageAlt": "Layered navy, white, and yellow architectural system with a city skyline and technical plans"
+      },
+      {
+        "eyebrow": "TECHNOLOGY CONSULTING",
+        "titleLead": ["Strategic guidance."],
+        "titleAccent": "Accountable execution.",
+        "description": "We stay accountable from architecture decisions through engineering delivery and long-term operations.",
+        "primaryLabel": "Book Discovery Call",
+        "secondaryLabel": "Meet Our Team",
+        "imageAlt": "Floating layered strategy system with operating-model diagrams and city-planning geometry"
+      },
+      {
+        "eyebrow": "AI ENGINEERING & OPERATIONS",
+        "titleLead": ["Strategy, AI engineering,"],
+        "titleAccent": "and operations in one team.",
+        "description": "Strategy, production engineering, and managed operations move together under one accountable team.",
+        "primaryLabel": "View Case Studies",
+        "secondaryLabel": "Explore Capabilities",
+        "imageAlt": "Floating layered AI orchestration system with a neural core and connected data streams"
+      },
+      {
+        "eyebrow": "ARC DELIVERY MODEL",
+        "titleLead": ["Assess. Re-engineer."],
+        "titleAccent": "Command production systems.",
+        "description": "We diagnose operating constraints, rebuild critical systems, and stay involved after launch.",
+        "primaryLabel": "Explore Our Programs",
+        "secondaryLabel": "See Case Studies",
+        "imageAlt": "Floating layered production command system with operational dashboards and workflow controls"
+      }
+    ]
+  },
+  "HomeDecision": {
+    "websiteGuide": "Website guide",
+    "choose": "Choose your",
+    "route": "route.",
+    "intro": "Smart paths to the expertise and insights that move your business forward.",
+    "start": "Find my starting point",
+    "coreOffering": "Core offering",
+    "capabilities": "Capabilities",
+    "more": "More ways to connect",
+    "clientEvidence": "Client evidence",
+    "proof": "Proof in",
+    "motion": "motion.",
+    "proofDescription": "Documented delivery work and client-approved evidence.",
+    "readCaseStudy": "Read case study",
+    "verified": "Verified evidence",
+    "deliveryAlt": "{client} case-study delivery environment",
+    "logoAlt": "{client} logo",
+    "routes": {
+      "industriesLabel": "Where we work",
+      "industriesTitle": "Industries",
+      "industriesAlt": "Architectural industry structures in Hive Vault Arc navy",
+      "caseStudiesLabel": "See it in action",
+      "caseStudiesTitle": "Case Studies",
+      "caseStudiesAlt": "Business performance reports prepared for a case-study review",
+      "arcLabel": "Our approach",
+      "arcTitle": "ARC Framework",
+      "insightsLabel": "Stay informed",
+      "insightsTitle": "Insights",
+      "contactLabel": "Let’s talk",
+      "contactTitle": "Book a Call",
+      "capabilitiesAlt": "Abstract systems map for Hive Vault Arc capabilities"
+    }
+  },
+  "Home": {
+    "identityEyebrow": "Our identity",
+    "identityTitle": "Advise. Build.",
+    "identityAccent": "Operate.",
+    "identityDescription": "Hive Vault Arc is a technology transformation partner — combining strategy, AI engineering, software development, and managed operations in one team. We stay until it works.",
+    "identityDisciplines": "Strategy · AI Engineering · Software · Operations",
+    "pillar": "Pillar",
+    "arcLoop": "The ARC loop",
+    "arcTitle": "Lasting transformation requires the full ARC.",
+    "arcDescription": "Assess the constraint. Build the operating system. Keep production accountable after launch.",
+    "ourCapabilities": "Our capabilities",
+    "arcImageAlt": "Operations command workspace with dashboards and production monitoring screens",
+    "featuredStory": "Featured operating story",
+    "featuredStoryTitle": "One accountable team from diagnosis to production.",
+    "technologyPartners": "Technology partners",
+    "ctaTitle": "Ready to transform core operations end to end?",
+    "ctaDescription": "Share your goals and constraints. We will define the strategy, architecture, and execution path, then discuss commercial terms after discovery.",
+    "ctaPrimary": "Book a discovery call",
+    "ctaSecondary": "View case studies",
+    "arcPhases": [
+      {
+        "phase": "01",
+        "title": "Assess",
+        "discipline": "Strategy & Architecture",
+        "summary": "Diagnose operating friction, define target architecture, and sequence the work leadership can execute.",
+        "proof": "Operating diagnosis"
+      },
+      {
+        "phase": "02",
+        "title": "Re-engineer",
+        "discipline": "AI, Software & Cloud",
+        "summary": "Build the systems, deploy the intelligence, and harden the infrastructure for real operational load.",
+        "proof": "Production systems"
+      },
+      {
+        "phase": "03",
+        "title": "Command",
+        "discipline": "Operate & Evolve",
+        "summary": "Stabilize, monitor, and evolve the systems long-term so decisions become measurable outcomes.",
+        "proof": "Managed outcomes"
+      }
+    ],
+    "serviceGuides": {
+      "title": "Service guides for Morocco",
+      "description": "Focused entry points for teams comparing AI, consulting, and software-delivery options.",
+      "aria": "Service guide links",
+      "open": "Open guide",
+      "items": [
+        {
+          "href": "/digital-services-tangier",
+          "label": "Digital Services in Tangier",
+          "region": "Tangier",
+          "summary": "A practical guide for teams evaluating AI, software, consulting, and delivery partners in Tangier."
+        },
+        {
+          "href": "/ai-agents-morocco",
+          "label": "AI Agents in Morocco",
+          "region": "Morocco",
+          "summary": "How Moroccan organizations can use multilingual AI agents for sales, support, and operational workflows."
+        }
+      ]
+    },
+    "capabilityPillars": [
+      {
+        "title": "Strategy & Business Consulting",
+        "desc": "Diagnose, define, and design transformation before a single line of code is written.",
+        "imageAlt": "Strategy and business consulting operating-model design",
+        "details": ["Business and digital transformation strategy", "Operational diagnostics and process redesign", "Innovation strategy and market expansion"]
+      },
+      {
+        "title": "Technology Consulting",
+        "desc": "Architecture decisions made early compound positively. We design systems that last.",
+        "imageAlt": "Technology consulting architecture and systems planning",
+        "details": ["Enterprise architecture and technology roadmaps", "Platform strategy and systems integration", "IT modernization and infrastructure design"]
+      },
+      {
+        "title": "AI, Data & Analytics",
+        "desc": "AI agents on WhatsApp, web chat, and email — multilingual, always on, and trained on your operations.",
+        "imageAlt": "AI and data analytics production intelligence systems",
+        "details": ["AI agent design and deployment", "Generative AI strategy and engineering", "Data engineering and business intelligence"]
+      },
+      {
+        "title": "Software Engineering",
+        "desc": "Production-grade custom software, SaaS platforms, and web and mobile applications.",
+        "imageAlt": "Software engineering production-grade systems workspace",
+        "details": ["Custom software and SaaS platform development", "Web and mobile application delivery", "API engineering and DevOps"]
+      },
+      {
+        "title": "Cloud & Infrastructure",
+        "desc": "Built for scale, security, and resilience — zero-trust design and observability from day one.",
+        "imageAlt": "Cloud infrastructure secure systems and observability",
+        "details": ["AWS, Azure, and GCP cloud migration", "Infrastructure automation and security architecture", "Observability, disaster recovery, and managed cloud services"]
+      },
+      {
+        "title": "Operations & Managed Services",
+        "desc": "We stay after go-live. The same team owns strategy through production, without a handoff.",
+        "imageAlt": "Operations and managed services monitoring workspace",
+        "details": ["Managed operations and application maintenance", "AI system management after deployment", "Business-process outsourcing and shared services"]
+      }
+    ]
+  },
+  "InsightsCarousel": {
+    "eyebrow": "Welcome to Hive Vault Arc",
+    "title": "Thinking, testing,",
+    "titleAccent": "shipping.",
+    "description": "Field notes from programs we have built and teams we have transformed.",
+    "article": "Article",
+    "caseStudy": "Case study",
+    "learnMore": "Learn more",
+    "play": "Play",
+    "pause": "Pause",
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "TrustedBy": {
+    "title": "Trusted by teams building for scale",
+    "caseStudyLabel": "Read the {client} case study"
+  },
+  "Arc": {
+    "label": "ARC operating model",
+    "heroLines": ["Assess the constraint.", "Re-engineer the system.", "Command the outcome."],
+    "heroDescription": "ARC is a closed-loop operating model for technology transformation. We diagnose operational constraints, rebuild the workflow and stack, and stay accountable in live production until results hold. Strategy, engineering, and operations remain under one accountable team.",
+    "bookDiagnostic": "Book ARC diagnostic",
+    "seeProduction": "See ARC in production",
+    "heroAlt": "ARC operating-model workspace connecting diagnostic evidence, a modular workflow, and an ordered command state",
+    "how": "How ARC works",
+    "processTitle": "Three connected decisions. One operating loop.",
+    "processDescription": "Each phase ends with a concrete output and a decision gate before the next commitment. The model is designed for complex operational change that must hold in production.",
+    "phasesLabel": "ARC operating phases",
+    "output": "{phase} output",
+    "bestFor": "Best for",
+    "buyerFit": ["Fragmented operations", "Legacy bottlenecks", "AI workflow rollout", "Production accountability gaps"],
+    "differenceEyebrow": "Why ARC is different",
+    "differenceTitle": "One loop, not three disconnected vendors.",
+    "differenceStatement": "Strategy, build, and operations stay connected under one accountable model, so decisions are made against real constraints and post-launch performance.",
+    "differenceDescription": "Traditional delivery advises, hands off, then supports. ARC diagnoses, builds, and operates against the same outcome.",
+    "meetTeam": "Meet the team accountable for delivery",
+    "proofEyebrow": "Proof in production",
+    "proofTitle": "Operating records. Delivery before claims.",
+    "proofDescription": "Each record stays attached to the business problem, the system delivered, and its production status. Performance figures remain unpublished until audited.",
+    "record": "{client} record",
+    "liveSystems": "Live systems, not slideware.",
+    "liveSystemsDescription": "Named operating records with delivery scope and production context.",
+    "problem": "Problem:",
+    "whatChanged": "What changed:",
+    "status": "Status:",
+    "viewSnapshot": "View case snapshot",
+    "apply": "Apply ARC",
+    "closingQuote": "One accountable team from constraint to production.",
+    "closingTitle": "Want ARC applied to your operations?",
+    "closingDescription": "Share the constraint, target outcome, and current stack. We will map the fastest path to operational gain.",
+    "requestAssessment": "Request ARC assessment",
+    "seeCaseStudies": "See case studies",
+    "phases": [
+      {"step":"01","title":"Assess","purpose":"Find the constraint before funding the build.","output":"Constraint map","description":"We map the operating workflow, system dependencies, decision owners, and measurable target before build scope is approved.","checkpoints":["Current-state evidence","Constraint priority","Decision-ready roadmap"]},
+      {"step":"02","title":"Re-engineer","purpose":"Design and deliver the operating system.","output":"Production-ready system","description":"We redesign the workflow and stack together, then validate integrations, controls, and release readiness against the approved outcome.","checkpoints":["Target workflow","Integrated stack","Production gate"]},
+      {"step":"03","title":"Command","purpose":"Run, measure, and improve in production.","output":"Live operating metrics","description":"The same accountable team monitors reliability, reports performance, and turns production evidence into the next improvement cycle.","checkpoints":["Operating telemetry","Managed response","Improvement backlog"]}
+    ],
+    "signals": [
+      {"title":"One team","description":"Diagnosis, delivery, and live operations stay connected.","linkLabel":"Meet the founders"},
+      {"title":"Production ownership","description":"Launch is a control point, not the end of the engagement.","linkLabel":"See managed operations"},
+      {"title":"Decision gates","description":"Scope advances only when constraints and evidence are clear.","linkLabel":"Review delivery depth"}
+    ],
+    "caseTitles": {
+      "crm": "One CRM system for live real estate operations.",
+      "whatsapp": "AI lead operations across WhatsApp and CRM."
+    }
+  },
+  "Capabilities": {
+    "heroLabel": "Capabilities & Mastery",
+    "heroLine1": "Six pillars.",
+    "heroAccent": "One accountable",
+    "heroLine3": "partner.",
+    "heroDescription": "Hive Vault Arc delivers strategy, engineering, and managed operations across six pillars, one team, and one accountability loop, from discovery to production.",
+    "exploreDetail": "Explore in detail",
+    "solutionPrograms": "Solution programs",
+    "learnMore": "Learn more",
+    "arcModel": "ARC model",
+    "arcWords": ["Assess.", "Build.", "Operate."],
+    "arcKeys": ["Decision gates", "Joint ownership", "Managed continuity"],
+    "phase": "Phase {step}",
+    "hvaFocus": "Hive Vault Arc focus",
+    "clientRole": "Client role",
+    "phaseOutput": "Phase output",
+    "viewPrograms": "View solution programs",
+    "quote": "Transformation succeeds when strategy, engineering, and operations move together, from the first decision to the last deployment.",
+    "quoteAlt": "Hive Vault Arc framework expertise",
+    "quoteDisciplines": "Strategy / Consulting / Engineering / Operations",
+    "programsTitle": "Choose the starting point.",
+    "programsDescription": "Three focused programs. Each one is scoped, built, and operated with one accountable team.",
+    "caseStudy": "Case study",
+    "fullCatalog": "Full program catalog",
+    "nextStep": "Next step",
+    "depthTitle": "Need the full capability map with delivery depth?",
+    "depthDescription": "Use In Detail for strategic context, execution model, and full sub-capability coverage across all six service pillars.",
+    "bookCall": "Book a discovery call",
+    "onPage": "On this page",
+    "fullDepth": "Full depth",
+    "pageLinks": [
+      {"label":"Capability pillars","meta":"6 pillars"},
+      {"label":"Solution programs","meta":"3 active"},
+      {"label":"ARC engagement model","meta":"How we work"}
+    ],
+    "fallbackCards": [
+      {"title":"AI & Data","alt":"AI and data analytics production intelligence systems","summary":"Design and deploy production intelligence, data products, and AI agents connected to real operations."},
+      {"title":"Technology Consulting","alt":"Technology consulting architecture and systems planning","summary":"Make architecture, platform, integration, and modernization decisions that remain reliable as the business scales."},
+      {"title":"Strategy & Business","alt":"Strategy and business consulting operating-model design","summary":"Define the operating problem, target model, and transformation sequence before committing to build."},
+      {"title":"Software Engineering","alt":"Software engineering production-grade systems workspace","summary":"Build secure, production-grade software, platforms, APIs, and web and mobile applications."},
+      {"title":"Cloud & Infrastructure","alt":"Cloud infrastructure secure systems and observability","summary":"Engineer resilient cloud foundations, observability, security controls, and delivery automation."},
+      {"title":"Operations & Managed Services","alt":"Operations and managed services monitoring workspace","summary":"Operate, monitor, maintain, and continuously improve critical production systems after launch."}
+    ],
+    "botPhases": [
+      {"step":"01","title":"Assess","detail":"Diagnose operating constraints, technology readiness, business priorities, and the transformation path.","objective":"Create a clear operating diagnosis before decisions turn into build scope.","hvaOwns":"Discovery design, constraint mapping, architecture review, opportunity sizing, roadmap framing.","clientRole":"Share operating reality, align priorities, confirm constraints, identify accountable owners.","checkpoints":["Map current operations","Prioritize transformation constraints","Confirm target outcomes"],"outputs":["Operating diagnosis","Capability gap map","Prioritized transformation roadmap"],"imageAlt":"Consulting team assessing operating constraints and transformation priorities"},
+      {"step":"02","title":"Re-engineer","detail":"Redesign processes, architecture, systems, and delivery controls around the approved target state.","objective":"Turn the roadmap into production systems and operating changes without losing continuity.","hvaOwns":"Solution architecture, build sprints, QA gates, integration reliability, release readiness.","clientRole":"Validate process changes, provide access, approve milestones, and coordinate stakeholders.","checkpoints":["Design target architecture","Build core workflows","Validate production readiness"],"outputs":["Technical blueprint","Integrated production stack","Release playbook and controls"],"imageAlt":"Engineering workspace for re-engineering systems and operating workflows"},
+      {"step":"03","title":"Command","detail":"Run, stabilize, monitor, and improve the production operation with long-term accountability.","objective":"Keep transformation alive after launch through managed operations and measurable improvement loops.","hvaOwns":"Operational governance, incident response, KPI monitoring, optimization backlog execution.","clientRole":"Review performance trends, validate business impact, and co-prioritize optimization cycles.","checkpoints":["Lead production operations","Monitor performance metrics","Improve continuously"],"outputs":["Performance reporting","Optimization releases","Operational risk controls"],"imageAlt":"Managed operations room monitoring production systems and performance"}
+    ],
+    "programs": [
+      {"category":"AI operations","name":"AI reception and lead operations","summary":"Deploy an accountable AI front door for qualification, routing, follow-up, and CRM continuity.","outcomes":["Faster lead handling","Connected operating records"],"alt":"AI reception and lead operations program workspace"},
+      {"category":"Systems modernization","name":"CRM modernization","summary":"Rebuild fragmented customer workflows around a reliable shared operating system.","outcomes":["Unified workflows","Reliable operational visibility"],"alt":"CRM modernization engineering and workflow workspace"},
+      {"category":"Cloud reliability","name":"Cloud delivery reliability","summary":"Strengthen infrastructure, deployment controls, observability, and recovery for critical systems.","outcomes":["Safer releases","Production resilience"],"alt":"Cloud delivery reliability infrastructure operations workspace"}
+    ]
+  },
+  "Evidence": {
+    "available": "Client letter available",
+    "referenceLetter": "Client reference letter",
+    "open": "Open client reference letter — PDF, {size}",
+    "openAria": "Open client reference letter for {client} — PDF, {size} (opens in a new tab)",
+    "newTab": "Opens in a new tab",
+    "sizeUnavailable": "size unavailable",
+    "railTitle": "Client evidence",
+    "railDescription": "Approved reference letters supporting published delivery work.",
+    "readCaseStudy": "Read case study",
+    "railAria": "Read the {client} case study. Client reference letter available.",
+    "languages": {
+      "ar": "Arabic",
+      "en": "English",
+      "es": "Spanish",
+      "fr": "French"
+    }
+  },
+  "DynamicContent": {
+    "home": "Home",
+    "breadcrumb": "Breadcrumb",
+    "blog": "Blog",
+    "insights": "Insights",
+    "capabilities": "Capabilities",
+    "caseStudies": "Case studies",
+    "newsArticles": "News articles",
+    "perspectives": "Perspectives",
+    "researchReports": "Research reports",
+    "allArticles": "All articles",
+    "allNews": "All news articles",
+    "allPerspectives": "All perspectives",
+    "allResearch": "All research reports",
+    "allCaseStudies": "All case studies",
+    "moreCaseStudies": "More case studies",
+    "sources": "Sources",
+    "topics": "Topics",
+    "relatedResources": "Related Hive Vault Arc resources",
+    "exploreCapabilities": "Explore capabilities",
+    "bookCall": "Book a call",
+    "aboutHiva": "About Hive Vault Arc",
+    "industry": "Industry",
+    "status": "Status",
+    "client": "Client",
+    "visitClient": "Visit client website",
+    "perspectiveFaq": "Questions leaders ask before AI",
+    "researchQuestions": "Research questions",
+    "sidebar": {
+      "title": "Ready to put this into practice?",
+      "description": "Hive Vault Arc combines technology consulting with engineering delivery to help businesses modernize operations with confidence.",
+      "cta": "Talk to us"
+    },
+    "newsSidebar": {
+      "title": "Evaluating local AI for your organization?",
+      "description": "Hive Vault Arc helps teams decide what should run locally, what should remain in the cloud, and how to govern agent access safely.",
+      "cta": "Discuss AI architecture"
+    },
+    "reportSidebar": {
+      "title": "Need the report translated into an operating plan?",
+      "description": "Hive Vault Arc turns benchmarks, delivery signals, and cloud-readiness findings into practical transformation work.",
+      "cta": "Discuss the findings"
+    },
+    "blogCta": {
+      "title": "Ready to turn strategy into execution?",
+      "description": "Let us scope the consulting and engineering plan that fits your goals, constraints, and operating model.",
+      "label": "Talk to Hive Vault Arc"
+    },
+    "newsCta": {
+      "title": "Build private AI with the right operating model.",
+      "description": "We help leadership teams translate AI hardware, model strategy, and privacy requirements into production-ready systems.",
+      "primary": "Talk to Hive Vault Arc"
+    },
+    "perspectiveCta": {
+      "title": "Diagnose the workflow before you automate it.",
+      "description": "Hive Vault Arc helps leadership teams assess operations, re-engineer the system, and command AI-enabled workflows in production.",
+      "primary": "Start a discovery call",
+      "secondary": "Explore ARC"
+    },
+    "researchCta": {
+      "title": "Turn research into production decisions.",
+      "description": "Hive Vault Arc helps teams map research findings into roadmap, architecture, and operating controls.",
+      "primary": "Book a discovery call"
+    },
+    "resourceLinks": {
+      "arc": "ARC Framework",
+      "capabilities": "Capabilities",
+      "about": "About Hive Vault Arc",
+      "caseStudies": "Case studies",
+      "crmProof": "CRM transformation proof",
+      "aiProof": "WhatsApp AI agent proof",
+      "book": "Book a discovery call"
+    },
+    "caseSections": {
+      "challenge": "Business challenge",
+      "architecture": "Execution architecture",
+      "modules": "Modules activated",
+      "stack": "Stack & integrations"
+    },
+    "caseCta": {
+      "title": "Apply this transformation pattern to your operations",
+      "description": "Review the relevant solution programs, then book a discovery call to scope your roadmap.",
+      "primary": "Book a discovery call",
+      "secondary": "View solution programs"
+    },
+    "capability": {
+      "label": "Capability",
+      "fallbackOutcome": "Clear operating movement",
+      "fallbackDelivery": "Focused delivery",
+      "start": "Start a conversation",
+      "fullMap": "View in full map",
+      "sectionsAria": "{title} sections",
+      "index": [
+        {"number": "01", "label": "Context", "href": "#context"},
+        {"number": "02", "label": "Coverage", "href": "#coverage"},
+        {"number": "03", "label": "Outcomes", "href": "#outcomes"},
+        {"number": "04", "label": "Related", "href": "#related"}
+      ],
+      "contextEyebrow": "Operating context",
+      "contextTitle": "Where this capability fits.",
+      "strategicContext": "Strategic context",
+      "executionContext": "Execution context",
+      "coverageEyebrow": "Capability coverage",
+      "coverageTitle": "What HVA can own inside this pillar.",
+      "outcomesEyebrow": "Expected movement",
+      "outcomesTitle": "Useful when the goal is accountable progress.",
+      "outcomesDescription": "This page focuses the pillar. The ARC model turns it into scoped work, production systems, and managed improvement.",
+      "relatedPagesAria": "Related landing pages",
+      "relatedEyebrow": "Related capabilities",
+      "relatedTitle": "Adjacent pillars to explore next.",
+      "open": "Open",
+      "bottomTitle": "Need {title} mapped to your operation?",
+      "bottomDescription": "Hive Vault Arc will scope the right diagnosis, build path, and operating model before execution starts.",
+      "bottomPrimary": "Book a discovery call",
+      "bottomSecondary": "Back to capabilities"
+    },
+    "employee": {
+      "focus": "Focus",
+      "profile": "Profile",
+      "experience": "Experience",
+      "education": "Education",
+      "moreTeam": "More from the team",
+      "backTeam": "Back to team",
+      "bottomTitle": "Work with the people who own the outcome",
+      "bottomDescription": "Hive Vault Arc keeps strategy, engineering, and operations close to the same senior team from discovery through production.",
+      "meetTeam": "Meet the team"
+    }
+  },
+  "Links": {
+    "eyebrow": "HVA / Connect",
+    "description": "AI and digital transformation in Tangier, Morocco",
+    "navLabel": "Official contact and social media links",
+    "email": "Email",
+    "call": "Call"
+  },
+  "SolutionPrograms": {
+    "hero": {
+      "eyebrow": "Capabilities / Solution programs",
+      "title": "Solution Programs:",
+      "emphasis": "Consulting-Led Systems",
+      "titleEnd": "at Full Depth.",
+      "description": "Focused programs—strategy, build, and managed operations delivered by one team in one accountable engagement.",
+      "primaryCta": "Start a program",
+      "secondaryCta": "Explore in detail",
+      "indexTitle": "Program index",
+      "indexFooter": "All programs → ARC delivery model"
+    },
+    "programLabel": "Program {number}",
+    "labels": {
+      "coreModules": "Core modules",
+      "primaryStack": "Primary stack",
+      "delivery": "Delivery",
+      "deliveryModel": "Delivery model",
+      "viewCaseStudy": "View case study",
+      "live": "Live in production",
+      "exploreCapabilities": "Explore capabilities"
+    },
+    "programs": [
+      {
+        "name": "AI Reception and Lead Operations Program",
+        "category": "Consulting-Led AI Program",
+        "summary": "Deploy multilingual AI reception and lead operations as a daily operating capability, not a one-off automation.",
+        "modules": ["Multilingual agent runtime", "Memory and context layer", "Lead scoring", "Human escalation workflows"],
+        "integrations": ["WhatsApp Business API", "HubSpot", "Salesforce", "Google Calendar"],
+        "deliveryModel": "Strategy workshops, build and deployment sprints, then ongoing optimization cycles."
+      },
+      {
+        "name": "Enterprise CRM Modernization Program",
+        "category": "Consulting-Led Transformation Program",
+        "summary": "Transform fragmented CRM operations into one governed system with reliable pipeline and process ownership.",
+        "modules": ["Pipeline orchestration", "Role-based permissions", "Automated follow-up sequences", "Audit and compliance logs"],
+        "integrations": ["Meta Ads", "DocuSign", "Email automation suites", "BI connectors"],
+        "deliveryModel": "Domain mapping, phased migration, production rollout, and managed improvement."
+      },
+      {
+        "name": "Cloud Delivery Reliability Stack",
+        "category": "Cloud Reliability Program",
+        "summary": "Stabilize release velocity with hardened infrastructure, deployment safety, observability, and security controls.",
+        "modules": ["CI/CD pipeline hardening", "Blue-green deployment patterns", "Observability dashboards", "Security controls"],
+        "integrations": ["AWS", "Google Cloud", "Docker", "GitHub Actions"],
+        "deliveryModel": "Reliability audit, remediation sprints, and ongoing SRE collaboration."
+      }
+    ],
+    "ai": {
+      "imageAlt": "AI reception and lead operations program by Hive Vault Arc in Morocco",
+      "quote": "Answers faster than our sales desk—and updates the CRM automatically.",
+      "quoteAttribution": "— Nadia El Idrissi, Head of Growth"
+    },
+    "why": {
+      "eyebrow": "Why a program",
+      "title": "A Program,",
+      "emphasis": "Not a Project.",
+      "description": "Projects hand off. Programs stay accountable. Every Hive Vault Arc engagement runs from diagnosis through production—one team, one loop, no drift.",
+      "rows": [
+        {"others": "Vendors deliver and disappear.", "arc": "Hive Vault Arc stays through evolution—monitoring, extending, improving."},
+        {"others": "Strategy and engineering are separated.", "arc": "One team owns strategy and build—no handoff, no drift."},
+        {"others": "Programs are scoped by hours, not outcomes.", "arc": "Every program is scoped around measurable operating impact."},
+        {"others": "Integration is an afterthought.", "arc": "Architecture, stack selection, and integrations are designed in from day one."}
+      ]
+    },
+    "crm": {
+      "features": [
+        {"title": "Pipeline orchestration", "description": "Multi-stage deal pipelines with role-based workflows and automated follow-up sequences.", "outcome": "OUTCOME: UNIFIED DATA OWNERSHIP"},
+        {"title": "Predictive reporting", "description": "BI connectors and executive dashboards surfacing operational intelligence across teams.", "outcome": "OUTCOME: AUTOMATED PIPELINE OPERATIONS"}
+      ],
+      "imageAlt": "Enterprise CRM modernization program by Hive Vault Arc in Morocco",
+      "scopeLabel": "Production scope",
+      "scope": "Role-based CRM operations and pipeline reporting"
+    },
+    "cloud": {
+      "disciplines": [
+        {"label": "Resilient architecture", "description": "Multi-region failover with recovery planning and active redundancy."},
+        {"label": "Controlled deployment", "description": "Blue-green releases with automated rollback and health-check gates."}
+      ],
+      "stackLabel": "RELIABILITY_STACK",
+      "layers": [
+        {"id": "CI/CD", "name": "Pipeline hardening", "status": "ACTIVE", "pulse": true},
+        {"id": "OBS", "name": "Observability layer", "status": "MONITORING", "pulse": false},
+        {"id": "SEC", "name": "Security controls", "status": "ENFORCED", "pulse": false},
+        {"id": "DR", "name": "Disaster recovery", "status": "STANDBY", "pulse": true}
+      ],
+      "controlsActive": "RESILIENCE CONTROLS ACTIVE",
+      "imageAlt": "Cloud delivery reliability infrastructure by Hive Vault Arc in Morocco"
+    },
+    "finalCta": {
+      "title": "Ready to architect your digital future?",
+      "description": "We scope the right program for your operations—constraints, integrations, and timeline first.",
+      "primary": "Start a program",
+      "secondary": "View all capabilities"
+    },
+    "bottomCta": {
+      "title": "Need the full capability map with delivery depth?",
+      "description": "Use In Detail for strategic context, execution model, and full sub-capability coverage across our connected service pillars.",
+      "primary": "Explore in detail",
+      "secondary": "Book a discovery call"
+    }
+  },
+  "CapabilitiesDetail": {
+    "hero": {
+      "eyebrow": "Capabilities in detail",
+      "title": "Capability depth, without the consulting maze.",
+      "description": "Connected service pillars mapped to the decisions clients actually need: what to scope, what to build, and what HVA keeps accountable after launch.",
+      "primaryCta": "View the map",
+      "secondaryCta": "Solution programs",
+      "panelTitle": "At a glance",
+      "panelDescription": "Start with a pillar, then move into ARC delivery when the scope is ready to become production work.",
+      "stats": [
+        {"value": "Connected", "label": "Service pillars"},
+        {"value": "ARC", "label": "Delivery model"},
+        {"value": "End-to-end", "label": "Capability coverage"}
+      ]
+    },
+    "indexAria": "Capability sections",
+    "pillars": {
+      "eyebrow": "Capability map",
+      "title": "Choose the layer that matches the problem.",
+      "description": "Each card keeps the promise short. Open full coverage only when you need the deeper list.",
+      "imageAlt": "{title} capability",
+      "coreAreas": "{title} core areas",
+      "primaryOutcome": "Primary outcome",
+      "fullCoverage": "Full coverage",
+      "openCapability": "Open capability",
+      "items": [
+        {
+          "id": "strategy-business",
+          "title": "Strategy & Business Consulting",
+          "briefLine": "The thinking layer—diagnosing, defining, and designing transformation before a line of code is written.",
+          "briefBullets": ["Business transformation", "Digital transformation", "Operational excellence"],
+          "strategicContext": "Transformation succeeds when the business model, operating model, and technology architecture move together from the first decision.",
+          "executionContext": "We run diagnostics, design target operating models, build technology roadmaps, and sequence transformation programs that leadership and operators can execute.",
+          "subCapabilities": ["Business and digital transformation strategy", "Operational diagnostics and process redesign", "Innovation strategy and technology-enabled market expansion", "Organizational redesign and change management", "Cost optimization and operational excellence"],
+          "relatedOutcomes": ["Sharper prioritization", "Reduced delivery risk", "Clearer transformation sequencing"]
+        },
+        {
+          "id": "technology-consulting",
+          "title": "Technology Consulting",
+          "briefLine": "The architecture layer—designing systems that last before building them.",
+          "briefBullets": ["Enterprise architecture", "Technology roadmaps", "Systems integration"],
+          "strategicContext": "Architecture decisions made early compound positively. Architecture decisions deferred compound into technical debt.",
+          "executionContext": "We design the technology blueprint, sequence the roadmap, select platforms, and connect fragmented tools so data and workflows move without friction.",
+          "subCapabilities": ["Enterprise architecture and technology roadmaps", "Platform strategy—build vs. buy vs. agent", "IT modernization and legacy replacement", "Systems integration and digital workplace design", "Infrastructure modernization for cloud, AI, and scale"],
+          "relatedOutcomes": ["Systems built to last", "Reduced integration debt", "Technology that serves the business over the long term"]
+        },
+        {
+          "id": "ai-data-analytics",
+          "title": "AI, Data & Analytics",
+          "briefLine": "The intelligence layer—AI engineering connected to real operations.",
+          "briefBullets": ["AI agents", "Generative AI engineering", "Predictive analytics"],
+          "strategicContext": "AI becomes a competitive advantage when it is integrated into daily operations, not isolated in a pilot dashboard.",
+          "executionContext": "We scope operational goals, deploy production AI agents, build data infrastructure, and connect workflows to measurable outcomes across the channels clients use.",
+          "subCapabilities": ["AI agent design and deployment", "Generative AI strategy and engineering", "Machine learning and predictive analytics", "Data engineering, warehouses, and pipelines", "Business intelligence and executive dashboards", "Conversational AI and WhatsApp agent systems", "MLOps and AI production operations"],
+          "relatedOutcomes": ["Faster decisions", "Lower manual load", "Continuous operational coverage"]
+        },
+        {
+          "id": "software-engineering",
+          "title": "Software Engineering & Product Development",
+          "briefLine": "The build layer—production-grade systems, not prototypes.",
+          "briefBullets": ["Custom software", "SaaS platforms", "Web and mobile applications"],
+          "strategicContext": "Growth requires systems built for operational fit, not generic tooling that creates workflow friction and scales the wrong behaviours.",
+          "executionContext": "We engineer custom applications, SaaS platforms, APIs, and mobile apps with reliability, security, and maintainability built in.",
+          "subCapabilities": ["Custom software development for the exact problem", "Multi-tenant SaaS platform development", "Web application engineering", "Mobile application development", "API development and integration engineering", "UX/UI engineering connected to the frontend", "DevOps, CI/CD, and platform engineering"],
+          "relatedOutcomes": ["Faster product delivery", "Better system fit", "Sustainable maintainability"]
+        },
+        {
+          "id": "cloud-infrastructure",
+          "title": "Cloud & Infrastructure",
+          "briefLine": "The foundation layer—built for scale, security, and resilience.",
+          "briefBullets": ["Cloud migration", "Security architecture", "Infrastructure automation"],
+          "strategicContext": "Security and infrastructure cannot be retrofitted after launch. Risk controls, zero-trust design, and observability must be designed in from the start.",
+          "executionContext": "We migrate and design cloud-native systems, automate infrastructure, implement zero-trust security, and deliver observability from day one.",
+          "subCapabilities": ["AWS, Azure, and GCP cloud migration and native development", "Infrastructure automation with Terraform and IaC", "Security architecture, zero-trust design, and secrets management", "Disaster recovery and multi-region failover planning", "Observability, logging, tracing, and alerting", "Managed cloud services and cost optimization", "Cybersecurity posture and digital risk assessment"],
+          "relatedOutcomes": ["Lower operational risk", "Stronger compliance posture", "Resilient production systems"]
+        },
+        {
+          "id": "operations-managed",
+          "title": "Operations & Managed Services",
+          "briefLine": "The evolution layer—we stay after go-live, because that is where transformation takes hold.",
+          "briefBullets": ["Managed operations", "Application maintenance", "AI system management"],
+          "strategicContext": "Most transformation programs fail at the handoff. Hive Vault Arc removes that handoff with the same team from strategy through production.",
+          "executionContext": "We provide ongoing ownership of the systems we build—monitoring, evolving, and operating them as a long-term partner.",
+          "subCapabilities": ["Managed operations and ongoing post-launch ownership", "Application maintenance, performance tuning, and feature expansion", "Automation and AI system management and evolution", "IT support and helpdesk for internal digital systems", "Business process outsourcing and shared services"],
+          "relatedOutcomes": ["Stable production operations", "Continuous improvement after launch", "Long-term partnership accountability"]
+        }
+      ]
+    },
+    "arc": {
+      "eyebrow": "ARC delivery",
+      "title": "Capability only matters when it reaches production",
+      "description": "HVA connects diagnosis, engineering, and managed operations in one accountable loop.",
+      "signals": ["Clear diagnosis", "Production build", "Ongoing ownership"]
+    },
+    "programs": {
+      "eyebrow": "From capability to program",
+      "title": "When scope is clear, use a ready delivery path.",
+      "view": "View program"
+    },
+    "bottomCta": {
+      "title": "Need this mapped to your business constraints?",
+      "description": "We align the right pillar, program, and operating model before execution starts.",
+      "primary": "Book a discovery call",
+      "secondary": "Back to capabilities"
+    }
+  },
+  "Privacy": {
+    "common": {"email": "Email:", "phone": "Phone:"},
+    "hero": {
+      "eyebrow": "Compliance & Data Protection",
+      "title": "Privacy Policy",
+      "description": "Hive Vault Arc is committed to protecting your personal data in compliance with Moroccan Law 09-08 on the protection of individuals with regard to the processing of personal data (CNDP), as well as the General Data Protection Regulation (GDPR) applicable to residents of the European Union under its extraterritorial scope.",
+      "updated": "Last updated: July 10, 2026"
+    },
+    "controller": {
+      "title": "1. Data Controller",
+      "intro": "The data controller for personal data collected via hivevaultarc.com is:",
+      "location": "Tangier, Tanger-Tetouan-Al Hoceima, Morocco"
+    },
+    "collection": {
+      "title": "2. Data We Collect",
+      "intro": "We collect only the data strictly necessary for the purposes described below:",
+      "items": [
+        {"label": "Contact form", "detail": "name, email address, phone number (optional), company name (optional), industry (optional), team size (optional), and message."},
+        {"label": "Server logs", "detail": "IP address, browser type and version, pages visited, and request timestamps."},
+        {"label": "Analytics data", "detail": "anonymised page paths, referrers, device and browser categories, and coarse location data collected through Vercel Web Analytics. The service does not store IP addresses or use cookies to identify visitors."}
+      ]
+    },
+    "purposes": {
+      "title": "3. Purposes of Processing",
+      "intro": "Your data is processed for the following purposes:",
+      "items": [
+        "Responding to your contact requests and enquiries about our services.",
+        "Drafting and delivering commercial proposals and service agreements.",
+        "Improving website performance and user experience.",
+        "Complying with applicable legal and regulatory obligations."
+      ]
+    },
+    "legalBasis": {
+      "title": "4. Legal Basis for Processing",
+      "intro": "Each processing activity rests on a legal basis compliant with Article 6 of the GDPR and Article 4 of Law 09-08:",
+      "items": [
+        {"label": "Consent", "detail": "you voluntarily submit information through the contact form."},
+        {"label": "Performance of a contract", "detail": "processing necessary to fulfil an agreed service engagement."},
+        {"label": "Legitimate interest", "detail": "security logs and aggregated, cookieless analytics used to protect and improve the site."}
+      ]
+    },
+    "cookies": {
+      "title": "5. Cookies and Tracking Technologies",
+      "body": "The public site does not currently use advertising or analytics cookies. Vercel Web Analytics measures page views with anonymised, aggregated data and does not place a cookie or retain a persistent identifier that follows a visitor across websites or days. If a future feature requires optional cookies, this policy and the consent controls will be updated before those cookies are enabled."
+    },
+    "retention": {
+      "title": "6. Data Retention",
+      "category": "Data category",
+      "period": "Retention period",
+      "rows": [
+        {"category": "Contact form data", "period": "2 years from last contact"},
+        {"category": "Server logs", "period": "According to the hosting provider’s security-log retention settings"},
+        {"category": "Client data (active contracts)", "period": "5 years after the end of the commercial relationship"},
+        {"category": "Anonymised analytics reports", "period": "For the reporting window available under the active Vercel plan"}
+      ]
+    },
+    "sharing": {
+      "title": "7. Data Sharing and Recipients",
+      "intro": "We never sell your personal data. Authorised recipients are strictly limited to the technical sub-processors necessary to operate the site:",
+      "recipients": [
+        {"label": "Vercel Inc.", "detail": "site hosting and deployment (Covina, California, United States)."},
+        {"label": "Vercel Analytics", "detail": "anonymised audience measurement."}
+      ],
+      "closing": "None of your data is shared with third parties for advertising or marketing purposes."
+    },
+    "transfers": {
+      "title": "8. International Data Transfers",
+      "body": "Data hosted on Vercel servers in the United States involves a transfer outside the European Economic Area, governed by Standard Contractual Clauses approved by the European Commission under Article 46 of the GDPR. For transfers outside Morocco, Hive Vault Arc complies with Article 43 of Law 09-08 and applicable CNDP authorisations."
+    },
+    "rights": {
+      "title": "9. Your Rights",
+      "intro": "Under the GDPR (Articles 15–22) and Law 09-08, you have the following rights:",
+      "items": [
+        {"label": "Right of access", "detail": "Obtain a copy of your data being processed."},
+        {"label": "Right to rectification", "detail": "Correct inaccurate or incomplete data."},
+        {"label": "Right to erasure", "detail": "Request deletion of your data, subject to applicable exceptions."},
+        {"label": "Right to restriction", "detail": "Temporarily suspend processing of your data."},
+        {"label": "Right to portability", "detail": "Receive your data in a structured, machine-readable format."},
+        {"label": "Right to object", "detail": "Object to processing based on legitimate interest."}
+      ],
+      "exercisePrefix": "To exercise your rights, send your request to",
+      "exerciseSuffix": ". We are committed to responding within 30 days."
+    },
+    "authorities": {
+      "title": "10. Supervisory Authorities",
+      "intro": "If you believe the processing of your data infringes your rights, you may lodge a complaint with the competent authority:",
+      "items": [
+        {"audience": "Users in Morocco", "name": "CNDP", "description": "Commission Nationale de contrôle de la Protection des Données à Caractère Personnel", "href": "https://www.cndp.ma", "domain": "www.cndp.ma"},
+        {"audience": "Users in the EU", "name": "CNIL (France) or local DPA", "description": "The data protection authority of your country of residence", "href": "https://www.cnil.fr", "domain": "www.cnil.fr"}
+      ]
+    },
+    "security": {
+      "title": "11. Data Security",
+      "intro": "Hive Vault Arc implements appropriate technical and organisational measures to protect your data against loss, unauthorised access, disclosure, or accidental destruction:",
+      "items": [
+        "Encryption of data in transit via HTTPS/TLS.",
+        "Strict access controls on systems holding personal data.",
+        "Documented security incident response procedures.",
+        "Regular review of user access rights."
+      ]
+    },
+    "automated": {
+      "title": "12. Automated Decision-Making and Profiling",
+      "body": "hivevaultarc.com does not carry out fully automated decision-making or profiling within the meaning of Article 22 of the GDPR. No algorithm makes decisions with legal or similarly significant effects on you based on your data."
+    },
+    "changes": {
+      "title": "13. Changes to This Policy",
+      "body": "Hive Vault Arc may update this Privacy Policy to reflect changes in its practices or applicable legal obligations. In the event of a material change, a notice will be provided by email where appropriate or on the site. The “Last updated” date will be revised accordingly."
+    },
+    "contact": {
+      "title": "14. Contact Us",
+      "intro": "For questions regarding this policy or to exercise your rights, contact our team:",
+      "label": "Data Protection Contact",
+      "response": "Response time: 30 days maximum"
+    },
+    "cta": {
+      "eyebrow": "Have a question?",
+      "title": "Get in touch with our team directly.",
+      "label": "Contact us"
+    }
+  },
+  "Legal": {
+    "common": {"email": "Email:", "phone": "Phone:"},
+    "hero": {
+      "eyebrow": "Legal Information",
+      "title": "Legal Mentions",
+      "description": "In accordance with Moroccan commercial and digital publication law, including Law 31-08 on consumer protection and the Code de Commerce, the following legal information applies to hivevaultarc.com.",
+      "updated": "Last updated: July 10, 2026"
+    },
+    "publisher": {
+      "title": "1. Site Publisher",
+      "intro": "The site hivevaultarc.com is published by:",
+      "location": "Tangier, Tanger-Tetouan-Al Hoceima, Morocco"
+    },
+    "director": {
+      "title": "2. Publication Director",
+      "intro": "The publication director of hivevaultarc.com is:",
+      "role": "Founder & CEO, Hive Vault Arc"
+    },
+    "hosting": {
+      "title": "3. Hosting",
+      "intro": "The site is hosted by:",
+      "location": "Covina, California 91723, United States"
+    },
+    "intellectualProperty": {
+      "title": "4. Intellectual Property",
+      "bodyOne": "All content on hivevaultarc.com—including texts, images, graphics, logos, icons, software, and other elements—is protected by Moroccan copyright law under Law No. 2-00 on copyright and related rights, as well as applicable international conventions.",
+      "bodyTwo": "Any reproduction, representation, modification, publication, or adaptation of any part of the site is prohibited without prior written authorisation from Hive Vault Arc. Unauthorised use may constitute copyright infringement under Law 2-00."
+    },
+    "liability": {
+      "title": "5. Limitation of Liability",
+      "intro": "Hive Vault Arc endeavours to keep the information published on this site accurate and up to date. However, Hive Vault Arc cannot guarantee its accuracy, completeness, or currency.",
+      "leadIn": "Hive Vault Arc accepts no liability for:",
+      "items": [
+        "Errors or omissions in information available on the site.",
+        "The content of third-party sites linked from this site, which Hive Vault Arc does not control.",
+        "Direct or indirect damages resulting from access to the site or use of the information it contains.",
+        "Temporary service interruptions due to maintenance or technical causes beyond our control."
+      ]
+    },
+    "personalData": {
+      "title": "6. Personal Data and CNDP",
+      "body": "The collection and processing of personal data through this site is governed by Moroccan Law 09-08 on personal data protection, under the supervision of the Commission Nationale de contrôle de la protection des Données à Caractère Personnel (CNDP).",
+      "linkPrefix": "For full details on how we collect, use, and protect your data, please refer to our",
+      "linkLabel": "Privacy Policy"
+    },
+    "jurisdiction": {
+      "title": "7. Governing Law and Jurisdiction",
+      "eyebrow": "Jurisdiction clause",
+      "body": "This site and its legal notices are governed by Moroccan law. In the event of a dispute relating to hivevaultarc.com, and in the absence of an amicable resolution, the courts of Tangier, Morocco, shall have jurisdiction, subject to mandatory consumer-protection provisions that may apply.",
+      "laws": "Applicable law: Moroccan Code de Commerce, Law 31-08, and Law 09-08."
+    },
+    "cookies": {
+      "title": "8. Cookies",
+      "body": "hivevaultarc.com does not currently use advertising or analytics cookies. Vercel Web Analytics records anonymised, aggregated page-view data without cookies or a persistent cross-site identifier. For more information, see the “Cookies and Tracking Technologies” section of our",
+      "linkLabel": "Privacy Policy"
+    },
+    "cta": {
+      "eyebrow": "Legal questions?",
+      "title": "Our team is available to help.",
+      "label": "Contact us"
+    }
+  },
+  "ArticleUi": {
+    "home": "Home",
+    "breadcrumb": "Breadcrumb",
+    "by": "By",
+    "aboutTitle": "About Hive Vault Arc",
+    "aboutDescription": "Hive Vault Arc is a technology consulting and digital transformation firm based in Tangier, Morocco. We advise, engineer, build, ship, and maintain intelligent systems across AI, automation, custom software, IT modernization, cloud infrastructure, and data capabilities.",
+    "aboutCta": "Explore case studies",
+    "continueReading": "Continue reading",
+    "related": "Related insights",
+    "allArticles": "All articles"
+  },
+  "InsightsHub": {
+    "types": {
+      "blog": "Blog",
+      "caseStudy": "Case study",
+      "news": "News article",
+      "perspective": "Perspective",
+      "research": "Research report"
+    },
+    "hero": {
+      "eyebrow": "Insights",
+      "title": "What We Think,",
+      "emphasis": "Test, and Ship.",
+      "description": "Blogs, case studies, perspectives, and research grounded in real operational work.",
+      "diagramLabel": "HIVE VAULT ARC INSIGHTS"
+    },
+    "categories": {
+      "eyebrow": "Insight types",
+      "typeLabel": "Insight type",
+      "open": "Open {type}"
+    },
+    "latest": {
+      "eyebrow": "Latest",
+      "label": "Latest {type}",
+      "readCaseStudy": "Read case study",
+      "openReport": "Open report",
+      "readInsight": "Read insight"
+    },
+    "grid": {
+      "eyebrow": "All insights",
+      "title": "Everything we have published",
+      "itemCount": "{count, plural, one {# item} other {# items}}",
+      "open": "Open {type}",
+      "loadMore": "Load more"
+    },
+    "slider": {
+      "ariaLabel": "Latest publications carousel",
+      "title": "Latest publications",
+      "previous": "Previous insight",
+      "next": "Next insight",
+      "trackLabel": "Insights slider",
+      "slidePosition": "{current} of {total}",
+      "readType": "Read {type} insight",
+      "choose": "Choose a publication",
+      "goTo": "Go to slide {number}"
+    },
+    "bottomCta": {
+      "title": "Need insights mapped to your operations?",
+      "description": "We can translate these insights into a practical transformation roadmap for your team.",
+      "primary": "Book a discovery call",
+      "secondary": "View capabilities"
+    }
+  },
+  "CollectionUi": {
+    "all": "All",
+    "allInsights": "All insights",
+    "read": "Read",
+    "readBlog": "Read the blog",
+    "comingSoon": "Coming soon",
+    "prepared": "prepared for publishing.",
+    "emptyDescription": "We publish deliberately—only when the content meets our editorial standard. Check back soon or explore another section.",
+    "defaultEmpty": "These articles are being",
+    "collectionEmpty": "{title} are being",
+    "brand": "Hive Vault Arc"
+  },
+  "BlogIndex": {
+    "eyebrow": "Strategy + Execution Journal",
+    "headline": "Hive Vault Arc",
+    "headlineItalic": "Consulting Briefing",
+    "description": "An editorial collection on AI agents, custom software, and the architecture of modern business operations—written for leadership teams in Morocco and beyond.",
+    "empty": "No articles in this category yet."
+  },
+  "CaseStudiesIndex": {
+    "eyebrow": "Transformation proof",
+    "headline": "Consulting-Led",
+    "headlineItalic": "Case Studies",
+    "description": "Each case documents the business challenge, execution architecture, and production context without publishing unverified performance claims.",
+    "evidenceAvailable": "Client letter available",
+    "empty": "No case studies in this category yet.",
+    "bottomCta": {
+      "title": "Ready to see how transformation looks in production?",
+      "description": "Start with a discovery call. We will show you how strategy, architecture, and delivery align in real environments.",
+      "primary": "Start discovery",
+      "secondary": "View solution programs"
+    }
+  },
+  "Portfolio": {
+    "hero": {
+      "eyebrow": "Transformation portfolio",
+      "titleLineOne": "Consulting-Led",
+      "titleLineTwo": "Programs in Production",
+      "description": "See how strategy, engineering, and operations become measurable production systems under one accountable team.",
+      "primaryCta": "Explore the work",
+      "secondaryCta": "Book a call",
+      "imageAlt": "A production CRM operating system used in a Hive Vault Arc transformation program"
+    },
+    "projects": {
+      "deploymentLabel": "Deployment status:",
+      "stackLabel": "Stack and integrations:",
+      "caseStudyCta": "Read case study",
+      "ai": {
+        "title": "Multilingual WhatsApp AI Agent",
+        "stream": "Program stream: conversational intelligence",
+        "description": "A consulting-led AI transformation stream for global lead management. The system handles multilingual initial inquiries, qualifies prospects with custom logic, and updates CRM records automatically.",
+        "deployment": "Live in production.",
+        "stack": "WhatsApp API, HubSpot, Google Calendar, PostgreSQL, and orchestration flows.",
+        "imageAlt": "Custom multilingual WhatsApp AI assistant built by Hive Vault Arc in Morocco",
+        "tags": ["Multilingual", "CRM integration", "Automated scheduling"],
+        "bullets": ["Automated lead qualification and routing", "Always-on lead capture across time zones", "Direct CRM synchronization"]
+      },
+      "crm": {
+        "title": "Real Estate CRM Transformation Program",
+        "description": "A consulting and engineering engagement for a luxury real estate group. We consolidated disconnected tools into one governed CRM operation covering the buyer journey.",
+        "deployment": "Live across sales and operations.",
+        "stack": "CRM core, DocuSign, Meta Lead Sync, pipeline automation, and BI reporting.",
+        "status": "Program status: live in production",
+        "statusDetail": "Full-stack CRM · BI reporting layer · real-time lead sync",
+        "imageAlt": "Custom real estate CRM system built by Hive Vault Arc for a Moroccan organization",
+        "cardTitle": "Architectural precision",
+        "cardCaption": "Consulting-led execution",
+        "tags": ["Custom SaaS", "Team collaboration", "Pipeline automation"]
+      }
+    },
+    "signature": {
+      "titleLineOne": "From Operating Problem",
+      "titleLineTwo": "to Production System",
+      "eyebrow": "Delivery signature",
+      "subtitle": "Strategy. Engineering. Operations.",
+      "description": "Everything needed to advise, engineer, deploy, and maintain reliable digital operations.",
+      "items": [
+        {"title": "Agent workflows", "detail": "AI reception and operational agents integrated with real business processes."},
+        {"title": "Decision clarity", "detail": "Reporting and analyst pipelines built for measurable operational control."},
+        {"title": "Automation layer", "detail": "From intake to delivery, workflows are structured to reduce manual friction."},
+        {"title": "Production delivery", "detail": "CI/CD, monitoring, and reliability patterns aligned with long-term scale."},
+        {"title": "Secure by default", "detail": "Validation, rate limits, and control layers are included from day one."},
+        {"title": "AI-ready products", "detail": "Practical AI features where they improve speed, quality, and decisions."}
+      ]
+    },
+    "bottomCta": {
+      "title": "Ready to move from fragmented projects to guided transformation?",
+      "description": "Share your constraints and we will map the right consulting and engineering path for your operating model.",
+      "primary": "Book a call",
+      "secondary": "View case studies"
+    }
+  },
+  "About": {
+    "hero": {
+      "eyebrow": "Who we are",
+      "titleLineOne": "We advise. We build.",
+      "titleLineTwo": "We operate.",
+      "emphasis": "One accountable partner.",
+      "description": "Hive Vault Arc is a technology transformation partner combining strategy, AI engineering, software, cloud, and managed operations in one production-minded delivery model.",
+      "primaryCta": "Book a call",
+      "secondaryCta": "View capabilities",
+      "frameworkLabel": "ARC Framework",
+      "frameworkLoop": "Assess. Re-engineer. Command.",
+      "imageAlt": "Technology leadership team reviewing global operations in a strategy room at night",
+      "imageCaption": "Strategy to production"
+    },
+    "factsHeading": "Hive Vault Arc at a glance",
+    "facts": [
+      {
+        "value": "Founder-led",
+        "label": "Senior ownership from first decision to live operation"
+      },
+      {
+        "value": "Tangier, Morocco",
+        "label": "Serving organizations across Morocco, France, and MENA"
+      },
+      {
+        "value": "Connected expertise",
+        "label": "Strategy, technology, AI, software, cloud, and operations"
+      },
+      {
+        "value": "One operating loop",
+        "label": "Assess, Re-engineer, and Command without a delivery handoff"
+      }
+    ],
+    "capabilities": {
+      "eyebrow": "What we do",
+      "title": "What we do, in one view.",
+      "description": "Connected capabilities move from business decision to reliable operation.",
+      "cta": "Explore all capabilities",
+      "imageAlt": "ARC operating model workspace",
+      "imageLabel": "ARC operating model",
+      "imageCaption": "Strategy connected to delivery and operations",
+      "items": [
+        {
+          "number": "01",
+          "slug": "strategy-business",
+          "title": "Strategy",
+          "description": "Enterprise strategy, operating models, and transformation roadmaps.",
+          "outcome": "Shape the operating roadmap before build starts.",
+          "phase": "Assess"
+        },
+        {
+          "number": "02",
+          "slug": "technology-consulting",
+          "title": "Technology",
+          "description": "Architecture, platforms, integration, and emerging technology decisions.",
+          "outcome": "Decide the architecture and integration path.",
+          "phase": "Assess"
+        },
+        {
+          "number": "03",
+          "slug": "ai-data-analytics",
+          "title": "AI & Data",
+          "description": "AI engineering, data strategy, analytics, and intelligent automation.",
+          "outcome": "Turn data and workflows into useful intelligence.",
+          "phase": "Build"
+        },
+        {
+          "number": "04",
+          "slug": "software-engineering",
+          "title": "Software",
+          "description": "Custom software, product engineering, and digital experiences.",
+          "outcome": "Ship the product layer people actually use.",
+          "phase": "Build"
+        },
+        {
+          "number": "05",
+          "slug": "cloud-infrastructure",
+          "title": "Cloud",
+          "description": "Cloud platforms, DevOps, security, and infrastructure modernization.",
+          "outcome": "Make the system reliable, secure, and observable.",
+          "phase": "Build"
+        },
+        {
+          "number": "06",
+          "slug": "operations-managed",
+          "title": "Operations",
+          "description": "Managed services, automation, support, and continuous performance improvement.",
+          "outcome": "Keep production improving after launch.",
+          "phase": "Operate"
+        }
+      ]
+    },
+    "delivery": {
+      "eyebrow": "How we deliver",
+      "title": "One team through every phase.",
+      "description": "ARC turns strategy, engineering, and operations into one continuous accountability loop.",
+      "steps": [
+        {
+          "number": "01",
+          "title": "Assess",
+          "description": "Map friction, define target architecture, and sequence the transformation before a single line of code is written.",
+          "checkpoints": ["Define measurable outcomes", "Audit current systems and blockers", "Sequence strategy into milestones"]
+        },
+        {
+          "number": "02",
+          "title": "Re-engineer",
+          "description": "Build the systems, deploy the intelligence, and wire the infrastructure in transparent sprint increments.",
+          "checkpoints": ["Deliver AI, software, and cloud layers", "Validate against real outcomes", "Iterate through demos and QA loops"]
+        },
+        {
+          "number": "03",
+          "title": "Command",
+          "description": "Stabilize, monitor, and evolve the operation with the same team retaining long-term ownership.",
+          "checkpoints": ["Operate production systems", "Monitor reliability and performance", "Evolve as requirements grow"]
+        }
+      ]
+    },
+    "proof": {
+      "industry": "Luxury real estate",
+      "title": "One CRM operating system for a live real estate operation.",
+      "summary": "Hive Vault Arc unified lead intake, buyer-journey pipeline work, team workflows, and operational reporting in one governed system.",
+      "status": "Live operational rollout",
+      "imageAlt": "ImmoWorld real estate CRM operating system engagement",
+      "cta": "Read the ImmoWorld case study"
+    },
+    "trust": {
+      "eyebrow": "Why buyers trust HVA",
+      "title": "Trust should be verifiable.",
+      "description": "See who is responsible, what has shipped, how we operate, and how your information is handled.",
+      "cta": "Review delivery proof",
+      "items": [
+        {
+          "id": "leadership",
+          "title": "Named leadership",
+          "description": "Founder profiles show who owns strategy, engineering, product systems, cloud, and production reliability.",
+          "linkLabel": "Meet the founders"
+        },
+        {
+          "id": "proof",
+          "title": "Published delivery proof",
+          "description": "The ImmoWorld case records the business challenge, delivered system, and production status.",
+          "linkLabel": "Read the case study"
+        },
+        {
+          "id": "legal",
+          "title": "Public legal information",
+          "description": "Our publisher, Tangier location, publication director, hosting provider, and official contacts are documented.",
+          "linkLabel": "View legal information"
+        },
+        {
+          "id": "privacy",
+          "title": "Clear data practices",
+          "description": "Our privacy policy explains what we collect, why we collect it, and how Law 09-08 and GDPR obligations are addressed.",
+          "linkLabel": "Read the privacy policy"
+        }
+      ]
+    },
+    "team": {
+      "eyebrow": "Our team",
+      "title": "The people behind Hive Vault Arc",
+      "description": "Operators, engineers, and builders with deep expertise and a shared commitment to solving complex problems that matter.",
+      "viewProfile": "View profile"
+    },
+    "contact": {
+      "title": "Start in Tangier. Work across borders.",
+      "description": "Direct access to the team responsible for the decision, delivery, and operation.",
+      "location": "Tangier, Morocco"
+    },
+    "bottomCta": {
+      "title": "Bring us the outcome, not a prewritten solution.",
+      "description": "We will map the right strategy, engineering, and operations path, then stay accountable through production.",
+      "primary": "Book a call",
+      "secondary": "View our capabilities"
+    }
+  },
+  "Industries": {
+    "hero": {
+      "eyebrow": "Industries",
+      "title": "Industry Context,",
+      "emphasis": "Not Generic Delivery.",
+      "description": "Hive Vault Arc combines sector knowledge with strategy, engineering, and operations in one accountable team.",
+      "primaryCta": "View sectors",
+      "secondaryCta": "See proof",
+      "wordmark": "Industries",
+      "wordmarkStart": "Ind",
+      "wordmarkEnd": "ustries"
+    },
+    "coverage": {
+      "eyebrow": "Sector coverage",
+      "title": "Industry programs built around operating reality.",
+      "description": "Each vertical is mapped to the systems, workflows, and governance patterns that determine whether transformation holds in production.",
+      "relatedWork": "See related work"
+    },
+    "cards": [
+      {
+        "id": "real-estate",
+        "category": "Real Estate & Construction",
+        "title": "Real Estate",
+        "description": "CRM, lead qualification, and AI-assisted client communication for property teams.",
+        "imageAlt": "Real estate CRM and lead operations in Morocco",
+        "bullets": ["Lead operations & CRM", "AI client communication", "Pipeline governance"]
+      },
+      {
+        "id": "healthcare",
+        "category": "Healthcare & Life Sciences",
+        "title": "Healthcare",
+        "description": "Clinical dashboards, medical systems, and diagnostic intelligence.",
+        "imageAlt": "Healthcare clinical operations dashboard in Morocco",
+        "bullets": ["Clinical dashboards", "Medical systems", "Diagnostic intelligence"]
+      },
+      {
+        "id": "financial-services",
+        "category": "Financial Services",
+        "title": "Finance & Banking",
+        "description": "Modern banking systems, fraud signals, and deal intelligence.",
+        "imageAlt": "Financial services deal pipeline in Morocco",
+        "bullets": ["Fraud detection", "Deal intelligence", "Digital banking"]
+      },
+      {
+        "id": "government",
+        "category": "Government & Public Sector",
+        "title": "Government",
+        "description": "Citizen portals, public data systems, and AI-ready services.",
+        "imageAlt": "Government digital transformation in Morocco",
+        "bullets": ["Citizen portals", "Public data systems", "AI readiness"]
+      },
+      {
+        "id": "retail",
+        "category": "Retail & E-Commerce",
+        "title": "Retail",
+        "description": "Commerce, personalization, and CRM across the Morocco–France corridor.",
+        "imageAlt": "Retail e-commerce platform in Morocco",
+        "bullets": ["Omnichannel commerce", "Personalization", "Retail CRM"]
+      },
+      {
+        "id": "energy",
+        "category": "Energy, Utilities & Sustainability",
+        "title": "Energy",
+        "description": "Smart grids, ESG analytics, and maintenance intelligence.",
+        "imageAlt": "Energy and sustainability systems in Morocco",
+        "bullets": ["Smart grids", "ESG analytics", "Predictive maintenance"]
+      },
+      {
+        "id": "logistics",
+        "category": "Logistics & Transportation",
+        "title": "Logistics",
+        "description": "Fleet workflows, route optimization, and SLA monitoring.",
+        "imageAlt": "Logistics dispatch workflow automation in Morocco",
+        "bullets": ["Fleet operations", "Route optimization", "SLA monitoring"]
+      },
+      {
+        "id": "consumer-goods",
+        "category": "Consumer Goods & Luxury",
+        "title": "Consumer & Luxury",
+        "description": "Customer analytics, AI marketing, and luxury retail intelligence.",
+        "imageAlt": "Consumer goods and luxury operations in Morocco and France",
+        "bullets": ["Customer analytics", "AI marketing", "Luxury intelligence"]
+      }
+    ],
+    "research": {
+      "shortLabel": "R&D",
+      "imageAlt": "Hive Vault Arc research and development framework for industry operating contexts",
+      "eyebrow": "Active laboratory",
+      "title": "Active Research & Development:",
+      "emphasis": "One Framework. Many Operating Contexts.",
+      "groups": {
+        "methodology": "Methodology",
+        "compliance": "Compliance"
+      },
+      "tracks": [
+        {
+          "code": "IND-001",
+          "title": "Sector-calibrated diagnostics",
+          "description": "Calibrated to sector economics, cycle times, and bottleneck patterns.",
+          "group": "methodology"
+        },
+        {
+          "code": "IND-002",
+          "title": "Domain-aware architecture",
+          "description": "Architecture reflects domain language, data structures, and decision hierarchies.",
+          "group": "methodology"
+        },
+        {
+          "code": "IND-003",
+          "title": "Regulatory awareness",
+          "description": "Controls introduced early to reduce delivery risk in sensitive operations.",
+          "group": "compliance"
+        },
+        {
+          "code": "IND-004",
+          "title": "Stakeholder communication",
+          "description": "Execution adapts to how leadership and operations actually communicate.",
+          "group": "compliance"
+        }
+      ],
+      "primaryCta": "Learn about ARC",
+      "secondaryCta": "Explore capabilities"
+    },
+    "mandate": {
+      "eyebrow": "Our mandate",
+      "quote": "Specificity is the antidote to technical debt.",
+      "title": "Need an industry-specific transformation plan?",
+      "description": "Book a discovery call and we will map the right capability and system program for your sector.",
+      "primaryCta": "Book a discovery call",
+      "secondaryCta": "View capabilities"
+    }
+  },
+  "GeoPages": {
+    "aiAgentsTangier": {
+      "schemaName": "AI Agent Development in Tangier",
+      "schemaDescription": "Multilingual AI agents for customer support, lead qualification, and WhatsApp-first operations in Tangier.",
+      "breadcrumb": "AI Agents in Tangier",
+      "hero": {
+        "kicker": "Local enterprise innovation",
+        "title": "AI agents built for Tangier businesses",
+        "lead": "Hive Vault Arc engineers multilingual agents for WhatsApp reception, lead qualification, customer support, and operational routing. Each system is designed around the realities of the team that will operate it.",
+        "primary": "Book an AI discovery",
+        "secondary": "Explore our expertises",
+        "imageAlt": "AI-enabled business operations in Tangier, Morocco"
+      },
+      "sections": [
+        {
+          "eyebrow": "Built for the operating environment",
+          "title": "Local context, production controls, and accountable delivery",
+          "paragraphs": [
+            "An effective agent must understand the language, escalation rules, systems, and service expectations of the business. We design the operating model before choosing the automation."
+          ],
+          "cards": [
+            {"title": "Local context", "body": "Arabic, French, and English conversation flows aligned with Tangier sales and service teams."},
+            {"title": "Core use cases", "body": "Reception, qualification, support triage, scheduling, and routing to the right human owner."},
+            {"title": "Delivery model", "body": "Discovery, architecture, controlled rollout, and post-launch improvement under one accountable team."}
+          ]
+        },
+        {
+          "title": "What an AI agent changes operationally",
+          "paragraphs": [
+            "Unlike a scripted chatbot, an AI agent can interpret intent, use approved tools, follow business rules, and carry context into the next operational step.",
+            "For a Tangier team, this can mean reading an incoming WhatsApp message, asking the right qualification questions, updating a CRM, and escalating to a person with a complete conversation history."
+          ],
+          "cards": [
+            {"title": "Autonomous execution", "body": "The agent follows a governed sequence of actions to complete a defined business task."},
+            {"title": "System integration", "body": "CRM, calendar, inventory, and reporting tools remain connected to the conversation."}
+          ]
+        },
+        {
+          "title": "Specialized agent types",
+          "paragraphs": [
+            "The right agent depends on the workflow rather than the channel alone. We prioritize use cases with clear ownership and an observable operating result."
+          ],
+          "cards": [
+            {"title": "WhatsApp operations", "body": "Always-on multilingual reception, qualification, booking, and support workflows."},
+            {"title": "Lead operations", "body": "Structured qualification and routing with clean context passed to the sales team."},
+            {"title": "Customer support", "body": "Routine resolution with controlled escalation for cases requiring human judgment."},
+            {"title": "Custom operations agents", "body": "Purpose-built assistants for industrial, logistics, and service workflows."}
+          ]
+        },
+        {
+          "title": "The ARC delivery sequence",
+          "paragraphs": [
+            "We diagnose the current workflow, define the conversation and integration architecture, deploy through controlled release gates, then monitor and improve the production system."
+          ],
+          "cards": [
+            {"title": "Diagnose", "body": "Map demand, bottlenecks, ownership, and the business outcome the agent must support."},
+            {"title": "Design", "body": "Define conversation logic, tool access, escalation, data handling, and quality controls."},
+            {"title": "Deploy", "body": "Release in stages, validate response quality, and align the human workflow around the agent."},
+            {"title": "Optimize", "body": "Review real interactions and improve routing, prompts, knowledge, and governance."}
+          ]
+        }
+      ],
+      "cta": {
+        "title": "Start with the workflow, not the chatbot",
+        "description": "We will assess where an agent can create useful operating leverage, what it must connect to, and how quality will be governed after launch.",
+        "primary": "Book a discovery call",
+        "secondary": "View all digital services",
+        "tertiary": "See the ARC Framework"
+      }
+    },
+    "aiAgentsMorocco": {
+      "schemaName": "AI Agent Development in Morocco",
+      "schemaDescription": "Multilingual AI-agent delivery for customer operations, lead qualification, and workflow automation across Morocco.",
+      "breadcrumb": "AI Agents in Morocco",
+      "hero": {
+        "kicker": "National AI services",
+        "title": "An AI-agent partner for Moroccan organizations",
+        "lead": "Hive Vault Arc delivers multilingual agents for organizations that need faster response, cleaner qualification, and more reliable daily operations. Consulting, engineering, integration, and production ownership remain connected.",
+        "primary": "Plan an AI rollout",
+        "secondary": "See the Tangier guide",
+        "imageAlt": "A business operator working with an AI-enabled operational system"
+      },
+      "sections": [
+        {
+          "title": "From AI interest to operating discipline",
+          "paragraphs": [
+            "The practical question is no longer whether AI can generate a response. It is whether the system can work safely inside a real process, use the right data, and hand responsibility to the right person.",
+            "We begin with the workflow and the intended operating result, then define the agent, integrations, controls, and review model required for production."
+          ]
+        },
+        {
+          "title": "A production-oriented agent stack",
+          "paragraphs": [
+            "The architecture is selected for reliability and maintainability. It can combine approved communication channels, orchestration, backend services, business data, and reporting without trapping the operation inside one disconnected tool."
+          ],
+          "cards": [
+            {"title": "Conversation layer", "body": "Intent handling, qualification logic, knowledge boundaries, and channel-aware response rules."},
+            {"title": "Operations layer", "body": "CRM synchronization, routing, escalation, analytics, and clear ownership of follow-up."}
+          ]
+        },
+        {
+          "title": "Use cases across Morocco",
+          "paragraphs": [
+            "We adapt the agent to sector workflows and language needs while maintaining one governed architecture."
+          ],
+          "cards": [
+            {"title": "Real estate", "body": "Property inquiries, prospect qualification, appointment routing, and pipeline updates."},
+            {"title": "Healthcare", "body": "Appointment support, information triage, and controlled escalation to care teams."},
+            {"title": "Logistics", "body": "Status handling, dispatch communication, and operator coordination."},
+            {"title": "Financial services", "body": "Pre-screening, onboarding guidance, and structured handoff to an advisor."}
+          ]
+        },
+        {
+          "title": "Commercial scope and rollout",
+          "paragraphs": [
+            "Commercial terms are defined after discovery because channel scope, integrations, governance, and support responsibility materially change the work.",
+            "National rollout is phased: validate one high-impact workflow, strengthen quality controls, extend to additional use cases, then expand across teams or regions."
+          ]
+        }
+      ],
+      "cta": {
+        "title": "Build AI agents that can operate in production",
+        "description": "Move from an AI idea to a governed rollout plan adapted to your market, systems, and internal capacity.",
+        "primary": "Book a discovery call",
+        "secondary": "Explore expertises in detail",
+        "tertiary": "View digital services in Tangier"
+      }
+    },
+    "itConsultingTangier": {
+      "schemaName": "IT Consulting in Tangier",
+      "schemaDescription": "Technology strategy, architecture, modernization, and delivery governance for organizations in Tangier.",
+      "breadcrumb": "IT Consulting in Tangier",
+      "hero": {
+        "kicker": "Tangier technology advisory",
+        "title": "IT consulting connected to execution",
+        "lead": "Hive Vault Arc helps leadership teams decide what to modernize, where to invest, and how to deliver without creating operational instability. Strategy, architecture, implementation governance, and production accountability stay connected.",
+        "primary": "Book an IT discovery",
+        "secondary": "Explore ARC",
+        "imageAlt": "Technology strategy and architecture workshop in Tangier"
+      },
+      "sections": [
+        {
+          "title": "Consulting that produces an executable system",
+          "paragraphs": [
+            "A useful technology strategy must explain what changes, why it changes, how dependencies are managed, and who owns the result. We turn leadership priorities into architecture decisions and a sequenced delivery roadmap."
+          ],
+          "cards": [
+            {"title": "Technology audit", "body": "Current systems, process friction, data dependencies, security exposure, and ownership."},
+            {"title": "Target architecture", "body": "The future operating model, platform boundaries, integration approach, and decision principles."},
+            {"title": "Delivery governance", "body": "Milestones, quality gates, risk controls, and the responsibilities required to reach production."}
+          ]
+        },
+        {
+          "title": "Modernization without operational disruption",
+          "paragraphs": [
+            "Fragmented tools and legacy processes rarely need to be replaced all at once. We identify the systems that create the greatest constraint, define safe transition boundaries, and sequence modernization around business continuity.",
+            "The result can combine retained systems, new integration layers, targeted custom software, cloud improvements, and clearer operational ownership."
+          ]
+        },
+        {
+          "title": "Why local context matters",
+          "paragraphs": [
+            "Tangier organizations often operate across Arabic, French, and international stakeholder environments. Local context shortens the distance between leadership intent and delivery action while global engineering standards protect long-term quality."
+          ],
+          "cards": [
+            {"title": "Stakeholder alignment", "body": "Decision structures, language, and operating realities are addressed directly."},
+            {"title": "Architecture rigor", "body": "Recommendations are tested against reliability, security, integration, and maintainability."},
+            {"title": "Delivery continuity", "body": "The team that advises can remain accountable through implementation and stabilization."}
+          ]
+        },
+        {
+          "title": "What to expect from the engagement",
+          "paragraphs": [
+            "Discovery and architecture establish the baseline, constraints, and decision-ready roadmap. Delivery then proceeds through milestones with technical reviews, operating-impact checks, and clear decisions on further investment."
+          ]
+        }
+      ],
+      "cta": {
+        "title": "Need an IT strategy you can execute?",
+        "description": "We can map the current environment, define the modernization sequence, and carry decisions into production with clear ownership.",
+        "primary": "Book a discovery call",
+        "secondary": "Explore the ARC Framework",
+        "tertiary": "View all digital services"
+      }
+    },
+    "customSoftwareMorocco": {
+      "schemaName": "Custom Software Development in Morocco",
+      "schemaDescription": "Custom web applications, SaaS products, and operational systems engineered for Moroccan organizations.",
+      "breadcrumb": "Custom Software in Morocco",
+      "hero": {
+        "kicker": "National software engineering",
+        "title": "Custom software built around your operating reality",
+        "lead": "Hive Vault Arc designs production systems that match how an organization actually works. We replace fragmented tools and manual workarounds with maintainable software, clear data, and controlled execution.",
+        "primary": "Scope a software build",
+        "secondary": "Read the IT consulting guide",
+        "imageAlt": "Custom operational software interface for a Moroccan organization"
+      },
+      "sections": [
+        {
+          "title": "What custom software changes in practical terms",
+          "paragraphs": [
+            "Off-the-shelf tools are designed for average use cases. When the workflow is distinctive, strategically important, or spread across disconnected systems, teams often absorb the difference through duplicate entry, manual coordination, and incomplete visibility.",
+            "Custom software captures the process correctly, improves adoption, and creates a dependable data foundation for decisions."
+          ]
+        },
+        {
+          "title": "A maintainable technology stack",
+          "paragraphs": [
+            "Technology is selected according to reliability, maintainability, security, and the expected evolution of the product rather than fashion."
+          ],
+          "cards": [
+            {"title": "Backend services", "body": "Secure APIs, integration logic, workflow orchestration, and durable business rules."},
+            {"title": "Web and mobile interfaces", "body": "Fast, accessible experiences designed for operational clarity."},
+            {"title": "Data architecture", "body": "Consistent schemas, reporting readiness, traceability, and controlled access."},
+            {"title": "AI-enabled modules", "body": "Targeted automation and decision support where the workflow justifies it."}
+          ]
+        },
+        {
+          "title": "Systems we build",
+          "paragraphs": [
+            "The product form follows the operating need and can serve internal teams, customers, or both."
+          ],
+          "cards": [
+            {"title": "SaaS platforms", "body": "Role-based products with a sound foundation for billing, administration, and feature evolution."},
+            {"title": "Internal tools", "body": "Operations portals, process dashboards, and coordinated team workflows."},
+            {"title": "AI-integrated systems", "body": "Applications combining workflow logic with controlled routing, assistance, or insight."}
+          ]
+        },
+        {
+          "title": "Milestone-based delivery",
+          "paragraphs": [
+            "Discovery establishes outcomes and system boundaries. Incremental delivery exposes progress and risk early. Launch includes production monitoring and stabilization, followed by planned optimization and scale."
+          ],
+          "cards": [
+            {"title": "Discover and design", "body": "Clarify outcomes, architecture, data, users, and acceptance criteria."},
+            {"title": "Build incrementally", "body": "Deliver useful modules through controlled iterations and shared review points."},
+            {"title": "Launch and stabilize", "body": "Deploy safely, monitor system health, and resolve production issues."},
+            {"title": "Optimize and evolve", "body": "Improve performance and extend the roadmap according to operating evidence."}
+          ]
+        },
+        {
+          "title": "Build or buy?",
+          "paragraphs": [
+            "The decision depends on how central the workflow is, how much differentiation it creates, and how costly the current workarounds have become. A hybrid model is often right: retain tools that work and build only where control or integration matters."
+          ]
+        }
+      ],
+      "cta": {
+        "title": "Build software that matches your operation",
+        "description": "We can define the system boundary, architecture, delivery sequence, and long-term ownership model for a custom platform.",
+        "primary": "Book a discovery call",
+        "secondary": "View the case studies",
+        "tertiary": "View digital services in Tangier"
+      }
+    },
+    "digitalServicesTangier": {
+      "schemaName": "Digital Services in Tangier",
+      "schemaDescription": "Strategy, AI, custom software, cloud, and managed operations delivered by a Tangier-based transformation team.",
+      "breadcrumb": "Digital Services in Tangier",
+      "hero": {
+        "kicker": "Digital services in Tangier",
+        "title": "Digital services built for Tangier businesses",
+        "lead": "Hive Vault Arc is a Tangier-based transformation partner for organizations that need more than a website vendor. We connect consulting, AI, custom software, cloud infrastructure, delivery, and ongoing operations in one accountable engagement.",
+        "primary": "Start with a discovery call",
+        "secondary": "Explore our expertises",
+        "imageAlt": "Hive Vault Arc digital-services team and operating environment in Tangier"
+      },
+      "sections": [
+        {
+          "title": "One connected digital operating layer",
+          "paragraphs": [
+            "Digital services should make a business easier to operate, measure, and evolve. That includes the strategy behind technology decisions, the systems that run daily work, the automation that removes repetitive tasks, and the infrastructure that keeps everything reliable.",
+            "We connect discovery, architecture, engineering, rollout, and long-term improvement so the result is a working operating system rather than a collection of tools."
+          ],
+          "cards": [
+            {"title": "AI and automation", "body": "Multilingual agents, workflow automation, lead operations, and customer-service systems."},
+            {"title": "IT consulting", "body": "Technology audits, architecture decisions, modernization roadmaps, and delivery governance."},
+            {"title": "Custom software", "body": "SaaS products, CRM systems, operational platforms, APIs, and integrations."}
+          ]
+        },
+        {
+          "title": "Why organizations choose a Tangier-based partner",
+          "paragraphs": [
+            "Local presence brings direct understanding of Arabic and French operating environments, Moroccan commercial context, and stakeholder rhythms. Engineering standards, release controls, and maintainability remain international."
+          ],
+          "cards": [
+            {"title": "Local context", "body": "Language, decision-making, compliance sensitivity, and day-to-day operations are understood directly."},
+            {"title": "Production standards", "body": "Architecture, quality gates, security, and reliability remain central to delivery."},
+            {"title": "One accountable team", "body": "Strategy, implementation, integration, cloud, and maintenance remain connected."}
+          ]
+        },
+        {
+          "title": "The ARC process",
+          "paragraphs": [
+            "Assess maps business goals, existing tools, process friction, data quality, and ownership. Re-engineer redesigns the priority workflow and builds the system. Command deploys, stabilizes, measures, and improves the operation."
+          ],
+          "cards": [
+            {"title": "Assess", "body": "Establish the constraint, target outcome, systems, evidence, and decision-ready roadmap."},
+            {"title": "Re-engineer", "body": "Design and build the workflow, architecture, integrations, and operating controls."},
+            {"title": "Command", "body": "Release, stabilize, monitor, and evolve the system in production."}
+          ]
+        },
+        {
+          "title": "Proof before promises",
+          "paragraphs": [
+            "Our case studies document the business context, delivery approach, and approved evidence available for publication. French pages link only to content that has an approved French translation."
+          ]
+        }
+      ],
+      "cta": {
+        "title": "Start with the business process",
+        "description": "We will identify where consulting, AI, software, cloud, or managed operations can create the clearest improvement and define the right delivery path.",
+        "primary": "Book a discovery call",
+        "secondary": "Explore our expertises",
+        "tertiary": "View the ARC Framework"
+      }
+    }
+  },
+  "Faqs": {
+    "defaultHeading": "Frequently Asked Questions",
+    "articleHeading": "Questions About This Article",
+    "home": {
+      "heading": "Frequently Asked Questions",
+      "items": [
+        {
+          "question": "What does Hive Vault Arc do?",
+          "answer": "Hive Vault Arc is a technology transformation partner combining strategy, AI engineering, software, cloud infrastructure, and managed operations. We advise, build, and operate so organizations can redesign how work happens and keep production systems improving after launch."
+        },
+        {
+          "question": "What is the ARC Program?",
+          "answer": "The ARC Program is Hive Vault Arc’s structured engagement model: Assess the operating state and constraints, Re-engineer processes and systems, then Command the production operation through stabilization and continuous improvement."
+        },
+        {
+          "question": "Does Hive Vault Arc build WhatsApp AI agents?",
+          "answer": "Yes. We build multilingual agents on the WhatsApp Business API for lead qualification, customer support, sales automation, persistent operational context, and direct CRM integration."
+        },
+        {
+          "question": "Is Hive Vault Arc an AI company, a consulting firm, or a software agency?",
+          "answer": "Hive Vault Arc is a technology transformation partner. We combine strategy, AI engineering, software delivery, cloud infrastructure, and managed operations in one accountable team."
+        },
+        {
+          "question": "What kinds of AI solutions does Hive Vault Arc build?",
+          "answer": "We build customer-facing AI agents, internal workflow automation, lead qualification and routing systems, decision-intelligence dashboards, and orchestration layers connecting AI with CRM, calendar, and data systems."
+        },
+        {
+          "question": "What does a digital transformation engagement look like?",
+          "answer": "It begins with discovery of business goals, operating constraints, and existing systems. We then define the roadmap, architecture, and delivery scope before executing through clear milestones and remaining involved through deployment and stabilization."
+        },
+        {
+          "question": "Can Hive Vault Arc support us after the system is live?",
+          "answer": "Yes. We provide reliability monitoring, optimization cycles, roadmap extensions, and architectural guidance as your operations evolve."
+        },
+        {
+          "question": "Do you publish real proof of delivery?",
+          "answer": "Yes. We publish approved case studies with the business context, architecture decisions, integrations, deployment status, and only those outcomes that have been verified and cleared for publication."
+        },
+        {
+          "question": "Where is Hive Vault Arc based and what markets do you serve?",
+          "answer": "We are based in Tangier, Morocco, and serve organizations in Morocco and international markets. Our team works in English, French, Arabic, and Spanish."
+        },
+        {
+          "question": "How does pricing work?",
+          "answer": "Commercial scope is defined after discovery and depends on transformation complexity, required systems, integrations, delivery responsibilities, and ongoing support needs."
+        }
+      ]
+    },
+    "capabilities": {
+      "heading": "Frequently Asked Questions",
+      "items": [
+        {
+          "question": "What are Hive Vault Arc’s service pillars?",
+          "answer": "Hive Vault Arc works across strategy and business consulting, technology consulting, AI and data, software engineering, cloud infrastructure, and operations and managed services. Each engagement combines the capabilities required by the operating problem."
+        },
+        {
+          "question": "What AI and automation solutions do you deliver?",
+          "answer": "We deliver AI agents, workflow automation, decision intelligence, reporting systems, orchestration layers, and operational integrations connected to CRM and data platforms."
+        },
+        {
+          "question": "What does consulting include at Hive Vault Arc?",
+          "answer": "Consulting includes strategy, architecture decisions, roadmap design, technology-function planning, and transformation sequencing, with accountability maintained through delivery."
+        },
+        {
+          "question": "How do you approach digital transformation programs?",
+          "answer": "We connect operating diagnostics, modernization priorities, architecture, implementation, rollout, and long-term improvement in one governed program."
+        },
+        {
+          "question": "Do you provide engineering delivery for product and platform builds?",
+          "answer": "Yes. We engineer custom web and mobile applications, SaaS platforms, APIs, integrations, CRM systems, and operational platforms."
+        },
+        {
+          "question": "What AI, data, and analytics capabilities are included?",
+          "answer": "Our work includes AI agents, generative AI engineering, predictive analytics, data pipelines, warehouses, executive dashboards, and MLOps."
+        },
+        {
+          "question": "Do you cover cloud, infrastructure, cybersecurity, and digital risk?",
+          "answer": "Yes. Delivery can include cloud migration, infrastructure automation, zero-trust design, observability, identity controls, monitoring, and governance."
+        },
+        {
+          "question": "Do you provide operations and managed services after go-live?",
+          "answer": "Yes. We can remain responsible for managed operations, application maintenance, performance tuning, AI-system management, support, and ongoing optimization."
+        },
+        {
+          "question": "How does ARC work with Hive Vault Arc?",
+          "answer": "ARC connects Assess, Re-engineer, and Command so diagnosis, architecture, delivery, and production accountability remain with one team."
+        },
+        {
+          "question": "Can Hive Vault Arc stay involved after launch?",
+          "answer": "Yes. Engagements can continue through maintenance, optimization, scaling, and managed operations according to the client’s operating model."
+        }
+      ]
+    },
+    "about": {
+      "heading": "Frequently Asked Questions",
+      "items": [
+        {
+          "question": "What is Hive Vault Arc?",
+          "answer": "Hive Vault Arc is a founder-led technology transformation partner based in Tangier, Morocco. We combine strategy consulting, AI engineering, software development, cloud infrastructure, and managed operations."
+        },
+        {
+          "question": "What is the ARC Framework?",
+          "answer": "ARC is the Hive Vault Arc delivery model: Assess, Re-engineer, Command. It connects operating diagnosis, system delivery, and long-term production accountability."
+        },
+        {
+          "question": "Who leads Hive Vault Arc engagements?",
+          "answer": "Hive Vault Arc is founder-led. Current leadership profiles and areas of responsibility are maintained on this page."
+        },
+        {
+          "question": "Do you stay involved after the initial build?",
+          "answer": "Yes. The Command phase covers managed operations, production monitoring, application evolution, and ongoing optimization after launch."
+        },
+        {
+          "question": "What industries does Hive Vault Arc serve?",
+          "answer": "We work across real estate and construction, healthcare, financial services, the public sector, retail, energy, logistics, and consumer and luxury businesses."
+        }
+      ]
+    },
+    "contact": {
+      "heading": "Frequently Asked Questions",
+      "items": [
+        {
+          "question": "What happens after I submit the contact form?",
+          "answer": "We review your brief and respond with the most appropriate next step. The first conversation focuses on your priorities, constraints, and the right engagement path."
+        },
+        {
+          "question": "Is the first discovery call paid?",
+          "answer": "No. Discovery is complimentary and is used to validate fit, clarify outcomes, and define possible next steps before formal scoping."
+        },
+        {
+          "question": "Can Hive Vault Arc sign an NDA before a detailed discussion?",
+          "answer": "Yes. We can sign an NDA before sensitive system, data, or commercial details are discussed."
+        },
+        {
+          "question": "Do you publish fixed prices on the website?",
+          "answer": "No. Pricing is defined after discovery and depends on scope, technical complexity, integrations, delivery responsibility, and ongoing support."
+        }
+      ]
+    },
+    "portfolio": {
+      "heading": "Frequently Asked Questions",
+      "items": [
+        {
+          "question": "What does the portfolio represent?",
+          "answer": "The portfolio presents real transformation programs delivered in operating environments, with emphasis on strategy, automation, engineering, and production accountability."
+        },
+        {
+          "question": "Are these live systems or demos?",
+          "answer": "Published case studies describe live or delivered systems. Their status is stated within each case study."
+        },
+        {
+          "question": "Do case studies include business and technical context?",
+          "answer": "Yes. We include the business challenge, transformation strategy, architecture decisions, integrations, deployment status, and approved outcomes."
+        },
+        {
+          "question": "Can you share additional proof privately?",
+          "answer": "Where confidentiality permits, qualified opportunities can receive deeper walkthroughs, architecture artifacts, and references under appropriate terms."
+        },
+        {
+          "question": "How should we use the portfolio in our evaluation?",
+          "answer": "Use it to compare your context with similar delivery patterns, then speak with us to map the appropriate transformation program for your organization."
+        }
+      ]
+    },
+    "arc": {
+      "heading": "Questions buyers ask before an ARC engagement",
+      "items": [
+        {
+          "question": "What happens in Assess?",
+          "answer": "Assess maps the current workflow, system dependencies, decision owners, and target outcome. The result is a constraint map and a decision-ready roadmap before build scope is approved."
+        },
+        {
+          "question": "What data do we need?",
+          "answer": "We begin with the evidence your teams already use: workflows, operating measures, system access, known failure points, and ownership. Missing evidence is documented as a constraint rather than replaced with assumptions."
+        },
+        {
+          "question": "How long does it take to reach production proof?",
+          "answer": "Timing is set after Assess, when scope, dependencies, and decision gates are known. The roadmap identifies the shortest safe production slice that can be delivered and evaluated."
+        },
+        {
+          "question": "How does ARC work with internal teams?",
+          "answer": "ARC establishes clear ownership between Hive Vault Arc and internal leaders. Client teams validate operating reality and business impact while HVA carries the agreed architecture, delivery, release controls, and production responsibilities."
+        },
+        {
+          "question": "When is ARC not the right fit?",
+          "answer": "ARC is not the best fit when the need is only temporary staff capacity, a standalone advisory document, or a build with no expectation of operating accountability after launch."
+        }
+      ]
+    },
+    "aiAgentsTangier": {
+      "heading": "AI Agents in Tangier: Frequently Asked Questions",
+      "items": [
+        {"question": "What types of Tangier businesses benefit from AI agents?", "answer": "Organizations with frequent customer messages, repeated qualification work, or time-sensitive support can benefit when the workflow and escalation rules are clearly defined."},
+        {"question": "Can Hive Vault Arc build agents in Arabic and French?", "answer": "Yes. We design multilingual agents in Arabic, French, English, and Spanish with business-specific tone, knowledge boundaries, and escalation rules."},
+        {"question": "How is the deployment timeline defined?", "answer": "Timing is defined after discovery according to workflow complexity, integrations, data readiness, testing, and the governance required for production."},
+        {"question": "Can the agent connect to our CRM and calendar?", "answer": "Yes. Agents can connect to approved CRM, calendar, operations, and reporting systems so the conversation becomes an operational action."},
+        {"question": "What happens after launch?", "answer": "We can provide monitoring, quality review, tuning, governance, and roadmap support as real interactions reveal opportunities for improvement."}
+      ]
+    },
+    "aiAgentsMorocco": {
+      "heading": "AI Agents in Morocco: Frequently Asked Questions",
+      "items": [
+        {"question": "Do you only work with organizations in Tangier?", "answer": "No. Hive Vault Arc is based in Tangier and supports organizations across Morocco as well as distributed and international teams."},
+        {"question": "What is included in an AI-agent implementation?", "answer": "A typical scope covers discovery, workflow and conversation design, integrations, testing, controlled rollout, and an agreed post-launch operating model."},
+        {"question": "Can you build sector-specific agents?", "answer": "Yes. The agent is designed around the relevant sector workflow, data boundaries, service expectations, and escalation responsibilities."},
+        {"question": "How is pricing structured?", "answer": "Commercial terms are defined after discovery according to scope, integrations, channels, governance, and ongoing operations responsibility."},
+        {"question": "How do we start?", "answer": "We begin with discovery of the current message flow, operational constraints, and the use case most suitable for a controlled first release."}
+      ]
+    },
+    "itConsultingTangier": {
+      "heading": "IT Consulting in Tangier: Frequently Asked Questions",
+      "items": [
+        {"question": "What does IT consulting include at Hive Vault Arc?", "answer": "It can include technology audits, target architecture, roadmap definition, delivery governance, and implementation support."},
+        {"question": "Do you only advise, or do you also implement?", "answer": "We do both. The same accountable team can carry decisions through implementation, stabilization, and ongoing improvement."},
+        {"question": "Can you modernize a fragmented legacy environment?", "answer": "Yes. We define phased modernization boundaries that reduce risk and preserve business continuity."},
+        {"question": "Why work with a Tangier-based consulting team?", "answer": "Local language and operating context improve stakeholder alignment, while our engineering standards protect reliability and long-term maintainability."},
+        {"question": "How does an engagement begin?", "answer": "Discovery maps current constraints, target outcomes, evidence, and decision ownership before a practical consulting-to-delivery sequence is proposed."}
+      ]
+    },
+    "customSoftwareMorocco": {
+      "heading": "Custom Software Development in Morocco: Frequently Asked Questions",
+      "items": [
+        {"question": "When should an organization choose custom software?", "answer": "Custom software is appropriate when a critical workflow is distinctive, fragmented across tools, or constrained by manual work and missing integrations."},
+        {"question": "How do you select the technology stack?", "answer": "We select technologies according to reliability, security, maintainability, integration requirements, and the product’s expected evolution."},
+        {"question": "Can you build internal and customer-facing platforms?", "answer": "Yes. We build internal systems, SaaS products, customer portals, and hybrid platforms."},
+        {"question": "How is delivery risk controlled?", "answer": "Delivery proceeds through explicit milestones, shared review points, acceptance criteria, and production-readiness gates."},
+        {"question": "Do you support software after launch?", "answer": "Yes. We can provide stabilization, maintenance, monitoring, optimization, and roadmap evolution after production release."}
+      ]
+    },
+    "digitalServicesTangier": {
+      "heading": "Digital Services in Tangier: Frequently Asked Questions",
+      "items": [
+        {"question": "What digital services does Hive Vault Arc offer in Tangier?", "answer": "We deliver technology strategy, AI agents and automation, custom software, systems integration, cloud infrastructure, and managed operations."},
+        {"question": "Do you only advise, or do you build as well?", "answer": "We advise, build, and can operate the resulting systems. The engagement model keeps architecture and implementation connected."},
+        {"question": "What does a Tangier-based partner add?", "answer": "Local presence supports Arabic and French operating contexts and direct stakeholder alignment, combined with production-grade engineering standards."},
+        {"question": "What types of organizations do you support?", "answer": "We support Moroccan and international organizations whose growth depends on better systems, automation, data, and delivery discipline."},
+        {"question": "How is the engagement timeline defined?", "answer": "The roadmap and timeline are defined after discovery, when scope, dependencies, risk, and internal decision gates are known."}
+      ]
+    }
+  },
+  "Metadata": {
+    "defaultTitle": "Hive Vault Arc | Technology Transformation Partner",
+    "defaultDescription": "Hive Vault Arc combines strategy, AI engineering, software, cloud infrastructure, and managed operations.",
+    "pages": {
+      "home": {
+        "title": "Hive Vault Arc | Technology Consulting & AI Transformation",
+        "description": "Hive Vault Arc is a technology transformation partner in Tangier, Morocco, combining strategy consulting, AI engineering, software development, cloud infrastructure, and managed operations."
+      },
+      "arc": {
+        "title": "ARC Framework | Assess, Re-engineer, Command",
+        "description": "Discover the ARC Framework, Hive Vault Arc’s operating model for diagnosing constraints, rebuilding systems, and sustaining production outcomes."
+      },
+      "capabilities": {
+        "title": "Capabilities | Six Service Pillars from Strategy to Operations",
+        "description": "Explore Hive Vault Arc capabilities across strategy, technology consulting, AI and data, software engineering, cloud infrastructure, and managed operations."
+      },
+      "capabilitiesDetail": {
+        "title": "Capabilities in Detail | Integrated Technology Delivery",
+        "description": "Review the expertise, delivery scope, and connected outcomes within each Hive Vault Arc capability pillar."
+      },
+      "capabilitiesPrograms": {
+        "title": "Solution Programs | Consulting-Led Operational Systems",
+        "description": "Explore structured solution programs that combine strategy, engineering, automation, and ongoing operational support."
+      },
+      "industries": {
+        "title": "Industries | Technology Transformation by Sector",
+        "description": "See how Hive Vault Arc applies strategy, AI, software, cloud, and operations expertise across priority industries."
+      },
+      "about": {
+        "title": "About | Founder-Led Technology Transformation Team",
+        "description": "Meet the founder-led Hive Vault Arc team delivering strategy, AI, software, cloud, and managed operations from Tangier."
+      },
+      "portfolio": {
+        "title": "Portfolio | Transformation Engagements and Delivery Outcomes",
+        "description": "Explore consulting-led transformation engagements delivered across AI operations, CRM modernization, analytics, software engineering, and cloud reliability."
+      },
+      "insights": {
+        "title": "Insights | Blogs, Case Studies, News, Perspectives and Research",
+        "description": "Explore Hive Vault Arc publications on technology consulting, digital transformation, AI operations, and execution."
+      },
+      "blog": {
+        "title": "Blog | Technology Strategy and Execution Insights",
+        "description": "Practical insights on technology consulting, AI automation, software engineering, and operating-model execution."
+      },
+      "caseStudies": {
+        "title": "Case Studies | Consulting-Led Transformation Outcomes",
+        "description": "Case studies documenting consulting strategy, engineering delivery, and approved operating outcomes."
+      },
+      "news": {
+        "title": "News Articles | Technology and Transformation Signals",
+        "description": "Timely articles on technology consulting, digital transformation, AI operations, and modernization trends."
+      },
+      "perspectives": {
+        "title": "Perspectives | Hive Vault Arc Point of View",
+        "description": "Strategic perspectives on transformation governance, operating models, and long-term technology execution."
+      },
+      "research": {
+        "title": "Research Reports | Data-Backed Transformation Analysis",
+        "description": "Research reports covering AI operations, transformation execution, and cloud reliability readiness."
+      },
+      "contact": {
+        "title": "Contact | Start a Technology Transformation Conversation",
+        "description": "Contact Hive Vault Arc to discuss strategy, AI engineering, software, cloud, or managed operations."
+      },
+      "privacy": {
+        "title": "Privacy Policy",
+        "description": "How Hive Vault Arc collects, uses, protects, and retains personal information."
+      },
+      "legal": {
+        "title": "Legal Mentions",
+        "description": "Legal and publisher information for the Hive Vault Arc website."
+      },
+      "links": {
+        "title": "Official Links",
+        "description": "Official Hive Vault Arc website, social profiles, and contact links."
+      },
+      "aiAgentsTangier": {
+        "title": "AI Agents in Tangier | Multilingual Business Automation",
+        "description": "AI agents for sales, support, and business operations designed for organizations in Tangier."
+      },
+      "aiAgentsMorocco": {
+        "title": "AI Agents in Morocco | Business Automation",
+        "description": "Multilingual AI agents for sales, support, and operational workflows across Morocco."
+      },
+      "itConsultingTangier": {
+        "title": "IT Consulting in Tangier | Strategy through Production",
+        "description": "Technology consulting, architecture, delivery, and operational support for organizations in Tangier."
+      },
+      "customSoftwareMorocco": {
+        "title": "Custom Software in Morocco | Web and Mobile Systems",
+        "description": "Custom software engineering for Moroccan organizations, from product strategy through reliable production operations."
+      },
+      "digitalServicesTangier": {
+        "title": "Digital Services in Tangier | Strategy, AI and Software",
+        "description": "Digital services in Tangier spanning strategy, AI, custom software, cloud infrastructure, and managed operations."
+      }
+    }
+  }
+}

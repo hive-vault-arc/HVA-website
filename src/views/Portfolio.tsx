@@ -1,9 +1,10 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
+import {Link} from '@/i18n/navigation';
 import Image from 'next/image';
 import { MotionConfig, motion, useScroll, useTransform } from 'framer-motion';
+import {useLocale, useTranslations} from 'next-intl';
 import {
   ArrowRight,
   BarChart3,
@@ -30,45 +31,24 @@ const blueprintGrid: React.CSSProperties = {
 
 /* ── Data ─────────────────────────────────────────────────────────────────── */
 
-const proofBlocks = [
-  {
-    icon: <Bot className="h-5 w-5" />,
-    title: 'Agent Workflows',
-    detail: 'AI receptionist and operational agents integrated with real business processes.',
-  },
-  {
-    icon: <BarChart3 className="h-5 w-5" />,
-    title: 'Decision Clarity',
-    detail: 'Reporting and analyst pipelines built for measurable operational control.',
-  },
-  {
-    icon: <Workflow className="h-5 w-5" />,
-    title: 'Automation Layer',
-    detail: 'From intake to delivery, workflows are structured to reduce manual friction.',
-  },
-  {
-    icon: <CloudCog className="h-5 w-5" />,
-    title: 'Production Delivery',
-    detail: 'CI/CD, monitoring, and reliability patterns aligned with long-term scale.',
-  },
-  {
-    icon: <ShieldCheck className="h-5 w-5" />,
-    title: 'Secure by Default',
-    detail: 'Validation, rate limits, and control layers are included from day one.',
-  },
-  {
-    icon: <Sparkles className="h-5 w-5" />,
-    title: 'AI-Ready Products',
-    detail: 'Practical AI features where they improve speed, quality, and decisions.',
-  },
-];
+const proofIcons = [Bot, BarChart3, Workflow, CloudCog, ShieldCheck, Sparkles] as const;
 
 /* ── Component ────────────────────────────────────────────────────────────── */
 
 const Portfolio: React.FC = () => {
+  const t = useTranslations('Portfolio');
+  const locale = useLocale();
   const { motionReduced } = useAnimationQuality();
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const proofCopy = t.raw('signature.items') as Array<{title: string; detail: string}>;
+  const proofBlocks = proofCopy.map((copy, index) => {
+    const Icon = proofIcons[index] ?? Bot;
+    return {...copy, icon: <Icon className="h-5 w-5" />};
+  });
+  const firstTags = t.raw('projects.ai.tags') as string[];
+  const firstBullets = t.raw('projects.ai.bullets') as string[];
+  const secondTags = t.raw('projects.crm.tags') as string[];
 
   return (
     <MotionConfig reducedMotion={motionReduced ? 'always' : 'never'}>
@@ -86,7 +66,7 @@ const Portfolio: React.FC = () => {
         <section className="relative flex min-h-[650px] items-end overflow-hidden bg-[#F7F8FA] md:min-h-[680px] lg:items-center">
           <Image
             src="/Images/blog/custom-crm-system-morocco.webp"
-            alt="A production CRM operating system used in a Hive Vault Arc transformation program"
+            alt={t('hero.imageAlt')}
             fill
             priority
             loading="eager"
@@ -106,22 +86,22 @@ const Portfolio: React.FC = () => {
               <div className="mb-5 flex items-center gap-3">
                 <SectionBrandMark size="sm" />
                 <span className="inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--section-label-color)]">
-                  Transformation Portfolio
+                  {t('hero.eyebrow')}
                 </span>
               </div>
               <h1 className="mb-6 max-w-[13ch] font-serif text-[clamp(2.65rem,12vw,4.5rem)] leading-[0.98] text-[#1A2535] md:text-7xl lg:max-w-3xl lg:text-7xl">
-                <span className="block">Consulting-Led</span>{' '}
-                <span className="block">Programs in Production</span>
+                <span className="block">{t('hero.titleLineOne')}</span>{' '}
+                <span className="block">{t('hero.titleLineTwo')}</span>
               </h1>
               <p className="max-w-lg text-lg font-medium leading-relaxed text-[#3D4858] md:text-xl">
-                See how strategy, engineering, and operations become measurable production systems under one accountable team.
+                {t('hero.description')}
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Link href="#portfolio-projects" className="sharp-edge inline-flex min-h-12 items-center justify-center bg-[#1A2535] px-7 py-3 text-sm font-bold text-white transition-colors hover:bg-[#E8A838]">
-                  Explore the Work
+                  {t('hero.primaryCta')}
                 </Link>
                 <Link href="/contact" className="sharp-edge inline-flex min-h-12 items-center justify-center border border-[#1A2535]/[0.24] bg-white/[0.88] px-7 py-3 text-sm font-bold text-[#1A2535] transition-colors hover:border-[#E8A838] hover:text-[var(--section-label-color)]">
-                  Book a Call
+                  {t('hero.secondaryCta')}
                 </Link>
               </div>
             </motion.div>
@@ -146,7 +126,7 @@ const Portfolio: React.FC = () => {
                 <div className="absolute -inset-4 bg-[#E8A838]/5 transition-all duration-300 group-hover:bg-[#E8A838]/10" />
                 <div className="relative w-full h-[260px] sm:h-[380px] md:h-[500px] shadow-lg">
                   <Image
-                    alt="Custom AI agent WhatsApp assistant built by Hive Vault Arc Morocco"
+                    alt={t('projects.ai.imageAlt')}
                     src="/Images/blog/custom-ai-agent-morocco.webp"
                     fill
                     sizes="(max-width: 1024px) 100vw, 58vw"
@@ -157,7 +137,7 @@ const Portfolio: React.FC = () => {
                 <div className="absolute -bottom-4 -right-4 hidden w-52 bg-white p-6 shadow-xl lg:block">
                   <Bot className="mb-3 h-8 w-8 text-[var(--section-label-color)]" />
                   <p className="text-[10px] font-bold text-[#566274] uppercase tracking-wider leading-relaxed">
-                    Program Stream 01: Conversational Intelligence
+                    {t('projects.ai.stream')}
                   </p>
                 </div>
               </div>
@@ -165,10 +145,10 @@ const Portfolio: React.FC = () => {
               {/* Content */}
               <div className="lg:col-span-5 space-y-5">
                 <h2 className="font-serif text-4xl text-[#1A2535] leading-tight">
-                  Multilingual WhatsApp AI Agent
+                  {t('projects.ai.title')}
                 </h2>
                 <div className="flex flex-wrap gap-2">
-                  {['Multilingual', 'CRM Integration', 'Automated Scheduling'].map((tag) => (
+                  {firstTags.map((tag) => (
                     <span
                       key={tag}
                       className="px-3 py-1 bg-[#DDE3EA] text-[#566274] text-[10px] font-bold uppercase tracking-wide"
@@ -178,18 +158,14 @@ const Portfolio: React.FC = () => {
                   ))}
                 </div>
                 <p className="text-[#566274] leading-relaxed font-light">
-                  Delivered a consulting-led AI transformation stream for global lead management. The system handles multilingual initial inquiries, qualifies prospects with custom logic, and updates CRM records automatically.
+                  {t('projects.ai.description')}
                 </p>
                 <div className="border border-[#DDE3EA] bg-[#FFFFFF] p-4 text-sm text-[#3D4858]">
-                  <p><span className="font-semibold">Deployment status:</span> Live in production since October 2025.</p>
-                  <p className="mt-1"><span className="font-semibold">Stack/integrations:</span> WhatsApp API, HubSpot, Google Calendar, PostgreSQL, orchestration flows.</p>
+                  <p><span className="font-semibold">{t('projects.deploymentLabel')}</span> {t('projects.ai.deployment')}</p>
+                  <p className="mt-1"><span className="font-semibold">{t('projects.stackLabel')}</span> {t('projects.ai.stack')}</p>
                 </div>
                 <ul className="space-y-3 text-sm text-[#566274]">
-                  {[
-                    'Automated lead qualification and routing',
-                    'Always-on lead capture across time zones',
-                    'Direct HubSpot & Salesforce synchronization',
-                  ].map((item) => (
+                  {firstBullets.map((item) => (
                     <li key={item} className="flex items-center gap-3">
                       <CheckCircle2 className="h-4 w-4 shrink-0 text-[var(--section-label-color)]" />
                       {item}
@@ -198,10 +174,10 @@ const Portfolio: React.FC = () => {
                 </ul>
                 <div className="pt-3">
                   <Link
-                    href="/case-studies/multilingual-whatsapp-ai-agent"
+                    href={locale === 'fr' ? '/case-studies' : '/case-studies/multilingual-whatsapp-ai-agent'}
                     className="group inline-flex min-h-11 items-center gap-2 border-b-2 border-[#E8A838] pb-1 font-bold text-[var(--section-label-color)] transition-colors hover:border-[#1A2535] hover:text-[#1A2535]"
                   >
-                    Read Case Study
+                    {t('projects.caseStudyCta')}
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </div>
@@ -224,10 +200,10 @@ const Portfolio: React.FC = () => {
                 {/* Content */}
                 <div className="lg:col-span-5 space-y-5 order-2 lg:order-1">
                   <h2 className="font-serif text-4xl text-[#1A2535] leading-tight">
-                    Real Estate CRM Transformation Program
+                    {t('projects.crm.title')}
                   </h2>
                   <div className="flex flex-wrap gap-2">
-                    {['Custom SaaS', 'Team Collaboration', 'Pipeline Automation'].map((tag) => (
+                    {secondTags.map((tag) => (
                       <span
                         key={tag}
                         className="px-3 py-1 bg-[#E8EBF0] text-[#566274] text-[10px] font-bold uppercase tracking-wide"
@@ -237,22 +213,22 @@ const Portfolio: React.FC = () => {
                     ))}
                   </div>
                 <p className="text-[#566274] leading-relaxed font-light">
-                  A consulting and engineering engagement for a luxury real estate group. We replaced three disconnected tools with one unified CRM operation that tracks the full buyer journey.
+                  {t('projects.crm.description')}
                 </p>
                 <div className="border border-[#DDE3EA] bg-white p-4 text-sm text-[#3D4858]">
-                  <p><span className="font-semibold">Deployment status:</span> Live in production since May 2025 across sales and operations.</p>
-                  <p className="mt-1"><span className="font-semibold">Stack/integrations:</span> CRM core, DocuSign, Meta Lead Sync, pipeline automation, BI reporting.</p>
+                  <p><span className="font-semibold">{t('projects.deploymentLabel')}</span> {t('projects.crm.deployment')}</p>
+                  <p className="mt-1"><span className="font-semibold">{t('projects.stackLabel')}</span> {t('projects.crm.stack')}</p>
                 </div>
                 <div className="border-l-4 border-[#E8A838] bg-[#FFFFFF] px-4 py-3">
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--section-label-color)]">Program status: Live in production</p>
-                  <p className="mt-0.5 text-[9px] text-[#566274]">Full-stack CRM · BI reporting layer · real-time lead sync</p>
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--section-label-color)]">{t('projects.crm.status')}</p>
+                  <p className="mt-0.5 text-[9px] text-[#566274]">{t('projects.crm.statusDetail')}</p>
                 </div>
                 <div className="pt-3">
                   <Link
-                    href="/case-studies/top-tier-crm-transformation-program-real-estate-operations"
+                    href={locale === 'fr' ? '/case-studies' : '/case-studies/top-tier-crm-transformation-program-real-estate-operations'}
                     className="group inline-flex min-h-11 items-center gap-2 border-b-2 border-[#E8A838] pb-1 font-bold text-[var(--section-label-color)] transition-colors hover:border-[#1A2535] hover:text-[#1A2535]"
                   >
-                    Read Case Study
+                    {t('projects.caseStudyCta')}
                       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </Link>
                   </div>
@@ -262,7 +238,7 @@ const Portfolio: React.FC = () => {
                 <div className="relative order-1 pt-8 sm:pl-8 lg:order-2 lg:col-span-7 lg:pt-10">
                   <div className="relative w-full h-[260px] sm:h-[380px] md:h-[500px] shadow-2xl">
                     <Image
-                      alt="Custom real estate CRM system built by Hive Vault Arc for Moroccan businesses"
+                      alt={t('projects.crm.imageAlt')}
                       src="/Images/blog/custom-crm-system-morocco.webp"
                       fill
                       sizes="(max-width: 1024px) 100vw, 58vw"
@@ -271,9 +247,9 @@ const Portfolio: React.FC = () => {
                   </div>
                   {/* Floating header card — blue */}
                   <div className="absolute -top-4 -left-4 hidden bg-[#E8A838] p-8 text-white lg:block">
-                    <h3 className="font-serif text-2xl mb-2">Architectural Precision</h3>
+                    <h3 className="font-serif text-2xl mb-2">{t('projects.crm.cardTitle')}</h3>
                     <p className="text-[10px] font-bold opacity-80 uppercase tracking-[0.2em]">
-                      Consulting-led execution
+                      {t('projects.crm.cardCaption')}
                     </p>
                   </div>
                 </div>
@@ -295,17 +271,17 @@ const Portfolio: React.FC = () => {
               className="text-center"
             >
               <h2 className="mx-auto max-w-5xl font-serif text-3xl sm:text-4xl md:text-5xl lg:text-8xl font-semibold leading-[0.96] text-[#1A2535]">
-                From Operating Problem
+                {t('signature.titleLineOne')}
                 <br />
-                to Production System
+                {t('signature.titleLineTwo')}
               </h2>
               <div className="mt-10 flex items-center justify-center gap-3">
                 <SectionBrandMark size="sm" />
-                <p className="text-xs uppercase tracking-[0.2em] text-[var(--section-label-color)]">Delivery Signature</p>
+                <p className="text-xs uppercase tracking-[0.2em] text-[var(--section-label-color)]">{t('signature.eyebrow')}</p>
               </div>
-              <h3 className="mt-3 font-serif text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold leading-[1.02] text-[#1A2535]">Strategy. Engineering. Operations.</h3>
+              <h3 className="mt-3 font-serif text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold leading-[1.02] text-[#1A2535]">{t('signature.subtitle')}</h3>
               <p className="mx-auto mt-3 max-w-4xl text-base leading-relaxed text-[#1A2535]/[0.72] md:text-[1.55rem]">
-                Everything needed to advise, engineer, deploy, and maintain reliable digital operations.
+                {t('signature.description')}
               </p>
             </motion.div>
 
@@ -344,11 +320,11 @@ const Portfolio: React.FC = () => {
         {/* ── CTA ───────────────────────────────────────────────────────────── */}
         <BottomCTA
           variant="dark"
-          headline="Ready to Move from Fragmented Projects to Guided Transformation?"
-          subtext="Share your constraints and we will map the right consulting and engineering path for your operating model."
-          primaryLabel="Book a Call"
+          headline={t('bottomCta.title')}
+          subtext={t('bottomCta.description')}
+          primaryLabel={t('bottomCta.primary')}
           primaryHref="/contact"
-          secondaryLabel="View Case Studies"
+          secondaryLabel={t('bottomCta.secondary')}
           secondaryHref="/case-studies"
         />
 

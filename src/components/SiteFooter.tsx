@@ -1,4 +1,5 @@
-import Link from 'next/link';
+import {Link} from '@/i18n/navigation';
+import {getTranslations} from 'next-intl/server';
 import { ArrowUpRight, Facebook, Globe, Instagram, Mail, Phone } from '@/components/icons';
 import { FaGithub, FaLinkedinIn, FaTiktok, FaXTwitter } from 'react-icons/fa6';
 import Logo from './Logo';
@@ -11,7 +12,6 @@ import {
   SITE_URL,
   SOCIAL_PROFILES,
 } from '../lib/seo';
-import { CANONICAL_MARKET_IDENTITY } from '../lib/positioning';
 
 const socialIcons = {
   LinkedIn: FaLinkedinIn,
@@ -23,41 +23,43 @@ const socialIcons = {
 } as const;
 
 const pageLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/arc', label: 'ARC' },
-  { href: '/capabilities', label: 'Capabilities' },
-  { href: '/industries', label: 'Industries' },
-  { href: '/aboutus', label: 'Who We Are' },
-  { href: '/insights', label: 'Insights' },
-  { href: '/contact', label: 'Contact' },
-];
+  { href: '/', key: 'home' },
+  { href: '/arc', key: 'arc' },
+  { href: '/capabilities', key: 'capabilities' },
+  { href: '/industries', key: 'industries' },
+  { href: '/aboutus', key: 'whoWeAre' },
+  { href: '/insights', key: 'insights' },
+  { href: '/contact', key: 'contact' },
+] as const;
 
 const expertiseLinks = [
-  { href: '/capabilities/strategy-business', label: 'Strategy & Business Consulting' },
-  { href: '/capabilities/technology-consulting', label: 'Technology Consulting' },
-  { href: '/capabilities/ai-data-analytics', label: 'AI, Data & Analytics' },
-  { href: '/capabilities/software-engineering', label: 'Software Engineering' },
-  { href: '/capabilities/cloud-infrastructure', label: 'Cloud & Infrastructure' },
-  { href: '/capabilities/operations-managed', label: 'Operations & Managed Services' },
-  { href: '/capabilities/solution-programs', label: 'Solution Programs' },
-];
+  { href: '/capabilities/strategy-business', key: 'strategyBusiness' },
+  { href: '/capabilities/technology-consulting', key: 'technologyConsulting' },
+  { href: '/capabilities/ai-data-analytics', key: 'aiData' },
+  { href: '/capabilities/software-engineering', key: 'softwareEngineering' },
+  { href: '/capabilities/cloud-infrastructure', key: 'cloudInfrastructure' },
+  { href: '/capabilities/operations-managed', key: 'managedOperations' },
+  { href: '/capabilities/solution-programs', key: 'solutionPrograms' },
+] as const;
 
 const industryLinks = [
-  { href: '/industries#real-estate', label: 'Real Estate & Construction' },
-  { href: '/industries#healthcare', label: 'Healthcare & Life Sciences' },
-  { href: '/industries#financial-services', label: 'Financial Services' },
-  { href: '/industries#government', label: 'Government & Public Sector' },
-  { href: '/industries#retail', label: 'Retail & E-Commerce' },
-  { href: '/industries#logistics', label: 'Logistics & Transportation' },
-];
+  { href: '/industries#real-estate', key: 'realEstate' },
+  { href: '/industries#healthcare', key: 'healthcare' },
+  { href: '/industries#financial-services', key: 'financialServices' },
+  { href: '/industries#government', key: 'government' },
+  { href: '/industries#retail', key: 'retail' },
+  { href: '/industries#logistics', key: 'logistics' },
+] as const;
 
 const legalLinks = [
-  { href: '/privacy-policy', label: 'Privacy Policy' },
-  { href: '/mentions-legales', label: 'Legal Mentions' },
-];
+  { href: '/privacy-policy', key: 'privacy' },
+  { href: '/mentions-legales', key: 'legalMentions' },
+] as const;
 
-export default function SiteFooter() {
+export default async function SiteFooter() {
   const year = new Date().getFullYear();
+  const t = await getTranslations('Footer');
+  const nav = await getTranslations('Navigation');
 
   return (
     <footer className="site-footer">
@@ -67,43 +69,43 @@ export default function SiteFooter() {
             <div className="site-footer__brand-col">
               <Logo className="site-footer__logo" light size="footer" />
               <p className="site-footer__statement">
-                {CANONICAL_MARKET_IDENTITY.shortDescriptor}
+                {t('description')}
               </p>
             </div>
 
-            <nav className="site-footer__group" aria-label="Footer pages">
-              <p className="site-footer__title">Pages</p>
+            <nav className="site-footer__group" aria-label={t('pages')}>
+              <p className="site-footer__title">{t('pages')}</p>
               <ul className="site-footer__list-stack">
                 {pageLinks.map((item) => (
                   <li key={item.href}>
                     <Link href={item.href} className="site-footer__link">
-                      {item.label}
+                      {nav(item.key)}
                     </Link>
                   </li>
                 ))}
               </ul>
             </nav>
 
-            <nav className="site-footer__group" aria-label="Footer services">
-              <p className="site-footer__title">Services</p>
+            <nav className="site-footer__group" aria-label={t('services')}>
+              <p className="site-footer__title">{t('services')}</p>
               <ul className="site-footer__list-stack">
                 {expertiseLinks.map((item) => (
                   <li key={item.href}>
                     <Link href={item.href} className="site-footer__link">
-                      {item.label}
+                      {t(item.key)}
                     </Link>
                   </li>
                 ))}
               </ul>
             </nav>
 
-            <nav className="site-footer__group" aria-label="Footer industries">
-              <p className="site-footer__title">Industries</p>
+            <nav className="site-footer__group" aria-label={t('industries')}>
+              <p className="site-footer__title">{t('industries')}</p>
               <ul className="site-footer__list-stack">
                 {industryLinks.map((item) => (
                   <li key={item.href}>
                     <Link href={item.href} className="site-footer__link">
-                      {item.label}
+                      {nav(item.key)}
                     </Link>
                   </li>
                 ))}
@@ -111,13 +113,13 @@ export default function SiteFooter() {
             </nav>
 
             <div className="site-footer__group">
-              <p className="site-footer__title">Connect</p>
+              <p className="site-footer__title">{t('connect')}</p>
               <div className="site-footer__contacts">
                 <Link
                   href="/contact"
                   className="sharp-edge flex min-h-11 items-center bg-[#1A2535] px-4 py-2 text-sm font-medium text-[#FFFFFF] transition-all duration-300 hover:bg-[#E8A838] hover:text-[#1A2535] sm:self-start"
                 >
-                  Book a Call
+                  {nav('bookCall')}
                   <ArrowUpRight className="w-3.5 h-3.5 ml-1.5" motion="nudge" aria-hidden="true" />
                 </Link>
                 <a href={`mailto:${CONTACT_EMAIL}`} className="site-footer__contact">
@@ -134,14 +136,14 @@ export default function SiteFooter() {
 
           <div className="site-footer__bar">
             <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
-              <p>© {year} {DISPLAY_BRAND_NAME_UPPER}. ALL RIGHTS RESERVED. PRECISION IN EXECUTION.</p>
+              <p>© {year} {DISPLAY_BRAND_NAME_UPPER}. {t('rights')} {t('precision')}</p>
               {legalLinks.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   className="site-footer__link text-[10px] opacity-50 hover:opacity-100"
                 >
-                  {item.label}
+                  {t(item.key)}
                 </Link>
               ))}
             </div>
@@ -151,7 +153,7 @@ export default function SiteFooter() {
                 target="_blank"
                 rel="noreferrer noopener"
                 className="site-footer__icon-link sharp-edge"
-                aria-label="Website"
+                aria-label={t('website')}
               >
                 <Globe className="h-4 w-4" aria-hidden="true" />
               </a>

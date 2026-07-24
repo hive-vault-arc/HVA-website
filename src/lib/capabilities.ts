@@ -1,4 +1,7 @@
 import type { SanityImageSource } from '@sanity/image-url';
+import type {AppLocale} from '@/i18n/config';
+import type {LocalizedContentMeta} from './localized-content';
+import {localeTag} from './localized-content';
 import { CAPABILITY_BRIEF_SECTIONS, CAPABILITY_DOMAINS } from './capabilities-content';
 import { sanityFetch, withSanityFallback } from '../sanity/lib/fetch';
 import { urlForImage } from '../sanity/lib/image';
@@ -27,7 +30,7 @@ export type CapabilitySeo = {
   noIndex?: boolean;
 };
 
-export type CapabilityProfileSummary = {
+export type CapabilityProfileSummary = LocalizedContentMeta & {
   _id?: string;
   title: string;
   slug: string;
@@ -251,30 +254,42 @@ export function toCapabilityProfileSummary(profile: CapabilityProfile): Capabili
   };
 }
 
-export async function getAllCapabilityProfiles(): Promise<CapabilityProfile[]> {
+export async function getAllCapabilityProfiles(locale: AppLocale = 'en'): Promise<CapabilityProfile[]> {
   const profiles = await fetchCapabilityData<SanityCapabilityProfile[]>(
     {
       query: allCapabilityProfilesQuery,
-      tags: [CAPABILITIES_TAG, 'capabilityProfiles'],
+      params: {locale},
+      tags: [
+        CAPABILITIES_TAG,
+        'capabilityProfiles',
+        localeTag('capabilityProfiles', locale),
+      ],
     },
     []
   );
 
-  if (profiles.length === 0) return FALLBACK_CAPABILITY_PROFILES;
+  if (profiles.length === 0) return locale === 'en' ? FALLBACK_CAPABILITY_PROFILES : [];
 
   return publishedCapabilities(profiles.map(normalizeCapabilityProfile));
 }
 
-export async function getFeaturedCapabilityProfiles(): Promise<CapabilityProfile[]> {
+export async function getFeaturedCapabilityProfiles(
+  locale: AppLocale = 'en'
+): Promise<CapabilityProfile[]> {
   const profiles = await fetchCapabilityData<SanityCapabilityProfile[]>(
     {
       query: featuredCapabilityProfilesQuery,
-      tags: [CAPABILITIES_TAG, 'capabilityProfiles'],
+      params: {locale},
+      tags: [
+        CAPABILITIES_TAG,
+        'capabilityProfiles',
+        localeTag('capabilityProfiles', locale),
+      ],
     },
     []
   );
 
-  if (profiles.length === 0) {
+  if (profiles.length === 0 && locale === 'en') {
     return FALLBACK_CAPABILITY_PROFILES.filter((profile) => profile.featuredOnCapabilities);
   }
 
@@ -283,19 +298,28 @@ export async function getFeaturedCapabilityProfiles(): Promise<CapabilityProfile
   );
 }
 
-export async function getCapabilityProfileBySlug(slug: string): Promise<CapabilityProfile | null> {
+export async function getCapabilityProfileBySlug(
+  slug: string,
+  locale: AppLocale = 'en'
+): Promise<CapabilityProfile | null> {
   const profile = await fetchCapabilityData<SanityCapabilityProfile | null>(
     {
       query: capabilityProfileBySlugQuery,
-      params: { slug },
-      tags: [CAPABILITIES_TAG, 'capabilityProfiles', `capability:${slug}`],
+      params: {slug, locale},
+      tags: [
+        CAPABILITIES_TAG,
+        'capabilityProfiles',
+        localeTag('capabilityProfiles', locale),
+        `capability:${locale}:${slug}`,
+      ],
     },
     null
   );
 
-  if (!profile) {
+  if (!profile && locale === 'en') {
     return FALLBACK_CAPABILITY_PROFILES.find((item) => item.slug === slug) ?? null;
   }
+  if (!profile) return null;
 
   const normalized = normalizeCapabilityProfile(profile);
   return normalized.visibility === 'hidden' ? null : normalized;
@@ -303,9 +327,10 @@ export async function getCapabilityProfileBySlug(slug: string): Promise<Capabili
 
 export async function getRelatedCapabilityProfiles(
   currentSlug: string,
-  limit = 3
+  limit = 3,
+  locale: AppLocale = 'en'
 ): Promise<CapabilityProfileSummary[]> {
-  const profiles = await getAllCapabilityProfiles();
+  const profiles = await getAllCapabilityProfiles(locale);
   return profiles
     .filter((profile) => profile.slug !== currentSlug)
     .slice(0, limit)

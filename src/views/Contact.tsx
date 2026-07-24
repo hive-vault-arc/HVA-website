@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useRef, useState } from 'react';
+import {useLocale, useTranslations} from 'next-intl';
 import Image from 'next/image';
 import { ArrowRight, Globe2, Mail, Phone } from '@/components/icons';
 import { MotionConfig, motion, useScroll, useTransform } from 'framer-motion';
@@ -19,6 +20,8 @@ const CONTACT_PHONES = [
 ];
 
 const Contact: React.FC = () => {
+  const locale = useLocale();
+  const t = useTranslations('Contact');
   const { motionReduced } = useAnimationQuality();
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
@@ -39,14 +42,20 @@ const Contact: React.FC = () => {
     const now = Date.now();
     if (now - lastSubmitAt.current < RATE_LIMIT_MS) {
       const secondsLeft = Math.ceil((RATE_LIMIT_MS - (now - lastSubmitAt.current)) / 1000);
-      setStatus({ type: 'error', message: `Please wait ${secondsLeft}s before submitting again.` });
+      setStatus({ type: 'error', message: t('rateLimit', {seconds: secondsLeft}) });
       return;
     }
     setIsSubmitting(true);
     setStatus(null);
     try {
       const endpoint = process.env.NEXT_PUBLIC_CONTACT_API_URL?.trim();
-      const payload = { ...formData, subject: 'Project Inquiry' };
+      const payload = {
+        ...formData,
+        subject: t('subject'),
+        locale,
+        sourceUrl: globalThis.location.href,
+        formIdentifier: 'contact-discovery',
+      };
       if (endpoint) {
         const response = await fetch(endpoint, {
           method: 'POST',
@@ -55,9 +64,9 @@ const Contact: React.FC = () => {
         });
         if (!response.ok) throw new Error(`Submission failed with status ${response.status}`);
         lastSubmitAt.current = Date.now();
-        setStatus({ type: 'success', message: 'Thank you. Your message was sent successfully.' });
+        setStatus({ type: 'success', message: t('success') });
       } else {
-        const subject = '[Hive Vault Arc] Project Inquiry';
+        const subject = `[Hive Vault Arc] ${t('subject')}`;
         const body = [
           `Name: ${formData.name}`,
           `Email: ${formData.email}`,
@@ -70,13 +79,13 @@ const Contact: React.FC = () => {
         const mailto = `mailto:${CONTACT_EMAILS.join(',')}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         globalThis.location.href = mailto;
         lastSubmitAt.current = Date.now();
-        setStatus({ type: 'success', message: 'Your email client was opened. Please send the drafted message.' });
+        setStatus({ type: 'success', message: t('emailOpened') });
       }
       setFormData({ name: '', email: '', company: '', industry: '', teamSize: '', message: '' });
     } catch {
       setStatus({
         type: 'error',
-        message: 'We could not send your message right now. Please try again or email us directly.',
+        message: t('directError'),
       });
     } finally {
       setIsSubmitting(false);
@@ -104,10 +113,10 @@ const Contact: React.FC = () => {
           >
             <SectionBrandMark size="md" className="contact-hero__mark mb-6" />
             <h1 className="contact-hero__title font-headline text-[#1A2535] mb-8">
-              Start your transformation discovery.
+              {t('title')}
             </h1>
             <p className="contact-hero__lead font-body text-[#566274]">
-              Share your goals, constraints, and current bottlenecks. We reply within 24 hours and guide your next step.
+              {t('lead')}
             </p>
           </motion.div>
           {/* Architectural accent line */}
@@ -116,7 +125,7 @@ const Contact: React.FC = () => {
 
         {/* ── Main grid ────────────────────────────────────────────────── */}
         <section className="mx-auto max-w-7xl px-6 pb-24 sm:px-8 md:pb-32">
-          <h2 className="sr-only">Contact details and discovery form</h2>
+          <h2 className="sr-only">{t('sectionLabel')}</h2>
           <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-10 xl:gap-24">
 
             {/* Left column — contact info + map */}
@@ -133,11 +142,11 @@ const Contact: React.FC = () => {
                 <div>
                   <div className="flex items-center gap-4 mb-4">
                     <Globe2 className="w-5 h-5 text-[#E8A838] shrink-0" strokeWidth={1.5} />
-                    <h3 className="text-xs font-label font-bold uppercase tracking-widest text-[#566274]">Operating Region</h3>
+                    <h3 className="text-xs font-label font-bold uppercase tracking-widest text-[#566274]">{t('operatingRegion')}</h3>
                   </div>
                   <p className="text-lg font-body leading-relaxed text-[#1A2535]">
-                    Tangier, Morocco<br />{' '}
-                    Remote delivery worldwide
+                    {t('location')}<br />{' '}
+                    {t('remote')}
                   </p>
                 </div>
 
@@ -145,7 +154,7 @@ const Contact: React.FC = () => {
                 <div>
                   <div className="flex items-center gap-4 mb-4">
                     <Mail className="w-5 h-5 text-[#E8A838] shrink-0" strokeWidth={1.5} />
-                    <h3 className="text-xs font-label font-bold uppercase tracking-widest text-[#566274]">Inquiries</h3>
+                    <h3 className="text-xs font-label font-bold uppercase tracking-widest text-[#566274]">{t('inquiries')}</h3>
                   </div>
                   {CONTACT_EMAILS.map((email) => (
                     <a
@@ -162,7 +171,7 @@ const Contact: React.FC = () => {
                 <div>
                   <div className="flex items-center gap-4 mb-4">
                     <Phone className="w-5 h-5 text-[#E8A838] shrink-0" strokeWidth={1.5} />
-                    <h3 className="text-xs font-label font-bold uppercase tracking-widest text-[#566274]">Direct Line</h3>
+                    <h3 className="text-xs font-label font-bold uppercase tracking-widest text-[#566274]">{t('directLine')}</h3>
                   </div>
                   {CONTACT_PHONES.map((phone) => (
                     <a
@@ -181,14 +190,14 @@ const Contact: React.FC = () => {
                 <div className="absolute inset-0 bg-neutral-200/50 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-0" />
                 <Image
                   src="/Images/locations/tangier-morocco-office-location.webp"
-                  alt="Map of Tangier, Morocco — Hive Vault Arc operating region"
+                  alt={t('mapAlt')}
                   fill
                   className="w-full h-full object-cover grayscale opacity-80 transition-transform duration-700 group-hover:scale-105"
                   sizes="(max-width: 1024px) 100vw, 33vw"
                 />
                   <div className="absolute inset-x-4 bottom-4 bg-white px-4 py-2 shadow-sm sm:inset-x-auto sm:left-6 sm:bottom-6">
                   <span className="text-xs font-label font-bold uppercase tracking-tighter text-[#1A2535]">
-                    Morocco + Remote
+                    {t('mapLabel')}
                   </span>
                 </div>
               </div>
@@ -214,7 +223,7 @@ const Contact: React.FC = () => {
                         htmlFor="name"
                         className="block text-xs font-label font-bold uppercase tracking-widest text-[#566274] mb-2"
                       >
-                        Name
+                        {t('name')}
                       </label>
                       <input
                         id="name"
@@ -222,7 +231,7 @@ const Contact: React.FC = () => {
                         type="text"
                         value={formData.name}
                         onChange={handleChange}
-                        placeholder="Your full name"
+                        placeholder={t('namePlaceholder')}
                         required
                         maxLength={100}
                         className="w-full bg-transparent border-0 border-b py-3 px-0 focus:outline-none text-lg font-body text-[#1A2535] placeholder:text-slate-300"
@@ -236,7 +245,7 @@ const Contact: React.FC = () => {
                         htmlFor="email"
                         className="block text-xs font-label font-bold uppercase tracking-widest text-[#566274] mb-2"
                       >
-                        Email Address
+                        {t('email')}
                       </label>
                       <input
                         id="email"
@@ -244,7 +253,7 @@ const Contact: React.FC = () => {
                         type="email"
                         value={formData.email}
                         onChange={handleChange}
-                        placeholder="name@company.com"
+                        placeholder={t('emailPlaceholder')}
                         required
                         maxLength={254}
                         className="w-full bg-transparent border-0 border-b py-3 px-0 focus:outline-none text-lg font-body text-[#1A2535] placeholder:text-slate-300"
@@ -261,7 +270,7 @@ const Contact: React.FC = () => {
                         htmlFor="company"
                         className="block text-xs font-label font-bold uppercase tracking-widest text-[#566274] mb-2"
                       >
-                        Company Name
+                        {t('company')}
                       </label>
                       <input
                         id="company"
@@ -269,7 +278,7 @@ const Contact: React.FC = () => {
                         type="text"
                         value={formData.company}
                         onChange={handleChange}
-                        placeholder="Your company"
+                        placeholder={t('companyPlaceholder')}
                         maxLength={120}
                         className="w-full bg-transparent border-0 border-b py-3 px-0 focus:outline-none text-lg font-body text-[#1A2535] placeholder:text-slate-300"
                         style={{ borderImage: 'linear-gradient(to right, transparent, #E8A838 22%, #E8A838 78%, transparent) 1' }}
@@ -282,7 +291,7 @@ const Contact: React.FC = () => {
                         htmlFor="industry"
                         className="block text-xs font-label font-bold uppercase tracking-widest text-[#566274] mb-2"
                       >
-                        Industry
+                        {t('industry')}
                       </label>
                       <input
                         id="industry"
@@ -290,7 +299,7 @@ const Contact: React.FC = () => {
                         type="text"
                         value={formData.industry}
                         onChange={handleChange}
-                        placeholder="e.g. Real Estate, Healthcare"
+                        placeholder={t('industryPlaceholder')}
                         maxLength={80}
                         className="w-full bg-transparent border-0 border-b py-3 px-0 focus:outline-none text-lg font-body text-[#1A2535] placeholder:text-slate-300"
                         style={{ borderImage: 'linear-gradient(to right, transparent, #E8A838 22%, #E8A838 78%, transparent) 1' }}
@@ -304,7 +313,7 @@ const Contact: React.FC = () => {
                       htmlFor="teamSize"
                       className="block text-xs font-label font-bold uppercase tracking-widest text-[#566274] mb-2"
                     >
-                      Team / Company Size
+                      {t('teamSize')}
                     </label>
                     <div className="flex flex-wrap gap-3 pt-1">
                       {['1–10', '11–50', '51–200', '200+'].map((size) => (
@@ -330,7 +339,7 @@ const Contact: React.FC = () => {
                       htmlFor="message"
                       className="block text-xs font-label font-bold uppercase tracking-widest text-[#566274] mb-2"
                     >
-                      Transformation Brief
+                      {t('brief')}
                     </label>
                     <textarea
                       id="message"
@@ -338,7 +347,7 @@ const Contact: React.FC = () => {
                       rows={5}
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder="Tell us about your objectives, timeline, and scope..."
+                      placeholder={t('briefPlaceholder')}
                       required
                       maxLength={5000}
                       className="w-full bg-transparent border-0 border-b py-3 px-0 focus:outline-none text-lg font-body text-[#1A2535] placeholder:text-slate-300 resize-none"
@@ -349,14 +358,14 @@ const Contact: React.FC = () => {
                   {/* CTA row */}
                   <div className="flex flex-col justify-between gap-8 pt-6 md:flex-row md:items-center">
                     <p className="text-sm font-body text-[#566274] max-w-xs leading-relaxed">
-                      We use this information to scope strategy, architecture, and delivery options for your team.
+                      {t('privacyNote')}
                     </p>
                     <button
                       type="submit"
                       disabled={isSubmitting}
                       className="sharp-edge group flex min-h-11 w-full items-center justify-center gap-3 bg-[#1A2535] px-10 py-5 font-label text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-[#E8A838] active:scale-95 disabled:cursor-not-allowed disabled:opacity-70 md:w-auto"
                     >
-                      {isSubmitting ? 'Sending…' : 'Send Message'}
+                      {isSubmitting ? t('sending') : t('send')}
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </button>
                   </div>
@@ -381,12 +390,12 @@ const Contact: React.FC = () => {
                     "
                   </span>
                   <p className="text-2xl md:text-3xl font-headline italic text-[#1A2535] leading-snug">
-                    "The value is not only in code delivery. The value is in building a reliable operating capability your business can grow on."
+                    “{t('quote')}”
                   </p>
                   <div className="mt-6 flex items-center gap-4">
                     <div className="w-12 h-px bg-[#E8A838]" />
                     <span className="text-sm font-label font-bold uppercase tracking-widest text-[#566274]">
-                      Managing Partner, Hive Vault Arc
+                      {t('quoteAttribution')}
                     </span>
                   </div>
                 </div>

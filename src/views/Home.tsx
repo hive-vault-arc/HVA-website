@@ -1,7 +1,8 @@
 'use client';
 
 import React, { Suspense, lazy, useEffect, useRef, useState } from 'react';
-import Link from 'next/link';
+import {useTranslations} from 'next-intl';
+import {Link} from '@/i18n/navigation';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import {
@@ -78,6 +79,7 @@ const Home: React.FC<HomeProps> = ({
   caseStudies,
   trustedPartners,
 }) => {
+  const t = useTranslations('Home');
   const { tier, motionReduced } = useAnimationQuality();
   const showAdvancedEffects = tier === 'high' && !motionReduced;
   const worldMapSectionRef = useRef<HTMLElement | null>(null);
@@ -102,107 +104,50 @@ const Home: React.FC<HomeProps> = ({
   }, []);
 
   const [hoveredPillar, setHoveredPillar] = useState<number | null>(null);
-  const arcPhases = [
-    {
-      phase: '01',
-      title: 'Assess',
-      discipline: 'Strategy & Architecture',
-      summary:
-        'Diagnose operating friction, define target architecture, and sequence the work leadership can execute.',
-      proof: 'Operating diagnosis',
-    },
-    {
-      phase: '02',
-      title: 'Re-engineer',
-      discipline: 'AI, Software & Cloud',
-      summary:
-        'Build the systems, deploy the intelligence, and harden the infrastructure for real operational load.',
-      proof: 'Production systems',
-    },
-    {
-      phase: '03',
-      title: 'Command',
-      discipline: 'Operate & Evolve',
-      summary:
-        'Stabilize, monitor, and evolve the systems long-term so decisions become measurable outcomes.',
-      proof: 'Managed outcomes',
-    },
-  ];
+  const arcPhases = t.raw('arcPhases') as Array<{
+    phase: string;
+    title: string;
+    discipline: string;
+    summary: string;
+    proof: string;
+  }>;
 
-  const capabilityPillars = [
+  const capabilityConfig = [
     {
       icon: <MessageSquare className="w-5 h-5" strokeWidth={1.5} />,
-      title: 'Strategy & Business Consulting',
-      desc: 'Diagnose, define, and design transformation before a single line of code is written.',
       image: '/Images/capabilities/hva-strategy-business-capability.webp',
-      imageAlt: 'Strategy and business consulting operating model design',
-      details: [
-        'Business and digital transformation strategy',
-        'Operational diagnostics and process redesign',
-        'Innovation strategy and market expansion',
-      ],
     },
     {
       icon: <Eye className="w-5 h-5" strokeWidth={1.5} />,
-      title: 'Technology Consulting',
-      desc: 'Architecture decisions made early compound positively. We design systems that last.',
       image: '/Images/capabilities/hva-technology-consulting-capability.webp',
-      imageAlt: 'Technology consulting architecture and systems planning',
-      details: [
-        'Enterprise architecture and technology roadmaps',
-        'Platform strategy and systems integration',
-        'IT modernization and infrastructure design',
-      ],
     },
     {
       icon: <Bot className="w-5 h-5" strokeWidth={1.5} />,
-      title: 'AI, Data & Analytics',
-      desc: 'AI agents on WhatsApp, web chat, and email — multilingual, always-on, trained on your operations.',
       image: '/Images/capabilities/hva-ai-data-capability.webp',
-      imageAlt: 'AI and data analytics production intelligence systems',
-      details: [
-        'AI agent design and deployment',
-        'Generative AI strategy and engineering',
-        'Data engineering and business intelligence',
-      ],
     },
     {
       icon: <Layers className="w-5 h-5" strokeWidth={1.5} />,
-      title: 'Software Engineering',
-      desc: 'Production-grade custom software, SaaS platforms, and web and mobile applications.',
       image: '/Images/capabilities/hva-software-engineering-capability.webp',
-      imageAlt: 'Software engineering production-grade systems workspace',
-      details: [
-        'Custom software and SaaS platform development',
-        'Web and mobile application delivery',
-        'API engineering and DevOps',
-      ],
     },
     {
       icon: <Cloud className="w-5 h-5" strokeWidth={1.5} />,
-      title: 'Cloud & Infrastructure',
-      desc: 'Built for scale, security, and resilience — zero-trust design and observability from day one.',
       image: '/Images/capabilities/hva-cloud-infrastructure-capability.webp',
-      imageAlt: 'Cloud infrastructure secure systems and observability',
-      details: [
-        'AWS, Azure, and GCP cloud migration',
-        'Infrastructure automation and security architecture',
-        'Observability, DR, and managed cloud services',
-      ],
     },
     {
       icon: <BarChart3 className="w-5 h-5" strokeWidth={1.5} />,
-      title: 'Operations & Managed Services',
-      desc: 'We stay after go-live. Same team — strategy through production. No handoff.',
       image: '/Images/capabilities/hva-operations-managed-capability.webp',
-      imageAlt: 'Operations and managed services monitoring workspace',
-      details: [
-        'Managed operations and application maintenance',
-        'AI system management post-deployment',
-        'Business process outsourcing and shared services',
-      ],
     },
   ];
+  const capabilityCopy = t.raw('capabilityPillars') as Array<{
+    title: string;
+    desc: string;
+    imageAlt: string;
+    details: string[];
+  }>;
+  const capabilityPillars = capabilityConfig.map((config, index) => ({
+    ...config,
+    ...capabilityCopy[index],
+  }));
 
   const techLogos = [
     { node: <SiReact />, title: 'React', href: 'https://react.dev' },
@@ -276,18 +221,18 @@ const Home: React.FC<HomeProps> = ({
           <div className="relative z-10">
             <div className="mb-10 flex items-center gap-3">
               <SectionBrandMark surface="dark" size="sm" />
-              <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[var(--section-label-color)]">Our Identity</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[var(--section-label-color)]">{t('identityEyebrow')}</p>
             </div>
             <h2 className="mb-7 font-headline text-[clamp(3rem,13vw,4rem)] leading-[1.04] text-white md:text-6xl md:leading-[1.08]">
-              Advise. Build.<br />{' '}
-              <em className="font-headline italic text-white/40">Operate.</em>
+              {t('identityTitle')}<br />{' '}
+              <em className="font-headline italic text-white/40">{t('identityAccent')}</em>
             </h2>
             <p className="text-white/60 font-body leading-relaxed text-base mb-10 max-w-sm">
-              Hive Vault Arc is a technology transformation partner — combining strategy, AI engineering, software development, and managed operations in one team. We stay until it works.
+              {t('identityDescription')}
             </p>
             <div className="h-px w-12 bg-[#E8A838] mb-4" />
             <p className="text-[9px] font-label font-bold uppercase tracking-[0.28em] text-white/40">
-              Strategy · AI Engineering · Software · Operations
+              {t('identityDisciplines')}
             </p>
           </div>
         </div>
@@ -314,7 +259,7 @@ const Home: React.FC<HomeProps> = ({
               </div>
               <div className="border-l-2 border-[#E8A838] p-5">
                 <p className="mb-2 text-[0.58rem] font-bold uppercase tracking-[0.18em] text-[var(--section-label-color)]">
-                  Pillar
+                  {t('pillar')}
                 </p>
                 <h3 className="font-headline text-xl leading-tight text-[#1A2535]">{pillar.title}</h3>
                 <p className="mt-2 max-w-sm text-sm leading-relaxed text-[#566274]">{pillar.desc}</p>
@@ -374,7 +319,7 @@ const Home: React.FC<HomeProps> = ({
                     }`}
                   >
                     <p className="mb-2 text-[0.58rem] font-bold uppercase tracking-[0.18em] text-[#F4D27C]">
-                      Pillar 0{idx + 1}
+                      {t('pillar')} 0{idx + 1}
                     </p>
                     <h3 className="max-w-[18rem] font-headline text-[1.72rem] leading-[1.06] text-white">
                       {pillar.title}
@@ -415,16 +360,16 @@ const Home: React.FC<HomeProps> = ({
             >
               <div className="home-arc-loop-mark">
                 <SectionBrandMark surface="light" size="md" />
-                <span>The ARC loop</span>
+                <span>{t('arcLoop')}</span>
               </div>
               <h2>
-                Lasting transformation requires the full ARC.
+                {t('arcTitle')}
               </h2>
               <p>
-                Assess the constraint. Build the operating system. Keep production accountable after launch.
+                {t('arcDescription')}
               </p>
               <Link href="/capabilities" className="home-arc-loop-link">
-                Our capabilities
+                {t('ourCapabilities')}
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </motion.div>
@@ -438,14 +383,14 @@ const Home: React.FC<HomeProps> = ({
             >
               <Image
                 src="/Images/capabilities/hva-operations-managed-capability.webp"
-                alt="Operations command workspace with dashboards and production monitoring screens"
+                alt={t('arcImageAlt')}
                 fill
                 sizes="(min-width: 1024px) 48vw, 100vw"
                 className="object-cover"
               />
               <div className="home-arc-loop-visual-card">
-                <span>Featured operating story</span>
-                <strong>One accountable team from diagnosis to production.</strong>
+                <span>{t('featuredStory')}</span>
+                <strong>{t('featuredStoryTitle')}</strong>
               </div>
             </motion.div>
           </div>
@@ -480,7 +425,7 @@ const Home: React.FC<HomeProps> = ({
           scaleOnHover
           fadeOut
           fadeOutColor="#FFFFFF"
-          ariaLabel="Technology partners"
+          ariaLabel={t('technologyPartners')}
         />
       </div>
 
@@ -492,11 +437,11 @@ const Home: React.FC<HomeProps> = ({
 
       <BottomCTA
         variant="dark"
-        headline="Ready to Transform Core Operations End to End?"
-        subtext="Share your goals and constraints. We will define the strategy, architecture, and execution path, then discuss pricing after discovery."
-        primaryLabel="Book Discovery Call"
+        headline={t('ctaTitle')}
+        subtext={t('ctaDescription')}
+        primaryLabel={t('ctaPrimary')}
         primaryHref="/contact"
-        secondaryLabel="View Case Studies"
+        secondaryLabel={t('ctaSecondary')}
         secondaryHref="/case-studies"
       />
 

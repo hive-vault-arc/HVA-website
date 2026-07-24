@@ -1,4 +1,4 @@
-import { PRODUCT_SYSTEMS } from './proof';
+import {PRODUCT_SYSTEMS} from './product-systems';
 
 export type CapabilityDomain = {
   id: string;

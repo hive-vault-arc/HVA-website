@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 
 vi.mock('next/navigation', () => ({
   usePathname: () => '/',
+  useSearchParams: () => new URLSearchParams(),
 }));
 
 const coreLinks = [

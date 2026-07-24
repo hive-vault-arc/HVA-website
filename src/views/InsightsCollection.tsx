@@ -2,6 +2,7 @@
 
 import InsightIndexPage, { type PageItem } from '../components/InsightIndexPage';
 import type { InsightCard } from '../lib/insights';
+import {useTranslations} from 'next-intl';
 
 type Props = {
   eyebrow: string;
@@ -20,6 +21,7 @@ export default function InsightsCollection({
   cards,
   basePath = '/insights',
 }: Readonly<Props>) {
+  const t = useTranslations('CollectionUi');
   const items: PageItem[] = cards.map((c) => ({
     href: `${basePath}/${c.slug}`,
     title: c.title,
@@ -33,12 +35,12 @@ export default function InsightsCollection({
   return (
     <InsightIndexPage
       eyebrow={eyebrow}
-      headline="Hive Vault Arc"
+      headline={t('brand')}
       headlineItalic={titleItalic ?? title}
       description={description}
       items={items}
       backHref="/insights"
-      emptyMessage={`${title} are being`}
+      emptyMessage={t('collectionEmpty', {title})}
     />
   );
 }

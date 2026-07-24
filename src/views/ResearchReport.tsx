@@ -1,12 +1,14 @@
 'use client';
 
-import Link from 'next/link';
+import {Link} from '@/i18n/navigation';
 import { ArrowUpRight, ExternalLink } from '@/components/icons';
 import ArticleDetailPage from '../components/ArticleDetailPage';
 import type { ContentSection } from '../lib/blog';
 import type { ResearchReport } from '../lib/insights';
+import {useTranslations} from 'next-intl';
 
 function RenderSection({ section, index }: { section: ContentSection; index: number }) {
+  const t = useTranslations('DynamicContent');
   switch (section.type) {
     case 'heading':
       return (
@@ -108,7 +110,7 @@ function RenderSection({ section, index }: { section: ContentSection; index: num
             className="text-2xl md:text-3xl mb-6 text-[#1A2535]"
             style={{ fontFamily: 'var(--font-headline)' }}
           >
-            Research Questions
+            {t('researchQuestions')}
           </h2>
           <div className="space-y-6">
             {section.items.map((item) => (
@@ -133,6 +135,7 @@ function RenderSection({ section, index }: { section: ContentSection; index: num
 }
 
 function ResearchReportSidebar({ report }: { report: ResearchReport }) {
+  const t = useTranslations('DynamicContent');
   return (
     <div className="space-y-10">
       {report.sources.length > 0 && (
@@ -141,7 +144,7 @@ function ResearchReportSidebar({ report }: { report: ResearchReport }) {
             className="text-xs font-bold uppercase tracking-widest text-[var(--section-label-color)] mb-4"
             style={{ fontFamily: 'var(--font-body)' }}
           >
-            Sources
+            {t('sources')}
           </h2>
           <ul className="space-y-3">
             {report.sources.map((source) => (
@@ -168,7 +171,7 @@ function ResearchReportSidebar({ report }: { report: ResearchReport }) {
             className="text-xs font-bold uppercase tracking-widest text-[var(--section-label-color)] mb-4"
             style={{ fontFamily: 'var(--font-body)' }}
           >
-            Topics
+            {t('topics')}
           </h2>
           <div className="flex flex-wrap gap-2">
             {report.keywords.slice(0, 8).map((keyword) => (
@@ -189,17 +192,17 @@ function ResearchReportSidebar({ report }: { report: ResearchReport }) {
           className="text-white text-sm font-semibold mb-3 leading-snug"
           style={{ fontFamily: 'var(--font-headline)', fontStyle: 'italic' }}
         >
-          Need the report translated into an operating plan?
+          {t('reportSidebar.title')}
         </p>
         <p className="text-white/60 text-xs mb-4 leading-relaxed" style={{ fontFamily: 'var(--font-body)' }}>
-          Hive Vault Arc turns benchmarks, delivery signals, and cloud readiness findings into practical transformation work.
+          {t('reportSidebar.description')}
         </p>
         <Link
           href="/contact"
           className="inline-flex items-center gap-1.5 text-xs font-bold tracking-widest uppercase text-[var(--section-label-color-dark)] hover:gap-3 transition-all"
           style={{ fontFamily: 'var(--font-body)' }}
         >
-          Discuss the findings
+          {t('reportSidebar.cta')}
           <ArrowUpRight className="w-3 h-3" />
         </Link>
       </div>
@@ -214,17 +217,18 @@ export default function ResearchReportView({
   readonly report: ResearchReport;
   readonly relatedReports: ResearchReport[];
 }) {
+  const t = useTranslations('DynamicContent');
   const sections =
     report.sections.length > 0 ? report.sections : [{ type: 'paragraph' as const, content: report.summary }];
 
   return (
     <ArticleDetailPage
       backHref="/insights/research-reports"
-      backLabel="All research reports"
+      backLabel={t('allResearch')}
       breadcrumbs={[
-        { label: 'Home', href: '/' },
-        { label: 'Insights', href: '/insights' },
-        { label: 'Research Reports', href: '/insights/research-reports' },
+        { label: t('home'), href: '/' },
+        { label: t('insights'), href: '/insights' },
+        { label: t('researchReports'), href: '/insights/research-reports' },
         { label: report.title },
       ]}
       eyebrow={report.tag}
@@ -245,15 +249,14 @@ export default function ResearchReportView({
         coverImage: item.coverImage,
       }))}
       relatedAllHref="/insights/research-reports"
-      relatedAllLabel="All Research Reports"
+      relatedAllLabel={t('allResearch')}
       bottomCta={{
         variant: 'blue',
-        headline: 'Turn research into production decisions.',
-        subtext:
-          'Hive Vault Arc helps teams map research findings into roadmap, architecture, and operating controls.',
-        primaryLabel: 'Book a Discovery Call',
+        headline: t('researchCta.title'),
+        subtext: t('researchCta.description'),
+        primaryLabel: t('researchCta.primary'),
         primaryHref: '/contact',
-        secondaryLabel: 'Explore capabilities',
+        secondaryLabel: t('exploreCapabilities'),
         secondaryHref: '/capabilities',
       }}
       sidebar={<ResearchReportSidebar report={report} />}

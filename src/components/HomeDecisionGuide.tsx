@@ -1,8 +1,9 @@
 'use client';
 
 import { useLayoutEffect, useRef, type ComponentType } from 'react';
+import {useTranslations} from 'next-intl';
 import Image from 'next/image';
-import Link from 'next/link';
+import {Link} from '@/i18n/navigation';
 import {
   ArrowRight,
   BarChart3,
@@ -32,47 +33,6 @@ type RouteItem = {
     src: string;
     alt: string;
   };
-};
-
-const ROUTES: Record<'industries' | 'caseStudies' | 'arc' | 'insights' | 'contact', RouteItem> = {
-  industries: {
-    href: '/industries',
-    label: 'Where we work',
-    title: 'Industries',
-    icon: Building2,
-    image: {
-      src: '/Images/page-heroes/hva-industries-hero-background.webp',
-      alt: 'Architectural industry structures in Hive Vault Arc navy',
-    },
-  },
-  caseStudies: {
-    href: '/case-studies',
-    label: 'See it in action',
-    title: 'Case Studies',
-    icon: BarChart3,
-    image: {
-      src: '/Images/insights/hva-case-studies-ai-transformation-morocco.webp',
-      alt: 'Business performance reports prepared for a case study review',
-    },
-  },
-  arc: {
-    href: '/arc',
-    label: 'Our approach',
-    title: 'ARC Framework',
-    icon: Route,
-  },
-  insights: {
-    href: '/insights',
-    label: 'Stay informed',
-    title: 'Insights',
-    icon: BookOpen,
-  },
-  contact: {
-    href: '/contact',
-    label: "Let's talk",
-    title: 'Book a Call',
-    icon: CalendarCheck,
-  },
 };
 
 function RouteArrow() {
@@ -122,7 +82,17 @@ function getEvidenceDirection(language: string): 'ltr' | 'rtl' {
   return code && ['ar', 'fa', 'he', 'ur'].includes(code) ? 'rtl' : 'ltr';
 }
 
-function FeaturedEvidence({ evidence }: { evidence?: ClientEvidenceSummary }) {
+function FeaturedEvidence({
+  evidence,
+  readCaseStudy,
+  verified,
+  deliveryAlt,
+}: {
+  evidence?: ClientEvidenceSummary;
+  readCaseStudy: string;
+  verified: string;
+  deliveryAlt: (client: string) => string;
+}) {
   if (!evidence) {
     return <div className="decision-proof-card decision-proof-card--featured is-empty" aria-hidden="true" />;
   }
@@ -130,7 +100,7 @@ function FeaturedEvidence({ evidence }: { evidence?: ClientEvidenceSummary }) {
   const proofCopy = evidence.quoteExcerpt ?? evidence.caseStudyTitle;
   const coverImage = evidence.coverImage ?? '/Images/home/pathfinder/pathfinder-proof.webp';
   const coverImageAlt =
-    evidence.coverImageAlt ?? `${evidence.clientName} case study delivery environment`;
+    evidence.coverImageAlt ?? deliveryAlt(evidence.clientName);
 
   return (
     <article className="decision-proof-card decision-proof-card--featured" data-proof-reveal>
@@ -172,12 +142,12 @@ function FeaturedEvidence({ evidence }: { evidence?: ClientEvidenceSummary }) {
 
         <footer>
           <Link href={`/case-studies/${evidence.slug}`}>
-            Read case study
+            {readCaseStudy}
             <ArrowRight aria-hidden="true" />
           </Link>
           <span>
             <CheckCircle2 aria-hidden="true" />
-            Verified evidence
+            {verified}
           </span>
         </footer>
       </div>
@@ -188,9 +158,15 @@ function FeaturedEvidence({ evidence }: { evidence?: ClientEvidenceSummary }) {
 function CaseStudyPreview({
   study,
   position,
+  readCaseStudy,
+  deliveryAlt,
+  logoAlt,
 }: {
   study: CaseStudyShowcaseSummary;
   position: 'top' | 'bottom';
+  readCaseStudy: string;
+  deliveryAlt: (client: string) => string;
+  logoAlt: (client: string) => string;
 }) {
   return (
     <article
@@ -200,7 +176,7 @@ function CaseStudyPreview({
       <div className="decision-proof-card__media" data-proof-image>
         <Image
           src={study.assets.coverImage}
-          alt={study.assets.coverAlt ?? `${study.clientName} case study delivery environment`}
+          alt={study.assets.coverAlt ?? deliveryAlt(study.clientName)}
           fill
           sizes="(max-width: 760px) 30vw, (max-width: 1180px) 14vw, 9vw"
           className="object-cover"
@@ -213,7 +189,7 @@ function CaseStudyPreview({
             {study.assets.clientLogo ? (
               <Image
                 src={study.assets.clientLogo}
-                alt={study.assets.clientLogoAlt ?? `${study.clientName} logo`}
+                alt={study.assets.clientLogoAlt ?? logoAlt(study.clientName)}
                 fill
                 sizes="3rem"
               />
@@ -231,7 +207,7 @@ function CaseStudyPreview({
 
         <footer>
           <Link href={`/case-studies/${study.slug}`}>
-            Read case study
+            {readCaseStudy}
             <ArrowRight aria-hidden="true" />
           </Link>
         </footer>
@@ -247,7 +223,48 @@ export default function HomeDecisionGuide({
   readonly evidence: readonly ClientEvidenceSummary[];
   readonly caseStudies: readonly CaseStudyShowcaseSummary[];
 }) {
+  const t = useTranslations('HomeDecision');
   const rootRef = useRef<HTMLDivElement | null>(null);
+  const routes: Record<'industries' | 'caseStudies' | 'arc' | 'insights' | 'contact', RouteItem> = {
+    industries: {
+      href: '/industries',
+      label: t('routes.industriesLabel'),
+      title: t('routes.industriesTitle'),
+      icon: Building2,
+      image: {
+        src: '/Images/page-heroes/hva-industries-hero-background.webp',
+        alt: t('routes.industriesAlt'),
+      },
+    },
+    caseStudies: {
+      href: '/case-studies',
+      label: t('routes.caseStudiesLabel'),
+      title: t('routes.caseStudiesTitle'),
+      icon: BarChart3,
+      image: {
+        src: '/Images/insights/hva-case-studies-ai-transformation-morocco.webp',
+        alt: t('routes.caseStudiesAlt'),
+      },
+    },
+    arc: {
+      href: '/arc',
+      label: t('routes.arcLabel'),
+      title: t('routes.arcTitle'),
+      icon: Route,
+    },
+    insights: {
+      href: '/insights',
+      label: t('routes.insightsLabel'),
+      title: t('routes.insightsTitle'),
+      icon: BookOpen,
+    },
+    contact: {
+      href: '/contact',
+      label: t('routes.contactLabel'),
+      title: t('routes.contactTitle'),
+      icon: CalendarCheck,
+    },
+  };
   const featuredEvidence = evidence[0];
   const secondaryCaseStudies = caseStudies
     .filter((study) => study.slug !== featuredEvidence?.slug)
@@ -413,17 +430,17 @@ export default function HomeDecisionGuide({
 
         <div className="decision-guide__shell">
           <header className="decision-guide__intro" data-guide-reveal>
-            <p className="decision-eyebrow">Website guide</p>
+            <p className="decision-eyebrow">{t('websiteGuide')}</p>
             <h2 id="decision-guide-title">
-              Choose your <span>route.</span>
+              {t('choose')} <span>{t('route')}</span>
             </h2>
             <span className="decision-intro-rule" aria-hidden="true" />
             <p className="decision-intro-copy">
-              Smart paths to the expertise and insights that move your business forward.
+              {t('intro')}
             </p>
             <Link href="/capabilities" className="decision-guide__start">
               <Compass aria-hidden="true" />
-              Find my starting point
+              {t('start')}
               <ArrowRight motion="nudge" aria-hidden="true" />
             </Link>
           </header>
@@ -437,7 +454,7 @@ export default function HomeDecisionGuide({
               <span className="decision-route__media" data-guide-image>
                 <Image
                   src="/Images/page-heroes/hva-capabilities-hero-background.webp"
-                  alt="Abstract systems map for Hive Vault Arc capabilities"
+                  alt={t('routes.capabilitiesAlt')}
                   fill
                   sizes="(max-width: 760px) 92vw, (max-width: 1120px) 44vw, 30vw"
                   className="object-cover"
@@ -448,18 +465,18 @@ export default function HomeDecisionGuide({
                   <Layers3 />
                 </span>
                 <span className="decision-route__copy">
-                  <span>Core offering</span>
-                  <strong>Capabilities</strong>
+                  <span>{t('coreOffering')}</span>
+                  <strong>{t('capabilities')}</strong>
                 </span>
                 <RouteArrow />
               </span>
             </Link>
 
-            <CompactRoute item={ROUTES.industries} className="decision-route--industries" />
-            <CompactRoute item={ROUTES.caseStudies} className="decision-route--case-studies" />
+            <CompactRoute item={routes.industries} className="decision-route--industries" />
+            <CompactRoute item={routes.caseStudies} className="decision-route--case-studies" />
 
             <Link
-              href={ROUTES.arc.href}
+              href={routes.arc.href}
               className="decision-route decision-route--arc"
               data-guide-reveal
             >
@@ -467,17 +484,17 @@ export default function HomeDecisionGuide({
                 <Route />
               </span>
               <span className="decision-route__copy">
-                <span>{ROUTES.arc.label}</span>
-                <strong>{ROUTES.arc.title}</strong>
+                <span>{routes.arc.label}</span>
+                <strong>{routes.arc.title}</strong>
               </span>
               <RouteArrow />
             </Link>
 
             <div className="decision-guide__more" data-guide-reveal>
-              More ways to connect
+              {t('more')}
             </div>
             <div className="decision-guide__connections" data-guide-reveal>
-              {[ROUTES.insights, ROUTES.contact].map((item) => {
+              {[routes.insights, routes.contact].map((item) => {
                 const Icon = item.icon;
                 return (
                   <Link key={item.href} href={item.href}>
@@ -498,21 +515,33 @@ export default function HomeDecisionGuide({
       <section className="decision-proof" aria-labelledby="decision-proof-title">
         <div className="decision-proof__shell">
           <header className="decision-proof__intro" data-proof-reveal>
-            <p className="decision-eyebrow">Client evidence</p>
+            <p className="decision-eyebrow">{t('clientEvidence')}</p>
             <h2 id="decision-proof-title">
-              Proof in <span>motion.</span>
+              {t('proof')} <span>{t('motion')}</span>
             </h2>
             <span className="decision-intro-rule" aria-hidden="true" />
-            <p className="decision-intro-copy">Documented delivery work and client-approved evidence.</p>
+            <p className="decision-intro-copy">{t('proofDescription')}</p>
           </header>
 
           <div className="decision-proof__board">
-            <FeaturedEvidence evidence={featuredEvidence} />
+            <FeaturedEvidence
+              evidence={featuredEvidence}
+              readCaseStudy={t('readCaseStudy')}
+              verified={t('verified')}
+              deliveryAlt={(client) => t('deliveryAlt', {client})}
+            />
             {(['top', 'bottom'] as const).map((position, index) => {
               const study = secondaryCaseStudies[index];
 
               return study ? (
-                <CaseStudyPreview key={study.slug} study={study} position={position} />
+                <CaseStudyPreview
+                  key={study.slug}
+                  study={study}
+                  position={position}
+                  readCaseStudy={t('readCaseStudy')}
+                  deliveryAlt={(client) => t('deliveryAlt', {client})}
+                  logoAlt={(client) => t('logoAlt', {client})}
+                />
               ) : (
                 <div
                   key={position}

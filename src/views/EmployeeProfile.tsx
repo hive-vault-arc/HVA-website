@@ -1,14 +1,15 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import {Link} from '@/i18n/navigation';
+import {useRouter} from '@/i18n/navigation';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowLeft, ArrowUpRight, ExternalLink } from '@/components/icons';
 import { useCallback, useState, type CSSProperties, type MouseEvent } from 'react';
 import type { EmployeeProfile } from '../lib/employee-profiles';
 import BottomCTA from '../components/BottomCTA';
 import SectionBrandMark from '../components/SectionBrandMark';
+import {useTranslations} from 'next-intl';
 
 type Props = {
   profile: EmployeeProfile;
@@ -20,6 +21,7 @@ function itemKey(fallback: string, key?: string) {
 }
 
 export default function EmployeeProfileView({ profile, relatedProfiles }: Props) {
+  const t = useTranslations('DynamicContent');
   const router = useRouter();
   const [isLeavingForTeam, setIsLeavingForTeam] = useState(false);
   const { scrollYProgress } = useScroll();
@@ -53,11 +55,11 @@ export default function EmployeeProfileView({ profile, relatedProfiles }: Props)
       <section className="employee-profile-hero">
         <div className="site-frame employee-profile-hero__grid">
           <div className="employee-profile-hero__copy">
-            <nav aria-label="Breadcrumb" className="employee-profile-breadcrumb">
-              <a href={teamHref} onClick={handleTeamBackClick}>
+            <nav aria-label={t('breadcrumb')} className="employee-profile-breadcrumb">
+              <Link href={teamHref} onClick={handleTeamBackClick}>
                 <ArrowLeft className="h-4 w-4" />
-                About Hive Vault Arc
-              </a>
+                {t('aboutHiva')}
+              </Link>
               <span aria-hidden="true">/</span>
               <span aria-current="page">{profile.name}</span>
             </nav>
@@ -79,7 +81,7 @@ export default function EmployeeProfileView({ profile, relatedProfiles }: Props)
                 </a>
               )}
               <Link href="/contact">
-                Book a Call
+                {t('bookCall')}
                 <ArrowUpRight className="h-4 w-4" />
               </Link>
             </div>
@@ -111,7 +113,7 @@ export default function EmployeeProfileView({ profile, relatedProfiles }: Props)
             transition={{ duration: 0.4 }}
           >
             <div>
-              <p>Focus</p>
+              <p>{t('employee.focus')}</p>
               <ul>
                 {profile.expertise.map((item) => (
                   <li key={item}>{item}</li>
@@ -128,7 +130,7 @@ export default function EmployeeProfileView({ profile, relatedProfiles }: Props)
               viewport={{ once: true, amount: 0.12 }}
               transition={{ duration: 0.4 }}
             >
-              <h2>Profile</h2>
+              <h2>{t('employee.profile')}</h2>
               <p>{profile.story}</p>
             </motion.section>
 
@@ -140,7 +142,7 @@ export default function EmployeeProfileView({ profile, relatedProfiles }: Props)
                 viewport={{ once: true, amount: 0.12 }}
                 transition={{ duration: 0.4 }}
               >
-                <h2>Experience</h2>
+                <h2>{t('employee.experience')}</h2>
                 <ol className="employee-profile-timeline">
                   {profile.experience.map((item, index) => (
                     <li key={itemKey(`${item.role}-${index}`, item._key)}>
@@ -176,7 +178,7 @@ export default function EmployeeProfileView({ profile, relatedProfiles }: Props)
                 viewport={{ once: true, amount: 0.12 }}
                 transition={{ duration: 0.4 }}
               >
-                <h2>Education</h2>
+                <h2>{t('employee.education')}</h2>
                 <div className="employee-profile-education">
                   {profile.education.map((item, index) => (
                     <article key={itemKey(`${item.institution}-${index}`, item._key)}>
@@ -197,9 +199,9 @@ export default function EmployeeProfileView({ profile, relatedProfiles }: Props)
         <section className="employee-profile-related">
           <div className="site-frame">
             <div className="employee-profile-related__heading">
-              <h2>More from the Team</h2>
+              <h2>{t('employee.moreTeam')}</h2>
               <a href={teamHref} onClick={handleTeamBackClick}>
-                Back to team
+                {t('employee.backTeam')}
               </a>
             </div>
             <div className="employee-profile-related__grid">
@@ -217,11 +219,11 @@ export default function EmployeeProfileView({ profile, relatedProfiles }: Props)
 
       <BottomCTA
         variant="light"
-        headline="Work With The People Who Own The Outcome"
-        subtext="Hive Vault Arc keeps strategy, engineering, and operations close to the same senior team from discovery through production."
-        primaryLabel="Book a Call"
+        headline={t('employee.bottomTitle')}
+        subtext={t('employee.bottomDescription')}
+        primaryLabel={t('bookCall')}
         primaryHref="/contact"
-        secondaryLabel="Meet the Team"
+        secondaryLabel={t('employee.meetTeam')}
         secondaryHref="/aboutus"
       />
     </div>

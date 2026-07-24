@@ -34,7 +34,7 @@ describe('Contact form', () => {
     fireEvent.click(screen.getByRole('button', { name: /send message/i }));
 
     await waitFor(() => {
-      expect(screen.getByText('Thank you. Your message was sent successfully.')).toBeInTheDocument();
+      expect(screen.getByText('Thank you. Your message has been received.')).toBeInTheDocument();
     });
 
     expect(fetchMock).toHaveBeenCalledTimes(1);

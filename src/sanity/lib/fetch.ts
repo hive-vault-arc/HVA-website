@@ -1,4 +1,7 @@
+import 'server-only';
+
 import type { QueryParams } from 'next-sanity';
+import {draftMode} from 'next/headers';
 
 import { sanityClient } from './client';
 
@@ -59,10 +62,25 @@ export async function sanityFetch<QueryResponse>({
   revalidate = 300,
   tags = [],
 }: SanityFetchOptions): Promise<QueryResponse> {
-  return sanityClient.fetch<QueryResponse>(query, params, {
+  const preview = (await draftMode()).isEnabled;
+  const previewToken = process.env.SANITY_PREVIEW_TOKEN;
+
+  if (preview && !previewToken) {
+    throw new Error('Draft Mode requires SANITY_PREVIEW_TOKEN.');
+  }
+
+  const client = preview
+    ? sanityClient.withConfig({
+        token: previewToken,
+        useCdn: false,
+        perspective: 'drafts',
+      })
+    : sanityClient;
+
+  return client.fetch<QueryResponse>(query, {...params, preview}, {
     next: {
-      revalidate,
-      ...(tags.length > 0 ? { tags } : {}),
+      revalidate: preview ? 0 : revalidate,
+      ...(!preview && tags.length > 0 ? {tags} : {}),
     },
   });
 }

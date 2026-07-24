@@ -8,6 +8,8 @@ const imageFields = `
 
 const employeeProfileFields = `
   _id,
+  language,
+  translationStatus,
   name,
   "slug": slug.current,
   position,
@@ -45,11 +47,24 @@ const employeeProfileFields = `
     description,
     keywords,
     noIndex
-  }
+  },
+  "translationTargets": *[
+    _type == "translation.metadata" &&
+    references(^._id)
+  ][0].translations[].value->{
+    language,
+    translationStatus,
+    "slug": slug.current
+  }[translationStatus == "approved"]
 `;
 
 export const allEmployeeProfilesQuery = defineQuery(`
-  *[_type == "employeeProfile" && defined(slug.current)]
+  *[
+    _type == "employeeProfile" &&
+    language == $locale &&
+    ($preview == true || translationStatus == "approved") &&
+    defined(slug.current)
+  ]
   | order(displayOrder asc, name asc) {
     ${employeeProfileFields}
   }
@@ -58,6 +73,8 @@ export const allEmployeeProfilesQuery = defineQuery(`
 export const featuredEmployeeProfilesQuery = defineQuery(`
   *[
     _type == "employeeProfile" &&
+    language == $locale &&
+    ($preview == true || translationStatus == "approved") &&
     defined(slug.current) &&
     featuredOnAbout == true
   ] | order(displayOrder asc, name asc) {
@@ -66,7 +83,12 @@ export const featuredEmployeeProfilesQuery = defineQuery(`
 `);
 
 export const employeeProfileBySlugQuery = defineQuery(`
-  *[_type == "employeeProfile" && slug.current == $slug][0] {
+  *[
+    _type == "employeeProfile" &&
+    language == $locale &&
+    ($preview == true || translationStatus == "approved") &&
+    slug.current == $slug
+  ][0] {
     ${employeeProfileFields}
   }
 `);

@@ -20,6 +20,7 @@ import {
   SOCIAL_PROFILES,
   WHATSAPP_URL,
 } from '../lib/seo';
+import {useTranslations} from 'next-intl';
 
 interface SocialLink {
   icon: ElementType;
@@ -38,56 +39,56 @@ const socialIcons: Record<string, ElementType> = {
   TikTok: FaTiktok,
 };
 
-const SOCIAL_LINKS: SocialLink[] = [
-  {
-    icon: Mail,
-    label: 'Email',
-    handle: CONTACT_EMAIL,
-    href: `mailto:${CONTACT_EMAIL}`,
-    external: false,
-  },
-  {
-    icon: Phone,
-    label: 'Call',
-    handle: CONTACT_PHONE_DISPLAY,
-    href: `tel:${CONTACT_PHONE_E164}`,
-    external: false,
-  },
-  ...SOCIAL_PROFILES.map((profile) => ({
-    icon: socialIcons[profile.label],
-    label: profile.label,
-    handle: profile.handle,
-    href: profile.url,
-    external: true,
-  })),
-  {
-    icon: Whatsapp,
-    label: 'WhatsApp',
-    handle: CONTACT_PHONE_DISPLAY,
-    href: WHATSAPP_URL,
-    external: true,
-  },
-];
-
 export default function SocialLinks() {
+  const t = useTranslations('Links');
+  const socialLinks: SocialLink[] = [
+    {
+      icon: Mail,
+      label: t('email'),
+      handle: CONTACT_EMAIL,
+      href: `mailto:${CONTACT_EMAIL}`,
+      external: false,
+    },
+    {
+      icon: Phone,
+      label: t('call'),
+      handle: CONTACT_PHONE_DISPLAY,
+      href: `tel:${CONTACT_PHONE_E164}`,
+      external: false,
+    },
+    ...SOCIAL_PROFILES.map((profile) => ({
+      icon: socialIcons[profile.label],
+      label: profile.label,
+      handle: profile.handle,
+      href: profile.url,
+      external: true,
+    })),
+    {
+      icon: Whatsapp,
+      label: 'WhatsApp',
+      handle: CONTACT_PHONE_DISPLAY,
+      href: WHATSAPP_URL,
+      external: true,
+    },
+  ];
   return (
     <div className="bg-[#FFFFFF] text-[#1A2535]">
       <div className="mx-auto max-w-lg px-6 pb-16 pt-28 lg:pt-32">
         <header className="mb-10 text-center">
           <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.28em] text-[var(--section-label-color)]">
-            HVA / Connect
+            {t('eyebrow')}
           </p>
           <h1 className="font-headline text-4xl font-medium leading-tight tracking-tight text-[#1A2535]">
             Hive Vault Arc
           </h1>
           <p className="mt-3 text-sm leading-relaxed text-[#566274]">
-            AI &amp; Digital Transformation in Tangier, Morocco
+            {t('description')}
           </p>
         </header>
 
-        <nav aria-label="Social media links">
+        <nav aria-label={t('navLabel')}>
           <ul className="space-y-3">
-            {SOCIAL_LINKS.map(({ icon: Icon, label, handle, href, external }) => (
+            {socialLinks.map(({ icon: Icon, label, handle, href, external }) => (
               <li key={label}>
                 <a
                   href={href}

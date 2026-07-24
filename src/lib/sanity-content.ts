@@ -1,4 +1,6 @@
 import type { SanityImageSource } from '@sanity/image-url';
+import type {AppLocale} from '@/i18n/config';
+import {localeTag} from './localized-content';
 import type { BlogPost } from './blog';
 import type { NewsArticle, ResearchReport } from './insights';
 import type { Perspective } from './perspectives';
@@ -244,110 +246,162 @@ function normalizeCaseStudy(study: SanityCaseStudy): CaseStudy {
   };
 }
 
-export async function getAllSanityPosts(): Promise<BlogPost[]> {
+export async function getAllSanityPosts(locale: AppLocale = 'en'): Promise<BlogPost[]> {
   const posts = await sanityFetch<SanityPost[]>({
     query: allPostsQuery,
-    tags: [INSIGHTS_TAG, 'posts'],
+    params: {locale},
+    tags: [INSIGHTS_TAG, 'posts', localeTag('posts', locale)],
   });
 
   return posts.map(normalizePost);
 }
 
-export async function getSanityPostBySlug(slug: string): Promise<BlogPost | null> {
+export async function getSanityPostBySlug(
+  slug: string,
+  locale: AppLocale = 'en'
+): Promise<BlogPost | null> {
   const post = await sanityFetch<SanityPost | null>({
     query: postBySlugQuery,
-    params: { slug },
-    tags: [INSIGHTS_TAG, `post:${slug}`],
+    params: {slug, locale},
+    tags: [INSIGHTS_TAG, localeTag('posts', locale), `post:${locale}:${slug}`],
   });
 
   return post ? normalizePost(post) : null;
 }
 
-export async function getRelatedSanityPosts(currentSlug: string, limit = 3): Promise<BlogPost[]> {
-  const posts = await getAllSanityPosts();
+export async function getRelatedSanityPosts(
+  currentSlug: string,
+  limit = 3,
+  locale: AppLocale = 'en'
+): Promise<BlogPost[]> {
+  const posts = await getAllSanityPosts(locale);
   return posts.filter((post) => post.slug !== currentSlug).slice(0, limit);
 }
 
-export async function getAllSanityNewsArticles(): Promise<NewsArticle[]> {
+export async function getAllSanityNewsArticles(
+  locale: AppLocale = 'en'
+): Promise<NewsArticle[]> {
   const articles = await sanityFetch<SanityNewsArticle[]>({
     query: allNewsArticlesQuery,
-    tags: [INSIGHTS_TAG, 'newsArticles'],
+    params: {locale},
+    tags: [INSIGHTS_TAG, 'newsArticles', localeTag('newsArticles', locale)],
   });
 
   return articles.map(normalizeNewsArticle);
 }
 
-export async function getSanityNewsArticleBySlug(slug: string): Promise<NewsArticle | null> {
+export async function getSanityNewsArticleBySlug(
+  slug: string,
+  locale: AppLocale = 'en'
+): Promise<NewsArticle | null> {
   const article = await sanityFetch<SanityNewsArticle | null>({
     query: newsArticleBySlugQuery,
-    params: { slug },
-    tags: [INSIGHTS_TAG, `newsArticle:${slug}`],
+    params: {slug, locale},
+    tags: [
+      INSIGHTS_TAG,
+      localeTag('newsArticles', locale),
+      `newsArticle:${locale}:${slug}`,
+    ],
   });
 
   return article ? normalizeNewsArticle(article) : null;
 }
 
-export async function getRelatedSanityNewsArticles(currentSlug: string, limit = 3): Promise<NewsArticle[]> {
-  const articles = await getAllSanityNewsArticles();
+export async function getRelatedSanityNewsArticles(
+  currentSlug: string,
+  limit = 3,
+  locale: AppLocale = 'en'
+): Promise<NewsArticle[]> {
+  const articles = await getAllSanityNewsArticles(locale);
   return articles.filter((article) => article.slug !== currentSlug).slice(0, limit);
 }
 
-export async function getAllSanityPerspectives(): Promise<Perspective[]> {
+export async function getAllSanityPerspectives(
+  locale: AppLocale = 'en'
+): Promise<Perspective[]> {
   const perspectives = await sanityFetch<SanityPerspective[]>({
     query: allPerspectivesQuery,
-    tags: [INSIGHTS_TAG, 'perspectives'],
+    params: {locale},
+    tags: [INSIGHTS_TAG, 'perspectives', localeTag('perspectives', locale)],
   });
 
   return perspectives.map(normalizePerspective);
 }
 
-export async function getSanityPerspectiveBySlug(slug: string): Promise<Perspective | null> {
+export async function getSanityPerspectiveBySlug(
+  slug: string,
+  locale: AppLocale = 'en'
+): Promise<Perspective | null> {
   const perspective = await sanityFetch<SanityPerspective | null>({
     query: perspectiveBySlugQuery,
-    params: { slug },
-    tags: [INSIGHTS_TAG, `perspective:${slug}`],
+    params: {slug, locale},
+    tags: [
+      INSIGHTS_TAG,
+      localeTag('perspectives', locale),
+      `perspective:${locale}:${slug}`,
+    ],
   });
 
   return perspective ? normalizePerspective(perspective) : null;
 }
 
-export async function getRelatedSanityPerspectives(currentSlug: string, limit = 3): Promise<Perspective[]> {
-  const perspectives = await getAllSanityPerspectives();
+export async function getRelatedSanityPerspectives(
+  currentSlug: string,
+  limit = 3,
+  locale: AppLocale = 'en'
+): Promise<Perspective[]> {
+  const perspectives = await getAllSanityPerspectives(locale);
   return perspectives.filter((perspective) => perspective.slug !== currentSlug).slice(0, limit);
 }
 
-export async function getAllSanityResearchReports(): Promise<ResearchReport[]> {
+export async function getAllSanityResearchReports(
+  locale: AppLocale = 'en'
+): Promise<ResearchReport[]> {
   const reports = await sanityFetch<SanityResearchReport[]>({
     query: allResearchReportsQuery,
-    tags: [INSIGHTS_TAG, 'researchReports'],
+    params: {locale},
+    tags: [INSIGHTS_TAG, 'researchReports', localeTag('researchReports', locale)],
   });
 
   return reports.map(normalizeResearchReport);
 }
 
-export async function getSanityResearchReportBySlug(slug: string): Promise<ResearchReport | null> {
+export async function getSanityResearchReportBySlug(
+  slug: string,
+  locale: AppLocale = 'en'
+): Promise<ResearchReport | null> {
   const report = await sanityFetch<SanityResearchReport | null>({
     query: researchReportBySlugQuery,
-    params: { slug },
-    tags: [INSIGHTS_TAG, `researchReport:${slug}`],
+    params: {slug, locale},
+    tags: [
+      INSIGHTS_TAG,
+      localeTag('researchReports', locale),
+      `researchReport:${locale}:${slug}`,
+    ],
   });
 
   return report ? normalizeResearchReport(report) : null;
 }
 
-export async function getAllSanityCaseStudies(): Promise<CaseStudy[]> {
+export async function getAllSanityCaseStudies(
+  locale: AppLocale = 'en'
+): Promise<CaseStudy[]> {
   const studies = await sanityFetch<SanityCaseStudy[]>({
     query: allCaseStudiesQuery,
-    tags: [INSIGHTS_TAG, 'caseStudies'],
+    params: {locale},
+    tags: [INSIGHTS_TAG, 'caseStudies', localeTag('caseStudies', locale)],
   });
 
   return studies.map(normalizeCaseStudy);
 }
 
-export async function getSanityClientEvidenceShowcase(): Promise<ClientEvidenceSummary[]> {
+export async function getSanityClientEvidenceShowcase(
+  locale: AppLocale = 'en'
+): Promise<ClientEvidenceSummary[]> {
   const evidence = await sanityFetch<SanityClientEvidenceSummary[]>({
     query: clientEvidenceShowcaseQuery,
-    tags: [INSIGHTS_TAG, 'caseStudies'],
+    params: {locale},
+    tags: [INSIGHTS_TAG, 'caseStudies', localeTag('caseStudies', locale)],
   });
 
   return evidence
@@ -355,17 +409,28 @@ export async function getSanityClientEvidenceShowcase(): Promise<ClientEvidenceS
     .filter((item): item is ClientEvidenceSummary => item !== null);
 }
 
-export async function getSanityCaseStudyBySlug(slug: string): Promise<CaseStudy | null> {
+export async function getSanityCaseStudyBySlug(
+  slug: string,
+  locale: AppLocale = 'en'
+): Promise<CaseStudy | null> {
   const study = await sanityFetch<SanityCaseStudy | null>({
     query: caseStudyBySlugQuery,
-    params: { slug },
-    tags: [INSIGHTS_TAG, `caseStudy:${slug}`],
+    params: {slug, locale},
+    tags: [
+      INSIGHTS_TAG,
+      localeTag('caseStudies', locale),
+      `caseStudy:${locale}:${slug}`,
+    ],
   });
 
   return study ? normalizeCaseStudy(study) : null;
 }
 
-export async function getRelatedSanityCaseStudies(currentSlug: string, limit = 3): Promise<CaseStudy[]> {
-  const studies = await getAllSanityCaseStudies();
+export async function getRelatedSanityCaseStudies(
+  currentSlug: string,
+  limit = 3,
+  locale: AppLocale = 'en'
+): Promise<CaseStudy[]> {
+  const studies = await getAllSanityCaseStudies(locale);
   return studies.filter((study) => study.slug !== currentSlug).slice(0, limit);
 }

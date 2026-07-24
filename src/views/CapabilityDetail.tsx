@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
+import {Link} from '@/i18n/navigation';
 import { MotionConfig, motion, useScroll, useTransform } from 'framer-motion';
 import {
   ArrowLeft,
@@ -20,6 +20,7 @@ import BottomCTA from '../components/BottomCTA';
 import SectionBrandMark from '../components/SectionBrandMark';
 import { useAnimationQuality } from '../lib/animationQuality';
 import type { CapabilityLandingLink, CapabilityProfile, CapabilityProfileSummary } from '../lib/capabilities';
+import {useTranslations} from 'next-intl';
 
 type CapabilityDetailProps = {
   capability: CapabilityProfile;
@@ -76,11 +77,13 @@ function LandingLink({ link }: { link: CapabilityLandingLink }) {
 }
 
 export default function CapabilityDetail({ capability, relatedCapabilities }: CapabilityDetailProps) {
+  const t = useTranslations('DynamicContent');
   const { motionReduced } = useAnimationQuality();
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const primaryOutcome = capability.relatedOutcomes[0] ?? 'Clear operating movement';
-  const secondaryOutcome = capability.relatedOutcomes[1] ?? capability.briefBullets[0] ?? 'Focused delivery';
+  const primaryOutcome = capability.relatedOutcomes[0] ?? t('capability.fallbackOutcome');
+  const secondaryOutcome = capability.relatedOutcomes[1] ?? capability.briefBullets[0] ?? t('capability.fallbackDelivery');
+  const indexItems = t.raw('capability.index') as Array<{number: string; label: string; href: string}>;
 
   return (
     <MotionConfig reducedMotion={motionReduced ? 'always' : 'never'}>
@@ -99,16 +102,16 @@ export default function CapabilityDetail({ capability, relatedCapabilities }: Ca
               variants={{ show: { transition: { staggerChildren: 0.08 } } }}
               className="capability-profile-hero-copy"
             >
-              <motion.nav variants={fadeUp} transition={{ duration: 0.4 }} aria-label="Breadcrumb">
+              <motion.nav variants={fadeUp} transition={{ duration: 0.4 }} aria-label={t('breadcrumb')}>
                 <Link href="/capabilities" className="capability-profile-back-link">
                   <ArrowLeft className="h-4 w-4" strokeWidth={1.7} />
-                  Capabilities
+                  {t('capabilities')}
                 </Link>
               </motion.nav>
 
               <motion.div variants={fadeUp} transition={{ duration: 0.45 }} className="cap-detail-mark">
                 <SectionBrandMark size="sm" />
-                <span>{capability.kicker || 'Capability'}</span>
+                <span>{capability.kicker || t('capability.label')}</span>
               </motion.div>
 
               <motion.h1 variants={fadeUp} transition={{ duration: 0.5 }}>
@@ -121,10 +124,10 @@ export default function CapabilityDetail({ capability, relatedCapabilities }: Ca
 
               <motion.div variants={fadeUp} transition={{ duration: 0.5 }} className="capability-profile-actions">
                 <Link href="/contact" className="sharp-edge btn-primary">
-                  Start a Conversation
+                  {t('capability.start')}
                 </Link>
                 <Link href={`/capabilities/in-detail#pillar-${capability.slug}`} className="sharp-edge btn-outlined">
-                  View in Full Map
+                  {t('capability.fullMap')}
                 </Link>
               </motion.div>
             </motion.div>
@@ -152,14 +155,9 @@ export default function CapabilityDetail({ capability, relatedCapabilities }: Ca
           </div>
         </section>
 
-        <nav className="capability-profile-index" aria-label={`${capability.title} sections`}>
+        <nav className="capability-profile-index" aria-label={t('capability.sectionsAria', {title: capability.title})}>
           <div className="cap-detail-shell capability-profile-index-grid">
-            {[
-              ['01', 'Context', '#context'],
-              ['02', 'Coverage', '#coverage'],
-              ['03', 'Outcomes', '#outcomes'],
-              ['04', 'Related', '#related'],
-            ].map(([number, label, href]) => (
+            {indexItems.map(({number, label, href}) => (
               <a key={href} href={href} className="capability-profile-index-item">
                 <span>{number}</span>
                 <strong>{label}</strong>
@@ -173,9 +171,9 @@ export default function CapabilityDetail({ capability, relatedCapabilities }: Ca
             <div className="cap-detail-section-head">
               <div className="cap-detail-mark">
                 <SectionBrandMark size="sm" />
-                <span>Operating context</span>
+                <span>{t('capability.contextEyebrow')}</span>
               </div>
-              <h2>Where this capability fits.</h2>
+              <h2>{t('capability.contextTitle')}</h2>
             </div>
 
             <motion.article
@@ -185,7 +183,7 @@ export default function CapabilityDetail({ capability, relatedCapabilities }: Ca
               transition={{ duration: 0.45 }}
               className="capability-profile-context-card"
             >
-              <span>Strategic context</span>
+              <span>{t('capability.strategicContext')}</span>
               <p>{capability.strategicContext}</p>
             </motion.article>
 
@@ -196,7 +194,7 @@ export default function CapabilityDetail({ capability, relatedCapabilities }: Ca
               transition={{ duration: 0.45, delay: 0.06 }}
               className="capability-profile-context-card capability-profile-context-card-dark"
             >
-              <span>Execution context</span>
+              <span>{t('capability.executionContext')}</span>
               <p>{capability.executionContext}</p>
             </motion.article>
           </div>
@@ -207,9 +205,9 @@ export default function CapabilityDetail({ capability, relatedCapabilities }: Ca
             <div className="capability-profile-coverage-copy">
               <div className="cap-detail-mark">
                 <SectionBrandMark size="sm" />
-                <span>Capability coverage</span>
+                <span>{t('capability.coverageEyebrow')}</span>
               </div>
-              <h2>What HVA can own inside this pillar.</h2>
+              <h2>{t('capability.coverageTitle')}</h2>
               <ul className="capability-profile-brief-list">
                 {capability.briefBullets.map((item) => (
                   <li key={item}>{item}</li>
@@ -240,13 +238,10 @@ export default function CapabilityDetail({ capability, relatedCapabilities }: Ca
             <div className="capability-profile-outcomes-copy">
               <div className="cap-detail-mark cap-detail-mark-dark">
                 <SectionBrandMark surface="dark" size="sm" />
-                <span>Expected movement</span>
+                <span>{t('capability.outcomesEyebrow')}</span>
               </div>
-              <h2>Useful when the goal is accountable progress.</h2>
-              <p>
-                This page focuses the pillar. The ARC model turns it into scoped work, production
-                systems, and managed improvement.
-              </p>
+              <h2>{t('capability.outcomesTitle')}</h2>
+              <p>{t('capability.outcomesDescription')}</p>
             </div>
 
             <div className="capability-profile-outcome-list">
@@ -259,7 +254,7 @@ export default function CapabilityDetail({ capability, relatedCapabilities }: Ca
             </div>
 
             {capability.landingLinks.length > 0 && (
-              <div className="capability-profile-landing-links" aria-label="Related landing pages">
+              <div className="capability-profile-landing-links" aria-label={t('capability.relatedPagesAria')}>
                 {capability.landingLinks.map((link) => (
                   <LandingLink key={link._key ?? link.href} link={link} />
                 ))}
@@ -274,9 +269,9 @@ export default function CapabilityDetail({ capability, relatedCapabilities }: Ca
               <div className="cap-detail-section-head">
                 <div className="cap-detail-mark">
                   <SectionBrandMark size="sm" />
-                  <span>Related capabilities</span>
+                  <span>{t('capability.relatedEyebrow')}</span>
                 </div>
-                <h2>Adjacent pillars to explore next.</h2>
+                <h2>{t('capability.relatedTitle')}</h2>
               </div>
 
               <div className="capability-profile-related-grid">
@@ -297,12 +292,12 @@ export default function CapabilityDetail({ capability, relatedCapabilities }: Ca
                       />
                     </div>
                     <div className="capability-profile-related-body">
-                      <span>{related.kicker || 'Capability'}</span>
+                      <span>{related.kicker || t('capability.label')}</span>
                       <strong>{related.shortTitle || related.title}</strong>
                       <em>{related.briefLine}</em>
                     </div>
                     <span className="capability-profile-related-link">
-                      Open <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={1.7} />
+                      {t('capability.open')} <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={1.7} />
                     </span>
                   </Link>
                 ))}
@@ -313,11 +308,11 @@ export default function CapabilityDetail({ capability, relatedCapabilities }: Ca
 
         <BottomCTA
           variant="light"
-          headline={`Need ${capability.shortTitle || capability.title} mapped to your operation?`}
-          subtext="Hive Vault Arc will scope the right diagnosis, build path, and operating model before execution starts."
-          primaryLabel="Book Discovery Call"
+          headline={t('capability.bottomTitle', {title: capability.shortTitle || capability.title})}
+          subtext={t('capability.bottomDescription')}
+          primaryLabel={t('capability.bottomPrimary')}
           primaryHref="/contact"
-          secondaryLabel="Back to Capabilities"
+          secondaryLabel={t('capability.bottomSecondary')}
           secondaryHref="/capabilities"
         />
       </div>

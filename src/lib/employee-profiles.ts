@@ -1,4 +1,7 @@
 import type { SanityImageSource } from '@sanity/image-url';
+import type {AppLocale} from '@/i18n/config';
+import type {LocalizedContentMeta} from './localized-content';
+import {localeTag} from './localized-content';
 import { sanityFetch } from '../sanity/lib/fetch';
 import { urlForImage } from '../sanity/lib/image';
 import {
@@ -38,7 +41,7 @@ export type EmployeeProfileSeo = {
   noIndex?: boolean;
 };
 
-export type EmployeeProfile = {
+export type EmployeeProfile = LocalizedContentMeta & {
   _id?: string;
   name: string;
   slug: string;
@@ -106,19 +109,23 @@ function publishedProfiles(profiles: EmployeeProfile[]): EmployeeProfile[] {
   return sortProfiles(profiles.filter((profile) => profile.visibility !== 'hidden'));
 }
 
-export async function getAllEmployeeProfiles(): Promise<EmployeeProfile[]> {
+export async function getAllEmployeeProfiles(locale: AppLocale = 'en'): Promise<EmployeeProfile[]> {
   const profiles = await sanityFetch<SanityEmployeeProfile[]>({
     query: allEmployeeProfilesQuery,
-    tags: [PEOPLE_TAG, 'employeeProfiles'],
+    params: {locale},
+    tags: [PEOPLE_TAG, 'employeeProfiles', localeTag('employeeProfiles', locale)],
   });
 
   return publishedProfiles(profiles.map(normalizeEmployeeProfile));
 }
 
-export async function getFeaturedEmployeeProfiles(): Promise<EmployeeProfile[]> {
+export async function getFeaturedEmployeeProfiles(
+  locale: AppLocale = 'en'
+): Promise<EmployeeProfile[]> {
   const profiles = await sanityFetch<SanityEmployeeProfile[]>({
     query: featuredEmployeeProfilesQuery,
-    tags: [PEOPLE_TAG, 'employeeProfiles'],
+    params: {locale},
+    tags: [PEOPLE_TAG, 'employeeProfiles', localeTag('employeeProfiles', locale)],
   });
 
   return publishedProfiles(profiles.map(normalizeEmployeeProfile)).filter(
@@ -126,11 +133,19 @@ export async function getFeaturedEmployeeProfiles(): Promise<EmployeeProfile[]> 
   );
 }
 
-export async function getEmployeeProfileBySlug(slug: string): Promise<EmployeeProfile | null> {
+export async function getEmployeeProfileBySlug(
+  slug: string,
+  locale: AppLocale = 'en'
+): Promise<EmployeeProfile | null> {
   const profile = await sanityFetch<SanityEmployeeProfile | null>({
     query: employeeProfileBySlugQuery,
-    params: { slug },
-    tags: [PEOPLE_TAG, 'employeeProfiles', `employeeProfile:${slug}`],
+    params: {slug, locale},
+    tags: [
+      PEOPLE_TAG,
+      'employeeProfiles',
+      localeTag('employeeProfiles', locale),
+      `employeeProfile:${locale}:${slug}`,
+    ],
   });
 
   if (!profile) return null;
@@ -141,8 +156,9 @@ export async function getEmployeeProfileBySlug(slug: string): Promise<EmployeePr
 
 export async function getRelatedEmployeeProfiles(
   currentSlug: string,
-  limit = 2
+  limit = 2,
+  locale: AppLocale = 'en'
 ): Promise<EmployeeProfile[]> {
-  const profiles = await getAllEmployeeProfiles();
+  const profiles = await getAllEmployeeProfiles(locale);
   return profiles.filter((profile) => profile.slug !== currentSlug).slice(0, limit);
 }

@@ -1,11 +1,13 @@
 'use client';
 
-import Link from 'next/link';
+import {Link} from '@/i18n/navigation';
 import { ArrowUpRight, ExternalLink } from '@/components/icons';
 import ArticleDetailPage from '../components/ArticleDetailPage';
 import type { Perspective, PerspectiveSection } from '../lib/perspectives';
+import {useLocale, useTranslations} from 'next-intl';
 
 function RenderSection({ section, index }: { section: PerspectiveSection; index: number }) {
+  const t = useTranslations('DynamicContent');
   switch (section.type) {
     case 'heading':
       return (
@@ -80,7 +82,7 @@ function RenderSection({ section, index }: { section: PerspectiveSection; index:
             className="text-2xl md:text-3xl mb-6 text-[#1A2535]"
             style={{ fontFamily: 'var(--font-headline)' }}
           >
-            Questions Leaders Ask Before AI
+            {t('perspectiveFaq')}
           </h2>
           <div className="space-y-6">
             {section.items.map((item) => (
@@ -105,22 +107,24 @@ function RenderSection({ section, index }: { section: PerspectiveSection; index:
 }
 
 function PerspectiveSidebar({ perspective }: { perspective: Perspective }) {
+  const t = useTranslations('DynamicContent');
+  const locale = useLocale();
   const relatedLinks =
     perspective.slug === 'consulting-engineering-one-loop'
       ? [
-          { href: '/arc', label: 'ARC framework' },
-          { href: '/capabilities', label: 'Capabilities' },
-          { href: '/aboutus', label: 'About Hive Vault Arc' },
-          { href: '/case-studies', label: 'Case studies' },
-          { href: '/case-studies/top-tier-crm-transformation-program-real-estate-operations', label: 'CRM transformation proof' },
-          { href: '/contact', label: 'Book a Discovery Call' },
+          { href: '/arc', label: t('resourceLinks.arc') },
+          { href: '/capabilities', label: t('resourceLinks.capabilities') },
+          { href: '/aboutus', label: t('resourceLinks.about') },
+          { href: '/case-studies', label: t('resourceLinks.caseStudies') },
+          { href: locale === 'fr' ? '/case-studies' : '/case-studies/top-tier-crm-transformation-program-real-estate-operations', label: t('resourceLinks.crmProof') },
+          { href: '/contact', label: t('resourceLinks.book') },
         ]
       : [
-          { href: '/arc', label: 'ARC framework' },
-          { href: '/capabilities', label: 'Capabilities' },
-          { href: '/case-studies', label: 'Case studies' },
-          { href: '/case-studies/multilingual-whatsapp-ai-agent', label: 'WhatsApp AI agent proof' },
-          { href: '/contact', label: 'Book a Discovery Call' },
+          { href: '/arc', label: t('resourceLinks.arc') },
+          { href: '/capabilities', label: t('resourceLinks.capabilities') },
+          { href: '/case-studies', label: t('resourceLinks.caseStudies') },
+          { href: locale === 'fr' ? '/case-studies' : '/case-studies/multilingual-whatsapp-ai-agent', label: t('resourceLinks.aiProof') },
+          { href: '/contact', label: t('resourceLinks.book') },
         ];
 
   return (
@@ -131,7 +135,7 @@ function PerspectiveSidebar({ perspective }: { perspective: Perspective }) {
             className="text-xs font-bold uppercase tracking-widest text-[var(--section-label-color)] mb-4"
             style={{ fontFamily: 'var(--font-body)' }}
           >
-            Sources
+            {t('sources')}
           </h2>
           <ul className="space-y-3">
             {perspective.sources.map((source) => (
@@ -157,7 +161,7 @@ function PerspectiveSidebar({ perspective }: { perspective: Perspective }) {
           className="text-xs font-bold uppercase tracking-widest text-[var(--section-label-color)] mb-4"
           style={{ fontFamily: 'var(--font-body)' }}
         >
-          Related Hive Vault Arc Resources
+          {t('relatedResources')}
         </h2>
         <ul className="space-y-3">
           {relatedLinks.map((link) => (
@@ -180,7 +184,7 @@ function PerspectiveSidebar({ perspective }: { perspective: Perspective }) {
           className="text-xs font-bold uppercase tracking-widest text-[var(--section-label-color)] mb-4"
           style={{ fontFamily: 'var(--font-body)' }}
         >
-          Topics
+          {t('topics')}
         </h2>
         <div className="flex flex-wrap gap-2">
           {perspective.keywords.slice(0, 8).map((keyword) => (
@@ -205,14 +209,15 @@ export default function PerspectiveView({
   readonly perspective: Perspective;
   readonly relatedPerspectives: Perspective[];
 }) {
+  const t = useTranslations('DynamicContent');
   return (
     <ArticleDetailPage
       backHref="/insights/perspectives"
-      backLabel="All perspectives"
+      backLabel={t('allPerspectives')}
       breadcrumbs={[
-        { label: 'Home', href: '/' },
-        { label: 'Insights', href: '/insights' },
-        { label: 'Perspectives', href: '/insights/perspectives' },
+        { label: t('home'), href: '/' },
+        { label: t('insights'), href: '/insights' },
+        { label: t('perspectives'), href: '/insights/perspectives' },
         { label: perspective.title },
       ]}
       eyebrow={perspective.tag}
@@ -233,15 +238,14 @@ export default function PerspectiveView({
         coverImage: item.coverImage,
       }))}
       relatedAllHref="/insights/perspectives"
-      relatedAllLabel="All Perspectives"
+      relatedAllLabel={t('allPerspectives')}
       bottomCta={{
         variant: 'blue',
-        headline: 'Diagnose the workflow before you automate it.',
-        subtext:
-          'Hive Vault Arc helps leadership teams assess operations, re-engineer the system, and command AI-enabled workflows in production.',
-        primaryLabel: 'Start a discovery call',
+        headline: t('perspectiveCta.title'),
+        subtext: t('perspectiveCta.description'),
+        primaryLabel: t('perspectiveCta.primary'),
         primaryHref: '/contact',
-        secondaryLabel: 'Explore ARC',
+        secondaryLabel: t('perspectiveCta.secondary'),
         secondaryHref: '/arc',
       }}
       sidebar={<PerspectiveSidebar perspective={perspective} />}

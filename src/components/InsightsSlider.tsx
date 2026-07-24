@@ -1,8 +1,9 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import Link from 'next/link';
+import {Link} from '@/i18n/navigation';
 import { motion, useReducedMotion } from 'framer-motion';
+import {useTranslations} from 'next-intl';
 import { ArrowRight, ChevronLeft, ChevronRight } from '@/components/icons';
 
 /* ─── Types ───────────────────────────────────────────────────────────────── */
@@ -30,6 +31,7 @@ function deterministicShuffle(arr: SlideItem[], count: number): SlideItem[] {
 /* ─── Component ───────────────────────────────────────────────────────────── */
 
 export default function InsightsSlider({ items }: { readonly items: SlideItem[] }) {
+  const t = useTranslations('InsightsHub.slider');
   const slides = deterministicShuffle(items, 6);
   const total = slides.length;
   const [current, setCurrent] = useState(0);
@@ -55,12 +57,12 @@ export default function InsightsSlider({ items }: { readonly items: SlideItem[] 
   return (
     <section
       className="insights-slider-section"
-      aria-label="Latest publications carousel"
+      aria-label={t('ariaLabel')}
       aria-roledescription="carousel"
     >
       {/* ── Header ── */}
       <div className="insights-slider-header">
-        <h2 className="insights-slider-eyebrow">Latest Publications</h2>
+        <h2 className="insights-slider-eyebrow">{t('title')}</h2>
       </div>
 
       {/* ── Main layout: controls + track ── */}
@@ -76,14 +78,14 @@ export default function InsightsSlider({ items }: { readonly items: SlideItem[] 
           <div className="insights-slider-nav">
             <button
               onClick={prev}
-              aria-label="Previous insight"
+              aria-label={t('previous')}
               className="insights-slider-nav-btn"
             >
               <ChevronLeft className="insights-slider-nav-icon" />
             </button>
             <button
               onClick={next}
-              aria-label="Next insight"
+              aria-label={t('next')}
               className="insights-slider-nav-btn"
             >
               <ChevronRight className="insights-slider-nav-icon" />
@@ -92,7 +94,7 @@ export default function InsightsSlider({ items }: { readonly items: SlideItem[] 
         </div>
 
         {/* Sliding track */}
-        <div className="insights-slider-track-outer" aria-label="Insights slider">
+        <div className="insights-slider-track-outer" aria-label={t('trackLabel')}>
           <motion.div
             className="insights-slider-track"
             animate={{ x: `calc(-${current} * (var(--card-w) + var(--card-gap)))` }}
@@ -106,7 +108,7 @@ export default function InsightsSlider({ items }: { readonly items: SlideItem[] 
                   className="insights-slide-card"
                   role="group"
                   aria-roledescription="slide"
-                  aria-label={`${i + 1} of ${total}`}
+                  aria-label={t('slidePosition', {current: i + 1, total})}
                   onPointerEnter={(event) => {
                     if (event.pointerType === 'mouse') setHoveredIndex(i);
                   }}
@@ -168,7 +170,7 @@ export default function InsightsSlider({ items }: { readonly items: SlideItem[] 
                         <p className="insights-slide-hover-title">{item.title}</p>
                         <p className="insights-slide-hover-desc">{item.description}</p>
                         <span className="insights-slide-learn-more">
-                          Read {item.tag} insight
+                          {t('readType', {type: item.tag})}
                           <ArrowRight className="insights-slide-learn-arrow h-4 w-4" aria-hidden="true" />
                         </span>
                       </div>
@@ -183,12 +185,12 @@ export default function InsightsSlider({ items }: { readonly items: SlideItem[] 
       </div>
 
       {/* ── Dot indicators ── */}
-      <div className="insights-slider-dots" role="group" aria-label="Choose a publication">
+      <div className="insights-slider-dots" role="group" aria-label={t('choose')}>
         {slides.map((_, i) => (
           <button
             key={i}
             aria-pressed={i === current}
-            aria-label={`Go to slide ${i + 1}`}
+            aria-label={t('goTo', {number: i + 1})}
             onClick={() => setCurrent(i)}
             className={`insights-slider-dot${i === current ? ' insights-slider-dot--active' : ''}`}
           />

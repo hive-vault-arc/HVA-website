@@ -1,9 +1,10 @@
 'use client';
 
-import Link from 'next/link';
+import {Link} from '@/i18n/navigation';
 import { ArrowUpRight, ExternalLink } from '@/components/icons';
 import type { BlogPost, ContentSection } from '../lib/blog';
 import ArticleDetailPage from '../components/ArticleDetailPage';
+import {useTranslations} from 'next-intl';
 
 /* ── Content renderer ────────────────────────────────────────────────────── */
 
@@ -110,6 +111,7 @@ function RenderSection({ section, index }: { section: ContentSection; index: num
 /* ── Sidebar ─────────────────────────────────────────────────────────────── */
 
 function BlogSidebar({ sources, tags }: { sources: BlogPost['sources']; tags: BlogPost['tags'] }) {
+  const t = useTranslations('DynamicContent');
   return (
     <div className="space-y-10">
       {/* Sources */}
@@ -119,7 +121,7 @@ function BlogSidebar({ sources, tags }: { sources: BlogPost['sources']; tags: Bl
             className="text-xs font-bold uppercase tracking-widest text-[var(--section-label-color)] mb-4"
             style={{ fontFamily: 'var(--font-body)' }}
           >
-            Sources
+            {t('sources')}
           </h2>
           <ul className="space-y-3">
             {sources.map((src, i) => (
@@ -147,7 +149,7 @@ function BlogSidebar({ sources, tags }: { sources: BlogPost['sources']; tags: Bl
             className="text-xs font-bold uppercase tracking-widest text-[var(--section-label-color)] mb-4"
             style={{ fontFamily: 'var(--font-body)' }}
           >
-            Topics
+            {t('topics')}
           </h2>
           <div className="flex flex-wrap gap-2">
             {tags.map((tag) => (
@@ -169,20 +171,20 @@ function BlogSidebar({ sources, tags }: { sources: BlogPost['sources']; tags: Bl
           className="text-white text-sm font-semibold mb-3 leading-snug"
           style={{ fontFamily: 'var(--font-headline)', fontStyle: 'italic' }}
         >
-          Ready to put this into practice?
+          {t('sidebar.title')}
         </p>
         <p
           className="text-white/60 text-xs mb-4 leading-relaxed"
           style={{ fontFamily: 'var(--font-body)' }}
         >
-          Hive Vault Arc combines technology consulting with engineering delivery to help businesses modernize operations with confidence.
+          {t('sidebar.description')}
         </p>
         <Link
           href="/contact"
           className="inline-flex items-center gap-1.5 text-xs font-bold tracking-widest uppercase text-[var(--section-label-color-dark)] hover:gap-3 transition-all"
           style={{ fontFamily: 'var(--font-body)' }}
         >
-          Talk to us
+          {t('sidebar.cta')}
           <ArrowUpRight className="w-3 h-3" />
         </Link>
       </div>
@@ -199,13 +201,14 @@ export default function BlogPostView({
   readonly post: BlogPost;
   readonly relatedPosts: BlogPost[];
 }) {
+  const t = useTranslations('DynamicContent');
   return (
     <ArticleDetailPage
       backHref="/blog"
-      backLabel="All articles"
+      backLabel={t('allArticles')}
       breadcrumbs={[
-        { label: 'Home', href: '/' },
-        { label: 'Blog', href: '/blog' },
+        { label: t('home'), href: '/' },
+        { label: t('blog'), href: '/blog' },
         { label: post.title },
       ]}
       eyebrow={post.category}
@@ -226,12 +229,12 @@ export default function BlogPostView({
         coverImage: p.coverImage,
       }))}
       relatedAllHref="/blog"
-      relatedAllLabel="All Articles"
+      relatedAllLabel={t('allArticles')}
       bottomCta={{
         variant: 'blue',
-        headline: 'Ready to turn strategy into execution?',
-        subtext: "Let us scope the consulting and engineering plan that fits your goals, constraints, and operating model.",
-        primaryLabel: 'Talk to Hive Vault Arc',
+        headline: t('blogCta.title'),
+        subtext: t('blogCta.description'),
+        primaryLabel: t('blogCta.label'),
         primaryHref: '/contact',
       }}
       sidebar={<BlogSidebar sources={post.sources} tags={post.tags} />}

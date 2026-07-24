@@ -30,6 +30,20 @@ const seoFields = `
   }
 `;
 
+const localizationFields = `
+  _id,
+  language,
+  translationStatus,
+  "translationTargets": *[
+    _type == "translation.metadata" &&
+    references(^._id)
+  ][0].translations[].value->{
+    language,
+    translationStatus,
+    "slug": slug.current
+  }[translationStatus == "approved"]
+`;
+
 const sectionFields = `
   sections[]{
     _key,
@@ -73,6 +87,7 @@ const sectionFields = `
 `;
 
 const postFields = `
+  ${localizationFields},
   "slug": slug.current,
   title,
   subtitle,
@@ -96,6 +111,7 @@ const postFields = `
 `;
 
 const newsArticleFields = `
+  ${localizationFields},
   title,
   "slug": slug.current,
   summary,
@@ -115,6 +131,7 @@ const newsArticleFields = `
 `;
 
 const perspectiveFields = `
+  ${localizationFields},
   "slug": slug.current,
   title,
   subtitle,
@@ -134,6 +151,7 @@ const perspectiveFields = `
 `;
 
 const researchReportFields = `
+  ${localizationFields},
   title,
   "slug": slug.current,
   subtitle,
@@ -167,6 +185,7 @@ const approvedClientEvidencePredicate = `
 `;
 
 const caseStudyFields = `
+  ${localizationFields},
   "slug": slug.current,
   title,
   clientName,
@@ -213,55 +232,100 @@ const approvedClientEvidenceDetailField = `
 `;
 
 export const allPostsQuery = defineQuery(`
-  *[_type == "post" && defined(slug.current)] | order(publishedAt desc, _updatedAt desc) {
+  *[
+    _type == "post" &&
+    language == $locale &&
+    ($preview == true || translationStatus == "approved") &&
+    defined(slug.current)
+  ] | order(publishedAt desc, _updatedAt desc) {
     ${postFields}
   }
 `);
 
 export const postBySlugQuery = defineQuery(`
-  *[_type == "post" && slug.current == $slug][0] {
+  *[
+    _type == "post" &&
+    language == $locale &&
+    ($preview == true || translationStatus == "approved") &&
+    slug.current == $slug
+  ][0] {
     ${postFields}
   }
 `);
 
 export const allNewsArticlesQuery = defineQuery(`
-  *[_type == "newsArticle" && defined(slug.current)] | order(publishedAt desc, _updatedAt desc) {
+  *[
+    _type == "newsArticle" &&
+    language == $locale &&
+    ($preview == true || translationStatus == "approved") &&
+    defined(slug.current)
+  ] | order(publishedAt desc, _updatedAt desc) {
     ${newsArticleFields}
   }
 `);
 
 export const newsArticleBySlugQuery = defineQuery(`
-  *[_type == "newsArticle" && slug.current == $slug][0] {
+  *[
+    _type == "newsArticle" &&
+    language == $locale &&
+    ($preview == true || translationStatus == "approved") &&
+    slug.current == $slug
+  ][0] {
     ${newsArticleFields}
   }
 `);
 
 export const allPerspectivesQuery = defineQuery(`
-  *[_type == "perspective" && defined(slug.current)] | order(publishedAt desc, _updatedAt desc) {
+  *[
+    _type == "perspective" &&
+    language == $locale &&
+    ($preview == true || translationStatus == "approved") &&
+    defined(slug.current)
+  ] | order(publishedAt desc, _updatedAt desc) {
     ${perspectiveFields}
   }
 `);
 
 export const perspectiveBySlugQuery = defineQuery(`
-  *[_type == "perspective" && slug.current == $slug][0] {
+  *[
+    _type == "perspective" &&
+    language == $locale &&
+    ($preview == true || translationStatus == "approved") &&
+    slug.current == $slug
+  ][0] {
     ${perspectiveFields}
   }
 `);
 
 export const allResearchReportsQuery = defineQuery(`
-  *[_type == "researchReport" && defined(slug.current)] | order(publishedAt desc, _updatedAt desc) {
+  *[
+    _type == "researchReport" &&
+    language == $locale &&
+    ($preview == true || translationStatus == "approved") &&
+    defined(slug.current)
+  ] | order(publishedAt desc, _updatedAt desc) {
     ${researchReportFields}
   }
 `);
 
 export const researchReportBySlugQuery = defineQuery(`
-  *[_type == "researchReport" && slug.current == $slug][0] {
+  *[
+    _type == "researchReport" &&
+    language == $locale &&
+    ($preview == true || translationStatus == "approved") &&
+    slug.current == $slug
+  ][0] {
     ${researchReportFields}
   }
 `);
 
 export const allCaseStudiesQuery = defineQuery(`
-  *[_type == "caseStudy" && defined(slug.current)] | order(lastUpdated desc, _updatedAt desc) {
+  *[
+    _type == "caseStudy" &&
+    language == $locale &&
+    ($preview == true || translationStatus == "approved") &&
+    defined(slug.current)
+  ] | order(lastUpdated desc, _updatedAt desc) {
     ${caseStudyFields}
   }
 `);
@@ -269,6 +333,8 @@ export const allCaseStudiesQuery = defineQuery(`
 export const clientEvidenceShowcaseQuery = defineQuery(`
   *[
     _type == "caseStudy" &&
+    language == $locale &&
+    ($preview == true || translationStatus == "approved") &&
     defined(slug.current) &&
     (${approvedClientEvidencePredicate})
   ]
@@ -296,7 +362,12 @@ export const clientEvidenceShowcaseQuery = defineQuery(`
 `);
 
 export const caseStudyBySlugQuery = defineQuery(`
-  *[_type == "caseStudy" && slug.current == $slug][0] {
+  *[
+    _type == "caseStudy" &&
+    language == $locale &&
+    ($preview == true || translationStatus == "approved") &&
+    slug.current == $slug
+  ][0] {
     ${caseStudyFields},
     ${approvedClientEvidenceDetailField}
   }

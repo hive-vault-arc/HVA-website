@@ -1,10 +1,12 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import {useTranslations} from 'next-intl';
+import {Link} from '@/i18n/navigation';
+import {usePathname} from '@/i18n/navigation';
 import { ArrowUpRight, ChevronDown, Menu, X } from '@/components/icons';
 import Logo from './Logo';
+import LocaleSwitcher from './localization/LocaleSwitcher';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -12,6 +14,7 @@ const Navbar: React.FC = () => {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [openMobileSection, setOpenMobileSection] = useState<string | null>(null);
   const pathname = usePathname();
+  const t = useTranslations('Navigation');
 
   const toggleMobileSection = (section: string) => {
     setOpenMobileSection((prev) => (prev === section ? null : section));
@@ -40,31 +43,31 @@ const Navbar: React.FC = () => {
   }, []);
 
   const CapabilitiesItems = [
-    { path: '/capabilities/solution-programs', label: 'Solution Programs' },
-    { path: '/capabilities/in-detail', label: 'In Detail' },
+    { path: '/capabilities/solution-programs', label: t('solutionPrograms') },
+    { path: '/capabilities/in-detail', label: t('inDetail') },
   ];
 
   const industriesItems = [
-    { path: '/industries#real-estate', label: 'Real Estate & Construction' },
-    { path: '/industries#healthcare', label: 'Healthcare & Life Sciences' },
-    { path: '/industries#financial-services', label: 'Financial Services' },
-    { path: '/industries#government', label: 'Government & Public Sector' },
-    { path: '/industries#retail', label: 'Retail & E-Commerce' },
-    { path: '/industries#energy', label: 'Energy & Sustainability' },
-    { path: '/industries#logistics', label: 'Logistics & Transportation' },
-    { path: '/industries#consumer-goods', label: 'Consumer Goods & Luxury' },
+    { path: '/industries#real-estate', label: t('realEstate') },
+    { path: '/industries#healthcare', label: t('healthcare') },
+    { path: '/industries#financial-services', label: t('financialServices') },
+    { path: '/industries#government', label: t('government') },
+    { path: '/industries#retail', label: t('retail') },
+    { path: '/industries#energy', label: t('energy') },
+    { path: '/industries#logistics', label: t('logistics') },
+    { path: '/industries#consumer-goods', label: t('consumerGoods') },
   ];
 
   const insightsItems = [
-    { path: '/blog', label: 'Blog' },
-    { path: '/case-studies', label: 'Case Studies' },
-    { path: '/insights/news-articles', label: 'News Articles' },
-    { path: '/insights/perspectives', label: 'Perspectives' },
-    { path: '/insights/research-reports', label: 'Research Reports' },
+    { path: '/blog', label: t('blog') },
+    { path: '/case-studies', label: t('caseStudies') },
+    { path: '/insights/news-articles', label: t('newsArticles') },
+    { path: '/insights/perspectives', label: t('perspectives') },
+    { path: '/insights/research-reports', label: t('researchReports') },
   ];
   const whoWeAreItems = [
-    { path: '/aboutus', label: 'About Us' },
-    { path: '/whoarewe/portfolio', label: 'Portfolio' },
+    { path: '/aboutus', label: t('aboutUs') },
+    { path: '/whoarewe/portfolio', label: t('portfolio') },
   ];
 
   const isInsightsActive =
@@ -75,7 +78,7 @@ const Navbar: React.FC = () => {
     pathname?.startsWith('/aboutus') || pathname?.startsWith('/whoarewe');
 
   const desktopLinkClass = (isActive: boolean) =>
-    `px-4 py-2 text-sm font-semibold transition-colors duration-150 ${
+    `px-3 py-2 text-sm font-semibold transition-colors duration-150 xl:px-4 ${
       isActive ? 'bg-[#E8A838] text-[#1A2535]' : 'text-[#1A2535]/[0.88] hover:bg-[#E8A838]/10 hover:text-[#1A2535]'
     }`;
 
@@ -111,11 +114,11 @@ const Navbar: React.FC = () => {
             <Logo />
 
             {/* Desktop Navigation */}
-            <div className="absolute left-1/2 hidden -translate-x-1/2 items-center space-x-1 lg:flex">
+            <div className="ml-auto hidden items-center space-x-0 xl:space-x-1 lg:flex">
               <Link href="/arc" className={desktopLinkClass(isRouteActive('/arc'))}>
                 <span className="flex items-baseline gap-1.5">
                   <span>ARC</span>{' '}
-                  <span className="text-[8px] font-semibold uppercase tracking-[0.18em] opacity-60">Framework</span>
+                  <span className="text-[8px] font-semibold uppercase tracking-[0.18em] opacity-60">{t('framework')}</span>
                 </span>
               </Link>
               <div
@@ -133,7 +136,7 @@ const Navbar: React.FC = () => {
                   aria-expanded={openMenu === 'capabilities'}
                   className={`${desktopLinkClass(!!isCapabilitiesActive)} inline-flex items-center gap-1.5`}
                 >
-                  Capabilities
+                  {t('capabilities')}
                   <ChevronDown className="h-3.5 w-3.5" />
                 </Link>
                 {openMenu === 'capabilities' && (
@@ -171,7 +174,7 @@ const Navbar: React.FC = () => {
                   aria-expanded={openMenu === 'industries'}
                   className={`${desktopLinkClass(!!isIndustriesActive)} inline-flex items-center gap-1.5`}
                 >
-                  Industries
+                  {t('industries')}
                   <ChevronDown className="h-3.5 w-3.5" />
                 </Link>
                 {openMenu === 'industries' && (
@@ -205,7 +208,7 @@ const Navbar: React.FC = () => {
                   aria-expanded={openMenu === 'who-we-are'}
                   className={`${desktopLinkClass(!!isWhoWeAreActive)} inline-flex items-center gap-1.5`}
                 >
-                  Who We Are
+                  {t('whoWeAre')}
                   <ChevronDown className="h-3.5 w-3.5" />
                 </Link>
                 {openMenu === 'who-we-are' && (
@@ -243,7 +246,7 @@ const Navbar: React.FC = () => {
                   aria-expanded={openMenu === 'insights'}
                   className={`${desktopLinkClass(!!isInsightsActive)} inline-flex items-center gap-1.5`}
                 >
-                  Insights
+                  {t('insights')}
                   <ChevronDown className="h-3.5 w-3.5" />
                 </Link>
                 {openMenu === 'insights' && (
@@ -268,11 +271,12 @@ const Navbar: React.FC = () => {
               </div>
             </div>
 
+            <LocaleSwitcher />
             <Link
               href="/contact"
               className="ml-auto hidden min-h-11 items-center bg-[#1A2535] px-4 py-2 text-sm font-semibold text-[#FFFFFF] transition-colors duration-150 hover:bg-[#E8A838] hover:text-[#1A2535] lg:flex"
             >
-              Book a Call
+              {t('bookCall')}
               <ArrowUpRight className="w-3.5 h-3.5 ml-1.5" />
             </Link>
 
@@ -287,7 +291,7 @@ const Navbar: React.FC = () => {
                 className="inline-flex h-11 w-11 items-center justify-center rounded-md text-[#1A2535]/70 hover:bg-[#E8A838]/10 hover:text-[#1A2535] focus:outline-none"
                 aria-expanded={isMobileMenuOpen}
               >
-                <span className="sr-only">Open main menu</span>
+                <span className="sr-only">{t('openMenu')}</span>
                 {isMobileMenuOpen ? (
                   <X className="block h-6 w-6" />
                 ) : (
@@ -302,7 +306,8 @@ const Navbar: React.FC = () => {
         {isMobileMenuOpen && (
         <div
           className="fixed inset-0 z-[80] opacity-100 pointer-events-auto lg:hidden"
-          aria-label="Mobile navigation"
+          role="navigation"
+          aria-label={t('mobileNavigation')}
         >
           {/* Backdrop */}
           <div
@@ -321,7 +326,7 @@ const Navbar: React.FC = () => {
                 type="button"
                 onClick={closeMobileMenu}
                 className="flex h-11 w-11 items-center justify-center rounded-full bg-[#1A2535]/[0.08] text-[#1A2535]/60 transition-colors hover:bg-[#E8A838]/[0.12] hover:text-[#E8A838]"
-                aria-label="Close menu"
+                aria-label={t('closeMenu')}
               >
                 <X className="h-5 w-5" />
               </button>
@@ -357,7 +362,7 @@ const Navbar: React.FC = () => {
                     }`}
                   >
                     <span className="flex items-center gap-2.5">
-                      Capabilities
+                      {t('capabilities')}
                     </span>
                   </Link>
                   <button
@@ -368,7 +373,7 @@ const Navbar: React.FC = () => {
                         ? 'border-[#1A2535]/10 bg-[#E8A838] text-[#1A2535]'
                         : 'border-[#1A2535]/[0.08] text-[#1A2535]/[0.45] hover:bg-[#E8A838]/[0.08] hover:text-[#E8A838]'
                     }`}
-                    aria-label="Toggle capabilities submenu"
+                    aria-label={t('toggleCapabilities')}
                     aria-expanded={openMobileSection === 'capabilities'}
                   >
                     <ChevronDown
@@ -386,7 +391,7 @@ const Navbar: React.FC = () => {
                       onClick={closeMobileMenu}
                       className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm text-[#1A2535]/50 hover:text-[#E8A838] hover:bg-[#E8A838]/[0.06] transition-colors"
                     >
-                      All Capabilities
+                      {t('allCapabilities')}
                     </Link>
                     {CapabilitiesItems.map((item) => (
                       <Link
@@ -421,7 +426,7 @@ const Navbar: React.FC = () => {
                     }`}
                   >
                     <span className="flex items-center gap-2.5">
-                      Industries
+                      {t('industries')}
                     </span>
                   </Link>
                   <button
@@ -432,7 +437,7 @@ const Navbar: React.FC = () => {
                         ? 'border-[#1A2535]/10 bg-[#E8A838] text-[#1A2535]'
                         : 'border-[#1A2535]/[0.08] text-[#1A2535]/[0.45] hover:bg-[#E8A838]/[0.08] hover:text-[#E8A838]'
                     }`}
-                    aria-label="Toggle industries submenu"
+                    aria-label={t('toggleIndustries')}
                     aria-expanded={openMobileSection === 'industries'}
                   >
                     <ChevronDown
@@ -474,7 +479,7 @@ const Navbar: React.FC = () => {
                     }`}
                   >
                     <span className="flex items-center gap-2.5">
-                      Who We Are
+                      {t('whoWeAre')}
                     </span>
                   </Link>
                   <button
@@ -485,7 +490,7 @@ const Navbar: React.FC = () => {
                         ? 'border-[#1A2535]/10 bg-[#E8A838] text-[#1A2535]'
                         : 'border-[#1A2535]/[0.08] text-[#1A2535]/[0.45] hover:bg-[#E8A838]/[0.08] hover:text-[#E8A838]'
                     }`}
-                    aria-label="Toggle who we are submenu"
+                    aria-label={t('toggleWhoWeAre')}
                     aria-expanded={openMobileSection === 'who-we-are'}
                   >
                     <ChevronDown
@@ -531,7 +536,7 @@ const Navbar: React.FC = () => {
                     }`}
                   >
                     <span className="flex items-center gap-2.5">
-                      Insights
+                      {t('insights')}
                     </span>
                   </Link>
                   <button
@@ -542,7 +547,7 @@ const Navbar: React.FC = () => {
                         ? 'border-[#1A2535]/10 bg-[#E8A838] text-[#1A2535]'
                         : 'border-[#1A2535]/[0.08] text-[#1A2535]/[0.45] hover:bg-[#E8A838]/[0.08] hover:text-[#E8A838]'
                     }`}
-                    aria-label="Toggle insights submenu"
+                    aria-label={t('toggleInsights')}
                     aria-expanded={openMobileSection === 'insights'}
                   >
                     <ChevronDown
@@ -575,6 +580,8 @@ const Navbar: React.FC = () => {
                 )}
               </div>
 
+              <LocaleSwitcher mobile />
+
               {/* Divider */}
               <div className="my-5 h-px bg-[#1A2535]/10" />
 
@@ -584,13 +591,13 @@ const Navbar: React.FC = () => {
                 onClick={closeMobileMenu}
                 className="flex items-center justify-center gap-2 w-full px-6 py-4 bg-[#1A2535] text-[#FFFFFF] rounded-xl text-[15px] font-semibold hover:bg-[#E8A838] hover:text-[#1A2535] transition-colors duration-200"
               >
-                Book a Call
+                {t('bookCall')}
                 <ArrowUpRight className="h-4 w-4" />
               </Link>
 
               {/* Brand tagline */}
               <p className="mt-6 text-center text-[9px] font-mono uppercase tracking-[0.22em] text-[#1A2535]/25">
-                Hive Vault Arc - Strategy - Engineering - Operations
+                {t('tagline')}
               </p>
             </div>
           </div>

@@ -6,15 +6,17 @@ import { ExternalLink } from '@/components/icons';
 import type { CaseStudy } from '../lib/proof';
 import ArticleDetailPage from '../components/ArticleDetailPage';
 import ClientEvidenceCard from '../components/ClientEvidenceCard';
+import {useTranslations} from 'next-intl';
 
 const fadeUp = { hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0 } };
 
 /* ── Case study sidebar ──────────────────────────────────────────────────── */
 
 function CaseStudySidebar({ study }: { readonly study: CaseStudy }) {
+  const t = useTranslations('DynamicContent');
   const meta = [
-    { label: 'Industry', value: study.industry },
-    { label: 'Status', value: study.deploymentStatus },
+    { label: t('industry'), value: study.industry },
+    { label: t('status'), value: study.deploymentStatus },
   ];
 
   return (
@@ -25,7 +27,7 @@ function CaseStudySidebar({ study }: { readonly study: CaseStudy }) {
             className="mb-4 text-[9px] font-bold uppercase tracking-[0.22em] text-[var(--section-label-color)]"
             style={{ fontFamily: 'var(--font-body)' }}
           >
-            Client
+            {t('client')}
           </p>
           {study.assets.clientLogo && (
             <div className="mb-5 flex h-20 items-center bg-[#1A2535] px-4">
@@ -49,7 +51,7 @@ function CaseStudySidebar({ study }: { readonly study: CaseStudy }) {
               className="mt-3 inline-flex min-h-11 items-center gap-2 text-xs font-bold text-[var(--section-label-color)] transition-colors hover:text-[#1A2535]"
               style={{ fontFamily: 'var(--font-body)' }}
             >
-              Visit client website <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+              {t('visitClient')} <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
             </a>
           )}
         </div>
@@ -93,6 +95,7 @@ function CaseStudySidebar({ study }: { readonly study: CaseStudy }) {
 /* ── Case study body content ─────────────────────────────────────────────── */
 
 function CaseStudyBody({ study }: { readonly study: CaseStudy }) {
+  const t = useTranslations('DynamicContent');
   return (
     <div>
       {study.clientEvidence ? (
@@ -132,7 +135,7 @@ function CaseStudyBody({ study }: { readonly study: CaseStudy }) {
             className="text-3xl text-[#1A2535] mb-4"
             style={{ fontFamily: 'var(--font-headline)' }}
           >
-            Business Challenge
+            {t('caseSections.challenge')}
           </h2>
           <p className="text-[#566274] leading-relaxed" style={{ fontFamily: 'var(--font-body)' }}>
             {study.problem}
@@ -154,7 +157,7 @@ function CaseStudyBody({ study }: { readonly study: CaseStudy }) {
             className="text-3xl text-[#1A2535] mb-4"
             style={{ fontFamily: 'var(--font-headline)' }}
           >
-            Execution Architecture
+            {t('caseSections.architecture')}
           </h2>
           <p className="text-[#566274] leading-relaxed" style={{ fontFamily: 'var(--font-body)' }}>
             {study.systemArchitecture}
@@ -176,7 +179,7 @@ function CaseStudyBody({ study }: { readonly study: CaseStudy }) {
             className="text-3xl text-[#1A2535] mb-5"
             style={{ fontFamily: 'var(--font-headline)' }}
           >
-            Modules Activated
+            {t('caseSections.modules')}
           </h2>
           <ul className="space-y-2">
             {study.operationalModules.map((mod) => (
@@ -194,7 +197,7 @@ function CaseStudyBody({ study }: { readonly study: CaseStudy }) {
             className="text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--section-label-color)] mb-4"
             style={{ fontFamily: 'var(--font-body)' }}
           >
-            Stack &amp; Integrations
+            {t('caseSections.stack')}
           </p>
           <div className="flex flex-wrap gap-2">
             {study.integrations.map((integration) => (
@@ -223,6 +226,7 @@ export default function CaseStudyDetail({
   readonly study: CaseStudy;
   readonly relatedStudies: CaseStudy[];
 }) {
+  const t = useTranslations('DynamicContent');
   const related = relatedStudies.map((s) => ({
       href: `/case-studies/${s.slug}`,
       title: s.title,
@@ -233,10 +237,10 @@ export default function CaseStudyDetail({
   return (
     <ArticleDetailPage
       backHref="/case-studies"
-      backLabel="Case Studies"
+      backLabel={t('caseStudies')}
       breadcrumbs={[
-        { label: 'Home', href: '/' },
-        { label: 'Case Studies', href: '/case-studies' },
+        { label: t('home'), href: '/' },
+        { label: t('caseStudies'), href: '/case-studies' },
         { label: study.title },
       ]}
       eyebrow={study.industry}
@@ -247,15 +251,15 @@ export default function CaseStudyDetail({
       coverAlt={study.assets.coverAlt ?? study.title}
       showAboutStrip={false}
       relatedItems={related}
-      relatedTitle="More Case Studies"
+      relatedTitle={t('moreCaseStudies')}
       relatedAllHref="/case-studies"
-      relatedAllLabel="All Case Studies"
+      relatedAllLabel={t('allCaseStudies')}
       bottomCta={{
-        headline: 'Apply This Transformation Pattern to Your Operations',
-        subtext: 'Review the relevant solution programs, then book a discovery call to scope your roadmap.',
-        primaryLabel: 'Book Discovery Call',
+        headline: t('caseCta.title'),
+        subtext: t('caseCta.description'),
+        primaryLabel: t('caseCta.primary'),
         primaryHref: '/contact',
-        secondaryLabel: 'View Solution Programs',
+        secondaryLabel: t('caseCta.secondary'),
         secondaryHref: '/capabilities/solution-programs',
       }}
       sidebar={<CaseStudySidebar study={study} />}

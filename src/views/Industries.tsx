@@ -1,9 +1,10 @@
 'use client';
 
 import type { CSSProperties } from 'react';
-import Link from 'next/link';
+import {Link} from '@/i18n/navigation';
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import {useTranslations} from 'next-intl';
 import { BarChart3, MessageSquare, Network, ShieldCheck, ArrowUpRight } from '@/components/icons';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 import SectionBrandMark from '../components/SectionBrandMark';
@@ -23,147 +24,118 @@ const IMGS = {
 
 const INDUSTRIES_PAGE_HERO_IMAGE = '/Images/page-heroes/hva-industries-hero-background.webp';
 
-const approachTracks = [
+const approachTrackConfig = [
   {
     code: 'IND-001',
     icon: <BarChart3 className="h-5 w-5" strokeWidth={1.5} />,
-    title: 'Sector-calibrated diagnostics',
-    desc: 'Calibrated to sector economics, cycle times, and bottleneck patterns.',
-    group: 'Methodology',
   },
   {
     code: 'IND-002',
     icon: <Network className="h-5 w-5" strokeWidth={1.5} />,
-    title: 'Domain-aware architecture',
-    desc: 'Architecture reflects domain language, data structures, and decision hierarchies.',
-    group: 'Methodology',
   },
   {
     code: 'IND-003',
     icon: <ShieldCheck className="h-5 w-5" strokeWidth={1.5} />,
-    title: 'Regulatory awareness',
-    desc: 'Controls introduced early to reduce delivery risk in sensitive operations.',
-    group: 'Compliance',
   },
   {
     code: 'IND-004',
     icon: <MessageSquare className="h-5 w-5" strokeWidth={1.5} />,
-    title: 'Stakeholder communication',
-    desc: 'Execution adapted to how leadership and operations actually communicate.',
-    group: 'Compliance',
   },
 ];
 
-const industryCards = [
+const industryCardConfig = [
   {
     id: 'real-estate',
-    category: 'Real Estate & Construction',
-    title: 'Real Estate',
-    description: 'CRM, lead qualification, and AI-assisted client communication for property teams.',
     image: IMGS.realEstate,
-    imageAlt: 'Real estate CRM lead operations Morocco',
     href: '/case-studies/top-tier-crm-transformation-program-real-estate-operations',
-    bullets: ['Lead operations & CRM', 'AI client communication', 'Pipeline governance'],
-    className: 'md:col-span-7 lg:col-span-7',
     layout: 'split',
     tone: 'light',
   },
   {
     id: 'healthcare',
-    category: 'Healthcare & Life Sciences',
-    title: 'Healthcare',
-    description: 'Clinical dashboards, medical systems, and diagnostic intelligence.',
     image: IMGS.healthcare,
-    imageAlt: 'Healthcare clinical operations dashboard Morocco',
     href: '/case-studies',
-    bullets: ['Clinical dashboards', 'Medical systems', 'Diagnostic intelligence'],
-    className: 'md:col-span-5 lg:col-span-5',
     layout: 'overlay',
     tone: 'dark',
   },
   {
     id: 'financial-services',
-    category: 'Financial Services',
-    title: 'Finance & Banking',
-    description: 'Modern banking systems, fraud signals, and deal intelligence.',
     image: IMGS.finance,
-    imageAlt: 'Financial services deal pipeline Morocco',
     href: '/case-studies',
-    bullets: ['Fraud detection', 'Deal intelligence', 'Digital banking'],
-    className: 'md:col-span-4',
     layout: 'stack',
     tone: 'light',
   },
   {
     id: 'government',
-    category: 'Government & Public Sector',
-    title: 'Government',
-    description: 'Citizen portals, public data systems, and AI-ready services.',
     image: IMGS.government,
-    imageAlt: 'Government digital transformation Morocco',
     href: '/case-studies',
-    bullets: ['Citizen portals', 'Public data systems', 'AI readiness'],
-    className: 'md:col-span-4',
     layout: 'stack',
     tone: 'light',
   },
   {
     id: 'retail',
-    category: 'Retail & E-Commerce',
-    title: 'Retail',
-    description: 'Commerce, personalization, and CRM across the Morocco-France corridor.',
     image: IMGS.retail,
-    imageAlt: 'Retail e-commerce platform Morocco',
     href: '/case-studies',
-    bullets: ['Omnichannel commerce', 'Personalization', 'Retail CRM'],
-    className: 'md:col-span-4',
     layout: 'stack',
     tone: 'dark',
   },
   {
     id: 'energy',
-    category: 'Energy, Utilities & Sustainability',
-    title: 'Energy',
-    description: 'Smart grids, ESG analytics, and maintenance intelligence.',
     image: IMGS.energy,
-    imageAlt: 'Energy sustainability digital Morocco',
     href: '/case-studies',
-    bullets: ['Smart grids', 'ESG analytics', 'Predictive maintenance'],
-    className: 'md:col-span-6',
     layout: 'split',
     tone: 'light',
   },
   {
     id: 'logistics',
-    category: 'Logistics & Transportation',
-    title: 'Logistics',
-    description: 'Fleet workflows, route optimization, and SLA monitoring.',
     image: IMGS.logistics,
-    imageAlt: 'Logistics dispatch workflow automation Morocco',
     href: '/case-studies',
-    bullets: ['Fleet operations', 'Route optimization', 'SLA monitoring'],
-    className: 'md:col-span-6',
     layout: 'split',
     tone: 'dark',
   },
   {
     id: 'consumer-goods',
-    category: 'Consumer Goods & Luxury',
-    title: 'Consumer & Luxury',
-    description: 'Customer analytics, AI marketing, and luxury retail intelligence.',
     image: IMGS.consumerGoods,
-    imageAlt: 'Consumer goods luxury operations Morocco France',
     href: '/case-studies',
-    bullets: ['Customer analytics', 'AI marketing', 'Luxury intelligence'],
-    className: 'md:col-span-12',
     layout: 'wide',
     tone: 'light',
   },
-];
+] as const;
+
+type IndustryCardCopy = {
+  id: string;
+  category: string;
+  title: string;
+  description: string;
+  imageAlt: string;
+  bullets: string[];
+};
+
+type IndustryCardData = IndustryCardCopy & {
+  image: string;
+  href: string;
+  layout: string;
+  tone: string;
+};
+
+type ApproachTrackCopy = {
+  code: string;
+  title: string;
+  description: string;
+  group: 'methodology' | 'compliance';
+};
 
 const fadeUp = { hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0 } };
 
-function IndustryCard({ card, index }: { card: (typeof industryCards)[number]; index: number }) {
+function IndustryCard({
+  card,
+  index,
+  relatedWorkLabel,
+}: {
+  card: IndustryCardData;
+  index: number;
+  relatedWorkLabel: string;
+}) {
   return (
     <motion.article
       id={card.id}
@@ -204,7 +176,7 @@ function IndustryCard({ card, index }: { card: (typeof industryCards)[number]; i
             ))}
           </ul>
           <span className="industry-card-cta">
-            See related work
+            {relatedWorkLabel}
             <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" strokeWidth={1.8} />
           </span>
         </div>
@@ -214,8 +186,19 @@ function IndustryCard({ card, index }: { card: (typeof industryCards)[number]; i
 }
 
 export default function Industries() {
+  const t = useTranslations('Industries');
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const cardCopy = t.raw('cards') as IndustryCardCopy[];
+  const cards = industryCardConfig.map((config) => ({
+    ...config,
+    ...cardCopy.find((item) => item.id === config.id)!,
+  }));
+  const trackCopy = t.raw('research.tracks') as ApproachTrackCopy[];
+  const approachTracks = approachTrackConfig.map((config) => ({
+    ...config,
+    ...trackCopy.find((item) => item.code === config.code)!,
+  }));
 
   return (
     <div className="relative isolate overflow-x-hidden bg-[#FFFFFF] text-[#1A2535]">
@@ -247,24 +230,19 @@ export default function Industries() {
             >
               <div className="industries-hero-mark">
                 <SectionBrandMark size="sm" eager />
-                <span>
-                  Industries
-                </span>
+                <span>{t('hero.eyebrow')}</span>
               </div>
               <h1 className="industries-hero-title">
-                Industry Context,
-                <br />{' '}
-                <em>Not Generic Delivery.</em>
+                {t('hero.title')}
+                <br /> <em>{t('hero.emphasis')}</em>
               </h1>
-              <p className="industries-hero-lede">
-                Hive Vault Arc operates across 8 industry verticals, combining domain expertise with strategy, engineering, and operations in one team.
-              </p>
+              <p className="industries-hero-lede">{t('hero.description')}</p>
               <div className="industries-hero-actions">
                 <Link href="#industry-verticals" className="sharp-edge btn-primary">
-                  View Sectors
+                  {t('hero.primaryCta')}
                 </Link>
                 <Link href="/case-studies" className="industries-hero-secondary">
-                  See Proof <ArrowUpRight aria-hidden="true" className="h-4 w-4" strokeWidth={1.7} />
+                  {t('hero.secondaryCta')} <ArrowUpRight aria-hidden="true" className="h-4 w-4" strokeWidth={1.7} />
                 </Link>
               </div>
             </motion.div>
@@ -275,8 +253,8 @@ export default function Industries() {
               transition={{ duration: 0.65, delay: 0.08 }}
             >
               <div className="industries-hero-wordmark">
-                <strong data-label="Industries">
-                  <span>Ind</span><span>ustries</span>
+                <strong data-label={t('hero.wordmark')}>
+                  <span>{t('hero.wordmarkStart')}</span><span>{t('hero.wordmarkEnd')}</span>
                 </strong>
                 <span aria-hidden="true" />
               </div>
@@ -294,15 +272,15 @@ export default function Industries() {
               <div className="mb-3 flex items-center gap-3">
                 <SectionBrandMark size="sm" />
                 <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)]">
-                  Sector Coverage
+                  {t('coverage.eyebrow')}
                 </p>
               </div>
               <h2 className="max-w-3xl font-headline text-4xl font-light leading-[1.05] text-[#1A2535] md:text-5xl">
-                Industry cards built around operating reality.
+                {t('coverage.title')}
               </h2>
             </div>
             <p className="md:col-span-5 max-w-xl text-base leading-relaxed text-[#536070]">
-              Each vertical is mapped to the systems, workflows, and governance patterns that usually decide whether transformation holds in production.
+              {t('coverage.description')}
             </p>
           </div>
 
@@ -313,8 +291,13 @@ export default function Industries() {
             viewport={{ once: true, amount: 0.08 }}
             transition={{ staggerChildren: 0.06 }}
           >
-            {industryCards.map((card, index) => (
-              <IndustryCard key={card.id} card={card} index={index} />
+            {cards.map((card, index) => (
+              <IndustryCard
+                key={card.id}
+                card={card}
+                index={index}
+                relatedWorkLabel={t('coverage.relatedWork')}
+              />
             ))}
           </motion.div>
         </div>
@@ -333,14 +316,14 @@ export default function Industries() {
                 <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(232,168,56,0.10)_1px,transparent_1px),linear-gradient(0deg,rgba(232,168,56,0.10)_1px,transparent_1px)] bg-[size:18px_18px]" />
                 <div className="absolute left-0 top-0 h-full w-1.5 bg-[#E8A838]" />
                 <span className="absolute left-7 top-5 text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)]">
-                  R&amp;D
+                  {t('research.shortLabel')}
                 </span>
                 <span className="absolute left-7 top-12 block h-px w-20 bg-[#E8A838]/35" />
               </div>
               <div aria-hidden="true" className="absolute -left-3 top-16 z-0 h-24 w-24 bg-[#FFF4D8]" />
               <Image
                 src={IMGS.rdLab}
-                alt="Hive Vault Arc analog research and development framework for industry operating contexts"
+                alt={t('research.imageAlt')}
                 width={1023}
                 height={1537}
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -354,22 +337,22 @@ export default function Industries() {
             <div className="mb-3 flex items-center gap-3">
               <SectionBrandMark size="sm" />
               <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-[var(--section-label-color)]">
-                Laboratory_Active
+                {t('research.eyebrow')}
               </p>
             </div>
             <h2
               className="mb-8 text-[clamp(2.25rem,11vw,3rem)] leading-tight text-[#1A2535] md:text-5xl"
               style={{ fontFamily: 'var(--font-headline)' }}
             >
-              Active Research &amp; Development:<br />{' '}
-              <em className="font-light italic">One Framework. Many Operating Contexts.</em>
+              {t('research.title')}<br />{' '}
+              <em className="font-light italic">{t('research.emphasis')}</em>
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-              {(['Methodology', 'Compliance'] as const).map((group) => (
+              {(['methodology', 'compliance'] as const).map((group) => (
                 <div key={group}>
                   <p className="text-[11px] font-bold uppercase tracking-widest mb-4 text-[var(--section-label-color)]">
-                    {group}
+                    {t(`research.groups.${group}`)}
                   </p>
                   <ul className="space-y-5">
                     {approachTracks
@@ -391,13 +374,13 @@ export default function Industries() {
                 href="/arc"
                 className="inline-flex min-h-11 items-center justify-center bg-[#1A2535] px-8 py-4 text-center text-sm font-bold uppercase tracking-widest text-white transition-colors duration-200 hover:bg-[#E8A838] w-full sm:w-auto"
               >
-                Learn About ARC
+                {t('research.primaryCta')}
               </Link>
               <Link
                 href="/capabilities"
                 className="inline-flex min-h-11 items-center gap-1.5 text-sm font-bold uppercase tracking-widest text-[var(--section-label-color)] transition-colors duration-200 hover:text-[#1A2535]"
               >
-                Explore Capabilities <ArrowUpRight className="h-4 w-4" />
+                {t('research.secondaryCta')} <ArrowUpRight className="h-4 w-4" />
               </Link>
             </div>
           </div>
@@ -414,23 +397,21 @@ export default function Industries() {
         >
           <div className="industries-mandate-mark">
             <SectionBrandMark surface="dark" size="sm" />
-            <span>Our Mandate</span>
+            <span>{t('mandate.eyebrow')}</span>
           </div>
           <div className="industries-mandate-content">
             <p className="industries-mandate-quote">
-              "Specificity is the antidote to technical debt."
+              &ldquo;{t('mandate.quote')}&rdquo;
             </p>
             <div className="industries-mandate-cta">
-              <h2>Need an Industry-Specific Transformation Plan?</h2>
-              <p>
-                Book a discovery call and we&apos;ll map the right capability and system program for your sector.
-              </p>
+              <h2>{t('mandate.title')}</h2>
+              <p>{t('mandate.description')}</p>
               <div className="industries-mandate-actions">
                 <Link href="/contact" className="industries-mandate-primary">
-                  Book Discovery Call
+                  {t('mandate.primaryCta')}
                 </Link>
                 <Link href="/capabilities" className="industries-mandate-secondary">
-                  View Capabilities <ArrowUpRight className="h-4 w-4" strokeWidth={1.7} />
+                  {t('mandate.secondaryCta')} <ArrowUpRight className="h-4 w-4" strokeWidth={1.7} />
                 </Link>
               </div>
             </div>

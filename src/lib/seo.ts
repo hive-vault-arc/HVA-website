@@ -1,7 +1,10 @@
 import type { Metadata } from 'next';
 import { CANONICAL_MARKET_IDENTITY } from './positioning';
+import type {AppLocale} from '@/i18n/config';
+import type {AppPathname} from '@/i18n/routing';
+import {localizedAlternates, localizedPath} from '@/i18n/route-manifest';
 
-export const SUPPORTED_LOCALES = ['en', 'fr', 'ar', 'es'] as const;
+export const SUPPORTED_LOCALES = ['en', 'fr'] as const;
 export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
 
 export const SITE_NAME = 'Hive Vault Arc';
@@ -164,6 +167,13 @@ type PageMetaInput = {
   alternates?: Record<string, string>;
 };
 
+type LocalizedPageMetaInput = Omit<PageMetaInput, 'path' | 'locale' | 'alternates'> & {
+  locale: AppLocale;
+  pathname: AppPathname;
+  params?: Record<string, string | number>;
+  translationParams?: Partial<Record<AppLocale, Record<string, string | number>>>;
+};
+
 export function compactMetaDescription(description: string, maxLength = 160): string {
   const normalized = description.replace(/\s+/g, ' ').trim();
   if (normalized.length <= maxLength) return normalized;
@@ -217,6 +227,28 @@ export function buildPageMetadata(input: PageMetaInput): Metadata {
   };
 }
 
+export function buildLocalizedPageMetadata(input: LocalizedPageMetaInput): Metadata {
+  const path = localizedPath(input.pathname, input.locale, input.params);
+  const alternates = localizedAlternates(
+    input.pathname,
+    input.translationParams ??
+      (input.params
+        ? {
+            [input.locale]: input.params,
+          }
+        : undefined),
+  );
+
+  return buildPageMetadata({
+    title: input.title,
+    description: input.description,
+    keywords: input.keywords,
+    path,
+    locale: input.locale === 'fr' ? 'fr_FR' : 'en_US',
+    alternates,
+  });
+}
+
 export function absoluteUrl(path: string): string {
   return new URL(path, SITE_URL).toString();
 }
@@ -236,4 +268,20 @@ export function buildBreadcrumbSchema(crumbs: { name: string; path: string }[]) 
       item: absoluteUrl(crumb.path),
     })),
   };
+}
+
+export function buildLocalizedBreadcrumbSchema(
+  locale: AppLocale,
+  crumbs: Array<{
+    name: string;
+    pathname: AppPathname;
+    params?: Record<string, string | number>;
+  }>,
+) {
+  return buildBreadcrumbSchema(
+    crumbs.map((crumb) => ({
+      name: crumb.name,
+      path: localizedPath(crumb.pathname, locale, crumb.params),
+    })),
+  );
 }

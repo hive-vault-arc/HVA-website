@@ -4,6 +4,10 @@ import {
   getSanityCaseStudyBySlug,
 } from './sanity-content';
 import type { ContentSeo } from './content-seo';
+import type {AppLocale} from '@/i18n/config';
+import type {LocalizedContentMeta} from './localized-content';
+export {PRODUCT_SYSTEMS} from './product-systems';
+export type {ProductSystem} from './product-systems';
 
 export type ClientEvidencePdf = {
   url: string;
@@ -38,7 +42,7 @@ export type ClientEvidenceSummary = {
   coverImageAlt?: string;
 };
 
-export type CaseStudy = {
+export type CaseStudy = LocalizedContentMeta & {
   slug: string;
   title: string;
   clientName: string;
@@ -71,16 +75,6 @@ export type CaseStudyShowcaseSummary = Pick<
     CaseStudy['assets'],
     'coverImage' | 'coverAlt' | 'clientLogo' | 'clientLogoAlt'
   >;
-};
-
-export type ProductSystem = {
-  name: string;
-  category: string;
-  modules: string[];
-  integrations: string[];
-  deliveryModel: string;
-  outcomes: string[];
-  proofLinks: string[];
 };
 
 export const CASE_STUDIES: CaseStudy[] = [
@@ -139,54 +133,33 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
 ];
 
-export const PRODUCT_SYSTEMS: ProductSystem[] = [
-  {
-    name: 'AI Reception and Lead Operations Program',
-    category: 'Consulting-Led AI Program',
-    modules: ['Multilingual agent runtime', 'Memory and context layer', 'Lead scoring', 'Human escalation workflows'],
-    integrations: ['WhatsApp Business API', 'HubSpot', 'Salesforce', 'Google Calendar'],
-    deliveryModel: 'Strategy workshops, build and deployment sprints, then ongoing optimization cycles.',
-    outcomes: ['Always-on lead capture', 'Lower response latency', 'Higher qualified meeting quality'],
-    proofLinks: ['/case-studies/multilingual-whatsapp-ai-agent'],
-  },
-  {
-    name: 'Enterprise CRM Modernization Program',
-    category: 'Consulting-Led Transformation Program',
-    modules: ['Pipeline orchestration', 'Role-based permissions', 'Automated follow-up sequences', 'Audit and compliance logs'],
-    integrations: ['Meta Ads', 'DocuSign', 'Email automation suites', 'BI connectors'],
-    deliveryModel: 'Domain mapping, phased migration, production rollout, and managed improvement.',
-    outcomes: ['Unified data ownership', 'Reduced manual processing', 'Faster sales operations'],
-    proofLinks: ['/case-studies/top-tier-crm-transformation-program-real-estate-operations'],
-  },
-  {
-    name: 'Cloud Delivery Reliability Stack',
-    category: 'Cloud Reliability Program',
-    modules: ['CI/CD pipeline hardening', 'Blue-green deployment patterns', 'Observability dashboards', 'Security controls'],
-    integrations: ['AWS', 'Google Cloud', 'Docker', 'GitHub Actions'],
-    deliveryModel: 'Reliability audit, remediation sprints, and ongoing SRE collaboration.',
-    outcomes: ['Lower deployment risk', 'Faster release cycles', 'Improved uptime posture'],
-    proofLinks: ['/capabilities', '/whoarewe/portfolio'],
-  },
-];
-
-export function getAllCaseStudies(): Promise<CaseStudy[]> {
-  return getAllSanityCaseStudies();
+export function getAllCaseStudies(locale: AppLocale = 'en'): Promise<CaseStudy[]> {
+  return getAllSanityCaseStudies(locale);
 }
 
-export function getClientEvidenceShowcase(): Promise<ClientEvidenceSummary[]> {
-  return getSanityClientEvidenceShowcase();
+export function getClientEvidenceShowcase(
+  locale: AppLocale = 'en'
+): Promise<ClientEvidenceSummary[]> {
+  return getSanityClientEvidenceShowcase(locale);
 }
 
-export async function getCaseStudyBySlug(slug: string): Promise<CaseStudy> {
-  const caseStudy = await getSanityCaseStudyBySlug(slug);
+export async function getCaseStudyBySlug(
+  slug: string,
+  locale: AppLocale = 'en'
+): Promise<CaseStudy> {
+  const caseStudy = await getSanityCaseStudyBySlug(slug, locale);
   if (!caseStudy) {
     throw new Error(`Case study not found: ${slug}`);
   }
   return caseStudy;
 }
 
-export async function getRelatedCaseStudies(currentSlug: string, limit = 3): Promise<CaseStudy[]> {
-  const caseStudies = await getAllCaseStudies();
+export async function getRelatedCaseStudies(
+  currentSlug: string,
+  limit = 3,
+  locale: AppLocale = 'en'
+): Promise<CaseStudy[]> {
+  const caseStudies = await getAllCaseStudies(locale);
   return caseStudies.filter((study) => study.slug !== currentSlug).slice(0, limit);
 }
 

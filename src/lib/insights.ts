@@ -6,8 +6,10 @@ import {
   getSanityResearchReportBySlug,
 } from './sanity-content';
 import type { ContentSeo } from './content-seo';
+import type {AppLocale} from '@/i18n/config';
+import type {LocalizedContentMeta} from './localized-content';
 
-export type InsightCard = {
+export type InsightCard = LocalizedContentMeta & {
   title: string;
   slug: string;
   summary: string;
@@ -257,28 +259,42 @@ export const INSIGHTS_CATEGORIES = [
   { label: 'Research Reports', href: '/insights/research-reports' },
 ] as const;
 
-export function getAllNewsArticles(): Promise<NewsArticle[]> {
-  return getAllSanityNewsArticles();
+export function getAllNewsArticles(locale: AppLocale = 'en'): Promise<NewsArticle[]> {
+  return getAllSanityNewsArticles(locale);
 }
 
-export function getNewsArticleBySlug(slug: string): Promise<NewsArticle | null> {
-  return getSanityNewsArticleBySlug(slug);
+export function getNewsArticleBySlug(
+  slug: string,
+  locale: AppLocale = 'en'
+): Promise<NewsArticle | null> {
+  return getSanityNewsArticleBySlug(slug, locale);
 }
 
-export async function getRelatedNewsArticles(currentSlug: string, limit = 3): Promise<NewsArticle[]> {
-  const articles = await getAllNewsArticles();
+export async function getRelatedNewsArticles(
+  currentSlug: string,
+  limit = 3,
+  locale: AppLocale = 'en'
+): Promise<NewsArticle[]> {
+  const articles = await getAllNewsArticles(locale);
   return articles.filter((article) => article.slug !== currentSlug).slice(0, limit);
 }
 
-export function getAllResearchReports(): Promise<ResearchReport[]> {
-  return getAllSanityResearchReports();
+export function getAllResearchReports(locale: AppLocale = 'en'): Promise<ResearchReport[]> {
+  return getAllSanityResearchReports(locale);
 }
 
-export function getResearchReportBySlug(slug: string): Promise<ResearchReport | null> {
-  return getSanityResearchReportBySlug(slug);
+export function getResearchReportBySlug(
+  slug: string,
+  locale: AppLocale = 'en'
+): Promise<ResearchReport | null> {
+  return getSanityResearchReportBySlug(slug, locale);
 }
 
-export async function getRelatedResearchReports(currentSlug: string, limit = 3): Promise<ResearchReport[]> {
-  const reports = await getAllResearchReports();
+export async function getRelatedResearchReports(
+  currentSlug: string,
+  limit = 3,
+  locale: AppLocale = 'en'
+): Promise<ResearchReport[]> {
+  const reports = await getAllResearchReports(locale);
   return reports.filter((report) => report.slug !== currentSlug).slice(0, limit);
 }

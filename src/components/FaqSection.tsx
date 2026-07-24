@@ -1,6 +1,7 @@
 import type { FaqItem } from '../data/faqs';
 import JsonLd from './JsonLd';
 import { Add } from './icons';
+import {getTranslations} from 'next-intl/server';
 
 type FaqSectionProps = {
   faqs: FaqItem[];
@@ -21,13 +22,15 @@ type FaqSectionProps = {
  * Because this is a server component it CANNOT be imported inside a 'use client'
  * view. Place it in the app/ route files (page.tsx) after the view component.
  */
-export default function FaqSection({
+export default async function FaqSection({
   faqs,
-  heading = 'Frequently Asked Questions',
+  heading,
   className = '',
   dir = 'ltr',
 }: FaqSectionProps) {
   if (!faqs || faqs.length === 0) return null;
+  const t = await getTranslations('Faqs');
+  const resolvedHeading = heading ?? t('defaultHeading');
 
   const faqSchema = {
     '@context': 'https://schema.org',
@@ -52,7 +55,7 @@ export default function FaqSection({
 
       <div className="mx-auto max-w-4xl px-6 lg:px-14">
         <h2 className="mb-12 font-serif text-3xl font-semibold tracking-tight text-[#1A2535] lg:text-4xl">
-          {heading}
+          {resolvedHeading}
         </h2>
 
         <div className="divide-y divide-[#DDE3EA]">

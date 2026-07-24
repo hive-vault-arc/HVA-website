@@ -1,250 +1,243 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import JsonLd from '../../components/JsonLd';
-import LocaleDocumentAttributes from '../../components/LocaleDocumentAttributes';
-import { SITE_NAME, SITE_URL, SUPPORTED_LOCALES, type SupportedLocale, buildPageMetadata } from '../../lib/seo';
-import { NOT_FOUND_METADATA } from '../../lib/not-found';
-import { getLocaleMessaging } from '../../lib/positioning';
+import type {AppLocale} from '@/i18n/config';
+import {buildStaticRouteMetadata} from '@/i18n/metadata';
+import {Link} from '@/i18n/navigation';
+import Home from '@/views/Home';
+import JsonLd from '@/components/JsonLd';
+import type { InsightsCarouselItem } from '@/components/InsightsCarousel';
+import FaqSection from '@/components/FaqSection';
+import {getLocalizedFaqs} from '@/i18n/faqs';
+import {localizedPath} from '@/i18n/route-manifest';
+import { getAllPosts, type BlogPost } from '@/lib/blog';
+import { buildHomeHeroProof } from '@/lib/home-hero';
+import {getTranslations} from 'next-intl/server';
+import {
+  getAllCaseStudies,
+  getClientEvidenceShowcase,
+  type CaseStudy,
+  type CaseStudyShowcaseSummary,
+} from '@/lib/proof';
+import {
+  GLOBAL_KEYWORDS,
+  SITE_URL,
+  absoluteUrl,
+} from '@/lib/seo';
 
-const homeContent: Record<
-  SupportedLocale,
-  {
-    title: string;
-    h1: string;
-    body: string;
-    keywords: string[];
-    primaryHref: string;
-    cta: string;
-    secondaryLabel: string;
-    proofPoints: string[];
-    locationLabel: string;
-  }
-> = {
-  en: {
-    title: 'Technology Consulting and Digital Transformation in Tangier, Morocco',
-    h1: 'Technology Consulting + Engineering Execution',
-    body: 'We guide strategy, architect solutions, build systems, and maintain production operations for teams scaling with AI, automation, software, cloud, and data.',
-    keywords: [
-      'technology consulting Morocco',
-      'digital transformation consulting Tangier',
-      'IT advisory and engineering execution',
-      'AI and automation consulting Morocco',
-      'workflow automation partner Morocco',
-      'CRM integration with ERP Morocco',
-      'cloud reliability and CI/CD Morocco',
-      'data capabilities and analytics consulting Morocco',
-    ],
-    primaryHref: '/case-studies',
-    cta: 'View Case Studies',
-    secondaryLabel: 'Explore ARC',
-    proofPoints: ['Strategy', 'AI Engineering', 'Managed Operations'],
-    locationLabel: 'Tangier, Morocco',
-  },
-  fr: {
-    title: 'Conseil technologique et transformation digitale à Tanger, Maroc',
-    h1: 'Conseil stratégique et exécution technique',
-    body: "Nous accompagnons les entreprises de la stratégie à la production : conseil, architecture, IA, automatisation, logiciel sur mesure, cloud et capacités data.",
-    keywords: [
-      'conseil technologique maroc',
-      'cabinet transformation digitale tanger',
-      'strategie IT et execution technique',
-      'développement logiciel sur mesure Maroc',
-      'développement application mobile entreprise Maroc',
-      'développement application web sur mesure Tanger',
-      'migration CRM Maroc',
-      'intégration CRM et ERP Maroc',
-      'automatisation des workflows entreprise Maroc',
-      'migration cloud et déploiement Maroc',
-      'conseil DevOps et CI/CD Maroc',
-      'consulting IA et automatisation maroc',
-      'capacites data et reporting decisionnel maroc',
-      'j’ai besoin d’une équipe pour créer mon application au Maroc',
-      'meilleure equipe software pour startup à Tanger',
-    ],
-    primaryHref: '/fr/capabilities',
-    cta: 'Voir les capacités',
-    secondaryLabel: 'Découvrir ARC',
-    proofPoints: ['Stratégie', 'Ingénierie IA', 'Opérations managées'],
-    locationLabel: 'Tanger, Maroc',
-  },
-  ar: {
-    title: 'استشارات تقنية وتحول رقمي في طنجة، المغرب',
-    h1: 'استشارات استراتيجية وتنفيذ تقني',
-    body: 'نرافق الشركات من الاستراتيجية إلى التشغيل الفعلي عبر الاستشارات التقنية، وهندسة الحلول، والذكاء الاصطناعي، والأتمتة، والبرمجيات المخصصة، والبنية السحابية، وخدمات البيانات.',
-    keywords: [
-      'استشارات تقنية في المغرب',
-      'شركة تحول رقمي في طنجة',
-      'استشارات التحول الرقمي في المغرب',
-      'تطوير برمجيات مخصصة في المغرب',
-      'تطوير تطبيقات للشركات في المغرب',
-      'خدمات ترحيل نظام CRM في المغرب',
-      'أتمتة سير العمل للشركات',
-      'استشارات الذكاء الاصطناعي في المغرب',
-      'خدمات البيانات والتحليلات للشركات',
-      'فريق برمجة للشركات الناشئة في طنجة',
-    ],
-    primaryHref: '/ar/capabilities',
-    cta: 'استكشف القدرات',
-    secondaryLabel: 'اكتشف إطار ARC',
-    proofPoints: ['الاستراتيجية', 'هندسة الذكاء الاصطناعي', 'العمليات المُدارة'],
-    locationLabel: 'طنجة، المغرب',
-  },
-  es: {
-    title: 'Consultoría tecnológica y transformación digital en Tánger, Marruecos',
-    h1: 'Consultoría estratégica y ejecución técnica',
-    body: 'Acompañamos a las empresas desde la estrategia hasta la operación en producción con IA, automatización, software a medida, modernización tecnológica, cloud y datos.',
-    keywords: [
-      'consultoria tecnologica marruecos',
-      'transformacion digital tanger',
-      'consultoria IT y ejecucion tecnica',
-      'desarrollo de software a medida marruecos',
-      'desarrollo de app movil personalizada para empresa',
-      'desarrollo de app web personalizada tanger',
-      'servicios de migracion de CRM marruecos',
-      'integracion de CRM con ERP marruecos',
-      'automatizacion de flujos de trabajo empresariales',
-      'migracion y despliegue cloud marruecos',
-      'consultoria DevOps y CI/CD marruecos',
-      'consultoria de IA y automatizacion para empresas',
-      'capacidades de datos y reporting ejecutivo marruecos',
-      'necesito equipo para crear mi app en marruecos',
-      'mejor equipo de software para startup en tanger',
-    ],
-    primaryHref: '/es/capabilities',
-    cta: 'Ver capacidades',
-    secondaryLabel: 'Descubrir ARC',
-    proofPoints: ['Estrategia', 'Ingeniería de IA', 'Operaciones gestionadas'],
-    locationLabel: 'Tánger, Marruecos',
-  },
-};
+type PageProps = {params: Promise<{locale: AppLocale}>};
 
-type LocalePageProps = {
-  params: Promise<{ locale: string }>;
-};
-
-export async function generateStaticParams() {
-  return SUPPORTED_LOCALES.map((locale) => ({ locale }));
+export async function generateMetadata({params}: PageProps): Promise<Metadata> {
+  const {locale} = await params;
+  const metadata = await buildStaticRouteMetadata(locale, 'home', GLOBAL_KEYWORDS);
+  return {
+    ...metadata,
+    title: {absolute: String(metadata.title)},
+  };
 }
 
-export async function generateMetadata({ params }: LocalePageProps): Promise<Metadata> {
-  const { locale } = await params;
-  if (!SUPPORTED_LOCALES.includes(locale as SupportedLocale)) {
-    return NOT_FOUND_METADATA;
+function buildInsightsCarouselItems(
+  posts: BlogPost[],
+  studies: CaseStudy[],
+  limit = 9
+): InsightsCarouselItem[] {
+  const postItems = posts
+    .filter((post) => Boolean(post.coverImage))
+    .slice(0, 10)
+    .map((post) => ({
+      id: `blog-${post.slug}`,
+      type: 'blog' as const,
+      tag: post.category,
+      title: post.title,
+      excerpt: post.excerpt,
+      image: post.coverImage,
+      href: `/blog/${post.slug}`,
+      date: post.publishedAt,
+    }));
+
+  const studyItems = studies
+    .filter((study) => Boolean(study.assets.coverImage))
+    .slice(0, 8)
+    .map((study) => ({
+      id: `case-${study.slug}`,
+      type: 'case-study' as const,
+      tag: study.industry,
+      title: study.title,
+      excerpt: study.summary,
+      image: study.assets.coverImage,
+      href: `/case-studies/${study.slug}`,
+      date: study.lastUpdated,
+    }));
+
+  // Interleave 2 blogs then 1 case-study for variety while keeping payload small.
+  const result: InsightsCarouselItem[] = [];
+  let blogIndex = 0;
+  let studyIndex = 0;
+  while (result.length < limit && (blogIndex < postItems.length || studyIndex < studyItems.length)) {
+    if (blogIndex < postItems.length) result.push(postItems[blogIndex++]);
+    if (result.length >= limit) break;
+    if (blogIndex < postItems.length) result.push(postItems[blogIndex++]);
+    if (result.length >= limit) break;
+    if (studyIndex < studyItems.length) result.push(studyItems[studyIndex++]);
   }
 
-  const content = homeContent[locale as SupportedLocale];
-  const identity = getLocaleMessaging(locale).identity;
-  const base = buildPageMetadata({
-    title: content.title,
-    description: identity.longDescriptor,
-    path: `/${locale}`,
-    locale,
-    keywords: content.keywords,
-    alternates: {
-      en: '/',
-      fr: '/fr',
-      ar: '/ar',
-      es: '/es',
-      'x-default': '/',
+  return result.slice(0, limit);
+}
+
+export default async function Page({params}: PageProps) {
+  const {locale} = await params;
+  const [posts, caseStudies, clientEvidence] = await Promise.all([
+    getAllPosts(locale),
+    getAllCaseStudies(locale),
+    getClientEvidenceShowcase(locale),
+  ]);
+  const [homeFaqs, tHome, tHomeMeta, tCapabilitiesMeta, tNavigation] = await Promise.all([
+    getLocalizedFaqs(locale, 'home'),
+    getTranslations({locale, namespace: 'Home'}),
+    getTranslations({locale, namespace: 'Metadata.pages.home'}),
+    getTranslations({locale, namespace: 'Metadata.pages.capabilities'}),
+    getTranslations({locale, namespace: 'Navigation'}),
+  ]);
+  const serviceGuides = tHome.raw('serviceGuides.items') as Array<{
+    href: '/digital-services-tangier' | '/ai-agents-morocco';
+    label: string;
+    region: string;
+    summary: string;
+  }>;
+  const insightsCarouselItems = buildInsightsCarouselItems(posts, caseStudies);
+  const { trustedPartners } = buildHomeHeroProof(caseStudies);
+  const caseStudyShowcase: CaseStudyShowcaseSummary[] = caseStudies.map((study) => ({
+    slug: study.slug,
+    title: study.title,
+    clientName: study.clientName,
+    industry: study.industry,
+    summary: study.summary,
+    assets: {
+      coverImage: study.assets.coverImage,
+      coverAlt: study.assets.coverAlt,
+      clientLogo: study.assets.clientLogo,
+      clientLogoAlt: study.assets.clientLogoAlt,
     },
-  });
-
-  // /en duplicates the English root page — keep it crawlable but non-indexed
-  // so link equity and canonical authority stay on /
-  if (locale === 'en') {
-    return {
-      ...base,
-      robots: { index: false, follow: true },
-      alternates: { canonical: '/' },
-    };
-  }
-
-  return base;
-}
-
-export default async function LocaleHomePage({ params }: LocalePageProps) {
-  const { locale } = await params;
-  if (!SUPPORTED_LOCALES.includes(locale as SupportedLocale)) {
-    notFound();
-  }
-
-  const isRtl = locale === 'ar';
-  const content = homeContent[locale as SupportedLocale];
-  const identity = getLocaleMessaging(locale).identity;
-  const schema = {
+  }));
+  const capabilitySchema = {
     '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    name: content.title,
-    description: identity.longDescriptor,
-    keywords: content.keywords,
-    url: `${SITE_URL}/${locale}`,
-    inLanguage: locale,
-    isPartOf: {
-      '@type': 'WebSite',
-      name: SITE_NAME,
-      url: SITE_URL,
+    '@type': ['ProfessionalService', 'Service'],
+    name: tCapabilitiesMeta('title'),
+    provider: {
+      '@id': `${SITE_URL}/#organization`,
     },
+    description: tCapabilitiesMeta('description'),
+    serviceType:
+      locale === 'fr'
+        ? [
+            'Conseil technologique',
+            'Transformation technologique',
+            'Architecture des systèmes',
+            'Développement d’agents IA',
+            'Automatisation par l’IA',
+            'Ingénierie CRM et systèmes',
+            'Développement logiciel sur mesure',
+            'Applications mobiles',
+            'Infrastructure cloud',
+            'Données et analytique',
+          ]
+        : [
+            'Technology Consulting',
+            'Technology Transformation',
+            'IT Advisory and Architecture',
+            'AI Agent Development',
+            'AI Automation',
+            'CRM and Systems Engineering',
+            'Custom Software Development',
+            'Mobile App Development',
+            'Cloud Infrastructure',
+            'Data Capabilities',
+          ],
+    areaServed: ['Morocco', 'Remote'],
+    availableLanguage: [locale],
+    url: absoluteUrl(localizedPath('/capabilities', locale)),
+    inLanguage: locale,
   };
 
-  const direction = isRtl ? 'rtl' : 'ltr';
+  const homePageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${absoluteUrl(localizedPath('/', locale))}#homepage`,
+    name: tHomeMeta('title'),
+    description: tHomeMeta('description'),
+    url: absoluteUrl(localizedPath('/', locale)),
+    inLanguage: locale,
+    isPartOf: {
+      '@id': `${SITE_URL}/#website`,
+    },
+    about: {
+      '@id': `${SITE_URL}/#organization`,
+    },
+    primaryImageOfPage: absoluteUrl('/Images/brand/hva-ai-software-agency-tangier.webp'),
+    significantLink: [
+      '/capabilities',
+      '/industries',
+      '/aboutus',
+      '/insights',
+      '/contact',
+    ].map((path) => absoluteUrl(localizedPath(path as '/capabilities', locale))),
+  };
+
+  const navigationItems = [
+    {name: tNavigation('capabilities'), path: '/capabilities' as const, description: tCapabilitiesMeta('description')},
+    {name: tNavigation('industries'), path: '/industries' as const, description: tNavigation('industries')},
+    {name: tNavigation('whoWeAre'), path: '/aboutus' as const, description: tNavigation('whoWeAre')},
+    {name: tNavigation('insights'), path: '/insights' as const, description: tNavigation('insights')},
+    {name: tNavigation('contact'), path: '/contact' as const, description: tNavigation('contact')},
+  ];
+  const primaryNavigationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: locale === 'fr' ? 'Sections principales du site Hive Vault Arc' : 'Primary Hive Vault Arc website sections',
+    itemListElement: navigationItems.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      description: item.description,
+      url: absoluteUrl(localizedPath(item.path, locale)),
+    })),
+  };
 
   return (
     <>
-      <LocaleDocumentAttributes locale={locale} direction={direction} />
-      <JsonLd data={schema} />
-      <div lang={locale} dir={direction} className="bg-white text-[#1A2535]">
-        <section className="editorial-hero">
-          <div className="editorial-shell grid gap-10 lg:grid-cols-[1.12fr_0.88fr] lg:items-end">
-            <div>
-              <p className="geo-kicker">{locale.toUpperCase()} · {content.locationLabel}</p>
-              <h1 className="editorial-title max-w-[13ch]">{content.h1}</h1>
-              <p className="editorial-lead max-w-3xl">{identity.shortDescriptor}</p>
-              <p className="mt-5 max-w-3xl text-base leading-relaxed text-[#536070] md:text-lg">
-                {content.body}
-              </p>
-              <div className="editorial-actions">
-                <Link href={content.primaryHref} className="editorial-cta sharp-edge">
-                  {content.cta}
-                </Link>
-                <Link href="/arc" className="editorial-link">
-                  {content.secondaryLabel}
-                </Link>
-              </div>
-            </div>
-            <div className="relative min-h-[18rem] overflow-hidden bg-[#E8EBF0] md:min-h-[25rem]">
-              <Image
-                src="/Images/brand/hva-ai-software-agency-tangier.webp"
-                alt={content.title}
-                fill
-                priority
-                className="object-cover grayscale"
-                sizes="(max-width: 1024px) 100vw, 42vw"
-              />
-            </div>
+      <JsonLd data={[homePageSchema, capabilitySchema, primaryNavigationSchema]} />
+      <Home
+        insightsCarouselItems={insightsCarouselItems}
+        clientEvidence={clientEvidence}
+        caseStudies={caseStudyShowcase}
+        trustedPartners={trustedPartners}
+      />
+      <section className="service-guides-section">
+        <div className="service-guides-shell">
+          <div className="service-guides-copy">
+            <h2>{tHome('serviceGuides.title')}</h2>
+            <p>{tHome('serviceGuides.description')}</p>
           </div>
-        </section>
 
-        <section className="border-y border-[#DDE3EA] bg-white">
-          <div className="mx-auto grid max-w-6xl gap-8 px-6 py-10 lg:grid-cols-[0.9fr_1.1fr] lg:px-12">
-            <ul className="grid gap-px bg-[#DDE3EA] sm:grid-cols-3" aria-label="Delivery coverage">
-              {content.proofPoints.map((point, index) => (
-                <li key={point} className="bg-white px-5 py-4">
-                  <span className="block text-[10px] font-bold tracking-[0.18em] text-[var(--section-label-color)]">
-                    0{index + 1}
-                  </span>
-                  <span className="mt-2 block text-sm font-semibold text-[#1A2535]">{point}</span>
-                </li>
+          <div className="service-guides-carousel" aria-label={tHome('serviceGuides.aria')}>
+            <div className="service-guides-track">
+              {[...serviceGuides, serviceGuides[0]].map((guide, index) => (
+                <Link
+                  key={`${guide.href}-${index}`}
+                  href={guide.href}
+                  aria-hidden={index === serviceGuides.length}
+                  tabIndex={index === serviceGuides.length ? -1 : undefined}
+                  className="service-guide-card"
+                >
+                  <span className="service-guide-region">{guide.region}</span>
+                  <span className="service-guide-title">{guide.label}</span>
+                  <span className="service-guide-summary">{guide.summary}</span>
+                  <span className="service-guide-link">{tHome('serviceGuides.open')}</span>
+                </Link>
               ))}
-            </ul>
-            <p className="self-center text-sm leading-relaxed text-[#536070] md:text-base">
-              {identity.proofStatement}
-            </p>
+            </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
+      <FaqSection faqs={homeFaqs.items} heading={homeFaqs.heading} />
     </>
   );
 }
-

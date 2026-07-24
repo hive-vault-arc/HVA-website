@@ -1,26 +1,30 @@
 'use client';
 
 import { useCallback, useRef, useState, type TouchEvent } from 'react';
+import {useTranslations} from 'next-intl';
 import Image from 'next/image';
-import Link from 'next/link';
+import {Link} from '@/i18n/navigation';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import {
   ChevronLeft,
   ChevronRight,
 } from '@/components/icons';
 
-type Slide = {
+type SlideCopy = {
   eyebrow: string;
   titleLead: string[];
   titleAccent: string;
   titleVariant?: 'compact';
   description: string;
   primaryLabel: string;
-  primaryHref: string;
   secondaryLabel: string;
+  imageAlt: string;
+};
+
+type Slide = SlideCopy & {
+  primaryHref: string;
   secondaryHref: string;
   image: string;
-  imageAlt: string;
   imageMode?: 'contain';
 };
 
@@ -41,72 +45,44 @@ const SLIDE_TRANSITION = {
   ease: [0.76, 0, 0.24, 1] as const,
 };
 
-const SLIDES: Slide[] = [
+const SLIDE_CONFIG: Array<
+  Pick<Slide, 'primaryHref' | 'secondaryHref' | 'image' | 'imageMode' | 'titleVariant'>
+> = [
   {
-    eyebrow: 'STRATEGY / TECHNOLOGY / OPERATIONS',
-    titleLead: ['We architect', 'what moves'],
-    titleAccent: 'your business',
-    description:
-      'From strategy to systems, we help ambitious teams build measurable progress.',
-    primaryLabel: 'Start a Project',
     primaryHref: '/contact',
-    secondaryLabel: 'Explore Capabilities',
     secondaryHref: '/capabilities',
     image: '/Images/hero/hva-architectural-system-hero-transparent.png',
-    imageAlt:
-      'Layered navy, white, and yellow architectural system with a city skyline and technical plans',
     imageMode: 'contain',
   },
   {
-    eyebrow: 'TECHNOLOGY CONSULTING',
-    titleLead: ['Strategic guidance.'],
-    titleAccent: 'Accountable execution.',
-    description:
-      'We stay accountable from architecture decisions through engineering delivery and long-term operations.',
-    primaryLabel: 'Book Discovery Call',
     primaryHref: '/contact',
-    secondaryLabel: 'Meet Our Team',
     secondaryHref: '/aboutus',
     image: '/Images/hero/hva-strategic-guidance-3d-transparent.webp',
-    imageAlt:
-      'Floating layered strategy system with operating model diagrams and city planning geometry',
     imageMode: 'contain',
   },
   {
-    eyebrow: 'AI ENGINEERING & OPERATIONS',
-    titleLead: ['Strategy, AI engineering,'],
-    titleAccent: 'and operations in one team.',
     titleVariant: 'compact',
-    description:
-      'Strategy, production engineering, and managed operations move together under one accountable team.',
-    primaryLabel: 'View Case Studies',
     primaryHref: '/case-studies',
-    secondaryLabel: 'Explore Capabilities',
     secondaryHref: '/capabilities',
     image: '/Images/hero/hva-ai-orchestration-3d-transparent.webp',
-    imageAlt:
-      'Floating layered AI orchestration system with a neural core and connected data streams',
     imageMode: 'contain',
   },
   {
-    eyebrow: 'ARC DELIVERY MODEL',
-    titleLead: ['Assess. Re-engineer.'],
-    titleAccent: 'Command production systems.',
     titleVariant: 'compact',
-    description:
-      'We diagnose operating constraints, rebuild critical systems, and stay involved after launch.',
-    primaryLabel: 'Explore Our Programs',
     primaryHref: '/capabilities',
-    secondaryLabel: 'See Case Studies',
     secondaryHref: '/case-studies',
     image: '/Images/hero/hva-arc-production-command-3d-transparent.webp',
-    imageAlt:
-      'Floating layered production command system with operational dashboards and workflow controls',
     imageMode: 'contain',
   },
 ];
 
 export default function HeroSlider() {
+  const t = useTranslations('HomeHero');
+  const slideCopy = t.raw('slides') as SlideCopy[];
+  const slides: Slide[] = SLIDE_CONFIG.map((config, index) => ({
+    ...config,
+    ...slideCopy[index],
+  }));
   const [active, setActive] = useState(0);
   const [direction, setDirection] = useState(1);
   const shouldReduceMotion = useReducedMotion();
@@ -114,8 +90,8 @@ export default function HeroSlider() {
 
   const navigate = useCallback((dir: number) => {
     setDirection(dir);
-    setActive((previous) => (previous + dir + SLIDES.length) % SLIDES.length);
-  }, []);
+    setActive((previous) => (previous + dir + slides.length) % slides.length);
+  }, [slides.length]);
 
   const goTo = useCallback(
     (index: number) => {
@@ -135,7 +111,7 @@ export default function HeroSlider() {
     if (Math.abs(delta) > 50) navigate(delta > 0 ? 1 : -1);
   };
 
-  const slide = SLIDES[active];
+  const slide = slides[active];
   if (!slide) return null;
 
   const titleClassName = [
@@ -157,12 +133,12 @@ export default function HeroSlider() {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
       aria-roledescription="carousel"
-      aria-label="Hive Vault Arc overview"
+      aria-label={t('carouselLabel')}
     >
       <button
         type="button"
         onClick={() => navigate(-1)}
-        aria-label="Previous slide"
+        aria-label={t('previous')}
         className="home-hero-arrow home-hero-arrow--prev"
       >
         <ChevronLeft className="h-6 w-6" aria-hidden="true" />
@@ -171,7 +147,7 @@ export default function HeroSlider() {
       <button
         type="button"
         onClick={() => navigate(1)}
-        aria-label="Next slide"
+        aria-label={t('next')}
         className="home-hero-arrow home-hero-arrow--next"
       >
         <ChevronRight className="h-6 w-6" aria-hidden="true" />
@@ -232,13 +208,13 @@ export default function HeroSlider() {
           </AnimatePresence>
         </div>
 
-        <div className="home-hero-dots" aria-label="Choose a hero slide">
-          {SLIDES.map((item, index) => (
+        <div className="home-hero-dots" aria-label={t('choose')}>
+          {slides.map((item, index) => (
             <button
               key={item.eyebrow}
               type="button"
               onClick={() => goTo(index)}
-              aria-label={`Go to slide ${index + 1}`}
+              aria-label={t('goTo', {number: index + 1})}
               aria-current={index === active ? 'true' : undefined}
               className="home-hero-dot-button"
             >

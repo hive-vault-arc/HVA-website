@@ -10,7 +10,8 @@
     "indexnow": "node scripts/submit-indexnow.mjs",
     "indexnow:dry-run": "node scripts/submit-indexnow.mjs --dry-run",
     "lint": "eslint .",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@react-spring/web": "^10.0.1",
@@ -29,6 +30,7 @@
     "lenis": "^1.3.15",
     "mathjs": "^15.1.0",
     "next": "^16.2.1",
+    "next-intl": "^4.13.3",
     "next-sanity": "^13.1.1",
     "ogl": "^1.0.11",
     "primeflex": "^4.0.0",
@@ -43,6 +45,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
+    "@playwright/test": "^1.61.1",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
