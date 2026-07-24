@@ -1,5 +1,6 @@
 import {UserIcon} from '@sanity/icons'
 import {defineArrayMember, defineField, defineType} from 'sanity'
+import {createLocalizationFields, localeScopedSlugIsUnique} from '../localization'
 
 const slugValidation = (slug?: {current?: string}) => {
   if (!slug?.current) return 'Required'
@@ -23,6 +24,7 @@ export const employeeProfile = defineType({
     {name: 'seo', title: 'SEO'},
   ],
   fields: [
+    ...createLocalizationFields('publishing'),
     defineField({
       name: 'name',
       title: 'Name',
@@ -36,7 +38,7 @@ export const employeeProfile = defineType({
       type: 'slug',
       group: 'identity',
       description: 'Controls the public URL: /aboutus/our-people/{slug}',
-      options: {source: 'name'},
+      options: {source: 'name', isUnique: localeScopedSlugIsUnique},
       validation: (rule) => rule.required().custom(slugValidation),
     }),
     defineField({

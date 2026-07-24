@@ -1,6 +1,7 @@
 import {DocumentTextIcon} from '@sanity/icons'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {sectionArrayMembers} from '../objects/sectionArrayMembers'
+import {createLocalizationFields, localeScopedSlugIsUnique} from '../localization'
 
 export const post = defineType({
   name: 'post',
@@ -8,6 +9,7 @@ export const post = defineType({
   type: 'document',
   icon: DocumentTextIcon,
   fields: [
+    ...createLocalizationFields(),
     defineField({
       name: 'title',
       title: 'Title',
@@ -18,7 +20,7 @@ export const post = defineType({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
-      options: {source: 'title'},
+      options: {source: 'title', isUnique: localeScopedSlugIsUnique},
       validation: (rule) =>
         rule.required().custom((slug) => {
           if (!slug?.current) return 'Required'

@@ -15,6 +15,13 @@
     "import:employee-profiles": "sanity exec scripts/import-employee-profiles.mjs --with-user-token",
     "import:insights": "sanity exec scripts/import-static-insights.mjs --with-user-token",
     "migrate:immoworld-case-study": "sanity exec scripts/update-immoworld-case-study.mjs --with-user-token",
+    "localization:baseline:dry-run": "sanity exec scripts/migrate-localization-baseline.mjs --with-user-token",
+    "localization:baseline:apply": "sanity exec scripts/migrate-localization-baseline.mjs --with-user-token -- --apply",
+    "localization:draft-baseline:dry-run": "sanity exec scripts/repair-localization-draft-baseline.mjs --with-user-token",
+    "localization:draft-baseline:apply": "sanity exec scripts/repair-localization-draft-baseline.mjs --with-user-token -- --apply",
+    "localization:french-drafts:dry-run": "sanity exec scripts/create-french-translation-drafts.mjs --with-user-token",
+    "localization:french-drafts:apply": "sanity exec scripts/create-french-translation-drafts.mjs --with-user-token -- --apply",
+    "localization:verify": "sanity exec scripts/verify-localization-state.mjs --with-user-token",
     "remove:unverified-case-study-metrics": "sanity exec scripts/remove-unverified-case-study-metrics.mjs --with-user-token",
     "upload:founder-portraits": "sanity exec scripts/upload-founder-portraits.mjs --with-user-token",
     "upload:insight-covers": "sanity exec scripts/upload-supplied-insight-covers.mjs --with-user-token",
@@ -24,10 +31,12 @@
     "sanity"
   ],
   "dependencies": {
+    "@sanity/document-internationalization": "^6.2.24",
     "@sanity/vision": "^6.5.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "sanity": "^6.5.0",
+    "sanity-plugin-internationalized-array": "^5.1.23",
     "styled-components": "^6.1.18"
   },
   "devDependencies": {

@@ -1,5 +1,6 @@
 import {DocumentTextIcon} from '@sanity/icons'
 import {defineArrayMember, defineField, defineType} from 'sanity'
+import {createLocalizationFields, localeScopedSlugIsUnique} from '../localization'
 
 const slugValidation = (slug?: {current?: string}) => {
   if (!slug?.current) return 'Required'
@@ -31,6 +32,7 @@ export const capability = defineType({
     {name: 'seo', title: 'SEO'},
   ],
   fields: [
+    ...createLocalizationFields('publishing'),
     defineField({
       name: 'title',
       title: 'Title',
@@ -43,7 +45,7 @@ export const capability = defineType({
       title: 'Slug',
       type: 'slug',
       group: 'identity',
-      options: {source: 'title'},
+      options: {source: 'title', isUnique: localeScopedSlugIsUnique},
       validation: (rule) => rule.required().custom(slugValidation),
     }),
     defineField({
