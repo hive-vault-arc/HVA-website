@@ -90,3 +90,12 @@ review, legal review where applicable, and route preview are complete.
 - The localization-compatible Studio schema and plugin are deployed at
   `https://hva.sanity.studio/`; the hosted authentication endpoint resolves successfully.
 - Dataset verification is read-only; the repair dry-run reports zero required patches.
+
+## Frontend preview handoff
+
+The committed feature branch is pushed to `origin/feature/en-fr-localization`. Production remains
+untouched. A Vercel preview could not be retained because both Vercel CLI 56.5.0 and 57.0.0
+completed the Next.js build and then failed in Vercel's packaging adapter with
+`Unable to find lambda for route: /ai/company`. The exact incomplete `UNKNOWN` placeholder
+deployment created during that attempt was removed. A normal preview can be retried after the
+project's Vercel Git integration or route-packaging configuration is corrected.
