@@ -8,6 +8,8 @@ import {
 import type { ContentSeo } from './content-seo';
 import type {AppLocale} from '@/i18n/config';
 import type {LocalizedContentMeta} from './localized-content';
+import {getPublishedCollection, getPublishedDocument} from './localized-content';
+import {cache} from 'react';
 
 export type InsightCard = LocalizedContentMeta & {
   title: string;
@@ -263,38 +265,46 @@ export function getAllNewsArticles(locale: AppLocale = 'en'): Promise<NewsArticl
   return getAllSanityNewsArticles(locale);
 }
 
-export function getNewsArticleBySlug(
+export const getNewsArticleBySlug = cache(function getNewsArticleBySlug(
   slug: string,
   locale: AppLocale = 'en'
 ): Promise<NewsArticle | null> {
-  return getSanityNewsArticleBySlug(slug, locale);
-}
+  return getPublishedDocument(locale, (targetLocale) =>
+    getSanityNewsArticleBySlug(slug, targetLocale),
+  );
+});
 
 export async function getRelatedNewsArticles(
   currentSlug: string,
   limit = 3,
   locale: AppLocale = 'en'
 ): Promise<NewsArticle[]> {
-  const articles = await getAllNewsArticles(locale);
-  return articles.filter((article) => article.slug !== currentSlug).slice(0, limit);
+  const articles = await getPublishedCollection(locale, getAllNewsArticles);
+  return articles.items
+    .filter((article) => article.slug !== currentSlug)
+    .slice(0, limit);
 }
 
 export function getAllResearchReports(locale: AppLocale = 'en'): Promise<ResearchReport[]> {
   return getAllSanityResearchReports(locale);
 }
 
-export function getResearchReportBySlug(
+export const getResearchReportBySlug = cache(function getResearchReportBySlug(
   slug: string,
   locale: AppLocale = 'en'
 ): Promise<ResearchReport | null> {
-  return getSanityResearchReportBySlug(slug, locale);
-}
+  return getPublishedDocument(locale, (targetLocale) =>
+    getSanityResearchReportBySlug(slug, targetLocale),
+  );
+});
 
 export async function getRelatedResearchReports(
   currentSlug: string,
   limit = 3,
   locale: AppLocale = 'en'
 ): Promise<ResearchReport[]> {
-  const reports = await getAllResearchReports(locale);
-  return reports.filter((report) => report.slug !== currentSlug).slice(0, limit);
+  const reports = await getPublishedCollection(locale, getAllResearchReports);
+  return reports.items
+    .filter((report) => report.slug !== currentSlug)
+    .slice(0, limit);
 }

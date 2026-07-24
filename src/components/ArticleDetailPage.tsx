@@ -7,6 +7,7 @@ import {useLocale, useTranslations} from 'next-intl';
 import { ArrowLeft, ArrowUpRight } from '@/components/icons';
 import BottomCTA from './BottomCTA';
 import SectionBrandMark from './SectionBrandMark';
+import {isSanityCdnImage} from '@/lib/image-delivery';
 
 /* ── Types ───────────────────────────────────────────────────────────────── */
 
@@ -271,6 +272,7 @@ export default function ArticleDetailPage({
               src={coverImage}
               alt={coverAlt ?? title}
               fill
+              unoptimized={isSanityCdnImage(coverImage)}
               className="object-cover"
               loading="eager"
               sizes="(max-width: 1024px) calc(100vw - 2rem), min(1640px, calc(100vw - 5rem))"
@@ -395,6 +397,7 @@ export default function ArticleDetailPage({
                           src={item.coverImage}
                           alt={item.title}
                           fill
+                          unoptimized={isSanityCdnImage(item.coverImage)}
                           className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         />

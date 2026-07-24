@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import {Link} from '@/i18n/navigation';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import {useTranslations} from 'next-intl';
+import {useLocale, useTranslations} from 'next-intl';
 import { ArrowDown, ArrowRight, ArrowUpRight } from '@/components/icons';
 import BottomCTA from '../components/BottomCTA';
 import InsightsSlider, { type SlideItem } from '../components/InsightsSlider';
@@ -13,6 +13,7 @@ import type { BlogPost } from '../lib/blog';
 import type { InsightCard as ResearchReport, NewsArticle } from '../lib/insights';
 import type { Perspective } from '../lib/perspectives';
 import type { CaseStudy } from '../lib/proof';
+import type {AppLocale} from '@/i18n/config';
 
 const CATEGORY_CARDS = [
   {
@@ -139,6 +140,15 @@ type InsightGridItem = {
   date: string;
   readTime?: string;
   meta?: string;
+  sourceLocale: AppLocale;
+};
+
+type InsightsContentLocales = {
+  posts: AppLocale;
+  caseStudies: AppLocale;
+  newsArticles: AppLocale;
+  perspectives: AppLocale;
+  researchReports: AppLocale;
 };
 
 type LatestProps = {
@@ -209,6 +219,7 @@ function LatestSection({ items }: LatestProps) {
                   <div className="mt-6 flex items-center gap-4">
                     <Link
                       href={latestPrimary.href}
+                      locale={latestPrimary.sourceLocale}
                       className="inline-flex items-center gap-2 px-5 py-2.5 text-[10px] font-bold
                                  uppercase tracking-[0.14em] text-white border border-white/30
                                  bg-white/10 backdrop-blur-sm hover:bg-[#E8A838] hover:border-[#E8A838]
@@ -272,6 +283,7 @@ function LatestSection({ items }: LatestProps) {
                 <div className="mt-6 flex items-center justify-between">
                   <Link
                     href={latestSecondary.href}
+                    locale={latestSecondary.sourceLocale}
                     className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase
                                tracking-[0.14em] text-[#1A2535] border border-[#1A2535]
                                px-4 py-2 hover:bg-[#1A2535] hover:text-white transition-all duration-200"
@@ -311,6 +323,7 @@ function buildAllInsights(
   perspectives: Perspective[],
   researchReports: ResearchReport[],
   typeLabels: Record<InsightGridItem['type'], string>,
+  contentLocales: InsightsContentLocales,
 ): InsightGridItem[] {
   const blogItems = posts.map((p) => ({
     id: `blog-${p.slug}`,
@@ -323,6 +336,7 @@ function buildAllInsights(
     href: `/blog/${p.slug}`,
     date: p.publishedAt,
     readTime: p.readTime,
+    sourceLocale: contentLocales.posts,
   }));
 
   const caseItems = studies.map((s) => ({
@@ -336,6 +350,7 @@ function buildAllInsights(
     href: `/case-studies/${s.slug}`,
     date: s.lastUpdated,
     meta: s.clientName,
+    sourceLocale: contentLocales.caseStudies,
   }));
 
   const newsItems = newsArticles.map((article) => ({
@@ -349,6 +364,7 @@ function buildAllInsights(
     href: `/insights/news-articles/${article.slug}`,
     date: article.publishedAt,
     readTime: article.readTime,
+    sourceLocale: contentLocales.newsArticles,
   }));
 
   const perspectiveItems = perspectives.map((perspective) => ({
@@ -362,6 +378,7 @@ function buildAllInsights(
     href: `/insights/perspectives/${perspective.slug}`,
     date: perspective.publishedAt,
     readTime: perspective.readTime,
+    sourceLocale: contentLocales.perspectives,
   }));
 
   const reportItems = researchReports.map((report) => ({
@@ -375,6 +392,7 @@ function buildAllInsights(
     href: `/insights/research-reports/${report.slug}`,
     date: report.publishedAt,
     readTime: report.readTime,
+    sourceLocale: contentLocales.researchReports,
   }));
 
   return sortLatestFirst([
@@ -396,6 +414,7 @@ function buildSliderItems(items: InsightGridItem[]): SlideItem[] {
     description: item.excerpt,
     image: item.image,
     href: item.href,
+    sourceLocale: item.sourceLocale,
   }));
 }
 
@@ -417,6 +436,7 @@ function InsightGridCard({ item, index }: { readonly item: InsightGridItem; read
     >
       <Link
         href={item.href}
+        locale={item.sourceLocale}
         className="absolute inset-0 block focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#E8A838]"
       >
         {item.image && (
@@ -484,6 +504,20 @@ function AllInsightsGrid({ items }: { readonly items: InsightGridItem[] }) {
   const visible = revealed ? items : items.slice(0, INITIAL_COUNT);
   const hasMore = items.length > INITIAL_COUNT && !revealed;
 
+  if (items.length === 0) {
+    return (
+      <section className="insights-empty-state" aria-labelledby="insights-empty-title">
+        <div className="insights-empty-state__inner">
+          <SectionBrandMark size="sm" />
+          <div>
+            <h2 id="insights-empty-title">{t('grid.emptyTitle')}</h2>
+            <p>{t('grid.emptyDescription')}</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="py-20 bg-[#FFFFFF]">
       <div className="mx-auto max-w-7xl px-6 lg:px-14">
@@ -534,14 +568,17 @@ export default function InsightsHub({
   newsArticles,
   perspectives,
   researchReports,
+  contentLocales,
 }: {
   readonly posts: BlogPost[];
   readonly caseStudies: CaseStudy[];
   readonly newsArticles: NewsArticle[];
   readonly perspectives: Perspective[];
   readonly researchReports: ResearchReport[];
+  readonly contentLocales: InsightsContentLocales;
 }) {
   const t = useTranslations('InsightsHub');
+  const locale = useLocale() as AppLocale;
   const allInsights = buildAllInsights(
     posts,
     caseStudies,
@@ -555,8 +592,13 @@ export default function InsightsHub({
       perspective: t('types.perspective'),
       'research-report': t('types.research'),
     },
+    contentLocales,
   );
   const sliderItems = buildSliderItems(allInsights);
+  const hasPublishedInsights = allInsights.length > 0;
+  const usesEnglishSources =
+    locale === 'fr' &&
+    Object.values(contentLocales).some((contentLocale) => contentLocale === 'en');
 
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
@@ -674,11 +716,33 @@ export default function InsightsHub({
         </div>
       </section>
 
+      {usesEnglishSources ? (
+        <aside className="border-b border-[#DDE3EA] bg-[#F8F9FB]">
+          <div className="mx-auto flex max-w-7xl items-start gap-4 px-6 py-4 lg:px-14">
+            <span className="mt-0.5 text-[10px] font-extrabold uppercase tracking-[0.2em] text-[#9A6B12]">
+              EN
+            </span>
+            <div>
+              <p className="text-sm font-bold text-[#1A2535]">
+                {t('englishCatalogue.title')}
+              </p>
+              <p className="mt-1 text-sm leading-relaxed text-[#536070]">
+                {t('englishCatalogue.description')}
+              </p>
+            </div>
+          </div>
+        </aside>
+      ) : null}
+
       {/* ── Insights Slider ──────────────────────────────────────────────── */}
       <InsightsSlider items={sliderItems} />
 
       {/* ── Category Navigation ───────────────────────────────────────────── */}
-      <section className="soft-grid-section py-20">
+      <section
+        className={`soft-grid-section ${
+          hasPublishedInsights ? 'py-20' : 'py-12 lg:py-14'
+        }`}
+      >
         <div className="mx-auto max-w-7xl px-6 lg:px-14">
           <div className="mb-8 flex items-center gap-3">
             <SectionBrandMark size="sm" />

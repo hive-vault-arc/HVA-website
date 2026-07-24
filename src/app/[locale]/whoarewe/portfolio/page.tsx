@@ -9,6 +9,7 @@ import {absoluteUrl, buildLocalizedBreadcrumbSchema} from '@/lib/seo';
 import { getAllCaseStudies } from '@/lib/proof';
 import {localizedPath} from '@/i18n/route-manifest';
 import {getTranslations} from 'next-intl/server';
+import {getPublishedCollection} from '@/lib/localized-content';
 
 type PageProps = {params: Promise<{locale: AppLocale}>};
 
@@ -19,12 +20,13 @@ export async function generateMetadata({params}: PageProps): Promise<Metadata> {
 
 export default async function Page({params}: PageProps) {
   const {locale} = await params;
-  const [caseStudies, portfolioFaqs, tMeta, tNav] = await Promise.all([
-    getAllCaseStudies(locale),
+  const [caseStudyCollection, portfolioFaqs, tMeta, tNav] = await Promise.all([
+    getPublishedCollection(locale, getAllCaseStudies),
     getLocalizedFaqs(locale, 'portfolio'),
     getTranslations({locale, namespace: 'Metadata.pages.portfolio'}),
     getTranslations({locale, namespace: 'Navigation'}),
   ]);
+  const caseStudies = caseStudyCollection.items;
 
   const breadcrumbSchema = buildLocalizedBreadcrumbSchema(locale, [
     {name: tNav('home'), pathname: '/'},

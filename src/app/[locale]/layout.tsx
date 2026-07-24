@@ -6,8 +6,8 @@ import {getMessages, getTranslations, setRequestLocale} from 'next-intl/server';
 import {notFound} from 'next/navigation';
 import Layout from '@/components/Layout';
 import JsonLd from '@/components/JsonLd';
+import EmployeeHashScroller from '@/components/EmployeeHashScroller';
 import {TranslationAvailabilityProvider} from '@/components/localization/TranslationAvailability';
-import { getAllEmployeeProfiles } from '@/lib/employee-profiles';
 import {routing} from '@/i18n/routing';
 import {localizedPath} from '@/i18n/route-manifest';
 import { manrope, newsreader } from '@/lib/fonts';
@@ -90,6 +90,12 @@ type LocaleLayoutProps = Readonly<{
   params: Promise<{locale: string}>;
 }>;
 
+const GLOBAL_FOUNDERS = [
+  {name: 'Khalid Chalhi', slug: 'khalid-chalhi'},
+  {name: 'Ali Amrani', slug: 'ali-amrani'},
+  {name: 'Oubay Ghamat', slug: 'oubay-ghamat'},
+] as const;
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({locale}));
 }
@@ -142,24 +148,18 @@ export default async function RootLayout({children, params}: LocaleLayoutProps) 
   if (!hasLocale(routing.locales, locale)) notFound();
 
   setRequestLocale(locale);
-  const [messages, allProfiles, tNavigation, tMetadata] = await Promise.all([
+  const [messages, tNavigation, tMetadata] = await Promise.all([
     getMessages(),
-    getAllEmployeeProfiles(locale),
     getTranslations({locale, namespace: 'Navigation'}),
     getTranslations({locale, namespace: 'Metadata.pages'}),
   ]);
-  const founders = allProfiles.filter(
-    (profile) => profile.profileType === 'coFounder'
-  );
-  const leadershipPeople = founders.map((member) => ({
+  const leadershipPeople = GLOBAL_FOUNDERS.map((member) => ({
     '@type': 'Person',
     '@id': `${absoluteUrl(
       localizedPath('/aboutus/our-people/[employee]', locale, {employee: member.slug}),
     )}#person`,
     name: member.name,
-    jobTitle: member.position,
-    description: member.summary,
-    image: absoluteUrl(member.profileImage),
+    jobTitle: locale === 'fr' ? 'Cofondateur' : 'Co-founder',
     url: absoluteUrl(
       localizedPath('/aboutus/our-people/[employee]', locale, {employee: member.slug}),
     ),
@@ -167,7 +167,6 @@ export default async function RootLayout({children, params}: LocaleLayoutProps) 
       '@id': absoluteUrl('/#organization'),
       name: 'Hive Vault Arc',
     },
-    knowsAbout: member.expertise,
   }));
 
   const organizationSchema = {
@@ -379,38 +378,6 @@ export default async function RootLayout({children, params}: LocaleLayoutProps) 
         {/* Warm up third-party connections used for 3D assets */}
         <link rel="preconnect" href="https://prod.spline.design" />
         <link rel="dns-prefetch" href="https://prod.spline.design" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(() => {
-  const employeeHashes = new Set(['khalid-chalhi', 'ali-amrani', 'oubay-ghamat']);
-  function revealEmployeeHashTarget() {
-    const id = window.location.hash.slice(1);
-    if (!employeeHashes.has(id)) return false;
-    const target = document.getElementById(id);
-    if (!target) return false;
-    const rect = target.getBoundingClientRect();
-    const currentScroll = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    const top = Math.max(0, rect.top + currentScroll - Math.max(96, (window.innerHeight - rect.height) / 2));
-    window.scrollTo(0, top);
-    document.documentElement.scrollTop = top;
-    document.body.scrollTop = top;
-    return true;
-  }
-  function scheduleEmployeeHashReveal() {
-    revealEmployeeHashTarget();
-    requestAnimationFrame(revealEmployeeHashTarget);
-    requestAnimationFrame(() => requestAnimationFrame(revealEmployeeHashTarget));
-    [80, 180, 360, 700, 1200].forEach((delay) => {
-      window.setTimeout(revealEmployeeHashTarget, delay);
-    });
-  }
-  scheduleEmployeeHashReveal();
-  window.addEventListener('pagereveal', scheduleEmployeeHashReveal, { capture: true });
-  window.addEventListener('pageshow', scheduleEmployeeHashReveal, { capture: true });
-  window.addEventListener('DOMContentLoaded', scheduleEmployeeHashReveal, { capture: true });
-})();`,
-          }}
-        />
       </head>
       <body>
         <NextIntlClientProvider messages={messages}>
@@ -420,6 +387,7 @@ export default async function RootLayout({children, params}: LocaleLayoutProps) 
           <TranslationAvailabilityProvider>
             <Layout>{children}</Layout>
           </TranslationAvailabilityProvider>
+          <EmployeeHashScroller />
           {process.env.VERCEL === '1' && <Analytics />}
         </NextIntlClientProvider>
       </body>

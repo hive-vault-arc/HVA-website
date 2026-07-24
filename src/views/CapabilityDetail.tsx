@@ -21,6 +21,7 @@ import SectionBrandMark from '../components/SectionBrandMark';
 import { useAnimationQuality } from '../lib/animationQuality';
 import type { CapabilityLandingLink, CapabilityProfile, CapabilityProfileSummary } from '../lib/capabilities';
 import {useTranslations} from 'next-intl';
+import {isSanityCdnImage} from '../lib/image-delivery';
 
 type CapabilityDetailProps = {
   capability: CapabilityProfile;
@@ -143,6 +144,7 @@ export default function CapabilityDetail({ capability, relatedCapabilities }: Ca
                 alt={capability.heroImageAlt}
                 fill
                 priority
+                unoptimized={isSanityCdnImage(capability.heroImage)}
                 sizes="(max-width: 1024px) 100vw, 42vw"
                 className="object-cover"
               />
@@ -287,6 +289,7 @@ export default function CapabilityDetail({ capability, relatedCapabilities }: Ca
                         alt={related.heroImageAlt}
                         fill
                         loading="lazy"
+                        unoptimized={isSanityCdnImage(related.heroImage)}
                         sizes="(max-width: 900px) 100vw, 31vw"
                         className="object-cover"
                       />

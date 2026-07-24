@@ -3,6 +3,7 @@
 import InsightIndexPage, { type PageItem } from '../components/InsightIndexPage';
 import type { InsightCard } from '../lib/insights';
 import {useTranslations} from 'next-intl';
+import type {AppLocale} from '@/i18n/config';
 
 type Props = {
   eyebrow: string;
@@ -11,6 +12,7 @@ type Props = {
   description: string;
   cards: InsightCard[];
   basePath?: string;
+  contentLocale: AppLocale;
 };
 
 export default function InsightsCollection({
@@ -20,6 +22,7 @@ export default function InsightsCollection({
   description,
   cards,
   basePath = '/insights',
+  contentLocale,
 }: Readonly<Props>) {
   const t = useTranslations('CollectionUi');
   const items: PageItem[] = cards.map((c) => ({
@@ -30,6 +33,7 @@ export default function InsightsCollection({
     date: c.publishedAt,
     meta: c.readTime,
     coverImage: c.coverImage,
+    sourceLocale: contentLocale,
   }));
 
   return (

@@ -2,10 +2,11 @@
 
 import {useLocale, useTranslations} from 'next-intl';
 import {useSearchParams} from 'next/navigation';
-import {Link, usePathname} from '@/i18n/navigation';
+import {Link} from '@/i18n/navigation';
 import type {AppLocale} from '@/i18n/config';
 import {localizeHref} from '@/i18n/route-manifest';
 import {useTranslationRoutes} from './TranslationAvailability';
+import {useHydratedPathname} from './useHydratedPathname';
 
 const DYNAMIC_ROUTE_PATTERNS = [
   /^\/blog\/[^/]+$/,
@@ -19,12 +20,15 @@ const DYNAMIC_ROUTE_PATTERNS = [
 
 export default function LocaleSwitcher({mobile = false}: {mobile?: boolean}) {
   const locale = useLocale() as AppLocale;
-  const pathname = usePathname();
+  const hydratedPathname = useHydratedPathname();
   const searchParams = useSearchParams();
   const translationRoutes = useTranslationRoutes();
   const t = useTranslations('Locale');
+  const pathname = hydratedPathname ?? '/';
   const isDynamicRoute = DYNAMIC_ROUTE_PATTERNS.some((pattern) => pattern.test(pathname));
-  const query = Object.fromEntries(searchParams.entries());
+  const query = hydratedPathname
+    ? Object.fromEntries(searchParams.entries())
+    : {};
 
   return (
     <div

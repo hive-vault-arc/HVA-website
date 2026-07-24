@@ -7,6 +7,7 @@ import type { CaseStudy } from '../lib/proof';
 import ArticleDetailPage from '../components/ArticleDetailPage';
 import ClientEvidenceCard from '../components/ClientEvidenceCard';
 import {useTranslations} from 'next-intl';
+import {isSanityCdnImage} from '../lib/image-delivery';
 
 const fadeUp = { hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0 } };
 
@@ -36,6 +37,7 @@ function CaseStudySidebar({ study }: { readonly study: CaseStudy }) {
                 alt={study.assets.clientLogoAlt ?? `${study.clientName} logo`}
                 width={210}
                 height={64}
+                unoptimized={isSanityCdnImage(study.assets.clientLogo)}
                 className="max-h-11 w-auto max-w-full object-contain object-left"
               />
             </div>

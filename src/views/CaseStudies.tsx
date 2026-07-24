@@ -3,8 +3,15 @@
 import type { CaseStudy } from '../lib/proof';
 import InsightIndexPage, { type PageItem } from '../components/InsightIndexPage';
 import {useTranslations} from 'next-intl';
+import type {AppLocale} from '@/i18n/config';
 
-export default function CaseStudies({ studies }: { readonly studies: CaseStudy[] }) {
+export default function CaseStudies({
+  studies,
+  contentLocale,
+}: {
+  readonly studies: CaseStudy[];
+  readonly contentLocale: AppLocale;
+}) {
   const t = useTranslations('CaseStudiesIndex');
   const items: PageItem[] = studies.map((s) => ({
     href: `/case-studies/${s.slug}`,
@@ -14,6 +21,7 @@ export default function CaseStudies({ studies }: { readonly studies: CaseStudy[]
     meta: s.deploymentStatus,
     coverImage: s.assets.coverImage || undefined,
     evidenceLabel: s.hasClientEvidence ? t('evidenceAvailable') : undefined,
+    sourceLocale: contentLocale,
   }));
 
   const industries = Array.from(new Set(studies.map((s) => s.industry)));

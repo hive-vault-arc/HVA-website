@@ -5,6 +5,7 @@ import {Link} from '@/i18n/navigation';
 import { motion, useReducedMotion } from 'framer-motion';
 import {useTranslations} from 'next-intl';
 import { ArrowRight, ChevronLeft, ChevronRight } from '@/components/icons';
+import type {AppLocale} from '@/i18n/config';
 
 /* ─── Types ───────────────────────────────────────────────────────────────── */
 
@@ -15,6 +16,7 @@ export type SlideItem = {
   description: string;
   image: string;
   href: string;
+  sourceLocale: AppLocale;
 };
 
 /* ─── Seeded deterministic shuffle — consistent SSR/CSR ───────────────────── */
@@ -118,6 +120,7 @@ export default function InsightsSlider({ items }: { readonly items: SlideItem[] 
                 >
                   <Link
                     href={item.href}
+                    locale={item.sourceLocale}
                     className="block h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E8A838] focus-visible:ring-inset"
                     tabIndex={i === current ? 0 : -1}
                     aria-current={i === current ? 'true' : undefined}
@@ -129,6 +132,9 @@ export default function InsightsSlider({ items }: { readonly items: SlideItem[] 
                     <motion.img
                       src={item.image}
                       alt={item.title}
+                      loading={i === current ? 'eager' : 'lazy'}
+                      fetchPriority={i === current ? 'high' : 'low'}
+                      decoding="async"
                       className="insights-slide-img"
                       animate={{
                         scale: isHovered ? 1.06 : 1,

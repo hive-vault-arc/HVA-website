@@ -8,6 +8,8 @@ import {useLocale, useTranslations} from 'next-intl';
 import { ArrowLeft, ArrowRight, ArrowUpRight } from '@/components/icons';
 import BottomCTA from './BottomCTA';
 import SectionBrandMark from './SectionBrandMark';
+import type {AppLocale} from '@/i18n/config';
+import {isSanityCdnImage} from '@/lib/image-delivery';
 
 /* ── Shared item shape ───────────────────────────────────────────────────── */
 
@@ -21,6 +23,7 @@ export type PageItem = {
   coverImage?: string;    // optional — shows image card; omit for text-only card
   author?: { name: string; initials: string };
   evidenceLabel?: string;
+  sourceLocale?: AppLocale;
 };
 
 /* ── Props ───────────────────────────────────────────────────────────────── */
@@ -152,7 +155,7 @@ export default function InsightIndexPage({
   bottomCta,
 }: Props) {
   const t = useTranslations('CollectionUi');
-  const locale = useLocale();
+  const locale = useLocale() as AppLocale;
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
@@ -167,6 +170,8 @@ export default function InsightIndexPage({
 
   const featured = filtered[0];
   const rest = filtered.slice(1);
+  const usesEnglishSources =
+    locale === 'fr' && items.some((item) => item.sourceLocale === 'en');
 
   return (
     <div className="min-h-[100dvh] bg-[#FFFFFF]">
@@ -209,6 +214,24 @@ export default function InsightIndexPage({
           </div>
         </div>
       </section>
+
+      {usesEnglishSources ? (
+        <aside className="max-w-[var(--site-frame)] mx-auto px-4 pt-8 md:px-8">
+          <div className="flex items-start gap-4 border-l-2 border-[#CD9F40] bg-[#F8F9FB] px-5 py-4">
+            <span className="mt-0.5 text-[10px] font-extrabold uppercase tracking-[0.2em] text-[#9A6B12]">
+              EN
+            </span>
+            <div>
+              <p className="text-sm font-bold text-[#1A2535]">
+                {t('englishCatalogueTitle')}
+              </p>
+              <p className="mt-1 text-sm leading-relaxed text-[#536070]">
+                {t('englishCatalogueDescription')}
+              </p>
+            </div>
+          </div>
+        </aside>
+      ) : null}
 
       {/* ── Filter / nav bar ───────────────────────────────────────────────── */}
       <section className="max-w-[var(--site-frame)] mx-auto px-4 md:px-8 pt-12 pb-8">
@@ -254,7 +277,7 @@ export default function InsightIndexPage({
             viewport={{ once: true, amount: 0.05 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
           >
-            <Link href={featured.href} className="group block">
+            <Link href={featured.href} locale={featured.sourceLocale} className="group block">
               {featured.coverImage ? (
                 /* ── Image featured: image left, card overlapping right ── */
                 <div className="flex flex-col lg:flex-row items-stretch">
@@ -265,6 +288,7 @@ export default function InsightIndexPage({
                         alt={featured.title}
                         fill
                         priority
+                        unoptimized={isSanityCdnImage(featured.coverImage)}
                         className="object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
                         sizes="(max-width: 1024px) 100vw, 60vw"
                       />
@@ -312,7 +336,7 @@ export default function InsightIndexPage({
                 viewport={{ once: true, amount: 0.05 }}
                 transition={{ duration: 0.5, delay: i * 0.08, ease: 'easeOut' }}
               >
-                <Link href={item.href} className="block">
+                <Link href={item.href} locale={item.sourceLocale} className="block">
                   {/* Image or placeholder */}
                   <div className="aspect-square bg-[#F7F8FA] mb-7 overflow-hidden relative">
                     {item.coverImage ? (
@@ -320,6 +344,7 @@ export default function InsightIndexPage({
                         src={item.coverImage}
                         alt={item.title}
                         fill
+                        unoptimized={isSanityCdnImage(item.coverImage)}
                         className="object-cover grayscale transition-all duration-500 group-hover:grayscale-0 group-hover:scale-105"
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
@@ -418,6 +443,11 @@ function FeaturedCardContent({
             {item.meta}
           </span>
         )}
+        {item.sourceLocale && item.sourceLocale !== locale ? (
+          <span className="text-[9px] font-extrabold uppercase tracking-[0.16em] text-[#9A6B12]">
+            {t('availableInEnglish')}
+          </span>
+        ) : null}
       </div>
       <h2
         className={`${titleSize === 'large' ? 'text-3xl md:text-4xl lg:text-5xl' : 'text-3xl md:text-4xl'} mb-5 leading-tight text-[#1A2535] transition-colors group-hover:text-[var(--section-label-color)]`}

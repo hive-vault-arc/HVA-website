@@ -7,6 +7,7 @@ import {getTranslations} from 'next-intl/server';
 import JsonLd from '@/components/JsonLd';
 import {localizedPath} from '@/i18n/route-manifest';
 import {absoluteUrl, buildLocalizedBreadcrumbSchema} from '@/lib/seo';
+import {getPublishedCollection} from '@/lib/localized-content';
 
 type PageProps = {params: Promise<{locale: AppLocale}>};
 
@@ -18,7 +19,7 @@ export async function generateMetadata({params}: PageProps): Promise<Metadata> {
 export default async function InsightsNewsArticlesPage({params}: PageProps) {
   const {locale} = await params;
   const [newsArticles, t, tNav] = await Promise.all([
-    getAllNewsArticles(locale),
+    getPublishedCollection(locale, getAllNewsArticles),
     getTranslations({locale, namespace: 'Collections.news'}),
     getTranslations({locale, namespace: 'Navigation'}),
   ]);
@@ -32,16 +33,17 @@ export default async function InsightsNewsArticlesPage({params}: PageProps) {
     inLanguage: locale,
     mainEntity: {
       '@type': 'ItemList',
-      numberOfItems: newsArticles.length,
-      itemListElement: newsArticles.map((article, index) => ({
+      numberOfItems: newsArticles.items.length,
+      itemListElement: newsArticles.items.map((article, index) => ({
         '@type': 'ListItem',
         position: index + 1,
         name: article.title,
         url: absoluteUrl(
-          localizedPath('/insights/news-articles/[slug]', locale, {
+          localizedPath('/insights/news-articles/[slug]', newsArticles.sourceLocale, {
             slug: article.slug,
           }),
         ),
+        inLanguage: newsArticles.sourceLocale,
       })),
     },
   };
@@ -58,8 +60,9 @@ export default async function InsightsNewsArticlesPage({params}: PageProps) {
         eyebrow={t('eyebrow')}
         title={t('title')}
         description={t('description')}
-        cards={newsArticles}
+        cards={newsArticles.items}
         basePath="/insights/news-articles"
+        contentLocale={newsArticles.sourceLocale}
       />
     </>
   );

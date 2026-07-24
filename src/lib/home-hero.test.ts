@@ -99,4 +99,26 @@ describe('buildHomeHeroProof', () => {
 
     expect(result.trustedPartners.filter((partner) => partner.name === 'Premium Advice & Training')).toHaveLength(1);
   });
+
+  it('keeps fallback partner links on their canonical source locale', () => {
+    const result = buildHomeHeroProof(
+      [
+        study({
+          slug: 'immoworld',
+          clientName: 'ImmoWorld',
+          assets: {
+            coverImage: '/cover.png',
+            logoLabel: 'ImmoWorld',
+            clientLogo: 'https://cdn.sanity.io/immoworld.png',
+          },
+        }),
+      ],
+      'en',
+    );
+
+    expect(result.trustedPartners[0]).toMatchObject({
+      href: '/case-studies/immoworld',
+      hrefLocale: 'en',
+    });
+  });
 });

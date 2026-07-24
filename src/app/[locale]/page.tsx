@@ -22,6 +22,7 @@ import {
   SITE_URL,
   absoluteUrl,
 } from '@/lib/seo';
+import {getPublishedCollection} from '@/lib/localized-content';
 
 type PageProps = {params: Promise<{locale: AppLocale}>};
 
@@ -37,6 +38,8 @@ export async function generateMetadata({params}: PageProps): Promise<Metadata> {
 function buildInsightsCarouselItems(
   posts: BlogPost[],
   studies: CaseStudy[],
+  postLocale: AppLocale,
+  caseStudyLocale: AppLocale,
   limit = 9
 ): InsightsCarouselItem[] {
   const postItems = posts
@@ -51,6 +54,7 @@ function buildInsightsCarouselItems(
       image: post.coverImage,
       href: `/blog/${post.slug}`,
       date: post.publishedAt,
+      sourceLocale: postLocale,
     }));
 
   const studyItems = studies
@@ -65,6 +69,7 @@ function buildInsightsCarouselItems(
       image: study.assets.coverImage,
       href: `/case-studies/${study.slug}`,
       date: study.lastUpdated,
+      sourceLocale: caseStudyLocale,
     }));
 
   // Interleave 2 blogs then 1 case-study for variety while keeping payload small.
@@ -85,8 +90,8 @@ function buildInsightsCarouselItems(
 export default async function Page({params}: PageProps) {
   const {locale} = await params;
   const [posts, caseStudies, clientEvidence] = await Promise.all([
-    getAllPosts(locale),
-    getAllCaseStudies(locale),
+    getPublishedCollection(locale, getAllPosts),
+    getPublishedCollection(locale, getAllCaseStudies),
     getClientEvidenceShowcase(locale),
   ]);
   const [homeFaqs, tHome, tHomeMeta, tCapabilitiesMeta, tNavigation] = await Promise.all([
@@ -102,9 +107,19 @@ export default async function Page({params}: PageProps) {
     region: string;
     summary: string;
   }>;
-  const insightsCarouselItems = buildInsightsCarouselItems(posts, caseStudies);
-  const { trustedPartners } = buildHomeHeroProof(caseStudies);
-  const caseStudyShowcase: CaseStudyShowcaseSummary[] = caseStudies.map((study) => ({
+  const localizedCaseStudies =
+    caseStudies.sourceLocale === locale ? caseStudies.items : [];
+  const insightsCarouselItems = buildInsightsCarouselItems(
+    posts.items,
+    caseStudies.items,
+    posts.sourceLocale,
+    caseStudies.sourceLocale,
+  );
+  const { trustedPartners } = buildHomeHeroProof(
+    caseStudies.items,
+    caseStudies.sourceLocale,
+  );
+  const caseStudyShowcase: CaseStudyShowcaseSummary[] = localizedCaseStudies.map((study) => ({
     slug: study.slug,
     title: study.title,
     clientName: study.clientName,

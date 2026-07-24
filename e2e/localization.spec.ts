@@ -88,28 +88,150 @@ test.describe('localized public routes', () => {
     }
   });
 
-  test('unapproved CMS translations are unavailable rather than falling back', async ({page}) => {
+  test('pending CMS translations keep complete source content with French presentation', async ({
+    page,
+  }) => {
     await page.goto(ENGLISH_CASE_STUDY);
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
-    await expect(page.locator('[aria-disabled="true"]')).toContainText('fr');
+    await expect(
+      page.getByRole('link', {name: 'View this page in French'}),
+    ).toHaveAttribute(
+      'href',
+      '/fr/etudes-de-cas/top-tier-crm-transformation-program-real-estate-operations',
+      {timeout: 15_000},
+    );
     await expect(page.locator('link[hreflang="fr"]')).toHaveCount(0);
 
     await page.goto(
       '/fr/etudes-de-cas/top-tier-crm-transformation-program-real-estate-operations',
     );
     await expect(page.locator('html')).toHaveAttribute('lang', 'fr');
-    expect(
-      await page.locator('meta[name="robots"][content*="noindex"]').count(),
-    ).toBeGreaterThan(0);
-    await expect(
-      page.locator('meta[name="robots"][content^="index"]'),
-    ).toHaveCount(0);
     await expect(page.getByRole('heading', {level: 1})).toContainText(
-      /plus disponible à cette adresse/i,
+      /Système d’exploitation CRM ImmoWorld/i,
     );
-    await expect(page.getByText(/ImmoWorld CRM Operating System/i)).toHaveCount(
-      0,
+    await expect(
+      page.locator(
+        'a[href="/case-studies/top-tier-crm-transformation-program-real-estate-operations"]',
+      ),
+    ).toBeAttached();
+    await expect(
+      page.locator(
+        'a[href="/fr/etudes-de-cas/top-tier-crm-transformation-program-real-estate-operations"]',
+      ),
+    ).toBeAttached();
+  });
+
+  test('French CMS routes keep full homepage, publication, capability, and people content', async ({
+    page,
+  }) => {
+    await page.goto('/fr');
+    await expect(page.locator('.decision-proof')).toHaveCount(1);
+    await expect(page.locator('.decision-proof-card')).toHaveCount(3);
+    await expect(page.locator('.home-trusted-logo')).toHaveCount(3);
+    await expect(
+      page.locator('a[href^="/fr/blog/"], a[href^="/fr/etudes-de-cas/"]').first(),
+    ).toBeAttached();
+
+    await page.goto('/fr/publications');
+    await expect(page.locator('.insights-empty-state')).toHaveCount(0);
+    await expect(page.locator('.insights-slide-card')).toHaveCount(6);
+    await expect(page.getByText(/Tout ce que nous avons publié/i)).toBeVisible();
+
+    await page.goto('/fr/expertises');
+    await expect(page.locator('a[href^="/fr/expertises/"]').filter({
+      has: page.getByRole('heading', {level: 2}),
+    })).toHaveCount(6);
+
+    await page.goto('/fr/qui-sommes-nous');
+    await expect(
+      page.locator('a[href^="/fr/qui-sommes-nous/equipe/"]'),
+    ).toHaveCount(3);
+  });
+
+  test('French detail routes render complete CMS bodies and localized related links', async ({
+    page,
+  }) => {
+    await page.goto('/fr/expertises/ai-data-analytics');
+    await expect(page.getByRole('heading', {level: 1})).toContainText(
+      /IA, données et analytique/i,
     );
+    await expect(page.getByText(/Conception et déploiement d’agents IA/i)).toBeVisible();
+    await expect(
+      page.locator('a[href="/capabilities/ai-data-analytics"]'),
+    ).toBeAttached();
+
+    await page.goto('/fr/qui-sommes-nous/equipe/khalid-chalhi');
+    await expect(page.getByRole('heading', {level: 1})).toContainText(
+      /Khalid Chalhi/i,
+    );
+    await expect(page.getByText(/Cofondateur et CEO/i).first()).toBeVisible();
+    await expect(
+      page.getByRole('link', {name: 'Retour à l’équipe'}),
+    ).toHaveAttribute('href', '/fr/qui-sommes-nous#khalid-chalhi');
+    await expect(
+      page.locator('a[href="/aboutus/our-people/khalid-chalhi"]'),
+    ).toBeAttached();
+  });
+
+  test('French routes expose localized CMS presentation while translations are reviewed', async ({
+    page,
+  }) => {
+    const clientWarnings: string[] = [];
+    page.on('console', (message) => {
+      if (message.type() === 'error' || message.type() === 'warning') {
+        const text = message.text();
+        if (!text.includes('GL Driver Message')) {
+          clientWarnings.push(text);
+        }
+      }
+    });
+
+    await page.goto('/fr/publications');
+    const firstPublication = page.locator('.insights-slide-card a').first();
+    await expect(firstPublication).toHaveAttribute(
+      'href',
+      /^\/fr\/(?:blog|etudes-de-cas|publications)\//,
+    );
+
+    await page.goto('/fr/expertises');
+    const discoveryLink = page.locator('.capabilities-depth-cta-secondary');
+    await expect(discoveryLink).toBeVisible();
+    const textLineCount = await discoveryLink.evaluate((element) => {
+      const textNode = Array.from(element.childNodes).find(
+        (node) => node.nodeType === Node.TEXT_NODE && node.textContent?.trim(),
+      );
+      if (!textNode) return 0;
+      const range = document.createRange();
+      range.selectNode(textNode);
+      return new Set(
+        Array.from(range.getClientRects()).map((rect) => Math.round(rect.y)),
+      ).size;
+    });
+    expect(textLineCount).toBe(1);
+    expect(clientWarnings).toEqual([]);
+  });
+
+  test('every French publication collection keeps its full catalogue on French routes', async ({
+    page,
+  }) => {
+    const collectionRoutes = [
+      {path: '/fr/blog', href: /^\/fr\/blog\//},
+      {path: '/fr/etudes-de-cas', href: /^\/fr\/etudes-de-cas\//},
+      {path: '/fr/publications/actualites', href: /^\/fr\/publications\/actualites\//},
+      {path: '/fr/publications/perspectives', href: /^\/fr\/publications\/perspectives\//},
+      {
+        path: '/fr/publications/rapports-de-recherche',
+        href: /^\/fr\/publications\/rapports-de-recherche\//,
+      },
+    ];
+
+    for (const collection of collectionRoutes) {
+      await page.goto(collection.path);
+      await expect(page.locator('.insight-index-empty')).toHaveCount(0);
+      await expect(
+        page.locator('a[href]').filter({has: page.locator('h2')}).first(),
+      ).toHaveAttribute('href', collection.href);
+    }
   });
 
   test('French contact and legal routes remain fully localized', async ({page}) => {

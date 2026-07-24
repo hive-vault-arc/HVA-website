@@ -335,6 +335,7 @@
     "description": "Notes de terrain tirées des programmes que nous avons construits et des équipes que nous avons accompagnées.",
     "article": "Article",
     "caseStudy": "Étude de cas",
+    "availableInEnglish": "Disponible en anglais",
     "learnMore": "En savoir plus",
     "play": "Lire",
     "pause": "Mettre en pause",
@@ -422,7 +423,7 @@
     "nextStep": "Prochaine étape",
     "depthTitle": "Besoin de la carte complète des expertises et de leur profondeur de livraison ?",
     "depthDescription": "La page En détail présente le contexte stratégique, le modèle d’exécution et l’ensemble des sous-expertises des six piliers.",
-    "bookCall": "Réserver un appel de découverte",
+    "bookCall": "Réserver un appel",
     "onPage": "Sur cette page",
     "fullDepth": "Vue complète",
     "pageLinks": [
@@ -1024,6 +1025,10 @@
       "typeLabel": "Type de publication",
       "open": "Ouvrir : {type}"
     },
+    "englishCatalogue": {
+      "title": "Les publications originales restent accessibles.",
+      "description": "Les éditions françaises sont en cours de validation éditoriale. En attendant leur approbation, ces cartes ouvrent les publications originales en anglais."
+    },
     "latest": {
       "eyebrow": "À la une",
       "label": "Dernière publication : {type}",
@@ -1036,7 +1041,9 @@
       "title": "Tout ce que nous avons publié",
       "itemCount": "{count, plural, one {# élément} other {# éléments}}",
       "open": "Ouvrir : {type}",
-      "loadMore": "Afficher plus"
+      "loadMore": "Afficher plus",
+      "emptyTitle": "Les éditions françaises sont en cours de validation.",
+      "emptyDescription": "Les articles et études de cas apparaîtront ici après leur validation éditoriale. Vous pouvez déjà explorer les différentes catégories de publications."
     },
     "slider": {
       "ariaLabel": "Carrousel des dernières publications",
@@ -1066,7 +1073,10 @@
     "emptyDescription": "Nous publions de manière délibérée, uniquement lorsque le contenu respecte nos exigences éditoriales. Revenez bientôt ou explorez une autre section.",
     "defaultEmpty": "Ces articles sont",
     "collectionEmpty": "La collection « {title} » est",
-    "brand": "Hive Vault Arc"
+    "brand": "Hive Vault Arc",
+    "availableInEnglish": "Disponible en anglais",
+    "englishCatalogueTitle": "Les publications originales restent accessibles.",
+    "englishCatalogueDescription": "Les éditions françaises sont en cours de validation éditoriale. Ces contenus ouvrent leur page originale en anglais jusqu’à la publication d’une version française approuvée."
   },
   "BlogIndex": {
     "eyebrow": "Journal de stratégie et d’exécution",

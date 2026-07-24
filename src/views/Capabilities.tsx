@@ -11,6 +11,7 @@ import SectionBrandMark from '../components/SectionBrandMark';
 import {CAPABILITY_SOLUTION_PROGRAM_DETAILS} from '../lib/capabilities-content';
 import type { CapabilityProfile } from '../lib/capabilities';
 import type {AppLocale} from '@/i18n/config';
+import {isSanityCdnImage} from '../lib/image-delivery';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -273,6 +274,7 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
                         src={card.image}
                         alt={card.alt}
                         fill
+                        unoptimized={isSanityCdnImage(card.image)}
                         sizes="(max-width: 768px) 100vw, 33vw"
                         className="object-cover"
                       />
@@ -301,6 +303,7 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
                       src={card.image}
                       alt={card.alt}
                       fill
+                      unoptimized={isSanityCdnImage(card.image)}
                       sizes="(max-width: 768px) 100vw, 33vw"
                       className="object-cover"
                     />

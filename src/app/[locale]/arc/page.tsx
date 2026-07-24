@@ -9,6 +9,7 @@ import {getLocalizedFaqs} from '@/i18n/faqs';
 import {localizedPath} from '@/i18n/route-manifest';
 import {SITE_URL, absoluteUrl, buildLocalizedBreadcrumbSchema} from '@/lib/seo';
 import {getTranslations} from 'next-intl/server';
+import {getPublishedCollection} from '@/lib/localized-content';
 
 type PageProps = {params: Promise<{locale: AppLocale}>};
 
@@ -24,13 +25,14 @@ const ARC_CASE_SLUGS = [
 
 export default async function ArcPage({params}: PageProps) {
   const {locale} = await params;
-  const [arcFaqs, tArc, tMeta, tNav, caseStudies] = await Promise.all([
+  const [arcFaqs, tArc, tMeta, tNav, caseStudyCollection] = await Promise.all([
     getLocalizedFaqs(locale, 'arc'),
     getTranslations({locale, namespace: 'Arc'}),
     getTranslations({locale, namespace: 'Metadata.pages.arc'}),
     getTranslations({locale, namespace: 'Navigation'}),
-    getAllCaseStudies(locale),
+    getPublishedCollection(locale, getAllCaseStudies),
   ]);
+  const caseStudies = caseStudyCollection.items;
   const arcCaseStudies = ARC_CASE_SLUGS.map((slug) =>
     caseStudies.find((study) => study.slug === slug)
   ).filter((study): study is (typeof caseStudies)[number] => Boolean(study));

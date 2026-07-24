@@ -1,13 +1,17 @@
 import type { SanityImageSource } from '@sanity/image-url';
+import {cache} from 'react';
 import type {AppLocale} from '@/i18n/config';
 import type {LocalizedContentMeta} from './localized-content';
-import {localeTag} from './localized-content';
+import {
+  getPublishedCollection,
+  getPublishedDocument,
+  localeTag,
+} from './localized-content';
 import { sanityFetch } from '../sanity/lib/fetch';
 import { urlForImage } from '../sanity/lib/image';
 import {
   allEmployeeProfilesQuery,
   employeeProfileBySlugQuery,
-  featuredEmployeeProfilesQuery,
 } from '../sanity/queries/people';
 
 const PEOPLE_TAG = 'people';
@@ -109,50 +113,56 @@ function publishedProfiles(profiles: EmployeeProfile[]): EmployeeProfile[] {
   return sortProfiles(profiles.filter((profile) => profile.visibility !== 'hidden'));
 }
 
-export async function getAllEmployeeProfiles(locale: AppLocale = 'en'): Promise<EmployeeProfile[]> {
-  const profiles = await sanityFetch<SanityEmployeeProfile[]>({
-    query: allEmployeeProfilesQuery,
-    params: {locale},
-    tags: [PEOPLE_TAG, 'employeeProfiles', localeTag('employeeProfiles', locale)],
+export const getAllEmployeeProfiles = cache(async function getAllEmployeeProfiles(
+  locale: AppLocale = 'en',
+): Promise<EmployeeProfile[]> {
+  const collection = await getPublishedCollection(locale, async (targetLocale) => {
+    const profiles = await sanityFetch<SanityEmployeeProfile[]>({
+      query: allEmployeeProfilesQuery,
+      params: {locale: targetLocale},
+      tags: [
+        PEOPLE_TAG,
+        'employeeProfiles',
+        localeTag('employeeProfiles', targetLocale),
+      ],
+    });
+
+    return publishedProfiles(profiles.map(normalizeEmployeeProfile));
   });
 
-  return publishedProfiles(profiles.map(normalizeEmployeeProfile));
-}
+  return collection.items;
+});
 
 export async function getFeaturedEmployeeProfiles(
   locale: AppLocale = 'en'
 ): Promise<EmployeeProfile[]> {
-  const profiles = await sanityFetch<SanityEmployeeProfile[]>({
-    query: featuredEmployeeProfilesQuery,
-    params: {locale},
-    tags: [PEOPLE_TAG, 'employeeProfiles', localeTag('employeeProfiles', locale)],
-  });
-
-  return publishedProfiles(profiles.map(normalizeEmployeeProfile)).filter(
-    (profile) => profile.featuredOnAbout
+  return (await getAllEmployeeProfiles(locale)).filter(
+    (profile) => profile.featuredOnAbout,
   );
 }
 
-export async function getEmployeeProfileBySlug(
+export const getEmployeeProfileBySlug = cache(async function getEmployeeProfileBySlug(
   slug: string,
   locale: AppLocale = 'en'
 ): Promise<EmployeeProfile | null> {
-  const profile = await sanityFetch<SanityEmployeeProfile | null>({
-    query: employeeProfileBySlugQuery,
-    params: {slug, locale},
-    tags: [
-      PEOPLE_TAG,
-      'employeeProfiles',
-      localeTag('employeeProfiles', locale),
-      `employeeProfile:${locale}:${slug}`,
-    ],
+  const profile = await getPublishedDocument(locale, async (targetLocale) => {
+    const sanityProfile = await sanityFetch<SanityEmployeeProfile | null>({
+      query: employeeProfileBySlugQuery,
+      params: {slug, locale: targetLocale},
+      tags: [
+        PEOPLE_TAG,
+        'employeeProfiles',
+        localeTag('employeeProfiles', targetLocale),
+        `employeeProfile:${targetLocale}:${slug}`,
+      ],
+    });
+
+    return sanityProfile ? normalizeEmployeeProfile(sanityProfile) : null;
   });
 
   if (!profile) return null;
-
-  const normalized = normalizeEmployeeProfile(profile);
-  return normalized.visibility === 'hidden' ? null : normalized;
-}
+  return profile.visibility === 'hidden' ? null : profile;
+});
 
 export async function getRelatedEmployeeProfiles(
   currentSlug: string,

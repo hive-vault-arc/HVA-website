@@ -1,10 +1,11 @@
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
-import {useTranslations} from 'next-intl';
+import {useLocale, useTranslations} from 'next-intl';
 import {Link} from '@/i18n/navigation';
 import { motion } from 'framer-motion';
 import { ArrowRight, Pause, Play, ChevronLeft, ChevronRight } from '@/components/icons';
+import type {AppLocale} from '@/i18n/config';
 
 export type InsightsCarouselItem = {
   id: string;
@@ -15,6 +16,7 @@ export type InsightsCarouselItem = {
   image: string;
   href: string;
   date: string;
+  sourceLocale: AppLocale;
 };
 
 const CARD_W = 360;
@@ -47,6 +49,7 @@ type InsightsCarouselProps = {
 
 export default function InsightsCarousel({ items }: InsightsCarouselProps) {
   const t = useTranslations('InsightsCarousel');
+  const currentLocale = useLocale() as AppLocale;
   const total = items.length;
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -79,15 +82,6 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
     window.addEventListener('resize', updateWidth);
     return () => window.removeEventListener('resize', updateWidth);
   }, []);
-
-  useEffect(() => {
-    items.forEach((item) => {
-      if (item.image) {
-        const img = new globalThis.Image();
-        img.src = item.image;
-      }
-    });
-  }, [items]);
 
   useEffect(() => {
     setHoveredCenter(false);
@@ -182,6 +176,9 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
                     <motion.img
                       src={item.image}
                       alt={item.title}
+                      loading={isCenter ? 'eager' : 'lazy'}
+                      fetchPriority={isCenter ? 'high' : 'low'}
+                      decoding="async"
                       className="w-full h-full object-cover"
                       animate={{ scale: isCenter && hoveredCenter ? 1.06 : 1 }}
                       transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
@@ -194,6 +191,7 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
                 {/* ── Static bottom text panel (28% height) ── */}
                 <Link
                   href={item.href}
+                  locale={item.sourceLocale}
                   className="absolute bottom-0 left-0 right-0 bg-white px-5 pt-4 pb-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#E8A838]"
                   style={{ height: '28%' }}
                 >
@@ -203,6 +201,11 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
                     </span>
                     {'  '}{item.date}
                   </p>
+                  {item.sourceLocale !== currentLocale ? (
+                    <p className="mb-1 text-[8px] font-bold uppercase tracking-[0.18em] text-[#9A6B12]">
+                      {t('availableInEnglish')}
+                    </p>
+                  ) : null}
                   <h3 className="font-headline text-[1.2rem] leading-snug text-[#1A2535] line-clamp-2">
                     {item.title}
                   </h3>
@@ -232,6 +235,7 @@ export default function InsightsCarousel({ items }: InsightsCarouselProps) {
                   </p>
                   <Link
                     href={item.href}
+                    locale={item.sourceLocale}
                     tabIndex={-1}
                     className="inline-flex items-center justify-center gap-2
                                bg-[#E8A838] text-[#1A2535]

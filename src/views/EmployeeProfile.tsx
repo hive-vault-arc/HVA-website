@@ -10,6 +10,7 @@ import type { EmployeeProfile } from '../lib/employee-profiles';
 import BottomCTA from '../components/BottomCTA';
 import SectionBrandMark from '../components/SectionBrandMark';
 import {useTranslations} from 'next-intl';
+import {isSanityCdnImage} from '../lib/image-delivery';
 
 type Props = {
   profile: EmployeeProfile;
@@ -96,6 +97,7 @@ export default function EmployeeProfileView({ profile, relatedProfiles }: Props)
               alt={profile.profileImageAlt}
               fill
               priority
+              unoptimized={isSanityCdnImage(profile.profileImage)}
               className={profile.slug === 'ali-amrani' ? 'employee-profile-portrait__ali' : undefined}
               sizes="(max-width: 900px) calc(100vw - 2rem), 42vw"
             />
@@ -200,9 +202,9 @@ export default function EmployeeProfileView({ profile, relatedProfiles }: Props)
           <div className="site-frame">
             <div className="employee-profile-related__heading">
               <h2>{t('employee.moreTeam')}</h2>
-              <a href={teamHref} onClick={handleTeamBackClick}>
+              <Link href={teamHref} onClick={handleTeamBackClick}>
                 {t('employee.backTeam')}
-              </a>
+              </Link>
             </div>
             <div className="employee-profile-related__grid">
               {relatedProfiles.map((item) => (

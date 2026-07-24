@@ -5,6 +5,8 @@ import {
 import type { ContentSeo } from './content-seo';
 import type {AppLocale} from '@/i18n/config';
 import type {LocalizedContentMeta} from './localized-content';
+import {getPublishedCollection, getPublishedDocument} from './localized-content';
+import {cache} from 'react';
 
 export type ContentSection =
   | { type: 'paragraph'; content: string }
@@ -1042,18 +1044,23 @@ export function getAllPosts(locale: AppLocale = 'en'): Promise<BlogPost[]> {
   return getAllSanityPosts(locale);
 }
 
-export async function getPostBySlug(slug: string, locale: AppLocale = 'en'): Promise<BlogPost> {
-  const post = await getSanityPostBySlug(slug, locale);
+export const getPostBySlug = cache(async function getPostBySlug(
+  slug: string,
+  locale: AppLocale = 'en'
+): Promise<BlogPost> {
+  const post = await getPublishedDocument(locale, (targetLocale) =>
+    getSanityPostBySlug(slug, targetLocale),
+  );
   if (!post) throw new Error(`Blog post not found: ${slug}`);
   return post;
-}
+});
 
 export async function getRelatedPosts(
   currentSlug: string,
   limit = 3,
   locale: AppLocale = 'en'
 ): Promise<BlogPost[]> {
-  const posts = await getAllPosts(locale);
-  return posts.filter((post) => post.slug !== currentSlug).slice(0, limit);
+  const posts = await getPublishedCollection(locale, getAllPosts);
+  return posts.items.filter((post) => post.slug !== currentSlug).slice(0, limit);
 }
 

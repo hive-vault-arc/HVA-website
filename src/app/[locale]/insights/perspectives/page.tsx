@@ -7,6 +7,7 @@ import {getTranslations} from 'next-intl/server';
 import JsonLd from '@/components/JsonLd';
 import {localizedPath} from '@/i18n/route-manifest';
 import {absoluteUrl, buildLocalizedBreadcrumbSchema} from '@/lib/seo';
+import {getPublishedCollection} from '@/lib/localized-content';
 
 type PageProps = {params: Promise<{locale: AppLocale}>};
 
@@ -18,11 +19,11 @@ export async function generateMetadata({params}: PageProps): Promise<Metadata> {
 export default async function InsightsPerspectivesPage({params}: PageProps) {
   const {locale} = await params;
   const [allPerspectives, t, tNav] = await Promise.all([
-    getAllPerspectives(locale),
+    getPublishedCollection(locale, getAllPerspectives),
     getTranslations({locale, namespace: 'Collections.perspectives'}),
     getTranslations({locale, namespace: 'Navigation'}),
   ]);
-  const perspectives = allPerspectives.map((perspective) => ({
+  const perspectives = allPerspectives.items.map((perspective) => ({
     title: perspective.title,
     slug: perspective.slug,
     summary: perspective.summary,
@@ -47,10 +48,11 @@ export default async function InsightsPerspectivesPage({params}: PageProps) {
         position: index + 1,
         name: perspective.title,
         url: absoluteUrl(
-          localizedPath('/insights/perspectives/[slug]', locale, {
+          localizedPath('/insights/perspectives/[slug]', allPerspectives.sourceLocale, {
             slug: perspective.slug,
           }),
         ),
+        inLanguage: allPerspectives.sourceLocale,
       })),
     },
   };
@@ -69,6 +71,7 @@ export default async function InsightsPerspectivesPage({params}: PageProps) {
         description={t('description')}
         cards={perspectives}
         basePath="/insights/perspectives"
+        contentLocale={allPerspectives.sourceLocale}
       />
     </>
   );

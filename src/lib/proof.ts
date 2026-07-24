@@ -6,6 +6,9 @@ import {
 import type { ContentSeo } from './content-seo';
 import type {AppLocale} from '@/i18n/config';
 import type {LocalizedContentMeta} from './localized-content';
+import {getPublishedCollection, getPublishedDocument} from './localized-content';
+import {applyFrenchCmsFallback} from '@/i18n/cms-fallback-fr';
+import {cache} from 'react';
 export {PRODUCT_SYSTEMS} from './product-systems';
 export type {ProductSystem} from './product-systems';
 
@@ -140,26 +143,39 @@ export function getAllCaseStudies(locale: AppLocale = 'en'): Promise<CaseStudy[]
 export function getClientEvidenceShowcase(
   locale: AppLocale = 'en'
 ): Promise<ClientEvidenceSummary[]> {
-  return getSanityClientEvidenceShowcase(locale);
+  if (locale === 'en') return getSanityClientEvidenceShowcase('en');
+
+  return Promise.all([
+    getSanityClientEvidenceShowcase(locale),
+    getSanityClientEvidenceShowcase('en'),
+  ]).then(([localizedEvidence, englishEvidence]) =>
+    localizedEvidence.length > 0
+      ? localizedEvidence
+      : englishEvidence.map((evidence) => applyFrenchCmsFallback(evidence)),
+  );
 }
 
-export async function getCaseStudyBySlug(
+export const getCaseStudyBySlug = cache(async function getCaseStudyBySlug(
   slug: string,
   locale: AppLocale = 'en'
 ): Promise<CaseStudy> {
-  const caseStudy = await getSanityCaseStudyBySlug(slug, locale);
+  const caseStudy = await getPublishedDocument(locale, (targetLocale) =>
+    getSanityCaseStudyBySlug(slug, targetLocale),
+  );
   if (!caseStudy) {
     throw new Error(`Case study not found: ${slug}`);
   }
   return caseStudy;
-}
+});
 
 export async function getRelatedCaseStudies(
   currentSlug: string,
   limit = 3,
   locale: AppLocale = 'en'
 ): Promise<CaseStudy[]> {
-  const caseStudies = await getAllCaseStudies(locale);
-  return caseStudies.filter((study) => study.slug !== currentSlug).slice(0, limit);
+  const caseStudies = await getPublishedCollection(locale, getAllCaseStudies);
+  return caseStudies.items
+    .filter((study) => study.slug !== currentSlug)
+    .slice(0, limit);
 }
 

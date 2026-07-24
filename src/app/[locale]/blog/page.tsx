@@ -11,6 +11,7 @@ import BlogIndex from '@/views/BlogIndex';
 import JsonLd from '@/components/JsonLd';
 import {localizedPath} from '@/i18n/route-manifest';
 import {getTranslations} from 'next-intl/server';
+import {getPublishedCollection} from '@/lib/localized-content';
 
 type PageProps = {params: Promise<{locale: AppLocale}>};
 
@@ -22,7 +23,7 @@ export async function generateMetadata({params}: PageProps): Promise<Metadata> {
 export default async function BlogPage({params}: PageProps) {
   const {locale} = await params;
   const [posts, tMeta, tNav] = await Promise.all([
-    getAllPosts(locale),
+    getPublishedCollection(locale, getAllPosts),
     getTranslations({locale, namespace: 'Metadata.pages.blog'}),
     getTranslations({locale, namespace: 'Navigation'}),
   ]);
@@ -34,12 +35,15 @@ export default async function BlogPage({params}: PageProps) {
     name: tMeta('title'),
     url: pageUrl,
     inLanguage: locale,
-    numberOfItems: posts.length,
-    itemListElement: posts.map((post, index) => ({
+    numberOfItems: posts.items.length,
+    itemListElement: posts.items.map((post, index) => ({
       '@type': 'ListItem',
       position: index + 1,
-      url: absoluteUrl(localizedPath('/blog/[slug]', locale, {slug: post.slug})),
+      url: absoluteUrl(
+        localizedPath('/blog/[slug]', posts.sourceLocale, {slug: post.slug}),
+      ),
       name: post.title,
+      inLanguage: posts.sourceLocale,
     })),
   };
 
@@ -65,7 +69,7 @@ export default async function BlogPage({params}: PageProps) {
   return (
     <>
       <JsonLd data={[itemListSchema, blogSchema, breadcrumbSchema]} />
-      <BlogIndex posts={posts} />
+      <BlogIndex posts={posts.items} contentLocale={posts.sourceLocale} />
     </>
   );
 }

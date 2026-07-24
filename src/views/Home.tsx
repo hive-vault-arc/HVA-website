@@ -26,6 +26,7 @@ import type { InsightsCarouselItem } from '../components/InsightsCarousel';
 import { useAnimationQuality } from '../lib/animationQuality';
 import type { CaseStudyShowcaseSummary, ClientEvidenceSummary } from '../lib/proof';
 import type { HomeTrustedPartner } from '../lib/home-hero';
+import {isSanityCdnImage} from '../lib/image-delivery';
 import {
   SiAndroid,
   SiCplusplus,
@@ -247,6 +248,7 @@ const Home: React.FC<HomeProps> = ({
                   alt={pillar.imageAlt}
                   fill
                   loading="lazy"
+                  unoptimized={isSanityCdnImage(pillar.image)}
                   sizes="(max-width: 640px) 100vw, 50vw"
                   className="object-cover opacity-64"
                 />
@@ -291,6 +293,7 @@ const Home: React.FC<HomeProps> = ({
                   alt={pillar.imageAlt}
                   fill
                   loading={idx <= 1 ? 'eager' : 'lazy'}
+                  unoptimized={isSanityCdnImage(pillar.image)}
                   sizes="(max-width: 1024px) 100vw, 22vw"
                   className="object-cover opacity-54 transition-transform duration-500 group-hover:scale-105"
                 />

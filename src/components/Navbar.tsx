@@ -3,17 +3,17 @@
 import React, { useState, useEffect } from 'react';
 import {useTranslations} from 'next-intl';
 import {Link} from '@/i18n/navigation';
-import {usePathname} from '@/i18n/navigation';
 import { ArrowUpRight, ChevronDown, Menu, X } from '@/components/icons';
 import Logo from './Logo';
 import LocaleSwitcher from './localization/LocaleSwitcher';
+import {useHydratedPathname} from './localization/useHydratedPathname';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [openMobileSection, setOpenMobileSection] = useState<string | null>(null);
-  const pathname = usePathname();
+  const pathname = useHydratedPathname();
   const t = useTranslations('Navigation');
 
   const toggleMobileSection = (section: string) => {
@@ -70,22 +70,29 @@ const Navbar: React.FC = () => {
     { path: '/whoarewe/portfolio', label: t('portfolio') },
   ];
 
-  const isInsightsActive =
-    pathname?.startsWith('/insights') || pathname?.startsWith('/blog') || pathname?.startsWith('/case-studies');
-  const isCapabilitiesActive = pathname?.startsWith('/capabilities');
-  const isIndustriesActive = pathname?.startsWith('/industries');
-  const isWhoWeAreActive =
-    pathname?.startsWith('/aboutus') || pathname?.startsWith('/whoarewe');
+  const isInsightsActive = Boolean(
+    pathname?.startsWith('/insights') ||
+      pathname?.startsWith('/blog') ||
+      pathname?.startsWith('/case-studies'),
+  );
+  const isCapabilitiesActive = Boolean(pathname?.startsWith('/capabilities'));
+  const isIndustriesActive = Boolean(pathname?.startsWith('/industries'));
+  const isWhoWeAreActive = Boolean(
+    pathname?.startsWith('/aboutus') || pathname?.startsWith('/whoarewe'),
+  );
 
   const desktopLinkClass = (isActive: boolean) =>
     `px-3 py-2 text-sm font-semibold transition-colors duration-150 xl:px-4 ${
       isActive ? 'bg-[#E8A838] text-[#1A2535]' : 'text-[#1A2535]/[0.88] hover:bg-[#E8A838]/10 hover:text-[#1A2535]'
     }`;
 
-  const isRouteActive = (path: string) => pathname === path || (path !== '/' && pathname?.startsWith(`${path}/`));
+  const isRouteActive = (path: string) =>
+    pathname === path ||
+    Boolean(path !== '/' && pathname?.startsWith(`${path}/`));
 
   const isInsightsItemActive = (path: string) =>
-    pathname === path || (path !== '/' && pathname?.startsWith(`${path}/`));
+    pathname === path ||
+    Boolean(path !== '/' && pathname?.startsWith(`${path}/`));
 
   const isCapabilitiesItemActive = (path: string) => {
     if (path === '/capabilities/solution-programs') {
@@ -96,7 +103,8 @@ const Navbar: React.FC = () => {
   };
 
   const isWhoWeAreItemActive = (path: string) =>
-    pathname === path || (path !== '/' && pathname?.startsWith(`${path}/`));
+    pathname === path ||
+    Boolean(path !== '/' && pathname?.startsWith(`${path}/`));
 
   return (
     <header className="navbar-sharp fixed left-2 right-2 top-2 z-50 w-auto max-w-none lg:left-1/2 lg:right-auto lg:w-[94%] lg:max-w-6xl lg:-translate-x-1/2">

@@ -86,7 +86,7 @@ const sectionFields = `
   }
 `;
 
-const postFields = `
+const postSummaryFields = `
   ${localizationFields},
   "slug": slug.current,
   title,
@@ -101,7 +101,11 @@ const postFields = `
   coverAlt,
   excerpt,
   tags,
-  ${seoFields},
+  ${seoFields}
+`;
+
+const postFields = `
+  ${postSummaryFields},
   faqs[]{
     question,
     answer
@@ -110,7 +114,7 @@ const postFields = `
   ${sectionFields}
 `;
 
-const newsArticleFields = `
+const newsArticleSummaryFields = `
   ${localizationFields},
   title,
   "slug": slug.current,
@@ -124,33 +128,41 @@ const newsArticleFields = `
   coverAlt,
   subtitle,
   category,
-  ${sourceFields},
   tags,
-  ${seoFields},
+  ${seoFields}
+`;
+
+const newsArticleFields = `
+  ${newsArticleSummaryFields},
+  ${sourceFields},
   ${sectionFields}
+`;
+
+const perspectiveSummaryFields = `
+  ${localizationFields},
+  "slug": slug.current,
+  title,
+  subtitle,
+  summary,
+  publishedAt,
+  readTime,
+  tag,
+  ${authorFields},
+  keywords,
+  coverImage {
+    ${imageFields}
+  },
+  coverAlt,
+  ${seoFields}
 `;
 
 const perspectiveFields = `
-  ${localizationFields},
-  "slug": slug.current,
-  title,
-  subtitle,
-  summary,
-  publishedAt,
-  readTime,
-  tag,
-  ${authorFields},
-  keywords,
+  ${perspectiveSummaryFields},
   ${sourceFields},
-  coverImage {
-    ${imageFields}
-  },
-  coverAlt,
-  ${seoFields},
   ${sectionFields}
 `;
 
-const researchReportFields = `
+const researchReportSummaryFields = `
   ${localizationFields},
   title,
   "slug": slug.current,
@@ -161,12 +173,16 @@ const researchReportFields = `
   readTime,
   ${authorFields},
   keywords,
-  ${sourceFields},
   coverImage {
     ${imageFields}
   },
   coverAlt,
-  ${seoFields},
+  ${seoFields}
+`;
+
+const researchReportFields = `
+  ${researchReportSummaryFields},
+  ${sourceFields},
   ${sectionFields}
 `;
 
@@ -184,17 +200,13 @@ const approvedClientEvidencePredicate = `
   ]._id
 `;
 
-const caseStudyFields = `
+const caseStudySummaryFields = `
   ${localizationFields},
   "slug": slug.current,
   title,
   clientName,
   industry,
   summary,
-  problem,
-  systemArchitecture,
-  operationalModules,
-  integrations,
   deploymentStatus,
   "hasClientEvidence": (${approvedClientEvidencePredicate}),
   assets{
@@ -211,6 +223,14 @@ const caseStudyFields = `
   },
   lastUpdated,
   ${seoFields}
+`;
+
+const caseStudyFields = `
+  ${caseStudySummaryFields},
+  problem,
+  systemArchitecture,
+  operationalModules,
+  integrations
 `;
 
 const approvedClientEvidenceDetailField = `
@@ -238,7 +258,7 @@ export const allPostsQuery = defineQuery(`
     ($preview == true || translationStatus == "approved") &&
     defined(slug.current)
   ] | order(publishedAt desc, _updatedAt desc) {
-    ${postFields}
+    ${postSummaryFields}
   }
 `);
 
@@ -260,7 +280,7 @@ export const allNewsArticlesQuery = defineQuery(`
     ($preview == true || translationStatus == "approved") &&
     defined(slug.current)
   ] | order(publishedAt desc, _updatedAt desc) {
-    ${newsArticleFields}
+    ${newsArticleSummaryFields}
   }
 `);
 
@@ -282,7 +302,7 @@ export const allPerspectivesQuery = defineQuery(`
     ($preview == true || translationStatus == "approved") &&
     defined(slug.current)
   ] | order(publishedAt desc, _updatedAt desc) {
-    ${perspectiveFields}
+    ${perspectiveSummaryFields}
   }
 `);
 
@@ -304,7 +324,7 @@ export const allResearchReportsQuery = defineQuery(`
     ($preview == true || translationStatus == "approved") &&
     defined(slug.current)
   ] | order(publishedAt desc, _updatedAt desc) {
-    ${researchReportFields}
+    ${researchReportSummaryFields}
   }
 `);
 
@@ -326,7 +346,52 @@ export const allCaseStudiesQuery = defineQuery(`
     ($preview == true || translationStatus == "approved") &&
     defined(slug.current)
   ] | order(lastUpdated desc, _updatedAt desc) {
-    ${caseStudyFields}
+    ${caseStudySummaryFields}
+  }
+`);
+
+export const allInsightCollectionsQuery = defineQuery(`
+  {
+    "posts": *[
+      _type == "post" &&
+      language in $locales &&
+      ($preview == true || translationStatus == "approved") &&
+      defined(slug.current)
+    ] | order(publishedAt desc, _updatedAt desc) {
+      ${postSummaryFields}
+    },
+    "newsArticles": *[
+      _type == "newsArticle" &&
+      language in $locales &&
+      ($preview == true || translationStatus == "approved") &&
+      defined(slug.current)
+    ] | order(publishedAt desc, _updatedAt desc) {
+      ${newsArticleSummaryFields}
+    },
+    "perspectives": *[
+      _type == "perspective" &&
+      language in $locales &&
+      ($preview == true || translationStatus == "approved") &&
+      defined(slug.current)
+    ] | order(publishedAt desc, _updatedAt desc) {
+      ${perspectiveSummaryFields}
+    },
+    "researchReports": *[
+      _type == "researchReport" &&
+      language in $locales &&
+      ($preview == true || translationStatus == "approved") &&
+      defined(slug.current)
+    ] | order(publishedAt desc, _updatedAt desc) {
+      ${researchReportSummaryFields}
+    },
+    "caseStudies": *[
+      _type == "caseStudy" &&
+      language in $locales &&
+      ($preview == true || translationStatus == "approved") &&
+      defined(slug.current)
+    ] | order(lastUpdated desc, _updatedAt desc) {
+      ${caseStudySummaryFields}
+    }
   }
 `);
 

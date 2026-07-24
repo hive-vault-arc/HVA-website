@@ -830,6 +830,14 @@
   gap: clamp(0.4rem, 0.9vw, 0.9rem);
 }
 
+.home-trusted-logos--1 {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.home-trusted-logos--2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .home-trusted-logo {
   position: relative;
   display: flex;
@@ -1348,6 +1356,44 @@
 .soft-grid-cta > * {
   position: relative;
   z-index: 1;
+}
+
+.insights-empty-state {
+  padding: clamp(2.75rem, 5vw, 4.5rem) var(--site-gutter);
+  background: #FFFFFF;
+  border-top: 1px solid rgba(16, 34, 76, 0.12);
+}
+
+.insights-empty-state__inner {
+  display: grid;
+  width: min(54rem, 100%);
+  margin-inline: auto;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 1rem;
+}
+
+.insights-empty-state__inner h2 {
+  margin: 0;
+  color: #10224C;
+  font-family: var(--font-headline);
+  font-size: clamp(1.75rem, 3vw, 2.65rem);
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.insights-empty-state__inner p {
+  max-width: 46rem;
+  margin: 0.85rem 0 0;
+  color: #53627B;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+@media (min-width: 640px) {
+  .insights-empty-state__inner {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
 }
 
 /* ─── Shared Footer ─────────────────────────────────────────────────────── */
@@ -5611,7 +5657,7 @@
   display: grid;
   width: min(var(--site-frame), calc(100% - (var(--site-gutter) * 2)));
   margin: 0 auto;
-  grid-template-columns: minmax(0, 0.78fr) minmax(13rem, 0.24fr) minmax(22rem, 0.52fr);
+  grid-template-columns: minmax(0, 0.78fr) minmax(16rem, 0.3fr) minmax(22rem, 0.52fr);
   gap: clamp(1.4rem, 3vw, 3.4rem);
   align-items: center;
   overflow: hidden;
@@ -5716,6 +5762,8 @@
   letter-spacing: 0.1em;
   text-decoration: none;
   text-transform: uppercase;
+  text-align: center;
+  text-wrap: balance;
   transition: background-color 160ms ease, border-color 160ms ease;
 }
 
@@ -7890,6 +7938,18 @@
   grid-template-rows: repeat(2, minmax(10.5rem, 1fr));
   gap: 0.85rem;
   min-height: 22rem;
+}
+
+.decision-proof__board--1 {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.decision-proof__board--1 .decision-proof-card--featured {
+  grid-column: 1;
+}
+
+.decision-proof__board--2 .decision-proof-card--compact {
+  grid-row: 1 / span 2;
 }
 
 .decision-proof-card {

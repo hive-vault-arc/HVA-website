@@ -7,6 +7,7 @@ import {getTranslations} from 'next-intl/server';
 import JsonLd from '@/components/JsonLd';
 import {localizedPath} from '@/i18n/route-manifest';
 import {absoluteUrl, buildLocalizedBreadcrumbSchema} from '@/lib/seo';
+import {getPublishedCollection} from '@/lib/localized-content';
 
 type PageProps = {params: Promise<{locale: AppLocale}>};
 
@@ -18,7 +19,7 @@ export async function generateMetadata({params}: PageProps): Promise<Metadata> {
 export default async function InsightsResearchReportsPage({params}: PageProps) {
   const {locale} = await params;
   const [researchReports, t, tNav] = await Promise.all([
-    getAllResearchReports(locale),
+    getPublishedCollection(locale, getAllResearchReports),
     getTranslations({locale, namespace: 'Collections.research'}),
     getTranslations({locale, namespace: 'Navigation'}),
   ]);
@@ -31,16 +32,17 @@ export default async function InsightsResearchReportsPage({params}: PageProps) {
     inLanguage: locale,
     mainEntity: {
       '@type': 'ItemList',
-      numberOfItems: researchReports.length,
-      itemListElement: researchReports.map((report, index) => ({
+      numberOfItems: researchReports.items.length,
+      itemListElement: researchReports.items.map((report, index) => ({
         '@type': 'ListItem',
         position: index + 1,
         name: report.title,
         url: absoluteUrl(
-          localizedPath('/insights/research-reports/[slug]', locale, {
+          localizedPath('/insights/research-reports/[slug]', researchReports.sourceLocale, {
             slug: report.slug,
           }),
         ),
+        inLanguage: researchReports.sourceLocale,
       })),
     },
   };
@@ -57,8 +59,9 @@ export default async function InsightsResearchReportsPage({params}: PageProps) {
         eyebrow={t('eyebrow')}
         title={t('title')}
         description={t('description')}
-        cards={researchReports}
+        cards={researchReports.items}
         basePath="/insights/research-reports"
+        contentLocale={researchReports.sourceLocale}
       />
     </>
   );

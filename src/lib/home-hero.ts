@@ -1,7 +1,9 @@
 import type { CaseStudy } from './proof';
+import type {AppLocale} from '@/i18n/config';
 
 export type HomeTrustedPartner = {
   href?: string;
+  hrefLocale?: AppLocale;
   logo: string;
   logoAlt: string;
   name: string;
@@ -29,7 +31,10 @@ function partnerPresentation(name: string, logo: string): Pick<HomeTrustedPartne
   return { logo, surface: 'light' };
 }
 
-export function buildHomeHeroProof(studies: CaseStudy[]): {
+export function buildHomeHeroProof(
+  studies: CaseStudy[],
+  hrefLocale?: AppLocale,
+): {
   trustedPartners: HomeTrustedPartner[];
 } {
   const seenClients = new Set<string>();
@@ -48,6 +53,7 @@ export function buildHomeHeroProof(studies: CaseStudy[]): {
         logo: presentation.logo,
         logoAlt: study.assets.clientLogoAlt ?? `${study.clientName} logo`,
         href: `/case-studies/${study.slug}`,
+        ...(hrefLocale ? {hrefLocale} : {}),
         surface: presentation.surface,
       },
     ];

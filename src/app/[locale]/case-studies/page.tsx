@@ -11,6 +11,7 @@ import {
 import CaseStudies from '@/views/CaseStudies';
 import {localizedPath} from '@/i18n/route-manifest';
 import {getTranslations} from 'next-intl/server';
+import {getPublishedCollection} from '@/lib/localized-content';
 
 type PageProps = {params: Promise<{locale: AppLocale}>};
 
@@ -22,7 +23,7 @@ export async function generateMetadata({params}: PageProps): Promise<Metadata> {
 export default async function CaseStudiesPage({params}: PageProps) {
   const {locale} = await params;
   const [studies, tMeta, tNav] = await Promise.all([
-    getAllCaseStudies(locale),
+    getPublishedCollection(locale, getAllCaseStudies),
     getTranslations({locale, namespace: 'Metadata.pages.caseStudies'}),
     getTranslations({locale, namespace: 'Navigation'}),
   ]);
@@ -35,13 +36,14 @@ export default async function CaseStudiesPage({params}: PageProps) {
     description: tMeta('description'),
     url: pageUrl,
     inLanguage: locale,
-    itemListElement: studies.map((study, index) => ({
+    itemListElement: studies.items.map((study, index) => ({
       '@type': 'ListItem',
       position: index + 1,
       name: study.title,
       url: absoluteUrl(
-        localizedPath('/case-studies/[slug]', locale, {slug: study.slug}),
+        localizedPath('/case-studies/[slug]', studies.sourceLocale, {slug: study.slug}),
       ),
+      inLanguage: studies.sourceLocale,
     })),
   };
 
@@ -64,7 +66,7 @@ export default async function CaseStudiesPage({params}: PageProps) {
   return (
     <>
       <JsonLd data={[itemListSchema, collectionSchema, breadcrumbSchema]} />
-      <CaseStudies studies={studies} />
+      <CaseStudies studies={studies.items} contentLocale={studies.sourceLocale} />
     </>
   );
 }

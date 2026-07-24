@@ -9,7 +9,12 @@ import {
   localizeHref,
 } from './route-manifest';
 import {routing, type AppPathname} from './routing';
-import {translationParams, translationRoutes} from '@/lib/localized-content';
+import {
+  getPublishedCollection,
+  getPublishedDocument,
+  translationParams,
+  translationRoutes,
+} from '@/lib/localized-content';
 
 function leafShape(value: unknown, path = ''): string[] {
   if (Array.isArray(value)) {
@@ -154,5 +159,175 @@ describe('localized routes', () => {
         expect(/^\/en(?:\/|$)/.test(path)).toBe(false);
       }
     }
+  });
+});
+
+describe('published localized collections', () => {
+  type TestPublication = {
+    slug: string;
+    title?: string;
+    summary?: string;
+    seo?: {title?: string; description?: string};
+    language: 'en' | 'fr';
+    translationTargets?: Array<{
+      language: 'en' | 'fr';
+      translationStatus: 'approved';
+      slug: string;
+    }>;
+  };
+
+  it('uses published French items when they exist', async () => {
+    const fetchByLocale = async (
+      locale: 'en' | 'fr',
+    ): Promise<TestPublication[]> =>
+      locale === 'fr'
+        ? [
+            {
+              slug: 'publication-francaise',
+              language: 'fr' as const,
+              translationTargets: [
+                {
+                  language: 'en' as const,
+                  translationStatus: 'approved' as const,
+                  slug: 'english-publication',
+                },
+              ],
+            },
+          ]
+        : [{slug: 'english-publication', language: 'en' as const}];
+
+    await expect(getPublishedCollection('fr', fetchByLocale)).resolves.toEqual({
+      items: [
+        {
+          slug: 'publication-francaise',
+          language: 'fr',
+          translationTargets: [
+            {
+              language: 'en',
+              translationStatus: 'approved',
+              slug: 'english-publication',
+            },
+          ],
+        },
+      ],
+      sourceLocale: 'fr',
+      hasFallbackContent: false,
+    });
+  });
+
+  it('keeps English items inside the French route when translations are pending', async () => {
+    const fetchByLocale = async (
+      locale: 'en' | 'fr',
+    ): Promise<TestPublication[]> =>
+      locale === 'en'
+        ? [{slug: 'english-publication', language: 'en' as const}]
+        : [];
+
+    await expect(getPublishedCollection('fr', fetchByLocale)).resolves.toEqual({
+      items: [{slug: 'english-publication', language: 'en'}],
+      sourceLocale: 'fr',
+      hasFallbackContent: true,
+    });
+  });
+
+  it('replaces translated documents without hiding untranslated siblings', async () => {
+    const fetchByLocale = async (
+      locale: 'en' | 'fr',
+    ): Promise<TestPublication[]> =>
+      locale === 'fr'
+        ? [
+            {
+              slug: 'premiere-publication',
+              language: 'fr' as const,
+              translationTargets: [
+                {
+                  language: 'en' as const,
+                  translationStatus: 'approved' as const,
+                  slug: 'first-publication',
+                },
+              ],
+            },
+          ]
+        : [
+            {slug: 'first-publication', language: 'en' as const},
+            {slug: 'second-publication', language: 'en' as const},
+          ];
+
+    await expect(getPublishedCollection('fr', fetchByLocale)).resolves.toEqual({
+      items: [
+        expect.objectContaining({slug: 'premiere-publication', language: 'fr'}),
+        {slug: 'second-publication', language: 'en'},
+      ],
+      sourceLocale: 'fr',
+      hasFallbackContent: true,
+    });
+  });
+
+  it('presents pending CMS titles in French without changing their source language', async () => {
+    const fetchByLocale = async (
+      locale: 'en' | 'fr',
+    ): Promise<TestPublication[]> =>
+      locale === 'en'
+        ? [
+            {
+              slug: 'fix-the-workflow-before-ai',
+              language: 'en',
+              title: 'Fix the Workflow Before You Add AI',
+              summary: 'English summary',
+              seo: {
+                title: 'Fix the Workflow Before You Add AI',
+                description: 'English metadata description',
+              },
+            },
+          ]
+        : [];
+
+    const collection = await getPublishedCollection('fr', fetchByLocale);
+
+    expect(collection.items[0]).toEqual(
+      expect.objectContaining({
+        language: 'en',
+        title: 'Corrigez le flux de travail avant d’ajouter l’IA',
+        summary:
+          'Le point de vue de Hive Vault Arc sur les raisons de diagnostiquer les processus, les données, les responsabilités et les indicateurs avant de déployer des agents IA.',
+        seo: {
+          title: 'Corrigez le flux de travail avant d’ajouter l’IA',
+          description:
+            'Le point de vue de Hive Vault Arc sur les raisons de diagnostiquer les processus, les données, les responsabilités et les indicateurs avant de déployer des agents IA.',
+        },
+      }),
+    );
+  });
+
+  it('starts French and English detail lookups together', async () => {
+    let englishStarted = false;
+    let releaseFrench: (() => void) | undefined;
+    const frenchGate = new Promise<void>((resolve) => {
+      releaseFrench = resolve;
+    });
+
+    const request = getPublishedDocument<TestPublication>('fr', async (locale) => {
+      if (locale === 'en') {
+        englishStarted = true;
+        return {
+          slug: 'fix-the-workflow-before-ai',
+          language: 'en',
+          title: 'Fix the Workflow Before You Add AI',
+        };
+      }
+
+      await frenchGate;
+      return null;
+    });
+
+    await Promise.resolve();
+    expect(englishStarted).toBe(true);
+    releaseFrench?.();
+
+    await expect(request).resolves.toEqual(
+      expect.objectContaining({
+        title: 'Corrigez le flux de travail avant d’ajouter l’IA',
+      }),
+    );
   });
 });

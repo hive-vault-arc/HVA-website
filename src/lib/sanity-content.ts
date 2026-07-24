@@ -9,6 +9,7 @@ import { sanityFetch } from '../sanity/lib/fetch';
 import { urlForImage } from '../sanity/lib/image';
 import {
   allCaseStudiesQuery,
+  allInsightCollectionsQuery,
   allNewsArticlesQuery,
   allPerspectivesQuery,
   allPostsQuery,
@@ -24,6 +25,8 @@ import {
 const INSIGHTS_TAG = 'insights';
 const COVER_WIDTH = 1600;
 const COVER_HEIGHT = 900;
+const CARD_COVER_WIDTH = 960;
+const CARD_COVER_HEIGHT = 540;
 const MAX_CLIENT_EVIDENCE_PDF_SIZE = 3 * 1024 * 1024;
 
 type SanityImageValue = SanityImageSource | null | undefined;
@@ -58,13 +61,33 @@ type SanityClientEvidenceSummary = {
   coverImageAlt?: string;
 };
 
-function imageUrlFromSource(image: SanityImageValue): string {
+type SanityInsightCollections = {
+  posts?: SanityPost[];
+  newsArticles?: SanityNewsArticle[];
+  perspectives?: SanityPerspective[];
+  researchReports?: SanityResearchReport[];
+  caseStudies?: SanityCaseStudy[];
+};
+
+export type InsightCollections = {
+  posts: BlogPost[];
+  newsArticles: NewsArticle[];
+  perspectives: Perspective[];
+  researchReports: ResearchReport[];
+  caseStudies: CaseStudy[];
+};
+
+function imageUrlFromSource(
+  image: SanityImageValue,
+  width = COVER_WIDTH,
+  height = COVER_HEIGHT,
+): string {
   if (!image) return '';
   if (typeof image === 'string') return image;
 
   return urlForImage(image)
-    .width(COVER_WIDTH)
-    .height(COVER_HEIGHT)
+    .width(width)
+    .height(height)
     .fit('crop')
     .auto('format')
     .url();
@@ -163,11 +186,15 @@ function normalizeClientEvidenceSummary(
   };
 }
 
-function normalizePost(post: SanityPost): BlogPost {
+function normalizePost(post: SanityPost, listing = false): BlogPost {
   return {
     ...post,
     authors: post.authors ?? [],
-    coverImage: imageUrlFromSource(post.coverImage),
+    coverImage: imageUrlFromSource(
+      post.coverImage,
+      listing ? CARD_COVER_WIDTH : COVER_WIDTH,
+      listing ? CARD_COVER_HEIGHT : COVER_HEIGHT,
+    ),
     coverAlt: post.coverAlt ?? post.title,
     tags: post.tags ?? [],
     faqs: post.faqs ?? [],
@@ -176,10 +203,14 @@ function normalizePost(post: SanityPost): BlogPost {
   };
 }
 
-function normalizeNewsArticle(article: SanityNewsArticle): NewsArticle {
+function normalizeNewsArticle(article: SanityNewsArticle, listing = false): NewsArticle {
   return {
     ...article,
-    coverImage: imageUrlFromSource(article.coverImage),
+    coverImage: imageUrlFromSource(
+      article.coverImage,
+      listing ? CARD_COVER_WIDTH : COVER_WIDTH,
+      listing ? CARD_COVER_HEIGHT : COVER_HEIGHT,
+    ),
     coverAlt: article.coverAlt ?? article.title,
     sources: article.sources ?? [],
     tags: article.tags ?? [],
@@ -187,31 +218,39 @@ function normalizeNewsArticle(article: SanityNewsArticle): NewsArticle {
   };
 }
 
-function normalizePerspective(perspective: SanityPerspective): Perspective {
+function normalizePerspective(perspective: SanityPerspective, listing = false): Perspective {
   return {
     ...perspective,
     authors: perspective.authors ?? [],
     keywords: perspective.keywords ?? [],
     sources: perspective.sources ?? [],
-    coverImage: imageUrlFromSource(perspective.coverImage),
+    coverImage: imageUrlFromSource(
+      perspective.coverImage,
+      listing ? CARD_COVER_WIDTH : COVER_WIDTH,
+      listing ? CARD_COVER_HEIGHT : COVER_HEIGHT,
+    ),
     coverAlt: perspective.coverAlt ?? perspective.title,
     sections: perspective.sections ?? [],
   };
 }
 
-function normalizeResearchReport(report: SanityResearchReport): ResearchReport {
+function normalizeResearchReport(report: SanityResearchReport, listing = false): ResearchReport {
   return {
     ...report,
     authors: report.authors ?? [],
     keywords: report.keywords ?? [],
     sources: report.sources ?? [],
     sections: report.sections ?? [],
-    coverImage: imageUrlFromSource(report.coverImage),
+    coverImage: imageUrlFromSource(
+      report.coverImage,
+      listing ? CARD_COVER_WIDTH : COVER_WIDTH,
+      listing ? CARD_COVER_HEIGHT : COVER_HEIGHT,
+    ),
     coverAlt: report.coverAlt ?? report.title,
   };
 }
 
-function normalizeCaseStudy(study: SanityCaseStudy): CaseStudy {
+function normalizeCaseStudy(study: SanityCaseStudy, listing = false): CaseStudy {
   const {
     assets: rawAssets,
     clientEvidence: rawClientEvidence,
@@ -236,13 +275,52 @@ function normalizeCaseStudy(study: SanityCaseStudy): CaseStudy {
     ...(clientEvidence ? { clientEvidence } : {}),
     assets: {
       ...assets,
-      coverImage: imageUrlFromSource(assets.coverImage),
+      coverImage: imageUrlFromSource(
+        assets.coverImage,
+        listing ? CARD_COVER_WIDTH : COVER_WIDTH,
+        listing ? CARD_COVER_HEIGHT : COVER_HEIGHT,
+      ),
       coverAlt: assets.coverAlt ?? study.title,
       logoLabel: assets.logoLabel ?? study.clientName,
       clientLogo: logoUrlFromSource(assets.clientLogo),
       clientLogoAlt: assets.clientLogoAlt ?? `${study.clientName} logo`,
       clientWebsite: assets.clientWebsite,
     },
+  };
+}
+
+export async function getSanityInsightCollections(
+  locales: AppLocale[],
+): Promise<InsightCollections> {
+  const collections = await sanityFetch<SanityInsightCollections>({
+    query: allInsightCollectionsQuery,
+    params: {locales},
+    tags: [
+      INSIGHTS_TAG,
+      ...locales.flatMap((locale) => [
+        localeTag('posts', locale),
+        localeTag('newsArticles', locale),
+        localeTag('perspectives', locale),
+        localeTag('researchReports', locale),
+        localeTag('caseStudies', locale),
+      ]),
+    ],
+  });
+
+  return {
+    posts: (collections.posts ?? []).map((post) => normalizePost(post, true)),
+    newsArticles: (collections.newsArticles ?? []).map((article) =>
+      normalizeNewsArticle(article, true),
+    ),
+    perspectives: (collections.perspectives ?? []).map((perspective) =>
+      normalizePerspective(perspective, true),
+    ),
+    researchReports: (collections.researchReports ?? []).map((report) =>
+      normalizeResearchReport(report, true),
+    ),
+    caseStudies: (collections.caseStudies ?? []).map((study) =>
+      normalizeCaseStudy(study, true),
+    ),
   };
 }
 
@@ -253,7 +331,7 @@ export async function getAllSanityPosts(locale: AppLocale = 'en'): Promise<BlogP
     tags: [INSIGHTS_TAG, 'posts', localeTag('posts', locale)],
   });
 
-  return posts.map(normalizePost);
+  return posts.map((post) => normalizePost(post, true));
 }
 
 export async function getSanityPostBySlug(
@@ -287,7 +365,7 @@ export async function getAllSanityNewsArticles(
     tags: [INSIGHTS_TAG, 'newsArticles', localeTag('newsArticles', locale)],
   });
 
-  return articles.map(normalizeNewsArticle);
+  return articles.map((article) => normalizeNewsArticle(article, true));
 }
 
 export async function getSanityNewsArticleBySlug(
@@ -325,7 +403,7 @@ export async function getAllSanityPerspectives(
     tags: [INSIGHTS_TAG, 'perspectives', localeTag('perspectives', locale)],
   });
 
-  return perspectives.map(normalizePerspective);
+  return perspectives.map((perspective) => normalizePerspective(perspective, true));
 }
 
 export async function getSanityPerspectiveBySlug(
@@ -363,7 +441,7 @@ export async function getAllSanityResearchReports(
     tags: [INSIGHTS_TAG, 'researchReports', localeTag('researchReports', locale)],
   });
 
-  return reports.map(normalizeResearchReport);
+  return reports.map((report) => normalizeResearchReport(report, true));
 }
 
 export async function getSanityResearchReportBySlug(
@@ -392,7 +470,7 @@ export async function getAllSanityCaseStudies(
     tags: [INSIGHTS_TAG, 'caseStudies', localeTag('caseStudies', locale)],
   });
 
-  return studies.map(normalizeCaseStudy);
+  return studies.map((study) => normalizeCaseStudy(study, true));
 }
 
 export async function getSanityClientEvidenceShowcase(

@@ -75,7 +75,7 @@ export const featuredCapabilityProfilesQuery = defineQuery(`
     defined(slug.current) &&
     featuredOnCapabilities == true
   ] | order(displayOrder asc, title asc) {
-    ${capabilityFields}
+    ${capabilitySummaryFields}
   }
 `);
 

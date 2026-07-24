@@ -28,13 +28,19 @@ export function TranslationAvailabilityProvider({children}: {children: ReactNode
 
 export function TranslationTargets({routes}: {routes: TranslationRoutes}) {
   const setRoutes = useContext(TranslationContext)?.setRoutes;
-  const serializedRoutes = JSON.stringify(routes);
+  const stableRoutes = useMemo(
+    () => ({
+      ...(routes.en ? {en: routes.en} : {}),
+      ...(routes.fr ? {fr: routes.fr} : {}),
+    }),
+    [routes.en, routes.fr],
+  );
 
   useEffect(() => {
     if (!setRoutes) return;
-    setRoutes(JSON.parse(serializedRoutes) as TranslationRoutes);
+    setRoutes(stableRoutes);
     return () => setRoutes({});
-  }, [serializedRoutes, setRoutes]);
+  }, [setRoutes, stableRoutes]);
 
   return null;
 }

@@ -10,6 +10,7 @@ const items: SlideItem[] = [
     description: 'First publication summary.',
     image: '/first.webp',
     href: '/insights/first',
+    sourceLocale: 'en',
   },
   {
     id: 'two',
@@ -18,6 +19,7 @@ const items: SlideItem[] = [
     description: 'Second publication summary.',
     image: '/second.webp',
     href: '/insights/second',
+    sourceLocale: 'en',
   },
 ];
 

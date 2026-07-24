@@ -139,6 +139,7 @@ function TrustedPartnerLogo({ partner, caseStudyLabel }: TrustedPartnerLogoProps
   return (
     <Link
       href={partner.href}
+      locale={partner.hrefLocale}
       className={className}
       data-partner={partnerSlug(partner.name)}
       aria-label={caseStudyLabel}
@@ -152,6 +153,7 @@ function TrustedPartnerLogo({ partner, caseStudyLabel }: TrustedPartnerLogoProps
 export default function TrustedByBar({ partners }: TrustedByBarProps) {
   const t = useTranslations('TrustedBy');
   if (partners.length === 0) return null;
+  const visibleColumnCount = Math.min(partners.length, 3);
 
   return (
     <section className="home-trusted" aria-labelledby="home-trusted-title">
@@ -159,7 +161,9 @@ export default function TrustedByBar({ partners }: TrustedByBarProps) {
         <div className="home-trusted-heading">
           <h2 id="home-trusted-title">{t('title')}</h2>
         </div>
-        <div className="home-trusted-logos">
+        <div
+          className={`home-trusted-logos home-trusted-logos--${visibleColumnCount}`}
+        >
           {partners.map((partner) => (
             <TrustedPartnerLogo
               key={partner.name}

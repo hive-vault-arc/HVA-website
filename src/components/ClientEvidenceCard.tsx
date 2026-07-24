@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { ExternalLink, FileText } from '@/components/icons';
 import type { ClientEvidence, ClientEvidenceSummary } from '../lib/proof';
 import {useLocale, useTranslations} from 'next-intl';
+import {isSanityCdnImage} from '../lib/image-delivery';
 
 type EvidenceDisplay = Pick<
   ClientEvidenceSummary,
@@ -88,6 +89,7 @@ export default function ClientEvidenceCard({
               src={evidence.clientLogo}
               alt={evidence.clientLogoAlt}
               fill
+              unoptimized={isSanityCdnImage(evidence.clientLogo)}
               sizes="6rem"
             />
           ) : (

@@ -19,6 +19,7 @@ import {
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import type { CaseStudyShowcaseSummary, ClientEvidenceSummary } from '../lib/proof';
+import {isSanityCdnImage} from '../lib/image-delivery';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -93,9 +94,7 @@ function FeaturedEvidence({
   verified: string;
   deliveryAlt: (client: string) => string;
 }) {
-  if (!evidence) {
-    return <div className="decision-proof-card decision-proof-card--featured is-empty" aria-hidden="true" />;
-  }
+  if (!evidence) return null;
 
   const proofCopy = evidence.quoteExcerpt ?? evidence.caseStudyTitle;
   const coverImage = evidence.coverImage ?? '/Images/home/pathfinder/pathfinder-proof.webp';
@@ -109,6 +108,7 @@ function FeaturedEvidence({
           src={coverImage}
           alt={coverImageAlt}
           fill
+          unoptimized={isSanityCdnImage(coverImage)}
           sizes="(max-width: 760px) 92vw, (max-width: 1120px) 38vw, 24vw"
           className="object-cover"
         />
@@ -122,6 +122,7 @@ function FeaturedEvidence({
                 src={evidence.clientLogo}
                 alt={evidence.clientLogoAlt}
                 fill
+                unoptimized={isSanityCdnImage(evidence.clientLogo)}
                 sizes="4rem"
               />
             ) : (
@@ -178,6 +179,7 @@ function CaseStudyPreview({
           src={study.assets.coverImage}
           alt={study.assets.coverAlt ?? deliveryAlt(study.clientName)}
           fill
+          unoptimized={isSanityCdnImage(study.assets.coverImage)}
           sizes="(max-width: 760px) 30vw, (max-width: 1180px) 14vw, 9vw"
           className="object-cover"
         />
@@ -191,6 +193,7 @@ function CaseStudyPreview({
                 src={study.assets.clientLogo}
                 alt={study.assets.clientLogoAlt ?? logoAlt(study.clientName)}
                 fill
+                unoptimized={isSanityCdnImage(study.assets.clientLogo)}
                 sizes="3rem"
               />
             ) : (
@@ -269,6 +272,8 @@ export default function HomeDecisionGuide({
   const secondaryCaseStudies = caseStudies
     .filter((study) => study.slug !== featuredEvidence?.slug)
     .slice(0, 2);
+  const proofCount = Number(Boolean(featuredEvidence)) + secondaryCaseStudies.length;
+  const hasProofContent = proofCount > 0;
 
   useLayoutEffect(() => {
     const root = rootRef.current;
@@ -309,37 +314,51 @@ export default function HomeDecisionGuide({
           }
         );
 
-        gsap.fromTo(
+        const proofSection = root.querySelector<HTMLElement>('.decision-proof');
+        const proofRevealTargets = gsap.utils.toArray<HTMLElement>(
           '[data-proof-reveal]',
-          { autoAlpha: 0, y: 30 },
-          {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.75,
-            ease: 'power3.out',
-            stagger: 0.08,
-            scrollTrigger: {
-              trigger: '.decision-proof',
-              start: 'top 78%',
-              once: true,
-            },
-          }
+          root,
+        );
+        const proofImageTargets = gsap.utils.toArray<HTMLImageElement>(
+          '[data-proof-image] img',
+          root,
         );
 
-        gsap.fromTo(
-          '[data-proof-image] img',
-          { scale: 1.08 },
-          {
-            scale: 1,
-            duration: 1.25,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: '.decision-proof',
-              start: 'top 78%',
-              once: true,
+        if (proofSection && proofRevealTargets.length > 0) {
+          gsap.fromTo(
+            proofRevealTargets,
+            { autoAlpha: 0, y: 30 },
+            {
+              autoAlpha: 1,
+              y: 0,
+              duration: 0.75,
+              ease: 'power3.out',
+              stagger: 0.08,
+              scrollTrigger: {
+                trigger: proofSection,
+                start: 'top 78%',
+                once: true,
+              },
             },
-          }
-        );
+          );
+        }
+
+        if (proofSection && proofImageTargets.length > 0) {
+          gsap.fromTo(
+            proofImageTargets,
+            { scale: 1.08 },
+            {
+              scale: 1,
+              duration: 1.25,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: proofSection,
+                start: 'top 78%',
+                once: true,
+              },
+            },
+          );
+        }
       });
 
       motion.add(
@@ -399,7 +418,7 @@ export default function HomeDecisionGuide({
       motion.revert();
       context.revert();
     };
-  }, []);
+  }, [hasProofContent]);
 
   return (
     <div ref={rootRef} className="home-decision-experience">
@@ -512,47 +531,41 @@ export default function HomeDecisionGuide({
         </div>
       </nav>
 
-      <section className="decision-proof" aria-labelledby="decision-proof-title">
-        <div className="decision-proof__shell">
-          <header className="decision-proof__intro" data-proof-reveal>
-            <p className="decision-eyebrow">{t('clientEvidence')}</p>
-            <h2 id="decision-proof-title">
-              {t('proof')} <span>{t('motion')}</span>
-            </h2>
-            <span className="decision-intro-rule" aria-hidden="true" />
-            <p className="decision-intro-copy">{t('proofDescription')}</p>
-          </header>
+      {hasProofContent ? (
+        <section className="decision-proof" aria-labelledby="decision-proof-title">
+          <div className="decision-proof__shell">
+            <header className="decision-proof__intro" data-proof-reveal>
+              <p className="decision-eyebrow">{t('clientEvidence')}</p>
+              <h2 id="decision-proof-title">
+                {t('proof')} <span>{t('motion')}</span>
+              </h2>
+              <span className="decision-intro-rule" aria-hidden="true" />
+              <p className="decision-intro-copy">{t('proofDescription')}</p>
+            </header>
 
-          <div className="decision-proof__board">
-            <FeaturedEvidence
-              evidence={featuredEvidence}
-              readCaseStudy={t('readCaseStudy')}
-              verified={t('verified')}
-              deliveryAlt={(client) => t('deliveryAlt', {client})}
-            />
-            {(['top', 'bottom'] as const).map((position, index) => {
-              const study = secondaryCaseStudies[index];
-
-              return study ? (
+            <div className={`decision-proof__board decision-proof__board--${proofCount}`}>
+              {featuredEvidence ? (
+                <FeaturedEvidence
+                  evidence={featuredEvidence}
+                  readCaseStudy={t('readCaseStudy')}
+                  verified={t('verified')}
+                  deliveryAlt={(client) => t('deliveryAlt', {client})}
+                />
+              ) : null}
+              {secondaryCaseStudies.map((study, index) => (
                 <CaseStudyPreview
                   key={study.slug}
                   study={study}
-                  position={position}
+                  position={index === 0 ? 'top' : 'bottom'}
                   readCaseStudy={t('readCaseStudy')}
                   deliveryAlt={(client) => t('deliveryAlt', {client})}
                   logoAlt={(client) => t('logoAlt', {client})}
                 />
-              ) : (
-                <div
-                  key={position}
-                  className={`decision-proof-card decision-proof-card--empty-${position} is-empty`}
-                  aria-hidden="true"
-                />
-              );
-            })}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ) : null}
     </div>
   );
 }

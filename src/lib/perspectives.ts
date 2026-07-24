@@ -5,6 +5,8 @@ import {
 import type { ContentSeo } from './content-seo';
 import type {AppLocale} from '@/i18n/config';
 import type {LocalizedContentMeta} from './localized-content';
+import {getPublishedCollection, getPublishedDocument} from './localized-content';
+import {cache} from 'react';
 
 export type PerspectiveSection =
   | { type: 'paragraph'; content: string }
@@ -491,23 +493,27 @@ export function getAllPerspectives(locale: AppLocale = 'en'): Promise<Perspectiv
   return getAllSanityPerspectives(locale);
 }
 
-export async function getPerspectiveBySlug(
+export const getPerspectiveBySlug = cache(async function getPerspectiveBySlug(
   slug: string,
   locale: AppLocale = 'en'
 ): Promise<Perspective> {
-  const perspective = await getSanityPerspectiveBySlug(slug, locale);
+  const perspective = await getPublishedDocument(locale, (targetLocale) =>
+    getSanityPerspectiveBySlug(slug, targetLocale),
+  );
   if (!perspective) {
     throw new Error(`Perspective not found: ${slug}`);
   }
 
   return perspective;
-}
+});
 
 export async function getRelatedPerspectives(
   currentSlug: string,
   limit = 3,
   locale: AppLocale = 'en'
 ): Promise<Perspective[]> {
-  const perspectives = await getAllPerspectives(locale);
-  return perspectives.filter((perspective) => perspective.slug !== currentSlug).slice(0, limit);
+  const perspectives = await getPublishedCollection(locale, getAllPerspectives);
+  return perspectives.items
+    .filter((perspective) => perspective.slug !== currentSlug)
+    .slice(0, limit);
 }

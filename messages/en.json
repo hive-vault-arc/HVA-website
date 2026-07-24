@@ -335,6 +335,7 @@
     "description": "Field notes from programs we have built and teams we have transformed.",
     "article": "Article",
     "caseStudy": "Case study",
+    "availableInEnglish": "Available in English",
     "learnMore": "Learn more",
     "play": "Play",
     "pause": "Pause",
@@ -1024,6 +1025,10 @@
       "typeLabel": "Insight type",
       "open": "Open {type}"
     },
+    "englishCatalogue": {
+      "title": "English publications remain available.",
+      "description": "French editions are in editorial review. Until they are approved, these cards open the original English publications."
+    },
     "latest": {
       "eyebrow": "Latest",
       "label": "Latest {type}",
@@ -1036,7 +1041,9 @@
       "title": "Everything we have published",
       "itemCount": "{count, plural, one {# item} other {# items}}",
       "open": "Open {type}",
-      "loadMore": "Load more"
+      "loadMore": "Load more",
+      "emptyTitle": "English publications are available while French editions are reviewed.",
+      "emptyDescription": "French articles and case studies appear here only after editorial approval. The publication categories remain available to explore."
     },
     "slider": {
       "ariaLabel": "Latest publications carousel",
@@ -1066,7 +1073,10 @@
     "emptyDescription": "We publish deliberately—only when the content meets our editorial standard. Check back soon or explore another section.",
     "defaultEmpty": "These articles are being",
     "collectionEmpty": "{title} are being",
-    "brand": "Hive Vault Arc"
+    "brand": "Hive Vault Arc",
+    "availableInEnglish": "Available in English",
+    "englishCatalogueTitle": "English publications remain available.",
+    "englishCatalogueDescription": "French editions are in editorial review. These entries open their original English pages until an approved French edition is published."
   },
   "BlogIndex": {
     "eyebrow": "Strategy + Execution Journal",

@@ -6,7 +6,7 @@ const imageFields = `
   hotspot
 `;
 
-const employeeProfileFields = `
+const employeeProfileSummaryFields = `
   _id,
   language,
   translationStatus,
@@ -16,27 +16,10 @@ const employeeProfileFields = `
   responsibilityTag,
   profileType,
   summary,
-  story,
   profileImage {
     ${imageFields}
   },
   profileImageAlt,
-  experience[]{
-    _key,
-    role,
-    organization,
-    location,
-    period,
-    summary,
-    highlights
-  },
-  education[]{
-    _key,
-    institution,
-    credential,
-    period,
-    summary
-  },
   expertise,
   linkedinUrl,
   displayOrder,
@@ -58,6 +41,27 @@ const employeeProfileFields = `
   }[translationStatus == "approved"]
 `;
 
+const employeeProfileFields = `
+  ${employeeProfileSummaryFields},
+  story,
+  experience[]{
+    _key,
+    role,
+    organization,
+    location,
+    period,
+    summary,
+    highlights
+  },
+  education[]{
+    _key,
+    institution,
+    credential,
+    period,
+    summary
+  }
+`;
+
 export const allEmployeeProfilesQuery = defineQuery(`
   *[
     _type == "employeeProfile" &&
@@ -66,7 +70,7 @@ export const allEmployeeProfilesQuery = defineQuery(`
     defined(slug.current)
   ]
   | order(displayOrder asc, name asc) {
-    ${employeeProfileFields}
+    ${employeeProfileSummaryFields}
   }
 `);
 
@@ -78,7 +82,7 @@ export const featuredEmployeeProfilesQuery = defineQuery(`
     defined(slug.current) &&
     featuredOnAbout == true
   ] | order(displayOrder asc, name asc) {
-    ${employeeProfileFields}
+    ${employeeProfileSummaryFields}
   }
 `);
 
