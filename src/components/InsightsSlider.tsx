@@ -30,15 +30,36 @@ function deterministicShuffle(arr: SlideItem[], count: number): SlideItem[] {
   return copy.slice(0, count);
 }
 
+function randomShuffle(arr: SlideItem[], count: number): SlideItem[] {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy.slice(0, count);
+}
+
 /* ─── Component ───────────────────────────────────────────────────────────── */
 
-export default function InsightsSlider({ items }: { readonly items: SlideItem[] }) {
+export default function InsightsSlider({
+  items,
+  randomize = false,
+}: {
+  readonly items: SlideItem[];
+  readonly randomize?: boolean;
+}) {
   const t = useTranslations('InsightsHub.slider');
-  const slides = deterministicShuffle(items, 6);
+  const [slides, setSlides] = useState(() => deterministicShuffle(items, 6));
   const total = slides.length;
   const [current, setCurrent] = useState(0);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const shouldReduceMotion = useReducedMotion();
+
+  useEffect(() => {
+    setSlides(
+      randomize ? randomShuffle(items, 6) : deterministicShuffle(items, 6),
+    );
+  }, [items, randomize]);
 
   useEffect(() => {
     if (current >= total) setCurrent(0);

@@ -56,4 +56,30 @@ describe('InsightsSlider', () => {
     expect(initialActiveLink).toHaveAttribute('tabindex', '-1');
     expect(initialInactiveLink).toHaveAttribute('tabindex', '0');
   });
+
+  it('can vary the publication order when reused on a contextual page', () => {
+    const random = vi.spyOn(Math, 'random').mockReturnValue(0.99);
+    const contextualItems: SlideItem[] = [
+      ...items,
+      {
+        id: 'three',
+        tag: 'Case study',
+        title: 'Third publication',
+        description: 'Third publication summary.',
+        image: '/third.webp',
+        href: '/insights/third',
+        sourceLocale: 'en',
+      },
+    ];
+
+    const {container} = render(
+      <InsightsSlider items={contextualItems} randomize />,
+    );
+    const activeLink = container.querySelector<HTMLAnchorElement>(
+      '.insights-slide-card > a[aria-current="true"]',
+    );
+
+    expect(activeLink).toHaveAttribute('href', '/insights/first');
+    random.mockRestore();
+  });
 });
