@@ -12,9 +12,19 @@ export type HomeTrustedPartner = {
 
 const PREMIUM_ADVICE_LOGO = '/Images/trustedby/premium-advice-training-logo-hq.webp';
 const TARIK_RAMI_LOGO = '/Images/trustedby/tarik-rami-immobilier-logo.webp';
+const TRUSTED_PARTNER_ORDER = ['premium advice', 'immoworld', 'tarik rami'] as const;
 
 function normalizePartnerName(name: string): string {
   return name.trim().toLocaleLowerCase();
+}
+
+function trustedPartnerRank(name: string): number {
+  const normalizedName = normalizePartnerName(name);
+  const rank = TRUSTED_PARTNER_ORDER.findIndex((partnerName) =>
+    normalizedName.includes(partnerName),
+  );
+
+  return rank === -1 ? TRUSTED_PARTNER_ORDER.length : rank;
 }
 
 function partnerPresentation(name: string, logo: string): Pick<HomeTrustedPartner, 'logo' | 'surface'> {
@@ -75,6 +85,11 @@ export function buildHomeHeroProof(
       surface: 'light',
     });
   }
+
+  trustedPartners.sort(
+    (firstPartner, secondPartner) =>
+      trustedPartnerRank(firstPartner.name) - trustedPartnerRank(secondPartner.name),
+  );
 
   return { trustedPartners };
 }

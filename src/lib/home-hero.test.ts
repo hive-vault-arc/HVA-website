@@ -108,6 +108,44 @@ describe('buildHomeHeroProof', () => {
     });
   });
 
+  it('keeps ImmoWorld in the middle regardless of the CMS order', () => {
+    const result = buildHomeHeroProof([
+      study({
+        slug: 'tarik-rami-immobilier',
+        clientName: 'Tarik Rami Immobilier',
+        assets: {
+          coverImage: '/tarik.webp',
+          logoLabel: 'Tarik Rami Immobilier',
+          clientLogo: 'https://cdn.sanity.io/tarik.webp',
+        },
+      }),
+      study({
+        slug: 'premium-advice-training',
+        clientName: 'Premium Advice & Training',
+        assets: {
+          coverImage: '/premium.webp',
+          logoLabel: 'Premium Advice & Training',
+          clientLogo: 'https://cdn.sanity.io/premium.webp',
+        },
+      }),
+      study({
+        slug: 'immoworld',
+        clientName: 'ImmoWorld',
+        assets: {
+          coverImage: '/immoworld.webp',
+          logoLabel: 'ImmoWorld',
+          clientLogo: 'https://cdn.sanity.io/immoworld.webp',
+        },
+      }),
+    ]);
+
+    expect(result.trustedPartners.map((partner) => partner.name)).toEqual([
+      'Premium Advice & Training',
+      'ImmoWorld',
+      'Tarik Rami Immobilier',
+    ]);
+  });
+
   it('deduplicates repeated client records', () => {
     const repeatedClient = study({
       slug: 'premium-advice-second-record',
