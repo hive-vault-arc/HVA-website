@@ -122,7 +122,7 @@ const Navbar: React.FC = () => {
             <Logo />
 
             {/* Desktop Navigation */}
-            <div className="ml-auto hidden items-center space-x-0 xl:space-x-1 lg:flex">
+            <div className="ml-auto hidden items-center space-x-1 xl:flex">
               <Link href="/arc" className={desktopLinkClass(isRouteActive('/arc'))}>
                 <span className="flex items-baseline gap-1.5">
                   <span>ARC</span>{' '}
@@ -279,17 +279,22 @@ const Navbar: React.FC = () => {
               </div>
             </div>
 
-            <LocaleSwitcher />
-            <Link
-              href="/contact"
-              className="ml-auto hidden min-h-11 items-center bg-[#1A2535] px-4 py-2 text-sm font-semibold text-[#FFFFFF] transition-colors duration-150 hover:bg-[#E8A838] hover:text-[#1A2535] lg:flex"
+            <div
+              data-navbar-actions
+              className="ml-4 hidden shrink-0 items-center gap-2 xl:flex"
             >
-              {t('bookCall')}
-              <ArrowUpRight className="w-3.5 h-3.5 ml-1.5" />
-            </Link>
+              <LocaleSwitcher />
+              <Link
+                href="/contact"
+                className="flex min-h-11 items-center bg-[#1A2535] px-4 py-2 text-sm font-semibold text-[#FFFFFF] transition-colors duration-150 hover:bg-[#E8A838] hover:text-[#1A2535]"
+              >
+                {t('bookCall')}
+                <ArrowUpRight className="ml-1.5 h-3.5 w-3.5" />
+              </Link>
+            </div>
 
             {/* Mobile menu button */}
-            <div className="flex items-center lg:hidden">
+            <div className="flex items-center xl:hidden">
               <button
                 onClick={() => {
                   const next = !isMobileMenuOpen;
@@ -313,7 +318,7 @@ const Navbar: React.FC = () => {
         {/* Mobile menu - full-screen slide-down overlay */}
         {isMobileMenuOpen && (
         <div
-          className="fixed inset-0 z-[80] opacity-100 pointer-events-auto lg:hidden"
+          className="fixed inset-0 z-[80] opacity-100 pointer-events-auto xl:hidden"
           role="navigation"
           aria-label={t('mobileNavigation')}
         >

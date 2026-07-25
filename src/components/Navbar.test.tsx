@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, within } from '@testing-library/react';
 import Navbar from './Navbar';
 
 vi.mock('next/navigation', () => ({
@@ -82,5 +82,56 @@ describe('Navbar', () => {
     ctaLinks.forEach((link) => {
       expect(link).toHaveAttribute('href', '/contact');
     });
+  });
+
+  it('places an accessible desktop language dropdown beside Book a Call', () => {
+    render(<Navbar />);
+
+    const trigger = screen.getByRole('button', {
+      name: 'Current language: English',
+    });
+    const actionGroup = trigger.closest('[data-navbar-actions]');
+
+    expect(actionGroup).not.toBeNull();
+    expect(trigger).toHaveAttribute('aria-expanded', 'false');
+    expect(
+      within(actionGroup as HTMLElement).getByRole('link', {name: 'Book a Call'}),
+    ).toHaveAttribute('href', '/contact');
+
+    fireEvent.click(trigger);
+
+    expect(trigger).toHaveAttribute('aria-expanded', 'true');
+    expect(screen.getByRole('menu', {name: 'Choose language'})).toBeInTheDocument();
+    expect(screen.getByRole('menuitem', {name: 'English'})).toHaveAttribute(
+      'aria-current',
+      'page',
+    );
+    expect(
+      screen.getByRole('menuitem', {name: 'View this page in French'}),
+    ).toHaveAttribute('href', '/fr');
+
+    fireEvent.keyDown(document, {key: 'Escape'});
+
+    expect(screen.queryByRole('menu', {name: 'Choose language'})).toBeNull();
+    expect(trigger).toHaveFocus();
+  });
+
+  it('keeps the direct language links in the mobile navigation', () => {
+    const {container} = render(<Navbar />);
+
+    fireEvent.click(screen.getByRole('button', {name: 'Open navigation menu'}));
+
+    const mobileSwitcher = container.querySelector(
+      '[data-locale-switcher="mobile"]',
+    );
+    expect(mobileSwitcher).not.toBeNull();
+    expect(
+      within(mobileSwitcher as HTMLElement).getByRole('link', {name: 'English'}),
+    ).toHaveAttribute('aria-current', 'page');
+    expect(
+      within(mobileSwitcher as HTMLElement).getByRole('link', {
+        name: 'View this page in French',
+      }),
+    ).toHaveAttribute('href', '/fr');
   });
 });

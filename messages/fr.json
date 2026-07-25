@@ -2,6 +2,12 @@
   "Locale": {
     "english": "Anglais",
     "french": "Français",
+    "selectLanguage": "Choisir la langue",
+    "currentLanguage": "Langue actuelle : {language}",
+    "languages": {
+      "en": "Anglais",
+      "fr": "Français"
+    },
     "switchTo": "Afficher cette page en {language}",
     "unavailable": "Cette page n’est pas disponible en {language}"
   },
