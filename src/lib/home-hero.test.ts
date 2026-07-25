@@ -57,6 +57,32 @@ describe('buildHomeHeroProof', () => {
         name: 'Tarik Rami Immobilier',
         logo: '/Images/trustedby/tarik-rami-immobilier-logo.webp',
         logoAlt: 'Tarik Rami Immobilier logo',
+        href: '/case-studies/tarik-rami-immobilier',
+        surface: 'light',
+      },
+    ]);
+  });
+
+  it('uses the Trusted By logo for the CMS-backed Tarik Rami case study', () => {
+    const result = buildHomeHeroProof([
+      study({
+        slug: 'tarik-rami-immobilier',
+        clientName: 'Tarik Rami Immobilier',
+        assets: {
+          coverImage: '/cover.webp',
+          logoLabel: 'Tarik Rami Immobilier',
+          clientLogo: 'https://cdn.sanity.io/tarik-rami-logo.webp',
+          clientLogoAlt: 'Tarik Rami Immobilier logo',
+        },
+      }),
+    ]);
+
+    expect(result.trustedPartners).toEqual([
+      {
+        name: 'Tarik Rami Immobilier',
+        logo: '/Images/trustedby/tarik-rami-immobilier-logo.webp',
+        logoAlt: 'Tarik Rami Immobilier logo',
+        href: '/case-studies/tarik-rami-immobilier',
         surface: 'light',
       },
     ]);
@@ -119,6 +145,10 @@ describe('buildHomeHeroProof', () => {
 
     expect(result.trustedPartners[0]).toMatchObject({
       href: '/case-studies/immoworld',
+      hrefLocale: 'en',
+    });
+    expect(result.trustedPartners[1]).toMatchObject({
+      href: '/case-studies/tarik-rami-immobilier',
       hrefLocale: 'en',
     });
   });

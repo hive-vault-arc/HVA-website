@@ -24,6 +24,10 @@ function partnerPresentation(name: string, logo: string): Pick<HomeTrustedPartne
     return { logo: PREMIUM_ADVICE_LOGO, surface: 'light' };
   }
 
+  if (normalizedName.includes('tarik rami')) {
+    return { logo: TARIK_RAMI_LOGO, surface: 'light' };
+  }
+
   if (normalizedName.includes('immoworld')) {
     return { logo, surface: 'dark' };
   }
@@ -66,6 +70,8 @@ export function buildHomeHeroProof(
       name: 'Tarik Rami Immobilier',
       logo: TARIK_RAMI_LOGO,
       logoAlt: 'Tarik Rami Immobilier logo',
+      href: '/case-studies/tarik-rami-immobilier',
+      ...(hrefLocale ? {hrefLocale} : {}),
       surface: 'light',
     });
   }
