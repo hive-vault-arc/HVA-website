@@ -64,17 +64,18 @@ const baseMetadata: Metadata = {
     images: [DEFAULT_OG_IMAGE_PATH],
   },
   icons: {
-    shortcut: [{ url: '/favicon.ico', type: 'image/x-icon' }],
+    shortcut: [{ url: '/Images/favico/favicon-32x32.webp', type: 'image/webp' }],
     icon: [
-      { url: '/favicon.ico', type: 'image/x-icon' },
-      { url: '/Images/favico/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/Images/favico/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/Images/favico/favicon-48x48.png', sizes: '48x48', type: 'image/png' },
-      { url: '/Images/favico/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
-      { url: '/Images/favico/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
-      { url: '/Images/favico/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' },
+      { url: '/Images/favico/favicon-16x16.webp', sizes: '16x16', type: 'image/webp' },
+      { url: '/Images/favico/favicon-32x32.webp', sizes: '32x32', type: 'image/webp' },
+      { url: '/Images/favico/favicon-48x48.webp', sizes: '48x48', type: 'image/webp' },
+      { url: '/Images/favico/favicon-96x96.webp', sizes: '96x96', type: 'image/webp' },
+      { url: '/Images/favico/android-chrome-192x192.webp', sizes: '192x192', type: 'image/webp' },
+      { url: '/Images/favico/android-chrome-512x512.webp', sizes: '512x512', type: 'image/webp' },
     ],
-    apple: [{ url: '/Images/favico/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+    apple: [
+      { url: '/Images/favico/apple-touch-icon.webp', sizes: '180x180', type: 'image/webp' },
+    ],
   },
   verification: {
     google: '5a73152a76ce06c0',
@@ -184,7 +185,7 @@ export default async function RootLayout({children, params}: LocaleLayoutProps) 
       width: SITE_LOGO_WIDTH,
       height: SITE_LOGO_HEIGHT,
     },
-    image: absoluteUrl('/Images/media/og-default.png'),
+    image: absoluteUrl('/Images/media/og-default.webp'),
     description:
       locale === 'fr'
         ? 'Partenaire de transformation technologique basé à Tanger. Hive Vault Arc réunit stratégie, ingénierie IA, logiciels sur mesure, infrastructure cloud et opérations managées, du conseil à la production.'

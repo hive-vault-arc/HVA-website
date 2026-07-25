@@ -60,4 +60,16 @@ describe('public localized GROQ queries', () => {
   ])('scopes detail lookup to the localized slug', (query) => {
     expect(String(query)).toContain('slug.current == $slug');
   });
+
+  it('keeps project media publication-gated and detail-only', () => {
+    const detailQuery = String(caseStudyBySlugQuery);
+
+    expect(detailQuery).toContain('"projectMedia"');
+    expect(detailQuery).toContain('publicationStatus == "approved"');
+    expect(detailQuery).toContain('defined(permissionConfirmedOn)');
+    expect(detailQuery).toContain('length(permissionReference) > 0');
+    expect(detailQuery).toContain('metadata.dimensions.width');
+    expect(detailQuery).toContain('metadata.dimensions.height');
+    expect(String(allCaseStudiesQuery)).not.toContain('"projectMedia"');
+  });
 });

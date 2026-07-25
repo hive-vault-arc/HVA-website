@@ -211,7 +211,11 @@ export default function EmployeeProfileView({ profile, relatedProfiles }: Props)
                 <Link key={item.slug} href={`/aboutus/our-people/${item.slug}`} className="employee-profile-related__item">
                   <span>{item.name}</span>
                   <em>{item.position}</em>
-                  <ArrowUpRight className="h-4 w-4" />
+                  <ArrowUpRight
+                    className="employee-profile-related__icon"
+                    size={18}
+                    aria-hidden="true"
+                  />
                 </Link>
               ))}
             </div>

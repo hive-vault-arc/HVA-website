@@ -69,18 +69,38 @@ export async function sanityFetch<QueryResponse>({
     throw new Error('Draft Mode requires SANITY_PREVIEW_TOKEN.');
   }
 
+  const development = process.env.NODE_ENV !== 'production';
+  const directClient = sanityClient.withConfig({useCdn: false});
   const client = preview
     ? sanityClient.withConfig({
         token: previewToken,
         useCdn: false,
         perspective: 'drafts',
       })
-    : sanityClient;
+    : development
+      ? directClient
+      : sanityClient;
 
-  return client.fetch<QueryResponse>(query, {...params, preview}, {
-    next: {
-      revalidate: preview ? 0 : revalidate,
-      ...(!preview && tags.length > 0 ? {tags} : {}),
-    },
-  });
+  const bypassCache = preview || development;
+  const requestOptions = bypassCache
+    ? ({cache: 'no-store'} as const)
+    : {
+        next: {
+          revalidate,
+          ...(tags.length > 0 ? {tags} : {}),
+        },
+      };
+
+  try {
+    return await client.fetch<QueryResponse>(query, {...params, preview}, requestOptions);
+  } catch (error) {
+    if (preview || !isRecoverableSanityFetchError(error)) throw error;
+
+    const alternateClient = development ? sanityClient : directClient;
+    return alternateClient.fetch<QueryResponse>(
+      query,
+      {...params, preview},
+      requestOptions,
+    );
+  }
 }

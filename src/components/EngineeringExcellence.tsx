@@ -21,7 +21,7 @@ export default function EngineeringExcellence() {
       >
         <div className="relative mx-auto h-full w-full overflow-hidden rounded-2xl">
           <Image
-            src="/Images/brand/ai-analytics-dashboard-business.jpg"
+            src="/Images/brand/ai-analytics-dashboard-business.webp"
             alt="AI analytics dashboard built by Hive Vault Arc for business intelligence"
             fill
             className="object-contain"

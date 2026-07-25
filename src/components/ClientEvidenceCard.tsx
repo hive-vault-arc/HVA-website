@@ -24,7 +24,7 @@ type EvidenceDisplay = Pick<
 type ClientEvidenceCardProps = {
   evidence: EvidenceDisplay;
   industry?: string;
-  variant?: 'rail' | 'detail';
+  variant?: 'rail' | 'detail' | 'spotlight';
   showQuote?: boolean;
   className?: string;
 };
@@ -79,6 +79,7 @@ export default function ClientEvidenceCard({
     ? formatFileSize(evidence.testimonialPdf.size, t('sizeUnavailable'))
     : undefined;
   const meta = [languageName, issuedOn].filter(Boolean).join(' · ');
+  const isSpotlight = variant === 'spotlight';
 
   return (
     <article className={`client-evidence-card client-evidence-card--${variant} ${className}`.trim()}>
@@ -135,7 +136,11 @@ export default function ClientEvidenceCard({
             rel="noopener noreferrer"
             aria-label={t('openAria', {client: evidence.clientName, size: pdfSize ?? t('sizeUnavailable')})}
           >
-            <span>{t('open', {size: pdfSize ?? t('sizeUnavailable')})}</span>
+            <span>
+              {t(isSpotlight ? 'openCompact' : 'open', {
+                size: pdfSize ?? t('sizeUnavailable'),
+              })}
+            </span>
             <ExternalLink aria-hidden="true" strokeWidth={1.6} />
           </a>
           <span className="client-evidence-card__new-tab">{t('newTab')}</span>

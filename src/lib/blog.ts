@@ -6,6 +6,7 @@ import type { ContentSeo } from './content-seo';
 import type {AppLocale} from '@/i18n/config';
 import type {LocalizedContentMeta} from './localized-content';
 import {getPublishedCollection, getPublishedDocument} from './localized-content';
+import {withSanityFallback} from '../sanity/lib/fetch';
 import {cache} from 'react';
 
 export type ContentSection =
@@ -1041,7 +1042,11 @@ export const POSTS: BlogPost[] = [
 ];
 
 export function getAllPosts(locale: AppLocale = 'en'): Promise<BlogPost[]> {
-  return getAllSanityPosts(locale);
+  return withSanityFallback(
+    () => getAllSanityPosts(locale),
+    () => (locale === 'en' ? POSTS : []),
+    'blog posts',
+  );
 }
 
 export const getPostBySlug = cache(async function getPostBySlug(

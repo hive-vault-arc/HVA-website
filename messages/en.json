@@ -453,8 +453,9 @@
   "Evidence": {
     "available": "Client letter available",
     "referenceLetter": "Client reference letter",
-    "open": "Open client reference letter — PDF, {size}",
-    "openAria": "Open client reference letter for {client} — PDF, {size} (opens in a new tab)",
+    "open": "Open client reference letter - PDF, {size}",
+    "openCompact": "Open testimonial - PDF, {size}",
+    "openAria": "Open client reference letter for {client} - PDF, {size} (opens in a new tab)",
     "newTab": "Opens in a new tab",
     "sizeUnavailable": "size unavailable",
     "railTitle": "Client evidence",
@@ -493,6 +494,8 @@
     "industry": "Industry",
     "status": "Status",
     "client": "Client",
+    "atAGlance": "At a glance",
+    "openTestimonial": "Open testimonial",
     "visitClient": "Visit client website",
     "perspectiveFaq": "Questions leaders ask before AI",
     "researchQuestions": "Research questions",
@@ -545,7 +548,8 @@
       "challenge": "Business challenge",
       "architecture": "Execution architecture",
       "modules": "Modules activated",
-      "stack": "Stack & integrations"
+      "stack": "Stack & integrations",
+      "projectMedia": "Project interface evidence"
     },
     "caseCta": {
       "title": "Apply this transformation pattern to your operations",

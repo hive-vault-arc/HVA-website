@@ -34,6 +34,8 @@ type BreadcrumbItem = {
 };
 
 type Props = {
+  variant?: 'article' | 'caseStudy';
+
   // Breadcrumb
   backHref: string;
   backLabel: string;
@@ -57,6 +59,7 @@ type Props = {
   // Cover image
   coverImage?: string;
   coverAlt?: string;
+  coverAside?: React.ReactNode;
 
   // Content slots
   children: React.ReactNode;
@@ -93,6 +96,7 @@ function fmtDate(isoDateTime: string, locale: string) {
 /* ── Component ───────────────────────────────────────────────────────────── */
 
 export default function ArticleDetailPage({
+  variant = 'article',
   backHref,
   backLabel,
   crumbText,
@@ -107,6 +111,7 @@ export default function ArticleDetailPage({
   authorHref = '/aboutus',
   coverImage,
   coverAlt,
+  coverAside,
   children,
   sidebar,
   contentAsArticle = false,
@@ -122,6 +127,7 @@ export default function ArticleDetailPage({
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
   const isoDate = publishedAt ? toIsoDateTime(publishedAt) : undefined;
+  const isCaseStudy = variant === 'caseStudy';
   const resolvedBreadcrumbs =
     breadcrumbs && breadcrumbs.length > 0
       ? breadcrumbs
@@ -132,7 +138,7 @@ export default function ArticleDetailPage({
         ];
 
   return (
-    <div className="bg-[#FFFFFF]">
+    <div className={isCaseStudy ? 'case-study-detail bg-[#FFFFFF]' : 'bg-[#FFFFFF]'}>
       {/* Scroll progress bar */}
       <motion.div
         aria-hidden="true"
@@ -141,7 +147,13 @@ export default function ArticleDetailPage({
       />
 
       {/* ── Hero ───────────────────────────────────────────────────────────── */}
-      <section className="bg-[#F7F8FA] pt-28 pb-14 sm:pt-32 md:pt-36 md:pb-16">
+      <section
+        className={
+          isCaseStudy
+            ? 'case-study-detail__hero bg-[#F7F8FA]'
+            : 'bg-[#F7F8FA] pt-28 pb-14 sm:pt-32 md:pt-36 md:pb-16'
+        }
+      >
         <div className="site-frame-narrow">
 
           {/* Breadcrumb */}
@@ -265,7 +277,37 @@ export default function ArticleDetailPage({
       </section>
 
       {/* ── Cover image ────────────────────────────────────────────────────── */}
-      {coverImage && (
+      {isCaseStudy ? (
+        coverImage || coverAside ? (
+          <div
+            className={`case-study-detail__lead site-frame-narrow ${
+              coverAside ? 'case-study-detail__lead--with-aside' : 'case-study-detail__lead--solo'
+            }`}
+          >
+            {coverImage ? (
+              <div className="case-study-detail__cover">
+                <Image
+                  src={coverImage}
+                  alt={coverAlt ?? title}
+                  fill
+                  priority
+                  unoptimized={isSanityCdnImage(coverImage)}
+                  sizes={
+                    coverAside
+                      ? '(max-width: 1024px) calc(100vw - 2rem), min(1160px, calc(72vw - 4rem))'
+                      : '(max-width: 1024px) calc(100vw - 2rem), min(1640px, calc(100vw - 5rem))'
+                  }
+                />
+              </div>
+            ) : null}
+            {coverAside ? (
+              <aside className="case-study-detail__lead-aside">
+                {coverAside}
+              </aside>
+            ) : null}
+          </div>
+        ) : null
+      ) : coverImage ? (
         <div className="site-frame-narrow -mt-1">
           <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#E8EBF0] sm:aspect-[16/9] lg:aspect-[21/9]">
             <Image
@@ -280,22 +322,44 @@ export default function ArticleDetailPage({
             <div className="absolute inset-0 bg-gradient-to-t from-[#FFFFFF] via-transparent to-transparent" />
           </div>
         </div>
-      )}
+      ) : null}
 
       {/* ── Body + Sidebar ─────────────────────────────────────────────────── */}
-      <section className="site-frame-narrow py-16">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+      <section
+        className={
+          isCaseStudy
+            ? 'case-study-detail__body site-frame-narrow'
+            : 'site-frame-narrow py-16'
+        }
+      >
+        <div
+          className={
+            isCaseStudy
+              ? `case-study-detail__body-grid ${
+                  sidebar ? 'case-study-detail__body-grid--with-sidebar' : ''
+                }`.trim()
+              : 'grid grid-cols-1 gap-12 lg:grid-cols-12'
+          }
+        >
           {/* Sticky Sidebar — 3 cols */}
-          {sidebar && (
+          {sidebar && !isCaseStudy ? (
             <aside className="order-2 lg:order-1 lg:col-span-3">
               <div className="lg:sticky lg:top-28">
                 {sidebar}
               </div>
             </aside>
-          )}
+          ) : null}
 
           {/* Main content — 9 cols (or full 12 if no sidebar) */}
-          <div className={sidebar ? 'order-1 lg:order-2 lg:col-span-9' : 'lg:col-span-12'}>
+          <div
+            className={
+              isCaseStudy
+                ? 'case-study-detail__main'
+                : sidebar
+                  ? 'order-1 lg:order-2 lg:col-span-9'
+                  : 'lg:col-span-12'
+            }
+          >
             {contentAsArticle ? (
               <motion.article
                 initial={{ opacity: 0, y: 8 }}
@@ -316,6 +380,14 @@ export default function ArticleDetailPage({
               </motion.div>
             )}
           </div>
+
+          {sidebar && isCaseStudy ? (
+            <aside className="case-study-detail__sidebar">
+              <div className="case-study-detail__sidebar-sticky">
+                {sidebar}
+              </div>
+            </aside>
+          ) : null}
         </div>
       </section>
 
@@ -373,7 +445,10 @@ export default function ArticleDetailPage({
                 <Link
                   href={relatedAllHref}
                   className="hidden md:inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-[#1A2535] hover:text-[#E8A838] transition-colors pb-1"
-                  style={{ fontFamily: 'var(--font-body)', borderBottom: '2px solid #1A2535' }}
+                  style={{
+                    fontFamily: 'var(--font-body)',
+                    borderBottom: isCaseStudy ? undefined : '2px solid #1A2535',
+                  }}
                 >
                   {relatedAllLabel ?? t('allArticles')}
                 </Link>
@@ -385,7 +460,7 @@ export default function ArticleDetailPage({
                 <motion.div
                   key={item.href}
                   className="group"
-                  initial={{ opacity: 0, y: 8 }}
+                  initial={isCaseStudy ? false : {opacity: 0, y: 8}}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.05 }}
                   transition={{ duration: 0.5, delay: i * 0.08, ease: 'easeOut' }}
@@ -397,6 +472,7 @@ export default function ArticleDetailPage({
                           src={item.coverImage}
                           alt={item.title}
                           fill
+                          loading={isCaseStudy ? 'eager' : 'lazy'}
                           unoptimized={isSanityCdnImage(item.coverImage)}
                           className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -436,6 +512,7 @@ export default function ArticleDetailPage({
       {bottomCta && (
         <BottomCTA
           variant={bottomCta.variant}
+          revealImmediately={isCaseStudy}
           headline={bottomCta.headline}
           subtext={bottomCta.subtext}
           primaryLabel={bottomCta.primaryLabel}

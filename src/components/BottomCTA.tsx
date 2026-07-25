@@ -14,6 +14,7 @@ interface BottomCTAProps {
   secondaryLabel?: string;
   secondaryHref?: string;
   variant?: 'dark' | 'blue' | 'light';
+  revealImmediately?: boolean;
 }
 
 export default function BottomCTA({
@@ -24,13 +25,14 @@ export default function BottomCTA({
   secondaryLabel,
   secondaryHref,
   variant = 'dark',
+  revealImmediately = false,
 }: BottomCTAProps) {
   const t = useTranslations('Common');
   if (variant === 'blue') {
     return (
       <section className="cta-banner bg-[#E8A838] py-20 px-6 md:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={revealImmediately ? false : {opacity: 0, y: 20}}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.5 }}
@@ -66,7 +68,7 @@ export default function BottomCTA({
     return (
       <section className="cta-banner soft-grid-cta px-6 py-20 text-center md:px-12 md:py-24">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={revealImmediately ? false : {opacity: 0, y: 20}}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.5 }}
@@ -99,7 +101,7 @@ export default function BottomCTA({
     <section className="cta-banner py-16 md:py-20">
       <div className="max-w-7xl mx-auto px-6 lg:px-14">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={revealImmediately ? false : {opacity: 0, y: 20}}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.5 }}

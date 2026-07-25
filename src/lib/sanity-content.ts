@@ -4,7 +4,12 @@ import {localeTag} from './localized-content';
 import type { BlogPost } from './blog';
 import type { NewsArticle, ResearchReport } from './insights';
 import type { Perspective } from './perspectives';
-import type { CaseStudy, ClientEvidence, ClientEvidenceSummary } from './proof';
+import type {
+  CaseStudy,
+  CaseStudyProjectMedia,
+  ClientEvidence,
+  ClientEvidenceSummary,
+} from './proof';
 import { sanityFetch } from '../sanity/lib/fetch';
 import { urlForImage } from '../sanity/lib/image';
 import {
@@ -37,9 +42,16 @@ type SanityResearchReport = Omit<ResearchReport, 'coverImage'> & { coverImage?: 
 type SanityClientEvidence = Omit<ClientEvidence, 'testimonialPdf'> & {
   testimonialPdf?: Partial<ClientEvidence['testimonialPdf']> | null;
 };
-type SanityCaseStudy = Omit<CaseStudy, 'assets' | 'clientEvidence' | 'hasClientEvidence'> & {
+type SanityCaseStudyProjectMedia = Omit<CaseStudyProjectMedia, 'image'> & {
+  image?: SanityImageValue;
+};
+type SanityCaseStudy = Omit<
+  CaseStudy,
+  'assets' | 'clientEvidence' | 'hasClientEvidence' | 'projectMedia'
+> & {
   hasClientEvidence?: boolean;
   clientEvidence?: SanityClientEvidence | null;
+  projectMedia?: SanityCaseStudyProjectMedia[] | null;
   assets?: Omit<CaseStudy['assets'], 'coverImage'> & {
     coverImage?: SanityImageValue;
   };
@@ -89,7 +101,7 @@ function imageUrlFromSource(
     .width(width)
     .height(height)
     .fit('crop')
-    .auto('format')
+    .format('webp')
     .url();
 }
 
@@ -97,7 +109,72 @@ function logoUrlFromSource(image: SanityImageValue): string {
   if (!image) return '';
   if (typeof image === 'string') return image;
 
-  return urlForImage(image).width(600).fit('max').auto('format').url();
+  return urlForImage(image).width(600).fit('max').format('webp').url();
+}
+
+function projectMediaUrlFromSource(
+  image: SanityImageValue,
+  deviceType: CaseStudyProjectMedia['deviceType'],
+): string {
+  if (!image) return '';
+  if (typeof image === 'string') return image;
+
+  return urlForImage(image)
+    .width(deviceType === 'phone' ? 900 : 1800)
+    .fit('max')
+    .format('webp')
+    .url();
+}
+
+function normalizeCaseStudyProjectMedia(
+  media: SanityCaseStudyProjectMedia[] | null | undefined,
+): CaseStudyProjectMedia[] {
+  return (media ?? []).flatMap((item) => {
+    const deviceType = item.deviceType === 'phone' ? 'phone' : 'desktop';
+    const image = projectMediaUrlFromSource(item.image, deviceType);
+    const alt = typeof item.alt === 'string' ? item.alt.trim() : '';
+    if (!item._key || !image || !alt) return [];
+
+    const placement =
+      item.placement === 'afterChallenge' ||
+      item.placement === 'afterArchitecture' ||
+      item.placement === 'afterModules'
+        ? item.placement
+        : 'afterArchitecture';
+    const evidenceType =
+      item.evidenceType === 'deliveredInterface' ||
+      item.evidenceType === 'conceptualInterface'
+        ? item.evidenceType
+        : 'fixtureBacked';
+
+    return [
+      {
+        _key: item._key,
+        image,
+        width:
+          typeof item.width === 'number' && item.width > 0
+            ? item.width
+            : deviceType === 'phone'
+              ? 600
+              : 1600,
+        height:
+          typeof item.height === 'number' && item.height > 0
+            ? item.height
+            : deviceType === 'phone'
+              ? 1120
+              : 970,
+        ...(item.lqip ? {lqip: item.lqip} : {}),
+        deviceType,
+        placement,
+        evidenceType,
+        alt,
+        ...(item.caption?.trim() ? {caption: item.caption.trim()} : {}),
+        ...(item.disclosure?.trim() ? {disclosure: item.disclosure.trim()} : {}),
+        publicationStatus:
+          item.publicationStatus === 'approved' ? 'approved' : 'notCleared',
+      },
+    ];
+  });
 }
 
 function nonEmptyString(value: unknown): string | undefined {
@@ -255,6 +332,7 @@ function normalizeCaseStudy(study: SanityCaseStudy, listing = false): CaseStudy 
     assets: rawAssets,
     clientEvidence: rawClientEvidence,
     hasClientEvidence: rawHasClientEvidence,
+    projectMedia: rawProjectMedia,
     ...baseStudy
   } = study;
   const assets: {
@@ -271,6 +349,7 @@ function normalizeCaseStudy(study: SanityCaseStudy, listing = false): CaseStudy 
     ...baseStudy,
     operationalModules: study.operationalModules ?? [],
     integrations: study.integrations ?? [],
+    projectMedia: normalizeCaseStudyProjectMedia(rawProjectMedia),
     hasClientEvidence: Boolean(rawHasClientEvidence || clientEvidence),
     ...(clientEvidence ? { clientEvidence } : {}),
     assets: {

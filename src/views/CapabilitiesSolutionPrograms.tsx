@@ -291,7 +291,7 @@ export default function CapabilitiesSolutionPrograms() {
             >
               <div className="relative aspect-[4/5] overflow-hidden group bg-[#E8EBF0]">
                 <Image
-                  src="/Images/solution-programs/hva-ai-reception-lead-operations.png"
+                  src="/Images/solution-programs/hva-ai-reception-lead-operations.webp"
                   alt={t('ai.imageAlt')}
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -478,7 +478,7 @@ export default function CapabilitiesSolutionPrograms() {
                 {/* Spanning image */}
                 <motion.div variants={fadeUp} transition={{ duration: 0.5 }} className="relative h-[340px] overflow-hidden group sm:h-[420px] md:col-span-2 md:h-[520px]">
                   <Image
-                    src="/Images/solution-programs/hva-enterprise-crm-modernization.png"
+                    src="/Images/solution-programs/hva-enterprise-crm-modernization.webp"
                     alt={t('crm.imageAlt')}
                     fill
                     sizes="(max-width: 768px) 100vw, 66vw"
@@ -624,7 +624,7 @@ export default function CapabilitiesSolutionPrograms() {
                 <div className="absolute inset-0 border border-white/10 translate-x-3 translate-y-3 z-0" />
                 <div className="relative w-full h-full overflow-hidden">
                   <Image
-                    src="/Images/solution-programs/hva-cloud-delivery-reliability-stack.png"
+                    src="/Images/solution-programs/hva-cloud-delivery-reliability-stack.webp"
                     alt={t('cloud.imageAlt')}
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"

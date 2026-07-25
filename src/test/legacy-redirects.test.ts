@@ -2,6 +2,10 @@ import { describe, expect, it } from 'vitest';
 import nextConfig from '../../next.config';
 
 describe('Legacy Redirect Rules', () => {
+  it('preserves proxy rewrite paths for next-intl locale routing', () => {
+    expect(nextConfig.skipProxyUrlNormalize).toBe(true);
+  });
+
   it('consolidates the www hostname to the canonical apex domain', async () => {
     const redirects = await (nextConfig.redirects?.() ?? Promise.resolve([]));
 

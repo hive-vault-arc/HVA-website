@@ -7,6 +7,7 @@ import { useCallback, useLayoutEffect, useRef } from 'react';
 import {useTranslations} from 'next-intl';
 
 import type { HomeTrustedPartner } from '../lib/home-hero';
+import {isSanityCdnImage} from '../lib/image-delivery';
 
 type TrustedByBarProps = {
   partners: HomeTrustedPartner[];
@@ -112,14 +113,26 @@ function TrustedPartnerLogo({ partner, caseStudyLabel }: TrustedPartnerLogoProps
         ref={monochromeRef}
         className="home-trusted-logo__layer home-trusted-logo__layer--monochrome"
       >
-        <Image src={partner.logo} alt="" fill sizes="(max-width: 640px) 42vw, 220px" />
+        <Image
+          src={partner.logo}
+          alt=""
+          fill
+          unoptimized={isSanityCdnImage(partner.logo)}
+          sizes="(max-width: 640px) 42vw, 220px"
+        />
       </span>
       <span
         ref={colorRef}
         className="home-trusted-logo__layer home-trusted-logo__layer--color"
         aria-hidden="true"
       >
-        <Image src={partner.logo} alt="" fill sizes="(max-width: 640px) 42vw, 220px" />
+        <Image
+          src={partner.logo}
+          alt=""
+          fill
+          unoptimized={isSanityCdnImage(partner.logo)}
+          sizes="(max-width: 640px) 42vw, 220px"
+        />
       </span>
     </span>
   );

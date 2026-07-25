@@ -453,8 +453,9 @@
   "Evidence": {
     "available": "Lettre client disponible",
     "referenceLetter": "Lettre de référence client",
-    "open": "Ouvrir la lettre de référence — PDF, {size}",
-    "openAria": "Ouvrir la lettre de référence de {client} — PDF, {size} (nouvel onglet)",
+    "open": "Ouvrir la lettre de référence - PDF, {size}",
+    "openCompact": "Ouvrir le témoignage - PDF, {size}",
+    "openAria": "Ouvrir la lettre de référence de {client} - PDF, {size} (nouvel onglet)",
     "newTab": "S’ouvre dans un nouvel onglet",
     "sizeUnavailable": "taille indisponible",
     "railTitle": "Preuves clients",
@@ -493,6 +494,8 @@
     "industry": "Secteur",
     "status": "Statut",
     "client": "Client",
+    "atAGlance": "En bref",
+    "openTestimonial": "Ouvrir le témoignage",
     "visitClient": "Visiter le site du client",
     "perspectiveFaq": "Questions que se posent les dirigeants avant l’IA",
     "researchQuestions": "Questions de recherche",
@@ -545,7 +548,8 @@
       "challenge": "Défi métier",
       "architecture": "Architecture d’exécution",
       "modules": "Modules activés",
-      "stack": "Socle et intégrations"
+      "stack": "Socle et intégrations",
+      "projectMedia": "Preuves visuelles de l’interface"
     },
     "caseCta": {
       "title": "Appliquez ce modèle de transformation à vos opérations",

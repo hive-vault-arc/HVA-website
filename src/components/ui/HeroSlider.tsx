@@ -51,7 +51,7 @@ const SLIDE_CONFIG: Array<
   {
     primaryHref: '/contact',
     secondaryHref: '/capabilities',
-    image: '/Images/hero/hva-architectural-system-hero-transparent.png',
+    image: '/Images/hero/hva-architectural-system-hero-transparent.webp',
     imageMode: 'contain',
   },
   {

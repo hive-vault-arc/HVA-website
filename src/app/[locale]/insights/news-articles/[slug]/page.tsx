@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     translationParams: translationParams(article, locale, article.slug),
     keywords: article.seo?.keywords?.length ? article.seo.keywords : article.tags,
   });
-  const coverUrl = absoluteUrl(article.coverImage ?? '/Images/media/og-default.png');
+  const coverUrl = absoluteUrl(article.coverImage ?? '/Images/media/og-default.webp');
   const isoDate = article.publishedAt.includes('T') ? article.publishedAt : `${article.publishedAt}T00:00:00Z`;
   const authorUrl = absoluteUrl(localizedPath('/aboutus', locale));
 
@@ -79,7 +79,7 @@ export default async function NewsArticlePage({ params }: Props) {
     description: article.summary,
     datePublished: isoDate,
     dateModified: isoDate,
-    image: absoluteUrl(article.coverImage ?? '/Images/media/og-default.png'),
+    image: absoluteUrl(article.coverImage ?? '/Images/media/og-default.webp'),
     inLanguage: locale,
     articleSection: article.category,
     keywords: article.tags.join(', '),

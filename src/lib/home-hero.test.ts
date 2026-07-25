@@ -15,9 +15,10 @@ function study(overrides: Partial<CaseStudy>): CaseStudy {
     operationalModules: [],
     integrations: [],
     deploymentStatus: 'Live',
+    projectMedia: [],
     hasClientEvidence: false,
     assets: {
-      coverImage: '/cover.png',
+      coverImage: '/cover.webp',
       logoLabel: 'Sample client',
     },
     lastUpdated: '2026-07-17',
@@ -32,9 +33,9 @@ describe('buildHomeHeroProof', () => {
         slug: 'immoworld',
         clientName: 'ImmoWorld',
         assets: {
-          coverImage: '/cover.png',
+          coverImage: '/cover.webp',
           logoLabel: 'ImmoWorld',
-          clientLogo: 'https://cdn.sanity.io/immoworld.png',
+          clientLogo: 'https://cdn.sanity.io/immoworld.webp',
           clientLogoAlt: 'ImmoWorld logo',
         },
       }),
@@ -47,7 +48,7 @@ describe('buildHomeHeroProof', () => {
     expect(result.trustedPartners).toEqual([
       {
         name: 'ImmoWorld',
-        logo: 'https://cdn.sanity.io/immoworld.png',
+        logo: 'https://cdn.sanity.io/immoworld.webp',
         logoAlt: 'ImmoWorld logo',
         href: '/case-studies/immoworld',
         surface: 'dark',
@@ -67,9 +68,9 @@ describe('buildHomeHeroProof', () => {
         slug: 'premium-advice-training',
         clientName: 'Premium Advice & Training',
         assets: {
-          coverImage: '/cover.png',
+          coverImage: '/cover.webp',
           logoLabel: 'Premium Advice & Training',
-          clientLogo: 'https://cdn.sanity.io/low-resolution-premium-logo.jpg',
+          clientLogo: 'https://cdn.sanity.io/low-resolution-premium-logo.webp',
         },
       }),
     ]);
@@ -86,9 +87,9 @@ describe('buildHomeHeroProof', () => {
       slug: 'premium-advice-second-record',
       clientName: 'Premium Advice & Training',
       assets: {
-        coverImage: '/cover.png',
+        coverImage: '/cover.webp',
         logoLabel: 'Premium Advice & Training',
-        clientLogo: 'https://cdn.sanity.io/premium-logo.jpg',
+        clientLogo: 'https://cdn.sanity.io/premium-logo.webp',
       },
     });
 
@@ -107,9 +108,9 @@ describe('buildHomeHeroProof', () => {
           slug: 'immoworld',
           clientName: 'ImmoWorld',
           assets: {
-            coverImage: '/cover.png',
+            coverImage: '/cover.webp',
             logoLabel: 'ImmoWorld',
-            clientLogo: 'https://cdn.sanity.io/immoworld.png',
+            clientLogo: 'https://cdn.sanity.io/immoworld.webp',
           },
         }),
       ],

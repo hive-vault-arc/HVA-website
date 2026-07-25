@@ -18,6 +18,7 @@ import {
   UsersRound,
 } from '@/components/icons';
 import PageAmbientBackground from '../components/PageAmbientBackground';
+import {isSanityCdnImage} from '../lib/image-delivery';
 import SectionBrandMark from '../components/SectionBrandMark';
 import type { CaseStudy } from '../lib/proof';
 
@@ -237,7 +238,7 @@ export default function Arc({ studies, children }: ArcProps) {
             >
               <div className="arc-hero-media">
                 <Image
-                  src="/Images/capabilities/hva-arc-operating-model-business-workspace.png"
+                  src="/Images/capabilities/hva-arc-operating-model-business-workspace.webp"
                   alt={t('heroAlt')}
                   fill
                   priority
@@ -445,6 +446,7 @@ export default function Arc({ studies, children }: ArcProps) {
                         `${orderedStudies[0].clientName} transformation engagement`
                       }
                       fill
+                      unoptimized={isSanityCdnImage(orderedStudies[0].assets.coverImage)}
                       loading="lazy"
                       sizes="(max-width: 900px) 100vw, 48vw"
                       className="object-cover"
@@ -458,6 +460,7 @@ export default function Arc({ studies, children }: ArcProps) {
                         `${orderedStudies[1].clientName} transformation engagement`
                       }
                       fill
+                      unoptimized={isSanityCdnImage(orderedStudies[1].assets.coverImage)}
                       loading="lazy"
                       sizes="(max-width: 900px) 70vw, 22vw"
                       className="object-cover"

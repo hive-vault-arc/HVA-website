@@ -225,12 +225,42 @@ const caseStudySummaryFields = `
   ${seoFields}
 `;
 
+const caseStudyProjectMediaFields = `
+  "projectMedia": projectMedia[
+    (
+      publicationStatus == "approved" &&
+      defined(permissionConfirmedOn) &&
+      length(permissionReference) > 0 &&
+      length(caption) > 0 &&
+      length(disclosure) > 0
+    ) ||
+    ($preview == true && publicationStatus == "notCleared")
+  ]{
+    _key,
+    internalLabel,
+    deviceType,
+    placement,
+    evidenceType,
+    alt,
+    caption,
+    disclosure,
+    publicationStatus,
+    image {
+      ${imageFields}
+    },
+    "width": image.asset->metadata.dimensions.width,
+    "height": image.asset->metadata.dimensions.height,
+    "lqip": image.asset->metadata.lqip
+  }
+`;
+
 const caseStudyFields = `
   ${caseStudySummaryFields},
   problem,
   systemArchitecture,
   operationalModules,
-  integrations
+  integrations,
+  ${caseStudyProjectMediaFields}
 `;
 
 const approvedClientEvidenceDetailField = `

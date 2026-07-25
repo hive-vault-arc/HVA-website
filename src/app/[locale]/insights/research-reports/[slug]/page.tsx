@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     translationParams: translationParams(report, locale, report.slug),
     keywords: report.seo?.keywords?.length ? report.seo.keywords : report.keywords,
   });
-  const coverUrl = absoluteUrl(report.coverImage ?? '/Images/media/og-default.png');
+  const coverUrl = absoluteUrl(report.coverImage ?? '/Images/media/og-default.webp');
   const isoDate = report.publishedAt.includes('T') ? report.publishedAt : `${report.publishedAt}T00:00:00Z`;
   const authorUrl = absoluteUrl(localizedPath('/aboutus', locale));
 
@@ -85,7 +85,7 @@ export default async function ResearchReportPage({ params }: Props) {
     description: report.summary,
     datePublished: isoDate,
     dateModified: isoDate,
-    image: absoluteUrl(report.coverImage ?? '/Images/media/og-default.png'),
+    image: absoluteUrl(report.coverImage ?? '/Images/media/og-default.webp'),
     inLanguage: locale,
     articleSection: report.tag,
     keywords: report.keywords.join(', '),

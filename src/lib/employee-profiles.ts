@@ -78,7 +78,7 @@ function imageUrlFromSource(image: SanityImageValue): string {
     .width(PROFILE_WIDTH)
     .height(PROFILE_HEIGHT)
     .fit('crop')
-    .auto('format')
+    .format('webp')
     .url();
 }
 

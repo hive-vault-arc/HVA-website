@@ -130,7 +130,7 @@ const FALLBACK_CAPABILITY_PROFILES: CapabilityProfile[] = CAPABILITY_DOMAINS.map
   const presentation = CAPABILITY_PRESENTATION[domain.id] ?? {
     shortTitle: domain.title,
     kicker: 'Capability',
-    heroImage: '/Images/capabilities/hva-capabilities-expertise.png',
+    heroImage: '/Images/capabilities/hva-capabilities-expertise.webp',
     heroImageAlt: `${domain.title} capability`,
     displayOrder: 100,
   };
@@ -178,7 +178,7 @@ function imageUrlFromSource(image: SanityImageValue): string {
     .width(CAPABILITY_IMAGE_WIDTH)
     .height(CAPABILITY_IMAGE_HEIGHT)
     .fit('crop')
-    .auto('format')
+    .format('webp')
     .url();
 }
 

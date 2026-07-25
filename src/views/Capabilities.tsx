@@ -467,7 +467,7 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
                 <div className="flex items-center gap-6">
                   <div className="w-16 h-16 bg-[#1A2535] overflow-hidden flex-shrink-0 relative">
                     <Image
-                      src="/Images/capabilities/hva-capabilities-expertise.png"
+                      src="/Images/capabilities/hva-capabilities-expertise.webp"
                       alt={t('quoteAlt')}
                       fill
                       sizes="64px"

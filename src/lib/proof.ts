@@ -8,6 +8,7 @@ import type {AppLocale} from '@/i18n/config';
 import type {LocalizedContentMeta} from './localized-content';
 import {getPublishedCollection, getPublishedDocument} from './localized-content';
 import {applyFrenchCmsFallback} from '@/i18n/cms-fallback-fr';
+import {withSanityFallback} from '../sanity/lib/fetch';
 import {cache} from 'react';
 export {PRODUCT_SYSTEMS} from './product-systems';
 export type {ProductSystem} from './product-systems';
@@ -45,6 +46,26 @@ export type ClientEvidenceSummary = {
   coverImageAlt?: string;
 };
 
+export type CaseStudyProjectMediaPlacement =
+  | 'afterChallenge'
+  | 'afterArchitecture'
+  | 'afterModules';
+
+export type CaseStudyProjectMedia = {
+  _key: string;
+  image: string;
+  width: number;
+  height: number;
+  lqip?: string;
+  deviceType: 'desktop' | 'phone';
+  placement: CaseStudyProjectMediaPlacement;
+  evidenceType: 'deliveredInterface' | 'fixtureBacked' | 'conceptualInterface';
+  alt: string;
+  caption?: string;
+  disclosure?: string;
+  publicationStatus: 'notCleared' | 'approved';
+};
+
 export type CaseStudy = LocalizedContentMeta & {
   slug: string;
   title: string;
@@ -56,6 +77,7 @@ export type CaseStudy = LocalizedContentMeta & {
   operationalModules: string[];
   integrations: string[];
   deploymentStatus: string;
+  projectMedia: CaseStudyProjectMedia[];
   hasClientEvidence: boolean;
   clientEvidence?: ClientEvidence;
   assets: {
@@ -95,6 +117,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     operationalModules: ['Customer Operations Engine', 'Automation and Orchestration Layer', 'Revenue and Pipeline Control'],
     integrations: ['WhatsApp Business API', 'HubSpot', 'Google Calendar', 'n8n workflow runner', 'PostgreSQL'],
     deploymentStatus: 'Live in production since October 2025',
+    projectMedia: [],
     hasClientEvidence: false,
     assets: {
       coverImage: '/Images/case-studies/whatsapp-ai-agent-operations-case-study-morocco.webp',
@@ -116,12 +139,13 @@ export const CASE_STUDIES: CaseStudy[] = [
     operationalModules: ['Lead Intake and Routing', 'Buyer-Journey Pipeline', 'Team Workflow Coordination', 'Operational Reporting'],
     integrations: ['Meta Lead Sync', 'DocuSign', 'Pipeline Automation', 'BI Reporting'],
     deploymentStatus: 'Live operational rollout since May 2025',
+    projectMedia: [],
     hasClientEvidence: false,
     assets: {
       coverImage: '/Images/case-studies/immoworld-crm-transformation-case-study-morocco.webp',
       coverAlt: 'ImmoWorld real estate CRM operating system engagement',
       logoLabel: 'ImmoWorld Luxury Real Estate',
-      clientLogo: '/Images/trustedby/logo.png',
+      clientLogo: '/Images/trustedby/logo.webp',
       clientLogoAlt: 'ImmoWorld Luxury Real Estate logo',
       clientWebsite: 'https://immoworld.ma/',
     },
@@ -137,17 +161,28 @@ export const CASE_STUDIES: CaseStudy[] = [
 ];
 
 export function getAllCaseStudies(locale: AppLocale = 'en'): Promise<CaseStudy[]> {
-  return getAllSanityCaseStudies(locale);
+  return withSanityFallback(
+    () => getAllSanityCaseStudies(locale),
+    () => (locale === 'en' ? CASE_STUDIES : []),
+    'case studies',
+  );
 }
 
 export function getClientEvidenceShowcase(
   locale: AppLocale = 'en'
 ): Promise<ClientEvidenceSummary[]> {
-  if (locale === 'en') return getSanityClientEvidenceShowcase('en');
+  const fetchEvidence = (targetLocale: AppLocale) =>
+    withSanityFallback(
+      () => getSanityClientEvidenceShowcase(targetLocale),
+      () => [],
+      'client evidence',
+    );
+
+  if (locale === 'en') return fetchEvidence('en');
 
   return Promise.all([
-    getSanityClientEvidenceShowcase(locale),
-    getSanityClientEvidenceShowcase('en'),
+    fetchEvidence(locale),
+    fetchEvidence('en'),
   ]).then(([localizedEvidence, englishEvidence]) =>
     localizedEvidence.length > 0
       ? localizedEvidence

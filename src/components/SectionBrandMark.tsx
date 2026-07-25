@@ -7,8 +7,8 @@ type SectionBrandMarkProps = {
   eager?: boolean;
 };
 
-const LOGO_ON_LIGHT_SRC = '/Images/brand/hva-logo-number-3.png';
-const LOGO_ON_DARK_SRC = '/Images/brand/hva-logo-number-4.png';
+const LOGO_ON_LIGHT_SRC = '/Images/brand/hva-logo-number-3.webp';
+const LOGO_ON_DARK_SRC = '/Images/brand/hva-logo-number-4.webp';
 
 const sizeClasses = {
   sm: 'h-8 w-8',

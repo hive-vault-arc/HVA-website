@@ -56,10 +56,12 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  skipProxyUrlNormalize: true,
   experimental: {
     globalNotFound: true,
   },
   images: {
+    formats: ['image/webp'],
     remotePatterns: [
       {
         protocol: 'https',

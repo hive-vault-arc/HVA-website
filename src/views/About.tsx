@@ -18,6 +18,7 @@ import {
 import SectionBrandMark from '../components/SectionBrandMark';
 import BottomCTA from '../components/BottomCTA';
 import PageAmbientBackground from '../components/PageAmbientBackground';
+import {isSanityCdnImage} from '../lib/image-delivery';
 import { useAnimationQuality } from '../lib/animationQuality';
 import type { EmployeeProfile } from '../lib/employee-profiles';
 import { CONTACT_EMAIL, CONTACT_PHONE_DISPLAY, CONTACT_PHONE_E164 } from '../lib/seo';
@@ -416,6 +417,7 @@ const About = ({ teamMembers }: AboutProps) => {
                           src={member.profileImage}
                           alt={member.profileImageAlt}
                           fill
+                          unoptimized={isSanityCdnImage(member.profileImage)}
                           loading={index === 0 ? 'eager' : 'lazy'}
                           sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
                           className="object-cover"

@@ -12,8 +12,8 @@ interface LogoProps {
   size?: 'nav' | 'footer';
 }
 
-const LOGO_ON_LIGHT_SRC = '/Images/brand/hva-logo-number-3.png';
-const LOGO_ON_DARK_SRC = '/Images/brand/hva-logo-number-4.png';
+const LOGO_ON_LIGHT_SRC = '/Images/brand/hva-logo-number-3.webp';
+const LOGO_ON_DARK_SRC = '/Images/brand/hva-logo-number-4.webp';
 
 const Logo: React.FC<LogoProps> = ({ className, light = false, size = 'nav' }) => {
   const t = useTranslations('Navigation');
