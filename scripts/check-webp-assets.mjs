@@ -5,6 +5,8 @@ import {fileURLToPath} from 'node:url'
 const __filename = fileURLToPath(import.meta.url)
 const frontendRoot = path.resolve(path.dirname(__filename), '..')
 const publicRoot = path.join(frontendRoot, 'public')
+const emailSignatureAssetsRoot = path.join(publicRoot, 'assets', 'email')
+const emailSafeRasterExtensions = new Set(['.gif', '.png'])
 const sourceRoots = [
   path.join(frontendRoot, 'src'),
   path.join(frontendRoot, 'messages'),
@@ -53,11 +55,26 @@ function isWebpFile(filePath) {
   }
 }
 
+function isEmailSafeSignatureAsset(filePath) {
+  const resolvedPath = path.resolve(filePath)
+  const isInsideEmailAssets =
+    resolvedPath === emailSignatureAssetsRoot ||
+    resolvedPath.startsWith(`${emailSignatureAssetsRoot}${path.sep}`)
+
+  return (
+    isInsideEmailAssets &&
+    emailSafeRasterExtensions.has(path.extname(resolvedPath).toLowerCase())
+  )
+}
+
 const errors = []
 const publicFiles = walk(publicRoot)
 
 for (const filePath of publicFiles) {
-  if (forbiddenRasterExtensions.test(path.basename(filePath))) {
+  if (
+    forbiddenRasterExtensions.test(path.basename(filePath)) &&
+    !isEmailSafeSignatureAsset(filePath)
+  ) {
     errors.push(`${relative(filePath)} is a non-WebP raster asset.`)
   }
   forbiddenRasterExtensions.lastIndex = 0
