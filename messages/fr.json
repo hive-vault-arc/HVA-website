@@ -355,25 +355,30 @@
   "Arc": {
     "label": "Modèle opérationnel ARC",
     "heroLines": ["Évaluer la contrainte.", "Réingénier le système.", "Piloter le résultat."],
-    "heroDescription": "ARC est un modèle opérationnel en boucle fermée pour la transformation technologique. Nous diagnostiquons les contraintes, reconstruisons les workflows et la pile technologique, puis restons responsables en production jusqu’à ce que les résultats soient durables. Stratégie, ingénierie et opérations restent réunies au sein d’une même équipe.",
-    "bookDiagnostic": "Réserver un diagnostic ARC",
+    "heroDescription": "ARC relie diagnostic, ingénierie et opérations pour qu’une seule équipe porte le résultat, de la contrainte à la production.",
+    "bookDiagnostic": "Demander une évaluation ARC",
     "seeProduction": "Voir ARC en production",
-    "heroAlt": "Espace de travail ARC reliant preuves de diagnostic, workflow modulaire et état de pilotage ordonné",
+    "heroAlt": "Dirigeants cartographiant un système métier pendant une session stratégique ARC",
+    "leadTitle": "Une seule boucle, de la contrainte opérationnelle aux preuves de production.",
+    "leadDescription": "ARC rend le chemin visible avant d’engager les dépenses. Le modèle relie diagnostic, livraison du système et opérations par des décisions explicites et une responsabilité claire.",
+    "loopAria": "Évaluer, Réingénier, Piloter : la boucle opérationnelle ARC",
+    "indexTitle": "Comprendre tout le modèle en soixante secondes.",
+    "indexDescription": "Trois responsabilités liées font avancer un même résultat, des preuves initiales à un système fiable en production.",
     "how": "Comment fonctionne ARC",
-    "processTitle": "Trois décisions liées. Une seule boucle opérationnelle.",
-    "processDescription": "Chaque phase se termine par un livrable concret et une décision avant l’engagement suivant. Le modèle répond aux transformations opérationnelles complexes qui doivent tenir en production.",
+    "processTitle": "Trois décisions. Une seule boucle responsable.",
+    "processDescription": "Chaque responsabilité se termine par un livrable concret et une décision avant le prochain engagement.",
     "phasesLabel": "Phases opérationnelles ARC",
     "output": "Livrable de la phase {phase}",
     "bestFor": "Particulièrement adapté à",
     "buyerFit": ["Opérations fragmentées", "Blocages liés aux systèmes existants", "Déploiement de workflows IA", "Manque de responsabilité en production"],
     "differenceEyebrow": "Pourquoi ARC est différent",
-    "differenceTitle": "Une boucle unique, pas trois prestataires déconnectés.",
-    "differenceStatement": "Stratégie, construction et opérations restent liées dans un même modèle responsable, afin que les décisions reposent sur les contraintes réelles et la performance après lancement.",
-    "differenceDescription": "Un modèle traditionnel conseille, transmet puis assiste. ARC diagnostique, construit et opère en visant le même résultat.",
+    "differenceTitle": "La responsabilité ne s’arrête pas au lancement.",
+    "differenceStatement": "Stratégie, ingénierie et opérations restent reliées dans un même modèle responsable.",
+    "differenceDescription": "Les décisions restent attachées aux contraintes réelles, aux preuves de production et au résultat validé au départ.",
     "meetTeam": "Découvrir l’équipe responsable de la livraison",
     "proofEyebrow": "La preuve en production",
-    "proofTitle": "Des dossiers opérationnels. La livraison avant les promesses.",
-    "proofDescription": "Chaque dossier reste lié au problème métier, au système livré et à son état de production. Les chiffres de performance ne sont publiés qu’après audit.",
+    "proofTitle": "Des preuves de production reliées à des systèmes nommés.",
+    "proofDescription": "Chaque dossier relie le problème métier, le système livré et son état actuel en production. Les chiffres restent non publiés avant audit.",
     "record": "Dossier {client}",
     "liveSystems": "Des systèmes actifs, pas des présentations.",
     "liveSystemsDescription": "Des dossiers opérationnels nommés, avec périmètre de livraison et contexte de production.",
@@ -381,6 +386,9 @@
     "whatChanged": "Évolution :",
     "status": "Statut :",
     "viewSnapshot": "Voir la synthèse",
+    "previousStudy": "Étude de cas précédente",
+    "nextStudy": "Étude de cas suivante",
+    "casePosition": "Étude {current} sur {total}",
     "apply": "Appliquer ARC",
     "closingQuote": "Une équipe responsable, de la contrainte à la production.",
     "closingTitle": "Vous souhaitez appliquer ARC à vos opérations ?",
@@ -388,9 +396,9 @@
     "requestAssessment": "Demander une évaluation ARC",
     "seeCaseStudies": "Voir les études de cas",
     "phases": [
-      {"step":"01","title":"Évaluer","purpose":"Identifier la contrainte avant de financer la construction.","output":"Carte des contraintes","description":"Nous cartographions le workflow, les dépendances, les responsables de décision et la cible mesurable avant d’approuver le périmètre de construction.","checkpoints":["Preuves de l’état actuel","Priorité des contraintes","Feuille de route décisionnelle"]},
-      {"step":"02","title":"Réingénier","purpose":"Concevoir et livrer le système opérationnel.","output":"Système prêt pour la production","description":"Nous repensons ensemble le workflow et la pile technologique, puis validons les intégrations, les contrôles et la préparation de la mise en production.","checkpoints":["Workflow cible","Pile intégrée","Validation de production"]},
-      {"step":"03","title":"Piloter","purpose":"Opérer, mesurer et améliorer en production.","output":"Indicateurs opérationnels actifs","description":"La même équipe responsable suit la fiabilité, rend compte de la performance et transforme les preuves de production en prochain cycle d’amélioration.","checkpoints":["Télémétrie opérationnelle","Réponse managée","Backlog d’amélioration"]}
+      {"step":"01","title":"Évaluer","purpose":"Identifier la contrainte avant de financer la construction.","output":"Carte des contraintes","description":"Nous cartographions le workflow, les dépendances, les responsables de décision et la cible mesurable avant d’approuver le périmètre de construction.","checkpoints":["Preuves de l’état actuel","Priorité des contraintes","Feuille de route décisionnelle"],"imageAlt":"Deux consultants cartographiant les dépendances opérationnelles pendant une évaluation ARC"},
+      {"step":"02","title":"Réingénier","purpose":"Concevoir et livrer le système opérationnel.","output":"Système prêt pour la production","description":"Nous repensons ensemble le workflow et la pile technologique, puis validons les intégrations, les contrôles et la préparation de la mise en production.","checkpoints":["Workflow cible","Pile intégrée","Validation de production"],"imageAlt":"Ingénieurs systèmes validant une architecture et un plan d’intégration"},
+      {"step":"03","title":"Piloter","purpose":"Opérer, mesurer et améliorer en production.","output":"Indicateurs opérationnels actifs","description":"La même équipe responsable suit la fiabilité, rend compte de la performance et transforme les preuves de production en prochain cycle d’amélioration.","checkpoints":["Télémétrie opérationnelle","Réponse managée","Backlog d’amélioration"],"imageAlt":"Opérateurs examinant les preuves de production et les décisions d’amélioration"}
     ],
     "signals": [
       {"title":"Une équipe","description":"Diagnostic, livraison et opérations en production restent connectés.","linkLabel":"Rencontrer les fondateurs"},
@@ -400,6 +408,16 @@
     "caseTitles": {
       "crm": "Un système CRM unique pour les opérations immobilières actives.",
       "whatsapp": "Des opérations de leads par IA entre WhatsApp et le CRM."
+    },
+    "caseRecords": {
+      "crm": {
+        "problem": "Trois outils déconnectés créaient des doublons, des relances manquées et aucun reporting fiable pour la direction.",
+        "change": "Un CRM unifié relie désormais la collecte des leads, le parcours acheteur, les workflows d’équipe et le reporting opérationnel."
+      },
+      "whatsapp": {
+        "problem": "Les leads entrants étaient traités manuellement sur WhatsApp et par téléphone, avec des opportunités hors horaires et un tri répétitif.",
+        "change": "Un agent IA en production gère désormais la qualification multilingue, le contexte persistant, la planification et les mises à jour du CRM."
+      }
     }
   },
   "Capabilities": {
@@ -1171,10 +1189,9 @@
   "About": {
     "hero": {
       "eyebrow": "Qui sommes-nous",
-      "titleLineOne": "Nous conseillons. Nous construisons.",
-      "titleLineTwo": "Nous opérons.",
-      "emphasis": "Un seul partenaire responsable.",
-      "description": "Hive Vault Arc accompagne les transformations technologiques en réunissant stratégie, ingénierie IA, logiciels, cloud et opérations managées dans un même modèle orienté production.",
+      "titleLineOne": "De la décision métier à l’exploitation.",
+      "emphasis": "Une seule équipe responsable.",
+      "description": "Hive Vault Arc relie stratégie, ingénierie IA, logiciels, cloud et opérations managées dans un modèle d’exécution conçu pour la production.",
       "primaryCta": "Planifier un échange",
       "secondaryCta": "Voir les expertises",
       "frameworkLabel": "ARC Framework",
@@ -1262,8 +1279,8 @@
     },
     "delivery": {
       "eyebrow": "Notre mode de livraison",
-      "title": "Une équipe à chaque étape.",
-      "description": "ARC réunit stratégie, ingénierie et opérations dans une boucle continue de responsabilité.",
+      "title": "Une seule boucle opérationnelle. Aucun passage de relais.",
+      "description": "ARC relie stratégie, ingénierie et opérations afin que la même équipe reste responsable, de l’évaluation à la production.",
       "steps": [
         {
           "number": "01",
@@ -1286,6 +1303,7 @@
       ]
     },
     "proof": {
+      "eyebrow": "La preuve en production",
       "industry": "Immobilier de luxe",
       "title": "Un système opérationnel CRM unique pour une activité immobilière en production.",
       "summary": "Hive Vault Arc a réuni la collecte des prospects, le pipeline du parcours acheteur, les processus d’équipe et le reporting opérationnel dans un système gouverné.",
@@ -1295,7 +1313,7 @@
     },
     "trust": {
       "eyebrow": "Pourquoi les décideurs font confiance à HVA",
-      "title": "La confiance doit pouvoir se vérifier.",
+      "title": "Une responsabilité que vous pouvez vérifier.",
       "description": "Découvrez qui est responsable, ce qui a été livré, notre manière d’opérer et la façon dont vos informations sont traitées.",
       "cta": "Voir les preuves de livraison",
       "items": [
@@ -1332,13 +1350,14 @@
       "viewProfile": "Voir le profil"
     },
     "contact": {
+      "eyebrow": "Notre implantation",
       "title": "Ancrés à Tanger. Actifs au-delà des frontières.",
       "description": "Un accès direct à l’équipe responsable de la décision, de la livraison et des opérations.",
       "location": "Tanger, Maroc"
     },
     "bottomCta": {
-      "title": "Apportez-nous le résultat attendu, pas une solution déjà écrite.",
-      "description": "Nous définirons la trajectoire adaptée en stratégie, ingénierie et opérations, puis resterons responsables jusqu’à la production.",
+      "title": "Apportez-nous le résultat. Nous tracerons la voie vers la production.",
+      "description": "La même équipe responsable relie stratégie, ingénierie et opérations, de la première décision à la mise en production.",
       "primary": "Planifier un échange",
       "secondary": "Voir nos expertises"
     }

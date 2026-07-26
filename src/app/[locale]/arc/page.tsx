@@ -86,6 +86,7 @@ export default async function ArcPage({params}: PageProps) {
         <FaqSection
           faqs={arcFaqs.items}
           heading={arcFaqs.heading}
+          className="arc-briefing__faq"
         />
       </Arc>
     </>

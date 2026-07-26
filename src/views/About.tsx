@@ -1,27 +1,22 @@
 'use client';
 
-import { useState, type CSSProperties, type ElementType } from 'react';
+import {useState, type CSSProperties} from 'react';
 import Image from 'next/image';
-import {Link} from '@/i18n/navigation';
-import { MotionConfig, motion, useScroll, useTransform } from 'framer-motion';
+import {MotionConfig, motion, useScroll, useTransform} from 'framer-motion';
 import {useLocale, useTranslations} from 'next-intl';
+import {Link} from '@/i18n/navigation';
 import {
   ArrowUpRight,
-  Compass,
   FileCheck2,
   Landmark,
   LockKeyhole,
-  Settings2,
-  Terminal,
   UsersRound,
 } from '@/components/icons';
-import SectionBrandMark from '../components/SectionBrandMark';
 import BottomCTA from '../components/BottomCTA';
-import PageAmbientBackground from '../components/PageAmbientBackground';
+import SectionBrandMark from '../components/SectionBrandMark';
+import type {EmployeeProfile} from '../lib/employee-profiles';
 import {isSanityCdnImage} from '../lib/image-delivery';
-import { useAnimationQuality } from '../lib/animationQuality';
-import type { EmployeeProfile } from '../lib/employee-profiles';
-import { CONTACT_EMAIL, CONTACT_PHONE_DISPLAY, CONTACT_PHONE_E164 } from '../lib/seo';
+import {CONTACT_EMAIL, CONTACT_PHONE_DISPLAY, CONTACT_PHONE_E164} from '../lib/seo';
 
 type TeamMember = Pick<
   EmployeeProfile,
@@ -61,18 +56,22 @@ type TrustSignalCopy = {
   linkLabel: string;
 };
 
-const deliveryStepIcons: ElementType[] = [Compass, Settings2, Terminal];
+const phaseCapabilitySlugs = [
+  new Set(['strategy-business', 'technology-consulting']),
+  new Set(['ai-data-analytics', 'software-engineering', 'cloud-infrastructure']),
+  new Set(['operations-managed']),
+] as const;
+
+const phaseMedia = [
+  '/Images/capabilities/hva-arc-assess-operating-model.webp',
+  '/Images/capabilities/hva-arc-reengineer-operating-model.webp',
+  '/Images/capabilities/hva-arc-command-operating-model.webp',
+] as const;
 
 const featuredProof = {
   slug: 'top-tier-crm-transformation-program-real-estate-operations',
   client: 'ImmoWorld',
-  industry: 'Luxury Real Estate',
-  title: 'One CRM operating system for a live real estate operation.',
-  summary:
-    'Hive Vault Arc unified lead intake, buyer-journey pipeline work, team workflows, and operational reporting in one governed system.',
-  status: 'Live operational rollout since May 2025',
   image: '/Images/case-studies/immoworld-crm-transformation-case-study-morocco.webp',
-  imageAlt: 'ImmoWorld real estate CRM operating system engagement',
 } as const;
 
 const trustSignalConfig = [
@@ -99,24 +98,21 @@ const trustSignalConfig = [
 ] as const;
 
 const reveal = {
-  initial: { opacity: 0, y: 18 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.12 },
-  transition: { duration: 0.5 },
-};
+  initial: {opacity: 0, y: 14},
+  whileInView: {opacity: 1, y: 0},
+  viewport: {once: true, amount: 0.14},
+  transition: {duration: 0.48, ease: [0.23, 1, 0.32, 1]},
+} as const;
 
-const About = ({ teamMembers }: AboutProps) => {
+const About = ({teamMembers}: AboutProps) => {
   const t = useTranslations('About');
   const locale = useLocale();
-  const { motionReduced } = useAnimationQuality();
-  const { scrollYProgress } = useScroll();
+  const {scrollYProgress} = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const [activeDeliveryStep, setActiveDeliveryStep] = useState(0);
+  const [activePhaseIndex, setActivePhaseIndex] = useState(0);
+
   const deliveryStepCopy = t.raw('delivery.steps') as DeliveryStepCopy[];
-  const deliverySteps = deliveryStepCopy.map((step, index) => ({
-    ...step,
-    icon: deliveryStepIcons[index] ?? Compass,
-  }));
+  const deliverySteps = deliveryStepCopy;
   const capabilityPillars = t.raw('capabilities.items') as CapabilityPillarCopy[];
   const companyFacts = t.raw('facts') as Array<{value: string; label: string}>;
   const trustSignalCopy = t.raw('trust.items') as TrustSignalCopy[];
@@ -125,255 +121,240 @@ const About = ({ teamMembers }: AboutProps) => {
     ...trustSignalCopy.find((item) => item.id === signal.id)!,
     href: signal.id === 'proof' && locale === 'fr' ? '/case-studies' : signal.href,
   }));
-  const activeDelivery = deliverySteps[activeDeliveryStep] ?? deliverySteps[0];
-  const ActiveDeliveryIcon = activeDelivery.icon;
+
+  const activePhase = deliverySteps[activePhaseIndex] ?? deliverySteps[0];
+  const activePhaseMedia = phaseMedia[activePhaseIndex] ?? phaseMedia[0];
+  const activeCapabilities = capabilityPillars.filter((pillar) =>
+    phaseCapabilitySlugs[activePhaseIndex]?.has(pillar.slug),
+  );
 
   return (
-    <MotionConfig reducedMotion={motionReduced ? 'always' : 'never'}>
-      <div className="about-hva-page about-redesign">
+    <MotionConfig reducedMotion="user">
+      <div className="about-hva-page about-v2">
         <motion.div
           aria-hidden="true"
-          className="about-scroll-progress"
-          style={{ scaleX: progressScale }}
+          className="about-v2__progress"
+          style={{scaleX: progressScale}}
         />
 
-        <section className="about-editorial-hero">
-          <PageAmbientBackground className="about-editorial-hero-ambient" />
-          <div className="about-editorial-shell about-editorial-hero-grid">
-            <motion.div
-              className="about-editorial-hero-copy"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55 }}
-            >
-              <div className="about-kicker">
-                <SectionBrandMark size="sm" eager />
-                <span>{t('hero.eyebrow')}</span>
-              </div>
-              <h1>
-                {t('hero.titleLineOne')}
-                <br />
-                {t('hero.titleLineTwo')}
-                <em>{t('hero.emphasis')}</em>
-              </h1>
-              <p>{t('hero.description')}</p>
-              <div className="about-hero-actions">
-                <Link href="/contact" className="about-button about-button-primary">
-                  {t('hero.primaryCta')} <ArrowUpRight aria-hidden="true" />
-                </Link>
-                <Link href="/capabilities" className="about-button about-button-secondary">
-                  {t('hero.secondaryCta')} <ArrowUpRight aria-hidden="true" />
-                </Link>
-              </div>
-            </motion.div>
+        <section className="about-v2__hero" aria-labelledby="about-title">
+          <div className="site-frame-wide">
+            <div className="about-v2__hero-grid">
+              <motion.div
+                className="about-v2__hero-copy"
+                initial={{opacity: 0, y: 18}}
+                animate={{opacity: 1, y: 0}}
+                transition={{duration: 0.52, ease: [0.23, 1, 0.32, 1]}}
+              >
+                <div className="about-v2__mark">
+                  <SectionBrandMark size="sm" eager />
+                  <span>{t('hero.eyebrow')}</span>
+                </div>
+                <h1 id="about-title">
+                  <span>{t('hero.titleLineOne')}</span>
+                  <em>{t('hero.emphasis')}</em>
+                </h1>
+                <p>{t('hero.description')}</p>
+                <div className="about-v2__actions">
+                  <Link href="/contact">
+                    {t('hero.primaryCta')} <ArrowUpRight aria-hidden="true" />
+                  </Link>
+                  <Link href="/capabilities">
+                    {t('hero.secondaryCta')} <ArrowUpRight aria-hidden="true" />
+                  </Link>
+                </div>
+              </motion.div>
 
-            <motion.div
-              className="about-editorial-hero-media"
-              initial={{ opacity: 0, x: 24 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.65, delay: 0.1 }}
-            >
-              <div className="about-hero-framework-card">
+              <motion.aside
+                className="about-v2__facts"
+                aria-labelledby="about-facts-title"
+                initial={{opacity: 0, x: 16}}
+                animate={{opacity: 1, x: 0}}
+                transition={{duration: 0.5, delay: 0.08, ease: [0.23, 1, 0.32, 1]}}
+              >
+                <span id="about-facts-title">{t('factsHeading')}</span>
+                <ol>
+                  {companyFacts.map((fact, index) => (
+                    <li key={fact.value}>
+                      <small>{String(index + 1).padStart(2, '0')}</small>
+                      <div>
+                        <strong>{fact.value}</strong>
+                        <p>{fact.label}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </motion.aside>
+            </div>
+
+            <div className="about-v2__hero-lower">
+              <motion.aside
+                className="about-v2__framework"
+                initial={{opacity: 0}}
+                animate={{opacity: 1}}
+                transition={{duration: 0.42, delay: 0.18}}
+              >
                 <span>{t('hero.frameworkLabel')}</span>
                 <strong>{t('hero.frameworkLoop')}</strong>
-              </div>
-              <Image
-                src="/Images/about/hva-team-strategy-room.webp"
-                alt={t('hero.imageAlt')}
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 52vw"
-                className="object-cover"
-              />
-              <div className="about-hero-media-caption">
-                <SectionBrandMark surface="dark" size="sm" />
-                <span>{t('hero.imageCaption')}</span>
-              </div>
-            </motion.div>
-          </div>
-        </section>
+                <p>{t('hero.imageCaption')}</p>
+              </motion.aside>
 
-        <section className="about-proof-strip" aria-labelledby="about-proof-heading">
-          <div className="about-editorial-shell">
-            <h2 id="about-proof-heading" className="sr-only">{t('factsHeading')}</h2>
-            <div className="about-proof-grid">
-              {companyFacts.map((fact) => (
-                <motion.article key={fact.value} className="about-proof-item" {...reveal}>
-                  <strong>{fact.value}</strong>
-                  <p>{fact.label}</p>
-                </motion.article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="service-map" className="about-service-map-section soft-grid-section">
-          <div className="about-service-map-shell">
-            <motion.div className="about-service-map-panel" {...reveal}>
-              <div className="about-service-map-copy">
-                <div aria-hidden="true" className="arc-dark-grid" />
-                <div className="about-service-map-mark">
-                  <SectionBrandMark surface="dark" size="sm" />
-                  <span>{t('capabilities.eyebrow')}</span>
-                </div>
-                <h2>{t('capabilities.title')}</h2>
-                <p>{t('capabilities.description')}</p>
-                <Link href="/capabilities#capability-pillars" className="about-service-map-link">
-                  {t('capabilities.cta')} <ArrowUpRight aria-hidden="true" />
-                </Link>
-              </div>
-
-              <div className="about-service-map-grid">
-                {capabilityPillars.map((pillar) => (
-                  <Link
-                    key={pillar.number}
-                    href={`/capabilities/${pillar.slug}`}
-                    className="about-service-map-item"
-                  >
-                    <span className="about-service-map-text">
-                      <span className="about-service-map-phase">{pillar.phase}</span>
-                      <strong>{pillar.title}</strong>
-                      <em>{pillar.outcome}</em>
-                    </span>
-                    <ArrowUpRight className="about-service-map-arrow" aria-hidden="true" />
-                    <span className="sr-only">{pillar.description}</span>
-                  </Link>
-                ))}
-              </div>
-
-              <div className="about-service-map-media">
+              <motion.figure
+                className="about-v2__hero-media"
+                initial={{opacity: 0.35, clipPath: 'inset(0 0 100% 0)'}}
+                animate={{opacity: 1, clipPath: 'inset(0 0 0% 0)'}}
+                transition={{duration: 0.72, delay: 0.1, ease: [0.23, 1, 0.32, 1]}}
+              >
                 <Image
-                  src="/Images/capabilities/hva-arc-framework-operating-model.webp"
-                  alt={t('capabilities.imageAlt')}
+                  src="/Images/about/hva-team-strategy-room.webp"
+                  alt={t('hero.imageAlt')}
                   fill
-                  sizes="(max-width: 1040px) 100vw, 92vw"
+                  priority
+                  sizes="(max-width: 767px) 100vw, 78vw"
                   className="object-cover"
                 />
-                <div className="about-service-map-media-caption">
-                  <div>
-                    <SectionBrandMark surface="dark" size="sm" />
-                    <span>{t('capabilities.imageLabel')}</span>
-                  </div>
-                  <p>{t('capabilities.imageCaption')}</p>
-                </div>
-              </div>
-            </motion.div>
+                <figcaption>
+                  <SectionBrandMark surface="dark" size="sm" />
+                  <span>{t('hero.imageCaption')}</span>
+                </figcaption>
+              </motion.figure>
+            </div>
           </div>
         </section>
 
-        <section className="about-delivery-section">
-          <div className="about-editorial-shell">
-            <motion.div className="about-delivery-header" {...reveal}>
-              <div className="about-section-heading">
+        <section className="about-v2__loop" aria-labelledby="about-loop-title">
+          <div className="site-frame-wide">
+            <motion.header {...reveal}>
+              <div className="about-v2__mark">
+                <SectionBrandMark size="sm" />
                 <span>{t('delivery.eyebrow')}</span>
-                <h2>{t('delivery.title')}</h2>
               </div>
-              <p>{t('delivery.description')}</p>
-            </motion.div>
-            <div className="about-delivery-progress" aria-hidden="true">
-              <motion.span
-                animate={{ width: `${((activeDeliveryStep + 1) / deliverySteps.length) * 100}%` }}
-                transition={{ duration: 0.3, ease: 'easeOut' }}
-              />
-            </div>
-            <div className="about-delivery-grid">
+              <div>
+                <h2 id="about-loop-title">{t('delivery.title')}</h2>
+                <p>{t('delivery.description')}</p>
+              </div>
+            </motion.header>
+
+            <div className="about-v2__phase-nav" aria-label={t('delivery.eyebrow')}>
               {deliverySteps.map((step, index) => {
-                const Icon = step.icon;
-                const isActive = activeDeliveryStep === index;
+                const isActive = index === activePhaseIndex;
                 return (
-                  <motion.button
-                    key={step.title}
+                  <button
+                    key={step.number}
                     type="button"
-                    className={`about-delivery-step ${isActive ? 'about-delivery-step-active' : ''}`}
-                    onMouseEnter={() => setActiveDeliveryStep(index)}
-                    onFocus={() => setActiveDeliveryStep(index)}
-                    onClick={() => setActiveDeliveryStep(index)}
-                    aria-expanded={isActive}
-                    aria-controls="about-delivery-detail"
-                    {...reveal}
-                    transition={{ duration: 0.5, delay: index * 0.08 }}
+                    className={isActive ? 'is-active' : undefined}
+                    aria-pressed={isActive}
+                    aria-controls="about-phase-panel"
+                    onClick={() => setActivePhaseIndex(index)}
+                    onFocus={() => setActivePhaseIndex(index)}
+                    onMouseEnter={() => setActivePhaseIndex(index)}
                   >
-                    <Icon className="about-delivery-icon" aria-hidden="true" />
-                    <h3>{step.title}</h3>
-                  </motion.button>
+                    <small>{step.number}</small>
+                    <strong>{step.title}</strong>
+                  </button>
                 );
               })}
             </div>
+
             <motion.div
-              id="about-delivery-detail"
-              key={activeDelivery.title}
-              className="about-delivery-detail"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.28 }}
+              id="about-phase-panel"
+              key={activePhase.number}
+              className="about-v2__phase-panel"
+              initial={{opacity: 0, y: 8}}
+              animate={{opacity: 1, y: 0}}
+              transition={{duration: 0.24, ease: 'easeOut'}}
             >
-              <div aria-hidden="true" className="arc-dark-grid" />
-              <div className="about-delivery-detail-summary">
-                <div className="about-delivery-detail-title">
-                  <ActiveDeliveryIcon aria-hidden="true" />
-                  <h3>{activeDelivery.title}</h3>
-                </div>
-                <p>{activeDelivery.description}</p>
+              <div className="about-v2__phase-copy">
+                <h3>{activePhase.title}</h3>
+                <p>{activePhase.description}</p>
+                <ul>
+                  {activePhase.checkpoints.map((checkpoint) => (
+                    <li key={checkpoint}>{checkpoint}</li>
+                  ))}
+                </ul>
               </div>
-              <ul>
-                {activeDelivery.checkpoints.map((checkpoint) => (
-                  <li key={checkpoint}>{checkpoint}</li>
+
+              <figure className="about-v2__phase-media">
+                <Image
+                  src={activePhaseMedia}
+                  alt={`${activePhase.title}: ${t('capabilities.imageAlt')}`}
+                  fill
+                  sizes="(max-width: 1023px) 100vw, 58vw"
+                  className="object-cover"
+                />
+                <figcaption>
+                  <span>{t('capabilities.imageLabel')}</span>
+                  <strong>{t('capabilities.imageCaption')}</strong>
+                </figcaption>
+              </figure>
+
+              <nav className="about-v2__capabilities" aria-label={t('capabilities.title')}>
+                {activeCapabilities.map((capability) => (
+                  <Link key={capability.slug} href={`/capabilities/${capability.slug}`}>
+                    <span>{capability.number}</span>
+                    <strong>{capability.title}</strong>
+                    <em>{capability.outcome}</em>
+                  </Link>
                 ))}
-              </ul>
+              </nav>
             </motion.div>
+
+            <Link href="/capabilities#capability-pillars" className="about-v2__all-capabilities">
+              {t('capabilities.cta')} <ArrowUpRight aria-hidden="true" />
+            </Link>
           </div>
         </section>
 
-        <section className="about-proof-case-section" aria-labelledby="about-proof-case-title">
-          <div className="about-editorial-shell about-proof-case-grid">
-            <motion.div className="about-proof-case-media" {...reveal}>
-              <Image
-                src={featuredProof.image}
-                alt={t('proof.imageAlt')}
-                fill
-                sizes="(max-width: 767px) 100vw, 52vw"
-                className="object-cover"
-              />
-            </motion.div>
-            <motion.div className="about-proof-case-copy" {...reveal}>
-              <div className="about-proof-case-client">
-                <span>{featuredProof.client}</span>
-                <span>{t('proof.industry')}</span>
-              </div>
-              <h2 id="about-proof-case-title">{t('proof.title')}</h2>
-              <p>{t('proof.summary')}</p>
-              <p className="about-proof-case-status">{t('proof.status')}</p>
-              <Link
-                href={locale === 'fr' ? '/case-studies' : `/case-studies/${featuredProof.slug}`}
-                className="about-proof-case-link"
-              >
-                {t('proof.cta')} <ArrowUpRight aria-hidden="true" />
-              </Link>
-            </motion.div>
+        <section className="about-v2__proof" aria-labelledby="about-proof-title">
+          <div className="site-frame-wide">
+            <div className="about-v2__proof-layout">
+              <motion.figure className="about-v2__proof-media" {...reveal}>
+                <Image
+                  src={featuredProof.image}
+                  alt={t('proof.imageAlt')}
+                  fill
+                  sizes="(max-width: 1023px) 100vw, 60vw"
+                  className="object-cover"
+                />
+                <figcaption>
+                  <span>{featuredProof.client}</span>
+                  <strong>{t('proof.status')}</strong>
+                </figcaption>
+              </motion.figure>
+
+              <motion.div className="about-v2__proof-copy" {...reveal}>
+                <span>{t('proof.eyebrow')}</span>
+                <small>{t('proof.industry')}</small>
+                <h2 id="about-proof-title">{t('proof.title')}</h2>
+                <p>{t('proof.summary')}</p>
+                <Link
+                  href={locale === 'fr' ? '/case-studies' : `/case-studies/${featuredProof.slug}`}
+                >
+                  {t('proof.cta')} <ArrowUpRight aria-hidden="true" />
+                </Link>
+              </motion.div>
+            </div>
           </div>
         </section>
 
-        <section className="about-trust-band" aria-labelledby="about-trust-title">
+        <section className="about-v2__trust" aria-labelledby="about-trust-title">
           <div aria-hidden="true" className="arc-dark-grid" />
-          <div className="about-editorial-shell about-trust-grid">
-            <motion.div className="about-trust-copy" {...reveal}>
+          <div className="site-frame-wide">
+            <motion.div className="about-v2__trust-copy" {...reveal}>
               <span>{t('trust.eyebrow')}</span>
               <h2 id="about-trust-title">{t('trust.title')}</h2>
               <p>{t('trust.description')}</p>
-              <Link href="/case-studies" className="about-trust-primary-link">
+              <Link href="/case-studies">
                 {t('trust.cta')} <ArrowUpRight aria-hidden="true" />
               </Link>
             </motion.div>
-            <div className="about-trust-ledger">
-              {trustSignals.map((signal) => {
+
+            <div className="about-v2__trust-ledger">
+              {trustSignals.map((signal, index) => {
                 const Icon = signal.icon;
                 return (
-                  <motion.article
-                    key={signal.title}
-                    className="about-trust-item"
-                    {...reveal}
-                    transition={{ duration: 0.45 }}
-                  >
+                  <motion.article key={signal.id} {...reveal}>
+                    <small>{String(index + 1).padStart(2, '0')}</small>
                     <Icon aria-hidden="true" />
                     <div>
                       <h3>{signal.title}</h3>
@@ -389,11 +370,11 @@ const About = ({ teamMembers }: AboutProps) => {
           </div>
         </section>
 
-        <section id="founders" className="about-team-section">
+        <section id="founders" className="about-team-section" aria-labelledby="about-team-title">
           <div className="about-editorial-shell">
             <motion.div className="about-team-heading" {...reveal}>
               <span>{t('team.eyebrow')}</span>
-              <h2>{t('team.title')}</h2>
+              <h2 id="about-team-title">{t('team.title')}</h2>
               <p>{t('team.description')}</p>
             </motion.div>
 
@@ -406,12 +387,15 @@ const About = ({ teamMembers }: AboutProps) => {
                     key={member.slug}
                     className="about-team-card"
                     {...reveal}
-                    transition={{ duration: 0.5, delay: index * 0.08 }}
+                    transition={{duration: 0.5, delay: index * 0.08}}
                   >
-                    <Link href={`/aboutus/our-people/${member.slug}`} className="about-team-card-link">
+                    <Link
+                      href={`/aboutus/our-people/${member.slug}`}
+                      className="about-team-card-link"
+                    >
                       <div
                         className={`about-team-portrait about-team-portrait-${member.slug}`}
-                        style={{ viewTransitionName: profileTransitionName } as CSSProperties}
+                        style={{viewTransitionName: profileTransitionName} as CSSProperties}
                       >
                         <Image
                           src={member.profileImage}
@@ -424,7 +408,9 @@ const About = ({ teamMembers }: AboutProps) => {
                         />
                       </div>
                       <div className="about-team-card-copy">
-                        <span className="about-team-responsibility">{member.responsibilityTag}</span>
+                        <span className="about-team-responsibility">
+                          {member.responsibilityTag}
+                        </span>
                         <h3>{member.name}</h3>
                         <span className="about-team-position">{member.position}</span>
                         <p>{member.summary}</p>
@@ -440,9 +426,10 @@ const About = ({ teamMembers }: AboutProps) => {
           </div>
         </section>
 
-        <section className="about-contact-strip" aria-labelledby="about-contact-title">
-          <div className="about-editorial-shell about-contact-grid">
+        <section className="about-v2__contact" aria-labelledby="about-contact-title">
+          <div className="site-frame-wide">
             <div>
+              <span>{t('contact.eyebrow')}</span>
               <h2 id="about-contact-title">{t('contact.title')}</h2>
               <p>{t('contact.description')}</p>
             </div>

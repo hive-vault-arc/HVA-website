@@ -355,25 +355,30 @@
   "Arc": {
     "label": "ARC operating model",
     "heroLines": ["Assess the constraint.", "Re-engineer the system.", "Command the outcome."],
-    "heroDescription": "ARC is a closed-loop operating model for technology transformation. We diagnose operational constraints, rebuild the workflow and stack, and stay accountable in live production until results hold. Strategy, engineering, and operations remain under one accountable team.",
-    "bookDiagnostic": "Book ARC diagnostic",
+    "heroDescription": "ARC connects diagnosis, engineering, and live operations so one accountable team carries the outcome from constraint to production.",
+    "bookDiagnostic": "Request ARC assessment",
     "seeProduction": "See ARC in production",
-    "heroAlt": "ARC operating-model workspace connecting diagnostic evidence, a modular workflow, and an ordered command state",
+    "heroAlt": "Senior operators mapping a business system during an ARC strategy session",
+    "leadTitle": "One loop from operating constraint to production evidence.",
+    "leadDescription": "ARC makes the path visible before money moves. It connects diagnosis, system delivery, and live operations through explicit decisions and accountable ownership.",
+    "loopAria": "Assess, Re-engineer, Command: the ARC operating loop",
+    "indexTitle": "Understand the whole model in sixty seconds.",
+    "indexDescription": "Three connected responsibilities move one outcome from evidence to a system that holds in production.",
     "how": "How ARC works",
-    "processTitle": "Three connected decisions. One operating loop.",
-    "processDescription": "Each phase ends with a concrete output and a decision gate before the next commitment. The model is designed for complex operational change that must hold in production.",
+    "processTitle": "Three decisions. One accountable operating loop.",
+    "processDescription": "Each responsibility ends with a concrete output and a decision before the next commitment begins.",
     "phasesLabel": "ARC operating phases",
     "output": "{phase} output",
     "bestFor": "Best for",
     "buyerFit": ["Fragmented operations", "Legacy bottlenecks", "AI workflow rollout", "Production accountability gaps"],
     "differenceEyebrow": "Why ARC is different",
-    "differenceTitle": "One loop, not three disconnected vendors.",
-    "differenceStatement": "Strategy, build, and operations stay connected under one accountable model, so decisions are made against real constraints and post-launch performance.",
-    "differenceDescription": "Traditional delivery advises, hands off, then supports. ARC diagnoses, builds, and operates against the same outcome.",
+    "differenceTitle": "Responsibility does not stop at launch.",
+    "differenceStatement": "Strategy, engineering, and operations remain connected under one accountable model.",
+    "differenceDescription": "Decisions stay attached to real constraints, production evidence, and the outcome approved at the start.",
     "meetTeam": "Meet the team accountable for delivery",
     "proofEyebrow": "Proof in production",
-    "proofTitle": "Operating records. Delivery before claims.",
-    "proofDescription": "Each record stays attached to the business problem, the system delivered, and its production status. Performance figures remain unpublished until audited.",
+    "proofTitle": "Production evidence, attached to named systems.",
+    "proofDescription": "Each record connects the business problem, delivered system, and current production status. Performance figures remain unpublished until audited.",
     "record": "{client} record",
     "liveSystems": "Live systems, not slideware.",
     "liveSystemsDescription": "Named operating records with delivery scope and production context.",
@@ -381,6 +386,9 @@
     "whatChanged": "What changed:",
     "status": "Status:",
     "viewSnapshot": "View case snapshot",
+    "previousStudy": "Previous case study",
+    "nextStudy": "Next case study",
+    "casePosition": "Case {current} of {total}",
     "apply": "Apply ARC",
     "closingQuote": "One accountable team from constraint to production.",
     "closingTitle": "Want ARC applied to your operations?",
@@ -388,9 +396,9 @@
     "requestAssessment": "Request ARC assessment",
     "seeCaseStudies": "See case studies",
     "phases": [
-      {"step":"01","title":"Assess","purpose":"Find the constraint before funding the build.","output":"Constraint map","description":"We map the operating workflow, system dependencies, decision owners, and measurable target before build scope is approved.","checkpoints":["Current-state evidence","Constraint priority","Decision-ready roadmap"]},
-      {"step":"02","title":"Re-engineer","purpose":"Design and deliver the operating system.","output":"Production-ready system","description":"We redesign the workflow and stack together, then validate integrations, controls, and release readiness against the approved outcome.","checkpoints":["Target workflow","Integrated stack","Production gate"]},
-      {"step":"03","title":"Command","purpose":"Run, measure, and improve in production.","output":"Live operating metrics","description":"The same accountable team monitors reliability, reports performance, and turns production evidence into the next improvement cycle.","checkpoints":["Operating telemetry","Managed response","Improvement backlog"]}
+      {"step":"01","title":"Assess","purpose":"Find the constraint before funding the build.","output":"Constraint map","description":"We map the operating workflow, system dependencies, decision owners, and measurable target before build scope is approved.","checkpoints":["Current-state evidence","Constraint priority","Decision-ready roadmap"],"imageAlt":"Two consultants mapping operational dependencies during an ARC assessment"},
+      {"step":"02","title":"Re-engineer","purpose":"Design and deliver the operating system.","output":"Production-ready system","description":"We redesign the workflow and stack together, then validate integrations, controls, and release readiness against the approved outcome.","checkpoints":["Target workflow","Integrated stack","Production gate"],"imageAlt":"Systems engineers validating an architecture and integration plan"},
+      {"step":"03","title":"Command","purpose":"Run, measure, and improve in production.","output":"Live operating metrics","description":"The same accountable team monitors reliability, reports performance, and turns production evidence into the next improvement cycle.","checkpoints":["Operating telemetry","Managed response","Improvement backlog"],"imageAlt":"Production operators reviewing live operating evidence and improvement decisions"}
     ],
     "signals": [
       {"title":"One team","description":"Diagnosis, delivery, and live operations stay connected.","linkLabel":"Meet the founders"},
@@ -400,6 +408,16 @@
     "caseTitles": {
       "crm": "One CRM system for live real estate operations.",
       "whatsapp": "AI lead operations across WhatsApp and CRM."
+    },
+    "caseRecords": {
+      "crm": {
+        "problem": "Three disconnected tools created duplicated records, missed follow-ups, and no dependable reporting layer for leadership.",
+        "change": "A unified CRM now connects lead intake, buyer-journey pipeline work, team workflows, and operational reporting."
+      },
+      "whatsapp": {
+        "problem": "Inbound leads were handled manually across WhatsApp and phone, leaving after-hours opportunities and repetitive triage unresolved.",
+        "change": "A production AI agent now handles multilingual qualification, persistent context, scheduling, and CRM pipeline updates."
+      }
     }
   },
   "Capabilities": {
@@ -1171,10 +1189,9 @@
   "About": {
     "hero": {
       "eyebrow": "Who we are",
-      "titleLineOne": "We advise. We build.",
-      "titleLineTwo": "We operate.",
-      "emphasis": "One accountable partner.",
-      "description": "Hive Vault Arc is a technology transformation partner combining strategy, AI engineering, software, cloud, and managed operations in one production-minded delivery model.",
+      "titleLineOne": "From business decision to live operation.",
+      "emphasis": "One accountable team.",
+      "description": "Hive Vault Arc connects strategy, AI engineering, software, cloud, and managed operations in one production-minded delivery model.",
       "primaryCta": "Book a call",
       "secondaryCta": "View capabilities",
       "frameworkLabel": "ARC Framework",
@@ -1262,8 +1279,8 @@
     },
     "delivery": {
       "eyebrow": "How we deliver",
-      "title": "One team through every phase.",
-      "description": "ARC turns strategy, engineering, and operations into one continuous accountability loop.",
+      "title": "One operating loop. No delivery handoff.",
+      "description": "ARC connects strategy, engineering, and operations so responsibility stays with one team from assessment through production.",
       "steps": [
         {
           "number": "01",
@@ -1286,6 +1303,7 @@
       ]
     },
     "proof": {
+      "eyebrow": "Evidence in production",
       "industry": "Luxury real estate",
       "title": "One CRM operating system for a live real estate operation.",
       "summary": "Hive Vault Arc unified lead intake, buyer-journey pipeline work, team workflows, and operational reporting in one governed system.",
@@ -1295,7 +1313,7 @@
     },
     "trust": {
       "eyebrow": "Why buyers trust HVA",
-      "title": "Trust should be verifiable.",
+      "title": "Accountability you can verify.",
       "description": "See who is responsible, what has shipped, how we operate, and how your information is handled.",
       "cta": "Review delivery proof",
       "items": [
@@ -1332,13 +1350,14 @@
       "viewProfile": "View profile"
     },
     "contact": {
+      "eyebrow": "Where we work",
       "title": "Start in Tangier. Work across borders.",
       "description": "Direct access to the team responsible for the decision, delivery, and operation.",
       "location": "Tangier, Morocco"
     },
     "bottomCta": {
-      "title": "Bring us the outcome, not a prewritten solution.",
-      "description": "We will map the right strategy, engineering, and operations path, then stay accountable through production.",
+      "title": "Bring us the outcome. We will map the route to production.",
+      "description": "The same accountable team connects strategy, engineering, and operations from the first decision through live delivery.",
       "primary": "Book a call",
       "secondary": "View our capabilities"
     }

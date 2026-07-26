@@ -1,61 +1,46 @@
 'use client';
 
-import type { ElementType, ReactNode } from 'react';
-import { useEffect, useMemo, useRef, useState } from 'react';
-import {useTranslations} from 'next-intl';
-import { track } from '@vercel/analytics/react';
-import { MotionConfig, motion, useScroll, useTransform } from 'framer-motion';
+import type {ReactNode} from 'react';
+import {useEffect, useMemo, useRef, useState} from 'react';
+import {track} from '@vercel/analytics/react';
 import Image from 'next/image';
+import {useTranslations} from 'next-intl';
 import {Link} from '@/i18n/navigation';
-import {
-  ArrowRight,
-  ArrowUpRight,
-  Compass,
-  Gauge,
-  GitBranch,
-  Settings2,
-  ShieldCheck,
-  UsersRound,
-} from '@/components/icons';
-import PageAmbientBackground from '../components/PageAmbientBackground';
-import {isSanityCdnImage} from '../lib/image-delivery';
-import SectionBrandMark from '../components/SectionBrandMark';
-import type { CaseStudy } from '../lib/proof';
+import {ArrowRight, ArrowUpRight} from '@/components/icons';
+import type {CaseStudy} from '@/lib/proof';
 
 type ArcProps = {
   readonly studies: readonly CaseStudy[];
   readonly children?: ReactNode;
 };
 
-type ArcPhase = {
+type ArcPhaseCopy = {
   step: string;
   title: string;
   purpose: string;
   output: string;
   description: string;
   checkpoints: readonly string[];
-  icon: ElementType;
+  imageAlt: string;
 };
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 18 },
-  show: { opacity: 1, y: 0 },
+type ArcPhase = ArcPhaseCopy & {
+  image: string;
+  letter: string;
 };
 
-const phaseIcons = [Compass, Settings2, Gauge] as const;
+const phaseImages = [
+  '/Images/arc/hva-arc-assess-fieldwork.webp',
+  '/Images/arc/hva-arc-reengineer-studio.webp',
+  '/Images/arc/hva-arc-command-operations.webp',
+] as const;
+
+const phaseLetters = ['A', 'R', 'C'] as const;
+
 const differenceSignalConfig = [
-  {
-    href: '/aboutus#founders',
-    icon: UsersRound,
-  },
-  {
-    href: '/capabilities/operations-managed',
-    icon: ShieldCheck,
-  },
-  {
-    href: '/capabilities/in-detail',
-    icon: GitBranch,
-  },
+  {href: '/aboutus#founders'},
+  {href: '/capabilities/operations-managed'},
+  {href: '/capabilities/in-detail'},
 ] as const;
 
 function recordArcEvent(name: string, properties: Record<string, string> = {}) {
@@ -65,12 +50,20 @@ function recordArcEvent(name: string, properties: Record<string, string> = {}) {
   });
 }
 
-export default function Arc({ studies, children }: ArcProps) {
+function normalizeVisibleText(value: unknown, fallback = '') {
+  return (typeof value === 'string' && value.trim() ? value : fallback).replace(
+    /[—–]/g,
+    '-'
+  );
+}
+
+export default function Arc({studies, children}: ArcProps) {
   const t = useTranslations('Arc');
-  const phaseCopy = t.raw('phases') as Array<Omit<ArcPhase, 'icon'>>;
+  const phaseCopy = t.raw('phases') as ArcPhaseCopy[];
   const arcPhases: readonly ArcPhase[] = phaseCopy.map((phase, index) => ({
     ...phase,
-    icon: phaseIcons[index] ?? Compass,
+    image: phaseImages[index] ?? phaseImages[0],
+    letter: phaseLetters[index] ?? 'A',
   }));
   const buyerFit = t.raw('buyerFit') as string[];
   const signalCopy = t.raw('signals') as Array<{
@@ -86,12 +79,21 @@ export default function Arc({ studies, children }: ArcProps) {
     'top-tier-crm-transformation-program-real-estate-operations': t('caseTitles.crm'),
     'multilingual-whatsapp-ai-agent': t('caseTitles.whatsapp'),
   };
+  const caseRecordCopy = t.raw('caseRecords') as Record<
+    'crm' | 'whatsapp',
+    {problem: string; change: string}
+  >;
+  const caseRecordKey: Record<string, 'crm' | 'whatsapp'> = {
+    'top-tier-crm-transformation-program-real-estate-operations': 'crm',
+    'multilingual-whatsapp-ai-agent': 'whatsapp',
+  };
+
   const [activePhaseIndex, setActivePhaseIndex] = useState(0);
+  const [activeStudyIndex, setActiveStudyIndex] = useState(0);
   const pageRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll();
-  const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const activePhase = arcPhases[activePhaseIndex] ?? arcPhases[0];
-  const ActivePhaseIcon = activePhase.icon;
+  const progressRef = useRef<HTMLSpanElement>(null);
+  const leadRef = useRef<HTMLElement>(null);
+  const processRef = useRef<HTMLElement>(null);
 
   const orderedStudies = useMemo(() => {
     const preferredOrder = [
@@ -103,6 +105,14 @@ export default function Arc({ studies, children }: ArcProps) {
       .map((slug) => studies.find((study) => study.slug === slug))
       .filter((study): study is CaseStudy => Boolean(study));
   }, [studies]);
+
+  const activeStudy = orderedStudies[activeStudyIndex] ?? orderedStudies[0];
+  const activeStudyRecordKey = activeStudy
+    ? caseRecordKey[activeStudy.slug]
+    : undefined;
+  const activeStudyRecord = activeStudyRecordKey
+    ? caseRecordCopy[activeStudyRecordKey]
+    : undefined;
 
   useEffect(() => {
     const root = pageRef.current;
@@ -120,23 +130,126 @@ export default function Arc({ studies, children }: ArcProps) {
 
           if (section && !seen.has(`section:${section}`)) {
             seen.add(`section:${section}`);
-            recordArcEvent('arc_section_view', { section });
+            recordArcEvent('arc_section_view', {section});
           }
 
           if (proofVariant && !seen.has(`proof:${proofVariant}`)) {
             seen.add(`proof:${proofVariant}`);
-            recordArcEvent('proof_card_view', { proof_variant: proofVariant });
+            recordArcEvent('proof_card_view', {proof_variant: proofVariant});
           }
         });
       },
-      { threshold: 0.35 }
+      {threshold: 0.32}
     );
 
-    root.querySelectorAll<HTMLElement>('[data-arc-section], [data-proof-variant]').forEach((element) => {
-      observer.observe(element);
-    });
+    root
+      .querySelectorAll<HTMLElement>('[data-arc-section], [data-proof-variant]')
+      .forEach((element) => observer.observe(element));
 
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const root = pageRef.current;
+    if (!root || !processRef.current) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let cancelled = false;
+    let cleanup: (() => void) | undefined;
+
+    void Promise.all([import('gsap'), import('gsap/ScrollTrigger')]).then(
+      ([gsapModule, scrollTriggerModule]) => {
+        if (cancelled) return;
+
+        const gsap = gsapModule.gsap;
+        const ScrollTrigger = scrollTriggerModule.ScrollTrigger;
+        gsap.registerPlugin(ScrollTrigger);
+
+        const context = gsap.context(() => {
+          if (progressRef.current) {
+            gsap.fromTo(
+              progressRef.current,
+              {scaleX: 0},
+              {
+                scaleX: 1,
+                ease: 'none',
+                scrollTrigger: {
+                  trigger: root,
+                  start: 'top top',
+                  end: 'bottom bottom',
+                  scrub: 0.25,
+                },
+              }
+            );
+          }
+
+          const leadWords = gsap.utils.toArray<HTMLElement>(
+            '.arc-briefing__lead-copy span'
+          );
+          if (leadWords.length > 0 && leadRef.current) {
+            gsap.fromTo(
+              leadWords,
+              {opacity: 0.18},
+              {
+                opacity: 1,
+                stagger: 0.035,
+                ease: 'none',
+                scrollTrigger: {
+                  trigger: leadRef.current,
+                  start: 'top 72%',
+                  end: 'bottom 42%',
+                  scrub: 0.6,
+                },
+              }
+            );
+          }
+
+          const stages = gsap.utils.toArray<HTMLElement>(
+            '.arc-briefing__stage'
+          );
+          stages.forEach((stage, index) => {
+            const image = stage.querySelector<HTMLElement>(
+              '.arc-briefing__stage-media'
+            );
+
+            if (image) {
+              gsap.fromTo(
+                image,
+                {scale: 0.92, opacity: 0.55},
+                {
+                  scale: 1,
+                  opacity: 1,
+                  ease: 'none',
+                  scrollTrigger: {
+                    trigger: stage,
+                    start: 'top 82%',
+                    end: 'top 36%',
+                    scrub: 0.7,
+                  },
+                }
+              );
+            }
+
+            ScrollTrigger.create({
+              trigger: stage,
+              start: 'top 56%',
+              end: 'bottom 44%',
+              onEnter: () => setActivePhaseIndex(index),
+              onEnterBack: () => setActivePhaseIndex(index),
+            });
+          });
+
+          cleanup = () => {
+            context.revert();
+          };
+        }, root);
+      }
+    );
+
+    return () => {
+      cancelled = true;
+      cleanup?.();
+    };
   }, []);
 
   const selectPhase = (index: number) => {
@@ -146,425 +259,378 @@ export default function Arc({ studies, children }: ArcProps) {
     });
   };
 
+  const moveStudy = (direction: -1 | 1) => {
+    if (orderedStudies.length < 2) return;
+    setActiveStudyIndex((current) => {
+      const next = (current + direction + orderedStudies.length) % orderedStudies.length;
+      const study = orderedStudies[next];
+      if (study) {
+        recordArcEvent('proof_carousel_change', {proof_variant: study.slug});
+      }
+      return next;
+    });
+  };
+
+  const leadWords = t('leadDescription').split(/\s+/);
+
   return (
-    <MotionConfig reducedMotion="user">
-      <div
-        ref={pageRef}
-        className="arc-redesign about-redesign relative isolate overflow-x-hidden bg-[#FFFFFF] text-[#1A2535]"
+    <div ref={pageRef} className="arc-briefing">
+      <span
+        ref={progressRef}
+        className="arc-briefing__progress"
+        aria-hidden="true"
+      />
+
+      <section
+        className="arc-briefing__hero"
+        aria-labelledby="arc-page-title"
+        data-arc-section="hero"
       >
-        <motion.div
-          aria-hidden="true"
-          className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-[#CD9F40]"
-          style={{ scaleX: progressScale }}
+        <Image
+          src="/Images/arc/hva-arc-briefing-hero.webp"
+          alt={t('heroAlt')}
+          fill
+          priority
+          sizes="100vw"
+          className="arc-briefing__hero-image"
         />
-
-        <section
-          className="arc-hero-section"
-          aria-labelledby="arc-page-title"
-          data-arc-section="hero"
-        >
-          <PageAmbientBackground className="arc-hero-ambient" />
-          <div aria-hidden="true" className="arc-hero-light-wash" />
-
-          <div className="arc-hero-shell">
-            <motion.div
-              initial="hidden"
-              animate="show"
-              variants={{ show: { transition: { staggerChildren: 0.08 } } }}
-              className="arc-hero-copy"
+        <div className="arc-briefing__hero-shade" aria-hidden="true" />
+        <div className="arc-briefing__shell arc-briefing__hero-content">
+          <p className="arc-briefing__hero-label">{t('label')}</p>
+          <h1 id="arc-page-title">
+            {(t.raw('heroLines') as string[]).map((line) => (
+              <span key={line}>{line}</span>
+            ))}
+          </h1>
+          <p className="arc-briefing__hero-lede">{t('heroDescription')}</p>
+          <div className="arc-briefing__hero-actions">
+            <Link
+              href="/contact"
+              className="arc-briefing__button arc-briefing__button--gold"
+              onClick={() =>
+                recordArcEvent('hero_primary_cta_click', {
+                  cta_variant: 'request_arc_assessment',
+                })
+              }
             >
-              <motion.div
-                variants={fadeUp}
-                transition={{ duration: 0.55 }}
-                className="arc-hero-label"
-              >
-                <SectionBrandMark size="sm" eager />
-                <span>{t('label')}</span>
-              </motion.div>
-
-              <motion.h1
-                id="arc-page-title"
-                variants={fadeUp}
-                transition={{ duration: 0.55 }}
-                className="arc-hero-title"
-              >
-                {(t.raw('heroLines') as string[]).map((line) => <span key={line}>{line}</span>)}
-              </motion.h1>
-
-              <motion.p
-                variants={fadeUp}
-                transition={{ duration: 0.55 }}
-                className="arc-hero-lede"
-              >
-                {t('heroDescription')}
-              </motion.p>
-
-              <motion.div
-                variants={fadeUp}
-                transition={{ duration: 0.55 }}
-                className="mt-9 flex flex-wrap items-center gap-4"
-              >
-                <Link
-                  href="/contact"
-                  className="arc-hero-primary"
-                  onClick={() =>
-                    recordArcEvent('hero_primary_cta_click', {
-                      cta_variant: 'book_arc_diagnostic',
-                    })
-                  }
-                >
-                  {t('bookDiagnostic')}
-                </Link>
-                <Link
-                  href="#proof-in-production"
-                  className="arc-hero-secondary"
-                  onClick={() =>
-                    recordArcEvent('hero_secondary_cta_click', {
-                      cta_variant: 'see_arc_in_production',
-                    })
-                  }
-                >
-                  {t('seeProduction')}
-                  <ArrowRight aria-hidden="true" className="h-4 w-4" />
-                </Link>
-              </motion.div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 24 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.16 }}
-              className="arc-hero-media-wrap"
+              {t('requestAssessment')}
+            </Link>
+            <Link
+              href="#proof-in-production"
+              className="arc-briefing__button arc-briefing__button--quiet"
+              onClick={() =>
+                recordArcEvent('hero_secondary_cta_click', {
+                  cta_variant: 'see_arc_in_production',
+                })
+              }
             >
-              <div className="arc-hero-media">
-                <Image
-                  src="/Images/capabilities/hva-arc-operating-model-business-workspace.webp"
-                  alt={t('heroAlt')}
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 42vw"
-                  className="object-cover"
-                />
-              </div>
-              <div
-                aria-hidden="true"
-                className="capabilities-hero-wordmark pointer-events-none !absolute inset-0 z-[3] !justify-start px-6 md:px-10"
-              >
-                <strong data-label="ARC" className="!text-[clamp(5rem,8vw,8.5rem)]">
-                  <span>ARC</span>
-                </strong>
-                <span />
-              </div>
-            </motion.div>
+              {t('seeProduction')}
+              <ArrowRight aria-hidden="true" />
+            </Link>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section
-          className="about-delivery-section"
-          aria-labelledby="arc-process-title"
-          data-arc-section="process"
-        >
-          <div className="about-editorial-shell">
-            <div className="about-delivery-header">
-              <div className="about-section-heading">
-                <span>{t('how')}</span>
-                <h2 id="arc-process-title">{t('processTitle')}</h2>
-              </div>
-              <p>
-                {t('processDescription')}
-              </p>
-            </div>
-
-            <div className="about-delivery-progress" aria-hidden="true">
-              <motion.span
-                animate={{ width: `${((activePhaseIndex + 1) / arcPhases.length) * 100}%` }}
-                transition={{ duration: 0.28, ease: 'easeOut' }}
-              />
-            </div>
-
-            <div className="about-delivery-grid" role="group" aria-label={t('phasesLabel')}>
-              {arcPhases.map((phase, index) => {
-                const Icon = phase.icon;
-                const isActive = activePhaseIndex === index;
-
-                return (
-                  <button
-                    key={phase.title}
-                    type="button"
-                    className={`about-delivery-step ${
-                      isActive ? 'about-delivery-step-active' : ''
-                    }`}
-                    onMouseEnter={() => setActivePhaseIndex(index)}
-                    onFocus={() => setActivePhaseIndex(index)}
-                    onClick={() => selectPhase(index)}
-                    aria-expanded={isActive}
-                    aria-controls="arc-active-phase"
-                  >
-                    <Icon className="about-delivery-icon" aria-hidden="true" />
-                    <h3>{phase.title}</h3>
-                    <p>{phase.purpose}</p>
-                  </button>
-                );
-              })}
-            </div>
-
-            <motion.div
-              id="arc-active-phase"
-              key={activePhase.title}
-              className="about-delivery-detail"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.28 }}
-              aria-live="polite"
-            >
-              <div aria-hidden="true" className="arc-dark-grid" />
-              <div className="about-delivery-detail-summary">
-                <div className="about-delivery-detail-label">
-                  <span>{activePhase.step}</span>
-                  <em>{t('output', {phase: activePhase.title})}</em>
-                </div>
-                <div className="about-delivery-detail-title">
-                  <ActivePhaseIcon aria-hidden="true" />
-                  <h3>{activePhase.output}</h3>
-                </div>
-                <p>{activePhase.description}</p>
-              </div>
+      <section
+        ref={leadRef}
+        className="arc-briefing__lead"
+        aria-labelledby="arc-lead-title"
+        data-arc-section="summary"
+      >
+        <div className="arc-briefing__shell arc-briefing__lead-layout">
+          <h2 id="arc-lead-title">{t('leadTitle')}</h2>
+          <div>
+            <p className="arc-briefing__lead-copy">
+              {leadWords.map((word, index) => (
+                <span key={`${word}-${index}`}>{word} </span>
+              ))}
+            </p>
+            <div className="arc-briefing__fit" aria-label={t('bestFor')}>
+              <strong>{t('bestFor')}</strong>
               <ul>
-                {activePhase.checkpoints.map((checkpoint) => (
-                  <li key={checkpoint}>{checkpoint}</li>
+                {buyerFit.map((item) => (
+                  <li key={item}>{item}</li>
                 ))}
               </ul>
-            </motion.div>
-
-            <div className="arc-operating-keys mt-6" aria-label={t('bestFor')}>
-              <span>{t('bestFor')}</span>
-              {buyerFit.map((item) => (
-                <span key={item}>{item}</span>
-              ))}
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
+      <div className="arc-briefing__marquee" aria-label={t('loopAria')}>
+        <div aria-hidden="true">
+          {[0, 1].map((copy) => (
+            <span key={copy}>
+              {arcPhases.map((phase) => (
+                <b key={`${copy}-${phase.title}`}>{phase.title}</b>
+              ))}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <section
+        className="arc-briefing__overview"
+        aria-labelledby="arc-overview-title"
+        data-arc-section="framework-overview"
+      >
+        <div className="arc-briefing__shell">
+          <header className="arc-briefing__section-heading">
+            <h2 id="arc-overview-title">{t('indexTitle')}</h2>
+            <p>{t('indexDescription')}</p>
+          </header>
+
+          <div
+            className={`arc-briefing__index arc-briefing__index--active-${
+              activePhaseIndex + 1
+            }`}
+            role="group"
+            aria-label={t('phasesLabel')}
+          >
+            {arcPhases.map((phase, index) => {
+              const isActive = activePhaseIndex === index;
+              return (
+                <button
+                  key={phase.title}
+                  type="button"
+                  className={isActive ? 'is-active' : undefined}
+                  aria-pressed={isActive}
+                  onMouseEnter={() => setActivePhaseIndex(index)}
+                  onFocus={() => setActivePhaseIndex(index)}
+                  onClick={() => selectPhase(index)}
+                >
+                  <span aria-hidden="true">{phase.letter}</span>
+                  <div>
+                    <h3>{phase.title}</h3>
+                    <p>{phase.purpose}</p>
+                    <strong>{phase.output}</strong>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section
+        ref={processRef}
+        className="arc-briefing__process"
+        aria-labelledby="arc-process-title"
+        data-arc-section="process"
+      >
+        <div className="arc-briefing__shell arc-briefing__process-layout">
+          <div className="arc-briefing__process-intro">
+            <h2 id="arc-process-title">{t('processTitle')}</h2>
+            <p>{t('processDescription')}</p>
+            <ol aria-label={t('phasesLabel')}>
+              {arcPhases.map((phase, index) => (
+                <li
+                  key={phase.title}
+                  className={activePhaseIndex === index ? 'is-active' : undefined}
+                >
+                  <span>{phase.letter}</span>
+                  {phase.title}
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          <div className="arc-briefing__stages">
+            {arcPhases.map((phase) => (
+              <article className="arc-briefing__stage" key={phase.title}>
+                <figure className="arc-briefing__stage-media">
+                  <Image
+                    src={phase.image}
+                    alt={phase.imageAlt}
+                    fill
+                    sizes="(max-width: 1023px) 100vw, 54vw"
+                    className="arc-briefing__stage-image"
+                  />
+                </figure>
+                <div className="arc-briefing__stage-copy">
+                  <h3>{phase.title}</h3>
+                  <p>{phase.description}</p>
+                  <div>
+                    <strong>{phase.output}</strong>
+                    <ul>
+                      {phase.checkpoints.map((checkpoint) => (
+                        <li key={checkpoint}>{checkpoint}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div className="arc-briefing__shell arc-briefing__accountability">
+          <div>
+            <h2>{t('differenceTitle')}</h2>
+            <p>{t('differenceStatement')}</p>
+            <p>{t('differenceDescription')}</p>
+          </div>
+          <div className="arc-briefing__accountability-links">
+            {differenceSignals.map((signal) => (
+              <Link href={signal.href} key={signal.title}>
+                <span>
+                  <strong>{signal.title}</strong>
+                  <em>{signal.description}</em>
+                </span>
+                <span>
+                  {signal.linkLabel}
+                  <ArrowUpRight aria-hidden="true" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {activeStudy && (
         <section
-          className="about-trust-band"
-          aria-labelledby="arc-difference-title"
-          data-arc-section="difference"
+          id="proof-in-production"
+          className="arc-briefing__proof"
+          aria-labelledby="arc-proof-title"
+          data-arc-section="proof-in-production"
         >
-          <div aria-hidden="true" className="arc-dark-grid" />
-          <div className="about-editorial-shell about-trust-grid">
-            <motion.div
-              className="about-trust-copy"
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.25 }}
-              transition={{ duration: 0.45 }}
+          <div className="arc-briefing__shell">
+            <header className="arc-briefing__section-heading">
+              <h2 id="arc-proof-title">{t('proofTitle')}</h2>
+              <p>{t('proofDescription')}</p>
+            </header>
+
+            <article
+              key={activeStudy.slug}
+              className="arc-briefing__case"
+              data-proof-variant={activeStudy.slug}
+              aria-live="polite"
             >
-              <span>{t('differenceEyebrow')}</span>
-              <h2 id="arc-difference-title">{t('differenceTitle')}</h2>
-              <p>{t('differenceStatement')}</p>
-              <p>{t('differenceDescription')}</p>
-              <Link href="/aboutus#founders" className="about-trust-primary-link">
-                {t('meetTeam')}
+              <div className="arc-briefing__case-identity">
+                <span>
+                  {normalizeVisibleText(activeStudy.clientName, activeStudy.title)}
+                </span>
+                <span>
+                  {normalizeVisibleText(activeStudy.industry, t('proofEyebrow'))}
+                </span>
+              </div>
+              <h3>
+                {normalizeVisibleText(
+                  caseDisplayTitle[activeStudy.slug] ?? activeStudy.title
+                )}
+              </h3>
+              <dl>
+                <div>
+                  <dt>{t('problem')}</dt>
+                  <dd>
+                    {normalizeVisibleText(
+                      activeStudyRecord?.problem,
+                      activeStudy.problem
+                    )}
+                  </dd>
+                </div>
+                <div>
+                  <dt>{t('whatChanged')}</dt>
+                  <dd>
+                    {normalizeVisibleText(
+                      activeStudyRecord?.change,
+                      activeStudy.summary
+                    )}
+                  </dd>
+                </div>
+                <div>
+                  <dt>{t('status')}</dt>
+                  <dd>
+                    {normalizeVisibleText(
+                      activeStudy.deploymentStatus,
+                      t('proofEyebrow')
+                    )}
+                  </dd>
+                </div>
+              </dl>
+              <Link
+                href={`/case-studies/${activeStudy.slug}`}
+                onClick={() =>
+                  recordArcEvent('case_study_click', {
+                    proof_variant: activeStudy.slug,
+                  })
+                }
+              >
+                {t('viewSnapshot')}
                 <ArrowUpRight aria-hidden="true" />
               </Link>
-            </motion.div>
+            </article>
 
-            <div className="about-trust-ledger">
-              {differenceSignals.map((signal) => {
-                const Icon = signal.icon;
-
-                return (
-                  <motion.article
-                    key={signal.title}
-                    className="about-trust-item"
-                    initial={{ opacity: 0, y: 12 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.28 }}
-                    transition={{ duration: 0.4 }}
+            {orderedStudies.length > 1 && (
+              <div className="arc-briefing__case-controls">
+                <p>
+                  {t('casePosition', {
+                    current: activeStudyIndex + 1,
+                    total: orderedStudies.length,
+                  })}
+                </p>
+                <div>
+                  <button
+                    type="button"
+                    onClick={() => moveStudy(-1)}
+                    aria-label={t('previousStudy')}
                   >
-                    <Icon aria-hidden="true" />
-                    <div>
-                      <h3>{signal.title}</h3>
-                      <p>{signal.description}</p>
-                    </div>
-                    <Link href={signal.href}>
-                      {signal.linkLabel}
-                      <ArrowUpRight aria-hidden="true" />
-                    </Link>
-                  </motion.article>
-                );
-              })}
-            </div>
+                    <ArrowRight aria-hidden="true" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => moveStudy(1)}
+                    aria-label={t('nextStudy')}
+                  >
+                    <ArrowRight aria-hidden="true" />
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </section>
+      )}
 
-        {orderedStudies.length >= 2 && (
-          <section
-            id="proof-in-production"
-            className="home-proof-section scroll-mt-28"
-            aria-labelledby="arc-cases-title"
-            data-arc-section="proof-in-production"
-          >
-            <div className="home-proof-shell">
-              <div className="home-proof-header">
-                <div className="home-proof-title">
-                  <SectionBrandMark size="sm" className="mt-0.5" />
-                  <div>
-                    <p>{t('proofEyebrow')}</p>
-                    <h2 id="arc-cases-title">{t('proofTitle')}</h2>
-                  </div>
-                </div>
-                <div className="home-proof-intro">
-                  <p>
-                    {t('proofDescription')}
-                  </p>
-                  <div className="home-proof-actions">
-                    {orderedStudies.map((study) => (
-                      <Link
-                        key={study.slug}
-                        href={`/case-studies/${study.slug}`}
-                        onClick={() =>
-                          recordArcEvent('case_study_click', {
-                            proof_variant: study.slug,
-                          })
-                        }
-                      >
-                        {t('record', {client: study.clientName})}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </div>
+      <div className="arc-briefing__questions">{children}</div>
 
-              <div className="home-proof-layout">
-                <div className="home-proof-visual">
-                  <div className="home-proof-photo home-proof-photo--main">
-                    <Image
-                      src={orderedStudies[0].assets.coverImage}
-                      alt={
-                        orderedStudies[0].assets.coverAlt ??
-                        `${orderedStudies[0].clientName} transformation engagement`
-                      }
-                      fill
-                      unoptimized={isSanityCdnImage(orderedStudies[0].assets.coverImage)}
-                      loading="lazy"
-                      sizes="(max-width: 900px) 100vw, 48vw"
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="home-proof-photo home-proof-photo--support">
-                    <Image
-                      src={orderedStudies[1].assets.coverImage}
-                      alt={
-                        orderedStudies[1].assets.coverAlt ??
-                        `${orderedStudies[1].clientName} transformation engagement`
-                      }
-                      fill
-                      unoptimized={isSanityCdnImage(orderedStudies[1].assets.coverImage)}
-                      loading="lazy"
-                      sizes="(max-width: 900px) 70vw, 22vw"
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="home-proof-caption">
-                    <strong>{t('liveSystems')}</strong>
-                    <span>{t('liveSystemsDescription')}</span>
-                  </div>
-                </div>
-
-                <div className="home-proof-list">
-                  {orderedStudies.map((study) => {
-                    return (
-                      <article
-                        key={study.slug}
-                        className="home-proof-row"
-                        data-proof-variant={study.slug}
-                      >
-                        <em>
-                          {study.clientName} · {study.industry}
-                        </em>
-                        <h3>{caseDisplayTitle[study.slug] ?? study.title}</h3>
-                        <p>
-                          <strong>{t('problem')}</strong> {study.problem}{' '}
-                          <strong>{t('whatChanged')}</strong> {study.summary}{' '}
-                          <strong>{t('status')}</strong> {study.deploymentStatus}.
-                        </p>
-                        <Link
-                          href={`/case-studies/${study.slug}`}
-                          className="about-proof-case-link"
-                          onClick={() =>
-                            recordArcEvent('case_study_click', {
-                              proof_variant: study.slug,
-                            })
-                          }
-                        >
-                          {t('viewSnapshot')}
-                          <ArrowUpRight aria-hidden="true" />
-                        </Link>
-                      </article>
-                    );
-                  })}
-                </div>
-              </div>
+      <section
+        className="arc-briefing__close"
+        aria-labelledby="arc-closing-title"
+        data-arc-section="conversion"
+      >
+        <div className="arc-briefing__shell arc-briefing__close-layout">
+          <p>{t('closingQuote')}</p>
+          <div>
+            <h2 id="arc-closing-title">{t('closingTitle')}</h2>
+            <p>{t('closingDescription')}</p>
+            <div>
+              <Link
+                href="/contact"
+                className="arc-briefing__button arc-briefing__button--gold"
+                onClick={() =>
+                  recordArcEvent('final_primary_cta_click', {
+                    cta_variant: 'request_arc_assessment',
+                  })
+                }
+              >
+                {t('requestAssessment')}
+              </Link>
+              <Link
+                href="/case-studies"
+                className="arc-briefing__button arc-briefing__button--quiet"
+                onClick={() =>
+                  recordArcEvent('final_secondary_cta_click', {
+                    cta_variant: 'see_case_studies',
+                  })
+                }
+              >
+                {t('seeCaseStudies')}
+                <ArrowUpRight aria-hidden="true" />
+              </Link>
             </div>
-          </section>
-        )}
-
-        {children}
-
-        <section
-          className="industries-mandate-section"
-          aria-labelledby="arc-closing-title"
-          data-arc-section="conversion"
-        >
-          <motion.div
-            className="industries-mandate-card"
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.28 }}
-            transition={{ duration: 0.45 }}
-          >
-            <div className="industries-mandate-mark">
-              <SectionBrandMark surface="dark" size="sm" />
-              <span>{t('apply')}</span>
-            </div>
-            <div className="industries-mandate-content">
-              <p className="industries-mandate-quote">
-                {t('closingQuote')}
-              </p>
-              <div className="industries-mandate-cta">
-                <h2 id="arc-closing-title">{t('closingTitle')}</h2>
-                <p>{t('closingDescription')}</p>
-                <div className="industries-mandate-actions">
-                  <Link
-                    href="/contact"
-                    className="industries-mandate-primary"
-                    onClick={() =>
-                      recordArcEvent('final_primary_cta_click', {
-                        cta_variant: 'request_arc_assessment',
-                      })
-                    }
-                  >
-                    {t('requestAssessment')}
-                  </Link>
-                  <Link
-                    href="/case-studies"
-                    className="industries-mandate-secondary"
-                    onClick={() =>
-                      recordArcEvent('final_secondary_cta_click', {
-                        cta_variant: 'see_case_studies',
-                      })
-                    }
-                  >
-                    {t('seeCaseStudies')}
-                    <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </section>
-      </div>
-    </MotionConfig>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
