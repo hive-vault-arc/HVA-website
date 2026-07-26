@@ -39,7 +39,7 @@ type RouteItem = {
 function RouteArrow() {
   return (
     <span className="decision-guide__arrow" aria-hidden="true">
-      <ArrowRight />
+      <ArrowRight size={16} />
     </span>
   );
 }

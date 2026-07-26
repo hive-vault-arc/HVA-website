@@ -1,29 +1,44 @@
 'use client';
 
-import {type CSSProperties} from 'react';
+import {useLayoutEffect, useRef, type CSSProperties} from 'react';
 import {Link} from '@/i18n/navigation';
 import Image from 'next/image';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import {motion, useScroll, useTransform} from 'framer-motion';
+import gsap from 'gsap';
+import {ScrollTrigger} from 'gsap/ScrollTrigger';
 import {useTranslations} from 'next-intl';
-import { BarChart3, MessageSquare, Network, ShieldCheck, ArrowUpRight } from '@/components/icons';
+import {
+  ArrowUpRight,
+  BarChart3,
+  MessageSquare,
+  Network,
+  ShieldCheck,
+} from '@/components/icons';
 import InsightsSlider, {type SlideItem} from '@/components/InsightsSlider';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 import SectionBrandMark from '../components/SectionBrandMark';
 
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
 const IMGS = {
-  realEstate:    '/Images/industries/real-estate-crm-lead-operations-morocco.webp',
-  healthcare:    '/Images/industries/healthcare-clinical-operations-dashboard-men-morocco.webp',
-  construction:  '/Images/industries/construction-project-management-automation-morocco.webp',
-  logistics:     '/Images/industries/logistics-dispatch-workflow-automation-morocco.webp',
-  finance:       '/Images/industries/finance-brokerage-deal-pipeline-morocco.webp',
-  government:    '/Images/industries/government-public-sector-digital-services-men-morocco.webp',
-  retail:        '/Images/industries/retail-ecommerce-operations-platform-morocco.webp',
-  energy:        '/Images/industries/energy-sustainability-monitoring-morocco.webp',
-  consumerGoods: '/Images/industries/consumer-goods-luxury-analytics-men-morocco.webp',
-  rdLab:         '/Images/industries/hva-industries-research-development-framework.webp',
+  realEstate: '/Images/industries/real-estate-crm-lead-operations-morocco.webp',
+  healthcare:
+    '/Images/industries/healthcare-clinical-operations-dashboard-men-morocco.webp',
+  logistics: '/Images/industries/logistics-dispatch-workflow-automation-morocco.webp',
+  finance: '/Images/industries/finance-brokerage-deal-pipeline-morocco.webp',
+  government:
+    '/Images/industries/government-public-sector-digital-services-men-morocco.webp',
+  retail: '/Images/industries/retail-ecommerce-operations-platform-morocco.webp',
+  energy: '/Images/industries/energy-sustainability-monitoring-morocco.webp',
+  consumerGoods:
+    '/Images/industries/consumer-goods-luxury-analytics-men-morocco.webp',
+  rdLab: '/Images/industries/hva-industries-research-development-framework.webp',
 };
 
-const INDUSTRIES_PAGE_HERO_IMAGE = '/Images/page-heroes/hva-industries-hero-background.webp';
+const INDUSTRIES_PAGE_HERO_IMAGE =
+  '/Images/page-heroes/hva-industries-hero-background.webp';
 
 const approachTrackConfig = [
   {
@@ -108,68 +123,86 @@ type ApproachTrackCopy = {
   group: 'methodology' | 'compliance';
 };
 
-const fadeUp = { hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0 } };
-
-function IndustryAtlas({
+function SectorGallery({
   cards,
   relatedWorkLabel,
 }: {
   cards: IndustryCardData[];
   relatedWorkLabel: string;
 }) {
+  const sectorBands = Array.from(
+    {length: Math.ceil(cards.length / 2)},
+    (_, bandIndex) => cards.slice(bandIndex * 2, bandIndex * 2 + 2),
+  );
+
   return (
-    <div className="industry-atlas">
-      <motion.div
-        className="industry-atlas-index"
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.08 }}
-        transition={{ staggerChildren: 0.045 }}
-      >
-        {cards.map((card, index) => {
-          return (
-            <motion.article
-              key={card.id}
-              id={card.id}
-              data-industry-card={card.id}
-              variants={fadeUp}
-              transition={{duration: 0.42}}
-              className="industry-atlas-item"
-            >
-              <Link
-                href={card.href}
-                className="industry-atlas-item-link"
-                aria-label={`${card.title}: ${relatedWorkLabel}`}
+    <div className="industries-dossier-gallery" data-industries-gallery>
+      {sectorBands.map((band, bandIndex) => (
+        <div
+          key={band.map((card) => card.id).join('-')}
+          className={`industries-dossier-band ${
+            bandIndex % 2 === 1 ? 'industries-dossier-band--reverse' : ''
+          }`}
+          data-industries-band
+        >
+          {band.map((card) => {
+            const cardIndex = cards.findIndex((item) => item.id === card.id);
+
+            return (
+              <article
+                key={card.id}
+                id={card.id}
+                data-industry-card={card.id}
+                data-industries-card
+                className="industries-dossier-sector"
               >
-                <div className="industry-atlas-item-media">
+                <Link
+                  href={card.href}
+                  className="industries-dossier-sector-link"
+                  aria-label={`${card.title}: ${relatedWorkLabel}`}
+                >
                   <Image
                     src={card.image}
                     alt={card.imageAlt}
                     fill
-                    priority={index < 2}
-                    loading={index < 2 ? 'eager' : 'lazy'}
-                    sizes="(max-width: 639px) 100vw, (max-width: 1279px) 50vw, 42vw"
+                    priority={cardIndex < 2}
+                    loading={cardIndex < 2 ? 'eager' : 'lazy'}
+                    sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 42vw"
                     className="object-cover"
+                    data-industries-card-image
                   />
-                </div>
-                <div className="industry-atlas-item-body">
-                  <span className="industry-atlas-item-category">{card.category}</span>
-                  <h3>{card.title}</h3>
-                  <p>{card.description}</p>
-                  <div className="industry-atlas-item-footer">
-                    <span>{card.bullets.slice(0, 2).join(' / ')}</span>
-                    <ArrowUpRight
-                      aria-hidden="true"
-                      className="h-4 w-4"
-                      strokeWidth={1.7}
-                    />
-                  </div>
-                </div>
-              </Link>
-            </motion.article>
-          );
-        })}
-      </motion.div>
+                  <span
+                    aria-hidden="true"
+                    className="industries-dossier-sector-shade"
+                  />
+
+                  <span className="industries-dossier-sector-meta">
+                    <span>{String(cardIndex + 1).padStart(2, '0')}</span>
+                    <span>{card.category}</span>
+                  </span>
+
+                  <span className="industries-dossier-sector-copy">
+                    <strong>{card.title}</strong>
+                    <span>{card.description}</span>
+                    <span className="industries-dossier-sector-tags">
+                      {card.bullets.map((bullet) => (
+                        <span key={bullet}>{bullet}</span>
+                      ))}
+                    </span>
+                  </span>
+
+                  <span
+                    className="industries-dossier-sector-arrow"
+                    aria-hidden="true"
+                  >
+                    <ArrowUpRight className="h-5 w-5" strokeWidth={1.6} />
+                  </span>
+                </Link>
+              </article>
+            );
+          })}
+        </div>
+      ))}
     </div>
   );
 }
@@ -179,8 +212,9 @@ export default function Industries({
 }: {
   readonly insightItems?: SlideItem[];
 }) {
+  const rootRef = useRef<HTMLDivElement | null>(null);
   const t = useTranslations('Industries');
-  const { scrollYProgress } = useScroll();
+  const {scrollYProgress} = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
   const cardCopy = t.raw('cards') as IndustryCardCopy[];
   const cards = industryCardConfig.map((config) => ({
@@ -193,34 +227,274 @@ export default function Industries({
     ...trackCopy.find((item) => item.code === config.code)!,
   }));
 
+  useLayoutEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+
+    const media = gsap.matchMedia();
+    const context = gsap.context(() => {
+      media.add('(prefers-reduced-motion: no-preference)', () => {
+        const revealTargets = gsap.utils.toArray<HTMLElement>(
+          '[data-industries-reveal]',
+          root,
+        );
+        const cardTargets = gsap.utils.toArray<HTMLElement>(
+          '[data-industries-card]',
+          root,
+        );
+        const principleTargets = gsap.utils.toArray<HTMLElement>(
+          '[data-industries-principle]',
+          root,
+        );
+
+        revealTargets.forEach((target) => {
+          gsap.fromTo(
+            target,
+            {opacity: 0, y: 28},
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.72,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: target,
+                start: 'top 88%',
+                once: true,
+              },
+            },
+          );
+        });
+
+        cardTargets.forEach((card, index) => {
+          gsap.fromTo(
+            card,
+            {opacity: 0, y: 42},
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.78,
+              delay: (index % 4) * 0.045,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: card,
+                start: 'top 90%',
+                once: true,
+              },
+            },
+          );
+        });
+
+        if (principleTargets.length > 0) {
+          gsap.fromTo(
+            principleTargets,
+            {opacity: 0, y: 22},
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.65,
+              stagger: 0.08,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: principleTargets[0].parentElement,
+                start: 'top 84%',
+                once: true,
+              },
+            },
+          );
+        }
+      });
+
+      media.add(
+        '(prefers-reduced-motion: no-preference) and (min-width: 768px)',
+        () => {
+          const hero = root.querySelector<HTMLElement>('.industries-hero');
+          const heroCopy = root.querySelector<HTMLElement>(
+            '[data-industries-hero-copy]',
+          );
+          const heroWordmark = root.querySelector<HTMLElement>(
+            '[data-industries-hero-wordmark]',
+          );
+
+          if (hero && heroCopy && heroWordmark) {
+            gsap.to(heroCopy, {
+              y: -24,
+              opacity: 0.78,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: hero,
+                start: 'top top',
+                end: 'bottom top',
+                scrub: 0.65,
+              },
+            });
+            gsap.to(heroWordmark, {
+              y: -38,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: hero,
+                start: 'top top',
+                end: 'bottom top',
+                scrub: 0.65,
+              },
+            });
+          }
+
+          gsap.utils
+            .toArray<HTMLElement>('[data-industries-card]', root)
+            .forEach((card) => {
+              const image = card.querySelector<HTMLElement>(
+                '[data-industries-card-image]',
+              );
+              if (!image) return;
+
+              gsap.fromTo(
+                image,
+                {'--industries-scroll-scale': 1.085},
+                {
+                  '--industries-scroll-scale': 1.001,
+                  ease: 'none',
+                  scrollTrigger: {
+                    trigger: card,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: 0.7,
+                  },
+                },
+              );
+            });
+
+          const method = root.querySelector<HTMLElement>(
+            '[data-industries-method]',
+          );
+          const methodImage = root.querySelector<HTMLElement>(
+            '[data-industries-method-image]',
+          );
+          const methodCopy = root.querySelector<HTMLElement>(
+            '[data-industries-method-copy]',
+          );
+
+          if (method && methodImage) {
+            gsap.fromTo(
+              methodImage,
+              {scale: 1.07},
+              {
+                scale: 1,
+                ease: 'none',
+                scrollTrigger: {
+                  trigger: method,
+                  start: 'top bottom',
+                  end: 'bottom top',
+                  scrub: 0.75,
+                },
+              },
+            );
+          }
+
+          if (method && methodCopy) {
+            gsap.fromTo(
+              methodCopy,
+              {opacity: 0.48, y: 18},
+              {
+                opacity: 1,
+                y: 0,
+                ease: 'none',
+                scrollTrigger: {
+                  trigger: method,
+                  start: 'top 82%',
+                  end: 'center 48%',
+                  scrub: 0.65,
+                },
+              },
+            );
+          }
+        },
+      );
+
+      media.add(
+        '(prefers-reduced-motion: no-preference) and (min-width: 1200px)',
+        () => {
+          const atlasLayout = root.querySelector<HTMLElement>(
+            '[data-industries-atlas-layout]',
+          );
+          const atlasIntro = root.querySelector<HTMLElement>(
+            '[data-industries-atlas-intro]',
+          );
+          const gallery = root.querySelector<HTMLElement>(
+            '[data-industries-gallery]',
+          );
+          const indexLinks = gsap.utils.toArray<HTMLAnchorElement>(
+            '[data-industries-index-link]',
+            root,
+          );
+          const sectorCards = gsap.utils.toArray<HTMLElement>(
+            '[data-industries-card]',
+            root,
+          );
+
+          if (atlasLayout && atlasIntro && gallery) {
+            ScrollTrigger.create({
+              trigger: atlasLayout,
+              start: 'top 116px',
+              endTrigger: gallery,
+              end: 'bottom bottom-=48',
+              pin: atlasIntro,
+              pinSpacing: false,
+              anticipatePin: 1,
+              invalidateOnRefresh: true,
+            });
+          }
+
+          sectorCards.forEach((card) => {
+            ScrollTrigger.create({
+              trigger: card,
+              start: 'top center',
+              end: 'bottom center',
+              onToggle: ({isActive}) => {
+                if (!isActive) return;
+
+                indexLinks.forEach((link) => {
+                  link.classList.toggle(
+                    'is-active',
+                    link.dataset.industriesIndexLink ===
+                      card.dataset.industryCard,
+                  );
+                });
+              },
+            });
+          });
+
+          return () => {
+            indexLinks.forEach((link) => link.classList.remove('is-active'));
+          };
+        },
+      );
+    }, root);
+
+    return () => {
+      media.revert();
+      context.revert();
+    };
+  }, []);
+
   return (
-    <div className="relative isolate overflow-x-hidden bg-[#FFFFFF] text-[#1A2535]">
-      {/* Scroll progress bar */}
+    <div ref={rootRef} className="industries-dossier-page">
       <motion.div
         aria-hidden="true"
-        className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-gradient-to-r from-[#E8A838] via-[#F0C15A] to-[#E8A838]"
-        style={{ scaleX: progressScale }}
+        className="industries-dossier-progress"
+        style={{scaleX: progressScale}}
       />
 
-      {/* ── Hero ─────────────────────────────────────────────────────────────── */}
       <section
         className="industries-hero"
-        style={{ '--page-hero-image': `url(${INDUSTRIES_PAGE_HERO_IMAGE})` } as CSSProperties}
+        style={
+          {'--page-hero-image': `url(${INDUSTRIES_PAGE_HERO_IMAGE})`} as CSSProperties
+        }
       >
         <PageAmbientBackground className="industries-hero-ambient" />
         <div aria-hidden="true" className="industries-hero-wash" />
         <div className="industries-hero-shell">
-          <motion.div
-            className="industries-hero-grid"
-            initial="hidden"
-            animate="show"
-            variants={{ show: { transition: { staggerChildren: 0.1 } } }}
-          >
-            <motion.div
-              className="industries-hero-copy"
-              variants={fadeUp}
-              transition={{ duration: 0.65 }}
-            >
+          <div className="industries-hero-grid">
+            <div className="industries-hero-copy" data-industries-hero-copy>
               <div className="industries-hero-mark">
                 <SectionBrandMark size="sm" eager />
                 <span>{t('hero.eyebrow')}</span>
@@ -235,85 +509,136 @@ export default function Industries({
                   {t('hero.primaryCta')}
                 </Link>
                 <Link href="/case-studies" className="industries-hero-secondary">
-                  {t('hero.secondaryCta')} <ArrowUpRight aria-hidden="true" className="h-4 w-4" strokeWidth={1.7} />
+                  {t('hero.secondaryCta')}
+                  <ArrowUpRight
+                    aria-hidden="true"
+                    className="h-4 w-4"
+                    strokeWidth={1.7}
+                  />
                 </Link>
               </div>
-            </motion.div>
+            </div>
 
-            <motion.aside
-              className="industries-hero-aside"
-              variants={fadeUp}
-              transition={{ duration: 0.65, delay: 0.08 }}
-            >
+            <aside className="industries-hero-aside" data-industries-hero-wordmark>
               <div className="industries-hero-wordmark">
                 <strong data-label={t('hero.wordmark')}>
-                  <span>{t('hero.wordmarkStart')}</span><span>{t('hero.wordmarkEnd')}</span>
+                  <span>{t('hero.wordmarkStart')}</span>
+                  <span>{t('hero.wordmarkEnd')}</span>
                 </strong>
                 <span aria-hidden="true" />
               </div>
-            </motion.aside>
-          </motion.div>
+            </aside>
+          </div>
         </div>
       </section>
       <div aria-hidden="true" className="capabilities-separator industries-separator" />
 
-      {/* ── Industry atlas ──────────────────────────────────────────────────── */}
-      <section id="industry-verticals" className="industry-atlas-section scroll-mt-28">
-        <div className="industry-middle-shell">
-          <div className="industry-atlas-heading">
-            <div className="flex items-center gap-3">
-              <SectionBrandMark size="sm" />
-              <p>{t('coverage.eyebrow')}</p>
-            </div>
-            <h2>{t('coverage.title')}</h2>
-            <p>{t('coverage.description')}</p>
-          </div>
+      <section id="industry-verticals" className="industries-dossier-gallery-section scroll-mt-24">
+        <div className="site-frame-wide">
+          <div
+            className="industries-dossier-atlas-layout"
+            data-industries-atlas-layout
+          >
+            <motion.aside
+              className="industries-dossier-section-heading"
+              data-industries-atlas-intro
+              data-industries-reveal
+            >
+              <div className="industries-dossier-mark">
+                <SectionBrandMark size="sm" />
+                <span>{t('coverage.eyebrow')}</span>
+              </div>
+              <h2>{t('coverage.title')}</h2>
+              <p>{t('coverage.description')}</p>
 
-          <IndustryAtlas cards={cards} relatedWorkLabel={t('coverage.relatedWork')} />
+              <nav
+                className="industries-dossier-index"
+                aria-label={t('coverage.eyebrow')}
+              >
+                {cards.map((card, index) => (
+                  <a
+                    key={card.id}
+                    href={`#${card.id}`}
+                    className={index === 0 ? 'is-active' : undefined}
+                    data-industries-index-link={card.id}
+                  >
+                    <span>{String(index + 1).padStart(2, '0')}</span>
+                    <strong>{card.title}</strong>
+                  </a>
+                ))}
+              </nav>
+            </motion.aside>
+
+            <SectorGallery
+              cards={cards}
+              relatedWorkLabel={t('coverage.relatedWork')}
+            />
+          </div>
         </div>
       </section>
 
-      {/* ── Compact operating framework ─────────────────────────────────────── */}
-      <section className="industries-framework-section">
-        <div className="industry-middle-shell">
-          <div className="industries-framework">
-            <div className="industries-framework-media">
+      <section className="industries-dossier-method">
+        <div className="site-frame-wide">
+          <div
+            className="industries-dossier-method-layout"
+            data-industries-method
+          >
+            <div className="industries-dossier-method-visual">
               <Image
                 src={IMGS.rdLab}
                 alt={t('research.imageAlt')}
                 fill
-                sizes="(max-width: 767px) 100vw, (max-width: 1279px) 42vw, 36vw"
+                sizes="(max-width: 1023px) 100vw, 50vw"
                 className="object-cover"
+                data-industries-method-image
+              />
+              <span
+                aria-hidden="true"
+                className="industries-dossier-method-shade"
               />
             </div>
 
-            <div className="industries-framework-copy">
-              <div className="industries-framework-mark">
-                <SectionBrandMark size="sm" />
-                <p>{t('research.eyebrow')}</p>
+            <div
+              className="industries-dossier-method-content"
+              data-industries-method-copy
+            >
+              <div className="industries-dossier-mark industries-dossier-mark--light">
+                <SectionBrandMark surface="dark" size="sm" />
+                <span>{t('research.eyebrow')}</span>
               </div>
-              <h2>
-                {t('research.title')}{' '}
-                <em>{t('research.emphasis')}</em>
+              <h2 className="industries-dossier-method-heading">
+                {t('research.title')} <em>{t('research.emphasis')}</em>
               </h2>
 
-              <div className="industries-framework-principles">
-                {approachTracks.map((track) => (
-                  <article key={track.code}>
-                    <div aria-hidden="true">{track.icon}</div>
-                    <div>
-                      <h3>{track.title}</h3>
-                      <p>{track.description}</p>
-                    </div>
+              <div className="industries-dossier-principles">
+                {approachTracks.map((track, index) => (
+                  <article key={track.code} data-industries-principle>
+                    <span className="industries-dossier-principle-number">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className="industries-dossier-principle-icon"
+                    >
+                      {track.icon}
+                    </span>
+                    <h3>{track.title}</h3>
+                    <p>{track.description}</p>
                   </article>
                 ))}
               </div>
 
-              <div className="industries-framework-actions">
-                <Link href="/arc" className="industries-framework-primary">
+              <div
+                className="industries-dossier-method-actions"
+                data-industries-reveal
+              >
+                <Link href="/arc" className="industries-dossier-primary">
                   {t('research.primaryCta')}
                 </Link>
-                <Link href="/capabilities" className="industries-framework-secondary">
+                <Link
+                  href="/capabilities"
+                  className="industries-dossier-text-link"
+                >
                   {t('research.secondaryCta')}
                   <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
                 </Link>
@@ -324,41 +649,35 @@ export default function Industries({
       </section>
 
       {insightItems.length > 0 ? (
-        <div className="industries-insights">
+        <div className="industries-dossier-insights" data-industries-reveal>
           <InsightsSlider items={insightItems} randomize />
         </div>
       ) : null}
 
-      <section className="industries-mandate-section">
-        <motion.div
-          className="industries-mandate-card"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.28 }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="industries-mandate-mark">
-            <SectionBrandMark surface="dark" size="sm" />
-            <span>{t('mandate.eyebrow')}</span>
+      <section className="industries-dossier-cta">
+        <div className="site-frame-wide industries-dossier-cta-layout">
+          <div className="industries-dossier-cta-quote" data-industries-reveal>
+            <div className="industries-dossier-mark industries-dossier-mark--light">
+              <SectionBrandMark surface="dark" size="sm" />
+              <span>{t('mandate.eyebrow')}</span>
+            </div>
+            <p>&ldquo;{t('mandate.quote')}&rdquo;</p>
           </div>
-          <div className="industries-mandate-content">
-            <p className="industries-mandate-quote">
-              &ldquo;{t('mandate.quote')}&rdquo;
-            </p>
-            <div className="industries-mandate-cta">
-              <h2>{t('mandate.title')}</h2>
-              <p>{t('mandate.description')}</p>
-              <div className="industries-mandate-actions">
-                <Link href="/contact" className="industries-mandate-primary">
-                  {t('mandate.primaryCta')}
-                </Link>
-                <Link href="/capabilities" className="industries-mandate-secondary">
-                  {t('mandate.secondaryCta')} <ArrowUpRight className="h-4 w-4" strokeWidth={1.7} />
-                </Link>
-              </div>
+
+          <div className="industries-dossier-cta-action" data-industries-reveal>
+            <h2>{t('mandate.title')}</h2>
+            <p>{t('mandate.description')}</p>
+            <div>
+              <Link href="/contact" className="industries-dossier-cta-primary">
+                {t('mandate.primaryCta')}
+              </Link>
+              <Link href="/capabilities" className="industries-dossier-cta-secondary">
+                {t('mandate.secondaryCta')}
+                <ArrowUpRight aria-hidden="true" className="h-4 w-4" strokeWidth={1.7} />
+              </Link>
             </div>
           </div>
-        </motion.div>
+        </div>
       </section>
     </div>
   );
