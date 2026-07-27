@@ -9801,12 +9801,13 @@
   padding-right: 0;
 }
 
-.case-study-story__outcome-grid article > svg {
+.case-study-story__outcome-grid article > .hva-icon {
+  inline-size: clamp(2.5rem, 3.25vw, 3.6rem);
+  block-size: clamp(2.5rem, 3.25vw, 3.6rem);
   width: clamp(2.5rem, 3.25vw, 3.6rem);
   height: clamp(2.5rem, 3.25vw, 3.6rem);
   margin-top: 0.2rem;
   color: #DBAA4D;
-  stroke-width: 1.15;
 }
 
 .case-study-story__outcome-group--case
@@ -9979,7 +9980,9 @@
     gap: 0.45rem 1rem;
   }
 
-  .case-study-story__outcome-grid article > svg {
+  .case-study-story__outcome-grid article > .hva-icon {
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
     width: 2.75rem;
     height: 2.75rem;
   }
@@ -16190,12 +16193,13 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
   padding-right: 0;
 }
 
-.arc-briefing__benchmarks article > svg {
+.arc-briefing__benchmarks article > .hva-icon {
+  inline-size: clamp(3.25rem, 4.3vw, 4.8rem);
+  block-size: clamp(3.25rem, 4.3vw, 4.8rem);
   width: clamp(3.25rem, 4.3vw, 4.8rem);
   height: clamp(3.25rem, 4.3vw, 4.8rem);
   margin-top: 0.25rem;
   color: var(--arc-gold);
-  stroke-width: 1.15;
 }
 
 .arc-briefing__benchmarks strong {
@@ -16579,7 +16583,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .arc-briefing__benchmarks article > svg {
+  .arc-briefing__benchmarks article > .hva-icon {
     margin-bottom: 1rem;
   }
 
@@ -16776,7 +16780,9 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
     border-top: 0;
   }
 
-  .arc-briefing__benchmarks article > svg {
+  .arc-briefing__benchmarks article > .hva-icon {
+    inline-size: 3rem;
+    block-size: 3rem;
     width: 3rem;
     height: 3rem;
     margin: 0.1rem 0 0;

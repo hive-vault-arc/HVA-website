@@ -6,8 +6,13 @@ import {track} from '@vercel/analytics/react';
 import Image from 'next/image';
 import {useTranslations} from 'next-intl';
 import {Link} from '@/i18n/navigation';
-import {ArrowRight, ArrowUpRight} from '@/components/icons';
-import {TbChartLine, TbClockHour4, TbCurrencyDollar} from 'react-icons/tb';
+import {
+  ArrowRight,
+  ArrowUpRight,
+  ChartArea,
+  Gauge,
+  TrendingUp,
+} from '@/components/icons';
 import type {CaseStudy} from '@/lib/proof';
 
 type ArcProps = {
@@ -473,14 +478,17 @@ export default function Arc({studies, children}: ArcProps) {
                 {benchmarkOutcomes.map((outcome) => {
                   const BenchmarkIcon =
                     outcome.category === 'throughput'
-                      ? TbChartLine
+                      ? TrendingUp
                       : outcome.category === 'cycleTime'
-                        ? TbClockHour4
-                        : TbCurrencyDollar;
+                        ? Gauge
+                        : ChartArea;
 
                   return (
                     <article key={outcome._key} data-category={outcome.category}>
-                      <BenchmarkIcon aria-hidden="true" />
+                      <BenchmarkIcon
+                        aria-hidden="true"
+                        color="var(--arc-gold)"
+                      />
                       <div>
                         <strong>{outcome.value}</strong>
                         <h3>{outcome.label}</h3>

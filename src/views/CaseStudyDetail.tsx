@@ -2,8 +2,12 @@
 
 import Image from 'next/image';
 import type {ReactNode} from 'react';
-import {ExternalLink} from '@/components/icons';
-import {TbChartLine, TbClockHour4, TbCurrencyDollar} from 'react-icons/tb';
+import {
+  ChartArea,
+  ExternalLink,
+  Gauge,
+  TrendingUp,
+} from '@/components/icons';
 import type {CaseStudy, CaseStudyOutcome} from '../lib/proof';
 import ArticleDetailPage from '../components/ArticleDetailPage';
 import {
@@ -119,12 +123,12 @@ function NarrativeSection({
 function OutcomeIcon({outcome}: {readonly outcome: CaseStudyOutcome}) {
   const Icon =
     outcome.category === 'throughput'
-      ? TbChartLine
+      ? TrendingUp
       : outcome.category === 'cycleTime'
-        ? TbClockHour4
-        : TbCurrencyDollar;
+        ? Gauge
+        : ChartArea;
 
-  return <Icon aria-hidden="true" />;
+  return <Icon aria-hidden="true" color="#DBAA4D" />;
 }
 
 export function CaseStudyOutcomes({study}: {readonly study: CaseStudy}) {
