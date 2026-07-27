@@ -578,7 +578,12 @@
       "architecture": "Execution architecture",
       "modules": "Modules activated",
       "stack": "Stack & integrations",
-      "projectMedia": "Project interface evidence"
+      "projectMedia": "Project interface evidence",
+      "outcomesEyebrow": "Measured in production",
+      "outcomesTitle": "The operating record, in numbers.",
+      "outcomesDescription": "Approved performance signals and named-system results from the {client} case-study record.",
+      "benchmarks": "Transformation benchmarks",
+      "caseResults": "{client} operating results"
     },
     "caseCta": {
       "title": "Apply this transformation pattern to your operations",

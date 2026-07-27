@@ -578,7 +578,12 @@
       "architecture": "Architecture d’exécution",
       "modules": "Modules activés",
       "stack": "Socle et intégrations",
-      "projectMedia": "Preuves visuelles de l’interface"
+      "projectMedia": "Preuves visuelles de l’interface",
+      "outcomesEyebrow": "Mesuré en production",
+      "outcomesTitle": "Le dossier opérationnel, en chiffres.",
+      "outcomesDescription": "Signaux de performance validés et résultats liés au système dans le dossier d’étude de cas {client}.",
+      "benchmarks": "Repères de transformation",
+      "caseResults": "Résultats opérationnels {client}"
     },
     "caseCta": {
       "title": "Appliquez ce modèle de transformation à vos opérations",

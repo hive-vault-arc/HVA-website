@@ -3,7 +3,8 @@
 import Image from 'next/image';
 import type {ReactNode} from 'react';
 import {ExternalLink} from '@/components/icons';
-import type {CaseStudy} from '../lib/proof';
+import {TbChartLine, TbClockHour4, TbCurrencyDollar} from 'react-icons/tb';
+import type {CaseStudy, CaseStudyOutcome} from '../lib/proof';
 import ArticleDetailPage from '../components/ArticleDetailPage';
 import {
   getEvidenceDirection,
@@ -115,6 +116,110 @@ function NarrativeSection({
   );
 }
 
+function OutcomeIcon({outcome}: {readonly outcome: CaseStudyOutcome}) {
+  const Icon =
+    outcome.category === 'throughput'
+      ? TbChartLine
+      : outcome.category === 'cycleTime'
+        ? TbClockHour4
+        : TbCurrencyDollar;
+
+  return <Icon aria-hidden="true" />;
+}
+
+export function CaseStudyOutcomes({study}: {readonly study: CaseStudy}) {
+  const t = useTranslations('DynamicContent');
+  const benchmarkOutcomes = study.publishedOutcomes.filter(
+    (outcome) => outcome.scope === 'benchmark'
+  );
+  const caseOutcomes = study.publishedOutcomes.filter(
+    (outcome) => outcome.scope === 'caseStudy'
+  );
+
+  if (benchmarkOutcomes.length === 0 && caseOutcomes.length === 0) return null;
+
+  return (
+    <section
+      className="case-study-story__outcomes"
+      aria-labelledby="case-study-outcomes-title"
+    >
+      <header className="case-study-story__outcomes-heading">
+        <p style={{fontFamily: 'var(--font-body)'}}>
+          {t('caseSections.outcomesEyebrow')}
+        </p>
+        <h2
+          id="case-study-outcomes-title"
+          style={{fontFamily: 'var(--font-headline)'}}
+        >
+          {t('caseSections.outcomesTitle')}
+        </h2>
+        <p style={{fontFamily: 'var(--font-body)'}}>
+          {t('caseSections.outcomesDescription', {client: study.clientName})}
+        </p>
+      </header>
+
+      {benchmarkOutcomes.length > 0 ? (
+        <div
+          className="case-study-story__outcome-group"
+          aria-label={t('caseSections.benchmarks')}
+        >
+          <p
+            className="case-study-story__outcome-group-label"
+            style={{fontFamily: 'var(--font-body)'}}
+          >
+            {t('caseSections.benchmarks')}
+          </p>
+          <div className="case-study-story__outcome-grid">
+            {benchmarkOutcomes.map((outcome) => (
+              <article key={outcome._key}>
+                <OutcomeIcon outcome={outcome} />
+                <div>
+                  <strong style={{fontFamily: 'var(--font-headline)'}}>
+                    {outcome.value}
+                  </strong>
+                  <h3 style={{fontFamily: 'var(--font-headline)'}}>
+                    {outcome.label}
+                  </h3>
+                  <p style={{fontFamily: 'var(--font-body)'}}>{outcome.context}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      ) : null}
+
+      {caseOutcomes.length > 0 ? (
+        <div
+          className="case-study-story__outcome-group case-study-story__outcome-group--case"
+          aria-label={t('caseSections.caseResults', {client: study.clientName})}
+        >
+          <p
+            className="case-study-story__outcome-group-label"
+            style={{fontFamily: 'var(--font-body)'}}
+          >
+            {t('caseSections.caseResults', {client: study.clientName})}
+          </p>
+          <div className="case-study-story__outcome-grid">
+            {caseOutcomes.map((outcome) => (
+              <article key={outcome._key}>
+                <div>
+                  <strong style={{fontFamily: 'var(--font-headline)'}}>
+                    {outcome.value}
+                  </strong>
+                  <h3 style={{fontFamily: 'var(--font-headline)'}}>
+                    {outcome.label}
+                  </h3>
+                  <p style={{fontFamily: 'var(--font-body)'}}>{outcome.context}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      ) : null}
+    </section>
+  );
+}
+
 function CaseStudyBody({study}: {readonly study: CaseStudy}) {
   const t = useTranslations('DynamicContent');
   const locale = useLocale();
@@ -208,6 +313,8 @@ function CaseStudyBody({study}: {readonly study: CaseStudy}) {
           ) : null}
         </section>
       ) : null}
+
+      <CaseStudyOutcomes study={study} />
     </div>
   );
 }
