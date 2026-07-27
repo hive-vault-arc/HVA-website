@@ -214,6 +214,7 @@ const caseStudySummaryFields = `
     length(permissionReference) > 0
   ]{
     _key,
+    scope,
     category,
     value,
     label,

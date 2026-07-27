@@ -202,6 +202,7 @@ function normalizeCaseStudyOutcomes(
     const value = nonEmptyString(outcome.value);
     const label = nonEmptyString(outcome.label);
     const context = nonEmptyString(outcome.context);
+    const scope = outcome.scope === 'benchmark' ? 'benchmark' : 'caseStudy';
     const category = CASE_STUDY_OUTCOME_CATEGORIES.has(
       outcome.category as CaseStudyOutcomeCategory,
     )
@@ -210,7 +211,7 @@ function normalizeCaseStudyOutcomes(
 
     if (!key || !value || !label || !context) return [];
 
-    return [{_key: key, category, value, label, context}];
+    return [{_key: key, scope, category, value, label, context}];
   });
 }
 

@@ -7,6 +7,7 @@ import Image from 'next/image';
 import {useTranslations} from 'next-intl';
 import {Link} from '@/i18n/navigation';
 import {ArrowRight, ArrowUpRight} from '@/components/icons';
+import {TbChartLine, TbClockHour4, TbCurrencyDollar} from 'react-icons/tb';
 import type {CaseStudy} from '@/lib/proof';
 
 type ArcProps = {
@@ -43,18 +44,14 @@ const differenceSignalConfig = [
   {href: '/capabilities/in-detail'},
 ] as const;
 
+const immoworldSlug =
+  'top-tier-crm-transformation-program-real-estate-operations';
+
 function recordArcEvent(name: string, properties: Record<string, string> = {}) {
   track(name, {
     content_group: 'ARC',
     ...properties,
   });
-}
-
-function normalizeVisibleText(value: unknown, fallback = '') {
-  return (typeof value === 'string' && value.trim() ? value : fallback).replace(
-    /[—–]/g,
-    '-'
-  );
 }
 
 export default function Arc({studies, children}: ArcProps) {
@@ -75,50 +72,27 @@ export default function Arc({studies, children}: ArcProps) {
     ...signal,
     ...signalCopy[index],
   }));
-  const caseDisplayTitle: Record<string, string> = {
-    'top-tier-crm-transformation-program-real-estate-operations': t('caseTitles.crm'),
-    'multilingual-whatsapp-ai-agent': t('caseTitles.whatsapp'),
-  };
-  const caseRecordCopy = t.raw('caseRecords') as Record<
-    'crm' | 'whatsapp',
-    {problem: string; change: string}
-  >;
-  const caseRecordKey: Record<string, 'crm' | 'whatsapp'> = {
-    'top-tier-crm-transformation-program-real-estate-operations': 'crm',
-    'multilingual-whatsapp-ai-agent': 'whatsapp',
-  };
 
   const [activePhaseIndex, setActivePhaseIndex] = useState(0);
-  const [activeStudyIndex, setActiveStudyIndex] = useState(0);
   const pageRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLSpanElement>(null);
   const leadRef = useRef<HTMLElement>(null);
   const processRef = useRef<HTMLElement>(null);
 
-  const orderedStudies = useMemo(() => {
-    const preferredOrder = [
-      'top-tier-crm-transformation-program-real-estate-operations',
-      'multilingual-whatsapp-ai-agent',
-    ];
-
-    return preferredOrder
-      .map((slug) => studies.find((study) => study.slug === slug))
-      .filter((study): study is CaseStudy => Boolean(study));
+  const outcomeStudy = useMemo(() => {
+    return studies.find(
+      (study) =>
+        study.slug === immoworldSlug && study.publishedOutcomes.length > 0
+    );
   }, [studies]);
-
-  const activeStudy = orderedStudies[activeStudyIndex] ?? orderedStudies[0];
-  const outcomeStudy = orderedStudies.find(
-    (study) =>
-      study.slug ===
-        'top-tier-crm-transformation-program-real-estate-operations' &&
-      study.publishedOutcomes.length > 0
-  );
-  const activeStudyRecordKey = activeStudy
-    ? caseRecordKey[activeStudy.slug]
-    : undefined;
-  const activeStudyRecord = activeStudyRecordKey
-    ? caseRecordCopy[activeStudyRecordKey]
-    : undefined;
+  const benchmarkOutcomes =
+    outcomeStudy?.publishedOutcomes.filter(
+      (outcome) => outcome.scope === 'benchmark'
+    ) ?? [];
+  const caseOutcomes =
+    outcomeStudy?.publishedOutcomes.filter(
+      (outcome) => outcome.scope === 'caseStudy'
+    ) ?? [];
 
   useEffect(() => {
     const root = pageRef.current;
@@ -262,18 +236,6 @@ export default function Arc({studies, children}: ArcProps) {
     setActivePhaseIndex(index);
     recordArcEvent('arc_stage_click', {
       stage: arcPhases[index]?.title ?? 'Unknown',
-    });
-  };
-
-  const moveStudy = (direction: -1 | 1) => {
-    if (orderedStudies.length < 2) return;
-    setActiveStudyIndex((current) => {
-      const next = (current + direction + orderedStudies.length) % orderedStudies.length;
-      const study = orderedStudies[next];
-      if (study) {
-        recordArcEvent('proof_carousel_change', {proof_variant: study.slug});
-      }
-      return next;
     });
   };
 
@@ -493,135 +455,80 @@ export default function Arc({studies, children}: ArcProps) {
         </div>
       </section>
 
-      {activeStudy && (
+      {outcomeStudy && caseOutcomes.length > 0 && (
         <section
           id="proof-in-production"
-          className="arc-briefing__proof"
-          aria-labelledby="arc-proof-title"
+          className="arc-briefing__outcomes"
+          aria-labelledby="arc-outcomes-title"
           data-arc-section="proof-in-production"
         >
           <div className="arc-briefing__shell">
-            <header className="arc-briefing__section-heading">
-              <h2 id="arc-proof-title">{t('proofTitle')}</h2>
-              <p>{t('proofDescription')}</p>
-            </header>
-
-            <article
-              key={activeStudy.slug}
-              className="arc-briefing__case"
-              data-proof-variant={activeStudy.slug}
-              aria-live="polite"
-            >
-              <div className="arc-briefing__case-identity">
-                <span>
-                  {normalizeVisibleText(activeStudy.clientName, activeStudy.title)}
-                </span>
-                <span>
-                  {normalizeVisibleText(activeStudy.industry, t('proofEyebrow'))}
-                </span>
-              </div>
-              <h3>
-                {normalizeVisibleText(
-                  caseDisplayTitle[activeStudy.slug] ?? activeStudy.title
-                )}
-              </h3>
-              <dl>
-                <div>
-                  <dt>{t('problem')}</dt>
-                  <dd>
-                    {normalizeVisibleText(
-                      activeStudyRecord?.problem,
-                      activeStudy.problem
-                    )}
-                  </dd>
-                </div>
-                <div>
-                  <dt>{t('whatChanged')}</dt>
-                  <dd>
-                    {normalizeVisibleText(
-                      activeStudyRecord?.change,
-                      activeStudy.summary
-                    )}
-                  </dd>
-                </div>
-                <div>
-                  <dt>{t('status')}</dt>
-                  <dd>
-                    {normalizeVisibleText(
-                      activeStudy.deploymentStatus,
-                      t('proofEyebrow')
-                    )}
-                  </dd>
-                </div>
-              </dl>
-              <Link
-                href={`/case-studies/${activeStudy.slug}`}
-                onClick={() =>
-                  recordArcEvent('case_study_click', {
-                    proof_variant: activeStudy.slug,
-                  })
-                }
-              >
-                {t('viewSnapshot')}
-                <ArrowUpRight aria-hidden="true" />
-              </Link>
-            </article>
-
-            {orderedStudies.length > 1 && (
-              <div className="arc-briefing__case-controls">
-                <p>
-                  {t('casePosition', {
-                    current: activeStudyIndex + 1,
-                    total: orderedStudies.length,
-                  })}
-                </p>
-                <div>
-                  <button
-                    type="button"
-                    onClick={() => moveStudy(-1)}
-                    aria-label={t('previousStudy')}
-                  >
-                    <ArrowRight aria-hidden="true" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => moveStudy(1)}
-                    aria-label={t('nextStudy')}
-                  >
-                    <ArrowRight aria-hidden="true" />
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-        </section>
-      )}
-
-      {outcomeStudy && (
-        <section
-          className="arc-briefing__outcomes"
-          aria-labelledby="arc-outcomes-title"
-          data-arc-section="measured-outcomes"
-        >
-          <div className="arc-briefing__shell">
-            <header>
+            <header className="arc-briefing__outcomes-heading">
               <p>{t('outcomesEyebrow')}</p>
               <h2 id="arc-outcomes-title">{t('outcomesTitle')}</h2>
-              <p>
-                {t('outcomesDescription', {
-                  client: outcomeStudy.clientName,
-                })}
-              </p>
             </header>
-            <div className="arc-briefing__outcome-list">
-              {outcomeStudy.publishedOutcomes.map((outcome) => (
-                <article key={outcome._key} data-category={outcome.category}>
-                  <strong>{outcome.value}</strong>
-                  <h3>{outcome.label}</h3>
-                  <p>{outcome.context}</p>
-                </article>
-              ))}
-            </div>
+
+            {benchmarkOutcomes.length > 0 && (
+              <div className="arc-briefing__benchmarks">
+                {benchmarkOutcomes.map((outcome) => {
+                  const BenchmarkIcon =
+                    outcome.category === 'throughput'
+                      ? TbChartLine
+                      : outcome.category === 'cycleTime'
+                        ? TbClockHour4
+                        : TbCurrencyDollar;
+
+                  return (
+                    <article key={outcome._key} data-category={outcome.category}>
+                      <BenchmarkIcon aria-hidden="true" />
+                      <div>
+                        <strong>{outcome.value}</strong>
+                        <h3>{outcome.label}</h3>
+                        <p>{outcome.context}</p>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            )}
+
+            <article
+              className="arc-briefing__outcome-case"
+              data-proof-variant={outcomeStudy.slug}
+            >
+              <figure className="arc-briefing__outcome-case-media">
+                <Image
+                  src="/Images/industries/real-estate-crm-lead-operations-morocco.webp"
+                  alt={t('outcomesImageAlt')}
+                  fill
+                  sizes="(max-width: 1023px) 100vw, 48vw"
+                />
+              </figure>
+              <div className="arc-briefing__outcome-case-content">
+                <p>{t('outcomesCaseEyebrow')}</p>
+                <h3>{t('caseTitles.crm')}</h3>
+                <p>{outcomeStudy.summary}</p>
+                <div className="arc-briefing__case-outcomes">
+                  {caseOutcomes.map((outcome) => (
+                    <div key={outcome._key}>
+                      <strong>{outcome.value}</strong>
+                      <span>{outcome.label}</span>
+                    </div>
+                  ))}
+                </div>
+                <Link
+                  href={`/case-studies/${outcomeStudy.slug}`}
+                  onClick={() =>
+                    recordArcEvent('case_study_click', {
+                      proof_variant: outcomeStudy.slug,
+                    })
+                  }
+                >
+                  {t('viewSnapshot')}
+                  <ArrowRight aria-hidden="true" />
+                </Link>
+              </div>
+            </article>
           </div>
         </section>
       )}

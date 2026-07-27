@@ -77,6 +77,7 @@ export type CaseStudyOutcomeCategory =
 
 export type CaseStudyOutcome = {
   _key: string;
+  scope: 'benchmark' | 'caseStudy';
   category: CaseStudyOutcomeCategory;
   value: string;
   label: string;

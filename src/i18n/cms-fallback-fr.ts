@@ -362,6 +362,20 @@ const caseStudyOutcomePatches: Record<
   Record<string, {label: string; context: string}>
 > = {
   'top-tier-crm-transformation-program-real-estate-operations': {
+    'throughput-lift': {
+      label: 'Hausse du débit opérationnel',
+      context: 'Amélioration durable du débit au cours des 90 premiers jours.',
+    },
+    'cycle-time-reduction': {
+      label: 'Réduction du temps de cycle',
+      context:
+        'Des cycles plus rapides grâce à la suppression des relais cachés et des reprises.',
+    },
+    'operating-margin-lift': {
+      label: 'Hausse de la marge opérationnelle',
+      context:
+        'Une marge renforcée par la suppression des contraintes et une meilleure fluidité.',
+    },
     'lead-response': {
       label: 'Réponse aux leads plus rapide',
       context:
