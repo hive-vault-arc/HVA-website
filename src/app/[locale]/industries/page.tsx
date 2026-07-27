@@ -3,12 +3,12 @@ import type {AppLocale} from "@/i18n/config";
 import {buildStaticRouteMetadata} from "@/i18n/metadata";
 import Industries from '@/views/Industries';
 import JsonLd from '@/components/JsonLd';
-import type {SlideItem} from '@/components/InsightsSlider';
+import type {IndustryInsightItem} from '@/components/IndustryInsightsShowcase';
 import {localizedPath} from '@/i18n/route-manifest';
 import {absoluteUrl, buildLocalizedBreadcrumbSchema} from '@/lib/seo';
 import {
-  getSanityInsightCollections,
-  type InsightCollections,
+  getSanityIndustryInsightCollections,
+  type IndustryInsightCollections,
 } from '@/lib/sanity-content';
 import {
   buildPublishedCollection,
@@ -18,12 +18,12 @@ import {getTranslations} from 'next-intl/server';
 
 type PageProps = {params: Promise<{locale: AppLocale}>};
 
-type DatedSlideItem = SlideItem & {publishedAt: string};
+type DatedIndustryInsightItem = IndustryInsightItem & {publishedAt: string};
 
 function buildIndustryInsightItems(
   locale: AppLocale,
-  collections: InsightCollections,
-): SlideItem[] {
+  collections: IndustryInsightCollections,
+): IndustryInsightItem[] {
   const localized = <T extends LocalizedContentMeta & {slug: string}>(items: T[]) =>
     buildPublishedCollection(
       locale,
@@ -36,7 +36,7 @@ function buildIndustryInsightItems(
   const perspectives = localized(collections.perspectives);
   const researchReports = localized(collections.researchReports);
 
-  const items: DatedSlideItem[] = [
+  const items: DatedIndustryInsightItem[] = [
     ...posts.items.map((post) => ({
       id: `blog-${post.slug}`,
       tag: post.category,
@@ -113,7 +113,9 @@ export default async function IndustriesPage({params}: PageProps) {
   const [tMeta, tNav, collections] = await Promise.all([
     getTranslations({locale, namespace: 'Metadata.pages.industries'}),
     getTranslations({locale, namespace: 'Navigation'}),
-    getSanityInsightCollections(locale === 'fr' ? ['fr', 'en'] : ['en']),
+    getSanityIndustryInsightCollections(
+      locale === 'fr' ? ['fr', 'en'] : ['en'],
+    ),
   ]);
   const insightItems = buildIndustryInsightItems(locale, collections);
   const pageSchema = {

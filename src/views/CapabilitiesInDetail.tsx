@@ -10,12 +10,12 @@ import {
   ArrowUpRight,
   Bot,
   Building2,
-  CheckCircle2,
   Cloud,
   Cpu,
   Layers3,
   Settings,
   Wrench,
+  X,
 } from '@/components/icons';
 import { useAnimationQuality } from '../lib/animationQuality';
 import BottomCTA from '../components/BottomCTA';
@@ -53,8 +53,14 @@ const capabilityImages: Record<string, string> = {
   'operations-managed': '/Images/capabilities/hva-operations-managed-capability.webp',
 };
 
+const programImages: Record<string, string> = {
+  'ai-reception-and-lead-operations-program': '/Images/solution-programs/hva-ai-reception-lead-operations.webp',
+  'enterprise-crm-modernization-program': '/Images/solution-programs/hva-enterprise-crm-modernization.webp',
+  'cloud-delivery-reliability-stack': '/Images/solution-programs/hva-cloud-delivery-reliability-stack.webp',
+};
+
 type ProgramCopy = {category: string; name: string; summary: string};
-type PhaseCopy = {title: string; detail: string};
+type DeliveryStageCopy = {title: string; detail: string};
 
 const fadeUp = {
   hidden: { opacity: 0, y: 18 },
@@ -65,17 +71,28 @@ const CapabilitiesInDetail: React.FC = () => {
   const t = useTranslations('CapabilitiesDetail');
   const capabilitiesT = useTranslations('Capabilities');
   const { motionReduced } = useAnimationQuality();
+  const coverageDialogRef = React.useRef<HTMLDialogElement>(null);
+  const [activeCoverage, setActiveCoverage] = React.useState<CapabilityDetailSection | null>(null);
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
   const detailSections = t.raw('pillars.items') as CapabilityDetailSection[];
   const heroStats = t.raw('hero.stats') as Array<{value: string; label: string}>;
-  const arcSignals = t.raw('arc.signals') as string[];
-  const arcPhases = capabilitiesT.raw('botPhases') as PhaseCopy[];
+  const deliveryStages = t.raw('delivery.stages') as DeliveryStageCopy[];
   const programCopy = capabilitiesT.raw('programs') as ProgramCopy[];
   const featuredPrograms = CAPABILITY_SOLUTION_PROGRAM_DETAILS.slice(0, 3).map((program, index) => ({
     ...program,
     ...programCopy[index],
   }));
+
+  React.useEffect(() => {
+    if (activeCoverage && !coverageDialogRef.current?.open) {
+      coverageDialogRef.current?.showModal();
+    }
+  }, [activeCoverage]);
+
+  const closeCoverage = () => {
+    coverageDialogRef.current?.close();
+  };
 
   return (
     <MotionConfig reducedMotion={motionReduced ? 'always' : 'never'}>
@@ -92,6 +109,7 @@ const CapabilitiesInDetail: React.FC = () => {
               initial="hidden"
               animate="show"
               variants={{ show: { transition: { staggerChildren: 0.08 } } }}
+              className="cap-detail-hero-heading"
             >
               <motion.div variants={fadeUp} transition={{ duration: 0.45 }} className="cap-detail-mark">
                 <SectionBrandMark size="sm" />
@@ -101,7 +119,14 @@ const CapabilitiesInDetail: React.FC = () => {
               <motion.h1 variants={fadeUp} transition={{ duration: 0.5 }}>
                 {t('hero.title')}
               </motion.h1>
+            </motion.div>
 
+            <motion.div
+              initial="hidden"
+              animate="show"
+              variants={{ show: { transition: { staggerChildren: 0.08, delayChildren: 0.12 } } }}
+              className="cap-detail-hero-narrative"
+            >
               <motion.p variants={fadeUp} transition={{ duration: 0.5 }} className="cap-detail-hero-copy">
                 {t('hero.description')}
               </motion.p>
@@ -117,8 +142,8 @@ const CapabilitiesInDetail: React.FC = () => {
             </motion.div>
 
             <motion.aside
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, clipPath: 'inset(0 0 100% 0)' }}
+              animate={{ opacity: 1, clipPath: 'inset(0 0 0% 0)' }}
               transition={{ duration: 0.5, delay: 0.12 }}
               className="cap-detail-hero-panel"
             >
@@ -204,25 +229,23 @@ const CapabilitiesInDetail: React.FC = () => {
                       <strong>{domain.relatedOutcomes[0]}</strong>
                     </div>
 
-                    <details className="cap-detail-more">
-                      <summary>
+                    <div className="cap-detail-card-actions">
+                      <button
+                        type="button"
+                        className="cap-detail-coverage-trigger"
+                        aria-haspopup="dialog"
+                        aria-controls="cap-detail-coverage-dialog"
+                        onClick={() => setActiveCoverage(domain)}
+                      >
                         {t('pillars.fullCoverage')}
                         <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.7} />
-                      </summary>
-                      <div className="cap-detail-more-content">
-                        <p>{domain.executionContext}</p>
-                        <ul>
-                          {domain.subCapabilities.map((item) => (
-                            <li key={item}>{item}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </details>
+                      </button>
 
-                    <Link href={`/capabilities/${domain.id}`} className="cap-detail-card-link">
-                      {t('pillars.openCapability')}
-                      <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={1.7} />
-                    </Link>
+                      <Link href={`/capabilities/${domain.id}`} className="cap-detail-card-link">
+                        {t('pillars.openCapability')}
+                        <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={1.7} />
+                      </Link>
+                    </div>
                   </div>
                 </motion.article>
               ))}
@@ -230,21 +253,71 @@ const CapabilitiesInDetail: React.FC = () => {
           </div>
         </section>
 
-        <section id="arc-delivery" className="cap-detail-arc-section">
-          <div className="cap-detail-shell cap-detail-arc-grid">
+        <dialog
+          id="cap-detail-coverage-dialog"
+          ref={coverageDialogRef}
+          className="cap-detail-coverage-dialog"
+          aria-labelledby="cap-detail-coverage-title"
+          onClose={() => setActiveCoverage(null)}
+        >
+          {activeCoverage && (
+            <article className="cap-detail-coverage-dialog__content">
+              <header className="cap-detail-coverage-dialog__header">
+                <div>
+                  <span>{t('pillars.fullCoverage')}</span>
+                  <h2 id="cap-detail-coverage-title">{activeCoverage.title}</h2>
+                </div>
+                <button type="button" onClick={closeCoverage} aria-label={t('pillars.closeCoverage')}>
+                  <X className="h-5 w-5" strokeWidth={1.8} />
+                </button>
+              </header>
+
+              <div className="cap-detail-coverage-dialog__body">
+                <figure>
+                  <Image
+                    src={capabilityImages[activeCoverage.id]}
+                    alt={t('pillars.imageAlt', {title: activeCoverage.title})}
+                    fill
+                    sizes="(max-width: 720px) calc(100vw - 4rem), 34rem"
+                    className="object-cover"
+                  />
+                </figure>
+                <div className="cap-detail-coverage-dialog__copy">
+                  <p>{activeCoverage.executionContext}</p>
+                  <ul>
+                    {activeCoverage.subCapabilities.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                  <Link href={`/capabilities/${activeCoverage.id}`} className="cap-detail-coverage-dialog__link" onClick={closeCoverage}>
+                    {t('pillars.openCapability')}
+                    <ArrowUpRight className="h-4 w-4" strokeWidth={1.7} />
+                  </Link>
+                </div>
+              </div>
+            </article>
+          )}
+        </dialog>
+
+        <section id="delivery-commitment" className="cap-detail-delivery-section">
+          <div className="cap-detail-shell cap-detail-delivery-grid">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.18 }}
               transition={{ duration: 0.45 }}
-              className="cap-detail-arc-copy"
+              className="cap-detail-delivery-copy"
             >
               <div className="cap-detail-mark cap-detail-mark-dark">
                 <SectionBrandMark surface="dark" size="sm" />
-                <span>{t('arc.eyebrow')}</span>
+                <span>{t('delivery.eyebrow')}</span>
               </div>
-              <h2>{t('arc.title')}</h2>
-              <p>{t('arc.description')}</p>
+              <h2>{t('delivery.title')}</h2>
+              <p>{t('delivery.description')}</p>
+              <Link href="/case-studies" className="cap-detail-delivery-link">
+                {t('delivery.proofLink')}
+                <ArrowRight className="h-4 w-4" strokeWidth={1.7} />
+              </Link>
             </motion.div>
 
             <motion.div
@@ -252,31 +325,16 @@ const CapabilitiesInDetail: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.18 }}
               transition={{ duration: 0.45, delay: 0.08 }}
-              className="cap-detail-arc-panel"
+              className="cap-detail-delivery-panel"
             >
-              {arcPhases.map((phase, index) => (
-                <article key={phase.title} className="cap-detail-arc-phase">
+              {deliveryStages.map((stage, index) => (
+                <article key={stage.title} className="cap-detail-delivery-stage">
                   <span>{String(index + 1).padStart(2, '0')}</span>
-                  <h3>{phase.title}</h3>
-                  <p>{phase.detail}</p>
+                  <h3>{stage.title}</h3>
+                  <p>{stage.detail}</p>
                 </article>
               ))}
             </motion.div>
-
-            <motion.ul
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.18 }}
-              transition={{ duration: 0.45, delay: 0.12 }}
-              className="cap-detail-signal-list"
-            >
-              {arcSignals.map((signal) => (
-                <li key={signal}>
-                  <CheckCircle2 className="h-4 w-4" strokeWidth={1.7} />
-                  {signal}
-                </li>
-              ))}
-            </motion.ul>
           </div>
         </section>
 
@@ -297,12 +355,24 @@ const CapabilitiesInDetail: React.FC = () => {
                   href={`/capabilities/solution-programs#program-${String(index + 1).padStart(2, '0')}`}
                   className="cap-detail-program-card"
                 >
-                  <span>{program.category}</span>
-                  <strong>{program.name}</strong>
-                  <em>{program.summary}</em>
-                  <span className="cap-detail-program-link">
-                    {t('programs.view')} <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={1.7} />
-                  </span>
+                  <div className="cap-detail-program-media">
+                    <Image
+                      src={programImages[program.slug]}
+                      alt={t('programs.imageAlt', {title: program.name})}
+                      fill
+                      sizes="(max-width: 900px) 100vw, 33vw"
+                      className="object-cover"
+                    />
+                    <span>{String(index + 1).padStart(2, '0')}</span>
+                  </div>
+                  <div className="cap-detail-program-body">
+                    <span>{program.category}</span>
+                    <strong>{program.name}</strong>
+                    <em>{program.summary}</em>
+                    <span className="cap-detail-program-link">
+                      {t('programs.view')} <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={1.7} />
+                    </span>
+                  </div>
                 </Link>
               ))}
             </div>

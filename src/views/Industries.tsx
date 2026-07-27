@@ -3,6 +3,7 @@
 import {useLayoutEffect, useRef, type CSSProperties} from 'react';
 import {Link} from '@/i18n/navigation';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import {motion, useScroll, useTransform} from 'framer-motion';
 import gsap from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
@@ -14,9 +15,23 @@ import {
   Network,
   ShieldCheck,
 } from '@/components/icons';
-import InsightsSlider, {type SlideItem} from '@/components/InsightsSlider';
+import DeferredMount from '@/components/DeferredMount';
+import type {IndustryInsightItem} from '@/components/IndustryInsightsShowcase';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 import SectionBrandMark from '../components/SectionBrandMark';
+
+const IndustryInsightsShowcase = dynamic(
+  () => import('@/components/IndustryInsightsShowcase'),
+  {
+    ssr: false,
+    loading: () => (
+      <div
+        aria-hidden="true"
+        className="industries-insights-deferred-placeholder"
+      />
+    ),
+  },
+);
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -210,7 +225,7 @@ function SectorGallery({
 export default function Industries({
   insightItems = [],
 }: {
-  readonly insightItems?: SlideItem[];
+  readonly insightItems?: IndustryInsightItem[];
 }) {
   const rootRef = useRef<HTMLDivElement | null>(null);
   const t = useTranslations('Industries');
@@ -483,6 +498,7 @@ export default function Industries({
         className="industries-dossier-progress"
         style={{scaleX: progressScale}}
       />
+      <div aria-hidden="true" className="industries-dossier-nav-veil" />
 
       <section
         className="industries-hero"
@@ -650,7 +666,17 @@ export default function Industries({
 
       {insightItems.length > 0 ? (
         <div className="industries-dossier-insights" data-industries-reveal>
-          <InsightsSlider items={insightItems} randomize />
+          <DeferredMount
+            rootMargin="900px 0px"
+            fallback={
+              <div
+                aria-hidden="true"
+                className="industries-insights-deferred-placeholder"
+              />
+            }
+          >
+            <IndustryInsightsShowcase items={insightItems} />
+          </DeferredMount>
         </div>
       ) : null}
 

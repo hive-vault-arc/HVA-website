@@ -442,9 +442,10 @@
     "clientRole": "Client role",
     "phaseOutput": "Phase output",
     "viewPrograms": "View solution programs",
-    "quote": "Transformation succeeds when strategy, engineering, and operations move together, from the first decision to the last deployment.",
-    "quoteAlt": "Hive Vault Arc framework expertise",
-    "quoteDisciplines": "Strategy / Consulting / Engineering / Operations",
+    "quote": "The work only matters when strategy becomes a system that teams can run, measure, and improve every day.",
+    "quoteAlt": "Ali Amrani, Co-Founder and CEO of Hive Vault Arc",
+    "quoteAuthor": "Ali Amrani",
+    "quoteRole": "Co-Founder & CEO",
     "programsTitle": "Choose the starting point.",
     "programsDescription": "Three focused programs. Each one is scoped, built, and operated with one accountable team.",
     "caseStudy": "Case study",
@@ -643,25 +644,24 @@
   },
   "SolutionPrograms": {
     "hero": {
-      "eyebrow": "Capabilities / Solution programs",
-      "title": "Solution Programs:",
-      "emphasis": "Consulting-Led Systems",
-      "titleEnd": "at Full Depth.",
-      "description": "Focused programs—strategy, build, and managed operations delivered by one team in one accountable engagement.",
-      "primaryCta": "Start a program",
-      "secondaryCta": "Explore in detail",
-      "indexTitle": "Program index",
-      "indexFooter": "All programs → ARC delivery model"
+      "eyebrow": "Solution programs",
+      "title": "Put critical operations into production.",
+      "description": "Three focused systems turn a decision into work that can run, improve, and stay owned.",
+      "primaryCta": "Explore programs",
+      "secondaryCta": "Explore capabilities",
+      "signal": "Three starting points",
+      "signalDetail": "Choose the operating problem first. The delivery team stays connected after launch."
     },
-    "programLabel": "Program {number}",
-    "labels": {
-      "coreModules": "Core modules",
-      "primaryStack": "Primary stack",
-      "delivery": "Delivery",
-      "deliveryModel": "Delivery model",
-      "viewCaseStudy": "View case study",
-      "live": "Live in production",
-      "exploreCapabilities": "Explore capabilities"
+    "navigator": {
+      "eyebrow": "Choose the starting point",
+      "title": "Start with the job that needs to work.",
+      "description": "Select a program to see the few elements that define its delivery path.",
+      "ariaLabel": "Solution program selector",
+      "modules": "What it connects",
+      "integrations": "Works with",
+      "delivery": "How it is delivered",
+      "openProgram": "Explore related proof",
+      "imageAlt": "Delivery program: {title}"
     },
     "programs": [
       {
@@ -689,58 +689,19 @@
         "deliveryModel": "Reliability audit, remediation sprints, and ongoing SRE collaboration."
       }
     ],
-    "ai": {
-      "imageAlt": "AI reception and lead operations program by Hive Vault Arc in Morocco",
-      "quote": "Answers faster than our sales desk—and updates the CRM automatically.",
-      "quoteAttribution": "— Nadia El Idrissi, Head of Growth"
-    },
-    "why": {
-      "eyebrow": "Why a program",
-      "title": "A Program,",
-      "emphasis": "Not a Project.",
-      "description": "Projects hand off. Programs stay accountable. Every Hive Vault Arc engagement runs from diagnosis through production—one team, one loop, no drift.",
-      "rows": [
-        {"others": "Vendors deliver and disappear.", "arc": "Hive Vault Arc stays through evolution—monitoring, extending, improving."},
-        {"others": "Strategy and engineering are separated.", "arc": "One team owns strategy and build—no handoff, no drift."},
-        {"others": "Programs are scoped by hours, not outcomes.", "arc": "Every program is scoped around measurable operating impact."},
-        {"others": "Integration is an afterthought.", "arc": "Architecture, stack selection, and integrations are designed in from day one."}
+    "ownership": {
+      "title": "The program is the accountable layer.",
+      "description": "It keeps the decision, the system, and its improvement in the same line of ownership.",
+      "steps": [
+        {"title": "Set the operating direction", "detail": "Scope the real constraint before committing a build plan."},
+        {"title": "Connect the working system", "detail": "Build the process, data, and integrations around the job at hand."},
+        {"title": "Stay with the operation", "detail": "Keep responsibility visible as the system runs and changes."}
       ]
     },
-    "crm": {
-      "features": [
-        {"title": "Pipeline orchestration", "description": "Multi-stage deal pipelines with role-based workflows and automated follow-up sequences.", "outcome": "OUTCOME: UNIFIED DATA OWNERSHIP"},
-        {"title": "Predictive reporting", "description": "BI connectors and executive dashboards surfacing operational intelligence across teams.", "outcome": "OUTCOME: AUTOMATED PIPELINE OPERATIONS"}
-      ],
-      "imageAlt": "Enterprise CRM modernization program by Hive Vault Arc in Morocco",
-      "scopeLabel": "Production scope",
-      "scope": "Role-based CRM operations and pipeline reporting"
-    },
-    "cloud": {
-      "disciplines": [
-        {"label": "Resilient architecture", "description": "Multi-region failover with recovery planning and active redundancy."},
-        {"label": "Controlled deployment", "description": "Blue-green releases with automated rollback and health-check gates."}
-      ],
-      "stackLabel": "RELIABILITY_STACK",
-      "layers": [
-        {"id": "CI/CD", "name": "Pipeline hardening", "status": "ACTIVE", "pulse": true},
-        {"id": "OBS", "name": "Observability layer", "status": "MONITORING", "pulse": false},
-        {"id": "SEC", "name": "Security controls", "status": "ENFORCED", "pulse": false},
-        {"id": "DR", "name": "Disaster recovery", "status": "STANDBY", "pulse": true}
-      ],
-      "controlsActive": "RESILIENCE CONTROLS ACTIVE",
-      "imageAlt": "Cloud delivery reliability infrastructure by Hive Vault Arc in Morocco"
-    },
-    "finalCta": {
-      "title": "Ready to architect your digital future?",
-      "description": "We scope the right program for your operations—constraints, integrations, and timeline first.",
-      "primary": "Start a program",
-      "secondary": "View all capabilities"
-    },
     "bottomCta": {
-      "title": "Need the full capability map with delivery depth?",
-      "description": "Use In Detail for strategic context, execution model, and full sub-capability coverage across our connected service pillars.",
-      "primary": "Explore in detail",
-      "secondary": "Book a discovery call"
+      "title": "Need a program shaped around your operation?",
+      "description": "We start with the constraint, the systems already in place, and the work that has to keep running.",
+      "primary": "Start a program"
     }
   },
   "CapabilitiesDetail": {
@@ -767,6 +728,7 @@
       "coreAreas": "{title} core areas",
       "primaryOutcome": "Primary outcome",
       "fullCoverage": "Full coverage",
+      "closeCoverage": "Close full coverage",
       "openCapability": "Open capability",
       "items": [
         {
@@ -831,15 +793,21 @@
         }
       ]
     },
-    "arc": {
-      "eyebrow": "ARC delivery",
-      "title": "Capability only matters when it reaches production",
-      "description": "HVA connects diagnosis, engineering, and managed operations in one accountable loop.",
-      "signals": ["Clear diagnosis", "Production build", "Ongoing ownership"]
+    "delivery": {
+      "eyebrow": "What delivery leaves behind",
+      "title": "Useful work has to survive the handoff.",
+      "description": "Each engagement should leave your team with clearer decisions, a system that works in practice, and ownership that does not disappear after launch.",
+      "proofLink": "See delivery proof",
+      "stages": [
+        {"title": "Shared direction", "detail": "A decision-ready scope grounded in the constraints your team actually faces."},
+        {"title": "A working system", "detail": "Processes, data, and technology connected around the job that needs to get done."},
+        {"title": "Ownership that continues", "detail": "Clear accountability for the live operation, its improvement, and what changes next."}
+      ]
     },
     "programs": {
       "eyebrow": "From capability to program",
       "title": "When scope is clear, use a ready delivery path.",
+      "imageAlt": "{title} delivery program",
       "view": "View program"
     },
     "bottomCta": {
@@ -1494,6 +1462,19 @@
       ],
       "primaryCta": "Learn about ARC",
       "secondaryCta": "Explore capabilities"
+    },
+    "insights": {
+      "eyebrow": "Field notes",
+      "title": "Ideas tested against operating reality.",
+      "description": "Research, perspectives, and delivery evidence selected from across our published work.",
+      "railLabel": "Browse every insight",
+      "railAriaLabel": "Industry insight publications",
+      "previous": "Show the previous insight",
+      "next": "Show the next insight",
+      "counter": "{current} of {total}",
+      "slidePosition": "Insight {current} of {total}",
+      "read": "Read insight",
+      "readInsight": "Read insight: {title}"
     },
     "mandate": {
       "eyebrow": "Our mandate",

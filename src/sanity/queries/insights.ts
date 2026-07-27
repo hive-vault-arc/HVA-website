@@ -237,6 +237,57 @@ const caseStudySummaryFields = `
   ${seoFields}
 `;
 
+const industryPostCardFields = `
+  ${localizationFields},
+  "slug": slug.current,
+  title,
+  category,
+  excerpt,
+  publishedAt,
+  coverImage {
+    ${imageFields}
+  }
+`;
+
+const industryNewsCardFields = `
+  ${localizationFields},
+  "slug": slug.current,
+  title,
+  summary,
+  category,
+  tag,
+  publishedAt,
+  coverImage {
+    ${imageFields}
+  }
+`;
+
+const industryEditorialCardFields = `
+  ${localizationFields},
+  "slug": slug.current,
+  title,
+  summary,
+  tag,
+  publishedAt,
+  coverImage {
+    ${imageFields}
+  }
+`;
+
+const industryCaseStudyCardFields = `
+  ${localizationFields},
+  "slug": slug.current,
+  title,
+  industry,
+  summary,
+  lastUpdated,
+  assets {
+    coverImage {
+      ${imageFields}
+    }
+  }
+`;
+
 const caseStudyProjectMediaFields = `
   "projectMedia": projectMedia[
     (
@@ -433,6 +484,61 @@ export const allInsightCollectionsQuery = defineQuery(`
       defined(slug.current)
     ] | order(lastUpdated desc, _updatedAt desc) {
       ${caseStudySummaryFields}
+    }
+  }
+`);
+
+/**
+ * Card-only payload for the Industries insight showcase.
+ * Keep this projection intentionally narrow: the page never needs authors,
+ * body sections, SEO metadata, evidence, or case-study operational details.
+ */
+export const industryInsightCollectionsQuery = defineQuery(`
+  {
+    "posts": *[
+      _type == "post" &&
+      language in $locales &&
+      ($preview == true || translationStatus == "approved") &&
+      defined(slug.current) &&
+      defined(coverImage.asset)
+    ] | order(publishedAt desc, _updatedAt desc) {
+      ${industryPostCardFields}
+    },
+    "newsArticles": *[
+      _type == "newsArticle" &&
+      language in $locales &&
+      ($preview == true || translationStatus == "approved") &&
+      defined(slug.current) &&
+      defined(coverImage.asset)
+    ] | order(publishedAt desc, _updatedAt desc) {
+      ${industryNewsCardFields}
+    },
+    "perspectives": *[
+      _type == "perspective" &&
+      language in $locales &&
+      ($preview == true || translationStatus == "approved") &&
+      defined(slug.current) &&
+      defined(coverImage.asset)
+    ] | order(publishedAt desc, _updatedAt desc) {
+      ${industryEditorialCardFields}
+    },
+    "researchReports": *[
+      _type == "researchReport" &&
+      language in $locales &&
+      ($preview == true || translationStatus == "approved") &&
+      defined(slug.current) &&
+      defined(coverImage.asset)
+    ] | order(publishedAt desc, _updatedAt desc) {
+      ${industryEditorialCardFields}
+    },
+    "caseStudies": *[
+      _type == "caseStudy" &&
+      language in $locales &&
+      ($preview == true || translationStatus == "approved") &&
+      defined(slug.current) &&
+      defined(assets.coverImage.asset)
+    ] | order(lastUpdated desc, _updatedAt desc) {
+      ${industryCaseStudyCardFields}
     }
   }
 `);

@@ -1,6 +1,6 @@
 import type { SanityImageSource } from '@sanity/image-url';
 import type {AppLocale} from '@/i18n/config';
-import {localeTag} from './localized-content';
+import {localeTag, type LocalizedContentMeta} from './localized-content';
 import type { BlogPost } from './blog';
 import type { NewsArticle, ResearchReport } from './insights';
 import type { Perspective } from './perspectives';
@@ -23,6 +23,7 @@ import {
   allResearchReportsQuery,
   caseStudyBySlugQuery,
   clientEvidenceShowcaseQuery,
+  industryInsightCollectionsQuery,
   newsArticleBySlugQuery,
   perspectiveBySlugQuery,
   postBySlugQuery,
@@ -94,6 +95,81 @@ export type InsightCollections = {
   perspectives: Perspective[];
   researchReports: ResearchReport[];
   caseStudies: CaseStudy[];
+};
+
+type IndustryInsightBase = LocalizedContentMeta & {
+  slug: string;
+  title: string;
+  publishedAt: string;
+  coverImage: string;
+};
+
+export type IndustryPostInsight = IndustryInsightBase & {
+  category: string;
+  excerpt: string;
+};
+
+export type IndustryNewsInsight = IndustryInsightBase & {
+  category?: string;
+  tag: string;
+  summary: string;
+};
+
+export type IndustryEditorialInsight = IndustryInsightBase & {
+  tag: string;
+  summary: string;
+};
+
+export type IndustryCaseStudyInsight = Omit<
+  IndustryInsightBase,
+  'publishedAt' | 'coverImage'
+> & {
+  industry: string;
+  summary: string;
+  lastUpdated: string;
+  assets: {
+    coverImage: string;
+  };
+};
+
+export type IndustryInsightCollections = {
+  posts: IndustryPostInsight[];
+  newsArticles: IndustryNewsInsight[];
+  perspectives: IndustryEditorialInsight[];
+  researchReports: IndustryEditorialInsight[];
+  caseStudies: IndustryCaseStudyInsight[];
+};
+
+type SanityIndustryPostInsight = Omit<IndustryPostInsight, 'coverImage'> & {
+  coverImage?: SanityImageValue;
+};
+
+type SanityIndustryNewsInsight = Omit<IndustryNewsInsight, 'coverImage'> & {
+  coverImage?: SanityImageValue;
+};
+
+type SanityIndustryEditorialInsight = Omit<
+  IndustryEditorialInsight,
+  'coverImage'
+> & {
+  coverImage?: SanityImageValue;
+};
+
+type SanityIndustryCaseStudyInsight = Omit<
+  IndustryCaseStudyInsight,
+  'assets'
+> & {
+  assets?: {
+    coverImage?: SanityImageValue;
+  };
+};
+
+type SanityIndustryInsightCollections = {
+  posts?: SanityIndustryPostInsight[];
+  newsArticles?: SanityIndustryNewsInsight[];
+  perspectives?: SanityIndustryEditorialInsight[];
+  researchReports?: SanityIndustryEditorialInsight[];
+  caseStudies?: SanityIndustryCaseStudyInsight[];
 };
 
 function imageUrlFromSource(
@@ -440,6 +516,70 @@ export async function getSanityInsightCollections(
     caseStudies: (collections.caseStudies ?? []).map((study) =>
       normalizeCaseStudy(study, true),
     ),
+  };
+}
+
+export async function getSanityIndustryInsightCollections(
+  locales: AppLocale[],
+): Promise<IndustryInsightCollections> {
+  const collections = await sanityFetch<SanityIndustryInsightCollections>({
+    query: industryInsightCollectionsQuery,
+    params: {locales},
+    tags: [
+      INSIGHTS_TAG,
+      ...locales.flatMap((locale) => [
+        localeTag('posts', locale),
+        localeTag('newsArticles', locale),
+        localeTag('perspectives', locale),
+        localeTag('researchReports', locale),
+        localeTag('caseStudies', locale),
+      ]),
+    ],
+  });
+
+  return {
+    posts: (collections.posts ?? []).map((post) => ({
+      ...post,
+      coverImage: imageUrlFromSource(
+        post.coverImage,
+        CARD_COVER_WIDTH,
+        CARD_COVER_HEIGHT,
+      ),
+    })),
+    newsArticles: (collections.newsArticles ?? []).map((article) => ({
+      ...article,
+      coverImage: imageUrlFromSource(
+        article.coverImage,
+        CARD_COVER_WIDTH,
+        CARD_COVER_HEIGHT,
+      ),
+    })),
+    perspectives: (collections.perspectives ?? []).map((perspective) => ({
+      ...perspective,
+      coverImage: imageUrlFromSource(
+        perspective.coverImage,
+        CARD_COVER_WIDTH,
+        CARD_COVER_HEIGHT,
+      ),
+    })),
+    researchReports: (collections.researchReports ?? []).map((report) => ({
+      ...report,
+      coverImage: imageUrlFromSource(
+        report.coverImage,
+        CARD_COVER_WIDTH,
+        CARD_COVER_HEIGHT,
+      ),
+    })),
+    caseStudies: (collections.caseStudies ?? []).map((study) => ({
+      ...study,
+      assets: {
+        coverImage: imageUrlFromSource(
+          study.assets?.coverImage,
+          CARD_COVER_WIDTH,
+          CARD_COVER_HEIGHT,
+        ),
+      },
+    })),
   };
 }
 

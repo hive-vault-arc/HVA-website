@@ -442,9 +442,10 @@
     "clientRole": "Rôle du client",
     "phaseOutput": "Livrable de la phase",
     "viewPrograms": "Voir les programmes solutions",
-    "quote": "La transformation réussit lorsque stratégie, ingénierie et opérations avancent ensemble, de la première décision au dernier déploiement.",
-    "quoteAlt": "Expertise du framework Hive Vault Arc",
-    "quoteDisciplines": "Stratégie / Conseil / Ingénierie / Opérations",
+    "quote": "Le travail ne compte que lorsque la stratégie devient un système que les équipes peuvent exploiter, mesurer et améliorer chaque jour.",
+    "quoteAlt": "Ali Amrani, cofondateur et CEO de Hive Vault Arc",
+    "quoteAuthor": "Ali Amrani",
+    "quoteRole": "Cofondateur & CEO",
     "programsTitle": "Choisissez votre point de départ.",
     "programsDescription": "Trois programmes ciblés. Chacun est cadré, construit et opéré par une seule équipe responsable.",
     "caseStudy": "Étude de cas",
@@ -643,25 +644,24 @@
   },
   "SolutionPrograms": {
     "hero": {
-      "eyebrow": "Expertises / Programmes solutions",
-      "title": "Programmes solutions :",
-      "emphasis": "des systèmes guidés par le conseil",
-      "titleEnd": "dans toute leur profondeur.",
-      "description": "Des programmes ciblés réunissant stratégie, construction et opérations managées, livrés par une seule équipe dans une mission responsable de bout en bout.",
-      "primaryCta": "Démarrer un programme",
-      "secondaryCta": "Explorer en détail",
-      "indexTitle": "Index des programmes",
-      "indexFooter": "Tous les programmes → modèle de livraison ARC"
+      "eyebrow": "Programmes solutions",
+      "title": "Faites passer les opérations essentielles en production.",
+      "description": "Trois systèmes ciblés transforment une décision en travail qui peut fonctionner, évoluer et rester sous responsabilité.",
+      "primaryCta": "Explorer les programmes",
+      "secondaryCta": "Explorer les expertises",
+      "signal": "Trois points de départ",
+      "signalDetail": "Commencez par le problème opérationnel. La même équipe de livraison reste liée au travail après le lancement."
     },
-    "programLabel": "Programme {number}",
-    "labels": {
-      "coreModules": "Modules principaux",
-      "primaryStack": "Socle principal",
-      "delivery": "Livraison",
-      "deliveryModel": "Modèle de livraison",
-      "viewCaseStudy": "Voir les études de cas",
-      "live": "En production",
-      "exploreCapabilities": "Explorer les expertises"
+    "navigator": {
+      "eyebrow": "Choisissez le point de départ",
+      "title": "Commencez par le travail qui doit fonctionner.",
+      "description": "Sélectionnez un programme pour voir les éléments qui définissent réellement sa trajectoire de livraison.",
+      "ariaLabel": "Sélecteur de programmes solutions",
+      "modules": "Ce que le programme relie",
+      "integrations": "Fonctionne avec",
+      "delivery": "Comment il est livré",
+      "openProgram": "Explorer les preuves associées",
+      "imageAlt": "Programme de livraison : {title}"
     },
     "programs": [
       {
@@ -689,58 +689,19 @@
         "deliveryModel": "Audit de fiabilité, sprints de correction et collaboration SRE continue."
       }
     ],
-    "ai": {
-      "imageAlt": "Programme d’accueil IA et de gestion des prospects par Hive Vault Arc au Maroc",
-      "quote": "Il répond plus vite que notre équipe commerciale et met à jour le CRM automatiquement.",
-      "quoteAttribution": "— Nadia El Idrissi, responsable croissance"
-    },
-    "why": {
-      "eyebrow": "Pourquoi un programme",
-      "title": "Un programme,",
-      "emphasis": "pas un simple projet.",
-      "description": "Un projet se termine par un transfert. Un programme maintient la responsabilité. Chaque mission Hive Vault Arc va du diagnostic à la production avec une équipe et une boucle uniques.",
-      "rows": [
-        {"others": "Les prestataires livrent puis disparaissent.", "arc": "Hive Vault Arc reste pendant l’évolution : supervision, extension et amélioration."},
-        {"others": "La stratégie et l’ingénierie sont séparées.", "arc": "Une seule équipe porte la stratégie et la construction, sans rupture."},
-        {"others": "Le périmètre est défini en heures, pas en résultats.", "arc": "Chaque programme est cadré autour d’un impact opérationnel mesurable."},
-        {"others": "L’intégration arrive après coup.", "arc": "Architecture, choix du socle et intégrations sont conçus dès le départ."}
+    "ownership": {
+      "title": "Le programme est la couche de responsabilité.",
+      "description": "Il garde la décision, le système et son amélioration dans une même ligne de responsabilité.",
+      "steps": [
+        {"title": "Définir la direction opérationnelle", "detail": "Cadrer la contrainte réelle avant de s’engager dans une trajectoire de construction."},
+        {"title": "Relier le système de travail", "detail": "Construire le processus, les données et les intégrations autour du travail à accomplir."},
+        {"title": "Rester lié à l’exploitation", "detail": "Garder la responsabilité visible lorsque le système fonctionne et évolue."}
       ]
     },
-    "crm": {
-      "features": [
-        {"title": "Orchestration du pipeline", "description": "Des pipelines multiétapes avec processus par rôle et séquences de suivi automatisées.", "outcome": "RÉSULTAT : PROPRIÉTÉ UNIFIÉE DES DONNÉES"},
-        {"title": "Reporting prédictif", "description": "Des connecteurs BI et tableaux de bord de direction qui rendent l’intelligence opérationnelle accessible aux équipes.", "outcome": "RÉSULTAT : OPÉRATIONS DU PIPELINE AUTOMATISÉES"}
-      ],
-      "imageAlt": "Programme de modernisation CRM d’entreprise par Hive Vault Arc au Maroc",
-      "scopeLabel": "Périmètre de production",
-      "scope": "Opérations CRM par rôle et reporting du pipeline"
-    },
-    "cloud": {
-      "disciplines": [
-        {"label": "Architecture résiliente", "description": "Bascule multi-région avec plan de reprise et redondance active."},
-        {"label": "Déploiement contrôlé", "description": "Mises en production blue-green avec retour arrière automatisé et contrôles de santé."}
-      ],
-      "stackLabel": "SOCLE_FIABILITÉ",
-      "layers": [
-        {"id": "CI/CD", "name": "Renforcement du pipeline", "status": "ACTIF", "pulse": true},
-        {"id": "OBS", "name": "Couche d’observabilité", "status": "SURVEILLÉE", "pulse": false},
-        {"id": "SEC", "name": "Contrôles de sécurité", "status": "APPLIQUÉS", "pulse": false},
-        {"id": "DR", "name": "Reprise après sinistre", "status": "EN VEILLE", "pulse": true}
-      ],
-      "controlsActive": "CONTRÔLES DE RÉSILIENCE ACTIFS",
-      "imageAlt": "Infrastructure de fiabilité des livraisons cloud par Hive Vault Arc au Maroc"
-    },
-    "finalCta": {
-      "title": "Prêt à concevoir votre avenir numérique ?",
-      "description": "Nous cadrons le programme adapté à vos opérations en commençant par les contraintes, les intégrations et le calendrier.",
-      "primary": "Démarrer un programme",
-      "secondary": "Voir toutes les expertises"
-    },
     "bottomCta": {
-      "title": "Besoin de la cartographie complète et de la profondeur de livraison ?",
-      "description": "La page En détail présente le contexte stratégique, le modèle d’exécution et toute la couverture de nos expertises connectées.",
-      "primary": "Explorer en détail",
-      "secondary": "Planifier un échange"
+      "title": "Besoin d’un programme conçu pour vos opérations ?",
+      "description": "Nous commençons par la contrainte, les systèmes déjà en place et le travail qui doit continuer à fonctionner.",
+      "primary": "Démarrer un programme"
     }
   },
   "CapabilitiesDetail": {
@@ -767,6 +728,7 @@
       "coreAreas": "Domaines clés de l’expertise {title}",
       "primaryOutcome": "Résultat principal",
       "fullCoverage": "Couverture complète",
+      "closeCoverage": "Fermer la couverture complète",
       "openCapability": "Ouvrir l’expertise",
       "items": [
         {
@@ -831,15 +793,21 @@
         }
       ]
     },
-    "arc": {
-      "eyebrow": "Livraison ARC",
-      "title": "Une expertise n’a de valeur que lorsqu’elle atteint la production",
-      "description": "HVA relie diagnostic, ingénierie et opérations managées dans une seule boucle de responsabilité.",
-      "signals": ["Diagnostic clair", "Construction en production", "Responsabilité continue"]
+    "delivery": {
+      "eyebrow": "Ce que la livraison laisse en place",
+      "title": "Un travail utile doit tenir après le transfert.",
+      "description": "Chaque mission doit laisser à votre équipe des décisions plus claires, un système qui fonctionne en pratique et une responsabilité qui ne disparaît pas après le lancement.",
+      "proofLink": "Voir les preuves de livraison",
+      "stages": [
+        {"title": "Une direction partagée", "detail": "Un périmètre exploitable, ancré dans les contraintes auxquelles votre équipe fait réellement face."},
+        {"title": "Un système opérationnel", "detail": "Des processus, des données et des technologies reliés autour du travail à accomplir."},
+        {"title": "Une responsabilité continue", "detail": "Une responsabilité claire sur l’exploitation, son amélioration et les prochaines évolutions."}
+      ]
     },
     "programs": {
       "eyebrow": "De l’expertise au programme",
       "title": "Lorsque le périmètre est clair, empruntez une trajectoire de livraison prête.",
+      "imageAlt": "Programme de livraison : {title}",
       "view": "Voir le programme"
     },
     "bottomCta": {
@@ -1494,6 +1462,19 @@
       ],
       "primaryCta": "Découvrir ARC",
       "secondaryCta": "Explorer les expertises"
+    },
+    "insights": {
+      "eyebrow": "Notes de terrain",
+      "title": "Des idées confrontées à la réalité opérationnelle.",
+      "description": "Recherches, perspectives et preuves de livraison issues de l’ensemble de nos publications.",
+      "railLabel": "Parcourir toutes les publications",
+      "railAriaLabel": "Publications liées aux secteurs",
+      "previous": "Afficher la publication précédente",
+      "next": "Afficher la publication suivante",
+      "counter": "{current} sur {total}",
+      "slidePosition": "Publication {current} sur {total}",
+      "read": "Lire la publication",
+      "readInsight": "Lire la publication : {title}"
     },
     "mandate": {
       "eyebrow": "Notre mandat",

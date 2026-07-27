@@ -2,19 +2,14 @@
 
 import Image from 'next/image';
 import {Link} from '@/i18n/navigation';
-import { useRef, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import {useEffect, useState} from 'react';
+import {AnimatePresence, MotionConfig, motion, useScroll, useTransform} from 'framer-motion';
 import {useLocale, useTranslations} from 'next-intl';
-import { ArrowUpRight, ArrowRight, Bot, Database, Cloud, Zap } from '@/components/icons';
+import {ArrowRight, ArrowUpRight, Bot, Cloud, Database, Layers3} from '@/components/icons';
 import BottomCTA from '../components/BottomCTA';
-import PageAmbientBackground from '../components/PageAmbientBackground';
 import SectionBrandMark from '../components/SectionBrandMark';
-import { CAPABILITY_SOLUTION_PROGRAM_DETAILS } from '../lib/capabilities-content';
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0 },
-};
+import {CAPABILITY_SOLUTION_PROGRAM_DETAILS} from '../lib/capabilities-content';
+import {useAnimationQuality} from '../lib/animationQuality';
 
 type ProgramCopy = {
   name: string;
@@ -25,656 +20,296 @@ type ProgramCopy = {
   deliveryModel: string;
 };
 
-type ComparisonRow = {others: string; arc: string};
-type FeatureCard = {title: string; description: string; outcome: string};
-type Discipline = {label: string; description: string};
-type ReliabilityLayer = {id: string; name: string; status: string; pulse: boolean};
-
-const blueprintGrid = {
-  backgroundImage:
-    'linear-gradient(to right,#E8A838 1px,transparent 1px),linear-gradient(to bottom,#E8A838 1px,transparent 1px)',
-  backgroundSize: '28px 28px',
+type OwnershipStep = {
+  title: string;
+  detail: string;
 };
+
+const PROGRAM_IMAGES: Record<string, string> = {
+  'ai-reception-and-lead-operations-program':
+    '/Images/solution-programs/hva-ai-reception-lead-operations.webp',
+  'enterprise-crm-modernization-program':
+    '/Images/solution-programs/hva-enterprise-crm-modernization.webp',
+  'cloud-delivery-reliability-stack':
+    '/Images/solution-programs/hva-cloud-delivery-reliability-stack.webp',
+};
+
+const PROGRAM_HASHES = ['program-01', 'program-02', 'program-03'] as const;
+
+function ProgramIcon({index}: {index: number}) {
+  const props = {className: 'h-5 w-5', strokeWidth: 1.5};
+
+  if (index === 0) return <Bot {...props} />;
+  if (index === 1) return <Database {...props} />;
+  return <Cloud {...props} />;
+}
 
 export default function CapabilitiesSolutionPrograms() {
   const t = useTranslations('SolutionPrograms');
   const locale = useLocale();
-  const { scrollYProgress } = useScroll();
+  const {motionReduced} = useAnimationQuality();
+  const {scrollYProgress} = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const [activeIndex, setActiveIndex] = useState(0);
+
   const programCopy = t.raw('programs') as ProgramCopy[];
+  const ownershipSteps = t.raw('ownership.steps') as OwnershipStep[];
   const programs = CAPABILITY_SOLUTION_PROGRAM_DETAILS.map((program, index) => ({
     ...program,
     ...programCopy[index],
   }));
-  const [p1, p2, p3] = programs;
-  const comparisonRows = t.raw('why.rows') as ComparisonRow[];
-  const crmFeatures = t.raw('crm.features') as FeatureCard[];
-  const cloudDisciplines = t.raw('cloud.disciplines') as Discipline[];
-  const reliabilityLayers = t.raw('cloud.layers') as ReliabilityLayer[];
-  const caseStudyHref = (href: string | undefined) =>
+  const activeProgram = programs[activeIndex]!;
+
+  const programHref = (href: string | undefined) =>
     locale === 'fr' && href?.startsWith('/case-studies/') ? '/case-studies' : href;
 
-  const heroRef = useRef<HTMLDivElement>(null);
-  const [heroSpot, setHeroSpot] = useState<{ x: number; y: number } | null>(null);
-  const onHeroMove = (e: React.MouseEvent<HTMLElement>) => {
-    const r = heroRef.current?.getBoundingClientRect();
-    if (!r) return;
-    setHeroSpot({ x: e.clientX - r.left, y: e.clientY - r.top });
+  useEffect(() => {
+    const selectProgramFromHash = () => {
+      const matchingIndex = PROGRAM_HASHES.indexOf(
+        window.location.hash.slice(1) as (typeof PROGRAM_HASHES)[number],
+      );
+
+      if (matchingIndex >= 0) setActiveIndex(matchingIndex);
+    };
+
+    selectProgramFromHash();
+    window.addEventListener('hashchange', selectProgramFromHash);
+
+    return () => window.removeEventListener('hashchange', selectProgramFromHash);
+  }, []);
+
+  const selectProgram = (index: number) => {
+    setActiveIndex(index);
+    window.history.replaceState(null, '', `#${PROGRAM_HASHES[index]}`);
   };
 
   return (
-    <div className="relative isolate overflow-x-hidden bg-[#FFFFFF] text-[#1A2535]">
-
-      {/* Scroll progress */}
-      <motion.div
-        aria-hidden="true"
-        className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-gradient-to-r from-[#E8A838] via-[#F0C15A] to-[#E8A838]"
-        style={{ scaleX: progressScale }}
-      />
-
-      {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="relative flex min-h-[calc(100dvh-4rem)] items-center overflow-hidden px-6 pt-28 pb-20 md:px-12 lg:min-h-[78vh]">
-        {/* Mouse-tracking overlay — decorative spotlight only */}
-        <div
-          ref={heroRef}
-          className="absolute inset-0 z-[1]"
-          onMouseMove={onHeroMove}
-          onMouseLeave={() => setHeroSpot(null)}
+    <MotionConfig reducedMotion={motionReduced ? 'always' : 'never'}>
+      <div className="solution-programs-page">
+        <motion.div
           aria-hidden="true"
-        />
-        {/* Plasma */}
-        <PageAmbientBackground className="-z-10" />
-
-        {/* Background image */}
-        <div className="absolute inset-0 z-0" aria-hidden="true">
-          <Image
-            src="/Images/hero/strategic-technology-consulting-tangier-morocco.webp"
-            alt=""
-            fill
-            className="object-cover grayscale opacity-[0.10]"
-            sizes="100vw"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#FFFFFF] via-[#FFFFFF]/92 to-[#FFFFFF]/40" />
-        </div>
-
-        {/* Cursor spotlight */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-[1] transition-opacity duration-300"
-          style={
-            heroSpot
-              ? { background: `radial-gradient(circle 260px at ${heroSpot.x}px ${heroSpot.y}px, rgba(232,168,56,0.12) 0%, transparent 100%)`, opacity: 1 }
-              : { opacity: 0 }
-          }
+          className="solution-programs-progress"
+          style={{scaleX: progressScale}}
         />
 
-        {/* Scanline */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-[1] opacity-[0.018]"
-          style={{ background: 'repeating-linear-gradient(to bottom, transparent 0px, transparent 3px, #E8A838 3px, #E8A838 4px)' }}
-        />
-
-        <div className="relative z-10 max-w-screen-2xl mx-auto w-full">
-          <motion.div
-            className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end"
-            initial="hidden"
-            animate="show"
-            variants={{ show: { transition: { staggerChildren: 0.09 } } }}
-          >
-            <motion.div variants={fadeUp} transition={{ duration: 0.6 }} className="lg:col-span-8">
-              <div className="mb-8 flex items-center gap-3">
-                <SectionBrandMark size="sm" />
-                <span className="inline-block bg-[#FFF4D8] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)]">
-                  {t('hero.eyebrow')}
-                </span>
-              </div>
-              <h1 className="font-headline font-light text-[clamp(3rem,7vw,6.5rem)] leading-[1.03] tracking-tight text-[#1A2535]">
-                {t('hero.title')}
-                <br />{' '}
-                <em className="italic text-[#536070] font-light">{t('hero.emphasis')}</em>
-                <br />{' '}
-                {t('hero.titleEnd')}
-              </h1>
-              <p className="mt-7 text-[1.1rem] text-[#536070] leading-relaxed max-w-xl">
-                {t('hero.description')}
-              </p>
-              <div className="flex flex-wrap items-center gap-5 mt-9">
-                <Link href="/contact" className="sharp-edge btn-primary">
-                  {t('hero.primaryCta')}
-                </Link>
-                <Link
-                  href="/capabilities/in-detail"
-                  className="inline-flex min-h-11 items-center border-b-2 border-[#E8A838]/40 pb-0.5 text-sm font-bold uppercase tracking-widest text-[var(--section-label-color)] transition-colors hover:border-[#1A2535] hover:text-[#1A2535]"
-                >
-                  {t('hero.secondaryCta')} <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </Link>
-              </div>
-            </motion.div>
-
-            {/* Right — 3-program index card */}
-            <motion.aside
-              variants={fadeUp}
-              transition={{ duration: 0.6, delay: 0.08 }}
-              className="lg:col-span-4 lg:self-end"
-            >
-              <div className="relative overflow-hidden bg-[#1A2535] p-6">
-                <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.05]" style={blueprintGrid} />
-                <p className="relative text-[9px] font-mono uppercase tracking-[0.3em] text-[var(--section-label-color-dark)] mb-4">
-                  {t('hero.indexTitle')}
-                </p>
-                <nav className="relative">
-                  {programs.map((program, index) => {
-                    const item = {
-                      num: String(index + 1).padStart(2, '0'),
-                      label: program.name,
-                      anchor: `#program-${String(index + 1).padStart(2, '0')}`,
-                    };
-                    return (
-                    <a
-                      key={item.anchor}
-                      href={item.anchor}
-                      className="flex items-center justify-between border-b border-white/[0.08] py-3 last:border-0 group"
-                    >
-                      <div className="flex items-center gap-3">
-                        <span className="font-mono text-[10px] text-[#E8A838]/60 group-hover:text-[#E8A838] transition-colors">{item.num}</span>
-                        <span className="text-sm font-medium text-white/[0.65] group-hover:text-white transition-colors duration-200">{item.label}</span>
-                      </div>
-                      <ArrowRight className="w-3 h-3 text-[#F0C15A]/40 group-hover:text-[#F0C15A] group-hover:translate-x-0.5 transition-all" />
-                    </a>
-                    );
-                  })}
-                </nav>
-                <div className="relative mt-4 border-t border-white/10 pt-4">
-                  <p className="text-[9px] font-mono uppercase tracking-[0.18em] text-white/25">
-                    {t('hero.indexFooter')}
-                  </p>
-                </div>
-              </div>
-            </motion.aside>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── PROGRAM OVERVIEW STRIP ───────────────────────────────────────── */}
-      <div className="border-y border-[#DDE3EA] bg-white">
-        <div className="max-w-screen-2xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#DDE3EA]">
-            {[
-              { icon: <Bot className="w-5 h-5" strokeWidth={1.3} />, num: '01', label: p1?.name, tag: p1?.category, anchor: '#program-01' },
-              { icon: <Database className="w-5 h-5" strokeWidth={1.3} />, num: '02', label: p2?.name, tag: p2?.category, anchor: '#program-02' },
-              { icon: <Cloud className="w-5 h-5" strokeWidth={1.3} />, num: '03', label: p3?.name, tag: p3?.category, anchor: '#program-03' },
-            ].map((item) => (
-              <a
-                key={item.num}
-                href={item.anchor}
-                className="group flex min-h-11 items-start gap-4 px-6 py-6 transition-colors duration-300 hover:bg-[#FFFFFF] sm:px-8"
-              >
-                <span className="mt-0.5 shrink-0 text-[var(--section-label-color)]">{item.icon}</span>
-                <div className="min-w-0">
-                  <p className="mb-1 text-[9px] font-bold uppercase tracking-[0.18em] text-[#566274]">{item.tag}</p>
-                  <p className="font-headline text-base leading-snug text-[#1A2535] transition-colors duration-300 group-hover:text-[var(--section-label-color)]">
-                    {item.label}
-                  </p>
-                </div>
-                <ArrowUpRight className="ml-auto mt-1 h-3.5 w-3.5 shrink-0 text-[#566274] transition-colors group-hover:text-[var(--section-label-color)]" />
-              </a>
+        <section className="solution-programs-hero">
+          <div className="solution-programs-hero__routes" aria-hidden="true">
+            {programs.map((program) => (
+              <span key={program.slug} className="solution-programs-hero__route">
+                <span />
+              </span>
             ))}
+            <span className="solution-programs-hero__axis" />
           </div>
-        </div>
-      </div>
 
-      {/* ── PROGRAM 01 — AI Reception & Lead Operations ───────────────────── */}
-      <section id="program-01" className="scroll-mt-28 bg-[#F7F8FA] py-24 md:py-32 px-6 md:px-12">
-        <div className="max-w-screen-2xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-
-            {/* Left — content */}
+          <div className="site-frame-wide solution-programs-hero__grid">
             <motion.div
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.15 }}
-              variants={{ show: { transition: { staggerChildren: 0.08 } } }}
+              initial={motionReduced ? false : {opacity: 0, y: 18}}
+              animate={{opacity: 1, y: 0}}
+              transition={{duration: 0.48}}
+              className="solution-programs-hero__copy"
             >
-              <motion.div variants={fadeUp} transition={{ duration: 0.5 }} className="mb-8 flex items-center gap-4">
+              <div className="solution-programs-kicker">
                 <SectionBrandMark size="sm" />
-                <span className="h-px w-10 bg-[#1A2535]" />
-                <span className="text-[10px] font-bold tracking-[0.28em] uppercase text-[var(--section-label-color)]">{t('programLabel', {number: '01'})}</span>
-              </motion.div>
-              <motion.h2 variants={fadeUp} transition={{ duration: 0.5 }} className="font-headline text-4xl md:text-5xl text-[#1A2535] mb-6 leading-tight">
-                {p1?.name}
-              </motion.h2>
-              <motion.p variants={fadeUp} transition={{ duration: 0.5 }} className="text-[#536070] text-base leading-relaxed mb-10 max-w-lg">
-                {p1?.summary}
-              </motion.p>
-
-              <motion.div variants={fadeUp} transition={{ duration: 0.5 }} className="mb-10 grid grid-cols-1 gap-8 sm:grid-cols-2">
-                <div>
-                  <p className="text-[9px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)] mb-4">{t('labels.coreModules')}</p>
-                  <ul className="space-y-2">
-                    {p1?.modules.map((mod) => (
-                      <li key={mod} className="flex items-start gap-2 text-sm text-[#1A2535] font-medium">
-                        <span className="mt-[6px] h-1 w-1 shrink-0 bg-[#E8A838] rounded-full" />
-                        {mod}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <p className="text-[9px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)] mb-4">{t('labels.primaryStack')}</p>
-                  <p className="text-sm text-[#1A2535] font-medium leading-relaxed">{p1?.integrations.join(', ')}</p>
-                  <div className="mt-5 pt-5 border-t border-[#CDD2DA]/40">
-                    <p className="text-[9px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)] mb-2">{t('labels.delivery')}</p>
-                    <p className="text-xs text-[#536070] leading-relaxed">{p1?.deliveryModel}</p>
-                  </div>
-                </div>
-              </motion.div>
-
-              <motion.div variants={fadeUp} transition={{ duration: 0.5 }}>
-                {p1?.proofLinks[0] && (
-                  <Link href={caseStudyHref(p1.proofLinks[0])!} className="group inline-flex items-center gap-3 text-sm font-bold uppercase tracking-[0.12em] text-[#1A2535] transition-colors hover:text-[var(--section-label-color)]">
-                    {t('labels.viewCaseStudy')}
-                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </Link>
-                )}
-              </motion.div>
+                <span>{t('hero.eyebrow')}</span>
+              </div>
+              <h1>{t('hero.title')}</h1>
+              <p>{t('hero.description')}</p>
+              <div className="solution-programs-hero__actions">
+                <Link href="#program-explorer" className="sharp-edge btn-primary">
+                  {t('hero.primaryCta')}
+                  <ArrowRight className="h-4 w-4" strokeWidth={1.7} aria-hidden="true" />
+                </Link>
+                <Link href="/capabilities/in-detail" className="solution-programs-text-link">
+                  {t('hero.secondaryCta')}
+                  <ArrowUpRight className="h-4 w-4" strokeWidth={1.7} aria-hidden="true" />
+                </Link>
+              </div>
             </motion.div>
 
-            {/* Right — image + blueprint data overlay */}
             <motion.div
-              className="relative"
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.7 }}
+              initial={motionReduced ? false : {opacity: 0, x: 22}}
+              animate={{opacity: 1, x: 0}}
+              transition={{duration: 0.52, delay: motionReduced ? 0 : 0.1}}
+              className="solution-programs-hero__signal"
+              aria-hidden="true"
             >
-              <div className="relative aspect-[4/5] overflow-hidden group bg-[#E8EBF0]">
-                <Image
-                  src="/Images/solution-programs/hva-ai-reception-lead-operations.webp"
-                  alt={t('ai.imageAlt')}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover grayscale blur-[2px] group-hover:grayscale-0 group-hover:blur-0 transition-all duration-700"
-                />
-                {/* Scanline overlay on image */}
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0 pointer-events-none opacity-[0.03]"
-                  style={{ background: 'repeating-linear-gradient(to bottom, transparent 0px, transparent 2px, #1A2535 2px, #1A2535 3px)' }}
-                />
+              <span>{t('hero.signal')}</span>
+              <div className="solution-programs-hero__signal-grid">
+                {programs.map((program, index) => (
+                  <motion.div
+                    key={program.slug}
+                    animate={
+                      motionReduced
+                        ? {opacity: index === activeIndex ? 1 : 0.42}
+                        : {
+                            opacity: index === activeIndex ? 1 : 0.42,
+                            y: index === activeIndex ? -5 : 0,
+                          }
+                    }
+                    transition={{duration: 0.36, ease: [0.16, 1, 0.3, 1]}}
+                  >
+                    <ProgramIcon index={index} />
+                    <strong>{String(index + 1).padStart(2, '0')}</strong>
+                  </motion.div>
+                ))}
               </div>
-
-              {/* Expert quote card */}
-              <div className="absolute -bottom-8 -left-8 bg-white p-9 shadow-[0_10px_40px_rgba(25,28,30,0.12)] max-w-[320px] hidden xl:block">
-                <p className="font-headline text-xl italic text-[#1A2535] leading-snug mb-5">
-                  &ldquo;{t('ai.quote')}&rdquo;
-                </p>
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#536070]">
-                  {t('ai.quoteAttribution')}
-                </p>
-              </div>
-
-              {/* Live status badge */}
-              <div className="absolute top-5 right-5 bg-[#1A2535]/80 backdrop-blur-sm px-4 py-2.5 flex items-center gap-2.5">
-                <span className="h-2 w-2 rounded-full bg-[#E8A838] animate-pulse" />
-                <span className="text-[10px] font-mono text-[#F0C15A] uppercase tracking-widest">{t('labels.live')}</span>
-              </div>
+              <p>{t('hero.signalDetail')}</p>
             </motion.div>
           </div>
-        </div>
+        </section>
 
-      </section>
-
-      {/* ── WHY A PROGRAM — dark contrast section (like ARC difference) ──── */}
-      <section className="bg-[#1A2535] py-24 relative overflow-hidden">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage: 'repeating-linear-gradient(0deg,#F0C15A 0,#F0C15A 1px,transparent 0,transparent 50%),repeating-linear-gradient(90deg,#F0C15A 0,#F0C15A 1px,transparent 0,transparent 50%)',
-            backgroundSize: '48px 48px',
-          }}
-        />
-        <div className="pointer-events-none absolute -top-32 left-1/3 h-96 w-96 rounded-full bg-[#E8A838]/20 blur-3xl" aria-hidden="true" />
-
-        <div className="relative z-10 max-w-screen-2xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-
-          <motion.div
-            className="lg:col-span-5"
-            initial={{ opacity: 0, x: -24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="mb-4 flex items-center gap-3">
-              <SectionBrandMark surface="dark" size="sm" />
-              <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[var(--section-label-color-dark)]">{t('why.eyebrow')}</p>
-            </div>
-            <h2 className="font-headline text-5xl md:text-6xl text-white leading-tight mb-6">
-              {t('why.title')}<br />{' '}
-              <em className="italic font-light text-white/60">{t('why.emphasis')}</em>
-            </h2>
-            <div className="w-16 h-[2px] bg-[#E8A838] mb-8" />
-            <p className="text-[#778192] text-base leading-relaxed">
-              {t('why.description')}
-            </p>
-          </motion.div>
-
-          <motion.div
-            className="lg:col-span-7"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.12 }}
-          >
-            <div className="space-y-px">
-              {comparisonRows.map((row, idx) => (
-                <motion.div
-                  key={row.others}
-                  initial={{ opacity: 0, x: 12 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: 0.05 * idx }}
-                  className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/[0.06]"
-                >
-                  <div className="bg-[#1A2535] px-5 py-4 flex items-start gap-3">
-                    <span className="mt-1 h-1.5 w-1.5 shrink-0 bg-[#9AA4B2]/40 rounded-full" />
-                    <p className="text-sm text-[#566274] line-through">{row.others}</p>
-                  </div>
-                  <div className="bg-[#1A2535] px-5 py-4 flex items-start gap-3 border-l border-[#E8A838]/20">
-                    <span className="mt-1 h-1.5 w-1.5 shrink-0 bg-[#E8A838] rounded-full" />
-                    <p className="text-sm text-white">{row.arc}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── PROGRAM 02 — Enterprise CRM Modernization ────────────────────── */}
-      <section id="program-02" className="scroll-mt-28 bg-white py-24 md:py-32 px-6 md:px-12">
-        <div className="max-w-screen-2xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-
-            {/* Sticky sidebar */}
-            <motion.div
-              className="lg:col-span-4"
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={{ show: { transition: { staggerChildren: 0.08 } } }}
-            >
-              <div className="lg:sticky lg:top-40">
-                <motion.div variants={fadeUp} transition={{ duration: 0.5 }} className="mb-8 flex items-center gap-4">
-                  <SectionBrandMark size="sm" />
-                  <span className="h-px w-10 bg-[#1A2535]" />
-                  <span className="text-[10px] font-bold tracking-[0.28em] uppercase text-[var(--section-label-color)]">{t('programLabel', {number: '02'})}</span>
-                </motion.div>
-                <motion.h2 variants={fadeUp} transition={{ duration: 0.5 }} className="font-headline text-4xl md:text-5xl text-[#1A2535] mb-6 leading-tight">
-                  {p2?.name}
-                </motion.h2>
-                <motion.p variants={fadeUp} transition={{ duration: 0.5 }} className="text-[#536070] text-base leading-relaxed mb-8">
-                  {p2?.summary}
-                </motion.p>
-                <motion.div variants={fadeUp} transition={{ duration: 0.5 }}>
-                  <p className="text-[9px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)] mb-2">{t('labels.deliveryModel')}</p>
-                  <p className="text-sm text-[#536070] leading-relaxed mb-3">{p2?.deliveryModel}</p>
-                  {/* Stack tags */}
-                  <div className="flex flex-wrap gap-1.5 mb-8">
-                    {p2?.integrations.map((tag) => (
-                      <span key={tag} className="text-[9px] font-medium bg-[#F7F8FA] text-[#536070] border border-[#DDE3EA] px-2.5 py-1 uppercase tracking-[0.1em]">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  {p2?.proofLinks[0] && (
-                    <Link href={caseStudyHref(p2.proofLinks[0])!} className="group inline-flex items-center gap-3 text-sm font-bold uppercase tracking-[0.12em] text-[#1A2535] transition-colors hover:text-[var(--section-label-color)]">
-                      {t('labels.viewCaseStudy')}
-                      <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                    </Link>
-                  )}
-                </motion.div>
-
+        <section id="program-explorer" className="solution-programs-explorer">
+          <div className="site-frame-wide">
+            <div className="solution-programs-explorer__heading">
+              <div className="solution-programs-kicker">
+                <SectionBrandMark size="sm" />
+                <span>{t('navigator.eyebrow')}</span>
               </div>
-            </motion.div>
+              <h2>{t('navigator.title')}</h2>
+              <p>{t('navigator.description')}</p>
+            </div>
 
-            {/* Bento right column */}
-            <motion.div
-              className="lg:col-span-8"
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.1 }}
-              variants={{ show: { transition: { staggerChildren: 0.08 } } }}
-            >
-              {/* ARC-style module cards (2×2) */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#DDE3EA]">
-                {crmFeatures.map((copy, index) => {
-                  const Icon = index === 0 ? Database : Zap;
-                  const card = {...copy, desc: copy.description, icon: <Icon className="w-5 h-5" strokeWidth={1.25} />};
+            <div className="solution-programs-explorer__layout">
+              <nav className="solution-programs-switchboard" aria-label={t('navigator.ariaLabel')}>
+                {programs.map((program, index) => {
+                  const isActive = index === activeIndex;
+
                   return (
-                  <motion.div
-                    key={card.title}
-                    variants={fadeUp}
-                    transition={{ duration: 0.5 }}
-                    className="group flex min-h-[280px] flex-col justify-between bg-white p-6 sm:p-8 md:aspect-square lg:p-10"
-                  >
-                    <div>
-                      <div className="w-12 h-12 bg-[#F7F8FA] flex items-center justify-center mb-8 group-hover:bg-[#1A2535] transition-colors duration-300">
-                        <span className="text-[var(--section-label-color)] transition-colors duration-300 group-hover:text-white">{card.icon}</span>
-                      </div>
-                      <h3 className="font-headline text-2xl text-[#1A2535] mb-3">{card.title}</h3>
-                      <p className="text-[#536070] text-sm leading-relaxed">{card.desc}</p>
-                    </div>
-                    <div className="pt-6 border-t border-[#DDE3EA] flex justify-between items-center">
-                      <span className="text-[9px] font-bold text-[var(--section-label-color)] uppercase tracking-[0.18em]">{card.outcome}</span>
-                      <ArrowUpRight className="h-3.5 w-3.5 text-[#566274]" />
-                    </div>
-                  </motion.div>
+                    <button
+                      key={program.slug}
+                      id={PROGRAM_HASHES[index]}
+                      type="button"
+                      className="solution-programs-switchboard__choice"
+                      aria-pressed={isActive}
+                      data-active={isActive || undefined}
+                      onClick={() => selectProgram(index)}
+                    >
+                      {isActive && (
+                        <motion.span
+                          layoutId="solution-program-active-choice"
+                          className="solution-programs-switchboard__active"
+                          transition={{type: 'spring', stiffness: 420, damping: 34}}
+                        />
+                      )}
+                      <span className="solution-programs-switchboard__content">
+                        <span className="solution-programs-switchboard__number">
+                          {String(index + 1).padStart(2, '0')}
+                        </span>
+                        <span className="solution-programs-switchboard__title">
+                          <ProgramIcon index={index} />
+                          <strong>{program.name}</strong>
+                        </span>
+                        <ArrowRight className="h-4 w-4" strokeWidth={1.7} aria-hidden="true" />
+                      </span>
+                    </button>
                   );
                 })}
+              </nav>
 
-                {/* Spanning image */}
-                <motion.div variants={fadeUp} transition={{ duration: 0.5 }} className="relative h-[340px] overflow-hidden group sm:h-[420px] md:col-span-2 md:h-[520px]">
-                  <Image
-                    src="/Images/solution-programs/hva-enterprise-crm-modernization.webp"
-                    alt={t('crm.imageAlt')}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 66vw"
-                    className="object-cover grayscale blur-[2px] group-hover:grayscale-0 group-hover:blur-0 transition-all duration-700"
-                  />
-                  <div className="absolute inset-0 bg-[#1A2535]/25" />
-                  <div
-                    aria-hidden="true"
-                    className="absolute inset-0 pointer-events-none opacity-[0.025]"
-                    style={{ background: 'repeating-linear-gradient(to bottom, transparent 0px, transparent 2px, #fff 2px, #fff 3px)' }}
-                  />
-                  {/* Live badge */}
-                  <div className="absolute top-5 right-5 bg-[#1A2535]/80 backdrop-blur-sm px-4 py-2.5 flex items-center gap-2.5">
-                    <span className="h-2 w-2 rounded-full bg-[#E8A838] animate-pulse" />
-                    <span className="text-[10px] font-mono text-[#F0C15A] uppercase tracking-widest">{t('labels.live')}</span>
-                  </div>
-                  <div className="absolute inset-x-4 bottom-4 bg-white/90 p-4 backdrop-blur-sm sm:inset-x-auto sm:left-6 sm:bottom-6 sm:p-5">
-                    <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#1A2535] mb-1">{t('crm.scopeLabel')}</p>
-                    <p className="font-headline text-lg text-[#1A2535]">{t('crm.scope')}</p>
-                  </div>
-                </motion.div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+              <div className="solution-programs-stage" aria-live="polite">
+                <AnimatePresence mode="wait" initial={!motionReduced}>
+                  <motion.article
+                    key={activeProgram.slug}
+                    initial={motionReduced ? false : {opacity: 0, y: 16}}
+                    animate={{opacity: 1, y: 0}}
+                    exit={motionReduced ? undefined : {opacity: 0, y: -12}}
+                    transition={{duration: 0.34, ease: [0.16, 1, 0.3, 1]}}
+                    className="solution-programs-stage__content"
+                  >
+                    <div className="solution-programs-stage__summary">
+                      <span>{activeProgram.category}</span>
+                      <h3>{activeProgram.name}</h3>
+                      <p>{activeProgram.summary}</p>
 
-      {/* ── PROGRAM 03 — Cloud Delivery Reliability Stack ────────────────── */}
-      <section id="program-03" className="scroll-mt-28 bg-[#1A2535] py-24 md:py-32 px-6 md:px-12 relative overflow-hidden">
-        {/* Blueprint grid */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage: 'linear-gradient(to right,#F0C15A 1px,transparent 1px),linear-gradient(to bottom,#F0C15A 1px,transparent 1px)',
-            backgroundSize: '44px 44px',
-          }}
-        />
-        <div className="pointer-events-none absolute -bottom-20 right-1/4 h-80 w-80 rounded-full bg-[#E8A838]/[0.15] blur-3xl" aria-hidden="true" />
-
-        <div className="relative z-10 max-w-screen-2xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-
-            {/* Left — text + metrics */}
-            <motion.div
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.15 }}
-              variants={{ show: { transition: { staggerChildren: 0.09 } } }}
-            >
-              <motion.div variants={fadeUp} transition={{ duration: 0.5 }} className="mb-8 flex items-center gap-4">
-                <SectionBrandMark surface="dark" size="sm" />
-                <span className="h-px w-10 bg-[#F0C15A]/40" />
-                <span className="text-[10px] font-bold tracking-[0.28em] uppercase text-[var(--section-label-color-dark)]">{t('programLabel', {number: '03'})}</span>
-              </motion.div>
-              <motion.h2 variants={fadeUp} transition={{ duration: 0.5 }} className="font-headline text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight">
-                {p3?.name}
-              </motion.h2>
-              <motion.p variants={fadeUp} transition={{ duration: 0.5 }} className="text-[#778192] text-base leading-relaxed mb-10 max-w-lg">
-                {p3?.summary}
-              </motion.p>
-
-              {/* Reliability disciplines */}
-              <motion.div variants={fadeUp} transition={{ duration: 0.5 }} className="space-y-5 mb-10">
-                {cloudDisciplines.map((discipline) => (
-                  <div key={discipline.label} className="pb-5 border-b border-white/10">
-                    <div>
-                      <p className="font-bold text-white text-sm mb-1">{discipline.label}</p>
-                      <p className="text-[#778192] text-sm leading-relaxed">{discipline.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </motion.div>
-
-              {/* Modules */}
-              <motion.div variants={fadeUp} transition={{ duration: 0.5 }}>
-                <p className="text-[9px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color-dark)] mb-4">{t('labels.coreModules')}</p>
-                <ul className="mb-8 grid grid-cols-1 gap-2 sm:grid-cols-2">
-                  {p3?.modules.map((mod) => (
-                    <li key={mod} className="flex items-start gap-2 text-sm text-[#9AA4B2]">
-                      <span className="mt-[6px] h-1 w-1 shrink-0 bg-[#F0C15A] rounded-full" />
-                      {mod}
-                    </li>
-                  ))}
-                </ul>
-                <div className="flex flex-wrap gap-1.5 mb-8">
-                  {p3?.integrations.map((tag) => (
-                    <span key={tag} className="text-[9px] font-medium bg-white/5 text-[#9AA4B2] border border-white/10 px-2.5 py-1 uppercase tracking-[0.1em]">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                {p3?.proofLinks[0] && (
-                  <Link href={p3.proofLinks[0]} className="group inline-flex min-h-11 items-center gap-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition-colors hover:text-[#F0C15A]">
-                    {t('labels.exploreCapabilities')}
-                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </Link>
-                )}
-              </motion.div>
-            </motion.div>
-
-            {/* Right — ARC-style blueprint diagram + image */}
-            <motion.div
-              className="relative"
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.7 }}
-            >
-              {/* Diagram card */}
-              <div className="relative overflow-hidden border border-white/10 mb-4">
-                <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.06]" style={blueprintGrid} />
-                <div className="relative p-6 h-full">
-                  <div className="flex justify-between items-center mb-5">
-                    <div className="bg-[#FFF4D8]/10 px-2 py-1 text-[8px] font-mono text-[var(--section-label-color-dark)] border border-[#F0C15A]/20 uppercase tracking-wider">
-                      {t('cloud.stackLabel')}
-                    </div>
-                    <div className="text-[9px] font-mono text-[#566274]">ARC/03</div>
-                  </div>
-                  <div className="space-y-2">
-                    {reliabilityLayers.map((layer) => (
-                      <div key={layer.id} className="bg-[#1A2535] border border-white/[0.07] px-4 py-2.5 flex items-center justify-between">
-                        <div className="flex items-center gap-2.5">
-                          <div className={`w-1.5 h-1.5 rounded-full bg-[#F0C15A] ${layer.pulse ? 'animate-pulse' : ''}`} />
-                          <span className="text-[8px] font-mono text-[#566274]">{layer.id}</span>
-                          <span className="font-headline text-sm text-white/80">{layer.name}</span>
-                        </div>
-                        <span className="text-[7px] font-mono text-[#F0C15A] tracking-wider">{layer.status}</span>
+                      <div className="solution-programs-stage__modules">
+                        <span>{t('navigator.modules')}</span>
+                        <ul>
+                          {activeProgram.modules.map((module) => (
+                            <li key={module}>{module}</li>
+                          ))}
+                        </ul>
                       </div>
-                    ))}
-                  </div>
-                  <div className="mt-4 flex items-center gap-2">
-                    <div className="h-[1px] flex-1 bg-[#E8A838]/20 relative">
-                      <div className="absolute top-0 left-0 h-[1px] w-16 bg-[#F0C15A] animate-pulse" />
+
+                      <div className="solution-programs-stage__details">
+                        <div>
+                          <span>{t('navigator.integrations')}</span>
+                          <p>{activeProgram.integrations.join(', ')}</p>
+                        </div>
+                        <div>
+                          <span>{t('navigator.delivery')}</span>
+                          <p>{activeProgram.deliveryModel}</p>
+                        </div>
+                      </div>
+
+                      {activeProgram.proofLinks[0] && (
+                        <Link
+                          href={programHref(activeProgram.proofLinks[0])!}
+                          className="solution-programs-proof-link"
+                        >
+                          {t('navigator.openProgram')}
+                          <ArrowUpRight className="h-4 w-4" strokeWidth={1.7} aria-hidden="true" />
+                        </Link>
+                      )}
                     </div>
-                    <span className="text-[7px] font-mono text-[#F0C15A] tracking-wider">{t('cloud.controlsActive')}</span>
-                  </div>
-                </div>
-              </div>
 
-              {/* Image below */}
-              <div className="relative w-full aspect-[16/9] overflow-hidden group">
-                <div className="absolute inset-0 border border-white/10 translate-x-3 translate-y-3 z-0" />
-                <div className="relative w-full h-full overflow-hidden">
-                  <Image
-                    src="/Images/solution-programs/hva-cloud-delivery-reliability-stack.webp"
-                    alt={t('cloud.imageAlt')}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                  />
-                  <div className="absolute inset-0 bg-[#1A2535]/40" />
-                </div>
+                    <figure className="solution-programs-stage__media">
+                      <Image
+                        src={PROGRAM_IMAGES[activeProgram.slug]!}
+                        alt={t('navigator.imageAlt', {title: activeProgram.name})}
+                        fill
+                        sizes="(max-width: 760px) calc(100vw - 3rem), (max-width: 1120px) 44vw, 34rem"
+                        className="object-cover"
+                      />
+                    </figure>
+                  </motion.article>
+                </AnimatePresence>
               </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── FINAL CTA ────────────────────────────────────────────────────── */}
-      <section className="soft-grid-cta px-6 py-24 text-center md:px-12">
-        <div className="relative mx-auto max-w-screen-2xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.65 }}
-          >
-            <SectionBrandMark size="sm" className="mx-auto mb-6" />
-            <h2 className="font-headline text-4xl md:text-5xl text-[#1A2535] mb-6 max-w-2xl mx-auto leading-tight">
-              {t('finalCta.title')}
-            </h2>
-            <p className="text-[#536070] text-lg mb-12 max-w-xl mx-auto leading-relaxed">
-              {t('finalCta.description')}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact" className="sharp-edge btn-primary">
-                {t('finalCta.primary')}
-              </Link>
-              <Link href="/capabilities" className="sharp-edge btn-outlined">
-                {t('finalCta.secondary')}
-              </Link>
             </div>
-          </motion.div>
-        </div>
-      </section>
+          </div>
+        </section>
 
-      <BottomCTA
-        variant="dark"
-        headline={t('bottomCta.title')}
-        subtext={t('bottomCta.description')}
-        primaryLabel={t('bottomCta.primary')}
-        primaryHref="/capabilities/in-detail"
-        secondaryLabel={t('bottomCta.secondary')}
-        secondaryHref="/contact"
-      />
-    </div>
+        <section className="solution-programs-ownership">
+          <div className="site-frame-wide solution-programs-ownership__layout">
+            <motion.div
+              initial={false}
+              whileInView={{opacity: 1, y: 0}}
+              viewport={{once: true, amount: 0.3}}
+              transition={{duration: 0.42}}
+              className="solution-programs-ownership__intro"
+            >
+              <Layers3 className="h-6 w-6" strokeWidth={1.45} aria-hidden="true" />
+              <h2>{t('ownership.title')}</h2>
+              <p>{t('ownership.description')}</p>
+            </motion.div>
+
+            <div className="solution-programs-ownership__steps">
+              {ownershipSteps.map((step, index) => (
+                <motion.article
+                  key={step.title}
+                  initial={false}
+                  whileInView={{opacity: 1, x: 0}}
+                  viewport={{once: true, amount: 0.35}}
+                  transition={{duration: 0.4, delay: motionReduced ? 0 : index * 0.08}}
+                >
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <h3>{step.title}</h3>
+                  <p>{step.detail}</p>
+                </motion.article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <BottomCTA
+          variant="light"
+          headline={t('bottomCta.title')}
+          subtext={t('bottomCta.description')}
+          primaryLabel={t('bottomCta.primary')}
+          primaryHref="/contact"
+          revealImmediately
+        />
+      </div>
+    </MotionConfig>
   );
 }

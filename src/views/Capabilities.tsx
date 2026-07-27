@@ -467,7 +467,7 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
                 <div className="flex items-center gap-6">
                   <div className="w-16 h-16 bg-[#1A2535] overflow-hidden flex-shrink-0 relative">
                     <Image
-                      src="/Images/capabilities/hva-capabilities-expertise.webp"
+                      src="/Images/team/ali-amrani-hva-co-founder.webp"
                       alt={t('quoteAlt')}
                       fill
                       sizes="64px"
@@ -475,9 +475,9 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
                     />
                   </div>
                   <div>
-                    <p className="font-bold text-[#1A2535] text-sm">ARC Framework</p>
+                    <p className="font-bold text-[#1A2535] text-sm">{t('quoteAuthor')}</p>
                     <p className="text-[0.7rem] text-[#536070] uppercase tracking-[0.14em] mt-1">
-                      {t('quoteDisciplines')}
+                      {t('quoteRole')}
                     </p>
                   </div>
                 </div>
