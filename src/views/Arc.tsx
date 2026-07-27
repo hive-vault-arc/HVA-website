@@ -107,6 +107,12 @@ export default function Arc({studies, children}: ArcProps) {
   }, [studies]);
 
   const activeStudy = orderedStudies[activeStudyIndex] ?? orderedStudies[0];
+  const outcomeStudy = orderedStudies.find(
+    (study) =>
+      study.slug ===
+        'top-tier-crm-transformation-program-real-estate-operations' &&
+      study.publishedOutcomes.length > 0
+  );
   const activeStudyRecordKey = activeStudy
     ? caseRecordKey[activeStudy.slug]
     : undefined;
@@ -587,6 +593,35 @@ export default function Arc({studies, children}: ArcProps) {
                 </div>
               </div>
             )}
+          </div>
+        </section>
+      )}
+
+      {outcomeStudy && (
+        <section
+          className="arc-briefing__outcomes"
+          aria-labelledby="arc-outcomes-title"
+          data-arc-section="measured-outcomes"
+        >
+          <div className="arc-briefing__shell">
+            <header>
+              <p>{t('outcomesEyebrow')}</p>
+              <h2 id="arc-outcomes-title">{t('outcomesTitle')}</h2>
+              <p>
+                {t('outcomesDescription', {
+                  client: outcomeStudy.clientName,
+                })}
+              </p>
+            </header>
+            <div className="arc-briefing__outcome-list">
+              {outcomeStudy.publishedOutcomes.map((outcome) => (
+                <article key={outcome._key} data-category={outcome.category}>
+                  <strong>{outcome.value}</strong>
+                  <h3>{outcome.label}</h3>
+                  <p>{outcome.context}</p>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
       )}

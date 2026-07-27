@@ -208,6 +208,17 @@ const caseStudySummaryFields = `
   industry,
   summary,
   deploymentStatus,
+  "publishedOutcomes": publishedOutcomes[
+    publicationStatus == "approved" &&
+    defined(permissionConfirmedOn) &&
+    length(permissionReference) > 0
+  ]{
+    _key,
+    category,
+    value,
+    label,
+    context
+  },
   "hasClientEvidence": (${approvedClientEvidencePredicate}),
   assets{
     coverImage {

@@ -66,6 +66,23 @@ export type CaseStudyProjectMedia = {
   publicationStatus: 'notCleared' | 'approved';
 };
 
+export type CaseStudyOutcomeCategory =
+  | 'responseTime'
+  | 'conversion'
+  | 'visibility'
+  | 'throughput'
+  | 'cycleTime'
+  | 'operatingMargin'
+  | 'other';
+
+export type CaseStudyOutcome = {
+  _key: string;
+  category: CaseStudyOutcomeCategory;
+  value: string;
+  label: string;
+  context: string;
+};
+
 export type CaseStudy = LocalizedContentMeta & {
   slug: string;
   title: string;
@@ -77,6 +94,7 @@ export type CaseStudy = LocalizedContentMeta & {
   operationalModules: string[];
   integrations: string[];
   deploymentStatus: string;
+  publishedOutcomes: CaseStudyOutcome[];
   projectMedia: CaseStudyProjectMedia[];
   hasClientEvidence: boolean;
   clientEvidence?: ClientEvidence;
@@ -117,6 +135,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     operationalModules: ['Customer Operations Engine', 'Automation and Orchestration Layer', 'Revenue and Pipeline Control'],
     integrations: ['WhatsApp Business API', 'HubSpot', 'Google Calendar', 'n8n workflow runner', 'PostgreSQL'],
     deploymentStatus: 'Live in production since October 2025',
+    publishedOutcomes: [],
     projectMedia: [],
     hasClientEvidence: false,
     assets: {
@@ -139,6 +158,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     operationalModules: ['Lead Intake and Routing', 'Buyer-Journey Pipeline', 'Team Workflow Coordination', 'Operational Reporting'],
     integrations: ['Meta Lead Sync', 'DocuSign', 'Pipeline Automation', 'BI Reporting'],
     deploymentStatus: 'Live operational rollout since May 2025',
+    publishedOutcomes: [],
     projectMedia: [],
     hasClientEvidence: false,
     assets: {

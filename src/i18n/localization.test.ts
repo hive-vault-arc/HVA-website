@@ -2,6 +2,7 @@ import {describe, expect, it} from 'vitest';
 import en from '../../messages/en.json';
 import fr from '../../messages/fr.json';
 import {APP_LOCALES, isAppLocale} from './config';
+import {applyFrenchCmsFallback} from './cms-fallback-fr';
 import {
   ROUTE_MANIFEST,
   localizedAlternates,
@@ -71,6 +72,32 @@ describe('localization catalogs', () => {
     for (const [path, value] of english) {
       expect(variables(french.get(path) ?? ''), path).toEqual(variables(value));
     }
+  });
+});
+
+describe('French CMS presentation fallback', () => {
+  it('localizes approved outcome copy while preserving the CMS-owned value', () => {
+    const result = applyFrenchCmsFallback({
+      slug: 'top-tier-crm-transformation-program-real-estate-operations',
+      publishedOutcomes: [
+        {
+          _key: 'lead-response',
+          value: '41%',
+          label: 'English label',
+          context: 'English context',
+        },
+      ],
+    });
+
+    expect(result.publishedOutcomes).toEqual([
+      {
+        _key: 'lead-response',
+        value: '41%',
+        label: 'Réponse aux leads plus rapide',
+        context:
+          'Le délai de réponse s’est amélioré après la centralisation de la réception et du suivi des leads.',
+      },
+    ]);
   });
 });
 

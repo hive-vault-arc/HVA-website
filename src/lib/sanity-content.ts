@@ -6,6 +6,8 @@ import type { NewsArticle, ResearchReport } from './insights';
 import type { Perspective } from './perspectives';
 import type {
   CaseStudy,
+  CaseStudyOutcome,
+  CaseStudyOutcomeCategory,
   CaseStudyProjectMedia,
   ClientEvidence,
   ClientEvidenceSummary,
@@ -47,11 +49,16 @@ type SanityCaseStudyProjectMedia = Omit<CaseStudyProjectMedia, 'image'> & {
 };
 type SanityCaseStudy = Omit<
   CaseStudy,
-  'assets' | 'clientEvidence' | 'hasClientEvidence' | 'projectMedia'
+  | 'assets'
+  | 'clientEvidence'
+  | 'hasClientEvidence'
+  | 'projectMedia'
+  | 'publishedOutcomes'
 > & {
   hasClientEvidence?: boolean;
   clientEvidence?: SanityClientEvidence | null;
   projectMedia?: SanityCaseStudyProjectMedia[] | null;
+  publishedOutcomes?: Partial<CaseStudyOutcome>[] | null;
   assets?: Omit<CaseStudy['assets'], 'coverImage'> & {
     coverImage?: SanityImageValue;
   };
@@ -174,6 +181,36 @@ function normalizeCaseStudyProjectMedia(
           item.publicationStatus === 'approved' ? 'approved' : 'notCleared',
       },
     ];
+  });
+}
+
+const CASE_STUDY_OUTCOME_CATEGORIES = new Set<CaseStudyOutcomeCategory>([
+  'responseTime',
+  'conversion',
+  'visibility',
+  'throughput',
+  'cycleTime',
+  'operatingMargin',
+  'other',
+]);
+
+function normalizeCaseStudyOutcomes(
+  outcomes: Partial<CaseStudyOutcome>[] | null | undefined,
+): CaseStudyOutcome[] {
+  return (outcomes ?? []).flatMap((outcome) => {
+    const key = nonEmptyString(outcome._key);
+    const value = nonEmptyString(outcome.value);
+    const label = nonEmptyString(outcome.label);
+    const context = nonEmptyString(outcome.context);
+    const category = CASE_STUDY_OUTCOME_CATEGORIES.has(
+      outcome.category as CaseStudyOutcomeCategory,
+    )
+      ? (outcome.category as CaseStudyOutcomeCategory)
+      : 'other';
+
+    if (!key || !value || !label || !context) return [];
+
+    return [{_key: key, category, value, label, context}];
   });
 }
 
@@ -333,6 +370,7 @@ function normalizeCaseStudy(study: SanityCaseStudy, listing = false): CaseStudy 
     clientEvidence: rawClientEvidence,
     hasClientEvidence: rawHasClientEvidence,
     projectMedia: rawProjectMedia,
+    publishedOutcomes: rawPublishedOutcomes,
     ...baseStudy
   } = study;
   const assets: {
@@ -349,6 +387,7 @@ function normalizeCaseStudy(study: SanityCaseStudy, listing = false): CaseStudy 
     ...baseStudy,
     operationalModules: study.operationalModules ?? [],
     integrations: study.integrations ?? [],
+    publishedOutcomes: normalizeCaseStudyOutcomes(rawPublishedOutcomes),
     projectMedia: normalizeCaseStudyProjectMedia(rawProjectMedia),
     hasClientEvidence: Boolean(rawHasClientEvidence || clientEvidence),
     ...(clientEvidence ? { clientEvidence } : {}),

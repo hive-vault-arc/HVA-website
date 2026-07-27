@@ -357,6 +357,29 @@ const caseStudyPatches: Record<string, CmsFallbackPatch> = {
   },
 };
 
+const caseStudyOutcomePatches: Record<
+  string,
+  Record<string, {label: string; context: string}>
+> = {
+  'top-tier-crm-transformation-program-real-estate-operations': {
+    'lead-response': {
+      label: 'Réponse aux leads plus rapide',
+      context:
+        'Le délai de réponse s’est amélioré après la centralisation de la réception et du suivi des leads.',
+    },
+    'tour-to-lease': {
+      label: 'Hausse de la conversion visite-location',
+      context:
+        'La conversion de la visite à la location s’est améliorée après la standardisation du pipeline et du suivi.',
+    },
+    'team-visibility': {
+      label: 'Visibilité en temps réel entre les équipes',
+      context:
+        'Les équipes commerciales et opérationnelles partagent une vue active des leads, des biens et des suivis.',
+    },
+  },
+};
+
 const employeePatches: Record<string, CmsFallbackPatch> = {
   'khalid-chalhi': {
     position: 'Cofondateur et CEO',
@@ -445,6 +468,16 @@ export function applyFrenchCmsFallback<T extends CmsFallbackDocument>(document: 
   if (!patch) return document;
 
   const merged: CmsFallbackDocument = {...document, ...patch};
+  const outcomePatch = caseStudyOutcomePatches[document.slug];
+  if (outcomePatch && Array.isArray(document.publishedOutcomes)) {
+    merged.publishedOutcomes = document.publishedOutcomes.map((outcome) => {
+      if (!outcome || typeof outcome !== 'object' || Array.isArray(outcome)) return outcome;
+
+      const record = outcome as Record<string, unknown>;
+      const key = typeof record._key === 'string' ? record._key : '';
+      return outcomePatch[key] ? {...record, ...outcomePatch[key]} : outcome;
+    });
+  }
   if (
     typeof document.caseStudyTitle === 'string' &&
     typeof patch.title === 'string'

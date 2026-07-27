@@ -15206,7 +15206,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
 
 .arc-briefing__hero {
   position: relative;
-  min-height: min(92dvh, 62rem);
+  min-height: min(84dvh, 54rem);
   overflow: hidden;
   background: #0b131e;
 }
@@ -15229,11 +15229,11 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
   position: relative;
   z-index: 1;
   display: flex;
-  min-height: min(92dvh, 62rem);
+  min-height: min(84dvh, 54rem);
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-end;
-  padding-block: clamp(5.5rem, 9vw, 8rem) clamp(3.75rem, 7vw, 6.5rem);
+  padding-block: clamp(5.25rem, 8vw, 7rem) clamp(3.25rem, 5vw, 4.75rem);
 }
 
 .arc-briefing__hero-label {
@@ -15247,10 +15247,10 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
 
 .arc-briefing__hero h1 {
   display: grid;
-  max-width: 12.5ch;
+  max-width: 16ch;
   margin: 0;
   font-family: var(--font-headline);
-  font-size: clamp(3.65rem, 7.2vw, 8.4rem);
+  font-size: clamp(3.25rem, 5vw, 5.75rem);
   font-weight: 400;
   letter-spacing: -0.055em;
   line-height: 0.82;
@@ -15332,7 +15332,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
 }
 
 .arc-briefing__lead {
-  padding: clamp(4.5rem, 7vw, 7.25rem) 0;
+  padding: clamp(3.75rem, 5.5vw, 5.75rem) 0;
   border-bottom: 1px solid var(--arc-line);
 }
 
@@ -15350,7 +15350,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
 .arc-briefing__close h2 {
   margin: 0;
   font-family: var(--font-headline);
-  font-size: clamp(3rem, 5.5vw, 6rem);
+  font-size: clamp(2.5rem, 3.8vw, 4.25rem);
   font-weight: 400;
   letter-spacing: -0.045em;
   line-height: 0.96;
@@ -15361,7 +15361,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
   margin: 0;
   color: var(--arc-ink);
   font-family: var(--font-headline);
-  font-size: clamp(1.65rem, 2.5vw, 2.7rem);
+  font-size: clamp(1.5rem, 2.05vw, 2.25rem);
   letter-spacing: -0.025em;
   line-height: 1.22;
 }
@@ -15374,7 +15374,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
   display: grid;
   grid-template-columns: 8rem minmax(0, 1fr);
   gap: 1.5rem;
-  margin-top: 3rem;
+  margin-top: 2.25rem;
   padding-top: 1.25rem;
   border-top: 1px solid var(--arc-line);
 }
@@ -15423,18 +15423,18 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
 .arc-briefing__marquee b {
   display: flex;
   align-items: center;
-  padding: 1.15rem 2.5rem;
+  padding: 0.9rem 2rem;
   font-family: var(--font-headline);
-  font-size: clamp(1.5rem, 2.6vw, 2.65rem);
+  font-size: clamp(1.25rem, 1.9vw, 2.05rem);
   font-weight: 400;
   letter-spacing: -0.035em;
   white-space: nowrap;
 }
 
 .arc-briefing__marquee b::after {
-  width: 3.5rem;
+  width: 2.75rem;
   height: 1px;
-  margin-left: 2.5rem;
+  margin-left: 2rem;
   background: rgb(16 26 39 / 0.42);
   content: "";
 }
@@ -15446,7 +15446,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
 }
 
 .arc-briefing__overview {
-  padding: clamp(4.75rem, 7vw, 7.5rem) 0;
+  padding: clamp(3.75rem, 5.5vw, 5.75rem) 0;
   background: var(--arc-surface);
 }
 
@@ -15454,7 +15454,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
   display: grid;
   gap: 1.35rem;
   max-width: 57rem;
-  margin-bottom: clamp(3rem, 5vw, 5rem);
+  margin-bottom: clamp(2.5rem, 3.75vw, 3.75rem);
 }
 
 .arc-briefing__section-heading p,
@@ -15492,10 +15492,10 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
   position: relative;
   display: grid;
   min-width: 0;
-  min-height: 29rem;
+  min-height: 22rem;
   align-content: space-between;
   overflow: hidden;
-  padding: clamp(1.5rem, 3vw, 2.75rem);
+  padding: clamp(1.5rem, 2.5vw, 2.25rem);
   border: 0;
   border-right: 1px solid var(--arc-line);
   background: transparent;
@@ -15516,7 +15516,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
   z-index: 0;
   color: rgb(242 241 236 / 0.11);
   font-family: var(--font-headline);
-  font-size: clamp(7rem, 12vw, 13rem);
+  font-size: clamp(5.75rem, 8.5vw, 9.5rem);
   font-weight: 400;
   letter-spacing: -0.08em;
   line-height: 0.7;
@@ -15531,7 +15531,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
 .arc-briefing__index h3 {
   margin: 0;
   font-family: var(--font-headline);
-  font-size: clamp(2.25rem, 3.7vw, 4.25rem);
+  font-size: clamp(2rem, 3vw, 3.25rem);
   font-weight: 400;
   letter-spacing: -0.04em;
   line-height: 0.96;
@@ -15548,7 +15548,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
 
 .arc-briefing__index strong {
   display: block;
-  margin-top: 1.7rem;
+  margin-top: 1.35rem;
   color: var(--arc-gold);
   font-size: 0.72rem;
   font-weight: 800;
@@ -15588,18 +15588,18 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
   position: sticky;
   top: 0;
   display: flex;
-  height: 100dvh;
-  min-height: 100dvh;
+  height: min(82dvh, 50rem);
+  min-height: 42rem;
   flex-direction: column;
   justify-content: center;
   align-self: start;
-  padding: 7.5rem clamp(2.5rem, 5vw, 5.5rem) 5rem 0;
+  padding: 5.5rem clamp(2.25rem, 4vw, 4.5rem) 4rem 0;
 }
 
 .arc-briefing__process-intro h2 {
   max-width: 10ch;
   overflow-wrap: normal;
-  font-size: clamp(3rem, 4.5vw, 5rem);
+  font-size: clamp(2.65rem, 3.8vw, 4.15rem);
   hyphens: none;
   word-break: normal;
 }
@@ -15611,7 +15611,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
 .arc-briefing__process-intro ol {
   display: grid;
   gap: 0.8rem;
-  margin: 3rem 0 0;
+  margin: 2.25rem 0 0;
   padding: 0;
   list-style: none;
 }
@@ -15644,13 +15644,13 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
 }
 
 .arc-briefing__stage {
-  min-height: 100dvh;
+  min-height: min(82dvh, 50rem);
   border-bottom: 1px solid var(--arc-line);
 }
 
 .arc-briefing__stage-media {
   position: relative;
-  min-height: 65dvh;
+  min-height: clamp(25rem, 50dvh, 32rem);
   margin: 0;
   overflow: hidden;
   background: #0b131e;
@@ -15679,13 +15679,13 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 4fr);
   gap: clamp(2rem, 4vw, 4.5rem);
-  padding: clamp(2.5rem, 4.5vw, 4.75rem);
+  padding: clamp(2rem, 3.2vw, 3.5rem);
 }
 
 .arc-briefing__stage-copy h3 {
   margin: 0;
   font-family: var(--font-headline);
-  font-size: clamp(3.5rem, 6vw, 7rem);
+  font-size: clamp(2.85rem, 3.8vw, 4.25rem);
   font-weight: 400;
   letter-spacing: -0.055em;
   line-height: 0.88;
@@ -15694,7 +15694,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
 .arc-briefing__stage-copy > p {
   grid-column: 1;
   max-width: 37rem;
-  margin: 1.5rem 0 0;
+  margin: 1.1rem 0 0;
   color: var(--arc-muted);
   font-size: 1rem;
   line-height: 1.67;
@@ -15712,7 +15712,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
   display: block;
   color: var(--arc-gold);
   font-family: var(--font-headline);
-  font-size: clamp(1.7rem, 2.4vw, 2.7rem);
+  font-size: clamp(1.5rem, 2vw, 2.25rem);
   font-weight: 400;
   line-height: 1.05;
 }
@@ -15735,7 +15735,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
   gap: clamp(3rem, 7vw, 8rem);
-  padding-block: clamp(5rem, 8vw, 8rem);
+  padding-block: clamp(4rem, 5.75vw, 6rem);
   border-top: 2px solid var(--arc-gold);
 }
 
@@ -15802,13 +15802,13 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
 
 .arc-briefing__proof {
   scroll-margin-top: 6rem;
-  padding: clamp(5rem, 8vw, 8rem) 0;
+  padding: clamp(3.5rem, 5vw, 5.25rem) 0;
   border-top: 1px solid var(--arc-line);
   background: var(--arc-surface-strong);
 }
 
 .arc-briefing__case {
-  padding-block: clamp(2.75rem, 5vw, 5.25rem);
+  padding-block: clamp(2.25rem, 3.25vw, 3.5rem);
   border-top: 1px solid var(--arc-line-strong);
   border-bottom: 1px solid var(--arc-line);
 }
@@ -15828,7 +15828,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
   max-width: 16ch;
   margin: 2rem 0 0;
   font-family: var(--font-headline);
-  font-size: clamp(3.25rem, 7vw, 8rem);
+  font-size: clamp(2.85rem, 4.3vw, 4.75rem);
   font-weight: 400;
   letter-spacing: -0.055em;
   line-height: 0.9;
@@ -15838,7 +15838,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0;
-  margin: clamp(3rem, 5vw, 5rem) 0 0;
+  margin: clamp(2.5rem, 3.5vw, 3.5rem) 0 0;
 }
 
 .arc-briefing__case dl > div {
@@ -15928,12 +15928,101 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
   height: 1rem;
 }
 
+.arc-briefing__outcomes {
+  padding: clamp(3.75rem, 5.5vw, 5.75rem) 0;
+  border-top: 1px solid var(--arc-line);
+  background: #0b131e;
+}
+
+.arc-briefing__outcomes header {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(18rem, 4fr);
+  gap: 1.25rem clamp(3rem, 7vw, 8rem);
+  align-items: end;
+  margin-bottom: clamp(2.5rem, 4vw, 4rem);
+}
+
+.arc-briefing__outcomes header > p:first-child {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--arc-gold);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.arc-briefing__outcomes h2 {
+  max-width: 15ch;
+  margin: 0;
+  font-family: var(--font-headline);
+  font-size: clamp(2.5rem, 3.8vw, 4.25rem);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 0.96;
+}
+
+.arc-briefing__outcomes header > p:last-child {
+  max-width: 32rem;
+  margin: 0;
+  color: var(--arc-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.arc-briefing__outcome-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--arc-line-strong);
+  border-bottom: 1px solid var(--arc-line);
+}
+
+.arc-briefing__outcome-list article {
+  min-width: 0;
+  padding: clamp(2rem, 3vw, 3rem);
+  border-left: 1px solid var(--arc-line);
+}
+
+.arc-briefing__outcome-list article:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.arc-briefing__outcome-list strong {
+  display: block;
+  color: var(--arc-gold);
+  font-family: var(--font-headline);
+  font-size: clamp(3.25rem, 5vw, 5.5rem);
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+}
+
+.arc-briefing__outcome-list h3 {
+  max-width: 18rem;
+  margin: 1.15rem 0 0;
+  color: var(--arc-ink);
+  font-family: var(--font-headline);
+  font-size: clamp(1.5rem, 2vw, 2.1rem);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+}
+
+.arc-briefing__outcome-list p {
+  max-width: 25rem;
+  margin: 0.9rem 0 0;
+  color: var(--arc-muted);
+  font-size: 0.92rem;
+  line-height: 1.58;
+}
+
 .arc-briefing__questions {
   background: var(--arc-bg);
 }
 
 .arc-briefing .arc-briefing__faq {
-  padding: clamp(4.5rem, 7vw, 7rem) 0 !important;
+  padding: clamp(3.75rem, 5vw, 5.25rem) 0 !important;
   border-color: var(--arc-line) !important;
   background: var(--arc-bg) !important;
 }
@@ -15946,10 +16035,10 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
 
 .arc-briefing .arc-briefing__faq h2 {
   max-width: 16ch;
-  margin-bottom: clamp(2.5rem, 4vw, 4rem);
+  margin-bottom: clamp(2.25rem, 3vw, 3rem);
   color: var(--arc-ink);
   font-family: var(--font-headline);
-  font-size: clamp(2.75rem, 5vw, 5rem);
+  font-size: clamp(2.5rem, 3.7vw, 3.75rem);
   font-weight: 400;
   letter-spacing: -0.045em;
   line-height: 0.98;
@@ -15991,7 +16080,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
   gap: clamp(3rem, 7vw, 8rem);
   align-items: end;
-  padding-block: clamp(4.5rem, 7vw, 7.5rem);
+  padding-block: clamp(3.75rem, 5.25vw, 5.5rem);
 }
 
 .arc-briefing__close-layout > p {
@@ -15999,7 +16088,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
   margin: 0;
   color: var(--arc-gold);
   font-family: var(--font-headline);
-  font-size: clamp(2rem, 3.6vw, 4rem);
+  font-size: clamp(1.8rem, 2.85vw, 3.1rem);
   line-height: 1.02;
 }
 
@@ -16042,7 +16131,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
 
 @media (max-width: 1199px) {
   .arc-briefing__hero h1 {
-    font-size: clamp(3.5rem, 7.7vw, 6.5rem);
+    font-size: clamp(3.25rem, 6.6vw, 5.7rem);
   }
 
   .arc-briefing__process-layout {
@@ -16067,7 +16156,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
 
   .arc-briefing__hero,
   .arc-briefing__hero-content {
-    min-height: min(88dvh, 54rem);
+    min-height: min(80dvh, 49rem);
   }
 
   .arc-briefing__hero-image {
@@ -16098,7 +16187,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
   }
 
   .arc-briefing__index button {
-    min-height: 24rem;
+    min-height: 19rem;
   }
 
   .arc-briefing__index button > span {
@@ -16113,7 +16202,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
     position: static;
     height: auto;
     min-height: 0;
-    padding: clamp(4.5rem, 8vw, 6rem) 0 3rem;
+    padding: clamp(3.75rem, 6vw, 5rem) 0 2.5rem;
   }
 
   .arc-briefing__process-intro ol {
@@ -16131,7 +16220,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
 
   .arc-briefing__stage-media {
     min-height: 0;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 16 / 10;
   }
 
   .arc-briefing__stage-copy {
@@ -16143,6 +16232,11 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
     grid-row: 1 / span 2;
     margin-top: 0;
   }
+
+  .arc-briefing__outcomes header {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
 }
 
 @media (max-width: 767px) {
@@ -16152,7 +16246,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
 
   .arc-briefing__hero,
   .arc-briefing__hero-content {
-    min-height: 47rem;
+    min-height: 42rem;
   }
 
   .arc-briefing__hero-image {
@@ -16166,12 +16260,12 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
   }
 
   .arc-briefing__hero-content {
-    padding-block: 7rem 2.75rem;
+    padding-block: 6.25rem 2.25rem;
   }
 
   .arc-briefing__hero h1 {
     max-width: 10ch;
-    font-size: clamp(3.05rem, 14.5vw, 5.1rem);
+    font-size: clamp(2.85rem, 12.4vw, 4.15rem);
     line-height: 0.88;
   }
 
@@ -16193,7 +16287,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
   .arc-briefing__process-intro h2,
   .arc-briefing__accountability h2,
   .arc-briefing__close h2 {
-    font-size: clamp(2.65rem, 12.5vw, 4.25rem);
+    font-size: clamp(2.35rem, 9.8vw, 3.4rem);
   }
 
   .arc-briefing__lead-copy {
@@ -16230,7 +16324,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
   }
 
   .arc-briefing__index button {
-    min-height: 17rem;
+    min-height: 13.5rem;
     border-right: 0;
     border-bottom: 1px solid var(--arc-line);
   }
@@ -16240,11 +16334,11 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
   }
 
   .arc-briefing__index button > span {
-    font-size: 7rem;
+    font-size: 5.5rem;
   }
 
   .arc-briefing__index h3 {
-    font-size: 2.65rem;
+    font-size: 2.35rem;
   }
 
   .arc-briefing__process-intro ol {
@@ -16252,7 +16346,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
   }
 
   .arc-briefing__stage-media {
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 4 / 3;
   }
 
   .arc-briefing__stage-copy {
@@ -16261,7 +16355,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
   }
 
   .arc-briefing__stage-copy h3 {
-    font-size: clamp(3.2rem, 15vw, 5rem);
+    font-size: clamp(2.75rem, 11vw, 3.6rem);
   }
 
   .arc-briefing__stage-copy > div {
@@ -16277,7 +16371,7 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
   }
 
   .arc-briefing__case h3 {
-    font-size: clamp(3rem, 14vw, 5rem);
+    font-size: clamp(2.65rem, 11vw, 3.75rem);
   }
 
   .arc-briefing__case dl {
@@ -16293,6 +16387,29 @@ body:has(> div[id^="S:"] :is(.employee-profile-page, .about-hva-page)) > footer.
 
   .arc-briefing__case dl > div:last-child {
     padding-bottom: 0;
+  }
+
+  .arc-briefing__outcomes h2 {
+    font-size: clamp(2.35rem, 9.8vw, 3.4rem);
+  }
+
+  .arc-briefing__outcome-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .arc-briefing__outcome-list article,
+  .arc-briefing__outcome-list article:first-child {
+    padding: 1.75rem 0;
+    border-top: 1px solid var(--arc-line);
+    border-left: 0;
+  }
+
+  .arc-briefing__outcome-list article:first-child {
+    border-top: 0;
+  }
+
+  .arc-briefing__outcome-list strong {
+    font-size: clamp(3rem, 15vw, 4.25rem);
   }
 
   .arc-briefing .arc-briefing__faq > div {
