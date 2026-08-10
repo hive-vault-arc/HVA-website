@@ -85,7 +85,7 @@ function CategoryCards() {
               <motion.img
                 src={cat.image}
                 alt=""
-                className="insights-card-image absolute inset-0 h-full w-full object-cover"
+                className="insights-card-image--color absolute inset-0 h-full w-full object-cover"
                 animate={{
                   scale: isHovered ? 1.07 : 1,
                 }}
@@ -343,7 +343,7 @@ function InsightGridCard({ item, index }: { readonly item: InsightGridItem; read
           <motion.img
             src={item.image}
             alt=""
-            className="insights-card-image absolute inset-0 h-full w-full object-cover"
+            className="insights-card-image--color absolute inset-0 h-full w-full object-cover"
             animate={{
               scale: hovered ? 1.07 : 1,
             }}

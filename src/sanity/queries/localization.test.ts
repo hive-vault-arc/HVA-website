@@ -61,6 +61,16 @@ describe('public localized GROQ queries', () => {
     expect(String(query)).toContain('slug.current == $slug');
   });
 
+  it.each([
+    caseStudyBySlugQuery,
+    capabilityProfileBySlugQuery,
+    employeeProfileBySlugQuery,
+  ])('filters the completed translation-target array after dereferencing it', (query) => {
+    const source = String(query);
+    expect(source).toContain('"translationTargets": (*[');
+    expect(source).toContain('})[translationStatus == "approved"]');
+  });
+
   it('keeps project media publication-gated and detail-only', () => {
     const detailQuery = String(caseStudyBySlugQuery);
 

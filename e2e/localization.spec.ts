@@ -39,11 +39,13 @@ test.describe('localized public routes', () => {
 
   test('language switcher preserves the exact route and query parameters', async ({page}) => {
     await page.goto('/capabilities?source=e2e');
-    await page.locator('a[hreflang="fr"]').first().click();
+    await page.getByRole('button', {name: 'Current language: English'}).click();
+    await page.getByRole('menuitem', {name: 'View this page in French'}).click();
     await expect(page).toHaveURL(/\/fr\/expertises\?source=e2e$/);
     await expect(page.locator('html')).toHaveAttribute('lang', 'fr');
 
-    await page.locator('a[hreflang="en"]').first().click();
+    await page.getByRole('button', {name: 'Langue actuelle : Français'}).click();
+    await page.getByRole('menuitem', {name: 'Afficher cette page en Anglais'}).click();
     await expect(page).toHaveURL(/\/capabilities\?source=e2e$/);
   });
 
@@ -88,19 +90,22 @@ test.describe('localized public routes', () => {
     }
   });
 
-  test('pending CMS translations keep complete source content with French presentation', async ({
+  test('published CMS translations expose complete reciprocal English and French routes', async ({
     page,
   }) => {
     await page.goto(ENGLISH_CASE_STUDY);
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+    await expect(page.locator('link[hreflang="fr"]')).toHaveAttribute(
+      'href',
+      /\/fr\/etudes-de-cas\/top-tier-crm-transformation-program-real-estate-operations$/,
+    );
+    await page.getByRole('button', {name: 'Current language: English'}).click();
     await expect(
-      page.getByRole('link', {name: 'View this page in French'}),
+      page.getByRole('menuitem', {name: 'View this page in French'}),
     ).toHaveAttribute(
       'href',
       '/fr/etudes-de-cas/top-tier-crm-transformation-program-real-estate-operations',
-      {timeout: 15_000},
     );
-    await expect(page.locator('link[hreflang="fr"]')).toHaveCount(0);
 
     await page.goto(
       '/fr/etudes-de-cas/top-tier-crm-transformation-program-real-estate-operations',
@@ -109,16 +114,10 @@ test.describe('localized public routes', () => {
     await expect(page.getByRole('heading', {level: 1})).toContainText(
       /Système d’exploitation CRM ImmoWorld/i,
     );
-    await expect(
-      page.locator(
-        'a[href="/case-studies/top-tier-crm-transformation-program-real-estate-operations"]',
-      ),
-    ).toBeAttached();
-    await expect(
-      page.locator(
-        'a[href="/fr/etudes-de-cas/top-tier-crm-transformation-program-real-estate-operations"]',
-      ),
-    ).toBeAttached();
+    await expect(page.locator('link[hreflang="en"]')).toHaveAttribute(
+      'href',
+      /\/case-studies\/top-tier-crm-transformation-program-real-estate-operations$/,
+    );
   });
 
   test('French CMS routes keep full homepage, publication, capability, and people content', async ({
@@ -157,8 +156,14 @@ test.describe('localized public routes', () => {
     );
     await expect(page.getByText(/Conception et déploiement d’agents IA/i)).toBeVisible();
     await expect(
-      page.locator('a[href="/capabilities/ai-data-analytics"]'),
+      page.locator(
+        '.capability-profile-related-card[href="/fr/expertises/strategy-business"]',
+      ),
     ).toBeAttached();
+    await expect(page.locator('link[hreflang="en"]')).toHaveAttribute(
+      'href',
+      /\/capabilities\/ai-data-analytics$/,
+    );
 
     await page.goto('/fr/qui-sommes-nous/equipe/khalid-chalhi');
     await expect(page.getByRole('heading', {level: 1})).toContainText(
@@ -168,12 +173,13 @@ test.describe('localized public routes', () => {
     await expect(
       page.getByRole('link', {name: 'Retour à l’équipe'}),
     ).toHaveAttribute('href', '/fr/qui-sommes-nous#khalid-chalhi');
-    await expect(
-      page.locator('a[href="/aboutus/our-people/khalid-chalhi"]'),
-    ).toBeAttached();
+    await expect(page.locator('link[hreflang="en"]')).toHaveAttribute(
+      'href',
+      /\/aboutus\/our-people\/khalid-chalhi$/,
+    );
   });
 
-  test('French routes expose localized CMS presentation while translations are reviewed', async ({
+  test('French routes expose published localized CMS presentation', async ({
     page,
   }) => {
     const clientWarnings: string[] = [];

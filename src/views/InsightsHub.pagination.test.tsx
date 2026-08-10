@@ -48,7 +48,7 @@ describe('Insights grid pagination', () => {
       />,
     );
 
-    expect(container.querySelectorAll('img.insights-card-image')).toHaveLength(6);
+    expect(container.querySelectorAll('img.insights-card-image--color')).toHaveLength(6);
     expect(screen.getAllByText('Publication 1')).toHaveLength(2);
     expect(screen.queryAllByText('Publication 7')).toHaveLength(0);
 

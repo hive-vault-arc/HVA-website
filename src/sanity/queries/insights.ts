@@ -34,14 +34,14 @@ const localizationFields = `
   _id,
   language,
   translationStatus,
-  "translationTargets": *[
+  "translationTargets": (*[
     _type == "translation.metadata" &&
     references(^._id)
   ][0].translations[].value->{
     language,
     translationStatus,
     "slug": slug.current
-  }[translationStatus == "approved"]
+  })[translationStatus == "approved"]
 `;
 
 const sectionFields = `
