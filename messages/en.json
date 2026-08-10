@@ -576,10 +576,17 @@
     },
     "caseSections": {
       "challenge": "Business challenge",
-      "architecture": "Execution architecture",
+      "architecture": "Solution delivered",
+      "testimonial": "Client testimonial",
       "modules": "Modules activated",
       "stack": "Stack & integrations",
       "projectMedia": "Project interface evidence",
+      "headlineMetrics": "Case study numbers",
+      "metricBasis": {
+        "systemScope": "System scope",
+        "verifiedResult": "Verified result",
+        "benchmark": "Published benchmark"
+      },
       "outcomesEyebrow": "Measured in production",
       "outcomesTitle": "The operating record, in numbers.",
       "outcomesDescription": "Approved performance signals and named-system results from the {client} case-study record.",

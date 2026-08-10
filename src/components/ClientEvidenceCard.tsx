@@ -107,7 +107,7 @@ export default function ClientEvidenceCard({
       <div className="client-evidence-card__document">
         <div className="client-evidence-card__document-mark" aria-hidden="true">
           <FileText strokeWidth={1.5} />
-          <span>PDF</span>
+          <span>{evidence.testimonialPdf ? 'PDF' : 'IMG'}</span>
         </div>
         <div className="client-evidence-card__document-copy">
           <span>{t('referenceLetter')}</span>

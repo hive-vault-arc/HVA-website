@@ -5,7 +5,7 @@ import {
   getSanityCaseStudyBySlug,
   getSanityHomeCaseStudyProof,
 } from './sanity-content';
-import type { ContentSeo } from './content-seo';
+import type {ContentSeo} from './content-seo';
 import type {AppLocale} from '@/i18n/config';
 import type {
   LocalizedContentMeta,
@@ -28,6 +28,14 @@ export type ClientEvidencePdf = {
   size: number;
 };
 
+export type ClientEvidenceImage = {
+  url: string;
+  width: number;
+  height: number;
+  lqip?: string;
+  alt: string;
+};
+
 export type ClientEvidence = {
   documentTitle: string;
   documentLanguage: string;
@@ -35,7 +43,8 @@ export type ClientEvidence = {
   quoteExcerpt?: string;
   signatoryName?: string;
   signatoryRole?: string;
-  testimonialPdf: ClientEvidencePdf;
+  testimonialPdf?: ClientEvidencePdf;
+  testimonialImage?: ClientEvidenceImage;
 };
 
 export type ClientEvidenceSummary = {
@@ -66,9 +75,7 @@ export type PublishedHomeCaseStudyProof = {
 };
 
 export type CaseStudyProjectMediaPlacement =
-  | 'afterChallenge'
-  | 'afterArchitecture'
-  | 'afterModules';
+  'afterChallenge' | 'afterArchitecture' | 'afterModules';
 
 export type CaseStudyProjectMedia = {
   _key: string;
@@ -103,17 +110,49 @@ export type CaseStudyOutcome = {
   context: string;
 };
 
+export type CaseStudyHeadlineMetricValueType =
+  | 'number'
+  | 'percentage'
+  | 'numberRange'
+  | 'percentageRange'
+  | 'multiplier'
+  | 'multiplierRange'
+  | 'duration';
+
+export type CaseStudyHeadlineMetricBasis =
+  'systemScope' | 'verifiedResult' | 'benchmark';
+
+export type CaseStudyHeadlineMetric = {
+  _key: string;
+  valueType: CaseStudyHeadlineMetricValueType;
+  value?: number;
+  minimum?: number;
+  maximum?: number;
+  unit?: string;
+  label: string;
+  context: string;
+  basis: CaseStudyHeadlineMetricBasis;
+};
+
+export type CaseStudyEngagementType =
+  | 'customSoftware'
+  | 'advisoryTransformation'
+  | 'managedOperations'
+  | 'hybridDelivery';
+
 export type CaseStudy = LocalizedContentMeta & {
   slug: string;
   title: string;
   clientName: string;
   industry: string;
+  engagementType: CaseStudyEngagementType;
   summary: string;
   problem: string;
   systemArchitecture: string;
   operationalModules: string[];
   integrations: string[];
   deploymentStatus: string;
+  headlineMetrics: CaseStudyHeadlineMetric[];
   publishedOutcomes: CaseStudyOutcome[];
   projectMedia: CaseStudyProjectMedia[];
   hasClientEvidence: boolean;
@@ -143,7 +182,12 @@ export type CaseStudyShowcaseSummary = Pick<
 export type PortfolioCaseStudy = LocalizedContentMeta &
   Pick<
     CaseStudy,
-    'slug' | 'title' | 'clientName' | 'industry' | 'summary' | 'deploymentStatus'
+    | 'slug'
+    | 'title'
+    | 'clientName'
+    | 'industry'
+    | 'summary'
+    | 'deploymentStatus'
   > & {
     assets: Pick<
       CaseStudy['assets'],
@@ -157,20 +201,63 @@ export const CASE_STUDIES: CaseStudy[] = [
     title: 'Multilingual WhatsApp AI Agent for Lead Operations',
     clientName: 'Atlas Property Group',
     industry: 'Real Estate',
+    engagementType: 'customSoftware',
     summary:
       'Built a production AI WhatsApp agent with persistent memory, automated scheduling, lead qualification, and CRM pipeline updates in real time.',
     problem:
       'Inbound leads were handled manually across WhatsApp and phone. The client was losing after-hours opportunities and spending too much time on repetitive triage.',
     systemArchitecture:
       'Event-driven AI orchestration with multilingual NLU, memory store, intent routing, and escalation policies for human takeover.',
-    operationalModules: ['Customer Operations Engine', 'Automation and Orchestration Layer', 'Revenue and Pipeline Control'],
-    integrations: ['WhatsApp Business API', 'HubSpot', 'Google Calendar', 'n8n workflow runner', 'PostgreSQL'],
+    operationalModules: [
+      'Customer Operations Engine',
+      'Automation and Orchestration Layer',
+      'Revenue and Pipeline Control',
+    ],
+    integrations: [
+      'WhatsApp Business API',
+      'HubSpot',
+      'Google Calendar',
+      'n8n workflow runner',
+      'PostgreSQL',
+    ],
     deploymentStatus: 'Live in production since October 2025',
+    headlineMetrics: [
+      {
+        _key: 'agent-runtime',
+        valueType: 'number',
+        value: 1,
+        unit: 'agent',
+        label: 'Multilingual entry point',
+        context:
+          'One governed agent handles reception, triage, and escalation.',
+        basis: 'systemScope',
+      },
+      {
+        _key: 'operational-modules',
+        valueType: 'number',
+        value: 3,
+        unit: 'modules',
+        label: 'Operational modules',
+        context:
+          'Functional scope recorded in the approved case-study document.',
+        basis: 'systemScope',
+      },
+      {
+        _key: 'connected-systems',
+        valueType: 'number',
+        value: 5,
+        unit: 'systems',
+        label: 'Connected systems',
+        context: 'Technical connections listed in the delivery scope.',
+        basis: 'systemScope',
+      },
+    ],
     publishedOutcomes: [],
     projectMedia: [],
     hasClientEvidence: false,
     assets: {
-      coverImage: '/Images/case-studies/whatsapp-ai-agent-operations-case-study-morocco.webp',
+      coverImage:
+        '/Images/case-studies/whatsapp-ai-agent-operations-case-study-morocco.webp',
       logoLabel: 'Atlas Property Group',
     },
     lastUpdated: '2026-03-27',
@@ -180,20 +267,87 @@ export const CASE_STUDIES: CaseStudy[] = [
     title: 'ImmoWorld CRM Operating System for Real Estate Operations',
     clientName: 'ImmoWorld',
     industry: 'Luxury Real Estate',
+    engagementType: 'customSoftware',
     summary:
       'A CRM operating system for ImmoWorld that centralizes lead intake, buyer-journey pipeline work, team workflows, and operational reporting.',
     problem:
       'Three disconnected tools created data duplication, missed follow-ups, and no reliable reporting layer for leadership decisions.',
     systemArchitecture:
       'A unified CRM operating system with role-based workflows, pipeline stages, follow-up automation, and a reporting layer for the sales and operations teams.',
-    operationalModules: ['Lead Intake and Routing', 'Buyer-Journey Pipeline', 'Team Workflow Coordination', 'Operational Reporting'],
-    integrations: ['Meta Lead Sync', 'DocuSign', 'Pipeline Automation', 'BI Reporting'],
+    operationalModules: [
+      'Lead Intake and Routing',
+      'Buyer-Journey Pipeline',
+      'Team Workflow Coordination',
+      'Operational Reporting',
+    ],
+    integrations: [
+      'Meta Lead Sync',
+      'DocuSign',
+      'Pipeline Automation',
+      'BI Reporting',
+    ],
     deploymentStatus: 'Live operational rollout since May 2025',
+    headlineMetrics: [
+      {
+        _key: 'throughput-lift',
+        valueType: 'multiplierRange',
+        minimum: 3,
+        maximum: 6,
+        label: 'Throughput lift',
+        context: 'Sustained throughput improvement within the first 90 days.',
+        basis: 'benchmark',
+      },
+      {
+        _key: 'cycle-time-reduction',
+        valueType: 'percentageRange',
+        minimum: 30,
+        maximum: 60,
+        label: 'Cycle time reduction',
+        context: 'Faster cycles by removing hidden handoffs and rework.',
+        basis: 'benchmark',
+      },
+      {
+        _key: 'operating-margin-lift',
+        valueType: 'percentageRange',
+        minimum: 15,
+        maximum: 25,
+        label: 'Operating margin lift',
+        context: 'Margin expansion through constraint removal and better flow.',
+        basis: 'benchmark',
+      },
+      {
+        _key: 'lead-response',
+        valueType: 'percentage',
+        value: 40,
+        label: 'Faster lead response',
+        context:
+          'Lead response time improved after centralizing intake and follow-up workflows.',
+        basis: 'verifiedResult',
+      },
+      {
+        _key: 'tour-to-lease',
+        valueType: 'percentage',
+        value: 25,
+        label: 'Lift in tour-to-lease conversion',
+        context:
+          'Conversion improved after standardizing the pipeline and follow-up process.',
+        basis: 'verifiedResult',
+      },
+      {
+        _key: 'team-visibility',
+        valueType: 'percentage',
+        value: 100,
+        label: 'Real-time visibility across teams',
+        context: 'Sales and operations teams share one live operating view.',
+        basis: 'verifiedResult',
+      },
+    ],
     publishedOutcomes: [],
     projectMedia: [],
     hasClientEvidence: false,
     assets: {
-      coverImage: '/Images/case-studies/immoworld-crm-transformation-case-study-morocco.webp',
+      coverImage:
+        '/Images/case-studies/immoworld-crm-transformation-case-study-morocco.webp',
       coverAlt: 'ImmoWorld real estate CRM operating system engagement',
       logoLabel: 'ImmoWorld Luxury Real Estate',
       clientLogo: '/Images/trustedby/logo.webp',
@@ -205,13 +359,20 @@ export const CASE_STUDIES: CaseStudy[] = [
       title: 'ImmoWorld CRM Operating System | Case Study',
       description:
         'How Hive Vault Arc supported ImmoWorld with a unified CRM operating system for lead intake, pipeline management, team workflows, and reporting.',
-      keywords: ['ImmoWorld', 'real estate CRM', 'CRM operating system', 'case study'],
+      keywords: [
+        'ImmoWorld',
+        'real estate CRM',
+        'CRM operating system',
+        'case study',
+      ],
       noIndex: false,
     },
   },
 ];
 
-export function getAllCaseStudies(locale: AppLocale = 'en'): Promise<CaseStudy[]> {
+export function getAllCaseStudies(
+  locale: AppLocale = 'en',
+): Promise<CaseStudy[]> {
   return withSanityFallback(
     () => getAllSanityCaseStudies(locale),
     () => (locale === 'en' ? CASE_STUDIES : []),
@@ -219,9 +380,7 @@ export function getAllCaseStudies(locale: AppLocale = 'en'): Promise<CaseStudy[]
   );
 }
 
-function getHomeCaseStudyProof(
-  locale: AppLocale,
-): Promise<HomeCaseStudyProof> {
+function getHomeCaseStudyProof(locale: AppLocale): Promise<HomeCaseStudyProof> {
   return withSanityFallback(
     () => getSanityHomeCaseStudyProof(locale),
     () => ({
@@ -295,7 +454,7 @@ export function getPortfolioCaseStudies(
 }
 
 export function getClientEvidenceShowcase(
-  locale: AppLocale = 'en'
+  locale: AppLocale = 'en',
 ): Promise<ClientEvidenceSummary[]> {
   const fetchEvidence = (targetLocale: AppLocale) =>
     withSanityFallback(
@@ -306,19 +465,17 @@ export function getClientEvidenceShowcase(
 
   if (locale === 'en') return fetchEvidence('en');
 
-  return Promise.all([
-    fetchEvidence(locale),
-    fetchEvidence('en'),
-  ]).then(([localizedEvidence, englishEvidence]) =>
-    localizedEvidence.length > 0
-      ? localizedEvidence
-      : englishEvidence.map((evidence) => applyFrenchCmsFallback(evidence)),
+  return Promise.all([fetchEvidence(locale), fetchEvidence('en')]).then(
+    ([localizedEvidence, englishEvidence]) =>
+      localizedEvidence.length > 0
+        ? localizedEvidence
+        : englishEvidence.map((evidence) => applyFrenchCmsFallback(evidence)),
   );
 }
 
 export const getCaseStudyBySlug = cache(async function getCaseStudyBySlug(
   slug: string,
-  locale: AppLocale = 'en'
+  locale: AppLocale = 'en',
 ): Promise<CaseStudy> {
   const caseStudy = await getPublishedDocument(locale, (targetLocale) =>
     getSanityCaseStudyBySlug(slug, targetLocale),
@@ -332,11 +489,10 @@ export const getCaseStudyBySlug = cache(async function getCaseStudyBySlug(
 export async function getRelatedCaseStudies(
   currentSlug: string,
   limit = 3,
-  locale: AppLocale = 'en'
+  locale: AppLocale = 'en',
 ): Promise<CaseStudy[]> {
   const caseStudies = await getPublishedCollection(locale, getAllCaseStudies);
   return caseStudies.items
     .filter((study) => study.slug !== currentSlug)
     .slice(0, limit);
 }
-

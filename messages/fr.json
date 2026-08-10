@@ -576,10 +576,17 @@
     },
     "caseSections": {
       "challenge": "Défi métier",
-      "architecture": "Architecture d’exécution",
+      "architecture": "Solution mise en œuvre",
+      "testimonial": "Témoignage client",
       "modules": "Modules activés",
       "stack": "Socle et intégrations",
       "projectMedia": "Preuves visuelles de l’interface",
+      "headlineMetrics": "Chiffres de l’étude de cas",
+      "metricBasis": {
+        "systemScope": "Périmètre du système",
+        "verifiedResult": "Résultat vérifié",
+        "benchmark": "Repère publié"
+      },
       "outcomesEyebrow": "Mesuré en production",
       "outcomesTitle": "Le dossier opérationnel, en chiffres.",
       "outcomesDescription": "Signaux de performance validés et résultats liés au système dans le dossier d’étude de cas {client}.",

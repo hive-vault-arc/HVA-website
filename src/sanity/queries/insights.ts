@@ -1,4 +1,4 @@
-import { defineQuery } from 'next-sanity';
+import {defineQuery} from 'next-sanity';
 
 const sourceFields = `
   sources[]{
@@ -191,13 +191,24 @@ const approvedClientEvidencePredicate = `
   defined(clientEvidence.permissionConfirmedOn) &&
   length(clientEvidence.documentTitle) > 0 &&
   length(clientEvidence.documentLanguage) > 0 &&
-  defined(clientEvidence.testimonialPdf.asset._ref) &&
-  clientEvidence.testimonialPdf.asset._ref in *[
-    _type == "sanity.fileAsset" &&
-    mimeType == "application/pdf" &&
-    size > 0 &&
-    size <= 3145728
-  ]._id
+  (
+    (
+      defined(clientEvidence.testimonialPdf.asset._ref) &&
+      clientEvidence.testimonialPdf.asset._ref in *[
+        _type == "sanity.fileAsset" &&
+        mimeType == "application/pdf" &&
+        size > 0 &&
+        size <= 3145728
+      ]._id
+    ) ||
+    (
+      defined(clientEvidence.testimonialImage.asset._ref) &&
+      length(clientEvidence.testimonialImageAlt) > 0 &&
+      clientEvidence.testimonialImage.asset._ref in *[
+        _type == "sanity.imageAsset" && mimeType == "image/webp"
+      ]._id
+    )
+  )
 `;
 
 const caseStudySummaryFields = `
@@ -206,6 +217,7 @@ const caseStudySummaryFields = `
   title,
   clientName,
   "industry": coalesce(industryRef->title, industry),
+  "engagementType": coalesce(engagementType, "customSoftware"),
   summary,
   deploymentStatus,
   "publishedOutcomes": publishedOutcomes[
@@ -510,6 +522,27 @@ const caseStudyFields = `
   systemArchitecture,
   operationalModules,
   integrations,
+  "headlineMetrics": headlineMetrics[
+    publicationStatus == "approved" &&
+    length(sourceReference) > 0 &&
+    (
+      basis == "systemScope" ||
+      (
+        defined(permissionConfirmedOn) &&
+        length(permissionReference) > 0
+      )
+    )
+  ]{
+    _key,
+    valueType,
+    value,
+    minimum,
+    maximum,
+    unit,
+    label,
+    context,
+    basis
+  },
   ${caseStudyProjectMediaFields}
 `;
 
@@ -522,11 +555,20 @@ const approvedClientEvidenceDetailField = `
       quoteExcerpt,
       signatoryName,
       signatoryRole,
-      "testimonialPdf": testimonialPdf.asset->{
-        url,
-        mimeType,
-        size
-      }
+      "testimonialPdf": select(
+        defined(testimonialPdf.asset._ref) => testimonialPdf.asset->{
+          url,
+          mimeType,
+          size
+        }
+      ),
+      testimonialImage {
+        ${imageFields}
+      },
+      testimonialImageAlt,
+      "testimonialImageWidth": testimonialImage.asset->metadata.dimensions.width,
+      "testimonialImageHeight": testimonialImage.asset->metadata.dimensions.height,
+      "testimonialImageLqip": testimonialImage.asset->metadata.lqip
     }
   )
 `;

@@ -1,4 +1,4 @@
-import type { SanityImageSource } from '@sanity/image-url';
+import type {SanityImageSource} from '@sanity/image-url';
 import type {AppLocale} from '@/i18n/config';
 import {applyFrenchCmsFallback} from '@/i18n/cms-fallback-fr';
 import {
@@ -17,11 +17,15 @@ import {
   type PaginatedInsights,
 } from './insight-pagination';
 import {localeTag, type LocalizedContentMeta} from './localized-content';
-import type { BlogPost } from './blog';
-import type { NewsArticle, ResearchReport } from './insights';
-import type { Perspective } from './perspectives';
+import type {BlogPost} from './blog';
+import type {NewsArticle, ResearchReport} from './insights';
+import type {Perspective} from './perspectives';
 import type {
   CaseStudy,
+  CaseStudyEngagementType,
+  CaseStudyHeadlineMetric,
+  CaseStudyHeadlineMetricBasis,
+  CaseStudyHeadlineMetricValueType,
   CaseStudyOutcome,
   CaseStudyOutcomeCategory,
   CaseStudyProjectMedia,
@@ -30,8 +34,8 @@ import type {
   HomeCaseStudyProof,
   PortfolioCaseStudy,
 } from './proof';
-import { sanityFetch } from '../sanity/lib/fetch';
-import { urlForImage } from '../sanity/lib/image';
+import {sanityFetch} from '../sanity/lib/fetch';
+import {urlForImage} from '../sanity/lib/image';
 import {
   allCaseStudiesQuery,
   allInsightCollectionsQuery,
@@ -60,12 +64,30 @@ const CARD_COVER_HEIGHT = 540;
 const MAX_CLIENT_EVIDENCE_PDF_SIZE = 3 * 1024 * 1024;
 
 type SanityImageValue = SanityImageSource | null | undefined;
-type SanityPost = Omit<BlogPost, 'coverImage'> & { coverImage?: SanityImageValue };
-type SanityNewsArticle = Omit<NewsArticle, 'coverImage'> & { coverImage?: SanityImageValue };
-type SanityPerspective = Omit<Perspective, 'coverImage'> & { coverImage?: SanityImageValue };
-type SanityResearchReport = Omit<ResearchReport, 'coverImage'> & { coverImage?: SanityImageValue };
-type SanityClientEvidence = Omit<ClientEvidence, 'testimonialPdf'> & {
-  testimonialPdf?: Partial<ClientEvidence['testimonialPdf']> | null;
+type SanityPost = Omit<BlogPost, 'coverImage'> & {
+  coverImage?: SanityImageValue;
+};
+type SanityNewsArticle = Omit<NewsArticle, 'coverImage'> & {
+  coverImage?: SanityImageValue;
+};
+type SanityPerspective = Omit<Perspective, 'coverImage'> & {
+  coverImage?: SanityImageValue;
+};
+type SanityResearchReport = Omit<ResearchReport, 'coverImage'> & {
+  coverImage?: SanityImageValue;
+};
+type SanityClientEvidence = Omit<
+  ClientEvidence,
+  'testimonialPdf' | 'testimonialImage'
+> & {
+  testimonialPdf?: Partial<
+    NonNullable<ClientEvidence['testimonialPdf']>
+  > | null;
+  testimonialImage?: SanityImageValue;
+  testimonialImageAlt?: string;
+  testimonialImageWidth?: number;
+  testimonialImageHeight?: number;
+  testimonialImageLqip?: string;
 };
 type SanityCaseStudyProjectMedia = Omit<CaseStudyProjectMedia, 'image'> & {
   image?: SanityImageValue;
@@ -75,12 +97,16 @@ type SanityCaseStudy = Omit<
   | 'assets'
   | 'clientEvidence'
   | 'hasClientEvidence'
+  | 'engagementType'
   | 'projectMedia'
+  | 'headlineMetrics'
   | 'publishedOutcomes'
 > & {
   hasClientEvidence?: boolean;
+  engagementType?: CaseStudyEngagementType | null;
   clientEvidence?: SanityClientEvidence | null;
   projectMedia?: SanityCaseStudyProjectMedia[] | null;
+  headlineMetrics?: Partial<CaseStudyHeadlineMetric>[] | null;
   publishedOutcomes?: Partial<CaseStudyOutcome>[] | null;
   assets?: Omit<CaseStudy['assets'], 'coverImage'> & {
     coverImage?: SanityImageValue;
@@ -118,7 +144,8 @@ type SanityHomeCaseStudyProof = {
 
 type SanityPaginatedInsight = {
   _id: string;
-  _type: 'post' | 'newsArticle' | 'perspective' | 'researchReport' | 'caseStudy';
+  _type:
+    'post' | 'newsArticle' | 'perspective' | 'researchReport' | 'caseStudy';
   language?: AppLocale;
   slug: string;
   title: string;
@@ -293,6 +320,13 @@ function logoUrlFromSource(image: SanityImageValue): string {
   return urlForImage(image).width(600).fit('max').format('webp').url();
 }
 
+function caseStudyDetailCoverUrlFromSource(image: SanityImageValue): string {
+  if (!image) return '';
+  if (typeof image === 'string') return image;
+
+  return urlForImage(image).width(COVER_WIDTH).fit('max').format('webp').url();
+}
+
 function projectMediaUrlFromSource(
   image: SanityImageValue,
   deviceType: CaseStudyProjectMedia['deviceType'],
@@ -305,6 +339,13 @@ function projectMediaUrlFromSource(
     .fit('max')
     .format('webp')
     .url();
+}
+
+function testimonialImageUrlFromSource(image: SanityImageValue): string {
+  if (!image) return '';
+  if (typeof image === 'string') return image;
+
+  return urlForImage(image).width(1400).fit('max').format('webp').url();
 }
 
 function normalizeCaseStudyProjectMedia(
@@ -350,7 +391,9 @@ function normalizeCaseStudyProjectMedia(
         evidenceType,
         alt,
         ...(item.caption?.trim() ? {caption: item.caption.trim()} : {}),
-        ...(item.disclosure?.trim() ? {disclosure: item.disclosure.trim()} : {}),
+        ...(item.disclosure?.trim()
+          ? {disclosure: item.disclosure.trim()}
+          : {}),
         publicationStatus:
           item.publicationStatus === 'approved' ? 'approved' : 'notCleared',
       },
@@ -367,6 +410,97 @@ const CASE_STUDY_OUTCOME_CATEGORIES = new Set<CaseStudyOutcomeCategory>([
   'operatingMargin',
   'other',
 ]);
+
+const CASE_STUDY_HEADLINE_METRIC_VALUE_TYPES =
+  new Set<CaseStudyHeadlineMetricValueType>([
+    'number',
+    'percentage',
+    'numberRange',
+    'percentageRange',
+    'multiplier',
+    'multiplierRange',
+    'duration',
+  ]);
+
+const CASE_STUDY_HEADLINE_METRIC_BASES = new Set<CaseStudyHeadlineMetricBasis>([
+  'systemScope',
+  'verifiedResult',
+  'benchmark',
+]);
+
+const CASE_STUDY_ENGAGEMENT_TYPES = new Set<CaseStudyEngagementType>([
+  'customSoftware',
+  'advisoryTransformation',
+  'managedOperations',
+  'hybridDelivery',
+]);
+
+function normalizeCaseStudyEngagementType(
+  value: CaseStudyEngagementType | null | undefined,
+): CaseStudyEngagementType {
+  return CASE_STUDY_ENGAGEMENT_TYPES.has(value as CaseStudyEngagementType)
+    ? (value as CaseStudyEngagementType)
+    : 'customSoftware';
+}
+
+function finiteNumber(value: unknown): number | undefined {
+  return typeof value === 'number' && Number.isFinite(value) && value >= 0
+    ? value
+    : undefined;
+}
+
+function normalizeCaseStudyHeadlineMetrics(
+  metrics: Partial<CaseStudyHeadlineMetric>[] | null | undefined,
+): CaseStudyHeadlineMetric[] {
+  return (metrics ?? []).flatMap((metric) => {
+    const key = nonEmptyString(metric._key);
+    const label = nonEmptyString(metric.label);
+    const context = nonEmptyString(metric.context);
+    const valueType = CASE_STUDY_HEADLINE_METRIC_VALUE_TYPES.has(
+      metric.valueType as CaseStudyHeadlineMetricValueType,
+    )
+      ? (metric.valueType as CaseStudyHeadlineMetricValueType)
+      : undefined;
+    const basis = CASE_STUDY_HEADLINE_METRIC_BASES.has(
+      metric.basis as CaseStudyHeadlineMetricBasis,
+    )
+      ? (metric.basis as CaseStudyHeadlineMetricBasis)
+      : undefined;
+    const value = finiteNumber(metric.value);
+    const minimum = finiteNumber(metric.minimum);
+    const maximum = finiteNumber(metric.maximum);
+    const isRange =
+      valueType === 'numberRange' ||
+      valueType === 'percentageRange' ||
+      valueType === 'multiplierRange';
+
+    if (
+      !key ||
+      !label ||
+      !context ||
+      !valueType ||
+      !basis ||
+      (isRange
+        ? minimum === undefined || maximum === undefined || maximum <= minimum
+        : value === undefined)
+    ) {
+      return [];
+    }
+
+    const unit = nonEmptyString(metric.unit);
+    return [
+      {
+        _key: key,
+        valueType,
+        ...(isRange ? {minimum, maximum} : {value}),
+        ...(unit ? {unit} : {}),
+        label,
+        context,
+        basis,
+      },
+    ];
+  });
+}
 
 function normalizeCaseStudyOutcomes(
   outcomes: Partial<CaseStudyOutcome>[] | null | undefined,
@@ -390,10 +524,14 @@ function normalizeCaseStudyOutcomes(
 }
 
 function nonEmptyString(value: unknown): string | undefined {
-  return typeof value === 'string' && value.trim().length > 0 ? value : undefined;
+  return typeof value === 'string' && value.trim().length > 0
+    ? value
+    : undefined;
 }
 
-function normalizeClientEvidence(evidence: SanityClientEvidence | null | undefined): ClientEvidence | undefined {
+function normalizeClientEvidence(
+  evidence: SanityClientEvidence | null | undefined,
+): ClientEvidence | undefined {
   if (!evidence) return undefined;
 
   const documentTitle = nonEmptyString(evidence.documentTitle);
@@ -401,17 +539,21 @@ function normalizeClientEvidence(evidence: SanityClientEvidence | null | undefin
   const pdfUrl = nonEmptyString(evidence.testimonialPdf?.url);
   const mimeType = nonEmptyString(evidence.testimonialPdf?.mimeType);
   const size = evidence.testimonialPdf?.size;
+  const testimonialImageUrl = testimonialImageUrlFromSource(
+    evidence.testimonialImage,
+  );
+  const testimonialImageAlt = nonEmptyString(evidence.testimonialImageAlt);
+  const hasValidPdf = Boolean(
+    pdfUrl &&
+    mimeType === 'application/pdf' &&
+    typeof size === 'number' &&
+    Number.isFinite(size) &&
+    size > 0 &&
+    size <= MAX_CLIENT_EVIDENCE_PDF_SIZE,
+  );
+  const hasValidImage = Boolean(testimonialImageUrl && testimonialImageAlt);
 
-  if (
-    !documentTitle ||
-    !documentLanguage ||
-    !pdfUrl ||
-    mimeType !== 'application/pdf' ||
-    typeof size !== 'number' ||
-    !Number.isFinite(size) ||
-    size <= 0 ||
-    size > MAX_CLIENT_EVIDENCE_PDF_SIZE
-  ) {
+  if (!documentTitle || !documentLanguage || (!hasValidPdf && !hasValidImage)) {
     return undefined;
   }
 
@@ -423,20 +565,45 @@ function normalizeClientEvidence(evidence: SanityClientEvidence | null | undefin
   return {
     documentTitle,
     documentLanguage,
-    ...(issuedOn ? { issuedOn } : {}),
-    ...(quoteExcerpt ? { quoteExcerpt } : {}),
-    ...(signatoryName ? { signatoryName } : {}),
-    ...(signatoryRole ? { signatoryRole } : {}),
-    testimonialPdf: {
-      url: pdfUrl,
-      mimeType,
-      size,
-    },
+    ...(issuedOn ? {issuedOn} : {}),
+    ...(quoteExcerpt ? {quoteExcerpt} : {}),
+    ...(signatoryName ? {signatoryName} : {}),
+    ...(signatoryRole ? {signatoryRole} : {}),
+    ...(hasValidPdf
+      ? {
+          testimonialPdf: {
+            url: pdfUrl!,
+            mimeType: mimeType!,
+            size: size!,
+          },
+        }
+      : {}),
+    ...(hasValidImage
+      ? {
+          testimonialImage: {
+            url: testimonialImageUrl,
+            width:
+              typeof evidence.testimonialImageWidth === 'number' &&
+              evidence.testimonialImageWidth > 0
+                ? evidence.testimonialImageWidth
+                : 1276,
+            height:
+              typeof evidence.testimonialImageHeight === 'number' &&
+              evidence.testimonialImageHeight > 0
+                ? evidence.testimonialImageHeight
+                : 1702,
+            ...(evidence.testimonialImageLqip
+              ? {lqip: evidence.testimonialImageLqip}
+              : {}),
+            alt: testimonialImageAlt!,
+          },
+        }
+      : {}),
   };
 }
 
 function normalizeClientEvidenceSummary(
-  evidence: SanityClientEvidenceSummary
+  evidence: SanityClientEvidenceSummary,
 ): ClientEvidenceSummary | null {
   const slug = nonEmptyString(evidence.slug);
   const caseStudyTitle = nonEmptyString(evidence.caseStudyTitle);
@@ -445,7 +612,14 @@ function normalizeClientEvidenceSummary(
   const documentTitle = nonEmptyString(evidence.documentTitle);
   const documentLanguage = nonEmptyString(evidence.documentLanguage);
 
-  if (!slug || !caseStudyTitle || !clientName || !industry || !documentTitle || !documentLanguage) {
+  if (
+    !slug ||
+    !caseStudyTitle ||
+    !clientName ||
+    !industry ||
+    !documentTitle ||
+    !documentLanguage
+  ) {
     return null;
   }
 
@@ -464,14 +638,15 @@ function normalizeClientEvidenceSummary(
     industry,
     documentTitle,
     documentLanguage,
-    ...(issuedOn ? { issuedOn } : {}),
-    ...(quoteExcerpt ? { quoteExcerpt } : {}),
-    ...(signatoryName ? { signatoryName } : {}),
-    ...(signatoryRole ? { signatoryRole } : {}),
-    ...(clientLogo ? { clientLogo } : {}),
-    clientLogoAlt: nonEmptyString(evidence.clientLogoAlt) ?? `${clientName} logo`,
-    ...(coverImage ? { coverImage } : {}),
-    ...(coverImageAlt ? { coverImageAlt } : {}),
+    ...(issuedOn ? {issuedOn} : {}),
+    ...(quoteExcerpt ? {quoteExcerpt} : {}),
+    ...(signatoryName ? {signatoryName} : {}),
+    ...(signatoryRole ? {signatoryRole} : {}),
+    ...(clientLogo ? {clientLogo} : {}),
+    clientLogoAlt:
+      nonEmptyString(evidence.clientLogoAlt) ?? `${clientName} logo`,
+    ...(coverImage ? {coverImage} : {}),
+    ...(coverImageAlt ? {coverImageAlt} : {}),
   };
 }
 
@@ -492,7 +667,10 @@ function normalizePost(post: SanityPost, listing = false): BlogPost {
   };
 }
 
-function normalizeNewsArticle(article: SanityNewsArticle, listing = false): NewsArticle {
+function normalizeNewsArticle(
+  article: SanityNewsArticle,
+  listing = false,
+): NewsArticle {
   return {
     ...article,
     coverImage: imageUrlFromSource(
@@ -507,7 +685,10 @@ function normalizeNewsArticle(article: SanityNewsArticle, listing = false): News
   };
 }
 
-function normalizePerspective(perspective: SanityPerspective, listing = false): Perspective {
+function normalizePerspective(
+  perspective: SanityPerspective,
+  listing = false,
+): Perspective {
   return {
     ...perspective,
     authors: perspective.authors ?? [],
@@ -523,7 +704,10 @@ function normalizePerspective(perspective: SanityPerspective, listing = false): 
   };
 }
 
-function normalizeResearchReport(report: SanityResearchReport, listing = false): ResearchReport {
+function normalizeResearchReport(
+  report: SanityResearchReport,
+  listing = false,
+): ResearchReport {
   return {
     ...report,
     authors: report.authors ?? [],
@@ -539,12 +723,16 @@ function normalizeResearchReport(report: SanityResearchReport, listing = false):
   };
 }
 
-function normalizeCaseStudy(study: SanityCaseStudy, listing = false): CaseStudy {
+function normalizeCaseStudy(
+  study: SanityCaseStudy,
+  listing = false,
+): CaseStudy {
   const {
     assets: rawAssets,
     clientEvidence: rawClientEvidence,
     hasClientEvidence: rawHasClientEvidence,
     projectMedia: rawProjectMedia,
+    headlineMetrics: rawHeadlineMetrics,
     publishedOutcomes: rawPublishedOutcomes,
     ...baseStudy
   } = study;
@@ -555,24 +743,28 @@ function normalizeCaseStudy(study: SanityCaseStudy, listing = false): CaseStudy 
     clientLogo?: SanityImageValue;
     clientLogoAlt?: string;
     clientWebsite?: string;
-  } = rawAssets ?? { logoLabel: study.clientName };
+  } = rawAssets ?? {logoLabel: study.clientName};
   const clientEvidence = normalizeClientEvidence(rawClientEvidence);
 
   return {
     ...baseStudy,
+    engagementType: normalizeCaseStudyEngagementType(study.engagementType),
     operationalModules: study.operationalModules ?? [],
     integrations: study.integrations ?? [],
+    headlineMetrics: normalizeCaseStudyHeadlineMetrics(rawHeadlineMetrics),
     publishedOutcomes: normalizeCaseStudyOutcomes(rawPublishedOutcomes),
     projectMedia: normalizeCaseStudyProjectMedia(rawProjectMedia),
     hasClientEvidence: Boolean(rawHasClientEvidence || clientEvidence),
-    ...(clientEvidence ? { clientEvidence } : {}),
+    ...(clientEvidence ? {clientEvidence} : {}),
     assets: {
       ...assets,
-      coverImage: imageUrlFromSource(
-        assets.coverImage,
-        listing ? CARD_COVER_WIDTH : COVER_WIDTH,
-        listing ? CARD_COVER_HEIGHT : COVER_HEIGHT,
-      ),
+      coverImage: listing
+        ? imageUrlFromSource(
+            assets.coverImage,
+            CARD_COVER_WIDTH,
+            CARD_COVER_HEIGHT,
+          )
+        : caseStudyDetailCoverUrlFromSource(assets.coverImage),
       coverAlt: assets.coverAlt ?? study.title,
       logoLabel: assets.logoLabel ?? study.clientName,
       clientLogo: logoUrlFromSource(assets.clientLogo),
@@ -770,19 +962,13 @@ function normalizePaginatedCollectionItem(
     href: collectionHref(item._type, item.slug),
     title: item.title,
     excerpt: item.excerpt ?? item.summary ?? '',
-    image: imageUrlFromSource(
-      imageSource,
-      CARD_COVER_WIDTH,
-      CARD_COVER_HEIGHT,
-    ),
+    image: imageUrlFromSource(imageSource, CARD_COVER_WIDTH, CARD_COVER_HEIGHT),
     date: item.publishedAt ?? item.lastUpdated ?? '',
     sourceLocale: locale,
     industry: normalizeInsightIndustry(item.industryTaxonomy),
     ...(item.readTime ? {readTime: item.readTime} : {}),
     ...(item.authorName ? {authorName: item.authorName} : {}),
-    ...(item.deploymentStatus
-      ? {deploymentStatus: item.deploymentStatus}
-      : {}),
+    ...(item.deploymentStatus ? {deploymentStatus: item.deploymentStatus} : {}),
     ...(item.hasClientEvidence
       ? {hasClientEvidence: item.hasClientEvidence}
       : {}),
@@ -814,12 +1000,7 @@ export async function getPaginatedSanityInsightCollection(
       industryId: industryId ?? '',
       includeIndustries,
     },
-    tags: [
-      INSIGHTS_TAG,
-      'industries',
-      tag,
-      localeTag(tag, locale),
-    ],
+    tags: [INSIGHTS_TAG, 'industries', tag, localeTag(tag, locale)],
   });
   const rawItems = result.items ?? [];
   const lastItem = rawItems.at(-1);
@@ -876,7 +1057,9 @@ export async function getSanityInsightCollections(
   };
 }
 
-function normalizePortfolioCaseStudy(study: SanityPortfolioCaseStudy): PortfolioCaseStudy {
+function normalizePortfolioCaseStudy(
+  study: SanityPortfolioCaseStudy,
+): PortfolioCaseStudy {
   const assets = study.assets ?? {};
 
   return {
@@ -958,7 +1141,9 @@ export async function getSanityIndustryInsightCollections(
   };
 }
 
-export async function getAllSanityPosts(locale: AppLocale = 'en'): Promise<BlogPost[]> {
+export async function getAllSanityPosts(
+  locale: AppLocale = 'en',
+): Promise<BlogPost[]> {
   const posts = await sanityFetch<SanityPost[]>({
     query: allPostsQuery,
     params: {locale},
@@ -970,7 +1155,7 @@ export async function getAllSanityPosts(locale: AppLocale = 'en'): Promise<BlogP
 
 export async function getSanityPostBySlug(
   slug: string,
-  locale: AppLocale = 'en'
+  locale: AppLocale = 'en',
 ): Promise<BlogPost | null> {
   const post = await sanityFetch<SanityPost | null>({
     query: postBySlugQuery,
@@ -984,14 +1169,14 @@ export async function getSanityPostBySlug(
 export async function getRelatedSanityPosts(
   currentSlug: string,
   limit = 3,
-  locale: AppLocale = 'en'
+  locale: AppLocale = 'en',
 ): Promise<BlogPost[]> {
   const posts = await getAllSanityPosts(locale);
   return posts.filter((post) => post.slug !== currentSlug).slice(0, limit);
 }
 
 export async function getAllSanityNewsArticles(
-  locale: AppLocale = 'en'
+  locale: AppLocale = 'en',
 ): Promise<NewsArticle[]> {
   const articles = await sanityFetch<SanityNewsArticle[]>({
     query: allNewsArticlesQuery,
@@ -1004,7 +1189,7 @@ export async function getAllSanityNewsArticles(
 
 export async function getSanityNewsArticleBySlug(
   slug: string,
-  locale: AppLocale = 'en'
+  locale: AppLocale = 'en',
 ): Promise<NewsArticle | null> {
   const article = await sanityFetch<SanityNewsArticle | null>({
     query: newsArticleBySlugQuery,
@@ -1022,14 +1207,16 @@ export async function getSanityNewsArticleBySlug(
 export async function getRelatedSanityNewsArticles(
   currentSlug: string,
   limit = 3,
-  locale: AppLocale = 'en'
+  locale: AppLocale = 'en',
 ): Promise<NewsArticle[]> {
   const articles = await getAllSanityNewsArticles(locale);
-  return articles.filter((article) => article.slug !== currentSlug).slice(0, limit);
+  return articles
+    .filter((article) => article.slug !== currentSlug)
+    .slice(0, limit);
 }
 
 export async function getAllSanityPerspectives(
-  locale: AppLocale = 'en'
+  locale: AppLocale = 'en',
 ): Promise<Perspective[]> {
   const perspectives = await sanityFetch<SanityPerspective[]>({
     query: allPerspectivesQuery,
@@ -1037,12 +1224,14 @@ export async function getAllSanityPerspectives(
     tags: [INSIGHTS_TAG, 'perspectives', localeTag('perspectives', locale)],
   });
 
-  return perspectives.map((perspective) => normalizePerspective(perspective, true));
+  return perspectives.map((perspective) =>
+    normalizePerspective(perspective, true),
+  );
 }
 
 export async function getSanityPerspectiveBySlug(
   slug: string,
-  locale: AppLocale = 'en'
+  locale: AppLocale = 'en',
 ): Promise<Perspective | null> {
   const perspective = await sanityFetch<SanityPerspective | null>({
     query: perspectiveBySlugQuery,
@@ -1060,19 +1249,25 @@ export async function getSanityPerspectiveBySlug(
 export async function getRelatedSanityPerspectives(
   currentSlug: string,
   limit = 3,
-  locale: AppLocale = 'en'
+  locale: AppLocale = 'en',
 ): Promise<Perspective[]> {
   const perspectives = await getAllSanityPerspectives(locale);
-  return perspectives.filter((perspective) => perspective.slug !== currentSlug).slice(0, limit);
+  return perspectives
+    .filter((perspective) => perspective.slug !== currentSlug)
+    .slice(0, limit);
 }
 
 export async function getAllSanityResearchReports(
-  locale: AppLocale = 'en'
+  locale: AppLocale = 'en',
 ): Promise<ResearchReport[]> {
   const reports = await sanityFetch<SanityResearchReport[]>({
     query: allResearchReportsQuery,
     params: {locale},
-    tags: [INSIGHTS_TAG, 'researchReports', localeTag('researchReports', locale)],
+    tags: [
+      INSIGHTS_TAG,
+      'researchReports',
+      localeTag('researchReports', locale),
+    ],
   });
 
   return reports.map((report) => normalizeResearchReport(report, true));
@@ -1080,7 +1275,7 @@ export async function getAllSanityResearchReports(
 
 export async function getSanityResearchReportBySlug(
   slug: string,
-  locale: AppLocale = 'en'
+  locale: AppLocale = 'en',
 ): Promise<ResearchReport | null> {
   const report = await sanityFetch<SanityResearchReport | null>({
     query: researchReportBySlugQuery,
@@ -1096,7 +1291,7 @@ export async function getSanityResearchReportBySlug(
 }
 
 export async function getAllSanityCaseStudies(
-  locale: AppLocale = 'en'
+  locale: AppLocale = 'en',
 ): Promise<CaseStudy[]> {
   const studies = await sanityFetch<SanityCaseStudy[]>({
     query: allCaseStudiesQuery,
@@ -1139,7 +1334,7 @@ export async function getSanityPortfolioCaseStudies(
 }
 
 export async function getSanityClientEvidenceShowcase(
-  locale: AppLocale = 'en'
+  locale: AppLocale = 'en',
 ): Promise<ClientEvidenceSummary[]> {
   const evidence = await sanityFetch<SanityClientEvidenceSummary[]>({
     query: clientEvidenceShowcaseQuery,
@@ -1154,7 +1349,7 @@ export async function getSanityClientEvidenceShowcase(
 
 export async function getSanityCaseStudyBySlug(
   slug: string,
-  locale: AppLocale = 'en'
+  locale: AppLocale = 'en',
 ): Promise<CaseStudy | null> {
   const study = await sanityFetch<SanityCaseStudy | null>({
     query: caseStudyBySlugQuery,
@@ -1172,7 +1367,7 @@ export async function getSanityCaseStudyBySlug(
 export async function getRelatedSanityCaseStudies(
   currentSlug: string,
   limit = 3,
-  locale: AppLocale = 'en'
+  locale: AppLocale = 'en',
 ): Promise<CaseStudy[]> {
   const studies = await getAllSanityCaseStudies(locale);
   return studies.filter((study) => study.slug !== currentSlug).slice(0, limit);
