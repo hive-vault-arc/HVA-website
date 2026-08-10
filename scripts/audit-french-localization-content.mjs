@@ -1,6 +1,6 @@
 import {getCliClient} from 'sanity/cli'
 
-const client = getCliClient({apiVersion: '2026-07-24'}).withConfig({perspective: 'raw'})
+const client = getCliClient({apiVersion: '2026-08-10'}).withConfig({perspective: 'published'})
 const types = [
   'post',
   'newsArticle',
@@ -9,13 +9,14 @@ const types = [
   'caseStudy',
   'employeeProfile',
   'capability',
+  'industry',
 ]
 
 const documents = await client.fetch(
   `*[
     _type in $types &&
-    _id in path("drafts.**") &&
-    language == "fr"
+    language == "fr" &&
+    translationStatus == "approved"
   ] | order(_type asc, title asc) {
     _id,
     _type,
@@ -26,6 +27,7 @@ const documents = await client.fetch(
     summary,
     excerpt,
     subtitle,
+    description,
     category,
     tag,
     readTime,
@@ -36,27 +38,34 @@ const documents = await client.fetch(
   {types},
 )
 
-const result = documents.map((document) => ({
-  id: document._id,
-  type: document._type,
-  title: document.title ?? document.name,
-  slug: document.slug,
-  translationStatus: document.translationStatus,
-  displayFields: Object.fromEntries(
-    [
-      'subtitle',
-      'summary',
-      'excerpt',
-      'category',
-      'tag',
-      'readTime',
-      'briefLine',
-      'position',
-      'responsibilityTag',
-    ]
-      .filter((field) => typeof document[field] === 'string' && document[field].trim().length > 0)
-      .map((field) => [field, document[field]]),
+console.log(
+  JSON.stringify(
+    documents.map((document) => ({
+      id: document._id,
+      type: document._type,
+      title: document.title ?? document.name,
+      slug: document.slug,
+      translationStatus: document.translationStatus,
+      displayFields: Object.fromEntries(
+        [
+          'subtitle',
+          'summary',
+          'excerpt',
+          'description',
+          'category',
+          'tag',
+          'readTime',
+          'briefLine',
+          'position',
+          'responsibilityTag',
+        ]
+          .filter(
+            (field) => typeof document[field] === 'string' && document[field].trim().length > 0,
+          )
+          .map((field) => [field, document[field]]),
+      ),
+    })),
+    null,
+    2,
   ),
-}))
-
-console.log(JSON.stringify(result, null, 2))
+)
