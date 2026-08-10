@@ -1,5 +1,21 @@
 import type { SanityImageSource } from '@sanity/image-url';
 import type {AppLocale} from '@/i18n/config';
+import {applyFrenchCmsFallback} from '@/i18n/cms-fallback-fr';
+import {
+  INSIGHT_COLLECTION_INITIAL_SIZE,
+  INSIGHT_COLLECTION_NEXT_SIZE,
+  type InsightCollectionCursor,
+  type InsightCollectionItem,
+  type InsightCollectionType,
+  type InsightIndustry,
+  type PaginatedInsightCollection,
+} from './insight-collection-pagination';
+import {
+  INSIGHTS_PAGE_SIZE,
+  type InsightListingItem,
+  type InsightPageCursor,
+  type PaginatedInsights,
+} from './insight-pagination';
 import {localeTag, type LocalizedContentMeta} from './localized-content';
 import type { BlogPost } from './blog';
 import type { NewsArticle, ResearchReport } from './insights';
@@ -11,6 +27,8 @@ import type {
   CaseStudyProjectMedia,
   ClientEvidence,
   ClientEvidenceSummary,
+  HomeCaseStudyProof,
+  PortfolioCaseStudy,
 } from './proof';
 import { sanityFetch } from '../sanity/lib/fetch';
 import { urlForImage } from '../sanity/lib/image';
@@ -23,9 +41,13 @@ import {
   allResearchReportsQuery,
   caseStudyBySlugQuery,
   clientEvidenceShowcaseQuery,
+  homeCaseStudyProofQuery,
   industryInsightCollectionsQuery,
   newsArticleBySlugQuery,
+  paginatedInsightCollectionQuery,
   perspectiveBySlugQuery,
+  paginatedInsightsQuery,
+  portfolioCaseStudiesQuery,
   postBySlugQuery,
   researchReportBySlugQuery,
 } from '../sanity/queries/insights';
@@ -89,6 +111,74 @@ type SanityInsightCollections = {
   caseStudies?: SanityCaseStudy[];
 };
 
+type SanityHomeCaseStudyProof = {
+  caseStudies?: SanityCaseStudy[];
+  clientEvidence?: SanityClientEvidenceSummary[];
+};
+
+type SanityPaginatedInsight = {
+  _id: string;
+  _type: 'post' | 'newsArticle' | 'perspective' | 'researchReport' | 'caseStudy';
+  language?: AppLocale;
+  slug: string;
+  title: string;
+  publishedAt?: string;
+  lastUpdated?: string;
+  category?: string;
+  excerpt?: string;
+  summary?: string;
+  tag?: string;
+  readTime?: string;
+  clientName?: string;
+  industry?: string;
+  coverImage?: SanityImageValue;
+  assets?: {
+    coverImage?: SanityImageValue;
+  };
+};
+
+type SanityPaginatedInsightsResult = {
+  items?: SanityPaginatedInsight[];
+  total?: number;
+  fallbackCount?: number;
+};
+
+type SanityInsightIndustry = {
+  id?: string;
+  title?: string;
+  slug?: string;
+  language?: AppLocale;
+};
+
+type SanityPaginatedCollectionItem = {
+  _id: string;
+  _type: InsightCollectionType;
+  language?: AppLocale;
+  slug: string;
+  title: string;
+  publishedAt?: string;
+  lastUpdated?: string;
+  excerpt?: string;
+  summary?: string;
+  readTime?: string;
+  authorName?: string;
+  deploymentStatus?: string;
+  legacyIndustry?: string;
+  hasClientEvidence?: boolean;
+  industryTaxonomy?: SanityInsightIndustry | null;
+  coverImage?: SanityImageValue;
+  assets?: {
+    coverImage?: SanityImageValue;
+  };
+};
+
+type SanityPaginatedInsightCollectionResult = {
+  items?: SanityPaginatedCollectionItem[];
+  total?: number;
+  fallbackCount?: number;
+  industries?: SanityInsightIndustry[];
+};
+
 export type InsightCollections = {
   posts: BlogPost[];
   newsArticles: NewsArticle[];
@@ -129,6 +219,14 @@ export type IndustryCaseStudyInsight = Omit<
   lastUpdated: string;
   assets: {
     coverImage: string;
+  };
+};
+type SanityPortfolioCaseStudy = Omit<PortfolioCaseStudy, 'assets'> & {
+  assets?: {
+    coverImage?: SanityImageValue;
+    coverAlt?: string;
+    clientLogo?: SanityImageValue;
+    clientLogoAlt?: string;
   };
 };
 
@@ -484,6 +582,265 @@ function normalizeCaseStudy(study: SanityCaseStudy, listing = false): CaseStudy 
   };
 }
 
+function normalizePaginatedInsight(
+  rawItem: SanityPaginatedInsight,
+  locale: AppLocale,
+): InsightListingItem {
+  const item =
+    locale === 'fr' && rawItem.language === 'en'
+      ? applyFrenchCmsFallback(rawItem)
+      : rawItem;
+  const date = item.publishedAt ?? item.lastUpdated ?? '';
+  const image = imageUrlFromSource(
+    item._type === 'caseStudy' ? item.assets?.coverImage : item.coverImage,
+    CARD_COVER_WIDTH,
+    CARD_COVER_HEIGHT,
+  );
+  const base = {
+    id: item._id,
+    title: item.title,
+    image,
+    date,
+    sourceLocale: locale,
+  };
+
+  switch (item._type) {
+    case 'post':
+      return {
+        ...base,
+        type: 'blog',
+        tag: item.category ?? '',
+        excerpt: item.excerpt ?? '',
+        href: `/blog/${item.slug}`,
+        ...(item.readTime ? {readTime: item.readTime} : {}),
+      };
+    case 'newsArticle':
+      return {
+        ...base,
+        type: 'news-article',
+        tag: item.category ?? item.tag ?? '',
+        excerpt: item.summary ?? '',
+        href: `/insights/news-articles/${item.slug}`,
+        ...(item.readTime ? {readTime: item.readTime} : {}),
+      };
+    case 'perspective':
+      return {
+        ...base,
+        type: 'perspective',
+        tag: item.tag ?? '',
+        excerpt: item.summary ?? '',
+        href: `/insights/perspectives/${item.slug}`,
+        ...(item.readTime ? {readTime: item.readTime} : {}),
+      };
+    case 'researchReport':
+      return {
+        ...base,
+        type: 'research-report',
+        tag: item.tag ?? '',
+        excerpt: item.summary ?? '',
+        href: `/insights/research-reports/${item.slug}`,
+        ...(item.readTime ? {readTime: item.readTime} : {}),
+      };
+    case 'caseStudy':
+      return {
+        ...base,
+        type: 'case-study',
+        tag: item.industry ?? '',
+        excerpt: item.summary ?? '',
+        href: `/case-studies/${item.slug}`,
+        ...(item.clientName ? {meta: item.clientName} : {}),
+      };
+  }
+}
+
+export async function getPaginatedSanityInsights(
+  locale: AppLocale,
+  cursor: InsightPageCursor | null = null,
+): Promise<PaginatedInsights> {
+  const result = await sanityFetch<SanityPaginatedInsightsResult>({
+    query: paginatedInsightsQuery,
+    params: {
+      locale,
+      limit: INSIGHTS_PAGE_SIZE,
+      hasCursor: cursor !== null,
+      cursorDate: cursor?.date ?? '',
+      cursorId: cursor?.id ?? '',
+    },
+    tags: [
+      INSIGHTS_TAG,
+      localeTag('posts', locale),
+      localeTag('newsArticles', locale),
+      localeTag('perspectives', locale),
+      localeTag('researchReports', locale),
+      localeTag('caseStudies', locale),
+    ],
+  });
+  const rawItems = result.items ?? [];
+  const items = rawItems.map((item) => normalizePaginatedInsight(item, locale));
+  const lastItem = rawItems.at(-1);
+
+  return {
+    items,
+    total: Math.max(0, result.total ?? 0),
+    hasFallbackContent: (result.fallbackCount ?? 0) > 0,
+    nextCursor:
+      rawItems.length === INSIGHTS_PAGE_SIZE && lastItem
+        ? {
+            date: lastItem.publishedAt ?? lastItem.lastUpdated ?? '',
+            id: lastItem._id,
+          }
+        : null,
+  };
+}
+
+const insightCollectionTags: Record<InsightCollectionType, string> = {
+  post: 'posts',
+  newsArticle: 'newsArticles',
+  perspective: 'perspectives',
+  researchReport: 'researchReports',
+  caseStudy: 'caseStudies',
+};
+
+function normalizeInsightIndustry(
+  industry: SanityInsightIndustry | null | undefined,
+): InsightIndustry | null {
+  const id = nonEmptyString(industry?.id);
+  const title = nonEmptyString(industry?.title);
+  const slug = nonEmptyString(industry?.slug);
+
+  return id && title && slug ? {id, title, slug} : null;
+}
+
+function normalizeInsightIndustries(
+  industries: SanityInsightIndustry[],
+  locale: AppLocale,
+): InsightIndustry[] {
+  const grouped = new Map<string, SanityInsightIndustry[]>();
+
+  for (const industry of industries) {
+    const slug = nonEmptyString(industry.slug);
+    if (!slug) continue;
+
+    grouped.set(slug, [...(grouped.get(slug) ?? []), industry]);
+  }
+
+  return [...grouped.entries()]
+    .map(([slug, translations]) => {
+      const preferred =
+        translations.find((industry) => industry.language === locale) ??
+        translations.find((industry) => industry.language === 'en') ??
+        translations[0];
+      const title = nonEmptyString(preferred?.title);
+
+      return title ? {id: slug, title, slug} : null;
+    })
+    .filter((industry): industry is InsightIndustry => industry !== null);
+}
+
+function collectionHref(type: InsightCollectionType, slug: string): string {
+  switch (type) {
+    case 'post':
+      return `/blog/${slug}`;
+    case 'newsArticle':
+      return `/insights/news-articles/${slug}`;
+    case 'perspective':
+      return `/insights/perspectives/${slug}`;
+    case 'researchReport':
+      return `/insights/research-reports/${slug}`;
+    case 'caseStudy':
+      return `/case-studies/${slug}`;
+  }
+}
+
+function normalizePaginatedCollectionItem(
+  rawItem: SanityPaginatedCollectionItem,
+  locale: AppLocale,
+): InsightCollectionItem {
+  const item =
+    locale === 'fr' && rawItem.language === 'en'
+      ? applyFrenchCmsFallback(rawItem)
+      : rawItem;
+  const imageSource =
+    item._type === 'caseStudy' ? item.assets?.coverImage : item.coverImage;
+
+  return {
+    id: item._id,
+    type: item._type,
+    slug: item.slug,
+    href: collectionHref(item._type, item.slug),
+    title: item.title,
+    excerpt: item.excerpt ?? item.summary ?? '',
+    image: imageUrlFromSource(
+      imageSource,
+      CARD_COVER_WIDTH,
+      CARD_COVER_HEIGHT,
+    ),
+    date: item.publishedAt ?? item.lastUpdated ?? '',
+    sourceLocale: locale,
+    industry: normalizeInsightIndustry(item.industryTaxonomy),
+    ...(item.readTime ? {readTime: item.readTime} : {}),
+    ...(item.authorName ? {authorName: item.authorName} : {}),
+    ...(item.deploymentStatus
+      ? {deploymentStatus: item.deploymentStatus}
+      : {}),
+    ...(item.hasClientEvidence
+      ? {hasClientEvidence: item.hasClientEvidence}
+      : {}),
+  };
+}
+
+export async function getPaginatedSanityInsightCollection(
+  locale: AppLocale,
+  collectionType: InsightCollectionType,
+  cursor: InsightCollectionCursor | null = null,
+  industryId: string | null = null,
+  includeIndustries = false,
+): Promise<PaginatedInsightCollection> {
+  const limit =
+    cursor === null
+      ? INSIGHT_COLLECTION_INITIAL_SIZE
+      : INSIGHT_COLLECTION_NEXT_SIZE;
+  const tag = insightCollectionTags[collectionType];
+  const result = await sanityFetch<SanityPaginatedInsightCollectionResult>({
+    query: paginatedInsightCollectionQuery,
+    params: {
+      locale,
+      collectionType,
+      limit,
+      hasCursor: cursor !== null,
+      cursorDate: cursor?.date ?? '',
+      cursorId: cursor?.id ?? '',
+      hasIndustry: Boolean(industryId),
+      industryId: industryId ?? '',
+      includeIndustries,
+    },
+    tags: [
+      INSIGHTS_TAG,
+      'industries',
+      tag,
+      localeTag(tag, locale),
+    ],
+  });
+  const rawItems = result.items ?? [];
+  const lastItem = rawItems.at(-1);
+
+  return {
+    items: rawItems.map((item) =>
+      normalizePaginatedCollectionItem(item, locale),
+    ),
+    total: Math.max(0, result.total ?? 0),
+    nextCursor:
+      rawItems.length === limit && lastItem
+        ? {
+            date: lastItem.publishedAt ?? lastItem.lastUpdated ?? '',
+            id: lastItem._id,
+          }
+        : null,
+    hasFallbackContent: (result.fallbackCount ?? 0) > 0,
+    industries: normalizeInsightIndustries(result.industries ?? [], locale),
+  };
+}
+
 export async function getSanityInsightCollections(
   locales: AppLocale[],
 ): Promise<InsightCollections> {
@@ -516,6 +873,24 @@ export async function getSanityInsightCollections(
     caseStudies: (collections.caseStudies ?? []).map((study) =>
       normalizeCaseStudy(study, true),
     ),
+  };
+}
+
+function normalizePortfolioCaseStudy(study: SanityPortfolioCaseStudy): PortfolioCaseStudy {
+  const assets = study.assets ?? {};
+
+  return {
+    ...study,
+    assets: {
+      coverImage: imageUrlFromSource(
+        assets.coverImage,
+        CARD_COVER_WIDTH,
+        CARD_COVER_HEIGHT,
+      ),
+      coverAlt: assets.coverAlt ?? study.title,
+      clientLogo: logoUrlFromSource(assets.clientLogo),
+      clientLogoAlt: assets.clientLogoAlt ?? `${study.clientName} logo`,
+    },
   };
 }
 
@@ -730,6 +1105,37 @@ export async function getAllSanityCaseStudies(
   });
 
   return studies.map((study) => normalizeCaseStudy(study, true));
+}
+
+export async function getSanityHomeCaseStudyProof(
+  locale: AppLocale = 'en',
+): Promise<HomeCaseStudyProof> {
+  const proof = await sanityFetch<SanityHomeCaseStudyProof>({
+    query: homeCaseStudyProofQuery,
+    params: {locale},
+    tags: [INSIGHTS_TAG, 'caseStudies', localeTag('caseStudies', locale)],
+  });
+
+  return {
+    caseStudies: (proof.caseStudies ?? []).map((study) =>
+      normalizeCaseStudy(study, true),
+    ),
+    clientEvidence: (proof.clientEvidence ?? [])
+      .map(normalizeClientEvidenceSummary)
+      .filter((item): item is ClientEvidenceSummary => item !== null),
+  };
+}
+
+export async function getSanityPortfolioCaseStudies(
+  locale: AppLocale = 'en',
+): Promise<PortfolioCaseStudy[]> {
+  const studies = await sanityFetch<SanityPortfolioCaseStudy[]>({
+    query: portfolioCaseStudiesQuery,
+    params: {locale},
+    tags: [INSIGHTS_TAG, 'caseStudies', localeTag('caseStudies', locale)],
+  });
+
+  return studies.map(normalizePortfolioCaseStudy);
 }
 
 export async function getSanityClientEvidenceShowcase(

@@ -49,13 +49,14 @@ type PageProps = {params: Promise<{locale: AppLocale}>};
 
 export async function generateMetadata({params}: PageProps): Promise<Metadata> {
   const {locale} = await params;
-  const founders = foundersFrom(await getFeaturedEmployeeProfiles(locale));
 
   return buildStaticRouteMetadata(
     locale,
     'about',
     mergeKeywords(GLOBAL_KEYWORDS, [
-      ...founders.flatMap((member) => [member.name, member.position, ...member.expertise]),
+      'Khalid Chalhi',
+      'Ali Amrani',
+      'Oubay Ghamat',
       'CEO of HVA',
       'CEO of Hive Vault Arc',
       'Hive Vault Arc CEO',

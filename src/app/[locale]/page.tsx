@@ -12,8 +12,7 @@ import { getAllPosts, type BlogPost } from '@/lib/blog';
 import { buildHomeHeroProof } from '@/lib/home-hero';
 import {getTranslations} from 'next-intl/server';
 import {
-  getAllCaseStudies,
-  getClientEvidenceShowcase,
+  getPublishedHomeCaseStudyProof,
   type CaseStudy,
   type CaseStudyShowcaseSummary,
 } from '@/lib/proof';
@@ -89,18 +88,24 @@ function buildInsightsCarouselItems(
 
 export default async function Page({params}: PageProps) {
   const {locale} = await params;
-  const [posts, caseStudies, clientEvidence] = await Promise.all([
+  const [
+    posts,
+    homeProof,
+    homeFaqs,
+    tHome,
+    tHomeMeta,
+    tCapabilitiesMeta,
+    tNavigation,
+  ] = await Promise.all([
     getPublishedCollection(locale, getAllPosts),
-    getPublishedCollection(locale, getAllCaseStudies),
-    getClientEvidenceShowcase(locale),
-  ]);
-  const [homeFaqs, tHome, tHomeMeta, tCapabilitiesMeta, tNavigation] = await Promise.all([
+    getPublishedHomeCaseStudyProof(locale),
     getLocalizedFaqs(locale, 'home'),
     getTranslations({locale, namespace: 'Home'}),
     getTranslations({locale, namespace: 'Metadata.pages.home'}),
     getTranslations({locale, namespace: 'Metadata.pages.capabilities'}),
     getTranslations({locale, namespace: 'Navigation'}),
   ]);
+  const {caseStudies, clientEvidence} = homeProof;
   const serviceGuides = tHome.raw('serviceGuides.items') as Array<{
     href: '/digital-services-tangier' | '/ai-agents-morocco';
     label: string;

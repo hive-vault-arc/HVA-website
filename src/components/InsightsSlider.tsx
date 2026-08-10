@@ -93,9 +93,13 @@ export default function InsightsSlider({
         {/* Left controls */}
         <div className="insights-slider-controls">
           <div className="insights-slider-counter" aria-live="polite" aria-atomic="true">
-            <span className="insights-slider-counter-current">{current + 1}</span>
+            <span className="insights-slider-counter-current">
+              {String(current + 1).padStart(2, '0')}
+            </span>
             <span className="insights-slider-counter-sep" aria-hidden="true" />
-            <span className="insights-slider-counter-total">{total}</span>
+            <span className="insights-slider-counter-total">
+              {String(total).padStart(2, '0')}
+            </span>
           </div>
 
           <div className="insights-slider-nav">
@@ -150,16 +154,18 @@ export default function InsightsSlider({
                   >
                   {/* Background image */}
                   <div className="insights-slide-bg">
+                    <span className="insights-slide-index" aria-hidden="true">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
                     <motion.img
                       src={item.image}
                       alt={item.title}
                       loading={i === current ? 'eager' : 'lazy'}
                       fetchPriority={i === current ? 'high' : 'low'}
                       decoding="async"
-                      className="insights-slide-img"
+                      className="insights-slide-img insights-card-image"
                       animate={{
                         scale: isHovered ? 1.06 : 1,
-                        filter: isHovered ? 'blur(8px)' : 'blur(0px)',
                       }}
                       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                     />

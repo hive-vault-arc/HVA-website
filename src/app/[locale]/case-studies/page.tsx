@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import type {AppLocale} from "@/i18n/config";
 import {buildStaticRouteMetadata} from "@/i18n/metadata";
 import JsonLd from '@/components/JsonLd';
-import { getAllCaseStudies } from '@/lib/proof';
+import {getResilientPaginatedInsightCollection} from '@/lib/resilient-insights';
 import {
   SITE_URL,
   absoluteUrl,
@@ -11,7 +11,6 @@ import {
 import CaseStudies from '@/views/CaseStudies';
 import {localizedPath} from '@/i18n/route-manifest';
 import {getTranslations} from 'next-intl/server';
-import {getPublishedCollection} from '@/lib/localized-content';
 
 type PageProps = {params: Promise<{locale: AppLocale}>};
 
@@ -22,8 +21,14 @@ export async function generateMetadata({params}: PageProps): Promise<Metadata> {
 
 export default async function CaseStudiesPage({params}: PageProps) {
   const {locale} = await params;
-  const [studies, tMeta, tNav] = await Promise.all([
-    getPublishedCollection(locale, getAllCaseStudies),
+  const [initialPage, tMeta, tNav] = await Promise.all([
+    getResilientPaginatedInsightCollection(
+      locale,
+      'caseStudy',
+      null,
+      null,
+      true,
+    ),
     getTranslations({locale, namespace: 'Metadata.pages.caseStudies'}),
     getTranslations({locale, namespace: 'Navigation'}),
   ]);
@@ -36,14 +41,17 @@ export default async function CaseStudiesPage({params}: PageProps) {
     description: tMeta('description'),
     url: pageUrl,
     inLanguage: locale,
-    itemListElement: studies.items.map((study, index) => ({
+    numberOfItems: initialPage.total,
+    itemListElement: initialPage.items.map((study, index) => ({
       '@type': 'ListItem',
       position: index + 1,
       name: study.title,
       url: absoluteUrl(
-        localizedPath('/case-studies/[slug]', studies.sourceLocale, {slug: study.slug}),
+        localizedPath('/case-studies/[slug]', study.sourceLocale, {
+          slug: study.slug,
+        }),
       ),
-      inLanguage: studies.sourceLocale,
+      inLanguage: study.sourceLocale,
     })),
   };
 
@@ -66,7 +74,10 @@ export default async function CaseStudiesPage({params}: PageProps) {
   return (
     <>
       <JsonLd data={[itemListSchema, collectionSchema, breadcrumbSchema]} />
-      <CaseStudies studies={studies.items} contentLocale={studies.sourceLocale} />
+      <CaseStudies
+        initialPage={initialPage}
+        industries={initialPage.industries}
+      />
     </>
   );
 }

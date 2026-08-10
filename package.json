@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --webpack",
+    "dev:turbo": "next dev --turbopack",
     "build": "npm run check:webp && next build",
     "check:webp": "node scripts/check-webp-assets.mjs",
     "start": "next start",

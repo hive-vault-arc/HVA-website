@@ -123,7 +123,11 @@ const Navbar: React.FC = () => {
 
             {/* Desktop Navigation */}
             <div className="ml-auto hidden items-center space-x-1 xl:flex">
-              <Link href="/arc" className={desktopLinkClass(isRouteActive('/arc'))}>
+              <Link
+                href="/arc"
+                data-navbar-link="arc"
+                className={desktopLinkClass(isRouteActive('/arc'))}
+              >
                 <span className="flex items-baseline gap-1.5">
                   <span>ARC</span>{' '}
                   <span className="text-[8px] font-semibold uppercase tracking-[0.18em] opacity-60">{t('framework')}</span>
@@ -140,6 +144,7 @@ const Navbar: React.FC = () => {
               >
                 <Link
                   href="/capabilities"
+                  data-navbar-link="capabilities"
                   aria-haspopup="menu"
                   aria-expanded={openMenu === 'capabilities'}
                   className={`${desktopLinkClass(!!isCapabilitiesActive)} inline-flex items-center gap-1.5`}
@@ -178,6 +183,7 @@ const Navbar: React.FC = () => {
               >
                 <Link
                   href="/industries"
+                  data-navbar-link="industries"
                   aria-haspopup="menu"
                   aria-expanded={openMenu === 'industries'}
                   className={`${desktopLinkClass(!!isIndustriesActive)} inline-flex items-center gap-1.5`}
@@ -212,6 +218,7 @@ const Navbar: React.FC = () => {
               >
                 <Link
                   href="/aboutus"
+                  data-navbar-link="who-we-are"
                   aria-haspopup="menu"
                   aria-expanded={openMenu === 'who-we-are'}
                   className={`${desktopLinkClass(!!isWhoWeAreActive)} inline-flex items-center gap-1.5`}
@@ -250,6 +257,7 @@ const Navbar: React.FC = () => {
               >
                 <Link
                   href="/insights"
+                  data-navbar-link="insights"
                   aria-haspopup="menu"
                   aria-expanded={openMenu === 'insights'}
                   className={`${desktopLinkClass(!!isInsightsActive)} inline-flex items-center gap-1.5`}

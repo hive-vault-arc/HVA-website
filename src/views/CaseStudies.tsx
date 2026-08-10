@@ -1,41 +1,33 @@
 'use client';
 
-import type { CaseStudy } from '../lib/proof';
-import InsightIndexPage, { type PageItem } from '../components/InsightIndexPage';
 import {useTranslations} from 'next-intl';
-import type {AppLocale} from '@/i18n/config';
+
+import InsightIndexPage from '@/components/InsightIndexPage';
+import type {
+  InsightIndustry,
+  PaginatedInsightCollection,
+} from '@/lib/insight-collection-pagination';
 
 export default function CaseStudies({
-  studies,
-  contentLocale,
+  initialPage,
+  industries,
 }: {
-  readonly studies: CaseStudy[];
-  readonly contentLocale: AppLocale;
+  readonly initialPage: PaginatedInsightCollection;
+  readonly industries: InsightIndustry[];
 }) {
   const t = useTranslations('CaseStudiesIndex');
-  const items: PageItem[] = studies.map((s) => ({
-    href: `/case-studies/${s.slug}`,
-    title: s.title,
-    excerpt: s.summary,
-    tag: s.industry,
-    meta: s.deploymentStatus,
-    coverImage: s.assets.coverImage || undefined,
-    evidenceLabel: s.hasClientEvidence ? t('evidenceAvailable') : undefined,
-    sourceLocale: contentLocale,
-  }));
-
-  const industries = Array.from(new Set(studies.map((s) => s.industry)));
 
   return (
     <InsightIndexPage
+      collectionType="caseStudy"
       eyebrow={t('eyebrow')}
       headline={t('headline')}
       headlineItalic={t('headlineItalic')}
       description={t('description')}
-      items={items}
-      filters={industries}
-      filterKey={(item) => item.tag}
+      initialPage={initialPage}
+      industries={industries}
       emptyMessage={t('empty')}
+      evidenceLabel={t('evidenceAvailable')}
       bottomCta={{
         headline: t('bottomCta.title'),
         subtext: t('bottomCta.description'),

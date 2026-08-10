@@ -41,6 +41,7 @@ describe('InsightsSlider', () => {
     );
     const initialInactiveLink = links.find((link) => link !== initialActiveLink);
 
+    expect(container.querySelectorAll('img.insights-card-image')).toHaveLength(2);
     expect(firstIndicator).toHaveAttribute('aria-pressed', 'true');
     expect(initialActiveLink).toHaveAttribute('tabindex', '0');
     expect(initialInactiveLink).toHaveAttribute('tabindex', '-1');

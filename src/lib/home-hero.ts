@@ -11,8 +11,32 @@ export type HomeTrustedPartner = {
 };
 
 const PREMIUM_ADVICE_LOGO = '/Images/trustedby/premium-advice-training-logo-hq.webp';
+const IMMOWORLD_LOGO = '/Images/trustedby/logo.webp';
 const TARIK_RAMI_LOGO = '/Images/trustedby/tarik-rami-immobilier-logo.webp';
 const TRUSTED_PARTNER_ORDER = ['premium advice', 'immoworld', 'tarik rami'] as const;
+const TRUSTED_PARTNER_FALLBACKS = [
+  {
+    name: 'Premium Advice & Training',
+    logo: PREMIUM_ADVICE_LOGO,
+    logoAlt: 'Premium Advice & Training logo',
+    href: '/case-studies/premium-advice-training-keepzen-digital-academy',
+    surface: 'light',
+  },
+  {
+    name: 'ImmoWorld',
+    logo: IMMOWORLD_LOGO,
+    logoAlt: 'ImmoWorld Luxury Real Estate logo',
+    href: '/case-studies/top-tier-crm-transformation-program-real-estate-operations',
+    surface: 'dark',
+  },
+  {
+    name: 'Tarik Rami Immobilier',
+    logo: TARIK_RAMI_LOGO,
+    logoAlt: 'Tarik Rami Immobilier logo',
+    href: '/case-studies/tarik-rami-immobilier',
+    surface: 'light',
+  },
+] satisfies Array<Omit<HomeTrustedPartner, 'hrefLocale'>>;
 
 function normalizePartnerName(name: string): string {
   return name.trim().toLocaleLowerCase();
@@ -73,16 +97,14 @@ export function buildHomeHeroProof(
     ];
   });
 
-  const tarikRamiKey = normalizePartnerName('Tarik Rami Immobilier');
+  for (const fallbackPartner of TRUSTED_PARTNER_FALLBACKS) {
+    const clientKey = normalizePartnerName(fallbackPartner.name);
+    if (seenClients.has(clientKey)) continue;
 
-  if (!seenClients.has(tarikRamiKey)) {
+    seenClients.add(clientKey);
     trustedPartners.push({
-      name: 'Tarik Rami Immobilier',
-      logo: TARIK_RAMI_LOGO,
-      logoAlt: 'Tarik Rami Immobilier logo',
-      href: '/case-studies/tarik-rami-immobilier',
+      ...fallbackPartner,
       ...(hrefLocale ? {hrefLocale} : {}),
-      surface: 'light',
     });
   }
 

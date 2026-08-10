@@ -2,12 +2,11 @@ import type { Metadata } from 'next';
 import type {AppLocale} from "@/i18n/config";
 import {buildStaticRouteMetadata} from "@/i18n/metadata";
 import InsightsCollection from '@/views/InsightsCollection';
-import { getAllNewsArticles } from '@/lib/insights';
+import {getResilientPaginatedInsightCollection} from '@/lib/resilient-insights';
 import {getTranslations} from 'next-intl/server';
 import JsonLd from '@/components/JsonLd';
 import {localizedPath} from '@/i18n/route-manifest';
 import {absoluteUrl, buildLocalizedBreadcrumbSchema} from '@/lib/seo';
-import {getPublishedCollection} from '@/lib/localized-content';
 
 type PageProps = {params: Promise<{locale: AppLocale}>};
 
@@ -18,8 +17,14 @@ export async function generateMetadata({params}: PageProps): Promise<Metadata> {
 
 export default async function InsightsNewsArticlesPage({params}: PageProps) {
   const {locale} = await params;
-  const [newsArticles, t, tNav] = await Promise.all([
-    getPublishedCollection(locale, getAllNewsArticles),
+  const [initialPage, t, tNav] = await Promise.all([
+    getResilientPaginatedInsightCollection(
+      locale,
+      'newsArticle',
+      null,
+      null,
+      true,
+    ),
     getTranslations({locale, namespace: 'Collections.news'}),
     getTranslations({locale, namespace: 'Navigation'}),
   ]);
@@ -33,17 +38,17 @@ export default async function InsightsNewsArticlesPage({params}: PageProps) {
     inLanguage: locale,
     mainEntity: {
       '@type': 'ItemList',
-      numberOfItems: newsArticles.items.length,
-      itemListElement: newsArticles.items.map((article, index) => ({
+      numberOfItems: initialPage.total,
+      itemListElement: initialPage.items.map((article, index) => ({
         '@type': 'ListItem',
         position: index + 1,
         name: article.title,
         url: absoluteUrl(
-          localizedPath('/insights/news-articles/[slug]', newsArticles.sourceLocale, {
+          localizedPath('/insights/news-articles/[slug]', article.sourceLocale, {
             slug: article.slug,
           }),
         ),
-        inLanguage: newsArticles.sourceLocale,
+        inLanguage: article.sourceLocale,
       })),
     },
   };
@@ -60,9 +65,9 @@ export default async function InsightsNewsArticlesPage({params}: PageProps) {
         eyebrow={t('eyebrow')}
         title={t('title')}
         description={t('description')}
-        cards={newsArticles.items}
-        basePath="/insights/news-articles"
-        contentLocale={newsArticles.sourceLocale}
+        collectionType="newsArticle"
+        initialPage={initialPage}
+        industries={initialPage.industries}
       />
     </>
   );

@@ -14,29 +14,43 @@ type SanityFetchOptions = {
 
 export function isRecoverableSanityFetchError(error: unknown): boolean {
   const candidate = error as {
+    code?: string;
     isNetworkError?: boolean;
     message?: string;
-    cause?: { code?: string };
+    cause?: unknown;
+    errors?: unknown[];
   };
-  const causeCode = candidate?.cause?.code ?? '';
+  const code = candidate?.code ?? '';
 
   return Boolean(
     candidate?.isNetworkError ||
       candidate?.message?.toLowerCase().includes('fetch failed') ||
-      causeCode.startsWith('UND_') ||
-      ['ECONNRESET', 'ECONNREFUSED', 'ENOTFOUND', 'ETIMEDOUT'].includes(causeCode)
+      candidate?.message?.toLowerCase().includes('socket timed out') ||
+      code.startsWith('UND_') ||
+      [
+        'ECONNRESET',
+        'ECONNREFUSED',
+        'ENETUNREACH',
+        'ENOTFOUND',
+        'ESOCKETTIMEDOUT',
+        'ETIMEDOUT',
+      ].includes(code) ||
+      (candidate?.cause !== undefined &&
+        isRecoverableSanityFetchError(candidate.cause)) ||
+      candidate?.errors?.some(isRecoverableSanityFetchError)
   );
 }
 
 export function getSanityFetchErrorSummary(error: unknown): string {
   const candidate = error as {
+    code?: string;
     message?: string;
     cause?: { code?: string };
   };
   const message = candidate?.message?.trim();
-  const causeCode = candidate?.cause?.code?.trim();
+  const code = candidate?.code?.trim() ?? candidate?.cause?.code?.trim();
 
-  return [message, causeCode].filter(Boolean).join(', ') || 'network error';
+  return [message, code].filter(Boolean).join(', ') || 'network error';
 }
 
 export async function withSanityFallback<T>(
@@ -77,16 +91,19 @@ export async function sanityFetch<QueryResponse>({
         useCdn: false,
         perspective: 'drafts',
       })
-    : development
-      ? directClient
-      : sanityClient;
+    : sanityClient;
 
-  const bypassCache = preview || development;
+  // Public content should use the same short-lived Next data cache in local
+  // development as it does in production. Forcing `no-store` here made every
+  // navigation repeat the Sanity round trip and amplified transient network
+  // failures. Draft Mode remains uncached so editorial previews stay live.
+  const bypassCache = preview;
+  const effectiveRevalidate = development ? Math.min(revalidate, 30) : revalidate;
   const requestOptions = bypassCache
     ? ({cache: 'no-store'} as const)
     : {
         next: {
-          revalidate,
+          revalidate: effectiveRevalidate,
           ...(tags.length > 0 ? {tags} : {}),
         },
       };
@@ -94,10 +111,15 @@ export async function sanityFetch<QueryResponse>({
   try {
     return await client.fetch<QueryResponse>(query, {...params, preview}, requestOptions);
   } catch (error) {
-    if (preview || !isRecoverableSanityFetchError(error)) throw error;
+    if (
+      preview ||
+      development ||
+      !isRecoverableSanityFetchError(error)
+    ) {
+      throw error;
+    }
 
-    const alternateClient = development ? sanityClient : directClient;
-    return alternateClient.fetch<QueryResponse>(
+    return directClient.fetch<QueryResponse>(
       query,
       {...params, preview},
       requestOptions,

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import {startTransition, useEffect, useRef, useState} from 'react';
 import {Link} from '@/i18n/navigation';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import {useLocale, useTranslations} from 'next-intl';
@@ -9,10 +9,12 @@ import BottomCTA from '../components/BottomCTA';
 import InsightsSlider, { type SlideItem } from '../components/InsightsSlider';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 import SectionBrandMark from '../components/SectionBrandMark';
-import type { BlogPost } from '../lib/blog';
-import type { InsightCard as ResearchReport, NewsArticle } from '../lib/insights';
-import type { Perspective } from '../lib/perspectives';
-import type { CaseStudy } from '../lib/proof';
+import type {
+  InsightListingItem as InsightGridItem,
+  InsightListingType,
+  InsightPageCursor,
+  PaginatedInsights,
+} from '../lib/insight-pagination';
 import type {AppLocale} from '@/i18n/config';
 
 const CATEGORY_CARDS = [
@@ -83,10 +85,9 @@ function CategoryCards() {
               <motion.img
                 src={cat.image}
                 alt=""
-                className="absolute inset-0 h-full w-full object-cover"
+                className="insights-card-image absolute inset-0 h-full w-full object-cover"
                 animate={{
                   scale: isHovered ? 1.07 : 1,
-                  filter: isHovered ? 'blur(6px)' : 'blur(0px)',
                 }}
                 transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
               />
@@ -128,28 +129,24 @@ function CategoryCards() {
 
 /* ── Latest section ───────────────────────────────────────────────────────── */
 
-type InsightGridItem = {
-  id: string;
-  type: 'blog' | 'case-study' | 'news-article' | 'perspective' | 'research-report';
-  typeLabel: string;
-  tag: string;
-  title: string;
-  excerpt: string;
-  image: string;
-  href: string;
-  date: string;
-  readTime?: string;
-  meta?: string;
-  sourceLocale: AppLocale;
-};
+function useInsightTypeLabel() {
+  const t = useTranslations('InsightsHub.types');
 
-type InsightsContentLocales = {
-  posts: AppLocale;
-  caseStudies: AppLocale;
-  newsArticles: AppLocale;
-  perspectives: AppLocale;
-  researchReports: AppLocale;
-};
+  return (type: InsightListingType) => {
+    switch (type) {
+      case 'blog':
+        return t('blog');
+      case 'case-study':
+        return t('caseStudy');
+      case 'news-article':
+        return t('news');
+      case 'perspective':
+        return t('perspective');
+      case 'research-report':
+        return t('research');
+    }
+  };
+}
 
 type LatestProps = {
   readonly items: InsightGridItem[];
@@ -157,6 +154,7 @@ type LatestProps = {
 
 function LatestSection({ items }: LatestProps) {
   const t = useTranslations('InsightsHub');
+  const typeLabelFor = useInsightTypeLabel();
   const [latestPrimary, latestSecondary] = items;
   const ctaLabelFor = (item: InsightGridItem) => {
     if (item.type === 'case-study') return t('latest.readCaseStudy');
@@ -192,7 +190,7 @@ function LatestSection({ items }: LatestProps) {
                 <motion.img
                   src={latestPrimary.image}
                   alt={latestPrimary.title}
-                  className="absolute inset-0 w-full h-full object-cover opacity-60
+                  className="insights-card-image insights-card-image--zoom absolute inset-0 w-full h-full object-cover opacity-60
                              transition-transform duration-700 group-hover:scale-105"
                 />
               )}
@@ -205,7 +203,7 @@ function LatestSection({ items }: LatestProps) {
                 <div className="mb-auto pt-6 flex items-center gap-2">
                   <span className="h-[1px] w-6 bg-[#E8A838]" />
                   <p className="text-[9px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color-dark)]">
-                    {t('latest.label', {type: latestPrimary.typeLabel})} · {latestPrimary.tag}
+                    {t('latest.label', {type: typeLabelFor(latestPrimary.type)})} · {latestPrimary.tag}
                   </p>
                 </div>
 
@@ -254,7 +252,7 @@ function LatestSection({ items }: LatestProps) {
                   <motion.img
                     src={latestSecondary.image}
                     alt={latestSecondary.title}
-                    className="absolute inset-0 w-full h-full object-cover opacity-80
+                    className="insights-card-image insights-card-image--zoom absolute inset-0 w-full h-full object-cover opacity-80
                                transition-transform duration-700 group-hover:scale-105"
                   />
                 )}
@@ -272,7 +270,7 @@ function LatestSection({ items }: LatestProps) {
               {/* Bottom text panel */}
               <div className="flex flex-col flex-1 bg-white border border-[#DDE3EA] border-t-0 p-8">
                 <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)]">
-                  {t('latest.label', {type: latestSecondary.typeLabel})}
+                  {t('latest.label', {type: typeLabelFor(latestSecondary.type)})}
                 </p>
                 <h3 className="font-headline text-2xl font-medium leading-snug text-[#1A2535]">
                   {latestSecondary.title}
@@ -307,105 +305,6 @@ function LatestSection({ items }: LatestProps) {
 
 /* ── All Insights grid ────────────────────────────────────────────────────── */
 
-function timeValue(date: string) {
-  const value = Date.parse(date);
-  return Number.isNaN(value) ? 0 : value;
-}
-
-function sortLatestFirst(items: InsightGridItem[]) {
-  return [...items].sort((a, b) => timeValue(b.date) - timeValue(a.date));
-}
-
-function buildAllInsights(
-  posts: BlogPost[],
-  studies: CaseStudy[],
-  newsArticles: NewsArticle[],
-  perspectives: Perspective[],
-  researchReports: ResearchReport[],
-  typeLabels: Record<InsightGridItem['type'], string>,
-  contentLocales: InsightsContentLocales,
-): InsightGridItem[] {
-  const blogItems = posts.map((p) => ({
-    id: `blog-${p.slug}`,
-    type: 'blog' as const,
-    typeLabel: typeLabels.blog,
-    tag: p.category,
-    title: p.title,
-    excerpt: p.excerpt,
-    image: p.coverImage ?? '',
-    href: `/blog/${p.slug}`,
-    date: p.publishedAt,
-    readTime: p.readTime,
-    sourceLocale: contentLocales.posts,
-  }));
-
-  const caseItems = studies.map((s) => ({
-    id: `case-${s.slug}`,
-    type: 'case-study' as const,
-    typeLabel: typeLabels['case-study'],
-    tag: s.industry,
-    title: s.title,
-    excerpt: s.summary,
-    image: s.assets.coverImage ?? '',
-    href: `/case-studies/${s.slug}`,
-    date: s.lastUpdated,
-    meta: s.clientName,
-    sourceLocale: contentLocales.caseStudies,
-  }));
-
-  const newsItems = newsArticles.map((article) => ({
-    id: `news-${article.slug}`,
-    type: 'news-article' as const,
-    typeLabel: typeLabels['news-article'],
-    tag: article.category || article.tag,
-    title: article.title,
-    excerpt: article.summary,
-    image: article.coverImage ?? '',
-    href: `/insights/news-articles/${article.slug}`,
-    date: article.publishedAt,
-    readTime: article.readTime,
-    sourceLocale: contentLocales.newsArticles,
-  }));
-
-  const perspectiveItems = perspectives.map((perspective) => ({
-    id: `perspective-${perspective.slug}`,
-    type: 'perspective' as const,
-    typeLabel: typeLabels.perspective,
-    tag: perspective.tag,
-    title: perspective.title,
-    excerpt: perspective.summary,
-    image: perspective.coverImage ?? '',
-    href: `/insights/perspectives/${perspective.slug}`,
-    date: perspective.publishedAt,
-    readTime: perspective.readTime,
-    sourceLocale: contentLocales.perspectives,
-  }));
-
-  const reportItems = researchReports.map((report) => ({
-    id: `research-${report.slug}`,
-    type: 'research-report' as const,
-    typeLabel: typeLabels['research-report'],
-    tag: report.tag,
-    title: report.title,
-    excerpt: report.summary,
-    image: report.coverImage ?? '',
-    href: `/insights/research-reports/${report.slug}`,
-    date: report.publishedAt,
-    readTime: report.readTime,
-    sourceLocale: contentLocales.researchReports,
-  }));
-
-  return sortLatestFirst([
-    ...blogItems,
-    ...caseItems,
-    ...newsItems,
-    ...perspectiveItems,
-    ...reportItems,
-  ]);
-}
-
-const INITIAL_COUNT = 6;
-
 function buildSliderItems(items: InsightGridItem[]): SlideItem[] {
   return items.map((item) => ({
     id: item.id,
@@ -420,6 +319,7 @@ function buildSliderItems(items: InsightGridItem[]): SlideItem[] {
 
 function InsightGridCard({ item, index }: { readonly item: InsightGridItem; readonly index: number }) {
   const t = useTranslations('InsightsHub');
+  const typeLabelFor = useInsightTypeLabel();
   const [hovered, setHovered] = useState(false);
   return (
     <motion.article
@@ -443,10 +343,9 @@ function InsightGridCard({ item, index }: { readonly item: InsightGridItem; read
           <motion.img
             src={item.image}
             alt=""
-            className="absolute inset-0 h-full w-full object-cover"
+            className="insights-card-image absolute inset-0 h-full w-full object-cover"
             animate={{
               scale: hovered ? 1.07 : 1,
-              filter: hovered ? 'blur(6px)' : 'blur(0px)',
             }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           />
@@ -489,7 +388,7 @@ function InsightGridCard({ item, index }: { readonly item: InsightGridItem; read
             {item.excerpt}
           </p>
           <span className="inline-flex items-center gap-2 self-start border border-white/35 bg-white/10 px-4 py-2 text-[9px] font-bold uppercase tracking-[0.14em] text-white transition-all duration-200 group-hover:border-[#E8A838] group-hover:bg-[#E8A838]">
-            {t('grid.open', {type: item.typeLabel.toLocaleLowerCase()})}
+            {t('grid.open', {type: typeLabelFor(item.type).toLocaleLowerCase()})}
             <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
           </span>
         </motion.div>
@@ -498,13 +397,75 @@ function InsightGridCard({ item, index }: { readonly item: InsightGridItem; read
   );
 }
 
-function AllInsightsGrid({ items }: { readonly items: InsightGridItem[] }) {
-  const t = useTranslations('InsightsHub');
-  const [revealed, setRevealed] = useState(false);
-  const visible = revealed ? items : items.slice(0, INITIAL_COUNT);
-  const hasMore = items.length > INITIAL_COUNT && !revealed;
+type AllInsightsGridProps = {
+  readonly initialItems: InsightGridItem[];
+  readonly total: number;
+  readonly initialCursor: InsightPageCursor | null;
+  readonly locale: AppLocale;
+};
 
-  if (items.length === 0) {
+export function AllInsightsGrid({
+  initialItems,
+  total,
+  initialCursor,
+  locale,
+}: AllInsightsGridProps) {
+  const t = useTranslations('InsightsHub');
+  const [items, setItems] = useState(initialItems);
+  const [cursor, setCursor] = useState(initialCursor);
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadError, setLoadError] = useState(false);
+  const requestController = useRef<AbortController | null>(null);
+  const hasMore = items.length < total && cursor !== null;
+
+  useEffect(
+    () => () => {
+      requestController.current?.abort();
+    },
+    [],
+  );
+
+  const loadMore = async () => {
+    if (!hasMore || isLoading || !cursor) return;
+
+    requestController.current?.abort();
+    const controller = new AbortController();
+    requestController.current = controller;
+    setIsLoading(true);
+    setLoadError(false);
+
+    const searchParams = new URLSearchParams({
+      locale,
+      cursorDate: cursor.date,
+      cursorId: cursor.id,
+    });
+
+    try {
+      const response = await fetch(`/api/insights?${searchParams.toString()}`, {
+        headers: {Accept: 'application/json'},
+        signal: controller.signal,
+      });
+      if (!response.ok) throw new Error(`Insights request failed: ${response.status}`);
+
+      const page = (await response.json()) as PaginatedInsights;
+      startTransition(() => {
+        setItems((currentItems) => {
+          const knownIds = new Set(currentItems.map((item) => item.id));
+          return [
+            ...currentItems,
+            ...page.items.filter((item) => !knownIds.has(item.id)),
+          ];
+        });
+        setCursor(page.nextCursor);
+      });
+    } catch (error) {
+      if ((error as Error).name !== 'AbortError') setLoadError(true);
+    } finally {
+      if (!controller.signal.aborted) setIsLoading(false);
+    }
+  };
+
+  if (initialItems.length === 0) {
     return (
       <section className="insights-empty-state" aria-labelledby="insights-empty-title">
         <div className="insights-empty-state__inner">
@@ -534,27 +495,45 @@ function AllInsightsGrid({ items }: { readonly items: InsightGridItem[] }) {
             </h2>
           </div>
           <span className="hidden text-[10px] uppercase tracking-widest text-[#566274] sm:block">
-            {t('grid.itemCount', {count: items.length})}
+            {t('grid.itemCount', {count: total})}
           </span>
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {visible.map((item, i) => (
+          {items.map((item, i) => (
             <InsightGridCard key={item.id} item={item} index={i} />
           ))}
         </div>
 
         {hasMore && (
-          <div className="mt-12 flex justify-center">
+          <div className="mt-12 flex flex-col items-center justify-center gap-3">
             <button
-              onClick={() => setRevealed(true)}
+              type="button"
+              onClick={loadMore}
+              disabled={isLoading}
+              aria-busy={isLoading}
+              aria-describedby={loadError ? 'insights-load-error' : undefined}
               className="inline-flex min-h-11 items-center gap-3 px-8 py-3.5 text-[10px] font-bold
                          uppercase tracking-[0.18em] text-[#1A2535] border border-[#1A2535]
-                         hover:bg-[#1A2535] hover:text-white transition-all duration-200"
+                         hover:bg-[#1A2535] hover:text-white transition-all duration-200
+                         disabled:cursor-wait disabled:opacity-55"
             >
-              {t('grid.loadMore')}
+              {loadError
+                ? t('grid.tryAgain')
+                : isLoading
+                  ? t('grid.loading')
+                  : t('grid.loadMore')}
               <ArrowDown className="h-3.5 w-3.5" aria-hidden="true" />
             </button>
+            {loadError ? (
+              <p
+                id="insights-load-error"
+                role="status"
+                className="max-w-sm text-center text-xs leading-relaxed text-[#566274]"
+              >
+                {t('grid.loadError')}
+              </p>
+            ) : null}
           </div>
         )}
       </div>
@@ -563,42 +542,21 @@ function AllInsightsGrid({ items }: { readonly items: InsightGridItem[] }) {
 }
 
 export default function InsightsHub({
-  posts,
-  caseStudies,
-  newsArticles,
-  perspectives,
-  researchReports,
-  contentLocales,
+  initialInsights,
+  totalInsights,
+  initialCursor,
+  hasFallbackContent,
 }: {
-  readonly posts: BlogPost[];
-  readonly caseStudies: CaseStudy[];
-  readonly newsArticles: NewsArticle[];
-  readonly perspectives: Perspective[];
-  readonly researchReports: ResearchReport[];
-  readonly contentLocales: InsightsContentLocales;
+  readonly initialInsights: InsightGridItem[];
+  readonly totalInsights: number;
+  readonly initialCursor: InsightPageCursor | null;
+  readonly hasFallbackContent: boolean;
 }) {
   const t = useTranslations('InsightsHub');
   const locale = useLocale() as AppLocale;
-  const allInsights = buildAllInsights(
-    posts,
-    caseStudies,
-    newsArticles,
-    perspectives,
-    researchReports,
-    {
-      blog: t('types.blog'),
-      'case-study': t('types.caseStudy'),
-      'news-article': t('types.news'),
-      perspective: t('types.perspective'),
-      'research-report': t('types.research'),
-    },
-    contentLocales,
-  );
-  const sliderItems = buildSliderItems(allInsights);
-  const hasPublishedInsights = allInsights.length > 0;
-  const usesEnglishSources =
-    locale === 'fr' &&
-    Object.values(contentLocales).some((contentLocale) => contentLocale === 'en');
+  const sliderItems = buildSliderItems(initialInsights);
+  const hasPublishedInsights = totalInsights > 0;
+  const usesEnglishSources = locale === 'fr' && hasFallbackContent;
 
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
@@ -613,19 +571,19 @@ export default function InsightsHub({
       />
 
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
-      <section className="relative isolate overflow-hidden border-b border-[#DDE3EA]">
+      <section className="insights-hub-hero relative isolate overflow-hidden border-b border-[#DDE3EA]">
         <PageAmbientBackground className="opacity-[0.92]" />
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-white/50" />
 
-        <div className="relative z-10 mx-auto flex min-h-[340px] max-w-7xl items-end justify-between gap-12 px-6 pb-14 pt-32 lg:px-14 lg:pb-16">
+        <div className="insights-hub-hero__shell relative z-10 mx-auto flex min-h-[340px] max-w-7xl items-end justify-between gap-12 px-6 pb-14 pt-32 lg:px-14 lg:pb-16">
           <motion.div
-            className="min-w-0 flex-1 max-w-3xl"
+            className="insights-hub-hero__copy min-w-0 max-w-3xl flex-1"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55 }}
           >
             <div className="mb-5 flex items-center gap-3">
-              <SectionBrandMark size="sm" />
+              <SectionBrandMark size="sm" eager />
               <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)]">
                 {t('hero.eyebrow')}
               </p>
@@ -644,7 +602,7 @@ export default function InsightsHub({
           </motion.div>
 
           <motion.div
-            className="hidden flex-shrink-0 items-center justify-center lg:flex"
+            className="insights-hub-hero__radar hidden flex-shrink-0 items-center justify-center lg:flex"
             initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.15 }}
@@ -755,10 +713,15 @@ export default function InsightsHub({
       </section>
 
       {/* ── Latest Featured ───────────────────────────────────────────────── */}
-      <LatestSection items={allInsights.slice(0, 2)} />
+      <LatestSection items={initialInsights.slice(0, 2)} />
 
       {/* ── All Insights Grid ────────────────────────────────────────────── */}
-      <AllInsightsGrid items={allInsights} />
+      <AllInsightsGrid
+        initialItems={initialInsights}
+        total={totalInsights}
+        initialCursor={initialCursor}
+        locale={locale}
+      />
 
       <BottomCTA
         variant="light"

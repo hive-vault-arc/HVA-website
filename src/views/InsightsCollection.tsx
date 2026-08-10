@@ -1,48 +1,44 @@
 'use client';
 
-import InsightIndexPage, { type PageItem } from '../components/InsightIndexPage';
-import type { InsightCard } from '../lib/insights';
 import {useTranslations} from 'next-intl';
-import type {AppLocale} from '@/i18n/config';
+
+import InsightIndexPage from '@/components/InsightIndexPage';
+import type {
+  InsightCollectionType,
+  InsightIndustry,
+  PaginatedInsightCollection,
+} from '@/lib/insight-collection-pagination';
 
 type Props = {
+  collectionType: Exclude<InsightCollectionType, 'post' | 'caseStudy'>;
   eyebrow: string;
   title: string;
   titleItalic?: string;
   description: string;
-  cards: InsightCard[];
-  basePath?: string;
-  contentLocale: AppLocale;
+  initialPage: PaginatedInsightCollection;
+  industries: InsightIndustry[];
 };
 
 export default function InsightsCollection({
+  collectionType,
   eyebrow,
   title,
   titleItalic,
   description,
-  cards,
-  basePath = '/insights',
-  contentLocale,
+  initialPage,
+  industries,
 }: Readonly<Props>) {
   const t = useTranslations('CollectionUi');
-  const items: PageItem[] = cards.map((c) => ({
-    href: `${basePath}/${c.slug}`,
-    title: c.title,
-    excerpt: c.summary,
-    tag: c.tag,
-    date: c.publishedAt,
-    meta: c.readTime,
-    coverImage: c.coverImage,
-    sourceLocale: contentLocale,
-  }));
 
   return (
     <InsightIndexPage
+      collectionType={collectionType}
       eyebrow={eyebrow}
       headline={t('brand')}
       headlineItalic={titleItalic ?? title}
       description={description}
-      items={items}
+      initialPage={initialPage}
+      industries={industries}
       backHref="/insights"
       emptyMessage={t('collectionEmpty', {title})}
     />

@@ -8,11 +8,11 @@ vi.mock('next/navigation', () => ({
 }));
 
 const coreLinks = [
-  ['ARC Framework', '/arc'],
-  ['Capabilities', '/capabilities'],
-  ['Industries', '/industries'],
-  ['Who We Are', '/aboutus'],
-  ['Insights', '/insights'],
+  ['ARC Framework', '/arc', 'arc'],
+  ['Capabilities', '/capabilities', 'capabilities'],
+  ['Industries', '/industries', 'industries'],
+  ['Who We Are', '/aboutus', 'who-we-are'],
+  ['Insights', '/insights', 'insights'],
 ] as const;
 
 const submenuLinks = {
@@ -60,8 +60,10 @@ describe('Navbar', () => {
   it('routes core links and exposes submenu links on keyboard focus', () => {
     render(<Navbar />);
 
-    coreLinks.forEach(([name, href]) => {
-      expect(screen.getByRole('link', { name })).toHaveAttribute('href', href);
+    coreLinks.forEach(([name, href, navbarLink]) => {
+      const link = screen.getByRole('link', { name });
+      expect(link).toHaveAttribute('href', href);
+      expect(link).toHaveAttribute('data-navbar-link', navbarLink);
     });
 
     Object.entries(submenuLinks).forEach(([menuName, links]) => {

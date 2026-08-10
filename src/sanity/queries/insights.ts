@@ -205,7 +205,7 @@ const caseStudySummaryFields = `
   "slug": slug.current,
   title,
   clientName,
-  industry,
+  "industry": coalesce(industryRef->title, industry),
   summary,
   deploymentStatus,
   "publishedOutcomes": publishedOutcomes[
@@ -278,13 +278,200 @@ const industryCaseStudyCardFields = `
   ${localizationFields},
   "slug": slug.current,
   title,
-  industry,
+  "industry": coalesce(industryRef->title, industry),
   summary,
   lastUpdated,
   assets {
     coverImage {
       ${imageFields}
     }
+  }
+`;
+
+const paginatedInsightPredicate = `
+  _type in ["post", "newsArticle", "perspective", "researchReport", "caseStudy"] &&
+  defined(slug.current) &&
+  (defined(publishedAt) || defined(lastUpdated)) &&
+  ($preview == true || translationStatus == "approved") &&
+  (
+    language == $locale ||
+    (
+      $locale == "fr" &&
+      language == "en" &&
+      count(
+        coalesce(
+          *[
+            _type == "translation.metadata" &&
+            references(^._id)
+          ][0].translations[
+            value->language == $locale &&
+            value->translationStatus == "approved"
+          ],
+          []
+        )
+      ) == 0
+    )
+  )
+`;
+
+const paginatedInsightFields = `
+  _id,
+  _type,
+  language,
+  "slug": slug.current,
+  title,
+  publishedAt,
+  lastUpdated,
+  _type == "post" => {
+    category,
+    excerpt,
+    readTime,
+    coverImage {
+      ${imageFields}
+    }
+  },
+  _type == "newsArticle" => {
+    summary,
+    category,
+    tag,
+    readTime,
+    coverImage {
+      ${imageFields}
+    }
+  },
+  _type == "perspective" => {
+    summary,
+    tag,
+    readTime,
+    coverImage {
+      ${imageFields}
+    }
+  },
+  _type == "researchReport" => {
+    summary,
+    tag,
+    readTime,
+    coverImage {
+      ${imageFields}
+    }
+  },
+  _type == "caseStudy" => {
+    clientName,
+    "industry": coalesce(industryRef->title, industry),
+    summary,
+    assets {
+      coverImage {
+        ${imageFields}
+      }
+    }
+  }
+`;
+
+const paginatedCollectionPredicate = `
+  _type == $collectionType &&
+  defined(slug.current) &&
+  (defined(publishedAt) || defined(lastUpdated)) &&
+  ($preview == true || translationStatus == "approved") &&
+  (
+    language == $locale ||
+    (
+      $locale == "fr" &&
+      language == "en" &&
+      count(
+        coalesce(
+          *[
+            _type == "translation.metadata" &&
+            references(^._id)
+          ][0].translations[
+            value->language == $locale &&
+            value->translationStatus == "approved"
+          ],
+          []
+        )
+      ) == 0
+    )
+  ) &&
+  (
+    $hasIndustry == false ||
+    industryRef->slug.current == $industryId
+  )
+`;
+
+const paginatedCollectionFields = `
+  _id,
+  _type,
+  language,
+  "slug": slug.current,
+  title,
+  publishedAt,
+  lastUpdated,
+  "industryTaxonomy": industryRef->{
+    "id": slug.current,
+    title,
+    "slug": slug.current,
+    language
+  },
+  _type == "post" => {
+    excerpt,
+    readTime,
+    "authorName": authors[0].name,
+    coverImage {
+      ${imageFields}
+    }
+  },
+  _type == "newsArticle" => {
+    summary,
+    readTime,
+    coverImage {
+      ${imageFields}
+    }
+  },
+  _type == "perspective" => {
+    summary,
+    readTime,
+    "authorName": authors[0].name,
+    coverImage {
+      ${imageFields}
+    }
+  },
+  _type == "researchReport" => {
+    summary,
+    readTime,
+    "authorName": authors[0].name,
+    coverImage {
+      ${imageFields}
+    }
+  },
+  _type == "caseStudy" => {
+    summary,
+    deploymentStatus,
+    "legacyIndustry": industry,
+    "hasClientEvidence": (${approvedClientEvidencePredicate}),
+    assets {
+      coverImage {
+        ${imageFields}
+      }
+    }
+  }
+`;
+
+const portfolioCaseStudyFields = `
+  ${localizationFields},
+  "slug": slug.current,
+  title,
+  clientName,
+  "industry": coalesce(industryRef->title, industry),
+  summary,
+  deploymentStatus,
+  assets {
+    coverImage {
+      ${imageFields}
+    },
+    coverAlt,
+    clientLogo {
+      ${imageFields}
+    },
+    clientLogoAlt
   }
 `;
 
@@ -489,6 +676,102 @@ export const allInsightCollectionsQuery = defineQuery(`
 `);
 
 /**
+ * Unified, card-only Insights feed.
+ *
+ * The locale predicate returns one public document per logical publication:
+ * an approved localized document when available, otherwise its English source.
+ * The compound cursor keeps pagination stable when publication dates match.
+ */
+export const paginatedInsightsQuery = defineQuery(`
+  {
+    "items": *[
+      ${paginatedInsightPredicate} &&
+      (
+        $hasCursor == false ||
+        coalesce(publishedAt, lastUpdated) < $cursorDate ||
+        (
+          coalesce(publishedAt, lastUpdated) == $cursorDate &&
+          _id > $cursorId
+        )
+      )
+    ]
+    | order(coalesce(publishedAt, lastUpdated) desc, _id asc)
+    [0...$limit] {
+      ${paginatedInsightFields}
+    },
+    "total": count(*[
+      ${paginatedInsightPredicate}
+    ]),
+    "fallbackCount": count(*[
+      ${paginatedInsightPredicate} &&
+      language != $locale
+    ])
+  }
+`);
+
+/**
+ * One listing contract for every Insights collection page.
+ *
+ * The first request asks for four records (one feature plus three cards).
+ * Cursor requests ask for three. Industry filtering uses the shared taxonomy
+ * slug so translated and fallback records stay in one visitor-facing group.
+ * The projection remains card-only.
+ */
+export const paginatedInsightCollectionQuery = defineQuery(`
+  {
+    "items": *[
+      ${paginatedCollectionPredicate} &&
+      (
+        $hasCursor == false ||
+        coalesce(publishedAt, lastUpdated) < $cursorDate ||
+        (
+          coalesce(publishedAt, lastUpdated) == $cursorDate &&
+          _id > $cursorId
+        )
+      )
+    ]
+    | order(coalesce(publishedAt, lastUpdated) desc, _id asc)
+    [0...$limit] {
+      ${paginatedCollectionFields}
+    },
+    "total": count(*[
+      ${paginatedCollectionPredicate}
+    ]),
+    "fallbackCount": count(*[
+      ${paginatedCollectionPredicate} &&
+      language != $locale
+    ]),
+    "industries": select(
+      $includeIndustries == true => *[
+        _type == "industry" &&
+        ($preview == true || translationStatus == "approved") &&
+        slug.current in *[
+          ${paginatedCollectionPredicate}
+        ].industryRef->slug.current
+      ]
+      | order(displayOrder asc, title asc) {
+        "id": slug.current,
+        title,
+        "slug": slug.current,
+        language
+      },
+      []
+    )
+  }
+`);
+
+export const portfolioCaseStudiesQuery = defineQuery(`
+  *[
+    _type == "caseStudy" &&
+    language == $locale &&
+    ($preview == true || translationStatus == "approved") &&
+    defined(slug.current)
+  ] | order(lastUpdated desc, _updatedAt desc) {
+    ${portfolioCaseStudyFields}
+  }
+`);
+
+/**
  * Card-only payload for the Industries insight showcase.
  * Keep this projection intentionally narrow: the page never needs authors,
  * body sections, SEO metadata, evidence, or case-study operational details.
@@ -543,6 +826,51 @@ export const industryInsightCollectionsQuery = defineQuery(`
   }
 `);
 
+const clientEvidenceShowcaseFields = `
+  "slug": slug.current,
+  "caseStudyTitle": title,
+  clientName,
+  "industry": coalesce(industryRef->title, industry),
+  "documentTitle": clientEvidence.documentTitle,
+  "documentLanguage": clientEvidence.documentLanguage,
+  "issuedOn": clientEvidence.issuedOn,
+  "quoteExcerpt": clientEvidence.quoteExcerpt,
+  "signatoryName": clientEvidence.signatoryName,
+  "signatoryRole": clientEvidence.signatoryRole,
+  "clientLogo": assets.clientLogo {
+    ${imageFields}
+  },
+  "clientLogoAlt": assets.clientLogoAlt,
+  "coverImage": assets.coverImage {
+    ${imageFields}
+  },
+  "coverImageAlt": assets.coverAlt
+`;
+
+export const homeCaseStudyProofQuery = defineQuery(`
+  {
+    "caseStudies": *[
+      _type == "caseStudy" &&
+      language == $locale &&
+      ($preview == true || translationStatus == "approved") &&
+      defined(slug.current)
+    ] | order(lastUpdated desc, _updatedAt desc) {
+      ${caseStudySummaryFields}
+    },
+    "clientEvidence": *[
+      _type == "caseStudy" &&
+      language == $locale &&
+      ($preview == true || translationStatus == "approved") &&
+      defined(slug.current) &&
+      (${approvedClientEvidencePredicate})
+    ]
+    | order(coalesce(clientEvidence.evidencePriority, 2147483647) asc, lastUpdated desc, _updatedAt desc)
+    [0...6] {
+      ${clientEvidenceShowcaseFields}
+    }
+  }
+`);
+
 export const clientEvidenceShowcaseQuery = defineQuery(`
   *[
     _type == "caseStudy" &&
@@ -553,24 +881,7 @@ export const clientEvidenceShowcaseQuery = defineQuery(`
   ]
   | order(coalesce(clientEvidence.evidencePriority, 2147483647) asc, lastUpdated desc, _updatedAt desc)
   [0...6] {
-    "slug": slug.current,
-    "caseStudyTitle": title,
-    clientName,
-    industry,
-    "documentTitle": clientEvidence.documentTitle,
-    "documentLanguage": clientEvidence.documentLanguage,
-    "issuedOn": clientEvidence.issuedOn,
-    "quoteExcerpt": clientEvidence.quoteExcerpt,
-    "signatoryName": clientEvidence.signatoryName,
-    "signatoryRole": clientEvidence.signatoryRole,
-    "clientLogo": assets.clientLogo {
-      ${imageFields}
-    },
-    "clientLogoAlt": assets.clientLogoAlt,
-    "coverImage": assets.coverImage {
-      ${imageFields}
-    },
-    "coverImageAlt": assets.coverAlt
+    ${clientEvidenceShowcaseFields}
   }
 `);
 

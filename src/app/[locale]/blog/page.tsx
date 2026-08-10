@@ -6,12 +6,11 @@ import {
   absoluteUrl,
   buildLocalizedBreadcrumbSchema,
 } from '@/lib/seo';
-import { getAllPosts } from '@/lib/blog';
+import {getResilientPaginatedInsightCollection} from '@/lib/resilient-insights';
 import BlogIndex from '@/views/BlogIndex';
 import JsonLd from '@/components/JsonLd';
 import {localizedPath} from '@/i18n/route-manifest';
 import {getTranslations} from 'next-intl/server';
-import {getPublishedCollection} from '@/lib/localized-content';
 
 type PageProps = {params: Promise<{locale: AppLocale}>};
 
@@ -22,8 +21,8 @@ export async function generateMetadata({params}: PageProps): Promise<Metadata> {
 
 export default async function BlogPage({params}: PageProps) {
   const {locale} = await params;
-  const [posts, tMeta, tNav] = await Promise.all([
-    getPublishedCollection(locale, getAllPosts),
+  const [initialPage, tMeta, tNav] = await Promise.all([
+    getResilientPaginatedInsightCollection(locale, 'post', null, null, true),
     getTranslations({locale, namespace: 'Metadata.pages.blog'}),
     getTranslations({locale, namespace: 'Navigation'}),
   ]);
@@ -35,15 +34,15 @@ export default async function BlogPage({params}: PageProps) {
     name: tMeta('title'),
     url: pageUrl,
     inLanguage: locale,
-    numberOfItems: posts.items.length,
-    itemListElement: posts.items.map((post, index) => ({
+    numberOfItems: initialPage.total,
+    itemListElement: initialPage.items.map((post, index) => ({
       '@type': 'ListItem',
       position: index + 1,
       url: absoluteUrl(
-        localizedPath('/blog/[slug]', posts.sourceLocale, {slug: post.slug}),
+        localizedPath('/blog/[slug]', post.sourceLocale, {slug: post.slug}),
       ),
       name: post.title,
-      inLanguage: posts.sourceLocale,
+      inLanguage: post.sourceLocale,
     })),
   };
 
@@ -69,7 +68,10 @@ export default async function BlogPage({params}: PageProps) {
   return (
     <>
       <JsonLd data={[itemListSchema, blogSchema, breadcrumbSchema]} />
-      <BlogIndex posts={posts.items} contentLocale={posts.sourceLocale} />
+      <BlogIndex
+        initialPage={initialPage}
+        industries={initialPage.industries}
+      />
     </>
   );
 }

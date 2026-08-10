@@ -15,6 +15,7 @@ function study(overrides: Partial<CaseStudy>): CaseStudy {
     operationalModules: [],
     integrations: [],
     deploymentStatus: 'Live',
+    publishedOutcomes: [],
     projectMedia: [],
     hasClientEvidence: false,
     assets: {
@@ -27,7 +28,7 @@ function study(overrides: Partial<CaseStudy>): CaseStudy {
 }
 
 describe('buildHomeHeroProof', () => {
-  it('returns only CMS-backed client logos and the independent partner logo', () => {
+  it('keeps the approved partner rail complete around CMS-backed logos', () => {
     const result = buildHomeHeroProof([
       study({
         slug: 'immoworld',
@@ -47,6 +48,13 @@ describe('buildHomeHeroProof', () => {
 
     expect(result.trustedPartners).toEqual([
       {
+        name: 'Premium Advice & Training',
+        logo: '/Images/trustedby/premium-advice-training-logo-hq.webp',
+        logoAlt: 'Premium Advice & Training logo',
+        href: '/case-studies/premium-advice-training-keepzen-digital-academy',
+        surface: 'light',
+      },
+      {
         name: 'ImmoWorld',
         logo: 'https://cdn.sanity.io/immoworld.webp',
         logoAlt: 'ImmoWorld logo',
@@ -60,6 +68,16 @@ describe('buildHomeHeroProof', () => {
         href: '/case-studies/tarik-rami-immobilier',
         surface: 'light',
       },
+    ]);
+  });
+
+  it('keeps all three approved clients visible when CMS content falls back', () => {
+    const result = buildHomeHeroProof([]);
+
+    expect(result.trustedPartners.map((partner) => partner.name)).toEqual([
+      'Premium Advice & Training',
+      'ImmoWorld',
+      'Tarik Rami Immobilier',
     ]);
   });
 
@@ -77,15 +95,17 @@ describe('buildHomeHeroProof', () => {
       }),
     ]);
 
-    expect(result.trustedPartners).toEqual([
-      {
-        name: 'Tarik Rami Immobilier',
-        logo: '/Images/trustedby/tarik-rami-immobilier-logo.webp',
-        logoAlt: 'Tarik Rami Immobilier logo',
-        href: '/case-studies/tarik-rami-immobilier',
-        surface: 'light',
-      },
-    ]);
+    expect(
+      result.trustedPartners.find(
+        (partner) => partner.name === 'Tarik Rami Immobilier',
+      ),
+    ).toEqual({
+      name: 'Tarik Rami Immobilier',
+      logo: '/Images/trustedby/tarik-rami-immobilier-logo.webp',
+      logoAlt: 'Tarik Rami Immobilier logo',
+      href: '/case-studies/tarik-rami-immobilier',
+      surface: 'light',
+    });
   });
 
   it('uses the high-resolution local Premium Advice logo in the trusted bar', () => {
@@ -181,13 +201,14 @@ describe('buildHomeHeroProof', () => {
       'en',
     );
 
-    expect(result.trustedPartners[0]).toMatchObject({
+    expect(
+      result.trustedPartners.find((partner) => partner.name === 'ImmoWorld'),
+    ).toMatchObject({
       href: '/case-studies/immoworld',
       hrefLocale: 'en',
     });
-    expect(result.trustedPartners[1]).toMatchObject({
-      href: '/case-studies/tarik-rami-immobilier',
-      hrefLocale: 'en',
-    });
+    expect(
+      result.trustedPartners.every((partner) => partner.hrefLocale === 'en'),
+    ).toBe(true);
   });
 });

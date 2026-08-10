@@ -1048,6 +1048,9 @@
       "itemCount": "{count, plural, one {# élément} other {# éléments}}",
       "open": "Ouvrir : {type}",
       "loadMore": "Afficher plus",
+      "loading": "Chargement de six publications",
+      "tryAgain": "Réessayer",
+      "loadError": "Les publications suivantes n’ont pas pu être chargées. Veuillez réessayer.",
       "emptyTitle": "Les éditions françaises sont en cours de validation.",
       "emptyDescription": "Les articles et études de cas apparaîtront ici après leur validation éditoriale. Vous pouvez déjà explorer les différentes catégories de publications."
     },
@@ -1080,6 +1083,22 @@
     "defaultEmpty": "Ces articles sont",
     "collectionEmpty": "La collection « {title} » est",
     "brand": "Hive Vault Arc",
+    "featured": "À la une",
+    "browseLatest": "Voir les dernières publications",
+    "industryFilter": "Filtrer par secteur",
+    "publishedCount": "{count} dans la collection",
+    "showingCount": "Affichage de {shown} sur {total}",
+    "loadMore": "Afficher 3 de plus",
+    "loading": "Chargement",
+    "tryAgain": "Réessayer",
+    "loadError": "Impossible de charger les publications suivantes. Veuillez réessayer.",
+    "types": {
+      "post": "Blog",
+      "newsArticle": "Actualité",
+      "perspective": "Perspective",
+      "researchReport": "Rapport de recherche",
+      "caseStudy": "Étude de cas"
+    },
     "availableInEnglish": "Disponible en anglais",
     "englishCatalogueTitle": "Les publications originales restent accessibles.",
     "englishCatalogueDescription": "Les éditions françaises sont en cours de validation éditoriale. Ces contenus ouvrent leur page originale en anglais jusqu’à la publication d’une version française approuvée."
@@ -1108,60 +1127,43 @@
   "Portfolio": {
     "hero": {
       "eyebrow": "Portfolio de transformation",
-      "titleLineOne": "Des programmes guidés par le conseil,",
-      "titleLineTwo": "déployés en production",
-      "description": "Découvrez comment la stratégie, l’ingénierie et les opérations deviennent des systèmes de production mesurables, sous la responsabilité d’une seule équipe.",
-      "primaryCta": "Voir les réalisations",
-      "secondaryCta": "Planifier un échange",
-      "imageAlt": "Système opérationnel CRM en production dans le cadre d’un programme de transformation Hive Vault Arc"
+      "titleLineOne": "Des systèmes conçus",
+      "titleLineTwo": "pour les opérations réelles.",
+      "description": "Un registre vivant de plateformes, d’automatisations, d’IA et de systèmes opérationnels conçus autour des contraintes des équipes qui les utilisent.",
+      "primaryCta": "Voir les réalisations livrées",
+      "secondaryCta": "Échanger sur un programme",
+      "featuredAriaLabel": "Études de cas mises en avant"
     },
     "projects": {
-      "deploymentLabel": "État du déploiement :",
-      "stackLabel": "Technologies et intégrations :",
-      "caseStudyCta": "Voir les études de cas",
-      "ai": {
-        "title": "Agent IA WhatsApp multilingue",
-        "stream": "Volet du programme : intelligence conversationnelle",
-        "description": "Un volet de transformation par l’IA guidé par le conseil pour la gestion internationale des prospects. Le système traite les premières demandes en plusieurs langues, qualifie les prospects selon une logique sur mesure et met à jour le CRM automatiquement.",
-        "deployment": "En production.",
-        "stack": "API WhatsApp, HubSpot, Google Calendar, PostgreSQL et flux d’orchestration.",
-        "imageAlt": "Assistant IA WhatsApp multilingue sur mesure conçu par Hive Vault Arc au Maroc",
-        "tags": ["Multilingue", "Intégration CRM", "Planification automatisée"],
-        "bullets": ["Qualification et routage automatisés des prospects", "Collecte continue des prospects, quel que soit le fuseau horaire", "Synchronisation directe avec le CRM"]
-      },
-      "crm": {
-        "title": "Programme de transformation CRM pour l’immobilier",
-        "description": "Une mission de conseil et d’ingénierie pour un groupe immobilier de luxe. Nous avons consolidé des outils déconnectés dans une seule exploitation CRM gouvernée, couvrant le parcours acheteur.",
-        "deployment": "En production pour les équipes commerciales et opérationnelles.",
-        "stack": "Cœur CRM, DocuSign, synchronisation Meta Lead, automatisation du pipeline et reporting BI.",
-        "status": "État du programme : en production",
-        "statusDetail": "CRM complet · couche de reporting BI · synchronisation des prospects en temps réel",
-        "imageAlt": "Système CRM immobilier sur mesure conçu par Hive Vault Arc pour une organisation marocaine",
-        "cardTitle": "Précision architecturale",
-        "cardCaption": "Une exécution guidée par le conseil",
-        "tags": ["SaaS sur mesure", "Collaboration d’équipe", "Automatisation du pipeline"]
-      }
+      "eyebrow": "Études de cas publiées",
+      "title": "Des systèmes livrés, présentés dans leur contexte opérationnel.",
+      "description": "Chaque réalisation précise le contexte client, le système livré et son état actuel. Toute nouvelle mission approuvée rejoint ce portfolio depuis le même catalogue d’études de cas.",
+      "count": "{count, plural, =0 {Aucune réalisation publiée} one {# étude de cas publiée} other {# études de cas publiées}}",
+      "statusLabel": "État de la livraison",
+      "caseStudyCta": "Lire l’étude de cas",
+      "openAria": "Ouvrir l’étude de cas : {title}",
+      "empty": "Les études de cas apparaîtront ici dès leur approbation."
     },
     "signature": {
-      "titleLineOne": "Du problème opérationnel",
-      "titleLineTwo": "au système de production",
-      "eyebrow": "Signature de livraison",
-      "subtitle": "Stratégie. Ingénierie. Opérations.",
-      "description": "Tout ce qu’il faut pour conseiller, concevoir, déployer et maintenir des opérations numériques fiables.",
+      "titleLineOne": "Du mandat opérationnel",
+      "titleLineTwo": "au système responsable",
+      "eyebrow": "Standard de livraison",
+      "subtitle": "Direction. Architecture. Opérations.",
+      "description": "Chaque mission relie le mandat métier, la conception technique, les contrôles de déploiement et la responsabilité à long terme.",
       "items": [
-        {"title": "Processus d’agents", "detail": "Des agents IA d’accueil et d’opérations intégrés aux processus métier réels."},
-        {"title": "Décisions plus claires", "detail": "Des pipelines de reporting et d’analyse conçus pour un pilotage opérationnel mesurable."},
-        {"title": "Couche d’automatisation", "detail": "De la collecte à la livraison, les processus réduisent les frictions manuelles."},
-        {"title": "Livraison en production", "detail": "CI/CD, supervision et pratiques de fiabilité adaptées à la croissance à long terme."},
-        {"title": "Sécurisé par défaut", "detail": "Validation, limites de débit et contrôles intégrés dès le départ."},
-        {"title": "Produits prêts pour l’IA", "detail": "Des fonctions IA concrètes là où elles améliorent la vitesse, la qualité et la décision."}
+        {"title": "Diagnostic opérationnel", "detail": "Contraintes, processus, parties prenantes et critères de réussite sont documentés avant les décisions d’architecture."},
+        {"title": "Architecture système", "detail": "Données, applications, intégrations et contrôles sont conçus comme un système opérationnel cohérent."},
+        {"title": "Livraison incrémentale", "detail": "Des incréments fonctionnels créent des points de revue explicites pour les utilisateurs, la direction et les responsables techniques."},
+        {"title": "Préparation à la production", "detail": "Mise en service, observabilité, sécurité, reprise et transfert sont intégrés au plan de livraison."},
+        {"title": "Gouvernance intégrée", "detail": "Droits de décision, contrôles d’accès, preuves et responsabilité du changement restent explicites."},
+        {"title": "Responsabilité continue", "detail": "L’équipe responsable reste engagée pendant l’adoption, l’exploitation et l’évolution du système."}
       ]
     },
     "bottomCta": {
-      "title": "Prêt à passer de projets fragmentés à une transformation guidée ?",
-      "description": "Présentez-nous vos contraintes : nous définirons la trajectoire de conseil et d’ingénierie adaptée à votre modèle opérationnel.",
-      "primary": "Planifier un échange",
-      "secondary": "Voir les études de cas"
+      "title": "Présentez-nous la contrainte opérationnelle. Nous construirons le système autour d’elle.",
+      "description": "Commençons par le contexte, les équipes et le travail qui doit continuer. Nous tracerons la voie responsable de la décision à l’exploitation.",
+      "primary": "Échanger sur votre programme",
+      "secondary": "Parcourir les études de cas"
     }
   },
   "About": {
@@ -1281,13 +1283,13 @@
       ]
     },
     "proof": {
-      "eyebrow": "La preuve en production",
-      "industry": "Immobilier de luxe",
-      "title": "Un système opérationnel CRM unique pour une activité immobilière en production.",
-      "summary": "Hive Vault Arc a réuni la collecte des prospects, le pipeline du parcours acheteur, les processus d’équipe et le reporting opérationnel dans un système gouverné.",
-      "status": "Déploiement opérationnel en production",
-      "imageAlt": "Mission de système opérationnel CRM immobilier pour ImmoWorld",
-      "cta": "Découvrir les études de cas"
+      "eyebrow": "Plateforme éducative livrée",
+      "industry": "Éducation et formation professionnelle",
+      "title": "Une académie numérique pour deux marques de formation.",
+      "summary": "Hive Vault Arc a réuni la découverte des programmes, l’intégration contrôlée des apprenants, les cours multimédias, les évaluations, la validation documentaire, le suivi de progression et l’administration dans une seule plateforme.",
+      "status": "Académie numérique livrée",
+      "imageAlt": "Page d’accueil de l’académie numérique Premium Advice & Training et KeepZen",
+      "cta": "Découvrir l’étude de l’académie numérique"
     },
     "trust": {
       "eyebrow": "Pourquoi les décideurs font confiance à HVA",
@@ -1304,8 +1306,8 @@
         {
           "id": "proof",
           "title": "Des réalisations publiées",
-          "description": "L’étude ImmoWorld présente le défi métier, le système livré et son état en production.",
-          "linkLabel": "Voir les études de cas"
+          "description": "L’étude Premium Advice et KeepZen présente le besoin, l’architecture de la plateforme, les parcours de formation et l’académie livrée.",
+          "linkLabel": "Lire l’étude de cas"
         },
         {
           "id": "legal",

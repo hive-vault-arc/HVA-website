@@ -1,12 +1,21 @@
 import {
   getAllSanityCaseStudies,
+  getSanityPortfolioCaseStudies,
   getSanityClientEvidenceShowcase,
   getSanityCaseStudyBySlug,
+  getSanityHomeCaseStudyProof,
 } from './sanity-content';
 import type { ContentSeo } from './content-seo';
 import type {AppLocale} from '@/i18n/config';
-import type {LocalizedContentMeta} from './localized-content';
-import {getPublishedCollection, getPublishedDocument} from './localized-content';
+import type {
+  LocalizedContentMeta,
+  PublishedCollection,
+} from './localized-content';
+import {
+  buildPublishedCollection,
+  getPublishedCollection,
+  getPublishedDocument,
+} from './localized-content';
 import {applyFrenchCmsFallback} from '@/i18n/cms-fallback-fr';
 import {withSanityFallback} from '../sanity/lib/fetch';
 import {cache} from 'react';
@@ -44,6 +53,16 @@ export type ClientEvidenceSummary = {
   clientLogoAlt: string;
   coverImage?: string;
   coverImageAlt?: string;
+};
+
+export type HomeCaseStudyProof = {
+  caseStudies: CaseStudy[];
+  clientEvidence: ClientEvidenceSummary[];
+};
+
+export type PublishedHomeCaseStudyProof = {
+  caseStudies: PublishedCollection<CaseStudy>;
+  clientEvidence: ClientEvidenceSummary[];
 };
 
 export type CaseStudyProjectMediaPlacement =
@@ -121,6 +140,17 @@ export type CaseStudyShowcaseSummary = Pick<
   >;
 };
 
+export type PortfolioCaseStudy = LocalizedContentMeta &
+  Pick<
+    CaseStudy,
+    'slug' | 'title' | 'clientName' | 'industry' | 'summary' | 'deploymentStatus'
+  > & {
+    assets: Pick<
+      CaseStudy['assets'],
+      'coverImage' | 'coverAlt' | 'clientLogo' | 'clientLogoAlt'
+    >;
+  };
+
 export const CASE_STUDIES: CaseStudy[] = [
   {
     slug: 'multilingual-whatsapp-ai-agent',
@@ -186,6 +216,81 @@ export function getAllCaseStudies(locale: AppLocale = 'en'): Promise<CaseStudy[]
     () => getAllSanityCaseStudies(locale),
     () => (locale === 'en' ? CASE_STUDIES : []),
     'case studies',
+  );
+}
+
+function getHomeCaseStudyProof(
+  locale: AppLocale,
+): Promise<HomeCaseStudyProof> {
+  return withSanityFallback(
+    () => getSanityHomeCaseStudyProof(locale),
+    () => ({
+      caseStudies: locale === 'en' ? CASE_STUDIES : [],
+      clientEvidence: [],
+    }),
+    'homepage proof',
+  );
+}
+
+export async function getPublishedHomeCaseStudyProof(
+  locale: AppLocale = 'en',
+): Promise<PublishedHomeCaseStudyProof> {
+  if (locale === 'en') {
+    const proof = await getHomeCaseStudyProof('en');
+    return {
+      caseStudies: buildPublishedCollection('en', [], proof.caseStudies),
+      clientEvidence: proof.clientEvidence,
+    };
+  }
+
+  const [localizedProof, englishProof] = await Promise.all([
+    getHomeCaseStudyProof(locale),
+    getHomeCaseStudyProof('en'),
+  ]);
+
+  return {
+    caseStudies: buildPublishedCollection(
+      locale,
+      localizedProof.caseStudies,
+      englishProof.caseStudies,
+    ),
+    clientEvidence:
+      localizedProof.clientEvidence.length > 0
+        ? localizedProof.clientEvidence
+        : englishProof.clientEvidence.map((evidence) =>
+            applyFrenchCmsFallback(evidence),
+          ),
+  };
+}
+
+function toPortfolioCaseStudy(study: CaseStudy): PortfolioCaseStudy {
+  return {
+    _id: study._id,
+    language: study.language,
+    translationStatus: study.translationStatus,
+    translationTargets: study.translationTargets,
+    slug: study.slug,
+    title: study.title,
+    clientName: study.clientName,
+    industry: study.industry,
+    summary: study.summary,
+    deploymentStatus: study.deploymentStatus,
+    assets: {
+      coverImage: study.assets.coverImage,
+      coverAlt: study.assets.coverAlt,
+      clientLogo: study.assets.clientLogo,
+      clientLogoAlt: study.assets.clientLogoAlt,
+    },
+  };
+}
+
+export function getPortfolioCaseStudies(
+  locale: AppLocale = 'en',
+): Promise<PortfolioCaseStudy[]> {
+  return withSanityFallback(
+    () => getSanityPortfolioCaseStudies(locale),
+    () => (locale === 'en' ? CASE_STUDIES.map(toPortfolioCaseStudy) : []),
+    'portfolio case studies',
   );
 }
 

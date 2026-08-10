@@ -1048,6 +1048,9 @@
       "itemCount": "{count, plural, one {# item} other {# items}}",
       "open": "Open {type}",
       "loadMore": "Load more",
+      "loading": "Loading six more",
+      "tryAgain": "Try again",
+      "loadError": "The next publications could not be loaded. Please try again.",
       "emptyTitle": "English publications are available while French editions are reviewed.",
       "emptyDescription": "French articles and case studies appear here only after editorial approval. The publication categories remain available to explore."
     },
@@ -1080,6 +1083,22 @@
     "defaultEmpty": "These articles are being",
     "collectionEmpty": "{title} are being",
     "brand": "Hive Vault Arc",
+    "featured": "Featured",
+    "browseLatest": "Browse latest",
+    "industryFilter": "Filter by industry",
+    "publishedCount": "{count} in the collection",
+    "showingCount": "Showing {shown} of {total}",
+    "loadMore": "Load 3 more",
+    "loading": "Loading",
+    "tryAgain": "Try again",
+    "loadError": "We could not load the next publications. Please try again.",
+    "types": {
+      "post": "Blog",
+      "newsArticle": "News article",
+      "perspective": "Perspective",
+      "researchReport": "Research report",
+      "caseStudy": "Case study"
+    },
     "availableInEnglish": "Available in English",
     "englishCatalogueTitle": "English publications remain available.",
     "englishCatalogueDescription": "French editions are in editorial review. These entries open their original English pages until an approved French edition is published."
@@ -1108,60 +1127,43 @@
   "Portfolio": {
     "hero": {
       "eyebrow": "Transformation portfolio",
-      "titleLineOne": "Consulting-Led",
-      "titleLineTwo": "Programs in Production",
-      "description": "See how strategy, engineering, and operations become measurable production systems under one accountable team.",
-      "primaryCta": "Explore the work",
-      "secondaryCta": "Book a call",
-      "imageAlt": "A production CRM operating system used in a Hive Vault Arc transformation program"
+      "titleLineOne": "Systems shaped",
+      "titleLineTwo": "around real operations.",
+      "description": "A living record of platforms, automation, AI, and operating systems delivered around the constraints of the teams that use them.",
+      "primaryCta": "View delivered work",
+      "secondaryCta": "Discuss a program",
+      "featuredAriaLabel": "Featured case studies"
     },
     "projects": {
-      "deploymentLabel": "Deployment status:",
-      "stackLabel": "Stack and integrations:",
+      "eyebrow": "Published case studies",
+      "title": "Delivered systems, in their operating context.",
+      "description": "Each record states the client context, system delivered, and current status. New approved work enters this portfolio through the same published case-study catalogue.",
+      "count": "{count, plural, =0 {No published projects} one {# published case study} other {# published case studies}}",
+      "statusLabel": "Delivery status",
       "caseStudyCta": "Read case study",
-      "ai": {
-        "title": "Multilingual WhatsApp AI Agent",
-        "stream": "Program stream: conversational intelligence",
-        "description": "A consulting-led AI transformation stream for global lead management. The system handles multilingual initial inquiries, qualifies prospects with custom logic, and updates CRM records automatically.",
-        "deployment": "Live in production.",
-        "stack": "WhatsApp API, HubSpot, Google Calendar, PostgreSQL, and orchestration flows.",
-        "imageAlt": "Custom multilingual WhatsApp AI assistant built by Hive Vault Arc in Morocco",
-        "tags": ["Multilingual", "CRM integration", "Automated scheduling"],
-        "bullets": ["Automated lead qualification and routing", "Always-on lead capture across time zones", "Direct CRM synchronization"]
-      },
-      "crm": {
-        "title": "Real Estate CRM Transformation Program",
-        "description": "A consulting and engineering engagement for a luxury real estate group. We consolidated disconnected tools into one governed CRM operation covering the buyer journey.",
-        "deployment": "Live across sales and operations.",
-        "stack": "CRM core, DocuSign, Meta Lead Sync, pipeline automation, and BI reporting.",
-        "status": "Program status: live in production",
-        "statusDetail": "Full-stack CRM · BI reporting layer · real-time lead sync",
-        "imageAlt": "Custom real estate CRM system built by Hive Vault Arc for a Moroccan organization",
-        "cardTitle": "Architectural precision",
-        "cardCaption": "Consulting-led execution",
-        "tags": ["Custom SaaS", "Team collaboration", "Pipeline automation"]
-      }
+      "openAria": "Open case study: {title}",
+      "empty": "Published case studies will appear here as soon as they are approved."
     },
     "signature": {
-      "titleLineOne": "From Operating Problem",
-      "titleLineTwo": "to Production System",
-      "eyebrow": "Delivery signature",
-      "subtitle": "Strategy. Engineering. Operations.",
-      "description": "Everything needed to advise, engineer, deploy, and maintain reliable digital operations.",
+      "titleLineOne": "From Operating Mandate",
+      "titleLineTwo": "to Accountable System",
+      "eyebrow": "Delivery standard",
+      "subtitle": "Direction. Architecture. Operations.",
+      "description": "Each engagement connects the business mandate, technical design, deployment controls, and long-term ownership.",
       "items": [
-        {"title": "Agent workflows", "detail": "AI reception and operational agents integrated with real business processes."},
-        {"title": "Decision clarity", "detail": "Reporting and analyst pipelines built for measurable operational control."},
-        {"title": "Automation layer", "detail": "From intake to delivery, workflows are structured to reduce manual friction."},
-        {"title": "Production delivery", "detail": "CI/CD, monitoring, and reliability patterns aligned with long-term scale."},
-        {"title": "Secure by default", "detail": "Validation, rate limits, and control layers are included from day one."},
-        {"title": "AI-ready products", "detail": "Practical AI features where they improve speed, quality, and decisions."}
+        {"title": "Operating diagnosis", "detail": "Constraints, workflows, stakeholders, and success criteria are documented before architecture decisions."},
+        {"title": "System architecture", "detail": "Data, applications, integrations, and controls are designed as one coherent operating system."},
+        {"title": "Incremental delivery", "detail": "Working increments create explicit review points for users, leadership, and technical owners."},
+        {"title": "Production readiness", "detail": "Release, observability, security, recovery, and handover are built into the delivery plan."},
+        {"title": "Governance by design", "detail": "Decision rights, access controls, evidence, and change ownership remain explicit."},
+        {"title": "Continuous ownership", "detail": "The accountable team stays with the system through adoption, operation, and evolution."}
       ]
     },
     "bottomCta": {
-      "title": "Ready to move from fragmented projects to guided transformation?",
-      "description": "Share your constraints and we will map the right consulting and engineering path for your operating model.",
-      "primary": "Book a call",
-      "secondary": "View case studies"
+      "title": "Bring us the operating constraint. We will shape the system around it.",
+      "description": "Start with the context, the people, and the work that has to keep running. We will map the accountable route from decision to operation.",
+      "primary": "Discuss your program",
+      "secondary": "Browse all case studies"
     }
   },
   "About": {
@@ -1281,13 +1283,13 @@
       ]
     },
     "proof": {
-      "eyebrow": "Evidence in production",
-      "industry": "Luxury real estate",
-      "title": "One CRM operating system for a live real estate operation.",
-      "summary": "Hive Vault Arc unified lead intake, buyer-journey pipeline work, team workflows, and operational reporting in one governed system.",
-      "status": "Live operational rollout",
-      "imageAlt": "ImmoWorld real estate CRM operating system engagement",
-      "cta": "Read the ImmoWorld case study"
+      "eyebrow": "Education platform delivery",
+      "industry": "Education & professional training",
+      "title": "One digital academy for two education brands.",
+      "summary": "Hive Vault Arc connected program discovery, controlled learner onboarding, multimedia courses, assessments, document review, progress tracking, and academy administration in one platform.",
+      "status": "Delivered digital academy",
+      "imageAlt": "Premium Advice & Training and KeepZen digital academy homepage",
+      "cta": "Read the digital academy case study"
     },
     "trust": {
       "eyebrow": "Why buyers trust HVA",
@@ -1304,7 +1306,7 @@
         {
           "id": "proof",
           "title": "Published delivery proof",
-          "description": "The ImmoWorld case records the business challenge, delivered system, and production status.",
+          "description": "The Premium Advice and KeepZen case records the challenge, platform architecture, learning workflows, and delivered academy.",
           "linkLabel": "Read the case study"
         },
         {

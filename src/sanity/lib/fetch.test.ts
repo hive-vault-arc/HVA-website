@@ -9,6 +9,12 @@ describe('Sanity fetch resilience', () => {
   it('recognizes common network failures', () => {
     expect(isRecoverableSanityFetchError(new TypeError('fetch failed'))).toBe(true);
     expect(isRecoverableSanityFetchError({ cause: { code: 'ENOTFOUND' } })).toBe(true);
+    expect(isRecoverableSanityFetchError({ code: 'ESOCKETTIMEDOUT' })).toBe(true);
+    expect(
+      isRecoverableSanityFetchError({
+        cause: {errors: [{code: 'ETIMEDOUT'}]},
+      })
+    ).toBe(true);
   });
 
   it('summarizes network failures without serializing request details', () => {
@@ -19,6 +25,12 @@ describe('Sanity fetch resilience', () => {
         request: { url: 'https://example.invalid/private-query' },
       })
     ).toBe('fetch failed, UND_ERR_CONNECT_TIMEOUT');
+    expect(
+      getSanityFetchErrorSummary({
+        message: 'Socket timed out on request',
+        code: 'ESOCKETTIMEDOUT',
+      })
+    ).toBe('Socket timed out on request, ESOCKETTIMEDOUT');
   });
 
   it('uses fallback content for a network failure', async () => {

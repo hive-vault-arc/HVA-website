@@ -6,7 +6,7 @@ import FaqSection from '@/components/FaqSection';
 import JsonLd from '@/components/JsonLd';
 import {getLocalizedFaqs} from '@/i18n/faqs';
 import {absoluteUrl, buildLocalizedBreadcrumbSchema} from '@/lib/seo';
-import { getAllCaseStudies } from '@/lib/proof';
+import {getPortfolioCaseStudies} from '@/lib/proof';
 import {localizedPath} from '@/i18n/route-manifest';
 import {getTranslations} from 'next-intl/server';
 import {getPublishedCollection} from '@/lib/localized-content';
@@ -21,7 +21,7 @@ export async function generateMetadata({params}: PageProps): Promise<Metadata> {
 export default async function Page({params}: PageProps) {
   const {locale} = await params;
   const [caseStudyCollection, portfolioFaqs, tMeta, tNav] = await Promise.all([
-    getPublishedCollection(locale, getAllCaseStudies),
+    getPublishedCollection(locale, getPortfolioCaseStudies),
     getLocalizedFaqs(locale, 'portfolio'),
     getTranslations({locale, namespace: 'Metadata.pages.portfolio'}),
     getTranslations({locale, namespace: 'Navigation'}),
@@ -53,7 +53,7 @@ export default async function Page({params}: PageProps) {
   return (
     <>
       <JsonLd data={[breadcrumbSchema, caseItemListSchema]} />
-      <Portfolio />
+      <Portfolio projects={caseStudies} />
       <FaqSection faqs={portfolioFaqs.items} heading={portfolioFaqs.heading} />
     </>
   );

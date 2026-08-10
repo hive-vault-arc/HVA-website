@@ -3,7 +3,7 @@
 import {useState, type CSSProperties} from 'react';
 import Image from 'next/image';
 import {MotionConfig, motion, useScroll, useTransform} from 'framer-motion';
-import {useLocale, useTranslations} from 'next-intl';
+import {useTranslations} from 'next-intl';
 import {Link} from '@/i18n/navigation';
 import {
   ArrowUpRight,
@@ -69,9 +69,9 @@ const phaseMedia = [
 ] as const;
 
 const featuredProof = {
-  slug: 'top-tier-crm-transformation-program-real-estate-operations',
-  client: 'ImmoWorld',
-  image: '/Images/case-studies/immoworld-crm-transformation-case-study-morocco.webp',
+  slug: 'premium-advice-training-keepzen-digital-academy',
+  client: 'Premium Advice × KeepZen',
+  image: '/Images/case-studies/premium-advice-keepzen-digital-academy.webp',
 } as const;
 
 const trustSignalConfig = [
@@ -106,7 +106,6 @@ const reveal = {
 
 const About = ({teamMembers}: AboutProps) => {
   const t = useTranslations('About');
-  const locale = useLocale();
   const {scrollYProgress} = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
   const [activePhaseIndex, setActivePhaseIndex] = useState(0);
@@ -119,7 +118,6 @@ const About = ({teamMembers}: AboutProps) => {
   const trustSignals = trustSignalConfig.map((signal) => ({
     ...signal,
     ...trustSignalCopy.find((item) => item.id === signal.id)!,
-    href: signal.id === 'proof' && locale === 'fr' ? '/case-studies' : signal.href,
   }));
 
   const activePhase = deliverySteps[activePhaseIndex] ?? deliverySteps[0];
@@ -314,7 +312,7 @@ const About = ({teamMembers}: AboutProps) => {
                   alt={t('proof.imageAlt')}
                   fill
                   sizes="(max-width: 1023px) 100vw, 60vw"
-                  className="object-cover"
+                  className="object-contain"
                 />
                 <figcaption>
                   <span>{featuredProof.client}</span>
@@ -327,9 +325,7 @@ const About = ({teamMembers}: AboutProps) => {
                 <small>{t('proof.industry')}</small>
                 <h2 id="about-proof-title">{t('proof.title')}</h2>
                 <p>{t('proof.summary')}</p>
-                <Link
-                  href={locale === 'fr' ? '/case-studies' : `/case-studies/${featuredProof.slug}`}
-                >
+                <Link href={`/case-studies/${featuredProof.slug}`}>
                   {t('proof.cta')} <ArrowUpRight aria-hidden="true" />
                 </Link>
               </motion.div>

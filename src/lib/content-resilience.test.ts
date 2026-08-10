@@ -13,6 +13,9 @@ const sanityMocks = vi.hoisted(() => ({
   getSanityClientEvidenceShowcase: vi.fn(async () => {
     throw new TypeError('fetch failed')
   }),
+  getSanityHomeCaseStudyProof: vi.fn(async () => {
+    throw new TypeError('fetch failed')
+  }),
   getSanityCaseStudyBySlug: vi.fn(async () => {
     throw new TypeError('fetch failed')
   }),
@@ -25,6 +28,7 @@ import {
   CASE_STUDIES,
   getAllCaseStudies,
   getClientEvidenceShowcase,
+  getPublishedHomeCaseStudyProof,
 } from './proof'
 
 describe('local content resilience', () => {
@@ -52,5 +56,16 @@ describe('local content resilience', () => {
     await expect(getAllPosts('fr')).resolves.toEqual([])
     await expect(getAllCaseStudies('fr')).resolves.toEqual([])
     await expect(getClientEvidenceShowcase('fr')).resolves.toEqual([])
+  })
+
+  it('returns the complete homepage proof fallback from one resilient boundary', async () => {
+    await expect(getPublishedHomeCaseStudyProof('en')).resolves.toEqual({
+      caseStudies: {
+        items: CASE_STUDIES,
+        sourceLocale: 'en',
+        hasFallbackContent: false,
+      },
+      clientEvidence: [],
+    })
   })
 })
