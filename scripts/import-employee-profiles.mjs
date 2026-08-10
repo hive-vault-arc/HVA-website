@@ -74,7 +74,7 @@ const profiles = [
       'Ali Amrani owns product systems, full-stack engineering, and delivery architecture for Hive Vault Arc programs.',
     story:
       'Ali brings a software engineering background into the operating layer of Hive Vault Arc. His work focuses on turning strategy and AI ambition into product systems that teams can actually use: interfaces, workflows, integrations, and reliable delivery architecture. Public LinkedIn information describes him as CEO & Co-Founder of Hive Vault Arc, working across AI transformation, software engineering, and managed operations.',
-    profileImage: '/Images/team/ali-amrani-hva-co-founder-portrait.jpeg',
+    profileImage: '/Images/team/ali-amrani-hva-co-founder-portrait.webp',
     profileImageAlt: 'Ali Amrani, Co-Founder and CEO of Hive Vault Arc',
     experience: [
       {

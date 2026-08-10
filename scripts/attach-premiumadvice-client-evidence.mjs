@@ -1,6 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import {getCliClient} from 'sanity/cli'
+import sharp from 'sharp'
 
 const apiVersion = '2026-07-16'
 const slug = 'premium-advice-training-keepzen-digital-academy'
@@ -61,12 +62,16 @@ async function getOrUploadPdf(filePath) {
 }
 
 async function getOrUploadLogo(filePath) {
-  const sourceId = 'hva-client-logo:premium-advice-training:user-supplied:v1'
+  const sourceId = 'hva-client-logo:premium-advice-training:user-supplied:webp:v2'
   const existing = await findAssetBySourceId('sanity.imageAsset', sourceId)
   if (existing?._id) return assetReference(existing._id, 'image')
 
-  const asset = await client.assets.upload('image', fs.createReadStream(filePath), {
-    filename: 'premium-advice-training-logo.jpg',
+  const webp = await sharp(fs.readFileSync(filePath))
+    .webp({lossless: true, effort: 6, exact: true})
+    .toBuffer()
+  const asset = await client.assets.upload('image', webp, {
+    filename: 'premium-advice-training-logo.webp',
+    contentType: 'image/webp',
     source: {
       id: sourceId,
       name: 'Premium Advice & Training user-supplied logo',

@@ -1,6 +1,7 @@
 import {UserIcon} from '@sanity/icons'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {createLocalizationFields, localeScopedSlugIsUnique} from '../localization'
+import {requireWebpImage} from '../webpValidation'
 
 const slugValidation = (slug?: {current?: string}) => {
   if (!slug?.current) return 'Required'
@@ -94,7 +95,7 @@ export const employeeProfile = defineType({
       type: 'image',
       group: 'identity',
       options: {hotspot: true},
-      validation: (rule) => rule.required(),
+      validation: (rule) => rule.required().custom(requireWebpImage),
     }),
     defineField({
       name: 'profileImageAlt',

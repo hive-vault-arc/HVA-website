@@ -14,7 +14,7 @@ const coverPath = path.join(
   studioRoot,
   'assets',
   'case-studies',
-  'premiumadvice-keepzen-academy-home.png',
+  'premiumadvice-keepzen-academy-home.webp',
 )
 
 const logoUrl =
@@ -46,6 +46,7 @@ async function getOrUploadLocalImage({sourceId, sourceName, sourceUrl, filePath,
 
   const asset = await client.assets.upload('image', fs.createReadStream(filePath), {
     filename,
+    contentType: 'image/webp',
     source: {
       id: sourceId,
       name: sourceName,
@@ -84,7 +85,7 @@ async function main() {
       sourceName: 'Premium Advice Training Academy live platform capture',
       sourceUrl: 'https://www.premiumadvicetrainingacademy.com/home',
       filePath: coverPath,
-      filename: 'premiumadvice-keepzen-digital-academy-home.png',
+      filename: 'premiumadvice-keepzen-digital-academy-home.webp',
     }),
     getOrUploadRemoteImage({
       sourceId: 'hva-client-logo:premiumadvice-training:main:v1',

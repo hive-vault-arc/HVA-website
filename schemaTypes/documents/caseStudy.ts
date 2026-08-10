@@ -1,6 +1,8 @@
 import {DocumentTextIcon} from '@sanity/icons'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {createLocalizationFields, localeScopedSlugIsUnique} from '../localization'
+import {createIndustryReferenceField} from '../industryReference'
+import {requireWebpImage} from '../webpValidation'
 
 export const caseStudy = defineType({
   name: 'caseStudy',
@@ -38,10 +40,16 @@ export const caseStudy = defineType({
     }),
     defineField({
       name: 'industry',
-      title: 'Industry',
+      title: 'Industry (Deprecated)',
       type: 'string',
-      validation: (rule) => rule.required(),
+      deprecated: {
+        reason:
+          'Use the shared Industry reference. Existing values remain visible until migration is complete.',
+      },
+      readOnly: true,
+      hidden: ({value}) => value === undefined,
     }),
+    createIndustryReferenceField(),
     defineField({
       name: 'summary',
       title: 'Summary',
@@ -94,6 +102,15 @@ export const caseStudy = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'publishedOutcomes',
+      title: 'Published Outcomes',
+      type: 'array',
+      description:
+        'Client- or owner-approved performance figures. Public queries return only approved items with a recorded approval date and reference.',
+      of: [defineArrayMember({type: 'publishedCaseStudyOutcome'})],
+      validation: (rule) => rule.max(6),
+    }),
+    defineField({
       name: 'measuredOutcomes',
       title: 'Measured Outcomes (Deprecated)',
       type: 'array',
@@ -127,6 +144,15 @@ export const caseStudy = defineType({
       },
     }),
     defineField({
+      name: 'projectMedia',
+      title: 'Project Media',
+      type: 'array',
+      description:
+        'Optional ordered product and delivery images. Only approved items appear publicly; an empty list leaves the narrative layout unchanged.',
+      of: [defineArrayMember({type: 'caseStudyProjectMedia'})],
+      validation: (rule) => rule.max(12),
+    }),
+    defineField({
       name: 'testimonial',
       title: 'Testimonial (Deprecated)',
       type: 'testimonial',
@@ -147,7 +173,7 @@ export const caseStudy = defineType({
           title: 'Cover Image',
           type: 'image',
           options: {hotspot: true},
-          validation: (rule) => rule.required(),
+          validation: (rule) => rule.required().custom(requireWebpImage),
         }),
         defineField({
           name: 'coverAlt',
@@ -166,6 +192,7 @@ export const caseStudy = defineType({
           title: 'Client Logo',
           type: 'image',
           options: {hotspot: false},
+          validation: (rule) => rule.custom(requireWebpImage),
         }),
         defineField({
           name: 'clientLogoAlt',

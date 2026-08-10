@@ -9,11 +9,11 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const studioRoot = path.resolve(__dirname, '..')
 const frontendRoot = path.resolve(studioRoot, '..', 'Hva-website-front')
-const logoPath = path.join(frontendRoot, 'public', 'Images', 'trustedby', 'logo.png')
+const logoPath = path.join(frontendRoot, 'public', 'Images', 'trustedby', 'logo.webp')
 const client = getCliClient({apiVersion})
 
 async function getClientLogo() {
-  const sourceId = 'hva-static:/Images/trustedby/logo.png'
+  const sourceId = 'hva-static:/Images/trustedby/logo.webp'
   const existing = await client.fetch(
     '*[_type == "sanity.imageAsset" && source.id == $sourceId][0]{_id}',
     {sourceId},
@@ -28,11 +28,12 @@ async function getClientLogo() {
   }
 
   const asset = await client.assets.upload('image', fs.createReadStream(logoPath), {
-    filename: 'immoworld-luxury-real-estate-logo.png',
+    filename: 'immoworld-luxury-real-estate-logo.webp',
+    contentType: 'image/webp',
     source: {
       id: sourceId,
       name: 'hva-static-import',
-      url: '/Images/trustedby/logo.png',
+      url: '/Images/trustedby/logo.webp',
     },
   })
 

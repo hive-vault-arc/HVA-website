@@ -2,6 +2,8 @@ import {DocumentTextIcon} from '@sanity/icons'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {sectionArrayMembers} from '../objects/sectionArrayMembers'
 import {createLocalizationFields, localeScopedSlugIsUnique} from '../localization'
+import {createIndustryReferenceField} from '../industryReference'
+import {requireWebpImage} from '../webpValidation'
 
 export const perspective = defineType({
   name: 'perspective',
@@ -56,6 +58,7 @@ export const perspective = defineType({
       },
       validation: (rule) => rule.required(),
     }),
+    createIndustryReferenceField(),
     defineField({
       name: 'publishedAt',
       title: 'Published At',
@@ -94,7 +97,7 @@ export const perspective = defineType({
       title: 'Cover Image',
       type: 'image',
       options: {hotspot: true},
-      validation: (rule) => rule.required(),
+      validation: (rule) => rule.required().custom(requireWebpImage),
     }),
     defineField({
       name: 'coverAlt',

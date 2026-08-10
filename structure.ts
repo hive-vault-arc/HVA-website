@@ -1,4 +1,4 @@
-import {DocumentTextIcon, UserIcon} from '@sanity/icons'
+import {DocumentTextIcon, TagIcon, UserIcon} from '@sanity/icons'
 import type {StructureResolver} from 'sanity/structure'
 
 export const structure: StructureResolver = (S) =>
@@ -11,6 +11,18 @@ export const structure: StructureResolver = (S) =>
         .child(
           S.documentTypeList('capability')
             .title('Capabilities')
+            .defaultOrdering([
+              {field: 'displayOrder', direction: 'asc'},
+              {field: 'title', direction: 'asc'},
+            ]),
+        ),
+      S.divider(),
+      S.listItem()
+        .title('Industries')
+        .icon(TagIcon)
+        .child(
+          S.documentTypeList('industry')
+            .title('Industries')
             .defaultOrdering([
               {field: 'displayOrder', direction: 'asc'},
               {field: 'title', direction: 'asc'},

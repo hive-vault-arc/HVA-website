@@ -14,6 +14,7 @@ export const LOCALIZED_SCHEMA_TYPES = [
   'caseStudy',
   'employeeProfile',
   'capability',
+  'industry',
 ] as const
 
 export type LocalizedSchemaType = (typeof LOCALIZED_SCHEMA_TYPES)[number]
@@ -62,7 +63,6 @@ const APPROVAL_REQUIRED_FIELDS: Record<LocalizedSchemaType, string[]> = {
   caseStudy: [
     'title',
     'slug.current',
-    'industry',
     'summary',
     'problem',
     'systemArchitecture',
@@ -91,6 +91,7 @@ const APPROVAL_REQUIRED_FIELDS: Record<LocalizedSchemaType, string[]> = {
     'seo.title',
     'seo.description',
   ],
+  industry: ['title', 'slug.current'],
 }
 
 function valueAtPath(document: SanityDocumentLike | undefined, path: string): unknown {

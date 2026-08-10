@@ -1,12 +1,14 @@
 import {caseStudy} from './caseStudy'
 import {capability} from './capability'
 import {employeeProfile} from './employeeProfile'
+import {industry} from './industry'
 import {newsArticle} from './newsArticle'
 import {perspective} from './perspective'
 import {post} from './post'
 import {researchReport} from './researchReport'
 
 export const documentTypes = [
+  industry,
   post,
   newsArticle,
   perspective,

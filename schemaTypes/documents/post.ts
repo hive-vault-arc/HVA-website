@@ -2,6 +2,8 @@ import {DocumentTextIcon} from '@sanity/icons'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {sectionArrayMembers} from '../objects/sectionArrayMembers'
 import {createLocalizationFields, localeScopedSlugIsUnique} from '../localization'
+import {createIndustryReferenceField} from '../industryReference'
+import {requireWebpImage} from '../webpValidation'
 
 export const post = defineType({
   name: 'post',
@@ -51,6 +53,7 @@ export const post = defineType({
       type: 'string',
       validation: (rule) => rule.required(),
     }),
+    createIndustryReferenceField(),
     defineField({
       name: 'readTime',
       title: 'Read Time',
@@ -75,7 +78,7 @@ export const post = defineType({
       title: 'Cover Image',
       type: 'image',
       options: {hotspot: true},
-      validation: (rule) => rule.required(),
+      validation: (rule) => rule.required().custom(requireWebpImage),
     }),
     defineField({
       name: 'coverAlt',
