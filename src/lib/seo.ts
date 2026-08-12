@@ -47,8 +47,8 @@ export const SOCIAL_PROFILES = [
   },
   {
     label: 'Instagram',
-    handle: '@hive.vault.arc',
-    url: 'https://www.instagram.com/hive.vault.arc/',
+    handle: '@hivevaultarc',
+    url: 'https://www.instagram.com/hivevaultarc/',
   },
   {
     label: 'Facebook',

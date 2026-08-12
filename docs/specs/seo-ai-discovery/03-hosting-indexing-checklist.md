@@ -230,7 +230,7 @@ The website currently uses these official social URLs in schema and `/ai/company
 
 - LinkedIn: `https://www.linkedin.com/company/hive-vault-arc`
 - GitHub: `https://github.com/hive-vault-arc`
-- Instagram: `https://www.instagram.com/hive.vault.arc/`
+- Instagram: `https://www.instagram.com/hivevaultarc/`
 - Facebook: `https://www.facebook.com/hivevaultarc`
 - X: `https://x.com/Hivevaultarc`
 - TikTok: `https://www.tiktok.com/@hivevaultarc`

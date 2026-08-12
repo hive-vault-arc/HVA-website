@@ -211,6 +211,7 @@ function CaseStudyNarrative({
     <section
       className="case-study-template__narrative"
       aria-labelledby="challenge-title solution-title"
+      data-has-media={media.length > 0 ? 'true' : 'false'}
     >
       <div className="case-study-template__narrative-pair">
         <article
