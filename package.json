@@ -21,6 +21,8 @@
     "migrate:immoworld-case-study": "sanity exec scripts/update-immoworld-case-study.mjs --with-user-token",
     "publish:immoworld-outcomes:dry-run": "sanity exec scripts/publish-immoworld-outcomes.mjs --with-user-token",
     "publish:immoworld-outcomes": "sanity exec scripts/publish-immoworld-outcomes.mjs --with-user-token -- --apply",
+    "publish:case-study-headline-metrics:dry-run": "sanity exec scripts/publish-case-study-headline-metrics.mjs --with-user-token",
+    "publish:case-study-headline-metrics": "sanity exec scripts/publish-case-study-headline-metrics.mjs --with-user-token -- --apply",
     "upsert:tarik-rami-case-study:dry-run": "sanity exec scripts/upsert-tarik-rami-case-study.mjs --with-user-token",
     "upsert:tarik-rami-case-study": "sanity exec scripts/upsert-tarik-rami-case-study.mjs --with-user-token -- --apply",
     "attach:tarik-rami-logo:dry-run": "sanity exec scripts/attach-tarik-rami-client-logo.mjs --with-user-token",
@@ -47,6 +49,8 @@
     "upload:insight-covers": "sanity exec scripts/upload-supplied-insight-covers.mjs --with-user-token",
     "upload:case-study-media:dry-run": "sanity exec scripts/upload-case-study-project-media.mjs --with-user-token",
     "upload:case-study-media": "sanity exec scripts/upload-case-study-project-media.mjs --with-user-token -- --apply",
+    "attach:immoworld-testimonial:dry-run": "sanity exec scripts/attach-immoworld-testimonial.mjs --with-user-token",
+    "attach:immoworld-testimonial": "sanity exec scripts/attach-immoworld-testimonial.mjs --with-user-token -- --apply",
     "start": "sanity start"
   },
   "keywords": [

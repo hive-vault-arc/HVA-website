@@ -53,6 +53,8 @@ export const caseStudyProjectMedia = defineType({
       name: 'deviceType',
       title: 'Device Type',
       type: 'string',
+      description:
+        'Phone screenshots are automatically grouped in the optional product-evidence stage after activated modules. Wide interfaces follow their narrative placement.',
       options: {
         layout: 'radio',
         list: [
@@ -67,7 +69,7 @@ export const caseStudyProjectMedia = defineType({
       title: 'Narrative Placement',
       type: 'string',
       description:
-        'Choose where this evidence supports the story. The website determines the responsive composition.',
+        'Choose where a desktop or wide interface supports the story. Phone screenshots are always grouped after activated modules so every case study keeps one consistent reading order.',
       options: {
         layout: 'radio',
         list: [

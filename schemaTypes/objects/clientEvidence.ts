@@ -1,5 +1,6 @@
 import {DocumentTextIcon} from '@sanity/icons'
 import {defineField, defineType, type FileValue, type ValidationContext} from 'sanity'
+import {requireWebpImage} from '../webpValidation'
 
 const APPROVED_STATUS = 'approved'
 const PDF_MIME_TYPE = 'application/pdf'
@@ -9,6 +10,11 @@ const ASSET_API_VERSION = '2026-07-01'
 
 type ClientEvidenceParent = {
   publicationStatus?: string
+  testimonialImage?: {
+    asset?: {
+      _ref?: string
+    }
+  }
 }
 
 type FileAssetMetadata = {
@@ -47,7 +53,7 @@ export const clientEvidence = defineType({
   type: 'object',
   icon: DocumentTextIcon,
   description:
-    'Publication-controlled evidence for this case study. Only upload a final reference letter after written permission is confirmed; Sanity file assets are publicly addressable.',
+    'Publication-controlled evidence for this case study. Upload a final testimonial PDF, image, or both only after written permission is confirmed; Sanity assets are publicly addressable.',
   initialValue: {
     publicationStatus: 'notCleared',
   },
@@ -57,7 +63,7 @@ export const clientEvidence = defineType({
       title: 'Publication Status',
       type: 'string',
       description:
-        'Approved evidence can appear on the website. Withdrawn evidence is never queried publicly; remove its PDF asset if permission has been revoked.',
+        'Approved evidence can appear on the website. Withdrawn evidence is never queried publicly; remove its testimonial assets if permission has been revoked.',
       initialValue: 'notCleared',
       options: {
         layout: 'radio',
@@ -117,9 +123,10 @@ export const clientEvidence = defineType({
         rule
           .custom((value, context) => {
             if (!isApproved(context)) return true
+            const parent = context.parent as ClientEvidenceParent | undefined
             return (
-              Boolean(fileAssetRef(value)) ||
-              'A client reference letter PDF is required before approval.'
+              Boolean(fileAssetRef(value) || parent?.testimonialImage?.asset?._ref) ||
+              'A testimonial PDF or image is required before approval.'
             )
           })
           .error(),
@@ -147,6 +154,31 @@ export const clientEvidence = defineType({
           })
           .warning(),
       ],
+    }),
+    defineField({
+      name: 'testimonialImage',
+      title: 'Client Testimonial Image',
+      type: 'image',
+      description:
+        'Optional signed or stamped testimonial image displayed in full on the case-study page. The website omits the section when this field is empty.',
+      hidden: ({parent}) => parent?.publicationStatus === 'notCleared',
+      options: {
+        hotspot: true,
+      },
+      validation: (rule) => rule.custom(requireWebpImage),
+    }),
+    defineField({
+      name: 'testimonialImageAlt',
+      title: 'Testimonial Image Alternative Text',
+      type: 'string',
+      description: 'Describe the testimonial document in the language of this case study.',
+      hidden: ({parent}) => !parent?.testimonialImage,
+      validation: (rule) =>
+        rule.max(240).custom((value, context) => {
+          const parent = context.parent as ClientEvidenceParent | undefined
+          if (!parent?.testimonialImage?.asset?._ref) return true
+          return (typeof value === 'string' && value.trim().length > 0) || 'Required'
+        }),
     }),
     defineField({
       name: 'issuedOn',

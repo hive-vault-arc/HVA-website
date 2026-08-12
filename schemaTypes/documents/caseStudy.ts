@@ -1,8 +1,28 @@
 import {DocumentTextIcon} from '@sanity/icons'
-import {defineArrayMember, defineField, defineType} from 'sanity'
+import {defineArrayMember, defineField, defineType, type ValidationContext} from 'sanity'
 import {createLocalizationFields, localeScopedSlugIsUnique} from '../localization'
 import {createIndustryReferenceField} from '../industryReference'
 import {requireWebpImage} from '../webpValidation'
+
+const SOFTWARE_DELIVERY_TYPES = new Set(['customSoftware', 'hybridDelivery'])
+
+type CaseStudyDocument = {
+  engagementType?: string
+}
+
+function requiredForSoftwareDelivery(
+  value: unknown[] | undefined,
+  context: ValidationContext,
+  fieldLabel: string,
+) {
+  const document = context.document as CaseStudyDocument | undefined
+  const engagementType = document?.engagementType ?? 'customSoftware'
+  if (!SOFTWARE_DELIVERY_TYPES.has(engagementType)) return true
+
+  return Array.isArray(value) && value.length > 0
+    ? true
+    : `Add at least one ${fieldLabel} for custom software or hybrid delivery.`
+}
 
 export const caseStudy = defineType({
   name: 'caseStudy',
@@ -51,6 +71,23 @@ export const caseStudy = defineType({
     }),
     createIndustryReferenceField(),
     defineField({
+      name: 'engagementType',
+      title: 'Engagement Type',
+      type: 'string',
+      description:
+        'Describes the work delivered and determines which delivery fields are expected. Existing records without a value are treated as custom software.',
+      initialValue: 'customSoftware',
+      options: {
+        layout: 'radio',
+        list: [
+          {title: 'Custom software or digital product', value: 'customSoftware'},
+          {title: 'Advisory or transformation program', value: 'advisoryTransformation'},
+          {title: 'Managed operations or service', value: 'managedOperations'},
+          {title: 'Hybrid advisory and software delivery', value: 'hybridDelivery'},
+        ],
+      },
+    }),
+    defineField({
       name: 'summary',
       title: 'Summary',
       type: 'text',
@@ -75,15 +112,27 @@ export const caseStudy = defineType({
       name: 'operationalModules',
       title: 'Operational Modules',
       type: 'array',
+      description:
+        'Required for custom software and hybrid delivery. Optional for advisory and managed-service case studies.',
       of: [defineArrayMember({type: 'string'})],
-      validation: (rule) => rule.required().min(1).unique(),
+      validation: (rule) =>
+        rule
+          .unique()
+          .custom((value, context) =>
+            requiredForSoftwareDelivery(value, context, 'operational module'),
+          ),
     }),
     defineField({
       name: 'integrations',
       title: 'Integrations',
       type: 'array',
+      description:
+        'Required for custom software and hybrid delivery. Optional when the engagement has no connected software stack.',
       of: [defineArrayMember({type: 'string'})],
-      validation: (rule) => rule.required().min(1).unique(),
+      validation: (rule) =>
+        rule
+          .unique()
+          .custom((value, context) => requiredForSoftwareDelivery(value, context, 'integration')),
     }),
     defineField({
       name: 'deploymentScale',
@@ -100,6 +149,15 @@ export const caseStudy = defineType({
       title: 'Deployment Status',
       type: 'string',
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'headlineMetrics',
+      title: 'Headline Metrics',
+      type: 'array',
+      description:
+        'Optional approved numbers shown after the delivered system, visual evidence, and integrations. Leave empty to omit the results grid. Use scope facts unless a performance figure has explicit approval.',
+      of: [defineArrayMember({type: 'caseStudyHeadlineMetric'})],
+      validation: (rule) => rule.max(6),
     }),
     defineField({
       name: 'publishedOutcomes',
@@ -148,7 +206,7 @@ export const caseStudy = defineType({
       title: 'Project Media',
       type: 'array',
       description:
-        'Optional ordered product and delivery images. Only approved items appear publicly; an empty list leaves the narrative layout unchanged.',
+        'Optional ordered product and delivery evidence. Custom-software records may include desktop or phone screenshots; advisory and service records can leave this empty with no public placeholder or reserved space.',
       of: [defineArrayMember({type: 'caseStudyProjectMedia'})],
       validation: (rule) => rule.max(12),
     }),
@@ -201,7 +259,8 @@ export const caseStudy = defineType({
           hidden: ({parent}) => !parent?.clientLogo,
           validation: (rule) =>
             rule.custom((value, context) => {
-              if (!context.parent?.clientLogo || value) return true
+              const parent = context.parent as {clientLogo?: unknown} | undefined
+              if (!parent?.clientLogo || value) return true
               return 'Add alt text when a client logo is present.'
             }),
         }),

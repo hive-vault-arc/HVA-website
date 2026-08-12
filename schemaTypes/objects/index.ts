@@ -2,6 +2,7 @@ import {author} from './author'
 import {caseStudyProjectMedia} from './caseStudyProjectMedia'
 import {clientEvidence} from './clientEvidence'
 import {caseStudyMetric} from './caseStudyMetric'
+import {caseStudyHeadlineMetric} from './caseStudyHeadlineMetric'
 import {publishedCaseStudyOutcome} from './publishedCaseStudyOutcome'
 import {faqSection} from './faqSection'
 import {faqItem} from './faqItem'
@@ -24,6 +25,7 @@ export const sharedObjectTypes = [
   statItem,
   faqItem,
   caseStudyMetric,
+  caseStudyHeadlineMetric,
   publishedCaseStudyOutcome,
   clientEvidence,
   testimonial,
