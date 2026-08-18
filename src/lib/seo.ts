@@ -10,10 +10,14 @@ export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
 export const SITE_NAME = 'Hive Vault Arc';
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://hivevaultarc.com';
 export const LINKEDIN_URL = 'https://www.linkedin.com/company/hive-vault-arc';
-export const SITE_LOGO_PATH = '/Images/brand/hva-logo-number-3.webp';
-export const SITE_LOGO_WIDTH = 1086;
-export const SITE_LOGO_HEIGHT = 1086;
-export const DEFAULT_OG_IMAGE_PATH = '/Images/brand/hva-ai-software-agency-tangier.webp';
+export const SITE_LOGO_PATH = '/Images/brand/hva-icon-static-light-surface.svg';
+export const SITE_LOGO_WIDTH = 100;
+export const SITE_LOGO_HEIGHT = 100;
+// Social previews use a rasterized version of the same micro lockup rendered in
+// the navbar. Keeping this as a 1200×630 WebP makes the mark reliable across
+// LinkedIn, WhatsApp, Slack, and other link unfurlers that do not render SVG OG
+// images consistently.
+export const DEFAULT_OG_IMAGE_PATH = '/Images/brand/hva-og-share.webp';
 export const DEFAULT_OG_IMAGE_WIDTH = 1200;
 export const DEFAULT_OG_IMAGE_HEIGHT = 630;
 

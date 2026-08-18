@@ -7,6 +7,7 @@ import type {AppLocale} from '@/i18n/config';
 import type {LocalizedContentMeta} from './localized-content';
 import {getPublishedCollection, getPublishedDocument} from './localized-content';
 import {cache} from 'react';
+import type {EditorialContentFields} from './editorial-taxonomy';
 
 export type PerspectiveSection =
   | { type: 'paragraph'; content: string }
@@ -16,7 +17,7 @@ export type PerspectiveSection =
   | { type: 'pullquote'; content: string; attribution?: string }
   | { type: 'faq'; items: { question: string; answer: string }[] };
 
-export type Perspective = LocalizedContentMeta & {
+export type Perspective = LocalizedContentMeta & EditorialContentFields & {
   slug: string;
   title: string;
   subtitle: string;

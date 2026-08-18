@@ -17,7 +17,6 @@ import {
   Workflow,
 } from '@/components/icons';
 import BottomCTA from '@/components/BottomCTA';
-import SectionBrandMark from '@/components/SectionBrandMark';
 import {useAnimationQuality} from '@/lib/animationQuality';
 import {isSanityCdnImage} from '@/lib/image-delivery';
 import type {PortfolioCaseStudy} from '@/lib/proof';
@@ -147,7 +146,7 @@ const Portfolio = ({projects}: PortfolioProps) => {
               transition={{duration: 0.58, ease: [0.23, 1, 0.32, 1]}}
             >
               <div className="portfolio-v2__mark">
-                <SectionBrandMark size="sm" eager />
+                <span className="page-family-label-line" aria-hidden="true" />
                 <span>{t('hero.eyebrow')}</span>
               </div>
               <h1 id="portfolio-title">
@@ -194,6 +193,7 @@ const Portfolio = ({projects}: PortfolioProps) => {
                           priority={index === 0}
                           fetchPriority={index === 0 ? 'high' : 'auto'}
                           loading="eager"
+                          quality={90}
                           sizes="(max-width: 767px) 88vw, (max-width: 1199px) 44vw, 32vw"
                           unoptimized={isSanityCdnImage(project.assets.coverImage)}
                           className="object-cover"
@@ -210,7 +210,7 @@ const Portfolio = ({projects}: PortfolioProps) => {
                 ))
               ) : (
                 <div className="portfolio-v2__hero-empty">
-                  <SectionBrandMark size="md" />
+                  <span className="page-family-label-line" aria-hidden="true" />
                   <p>{t('projects.empty')}</p>
                 </div>
               )}
@@ -226,7 +226,7 @@ const Portfolio = ({projects}: PortfolioProps) => {
           <div className="site-frame-wide portfolio-v2__project-layout">
             <motion.header className="portfolio-v2__project-intro" {...reveal}>
               <div className="portfolio-v2__mark">
-                <SectionBrandMark size="sm" />
+                <span className="page-family-label-line" aria-hidden="true" />
                 <span>{t('projects.eyebrow')}</span>
               </div>
               <h2 id="portfolio-projects-title">{t('projects.title')}</h2>
@@ -263,6 +263,7 @@ const Portfolio = ({projects}: PortfolioProps) => {
                             loading={
                               index < 2 || featuredProjectSlugs.has(project.slug) ? 'eager' : 'lazy'
                             }
+                            quality={90}
                             sizes="(max-width: 767px) 100vw, (max-width: 1199px) 46vw, 38vw"
                             unoptimized={isSanityCdnImage(project.assets.coverImage)}
                             className="object-cover"
@@ -317,67 +318,46 @@ const Portfolio = ({projects}: PortfolioProps) => {
         </section>
 
         <section className="portfolio-v2__signature" aria-labelledby="portfolio-signature-title">
-          <div className="container mx-auto px-4">
-            <motion.div
+          <div className="site-frame-wide portfolio-v2__signature-layout">
+            <motion.header
               initial={{opacity: 0, y: 18}}
               whileInView={{opacity: 1, y: 0}}
               viewport={{once: true, amount: 0.2}}
               transition={{duration: 0.4}}
-              className="text-center"
+              className="portfolio-v2__signature-intro"
             >
-              <h2
-                id="portfolio-signature-title"
-                className="mx-auto max-w-5xl font-serif text-3xl font-semibold leading-[0.96] text-[#1A2535] sm:text-4xl md:text-5xl lg:text-8xl"
-              >
+              <div className="portfolio-v2__mark">
+                <span className="page-family-label-line" aria-hidden="true" />
+                <span>{t('signature.eyebrow')}</span>
+              </div>
+              <h2 id="portfolio-signature-title">
                 {t('signature.titleLineOne')}
                 <br />
                 {t('signature.titleLineTwo')}
               </h2>
-              <div className="mt-10 flex items-center justify-center gap-3">
-                <SectionBrandMark size="sm" />
-                <p className="text-xs uppercase tracking-[0.2em] text-[var(--section-label-color)]">
-                  {t('signature.eyebrow')}
-                </p>
+              <div className="portfolio-v2__signature-copy">
+                <h3>{t('signature.subtitle')}</h3>
+                <p>{t('signature.description')}</p>
               </div>
-              <h3 className="mt-3 font-serif text-xl font-semibold leading-[1.02] text-[#1A2535] sm:text-2xl md:text-3xl lg:text-5xl">
-                {t('signature.subtitle')}
-              </h3>
-              <p className="mx-auto mt-3 max-w-4xl text-base leading-relaxed text-[#1A2535]/[0.72] md:text-[1.55rem]">
-                {t('signature.description')}
-              </p>
-            </motion.div>
+            </motion.header>
 
-            <div className="mt-10 overflow-hidden border border-[#1A2535]/[0.12] bg-white/[0.84]">
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-                {signatureItems.map(({title, detail, Icon}, index) => (
-                  <motion.article
-                    key={title}
-                    initial={{opacity: 0, y: 16}}
-                    whileInView={{opacity: 1, y: 0}}
-                    viewport={{once: true, amount: 0.2}}
-                    transition={{duration: 0.35, delay: index * 0.04}}
-                    className={[
-                      'relative border border-[#1A2535]/10 p-5 py-6 md:p-6',
-                      'bg-[linear-gradient(rgba(30,39,46,0.055)_1px,transparent_1px),linear-gradient(90deg,rgba(30,39,46,0.055)_1px,transparent_1px)] bg-[size:26px_26px]',
-                      index % 2 === 0 ? 'bg-[#FFFFFF]' : 'bg-[#F7F8FA]',
-                    ].join(' ')}
-                  >
-                    <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_28%_24%,rgba(232,168,56,0.09),transparent_52%)]" />
-                    <div className="relative z-10">
-                      <Icon
-                        className="h-5 w-5 text-[var(--section-label-color)]"
-                        aria-hidden="true"
-                      />
-                      <h4 className="mt-3 text-3xl font-semibold tracking-tight text-[#1A2535] md:text-[2.1rem]">
-                        {title}
-                      </h4>
-                      <p className="mt-2 max-w-md text-base leading-relaxed text-[#1A2535]/[0.82] md:text-xl">
-                        {detail}
-                      </p>
-                    </div>
-                  </motion.article>
-                ))}
-              </div>
+            <div className="portfolio-v2__signature-grid">
+              {signatureItems.map(({title, detail, Icon}, index) => (
+                <motion.article
+                  key={title}
+                  initial={{opacity: 0, y: 16}}
+                  whileInView={{opacity: 1, y: 0}}
+                  viewport={{once: true, amount: 0.2}}
+                  transition={{duration: 0.35, delay: index * 0.04}}
+                >
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <Icon aria-hidden="true" />
+                  <div>
+                    <h4>{title}</h4>
+                    <p>{detail}</p>
+                  </div>
+                </motion.article>
+              ))}
             </div>
           </div>
         </section>

@@ -23,7 +23,7 @@ export default async function ITConsultingTangierPage({params}: PageProps) {
     <GeoServicePage
       locale={locale}
       pathname="/it-consulting-tangier"
-      image="/Images/hero/strategic-technology-consulting-tangier-morocco.webp"
+      image="/Images/home/capabilities/strategy-technology-consulting-men.webp"
       copy={t.raw('itConsultingTangier') as GeoPageCopy}
       faqs={faqs}
       heroSecondaryHref="/arc"

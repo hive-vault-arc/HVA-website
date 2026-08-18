@@ -333,10 +333,10 @@ const caseStudyPatches: Record<string, CmsFallbackPatch> = {
     deploymentStatus: 'Déploiement opérationnel en production depuis mai 2025',
   },
   'multilingual-whatsapp-ai-agent': {
-    title: 'Agent IA WhatsApp multilingue pour les opérations commerciales',
+    title: 'Flux WhatsApp multilingue pour les prospects',
     industry: 'Immobilier',
     summary:
-      'Un agent IA WhatsApp en production avec mémoire persistante, planification automatisée, qualification des prospects et mise à jour du pipeline CRM en temps réel.',
+      'Capture des prospects, qualification, rapprochement avec un projet et transmission de la visite dans un même flux connecté.',
     problem:
       'Les prospects entrants étaient traités manuellement sur WhatsApp et par téléphone. Le client perdait des opportunités en dehors des horaires et consacrait trop de temps au tri répétitif.',
     systemArchitecture:
@@ -353,7 +353,7 @@ const caseStudyPatches: Record<string, CmsFallbackPatch> = {
       'Moteur de processus n8n',
       'PostgreSQL',
     ],
-    deploymentStatus: 'En production depuis octobre 2025',
+    deploymentStatus: '',
   },
 };
 
@@ -413,13 +413,13 @@ const employeePatches: Record<string, CmsFallbackPatch> = {
     ],
   },
   'ali-amrani': {
-    position: 'Cofondateur et CEO',
+    position: 'Cofondateur et CTO',
     responsibilityTag: 'Produit · Systèmes · Full-stack',
     summary:
       'Ali Amrani pilote les systèmes produit, l’ingénierie full-stack et l’architecture de livraison des programmes Hive Vault Arc.',
     story:
       'Ali apporte son expérience de l’ingénierie logicielle à la couche opérationnelle de Hive Vault Arc. Son travail transforme la stratégie et l’ambition IA en systèmes produit réellement utilisables : interfaces, processus, intégrations et architecture de livraison fiable.',
-    profileImageAlt: 'Ali Amrani, cofondateur de Hive Vault Arc',
+    profileImageAlt: 'Ali Amrani, cofondateur et CTO de Hive Vault Arc',
     expertise: [
       'Ingénierie full-stack',
       'Systèmes produit',
@@ -430,13 +430,13 @@ const employeePatches: Record<string, CmsFallbackPatch> = {
     ],
   },
   'oubay-ghamat': {
-    position: 'Cofondateur et CEO',
+    position: 'Cofondateur et COO',
     responsibilityTag: 'Cloud · Infrastructure · Opérations',
     summary:
       'Oubay Ghamat dirige l’infrastructure cloud, les opérations et la fiabilité en production des systèmes Hive Vault Arc.',
     story:
       'Oubay se concentre sur les systèmes qui maintiennent la transformation stable après le lancement : infrastructure cloud, préparation opérationnelle, livraison frontend et fiabilité en production.',
-    profileImageAlt: 'Oubay Ghamat, cofondateur de Hive Vault Arc',
+    profileImageAlt: 'Oubay Ghamat, cofondateur et COO de Hive Vault Arc',
     expertise: [
       'Infrastructure cloud',
       'Opérations managées',

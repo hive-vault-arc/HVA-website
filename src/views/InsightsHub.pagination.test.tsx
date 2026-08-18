@@ -15,6 +15,8 @@ function listingItem(index: number): InsightListingItem {
     date: `2026-06-${String(20 - index).padStart(2, '0')}`,
     readTime: '5 min read',
     sourceLocale: 'en',
+    editorialFormat: index % 2 === 0 ? 'evidence-brief' : 'operating-note',
+    topics: index % 2 === 0 ? ['data-cloud-reliability'] : ['ai-operational-systems'],
   };
 }
 
@@ -48,19 +50,42 @@ describe('Insights grid pagination', () => {
       />,
     );
 
-    expect(container.querySelectorAll('img.insights-card-image--color')).toHaveLength(6);
-    expect(screen.getAllByText('Publication 1')).toHaveLength(2);
+    expect(container.querySelectorAll('img')).toHaveLength(6);
+    expect(screen.getByText('Publication 1')).toBeInTheDocument();
     expect(screen.queryAllByText('Publication 7')).toHaveLength(0);
 
-    fireEvent.click(screen.getByRole('button', {name: 'Load more'}));
+    fireEvent.click(screen.getByRole('button', {name: 'Load six more'}));
 
     await waitFor(() => {
-      expect(screen.getAllByText('Publication 12')).toHaveLength(2);
+      expect(screen.getByText('Publication 12')).toBeInTheDocument();
     });
     expect(fetchMock).toHaveBeenCalledTimes(1);
     expect(fetchMock.mock.calls[0][0]).toContain(
       '/api/insights?locale=en&cursorDate=2026-06-14&cursorId=document-6',
     );
-    expect(screen.queryByRole('button', {name: 'Load more'})).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', {name: 'Load six more'})).not.toBeInTheDocument();
+  });
+
+  it('filters the loaded library by stable topic and format keys', () => {
+    const initialItems = Array.from({length: 6}, (_, index) => listingItem(index + 1));
+    render(
+      <AllInsightsGrid
+        initialItems={initialItems}
+        total={6}
+        initialCursor={null}
+        locale="en"
+      />,
+    );
+
+    fireEvent.change(screen.getByLabelText('Topic'), {
+      target: {value: 'data-cloud-reliability'},
+    });
+    expect(screen.getByText('Publication 2')).toBeInTheDocument();
+    expect(screen.queryByText('Publication 1')).not.toBeInTheDocument();
+
+    fireEvent.change(screen.getByLabelText('Format'), {
+      target: {value: 'evidence-brief'},
+    });
+    expect(screen.getByText('Publication 4')).toBeInTheDocument();
   });
 });

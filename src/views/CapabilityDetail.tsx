@@ -1,307 +1,257 @@
 'use client';
 
 import Image from 'next/image';
-import {Link} from '@/i18n/navigation';
-import { MotionConfig, motion, useScroll, useTransform } from 'framer-motion';
+import {MotionConfig, motion, useScroll, useTransform} from 'framer-motion';
+import {useTranslations} from 'next-intl';
 import {
   ArrowLeft,
   ArrowRight,
   ArrowUpRight,
-  Bot,
-  Building2,
   CheckCircle2,
-  Cloud,
-  Cpu,
+  Compass,
+  Gauge,
   Layers3,
-  Settings,
-  Wrench,
+  Route,
+  ShieldCheck,
+  Workflow,
 } from '@/components/icons';
 import BottomCTA from '../components/BottomCTA';
-import SectionBrandMark from '../components/SectionBrandMark';
-import { useAnimationQuality } from '../lib/animationQuality';
-import type { CapabilityLandingLink, CapabilityProfile, CapabilityProfileSummary } from '../lib/capabilities';
-import {useTranslations} from 'next-intl';
+import {Link} from '@/i18n/navigation';
+import {useAnimationQuality} from '../lib/animationQuality';
+import type {CapabilityProfile, CapabilityProfileSummary} from '../lib/capabilities';
 import {isSanityCdnImage} from '../lib/image-delivery';
+import styles from './CapabilityDetail.module.css';
 
 type CapabilityDetailProps = {
   capability: CapabilityProfile;
   relatedCapabilities: CapabilityProfileSummary[];
 };
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 18 },
-  show: { opacity: 1, y: 0 },
+type DeliveryStep = {
+  step: string;
+  title: string;
+  detail: string;
+  output: string;
 };
 
-function getCapabilityIcon(slug: string, cls = 'h-5 w-5', strokeWidth = 1.5) {
-  switch (slug) {
-    case 'strategy-business':
-      return <Building2 className={cls} strokeWidth={strokeWidth} />;
-    case 'technology-consulting':
-      return <Wrench className={cls} strokeWidth={strokeWidth} />;
-    case 'ai-data-analytics':
-      return <Bot className={cls} strokeWidth={strokeWidth} />;
-    case 'software-engineering':
-      return <Cpu className={cls} strokeWidth={strokeWidth} />;
-    case 'cloud-infrastructure':
-      return <Cloud className={cls} strokeWidth={strokeWidth} />;
-    case 'operations-managed':
-      return <Settings className={cls} strokeWidth={strokeWidth} />;
-    default:
-      return <Layers3 className={cls} strokeWidth={strokeWidth} />;
-  }
+const CAPABILITY_VISUALS: Record<string, string> = {
+  'strategy-business': '/Images/capabilities/detail/hva-strategy-business-hero-v3.webp',
+  'technology-consulting': '/Images/capabilities/detail/hva-technology-consulting-hero-v3.webp',
+  'ai-data-analytics': '/Images/capabilities/detail/hva-ai-data-analytics-hero-v3.webp',
+  'software-engineering': '/Images/capabilities/detail/hva-software-engineering-hero-v3.webp',
+  'cloud-infrastructure': '/Images/capabilities/detail/hva-cloud-infrastructure-hero-v3.webp',
+  'operations-managed': '/Images/capabilities/detail/hva-operations-managed-hero-v3.webp',
+};
+
+const SCOPE_ICONS = [Compass, Route, Workflow, Layers3, ShieldCheck, Gauge];
+const DELIVERY_ICONS = [Compass, Workflow, Gauge];
+
+function getCapabilityVisual(slug: string, fallback: string) {
+  return CAPABILITY_VISUALS[slug] ?? fallback;
 }
 
-function LandingLink({ link }: { link: CapabilityLandingLink }) {
-  const isExternal = /^https?:\/\//i.test(link.href);
-
-  if (isExternal) {
-    return (
-      <a
-        href={link.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="capability-profile-landing-link"
-      >
-        {link.label}
-        <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={1.7} />
-      </a>
-    );
-  }
-
-  return (
-    <Link href={link.href} className="capability-profile-landing-link">
-      {link.label}
-      <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.7} />
-    </Link>
-  );
-}
-
-export default function CapabilityDetail({ capability, relatedCapabilities }: CapabilityDetailProps) {
+export default function CapabilityDetail({capability, relatedCapabilities}: CapabilityDetailProps) {
   const t = useTranslations('DynamicContent');
-  const { motionReduced } = useAnimationQuality();
-  const { scrollYProgress } = useScroll();
+  const {motionReduced} = useAnimationQuality();
+  const {scrollYProgress} = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
   const primaryOutcome = capability.relatedOutcomes[0] ?? t('capability.fallbackOutcome');
-  const secondaryOutcome = capability.relatedOutcomes[1] ?? capability.briefBullets[0] ?? t('capability.fallbackDelivery');
-  const indexItems = t.raw('capability.index') as Array<{number: string; label: string; href: string}>;
+  const secondaryOutcome =
+    capability.relatedOutcomes[1] ?? capability.briefBullets[0] ?? t('capability.fallbackDelivery');
+  const outcomes = [primaryOutcome, secondaryOutcome, ...capability.relatedOutcomes.slice(2, 4)].filter(
+    (outcome, index, all) => all.indexOf(outcome) === index,
+  );
+  const deliverySteps = t.raw('capability.deliverySteps') as DeliveryStep[];
+  const capabilityVisual = getCapabilityVisual(capability.slug, capability.heroImage);
 
   return (
     <MotionConfig reducedMotion={motionReduced ? 'always' : 'never'}>
-      <div className="capability-profile-page">
+      <main className={styles.page} data-capability={capability.slug}>
         <motion.div
           aria-hidden="true"
-          className="fixed left-0 right-0 top-0 z-[70] h-[3px] origin-left bg-[#E8A838]"
-          style={{ scaleX: progressScale }}
+          className={styles.progress}
+          style={{scaleX: progressScale}}
         />
 
-        <section className="capability-profile-hero soft-grid-section">
-          <div className="cap-detail-shell capability-profile-hero-grid">
-            <motion.div
-              initial="hidden"
-              animate="show"
-              variants={{ show: { transition: { staggerChildren: 0.08 } } }}
-              className="capability-profile-hero-copy"
-            >
-              <motion.nav variants={fadeUp} transition={{ duration: 0.4 }} aria-label={t('breadcrumb')}>
-                <Link href="/capabilities" className="capability-profile-back-link">
-                  <ArrowLeft className="h-4 w-4" strokeWidth={1.7} />
+        <section className={styles.hero}>
+          <div className={`site-frame ${styles.heroFrame}`}>
+            <Image
+              src={capabilityVisual}
+              alt={t('capability.heroImageAlt', {title: capability.title})}
+              fill
+              priority
+              quality={90}
+              unoptimized={isSanityCdnImage(capabilityVisual)}
+              sizes="(max-width: 820px) calc(100vw - 32px), calc(100vw - 64px)"
+              className={styles.heroImage}
+            />
+            <div className={styles.heroShade} aria-hidden="true" />
+
+            <div className={styles.heroContent}>
+              <nav aria-label={t('breadcrumb')}>
+                <Link href="/capabilities" className={styles.backLink}>
+                  <ArrowLeft className="h-4 w-4" strokeWidth={1.7} aria-hidden="true" />
                   {t('capabilities')}
                 </Link>
-              </motion.nav>
+              </nav>
 
-              <motion.div variants={fadeUp} transition={{ duration: 0.45 }} className="cap-detail-mark">
-                <SectionBrandMark size="sm" />
-                <span>{capability.kicker || t('capability.label')}</span>
-              </motion.div>
+              <div className={styles.eyebrow}>
+                <span aria-hidden="true" />
+                {capability.kicker || t('capability.label')}
+              </div>
 
-              <motion.h1 variants={fadeUp} transition={{ duration: 0.5 }}>
-                {capability.title}
-              </motion.h1>
+              <h1>{capability.title}</h1>
 
-              <motion.p variants={fadeUp} transition={{ duration: 0.5 }} className="capability-profile-lede">
+              <p className={styles.lede}>
                 {capability.briefLine}
-              </motion.p>
+              </p>
 
-              <motion.div variants={fadeUp} transition={{ duration: 0.5 }} className="capability-profile-actions">
-                <Link href="/contact" className="sharp-edge btn-primary">
+              <div className={styles.heroActions}>
+                <Link href="/contact" className={styles.primaryAction}>
                   {t('capability.start')}
+                  <ArrowRight className="h-4 w-4" strokeWidth={1.7} aria-hidden="true" />
                 </Link>
-                <Link href={`/capabilities/in-detail#pillar-${capability.slug}`} className="sharp-edge btn-outlined">
+                <Link href={`/capabilities/in-detail#pillar-${capability.slug}`} className={styles.secondaryAction}>
                   {t('capability.fullMap')}
                 </Link>
-              </motion.div>
-            </motion.div>
-
-            <motion.aside
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="capability-profile-hero-media"
-            >
-              <Image
-                src={capability.heroImage}
-                alt={capability.heroImageAlt}
-                fill
-                priority
-                unoptimized={isSanityCdnImage(capability.heroImage)}
-                sizes="(max-width: 1024px) 100vw, 42vw"
-                className="object-cover"
-              />
-              <div className="capability-profile-hero-card">
-                <span>{getCapabilityIcon(capability.slug, 'h-5 w-5')}</span>
-                <strong>{capability.shortTitle || capability.title}</strong>
-                <em>{primaryOutcome}</em>
               </div>
-            </motion.aside>
+            </div>
           </div>
         </section>
 
-        <nav className="capability-profile-index" aria-label={t('capability.sectionsAria', {title: capability.title})}>
-          <div className="cap-detail-shell capability-profile-index-grid">
-            {indexItems.map(({number, label, href}) => (
-              <a key={href} href={href} className="capability-profile-index-item">
-                <span>{number}</span>
-                <strong>{label}</strong>
-              </a>
-            ))}
+        <section className={styles.briefBand} aria-label={t('capability.atAGlance')}>
+          <div className={`site-frame ${styles.briefGrid}`}>
+            <div className={styles.briefLabel}>{t('capability.atAGlance')}</div>
+            <ol>
+              {capability.briefBullets.slice(0, 3).map((item, index) => (
+                <li key={item}>
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <p>{item}</p>
+                </li>
+              ))}
+            </ol>
           </div>
-        </nav>
+        </section>
 
-        <section id="context" className="capability-profile-context-section">
-          <div className="cap-detail-shell capability-profile-context-grid">
-            <div className="cap-detail-section-head">
-              <div className="cap-detail-mark">
-                <SectionBrandMark size="sm" />
-                <span>{t('capability.contextEyebrow')}</span>
-              </div>
+        <section id="context" className={styles.decisionSection}>
+          <div className={`site-frame ${styles.decisionGrid}`}>
+            <header className={styles.sectionHeading}>
+              <div className={styles.lightEyebrow}>{t('capability.contextEyebrow')}</div>
               <h2>{t('capability.contextTitle')}</h2>
+            </header>
+
+            <article className={styles.decisionColumn}>
+              <span>01</span>
+              <h3>{t('capability.strategicContext')}</h3>
+              <p>{capability.strategicContext}</p>
+            </article>
+
+            <article className={styles.decisionColumn}>
+              <span>02</span>
+              <h3>{t('capability.executionContext')}</h3>
+              <p>{capability.executionContext}</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="coverage" className={styles.scopeSection}>
+          <div className={`site-frame ${styles.scopeGrid}`}>
+            <header className={styles.sectionHeading}>
+              <div className={styles.lightEyebrow}>{t('capability.coverageEyebrow')}</div>
+              <h2>{t('capability.coverageTitle')}</h2>
+              <p>{t('capability.scopeDescription')}</p>
+            </header>
+
+            <ol className={styles.scopeList}>
+              {capability.subCapabilities.map((item, index) => {
+                const ScopeIcon = SCOPE_ICONS[index % SCOPE_ICONS.length];
+
+                return (
+                  <li key={item}>
+                    <div className={styles.scopeMeta}>
+                      <span>{String(index + 1).padStart(2, '0')}</span>
+                      <span className={styles.iconFrame} aria-hidden="true">
+                        <ScopeIcon className="h-4 w-4" strokeWidth={1.6} />
+                      </span>
+                    </div>
+                    <p>{item}</p>
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
+
+        </section>
+
+        <section id="outcomes" className={styles.deliverySection}>
+          <div className={`site-frame ${styles.deliveryPanel}`}>
+            <div className={styles.deliveryGrid}>
+              <header className={styles.deliveryHeading}>
+                <div className={styles.darkEyebrow}>{t('capability.deliveryEyebrow')}</div>
+                <h2>{t('capability.deliveryTitle')}</h2>
+                <p>{t('capability.deliveryDescription')}</p>
+              </header>
+
+              <ol className={styles.deliverySteps}>
+                {deliverySteps.map((step, index) => {
+                  const StepIcon = DELIVERY_ICONS[index % DELIVERY_ICONS.length];
+
+                  return (
+                    <li key={step.step}>
+                      <div className={styles.stepMeta}>
+                        <span>{step.step}</span>
+                        <span className={styles.deliveryIcon} aria-hidden="true">
+                          <StepIcon className="h-4 w-4" strokeWidth={1.6} />
+                        </span>
+                      </div>
+                      <div className={styles.stepCopy}>
+                        <h3>{step.title}</h3>
+                        <p>{step.detail}</p>
+                      </div>
+                      <div className={styles.stepOutput}>
+                        <span>{t('capability.workingOutput')}</span>
+                        <strong>{step.output}</strong>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ol>
             </div>
 
-            <motion.article
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.18 }}
-              transition={{ duration: 0.45 }}
-              className="capability-profile-context-card"
-            >
-              <span>{t('capability.strategicContext')}</span>
-              <p>{capability.strategicContext}</p>
-            </motion.article>
-
-            <motion.article
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.18 }}
-              transition={{ duration: 0.45, delay: 0.06 }}
-              className="capability-profile-context-card capability-profile-context-card-dark"
-            >
-              <span>{t('capability.executionContext')}</span>
-              <p>{capability.executionContext}</p>
-            </motion.article>
-          </div>
-        </section>
-
-        <section id="coverage" className="capability-profile-coverage-section soft-grid-section">
-          <div className="cap-detail-shell capability-profile-coverage-grid">
-            <div className="capability-profile-coverage-copy">
-              <div className="cap-detail-mark">
-                <SectionBrandMark size="sm" />
-                <span>{t('capability.coverageEyebrow')}</span>
+            <div className={styles.outcomesBlock}>
+              <div>
+                <span>{t('capability.outcomesEyebrow')}</span>
+                <h3>{t('capability.outcomesTitle')}</h3>
               </div>
-              <h2>{t('capability.coverageTitle')}</h2>
-              <ul className="capability-profile-brief-list">
-                {capability.briefBullets.map((item) => (
-                  <li key={item}>{item}</li>
+              <ul>
+                {outcomes.map((outcome) => (
+                  <li key={outcome}>
+                    <CheckCircle2 className="h-4 w-4" strokeWidth={1.7} aria-hidden="true" />
+                    <span>{outcome}</span>
+                  </li>
                 ))}
               </ul>
             </div>
-
-            <div className="capability-profile-coverage-list">
-              {capability.subCapabilities.map((item, index) => (
-                <motion.article
-                  key={item}
-                  initial={{ opacity: 0, y: 14 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.14 }}
-                  transition={{ duration: 0.4, delay: (index % 3) * 0.04 }}
-                  className="capability-profile-coverage-item"
-                >
-                  <span>{String(index + 1).padStart(2, '0')}</span>
-                  <p>{item}</p>
-                </motion.article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="outcomes" className="capability-profile-outcomes-section">
-          <div className="cap-detail-shell capability-profile-outcomes-grid">
-            <div className="capability-profile-outcomes-copy">
-              <div className="cap-detail-mark cap-detail-mark-dark">
-                <SectionBrandMark surface="dark" size="sm" />
-                <span>{t('capability.outcomesEyebrow')}</span>
-              </div>
-              <h2>{t('capability.outcomesTitle')}</h2>
-              <p>{t('capability.outcomesDescription')}</p>
-            </div>
-
-            <div className="capability-profile-outcome-list">
-              {[primaryOutcome, secondaryOutcome, ...(capability.relatedOutcomes.slice(2, 4))].map((outcome) => (
-                <article key={outcome}>
-                  <CheckCircle2 className="h-4 w-4" strokeWidth={1.7} />
-                  <span>{outcome}</span>
-                </article>
-              ))}
-            </div>
-
-            {capability.landingLinks.length > 0 && (
-              <div className="capability-profile-landing-links" aria-label={t('capability.relatedPagesAria')}>
-                {capability.landingLinks.map((link) => (
-                  <LandingLink key={link._key ?? link.href} link={link} />
-                ))}
-              </div>
-            )}
           </div>
         </section>
 
         {relatedCapabilities.length > 0 && (
-          <section id="related" className="capability-profile-related-section">
-            <div className="cap-detail-shell">
-              <div className="cap-detail-section-head">
-                <div className="cap-detail-mark">
-                  <SectionBrandMark size="sm" />
-                  <span>{t('capability.relatedEyebrow')}</span>
-                </div>
+          <section id="related" className={styles.relatedSection}>
+            <div className="site-frame">
+              <header className={styles.relatedHeading}>
+                <div className={styles.lightEyebrow}>{t('capability.relatedEyebrow')}</div>
                 <h2>{t('capability.relatedTitle')}</h2>
-              </div>
+              </header>
 
-              <div className="capability-profile-related-grid">
-                {relatedCapabilities.map((related) => (
-                  <Link
-                    key={related.slug}
-                    href={`/capabilities/${related.slug}`}
-                    className="capability-profile-related-card"
-                  >
-                    <div className="capability-profile-related-media">
-                      <Image
-                        src={related.heroImage}
-                        alt={related.heroImageAlt}
-                        fill
-                        loading="lazy"
-                        unoptimized={isSanityCdnImage(related.heroImage)}
-                        sizes="(max-width: 900px) 100vw, 31vw"
-                        className="object-cover"
-                      />
-                    </div>
-                    <div className="capability-profile-related-body">
-                      <span>{related.kicker || t('capability.label')}</span>
+              <div className={styles.relatedGrid}>
+                {relatedCapabilities.map((related, index) => (
+                  <Link key={related.slug} href={`/capabilities/${related.slug}`} className={styles.relatedLink}>
+                    <span>{String(index + 1).padStart(2, '0')}</span>
+                    <div>
                       <strong>{related.shortTitle || related.title}</strong>
-                      <em>{related.briefLine}</em>
+                      <p>{related.briefLine}</p>
                     </div>
-                    <span className="capability-profile-related-link">
-                      {t('capability.open')} <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={1.7} />
-                    </span>
+                    <ArrowUpRight className="h-5 w-5" strokeWidth={1.6} aria-hidden="true" />
                   </Link>
                 ))}
               </div>
@@ -310,6 +260,7 @@ export default function CapabilityDetail({ capability, relatedCapabilities }: Ca
         )}
 
         <BottomCTA
+          compact
           variant="light"
           headline={t('capability.bottomTitle', {title: capability.shortTitle || capability.title})}
           subtext={t('capability.bottomDescription')}
@@ -318,7 +269,7 @@ export default function CapabilityDetail({ capability, relatedCapabilities }: Ca
           secondaryLabel={t('capability.bottomSecondary')}
           secondaryHref="/capabilities"
         />
-      </div>
+      </main>
     </MotionConfig>
   );
 }

@@ -1,13 +1,11 @@
 'use client';
 
-import { type CSSProperties, useState } from 'react';
+import {useState} from 'react';
 import {useLocale, useTranslations} from 'next-intl';
 import Image from 'next/image';
 import {Link} from '@/i18n/navigation';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Send, Settings, Wrench } from '@/components/icons';
-import PageAmbientBackground from '../components/PageAmbientBackground';
-import SectionBrandMark from '../components/SectionBrandMark';
 import {CAPABILITY_SOLUTION_PROGRAM_DETAILS} from '../lib/capabilities-content';
 import type { CapabilityProfile } from '../lib/capabilities';
 import type {AppLocale} from '@/i18n/config';
@@ -22,45 +20,58 @@ const BOT_CONFIG = [
   {
     step: '01',
     icon: <Wrench className="h-8 w-8" />,
-    image: '/Images/capabilities/hva-arc-assess-operating-model.webp',
+    image: '/Images/capabilities/editorial/hva-arc-assess-capabilities-v2.webp',
   },
   {
     step: '02',
     icon: <Settings className="h-8 w-8" />,
-    image: '/Images/capabilities/hva-arc-reengineer-operating-model.webp',
+    image: '/Images/capabilities/editorial/hva-arc-reengineer-capabilities-v2.webp',
   },
   {
     step: '03',
     icon: <Send className="h-8 w-8" />,
-    image: '/Images/capabilities/hva-arc-command-operating-model.webp',
+    image: '/Images/capabilities/editorial/hva-arc-command-capabilities-v2.webp',
   },
 ];
 
 const CAPABILITY_IMAGES = {
-  strategyBusiness: '/Images/capabilities/hva-strategy-business-capability.webp',
-  technologyConsulting: '/Images/capabilities/hva-technology-consulting-capability.webp',
-  aiDataAnalytics: '/Images/capabilities/hva-ai-data-capability.webp',
-  softwareEngineering: '/Images/capabilities/hva-software-engineering-capability.webp',
-  cloudInfrastructure: '/Images/capabilities/hva-cloud-infrastructure-capability.webp',
-  operationsManaged: '/Images/capabilities/hva-operations-managed-capability.webp',
+  strategyBusiness: '/Images/capabilities/editorial/hva-strategy-business-capability-v2.webp',
+  technologyConsulting: '/Images/capabilities/editorial/hva-technology-consulting-capability-v2.webp',
+  aiDataAnalytics: '/Images/capabilities/editorial/hva-ai-data-capability-v2.webp',
+  softwareEngineering: '/Images/capabilities/editorial/hva-software-engineering-capability-v2.webp',
+  cloudInfrastructure: '/Images/capabilities/editorial/hva-cloud-infrastructure-capability-v2.webp',
+  operationsManaged: '/Images/capabilities/editorial/hva-operations-managed-capability-v2.webp',
 };
 
-const CAPABILITIES_PAGE_HERO_IMAGE = '/Images/page-heroes/hva-capabilities-hero-background.webp';
+const PROGRAM_IMAGES = [
+  '/Images/capabilities/editorial/hva-ai-reception-program-v2.webp',
+  '/Images/capabilities/editorial/hva-crm-modernization-program-v2.webp',
+  '/Images/capabilities/editorial/hva-cloud-reliability-program-v2.webp',
+];
+
+const CAPABILITIES_PAGE_HERO_IMAGE =
+  '/Images/page-heroes/hva-capabilities-magnetic-fields-hero-v2.webp';
 
 type CapabilitiesProps = {
   capabilities?: CapabilityProfile[];
+  aliProfileImage?: string;
+  aliProfileImageAlt?: string;
 };
 
 const CARD_ORDER = [
-  'ai-data-analytics',
-  'technology-consulting',
   'strategy-business',
+  'technology-consulting',
+  'ai-data-analytics',
   'software-engineering',
   'cloud-infrastructure',
   'operations-managed',
 ];
 
-export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
+export default function Capabilities({
+  capabilities = [],
+  aliProfileImage = '/Images/team/ali-amrani-founder-2026.webp',
+  aliProfileImageAlt,
+}: CapabilitiesProps) {
   const t = useTranslations('Capabilities');
   const tLocale = useTranslations('Locale');
   const locale = useLocale() as AppLocale;
@@ -163,8 +174,8 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
     return {
       id: capability.slug,
       title: capability.shortTitle || fallback?.title || capability.title,
-      image: capability.heroImage || fallback?.image || CAPABILITY_IMAGES.aiDataAnalytics,
-      alt: capability.heroImageAlt || fallback?.alt || `${capability.title} capability`,
+      image: fallback?.image || capability.heroImage || CAPABILITY_IMAGES.aiDataAnalytics,
+      alt: fallback?.alt || capability.heroImageAlt || `${capability.title} capability`,
       summary: capability.briefLine,
       href: `/capabilities/${capability.slug}`,
       variant: fallback?.variant ?? ('image' as const),
@@ -181,12 +192,17 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
       />
 
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
-      <section
-        className="capabilities-hero"
-        style={{ '--page-hero-image': `url(${CAPABILITIES_PAGE_HERO_IMAGE})` } as CSSProperties}
-      >
-        <PageAmbientBackground className="capabilities-hero-ambient" />
-        <div aria-hidden="true" className="capabilities-hero-wash" />
+      <section className="capabilities-hero">
+        <Image
+          src={CAPABILITIES_PAGE_HERO_IMAGE}
+          alt=""
+          fill
+          priority
+          quality={90}
+          sizes="100vw"
+          className="capabilities-hero-background"
+          aria-hidden="true"
+        />
         <div className="capabilities-hero-shell">
           <motion.div
             initial="hidden"
@@ -200,17 +216,11 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
               className="capabilities-hero-copy"
             >
               <div className="capabilities-hero-mark">
-                <SectionBrandMark size="sm" eager />
-                <span>
-                  {t('heroLabel')}
-                </span>
+                <span>{t('heroLabel')}</span>
               </div>
               <h1 className="capabilities-hero-title">
-                {t('heroLine1')}
-                <br />{' '}
-                <em>{t('heroAccent')}</em>
-                <br />{' '}
-                {t('heroLine3')}
+                <span>{t('heroLine1')}</span>
+                <em>{t('heroAccent')} {t('heroLine3')}</em>
               </h1>
               <p className="capabilities-hero-lede">
                 {t('heroDescription')}
@@ -228,24 +238,9 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
               </div>
             </motion.div>
 
-            <motion.aside
-              variants={fadeUp}
-              transition={{ duration: 0.65, delay: 0.08 }}
-              className="capabilities-hero-aside"
-            >
-              <div className="capabilities-hero-wordmark">
-                <strong data-label="Capabilities">
-                  <span>Cap</span><span>abilities</span>
-                </strong>
-                <span aria-hidden="true" />
-              </div>
-            </motion.aside>
           </motion.div>
         </div>
       </section>
-
-      {/* Separator */}
-      <div aria-hidden="true" className="capabilities-separator" />
 
       {/* ── SERVICE PILLARS BENTO GRID ────────────────────────────────────── */}
       <section id="capability-pillars" className="capability-showcase-section scroll-mt-28">
@@ -257,7 +252,7 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
             viewport={{ once: true, amount: 0.05 }}
             transition={{ staggerChildren: 0.07 }}
           >
-            {capabilityCards.map((card) => (
+            {capabilityCards.map((card, index) => (
               <motion.article
                 key={card.id}
                 variants={fadeUp}
@@ -274,20 +269,20 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
                         src={card.image}
                         alt={card.alt}
                         fill
+                        quality={90}
                         unoptimized={isSanityCdnImage(card.image)}
                         sizes="(max-width: 768px) 100vw, 33vw"
                         className="object-cover"
                       />
                     </div>
                     <div className="capability-card-body">
-                      <h2>{card.title}</h2>
-                    </div>
-                    <div className="capability-card-hover" aria-hidden="true">
-                      <div>
-                        <p className="capability-card-hover-title">{card.title}</p>
-                        <p>{card.summary}</p>
+                      <div className="capability-card-meta">
+                        <span>{String(index + 1).padStart(2, '0')}</span>
+                        <ArrowRight className="h-5 w-5" strokeWidth={1.6} aria-hidden="true" />
                       </div>
-                      <span className="capability-card-hover-link">
+                      <h2>{card.title}</h2>
+                      <p>{card.summary}</p>
+                      <span className="capability-card-action">
                         {t('learnMore')} <ArrowRight className="h-5 w-5" strokeWidth={1.7} />
                       </span>
                     </div>
@@ -303,20 +298,19 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
                       src={card.image}
                       alt={card.alt}
                       fill
+                      quality={90}
                       unoptimized={isSanityCdnImage(card.image)}
                       sizes="(max-width: 768px) 100vw, 33vw"
                       className="object-cover"
                     />
                   </div>
                   <div className="capability-card-body">
-                    <h2>{card.title}</h2>
-                  </div>
-                  <div className="capability-card-hover" aria-hidden="true">
-                    <div>
-                      <p className="capability-card-hover-title">{card.title}</p>
-                      <p>{card.summary}</p>
+                    <div className="capability-card-meta">
+                      <span>{String(index + 1).padStart(2, '0')}</span>
                     </div>
-                    <span className="capability-card-hover-link">
+                    <h2>{card.title}</h2>
+                    <p>{card.summary}</p>
+                    <span className="capability-card-action">
                       {tLocale('unavailable', {language: tLocale('french')})}
                     </span>
                   </div>
@@ -329,8 +323,8 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
       </section>
 
       {/* ── ARC OPERATING MODEL ────────────────────────────────────────────── */}
-      <section id="bot-model" className="capabilities-arc-section soft-grid-section scroll-mt-28 px-6 py-28 lg:px-12">
-        <div className="relative mx-auto max-w-screen-2xl">
+      <section id="bot-model" className="capabilities-arc-section soft-grid-section scroll-mt-28 py-28">
+        <div className="site-frame-wide relative">
 
           <motion.div
             initial="hidden"
@@ -341,7 +335,6 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
           >
             <motion.div variants={fadeUp} transition={{ duration: 0.55 }} className="arc-operating-title">
               <div className="arc-operating-mark">
-                <SectionBrandMark size="sm" />
                 <span>{t('arcModel')}</span>
               </div>
               <h2>
@@ -363,7 +356,7 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
                   <motion.div
                     className="arc-operating-progress-fill"
                     animate={{ width: `${((activeBOTStep + 1) / botPhases.length) * 100}%` }}
-                    transition={{ duration: 0.25, ease: 'easeOut' }}
+                    transition={{ duration: 0.5, ease: 'easeOut' }}
                   />
                 </div>
               </div>
@@ -397,7 +390,7 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
               key={activeBOTItem.step}
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.28 }}
+              transition={{ duration: 0.5 }}
               className="arc-operating-panel"
             >
               <div className="arc-operating-media">
@@ -406,6 +399,7 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
                   alt={activeBOTItem.imageAlt}
                   fill
                   loading="lazy"
+                  quality={90}
                   sizes="(max-width: 1024px) 100vw, 58vw"
                   className="object-cover"
                 />
@@ -431,7 +425,7 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
               </Link>
               <Link
                 href="/capabilities/solution-programs"
-                className="text-sm font-bold uppercase tracking-wide text-[#E8A838] transition-colors duration-200 hover:text-[#C8891C]"
+                className="text-sm font-bold uppercase tracking-wide text-[#E8A838] transition-opacity duration-200 hover:opacity-80"
               >
                 {t('viewPrograms')} <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
@@ -442,41 +436,34 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
 
 
       {/* ── EXPERT INSIGHT QUOTE ──────────────────────────────────────────── */}
-      <section className="capabilities-quote-section px-6 lg:px-12 py-28">
-        <div className="mx-auto max-w-screen-2xl">
+      <section className="capabilities-quote-section py-28">
+        <div className="site-frame-wide">
           <div className="grid grid-cols-1 md:grid-cols-12">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.65 }}
-              className="capabilities-quote-card col-span-12 md:col-span-10 md:col-start-2 bg-[#E8EBF0] p-12 md:p-16 relative overflow-hidden"
+              className="capabilities-quote-card col-span-12 md:col-span-10 md:col-start-2"
             >
-              {/* Decorative open-quote mark */}
-              <div
-                aria-hidden="true"
-                className="absolute top-8 left-10 font-headline text-[9rem] leading-none text-[#E8A838]/10 select-none pointer-events-none"
-              >
-                &ldquo;
-              </div>
-
-              <div className="relative z-10 w-full">
-                <h2 className="capabilities-quote-text font-headline text-3xl md:text-4xl lg:text-[2.8rem] italic leading-tight text-[#1A2535] mb-12">
-                  “{t('quote')}”
-                </h2>
-                <div className="flex items-center gap-6">
+              <div className="capabilities-quote-content">
+                <blockquote className="capabilities-quote-text">
+                  <p>&ldquo;{t('quote')}&rdquo;</p>
+                </blockquote>
+                <div className="capabilities-quote-author flex items-center gap-5">
                   <div className="w-16 h-16 bg-[#1A2535] overflow-hidden flex-shrink-0 relative">
                     <Image
-                      src="/Images/team/ali-amrani-hva-co-founder.webp"
-                      alt={t('quoteAlt')}
+                      src={aliProfileImage}
+                      alt={aliProfileImageAlt ?? t('quoteAlt')}
                       fill
+                      quality={90}
                       sizes="64px"
-                      className="object-cover grayscale"
+                      className="object-cover"
                     />
                   </div>
                   <div>
                     <p className="font-bold text-[#1A2535] text-sm">{t('quoteAuthor')}</p>
-                    <p className="text-[0.7rem] text-[#536070] uppercase tracking-[0.14em] mt-1">
+                    <p className="text-[0.7rem] text-[#536174] uppercase tracking-[0.14em] mt-1">
                       {t('quoteRole')}
                     </p>
                   </div>
@@ -488,8 +475,8 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
       </section>
 
       {/* ── SOLUTION PROGRAMS ─────────────────────────────────────────────── */}
-      <section id="solution-programs" className="scroll-mt-28 bg-[#FFFFFF] px-6 py-20 lg:px-12">
-        <div className="mx-auto max-w-screen-2xl">
+      <section id="solution-programs" className="scroll-mt-28 bg-[#FFFFFF] py-20">
+        <div className="site-frame-wide">
           <motion.div
             initial="hidden"
             whileInView="show"
@@ -498,7 +485,6 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
           >
             <motion.div variants={fadeUp} transition={{ duration: 0.5 }} className="programs-header">
               <div className="programs-mark">
-                <SectionBrandMark size="sm" />
                 <span>{t('solutionPrograms')}</span>
               </div>
               <h2>{t('programsTitle')}</h2>
@@ -514,20 +500,10 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
                 alt: string;
               }>).map((program, i) => {
                 const programCodes = ['A', 'B', 'C'];
-                const programMedia = [
-                  {
-                    src: CAPABILITY_IMAGES.aiDataAnalytics,
-                    alt: program.alt,
-                  },
-                  {
-                    src: CAPABILITY_IMAGES.softwareEngineering,
-                    alt: program.alt,
-                  },
-                  {
-                    src: CAPABILITY_IMAGES.cloudInfrastructure,
-                    alt: program.alt,
-                  },
-                ];
+                const proofLink = CAPABILITY_SOLUTION_PROGRAM_DETAILS[i]?.proofLinks?.[0];
+                const caseStudyLink = proofLink?.startsWith('/case-studies/')
+                  ? proofLink
+                  : undefined;
                 return (
                   <motion.article
                     key={program.name}
@@ -537,10 +513,11 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
                   >
                     <div className="program-card-media">
                       <Image
-                        src={programMedia[i]!.src}
-                        alt={programMedia[i]!.alt}
+                        src={PROGRAM_IMAGES[i]!}
+                        alt={program.alt}
                         fill
                         loading="lazy"
+                        quality={90}
                         sizes="(max-width: 768px) 100vw, 33vw"
                         className="object-cover"
                       />
@@ -562,9 +539,9 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
                         ))}
                       </div>
 
-                      {CAPABILITY_SOLUTION_PROGRAM_DETAILS[i]?.proofLinks?.[0] && (
+                      {caseStudyLink && (
                         <Link
-                          href={CAPABILITY_SOLUTION_PROGRAM_DETAILS[i]!.proofLinks[0]!}
+                          href={caseStudyLink}
                           className="program-card-link"
                         >
                           {t('caseStudy')} <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -599,7 +576,6 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
         >
           <div className="capabilities-depth-cta-copy">
             <div className="capabilities-depth-cta-mark">
-              <SectionBrandMark surface="dark" size="sm" />
               <span>{t('nextStep')}</span>
             </div>
             <h2>{t('depthTitle')}</h2>
@@ -613,7 +589,7 @@ export default function Capabilities({ capabilities = [] }: CapabilitiesProps) {
               {t('bookCall')}
             </Link>
           </div>
-          <div className="capabilities-page-card capabilities-page-card--end">
+          <div className="capabilities-page-index">
             <p className="capabilities-page-card-title">
               {t('onPage')}
             </p>

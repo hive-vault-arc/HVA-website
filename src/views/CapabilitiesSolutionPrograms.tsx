@@ -1,15 +1,24 @@
 'use client';
 
 import Image from 'next/image';
-import {Link} from '@/i18n/navigation';
 import {useEffect, useState} from 'react';
 import {AnimatePresence, MotionConfig, motion, useScroll, useTransform} from 'framer-motion';
 import {useLocale, useTranslations} from 'next-intl';
-import {ArrowRight, ArrowUpRight, Bot, Cloud, Database, Layers3} from '@/components/icons';
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Bot,
+  Cloud,
+  Compass,
+  Database,
+  Gauge,
+  Workflow,
+} from '@/components/icons';
+import {Link} from '@/i18n/navigation';
 import BottomCTA from '../components/BottomCTA';
-import SectionBrandMark from '../components/SectionBrandMark';
 import {CAPABILITY_SOLUTION_PROGRAM_DETAILS} from '../lib/capabilities-content';
 import {useAnimationQuality} from '../lib/animationQuality';
+import styles from './CapabilityIndustryPages.module.css';
 
 type ProgramCopy = {
   name: string;
@@ -23,15 +32,16 @@ type ProgramCopy = {
 type OwnershipStep = {
   title: string;
   detail: string;
+  output: string;
 };
 
 const PROGRAM_IMAGES: Record<string, string> = {
   'ai-reception-and-lead-operations-program':
-    '/Images/solution-programs/hva-ai-reception-lead-operations.webp',
+    '/Images/capabilities/editorial/hva-ai-reception-program-v2.webp',
   'enterprise-crm-modernization-program':
-    '/Images/solution-programs/hva-enterprise-crm-modernization.webp',
+    '/Images/capabilities/editorial/hva-crm-modernization-program-v2.webp',
   'cloud-delivery-reliability-stack':
-    '/Images/solution-programs/hva-cloud-delivery-reliability-stack.webp',
+    '/Images/capabilities/editorial/hva-cloud-reliability-program-v2.webp',
 };
 
 const PROGRAM_HASHES = ['program-01', 'program-02', 'program-03'] as const;
@@ -42,6 +52,14 @@ function ProgramIcon({index}: {index: number}) {
   if (index === 0) return <Bot {...props} />;
   if (index === 1) return <Database {...props} />;
   return <Cloud {...props} />;
+}
+
+function OwnershipIcon({index}: {index: number}) {
+  const props = {className: 'h-5 w-5', strokeWidth: 1.5};
+
+  if (index === 0) return <Compass {...props} />;
+  if (index === 1) return <Workflow {...props} />;
+  return <Gauge {...props} />;
 }
 
 export default function CapabilitiesSolutionPrograms() {
@@ -74,7 +92,6 @@ export default function CapabilitiesSolutionPrograms() {
 
     selectProgramFromHash();
     window.addEventListener('hashchange', selectProgramFromHash);
-
     return () => window.removeEventListener('hashchange', selectProgramFromHash);
   }, []);
 
@@ -85,93 +102,72 @@ export default function CapabilitiesSolutionPrograms() {
 
   return (
     <MotionConfig reducedMotion={motionReduced ? 'always' : 'never'}>
-      <div className="solution-programs-page">
-        <motion.div
-          aria-hidden="true"
-          className="solution-programs-progress"
-          style={{scaleX: progressScale}}
-        />
+      <div className={styles.page}>
+        <motion.div aria-hidden="true" className={styles.progress} style={{scaleX: progressScale}} />
 
-        <section className="solution-programs-hero">
-          <div className="solution-programs-hero__routes" aria-hidden="true">
-            {programs.map((program) => (
-              <span key={program.slug} className="solution-programs-hero__route">
-                <span />
-              </span>
-            ))}
-            <span className="solution-programs-hero__axis" />
-          </div>
-
-          <div className="site-frame-wide solution-programs-hero__grid">
+        <section className={styles.programHero}>
+          <div className={`${styles.shell} ${styles.programHeroGrid}`}>
             <motion.div
               initial={motionReduced ? false : {opacity: 0, y: 18}}
               animate={{opacity: 1, y: 0}}
               transition={{duration: 0.48}}
-              className="solution-programs-hero__copy"
+              className={styles.programHeroCopy}
             >
-              <div className="solution-programs-kicker">
-                <SectionBrandMark size="sm" />
-                <span>{t('hero.eyebrow')}</span>
-              </div>
+              <p className={styles.sectionLabel}>{t('hero.eyebrow')}</p>
               <h1>{t('hero.title')}</h1>
               <p>{t('hero.description')}</p>
-              <div className="solution-programs-hero__actions">
-                <Link href="#program-explorer" className="sharp-edge btn-primary">
+              <div className={styles.heroActions}>
+                <Link href="#program-explorer" className={styles.buttonPrimary}>
                   {t('hero.primaryCta')}
                   <ArrowRight className="h-4 w-4" strokeWidth={1.7} aria-hidden="true" />
                 </Link>
-                <Link href="/capabilities/in-detail" className="solution-programs-text-link">
+                <Link href="/capabilities/in-detail" className={styles.textLink}>
                   {t('hero.secondaryCta')}
                   <ArrowUpRight className="h-4 w-4" strokeWidth={1.7} aria-hidden="true" />
                 </Link>
               </div>
             </motion.div>
 
-            <motion.div
-              initial={motionReduced ? false : {opacity: 0, x: 22}}
-              animate={{opacity: 1, x: 0}}
+            <motion.figure
+              initial={motionReduced ? false : {opacity: 0, y: 16}}
+              animate={{opacity: 1, y: 0}}
               transition={{duration: 0.52, delay: motionReduced ? 0 : 0.1}}
-              className="solution-programs-hero__signal"
-              aria-hidden="true"
+              className={styles.programHeroMedia}
             >
-              <span>{t('hero.signal')}</span>
-              <div className="solution-programs-hero__signal-grid">
-                {programs.map((program, index) => (
-                  <motion.div
-                    key={program.slug}
-                    animate={
-                      motionReduced
-                        ? {opacity: index === activeIndex ? 1 : 0.42}
-                        : {
-                            opacity: index === activeIndex ? 1 : 0.42,
-                            y: index === activeIndex ? -5 : 0,
-                          }
-                    }
-                    transition={{duration: 0.36, ease: [0.16, 1, 0.3, 1]}}
-                  >
-                    <ProgramIcon index={index} />
-                    <strong>{String(index + 1).padStart(2, '0')}</strong>
-                  </motion.div>
-                ))}
-              </div>
-              <p>{t('hero.signalDetail')}</p>
-            </motion.div>
+              <Image
+                src="/Images/solution-programs/hva-solution-programs-hero-v2.webp"
+                alt={t('hero.imageAlt')}
+                fill
+                priority
+                quality={90}
+                sizes="(max-width: 900px) calc(100vw - 2rem), 54vw"
+              />
+              <figcaption className={styles.programHeroCaption}>
+                <span>{t('hero.signal')}</span>
+                <strong>{t('hero.signalDetail')}</strong>
+              </figcaption>
+            </motion.figure>
           </div>
         </section>
 
-        <section id="program-explorer" className="solution-programs-explorer">
-          <div className="site-frame-wide">
-            <div className="solution-programs-explorer__heading">
-              <div className="solution-programs-kicker">
-                <SectionBrandMark size="sm" />
-                <span>{t('navigator.eyebrow')}</span>
+        <section id="program-explorer" className={styles.programExplorer}>
+          <div className={styles.shell}>
+            <header className={styles.sectionIntro}>
+              <div>
+                <p className={styles.sectionLabel}>{t('navigator.eyebrow')}</p>
+                <h2>{t('navigator.title')}</h2>
               </div>
-              <h2>{t('navigator.title')}</h2>
-              <p>{t('navigator.description')}</p>
-            </div>
+              <div className={styles.sectionIntroContext}>
+                <p>{t('navigator.description')}</p>
+                <div className={styles.sectionIntroNote}>
+                  <strong>{t('hero.signal')}</strong>
+                  <span>{t('hero.signalDetail')}</span>
+                </div>
+              </div>
+            </header>
 
-            <div className="solution-programs-explorer__layout">
-              <nav className="solution-programs-switchboard" aria-label={t('navigator.ariaLabel')}>
+            <div className={styles.programWorkbench}>
+              <nav className={styles.programChoices} aria-label={t('navigator.ariaLabel')}>
                 {programs.map((program, index) => {
                   const isActive = index === activeIndex;
 
@@ -180,50 +176,54 @@ export default function CapabilitiesSolutionPrograms() {
                       key={program.slug}
                       id={PROGRAM_HASHES[index]}
                       type="button"
-                      className="solution-programs-switchboard__choice"
+                      className={styles.choice}
                       aria-pressed={isActive}
                       data-active={isActive || undefined}
                       onClick={() => selectProgram(index)}
                     >
-                      {isActive && (
-                        <motion.span
-                          layoutId="solution-program-active-choice"
-                          className="solution-programs-switchboard__active"
-                          transition={{type: 'spring', stiffness: 420, damping: 34}}
-                        />
-                      )}
-                      <span className="solution-programs-switchboard__content">
-                        <span className="solution-programs-switchboard__number">
+                      <span className={styles.choiceIcon} aria-hidden="true">
+                        <ProgramIcon index={index} />
+                      </span>
+                      <span className={styles.choiceTitle}>
+                        <span className={styles.choiceNumber}>
                           {String(index + 1).padStart(2, '0')}
                         </span>
-                        <span className="solution-programs-switchboard__title">
-                          <ProgramIcon index={index} />
-                          <strong>{program.name}</strong>
-                        </span>
-                        <ArrowRight className="h-4 w-4" strokeWidth={1.7} aria-hidden="true" />
+                        <strong>{program.name}</strong>
+                        <small>{program.category}</small>
                       </span>
+                      <ArrowRight className="h-4 w-4" strokeWidth={1.7} aria-hidden="true" />
                     </button>
                   );
                 })}
               </nav>
 
-              <div className="solution-programs-stage" aria-live="polite">
+              <div className={styles.programStage} aria-live="polite">
                 <AnimatePresence mode="wait" initial={!motionReduced}>
                   <motion.article
                     key={activeProgram.slug}
-                    initial={motionReduced ? false : {opacity: 0, y: 16}}
+                    initial={motionReduced ? false : {opacity: 0, y: 14}}
                     animate={{opacity: 1, y: 0}}
-                    exit={motionReduced ? undefined : {opacity: 0, y: -12}}
-                    transition={{duration: 0.34, ease: [0.16, 1, 0.3, 1]}}
-                    className="solution-programs-stage__content"
+                    exit={motionReduced ? undefined : {opacity: 0, y: -10}}
+                    transition={{duration: 0.4, ease: [0.16, 1, 0.3, 1]}}
+                    className={styles.programStageArticle}
                   >
-                    <div className="solution-programs-stage__summary">
-                      <span>{activeProgram.category}</span>
+                    <figure className={styles.programStageMedia}>
+                      <Image
+                        src={PROGRAM_IMAGES[activeProgram.slug]!}
+                        alt={t('navigator.imageAlt', {title: activeProgram.name})}
+                        fill
+                        quality={90}
+                        sizes="(max-width: 760px) calc(100vw - 3rem), (max-width: 1120px) 44vw, 34rem"
+                      />
+                    </figure>
+
+                    <div className={styles.programStageCopy}>
+                      <span className={styles.programStageKicker}>{activeProgram.category}</span>
                       <h3>{activeProgram.name}</h3>
                       <p>{activeProgram.summary}</p>
 
-                      <div className="solution-programs-stage__modules">
-                        <span>{t('navigator.modules')}</span>
+                      <div className={styles.programModules}>
+                        <span className={styles.metaLabel}>{t('navigator.modules')}</span>
                         <ul>
                           {activeProgram.modules.map((module) => (
                             <li key={module}>{module}</li>
@@ -231,13 +231,13 @@ export default function CapabilitiesSolutionPrograms() {
                         </ul>
                       </div>
 
-                      <div className="solution-programs-stage__details">
+                      <div className={styles.programDetails}>
                         <div>
-                          <span>{t('navigator.integrations')}</span>
+                          <span className={styles.metaLabel}>{t('navigator.integrations')}</span>
                           <p>{activeProgram.integrations.join(', ')}</p>
                         </div>
                         <div>
-                          <span>{t('navigator.delivery')}</span>
+                          <span className={styles.metaLabel}>{t('navigator.delivery')}</span>
                           <p>{activeProgram.deliveryModel}</p>
                         </div>
                       </div>
@@ -245,23 +245,13 @@ export default function CapabilitiesSolutionPrograms() {
                       {activeProgram.proofLinks[0] && (
                         <Link
                           href={programHref(activeProgram.proofLinks[0])!}
-                          className="solution-programs-proof-link"
+                          className={styles.programProofLink}
                         >
                           {t('navigator.openProgram')}
                           <ArrowUpRight className="h-4 w-4" strokeWidth={1.7} aria-hidden="true" />
                         </Link>
                       )}
                     </div>
-
-                    <figure className="solution-programs-stage__media">
-                      <Image
-                        src={PROGRAM_IMAGES[activeProgram.slug]!}
-                        alt={t('navigator.imageAlt', {title: activeProgram.name})}
-                        fill
-                        sizes="(max-width: 760px) calc(100vw - 3rem), (max-width: 1120px) 44vw, 34rem"
-                        className="object-cover"
-                      />
-                    </figure>
                   </motion.article>
                 </AnimatePresence>
               </div>
@@ -269,45 +259,41 @@ export default function CapabilitiesSolutionPrograms() {
           </div>
         </section>
 
-        <section className="solution-programs-ownership">
-          <div className="site-frame-wide solution-programs-ownership__layout">
-            <motion.div
-              initial={false}
-              whileInView={{opacity: 1, y: 0}}
-              viewport={{once: true, amount: 0.3}}
-              transition={{duration: 0.42}}
-              className="solution-programs-ownership__intro"
-            >
-              <Layers3 className="h-6 w-6" strokeWidth={1.45} aria-hidden="true" />
+        <section className={styles.ownership}>
+          <div className={`${styles.shell} ${styles.ownershipPanel}`}>
+            <div className={styles.ownershipIntro}>
+              <p className={`${styles.sectionLabel} ${styles.sectionLabelDark}`}>
+                ARC delivery
+              </p>
               <h2>{t('ownership.title')}</h2>
               <p>{t('ownership.description')}</p>
-            </motion.div>
-
-            <div className="solution-programs-ownership__steps">
+            </div>
+            <div className={styles.ownershipPhases}>
               {ownershipSteps.map((step, index) => (
-                <motion.article
-                  key={step.title}
-                  initial={false}
-                  whileInView={{opacity: 1, x: 0}}
-                  viewport={{once: true, amount: 0.35}}
-                  transition={{duration: 0.4, delay: motionReduced ? 0 : index * 0.08}}
-                >
-                  <span>{String(index + 1).padStart(2, '0')}</span>
+                <article key={step.title} className={styles.ownershipPhase}>
+                  <div className={styles.ownershipPhaseHeader}>
+                    <span>{String(index + 1).padStart(2, '0')}</span>
+                    <i aria-hidden="true"><OwnershipIcon index={index} /></i>
+                  </div>
                   <h3>{step.title}</h3>
                   <p>{step.detail}</p>
-                </motion.article>
+                  <div className={styles.ownershipOutput}>
+                    <small>{t('ownership.outputLabel')}</small>
+                    <strong>{step.output}</strong>
+                  </div>
+                </article>
               ))}
             </div>
           </div>
         </section>
 
         <BottomCTA
-          variant="light"
           headline={t('bottomCta.title')}
           subtext={t('bottomCta.description')}
           primaryLabel={t('bottomCta.primary')}
           primaryHref="/contact"
-          revealImmediately
+          variant="light"
+          compact
         />
       </div>
     </MotionConfig>

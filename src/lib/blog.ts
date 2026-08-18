@@ -8,6 +8,7 @@ import type {LocalizedContentMeta} from './localized-content';
 import {getPublishedCollection, getPublishedDocument} from './localized-content';
 import {withSanityFallback} from '../sanity/lib/fetch';
 import {cache} from 'react';
+import type {EditorialContentFields} from './editorial-taxonomy';
 
 export type ContentSection =
   | { type: 'paragraph'; content: string }
@@ -18,7 +19,7 @@ export type ContentSection =
   | { type: 'list'; items: string[] }
   | { type: 'faq'; items: { question: string; answer: string }[] };
 
-export type BlogPost = LocalizedContentMeta & {
+export type BlogPost = LocalizedContentMeta & EditorialContentFields & {
   slug: string;
   title: string;
   subtitle: string;

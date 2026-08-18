@@ -80,7 +80,6 @@ const placedMedia: CaseStudyProjectMedia[] = [
     placement: 'afterChallenge',
     evidenceType: 'fixtureBacked',
     alt: 'Challenge workflow before consolidation.',
-    caption: 'The fragmented starting point.',
     disclosure: 'Illustrative interface data.',
     publicationStatus: 'approved',
   },
@@ -93,7 +92,6 @@ const placedMedia: CaseStudyProjectMedia[] = [
     placement: 'afterArchitecture',
     evidenceType: 'deliveredInterface',
     alt: 'Delivered operating system interface.',
-    caption: 'The delivered shared operating view.',
     disclosure: 'Illustrative interface data.',
     publicationStatus: 'approved',
   },
@@ -106,7 +104,6 @@ const placedMedia: CaseStudyProjectMedia[] = [
     placement: 'afterChallenge',
     evidenceType: 'deliveredInterface',
     alt: 'Mobile workflow module.',
-    caption: 'A delivered mobile workflow.',
     disclosure: 'Illustrative interface data.',
     publicationStatus: 'approved',
   },
@@ -296,8 +293,8 @@ describe('CaseStudyDetail', () => {
     const modules = container.querySelector<HTMLElement>(
       '.case-study-template__modules',
     );
-    const moduleMedia = container.querySelector<HTMLElement>(
-      '.case-study-template__systems-media',
+    const proofMedia = container.querySelector<HTMLElement>(
+      '.case-study-template__narrative-media',
     );
     const integrations = container.querySelector<HTMLElement>(
       '.case-study-template__integrations',
@@ -311,29 +308,37 @@ describe('CaseStudyDetail', () => {
     expect(narrative).not.toBeNull();
     expect(systems).not.toBeNull();
     expect(modules).not.toBeNull();
-    expect(moduleMedia).not.toBeNull();
+    expect(proofMedia).not.toBeNull();
     expect(integrations).not.toBeNull();
     expect(metrics).not.toBeNull();
     expect(
       within(narrative!).getByAltText(placedMedia[0].alt),
     ).toBeInTheDocument();
     expect(
-      within(narrative!).getByAltText(placedMedia[1].alt),
+      within(proofMedia!).getByAltText(placedMedia[2].alt),
     ).toBeInTheDocument();
     expect(
-      within(systems!).getByAltText(placedMedia[2].alt),
+      within(proofMedia!).getAllByRole('img'),
+    ).toHaveLength(2);
+    expect(
+      within(proofMedia!).getByRole('button', {
+        name: 'Next desktop screen',
+      }),
     ).toBeInTheDocument();
     expect(
-      narrative!.querySelector(
-        '.case-study-template__narrative-pair + .case-study-project-media',
-      ),
+      within(proofMedia!).queryByRole('button', {
+        name: 'Next mobile screen',
+      }),
+    ).not.toBeInTheDocument();
+    expect(
+      narrative!.querySelector('.case-study-project-media'),
     ).not.toBeNull();
     expect(
-      modules!.compareDocumentPosition(moduleMedia!) &
+      narrative!.compareDocumentPosition(modules!) &
         Node.DOCUMENT_POSITION_FOLLOWING,
     ).toBeTruthy();
     expect(
-      moduleMedia!.compareDocumentPosition(integrations!) &
+      systems!.compareDocumentPosition(integrations!) &
         Node.DOCUMENT_POSITION_FOLLOWING,
     ).toBeTruthy();
     expect(

@@ -1,6 +1,11 @@
 import type {AppLocale} from '@/i18n/config';
+import type {
+  EditorialFormat,
+  EditorialTopic,
+} from './editorial-taxonomy';
 
 export const INSIGHT_COLLECTION_INITIAL_SIZE = 4;
+export const INSIGHT_COLLECTION_CASE_STUDY_INITIAL_SIZE = 5;
 export const INSIGHT_COLLECTION_NEXT_SIZE = 3;
 
 export const INSIGHT_COLLECTION_TYPES = [
@@ -39,6 +44,11 @@ export type InsightCollectionItem = {
   authorName?: string;
   deploymentStatus?: string;
   hasClientEvidence?: boolean;
+  editorialFormat?: EditorialFormat;
+  topics?: EditorialTopic[];
+  directAnswer?: string;
+  evidenceType?: string;
+  coverDisclosure?: string;
 };
 
 export type PaginatedInsightCollection = {

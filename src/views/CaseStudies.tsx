@@ -16,12 +16,13 @@ export default function CaseStudies({
   readonly industries: InsightIndustry[];
 }) {
   const t = useTranslations('CaseStudiesIndex');
+  const collectionT = useTranslations('CollectionUi');
 
   return (
     <InsightIndexPage
       collectionType="caseStudy"
       eyebrow={t('eyebrow')}
-      headline={t('headline')}
+      headline={collectionT('brand')}
       headlineItalic={t('headlineItalic')}
       description={t('description')}
       initialPage={initialPage}

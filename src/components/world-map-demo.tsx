@@ -1,21 +1,25 @@
+import {useTranslations} from 'next-intl';
 import { WorldMap } from "./ui/world-map";
 import { WORLD_MAP_DOTS } from "../data/worldMapDots";
 
 export function WorldMapDemo() {
+  const t = useTranslations('Home');
+
   return (
-    <div className="w-full pt-4 pb-12">
-      <div className="max-w-7xl mx-auto px-4 text-center">
-        <p className="font-bold text-3xl md:text-7xl text-[#1A2535] mb-6">
-          Global Reach, Local Impact
+    <div className="home-global-reach">
+      <div className="home-global-reach__header">
+        <p className="home-global-reach__eyebrow">{t('globalReachEyebrow')}</p>
+        <h2>
+          {t('globalReachTitle')}
+        </h2>
+        <p>
+          {t('globalReachDescription')}
         </p>
-        <p className="text-sm md:text-lg text-neutral-400 max-w-3xl mx-auto py-2">
-          We collaborate across regions to deliver consistent product quality and execution speed.
-        </p>
-        <p className="text-xs md:text-sm text-neutral-500 max-w-2xl mx-auto">
-          Based in Morocco, delivering for clients worldwide.
-        </p>
+        <small>
+          {t('globalReachLocation')}
+        </small>
       </div>
-      <div className="mx-auto mt-6 w-[92%] max-w-5xl">
+      <div className="home-global-reach__map">
         <WorldMap dots={WORLD_MAP_DOTS} lineColor="#E8A838" />
       </div>
     </div>

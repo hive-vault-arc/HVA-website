@@ -54,7 +54,7 @@ function RenderSection({ section, index }: { section: PerspectiveSection; index:
           </blockquote>
           {section.attribution && (
             <cite
-              className="text-xs font-bold tracking-widest uppercase not-italic text-[var(--section-label-color)]"
+              className="text-xs font-bold tracking-widest uppercase not-italic text-[#1A2535]"
               style={{ fontFamily: 'var(--font-body)' }}
             >
               - {section.attribution}
@@ -132,7 +132,7 @@ function PerspectiveSidebar({ perspective }: { perspective: Perspective }) {
       {perspective.sources.length > 0 && (
         <div>
           <h2
-            className="text-xs font-bold uppercase tracking-widest text-[var(--section-label-color)] mb-4"
+            className="mb-4 text-xs font-bold uppercase tracking-widest text-[#1A2535]"
             style={{ fontFamily: 'var(--font-body)' }}
           >
             {t('sources')}
@@ -158,7 +158,7 @@ function PerspectiveSidebar({ perspective }: { perspective: Perspective }) {
 
       <div>
         <h2
-          className="text-xs font-bold uppercase tracking-widest text-[var(--section-label-color)] mb-4"
+          className="mb-4 text-xs font-bold uppercase tracking-widest text-[#1A2535]"
           style={{ fontFamily: 'var(--font-body)' }}
         >
           {t('relatedResources')}
@@ -181,7 +181,7 @@ function PerspectiveSidebar({ perspective }: { perspective: Perspective }) {
 
       <div>
         <h2
-          className="text-xs font-bold uppercase tracking-widest text-[var(--section-label-color)] mb-4"
+          className="mb-4 text-xs font-bold uppercase tracking-widest text-[#1A2535]"
           style={{ fontFamily: 'var(--font-body)' }}
         >
           {t('topics')}
@@ -229,6 +229,7 @@ export default function PerspectiveView({
       authorHref="/aboutus"
       coverImage={perspective.coverImage}
       coverAlt={perspective.coverAlt}
+      editorial={perspective}
       contentAsArticle
       showAboutStrip
       relatedItems={relatedPerspectives.map((item) => ({
@@ -236,6 +237,8 @@ export default function PerspectiveView({
         title: item.title,
         tag: item.tag,
         coverImage: item.coverImage,
+        editorialFormat: item.editorialFormat,
+        topics: item.topics,
       }))}
       relatedAllHref="/insights/perspectives"
       relatedAllLabel={t('allPerspectives')}

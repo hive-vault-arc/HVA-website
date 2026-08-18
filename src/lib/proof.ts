@@ -87,7 +87,6 @@ export type CaseStudyProjectMedia = {
   placement: CaseStudyProjectMediaPlacement;
   evidenceType: 'deliveredInterface' | 'fixtureBacked' | 'conceptualInterface';
   alt: string;
-  caption?: string;
   disclosure?: string;
   publicationStatus: 'notCleared' | 'approved';
 };
@@ -165,6 +164,7 @@ export type CaseStudy = LocalizedContentMeta & {
     clientLogoAlt?: string;
     clientWebsite?: string;
   };
+  coverDisclosure?: string;
   lastUpdated: string;
   seo?: ContentSeo;
 };
@@ -198,12 +198,12 @@ export type PortfolioCaseStudy = LocalizedContentMeta &
 export const CASE_STUDIES: CaseStudy[] = [
   {
     slug: 'multilingual-whatsapp-ai-agent',
-    title: 'Multilingual WhatsApp AI Agent for Lead Operations',
+    title: 'Multilingual WhatsApp lead workflow',
     clientName: 'Atlas Property Group',
     industry: 'Real Estate',
     engagementType: 'customSoftware',
     summary:
-      'Built a production AI WhatsApp agent with persistent memory, automated scheduling, lead qualification, and CRM pipeline updates in real time.',
+      'Lead capture, qualification, project matching and visit handoff in one connected workflow.',
     problem:
       'Inbound leads were handled manually across WhatsApp and phone. The client was losing after-hours opportunities and spending too much time on repetitive triage.',
     systemArchitecture:
@@ -220,7 +220,8 @@ export const CASE_STUDIES: CaseStudy[] = [
       'n8n workflow runner',
       'PostgreSQL',
     ],
-    deploymentStatus: 'Live in production since October 2025',
+    deploymentStatus: '',
+    coverDisclosure: 'Illustrative workflow reconstruction.',
     headlineMetrics: [
       {
         _key: 'agent-runtime',
@@ -257,7 +258,9 @@ export const CASE_STUDIES: CaseStudy[] = [
     hasClientEvidence: false,
     assets: {
       coverImage:
-        '/Images/case-studies/whatsapp-ai-agent-operations-case-study-morocco.webp',
+        '/Images/case-studies/immoworld-whatsapp-ai-french-dutch-phone-pair.webp',
+      coverAlt:
+        'Two ImmoWorld WhatsApp workflow screens showing French and Dutch lead conversations in Tangier',
       logoLabel: 'Atlas Property Group',
     },
     lastUpdated: '2026-03-27',
@@ -366,6 +369,56 @@ export const CASE_STUDIES: CaseStudy[] = [
         'case study',
       ],
       noIndex: false,
+    },
+  },
+  {
+    slug: 'healthcare-ai-receptionist-crm',
+    title: 'AI Receptionist CRM — Administrative Workflow Demo',
+    clientName: 'H.V.A. Demo',
+    industry: 'Healthcare & Life Sciences',
+    engagementType: 'customSoftware',
+    summary:
+      'A synthetic workflow demonstration connecting WhatsApp conversations, appointment availability, reminders, and staff handoff in one reception workspace.',
+    problem:
+      'Reception teams need a clear administrative view of incoming conversations, appointment requests, confirmations, and the moments that require staff review.',
+    systemArchitecture:
+      'A demonstration workflow connects a WhatsApp-style conversation, availability checks, appointment creation, reminders, and an explicit human handoff without making clinical decisions.',
+    operationalModules: [
+      'Conversation and reception queue',
+      'Appointment availability and scheduling',
+      'Reminder and staff handoff controls',
+    ],
+    integrations: [
+      'WhatsApp-style conversation interface',
+      'Appointment scheduling workspace',
+      'Human reception review',
+    ],
+    deploymentStatus: 'Concept demonstration using synthetic data',
+    coverDisclosure:
+      'Concept demonstration using synthetic data. Administrative workflow only.',
+    headlineMetrics: [],
+    publishedOutcomes: [],
+    projectMedia: [],
+    hasClientEvidence: false,
+    assets: {
+      coverImage:
+        '/Images/case-studies/healthcare-ai-receptionist-crm.webp',
+      coverAlt:
+        'AI receptionist appointments workspace with a WhatsApp conversation phone on the right',
+      logoLabel: 'H.V.A. Demo',
+    },
+    lastUpdated: '2026-08-16',
+    seo: {
+      title: 'AI Receptionist CRM — Administrative Workflow Demo | Case Study',
+      description:
+        'A synthetic H.V.A. demonstration of an AI receptionist administrative workflow for conversations, appointment scheduling, reminders, and staff handoff.',
+      keywords: [
+        'AI receptionist demo',
+        'administrative workflow',
+        'appointment scheduling',
+        'healthcare operations software',
+      ],
+      noIndex: true,
     },
   },
 ];
@@ -480,10 +533,16 @@ export const getCaseStudyBySlug = cache(async function getCaseStudyBySlug(
   const caseStudy = await getPublishedDocument(locale, (targetLocale) =>
     getSanityCaseStudyBySlug(slug, targetLocale),
   );
-  if (!caseStudy) {
-    throw new Error(`Case study not found: ${slug}`);
+  if (caseStudy) return caseStudy;
+
+  const localCaseStudy = CASE_STUDIES.find((study) => study.slug === slug);
+  if (localCaseStudy) {
+    return locale === 'fr'
+      ? applyFrenchCmsFallback(localCaseStudy)
+      : localCaseStudy;
   }
-  return caseStudy;
+
+  throw new Error(`Case study not found: ${slug}`);
 });
 
 export async function getRelatedCaseStudies(

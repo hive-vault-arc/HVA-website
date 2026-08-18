@@ -16,12 +16,13 @@ export default function BlogIndex({
   readonly industries: InsightIndustry[];
 }) {
   const t = useTranslations('BlogIndex');
+  const collectionT = useTranslations('CollectionUi');
 
   return (
     <InsightIndexPage
       collectionType="post"
       eyebrow={t('eyebrow')}
-      headline={t('headline')}
+      headline={collectionT('brand')}
       headlineItalic={t('headlineItalic')}
       description={t('description')}
       initialPage={initialPage}

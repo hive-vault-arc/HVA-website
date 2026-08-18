@@ -23,7 +23,7 @@ export default async function DigitalServicesTangierPage({params}: PageProps) {
     <GeoServicePage
       locale={locale}
       pathname="/digital-services-tangier"
-      image="/Images/brand/hva-ai-software-agency-tangier.webp"
+      image="/Images/hero/digital-transformation-scalable-systems-tangier-morocco.webp"
       copy={t.raw('digitalServicesTangier') as GeoPageCopy}
       faqs={faqs}
       heroSecondaryHref="/capabilities"

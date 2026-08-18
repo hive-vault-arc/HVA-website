@@ -8,15 +8,20 @@ import {
   ArrowRight,
   BarChart3,
   ChartArea,
+  CheckCircle2,
   ExternalLink,
   Gauge,
+  GitBranch,
+  Layers,
   Network,
   TrendingUp,
   Users,
   Workflow,
 } from '@/components/icons';
 import SectionBrandMark from '@/components/SectionBrandMark';
-import CaseStudyProjectMedia from '@/components/CaseStudyProjectMedia';
+import CaseStudyProjectMedia, {
+  type CaseStudyProjectMediaLabels,
+} from '@/components/CaseStudyProjectMedia';
 import CaseStudyTestimonial from '@/components/CaseStudyTestimonial';
 import {
   getEvidenceDirection,
@@ -29,6 +34,13 @@ import type {
   CaseStudyOutcome,
   CaseStudyProjectMedia as ProjectMedia,
 } from '@/lib/proof';
+
+function orderProjectMedia(items: ProjectMedia[]) {
+  return [
+    ...items.filter((item) => item.deviceType !== 'phone'),
+    ...items.filter((item) => item.deviceType === 'phone'),
+  ];
+}
 
 export function formatCaseStudyHeadlineMetric(
   metric: CaseStudyHeadlineMetric,
@@ -77,6 +89,14 @@ export function CaseStudyHeadlineMetrics({
       className="case-study-template__headline-metrics"
       aria-label={t('caseSections.headlineMetrics')}
     >
+      <header className="case-study-template__headline-metrics-intro">
+        <div className="case-study-template__headline-metrics-intro-copy">
+          <span className="case-study-template__headline-metrics-eyebrow">
+            {t('caseSections.headlineMetrics')}
+          </span>
+          <h2>{t('caseSections.outcomesTitle')}</h2>
+        </div>
+      </header>
       <div
         className="case-study-template__headline-metrics-grid"
         data-count={metrics.length}
@@ -100,7 +120,9 @@ export function CaseStudyHeadlineMetrics({
                 <MetricIcon />
               </div>
               <strong>{formatCaseStudyHeadlineMetric(metric, locale)}</strong>
-              <h2>{metric.label}</h2>
+              <h3 className="case-study-template__headline-metric-title">
+                {metric.label}
+              </h3>
               <p>{metric.context}</p>
               <span>{t(`caseSections.metricBasis.${metric.basis}`)}</span>
             </article>
@@ -199,6 +221,7 @@ function CaseStudyNarrative({
   solution,
   media,
   mediaLabel,
+  mediaLabels,
 }: {
   readonly challengeTitle: string;
   readonly challenge: string;
@@ -206,6 +229,7 @@ function CaseStudyNarrative({
   readonly solution: string;
   readonly media: ProjectMedia[];
   readonly mediaLabel: string;
+  readonly mediaLabels: CaseStudyProjectMediaLabels;
 }) {
   return (
     <section
@@ -218,6 +242,12 @@ function CaseStudyNarrative({
           id="challenge"
           className="case-study-template__narrative-panel"
         >
+          <span
+            className="case-study-template__narrative-kicker"
+            aria-hidden="true"
+          >
+            01 /
+          </span>
           <h2 id="challenge-title">{challengeTitle}</h2>
           <p>{challenge}</p>
         </article>
@@ -225,6 +255,12 @@ function CaseStudyNarrative({
           id="solution"
           className="case-study-template__narrative-panel case-study-template__narrative-panel--dark"
         >
+          <span
+            className="case-study-template__narrative-kicker"
+            aria-hidden="true"
+          >
+            02 /
+          </span>
           <h2 id="solution-title">{solutionTitle}</h2>
           <p>{solution}</p>
         </article>
@@ -232,6 +268,7 @@ function CaseStudyNarrative({
       <CaseStudyProjectMedia
         items={media}
         label={mediaLabel}
+        mediaLabels={mediaLabels}
         className="case-study-template__narrative-media"
       />
     </section>
@@ -325,17 +362,14 @@ export function CaseStudyOutcomes({study}: {readonly study: CaseStudy}) {
 
 function CaseStudySystems({
   study,
-  media,
 }: {
   readonly study: CaseStudy;
-  readonly media: ProjectMedia[];
 }) {
   const t = useTranslations('DynamicContent');
   const hasModules = study.operationalModules.length > 0;
   const hasIntegrations = study.integrations.length > 0;
-  const hasMedia = media.length > 0;
 
-  if (!hasModules && !hasIntegrations && !hasMedia) return null;
+  if (!hasModules && !hasIntegrations) return null;
 
   return (
     <section
@@ -347,33 +381,55 @@ function CaseStudySystems({
             ? 'case-study-integrations-title'
             : undefined
       }
-      data-has-media={hasMedia ? 'true' : 'false'}
+      data-has-media="false"
     >
       {hasModules ? (
         <div className="case-study-template__modules">
-          <h2 id="case-study-systems-title">{t('caseSections.modules')}</h2>
-          <ul>
-            {study.operationalModules.map((module) => (
-              <li key={module}>{module}</li>
+          <div className="case-study-template__systems-heading">
+            <span className="case-study-template__systems-heading-icon" aria-hidden="true">
+              <Layers />
+            </span>
+            <div>
+              <span className="case-study-template__systems-eyebrow">01 / OPERATING LAYER</span>
+              <h2 id="case-study-systems-title">{t('caseSections.modules')}</h2>
+            </div>
+          </div>
+          <ol>
+            {study.operationalModules.map((module, index) => (
+              <li key={module}>
+                <span className="case-study-template__systems-number">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <span>{module}</span>
+                <CheckCircle2 aria-hidden="true" />
+              </li>
             ))}
-          </ul>
+          </ol>
         </div>
       ) : null}
 
-      <CaseStudyProjectMedia
-        items={media}
-        label={t('caseSections.projectMedia')}
-        className="case-study-template__systems-media"
-      />
-
       {hasIntegrations ? (
         <div className="case-study-template__integrations">
-          <h2 id="case-study-integrations-title">{t('caseSections.stack')}</h2>
-          <ul>
-            {study.integrations.map((integration) => (
-              <li key={integration}>{integration}</li>
+          <div className="case-study-template__systems-heading">
+            <span className="case-study-template__systems-heading-icon" aria-hidden="true">
+              <GitBranch />
+            </span>
+            <div>
+              <span className="case-study-template__systems-eyebrow">02 / DELIVERY STACK</span>
+              <h2 id="case-study-integrations-title">{t('caseSections.stack')}</h2>
+            </div>
+          </div>
+          <ol>
+            {study.integrations.map((integration, index) => (
+              <li key={integration}>
+                <span className="case-study-template__systems-number">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <span>{integration}</span>
+                <CheckCircle2 aria-hidden="true" />
+              </li>
             ))}
-          </ul>
+          </ol>
         </div>
       ) : null}
     </section>
@@ -415,6 +471,7 @@ function RelatedCaseStudies({studies}: {readonly studies: CaseStudy[]}) {
                   alt={relatedStudy.assets.coverAlt ?? relatedStudy.title}
                   fill
                   loading="lazy"
+                  quality={90}
                   unoptimized={isSanityCdnImage(relatedStudy.assets.coverImage)}
                   sizes="(max-width: 760px) calc(100vw - 2rem), (max-width: 1100px) 50vw, 33vw"
                 />
@@ -471,17 +528,38 @@ export default function CaseStudyDetail({
   const locale = useLocale();
   const projectMedia =
     !study.language || study.language === locale
-      ? (study.projectMedia ?? [])
+      ? (study.projectMedia ?? []).filter(
+          (item) => item.publicationStatus === 'approved',
+        )
       : [];
-  const narrativeMedia = projectMedia.filter(
-    (item) =>
-      item.deviceType !== 'phone' &&
-      (item.placement === 'afterChallenge' ||
-        item.placement === 'afterArchitecture'),
+  const desktopMedia = orderProjectMedia(
+    projectMedia.filter((item) => item.deviceType !== 'phone'),
   );
-  const moduleMedia = projectMedia.filter(
-    (item) => item.deviceType === 'phone' || item.placement === 'afterModules',
+  const phoneMedia = orderProjectMedia(
+    projectMedia.filter((item) => item.deviceType === 'phone'),
   );
+  const proofMedia = orderProjectMedia([...desktopMedia, ...phoneMedia]);
+  const projectMediaLabels: CaseStudyProjectMediaLabels = {
+    desktop: {
+      eyebrow: t('caseSections.desktopProofEyebrow'),
+      title: t('caseSections.desktopProof'),
+      previousLabel: t('caseSections.desktopPrevious'),
+      nextLabel: t('caseSections.desktopNext'),
+    },
+    phone: {
+      eyebrow:
+        desktopMedia.length > 0
+          ? t('caseSections.mobileProofEyebrow')
+          : t('caseSections.mobileProofEyebrow').replace(/^\d{2}/, '01'),
+      title: t('caseSections.mobileProof'),
+      previousLabel: t('caseSections.mobilePrevious'),
+      nextLabel: t('caseSections.mobileNext'),
+    },
+  };
+  const heroDesktopMedia = desktopMedia.find(
+    (item) => item.deviceType === 'desktop',
+  );
+  const heroCoverImage = study.assets.coverImage;
 
   return (
     <main
@@ -510,7 +588,7 @@ export default function CaseStudyDetail({
             <div className="case-study-template__hero-grid">
               <div className="case-study-template__hero-copy">
                 <div className="case-study-template__hero-label">
-                  <SectionBrandMark surface="light" size="sm" />
+                  <span className="case-study-template__hero-label-line" aria-hidden="true" />
                   <span>{study.industry}</span>
                 </div>
                 <h1>{study.title}</h1>
@@ -518,17 +596,39 @@ export default function CaseStudyDetail({
               </div>
 
               <div className="case-study-template__hero-visual">
-                <figure className="case-study-template__cover">
-                  <Image
-                    src={study.assets.coverImage}
-                    alt={study.assets.coverAlt ?? study.title}
-                    fill
-                    priority
-                    unoptimized={isSanityCdnImage(study.assets.coverImage)}
-                    className="case-study-template__cover-image"
-                    sizes="(max-width: 900px) calc(100vw - 2rem), min(58vw, 68rem)"
-                  />
-                </figure>
+                {heroDesktopMedia ? (
+                  <figure className="case-study-template__hero-screen">
+                    <Image
+                      src={heroDesktopMedia.image}
+                      alt={heroDesktopMedia.alt}
+                      width={heroDesktopMedia.width}
+                      height={heroDesktopMedia.height}
+                      priority
+                      quality={90}
+                      unoptimized={isSanityCdnImage(heroDesktopMedia.image)}
+                      className="case-study-template__hero-screen-image"
+                      sizes="(max-width: 900px) calc(100vw - 2rem), min(64vw, 76rem)"
+                    />
+                  </figure>
+                ) : (
+                  <figure className="case-study-template__cover">
+                    <Image
+                      src={heroCoverImage}
+                      alt={study.assets.coverAlt ?? study.title}
+                      fill
+                      priority
+                      quality={90}
+                      unoptimized={isSanityCdnImage(heroCoverImage)}
+                      className="case-study-template__cover-image"
+                      sizes="(max-width: 900px) calc(100vw - 2rem), min(58vw, 68rem)"
+                    />
+                    {study.coverDisclosure ? (
+                      <figcaption className="case-study-template__cover-disclosure">
+                        {study.coverDisclosure}
+                      </figcaption>
+                    ) : null}
+                  </figure>
+                )}
                 <CaseStudyIdentity study={study} />
               </div>
             </div>
@@ -536,20 +636,21 @@ export default function CaseStudyDetail({
         </header>
 
         <div className="site-frame-wide case-study-template__dossier">
+          <CaseStudyTestimonial evidence={study.clientEvidence} />
           <CaseStudyNarrative
             challengeTitle={t('caseSections.challenge')}
             challenge={study.problem}
             solutionTitle={t('caseSections.architecture')}
             solution={study.systemArchitecture}
-            media={narrativeMedia}
+            media={proofMedia}
             mediaLabel={t('caseSections.projectMedia')}
+            mediaLabels={projectMediaLabels}
           />
-          <CaseStudySystems study={study} media={moduleMedia} />
+          <CaseStudySystems study={study} />
           <CaseStudyHeadlineMetrics metrics={study.headlineMetrics} />
           {study.headlineMetrics.length === 0 ? (
             <CaseStudyOutcomes study={study} />
           ) : null}
-          <CaseStudyTestimonial evidence={study.clientEvidence} />
         </div>
 
         <RelatedCaseStudies studies={relatedStudies} />

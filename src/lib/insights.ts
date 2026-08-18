@@ -10,8 +10,9 @@ import type {AppLocale} from '@/i18n/config';
 import type {LocalizedContentMeta} from './localized-content';
 import {getPublishedCollection, getPublishedDocument} from './localized-content';
 import {cache} from 'react';
+import type {EditorialContentFields} from './editorial-taxonomy';
 
-export type InsightCard = LocalizedContentMeta & {
+export type InsightCard = LocalizedContentMeta & EditorialContentFields & {
   title: string;
   slug: string;
   summary: string;

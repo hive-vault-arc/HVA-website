@@ -1,13 +1,13 @@
-import Image from 'next/image';
 import type {AppLocale} from '@/i18n/config';
 import type {AppPathname} from '@/i18n/routing';
 import {localizedPath} from '@/i18n/route-manifest';
 import {Link} from '@/i18n/navigation';
-import {ArrowRight} from '@/components/icons';
+import {ArrowUpRight} from '@/components/icons';
 import FaqSection from '@/components/FaqSection';
 import JsonLd from '@/components/JsonLd';
 import type {FaqItem} from '@/data/faqs';
 import {SITE_URL, absoluteUrl} from '@/lib/seo';
+import SectionBrandMark from '@/components/SectionBrandMark';
 
 export type GeoCardCopy = {
   title: string;
@@ -111,98 +111,143 @@ export default function GeoServicePage({
   return (
     <>
       <JsonLd data={[professionalServiceSchema, breadcrumbSchema]} />
-      <main className="bg-neutral text-tertiary">
-        <section className="editorial-hero">
-          <div className="editorial-shell grid gap-10 lg:grid-cols-[1.12fr_0.88fr] lg:items-end">
-            <div>
-              <p className="geo-kicker">{copy.hero.kicker}</p>
-              <h1 className="editorial-title">{copy.hero.title}</h1>
-              <p className="editorial-lead max-w-3xl">{copy.hero.lead}</p>
-              <div className="editorial-actions">
-                <Link href="/contact" className="editorial-cta sharp-edge">
-                  {copy.hero.primary}
-                </Link>
-                <Link href={heroSecondaryHref} className="editorial-link">
-                  {copy.hero.secondary}
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </Link>
+      <main className="geo-article-page">
+        <section className="geo-article-hero">
+          <div className="site-frame-narrow geo-article-hero-inner">
+            <nav className="geo-article-breadcrumb" aria-label={copy.breadcrumb}>
+              <Link href="/">{locale === 'fr' ? 'Accueil' : 'Home'}</Link>
+              <span aria-hidden="true">/</span>
+              <span aria-current="page">{copy.breadcrumb}</span>
+            </nav>
+
+            <div className="geo-article-meta">
+              <SectionBrandMark size="sm" eager />
+              <span>{copy.hero.kicker}</span>
+              <span className="geo-article-meta-dot" aria-hidden="true" />
+              <span className="geo-article-meta-muted">{copy.breadcrumb}</span>
+            </div>
+
+            <h1>{copy.hero.title}</h1>
+            <p className="geo-article-subtitle">{copy.hero.lead}</p>
+
+            <div className="geo-article-author">
+              <SectionBrandMark size="sm" />
+              <div>
+                <strong>{copy.schemaName}</strong>
+                <span>{copy.hero.kicker}</span>
               </div>
             </div>
-            <div className="relative min-h-[18rem] overflow-hidden bg-[#E8EBF0] md:min-h-[25rem]">
-              <Image
-                src={image}
-                alt={copy.hero.imageAlt}
-                fill
-                priority
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 42vw"
-              />
+
+            <div className="geo-article-actions">
+              <Link href="/contact" className="geo-article-primary-action sharp-edge">
+                {copy.hero.primary}
+              </Link>
+              <Link href={heroSecondaryHref} className="geo-article-text-action">
+                {copy.hero.secondary}
+                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
             </div>
           </div>
         </section>
 
-        <div className="border-y border-[#DDE3EA] bg-white">
-          <div className="mx-auto max-w-5xl space-y-16 px-6 py-16 lg:px-12 lg:py-20">
-            {copy.sections.map((section, sectionIndex) => (
-              <section key={section.title}>
-                {section.eyebrow && <p className="geo-kicker">{section.eyebrow}</p>}
-                <h2 className="services-brief-section-title">{section.title}</h2>
-                <div className="mt-5 max-w-4xl space-y-4">
-                  {section.paragraphs.map((paragraph) => (
-                    <p key={paragraph} className="text-base leading-relaxed text-secondary">
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-                {section.cards && section.cards.length > 0 && (
-                  <div
-                    className={`mt-7 grid gap-4 ${
-                      section.cards.length === 3
-                        ? 'md:grid-cols-3'
-                        : section.cards.length > 3
-                          ? 'md:grid-cols-2'
-                          : 'md:grid-cols-2'
-                    }`}
-                  >
-                    {section.cards.map((card, cardIndex) => (
-                      <article key={card.title} className="geo-card card-hover">
-                        <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-primary">
-                          {String(sectionIndex + 1).padStart(2, '0')} ·{' '}
-                          {String(cardIndex + 1).padStart(2, '0')}
-                        </p>
-                        <h3 className="mt-3 font-headline text-xl leading-tight text-[#1A2535]">
-                          {card.title}
-                        </h3>
-                        <p className="mt-3 text-sm leading-relaxed text-secondary">{card.body}</p>
-                      </article>
+        <section className="site-frame-narrow geo-article-body">
+          <div className="geo-article-grid">
+            <aside className="geo-article-sidebar">
+              <div className="geo-article-sidebar-sticky">
+                <p className="geo-article-sidebar-label">{copy.hero.kicker}</p>
+                <nav aria-label={copy.breadcrumb}>
+                  <ol>
+                    {copy.sections.map((section, index) => (
+                      <li key={section.title}>
+                        <a href={`#geo-article-section-${index + 1}`}>
+                          <span>{String(index + 1).padStart(2, '0')}</span>
+                          <span>{section.title}</span>
+                        </a>
+                      </li>
                     ))}
-                  </div>
-                )}
-              </section>
-            ))}
-          </div>
-        </div>
+                  </ol>
+                </nav>
 
-        <section className="bg-white">
-          <div className="mx-auto max-w-5xl px-6 py-14 lg:px-12">
-            <h2 className="services-brief-section-title">{copy.cta.title}</h2>
-            <p className="mt-4 max-w-3xl text-base leading-relaxed text-secondary">
-              {copy.cta.description}
-            </p>
-            <div className="editorial-actions mt-7">
-              <Link href="/contact" className="editorial-cta sharp-edge">
-                {copy.cta.primary}
-              </Link>
-              <Link href={ctaSecondaryHref} className="editorial-link">
-                {copy.cta.secondary}
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </Link>
-              {copy.cta.tertiary && ctaTertiaryHref && (
-                <Link href={ctaTertiaryHref} className="editorial-link">
-                  {copy.cta.tertiary}
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                <div className="geo-article-sidebar-cta">
+                  <p>{copy.breadcrumb}</p>
+                  <h2>{copy.cta.title}</h2>
+                  <p className="geo-article-sidebar-cta-copy">{copy.cta.description}</p>
+                  <Link href="/contact" className="geo-article-sidebar-cta-link">
+                    {copy.cta.primary}
+                    <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                  </Link>
+                </div>
+              </div>
+            </aside>
+
+            <article className="geo-article-main">
+              {copy.sections.map((section, sectionIndex) => {
+                const firstParagraph = section.paragraphs[0];
+                const remainingParagraphs = section.paragraphs.slice(1);
+
+                return (
+                  <section
+                    key={section.title}
+                    id={`geo-article-section-${sectionIndex + 1}`}
+                    className={`geo-article-section geo-article-section--${sectionIndex % 3}`}
+                  >
+                    <div className="geo-article-section-meta">
+                      <span>{String(sectionIndex + 1).padStart(2, '0')}</span>
+                      <span>{section.eyebrow || copy.hero.kicker}</span>
+                    </div>
+                    <h2>{section.title}</h2>
+                    <div className="geo-article-paragraphs">
+                      {firstParagraph && <p className="geo-article-intro-copy">{firstParagraph}</p>}
+                      {remainingParagraphs.map((paragraph) => (
+                        <p key={paragraph}>{paragraph}</p>
+                      ))}
+                    </div>
+
+                    {section.cards && section.cards.length > 0 && (
+                      <div className="geo-article-card-grid">
+                        {section.cards.map((card, cardIndex) => (
+                          <article key={card.title} className="geo-article-card">
+                            <div className="geo-article-card-mark" aria-hidden="true" />
+                            <div className="geo-article-card-index">
+                              {String(sectionIndex + 1).padStart(2, '0')} /{' '}
+                              {String(cardIndex + 1).padStart(2, '0')}
+                            </div>
+                            <h3>{card.title}</h3>
+                            <p>{card.body}</p>
+                          </article>
+                        ))}
+                      </div>
+                    )}
+                  </section>
+                );
+              })}
+            </article>
+          </div>
+        </section>
+
+        <section className="geo-article-cta">
+          <div className="site-frame-narrow geo-article-cta-grid">
+            <div>
+              <p className="geo-article-cta-kicker">{copy.breadcrumb}</p>
+              <h2>{copy.cta.title}</h2>
+            </div>
+            <div>
+              <p className="geo-article-cta-description">{copy.cta.description}</p>
+              <div className="geo-article-actions">
+                <Link href="/contact" className="geo-article-primary-action geo-article-primary-action--light sharp-edge">
+                  {copy.cta.primary}
                 </Link>
-              )}
+                <Link href={ctaSecondaryHref} className="geo-article-text-action geo-article-text-action--light">
+                  {copy.cta.secondary}
+                  <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+                {copy.cta.tertiary && ctaTertiaryHref && (
+                  <Link href={ctaTertiaryHref} className="geo-article-text-action geo-article-text-action--light">
+                    {copy.cta.tertiary}
+                    <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                  </Link>
+                )}
+              </div>
             </div>
           </div>
         </section>

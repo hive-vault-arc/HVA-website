@@ -1,7 +1,6 @@
 'use client';
 
 import {
-  startTransition,
   useEffect,
   useRef,
   useState,
@@ -19,10 +18,11 @@ import {
   type InsightIndustry,
   type PaginatedInsightCollection,
 } from '@/lib/insight-collection-pagination';
+import {getEditorialTopicImage} from '@/lib/editorial-taxonomy';
 import {isSanityCdnImage} from '@/lib/image-delivery';
 
 import BottomCTA from './BottomCTA';
-import SectionBrandMark from './SectionBrandMark';
+import InsightsEditorialHero from './InsightsEditorialHero';
 
 type BottomCtaConfig = {
   headline: string;
@@ -38,7 +38,7 @@ type Props = {
   collectionType: InsightCollectionType;
   eyebrow: string;
   headline: string;
-  headlineItalic: string;
+  headlineItalic?: string;
   description: string;
   initialPage: PaginatedInsightCollection;
   industries: InsightIndustry[];
@@ -87,23 +87,35 @@ function requestUrl({
 function PublicationImage({
   item,
   priority = false,
+  evidenceLabel,
 }: {
   item: InsightCollectionItem;
   priority?: boolean;
+  evidenceLabel?: string;
 }) {
   const t = useTranslations('CollectionUi');
+  const image =
+    item.type === 'caseStudy' || item.editorialFormat === 'case'
+      ? item.image
+      : getEditorialTopicImage(item.topics, item.image);
+  const containImage = image?.includes(
+    'immoworld-whatsapp-ai-french-dutch-phone-pair',
+  ) || image?.includes(
+    'healthcare-ai-receptionist-crm',
+  );
 
   return (
     <div className="insight-index-v2__media">
-      {item.image ? (
+      {image ? (
         <Image
-          src={item.image}
+          src={image}
           alt={item.title}
           fill
           priority={priority}
           loading={priority ? 'eager' : 'lazy'}
-          unoptimized={isSanityCdnImage(item.image)}
-          className="insight-index-v2__image insights-card-image"
+          quality={priority ? 90 : 88}
+          unoptimized={isSanityCdnImage(image)}
+          className={`insight-index-v2__image insights-card-image${containImage ? ' insight-index-v2__image--contain' : ''}`}
           sizes={
             priority
               ? '(max-width: 900px) 100vw, 58vw'
@@ -112,10 +124,15 @@ function PublicationImage({
         />
       ) : (
         <div className="insight-index-v2__placeholder">
-          <SectionBrandMark size="sm" />
+          <span className="insight-index-v2__placeholder-mark" aria-hidden="true" />
           <span>{t(`types.${item.type}`)}</span>
         </div>
       )}
+      {item.hasClientEvidence && evidenceLabel ? (
+        <span className="case-evidence-marker case-evidence-marker--media">
+          {evidenceLabel}
+        </span>
+      ) : null}
     </div>
   );
 }
@@ -130,10 +147,13 @@ function PublicationMeta({
   industries: InsightIndustry[];
 }) {
   const t = useTranslations('CollectionUi');
+  const editorialT = useTranslations('InsightsHub.editorial');
   const primaryLabel =
-    industries.find((industry) => industry.id === item.industry?.id)?.title ??
-    item.industry?.title ??
-    t(`types.${item.type}`);
+    item.editorialFormat
+      ? editorialT(`formats.${item.editorialFormat}`)
+      : industries.find((industry) => industry.id === item.industry?.id)?.title ??
+        item.industry?.title ??
+        t(`types.${item.type}`);
   const secondaryLabel =
     item.readTime ??
     item.deploymentStatus ??
@@ -167,7 +187,7 @@ function FeaturedPublication({
         locale={item.sourceLocale}
         className="insight-index-v2__feature-link"
       >
-        <PublicationImage item={item} priority />
+        <PublicationImage item={item} priority evidenceLabel={evidenceLabel} />
         <div className="insight-index-v2__feature-copy">
           <div>
             <div className="insight-index-v2__feature-heading">
@@ -180,9 +200,11 @@ function FeaturedPublication({
               industries={industries}
             />
             <h2>{item.title}</h2>
-            <p>{item.excerpt}</p>
-            {item.hasClientEvidence && evidenceLabel ? (
-              <span className="case-evidence-marker">{evidenceLabel}</span>
+            {item.excerpt ? <p>{item.excerpt}</p> : null}
+            {item.coverDisclosure ? (
+              <span className="insight-index-v2__cover-disclosure">
+                {item.coverDisclosure}
+              </span>
             ) : null}
           </div>
           <span className="insight-index-v2__read-link">
@@ -197,11 +219,13 @@ function FeaturedPublication({
 
 function PublicationCard({
   item,
+  index,
   locale,
   evidenceLabel,
   industries,
 }: {
   item: InsightCollectionItem;
+  index: number;
   locale: AppLocale;
   evidenceLabel?: string;
   industries: InsightIndustry[];
@@ -215,17 +239,24 @@ function PublicationCard({
         locale={item.sourceLocale}
         className="insight-index-v2__card-link"
       >
-        <PublicationImage item={item} />
+        <PublicationImage item={item} evidenceLabel={evidenceLabel} />
         <div className="insight-index-v2__card-copy">
-          <PublicationMeta
-            item={item}
-            locale={locale}
-            industries={industries}
-          />
+          <div className="insight-index-v2__card-heading">
+            <PublicationMeta
+              item={item}
+              locale={locale}
+              industries={industries}
+            />
+            <span aria-hidden="true">
+              {String(index + 2).padStart(2, '0')}
+            </span>
+          </div>
           <h3>{item.title}</h3>
-          <p>{item.excerpt}</p>
-          {item.hasClientEvidence && evidenceLabel ? (
-            <span className="case-evidence-marker">{evidenceLabel}</span>
+          {item.excerpt ? <p>{item.excerpt}</p> : null}
+          {item.coverDisclosure ? (
+            <span className="insight-index-v2__cover-disclosure">
+              {item.coverDisclosure}
+            </span>
           ) : null}
           <div className="insight-index-v2__card-footer">
             <span>
@@ -300,22 +331,20 @@ export default function InsightIndexPage({
       if (!response.ok) throw new Error('Collection request failed.');
 
       const page = (await response.json()) as PaginatedInsightCollection;
-      startTransition(() => {
-        if (nextCursor === null) {
-          setItems(page.items);
-        } else {
-          setItems((current) => {
-            const knownIds = new Set(current.map((item) => item.id));
-            return [
-              ...current,
-              ...page.items.filter((item) => !knownIds.has(item.id)),
-            ];
-          });
-        }
-        setTotal(page.total);
-        setCursor(page.nextCursor);
-        setHasFallbackContent(page.hasFallbackContent);
-      });
+      if (nextCursor === null) {
+        setItems(page.items);
+      } else {
+        setItems((current) => {
+          const knownIds = new Set(current.map((item) => item.id));
+          return [
+            ...current,
+            ...page.items.filter((item) => !knownIds.has(item.id)),
+          ];
+        });
+      }
+      setTotal(page.total);
+      setCursor(page.nextCursor);
+      setHasFallbackContent(page.hasFallbackContent);
       return true;
     } catch (requestError) {
       if (
@@ -361,32 +390,16 @@ export default function InsightIndexPage({
   };
 
   return (
-    <main className="insight-index-v2">
-      <section className="insight-index-v2__hero" aria-labelledby="insight-index-title">
-        <div className="site-frame-wide insight-index-v2__hero-grid">
-          <div className="insight-index-v2__hero-title">
-            <div className="insight-index-v2__brand-line">
-              <SectionBrandMark size="sm" />
-              <span>{eyebrow}</span>
-            </div>
-            <h1 id="insight-index-title">
-              {headline}
-              <span>{headlineItalic}</span>
-            </h1>
-          </div>
-          <div className="insight-index-v2__hero-context">
-            <p>{description}</p>
-            <div className="insight-index-v2__hero-stat">
-              <strong>{total.toString().padStart(2, '0')}</strong>
-              <span>{t('publishedCount', {count: total})}</span>
-            </div>
-            <a href="#publication-index" className="insight-index-v2__browse-link">
-              {t('browseLatest')}
-              <ArrowDown aria-hidden="true" />
-            </a>
-          </div>
-        </div>
-      </section>
+    <main className="insight-index-v2" data-collection={collectionType}>
+      <InsightsEditorialHero
+        eyebrow={eyebrow}
+        headline={headline}
+        headlineItalic={headlineItalic}
+        description={description}
+        total={total}
+        countLabel={t('publishedCount', {count: total})}
+        browseLabel={t('browseLatest')}
+      />
 
       {hasFallbackContent ? (
         <aside className="site-frame-wide insight-index-v2__fallback">
@@ -468,10 +481,11 @@ export default function InsightIndexPage({
             />
             {cards.length > 0 ? (
               <div className="insight-index-v2__grid">
-                {cards.map((item) => (
+                {cards.map((item, index) => (
                   <PublicationCard
                     key={item.id}
                     item={item}
+                    index={index}
                     locale={locale}
                     evidenceLabel={evidenceLabel}
                     industries={industries}
@@ -482,7 +496,7 @@ export default function InsightIndexPage({
           </>
         ) : (
           <div className="insight-index-v2__empty">
-            <SectionBrandMark size="sm" />
+            <span className="insight-index-v2__placeholder-mark" aria-hidden="true" />
             <h2>{emptyMessage ?? t('defaultEmpty')}</h2>
             <p>{t('emptyDescription')}</p>
           </div>
@@ -505,7 +519,10 @@ export default function InsightIndexPage({
       </section>
 
       <BottomCTA
-        variant={resolvedBottomCta.variant ?? 'dark'}
+        variant={
+          resolvedBottomCta.variant ??
+          (collectionType === 'researchReport' ? 'light' : 'dark')
+        }
         revealImmediately
         headline={resolvedBottomCta.headline}
         subtext={resolvedBottomCta.subtext}

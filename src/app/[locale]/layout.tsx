@@ -11,6 +11,7 @@ import {TranslationAvailabilityProvider} from '@/components/localization/Transla
 import {routing} from '@/i18n/routing';
 import {localizedPath} from '@/i18n/route-manifest';
 import { manrope, newsreader } from '@/lib/fonts';
+import {withoutCrawlerOnlyMessages} from '@/i18n/client-messages';
 import {
   CONTACT_EMAIL,
   CONTACT_PHONE_E164,
@@ -53,7 +54,7 @@ const baseMetadata: Metadata = {
         url: DEFAULT_OG_IMAGE_PATH,
         width: DEFAULT_OG_IMAGE_WIDTH,
         height: DEFAULT_OG_IMAGE_HEIGHT,
-        alt: 'Hive Vault Arc - Technology Transformation Partner, Strategy, AI Engineering, Operations',
+        alt: 'Hive Vault Arc logo - Technology Transformation Partner',
       },
     ],
   },
@@ -78,9 +79,21 @@ type LocaleLayoutProps = Readonly<{
 }>;
 
 const GLOBAL_FOUNDERS = [
-  {name: 'Khalid Chalhi', slug: 'khalid-chalhi'},
-  {name: 'Ali Amrani', slug: 'ali-amrani'},
-  {name: 'Oubay Ghamat', slug: 'oubay-ghamat'},
+  {
+    name: 'Khalid Chalhi',
+    slug: 'khalid-chalhi',
+    jobTitle: {en: 'Co-Founder & CEO', fr: 'Cofondateur et CEO'},
+  },
+  {
+    name: 'Ali Amrani',
+    slug: 'ali-amrani',
+    jobTitle: {en: 'Co-Founder & CTO', fr: 'Cofondateur et CTO'},
+  },
+  {
+    name: 'Oubay Ghamat',
+    slug: 'oubay-ghamat',
+    jobTitle: {en: 'Co-Founder & COO', fr: 'Cofondateur et COO'},
+  },
 ] as const;
 
 export function generateStaticParams() {
@@ -140,13 +153,14 @@ export default async function RootLayout({children, params}: LocaleLayoutProps) 
     getTranslations({locale, namespace: 'Navigation'}),
     getTranslations({locale, namespace: 'Metadata.pages'}),
   ]);
+  const clientMessages = withoutCrawlerOnlyMessages(messages);
   const leadershipPeople = GLOBAL_FOUNDERS.map((member) => ({
     '@type': 'Person',
     '@id': `${absoluteUrl(
       localizedPath('/aboutus/our-people/[employee]', locale, {employee: member.slug}),
     )}#person`,
     name: member.name,
-    jobTitle: locale === 'fr' ? 'Cofondateur' : 'Co-founder',
+    jobTitle: member.jobTitle[locale],
     url: absoluteUrl(
       localizedPath('/aboutus/our-people/[employee]', locale, {employee: member.slug}),
     ),
@@ -367,7 +381,7 @@ export default async function RootLayout({children, params}: LocaleLayoutProps) 
         <link rel="dns-prefetch" href="https://prod.spline.design" />
       </head>
       <body>
-        <NextIntlClientProvider messages={messages}>
+        <NextIntlClientProvider messages={clientMessages}>
           <JsonLd data={organizationSchema} />
           <JsonLd data={websiteSchema} />
           <JsonLd data={navigationSchema} />

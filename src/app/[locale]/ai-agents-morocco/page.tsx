@@ -23,7 +23,7 @@ export default async function AIAgentsMoroccoPage({params}: PageProps) {
     <GeoServicePage
       locale={locale}
       pathname="/ai-agents-morocco"
-      image="/Images/hero/ai-powered-transformation-operations-tangier-morocco.webp"
+      image="/Images/blog/ai-agent-development-service.webp"
       copy={t.raw('aiAgentsMorocco') as GeoPageCopy}
       faqs={faqs}
       heroSecondaryHref="/ai-agents-tangier"

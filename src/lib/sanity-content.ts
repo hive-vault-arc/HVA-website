@@ -2,6 +2,7 @@ import type {SanityImageSource} from '@sanity/image-url';
 import type {AppLocale} from '@/i18n/config';
 import {applyFrenchCmsFallback} from '@/i18n/cms-fallback-fr';
 import {
+  INSIGHT_COLLECTION_CASE_STUDY_INITIAL_SIZE,
   INSIGHT_COLLECTION_INITIAL_SIZE,
   INSIGHT_COLLECTION_NEXT_SIZE,
   type InsightCollectionCursor,
@@ -20,6 +21,11 @@ import {localeTag, type LocalizedContentMeta} from './localized-content';
 import type {BlogPost} from './blog';
 import type {NewsArticle, ResearchReport} from './insights';
 import type {Perspective} from './perspectives';
+import {
+  resolveEditorialFields,
+  type EditorialContentFields,
+} from './editorial-taxonomy';
+import {getLocalCaseStudyCover} from './case-study-assets';
 import type {
   CaseStudy,
   CaseStudyEngagementType,
@@ -34,7 +40,7 @@ import type {
   HomeCaseStudyProof,
   PortfolioCaseStudy,
 } from './proof';
-import {sanityFetch} from '../sanity/lib/fetch';
+import {sanityFetch, withSanityFallback} from '../sanity/lib/fetch';
 import {urlForImage} from '../sanity/lib/image';
 import {
   allCaseStudiesQuery,
@@ -57,10 +63,11 @@ import {
 } from '../sanity/queries/insights';
 
 const INSIGHTS_TAG = 'insights';
-const COVER_WIDTH = 1600;
-const COVER_HEIGHT = 900;
-const CARD_COVER_WIDTH = 960;
-const CARD_COVER_HEIGHT = 540;
+const COVER_WIDTH = 2200;
+const COVER_HEIGHT = 1238;
+const CARD_COVER_WIDTH = 1400;
+const CARD_COVER_HEIGHT = 788;
+const SANITY_EDITORIAL_QUALITY = 90;
 const MAX_CLIENT_EVIDENCE_PDF_SIZE = 3 * 1024 * 1024;
 
 type SanityImageValue = SanityImageSource | null | undefined;
@@ -162,7 +169,7 @@ type SanityPaginatedInsight = {
   assets?: {
     coverImage?: SanityImageValue;
   };
-};
+} & EditorialContentFields;
 
 type SanityPaginatedInsightsResult = {
   items?: SanityPaginatedInsight[];
@@ -197,7 +204,7 @@ type SanityPaginatedCollectionItem = {
   assets?: {
     coverImage?: SanityImageValue;
   };
-};
+} & EditorialContentFields;
 
 type SanityPaginatedInsightCollectionResult = {
   items?: SanityPaginatedCollectionItem[];
@@ -310,6 +317,7 @@ function imageUrlFromSource(
     .height(height)
     .fit('crop')
     .format('webp')
+    .quality(SANITY_EDITORIAL_QUALITY)
     .url();
 }
 
@@ -317,14 +325,24 @@ function logoUrlFromSource(image: SanityImageValue): string {
   if (!image) return '';
   if (typeof image === 'string') return image;
 
-  return urlForImage(image).width(600).fit('max').format('webp').url();
+  return urlForImage(image)
+    .width(800)
+    .fit('max')
+    .format('webp')
+    .quality(SANITY_EDITORIAL_QUALITY)
+    .url();
 }
 
 function caseStudyDetailCoverUrlFromSource(image: SanityImageValue): string {
   if (!image) return '';
   if (typeof image === 'string') return image;
 
-  return urlForImage(image).width(COVER_WIDTH).fit('max').format('webp').url();
+  return urlForImage(image)
+    .width(COVER_WIDTH)
+    .fit('max')
+    .format('webp')
+    .quality(SANITY_EDITORIAL_QUALITY)
+    .url();
 }
 
 function projectMediaUrlFromSource(
@@ -335,9 +353,10 @@ function projectMediaUrlFromSource(
   if (typeof image === 'string') return image;
 
   return urlForImage(image)
-    .width(deviceType === 'phone' ? 900 : 1800)
+    .width(deviceType === 'phone' ? 1200 : 2200)
     .fit('max')
     .format('webp')
+    .quality(SANITY_EDITORIAL_QUALITY)
     .url();
 }
 
@@ -345,7 +364,12 @@ function testimonialImageUrlFromSource(image: SanityImageValue): string {
   if (!image) return '';
   if (typeof image === 'string') return image;
 
-  return urlForImage(image).width(1400).fit('max').format('webp').url();
+  return urlForImage(image)
+    .width(1800)
+    .fit('max')
+    .format('webp')
+    .quality(SANITY_EDITORIAL_QUALITY)
+    .url();
 }
 
 function normalizeCaseStudyProjectMedia(
@@ -390,7 +414,6 @@ function normalizeCaseStudyProjectMedia(
         placement,
         evidenceType,
         alt,
-        ...(item.caption?.trim() ? {caption: item.caption.trim()} : {}),
         ...(item.disclosure?.trim()
           ? {disclosure: item.disclosure.trim()}
           : {}),
@@ -653,6 +676,7 @@ function normalizeClientEvidenceSummary(
 function normalizePost(post: SanityPost, listing = false): BlogPost {
   return {
     ...post,
+    ...resolveEditorialFields(post.slug, post),
     authors: post.authors ?? [],
     coverImage: imageUrlFromSource(
       post.coverImage,
@@ -673,6 +697,7 @@ function normalizeNewsArticle(
 ): NewsArticle {
   return {
     ...article,
+    ...resolveEditorialFields(article.slug, article),
     coverImage: imageUrlFromSource(
       article.coverImage,
       listing ? CARD_COVER_WIDTH : COVER_WIDTH,
@@ -691,6 +716,7 @@ function normalizePerspective(
 ): Perspective {
   return {
     ...perspective,
+    ...resolveEditorialFields(perspective.slug, perspective),
     authors: perspective.authors ?? [],
     keywords: perspective.keywords ?? [],
     sources: perspective.sources ?? [],
@@ -710,6 +736,7 @@ function normalizeResearchReport(
 ): ResearchReport {
   return {
     ...report,
+    ...resolveEditorialFields(report.slug, report),
     authors: report.authors ?? [],
     keywords: report.keywords ?? [],
     sources: report.sources ?? [],
@@ -745,9 +772,26 @@ function normalizeCaseStudy(
     clientWebsite?: string;
   } = rawAssets ?? {logoLabel: study.clientName};
   const clientEvidence = normalizeClientEvidence(rawClientEvidence);
+  const localCover = getLocalCaseStudyCover(study.slug);
 
   return {
     ...baseStudy,
+    title: localCover?.title ?? baseStudy.title,
+    summary: localCover?.summary ?? baseStudy.summary,
+    deploymentStatus:
+      localCover?.deploymentStatus ?? baseStudy.deploymentStatus,
+    ...(localCover
+      ? {
+          seo: {
+            ...(baseStudy.seo ?? {}),
+            title: `${localCover.title} | Case Study`,
+            description: localCover.summary,
+          },
+        }
+      : {}),
+    ...(localCover?.coverDisclosure
+      ? {coverDisclosure: localCover.coverDisclosure}
+      : {}),
     engagementType: normalizeCaseStudyEngagementType(study.engagementType),
     operationalModules: study.operationalModules ?? [],
     integrations: study.integrations ?? [],
@@ -758,14 +802,17 @@ function normalizeCaseStudy(
     ...(clientEvidence ? {clientEvidence} : {}),
     assets: {
       ...assets,
-      coverImage: listing
-        ? imageUrlFromSource(
-            assets.coverImage,
-            CARD_COVER_WIDTH,
-            CARD_COVER_HEIGHT,
-          )
-        : caseStudyDetailCoverUrlFromSource(assets.coverImage),
-      coverAlt: assets.coverAlt ?? study.title,
+      coverImage:
+        (listing
+          ? imageUrlFromSource(
+              assets.coverImage,
+              CARD_COVER_WIDTH,
+              CARD_COVER_HEIGHT,
+            )
+          : caseStudyDetailCoverUrlFromSource(assets.coverImage)) ||
+        localCover?.image ||
+        '',
+      coverAlt: assets.coverAlt ?? localCover?.alt ?? study.title,
       logoLabel: assets.logoLabel ?? study.clientName,
       clientLogo: logoUrlFromSource(assets.clientLogo),
       clientLogoAlt: assets.clientLogoAlt ?? `${study.clientName} logo`,
@@ -783,6 +830,8 @@ function normalizePaginatedInsight(
       ? applyFrenchCmsFallback(rawItem)
       : rawItem;
   const date = item.publishedAt ?? item.lastUpdated ?? '';
+  const localCover =
+    item._type === 'caseStudy' ? getLocalCaseStudyCover(item.slug) : undefined;
   const image = imageUrlFromSource(
     item._type === 'caseStudy' ? item.assets?.coverImage : item.coverImage,
     CARD_COVER_WIDTH,
@@ -790,10 +839,11 @@ function normalizePaginatedInsight(
   );
   const base = {
     id: item._id,
-    title: item.title,
-    image,
+    image: image || localCover?.image || '',
     date,
     sourceLocale: locale,
+    ...resolveEditorialFields(item.slug, item),
+    title: localCover?.title ?? item.title,
   };
 
   switch (item._type) {
@@ -838,9 +888,12 @@ function normalizePaginatedInsight(
         ...base,
         type: 'case-study',
         tag: item.industry ?? '',
-        excerpt: item.summary ?? '',
+        excerpt: localCover?.summary ?? item.summary ?? '',
         href: `/case-studies/${item.slug}`,
         ...(item.clientName ? {meta: item.clientName} : {}),
+        ...(localCover?.coverDisclosure
+          ? {coverDisclosure: localCover.coverDisclosure}
+          : {}),
       };
   }
 }
@@ -954,21 +1007,35 @@ function normalizePaginatedCollectionItem(
       : rawItem;
   const imageSource =
     item._type === 'caseStudy' ? item.assets?.coverImage : item.coverImage;
+  const localCover =
+    item._type === 'caseStudy' ? getLocalCaseStudyCover(item.slug) : undefined;
 
   return {
     id: item._id,
     type: item._type,
     slug: item.slug,
     href: collectionHref(item._type, item.slug),
-    title: item.title,
-    excerpt: item.excerpt ?? item.summary ?? '',
-    image: imageUrlFromSource(imageSource, CARD_COVER_WIDTH, CARD_COVER_HEIGHT),
     date: item.publishedAt ?? item.lastUpdated ?? '',
     sourceLocale: locale,
+    ...resolveEditorialFields(item.slug, item),
+    title: localCover?.title ?? item.title,
+    excerpt:
+      localCover?.summary ?? item.excerpt ?? item.summary ?? '',
+    image:
+      imageUrlFromSource(imageSource, CARD_COVER_WIDTH, CARD_COVER_HEIGHT) ||
+      localCover?.image ||
+      '',
     industry: normalizeInsightIndustry(item.industryTaxonomy),
     ...(item.readTime ? {readTime: item.readTime} : {}),
     ...(item.authorName ? {authorName: item.authorName} : {}),
-    ...(item.deploymentStatus ? {deploymentStatus: item.deploymentStatus} : {}),
+    ...(localCover
+      ? {deploymentStatus: localCover.deploymentStatus}
+      : item.deploymentStatus
+        ? {deploymentStatus: item.deploymentStatus}
+        : {}),
+    ...(localCover?.coverDisclosure
+      ? {coverDisclosure: localCover.coverDisclosure}
+      : {}),
     ...(item.hasClientEvidence
       ? {hasClientEvidence: item.hasClientEvidence}
       : {}),
@@ -984,7 +1051,9 @@ export async function getPaginatedSanityInsightCollection(
 ): Promise<PaginatedInsightCollection> {
   const limit =
     cursor === null
-      ? INSIGHT_COLLECTION_INITIAL_SIZE
+      ? collectionType === 'caseStudy'
+        ? INSIGHT_COLLECTION_CASE_STUDY_INITIAL_SIZE
+        : INSIGHT_COLLECTION_INITIAL_SIZE
       : INSIGHT_COLLECTION_NEXT_SIZE;
   const tag = insightCollectionTags[collectionType];
   const result = await sanityFetch<SanityPaginatedInsightCollectionResult>({
@@ -1061,16 +1130,22 @@ function normalizePortfolioCaseStudy(
   study: SanityPortfolioCaseStudy,
 ): PortfolioCaseStudy {
   const assets = study.assets ?? {};
+  const localCover = getLocalCaseStudyCover(study.slug);
 
   return {
     ...study,
+    title: localCover?.title ?? study.title,
+    summary: localCover?.summary ?? study.summary,
     assets: {
-      coverImage: imageUrlFromSource(
-        assets.coverImage,
-        CARD_COVER_WIDTH,
-        CARD_COVER_HEIGHT,
-      ),
-      coverAlt: assets.coverAlt ?? study.title,
+      coverImage:
+        imageUrlFromSource(
+          assets.coverImage,
+          CARD_COVER_WIDTH,
+          CARD_COVER_HEIGHT,
+        ) ||
+        localCover?.image ||
+        '',
+      coverAlt: assets.coverAlt ?? localCover?.alt ?? study.title,
       clientLogo: logoUrlFromSource(assets.clientLogo),
       clientLogoAlt: assets.clientLogoAlt ?? `${study.clientName} logo`,
     },
@@ -1080,65 +1155,77 @@ function normalizePortfolioCaseStudy(
 export async function getSanityIndustryInsightCollections(
   locales: AppLocale[],
 ): Promise<IndustryInsightCollections> {
-  const collections = await sanityFetch<SanityIndustryInsightCollections>({
-    query: industryInsightCollectionsQuery,
-    params: {locales},
-    tags: [
-      INSIGHTS_TAG,
-      ...locales.flatMap((locale) => [
-        localeTag('posts', locale),
-        localeTag('newsArticles', locale),
-        localeTag('perspectives', locale),
-        localeTag('researchReports', locale),
-        localeTag('caseStudies', locale),
-      ]),
-    ],
-  });
+  return withSanityFallback(
+    async () => {
+      const collections = await sanityFetch<SanityIndustryInsightCollections>({
+        query: industryInsightCollectionsQuery,
+        params: {locales},
+        tags: [
+          INSIGHTS_TAG,
+          ...locales.flatMap((locale) => [
+            localeTag('posts', locale),
+            localeTag('newsArticles', locale),
+            localeTag('perspectives', locale),
+            localeTag('researchReports', locale),
+            localeTag('caseStudies', locale),
+          ]),
+        ],
+      });
 
-  return {
-    posts: (collections.posts ?? []).map((post) => ({
-      ...post,
-      coverImage: imageUrlFromSource(
-        post.coverImage,
-        CARD_COVER_WIDTH,
-        CARD_COVER_HEIGHT,
-      ),
-    })),
-    newsArticles: (collections.newsArticles ?? []).map((article) => ({
-      ...article,
-      coverImage: imageUrlFromSource(
-        article.coverImage,
-        CARD_COVER_WIDTH,
-        CARD_COVER_HEIGHT,
-      ),
-    })),
-    perspectives: (collections.perspectives ?? []).map((perspective) => ({
-      ...perspective,
-      coverImage: imageUrlFromSource(
-        perspective.coverImage,
-        CARD_COVER_WIDTH,
-        CARD_COVER_HEIGHT,
-      ),
-    })),
-    researchReports: (collections.researchReports ?? []).map((report) => ({
-      ...report,
-      coverImage: imageUrlFromSource(
-        report.coverImage,
-        CARD_COVER_WIDTH,
-        CARD_COVER_HEIGHT,
-      ),
-    })),
-    caseStudies: (collections.caseStudies ?? []).map((study) => ({
-      ...study,
-      assets: {
-        coverImage: imageUrlFromSource(
-          study.assets?.coverImage,
-          CARD_COVER_WIDTH,
-          CARD_COVER_HEIGHT,
-        ),
-      },
-    })),
-  };
+      return {
+        posts: (collections.posts ?? []).map((post) => ({
+          ...post,
+          coverImage: imageUrlFromSource(
+            post.coverImage,
+            CARD_COVER_WIDTH,
+            CARD_COVER_HEIGHT,
+          ),
+        })),
+        newsArticles: (collections.newsArticles ?? []).map((article) => ({
+          ...article,
+          coverImage: imageUrlFromSource(
+            article.coverImage,
+            CARD_COVER_WIDTH,
+            CARD_COVER_HEIGHT,
+          ),
+        })),
+        perspectives: (collections.perspectives ?? []).map((perspective) => ({
+          ...perspective,
+          coverImage: imageUrlFromSource(
+            perspective.coverImage,
+            CARD_COVER_WIDTH,
+            CARD_COVER_HEIGHT,
+          ),
+        })),
+        researchReports: (collections.researchReports ?? []).map((report) => ({
+          ...report,
+          coverImage: imageUrlFromSource(
+            report.coverImage,
+            CARD_COVER_WIDTH,
+            CARD_COVER_HEIGHT,
+          ),
+        })),
+        caseStudies: (collections.caseStudies ?? []).map((study) => ({
+          ...study,
+          assets: {
+            coverImage: imageUrlFromSource(
+              study.assets?.coverImage,
+              CARD_COVER_WIDTH,
+              CARD_COVER_HEIGHT,
+            ),
+          },
+        })),
+      };
+    },
+    () => ({
+      posts: [],
+      newsArticles: [],
+      perspectives: [],
+      researchReports: [],
+      caseStudies: [],
+    }),
+    'industry insights',
+  );
 }
 
 export async function getAllSanityPosts(

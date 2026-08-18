@@ -36,8 +36,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
+  const isFounder = profile.profileType === 'coFounder';
   const metadata = buildLocalizedPageMetadata({
-    title: profile.seo?.title ?? `${profile.name} | ${profile.position}`,
+    title: isFounder
+      ? `${profile.name} | ${profile.position}`
+      : profile.seo?.title ?? `${profile.name} | ${profile.position}`,
     description: profile.seo?.description ?? profile.summary,
     pathname: '/aboutus/our-people/[employee]',
     locale,

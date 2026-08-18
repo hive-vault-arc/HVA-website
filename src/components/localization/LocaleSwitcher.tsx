@@ -3,7 +3,7 @@
 import {useEffect, useId, useRef, useState} from 'react';
 import {useLocale, useTranslations} from 'next-intl';
 import {useSearchParams} from 'next/navigation';
-import {ChevronDown} from '@/components/icons';
+import {ChevronDown, Globe} from '@/components/icons';
 import {Link} from '@/i18n/navigation';
 import {APP_LOCALES, type AppLocale} from '@/i18n/config';
 import {localizeHref} from '@/i18n/route-manifest';
@@ -61,6 +61,7 @@ export default function LocaleSwitcher({mobile = false}: {mobile?: boolean}) {
 
   const activeOption =
     localeOptions.find((option) => option.active) ?? localeOptions[0];
+  const languageEyebrow = locale === 'fr' ? 'LANGUE' : 'LANGUAGE';
 
   useEffect(() => {
     setDesktopMenuOpen(false);
@@ -153,7 +154,7 @@ export default function LocaleSwitcher({mobile = false}: {mobile?: boolean}) {
         aria-expanded={desktopMenuOpen}
         aria-controls={desktopMenuOpen ? menuId : undefined}
         aria-label={t('currentLanguage', {language: activeOption.language})}
-        className="group inline-flex min-h-11 min-w-[4.5rem] items-center justify-between gap-2 border border-[#1A2535]/15 bg-white px-3 text-xs font-semibold uppercase tracking-[0.08em] text-[#1A2535] transition-[border-color,background-color,color] duration-150 hover:border-[#CD9F40]/60 hover:bg-[#CD9F40]/[0.08] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#CD9F40]"
+        className="group inline-flex min-h-11 min-w-[4.25rem] items-center justify-between gap-1.5 border border-[#1A2535]/15 bg-white px-2.5 text-[10px] font-semibold uppercase tracking-[0.08em] text-[#1A2535] transition-[border-color,background-color,color] duration-150 hover:border-[#CD9F40]/60 hover:bg-[#CD9F40]/[0.08] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#CD9F40]"
         onClick={() => setDesktopMenuOpen((open) => !open)}
         onKeyDown={(event) => {
           if (event.key !== 'ArrowDown') return;
@@ -166,76 +167,105 @@ export default function LocaleSwitcher({mobile = false}: {mobile?: boolean}) {
           });
         }}
       >
-        <span>{activeOption.locale}</span>
+        <span className="flex items-center gap-1.5">
+          <Globe className="h-3.5 w-3.5 text-[#E8A838]" aria-hidden="true" />
+          <span>{activeOption.locale}</span>
+        </span>
         <ChevronDown
           aria-hidden="true"
-          className={`h-3.5 w-3.5 text-[#1A2535]/50 transition-transform duration-150 ${
+          className={`h-3 w-3 text-[#1A2535]/50 transition-transform duration-150 ${
             desktopMenuOpen ? 'rotate-180' : ''
           }`}
         />
       </button>
 
       {desktopMenuOpen ? (
-        <div className="absolute right-0 top-full z-50 pt-2">
+        <div className="absolute right-0 top-full z-30 mt-4">
           <div
-            ref={menuRef}
-            id={menuId}
-            role="menu"
-            aria-label={t('selectLanguage')}
-            className="min-w-[12.5rem] border border-[#1A2535]/10 bg-white p-1.5 shadow-[0_16px_40px_rgba(26,37,53,0.16)]"
+            className="navbar-mega-panel locale-switcher-menu w-[min(42rem,calc(100vw-2rem))] overflow-hidden border border-[#DDE3EA] bg-[#FCFBF8]/[0.99] text-[#1A2535] shadow-[0_24px_60px_rgba(13,24,36,0.18)]"
           >
-            <p className="px-3 pb-2 pt-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#1A2535]/40">
-              {t('selectLanguage')}
-            </p>
-            {localeOptions.map((option) => {
-              if (option.unavailable) {
-                return (
-                  <span
-                    key={option.locale}
-                    role="menuitem"
-                    aria-disabled="true"
-                    title={t('unavailable', {language: option.language})}
-                    className="flex min-h-11 cursor-not-allowed items-center justify-between gap-4 px-3 text-sm text-[#1A2535]/25"
-                  >
-                    <span>{option.language}</span>
-                    <span className="text-[10px] font-semibold uppercase tracking-[0.12em]">
-                      {option.locale}
-                    </span>
-                  </span>
-                );
-              }
+            <div className="grid min-h-[238px] grid-cols-[minmax(240px,0.78fr)_2.22fr]">
+              <div className="flex flex-col justify-between border-r border-[#DDE3EA] px-8 py-7">
+                <div>
+                  <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-[#E8A838]">
+                    {languageEyebrow}
+                  </p>
+                  <div className="mt-5 flex max-w-[250px] items-end justify-between gap-5 font-serif text-[30px] leading-[1.05] text-[#1A2535]">
+                    <span>{t('selectLanguage')}</span>
+                    <Globe className="mb-1 h-4 w-4 shrink-0 text-[#E8A838]" aria-hidden="true" />
+                  </div>
+                </div>
+                <span aria-hidden="true" className="h-px w-12 bg-[#E8A838]" />
+              </div>
 
-              return (
-                <Link
-                  key={option.locale}
-                  role="menuitem"
-                  href={option.href}
-                  locale={option.locale}
-                  hrefLang={option.locale}
-                  aria-current={option.active ? 'page' : undefined}
-                  aria-label={
+              <div
+                ref={menuRef}
+                id={menuId}
+                role="menu"
+                aria-label={t('selectLanguage')}
+                className="grid grid-cols-2 content-start gap-x-8 gap-y-1 px-8 py-7"
+              >
+                {localeOptions.map((option, index) => {
+                  const itemClassName = `group relative flex min-h-[54px] items-center justify-between gap-4 border-b px-1 py-3 transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8A838] ${
                     option.active
-                      ? option.language
-                      : t('switchTo', {language: option.language})
+                      ? 'border-[#E8A838]'
+                      : 'border-[#DDE3EA] hover:border-[#E8A838]/70'
+                  }`;
+
+                  if (option.unavailable) {
+                    return (
+                      <span
+                        key={option.locale}
+                        role="menuitem"
+                        aria-disabled="true"
+                        title={t('unavailable', {language: option.language})}
+                        className={`${itemClassName} cursor-not-allowed text-[#1A2535]/25`}
+                      >
+                        <span className="flex min-w-0 items-start gap-3">
+                          <span aria-hidden="true" className="pt-0.5 text-[9px] font-semibold tabular-nums text-[#E8A838]">
+                            {String(index + 1).padStart(2, '0')}
+                          </span>
+                          <span className="text-[13px] font-semibold leading-5">{option.language}</span>
+                        </span>
+                        <span className="text-[9px] font-semibold uppercase tracking-[0.12em]">{option.locale}</span>
+                      </span>
+                    );
                   }
-                  onClick={() => setDesktopMenuOpen(false)}
-                  className={`flex min-h-11 items-center justify-between gap-4 px-3 text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-[#CD9F40] ${
-                    option.active
-                      ? 'bg-[#1A2535] text-white'
-                      : 'text-[#1A2535]/75 hover:bg-[#CD9F40]/[0.10] hover:text-[#1A2535]'
-                  }`}
-                >
-                  <span>{option.language}</span>
-                  <span
-                    className={`text-[10px] font-semibold uppercase tracking-[0.12em] ${
-                      option.active ? 'text-[#E8A838]' : 'text-[#1A2535]/40'
-                    }`}
-                  >
-                    {option.locale}
-                  </span>
-                </Link>
-              );
-            })}
+
+                  return (
+                    <Link
+                      key={option.locale}
+                      role="menuitem"
+                      href={option.href}
+                      locale={option.locale}
+                      hrefLang={option.locale}
+                      aria-current={option.active ? 'page' : undefined}
+                      aria-label={
+                        option.active
+                          ? option.language
+                          : t('switchTo', {language: option.language})
+                      }
+                      onClick={() => setDesktopMenuOpen(false)}
+                      className={`${itemClassName} ${
+                        option.active
+                          ? 'text-[#1A2535]'
+                          : 'text-[#1A2535]/80 hover:text-[#1A2535]'
+                      }`}
+                    >
+                      <span className="flex min-w-0 items-start gap-3">
+                        <span aria-hidden="true" className="pt-0.5 text-[9px] font-semibold tabular-nums text-[#E8A838]">
+                          {String(index + 1).padStart(2, '0')}
+                        </span>
+                        <span className="text-[13px] font-semibold leading-5">{option.language}</span>
+                      </span>
+                      <span className={`text-[9px] font-semibold uppercase tracking-[0.12em] ${option.active ? 'text-[#E8A838]' : 'text-[#536174]'}`}>
+                        {option.locale}
+                      </span>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
       ) : null}

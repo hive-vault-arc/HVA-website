@@ -59,6 +59,7 @@ function CompactRoute({ item, className = '' }: { item: RouteItem; className?: s
             src={item.image.src}
             alt={item.image.alt}
             fill
+            quality={90}
             sizes="(max-width: 480px) 92vw, (max-width: 760px) 44vw, (max-width: 1180px) 45vw, 22vw"
             className="object-cover"
           />
@@ -108,6 +109,7 @@ function FeaturedEvidence({
           src={coverImage}
           alt={coverImageAlt}
           fill
+          quality={90}
           unoptimized={isSanityCdnImage(coverImage)}
           sizes="(max-width: 760px) 92vw, (max-width: 1120px) 38vw, 24vw"
           className="object-cover"

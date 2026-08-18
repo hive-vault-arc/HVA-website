@@ -1,4 +1,8 @@
 import type {AppLocale} from '@/i18n/config';
+import type {
+  EditorialFormat,
+  EditorialTopic,
+} from './editorial-taxonomy';
 
 export const INSIGHTS_PAGE_SIZE = 6;
 
@@ -21,6 +25,11 @@ export type InsightListingItem = {
   readTime?: string;
   meta?: string;
   sourceLocale: AppLocale;
+  editorialFormat?: EditorialFormat;
+  topics?: EditorialTopic[];
+  directAnswer?: string;
+  evidenceType?: string;
+  coverDisclosure?: string;
 };
 
 export type InsightPageCursor = {

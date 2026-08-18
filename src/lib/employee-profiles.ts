@@ -17,8 +17,24 @@ import {
 } from '../sanity/queries/people';
 
 const PEOPLE_TAG = 'people';
-const PROFILE_WIDTH = 1400;
-const PROFILE_HEIGHT = 1750;
+const PROFILE_WIDTH = 1800;
+const PROFILE_HEIGHT = 2250;
+const PROFILE_IMAGE_QUALITY = 90;
+
+const LEADERSHIP_IDENTITY = {
+  'khalid-chalhi': {
+    en: 'Co-Founder & CEO',
+    fr: 'Cofondateur et CEO',
+  },
+  'ali-amrani': {
+    en: 'Co-Founder & CTO',
+    fr: 'Cofondateur et CTO',
+  },
+  'oubay-ghamat': {
+    en: 'Co-Founder & COO',
+    fr: 'Cofondateur et COO',
+  },
+} as const;
 
 type SanityImageValue = SanityImageSource | string | null | undefined;
 
@@ -61,6 +77,7 @@ export type EmployeeProfile = LocalizedContentMeta & {
   experience: EmployeeProfileExperience[];
   education: EmployeeProfileEducation[];
   expertise: string[];
+  operatingPrinciple?: string;
   linkedinUrl?: string;
   displayOrder: number;
   featuredOnAbout: boolean;
@@ -107,7 +124,7 @@ const FALLBACK_EMPLOYEE_PROFILES: EmployeeProfile[] = [
     translationStatus: 'approved',
     name: 'Ali Amrani',
     slug: 'ali-amrani',
-    position: 'Co-Founder & CEO',
+    position: 'Co-Founder & CTO',
     responsibilityTag: 'Product · Systems · Full-Stack',
     profileType: 'coFounder',
     summary:
@@ -115,7 +132,7 @@ const FALLBACK_EMPLOYEE_PROFILES: EmployeeProfile[] = [
     story:
       'Ali brings a software engineering background into the operating layer of Hive Vault Arc. His work focuses on turning strategy and AI ambition into product systems that teams can actually use: interfaces, workflows, integrations, and reliable delivery architecture.',
     profileImage: '/Images/team/ali-amrani-founder-2026.webp',
-    profileImageAlt: 'Ali Amrani, Co-Founder of Hive Vault Arc',
+    profileImageAlt: 'Ali Amrani, Co-Founder and CTO of Hive Vault Arc',
     experience: [],
     education: [],
     expertise: [
@@ -136,7 +153,7 @@ const FALLBACK_EMPLOYEE_PROFILES: EmployeeProfile[] = [
     translationStatus: 'approved',
     name: 'Oubay Ghamat',
     slug: 'oubay-ghamat',
-    position: 'Co-Founder & CEO',
+    position: 'Co-Founder & COO',
     responsibilityTag: 'Cloud · Infrastructure · Operations',
     profileType: 'coFounder',
     summary:
@@ -144,7 +161,7 @@ const FALLBACK_EMPLOYEE_PROFILES: EmployeeProfile[] = [
     story:
       'Oubay focuses on the systems that keep transformation work stable after launch: cloud infrastructure, operational readiness, frontend delivery, and production reliability.',
     profileImage: '/Images/team/oubay-ghamat-founder-2026.webp',
-    profileImageAlt: 'Oubay Ghamat, Co-Founder of Hive Vault Arc',
+    profileImageAlt: 'Oubay Ghamat, Co-Founder and COO of Hive Vault Arc',
     experience: [],
     education: [],
     expertise: [
@@ -162,6 +179,143 @@ const FALLBACK_EMPLOYEE_PROFILES: EmployeeProfile[] = [
   },
 ];
 
+const CURATED_LEADERSHIP_CONTENT = {
+  'khalid-chalhi': {
+    name: 'Khalid Chalhi',
+    responsibilityTag: 'Strategy / AI Engineering / Software Systems',
+    summary: 'Khalid leads company direction across strategy, AI engineering, and software delivery.',
+    story: 'Khalid works across business strategy and system architecture. He turns operating problems into AI and software programs that can run in production.',
+    experience: [
+      {
+        role: 'Chief Executive Officer',
+        organization: 'Hive Vault Arc',
+        location: 'Morocco / Hybrid',
+        period: 'Apr 2026 - Present',
+        summary: 'Leads company strategy and delivery across AI, software, cloud, and managed operations.',
+      },
+      {
+        role: 'Lead AI Software Engineer & System Architect',
+        organization: 'ImmoWorld',
+        location: 'Tangier / Remote',
+        period: 'Jun 2025 - Mar 2026',
+        summary: 'Designed an AI-enabled real estate operating platform spanning CRM, agents, property workflows, and analytics.',
+      },
+      {
+        role: 'Process Automation Engineer',
+        organization: 'TE Connectivity',
+        location: 'Tangier / Hybrid',
+        period: 'Mar 2025 - Oct 2025',
+        summary: 'Built automation services and real-time system integrations with FastAPI and WebSockets.',
+      },
+    ],
+    education: [
+      {
+        institution: "Ecole Marocaine des Sciences de l'Ingenieur",
+        credential: "Master's degree, Computer Science Applied to Business Administration",
+        period: 'Oct 2020 - Oct 2025',
+      },
+    ],
+    expertise: [
+      'Business Strategy',
+      'AI Engineering',
+      'Software Systems',
+      'System Architecture',
+      'Process Automation',
+    ],
+    operatingPrinciple: 'Build the operating system around the outcome, not the technology.',
+    linkedinUrl: 'https://www.linkedin.com/in/khalid-chalhi/',
+  },
+  'ali-amrani': {
+    name: 'Ali Amrani',
+    responsibilityTag: 'AI Transformation / Software Engineering / Operations',
+    summary: 'Ali leads technology architecture, software engineering, and production delivery at Hive Vault Arc.',
+    story: 'Ali connects product decisions to implementation. His background spans full-stack platforms, process automation, and software systems built for daily operations.',
+    experience: [
+      {
+        role: 'Chief Technology Officer',
+        organization: 'Hive Vault Arc',
+        location: 'Tangier / On-site',
+        period: 'Jan 2026 - Present',
+        summary: 'Owns technical direction across software, AI integration, delivery architecture, and managed operations.',
+      },
+      {
+        role: 'IT Intern - Digital Process Automation',
+        organization: 'TE Connectivity',
+        location: 'Tangier / On-site',
+        period: 'Apr 2025 - Sep 2025',
+        summary: 'Worked on enterprise automation and service integration using Angular and ASP.NET Web API.',
+      },
+      {
+        role: 'Web Developer',
+        organization: 'Premium Advice & Training',
+        location: 'Tangier / On-site',
+        period: 'Jul 2024 - Sep 2024',
+        summary: 'Built a full-stack learning platform with Next.js, TypeScript, Firebase, tracking, and administration workflows.',
+      },
+    ],
+    education: [
+      {
+        institution: "Ecole Marocaine des Sciences de l'Ingenieur",
+        credential: "Master's degree, Computer and Network Engineering",
+        period: 'Oct 2020 - Aug 2025',
+      },
+    ],
+    expertise: [
+      'Software Architecture',
+      'Full-Stack Engineering',
+      'AI Transformation',
+      'Process Automation',
+      'Managed Operations',
+    ],
+    operatingPrinciple: 'A technical decision is useful only when the team can operate it.',
+    linkedinUrl: 'https://www.linkedin.com/in/ali-amrani-566361349/',
+  },
+  'oubay-ghamat': {
+    name: 'Oubaye El Ghammat Ghori',
+    responsibilityTag: 'Operations / Product Delivery / Reliability',
+    summary: 'Oubaye leads operating delivery, coordination, and production continuity at Hive Vault Arc.',
+    story: 'Oubaye brings full-stack product experience into the operating side of delivery. He keeps teams, releases, and client systems aligned from build through live operation.',
+    experience: [
+      {
+        role: 'Co-Founder & Chief Operating Officer',
+        organization: 'Hive Vault Arc',
+        period: 'Mar 2026 - Present',
+        summary: 'Leads delivery operations, coordination, and production continuity across client programs.',
+      },
+      {
+        role: 'Junior React Developer',
+        organization: 'Coffee IT',
+        location: 'Utrecht / Hybrid',
+        period: 'Dec 2025 - Jun 2026',
+        summary: 'Delivered web application interfaces within a collaborative product team.',
+      },
+      {
+        role: 'Software Engineer',
+        organization: 'Jordi Hans Design',
+        location: 'Sweden / Hybrid',
+        period: 'Aug 2023 - Dec 2025',
+        summary: 'Built scalable web and mobile experiences across client projects.',
+      },
+    ],
+    education: [
+      {
+        institution: 'Lancaster University',
+        credential: 'BSc (Hons) Computer Science',
+        period: 'Oct 2020 - Jun 2024',
+      },
+    ],
+    expertise: [
+      'Operating Delivery',
+      'Full-Stack Development',
+      'React',
+      'Docker',
+      'Production Reliability',
+    ],
+    operatingPrinciple: 'Keep ownership visible from the first decision to the live system.',
+    linkedinUrl: 'https://www.linkedin.com/in/oubaye-el-ghammat-ghori-68a50a213/',
+  },
+} satisfies Record<string, Partial<EmployeeProfile>>;
+
 function imageUrlFromSource(image: SanityImageValue): string {
   if (!image) return '';
   if (typeof image === 'string') return image;
@@ -171,6 +325,7 @@ function imageUrlFromSource(image: SanityImageValue): string {
     .height(PROFILE_HEIGHT)
     .fit('crop')
     .format('webp')
+    .quality(PROFILE_IMAGE_QUALITY)
     .url();
 }
 
@@ -205,6 +360,40 @@ function publishedProfiles(profiles: EmployeeProfile[]): EmployeeProfile[] {
   return sortProfiles(profiles.filter((profile) => profile.visibility !== 'hidden'));
 }
 
+function applyLeadershipIdentity(
+  profile: EmployeeProfile,
+  locale: AppLocale,
+): EmployeeProfile {
+  const identity = LEADERSHIP_IDENTITY[
+    profile.slug as keyof typeof LEADERSHIP_IDENTITY
+  ];
+  const curated = CURATED_LEADERSHIP_CONTENT[
+    profile.slug as keyof typeof CURATED_LEADERSHIP_CONTENT
+  ];
+
+  if (!identity) return profile;
+
+  return {
+    ...profile,
+    ...curated,
+    position: identity[locale],
+    // Portraits are editorial fields in Sanity. Keep the CMS value intact so
+    // image updates do not require a frontend code change.
+    profileImage: profile.profileImage,
+    profileImageAlt:
+      locale === 'fr'
+        ? `${curated?.name ?? profile.name}, ${identity.fr.toLocaleLowerCase('fr-FR')} de Hive Vault Arc`
+        : `${curated?.name ?? profile.name}, ${identity.en} of Hive Vault Arc`,
+  };
+}
+
+function applyLeadershipIdentities(
+  profiles: EmployeeProfile[],
+  locale: AppLocale,
+): EmployeeProfile[] {
+  return profiles.map((profile) => applyLeadershipIdentity(profile, locale));
+}
+
 function fallbackEmployeeProfiles(locale: AppLocale): EmployeeProfile[] {
   return buildPublishedCollection(
     locale,
@@ -233,7 +422,7 @@ async function fetchEmployeeProfiles(
 export const getAllEmployeeProfiles = cache(async function getAllEmployeeProfiles(
   locale: AppLocale = 'en',
 ): Promise<EmployeeProfile[]> {
-  return withSanityFallback(
+  const profiles = await withSanityFallback(
     async () => {
       const collection = await getPublishedCollection(locale, (targetLocale) =>
         fetchEmployeeProfiles(targetLocale, allEmployeeProfilesQuery),
@@ -243,12 +432,14 @@ export const getAllEmployeeProfiles = cache(async function getAllEmployeeProfile
     () => fallbackEmployeeProfiles(locale),
     'employee profiles',
   );
+
+  return applyLeadershipIdentities(profiles, locale);
 });
 
 export const getFeaturedEmployeeProfiles = cache(async function getFeaturedEmployeeProfiles(
   locale: AppLocale = 'en'
 ): Promise<EmployeeProfile[]> {
-  return withSanityFallback(
+  const profiles = await withSanityFallback(
     async () => {
       const collection = await getPublishedCollection(locale, (targetLocale) =>
         fetchEmployeeProfiles(targetLocale, featuredEmployeeProfilesQuery),
@@ -261,6 +452,8 @@ export const getFeaturedEmployeeProfiles = cache(async function getFeaturedEmplo
       ),
     'featured employee profiles',
   );
+
+  return applyLeadershipIdentities(profiles, locale);
 });
 
 export const getEmployeeProfileBySlug = cache(async function getEmployeeProfileBySlug(
@@ -291,7 +484,9 @@ export const getEmployeeProfileBySlug = cache(async function getEmployeeProfileB
   );
 
   if (!profile) return null;
-  return profile.visibility === 'hidden' ? null : profile;
+  return profile.visibility === 'hidden'
+    ? null
+    : applyLeadershipIdentity(profile, locale);
 });
 
 export async function getRelatedEmployeeProfiles(

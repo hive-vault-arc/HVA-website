@@ -42,7 +42,7 @@ const ProductsSystems: React.FC = () => {
                 Consulting-Led System Programs
               </span>
             </div>
-            <h1 className="mb-8 font-serif text-[clamp(2.75rem,13vw,4rem)] font-medium leading-[1.04] tracking-tight text-[#1A2535] sm:text-5xl md:text-[4.5rem] xl:text-[5rem]">
+            <h1 className="mb-8 font-serif text-[clamp(2.75rem,13cqw,4rem)] font-medium leading-[1.04] tracking-tight text-[#1A2535] sm:text-5xl md:text-[4.5rem] xl:text-[5rem]">
               Operational Programs<br />
               <em className="italic">Designed and Delivered</em><br />
               with Consulting Rigor.
@@ -146,7 +146,7 @@ const ProductsSystems: React.FC = () => {
 
       {/* ── Systems grid ─────────────────────────────────────────────────── */}
       <section className="systems-grid-zone">
-        <div className="editorial-shell systems-grid">
+        <div className="site-frame-wide systems-grid">
           {PRODUCT_SYSTEMS.map((system, index) => (
             <motion.article
               key={system.name}

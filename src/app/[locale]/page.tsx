@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 import type {AppLocale} from '@/i18n/config';
 import {buildStaticRouteMetadata} from '@/i18n/metadata';
-import {Link} from '@/i18n/navigation';
 import Home from '@/views/Home';
 import JsonLd from '@/components/JsonLd';
 import type { InsightsCarouselItem } from '@/components/InsightsCarousel';
 import FaqSection from '@/components/FaqSection';
+import BottomCTA from '@/components/BottomCTA';
 import {getLocalizedFaqs} from '@/i18n/faqs';
 import {localizedPath} from '@/i18n/route-manifest';
 import { getAllPosts, type BlogPost } from '@/lib/blog';
@@ -39,11 +39,11 @@ function buildInsightsCarouselItems(
   studies: CaseStudy[],
   postLocale: AppLocale,
   caseStudyLocale: AppLocale,
-  limit = 9
+  limit = 3
 ): InsightsCarouselItem[] {
   const postItems = posts
     .filter((post) => Boolean(post.coverImage))
-    .slice(0, 10)
+    .slice(0, 4)
     .map((post) => ({
       id: `blog-${post.slug}`,
       type: 'blog' as const,
@@ -58,7 +58,7 @@ function buildInsightsCarouselItems(
 
   const studyItems = studies
     .filter((study) => Boolean(study.assets.coverImage))
-    .slice(0, 8)
+    .slice(0, 2)
     .map((study) => ({
       id: `case-${study.slug}`,
       type: 'case-study' as const,
@@ -106,8 +106,7 @@ export default async function Page({params}: PageProps) {
     getTranslations({locale, namespace: 'Navigation'}),
   ]);
   const {caseStudies, clientEvidence} = homeProof;
-  const serviceGuides = tHome.raw('serviceGuides.items') as Array<{
-    href: '/digital-services-tangier' | '/ai-agents-morocco';
+  const discoveryPrompts = tHome.raw('discoveryPrep.items') as Array<{
     label: string;
     region: string;
     summary: string;
@@ -230,34 +229,42 @@ export default async function Page({params}: PageProps) {
         caseStudies={caseStudyShowcase}
         trustedPartners={trustedPartners}
       />
+      <FaqSection
+        faqs={homeFaqs.items.slice(0, 5)}
+        heading={homeFaqs.heading}
+        className="home-faq-section"
+      />
       <section className="service-guides-section">
         <div className="service-guides-shell">
           <div className="service-guides-copy">
-            <h2>{tHome('serviceGuides.title')}</h2>
-            <p>{tHome('serviceGuides.description')}</p>
+            <h2>{tHome('discoveryPrep.title')}</h2>
+            <p>{tHome('discoveryPrep.description')}</p>
           </div>
 
-          <div className="service-guides-carousel" aria-label={tHome('serviceGuides.aria')}>
+          <div className="service-guides-grid" aria-label={tHome('discoveryPrep.aria')}>
             <div className="service-guides-track">
-              {[...serviceGuides, serviceGuides[0]].map((guide, index) => (
-                <Link
-                  key={`${guide.href}-${index}`}
-                  href={guide.href}
-                  aria-hidden={index === serviceGuides.length}
-                  tabIndex={index === serviceGuides.length ? -1 : undefined}
-                  className="service-guide-card"
-                >
-                  <span className="service-guide-region">{guide.region}</span>
-                  <span className="service-guide-title">{guide.label}</span>
-                  <span className="service-guide-summary">{guide.summary}</span>
-                  <span className="service-guide-link">{tHome('serviceGuides.open')}</span>
-                </Link>
+              {discoveryPrompts.map((prompt) => (
+                <article key={prompt.region} className="service-guide-card">
+                  <span className="service-guide-region">{prompt.region}</span>
+                  <span className="service-guide-title">{prompt.label}</span>
+                  <span className="service-guide-summary">{prompt.summary}</span>
+                  <span className="service-guide-link">{tHome('discoveryPrep.open')}</span>
+                </article>
               ))}
             </div>
           </div>
         </div>
       </section>
-      <FaqSection faqs={homeFaqs.items} heading={homeFaqs.heading} />
+      <BottomCTA
+        variant="dark"
+        compact
+        headline={tHome('ctaTitle')}
+        subtext={tHome('ctaDescription')}
+        primaryLabel={tHome('ctaPrimary')}
+        primaryHref="/contact"
+        secondaryLabel={tHome('ctaSecondary')}
+        secondaryHref="/case-studies"
+      />
     </>
   );
 }

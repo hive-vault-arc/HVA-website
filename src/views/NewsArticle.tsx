@@ -54,7 +54,7 @@ function RenderSection({ section, index }: { section: ContentSection; index: num
           </blockquote>
           {section.attribution && (
             <cite
-              className="text-xs font-bold tracking-widest uppercase not-italic text-[var(--section-label-color)]"
+              className="text-xs font-bold tracking-widest uppercase not-italic text-[#1A2535]"
               style={{ fontFamily: 'var(--font-body)' }}
             >
               - {section.attribution}
@@ -68,7 +68,7 @@ function RenderSection({ section, index }: { section: ContentSection; index: num
           {section.stats.map((stat) => (
             <div key={`${stat.value}-${stat.label}`} className="bg-[#F7F8FA] p-6">
               <p
-                className="mb-1 text-3xl font-bold text-[var(--section-label-color)]"
+                className="mb-1 text-3xl font-bold text-[#1A2535]"
                 style={{ fontFamily: 'var(--font-body)' }}
               >
                 {stat.value}
@@ -80,7 +80,7 @@ function RenderSection({ section, index }: { section: ContentSection; index: num
                 {stat.label}
               </p>
               <p
-                className="text-[10px] font-bold tracking-widest uppercase text-[var(--section-label-color)]"
+                className="text-[10px] font-bold tracking-widest uppercase text-[#1A2535]"
                 style={{ fontFamily: 'var(--font-body)' }}
               >
                 {stat.source}
@@ -114,7 +114,7 @@ function NewsSidebar({ sources, tags }: { sources: NewsArticle['sources']; tags:
       {sources.length > 0 && (
         <div>
           <h2
-            className="text-xs font-bold uppercase tracking-widest text-[var(--section-label-color)] mb-4"
+            className="mb-4 text-xs font-bold uppercase tracking-widest text-[#1A2535]"
             style={{ fontFamily: 'var(--font-body)' }}
           >
             {t('sources')}
@@ -141,7 +141,7 @@ function NewsSidebar({ sources, tags }: { sources: NewsArticle['sources']; tags:
       {tags.length > 0 && (
         <div>
           <h2
-            className="text-xs font-bold uppercase tracking-widest text-[var(--section-label-color)] mb-4"
+            className="mb-4 text-xs font-bold uppercase tracking-widest text-[#1A2535]"
             style={{ fontFamily: 'var(--font-body)' }}
           >
             {t('topics')}
@@ -175,7 +175,7 @@ function NewsSidebar({ sources, tags }: { sources: NewsArticle['sources']; tags:
         </p>
         <Link
           href="/contact"
-          className="inline-flex items-center gap-1.5 text-xs font-bold tracking-widest uppercase text-[var(--section-label-color-dark)] hover:gap-3 transition-all"
+          className="inline-flex items-center gap-1.5 text-xs font-bold tracking-widest uppercase text-[#1A2535] transition-all hover:gap-3 hover:text-[#E8A838]"
           style={{ fontFamily: 'var(--font-body)' }}
         >
           {t('newsSidebar.cta')}
@@ -211,6 +211,7 @@ export default function NewsArticleView({
       subtitle={article.subtitle}
       coverImage={article.coverImage}
       coverAlt={article.coverAlt}
+      editorial={article}
       contentAsArticle
       showAboutStrip
       relatedItems={relatedArticles.map((item) => ({
@@ -218,6 +219,8 @@ export default function NewsArticleView({
         title: item.title,
         tag: item.tag,
         coverImage: item.coverImage,
+        editorialFormat: item.editorialFormat,
+        topics: item.topics,
       }))}
       relatedAllHref="/insights/news-articles"
       relatedAllLabel={t('allNews')}

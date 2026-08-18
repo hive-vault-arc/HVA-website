@@ -8,6 +8,12 @@ import { ArrowLeft, ArrowUpRight } from '@/components/icons';
 import BottomCTA from './BottomCTA';
 import SectionBrandMark from './SectionBrandMark';
 import {isSanityCdnImage} from '@/lib/image-delivery';
+import {
+  getEditorialTopicImage,
+  type EditorialContentFields,
+  type EditorialFormat,
+  type EditorialTopic,
+} from '@/lib/editorial-taxonomy';
 
 /* ── Types ───────────────────────────────────────────────────────────────── */
 
@@ -16,7 +22,15 @@ export type RelatedItem = {
   title: string;
   tag: string;
   coverImage?: string;
+  editorialFormat?: EditorialFormat;
+  topics?: EditorialTopic[];
 };
+
+function getRelatedItemImage(item: RelatedItem) {
+  return item.editorialFormat === 'case'
+    ? item.coverImage
+    : getEditorialTopicImage(item.topics, item.coverImage);
+}
 
 type BottomCtaConfig = {
   variant?: 'dark' | 'blue' | 'light';
@@ -65,6 +79,7 @@ type Props = {
   children: React.ReactNode;
   sidebar?: React.ReactNode;
   contentAsArticle?: boolean;
+  editorial?: EditorialContentFields;
 
   // About strip
   showAboutStrip?: boolean;
@@ -115,6 +130,7 @@ export default function ArticleDetailPage({
   children,
   sidebar,
   contentAsArticle = false,
+  editorial,
   showAboutStrip = false,
   relatedItems = [],
   relatedTitle,
@@ -123,11 +139,17 @@ export default function ArticleDetailPage({
   bottomCta,
 }: Props) {
   const t = useTranslations('ArticleUi');
+  const tEditorial = useTranslations('InsightsHub.editorial');
   const locale = useLocale();
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
   const isoDate = publishedAt ? toIsoDateTime(publishedAt) : undefined;
   const isCaseStudy = variant === 'caseStudy';
+  const displayedCoverImage = isCaseStudy
+    ? coverImage
+    : getEditorialTopicImage(editorial?.topics, coverImage);
+  const hasDirectAnswer = Boolean(editorial?.directAnswer);
+  const hasKeyTakeaways = Boolean(editorial?.keyTakeaways?.length);
   const resolvedBreadcrumbs =
     breadcrumbs && breadcrumbs.length > 0
       ? breadcrumbs
@@ -202,7 +224,7 @@ export default function ArticleDetailPage({
             style={{ fontFamily: 'var(--font-body)' }}
           >
             <SectionBrandMark size="sm" className="mr-1" />
-            <span style={{ color: 'var(--section-label-color)' }}>{eyebrow}</span>
+            <span className="text-[#1A2535]">{eyebrow}</span>
             {isoDate && (
               <>
                 <span className="w-1 h-1 rounded-full bg-[#CDD2DA]" />
@@ -223,11 +245,19 @@ export default function ArticleDetailPage({
                 <span className="text-[#6B7280]">{metaLabel}</span>
               </>
             )}
+            {editorial?.editorialFormat ? (
+              <>
+                <span className="h-1 w-1 rounded-full bg-[#CDD2DA]" aria-hidden="true" />
+                <span className="text-[#1A2535]">
+                  {tEditorial(`formats.${editorial.editorialFormat}`)}
+                </span>
+              </>
+            ) : null}
           </div>
 
           {/* Title */}
           <motion.h1
-            className="mb-6 text-[clamp(2.4rem,11vw,3.8rem)] leading-tight tracking-tight text-[#1A2535] md:text-6xl"
+            className="mb-6 text-[clamp(2.4rem,11cqw,3.8rem)] leading-tight tracking-tight text-[#1A2535] md:text-6xl"
             style={{ fontFamily: 'var(--font-headline)' }}
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -263,7 +293,7 @@ export default function ArticleDetailPage({
               <address className="not-italic">
                 <p className="text-sm text-[#1A2535]" style={{ fontFamily: 'var(--font-body)' }}>
                   <span>{t('by')} </span>
-                  <Link rel="author" href={authorHref} className="text-[var(--section-label-color)] hover:underline">
+                  <Link rel="author" href={authorHref} className="font-semibold text-[#1A2535] hover:underline">
                     {author.name}
                   </Link>
                 </p>
@@ -278,20 +308,21 @@ export default function ArticleDetailPage({
 
       {/* ── Cover image ────────────────────────────────────────────────────── */}
       {isCaseStudy ? (
-        coverImage || coverAside ? (
+        displayedCoverImage || coverAside ? (
           <div
             className={`case-study-detail__lead site-frame-narrow ${
               coverAside ? 'case-study-detail__lead--with-aside' : 'case-study-detail__lead--solo'
             }`}
           >
-            {coverImage ? (
+            {displayedCoverImage ? (
               <div className="case-study-detail__cover">
                 <Image
-                  src={coverImage}
+                  src={displayedCoverImage}
                   alt={coverAlt ?? title}
                   fill
                   priority
-                  unoptimized={isSanityCdnImage(coverImage)}
+                  quality={90}
+                  unoptimized={isSanityCdnImage(displayedCoverImage)}
                   sizes={
                     coverAside
                       ? '(max-width: 1024px) calc(100vw - 2rem), min(1160px, calc(72vw - 4rem))'
@@ -307,14 +338,15 @@ export default function ArticleDetailPage({
             ) : null}
           </div>
         ) : null
-      ) : coverImage ? (
+      ) : displayedCoverImage ? (
         <div className="site-frame-narrow -mt-1">
           <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#E8EBF0] sm:aspect-[16/9] lg:aspect-[21/9]">
             <Image
-              src={coverImage}
+              src={displayedCoverImage}
               alt={coverAlt ?? title}
               fill
-              unoptimized={isSanityCdnImage(coverImage)}
+              quality={90}
+              unoptimized={isSanityCdnImage(displayedCoverImage)}
               className="object-cover"
               loading="eager"
               sizes="(max-width: 1024px) calc(100vw - 2rem), min(1640px, calc(100vw - 5rem))"
@@ -324,12 +356,75 @@ export default function ArticleDetailPage({
         </div>
       ) : null}
 
+      {hasDirectAnswer || hasKeyTakeaways ? (
+        <section
+          className="site-frame-narrow border-b border-[#DDE3EA] py-9 md:py-10"
+          aria-labelledby={hasDirectAnswer ? 'article-direct-answer' : 'article-key-takeaways'}
+        >
+          <div
+            className={
+              hasDirectAnswer && hasKeyTakeaways
+                ? 'grid gap-8 lg:grid-cols-[0.78fr_1.22fr] lg:gap-14'
+                : undefined
+            }
+          >
+            {editorial?.directAnswer ? (
+              <div
+                className={
+                  hasKeyTakeaways
+                    ? undefined
+                    : 'grid gap-4 md:grid-cols-[180px_minmax(0,1fr)] md:items-start md:gap-10'
+                }
+              >
+                <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#1A2535]">
+                  {t('directAnswer')}
+                </p>
+                <h2
+                  id="article-direct-answer"
+                  className={`font-headline text-2xl leading-snug text-[#1A2535] md:text-3xl ${
+                    hasKeyTakeaways ? 'mt-3 max-w-[22ch]' : 'max-w-[46ch]'
+                  }`}
+                >
+                  {editorial.directAnswer}
+                </h2>
+              </div>
+            ) : null}
+            {editorial?.keyTakeaways?.length ? (
+              <div
+                className={
+                  hasDirectAnswer
+                    ? 'border-l-0 border-[#DDE3EA] lg:border-l lg:pl-10'
+                    : 'max-w-3xl'
+                }
+              >
+                <p
+                  id="article-key-takeaways"
+                  className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#1A2535]"
+                >
+                  {t('keyTakeaways')}
+                </p>
+                <ul className="mt-4 grid gap-3">
+                  {editorial.keyTakeaways.map((takeaway) => (
+                    <li key={takeaway} className="flex gap-3 text-sm leading-6 text-[#536174]">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 bg-[#E8A838]" aria-hidden="true" />
+                      {takeaway}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+          </div>
+        </section>
+      ) : null}
+
       {/* ── Body + Sidebar ─────────────────────────────────────────────────── */}
       <section
         className={
           isCaseStudy
             ? 'case-study-detail__body site-frame-narrow'
-            : 'site-frame-narrow py-16'
+            : sidebar
+              ? 'site-frame-narrow py-16'
+              : 'site-frame-reading py-16'
         }
       >
         <div
@@ -391,8 +486,66 @@ export default function ArticleDetailPage({
         </div>
       </section>
 
+      {editorial?.methodology || editorial?.limitations ? (
+        <section className="border-y border-[#DDE3EA] bg-[#F1F3F6] py-10 md:py-12">
+          <div className="site-frame-narrow grid gap-8 md:grid-cols-2 md:gap-12">
+            {editorial.methodology ? (
+              <div>
+                <h2 className="font-headline text-2xl text-[#1A2535]">{t('methodology')}</h2>
+                <p className="mt-3 text-sm leading-6 text-[#536174]">{editorial.methodology}</p>
+              </div>
+            ) : null}
+            {editorial.limitations ? (
+              <div>
+                <h2 className="font-headline text-2xl text-[#1A2535]">{t('limitations')}</h2>
+                <p className="mt-3 text-sm leading-6 text-[#536174]">{editorial.limitations}</p>
+              </div>
+            ) : null}
+          </div>
+        </section>
+      ) : null}
+
+      {editorial?.reviewers?.length || editorial?.relatedCases?.length || editorial?.relatedCapabilities?.length ? (
+        <section className="site-frame-narrow py-10 md:py-12" aria-labelledby="article-accountability-title">
+          <h2 id="article-accountability-title" className="font-headline text-2xl text-[#1A2535]">{t('accountability')}</h2>
+          <div className="mt-5 grid gap-8 border-t border-[#DDE3EA] pt-6 md:grid-cols-3">
+            {editorial.reviewers?.length ? (
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-[0.12em] text-[#1A2535]">{t('reviewedBy')}</h3>
+                {editorial.reviewers.map((reviewer) => (
+                  <p key={reviewer.name} className="mt-2 text-sm leading-6 text-[#536174]">
+                    <strong className="block text-[#1A2535]">{reviewer.name}</strong>
+                    {reviewer.role}
+                  </p>
+                ))}
+              </div>
+            ) : null}
+            {editorial.relatedCases?.length ? (
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-[0.12em] text-[#1A2535]">{t('relatedCases')}</h3>
+                {editorial.relatedCases.map((item) => (
+                  <Link key={item.href} href={item.href} className="mt-2 flex min-h-11 items-center gap-2 text-sm text-[#536174] hover:text-[#1A2535]">
+                    {item.label}<ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                  </Link>
+                ))}
+              </div>
+            ) : null}
+            {editorial.relatedCapabilities?.length ? (
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-[0.12em] text-[#1A2535]">{t('relatedCapabilities')}</h3>
+                {editorial.relatedCapabilities.map((item) => (
+                  <Link key={item.href} href={item.href} className="mt-2 flex min-h-11 items-center gap-2 text-sm text-[#536174] hover:text-[#1A2535]">
+                    {item.label}<ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                  </Link>
+                ))}
+              </div>
+            ) : null}
+          </div>
+        </section>
+      ) : null}
+
       {/* ── About Hive Vault Arc strip ──────────────────────────────────────────────── */}
-      {showAboutStrip && (
+      {showAboutStrip && !editorial && (
         <section className="bg-[#F7F8FA] py-16">
           <div className="site-frame-narrow flex flex-col md:flex-row gap-10 items-center md:items-start">
             <SectionBrandMark size="lg" />
@@ -411,7 +564,7 @@ export default function ArticleDetailPage({
               </p>
               <Link
                 href="/case-studies"
-              className="inline-flex min-h-11 items-center gap-2 text-sm font-bold uppercase tracking-widest text-[var(--section-label-color)] transition-all hover:gap-4"
+              className="inline-flex min-h-11 items-center gap-2 text-sm font-bold uppercase tracking-widest text-[#1A2535] transition-all hover:gap-4 hover:text-[#E8A838]"
                 style={{ fontFamily: 'var(--font-body)' }}
               >
                 {t('aboutCta')}
@@ -429,7 +582,7 @@ export default function ArticleDetailPage({
             <div className="mb-12 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <p
-                  className="text-xs font-bold uppercase tracking-widest text-[var(--section-label-color)] mb-3"
+                  className="mb-3 text-xs font-bold uppercase tracking-widest text-[#1A2535]"
                   style={{ fontFamily: 'var(--font-body)' }}
                 >
                   {t('continueReading')}
@@ -467,14 +620,15 @@ export default function ArticleDetailPage({
                 >
                   <Link href={item.href} className="block">
                     <div className="aspect-[4/3] mb-5 overflow-hidden bg-[#E8EBF0] relative">
-                      {item.coverImage ? (
+                      {getRelatedItemImage(item) ? (
                         <Image
-                          src={item.coverImage}
+                          src={getRelatedItemImage(item)!}
                           alt={item.title}
                           fill
                           loading={isCaseStudy ? 'eager' : 'lazy'}
-                          unoptimized={isSanityCdnImage(item.coverImage)}
-                          className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                          quality={90}
+                          unoptimized={isSanityCdnImage(getRelatedItemImage(item))}
+                          className="object-cover transition-transform duration-700 group-hover:scale-105"
                           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         />
                       ) : (
@@ -489,8 +643,8 @@ export default function ArticleDetailPage({
                       )}
                     </div>
                     <p
-                      className="text-xs font-bold uppercase tracking-widest mb-3"
-                      style={{ color: '#E8A838', fontFamily: 'var(--font-body)' }}
+                      className="mb-3 text-xs font-bold uppercase tracking-widest text-[#1A2535]"
+                      style={{ fontFamily: 'var(--font-body)' }}
                     >
                       {item.tag}
                     </p>
@@ -515,10 +669,10 @@ export default function ArticleDetailPage({
           revealImmediately={isCaseStudy}
           headline={bottomCta.headline}
           subtext={bottomCta.subtext}
-          primaryLabel={bottomCta.primaryLabel}
-          primaryHref={bottomCta.primaryHref}
-          secondaryLabel={bottomCta.secondaryLabel}
-          secondaryHref={bottomCta.secondaryHref}
+          primaryLabel={editorial?.primaryCta?.label ?? bottomCta.primaryLabel}
+          primaryHref={editorial?.primaryCta?.href ?? bottomCta.primaryHref}
+          secondaryLabel={editorial?.primaryCta ? undefined : bottomCta.secondaryLabel}
+          secondaryHref={editorial?.primaryCta ? undefined : bottomCta.secondaryHref}
         />
       )}
     </div>

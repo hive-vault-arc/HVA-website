@@ -30,6 +30,12 @@
     "toggleWhoWeAre": "Toggle who we are submenu",
     "toggleInsights": "Toggle insights submenu",
     "framework": "Framework",
+    "strategyBusiness": "Strategy & Business Consulting",
+    "technologyConsulting": "Technology Consulting",
+    "aiData": "AI, Data & Analytics",
+    "softwareEngineering": "Software Engineering",
+    "cloudInfrastructure": "Cloud & Infrastructure",
+    "managedOperations": "Operations & Managed Services",
     "solutionPrograms": "Solution Programs",
     "inDetail": "In Detail",
     "aboutUs": "About Us",
@@ -110,9 +116,14 @@
     "emailOpened": "Your email client was opened. Please send the drafted message.",
     "directError": "We could not send your message right now. Please try again or email us directly.",
     "eyebrow": "Contact",
-    "title": "Start your transformation discovery.",
-    "lead": "Share your goals, constraints, and current bottlenecks. We review the request and guide you toward the most appropriate next step.",
+    "title": "Tell us what you are working on.",
+    "lead": "Share your goals, constraints, and current bottlenecks. We will review them and suggest a practical next step.",
     "sectionLabel": "Contact details and discovery form",
+    "detailsHeading": "Contact details",
+    "socialHeading": "Social media",
+    "formHeading": "Send a short brief",
+    "formIntro": "A few details are enough to start the conversation.",
+    "requiredNote": "* Required fields",
     "operatingRegion": "Operating Region",
     "location": "Tangier, Morocco",
     "remote": "Remote delivery worldwide",
@@ -237,19 +248,26 @@
     "identityEyebrow": "Our identity",
     "identityTitle": "Advise. Build.",
     "identityAccent": "Operate.",
-    "identityDescription": "Hive Vault Arc is a technology transformation partner — combining strategy, AI engineering, software development, and managed operations in one team. We stay until it works.",
+    "identityDescription": "Hive Vault Arc brings strategy, AI engineering, software, cloud, and operations into one accountable delivery team. We stay with the system from decision to production.",
     "identityDisciplines": "Strategy · AI Engineering · Software · Operations",
     "pillar": "Pillar",
     "arcLoop": "The ARC loop",
-    "arcTitle": "Lasting transformation requires the full ARC.",
-    "arcDescription": "Assess the constraint. Build the operating system. Keep production accountable after launch.",
+    "arcTitle": "One ARC loop. From strategy to production.",
+    "arcTitleLine1": "One ARC loop.",
+    "arcTitleLine2": "From strategy",
+    "arcTitleLine3": "to production.",
+    "arcDescription": "Assess. Build. Operate. One team owns the outcome.",
     "ourCapabilities": "Our capabilities",
-    "arcImageAlt": "Operations command workspace with dashboards and production monitoring screens",
+    "arcImageAlt": "Executive working session around a systems architecture blueprint",
     "featuredStory": "Featured operating story",
-    "featuredStoryTitle": "One accountable team from diagnosis to production.",
+    "featuredStoryTitle": "One team. From diagnosis to production.",
     "technologyPartners": "Technology partners",
-    "ctaTitle": "Ready to transform core operations end to end?",
-    "ctaDescription": "Share your goals and constraints. We will define the strategy, architecture, and execution path, then discuss commercial terms after discovery.",
+    "globalReachEyebrow": "Delivery network",
+    "globalReachTitle": "Global Reach, Local Impact",
+    "globalReachDescription": "We collaborate across regions to deliver consistent product quality and execution speed.",
+    "globalReachLocation": "Based in Morocco, delivering for clients worldwide.",
+    "ctaTitle": "Ready to improve core operations?",
+    "ctaDescription": "Share the constraint. We will define the strategy, system, and delivery path.",
     "ctaPrimary": "Book a discovery call",
     "ctaSecondary": "View case studies",
     "arcPhases": [
@@ -257,41 +275,39 @@
         "phase": "01",
         "title": "Assess",
         "discipline": "Strategy & Architecture",
-        "summary": "Diagnose operating friction, define target architecture, and sequence the work leadership can execute.",
+        "summary": "Find the constraint. Set the architecture. Prioritize the work.",
         "proof": "Operating diagnosis"
       },
       {
         "phase": "02",
         "title": "Re-engineer",
         "discipline": "AI, Software & Cloud",
-        "summary": "Build the systems, deploy the intelligence, and harden the infrastructure for real operational load.",
+        "summary": "Build the system. Deploy AI. Prepare for real load.",
         "proof": "Production systems"
       },
       {
         "phase": "03",
         "title": "Command",
         "discipline": "Operate & Evolve",
-        "summary": "Stabilize, monitor, and evolve the systems long-term so decisions become measurable outcomes.",
+        "summary": "Run, monitor, and improve the system.",
         "proof": "Managed outcomes"
       }
     ],
-    "serviceGuides": {
-      "title": "Service guides for Morocco",
-      "description": "Focused entry points for teams comparing AI, consulting, and software-delivery options.",
-      "aria": "Service guide links",
-      "open": "Open guide",
+    "discoveryPrep": {
+      "title": "Prepare for a useful first call",
+      "description": "Two clear inputs are enough to start well.",
+      "aria": "Discovery preparation notes",
+      "open": "Bring this to the call",
       "items": [
         {
-          "href": "/digital-services-tangier",
-          "label": "Digital Services in Tangier",
-          "region": "Tangier",
-          "summary": "A practical guide for teams evaluating AI, software, consulting, and delivery partners in Tangier."
+          "label": "Where is the work slowing down?",
+          "region": "Current constraint",
+          "summary": "Name the process, system, or decision creating friction. A short description is enough."
         },
         {
-          "href": "/ai-agents-morocco",
-          "label": "AI Agents in Morocco",
-          "region": "Morocco",
-          "summary": "How Moroccan organizations can use multilingual AI agents for sales, support, and operational workflows."
+          "label": "What needs to improve?",
+          "region": "Desired outcome",
+          "summary": "Share the result you need, who owns it, and any timing or operating constraints."
         }
       ]
     },
@@ -343,6 +359,7 @@
     "caseStudy": "Case study",
     "availableInEnglish": "Available in English",
     "learnMore": "Learn more",
+    "viewAll": "View all insights",
     "play": "Play",
     "pause": "Pause",
     "previous": "Previous",
@@ -355,26 +372,26 @@
   "Arc": {
     "label": "ARC operating model",
     "heroLines": ["Assess the constraint.", "Re-engineer the system.", "Command the outcome."],
-    "heroDescription": "ARC connects diagnosis, engineering, and live operations so one accountable team carries the outcome from constraint to production.",
+    "heroDescription": "ARC connects diagnosis, engineering, and live operations. One team carries the outcome from constraint to production.",
     "bookDiagnostic": "Request ARC assessment",
     "seeProduction": "See ARC in production",
     "heroAlt": "Senior operators mapping a business system during an ARC strategy session",
-    "leadTitle": "One loop from operating constraint to production evidence.",
-    "leadDescription": "ARC makes the path visible before money moves. It connects diagnosis, system delivery, and live operations through explicit decisions and accountable ownership.",
+    "leadTitle": "One loop. One accountable outcome.",
+    "leadDescription": "ARC makes the path clear before investment begins. Diagnosis, delivery, and live operations stay under one accountable team.",
     "loopAria": "Assess, Re-engineer, Command: the ARC operating loop",
-    "indexTitle": "Understand the whole model in sixty seconds.",
-    "indexDescription": "Three connected responsibilities move one outcome from evidence to a system that holds in production.",
+    "indexTitle": "ARC in three decisions.",
+    "indexDescription": "Assess the constraint. Re-engineer the system. Command the outcome.",
     "how": "How ARC works",
-    "processTitle": "Three decisions. One accountable operating loop.",
-    "processDescription": "Each responsibility ends with a concrete output and a decision before the next commitment begins.",
+    "processTitle": "Assess. Re-engineer. Command.",
+    "processDescription": "Each phase ends with a clear output and a decision.",
     "phasesLabel": "ARC operating phases",
     "output": "{phase} output",
     "bestFor": "Best for",
     "buyerFit": ["Fragmented operations", "Legacy bottlenecks", "AI workflow rollout", "Production accountability gaps"],
     "differenceEyebrow": "Why ARC is different",
-    "differenceTitle": "Responsibility does not stop at launch.",
-    "differenceStatement": "Strategy, engineering, and operations remain connected under one accountable model.",
-    "differenceDescription": "Decisions stay attached to real constraints, production evidence, and the outcome approved at the start.",
+    "differenceTitle": "Ownership continues after launch.",
+    "differenceStatement": "Strategy, engineering, and operations stay connected.",
+    "differenceDescription": "Every decision stays tied to the constraint, the evidence, and the approved outcome.",
     "meetTeam": "Meet the team accountable for delivery",
     "proofEyebrow": "Proof in production",
     "proofTitle": "Production evidence, attached to named systems.",
@@ -390,14 +407,14 @@
     "nextStudy": "Next case study",
     "casePosition": "Case {current} of {total}",
     "outcomesEyebrow": "Proven outcomes",
-    "outcomesTitle": "Systems that deliver measurable results.",
-    "outcomesDescription": "Approved performance signals and named-system results.",
+    "outcomesTitle": "Proof from live systems.",
+    "outcomesDescription": "Approved signals from named production systems.",
     "outcomesCaseEyebrow": "Named systems. Real results.",
     "outcomesImageAlt": "Modern residential development representing the ImmoWorld CRM operating system",
     "apply": "Apply ARC",
     "closingQuote": "One accountable team from constraint to production.",
-    "closingTitle": "Want ARC applied to your operations?",
-    "closingDescription": "Share the constraint, target outcome, and current stack. We will map the fastest path to operational gain.",
+    "closingTitle": "Apply ARC to your operation.",
+    "closingDescription": "Share the constraint, target outcome, and current stack. We will map the next move.",
     "requestAssessment": "Request ARC assessment",
     "seeCaseStudies": "See case studies",
     "phases": [
@@ -426,16 +443,16 @@
     }
   },
   "Capabilities": {
-    "heroLabel": "Capabilities & Mastery",
+    "heroLabel": "Integrated capabilities",
     "heroLine1": "Six pillars.",
     "heroAccent": "One accountable",
-    "heroLine3": "partner.",
-    "heroDescription": "Hive Vault Arc delivers strategy, engineering, and managed operations across six pillars, one team, and one accountability loop, from discovery to production.",
+    "heroLine3": "team.",
+    "heroDescription": "Strategy, engineering, and managed operations stay connected from decision to production.",
     "exploreDetail": "Explore in detail",
     "solutionPrograms": "Solution programs",
     "learnMore": "Learn more",
     "arcModel": "ARC model",
-    "arcWords": ["Assess.", "Build.", "Operate."],
+    "arcWords": ["Assess.", "Re-engineer.", "Command."],
     "arcKeys": ["Decision gates", "Joint ownership", "Managed continuity"],
     "phase": "Phase {step}",
     "hvaFocus": "Hive Vault Arc focus",
@@ -443,16 +460,16 @@
     "phaseOutput": "Phase output",
     "viewPrograms": "View solution programs",
     "quote": "The work only matters when strategy becomes a system that teams can run, measure, and improve every day.",
-    "quoteAlt": "Ali Amrani, Co-Founder and CEO of Hive Vault Arc",
+    "quoteAlt": "Ali Amrani, Co-Founder and CTO of Hive Vault Arc",
     "quoteAuthor": "Ali Amrani",
-    "quoteRole": "Co-Founder & CEO",
+    "quoteRole": "Co-Founder & CTO",
     "programsTitle": "Choose the starting point.",
     "programsDescription": "Three focused programs. Each one is scoped, built, and operated with one accountable team.",
     "caseStudy": "Case study",
     "fullCatalog": "Full program catalog",
     "nextStep": "Next step",
-    "depthTitle": "Need the full capability map with delivery depth?",
-    "depthDescription": "Use In Detail for strategic context, execution model, and full sub-capability coverage across all six service pillars.",
+    "depthTitle": "Explore the full capability map.",
+    "depthDescription": "Review the strategic context, delivery model, and detailed scope for every pillar.",
     "bookCall": "Book a discovery call",
     "onPage": "On this page",
     "fullDepth": "Full depth",
@@ -581,6 +598,14 @@
       "modules": "Modules activated",
       "stack": "Stack & integrations",
       "projectMedia": "Project interface evidence",
+      "desktopProofEyebrow": "01 / DESKTOP PROOF",
+      "desktopProof": "Desktop workflow",
+      "desktopPrevious": "Previous desktop screen",
+      "desktopNext": "Next desktop screen",
+      "mobileProofEyebrow": "02 / MOBILE PROOF",
+      "mobileProof": "Mobile workflow",
+      "mobilePrevious": "Previous mobile screen",
+      "mobileNext": "Next mobile screen",
       "headlineMetrics": "Case study numbers",
       "metricBasis": {
         "systemScope": "System scope",
@@ -605,6 +630,8 @@
       "fallbackDelivery": "Focused delivery",
       "start": "Start a conversation",
       "fullMap": "View in full map",
+      "heroImageAlt": "Operational system representing {title}",
+      "atAGlance": "At a glance",
       "sectionsAria": "{title} sections",
       "index": [
         {"number": "01", "label": "Context", "href": "#context"},
@@ -618,10 +645,36 @@
       "executionContext": "Execution context",
       "coverageEyebrow": "Capability coverage",
       "coverageTitle": "What HVA can own inside this pillar.",
+      "scopeDescription": "A clear ownership map keeps leadership decisions, delivery work, and production responsibility connected.",
+      "deliveryEyebrow": "ARC delivery",
+      "deliveryTitle": "From decision to a running operation.",
+      "deliveryDescription": "Diagnosis, implementation, and operating ownership stay connected through one delivery model.",
+      "workingOutput": "Working output",
+      "deliverySteps": [
+        {
+          "step": "01",
+          "title": "Assess",
+          "detail": "Clarify the business constraint, process friction, system readiness, and measures that matter.",
+          "output": "A decision-ready scope"
+        },
+        {
+          "step": "02",
+          "title": "Re-engineer",
+          "detail": "Redesign and build the processes, systems, automations, and controls around an approved target state.",
+          "output": "A production-ready system"
+        },
+        {
+          "step": "03",
+          "title": "Command",
+          "detail": "Run, stabilize, monitor, and improve the production operation with clear accountability.",
+          "output": "Measured operational ownership"
+        }
+      ],
       "outcomesEyebrow": "Expected movement",
       "outcomesTitle": "Useful when the goal is accountable progress.",
       "outcomesDescription": "This page focuses the pillar. The ARC model turns it into scoped work, production systems, and managed improvement.",
       "relatedPagesAria": "Related landing pages",
+      "relatedGuides": "Related service guides",
       "relatedEyebrow": "Related capabilities",
       "relatedTitle": "Adjacent pillars to explore next.",
       "open": "Open",
@@ -635,6 +688,11 @@
       "profile": "Profile",
       "experience": "Experience",
       "education": "Education",
+      "leadership": "Leadership",
+      "operatingPrinciple": "Operating principle",
+      "background": "Background",
+      "selectedExperience": "Selected experience",
+      "otherFounders": "Founding team",
       "moreTeam": "More from the team",
       "backTeam": "Back to team",
       "bottomTitle": "Work with the people who own the outcome",
@@ -657,7 +715,8 @@
       "primaryCta": "Explore programs",
       "secondaryCta": "Explore capabilities",
       "signal": "Three starting points",
-      "signalDetail": "Choose the operating problem first. The delivery team stays connected after launch."
+      "signalDetail": "Choose the operating problem first. The delivery team stays connected after launch.",
+      "imageAlt": "Three connected operating modules representing AI reception, CRM modernization, and cloud reliability"
     },
     "navigator": {
       "eyebrow": "Choose the starting point",
@@ -699,10 +758,11 @@
     "ownership": {
       "title": "The program is the accountable layer.",
       "description": "It keeps the decision, the system, and its improvement in the same line of ownership.",
+      "outputLabel": "Working output",
       "steps": [
-        {"title": "Set the operating direction", "detail": "Scope the real constraint before committing a build plan."},
-        {"title": "Connect the working system", "detail": "Build the process, data, and integrations around the job at hand."},
-        {"title": "Stay with the operation", "detail": "Keep responsibility visible as the system runs and changes."}
+        {"title": "Set the operating direction", "detail": "Scope the real constraint before committing a build plan.", "output": "A decision-ready scope"},
+        {"title": "Connect the working system", "detail": "Build the process, data, and integrations around the job at hand.", "output": "A production-ready system"},
+        {"title": "Stay with the operation", "detail": "Keep responsibility visible as the system runs and changes.", "output": "Measured operational ownership"}
       ]
     },
     "bottomCta": {
@@ -714,12 +774,13 @@
   "CapabilitiesDetail": {
     "hero": {
       "eyebrow": "Capabilities in detail",
-      "title": "Capability depth, without the consulting maze.",
-      "description": "Connected service pillars mapped to the decisions clients actually need: what to scope, what to build, and what HVA keeps accountable after launch.",
+      "title": "Six capabilities. One operating system.",
+      "description": "See what to scope, what to build, and what remains accountable after launch.",
       "primaryCta": "View the map",
       "secondaryCta": "Solution programs",
       "panelTitle": "At a glance",
-      "panelDescription": "Start with a pillar, then move into ARC delivery when the scope is ready to become production work.",
+      "panelDescription": "A connected view from strategy to live operations.",
+      "imageAlt": "Layered capability atlas connecting strategy, software, cloud, data, and operations",
       "stats": [
         {"value": "Connected", "label": "Service pillars"},
         {"value": "ARC", "label": "Delivery model"},
@@ -1016,7 +1077,15 @@
     "aboutCta": "Explore case studies",
     "continueReading": "Continue reading",
     "related": "Related insights",
-    "allArticles": "All articles"
+    "allArticles": "All articles",
+    "directAnswer": "Direct answer",
+    "keyTakeaways": "Key takeaways",
+    "methodology": "Methodology",
+    "limitations": "Limitations",
+    "accountability": "Editorial accountability",
+    "reviewedBy": "Reviewed by",
+    "relatedCases": "Related cases",
+    "relatedCapabilities": "Related capabilities"
   },
   "InsightsHub": {
     "types": {
@@ -1077,6 +1146,69 @@
       "description": "We can translate these insights into a practical transformation roadmap for your team.",
       "primary": "Book a discovery call",
       "secondary": "View capabilities"
+    },
+    "editorial": {
+      "heroEyebrow": "Insights",
+      "heroTitle": "Useful thinking for systems that must work.",
+      "heroDescription": "Operating notes, evidence briefs, industry guides, and delivery cases for leaders building real technology systems.",
+      "browseAll": "Browse publications",
+      "viewEvidence": "View client evidence",
+      "englishFallback": "Approved French editions appear here when ready. Original English publications remain available.",
+      "topicsTitle": "Explore by business question",
+      "topicsDescription": "Start with the operating issue, not the publication type.",
+      "topics": {
+        "ai-operational-systems": {
+          "title": "AI operational systems",
+          "description": "Agents, controls, workflow design, and production ownership."
+        },
+        "custom-software-automation": {
+          "title": "Custom software and automation",
+          "description": "Systems built around the work standard tools cannot resolve."
+        },
+        "real-estate-construction": {
+          "title": "Real estate and construction",
+          "description": "Delivery evidence and operating patterns for property teams."
+        },
+        "morocco-north-africa-transformation": {
+          "title": "Morocco and North Africa",
+          "description": "Local market context, multilingual operations, and adoption."
+        },
+        "data-cloud-reliability": {
+          "title": "Data and cloud reliability",
+          "description": "Architecture, controls, observability, and resilient operations."
+        }
+      },
+      "formats": {
+        "operating-note": "Operating note",
+        "evidence-brief": "Evidence brief",
+        "industry-guide": "Industry guide",
+        "case": "Case",
+        "founder-view": "Founder view"
+      },
+      "featuredEyebrow": "Selected publication",
+      "featuredTitle": "Start here",
+      "readFeatured": "Read publication",
+      "evidenceEyebrow": "Evidence in production",
+      "evidenceTitle": "Work that reached the operating floor.",
+      "evidenceDescription": "Approved delivery cases. Clear scope, visible systems, and accountable outcomes.",
+      "approvedCase": "Approved client case",
+      "indexEyebrow": "Publication index",
+      "indexTitle": "Latest thinking and proof.",
+      "indexDescription": "Filter the library by the problem you are solving or the editorial format you need.",
+      "topicFilter": "Topic",
+      "formatFilter": "Format",
+      "allTopics": "All topics",
+      "allFormats": "All formats",
+      "emptyTitle": "No publications match these filters.",
+      "emptyDescription": "Clear one filter or choose another topic.",
+      "loadMore": "Load six more",
+      "loading": "Loading",
+      "tryAgain": "Try again",
+      "loadError": "The next publications could not be loaded.",
+      "ctaTitle": "Turn an operating question into a clear next move.",
+      "ctaDescription": "Bring the workflow, constraint, or system. We will help define the practical path forward.",
+      "ctaPrimary": "Book a discovery call",
+      "ctaSecondary": "Explore capabilities"
     }
   },
   "CollectionUi": {
@@ -1108,7 +1240,26 @@
     },
     "availableInEnglish": "Available in English",
     "englishCatalogueTitle": "English publications remain available.",
-    "englishCatalogueDescription": "French editions are in editorial review. These entries open their original English pages until an approved French edition is published."
+    "englishCatalogueDescription": "French editions are in editorial review. These entries open their original English pages until an approved French edition is published.",
+    "caseStudyRoutes": {
+      "eyebrow": "Continue the operating thread",
+      "description": "Move from delivery evidence to the context, capabilities, or conversation behind the work.",
+      "insights": {
+        "title": "Operating context",
+        "description": "Read the thinking behind the systems.",
+        "href": "/insights"
+      },
+      "capabilities": {
+        "title": "Capabilities",
+        "description": "See how we build around the work.",
+        "href": "/capabilities"
+      },
+      "contact": {
+        "title": "Start a conversation",
+        "description": "Bring a similar operating challenge.",
+        "href": "/contact"
+      }
+    }
   },
   "BlogIndex": {
     "eyebrow": "Strategy + Execution Journal",
@@ -1136,7 +1287,7 @@
       "eyebrow": "Transformation portfolio",
       "titleLineOne": "Systems shaped",
       "titleLineTwo": "around real operations.",
-      "description": "A living record of platforms, automation, AI, and operating systems delivered around the constraints of the teams that use them.",
+      "description": "Platforms, automation, and operating systems shaped around the teams that use them.",
       "primaryCta": "View delivered work",
       "secondaryCta": "Discuss a program",
       "featuredAriaLabel": "Featured case studies"
@@ -1183,7 +1334,7 @@
       "secondaryCta": "View capabilities",
       "frameworkLabel": "ARC Framework",
       "frameworkLoop": "Assess. Re-engineer. Command.",
-      "imageAlt": "Technology leadership team reviewing global operations in a strategy room at night",
+      "imageAlt": "Technology delivery team reviewing a system plan in a focused working session",
       "imageCaption": "Strategy to production"
     },
     "factsHeading": "Hive Vault Arc at a glance",
@@ -1340,7 +1491,10 @@
       "eyebrow": "Where we work",
       "title": "Start in Tangier. Work across borders.",
       "description": "Direct access to the team responsible for the decision, delivery, and operation.",
-      "location": "Tangier, Morocco"
+      "location": "Tangier, Morocco",
+      "region": "Morocco, Europe, and remote delivery worldwide",
+      "languages": "English, French, and Arabic",
+      "socialLabel": "Hive Vault Arc social profiles"
     },
     "bottomCta": {
       "title": "Bring us the outcome. We will map the route to production.",
@@ -1352,14 +1506,15 @@
   "Industries": {
     "hero": {
       "eyebrow": "Industries",
-      "title": "Industry Context,",
-      "emphasis": "Not Generic Delivery.",
-      "description": "Hive Vault Arc combines sector knowledge with strategy, engineering, and operations in one accountable team.",
+      "title": "Built for the sector.",
+      "emphasis": "Designed for the operation.",
+      "description": "Sector context meets strategy, engineering, and live operations.",
       "primaryCta": "View sectors",
       "secondaryCta": "See proof",
       "wordmark": "Industries",
       "wordmarkStart": "Ind",
-      "wordmarkEnd": "ustries"
+      "wordmarkEnd": "ustries",
+      "imageAlt": "Connected operating modules representing the sectors served by Hive Vault Arc"
     },
     "coverage": {
       "eyebrow": "Sector coverage",

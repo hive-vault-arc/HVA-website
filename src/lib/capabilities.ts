@@ -17,8 +17,9 @@ import {
 } from '../sanity/queries/capabilities';
 
 const CAPABILITIES_TAG = 'capabilities';
-const CAPABILITY_IMAGE_WIDTH = 1600;
-const CAPABILITY_IMAGE_HEIGHT = 1100;
+const CAPABILITY_IMAGE_WIDTH = 2000;
+const CAPABILITY_IMAGE_HEIGHT = 1375;
+const CAPABILITY_IMAGE_QUALITY = 90;
 
 type SanityImageValue = SanityImageSource | string | null | undefined;
 
@@ -179,6 +180,7 @@ function imageUrlFromSource(image: SanityImageValue): string {
     .height(CAPABILITY_IMAGE_HEIGHT)
     .fit('crop')
     .format('webp')
+    .quality(CAPABILITY_IMAGE_QUALITY)
     .url();
 }
 

@@ -4,19 +4,34 @@ import {useState, type CSSProperties} from 'react';
 import Image from 'next/image';
 import {MotionConfig, motion, useScroll, useTransform} from 'framer-motion';
 import {useTranslations} from 'next-intl';
+import {FaLinkedinIn, FaXTwitter} from 'react-icons/fa6';
 import {Link} from '@/i18n/navigation';
 import {
   ArrowUpRight,
+  Compass,
   FileCheck2,
+  Globe,
+  Instagram,
   Landmark,
   LockKeyhole,
+  Mail,
+  MessageSquare,
+  Phone,
   UsersRound,
 } from '@/components/icons';
 import BottomCTA from '../components/BottomCTA';
-import SectionBrandMark from '../components/SectionBrandMark';
 import type {EmployeeProfile} from '../lib/employee-profiles';
 import {isSanityCdnImage} from '../lib/image-delivery';
-import {CONTACT_EMAIL, CONTACT_PHONE_DISPLAY, CONTACT_PHONE_E164} from '../lib/seo';
+import {
+  CONTACT_EMAIL,
+  CONTACT_PHONE_DISPLAY,
+  CONTACT_PHONE_E164,
+  SOCIAL_PROFILES,
+} from '../lib/seo';
+
+const ABOUT_SOCIAL_PROFILES = SOCIAL_PROFILES.filter(({label}) =>
+  ['LinkedIn', 'Instagram', 'X'].includes(label),
+);
 
 type TeamMember = Pick<
   EmployeeProfile,
@@ -63,14 +78,14 @@ const phaseCapabilitySlugs = [
 ] as const;
 
 const phaseMedia = [
-  '/Images/capabilities/hva-arc-assess-operating-model.webp',
-  '/Images/capabilities/hva-arc-reengineer-operating-model.webp',
-  '/Images/capabilities/hva-arc-command-operating-model.webp',
+  '/Images/capabilities/editorial/hva-arc-assess-capabilities-v2.webp',
+  '/Images/capabilities/editorial/hva-arc-reengineer-capabilities-v2.webp',
+  '/Images/capabilities/editorial/hva-arc-command-capabilities-v2.webp',
 ] as const;
 
 const featuredProof = {
   slug: 'premium-advice-training-keepzen-digital-academy',
-  client: 'Premium Advice × KeepZen',
+  client: 'Premium Advice x KeepZen',
   image: '/Images/case-studies/premium-advice-keepzen-digital-academy.webp',
 } as const;
 
@@ -145,7 +160,7 @@ const About = ({teamMembers}: AboutProps) => {
                 transition={{duration: 0.52, ease: [0.23, 1, 0.32, 1]}}
               >
                 <div className="about-v2__mark">
-                  <SectionBrandMark size="sm" eager />
+                  <span className="page-family-label-line" aria-hidden="true" />
                   <span>{t('hero.eyebrow')}</span>
                 </div>
                 <h1 id="about-title">
@@ -163,40 +178,6 @@ const About = ({teamMembers}: AboutProps) => {
                 </div>
               </motion.div>
 
-              <motion.aside
-                className="about-v2__facts"
-                aria-labelledby="about-facts-title"
-                initial={{opacity: 0, x: 16}}
-                animate={{opacity: 1, x: 0}}
-                transition={{duration: 0.5, delay: 0.08, ease: [0.23, 1, 0.32, 1]}}
-              >
-                <span id="about-facts-title">{t('factsHeading')}</span>
-                <ol>
-                  {companyFacts.map((fact, index) => (
-                    <li key={fact.value}>
-                      <small>{String(index + 1).padStart(2, '0')}</small>
-                      <div>
-                        <strong>{fact.value}</strong>
-                        <p>{fact.label}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-              </motion.aside>
-            </div>
-
-            <div className="about-v2__hero-lower">
-              <motion.aside
-                className="about-v2__framework"
-                initial={{opacity: 0}}
-                animate={{opacity: 1}}
-                transition={{duration: 0.42, delay: 0.18}}
-              >
-                <span>{t('hero.frameworkLabel')}</span>
-                <strong>{t('hero.frameworkLoop')}</strong>
-                <p>{t('hero.imageCaption')}</p>
-              </motion.aside>
-
               <motion.figure
                 className="about-v2__hero-media"
                 initial={{opacity: 0.35, clipPath: 'inset(0 0 100% 0)'}}
@@ -204,19 +185,41 @@ const About = ({teamMembers}: AboutProps) => {
                 transition={{duration: 0.72, delay: 0.1, ease: [0.23, 1, 0.32, 1]}}
               >
                 <Image
-                  src="/Images/about/hva-team-strategy-room.webp"
+                  src="/Images/about/hva-about-team-system-session-v2.webp"
                   alt={t('hero.imageAlt')}
                   fill
                   priority
-                  sizes="(max-width: 767px) 100vw, 78vw"
+                  quality={90}
+                  sizes="(max-width: 767px) calc(100vw - 2rem), 56vw"
                   className="object-cover"
                 />
                 <figcaption>
-                  <SectionBrandMark surface="dark" size="sm" />
-                  <span>{t('hero.imageCaption')}</span>
+                  <span>{t('hero.frameworkLabel')}</span>
+                  <strong>{t('hero.frameworkLoop')}</strong>
                 </figcaption>
               </motion.figure>
             </div>
+
+            <motion.aside
+              className="about-v2__facts"
+              aria-labelledby="about-facts-title"
+              initial={{opacity: 0, y: 12}}
+              animate={{opacity: 1, y: 0}}
+              transition={{duration: 0.5, delay: 0.16, ease: [0.23, 1, 0.32, 1]}}
+            >
+              <span id="about-facts-title">{t('factsHeading')}</span>
+              <ol>
+                {companyFacts.map((fact, index) => (
+                  <li key={fact.value}>
+                    <small>{String(index + 1).padStart(2, '0')}</small>
+                    <div>
+                      <strong>{fact.value}</strong>
+                      <p>{fact.label}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </motion.aside>
           </div>
         </section>
 
@@ -224,13 +227,11 @@ const About = ({teamMembers}: AboutProps) => {
           <div className="site-frame-wide">
             <motion.header {...reveal}>
               <div className="about-v2__mark">
-                <SectionBrandMark size="sm" />
+                <span className="page-family-label-line" aria-hidden="true" />
                 <span>{t('delivery.eyebrow')}</span>
               </div>
-              <div>
-                <h2 id="about-loop-title">{t('delivery.title')}</h2>
-                <p>{t('delivery.description')}</p>
-              </div>
+              <h2 id="about-loop-title">{t('delivery.title')}</h2>
+              <p>{t('delivery.description')}</p>
             </motion.header>
 
             <div className="about-v2__phase-nav" aria-label={t('delivery.eyebrow')}>
@@ -277,6 +278,7 @@ const About = ({teamMembers}: AboutProps) => {
                   src={activePhaseMedia}
                   alt={`${activePhase.title}: ${t('capabilities.imageAlt')}`}
                   fill
+                  quality={90}
                   sizes="(max-width: 1023px) 100vw, 58vw"
                   className="object-cover"
                 />
@@ -397,6 +399,7 @@ const About = ({teamMembers}: AboutProps) => {
                           src={member.profileImage}
                           alt={member.profileImageAlt}
                           fill
+                          quality={90}
                           unoptimized={isSanityCdnImage(member.profileImage)}
                           loading={index === 0 ? 'eager' : 'lazy'}
                           sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
@@ -430,9 +433,53 @@ const About = ({teamMembers}: AboutProps) => {
               <p>{t('contact.description')}</p>
             </div>
             <address>
-              <span>{t('contact.location')}</span>
-              <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
-              <a href={`tel:${CONTACT_PHONE_E164}`}>{CONTACT_PHONE_DISPLAY}</a>
+              <div className="about-v2__contact-details">
+                <span>
+                  <i className="about-v2__contact-icon"><Compass aria-hidden="true" /></i>
+                  <span>{t('contact.location')}</span>
+                </span>
+                <span>
+                  <i className="about-v2__contact-icon"><Globe aria-hidden="true" /></i>
+                  <span>{t('contact.region')}</span>
+                </span>
+                <span>
+                  <i className="about-v2__contact-icon"><MessageSquare aria-hidden="true" /></i>
+                  <span>{t('contact.languages')}</span>
+                </span>
+                <a href={`mailto:${CONTACT_EMAIL}`}>
+                  <i className="about-v2__contact-icon"><Mail aria-hidden="true" /></i>
+                  <span>{CONTACT_EMAIL}</span>
+                </a>
+                <a href={`tel:${CONTACT_PHONE_E164}`}>
+                  <i className="about-v2__contact-icon"><Phone aria-hidden="true" /></i>
+                  <span>{CONTACT_PHONE_DISPLAY}</span>
+                </a>
+              </div>
+              <div className="about-v2__contact-socials" aria-label={t('contact.socialLabel')}>
+                {ABOUT_SOCIAL_PROFILES.map((profile) => (
+                  <a
+                    key={profile.label}
+                    href={profile.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${profile.label}: ${profile.handle}`}
+                  >
+                    <i className="about-v2__contact-icon about-v2__contact-social-icon">
+                      {profile.label === 'Instagram' ? (
+                        <Instagram aria-hidden="true" />
+                      ) : profile.label === 'LinkedIn' ? (
+                        <FaLinkedinIn aria-hidden="true" />
+                      ) : (
+                        <FaXTwitter aria-hidden="true" />
+                      )}
+                    </i>
+                    <span>
+                      <strong>{profile.label}</strong>
+                    </span>
+                    <ArrowUpRight aria-hidden="true" />
+                  </a>
+                ))}
+              </div>
             </address>
           </div>
         </section>

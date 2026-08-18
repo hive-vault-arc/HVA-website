@@ -30,6 +30,12 @@
     "toggleWhoWeAre": "Afficher ou masquer le sous-menu Qui sommes-nous",
     "toggleInsights": "Afficher ou masquer le sous-menu des publications",
     "framework": "Framework",
+    "strategyBusiness": "Conseil en stratégie et développement",
+    "technologyConsulting": "Conseil technologique",
+    "aiData": "IA, données et analytique",
+    "softwareEngineering": "Ingénierie logicielle",
+    "cloudInfrastructure": "Cloud et infrastructure",
+    "managedOperations": "Opérations et services managés",
     "solutionPrograms": "Programmes solutions",
     "inDetail": "En détail",
     "aboutUs": "À propos",
@@ -110,9 +116,14 @@
     "emailOpened": "Votre application de messagerie a été ouverte. Il ne vous reste plus qu’à envoyer le message.",
     "directError": "Votre message ne peut pas être envoyé pour le moment. Veuillez réessayer ou nous écrire directement.",
     "eyebrow": "Contact",
-    "title": "Commençons par comprendre votre transformation.",
-    "lead": "Présentez-nous vos objectifs, vos contraintes et vos principaux points de friction. Nous étudions la demande et vous orientons vers l’étape suivante la plus pertinente.",
+    "title": "Parlez-nous de votre projet.",
+    "lead": "Présentez vos objectifs, vos contraintes et vos points de friction. Nous les étudierons et proposerons une prochaine étape concrète.",
     "sectionLabel": "Coordonnées et formulaire de découverte",
+    "detailsHeading": "Coordonnées",
+    "socialHeading": "Réseaux sociaux",
+    "formHeading": "Envoyez-nous un bref aperçu",
+    "formIntro": "Quelques informations suffisent pour commencer l’échange.",
+    "requiredNote": "* Champs obligatoires",
     "operatingRegion": "Zone d’intervention",
     "location": "Tanger, Maroc",
     "remote": "Livraison à distance dans le monde entier",
@@ -237,19 +248,26 @@
     "identityEyebrow": "Notre identité",
     "identityTitle": "Conseiller. Construire.",
     "identityAccent": "Opérer.",
-    "identityDescription": "Hive Vault Arc est un partenaire de transformation technologique qui réunit stratégie, ingénierie IA, développement logiciel et opérations managées au sein d’une même équipe. Nous restons jusqu’à ce que le système fonctionne.",
+    "identityDescription": "Hive Vault Arc réunit stratégie, ingénierie IA, logiciel, cloud et opérations dans une seule équipe responsable. Nous accompagnons le système de la décision jusqu’à la production.",
     "identityDisciplines": "Stratégie · Ingénierie IA · Logiciels · Opérations",
     "pillar": "Pilier",
     "arcLoop": "La boucle ARC",
-    "arcTitle": "Une transformation durable exige l’ensemble du cycle ARC.",
-    "arcDescription": "Évaluer la contrainte. Construire le système opérationnel. Assurer la responsabilité en production après le lancement.",
+    "arcTitle": "Une boucle ARC. De la stratégie à la production.",
+    "arcTitleLine1": "Une boucle ARC.",
+    "arcTitleLine2": "De la stratégie",
+    "arcTitleLine3": "à la production.",
+    "arcDescription": "Évaluer. Construire. Piloter. Une équipe porte le résultat.",
     "ourCapabilities": "Nos expertises",
-    "arcImageAlt": "Espace de pilotage des opérations avec tableaux de bord et écrans de suivi de production",
+    "arcImageAlt": "Session de travail de direction autour d’un plan d’architecture des systèmes",
     "featuredStory": "Parcours opérationnel à la une",
-    "featuredStoryTitle": "Une seule équipe responsable, du diagnostic à la production.",
+    "featuredStoryTitle": "Une équipe. Du diagnostic à la production.",
     "technologyPartners": "Partenaires technologiques",
-    "ctaTitle": "Prêt à transformer vos opérations de bout en bout ?",
-    "ctaDescription": "Présentez-nous vos objectifs et vos contraintes. Nous définirons la stratégie, l’architecture et le parcours d’exécution, puis les conditions commerciales après la phase de découverte.",
+    "globalReachEyebrow": "Réseau de livraison",
+    "globalReachTitle": "Portée mondiale, impact local",
+    "globalReachDescription": "Nous collaborons entre régions pour garantir la qualité des produits et la rapidité d’exécution.",
+    "globalReachLocation": "Basés au Maroc, nous livrons pour des clients partout dans le monde.",
+    "ctaTitle": "Prêt à améliorer vos opérations ?",
+    "ctaDescription": "Présentez la contrainte. Nous définirons la stratégie, le système et le parcours de livraison.",
     "ctaPrimary": "Réserver un appel de découverte",
     "ctaSecondary": "Voir les études de cas",
     "arcPhases": [
@@ -257,41 +275,39 @@
         "phase": "01",
         "title": "Évaluer",
         "discipline": "Stratégie et architecture",
-        "summary": "Diagnostiquer les frictions opérationnelles, définir l’architecture cible et séquencer un plan que la direction peut exécuter.",
+        "summary": "Repérer la contrainte. Définir l’architecture. Prioriser.",
         "proof": "Diagnostic opérationnel"
       },
       {
         "phase": "02",
         "title": "Réingénier",
         "discipline": "IA, logiciels et cloud",
-        "summary": "Construire les systèmes, déployer l’intelligence et renforcer l’infrastructure pour la charge réelle de production.",
+        "summary": "Construire le système. Déployer l’IA. Préparer la charge.",
         "proof": "Systèmes en production"
       },
       {
         "phase": "03",
         "title": "Piloter",
         "discipline": "Opérer et faire évoluer",
-        "summary": "Stabiliser, suivre et faire évoluer les systèmes afin de convertir les décisions en résultats mesurables.",
+        "summary": "Exploiter, suivre et améliorer le système.",
         "proof": "Résultats managés"
       }
     ],
-    "serviceGuides": {
-      "title": "Guides de services au Maroc",
-      "description": "Des points d’entrée ciblés pour comparer les options en IA, conseil et livraison logicielle.",
-      "aria": "Liens vers les guides de services",
-      "open": "Ouvrir le guide",
+    "discoveryPrep": {
+      "title": "Préparer un premier échange utile",
+      "description": "Deux éléments clairs suffisent pour bien commencer.",
+      "aria": "Repères pour préparer un échange de découverte",
+      "open": "À partager pendant l’échange",
       "items": [
         {
-          "href": "/digital-services-tangier",
-          "label": "Services digitaux à Tanger",
-          "region": "Tanger",
-          "summary": "Un guide pratique pour évaluer les partenaires en IA, logiciels, conseil et livraison à Tanger."
+          "label": "Où le travail ralentit-il ?",
+          "region": "Contrainte actuelle",
+          "summary": "Indiquez le processus, le système ou la décision qui crée de la friction. Une courte description suffit."
         },
         {
-          "href": "/ai-agents-morocco",
-          "label": "Agents IA au Maroc",
-          "region": "Maroc",
-          "summary": "Comment les organisations marocaines peuvent utiliser des agents IA multilingues pour les ventes, le support et les opérations."
+          "label": "Quel résultat doit s’améliorer ?",
+          "region": "Résultat attendu",
+          "summary": "Précisez le résultat visé, son responsable et les éventuelles contraintes de délai ou d’exploitation."
         }
       ]
     },
@@ -343,6 +359,7 @@
     "caseStudy": "Étude de cas",
     "availableInEnglish": "Disponible en anglais",
     "learnMore": "En savoir plus",
+    "viewAll": "Voir tous les insights",
     "play": "Lire",
     "pause": "Mettre en pause",
     "previous": "Précédent",
@@ -355,26 +372,26 @@
   "Arc": {
     "label": "Modèle opérationnel ARC",
     "heroLines": ["Évaluer la contrainte.", "Réingénier le système.", "Piloter le résultat."],
-    "heroDescription": "ARC relie diagnostic, ingénierie et opérations pour qu’une seule équipe porte le résultat, de la contrainte à la production.",
+    "heroDescription": "ARC relie le diagnostic, l’ingénierie et les opérations. Une seule équipe porte le résultat, de la contrainte à la production.",
     "bookDiagnostic": "Demander une évaluation ARC",
     "seeProduction": "Voir ARC en production",
     "heroAlt": "Dirigeants cartographiant un système métier pendant une session stratégique ARC",
-    "leadTitle": "Une seule boucle, de la contrainte opérationnelle aux preuves de production.",
-    "leadDescription": "ARC rend le chemin visible avant d’engager les dépenses. Le modèle relie diagnostic, livraison du système et opérations par des décisions explicites et une responsabilité claire.",
+    "leadTitle": "Une boucle. Un résultat assumé.",
+    "leadDescription": "ARC clarifie le chemin avant l’investissement. Le diagnostic, la livraison et les opérations restent sous la responsabilité d’une seule équipe.",
     "loopAria": "Évaluer, Réingénier, Piloter : la boucle opérationnelle ARC",
-    "indexTitle": "Comprendre tout le modèle en soixante secondes.",
-    "indexDescription": "Trois responsabilités liées font avancer un même résultat, des preuves initiales à un système fiable en production.",
+    "indexTitle": "ARC en trois décisions.",
+    "indexDescription": "Évaluer la contrainte. Réingénier le système. Piloter le résultat.",
     "how": "Comment fonctionne ARC",
-    "processTitle": "Trois décisions. Une seule boucle responsable.",
-    "processDescription": "Chaque responsabilité se termine par un livrable concret et une décision avant le prochain engagement.",
+    "processTitle": "Évaluer. Réingénier. Piloter.",
+    "processDescription": "Chaque phase se termine par un livrable clair et une décision.",
     "phasesLabel": "Phases opérationnelles ARC",
     "output": "Livrable de la phase {phase}",
     "bestFor": "Particulièrement adapté à",
     "buyerFit": ["Opérations fragmentées", "Blocages liés aux systèmes existants", "Déploiement de workflows IA", "Manque de responsabilité en production"],
     "differenceEyebrow": "Pourquoi ARC est différent",
-    "differenceTitle": "La responsabilité ne s’arrête pas au lancement.",
-    "differenceStatement": "Stratégie, ingénierie et opérations restent reliées dans un même modèle responsable.",
-    "differenceDescription": "Les décisions restent attachées aux contraintes réelles, aux preuves de production et au résultat validé au départ.",
+    "differenceTitle": "La responsabilité continue après le lancement.",
+    "differenceStatement": "Stratégie, ingénierie et opérations restent connectées.",
+    "differenceDescription": "Chaque décision reste liée à la contrainte, aux preuves et au résultat approuvé.",
     "meetTeam": "Découvrir l’équipe responsable de la livraison",
     "proofEyebrow": "La preuve en production",
     "proofTitle": "Des preuves de production reliées à des systèmes nommés.",
@@ -390,14 +407,14 @@
     "nextStudy": "Étude de cas suivante",
     "casePosition": "Étude {current} sur {total}",
     "outcomesEyebrow": "Résultats démontrés",
-    "outcomesTitle": "Des systèmes qui produisent des résultats mesurables.",
-    "outcomesDescription": "Signaux de performance validés et résultats liés à des systèmes nommés.",
+    "outcomesTitle": "La preuve par des systèmes actifs.",
+    "outcomesDescription": "Des signaux validés issus de systèmes de production nommés.",
     "outcomesCaseEyebrow": "Des systèmes nommés. Des résultats réels.",
     "outcomesImageAlt": "Programme résidentiel moderne représentant le système CRM ImmoWorld",
     "apply": "Appliquer ARC",
     "closingQuote": "Une équipe responsable, de la contrainte à la production.",
-    "closingTitle": "Vous souhaitez appliquer ARC à vos opérations ?",
-    "closingDescription": "Présentez la contrainte, le résultat visé et votre environnement actuel. Nous tracerons le chemin le plus direct vers un gain opérationnel.",
+    "closingTitle": "Appliquer ARC à votre opération.",
+    "closingDescription": "Présentez la contrainte, le résultat visé et votre environnement actuel. Nous tracerons la prochaine étape.",
     "requestAssessment": "Demander une évaluation ARC",
     "seeCaseStudies": "Voir les études de cas",
     "phases": [
@@ -426,16 +443,16 @@
     }
   },
   "Capabilities": {
-    "heroLabel": "Expertises et maîtrise",
+    "heroLabel": "Expertises intégrées",
     "heroLine1": "Six piliers.",
-    "heroAccent": "Un partenaire",
+    "heroAccent": "Une équipe",
     "heroLine3": "responsable.",
-    "heroDescription": "Hive Vault Arc réunit stratégie, ingénierie et opérations managées autour de six piliers, d’une seule équipe et d’une même boucle de responsabilité, de la découverte à la production.",
+    "heroDescription": "La stratégie, l’ingénierie et les opérations managées restent liées, de la décision à la production.",
     "exploreDetail": "Explorer en détail",
     "solutionPrograms": "Programmes solutions",
     "learnMore": "En savoir plus",
     "arcModel": "Modèle ARC",
-    "arcWords": ["Évaluer.", "Construire.", "Opérer."],
+    "arcWords": ["Évaluer.", "Reconcevoir.", "Piloter."],
     "arcKeys": ["Décisions structurées", "Responsabilité partagée", "Continuité managée"],
     "phase": "Phase {step}",
     "hvaFocus": "Priorité Hive Vault Arc",
@@ -443,16 +460,16 @@
     "phaseOutput": "Livrable de la phase",
     "viewPrograms": "Voir les programmes solutions",
     "quote": "Le travail ne compte que lorsque la stratégie devient un système que les équipes peuvent exploiter, mesurer et améliorer chaque jour.",
-    "quoteAlt": "Ali Amrani, cofondateur et CEO de Hive Vault Arc",
+    "quoteAlt": "Ali Amrani, cofondateur et CTO de Hive Vault Arc",
     "quoteAuthor": "Ali Amrani",
-    "quoteRole": "Cofondateur & CEO",
+    "quoteRole": "Cofondateur & CTO",
     "programsTitle": "Choisissez votre point de départ.",
     "programsDescription": "Trois programmes ciblés. Chacun est cadré, construit et opéré par une seule équipe responsable.",
     "caseStudy": "Étude de cas",
     "fullCatalog": "Catalogue complet des programmes",
     "nextStep": "Prochaine étape",
-    "depthTitle": "Besoin de la carte complète des expertises et de leur profondeur de livraison ?",
-    "depthDescription": "La page En détail présente le contexte stratégique, le modèle d’exécution et l’ensemble des sous-expertises des six piliers.",
+    "depthTitle": "Explorez la carte complète des expertises.",
+    "depthDescription": "Consultez le contexte stratégique, le modèle de livraison et le périmètre détaillé de chaque pilier.",
     "bookCall": "Réserver un appel",
     "onPage": "Sur cette page",
     "fullDepth": "Vue complète",
@@ -581,6 +598,14 @@
       "modules": "Modules activés",
       "stack": "Socle et intégrations",
       "projectMedia": "Preuves visuelles de l’interface",
+      "desktopProofEyebrow": "01 / PREUVE DESKTOP",
+      "desktopProof": "Parcours desktop",
+      "desktopPrevious": "Écran desktop précédent",
+      "desktopNext": "Écran desktop suivant",
+      "mobileProofEyebrow": "02 / PREUVE MOBILE",
+      "mobileProof": "Parcours mobile",
+      "mobilePrevious": "Écran mobile précédent",
+      "mobileNext": "Écran mobile suivant",
       "headlineMetrics": "Chiffres de l’étude de cas",
       "metricBasis": {
         "systemScope": "Périmètre du système",
@@ -605,6 +630,8 @@
       "fallbackDelivery": "Livraison ciblée",
       "start": "Démarrer un échange",
       "fullMap": "Voir la cartographie complète",
+      "heroImageAlt": "Système opérationnel représentant {title}",
+      "atAGlance": "En bref",
       "sectionsAria": "Sections de l’expertise {title}",
       "index": [
         {"number": "01", "label": "Contexte", "href": "#context"},
@@ -618,10 +645,36 @@
       "executionContext": "Contexte d’exécution",
       "coverageEyebrow": "Couverture de l’expertise",
       "coverageTitle": "Ce que HVA peut prendre en charge dans ce domaine.",
+      "scopeDescription": "Une cartographie claire des responsabilités relie les décisions de direction, la livraison et la responsabilité en production.",
+      "deliveryEyebrow": "Livraison ARC",
+      "deliveryTitle": "De la décision à une opération fonctionnelle.",
+      "deliveryDescription": "Le diagnostic, la mise en œuvre et la responsabilité opérationnelle restent reliés dans un même modèle de livraison.",
+      "workingOutput": "Livrable opérationnel",
+      "deliverySteps": [
+        {
+          "step": "01",
+          "title": "Évaluer",
+          "detail": "Clarifier la contrainte métier, les frictions de processus, la maturité des systèmes et les mesures utiles.",
+          "output": "Un périmètre prêt à décider"
+        },
+        {
+          "step": "02",
+          "title": "Ré-ingénier",
+          "detail": "Redessiner et construire les processus, systèmes, automatisations et contrôles autour d’une cible validée.",
+          "output": "Un système prêt pour la production"
+        },
+        {
+          "step": "03",
+          "title": "Piloter",
+          "detail": "Exploiter, stabiliser, superviser et améliorer l’opération en production avec une responsabilité claire.",
+          "output": "Une responsabilité opérationnelle mesurée"
+        }
+      ],
       "outcomesEyebrow": "Évolution attendue",
       "outcomesTitle": "Utile lorsque l’objectif est un progrès responsable.",
       "outcomesDescription": "Cette page précise l’expertise. Le modèle ARC la transforme en travail cadré, systèmes de production et amélioration managée.",
       "relatedPagesAria": "Pages associées",
+      "relatedGuides": "Guides de services associés",
       "relatedEyebrow": "Expertises associées",
       "relatedTitle": "Les domaines adjacents à explorer ensuite.",
       "open": "Ouvrir",
@@ -635,6 +688,11 @@
       "profile": "Profil",
       "experience": "Expérience",
       "education": "Formation",
+      "leadership": "Direction",
+      "operatingPrinciple": "Principe de travail",
+      "background": "Parcours",
+      "selectedExperience": "Expériences sélectionnées",
+      "otherFounders": "Équipe fondatrice",
       "moreTeam": "Autres membres de l’équipe",
       "backTeam": "Retour à l’équipe",
       "bottomTitle": "Travaillez avec les personnes responsables du résultat",
@@ -657,7 +715,8 @@
       "primaryCta": "Explorer les programmes",
       "secondaryCta": "Explorer les expertises",
       "signal": "Trois points de départ",
-      "signalDetail": "Commencez par le problème opérationnel. La même équipe de livraison reste liée au travail après le lancement."
+      "signalDetail": "Commencez par le problème opérationnel. La même équipe de livraison reste liée au travail après le lancement.",
+      "imageAlt": "Trois modules opérationnels reliés représentant l’accueil IA, la modernisation CRM et la fiabilité cloud"
     },
     "navigator": {
       "eyebrow": "Choisissez le point de départ",
@@ -699,10 +758,11 @@
     "ownership": {
       "title": "Le programme est la couche de responsabilité.",
       "description": "Il garde la décision, le système et son amélioration dans une même ligne de responsabilité.",
+      "outputLabel": "Livrable opérationnel",
       "steps": [
-        {"title": "Définir la direction opérationnelle", "detail": "Cadrer la contrainte réelle avant de s’engager dans une trajectoire de construction."},
-        {"title": "Relier le système de travail", "detail": "Construire le processus, les données et les intégrations autour du travail à accomplir."},
-        {"title": "Rester lié à l’exploitation", "detail": "Garder la responsabilité visible lorsque le système fonctionne et évolue."}
+        {"title": "Définir la direction opérationnelle", "detail": "Cadrer la contrainte réelle avant de s’engager dans une trajectoire de construction.", "output": "Un cadrage prêt pour décision"},
+        {"title": "Relier le système de travail", "detail": "Construire le processus, les données et les intégrations autour du travail à accomplir.", "output": "Un système prêt pour la production"},
+        {"title": "Rester lié à l’exploitation", "detail": "Garder la responsabilité visible lorsque le système fonctionne et évolue.", "output": "Une responsabilité opérationnelle mesurée"}
       ]
     },
     "bottomCta": {
@@ -714,12 +774,13 @@
   "CapabilitiesDetail": {
     "hero": {
       "eyebrow": "Expertises en détail",
-      "title": "La profondeur d’expertise, sans le labyrinthe du conseil.",
-      "description": "Des expertises connectées aux décisions dont les clients ont réellement besoin : quoi cadrer, quoi construire et ce dont HVA reste responsable après le lancement.",
+      "title": "Six expertises. Un seul système opérationnel.",
+      "description": "Voyez quoi cadrer, quoi construire et ce qui reste sous responsabilité après le lancement.",
       "primaryCta": "Voir la cartographie",
       "secondaryCta": "Programmes solutions",
       "panelTitle": "En bref",
-      "panelDescription": "Commencez par une expertise, puis passez à la livraison ARC lorsque le périmètre est prêt à devenir un travail de production.",
+      "panelDescription": "Une vue connectée, de la stratégie aux opérations.",
+      "imageAlt": "Cartographie d’expertises reliant stratégie, logiciels, cloud, données et opérations",
       "stats": [
         {"value": "Connectées", "label": "Expertises"},
         {"value": "ARC", "label": "Modèle de livraison"},
@@ -1016,7 +1077,15 @@
     "aboutCta": "Explorer les études de cas",
     "continueReading": "Poursuivre la lecture",
     "related": "Publications associées",
-    "allArticles": "Tous les articles"
+    "allArticles": "Tous les articles",
+    "directAnswer": "Réponse directe",
+    "keyTakeaways": "Points clés",
+    "methodology": "Méthodologie",
+    "limitations": "Limites",
+    "accountability": "Responsabilité éditoriale",
+    "reviewedBy": "Relu par",
+    "relatedCases": "Cas associés",
+    "relatedCapabilities": "Expertises associées"
   },
   "InsightsHub": {
     "types": {
@@ -1077,6 +1146,69 @@
       "description": "Nous pouvons transformer ces publications en une feuille de route concrète pour votre équipe.",
       "primary": "Planifier un échange",
       "secondary": "Voir les expertises"
+    },
+    "editorial": {
+      "heroEyebrow": "Publications",
+      "heroTitle": "Des idées utiles pour des systèmes qui doivent fonctionner.",
+      "heroDescription": "Notes opérationnelles, synthèses de preuves, guides sectoriels et cas de livraison pour les dirigeants qui bâtissent des systèmes réels.",
+      "browseAll": "Parcourir les publications",
+      "viewEvidence": "Voir les preuves clients",
+      "englishFallback": "Les éditions françaises approuvées apparaissent ici dès qu’elles sont prêtes. Les publications originales en anglais restent accessibles.",
+      "topicsTitle": "Explorer par question métier",
+      "topicsDescription": "Commencez par le problème opérationnel, pas par le type de publication.",
+      "topics": {
+        "ai-operational-systems": {
+          "title": "Systèmes opérationnels IA",
+          "description": "Agents, contrôles, workflows et responsabilité en production."
+        },
+        "custom-software-automation": {
+          "title": "Logiciels sur mesure et automatisation",
+          "description": "Des systèmes adaptés au travail que les outils standards ne couvrent pas."
+        },
+        "real-estate-construction": {
+          "title": "Immobilier et construction",
+          "description": "Preuves de livraison et modèles opérationnels pour les équipes immobilières."
+        },
+        "morocco-north-africa-transformation": {
+          "title": "Maroc et Afrique du Nord",
+          "description": "Contexte local, opérations multilingues et adoption."
+        },
+        "data-cloud-reliability": {
+          "title": "Fiabilité des données et du cloud",
+          "description": "Architecture, contrôles, observabilité et opérations résilientes."
+        }
+      },
+      "formats": {
+        "operating-note": "Note opérationnelle",
+        "evidence-brief": "Synthèse de preuves",
+        "industry-guide": "Guide sectoriel",
+        "case": "Cas",
+        "founder-view": "Point de vue fondateur"
+      },
+      "featuredEyebrow": "Publication sélectionnée",
+      "featuredTitle": "Commencer ici",
+      "readFeatured": "Lire la publication",
+      "evidenceEyebrow": "Preuves en production",
+      "evidenceTitle": "Des systèmes livrés sur le terrain.",
+      "evidenceDescription": "Des cas approuvés, avec un périmètre clair, des systèmes visibles et des résultats suivis.",
+      "approvedCase": "Cas client approuvé",
+      "indexEyebrow": "Index des publications",
+      "indexTitle": "Analyses et preuves récentes.",
+      "indexDescription": "Filtrez la bibliothèque par problème métier ou par format éditorial.",
+      "topicFilter": "Sujet",
+      "formatFilter": "Format",
+      "allTopics": "Tous les sujets",
+      "allFormats": "Tous les formats",
+      "emptyTitle": "Aucune publication ne correspond à ces filtres.",
+      "emptyDescription": "Retirez un filtre ou choisissez un autre sujet.",
+      "loadMore": "Afficher six de plus",
+      "loading": "Chargement",
+      "tryAgain": "Réessayer",
+      "loadError": "Les publications suivantes n’ont pas pu être chargées.",
+      "ctaTitle": "Transformez une question opérationnelle en prochaine étape claire.",
+      "ctaDescription": "Apportez le workflow, la contrainte ou le système. Nous vous aiderons à définir la voie pratique.",
+      "ctaPrimary": "Planifier un échange",
+      "ctaSecondary": "Explorer les expertises"
     }
   },
   "CollectionUi": {
@@ -1108,7 +1240,26 @@
     },
     "availableInEnglish": "Disponible en anglais",
     "englishCatalogueTitle": "Les publications originales restent accessibles.",
-    "englishCatalogueDescription": "Les éditions françaises sont en cours de validation éditoriale. Ces contenus ouvrent leur page originale en anglais jusqu’à la publication d’une version française approuvée."
+    "englishCatalogueDescription": "Les éditions françaises sont en cours de validation éditoriale. Ces contenus ouvrent leur page originale en anglais jusqu’à la publication d’une version française approuvée.",
+    "caseStudyRoutes": {
+      "eyebrow": "Poursuivre le fil de l’exécution",
+      "description": "Passez des preuves de livraison au contexte, aux capacités ou à l’échange qui donnent forme au travail.",
+      "insights": {
+        "title": "Contexte opérationnel",
+        "description": "Lisez les idées qui soutiennent nos systèmes.",
+        "href": "/insights"
+      },
+      "capabilities": {
+        "title": "Capacités",
+        "description": "Découvrez comment nous construisons autour du travail.",
+        "href": "/capabilities"
+      },
+      "contact": {
+        "title": "Démarrer un échange",
+        "description": "Apportez un défi opérationnel similaire.",
+        "href": "/contact"
+      }
+    }
   },
   "BlogIndex": {
     "eyebrow": "Journal de stratégie et d’exécution",
@@ -1136,7 +1287,7 @@
       "eyebrow": "Portfolio de transformation",
       "titleLineOne": "Des systèmes conçus",
       "titleLineTwo": "pour les opérations réelles.",
-      "description": "Un registre vivant de plateformes, d’automatisations, d’IA et de systèmes opérationnels conçus autour des contraintes des équipes qui les utilisent.",
+      "description": "Plateformes, automatisations et systèmes opérationnels conçus autour des équipes qui les utilisent.",
       "primaryCta": "Voir les réalisations livrées",
       "secondaryCta": "Échanger sur un programme",
       "featuredAriaLabel": "Études de cas mises en avant"
@@ -1183,7 +1334,7 @@
       "secondaryCta": "Voir les expertises",
       "frameworkLabel": "ARC Framework",
       "frameworkLoop": "Évaluer. Réingénier. Piloter.",
-      "imageAlt": "Équipe de direction technologique analysant les opérations dans une salle de stratégie",
+      "imageAlt": "Équipe de livraison technologique analysant un plan système lors d’une session de travail",
       "imageCaption": "De la stratégie à la production"
     },
     "factsHeading": "Hive Vault Arc en bref",
@@ -1340,7 +1491,10 @@
       "eyebrow": "Notre implantation",
       "title": "Ancrés à Tanger. Actifs au-delà des frontières.",
       "description": "Un accès direct à l’équipe responsable de la décision, de la livraison et des opérations.",
-      "location": "Tanger, Maroc"
+      "location": "Tanger, Maroc",
+      "region": "Maroc, Europe et livraison à distance dans le monde entier",
+      "languages": "Français, anglais et arabe",
+      "socialLabel": "Profils sociaux de Hive Vault Arc"
     },
     "bottomCta": {
       "title": "Apportez-nous le résultat. Nous tracerons la voie vers la production.",
@@ -1352,14 +1506,15 @@
   "Industries": {
     "hero": {
       "eyebrow": "Secteurs",
-      "title": "La réalité du secteur,",
-      "emphasis": "pas une approche générique.",
-      "description": "Hive Vault Arc réunit connaissance sectorielle, stratégie, ingénierie et opérations au sein d’une équipe responsable de bout en bout.",
+      "title": "Conçu pour le secteur.",
+      "emphasis": "Pensé pour l’opération.",
+      "description": "Le contexte sectoriel rencontre la stratégie, l’ingénierie et les opérations.",
       "primaryCta": "Voir les secteurs",
       "secondaryCta": "Voir les réalisations",
       "wordmark": "Secteurs",
       "wordmarkStart": "Sec",
-      "wordmarkEnd": "teurs"
+      "wordmarkEnd": "teurs",
+      "imageAlt": "Modules opérationnels connectés représentant les secteurs accompagnés par Hive Vault Arc"
     },
     "coverage": {
       "eyebrow": "Couverture sectorielle",

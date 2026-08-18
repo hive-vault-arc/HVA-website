@@ -33,22 +33,40 @@ describe('employee profile resilience', () => {
     expect(profiles.map((profile) => profile.name)).toEqual([
       'Khalid Chalhi',
       'Ali Amrani',
-      'Oubay Ghamat',
+      'Oubaye El Ghammat Ghori',
     ]);
+    expect(profiles.map((profile) => profile.position)).toEqual([
+      'Co-Founder & CEO',
+      'Co-Founder & CTO',
+      'Co-Founder & COO',
+    ]);
+    expect(profiles[1]?.profileImage).toBe('/Images/team/ali-amrani-founder-2026.webp');
     expect(profiles.every((profile) => profile.profileImage.endsWith('.webp'))).toBe(true);
   });
 
   it('localizes the founder fallback for the French About page', async () => {
     const profiles = await getFeaturedEmployeeProfiles('fr');
 
-    expect(profiles[0]?.position).toBe('Cofondateur et CEO');
-    expect(profiles[0]?.responsibilityTag).toContain('Stratégie');
+    expect(profiles.map((profile) => profile.position)).toEqual([
+      'Cofondateur et CEO',
+      'Cofondateur et CTO',
+      'Cofondateur et COO',
+    ]);
+    expect(profiles[0]?.responsibilityTag).toContain('Strategy');
   });
 
   it('keeps individual founder pages available during a CMS timeout', async () => {
     const profile = await getEmployeeProfileBySlug('ali-amrani', 'en');
 
     expect(profile?.name).toBe('Ali Amrani');
+    expect(profile?.position).toBe('Co-Founder & CTO');
     expect(profile?.profileImage).toBe('/Images/team/ali-amrani-founder-2026.webp');
+    expect(profile?.experience).toHaveLength(3);
+    expect(profile?.education[0]?.institution).toBe(
+      "Ecole Marocaine des Sciences de l'Ingenieur",
+    );
+    expect(profile?.operatingPrinciple).toBe(
+      'A technical decision is useful only when the team can operate it.',
+    );
   });
 });

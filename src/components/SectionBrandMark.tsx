@@ -7,8 +7,8 @@ type SectionBrandMarkProps = {
   eager?: boolean;
 };
 
-const LOGO_ON_LIGHT_SRC = '/Images/brand/hva-logo-number-3.webp';
-const LOGO_ON_DARK_SRC = '/Images/brand/hva-logo-number-4.webp';
+const LOGO_ON_LIGHT_SRC = '/Images/brand/hva-icon-static-light-surface.svg';
+const LOGO_ON_DARK_SRC = '/Images/brand/hva-icon-static-dark-surface.svg';
 
 const sizeClasses = {
   sm: 'h-8 w-8',
@@ -34,8 +34,8 @@ export default function SectionBrandMark({
       <Image
         src={src}
         alt=""
-        width={1086}
-        height={1086}
+        width={100}
+        height={100}
         className="h-full w-full object-contain"
         loading={eager ? 'eager' : 'lazy'}
         fetchPriority={eager ? 'high' : 'auto'}

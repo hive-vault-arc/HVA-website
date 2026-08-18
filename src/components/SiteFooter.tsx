@@ -67,13 +67,14 @@ export default async function SiteFooter() {
         <div className="site-footer__container">
           <div className="site-footer__main">
             <div className="site-footer__brand-col">
-              <Logo className="site-footer__logo" light size="footer" />
+              <Logo className="site-footer__logo" light kind="wordmark" size="footer" />
               <p className="site-footer__statement">
                 {t('description')}
               </p>
             </div>
 
-            <nav className="site-footer__group" aria-label={t('pages')}>
+            <div className="site-footer__nav-grid">
+            <nav className="site-footer__group site-footer__group--pages" aria-label={t('pages')}>
               <p className="site-footer__title">{t('pages')}</p>
               <ul className="site-footer__list-stack">
                 {pageLinks.map((item) => (
@@ -86,7 +87,7 @@ export default async function SiteFooter() {
               </ul>
             </nav>
 
-            <nav className="site-footer__group" aria-label={t('services')}>
+            <nav className="site-footer__group site-footer__group--services" aria-label={t('services')}>
               <p className="site-footer__title">{t('services')}</p>
               <ul className="site-footer__list-stack">
                 {expertiseLinks.map((item) => (
@@ -99,7 +100,7 @@ export default async function SiteFooter() {
               </ul>
             </nav>
 
-            <nav className="site-footer__group" aria-label={t('industries')}>
+            <nav className="site-footer__group site-footer__group--industries" aria-label={t('industries')}>
               <p className="site-footer__title">{t('industries')}</p>
               <ul className="site-footer__list-stack">
                 {industryLinks.map((item) => (
@@ -112,15 +113,12 @@ export default async function SiteFooter() {
               </ul>
             </nav>
 
-            <div className="site-footer__group">
+            <div className="site-footer__group site-footer__group--connect">
               <p className="site-footer__title">{t('connect')}</p>
               <div className="site-footer__contacts">
-                <Link
-                  href="/contact"
-                  className="sharp-edge flex min-h-11 items-center bg-[#1A2535] px-4 py-2 text-sm font-medium text-[#FFFFFF] transition-all duration-300 hover:bg-[#E8A838] hover:text-[#1A2535] sm:self-start"
-                >
+                <Link href="/contact" className="site-footer__cta sharp-edge">
                   {nav('bookCall')}
-                  <ArrowUpRight className="w-3.5 h-3.5 ml-1.5" motion="nudge" aria-hidden="true" />
+                  <ArrowUpRight className="h-3.5 w-3.5" motion="nudge" aria-hidden="true" />
                 </Link>
                 <a href={`mailto:${CONTACT_EMAIL}`} className="site-footer__contact">
                   <Mail className="h-3.5 w-3.5" aria-hidden="true" />
@@ -132,20 +130,19 @@ export default async function SiteFooter() {
                 </a>
               </div>
             </div>
+            </div>
           </div>
 
           <div className="site-footer__bar">
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
-              <p>© {year} {DISPLAY_BRAND_NAME_UPPER}. {t('rights')} {t('precision')}</p>
-              {legalLinks.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="site-footer__link text-[10px] opacity-50 hover:opacity-100"
-                >
-                  {t(item.key)}
-                </Link>
-              ))}
+            <div className="site-footer__legal">
+              <p>&copy; {year} {DISPLAY_BRAND_NAME_UPPER}. {t('rights')} {t('precision')}</p>
+              <div className="site-footer__legal-links">
+                {legalLinks.map((item) => (
+                  <Link key={item.href} href={item.href} className="site-footer__legal-link">
+                    {t(item.key)}
+                  </Link>
+                ))}
+              </div>
             </div>
             <div className="site-footer__social">
               <a

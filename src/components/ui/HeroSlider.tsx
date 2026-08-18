@@ -67,13 +67,6 @@ const SLIDE_CONFIG: Array<
     image: '/Images/hero/hva-ai-orchestration-3d-transparent.webp',
     imageMode: 'contain',
   },
-  {
-    titleVariant: 'compact',
-    primaryHref: '/capabilities',
-    secondaryHref: '/case-studies',
-    image: '/Images/hero/hva-arc-production-command-3d-transparent.webp',
-    imageMode: 'contain',
-  },
 ];
 
 export default function HeroSlider() {
@@ -194,6 +187,7 @@ export default function HeroSlider() {
                     src={slide.image}
                     alt={slide.imageAlt}
                     fill
+                    quality={90}
                     className={`${
                       slide.imageMode === 'contain' ? 'object-contain' : 'object-cover'
                     } hero-image-animate`}

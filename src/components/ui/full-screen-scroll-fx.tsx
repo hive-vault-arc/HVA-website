@@ -787,7 +787,6 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
           .fx-bg-img {
             position: absolute; inset: -10% 0 -10% 0;
             width: 100%; height: 120%; object-fit: cover;
-            filter: brightness(0.96) saturate(1.04);
             opacity: 0;
             will-change: transform, opacity;
           }
@@ -832,7 +831,7 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
 
           .fx-header {
             grid-column: 1 / 13; align-self: start; padding-top: 6vh;
-            font-size: clamp(2rem, 9vw, 9rem); line-height: 0.86; text-align: center; color: var(--fx-text);
+            font-size: clamp(2rem, 9cqw, 9rem); line-height: 0.86; text-align: center; color: var(--fx-text);
           }
           .fx-header > * { display: block; }
 
@@ -863,7 +862,7 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
             opacity: 0.35;
             transition: opacity 0.3s ease, transform 0.3s ease;
             position: relative;
-            font-size: clamp(1rem, 2.4vw, 1.8rem);
+            font-size: clamp(1rem, 2.4cqw, 1.8rem);
             user-select: none;
             cursor: pointer;
           }
@@ -888,7 +887,7 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
           .fx-featured-title {
             margin: 0; color: var(--fx-text);
             font-weight: 900; letter-spacing: -0.01em;
-            font-size: clamp(2rem, 7.5vw, 6rem);
+            font-size: clamp(2rem, 7.5cqw, 6rem);
           }
           .fx-word-mask { display: inline-block; overflow: hidden; vertical-align: middle; }
           .fx-word { display: inline-block; vertical-align: middle; }
@@ -896,7 +895,7 @@ export const FullScreenScrollFX = forwardRef<HTMLDivElement, FullScreenFXProps>(
           .fx-footer {
             grid-column: 1 / 13; align-self: end; padding-bottom: 5vh; text-align: center;
           }
-          .fx-footer-title { color: var(--fx-text); font-size: clamp(1.6rem, 7vw, 7rem); font-weight: 900; letter-spacing: -0.01em; line-height: 0.9; }
+          .fx-footer-title { color: var(--fx-text); font-size: clamp(1.6rem, 7cqw, 7rem); font-weight: 900; letter-spacing: -0.01em; line-height: 0.9; }
           .fx-progress {
             width: 200px;
             height: 2px;

@@ -17,6 +17,12 @@ const coreLinks = [
 
 const submenuLinks = {
   Capabilities: [
+    ['Strategy & Business Consulting', '/capabilities/strategy-business'],
+    ['Technology Consulting', '/capabilities/technology-consulting'],
+    ['AI, Data & Analytics', '/capabilities/ai-data-analytics'],
+    ['Software Engineering', '/capabilities/software-engineering'],
+    ['Cloud & Infrastructure', '/capabilities/cloud-infrastructure'],
+    ['Operations & Managed Services', '/capabilities/operations-managed'],
     ['Solution Programs', '/capabilities/solution-programs'],
     ['In Detail', '/capabilities/in-detail'],
   ],
@@ -33,6 +39,9 @@ const submenuLinks = {
   'Who We Are': [
     ['About Us', '/aboutus'],
     ['Portfolio', '/whoarewe/portfolio'],
+    ['LinkedIn', 'https://www.linkedin.com/company/hive-vault-arc'],
+    ['Instagram', 'https://www.instagram.com/hivevaultarc/'],
+    ['X', 'https://x.com/Hivevaultarc'],
   ],
   Insights: [
     ['Blog', '/blog'],
@@ -71,10 +80,23 @@ describe('Navbar', () => {
       links.forEach(([name, href]) => {
         expect(screen.getByRole('link', { name })).toHaveAttribute('href', href);
       });
+
+      if (menuName === 'Who We Are') {
+        ['LinkedIn', 'Instagram', 'X'].forEach((name) => {
+          expect(screen.getByRole('link', {name})).toHaveAttribute(
+            'target',
+            '_blank',
+          );
+          expect(screen.getByRole('link', {name})).toHaveAttribute(
+            'rel',
+            'noopener noreferrer',
+          );
+        });
+      }
     });
 
     expect(screen.queryByRole('link', { name: 'Contact' })).toBeNull();
-  });
+  }, 10000);
 
   it('routes Book a Call CTA to contact page', () => {
     render(<Navbar />);

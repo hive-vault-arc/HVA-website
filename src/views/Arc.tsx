@@ -36,9 +36,9 @@ type ArcPhase = ArcPhaseCopy & {
 };
 
 const phaseImages = [
-  '/Images/arc/hva-arc-assess-fieldwork.webp',
-  '/Images/arc/hva-arc-reengineer-studio.webp',
-  '/Images/arc/hva-arc-command-operations.webp',
+  '/Images/arc/hva-arc-assess-diagnostic-v2.webp',
+  '/Images/arc/hva-arc-reengineer-architecture-v2.webp',
+  '/Images/arc/hva-arc-command-network-v2.webp',
 ] as const;
 
 const phaseLetters = ['A', 'R', 'C'] as const;
@@ -169,15 +169,15 @@ export default function Arc({studies, children}: ArcProps) {
           }
 
           const leadWords = gsap.utils.toArray<HTMLElement>(
-            '.arc-briefing__lead-copy span'
+            '.arc-briefing__lead-copy span:not(:first-child)'
           );
           if (leadWords.length > 0 && leadRef.current) {
             gsap.fromTo(
               leadWords,
-              {opacity: 0.18},
+              {opacity: 0.72},
               {
                 opacity: 1,
-                stagger: 0.035,
+                stagger: 0.12,
                 ease: 'none',
                 scrollTrigger: {
                   trigger: leadRef.current,
@@ -244,7 +244,8 @@ export default function Arc({studies, children}: ArcProps) {
     });
   };
 
-  const leadWords = t('leadDescription').split(/\s+/);
+  const leadSentences = t('leadDescription').split(/(?<=\.)\s+/);
+  const leadTitleLines = t('leadTitle').split(/(?<=\.)\s+/);
 
   return (
     <div ref={pageRef} className="arc-briefing">
@@ -260,10 +261,11 @@ export default function Arc({studies, children}: ArcProps) {
         data-arc-section="hero"
       >
         <Image
-          src="/Images/arc/hva-arc-briefing-hero.webp"
+          src="/Images/arc/hva-arc-systems-hero-v2.webp"
           alt={t('heroAlt')}
           fill
           priority
+          quality={90}
           sizes="100vw"
           className="arc-briefing__hero-image"
         />
@@ -311,11 +313,17 @@ export default function Arc({studies, children}: ArcProps) {
         data-arc-section="summary"
       >
         <div className="arc-briefing__shell arc-briefing__lead-layout">
-          <h2 id="arc-lead-title">{t('leadTitle')}</h2>
-          <div>
+          <div className="arc-briefing__lead-heading">
+            <h2 id="arc-lead-title">
+              {leadTitleLines.map((line) => (
+                <span key={line}>{line}</span>
+              ))}
+            </h2>
+          </div>
+          <div className="arc-briefing__lead-content">
             <p className="arc-briefing__lead-copy">
-              {leadWords.map((word, index) => (
-                <span key={`${word}-${index}`}>{word} </span>
+              {leadSentences.map((sentence, index) => (
+                <span key={`${sentence}-${index}`}>{sentence}</span>
               ))}
             </p>
             <div className="arc-briefing__fit" aria-label={t('bestFor')}>
@@ -391,9 +399,15 @@ export default function Arc({studies, children}: ArcProps) {
         aria-labelledby="arc-process-title"
         data-arc-section="process"
       >
-        <div className="arc-briefing__shell arc-briefing__process-layout">
+          <div className="arc-briefing__shell arc-briefing__process-layout">
           <div className="arc-briefing__process-intro">
-            <h2 id="arc-process-title">{t('processTitle')}</h2>
+            <h2 id="arc-process-title">
+              {t('processTitle')
+                .split(/(?<=\.)\s+/)
+                .map((line) => (
+                  <span key={line}>{line}</span>
+                ))}
+            </h2>
             <p>{t('processDescription')}</p>
             <ol aria-label={t('phasesLabel')}>
               {arcPhases.map((phase, index) => (
@@ -416,6 +430,7 @@ export default function Arc({studies, children}: ArcProps) {
                     src={phase.image}
                     alt={phase.imageAlt}
                     fill
+                    quality={90}
                     sizes="(max-width: 1023px) 100vw, 54vw"
                     className="arc-briefing__stage-image"
                   />
@@ -468,37 +483,40 @@ export default function Arc({studies, children}: ArcProps) {
           data-arc-section="proof-in-production"
         >
           <div className="arc-briefing__shell">
-            <header className="arc-briefing__outcomes-heading">
-              <p>{t('outcomesEyebrow')}</p>
-              <h2 id="arc-outcomes-title">{t('outcomesTitle')}</h2>
-            </header>
+            <div className="arc-briefing__outcomes-overview">
+              <header className="arc-briefing__outcomes-heading">
+                <p>{t('outcomesEyebrow')}</p>
+                <h2 id="arc-outcomes-title">{t('outcomesTitle')}</h2>
+                <p>{t('outcomesDescription')}</p>
+              </header>
 
-            {benchmarkOutcomes.length > 0 && (
-              <div className="arc-briefing__benchmarks">
-                {benchmarkOutcomes.map((outcome) => {
-                  const BenchmarkIcon =
-                    outcome.category === 'throughput'
-                      ? TrendingUp
-                      : outcome.category === 'cycleTime'
-                        ? Gauge
-                        : ChartArea;
+              {benchmarkOutcomes.length > 0 && (
+                <div className="arc-briefing__benchmarks">
+                  {benchmarkOutcomes.map((outcome) => {
+                    const BenchmarkIcon =
+                      outcome.category === 'throughput'
+                        ? TrendingUp
+                        : outcome.category === 'cycleTime'
+                          ? Gauge
+                          : ChartArea;
 
-                  return (
-                    <article key={outcome._key} data-category={outcome.category}>
-                      <BenchmarkIcon
-                        aria-hidden="true"
-                        color="var(--arc-gold)"
-                      />
-                      <div>
-                        <strong>{outcome.value}</strong>
-                        <h3>{outcome.label}</h3>
-                        <p>{outcome.context}</p>
-                      </div>
-                    </article>
-                  );
-                })}
-              </div>
-            )}
+                    return (
+                      <article key={outcome._key} data-category={outcome.category}>
+                        <BenchmarkIcon
+                          aria-hidden="true"
+                          color="var(--arc-gold)"
+                        />
+                        <div>
+                          <strong>{outcome.value}</strong>
+                          <h3>{outcome.label}</h3>
+                          <p>{outcome.context}</p>
+                        </div>
+                      </article>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
 
             <article
               className="arc-briefing__outcome-case"
@@ -506,9 +524,10 @@ export default function Arc({studies, children}: ArcProps) {
             >
               <figure className="arc-briefing__outcome-case-media">
                 <Image
-                  src="/Images/industries/real-estate-crm-lead-operations-morocco.webp"
+                  src="/Images/arc/hva-arc-real-estate-operations-v2.webp"
                   alt={t('outcomesImageAlt')}
                   fill
+                  quality={90}
                   sizes="(max-width: 1023px) 100vw, 48vw"
                 />
               </figure>

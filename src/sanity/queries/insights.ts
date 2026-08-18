@@ -30,6 +30,33 @@ const seoFields = `
   }
 `;
 
+const editorialFields = `
+  editorialFormat,
+  topics,
+  directAnswer,
+  keyTakeaways,
+  evidenceType,
+  reviewers[]{
+    name,
+    role,
+    initials
+  },
+  relatedCases[]->{
+    "label": title,
+    "href": "/case-studies/" + slug.current
+  },
+  relatedCapabilities[]->{
+    "label": title,
+    "href": "/capabilities/" + slug.current
+  },
+  methodology,
+  limitations,
+  primaryCta{
+    label,
+    href
+  }
+`;
+
 const localizationFields = `
   _id,
   language,
@@ -101,6 +128,7 @@ const postSummaryFields = `
   coverAlt,
   excerpt,
   tags,
+  ${editorialFields},
   ${seoFields}
 `;
 
@@ -129,6 +157,7 @@ const newsArticleSummaryFields = `
   subtitle,
   category,
   tags,
+  ${editorialFields},
   ${seoFields}
 `;
 
@@ -153,6 +182,7 @@ const perspectiveSummaryFields = `
     ${imageFields}
   },
   coverAlt,
+  ${editorialFields},
   ${seoFields}
 `;
 
@@ -177,6 +207,7 @@ const researchReportSummaryFields = `
     ${imageFields}
   },
   coverAlt,
+  ${editorialFields},
   ${seoFields}
 `;
 
@@ -334,6 +365,7 @@ const paginatedInsightFields = `
   title,
   publishedAt,
   lastUpdated,
+  ${editorialFields},
   _type == "post" => {
     category,
     excerpt,
@@ -417,6 +449,7 @@ const paginatedCollectionFields = `
   title,
   publishedAt,
   lastUpdated,
+  ${editorialFields},
   "industryTaxonomy": industryRef->{
     "id": slug.current,
     title,
@@ -493,7 +526,7 @@ const caseStudyProjectMediaFields = `
       publicationStatus == "approved" &&
       defined(permissionConfirmedOn) &&
       length(permissionReference) > 0 &&
-      length(caption) > 0 &&
+      length(alt) > 0 &&
       length(disclosure) > 0
     ) ||
     ($preview == true && publicationStatus == "notCleared")
@@ -504,7 +537,6 @@ const caseStudyProjectMediaFields = `
     placement,
     evidenceType,
     alt,
-    caption,
     disclosure,
     publicationStatus,
     image {

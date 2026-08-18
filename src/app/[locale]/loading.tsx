@@ -1,21 +1,18 @@
-import SectionBrandMark from '@/components/SectionBrandMark';
-import {getTranslations} from 'next-intl/server';
-
-export default async function Loading() {
-  const t = await getTranslations('Errors');
+export default function Loading() {
   return (
     <div
-      className="flex min-h-[72dvh] items-center justify-center bg-[#F7F8FA] px-6 text-[#1A2535]"
+      className="min-h-[72dvh] bg-[#FCFBF8] px-4 pb-16 pt-28 md:px-8 md:pt-36"
       role="status"
-      aria-live="polite"
+      aria-label="Loading"
     >
-      <div className="w-full max-w-sm border-y border-[#DDE3EA] py-10 text-center">
-        <SectionBrandMark size="sm" className="mx-auto" />
-        <p className="mt-5 text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)]">
-          {t('loading')}
-        </p>
-        <div className="mx-auto mt-6 h-px w-24 overflow-hidden bg-[#DDE3EA]" aria-hidden="true">
-          <div className="h-full w-full origin-left bg-[#E8A838] motion-safe:animate-pulse" />
+      <div className="site-frame-wide animate-pulse" aria-hidden="true">
+        <div className="h-3 w-24 bg-[#DDE3EA]" />
+        <div className="mt-6 h-12 max-w-xl bg-[#DDE3EA] md:h-16" />
+        <div className="mt-4 h-5 max-w-md bg-[#F1F3F6]" />
+        <div className="mt-12 grid gap-px bg-[#DDE3EA] md:grid-cols-3">
+          <div className="h-44 bg-white" />
+          <div className="h-44 bg-white" />
+          <div className="h-44 bg-white" />
         </div>
       </div>
     </div>

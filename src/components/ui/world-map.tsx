@@ -68,7 +68,7 @@ export function WorldMap({ dots = [], lineColor = "#E8A838" }: MapProps) {
   );
 
   return (
-    <div className="sharp-edge w-full aspect-[2/1] bg-[#FFFFFF] relative font-sans rounded-2xl border border-[#1A2535]/10">
+    <div className="sharp-edge relative aspect-[2/1] w-full border border-[#DDE3EA] bg-[#FFFFFF] font-sans">
       <div 
         className="h-full w-full [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)] pointer-events-none select-none"
         dangerouslySetInnerHTML={{ __html: svgMap }}

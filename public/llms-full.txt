@@ -38,11 +38,11 @@ The company is not positioned as an advice-only consultancy or a build-only deve
 
 ## 3. Leadership
 
-Hive Vault Arc is led by three co-founders. Each founder is a CEO and owns a distinct responsibility area.
+Hive Vault Arc is led by three co-founders with distinct executive responsibilities.
 
 - Khalid Chalhi: Co-Founder and CEO. Responsible for strategy, AI engineering, and software execution.
-- Ali Amrani: Co-Founder and CEO. Responsible for product systems, full-stack engineering, and delivery architecture.
-- Oubay Ghamat: Co-Founder and CEO. Responsible for cloud infrastructure, operations, and production reliability.
+- Ali Amrani: Co-Founder and CTO. Responsible for product systems, full-stack engineering, and delivery architecture.
+- Oubay Ghamat: Co-Founder and COO. Responsible for cloud infrastructure, operations, and production reliability.
 - Khalid Chalhi profile: https://hivevaultarc.com/aboutus/our-people/khalid-chalhi
 - Ali Amrani profile: https://hivevaultarc.com/aboutus/our-people/ali-amrani
 - Oubay Ghamat profile: https://hivevaultarc.com/aboutus/our-people/oubay-ghamat
@@ -337,7 +337,7 @@ Hive Vault Arc is a technology transformation partner based in Tangier, Morocco.
 
 ### Who leads Hive Vault Arc?
 
-Hive Vault Arc is led by three Co-Founders and CEOs: Khalid Chalhi, Ali Amrani, and Oubay Ghamat. Khalid owns strategy, AI, and software execution; Ali owns product systems and full-stack delivery architecture; Oubay owns cloud infrastructure, operations, and reliability.
+Hive Vault Arc is led by three Co-Founders: Khalid Chalhi, CEO; Ali Amrani, CTO; and Oubay Ghamat, COO. Khalid owns strategy, AI, and software execution; Ali owns product systems and full-stack delivery architecture; Oubay owns cloud infrastructure, operations, and reliability.
 
 ### What is the ARC model?
 

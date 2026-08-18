@@ -48,20 +48,22 @@ function TrustedPartnerLogo({ partner, caseStudyLabel }: TrustedPartnerLogoProps
       return;
     }
 
-    const timeline = gsap.timeline({ defaults: { duration: 0.22, ease: 'power2.out' } });
+    const timeline = gsap.timeline({
+      defaults: { duration: 0.8, ease: 'power3.inOut' },
+    });
 
     if (nextActive) {
       gsap.set(color, { autoAlpha: 0, yPercent: -115 });
       timeline
         .to(monochrome, { autoAlpha: 0, yPercent: 115 }, 0)
-        .to(color, { autoAlpha: 1, yPercent: 0 }, 0.025);
+        .to(color, { autoAlpha: 1, yPercent: 0 }, 0.08);
       return;
     }
 
     gsap.set(monochrome, { autoAlpha: 0, yPercent: -115 });
     timeline
       .to(color, { autoAlpha: 0, yPercent: -115 }, 0)
-      .to(monochrome, { autoAlpha: 1, yPercent: 0 }, 0.025);
+      .to(monochrome, { autoAlpha: 1, yPercent: 0 }, 0.08);
   }, []);
 
   const syncInteractionState = useCallback(() => {

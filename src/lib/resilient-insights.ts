@@ -4,6 +4,7 @@ import {withSanityFallback} from '@/sanity/lib/fetch';
 
 import {POSTS} from './blog';
 import {
+  INSIGHT_COLLECTION_CASE_STUDY_INITIAL_SIZE,
   INSIGHT_COLLECTION_INITIAL_SIZE,
   INSIGHT_COLLECTION_NEXT_SIZE,
   type InsightCollectionCursor,
@@ -25,8 +26,14 @@ import {
   getPaginatedSanityInsightCollection,
   getPaginatedSanityInsights,
 } from './sanity-content';
+import {
+  resolveEditorialFields,
+  type EditorialContentFields,
+} from './editorial-taxonomy';
 
-type LocalCollectionRecord = {
+const LOCAL_DEMO_CASE_STUDY_SLUG = 'healthcare-ai-receptionist-crm';
+
+type LocalCollectionRecord = EditorialContentFields & {
   id: string;
   type: InsightCollectionType;
   slug: string;
@@ -39,6 +46,7 @@ type LocalCollectionRecord = {
   authorName?: string;
   deploymentStatus?: string;
   hasClientEvidence?: boolean;
+  coverDisclosure?: string;
 };
 
 const REAL_ESTATE_LABELS = new Set([
@@ -54,6 +62,7 @@ const EDUCATION_LABELS = new Set([
   'education & professional training',
   'éducation et formation professionnelle',
 ]);
+
 
 function localizedRecord<T extends {slug: string}>(
   record: T,
@@ -154,7 +163,9 @@ function localRecords(
         };
       });
     case 'caseStudy':
-      return CASE_STUDIES.map((source) => {
+      return CASE_STUDIES.filter(
+        (source) => source.slug !== LOCAL_DEMO_CASE_STUDY_SLUG,
+      ).map((source) => {
         const study = localizedRecord(source, locale);
         return {
           id: `fallback:caseStudy:${study.slug}`,
@@ -170,6 +181,7 @@ function localRecords(
           industryLabel: study.industry,
           deploymentStatus: study.deploymentStatus,
           hasClientEvidence: study.hasClientEvidence,
+          coverDisclosure: study.coverDisclosure,
         };
       });
   }
@@ -216,9 +228,13 @@ function toCollectionItem(
     image: record.image,
     date: record.date,
     sourceLocale: locale,
+    ...resolveEditorialFields(record.slug, record),
     industry: localIndustry(record.industryLabel, locale),
     ...(record.readTime ? {readTime: record.readTime} : {}),
     ...(record.authorName ? {authorName: record.authorName} : {}),
+    ...(record.coverDisclosure
+      ? {coverDisclosure: record.coverDisclosure}
+      : {}),
     ...(record.deploymentStatus
       ? {deploymentStatus: record.deploymentStatus}
       : {}),
@@ -267,7 +283,9 @@ export function getLocalInsightCollectionPage(
   );
   const limit =
     cursor === null
-      ? INSIGHT_COLLECTION_INITIAL_SIZE
+      ? collectionType === 'caseStudy'
+        ? INSIGHT_COLLECTION_CASE_STUDY_INITIAL_SIZE
+        : INSIGHT_COLLECTION_INITIAL_SIZE
       : INSIGHT_COLLECTION_NEXT_SIZE;
   const items = available.slice(0, limit);
   const lastItem = items.at(-1);
@@ -321,6 +339,9 @@ function toListingItem(
     sourceLocale: locale,
     ...(collectionItem.readTime
       ? {readTime: collectionItem.readTime}
+      : {}),
+    ...(collectionItem.coverDisclosure
+      ? {coverDisclosure: collectionItem.coverDisclosure}
       : {}),
   };
 }
