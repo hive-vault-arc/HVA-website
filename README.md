@@ -51,6 +51,11 @@ http://localhost:3000
 - `npm run start` - Run production build locally
 - `npm run lint` - Run ESLint
 - `npm run test` - Run test suite
+- `npm run check:webp` - Verify that public raster assets use WebP
+
+## Deployment
+
+Production builds run `npm run build`, which verifies WebP assets before compiling the Next.js application. Pushes to `main` trigger the production deployment.
 
 ## Environment Variables
 
