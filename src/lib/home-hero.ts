@@ -42,27 +42,62 @@ function normalizePartnerName(name: string): string {
   return name.trim().toLocaleLowerCase();
 }
 
-function trustedPartnerRank(name: string): number {
+function trustedClientKey(name: string, slug?: string): string {
   const normalizedName = normalizePartnerName(name);
-  const rank = TRUSTED_PARTNER_ORDER.findIndex((partnerName) =>
-    normalizedName.includes(partnerName),
-  );
+  const normalizedSlug = slug?.trim().toLocaleLowerCase() ?? '';
+
+  if (
+    normalizedName.includes('premium advice') ||
+    normalizedSlug.includes('premium-advice') ||
+    (normalizedName.includes('asesoramiento') && normalizedName.includes('premium')) ||
+    (normalizedSlug.includes('asesoramiento') && normalizedSlug.includes('premium')) ||
+    (name.includes('نصيحة') && name.includes('تدريب'))
+  ) {
+    return 'premium-advice';
+  }
+
+  if (
+    normalizedName.includes('tarik rami') ||
+    normalizedSlug.includes('tarik-rami') ||
+    (name.includes('طارق') && name.includes('رامي'))
+  ) {
+    return 'tarik-rami';
+  }
+
+  if (normalizedName.includes('immoworld') || normalizedSlug.includes('immoworld')) {
+    return 'immoworld';
+  }
+
+  return normalizedName;
+}
+
+function trustedPartnerRank(name: string): number {
+  const trustedKey = trustedClientKey(name);
+  const rank = TRUSTED_PARTNER_ORDER.findIndex((partnerName) => {
+    if (partnerName === 'premium advice') return trustedKey === 'premium-advice';
+    if (partnerName === 'tarik rami') return trustedKey === 'tarik-rami';
+    return trustedKey === 'immoworld';
+  });
 
   return rank === -1 ? TRUSTED_PARTNER_ORDER.length : rank;
 }
 
-function partnerPresentation(name: string, logo: string): Pick<HomeTrustedPartner, 'logo' | 'surface'> {
-  const normalizedName = normalizePartnerName(name);
+function partnerPresentation(
+  name: string,
+  logo: string,
+  slug?: string,
+): Pick<HomeTrustedPartner, 'logo' | 'surface'> {
+  const clientKey = trustedClientKey(name, slug);
 
-  if (normalizedName.includes('premium advice')) {
+  if (clientKey === 'premium-advice') {
     return { logo: PREMIUM_ADVICE_LOGO, surface: 'light' };
   }
 
-  if (normalizedName.includes('tarik rami')) {
+  if (clientKey === 'tarik-rami') {
     return { logo: TARIK_RAMI_LOGO, surface: 'light' };
   }
 
-  if (normalizedName.includes('immoworld')) {
+  if (clientKey === 'immoworld') {
     return { logo, surface: 'dark' };
   }
 
@@ -78,12 +113,12 @@ export function buildHomeHeroProof(
   const seenClients = new Set<string>();
   const trustedPartners = studies.flatMap<HomeTrustedPartner>((study) => {
     const logo = study.assets.clientLogo;
-    const clientKey = normalizePartnerName(study.clientName);
+    const clientKey = trustedClientKey(study.clientName, study.slug);
 
     if (!logo || seenClients.has(clientKey)) return [];
     seenClients.add(clientKey);
 
-    const presentation = partnerPresentation(study.clientName, logo);
+    const presentation = partnerPresentation(study.clientName, logo, study.slug);
 
     return [
       {
@@ -98,7 +133,7 @@ export function buildHomeHeroProof(
   });
 
   for (const fallbackPartner of TRUSTED_PARTNER_FALLBACKS) {
-    const clientKey = normalizePartnerName(fallbackPartner.name);
+    const clientKey = trustedClientKey(fallbackPartner.name);
     if (seenClients.has(clientKey)) continue;
 
     seenClients.add(clientKey);

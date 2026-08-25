@@ -2,13 +2,18 @@
 
 import React, {type CSSProperties} from 'react';
 import dynamic from 'next/dynamic';
-import Image from 'next/image';
 import {motion, useScroll, useTransform} from 'framer-motion';
-import {useTranslations} from 'next-intl';
+import {useLocale, useTranslations} from 'next-intl';
 import {ArrowUpRight, BarChart3, MessageSquare, Network, ShieldCheck} from '@/components/icons';
 import DeferredMount from '@/components/DeferredMount';
 import type {IndustryInsightItem} from '@/components/IndustryInsightsShowcase';
 import {Link} from '@/i18n/navigation';
+import ResponsiveMedia from '@/components/media/ResponsiveMedia';
+import type {AppLocale} from '@/i18n/config';
+import {
+  SEMANTIC_MEDIA,
+  type SemanticMediaDefinition,
+} from '@/lib/semantic-media';
 import styles from './CapabilityIndustryPages.module.css';
 
 const IndustryInsightsShowcase = dynamic(
@@ -17,15 +22,15 @@ const IndustryInsightsShowcase = dynamic(
 );
 
 const IMGS = {
-  realEstate: '/Images/industries/real-estate-crm-lead-operations-morocco.webp',
-  healthcare: '/Images/industries/healthcare-clinical-operations-dashboard-men-morocco.webp',
-  logistics: '/Images/industries/logistics-dispatch-workflow-automation-morocco.webp',
-  finance: '/Images/industries/finance-brokerage-deal-pipeline-morocco.webp',
-  government: '/Images/industries/government-public-sector-digital-services-men-morocco.webp',
-  retail: '/Images/industries/retail-ecommerce-operations-platform-morocco.webp',
-  energy: '/Images/industries/energy-sustainability-monitoring-morocco.webp',
-  consumerGoods: '/Images/industries/consumer-goods-luxury-analytics-men-morocco.webp',
-  rdLab: '/Images/industries/hva-industries-method-session-v2.webp',
+  realEstate: SEMANTIC_MEDIA.industries.realEstate,
+  healthcare: SEMANTIC_MEDIA.industries.healthcare,
+  logistics: SEMANTIC_MEDIA.industries.logistics,
+  finance: SEMANTIC_MEDIA.industries.finance,
+  government: SEMANTIC_MEDIA.industries.government,
+  retail: SEMANTIC_MEDIA.industries.retail,
+  energy: SEMANTIC_MEDIA.industries.energy,
+  consumerGoods: SEMANTIC_MEDIA.industries.consumerLuxury,
+  rdLab: SEMANTIC_MEDIA.industries.method,
 };
 
 const HERO_BACKGROUND = '/Images/page-heroes/hva-industries-adaptive-fields-hero-v2.webp';
@@ -37,15 +42,15 @@ const approachTrackConfig = [
   {code: 'IND-004', icon: <MessageSquare className="h-5 w-5" strokeWidth={1.5} />},
 ];
 
-const industryCardConfig = [
-  {id: 'real-estate', image: IMGS.realEstate, href: '/case-studies/top-tier-crm-transformation-program-real-estate-operations'},
-  {id: 'healthcare', image: IMGS.healthcare, href: '/case-studies'},
-  {id: 'financial-services', image: IMGS.finance, href: '/case-studies'},
-  {id: 'government', image: IMGS.government, href: '/case-studies'},
-  {id: 'retail', image: IMGS.retail, href: '/case-studies'},
-  {id: 'energy', image: IMGS.energy, href: '/case-studies'},
-  {id: 'logistics', image: IMGS.logistics, href: '/case-studies'},
-  {id: 'consumer-goods', image: IMGS.consumerGoods, href: '/case-studies'},
+export const INDUSTRY_CARD_CONFIG = [
+  {id: 'real-estate', image: IMGS.realEstate.desktopSrc, media: IMGS.realEstate, href: '/case-studies/top-tier-crm-transformation-program-real-estate-operations'},
+  {id: 'healthcare', image: IMGS.healthcare.desktopSrc, media: IMGS.healthcare, href: '/case-studies'},
+  {id: 'financial-services', image: IMGS.finance.desktopSrc, media: IMGS.finance, href: '/case-studies'},
+  {id: 'government', image: IMGS.government.desktopSrc, media: IMGS.government, href: '/case-studies'},
+  {id: 'retail', image: IMGS.retail.desktopSrc, media: IMGS.retail, href: '/case-studies'},
+  {id: 'energy', image: IMGS.energy.desktopSrc, media: IMGS.energy, href: '/case-studies'},
+  {id: 'logistics', image: IMGS.logistics.desktopSrc, media: IMGS.logistics, href: '/case-studies'},
+  {id: 'consumer-goods', image: IMGS.consumerGoods.desktopSrc, media: IMGS.consumerGoods, href: '/case-studies'},
 ] as const;
 
 type IndustryCardCopy = {
@@ -57,16 +62,29 @@ type IndustryCardCopy = {
   bullets: string[];
 };
 
-type IndustryCardData = IndustryCardCopy & {image: string; href: string};
+type IndustryCardData = IndustryCardCopy & {
+  image: string;
+  media: SemanticMediaDefinition;
+  href: string;
+};
 type ApproachTrackCopy = {code: string; title: string; description: string; group: 'methodology' | 'compliance'};
 
-function SectorGallery({cards, relatedWorkLabel}: {cards: IndustryCardData[]; relatedWorkLabel: string}) {
+function SectorGallery({
+  cards,
+  relatedWorkLabel,
+  locale,
+}: {
+  cards: IndustryCardData[];
+  relatedWorkLabel: string;
+  locale: AppLocale;
+}) {
   return (
     <div className={styles.sectorGallery}>
       {cards.map((card, cardIndex) => (
         <motion.article
           key={card.id}
           id={card.id}
+          data-sector={card.id}
           className={styles.sectorCard}
           initial={{opacity: 0, y: 18}}
           whileInView={{opacity: 1, y: 0}}
@@ -74,12 +92,10 @@ function SectorGallery({cards, relatedWorkLabel}: {cards: IndustryCardData[]; re
           transition={{duration: 0.48}}
         >
           <Link href={card.href} className={styles.sectorCardLink} aria-label={`${card.title}: ${relatedWorkLabel}`}>
-            <Image
-              src={card.image}
-              alt={card.imageAlt}
-              fill
+            <ResponsiveMedia
+              media={card.media}
+              locale={locale}
               priority={cardIndex < 2}
-              quality={90}
               sizes="(max-width: 900px) 100vw, 62vw"
             />
             <span className={styles.sectorMeta}>
@@ -105,10 +121,11 @@ function SectorGallery({cards, relatedWorkLabel}: {cards: IndustryCardData[]; re
 
 export default function Industries({insightItems = []}: {readonly insightItems?: IndustryInsightItem[]}) {
   const t = useTranslations('Industries');
+  const locale = useLocale() as AppLocale;
   const {scrollYProgress} = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
   const cardCopy = t.raw('cards') as IndustryCardCopy[];
-  const cards = industryCardConfig.map((config) => ({
+  const cards = INDUSTRY_CARD_CONFIG.map((config) => ({
     ...config,
     ...cardCopy.find((item) => item.id === config.id)!,
   }));
@@ -170,7 +187,6 @@ export default function Industries({insightItems = []}: {readonly insightItems?:
             <div className={styles.heroActions}>
               <Link href="#industry-atlas" className={styles.buttonPrimary}>
                 {t('hero.primaryCta')}
-                <ArrowUpRight className="h-4 w-4" strokeWidth={1.7} aria-hidden="true" />
               </Link>
               <Link href="/case-studies" className={styles.textLink}>
                 {t('hero.secondaryCta')}
@@ -205,7 +221,11 @@ export default function Industries({insightItems = []}: {readonly insightItems?:
             </nav>
           </aside>
 
-          <SectorGallery cards={cards} relatedWorkLabel={t('coverage.relatedWork')} />
+          <SectorGallery
+            cards={cards}
+            relatedWorkLabel={t('coverage.relatedWork')}
+            locale={locale}
+          />
         </div>
       </section>
 
@@ -213,11 +233,9 @@ export default function Industries({insightItems = []}: {readonly insightItems?:
         <div className={styles.shell}>
           <div className={styles.method}>
             <figure className={styles.methodMedia}>
-              <Image
-                src={IMGS.rdLab}
-                alt={t('research.imageAlt')}
-                fill
-                quality={90}
+              <ResponsiveMedia
+                media={IMGS.rdLab}
+                locale={locale}
                 sizes="(max-width: 900px) 100vw, 44vw"
               />
             </figure>

@@ -1247,7 +1247,10 @@ export async function getSanityPostBySlug(
   const post = await sanityFetch<SanityPost | null>({
     query: postBySlugQuery,
     params: {slug, locale},
-    tags: [INSIGHTS_TAG, localeTag('posts', locale), `post:${locale}:${slug}`],
+    // Locale collection tags are sufficient for webhook invalidation. Avoid
+    // using localized slugs as Next cache tags: Arabic slugs are valid routes
+    // but are not accepted by every fetch/cache implementation as tag values.
+    tags: [INSIGHTS_TAG, localeTag('posts', locale)],
   });
 
   return post ? normalizePost(post) : null;
@@ -1281,11 +1284,7 @@ export async function getSanityNewsArticleBySlug(
   const article = await sanityFetch<SanityNewsArticle | null>({
     query: newsArticleBySlugQuery,
     params: {slug, locale},
-    tags: [
-      INSIGHTS_TAG,
-      localeTag('newsArticles', locale),
-      `newsArticle:${locale}:${slug}`,
-    ],
+    tags: [INSIGHTS_TAG, localeTag('newsArticles', locale)],
   });
 
   return article ? normalizeNewsArticle(article) : null;
@@ -1323,11 +1322,7 @@ export async function getSanityPerspectiveBySlug(
   const perspective = await sanityFetch<SanityPerspective | null>({
     query: perspectiveBySlugQuery,
     params: {slug, locale},
-    tags: [
-      INSIGHTS_TAG,
-      localeTag('perspectives', locale),
-      `perspective:${locale}:${slug}`,
-    ],
+    tags: [INSIGHTS_TAG, localeTag('perspectives', locale)],
   });
 
   return perspective ? normalizePerspective(perspective) : null;
@@ -1367,11 +1362,7 @@ export async function getSanityResearchReportBySlug(
   const report = await sanityFetch<SanityResearchReport | null>({
     query: researchReportBySlugQuery,
     params: {slug, locale},
-    tags: [
-      INSIGHTS_TAG,
-      localeTag('researchReports', locale),
-      `researchReport:${locale}:${slug}`,
-    ],
+    tags: [INSIGHTS_TAG, localeTag('researchReports', locale)],
   });
 
   return report ? normalizeResearchReport(report) : null;
@@ -1441,11 +1432,7 @@ export async function getSanityCaseStudyBySlug(
   const study = await sanityFetch<SanityCaseStudy | null>({
     query: caseStudyBySlugQuery,
     params: {slug, locale},
-    tags: [
-      INSIGHTS_TAG,
-      localeTag('caseStudies', locale),
-      `caseStudy:${locale}:${slug}`,
-    ],
+    tags: [INSIGHTS_TAG, localeTag('caseStudies', locale)],
   });
 
   return study ? normalizeCaseStudy(study) : null;

@@ -156,10 +156,10 @@ const Portfolio = ({projects}: PortfolioProps) => {
               <p>{t('hero.description')}</p>
               <div className="portfolio-v2__hero-actions">
                 <Link href="#portfolio-projects">
-                  {t('hero.primaryCta')} <ArrowRight aria-hidden="true" />
+                  {t('hero.primaryCta')}
                 </Link>
                 <Link href="/contact">
-                  {t('hero.secondaryCta')} <ArrowRight aria-hidden="true" />
+                  {t('hero.secondaryCta')}
                 </Link>
               </div>
             </motion.div>

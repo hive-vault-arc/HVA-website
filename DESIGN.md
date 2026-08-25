@@ -238,6 +238,8 @@ Dark or highly contrasted modules must not collide with viewport edges.
 - Do not use a large filled amber rectangle around ordinary active navigation links.
 - Keep the header treatment consistent between routes.
 - Switch logo tone only when the actual navbar surface changes.
+- Keep the navbar shell, desktop menus, language controls, mobile menu, accordion rows, and navigation actions square (`0` border radius).
+- At page start, keep the fixed navbar on its solid route-appropriate surface without a visible border or shadow. Introduce its subtle border and shadow only after scrolling.
 
 ## 7. Image Policy
 
@@ -314,11 +316,13 @@ If an image does none of these, remove it.
 - Primary button: navy surface, white text, amber focus treatment.
 - Secondary button: light surface, navy text, border token.
 - Tertiary action: text plus a familiar icon.
+- Core CTAs must use a clear filled or outlined control shape; do not rely on an arrow glyph to make a button identifiable. Reserve directional icons for tertiary links, card navigation, and external destinations.
 - Hover may shift approved color and translate by `1-2px`.
 - Active state may use `scale(0.98)` or `translateY(1px)`.
 - Focus indicators must be visible and use approved amber/navy tokens.
 - Motion uses `transform` and `opacity`, respects reduced motion, and does not compete with reading.
 - Do not add continuous decorative animation merely to make the page feel active.
+- Use short, once-only entrances to establish hierarchy and brief state changes for navigation. Do not use scrolling hijacks, marquees, particles, magnetic controls, or looping decoration as generic site motion.
 - Icon families must use a consistent visual weight within a component or section.
 - Framed icon tiles always use a solid `#FFFFFF` background, including hover and active states. Use navy or brand gold for the glyph and `#DDE3EA` or brand gold for the border; never fill icon tiles with amber, ivory, navy, transparency, or gradients.
 - Client and technology partner logos retain their supplied colors at rest and on interaction. Do not grayscale, recolor, fade, or swap them; hover emphasis must be restrained and slow (`1-1.2s`) without obscuring the original identity.

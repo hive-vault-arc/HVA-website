@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import type {AppLocale} from '@/i18n/config';
-import {localizedPath} from '@/i18n/route-manifest';
+import {decodeRouteParam, localizedPath} from '@/i18n/route-manifest';
 import { notFound } from 'next/navigation';
 import JsonLd from '@/components/JsonLd';
 import {getCaseStudyBySlug, getRelatedCaseStudies} from '@/lib/proof';
@@ -20,7 +20,8 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const {locale, slug} = await params;
+  const {locale, slug: routeSlug} = await params;
+  const slug = decodeRouteParam(routeSlug);
   const study = await getCaseStudyBySlug(slug, locale).catch(() => null);
   if (!study) return {};
 
@@ -53,7 +54,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function CaseStudyDetailPage({ params }: Props) {
-  const {locale, slug} = await params;
+  const {locale, slug: routeSlug} = await params;
+  const slug = decodeRouteParam(routeSlug);
   const study = await getCaseStudyBySlug(slug, locale).catch(() => null);
   if (!study) notFound();
   const [relatedStudies, tContent] = await Promise.all([

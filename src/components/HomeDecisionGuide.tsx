@@ -1,7 +1,7 @@
 'use client';
 
 import { useLayoutEffect, useRef, type ComponentType } from 'react';
-import {useTranslations} from 'next-intl';
+import {useLocale, useTranslations} from 'next-intl';
 import Image from 'next/image';
 import {Link} from '@/i18n/navigation';
 import {
@@ -95,12 +95,18 @@ function FeaturedEvidence({
   verified: string;
   deliveryAlt: (client: string) => string;
 }) {
+  const locale = useLocale();
+  const evidenceT = useTranslations('Evidence');
   if (!evidence) return null;
 
   const proofCopy = evidence.quoteExcerpt ?? evidence.caseStudyTitle;
   const coverImage = evidence.coverImage ?? '/Images/home/pathfinder/pathfinder-proof.webp';
   const coverImageAlt =
     evidence.coverImageAlt ?? deliveryAlt(evidence.clientName);
+  const sourceLanguage = evidence.documentLanguage.trim().toLowerCase().split(/[-_]/)[0] || 'en';
+  const sourceLanguageName = evidenceT.has(`languages.${sourceLanguage}`)
+    ? evidenceT(`languages.${sourceLanguage}`)
+    : evidence.documentLanguage;
 
   return (
     <article className="decision-proof-card decision-proof-card--featured" data-proof-reveal>
@@ -142,6 +148,11 @@ function FeaturedEvidence({
         <blockquote dir={getEvidenceDirection(evidence.documentLanguage)}>
           {proofCopy}
         </blockquote>
+        {sourceLanguage !== locale ? (
+          <small className="decision-proof-card__source" lang={locale}>
+            {evidenceT('sourceDisclosure', {language: sourceLanguageName})}
+          </small>
+        ) : null}
 
         <footer>
           <Link href={`/case-studies/${evidence.slug}`}>

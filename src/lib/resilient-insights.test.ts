@@ -68,4 +68,22 @@ describe('local insight pagination fallback', () => {
     expect(page.nextCursor).not.toBeNull();
     expect(page.hasFallbackContent).toBe(true);
   });
+
+  it.each(['es', 'ar'] as const)(
+    'does not expose the English fallback catalogue on %s routes',
+    (locale) => {
+      expect(getLocalInsightCollectionPage(locale, 'post')).toMatchObject({
+        items: [],
+        total: 0,
+        nextCursor: null,
+        hasFallbackContent: false,
+      });
+      expect(getLocalInsightsPage(locale)).toMatchObject({
+        items: [],
+        total: 0,
+        nextCursor: null,
+        hasFallbackContent: false,
+      });
+    },
+  );
 });

@@ -25,8 +25,34 @@ const ERROR_COPY = {
     contactTeam: "Contacter l'equipe",
     suggestedPages: 'Pages suggerees',
   },
+  es: {
+    retry: 'Intentar de nuevo',
+    returnHome: 'Volver al inicio',
+    temporaryTitle: 'La página no está disponible temporalmente',
+    temporaryDescription:
+      'La página no se pudo cargar correctamente. Inténtelo de nuevo o vuelva a la página de inicio.',
+    navigationError: 'Error de navegación / 404',
+    movedTitle: 'Esta página ya no está en esta dirección.',
+    movedDescription:
+      'El enlace puede estar desactualizado o la página puede haberse movido. Vuelva al sitio principal o continúe desde una de las secciones siguientes.',
+    contactTeam: 'Contactar al equipo',
+    suggestedPages: 'Páginas sugeridas',
+  },
+  ar: {
+    retry: 'حاول مرة أخرى',
+    returnHome: 'العودة إلى الرئيسية',
+    temporaryTitle: 'الصفحة غير متاحة مؤقتًا',
+    temporaryDescription:
+      'تعذر تحميل الصفحة بشكل كامل. حاول مرة أخرى أو ارجع إلى الصفحة الرئيسية.',
+    navigationError: 'خطأ في التنقل / 404',
+    movedTitle: 'لم تعد هذه الصفحة متاحة على هذا العنوان.',
+    movedDescription:
+      'قد يكون الرابط قديمًا أو نُقلت الصفحة. ارجع إلى الموقع الرئيسي أو تابع عبر أحد الأقسام أدناه.',
+    contactTeam: 'تواصل مع الفريق',
+    suggestedPages: 'صفحات مقترحة',
+  },
 } as const;
 
 export function getErrorCopy(locale: string) {
-  return locale === 'fr' ? ERROR_COPY.fr : ERROR_COPY.en;
+  return ERROR_COPY[locale as keyof typeof ERROR_COPY] ?? ERROR_COPY.en;
 }

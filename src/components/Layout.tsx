@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from './Navbar';
 import SiteFooter from './SiteFooter';
+import SiteMotion from './motion/SiteMotion';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -11,9 +12,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
       <Navbar />
-      <main className="min-h-[100dvh] w-full">
-        {children}
-      </main>
+      <SiteMotion>{children}</SiteMotion>
       <SiteFooter />
     </>
   );

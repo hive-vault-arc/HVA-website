@@ -10,6 +10,13 @@ import {CAPABILITY_SOLUTION_PROGRAM_DETAILS} from '../lib/capabilities-content';
 import type { CapabilityProfile } from '../lib/capabilities';
 import type {AppLocale} from '@/i18n/config';
 import {isSanityCdnImage} from '../lib/image-delivery';
+import {
+  DEFAULT_SOLUTION_PROGRAM_MEDIA,
+  type SolutionProgramMedia,
+} from '../lib/solution-program-media';
+import ResponsiveMedia from '@/components/media/ResponsiveMedia';
+import CloudEcosystemRail from '@/components/media/CloudEcosystemRail';
+import {SEMANTIC_MEDIA, semanticMediaAlt} from '@/lib/semantic-media';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -20,34 +27,28 @@ const BOT_CONFIG = [
   {
     step: '01',
     icon: <Wrench className="h-8 w-8" />,
-    image: '/Images/capabilities/editorial/hva-arc-assess-capabilities-v2.webp',
+    media: SEMANTIC_MEDIA.arc.assess,
   },
   {
     step: '02',
     icon: <Settings className="h-8 w-8" />,
-    image: '/Images/capabilities/editorial/hva-arc-reengineer-capabilities-v2.webp',
+    media: SEMANTIC_MEDIA.arc.reengineer,
   },
   {
     step: '03',
     icon: <Send className="h-8 w-8" />,
-    image: '/Images/capabilities/editorial/hva-arc-command-capabilities-v2.webp',
+    media: SEMANTIC_MEDIA.arc.command,
   },
 ];
 
-const CAPABILITY_IMAGES = {
-  strategyBusiness: '/Images/capabilities/editorial/hva-strategy-business-capability-v2.webp',
-  technologyConsulting: '/Images/capabilities/editorial/hva-technology-consulting-capability-v2.webp',
-  aiDataAnalytics: '/Images/capabilities/editorial/hva-ai-data-capability-v2.webp',
-  softwareEngineering: '/Images/capabilities/editorial/hva-software-engineering-capability-v2.webp',
-  cloudInfrastructure: '/Images/capabilities/editorial/hva-cloud-infrastructure-capability-v2.webp',
-  operationsManaged: '/Images/capabilities/editorial/hva-operations-managed-capability-v2.webp',
+const CAPABILITY_MEDIA = {
+  strategyBusiness: SEMANTIC_MEDIA.capabilities.strategyBusiness,
+  technologyConsulting: SEMANTIC_MEDIA.capabilities.technologyConsulting,
+  aiDataAnalytics: SEMANTIC_MEDIA.capabilities.aiData,
+  softwareEngineering: SEMANTIC_MEDIA.capabilities.softwareEngineering,
+  cloudInfrastructure: SEMANTIC_MEDIA.capabilities.cloudInfrastructure,
+  operationsManaged: SEMANTIC_MEDIA.capabilities.operationsManaged,
 };
-
-const PROGRAM_IMAGES = [
-  '/Images/capabilities/editorial/hva-ai-reception-program-v2.webp',
-  '/Images/capabilities/editorial/hva-crm-modernization-program-v2.webp',
-  '/Images/capabilities/editorial/hva-cloud-reliability-program-v2.webp',
-];
 
 const CAPABILITIES_PAGE_HERO_IMAGE =
   '/Images/page-heroes/hva-capabilities-magnetic-fields-hero-v2.webp';
@@ -56,6 +57,7 @@ type CapabilitiesProps = {
   capabilities?: CapabilityProfile[];
   aliProfileImage?: string;
   aliProfileImageAlt?: string;
+  programMedia?: SolutionProgramMedia;
 };
 
 const CARD_ORDER = [
@@ -71,6 +73,7 @@ export default function Capabilities({
   capabilities = [],
   aliProfileImage = '/Images/team/ali-amrani-founder-2026.webp',
   aliProfileImageAlt,
+  programMedia = DEFAULT_SOLUTION_PROGRAM_MEDIA,
 }: CapabilitiesProps) {
   const t = useTranslations('Capabilities');
   const tLocale = useTranslations('Locale');
@@ -123,42 +126,42 @@ export default function Capabilities({
     {
       id: 'ai-data-analytics',
       ...fallbackCopy[0],
-      image: CAPABILITY_IMAGES.aiDataAnalytics,
+      media: CAPABILITY_MEDIA.aiDataAnalytics,
       href: locale === 'en' ? '/capabilities/ai-data-analytics' : undefined,
       variant: 'image' as const,
     },
     {
       id: 'technology-consulting',
       ...fallbackCopy[1],
-      image: CAPABILITY_IMAGES.technologyConsulting,
+      media: CAPABILITY_MEDIA.technologyConsulting,
       href: locale === 'en' ? '/capabilities/technology-consulting' : undefined,
       variant: 'image' as const,
     },
     {
       id: 'strategy-business',
       ...fallbackCopy[2],
-      image: CAPABILITY_IMAGES.strategyBusiness,
+      media: CAPABILITY_MEDIA.strategyBusiness,
       href: locale === 'en' ? '/capabilities/strategy-business' : undefined,
       variant: 'text' as const,
     },
     {
       id: 'software-engineering',
       ...fallbackCopy[3],
-      image: CAPABILITY_IMAGES.softwareEngineering,
+      media: CAPABILITY_MEDIA.softwareEngineering,
       href: locale === 'en' ? '/capabilities/software-engineering' : undefined,
       variant: 'image' as const,
     },
     {
       id: 'cloud-infrastructure',
       ...fallbackCopy[4],
-      image: CAPABILITY_IMAGES.cloudInfrastructure,
+      media: CAPABILITY_MEDIA.cloudInfrastructure,
       href: locale === 'en' ? '/capabilities/cloud-infrastructure' : undefined,
       variant: 'image' as const,
     },
     {
       id: 'operations-managed',
       ...fallbackCopy[5],
-      image: CAPABILITY_IMAGES.operationsManaged,
+      media: CAPABILITY_MEDIA.operationsManaged,
       href: locale === 'en' ? '/capabilities/operations-managed' : undefined,
       variant: 'image' as const,
     },
@@ -174,8 +177,10 @@ export default function Capabilities({
     return {
       id: capability.slug,
       title: capability.shortTitle || fallback?.title || capability.title,
-      image: fallback?.image || capability.heroImage || CAPABILITY_IMAGES.aiDataAnalytics,
-      alt: fallback?.alt || capability.heroImageAlt || `${capability.title} capability`,
+      media: fallback?.media || CAPABILITY_MEDIA.aiDataAnalytics,
+      alt: fallback?.media
+        ? semanticMediaAlt(fallback.media, locale)
+        : capability.heroImageAlt || `${capability.title} capability`,
       summary: capability.briefLine,
       href: `/capabilities/${capability.slug}`,
       variant: fallback?.variant ?? ('image' as const),
@@ -183,7 +188,7 @@ export default function Capabilities({
   }).filter((card): card is NonNullable<typeof card> => Boolean(card));
 
   return (
-    <div className="relative isolate overflow-x-hidden bg-[#FFFFFF] text-[#1A2535]">
+    <div className="relative isolate overflow-x-clip bg-[#FFFFFF] text-[#1A2535]">
       {/* Scroll progress bar */}
       <motion.div
         aria-hidden="true"
@@ -265,15 +270,18 @@ export default function Capabilities({
                     className="capability-card-link-shell"
                   >
                     <div className="capability-card-image">
-                      <Image
-                        src={card.image}
+                      <ResponsiveMedia
+                        media={card.media}
+                        locale={locale}
                         alt={card.alt}
-                        fill
-                        quality={90}
-                        unoptimized={isSanityCdnImage(card.image)}
                         sizes="(max-width: 768px) 100vw, 33vw"
                         className="object-cover"
                       />
+                      {card.id === 'cloud-infrastructure' ? (
+                        <CloudEcosystemRail
+                          ariaLabel={locale === 'fr' ? 'Technologies cloud et de conteneurs' : 'Cloud and container technologies'}
+                        />
+                      ) : null}
                     </div>
                     <div className="capability-card-body">
                       <div className="capability-card-meta">
@@ -294,15 +302,18 @@ export default function Capabilities({
                     title={tLocale('unavailable', {language: tLocale('french')})}
                   >
                   <div className="capability-card-image">
-                    <Image
-                      src={card.image}
+                    <ResponsiveMedia
+                      media={card.media}
+                      locale={locale}
                       alt={card.alt}
-                      fill
-                      quality={90}
-                      unoptimized={isSanityCdnImage(card.image)}
                       sizes="(max-width: 768px) 100vw, 33vw"
                       className="object-cover"
                     />
+                    {card.id === 'cloud-infrastructure' ? (
+                      <CloudEcosystemRail
+                        ariaLabel={locale === 'fr' ? 'Technologies cloud et de conteneurs' : 'Cloud and container technologies'}
+                      />
+                    ) : null}
                   </div>
                   <div className="capability-card-body">
                     <div className="capability-card-meta">
@@ -394,14 +405,11 @@ export default function Capabilities({
               className="arc-operating-panel"
             >
               <div className="arc-operating-media">
-                <Image
-                  src={activeBOTItem.image}
-                  alt={activeBOTItem.imageAlt}
-                  fill
-                  loading="lazy"
-                  quality={90}
+                <ResponsiveMedia
+                  media={activeBOTItem.media}
+                  locale={locale}
                   sizes="(max-width: 1024px) 100vw, 58vw"
-                  className="object-cover"
+                  className="arc-operating-image"
                 />
                 <div className="arc-operating-media-copy">
                   <span>{t('phase', {step: activeBOTItem.step})}</span>
@@ -499,8 +507,12 @@ export default function Capabilities({
                 outcomes: string[];
                 alt: string;
               }>).map((program, i) => {
-                const programCodes = ['A', 'B', 'C'];
-                const proofLink = CAPABILITY_SOLUTION_PROGRAM_DETAILS[i]?.proofLinks?.[0];
+                const programDetail = CAPABILITY_SOLUTION_PROGRAM_DETAILS[i];
+                const media = programDetail
+                  ? programMedia[programDetail.slug] ??
+                    DEFAULT_SOLUTION_PROGRAM_MEDIA[programDetail.slug]
+                  : undefined;
+                const proofLink = media?.proofHref ?? programDetail?.proofLinks?.[0];
                 const caseStudyLink = proofLink?.startsWith('/case-studies/')
                   ? proofLink
                   : undefined;
@@ -513,18 +525,19 @@ export default function Capabilities({
                   >
                     <div className="program-card-media">
                       <Image
-                        src={PROGRAM_IMAGES[i]!}
-                        alt={program.alt}
+                        src={media?.cardImage ?? ''}
+                        alt={media?.alt ?? program.alt}
                         fill
                         loading="lazy"
                         quality={90}
                         sizes="(max-width: 768px) 100vw, 33vw"
                         className="object-cover"
+                        style={{
+                          objectFit: media?.cardFit ?? 'cover',
+                          objectPosition: media?.objectPosition ?? 'center',
+                        }}
+                        unoptimized={isSanityCdnImage(media?.cardImage ?? '')}
                       />
-                      <div className="program-card-media-label">
-                        <span>{programCodes[i]}</span>
-                        <em>PRG-00{i + 1}</em>
-                      </div>
                     </div>
 
                     <div className="program-card-body">
@@ -559,7 +572,7 @@ export default function Capabilities({
               className="mt-10 flex justify-center"
             >
               <Link href="/capabilities/solution-programs" className="sharp-edge btn-primary">
-                {t('fullCatalog')} <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                {t('fullCatalog')}
               </Link>
             </motion.div>
           </motion.div>
@@ -583,7 +596,7 @@ export default function Capabilities({
           </div>
           <div className="capabilities-depth-cta-actions">
             <Link href="/capabilities/in-detail" className="sharp-edge btn-primary">
-              {t('exploreDetail')} <ArrowRight className="h-4 w-4" strokeWidth={1.7} />
+              {t('exploreDetail')}
             </Link>
             <Link href="/contact" className="capabilities-depth-cta-secondary">
               {t('bookCall')}

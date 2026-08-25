@@ -18,7 +18,7 @@ import {
   Workflow,
   type IconsaxIconComponent,
 } from "@/components/icons";
-import type { AppLocale } from "@/i18n/config";
+import { LOCALE_PROFILES, type AppLocale } from "@/i18n/config";
 import { Link } from "@/i18n/navigation";
 import {
   EDITORIAL_FORMATS,
@@ -62,7 +62,7 @@ type PublicationIndexProps = {
 function formatDate(value: string, locale: AppLocale) {
   if (!value) return "";
   return new Date(value).toLocaleDateString(
-    locale === "fr" ? "fr-FR" : "en-GB",
+    LOCALE_PROFILES[locale].formattingLocale,
     {
       day: "numeric",
       month: "short",
@@ -834,7 +834,7 @@ export default function InsightsHub({
   }
 
   return (
-    <main className="insights-hub-page overflow-x-hidden bg-white text-[#1A2535]">
+    <main className="insights-hub-page overflow-x-clip bg-white text-[#1A2535]">
       <InsightsEditorialHero
         eyebrow={t("heroEyebrow")}
         headline={collectionT("brand")}

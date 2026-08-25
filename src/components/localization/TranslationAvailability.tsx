@@ -32,8 +32,10 @@ export function TranslationTargets({routes}: {routes: TranslationRoutes}) {
     () => ({
       ...(routes.en ? {en: routes.en} : {}),
       ...(routes.fr ? {fr: routes.fr} : {}),
+      ...(routes.es ? {es: routes.es} : {}),
+      ...(routes.ar ? {ar: routes.ar} : {}),
     }),
-    [routes.en, routes.fr],
+    [routes.en, routes.fr, routes.es, routes.ar],
   );
 
   useEffect(() => {

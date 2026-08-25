@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { ExternalLink, FileText } from '@/components/icons';
 import type { ClientEvidence, ClientEvidenceSummary } from '../lib/proof';
 import {useLocale, useTranslations} from 'next-intl';
+import {LOCALE_PROFILES, type AppLocale} from '@/i18n/config';
 import {isSanityCdnImage} from '../lib/image-delivery';
 
 type EvidenceDisplay = Pick<
@@ -39,13 +40,13 @@ export function getEvidenceDirection(language: string): 'ltr' | 'rtl' {
   return RTL_LANGUAGES.has(getEvidenceLanguageCode(language)) ? 'rtl' : 'ltr';
 }
 
-function formatIssueDate(isoDate: string | undefined, locale: string) {
+function formatIssueDate(isoDate: string | undefined, locale: AppLocale) {
   if (!isoDate) return undefined;
 
   const date = new Date(`${isoDate}T00:00:00Z`);
   if (Number.isNaN(date.getTime())) return isoDate;
 
-  return new Intl.DateTimeFormat(locale === 'fr' ? 'fr-FR' : 'en-GB', {
+  return new Intl.DateTimeFormat(LOCALE_PROFILES[locale].formattingLocale, {
     month: 'long',
     timeZone: 'UTC',
     year: 'numeric',
@@ -68,7 +69,7 @@ export default function ClientEvidenceCard({
   className = '',
 }: ClientEvidenceCardProps) {
   const t = useTranslations('Evidence');
-  const locale = useLocale();
+  const locale = useLocale() as AppLocale;
   const languageCode = getEvidenceLanguageCode(evidence.documentLanguage);
   const direction = getEvidenceDirection(evidence.documentLanguage);
   const languageName = t.has(`languages.${languageCode}`)

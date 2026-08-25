@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render, screen, within } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import Navbar from './Navbar';
 
 vi.mock('next/navigation', () => ({
@@ -59,11 +59,17 @@ describe('Navbar', () => {
     const navSurface = container.querySelector('[data-scrolled]');
 
     expect(navSurface).toHaveAttribute('data-scrolled', 'false');
+    expect(navSurface).toHaveAttribute('data-navbar-surface', 'shell');
+    expect(navSurface).toHaveClass('rounded-none');
+    expect(navSurface).toHaveClass('border-transparent');
+    expect(navSurface).toHaveClass('shadow-none');
 
     Object.defineProperty(window, 'scrollY', { configurable: true, value: 40 });
     fireEvent.scroll(window);
 
     expect(navSurface).toHaveAttribute('data-scrolled', 'true');
+    expect(navSurface).toHaveClass('border-[#DDE3EA]');
+    expect(navSurface).toHaveClass('shadow-[0_6px_18px_rgba(26,37,53,0.10)]');
   });
 
   it('routes core links and exposes submenu links on keyboard focus', () => {
@@ -105,6 +111,8 @@ describe('Navbar', () => {
     expect(ctaLinks.length).toBeGreaterThan(0);
     ctaLinks.forEach((link) => {
       expect(link).toHaveAttribute('href', '/contact');
+      expect(link).toHaveClass('site-action', 'site-action-primary');
+      expect(link.querySelector('svg')).toBeNull();
     });
   });
 
@@ -131,7 +139,7 @@ describe('Navbar', () => {
       'page',
     );
     expect(
-      screen.getByRole('menuitem', {name: 'View this page in French'}),
+      screen.getByRole('menuitem', {name: 'View this page in Français'}),
     ).toHaveAttribute('href', '/fr');
 
     fireEvent.keyDown(document, {key: 'Escape'});
@@ -154,8 +162,101 @@ describe('Navbar', () => {
     ).toHaveAttribute('aria-current', 'page');
     expect(
       within(mobileSwitcher as HTMLElement).getByRole('link', {
-        name: 'View this page in French',
+        name: 'View this page in Français',
       }),
     ).toHaveAttribute('href', '/fr');
+  });
+
+  it('moves focus into the mobile panel and restores it after Escape', async () => {
+    render(<Navbar />);
+
+    const trigger = screen.getByRole('button', {name: 'Open navigation menu'});
+    fireEvent.click(trigger);
+
+    const panel = screen.getByRole('dialog', {name: 'Mobile navigation'});
+    expect(panel).toBeInTheDocument();
+    expect(document.body.style.overflow).toBe('hidden');
+    await waitFor(() => {
+      expect(
+        within(panel).getByRole('button', {name: 'Close navigation menu'}),
+      ).toHaveFocus();
+    });
+
+    fireEvent.keyDown(document, {key: 'Escape'});
+
+    await waitFor(() => {
+      expect(screen.queryByRole('dialog', {name: 'Mobile navigation'})).toBeNull();
+      expect(document.body.style.overflow).toBe('');
+      expect(trigger).toHaveFocus();
+    });
+  });
+
+  it('uses a sharp framed mobile navigation rail with separate accordion controls', () => {
+    render(<Navbar />);
+
+    fireEvent.click(screen.getByRole('button', {name: 'Open navigation menu'}));
+
+    const panel = screen.getByRole('dialog', {name: 'Mobile navigation'});
+    expect(within(panel).getByAltText('Hive Vault Arc')).toBeInTheDocument();
+    expect(panel).not.toHaveClass('rounded-xl');
+    expect(panel).not.toHaveClass('rounded-lg');
+    expect(within(panel).getByRole('link', {name: 'ARC'})).toHaveAttribute(
+      'href',
+      '/arc',
+    );
+
+    const capabilitiesToggle = within(panel).getByRole('button', {
+      name: 'Toggle capabilities submenu',
+    });
+    expect(capabilitiesToggle).toHaveAttribute('aria-expanded', 'false');
+    expect(capabilitiesToggle).toHaveAttribute(
+      'aria-controls',
+      'mobile-navigation-capabilities',
+    );
+    expect(within(panel).getByRole('link', {name: 'Capabilities'})).toHaveAttribute(
+      'href',
+      '/capabilities',
+    );
+
+    fireEvent.click(capabilitiesToggle);
+
+    expect(capabilitiesToggle).toHaveAttribute('aria-expanded', 'true');
+    expect(
+      within(panel).getByRole('link', {name: 'Strategy & Business Consulting'}),
+    ).toHaveAttribute('href', '/capabilities/strategy-business');
+  });
+
+  it('keeps desktop, locale, and mobile navigation surfaces square', () => {
+    const {container} = render(<Navbar />);
+
+    fireEvent.focus(screen.getByRole('link', {name: 'Capabilities'}));
+    expect(container.querySelector('[data-navbar-surface="desktop-menu"]')).toHaveClass(
+      'rounded-none',
+    );
+
+    fireEvent.click(
+      screen.getByRole('button', {name: 'Current language: English'}),
+    );
+    expect(container.querySelector('[data-navbar-surface="locale-menu"]')).toHaveClass(
+      'rounded-none',
+    );
+
+    fireEvent.click(screen.getByRole('button', {name: 'Open navigation menu'}));
+    expect(container.querySelector('[data-navbar-surface="mobile-menu"]')).toBeInTheDocument();
+    expect(container.querySelector('.navbar-mobile-panel')).not.toHaveClass('rounded-xl');
+    expect(container.querySelector('.navbar-mobile-panel')).not.toHaveClass('rounded-lg');
+  });
+
+  it('uses logical RTL-safe placement and mirrors directional arrows', () => {
+    const {container} = render(<Navbar />);
+
+    expect(container.firstElementChild).toHaveClass('inset-x-2', 'lg:start-1/2');
+    fireEvent.focus(screen.getByRole('link', {name: 'Capabilities'}));
+    expect(container.querySelector('[data-navbar-surface="desktop-menu"] > div > div'))
+      .toHaveClass('border-s');
+
+    fireEvent.click(screen.getByRole('button', {name: 'Open navigation menu'}));
+    expect(container.querySelector('.navbar-mobile-panel')).toHaveClass('end-0', 'border-s');
+    expect(container.querySelectorAll('.rtl\\:rotate-180').length).toBeGreaterThan(0);
   });
 });

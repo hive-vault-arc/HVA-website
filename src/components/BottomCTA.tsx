@@ -2,7 +2,6 @@
 
 import {motion} from 'framer-motion';
 import {useTranslations} from 'next-intl';
-import {ArrowRight} from '@/components/icons';
 import {Link} from '@/i18n/navigation';
 
 interface BottomCTAProps {
@@ -68,22 +67,17 @@ export default function BottomCTA({
         <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row lg:justify-end">
           <Link
             href={primaryHref}
-            className={`inline-flex min-h-11 items-center justify-center gap-2 px-7 py-3 text-sm font-bold transition-[background-color,color,transform] duration-200 active:scale-[0.98] ${
-              isDark
-                ? 'bg-[#E8A838] text-[#1A2535] hover:bg-[#E8A838]'
-                : 'bg-[#1A2535] text-[#FFFFFF] hover:bg-[#0D1824]'
+            className={`site-action w-full px-7 sm:w-auto ${
+              isDark ? 'site-action-primary-on-dark' : 'site-action-primary'
             }`}
           >
             {primaryLabel}
-            <ArrowRight className="h-4 w-4" motion="nudge" aria-hidden="true" />
           </Link>
           {secondaryLabel && secondaryHref && (
             <Link
               href={secondaryHref}
-              className={`inline-flex min-h-11 items-center justify-center border px-7 py-3 text-sm font-bold transition-colors duration-200 ${
-                isDark
-                  ? 'border-[#536174] text-[#FFFFFF] hover:border-[#E8A838] hover:text-[#E8A838]'
-                  : 'border-[#1A2535] text-[#1A2535] hover:bg-[#1A2535] hover:text-[#FFFFFF]'
+              className={`site-action w-full px-7 sm:w-auto ${
+                isDark ? 'site-action-secondary-dark' : 'site-action-secondary'
               }`}
             >
               {secondaryLabel}

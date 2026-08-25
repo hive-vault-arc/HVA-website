@@ -172,11 +172,9 @@ export default function HeroSlider() {
                 <div className="home-hero-actions home-hero-reveal">
                   <Link href={slide.primaryHref} className="home-hero-primary sharp-edge">
                     {slide.primaryLabel}
-                    <ChevronRight className="h-4 w-4" motion="nudge" aria-hidden="true" />
                   </Link>
                   <Link href={slide.secondaryHref} className="home-hero-secondary sharp-edge">
                     {slide.secondaryLabel}
-                    <ChevronRight className="h-4 w-4" aria-hidden="true" />
                   </Link>
                 </div>
               </div>

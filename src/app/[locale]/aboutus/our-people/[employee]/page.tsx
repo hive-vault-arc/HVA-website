@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import type {AppLocale} from '@/i18n/config';
-import {localizedPath} from '@/i18n/route-manifest';
+import {decodeRouteParam, localizedPath} from '@/i18n/route-manifest';
 import { notFound } from 'next/navigation';
 import JsonLd from '@/components/JsonLd';
 import EmployeeProfileView from '@/views/EmployeeProfile';
@@ -26,7 +26,8 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const {locale, employee} = await params;
+  const {locale, employee: routeEmployee} = await params;
+  const employee = decodeRouteParam(routeEmployee);
   const profile = await getEmployeeProfileBySlug(employee, locale);
 
   if (!profile) {
@@ -64,7 +65,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function EmployeeProfilePage({ params }: Props) {
-  const {locale, employee} = await params;
+  const {locale, employee: routeEmployee} = await params;
+  const employee = decodeRouteParam(routeEmployee);
   const profile = await getEmployeeProfileBySlug(employee, locale);
 
   if (!profile) notFound();

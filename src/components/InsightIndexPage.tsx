@@ -9,7 +9,7 @@ import Image from 'next/image';
 import {useLocale, useTranslations} from 'next-intl';
 
 import {ArrowDown, ArrowUpRight} from '@/components/icons';
-import type {AppLocale} from '@/i18n/config';
+import {LOCALE_PROFILES, type AppLocale} from '@/i18n/config';
 import {Link} from '@/i18n/navigation';
 import {
   type InsightCollectionCursor,
@@ -52,7 +52,7 @@ type Props = {
 function formatDate(iso: string, locale: AppLocale) {
   if (!iso) return '';
 
-  return new Date(iso).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-GB', {
+  return new Date(iso).toLocaleDateString(LOCALE_PROFILES[locale].formattingLocale, {
     day: 'numeric',
     month: 'short',
     year: 'numeric',

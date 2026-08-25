@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import type {AppLocale} from '@/i18n/config';
-import {localizedPath} from '@/i18n/route-manifest';
+import {decodeRouteParam, localizedPath} from '@/i18n/route-manifest';
 import { notFound } from 'next/navigation';
 import JsonLd from '@/components/JsonLd';
 import NewsArticleView from '@/views/NewsArticle';
@@ -21,7 +21,8 @@ import {getTranslations} from 'next-intl/server';
 type Props = {params: Promise<{locale: AppLocale; slug: string}>};
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const {locale, slug} = await params;
+  const {locale, slug: routeSlug} = await params;
+  const slug = decodeRouteParam(routeSlug);
   const article = await getNewsArticleBySlug(slug, locale);
   if (!article) return {};
 
@@ -62,7 +63,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function NewsArticlePage({ params }: Props) {
-  const {locale, slug} = await params;
+  const {locale, slug: routeSlug} = await params;
+  const slug = decodeRouteParam(routeSlug);
   const article = await getNewsArticleBySlug(slug, locale);
   if (!article) notFound();
   const [relatedArticles, tContent] = await Promise.all([

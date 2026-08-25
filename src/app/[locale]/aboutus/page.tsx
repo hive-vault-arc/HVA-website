@@ -15,7 +15,20 @@ import {
   mergeKeywords,
 } from '@/lib/seo';
 import {localizedPath} from '@/i18n/route-manifest';
+import {translationSlug} from '@/lib/localized-content';
 import {getTranslations} from 'next-intl/server';
+import {getCaseStudyBySlug} from '@/lib/proof';
+
+const FEATURED_PROOF_SLUG =
+  'premium-advice-training-keepzen-digital-academy';
+
+async function getFeaturedProof(locale: AppLocale) {
+  const englishProof = await getCaseStudyBySlug(FEATURED_PROOF_SLUG, 'en');
+  if (locale === 'en') return englishProof;
+
+  const localizedSlug = translationSlug(englishProof, locale);
+  return localizedSlug ? getCaseStudyBySlug(localizedSlug, locale) : undefined;
+}
 
 function foundersFrom(teamMembers: EmployeeProfile[]): EmployeeProfile[] {
   return teamMembers.filter((member) => member.profileType === 'coFounder');
@@ -83,9 +96,10 @@ export async function generateMetadata({params}: PageProps): Promise<Metadata> {
 
 export default async function Page({params}: PageProps) {
   const {locale} = await params;
-  const [teamMembers, aboutFaqs, tMeta, tNav] = await Promise.all([
+  const [teamMembers, aboutFaqs, featuredCaseStudy, tMeta, tNav] = await Promise.all([
     getFeaturedEmployeeProfiles(locale),
     getLocalizedFaqs(locale, 'about'),
+    getFeaturedProof(locale),
     getTranslations({locale, namespace: 'Metadata.pages.about'}),
     getTranslations({locale, namespace: 'Navigation'}),
   ]);
@@ -131,7 +145,7 @@ export default async function Page({params}: PageProps) {
   return (
     <>
       <JsonLd data={[aboutPageSchema, ...leadershipPeople, breadcrumbSchema]} />
-      <About teamMembers={teamMembers} />
+      <About teamMembers={teamMembers} featuredCaseStudy={featuredCaseStudy} />
       <FaqSection faqs={aboutFaqs.items} heading={aboutFaqs.heading} />
     </>
   );

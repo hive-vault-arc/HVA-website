@@ -187,6 +187,25 @@ describe('buildHomeHeroProof', () => {
     expect(result.trustedPartners.filter((partner) => partner.name === 'Premium Advice & Training')).toHaveLength(1);
   });
 
+  it('deduplicates known client aliases from separate CMS records', () => {
+    const result = buildHomeHeroProof([
+      study({slug: 'premium-full', clientName: 'Premium Advice & Training'}),
+      study({slug: 'premium-alias', clientName: 'Premium Advice'}),
+      study({
+        slug: 'asesoramiento-y-formacion-premium',
+        clientName: 'Asesoramiento y Formación Premium',
+      }),
+      study({slug: 'tarik-full', clientName: 'Tarik Rami Immobilier'}),
+      study({slug: 'tarik-alias', clientName: 'Tarik Rami'}),
+      study({slug: 'نصيحة-متميزة-للتدريب', clientName: 'نصيحة وتدريب متميز'}),
+      study({slug: 'tarik-rami-immobilier', clientName: 'طارق رامي للعقارات'}),
+    ]);
+
+    expect(result.trustedPartners.filter((partner) => /premium advice/i.test(partner.name))).toHaveLength(1);
+    expect(result.trustedPartners.filter((partner) => /tarik rami/i.test(partner.name))).toHaveLength(1);
+    expect(result.trustedPartners).toHaveLength(3);
+  });
+
   it('keeps fallback partner links on their canonical source locale', () => {
     const result = buildHomeHeroProof(
       [

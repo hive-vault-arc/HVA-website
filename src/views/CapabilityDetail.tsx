@@ -2,10 +2,9 @@
 
 import Image from 'next/image';
 import {MotionConfig, motion, useScroll, useTransform} from 'framer-motion';
-import {useTranslations} from 'next-intl';
+import {useLocale, useTranslations} from 'next-intl';
 import {
   ArrowLeft,
-  ArrowRight,
   ArrowUpRight,
   CheckCircle2,
   Compass,
@@ -20,6 +19,12 @@ import {Link} from '@/i18n/navigation';
 import {useAnimationQuality} from '../lib/animationQuality';
 import type {CapabilityProfile, CapabilityProfileSummary} from '../lib/capabilities';
 import {isSanityCdnImage} from '../lib/image-delivery';
+import {
+  SEMANTIC_MEDIA,
+  semanticMediaAlt,
+  type SemanticMediaDefinition,
+} from '../lib/semantic-media';
+import type {AppLocale} from '../i18n/config';
 import styles from './CapabilityDetail.module.css';
 
 type CapabilityDetailProps = {
@@ -34,24 +39,25 @@ type DeliveryStep = {
   output: string;
 };
 
-const CAPABILITY_VISUALS: Record<string, string> = {
-  'strategy-business': '/Images/capabilities/detail/hva-strategy-business-hero-v3.webp',
-  'technology-consulting': '/Images/capabilities/detail/hva-technology-consulting-hero-v3.webp',
-  'ai-data-analytics': '/Images/capabilities/detail/hva-ai-data-analytics-hero-v3.webp',
-  'software-engineering': '/Images/capabilities/detail/hva-software-engineering-hero-v3.webp',
-  'cloud-infrastructure': '/Images/capabilities/detail/hva-cloud-infrastructure-hero-v3.webp',
-  'operations-managed': '/Images/capabilities/detail/hva-operations-managed-hero-v3.webp',
+const CAPABILITY_VISUALS: Record<string, SemanticMediaDefinition> = {
+  'strategy-business': SEMANTIC_MEDIA.capabilities.strategyBusiness,
+  'technology-consulting': SEMANTIC_MEDIA.capabilities.technologyConsulting,
+  'ai-data-analytics': SEMANTIC_MEDIA.capabilities.aiData,
+  'software-engineering': SEMANTIC_MEDIA.capabilities.softwareEngineering,
+  'cloud-infrastructure': SEMANTIC_MEDIA.capabilities.cloudInfrastructure,
+  'operations-managed': SEMANTIC_MEDIA.capabilities.operationsManaged,
 };
 
 const SCOPE_ICONS = [Compass, Route, Workflow, Layers3, ShieldCheck, Gauge];
 const DELIVERY_ICONS = [Compass, Workflow, Gauge];
 
-function getCapabilityVisual(slug: string, fallback: string) {
-  return CAPABILITY_VISUALS[slug] ?? fallback;
+function getCapabilityVisual(slug: string) {
+  return CAPABILITY_VISUALS[slug];
 }
 
 export default function CapabilityDetail({capability, relatedCapabilities}: CapabilityDetailProps) {
   const t = useTranslations('DynamicContent');
+  const locale = useLocale() as AppLocale;
   const {motionReduced} = useAnimationQuality();
   const {scrollYProgress} = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
@@ -62,7 +68,11 @@ export default function CapabilityDetail({capability, relatedCapabilities}: Capa
     (outcome, index, all) => all.indexOf(outcome) === index,
   );
   const deliverySteps = t.raw('capability.deliverySteps') as DeliveryStep[];
-  const capabilityVisual = getCapabilityVisual(capability.slug, capability.heroImage);
+  const capabilityVisual = getCapabilityVisual(capability.slug);
+  const capabilityVisualSrc = capabilityVisual?.desktopSrc ?? capability.heroImage;
+  const capabilityVisualAlt = capabilityVisual
+    ? semanticMediaAlt(capabilityVisual, locale)
+    : t('capability.heroImageAlt', {title: capability.title});
 
   return (
     <MotionConfig reducedMotion={motionReduced ? 'always' : 'never'}>
@@ -76,12 +86,12 @@ export default function CapabilityDetail({capability, relatedCapabilities}: Capa
         <section className={styles.hero}>
           <div className={`site-frame ${styles.heroFrame}`}>
             <Image
-              src={capabilityVisual}
-              alt={t('capability.heroImageAlt', {title: capability.title})}
+              src={capabilityVisualSrc}
+              alt={capabilityVisualAlt}
               fill
               priority
               quality={90}
-              unoptimized={isSanityCdnImage(capabilityVisual)}
+              unoptimized={isSanityCdnImage(capabilityVisualSrc)}
               sizes="(max-width: 820px) calc(100vw - 32px), calc(100vw - 64px)"
               className={styles.heroImage}
             />
@@ -109,7 +119,6 @@ export default function CapabilityDetail({capability, relatedCapabilities}: Capa
               <div className={styles.heroActions}>
                 <Link href="/contact" className={styles.primaryAction}>
                   {t('capability.start')}
-                  <ArrowRight className="h-4 w-4" strokeWidth={1.7} aria-hidden="true" />
                 </Link>
                 <Link href={`/capabilities/in-detail#pillar-${capability.slug}`} className={styles.secondaryAction}>
                   {t('capability.fullMap')}

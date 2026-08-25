@@ -1,12 +1,12 @@
 'use client';
 
-import { gsap } from 'gsap';
+import {gsap} from 'gsap';
 import Image from 'next/image';
 import {Link} from '@/i18n/navigation';
-import { useCallback, useLayoutEffect, useRef } from 'react';
+import {useCallback, useLayoutEffect, useRef} from 'react';
 import {useTranslations} from 'next-intl';
 
-import type { HomeTrustedPartner } from '../lib/home-hero';
+import type {HomeTrustedPartner} from '../lib/home-hero';
 import {isSanityCdnImage} from '../lib/image-delivery';
 
 type TrustedByBarProps = {
@@ -19,13 +19,29 @@ type TrustedPartnerLogoProps = {
 };
 
 function partnerSlug(name: string): string {
-  return name
-    .toLocaleLowerCase()
+  const normalizedName = name.trim().toLocaleLowerCase();
+
+  if (
+    normalizedName.includes('premium advice') ||
+    (normalizedName.includes('asesoramiento') && normalizedName.includes('premium')) ||
+    (name.includes('نصيحة') && name.includes('تدريب'))
+  ) {
+    return 'premium-advice-training';
+  }
+
+  if (
+    (normalizedName.includes('tarik') && normalizedName.includes('rami')) ||
+    (name.includes('طارق') && name.includes('رامي'))
+  ) {
+    return 'tarik-rami-immobilier';
+  }
+
+  return normalizedName
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/(^-|-$)/g, '');
 }
 
-function TrustedPartnerLogo({ partner, caseStudyLabel }: TrustedPartnerLogoProps) {
+function TrustedPartnerLogo({partner, caseStudyLabel}: TrustedPartnerLogoProps) {
   const monochromeRef = useRef<HTMLSpanElement>(null);
   const colorRef = useRef<HTMLSpanElement>(null);
   const pointerActiveRef = useRef(false);
@@ -43,27 +59,27 @@ function TrustedPartnerLogo({ partner, caseStudyLabel }: TrustedPartnerLogoProps
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (reduceMotion) {
-      gsap.set(monochrome, { autoAlpha: nextActive ? 0 : 1, yPercent: 0 });
-      gsap.set(color, { autoAlpha: nextActive ? 1 : 0, yPercent: 0 });
+      gsap.set(monochrome, {autoAlpha: nextActive ? 0 : 1, yPercent: 0});
+      gsap.set(color, {autoAlpha: nextActive ? 1 : 0, yPercent: 0});
       return;
     }
 
     const timeline = gsap.timeline({
-      defaults: { duration: 0.8, ease: 'power3.inOut' },
+      defaults: {duration: 0.8, ease: 'power3.inOut'},
     });
 
     if (nextActive) {
-      gsap.set(color, { autoAlpha: 0, yPercent: -115 });
+      gsap.set(color, {autoAlpha: 0, yPercent: -115});
       timeline
-        .to(monochrome, { autoAlpha: 0, yPercent: 115 }, 0)
-        .to(color, { autoAlpha: 1, yPercent: 0 }, 0.08);
+        .to(monochrome, {autoAlpha: 0, yPercent: 115}, 0)
+        .to(color, {autoAlpha: 1, yPercent: 0}, 0.08);
       return;
     }
 
-    gsap.set(monochrome, { autoAlpha: 0, yPercent: -115 });
+    gsap.set(monochrome, {autoAlpha: 0, yPercent: -115});
     timeline
-      .to(color, { autoAlpha: 0, yPercent: -115 }, 0)
-      .to(monochrome, { autoAlpha: 1, yPercent: 0 }, 0.08);
+      .to(color, {autoAlpha: 0, yPercent: -115}, 0)
+      .to(monochrome, {autoAlpha: 1, yPercent: 0}, 0.08);
   }, []);
 
   const syncInteractionState = useCallback(() => {
@@ -76,8 +92,8 @@ function TrustedPartnerLogo({ partner, caseStudyLabel }: TrustedPartnerLogoProps
 
     if (!monochrome || !color) return;
 
-    gsap.set(monochrome, { autoAlpha: 1, yPercent: 0 });
-    gsap.set(color, { autoAlpha: 0, yPercent: -115 });
+    gsap.set(monochrome, {autoAlpha: 1, yPercent: 0});
+    gsap.set(color, {autoAlpha: 0, yPercent: -115});
 
     return () => {
       gsap.killTweensOf([monochrome, color]);
@@ -141,11 +157,7 @@ function TrustedPartnerLogo({ partner, caseStudyLabel }: TrustedPartnerLogoProps
 
   if (!partner.href) {
     return (
-      <div
-        className={className}
-        data-partner={partnerSlug(partner.name)}
-        {...interactionProps}
-      >
+      <div className={className} data-partner={partnerSlug(partner.name)} {...interactionProps}>
         {media}
       </div>
     );
@@ -165,7 +177,7 @@ function TrustedPartnerLogo({ partner, caseStudyLabel }: TrustedPartnerLogoProps
   );
 }
 
-export default function TrustedByBar({ partners }: TrustedByBarProps) {
+export default function TrustedByBar({partners}: TrustedByBarProps) {
   const t = useTranslations('TrustedBy');
   if (partners.length === 0) return null;
   const visibleColumnCount = Math.min(partners.length, 3);
@@ -176,9 +188,7 @@ export default function TrustedByBar({ partners }: TrustedByBarProps) {
         <div className="home-trusted-heading">
           <h2 id="home-trusted-title">{t('title')}</h2>
         </div>
-        <div
-          className={`home-trusted-logos home-trusted-logos--${visibleColumnCount}`}
-        >
+        <div className={`home-trusted-logos home-trusted-logos--${visibleColumnCount}`}>
           {partners.map((partner) => (
             <TrustedPartnerLogo
               key={partner.name}

@@ -11,13 +11,17 @@
     "audit:brand:strict": "node scripts/audit-brand-system.mjs --strict",
     "audit:responsive": "node scripts/audit-responsive-system.mjs",
     "images:export": "node scripts/export-editorial-images.mjs",
+    "images:semantic": "node scripts/export-semantic-images.mjs",
+    "i18n:validate": "node scripts/validate-message-catalogs.mjs",
+    "i18n:draft": "node scripts/draft-message-catalog.mjs",
     "check:webp": "node scripts/check-webp-assets.mjs",
     "start": "next start",
     "indexnow": "node scripts/submit-indexnow.mjs",
     "indexnow:dry-run": "node scripts/submit-indexnow.mjs --dry-run",
     "lint": "eslint .",
     "test": "vitest run",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:semantic-visual": "node scripts/verify-semantic-routes.mjs"
   },
   "dependencies": {
     "@react-spring/web": "^10.0.1",

@@ -251,6 +251,19 @@ export function getLocalInsightCollectionPage(
   industryId: string | null = null,
   includeIndustries = false,
 ): PaginatedInsightCollection {
+  // Spanish and Arabic must never receive the English fixture catalogue when
+  // Sanity is briefly unavailable. An empty state is preferable to publishing
+  // untranslated editorial content under a localized URL.
+  if (locale === 'es' || locale === 'ar') {
+    return {
+      items: [],
+      total: 0,
+      nextCursor: null,
+      hasFallbackContent: false,
+      industries: [],
+    };
+  }
+
   const allRecords = localRecords(collectionType, locale).sort(
     (left, right) =>
       right.date.localeCompare(left.date) || left.id.localeCompare(right.id),
@@ -350,6 +363,15 @@ export function getLocalInsightsPage(
   locale: AppLocale,
   cursor: InsightPageCursor | null = null,
 ): PaginatedInsights {
+  if (locale === 'es' || locale === 'ar') {
+    return {
+      items: [],
+      total: 0,
+      nextCursor: null,
+      hasFallbackContent: false,
+    };
+  }
+
   const records = (
     [
       'post',

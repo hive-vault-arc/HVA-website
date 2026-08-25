@@ -3,7 +3,7 @@
 import {useState, type CSSProperties} from 'react';
 import Image from 'next/image';
 import {MotionConfig, motion, useScroll, useTransform} from 'framer-motion';
-import {useTranslations} from 'next-intl';
+import {useLocale, useTranslations} from 'next-intl';
 import {FaLinkedinIn, FaXTwitter} from 'react-icons/fa6';
 import {Link} from '@/i18n/navigation';
 import {
@@ -21,7 +21,11 @@ import {
 } from '@/components/icons';
 import BottomCTA from '../components/BottomCTA';
 import type {EmployeeProfile} from '../lib/employee-profiles';
+import type {CaseStudy} from '../lib/proof';
 import {isSanityCdnImage} from '../lib/image-delivery';
+import ResponsiveMedia from '@/components/media/ResponsiveMedia';
+import type {AppLocale} from '@/i18n/config';
+import {SEMANTIC_MEDIA} from '@/lib/semantic-media';
 import {
   CONTACT_EMAIL,
   CONTACT_PHONE_DISPLAY,
@@ -46,6 +50,10 @@ type TeamMember = Pick<
 
 type AboutProps = {
   readonly teamMembers: readonly TeamMember[];
+  readonly featuredCaseStudy?: Pick<
+    CaseStudy,
+    'slug' | 'title' | 'clientName' | 'assets'
+  >;
 };
 
 type DeliveryStepCopy = {
@@ -78,15 +86,16 @@ const phaseCapabilitySlugs = [
 ] as const;
 
 const phaseMedia = [
-  '/Images/capabilities/editorial/hva-arc-assess-capabilities-v2.webp',
-  '/Images/capabilities/editorial/hva-arc-reengineer-capabilities-v2.webp',
-  '/Images/capabilities/editorial/hva-arc-command-capabilities-v2.webp',
+  SEMANTIC_MEDIA.arc.assess,
+  SEMANTIC_MEDIA.arc.reengineer,
+  SEMANTIC_MEDIA.arc.command,
 ] as const;
 
-const featuredProof = {
+const DEFAULT_FEATURED_PROOF = {
   slug: 'premium-advice-training-keepzen-digital-academy',
   client: 'Premium Advice x KeepZen',
   image: '/Images/case-studies/premium-advice-keepzen-digital-academy.webp',
+  imageAlt: 'Premium Advice and KeepZen digital academy platform',
 } as const;
 
 const trustSignalConfig = [
@@ -97,7 +106,7 @@ const trustSignalConfig = [
   },
   {
     id: 'proof',
-    href: `/case-studies/${featuredProof.slug}`,
+    href: `/case-studies/${DEFAULT_FEATURED_PROOF.slug}`,
     icon: FileCheck2,
   },
   {
@@ -119,8 +128,18 @@ const reveal = {
   transition: {duration: 0.48, ease: [0.23, 1, 0.32, 1]},
 } as const;
 
-const About = ({teamMembers}: AboutProps) => {
+const About = ({teamMembers, featuredCaseStudy}: AboutProps) => {
   const t = useTranslations('About');
+  const locale = useLocale() as AppLocale;
+  const featuredProof = featuredCaseStudy
+    ? {
+        slug: featuredCaseStudy.slug,
+        client: featuredCaseStudy.clientName,
+        image: featuredCaseStudy.assets.coverImage,
+        imageAlt:
+          featuredCaseStudy.assets.coverAlt ?? featuredCaseStudy.title,
+      }
+    : DEFAULT_FEATURED_PROOF;
   const {scrollYProgress} = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
   const [activePhaseIndex, setActivePhaseIndex] = useState(0);
@@ -170,10 +189,10 @@ const About = ({teamMembers}: AboutProps) => {
                 <p>{t('hero.description')}</p>
                 <div className="about-v2__actions">
                   <Link href="/contact">
-                    {t('hero.primaryCta')} <ArrowUpRight aria-hidden="true" />
+                    {t('hero.primaryCta')}
                   </Link>
                   <Link href="/capabilities">
-                    {t('hero.secondaryCta')} <ArrowUpRight aria-hidden="true" />
+                    {t('hero.secondaryCta')}
                   </Link>
                 </div>
               </motion.div>
@@ -185,7 +204,7 @@ const About = ({teamMembers}: AboutProps) => {
                 transition={{duration: 0.72, delay: 0.1, ease: [0.23, 1, 0.32, 1]}}
               >
                 <Image
-                  src="/Images/about/hva-about-team-system-session-v2.webp"
+                  src="/Images/about/hva-about-team-system-session-v3.webp"
                   alt={t('hero.imageAlt')}
                   fill
                   priority
@@ -274,13 +293,10 @@ const About = ({teamMembers}: AboutProps) => {
               </div>
 
               <figure className="about-v2__phase-media">
-                <Image
-                  src={activePhaseMedia}
-                  alt={`${activePhase.title}: ${t('capabilities.imageAlt')}`}
-                  fill
-                  quality={90}
+                <ResponsiveMedia
+                  media={activePhaseMedia}
+                  locale={locale}
                   sizes="(max-width: 1023px) 100vw, 58vw"
-                  className="object-cover"
                 />
                 <figcaption>
                   <span>{t('capabilities.imageLabel')}</span>
@@ -311,10 +327,11 @@ const About = ({teamMembers}: AboutProps) => {
               <motion.figure className="about-v2__proof-media" {...reveal}>
                 <Image
                   src={featuredProof.image}
-                  alt={t('proof.imageAlt')}
+                  alt={featuredProof.imageAlt}
                   fill
                   sizes="(max-width: 1023px) 100vw, 60vw"
                   className="object-contain"
+                  unoptimized={isSanityCdnImage(featuredProof.image)}
                 />
                 <figcaption>
                   <span>{featuredProof.client}</span>

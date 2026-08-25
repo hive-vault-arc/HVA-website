@@ -7,6 +7,7 @@ import FaqSection from '@/components/FaqSection';
 import {getLocalizedFaqs} from '@/i18n/faqs';
 import { getFeaturedCapabilityProfiles } from '@/lib/capabilities';
 import {getEmployeeProfileBySlug} from '@/lib/employee-profiles';
+import {getSolutionProgramMedia} from '@/lib/solution-program-media.server';
 import {
   CONTACT_PHONE_E164,
   GLOBAL_KEYWORDS,
@@ -27,10 +28,11 @@ export async function generateMetadata({params}: PageProps): Promise<Metadata> {
 
 export default async function Page({params}: PageProps) {
   const {locale} = await params;
-  const [capabilities, capabilitiesFaqs, aliProfile, tMeta, tNav] = await Promise.all([
+  const [capabilities, capabilitiesFaqs, aliProfile, programMedia, tMeta, tNav] = await Promise.all([
     getFeaturedCapabilityProfiles(locale),
     getLocalizedFaqs(locale, 'capabilities'),
     getEmployeeProfileBySlug('ali-amrani', locale),
+    getSolutionProgramMedia(locale),
     getTranslations({locale, namespace: 'Metadata.pages.capabilities'}),
     getTranslations({locale, namespace: 'Navigation'}),
   ]);
@@ -104,6 +106,7 @@ export default async function Page({params}: PageProps) {
         capabilities={capabilities}
         aliProfileImage={aliProfile?.profileImage}
         aliProfileImageAlt={aliProfile?.profileImageAlt}
+        programMedia={programMedia}
       />
       <FaqSection faqs={capabilitiesFaqs.items} heading={capabilitiesFaqs.heading} />
     </>

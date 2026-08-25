@@ -1,10 +1,13 @@
 'use client';
 
 import React, { Suspense, lazy, useEffect } from 'react';
-import {useTranslations} from 'next-intl';
+import {useLocale, useTranslations} from 'next-intl';
 import {Link} from '@/i18n/navigation';
 import dynamic from 'next/dynamic';
-import Image from 'next/image';
+import ResponsiveMedia from '@/components/media/ResponsiveMedia';
+import CloudEcosystemRail from '@/components/media/CloudEcosystemRail';
+import type {AppLocale} from '@/i18n/config';
+import {SEMANTIC_MEDIA} from '@/lib/semantic-media';
 import {
   ArrowRight,
   BarChart3,
@@ -58,6 +61,7 @@ const Home: React.FC<HomeProps> = ({
   trustedPartners,
 }) => {
   const t = useTranslations('Home');
+  const locale = useLocale() as AppLocale;
 
   useEffect(() => {
     document.body.classList.add('home-page');
@@ -106,15 +110,15 @@ const Home: React.FC<HomeProps> = ({
   }));
   const capabilityGroups = [
     {
-      image: '/Images/home/capabilities/strategy-technology-consulting-men.webp',
+      media: SEMANTIC_MEDIA.home.strategyTechnology,
       pillarIndexes: [0, 1],
     },
     {
-      image: '/Images/home/capabilities/ai-software-engineering.webp',
+      media: SEMANTIC_MEDIA.home.aiSoftware,
       pillarIndexes: [2, 3],
     },
     {
-      image: '/Images/home/capabilities/cloud-managed-operations-men.webp',
+      media: SEMANTIC_MEDIA.home.cloudOperations,
       pillarIndexes: [4, 5],
     },
   ];
@@ -163,7 +167,7 @@ const Home: React.FC<HomeProps> = ({
           <div className="home-identity-mosaic">
             {capabilityGroups.map((group, groupIndex) => (
               <motion.article
-                key={group.image}
+                key={group.media.altKey}
                 className={`home-capability-group home-capability-group--${groupIndex + 1}`}
                 initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -175,14 +179,21 @@ const Home: React.FC<HomeProps> = ({
                 }}
               >
                 <figure className="home-capability-group__media">
-                  <Image
-                    src={group.image}
-                    alt={capabilityPillars[group.pillarIndexes[0]].imageAlt}
-                    fill
-                    quality={90}
+                  <ResponsiveMedia
+                    media={group.media}
+                    locale={locale}
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 44vw, 29vw"
                     className="home-capability-group__image"
                   />
+                  {groupIndex === 2 ? (
+                    <CloudEcosystemRail
+                      ariaLabel={
+                        locale === 'fr'
+                          ? 'Technologies cloud et de conteneurs'
+                          : 'Cloud and container technologies'
+                      }
+                    />
+                  ) : null}
                 </figure>
 
                 <div className="home-capability-group__content">
@@ -254,13 +265,10 @@ const Home: React.FC<HomeProps> = ({
               transition={{ duration: 0.55, delay: 0.08 }}
             >
               <div className="home-arc-loop-visual">
-                <Image
-                  src="/Images/home/arc-operating-model-session.webp"
-                  alt={t('arcImageAlt')}
-                  fill
-                  quality={90}
+                <ResponsiveMedia
+                  media={SEMANTIC_MEDIA.home.arcOperatingModel}
+                  locale={locale}
                   sizes="(min-width: 1041px) 42vw, 100vw"
-                  className="object-cover object-center"
                 />
               </div>
               <figcaption className="home-arc-loop-visual-card">

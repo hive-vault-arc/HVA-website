@@ -6,7 +6,6 @@ import Image from 'next/image';
 import {useLocale, useTranslations} from 'next-intl';
 import {FaGithub, FaLinkedinIn, FaTiktok, FaXTwitter} from 'react-icons/fa6';
 import {
-  ArrowRight,
   ArrowUpRight,
   Facebook,
   Globe2,
@@ -258,7 +257,6 @@ const Contact: React.FC = () => {
                 <p>{t('privacyNote')}</p>
                 <button type="submit" disabled={isSubmitting} className={styles.submitButton}>
                   {isSubmitting ? t('sending') : t('send')}
-                  <ArrowRight className={styles.buttonArrow} aria-hidden="true" />
                 </button>
               </div>
 

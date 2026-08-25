@@ -1,0 +1,3034 @@
+{
+  "Locale": {
+    "eyebrow": "Idioma",
+    "english": "English",
+    "french": "Français",
+    "selectLanguage": "Elige idioma",
+    "currentLanguage": "Idioma actual: {language}",
+    "languages": {
+      "en": "English",
+      "fr": "Français",
+      "es": "Español",
+      "ar": "العربية"
+    },
+    "switchTo": "Ver esta página en {language}",
+    "unavailable": "Esta página no está disponible en {language}"
+  },
+  "Navigation": {
+    "home": "Inicio",
+    "arc": "ARC Framework",
+    "capabilities": "Capacidades",
+    "industries": "Industrias",
+    "whoWeAre": "Quienes somos",
+    "insights": "Perspectivas",
+    "caseStudies": "Estudios de caso",
+    "contact": "Contacto",
+    "bookCall": "Reservar una llamada",
+    "openMenu": "Abrir menú de navegación",
+    "closeMenu": "Cerrar menú de navegación",
+    "mobileNavigation": "Navegación móvil",
+    "allCapabilities": "Todas las capacidades",
+    "toggleCapabilities": "Alternar submenú de capacidades",
+    "toggleIndustries": "Alternar submenú de industrias",
+    "toggleWhoWeAre": "Alternar quiénes somos submenú",
+    "toggleInsights": "Alternar submenú de estadísticas",
+    "framework": "Marco",
+    "strategyBusiness": "Consultoría estratégica y empresarial",
+    "technologyConsulting": "Consultoría Tecnológica",
+    "aiData": "IA, datos y análisis",
+    "softwareEngineering": "Ingeniería de software",
+    "cloudInfrastructure": "Nube e infraestructura",
+    "managedOperations": "Operaciones y servicios gestionados",
+    "solutionPrograms": "Programas de solución",
+    "inDetail": "En detalle",
+    "aboutUs": "Sobre nosotros",
+    "portfolio": "Portafolio",
+    "blog": "Blog",
+    "newsArticles": "Artículos de noticias",
+    "perspectives": "Perspectivas",
+    "researchReports": "Informes de investigación",
+    "realEstate": "Bienes Raíces y Construcción",
+    "healthcare": "Salud y ciencias biológicas",
+    "financialServices": "Servicios financieros",
+    "government": "Gobierno y sector público",
+    "retail": "Venta minorista y comercio electrónico",
+    "energy": "Energía y Sostenibilidad",
+    "logistics": "Logística y Transporte",
+    "consumerGoods": "Bienes de consumo y lujo",
+    "tagline": "Hive Vault Arc — Estrategia — Ingeniería — Operaciones"
+  },
+  "Footer": {
+    "description": "Estrategia, ingeniería y operaciones bajo un solo equipo responsable.",
+    "explore": "Explorar",
+    "company": "Empresa",
+    "legal": "Legales",
+    "privacy": "Política de privacidad",
+    "legalMentions": "Menciones Legales",
+    "rights": "Todos los derechos reservados.",
+    "location": "Tánger, Marruecos",
+    "pages": "paginas",
+    "services": "Servicios",
+    "industries": "Industrias",
+    "connect": "Conectar",
+    "website": "Sitio web",
+    "precision": "Precisión en la ejecución.",
+    "strategyBusiness": "Consultoría estratégica y empresarial",
+    "technologyConsulting": "Consultoría Tecnológica",
+    "aiData": "IA, datos y análisis",
+    "softwareEngineering": "Ingeniería de software",
+    "cloudInfrastructure": "Nube e infraestructura",
+    "managedOperations": "Operaciones y servicios gestionados",
+    "solutionPrograms": "Programas de solución"
+  },
+  "Common": {
+    "learnMore": "Más información",
+    "readMore": "Leer más",
+    "viewAll": "Ver todo",
+    "viewCaseStudy": "Leer estudio de caso",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "loading": "Cargando",
+    "notAvailable": "No disponible",
+    "originalLanguage": "Idioma original",
+    "downloadDocument": "Descargar documento",
+    "verifiedEvidence": "Evidencia verificada",
+    "nextStep": "Siguiente paso"
+  },
+  "Errors": {
+    "title": "algo salió mal",
+    "description": "No pudimos cargar esta página. Por favor inténtalo de nuevo.",
+    "retry": "Inténtalo de nuevo",
+    "notFoundTitle": "Página no encontrada",
+    "notFoundDescription": "La página que usted solicitó no existe o ya no está disponible.",
+    "returnHome": "volver a casa",
+    "temporaryTitle": "Página no disponible temporalmente",
+    "temporaryDescription": "La página no se pudo cargar limpiamente. Vuelva a intentar la solicitud o regrese a la página de inicio.",
+    "loading": "Cargando Hive Vault Arc",
+    "navigationError": "Error de navegación / 404",
+    "movedTitle": "Esta página ya no está en esta dirección.",
+    "movedDescription": "Es posible que el enlace esté desactualizado o que la página se haya movido. Regrese al sitio principal o continúe a través de una de las secciones siguientes.",
+    "contactTeam": "Contacta con el equipo",
+    "suggestedPages": "Páginas sugeridas"
+  },
+  "Contact": {
+    "formLocale": "ingles",
+    "success": "Gracias. Su mensaje ha sido recibido.",
+    "error": "No pudimos enviar tu mensaje. Por favor inténtalo de nuevo.",
+    "rateLimit": "Espere {seconds}s antes de volver a enviarlo.",
+    "emailOpened": "Se abrió su cliente de correo electrónico. Por favor envíe el mensaje redactado.",
+    "directError": "No pudimos enviar su mensaje en este momento. Inténtelo de nuevo o envíenos un correo electrónico directamente.",
+    "eyebrow": "Contacto",
+    "title": "Cuéntanos en qué estás trabajando.",
+    "lead": "Comparta sus objetivos, limitaciones y obstáculos actuales. Los revisaremos y sugeriremos un siguiente paso práctico.",
+    "sectionLabel": "Datos de contacto y formulario de descubrimiento",
+    "detailsHeading": "Datos de contacto",
+    "socialHeading": "redes sociales",
+    "formHeading": "Enviar un breve resumen",
+    "formIntro": "Algunos detalles son suficientes para iniciar la conversación.",
+    "requiredNote": "* Campos obligatorios",
+    "operatingRegion": "Región operativa",
+    "location": "Tánger, Marruecos",
+    "remote": "Entrega remota en todo el mundo",
+    "inquiries": "Consultas",
+    "directLine": "Línea Directa",
+    "mapAlt": "Mapa de Tánger, Marruecos: región operativa Hive Vault Arc",
+    "mapLabel": "Marruecos + Remoto",
+    "name": "Nombre",
+    "namePlaceholder": "Tu nombre completo",
+    "email": "Dirección de correo electrónico",
+    "emailPlaceholder": "name@company.com",
+    "company": "Nombre de la empresa",
+    "companyPlaceholder": "tu empresa",
+    "industry": "Industria",
+    "industryPlaceholder": "por ej. Bienes Raíces, Salud",
+    "teamSize": "Tamaño del equipo/empresa",
+    "brief": "Resumen de transformación",
+    "briefPlaceholder": "Cuéntenos sobre sus objetivos, cronograma y alcance...",
+    "privacyNote": "Usamos esta información para evaluar la estrategia, la arquitectura y las opciones de entrega para su equipo.",
+    "sending": "Enviando…",
+    "send": "Enviar mensaje",
+    "quote": "El valor no está sólo en la entrega del código. El valor está en desarrollar una capacidad operativa confiable sobre la cual su negocio pueda crecer.",
+    "quoteAttribution": "Socio director, Hive Vault Arc",
+    "subject": "Consulta de proyecto"
+  },
+  "Collections": {
+    "news": {
+      "eyebrow": "Perspectivas / Artículos de noticias",
+      "title": "Artículos de noticias",
+      "description": "Señales de mercado, tendencias de ejecución y actualizaciones de tecnología operativa relevantes para los equipos de liderazgo."
+    },
+    "perspectives": {
+      "eyebrow": "Perspectivas / Perspectivas",
+      "title": "Perspectivas",
+      "description": "Puntos de vista editoriales sobre cómo se deben regir la estrategia, la arquitectura y la ejecución en las organizaciones modernas."
+    },
+    "research": {
+      "eyebrow": "Perspectivas / Informes de investigación",
+      "title": "Informes de investigación",
+      "description": "Informes respaldados por datos diseñados para ayudar a los ejecutivos a evaluar la estrategia tecnológica y la madurez de ejecución."
+    }
+  },
+  "HomeHero": {
+    "carouselLabel": "Descripción general de Hive Vault Arc",
+    "previous": "Diapositiva anterior",
+    "next": "Siguiente diapositiva",
+    "choose": "Elige una diapositiva de héroe",
+    "goTo": "Ir a la diapositiva {number}",
+    "slides": [
+      {
+        "eyebrow": "ESTRATEGIA / TECNOLOGÍA / OPERACIONES",
+        "titleLead": [
+          "Nosotros arquitectos",
+          "que se mueve"
+        ],
+        "titleAccent": "tu negocio",
+        "description": "Desde la estrategia hasta los sistemas, ayudamos a equipos ambiciosos a generar un progreso mensurable.",
+        "primaryLabel": "Iniciar un proyecto",
+        "secondaryLabel": "Explorar capacidades",
+        "imageAlt": "Sistema arquitectónico en capas azul marino, blanco y amarillo con un horizonte de la ciudad y planos técnicos."
+      },
+      {
+        "eyebrow": "CONSULTORÍA TECNOLÓGICA",
+        "titleLead": [
+          "Orientación estratégica."
+        ],
+        "titleAccent": "Ejecución responsable.",
+        "description": "Seguimos siendo responsables desde las decisiones de arquitectura hasta la entrega de ingeniería y las operaciones a largo plazo.",
+        "primaryLabel": "Reservar llamada de descubrimiento",
+        "secondaryLabel": "Conozca a nuestro equipo",
+        "imageAlt": "Sistema de estrategia flotante en capas con diagramas de modelo operativo y geometría de planificación urbana"
+      },
+      {
+        "eyebrow": "INGENIERÍA Y OPERACIONES DE IA",
+        "titleLead": [
+          "Estrategia, ingeniería de IA,"
+        ],
+        "titleAccent": "y operaciones en un solo equipo.",
+        "description": "La estrategia, la ingeniería de producción y las operaciones gestionadas se mueven juntas bajo un solo equipo responsable.",
+        "primaryLabel": "Ver estudios de casos",
+        "secondaryLabel": "Explorar capacidades",
+        "imageAlt": "Sistema de orquestación de IA en capas flotantes con un núcleo neuronal y flujos de datos conectados"
+      },
+      {
+        "eyebrow": "MODELO DE ENTREGA DE ARCO",
+        "titleLead": [
+          "Evaluar. Reingeniería."
+        ],
+        "titleAccent": "Comando sistemas de producción.",
+        "description": "Diagnosticamos limitaciones operativas, reconstruimos sistemas críticos y permanecemos involucrados después del lanzamiento.",
+        "primaryLabel": "Explora nuestros programas",
+        "secondaryLabel": "Ver casos de estudio",
+        "imageAlt": "Sistema de comando de producción flotante en capas con paneles operativos y controles de flujo de trabajo"
+      }
+    ]
+  },
+  "HomeDecision": {
+    "websiteGuide": "guía del sitio web",
+    "choose": "Elige tu",
+    "route": "ruta.",
+    "intro": "Caminos inteligentes hacia la experiencia y los conocimientos que hacen avanzar su negocio.",
+    "start": "encontrar mi punto de partida",
+    "coreOffering": "Oferta principal",
+    "capabilities": "Capacidades",
+    "more": "Más formas de conectarse",
+    "clientEvidence": "evidencia del cliente",
+    "proof": "Prueba en",
+    "motion": "movimiento.",
+    "proofDescription": "Trabajo de entrega documentado y evidencia aprobada por el cliente.",
+    "readCaseStudy": "Leer estudio de caso",
+    "verified": "Evidencia verificada",
+    "deliveryAlt": "Entorno de entrega del estudio de caso {client}",
+    "logoAlt": "Logotipo {client}",
+    "routes": {
+      "industriesLabel": "donde trabajamos",
+      "industriesTitle": "Industrias",
+      "industriesAlt": "Estructuras de la industria arquitectónica en Hive Vault Arc azul marino",
+      "caseStudiesLabel": "Véalo en acción",
+      "caseStudiesTitle": "Estudios de caso",
+      "caseStudiesAlt": "Informes de desempeño empresarial preparados para una revisión de un estudio de caso",
+      "arcLabel": "Nuestro enfoque",
+      "arcTitle": "ARC Framework",
+      "insightsLabel": "Mantente informado",
+      "insightsTitle": "Perspectivas",
+      "contactLabel": "hablemos",
+      "contactTitle": "Reservar una llamada",
+      "capabilitiesAlt": "Mapa de sistemas abstractos para capacidades Hive Vault Arc"
+    }
+  },
+  "Home": {
+    "identityEyebrow": "nuestra identidad",
+    "identityTitle": "Aconsejar. Construir.",
+    "identityAccent": "Operar.",
+    "identityDescription": "Hive Vault Arc reúne estrategia, ingeniería de inteligencia artificial, software, nube y operaciones en un solo equipo de entrega responsable. Nos quedamos con el sistema desde la decisión hasta la producción.",
+    "identityDisciplines": "Estrategia · Ingeniería de IA · Software · Operaciones",
+    "pillar": "Pilar",
+    "arcLoop": "El bucle ARCO",
+    "arcTitle": "Un bucle ARC. De la estrategia a la producción.",
+    "arcTitleLine1": "Un bucle ARC.",
+    "arcTitleLine2": "De la estrategia",
+    "arcTitleLine3": "a la producción.",
+    "arcDescription": "Evaluar. Construir. Funcionar. Un equipo es dueño del resultado.",
+    "ourCapabilities": "Nuestras capacidades",
+    "arcImageAlt": "Sesión de trabajo ejecutivo en torno a un proyecto de arquitectura de sistemas",
+    "featuredStory": "Historia operativa destacada",
+    "featuredStoryTitle": "Un equipo. Del diagnóstico a la producción.",
+    "technologyPartners": "Socios tecnológicos",
+    "globalReachEyebrow": "Red de entrega",
+    "globalReachTitle": "Alcance global, impacto local",
+    "globalReachDescription": "Colaboramos entre regiones para ofrecer una calidad de producto y una velocidad de ejecución consistentes.",
+    "globalReachLocation": "Con sede en Marruecos, realizando entregas a clientes de todo el mundo.",
+    "ctaTitle": "¿Listo para mejorar las operaciones principales?",
+    "ctaDescription": "Comparte la restricción. Definiremos la estrategia, el sistema y la ruta de entrega.",
+    "ctaPrimary": "Reserve una llamada de descubrimiento",
+    "ctaSecondary": "Ver estudios de casos",
+    "arcPhases": [
+      {
+        "phase": "01",
+        "title": "evaluar",
+        "discipline": "Estrategia y Arquitectura",
+        "summary": "Encuentra la restricción. Establecer la arquitectura. Priorizar el trabajo.",
+        "proof": "Diagnóstico operativo"
+      },
+      {
+        "phase": "02",
+        "title": "Reingeniería",
+        "discipline": "IA, software y nube",
+        "summary": "Construya el sistema. Implementar IA. Prepárate para una carga real.",
+        "proof": "Sistemas de producción"
+      },
+      {
+        "phase": "03",
+        "title": "Comando",
+        "discipline": "Operar y evolucionar",
+        "summary": "Ejecutar, monitorear y mejorar el sistema.",
+        "proof": "Resultados gestionados"
+      }
+    ],
+    "discoveryPrep": {
+      "title": "Prepárese para una primera llamada útil",
+      "description": "Dos aportaciones claras son suficientes para empezar bien.",
+      "aria": "Notas de preparación del descubrimiento",
+      "open": "Trae esto a la llamada.",
+      "items": [
+        {
+          "label": "¿Dónde se está desacelerando el trabajo?",
+          "region": "Restricción actual",
+          "summary": "Nombra el proceso, sistema o decisión que crea fricción. Una breve descripción es suficiente."
+        },
+        {
+          "label": "¿Qué necesita mejorar?",
+          "region": "Resultado deseado",
+          "summary": "Comparta el resultado que necesita, quién es el propietario y cualquier limitación operativa o de tiempo."
+        }
+      ]
+    },
+    "capabilityPillars": [
+      {
+        "title": "Consultoría estratégica y empresarial",
+        "desc": "Diagnostica, define y diseña la transformación antes de escribir una sola línea de código.",
+        "imageAlt": "Diseño de modelo operativo de consultoría estratégica y empresarial.",
+        "details": [
+          "Estrategia de negocio y transformación digital",
+          "Diagnóstico operativo y rediseño de procesos.",
+          "Estrategia de innovación y expansión de mercado."
+        ]
+      },
+      {
+        "title": "Consultoría Tecnológica",
+        "desc": "Las decisiones arquitectónicas tomadas tempranamente son positivas. Diseñamos sistemas que duran.",
+        "imageAlt": "Consultoría tecnológica en arquitectura y planificación de sistemas.",
+        "details": [
+          "Hojas de ruta de arquitectura empresarial y tecnología",
+          "Estrategia de plataforma e integración de sistemas.",
+          "Modernización de TI y diseño de infraestructura."
+        ]
+      },
+      {
+        "title": "IA, datos y análisis",
+        "desc": "Agentes de IA en WhatsApp, chat web y correo electrónico: multilingües, siempre disponibles y capacitados para sus operaciones.",
+        "imageAlt": "Sistemas de inteligencia de producción de inteligencia artificial y análisis de datos.",
+        "details": [
+          "Diseño e implementación de agentes de IA",
+          "Estrategia e ingeniería de IA generativa",
+          "Ingeniería de datos e inteligencia de negocios."
+        ]
+      },
+      {
+        "title": "Ingeniería de software",
+        "desc": "Software personalizado de nivel de producción, plataformas SaaS y aplicaciones web y móviles.",
+        "imageAlt": "Espacio de trabajo de sistemas de grado de producción de ingeniería de software",
+        "details": [
+          "Desarrollo de software personalizado y plataforma SaaS.",
+          "Entrega de aplicaciones web y móviles",
+          "Ingeniería API y DevOps"
+        ]
+      },
+      {
+        "title": "Nube e infraestructura",
+        "desc": "Diseñado para ofrecer escala, seguridad y resiliencia: diseño de confianza cero y observabilidad desde el primer día.",
+        "imageAlt": "Sistemas seguros de infraestructura en la nube y observabilidad.",
+        "details": [
+          "AWS, Azure y migración a la nube de GCP",
+          "Automatización de infraestructura y arquitectura de seguridad.",
+          "Observabilidad, recuperación ante desastres y servicios gestionados en la nube"
+        ]
+      },
+      {
+        "title": "Operaciones y servicios gestionados",
+        "desc": "Nos quedamos después del lanzamiento. El mismo equipo es dueño de la estrategia a través de la producción, sin traspasos.",
+        "imageAlt": "Espacio de trabajo de monitoreo de operaciones y servicios administrados",
+        "details": [
+          "Operaciones gestionadas y mantenimiento de aplicaciones.",
+          "Gestión del sistema de IA después de la implementación",
+          "Outsourcing de procesos de negocio y servicios compartidos"
+        ]
+      }
+    ]
+  },
+  "InsightsCarousel": {
+    "eyebrow": "Bienvenido a Hive Vault Arc",
+    "title": "Pensando, probando,",
+    "titleAccent": "envío.",
+    "description": "Notas de campo de los programas que hemos creado y los equipos que hemos transformado.",
+    "article": "Artículo",
+    "caseStudy": "Estudio de caso",
+    "availableInEnglish": "Disponible en inglés",
+    "learnMore": "Más información",
+    "viewAll": "Ver todas las estadísticas",
+    "play": "Jugar",
+    "pause": "Pausa",
+    "previous": "Anterior",
+    "next": "Siguiente"
+  },
+  "TrustedBy": {
+    "title": "Con la confianza de los equipos que construyen escala",
+    "caseStudyLabel": "Lea el estudio de caso {client}"
+  },
+  "Arc": {
+    "label": "Modelo operativo ARCO",
+    "heroLines": [
+      "Evalúe la restricción.",
+      "Reingeniería del sistema.",
+      "Comanda el resultado."
+    ],
+    "heroDescription": "ARC conecta diagnóstico, ingeniería y operaciones en vivo. Un equipo lleva el resultado desde la restricción hasta la producción.",
+    "bookDiagnostic": "Solicitar evaluación ARC",
+    "seeProduction": "Ver ARC en producción",
+    "heroAlt": "Operadores senior mapeando un sistema empresarial durante una sesión de estrategia ARC",
+    "leadTitle": "Un bucle. Un resultado responsable.",
+    "leadDescription": "ARC deja claro el camino antes de que comience la inversión. El diagnóstico, la entrega y las operaciones en vivo permanecen bajo un solo equipo responsable.",
+    "loopAria": "Evaluar, rediseñar, comandar: el circuito operativo del ARC",
+    "indexTitle": "ARC en tres decisiones.",
+    "indexDescription": "Evalúe la restricción. Reingeniería del sistema. Comanda el resultado.",
+    "how": "Cómo funciona ARCO",
+    "processTitle": "Evaluar. Reingeniería. Dominio.",
+    "processDescription": "Cada fase termina con un resultado claro y una decisión.",
+    "phasesLabel": "Fases de funcionamiento del ARCO",
+    "output": "Salida {phase}",
+    "bestFor": "Lo mejor para",
+    "buyerFit": [
+      "Operaciones fragmentadas",
+      "Cuellos de botella heredados",
+      "Implementación del flujo de trabajo de IA",
+      "Brechas en la rendición de cuentas de la producción"
+    ],
+    "differenceEyebrow": "Por qué ARC es diferente",
+    "differenceTitle": "La propiedad continúa después del lanzamiento.",
+    "differenceStatement": "La estrategia, la ingeniería y las operaciones permanecen conectadas.",
+    "differenceDescription": "Cada decisión permanece ligada a la restricción, la evidencia y el resultado aprobado.",
+    "meetTeam": "Conozca al equipo responsable de la entrega.",
+    "proofEyebrow": "Prueba en producción",
+    "proofTitle": "Pruebas de producción, adjuntas a los sistemas nombrados.",
+    "proofDescription": "Cada registro conecta el problema empresarial, el sistema entregado y el estado de producción actual. Las cifras de rendimiento aparecen sólo después de la aprobación de la publicación.",
+    "record": "Registro {client}",
+    "liveSystems": "Sistemas en vivo, no diapositivas.",
+    "liveSystemsDescription": "Registros operativos nombrados con alcance de entrega y contexto de producción.",
+    "problem": "Problema:",
+    "whatChanged": "Qué cambió:",
+    "status": "Estado:",
+    "viewSnapshot": "Ver instantánea del caso",
+    "previousStudy": "Estudio de caso anterior",
+    "nextStudy": "Próximo caso de estudio",
+    "casePosition": "Caso {current} de {total}",
+    "outcomesEyebrow": "Resultados probados",
+    "outcomesTitle": "Prueba de sistemas en vivo.",
+    "outcomesDescription": "Señales aprobadas de sistemas de producción nombrados.",
+    "outcomesCaseEyebrow": "Sistemas nombrados. Resultados reales.",
+    "outcomesImageAlt": "Desarrollo residencial moderno que representa el sistema operativo ImmoWorld CRM",
+    "apply": "Aplicar arco",
+    "closingQuote": "Un equipo responsable desde la restricción hasta la producción.",
+    "closingTitle": "Aplique ARC a su operación.",
+    "closingDescription": "Comparta la restricción, el resultado objetivo y la pila actual. Mapearemos el próximo movimiento.",
+    "requestAssessment": "Solicitar evaluación ARC",
+    "seeCaseStudies": "Ver casos de estudio",
+    "phases": [
+      {
+        "step": "01",
+        "title": "evaluar",
+        "purpose": "Encuentre la restricción antes de financiar la construcción.",
+        "output": "mapa de restricciones",
+        "description": "Mapeamos el flujo de trabajo operativo, las dependencias del sistema, los propietarios de las decisiones y el objetivo mensurable antes de que se apruebe el alcance de la compilación.",
+        "checkpoints": [
+          "Evidencia del estado actual",
+          "Prioridad de restricción",
+          "Hoja de ruta lista para tomar decisiones"
+        ],
+        "imageAlt": "Dos consultores mapean dependencias operativas durante una evaluación ARC"
+      },
+      {
+        "step": "02",
+        "title": "Reingeniería",
+        "purpose": "Diseñar y entregar el sistema operativo.",
+        "output": "Sistema listo para producción",
+        "description": "Rediseñamos el flujo de trabajo y lo apilamos, luego validamos las integraciones, los controles y la preparación del lanzamiento con respecto al resultado aprobado.",
+        "checkpoints": [
+          "Flujo de trabajo objetivo",
+          "Pila integrada",
+          "Puerta de producción"
+        ],
+        "imageAlt": "Ingenieros de sistemas validando un plan de arquitectura e integración."
+      },
+      {
+        "step": "03",
+        "title": "Comando",
+        "purpose": "Ejecutar, medir y mejorar en producción.",
+        "output": "Métricas operativas en vivo",
+        "description": "El mismo equipo responsable monitorea la confiabilidad, informa el desempeño y convierte la evidencia de producción en el siguiente ciclo de mejora.",
+        "checkpoints": [
+          "Telemetría operativa",
+          "Respuesta gestionada",
+          "Trabajo pendiente de mejora"
+        ],
+        "imageAlt": "Operadores de producción revisando evidencia operativa en vivo y decisiones de mejora."
+      }
+    ],
+    "signals": [
+      {
+        "title": "un equipo",
+        "description": "El diagnóstico, la entrega y las operaciones en vivo permanecen conectados.",
+        "linkLabel": "Conoce a los fundadores"
+      },
+      {
+        "title": "Propiedad de producción",
+        "description": "El lanzamiento es un punto de control, no el final del enfrentamiento.",
+        "linkLabel": "Ver operaciones gestionadas"
+      },
+      {
+        "title": "Puertas de decisión",
+        "description": "El alcance avanza sólo cuando las limitaciones y la evidencia son claras.",
+        "linkLabel": "Revisar la profundidad de entrega"
+      }
+    ],
+    "caseTitles": {
+      "crm": "Un sistema CRM para operaciones inmobiliarias en vivo.",
+      "whatsapp": "Operaciones líderes de IA en WhatsApp y CRM."
+    },
+    "caseRecords": {
+      "crm": {
+        "problem": "Tres herramientas desconectadas crearon registros duplicados, seguimientos perdidos y ninguna capa de informes confiable para el liderazgo.",
+        "change": "Un CRM unificado ahora conecta la admisión de clientes potenciales, el trabajo del proceso de recorrido del comprador, los flujos de trabajo del equipo y los informes operativos."
+      },
+      "whatsapp": {
+        "problem": "Los clientes potenciales entrantes se manejaron manualmente a través de WhatsApp y por teléfono, lo que dejó sin resolver las oportunidades fuera del horario laboral y la clasificación repetitiva.",
+        "change": "Un agente de producción de IA ahora maneja la calificación multilingüe, el contexto persistente, la programación y las actualizaciones del proceso de CRM."
+      }
+    }
+  },
+  "Capabilities": {
+    "heroLabel": "Capacidades integradas",
+    "heroLine1": "Seis pilares.",
+    "heroAccent": "uno responsable",
+    "heroLine3": "equipo.",
+    "heroDescription": "La estrategia, la ingeniería y las operaciones gestionadas permanecen conectadas desde la decisión hasta la producción.",
+    "exploreDetail": "Explora en detalle",
+    "solutionPrograms": "Programas de solución",
+    "learnMore": "Más información",
+    "arcModel": "modelo arco",
+    "arcWords": [
+      "Evaluar.",
+      "Reingeniería.",
+      "Comando."
+    ],
+    "arcKeys": [
+      "Puertas de decisión",
+      "Propiedad conjunta",
+      "Continuidad gestionada"
+    ],
+    "phase": "Fase {step}",
+    "hvaFocus": "enfoque Hive Vault Arc",
+    "clientRole": "Rol del cliente",
+    "phaseOutput": "Salida de fase",
+    "viewPrograms": "Ver programas de solución",
+    "quote": "El trabajo sólo importa cuando la estrategia se convierte en un sistema que los equipos pueden ejecutar, medir y mejorar todos los días.",
+    "quoteAlt": "Ali Amrani, cofundador y director de tecnología de Hive Vault Arc",
+    "quoteAuthor": "Ali Amrani",
+    "quoteRole": "Cofundador y director de tecnología",
+    "programsTitle": "Elige el punto de partida.",
+    "programsDescription": "Tres programas enfocados. Cada uno está diseñado, construido y operado con un equipo responsable.",
+    "caseStudy": "Estudio de caso",
+    "fullCatalog": "Catálogo completo de programas",
+    "nextStep": "Siguiente paso",
+    "depthTitle": "Explore el mapa de capacidades completo.",
+    "depthDescription": "Revise el contexto estratégico, el modelo de entrega y el alcance detallado de cada pilar.",
+    "bookCall": "Reserve una llamada de descubrimiento",
+    "onPage": "En esta pagina",
+    "fullDepth": "profundidad total",
+    "pageLinks": [
+      {
+        "label": "Pilares de capacidad",
+        "meta": "6 pilares"
+      },
+      {
+        "label": "Programas de solución",
+        "meta": "3 activos"
+      },
+      {
+        "label": "Modelo de participación ARC",
+        "meta": "como trabajamos"
+      }
+    ],
+    "fallbackCards": [
+      {
+        "title": "IA y datos",
+        "alt": "Sistemas de inteligencia de producción de inteligencia artificial y análisis de datos.",
+        "summary": "Diseñe e implemente inteligencia de producción, productos de datos y agentes de IA conectados a operaciones reales."
+      },
+      {
+        "title": "Consultoría Tecnológica",
+        "alt": "Consultoría tecnológica en arquitectura y planificación de sistemas.",
+        "summary": "Tome decisiones de arquitectura, plataforma, integración y modernización que sigan siendo confiables a medida que el negocio crece."
+      },
+      {
+        "title": "Estrategia y Negocios",
+        "alt": "Diseño de modelo operativo de consultoría estratégica y empresarial.",
+        "summary": "Defina el problema operativo, el modelo objetivo y la secuencia de transformación antes de comprometerse a construir."
+      },
+      {
+        "title": "Ingeniería de software",
+        "alt": "Espacio de trabajo de sistemas de grado de producción de ingeniería de software",
+        "summary": "Cree software, plataformas, API y aplicaciones web y móviles seguras y de nivel de producción."
+      },
+      {
+        "title": "Nube e infraestructura",
+        "alt": "Sistemas seguros de infraestructura en la nube y observabilidad.",
+        "summary": "Diseñe bases de nube resilientes, observabilidad, controles de seguridad y automatización de entrega."
+      },
+      {
+        "title": "Operaciones y servicios gestionados",
+        "alt": "Espacio de trabajo de monitoreo de operaciones y servicios administrados",
+        "summary": "Operar, monitorear, mantener y mejorar continuamente los sistemas de producción críticos después del lanzamiento."
+      }
+    ],
+    "botPhases": [
+      {
+        "step": "01",
+        "title": "evaluar",
+        "detail": "Diagnosticar las limitaciones operativas, la preparación tecnológica, las prioridades comerciales y el camino de transformación.",
+        "objective": "Cree un diagnóstico operativo claro antes de que las decisiones se conviertan en alcance de construcción.",
+        "hvaOwns": "Diseño de descubrimiento, mapeo de restricciones, revisión de arquitectura, dimensionamiento de oportunidades, formulación de hojas de ruta.",
+        "clientRole": "Comparta la realidad operativa, alinee prioridades, confirme limitaciones, identifique propietarios responsables.",
+        "checkpoints": [
+          "Mapa de operaciones actuales",
+          "Priorizar las limitaciones de la transformación",
+          "Confirmar los resultados objetivo"
+        ],
+        "outputs": [
+          "Diagnóstico operativo",
+          "Mapa de brecha de capacidad",
+          "Hoja de ruta de transformación priorizada"
+        ],
+        "imageAlt": "Equipo de consultoría que evalúa las limitaciones operativas y las prioridades de transformación"
+      },
+      {
+        "step": "02",
+        "title": "Reingeniería",
+        "detail": "Rediseñar procesos, arquitectura, sistemas y controles de entrega en torno al estado objetivo aprobado.",
+        "objective": "Convertir la hoja de ruta en sistemas de producción y cambios operativos sin perder continuidad.",
+        "hvaOwns": "Arquitectura de la solución, sprints de compilación, puertas de control de calidad, confiabilidad de la integración, preparación para el lanzamiento.",
+        "clientRole": "Valide los cambios de proceso, proporcione acceso, apruebe hitos y coordine a las partes interesadas.",
+        "checkpoints": [
+          "Diseñar la arquitectura de destino.",
+          "Cree flujos de trabajo centrales",
+          "Validar la preparación para la producción"
+        ],
+        "outputs": [
+          "Plano técnico",
+          "Pila de producción integrada",
+          "Liberar libro de jugadas y controles"
+        ],
+        "imageAlt": "Espacio de trabajo de ingeniería para reingeniería de sistemas y flujos de trabajo operativos."
+      },
+      {
+        "step": "03",
+        "title": "Comando",
+        "detail": "Ejecutar, estabilizar, monitorear y mejorar la operación de producción con responsabilidad a largo plazo.",
+        "objective": "Mantenga viva la transformación después del lanzamiento mediante operaciones gestionadas y ciclos de mejora mensurables.",
+        "hvaOwns": "Gobernanza operativa, respuesta a incidentes, monitoreo de KPI, ejecución de backlog de optimización.",
+        "clientRole": "Revise las tendencias de rendimiento, valide el impacto empresarial y priorice conjuntamente los ciclos de optimización.",
+        "checkpoints": [
+          "Liderar operaciones de producción.",
+          "Supervisar las métricas de rendimiento",
+          "Mejorar continuamente"
+        ],
+        "outputs": [
+          "Informes de rendimiento",
+          "Lanzamientos de optimización",
+          "Controles de riesgo operacional"
+        ],
+        "imageAlt": "Sala de operaciones administrada que monitorea los sistemas de producción y el rendimiento."
+      }
+    ],
+    "programs": [
+      {
+        "category": "Operaciones de IA",
+        "name": "Recepción de IA y operaciones principales",
+        "summary": "Implemente una puerta de entrada de IA responsable para la calificación, el enrutamiento, el seguimiento y la continuidad del CRM.",
+        "outcomes": [
+          "Manejo de clientes potenciales más rápido",
+          "Registros operativos conectados"
+        ],
+        "alt": "Espacio de trabajo del programa de operaciones líderes y de recepción de IA"
+      },
+      {
+        "category": "Modernización de sistemas",
+        "name": "Modernización de CRM",
+        "summary": "Reconstruya flujos de trabajo de clientes fragmentados en torno a un sistema operativo compartido confiable.",
+        "outcomes": [
+          "Flujos de trabajo unificados",
+          "Visibilidad operativa confiable"
+        ],
+        "alt": "Espacio de trabajo de flujo de trabajo e ingeniería de modernización de CRM"
+      },
+      {
+        "category": "Fiabilidad en la nube",
+        "name": "Fiabilidad de entrega en la nube",
+        "summary": "Fortalecer la infraestructura, los controles de implementación, la observabilidad y la recuperación de sistemas críticos.",
+        "outcomes": [
+          "Liberaciones más seguras",
+          "Resiliencia de la producción"
+        ],
+        "alt": "Espacio de trabajo de operaciones de infraestructura de confiabilidad de entrega en la nube"
+      }
+    ]
+  },
+  "Evidence": {
+    "available": "Carta de cliente disponible",
+    "referenceLetter": "carta de referencia del cliente",
+    "open": "Abrir carta de referencia del cliente: PDF, {size}",
+    "openCompact": "Abrir testimonio - PDF, {size}",
+    "openAria": "Abrir carta de referencia del cliente para {client} - PDF, {size} (se abre en una nueva pestaña)",
+    "newTab": "Se abre en una nueva pestaña",
+    "sizeUnavailable": "tamaño no disponible",
+    "railTitle": "evidencia del cliente",
+    "railDescription": "Cartas de referencia aprobadas que respaldan el trabajo de entrega publicado.",
+    "readCaseStudy": "Leer estudio de caso",
+    "railAria": "Lea el estudio de caso {client}. Carta de referencia del cliente disponible.",
+    "sourceDisclosure": "Fuente original: {language}",
+    "languages": {
+      "ar": "árabe",
+      "en": "ingles",
+      "es": "español",
+      "fr": "francés"
+    }
+  },
+  "DynamicContent": {
+    "home": "Inicio",
+    "breadcrumb": "Miga de pan",
+    "blog": "Blog",
+    "insights": "Perspectivas",
+    "capabilities": "Capacidades",
+    "caseStudies": "Estudios de caso",
+    "newsArticles": "Artículos de noticias",
+    "perspectives": "Perspectivas",
+    "researchReports": "Informes de investigación",
+    "allArticles": "Todos los artículos",
+    "allNews": "Todos los artículos de noticias",
+    "allPerspectives": "Todas las perspectivas",
+    "allResearch": "Todos los informes de investigación.",
+    "allCaseStudies": "Todos los estudios de caso",
+    "moreCaseStudies": "Más estudios de caso",
+    "sources": "Fuentes",
+    "topics": "Temas",
+    "relatedResources": "Recursos Hive Vault Arc relacionados",
+    "exploreCapabilities": "Explorar capacidades",
+    "bookCall": "reservar una llamada",
+    "aboutHiva": "Acerca de Hive Vault Arc",
+    "industry": "Industria",
+    "status": "Estado",
+    "client": "Cliente",
+    "atAGlance": "De un vistazo",
+    "openTestimonial": "testimonio abierto",
+    "visitClient": "Visitar sitio web del cliente",
+    "perspectiveFaq": "Preguntas que los líderes hacen ante la IA",
+    "researchQuestions": "Preguntas de investigación",
+    "sidebar": {
+      "title": "¿Listo para poner esto en práctica?",
+      "description": "Hive Vault Arc combina consultoría tecnológica con entrega de ingeniería para ayudar a las empresas a modernizar sus operaciones con confianza.",
+      "cta": "Habla con nosotros"
+    },
+    "newsSidebar": {
+      "title": "¿Está evaluando la IA local para su organización?",
+      "description": "Hive Vault Arc ayuda a los equipos a decidir qué debe ejecutarse localmente, qué debe permanecer en la nube y cómo gestionar el acceso de los agentes de forma segura.",
+      "cta": "Discutir la arquitectura de la IA"
+    },
+    "reportSidebar": {
+      "title": "¿Necesita que el informe se traduzca en un plan operativo?",
+      "description": "Hive Vault Arc convierte los puntos de referencia, las señales de entrega y los hallazgos de preparación para la nube en un trabajo práctico de transformación.",
+      "cta": "Discutir los hallazgos"
+    },
+    "blogCta": {
+      "title": "¿Listo para convertir la estrategia en ejecución?",
+      "description": "Permítanos definir el plan de consultoría e ingeniería que se ajuste a sus objetivos, limitaciones y modelo operativo.",
+      "label": "Habla con Hive Vault Arc"
+    },
+    "newsCta": {
+      "title": "Cree IA privada con el modelo operativo adecuado.",
+      "description": "Ayudamos a los equipos de liderazgo a traducir el hardware de IA, la estrategia de modelo y los requisitos de privacidad en sistemas listos para producción.",
+      "primary": "Habla con Hive Vault Arc"
+    },
+    "perspectiveCta": {
+      "title": "Diagnostica el flujo de trabajo antes de automatizarlo.",
+      "description": "Hive Vault Arc ayuda a los equipos de liderazgo a evaluar las operaciones, rediseñar el sistema y controlar flujos de trabajo habilitados para IA en producción.",
+      "primary": "Iniciar una llamada de descubrimiento",
+      "secondary": "Explorar ARCO"
+    },
+    "researchCta": {
+      "title": "Convertir la investigación en decisiones de producción.",
+      "description": "Hive Vault Arc ayuda a los equipos a mapear los hallazgos de la investigación en una hoja de ruta, arquitectura y controles operativos.",
+      "primary": "Reserve una llamada de descubrimiento"
+    },
+    "resourceLinks": {
+      "arc": "ARC Framework",
+      "capabilities": "Capacidades",
+      "about": "Acerca de Hive Vault Arc",
+      "caseStudies": "Estudios de caso",
+      "crmProof": "Prueba de transformación de CRM",
+      "aiProof": "WhatsApp Prueba de agente de IA",
+      "book": "Reserve una llamada de descubrimiento"
+    },
+    "caseSections": {
+      "challenge": "Reto empresarial",
+      "architecture": "Solución entregada",
+      "testimonial": "Testimonio de cliente",
+      "modules": "Módulos activados",
+      "stack": "Pila e integraciones",
+      "projectMedia": "Evidencia de la interfaz del proyecto",
+      "desktopProofEyebrow": "01 / PRUEBA DE ESCRITORIO",
+      "desktopProof": "Flujo de trabajo de escritorio",
+      "desktopPrevious": "Pantalla de escritorio anterior",
+      "desktopNext": "Siguiente pantalla de escritorio",
+      "mobileProofEyebrow": "02 / PRUEBA MÓVIL",
+      "mobileProof": "Flujo de trabajo móvil",
+      "mobilePrevious": "Pantalla móvil anterior",
+      "mobileNext": "Siguiente pantalla del móvil",
+      "headlineMetrics": "Números de estudios de caso",
+      "metricBasis": {
+        "systemScope": "Alcance del sistema",
+        "verifiedResult": "Resultado verificado",
+        "benchmark": "Punto de referencia publicado"
+      },
+      "outcomesEyebrow": "Medido en producción",
+      "outcomesTitle": "El historial operativo, en cifras.",
+      "outcomesDescription": "Señales de rendimiento aprobadas y resultados del sistema con nombre del registro de estudio de caso {client}.",
+      "benchmarks": "Puntos de referencia de transformación",
+      "caseResults": "{client} resultados operativos"
+    },
+    "caseCta": {
+      "title": "Aplica este patrón de transformación a tus operaciones",
+      "description": "Revise los programas de soluciones relevantes y luego reserve una llamada de descubrimiento para analizar su hoja de ruta.",
+      "primary": "Reserve una llamada de descubrimiento",
+      "secondary": "Ver programas de solución"
+    },
+    "capability": {
+      "label": "Capacidad",
+      "fallbackOutcome": "Movimiento operativo claro",
+      "fallbackDelivery": "Entrega enfocada",
+      "start": "iniciar una conversación",
+      "fullMap": "Ver en mapa completo",
+      "heroImageAlt": "Sistema operativo que representa {title}",
+      "atAGlance": "De un vistazo",
+      "sectionsAria": "Secciones {title}",
+      "index": [
+        {
+          "number": "01",
+          "label": "Contexto",
+          "href": "#contexto"
+        },
+        {
+          "number": "02",
+          "label": "Cobertura",
+          "href": "#cobertura"
+        },
+        {
+          "number": "03",
+          "label": "Resultados",
+          "href": "#resultados"
+        },
+        {
+          "number": "04",
+          "label": "Relacionado",
+          "href": "#relacionado"
+        }
+      ],
+      "contextEyebrow": "Contexto operativo",
+      "contextTitle": "Dónde encaja esta capacidad.",
+      "strategicContext": "Contexto estratégico",
+      "executionContext": "Contexto de ejecución",
+      "coverageEyebrow": "Cobertura de capacidad",
+      "coverageTitle": "Lo que HVA puede poseer dentro de este pilar.",
+      "scopeDescription": "Un mapa de propiedad claro mantiene conectadas las decisiones de liderazgo, el trabajo de entrega y la responsabilidad de producción.",
+      "deliveryEyebrow": "entrega de arco",
+      "deliveryTitle": "De la decisión a una operación en marcha.",
+      "deliveryDescription": "El diagnóstico, la implementación y la propiedad operativa permanecen conectados a través de un modelo de entrega.",
+      "workingOutput": "Salida de trabajo",
+      "deliverySteps": [
+        {
+          "step": "01",
+          "title": "evaluar",
+          "detail": "Aclare las restricciones comerciales, las fricciones de los procesos, la preparación del sistema y las medidas importantes.",
+          "output": "Un alcance listo para tomar decisiones"
+        },
+        {
+          "step": "02",
+          "title": "Reingeniería",
+          "detail": "Rediseñar y construir los procesos, sistemas, automatizaciones y controles en torno a un estado objetivo aprobado.",
+          "output": "Un sistema listo para producción"
+        },
+        {
+          "step": "03",
+          "title": "Comando",
+          "detail": "Ejecutar, estabilizar, monitorear y mejorar la operación de producción con una responsabilidad clara.",
+          "output": "Propiedad operativa medida"
+        }
+      ],
+      "outcomesEyebrow": "Movimiento esperado",
+      "outcomesTitle": "Útil cuando el objetivo es un progreso responsable.",
+      "outcomesDescription": "Esta página centra el pilar. El modelo ARC lo convierte en trabajo con alcance, sistemas de producción y mejora gestionada.",
+      "relatedPagesAria": "Páginas de destino relacionadas",
+      "relatedGuides": "Guías de servicios relacionados",
+      "relatedEyebrow": "Capacidades relacionadas",
+      "relatedTitle": "Pilares adyacentes para explorar a continuación.",
+      "open": "Abierto",
+      "bottomTitle": "¿Necesita asignar {title} a su operación?",
+      "bottomDescription": "Hive Vault Arc determinará el diagnóstico, la ruta de compilación y el modelo operativo correctos antes de que comience la ejecución.",
+      "bottomPrimary": "Reserve una llamada de descubrimiento",
+      "bottomSecondary": "Volver a capacidades"
+    },
+    "employee": {
+      "focus": "Enfoque",
+      "profile": "Perfil",
+      "experience": "Experiencia",
+      "education": "educación",
+      "leadership": "Liderazgo",
+      "operatingPrinciple": "Principio de funcionamiento",
+      "background": "Antecedentes",
+      "selectedExperience": "Experiencia seleccionada",
+      "otherFounders": "Equipo fundador",
+      "moreTeam": "Más del equipo",
+      "backTeam": "volver al equipo",
+      "bottomTitle": "Trabajar con las personas que poseen el resultado.",
+      "bottomDescription": "Hive Vault Arc mantiene la estrategia, la ingeniería y las operaciones cerca del mismo equipo senior desde el descubrimiento hasta la producción.",
+      "meetTeam": "Conoce al equipo"
+    }
+  },
+  "Links": {
+    "eyebrow": "HVA/Conectar",
+    "description": "IA y transformación digital en Tánger, Marruecos",
+    "navLabel": "Enlaces oficiales de contacto y redes sociales.",
+    "email": "Correo electrónico",
+    "call": "llamar"
+  },
+  "SolutionPrograms": {
+    "hero": {
+      "eyebrow": "Programas de solución",
+      "title": "Poner en producción las operaciones críticas.",
+      "description": "Tres sistemas enfocados convierten una decisión en un trabajo que puede ejecutarse, mejorarse y mantenerse.",
+      "primaryCta": "Explorar programas",
+      "secondaryCta": "Explorar capacidades",
+      "signal": "Tres puntos de partida",
+      "signalDetail": "Elija primero el problema operativo. El equipo de entrega permanece conectado después del lanzamiento.",
+      "imageAlt": "Tres módulos operativos conectados que representan la recepción de IA, la modernización de CRM y la confiabilidad de la nube"
+    },
+    "navigator": {
+      "eyebrow": "Elige el punto de partida",
+      "title": "Comience con el trabajo que necesita funcionar.",
+      "description": "Seleccione un programa para ver los pocos elementos que definen su ruta de entrega.",
+      "ariaLabel": "Selector de programa de solución",
+      "modules": "lo que conecta",
+      "integrations": "Funciona con",
+      "delivery": "como se entrega",
+      "openProgram": "Explorar pruebas relacionadas",
+      "imageAlt": "Programa de entrega: {title}"
+    },
+    "programs": [
+      {
+        "name": "Programa de operaciones líderes y de recepción de IA",
+        "category": "Programa de IA dirigido por consultoría",
+        "summary": "Implemente la recepción de IA multilingüe y dirija las operaciones como una capacidad operativa diaria, no como una automatización única.",
+        "modules": [
+          "Tiempo de ejecución del agente multilingüe",
+          "Capa de memoria y contexto.",
+          "Puntuación de clientes potenciales",
+          "Flujos de trabajo de escalada humana"
+        ],
+        "integrations": [
+          "WhatsApp API empresarial",
+          "HubSpot",
+          "Salesforce",
+          "Calendario de Google"
+        ],
+        "deliveryModel": "Talleres de estrategia, sprints de construcción e implementación y luego ciclos de optimización continuos."
+      },
+      {
+        "name": "Programa de modernización de CRM empresarial",
+        "category": "Programa de transformación liderado por consultoría",
+        "summary": "Transforme las operaciones de CRM fragmentadas en un sistema gobernado con procesos y procesos confiables.",
+        "modules": [
+          "Orquestación de tuberías",
+          "Permisos basados en roles",
+          "Secuencias de seguimiento automatizadas",
+          "Registros de auditoría y cumplimiento"
+        ],
+        "integrations": [
+          "Metaanuncios",
+          "DocuSign",
+          "Suites de automatización de correo electrónico",
+          "Conectores BI"
+        ],
+        "deliveryModel": "Mapeo de dominios, migración por fases, implementación de producción y mejora gestionada."
+      },
+      {
+        "name": "Pila de confiabilidad de entrega en la nube",
+        "category": "Programa de confiabilidad de la nube",
+        "summary": "Estabilice la velocidad de lanzamiento con infraestructura reforzada, seguridad de implementación, observabilidad y controles de seguridad.",
+        "modules": [
+          "Fortalecimiento de la canalización de CI/CD",
+          "Patrones de implementación azul-verde",
+          "Paneles de observabilidad",
+          "Controles de seguridad"
+        ],
+        "integrations": [
+          "AWS",
+          "Google Cloud",
+          "Docker",
+          "Acciones de GitHub"
+        ],
+        "deliveryModel": "Auditoría de confiabilidad, sprints de remediación y colaboración continua con SRE."
+      }
+    ],
+    "ownership": {
+      "title": "El programa es la capa responsable.",
+      "description": "Mantiene la decisión, el sistema y su mejora en la misma línea de propiedad.",
+      "outputLabel": "Salida de trabajo",
+      "steps": [
+        {
+          "title": "Establecer la dirección de funcionamiento",
+          "detail": "Evalúe la restricción real antes de comprometerse con un plan de construcción.",
+          "output": "Un alcance listo para tomar decisiones"
+        },
+        {
+          "title": "Conecte el sistema de trabajo",
+          "detail": "Cree el proceso, los datos y las integraciones en torno al trabajo en cuestión.",
+          "output": "Un sistema listo para producción"
+        },
+        {
+          "title": "Quédate con la operación.",
+          "detail": "Mantenga la responsabilidad visible a medida que el sistema se ejecuta y cambia.",
+          "output": "Propiedad operativa medida"
+        }
+      ]
+    },
+    "bottomCta": {
+      "title": "¿Necesita un programa adaptado a su operación?",
+      "description": "Comenzamos con la restricción, los sistemas que ya están implementados y el trabajo que debe seguir ejecutándose.",
+      "primary": "iniciar un programa"
+    }
+  },
+  "CapabilitiesDetail": {
+    "hero": {
+      "eyebrow": "Capacidades en detalle",
+      "title": "Seis capacidades. Un sistema operativo.",
+      "description": "Vea qué alcance, qué construir y qué sigue siendo responsable después del lanzamiento.",
+      "primaryCta": "Ver el mapa",
+      "secondaryCta": "Programas de solución",
+      "panelTitle": "De un vistazo",
+      "panelDescription": "Una visión conectada desde la estrategia hasta las operaciones en vivo.",
+      "imageAlt": "Atlas de capacidades en capas que conecta estrategia, software, nube, datos y operaciones",
+      "stats": [
+        {
+          "value": "Conectado",
+          "label": "Pilares de servicio"
+        },
+        {
+          "value": "ARCO",
+          "label": "Modelo de entrega"
+        },
+        {
+          "value": "De extremo a extremo",
+          "label": "Cobertura de capacidad"
+        }
+      ]
+    },
+    "indexAria": "Secciones de capacidad",
+    "pillars": {
+      "eyebrow": "Mapa de capacidades",
+      "title": "Elija la capa que coincida con el problema.",
+      "description": "Cada tarjeta mantiene breve la promesa. Abra la cobertura completa solo cuando necesite una lista más profunda.",
+      "imageAlt": "Capacidad {title}",
+      "coreAreas": "{title} áreas principales",
+      "primaryOutcome": "Resultado primario",
+      "fullCoverage": "Cobertura total",
+      "closeCoverage": "Cerrar cobertura completa",
+      "openCapability": "Capacidad abierta",
+      "items": [
+        {
+          "id": "strategy-business",
+          "title": "Consultoría estratégica y empresarial",
+          "briefLine": "La capa de pensamiento: diagnosticar, definir y diseñar la transformación antes de escribir una línea de código.",
+          "briefBullets": [
+            "Transformación empresarial",
+            "Transformación digital",
+            "Excelencia operativa"
+          ],
+          "strategicContext": "La transformación tiene éxito cuando el modelo de negocio, el modelo operativo y la arquitectura tecnológica avanzan juntos desde la primera decisión.",
+          "executionContext": "Realizamos diagnósticos, diseñamos modelos operativos objetivo, creamos hojas de ruta tecnológicas y secuenciamos programas de transformación que los líderes y los operadores pueden ejecutar.",
+          "subCapabilities": [
+            "Estrategia de negocio y transformación digital",
+            "Diagnóstico operativo y rediseño de procesos.",
+            "Estrategia de innovación y expansión del mercado basada en la tecnología.",
+            "Rediseño organizacional y gestión del cambio.",
+            "Optimización de costos y excelencia operativa"
+          ],
+          "relatedOutcomes": [
+            "Priorización más precisa",
+            "Riesgo de entrega reducido",
+            "Secuenciación de transformación más clara"
+          ]
+        },
+        {
+          "id": "technology-consulting",
+          "title": "Consultoría Tecnológica",
+          "briefLine": "La capa de arquitectura: diseñar sistemas que duren antes de construirlos.",
+          "briefBullets": [
+            "Arquitectura empresarial",
+            "Hojas de ruta tecnológicas",
+            "Integración de sistemas"
+          ],
+          "strategicContext": "Las decisiones arquitectónicas tomadas tempranamente son positivas. Las decisiones de arquitectura aplazadas se convierten en deuda técnica.",
+          "executionContext": "Diseñamos el plan tecnológico, secuenciamos la hoja de ruta, seleccionamos plataformas y conectamos herramientas fragmentadas para que los datos y los flujos de trabajo se muevan sin fricciones.",
+          "subCapabilities": [
+            "Hojas de ruta de arquitectura empresarial y tecnología",
+            "Estrategia de plataforma: construir versus comprar versus agente",
+            "Modernización de TI y reemplazo de legados",
+            "Integración de sistemas y diseño del lugar de trabajo digital.",
+            "Modernización de la infraestructura para la nube, la IA y la escala"
+          ],
+          "relatedOutcomes": [
+            "Sistemas construidos para durar",
+            "Deuda de integración reducida",
+            "Tecnología que sirve al negocio a largo plazo."
+          ]
+        },
+        {
+          "id": "ai-data-analytics",
+          "title": "IA, datos y análisis",
+          "briefLine": "La capa de inteligencia: ingeniería de IA conectada a operaciones reales.",
+          "briefBullets": [
+            "Agentes de IA",
+            "Ingeniería de IA generativa",
+            "Análisis predictivo"
+          ],
+          "strategicContext": "La IA se convierte en una ventaja competitiva cuando se integra en las operaciones diarias, no aislada en un panel piloto.",
+          "executionContext": "Determinamos objetivos operativos, implementamos agentes de inteligencia artificial de producción, creamos infraestructura de datos y conectamos flujos de trabajo para obtener resultados medibles en todos los canales que utilizan los clientes.",
+          "subCapabilities": [
+            "Diseño e implementación de agentes de IA",
+            "Estrategia e ingeniería de IA generativa",
+            "Aprendizaje automático y análisis predictivo",
+            "Ingeniería de datos, almacenes y oleoductos.",
+            "Inteligencia de negocios y paneles ejecutivos",
+            "IA conversacional y sistemas de agentes WhatsApp",
+            "Operaciones de producción de MLOps y IA"
+          ],
+          "relatedOutcomes": [
+            "Decisiones más rápidas",
+            "Bajar carga manual",
+            "Cobertura operativa continua"
+          ]
+        },
+        {
+          "id": "software-engineering",
+          "title": "Ingeniería de software y desarrollo de productos",
+          "briefLine": "La capa de construcción: sistemas de producción, no prototipos.",
+          "briefBullets": [
+            "Software personalizado",
+            "Plataformas SaaS",
+            "Aplicaciones web y móviles"
+          ],
+          "strategicContext": "El crecimiento requiere sistemas diseñados para adaptarse operativamente, no herramientas genéricas que crean fricciones en el flujo de trabajo y escalan los comportamientos incorrectos.",
+          "executionContext": "Diseñamos aplicaciones personalizadas, plataformas SaaS, API y aplicaciones móviles con confiabilidad, seguridad y mantenibilidad integradas.",
+          "subCapabilities": [
+            "Desarrollo de software personalizado para el problema exacto",
+            "Desarrollo de plataforma SaaS multiinquilino",
+            "ingeniería de aplicaciones web",
+            "Desarrollo de aplicaciones móviles",
+            "Ingeniería de desarrollo e integración de API.",
+            "Ingeniería UX/UI conectada al frontend",
+            "DevOps, CI/CD e ingeniería de plataformas"
+          ],
+          "relatedOutcomes": [
+            "Entrega de productos más rápida",
+            "Mejor ajuste del sistema",
+            "Mantenibilidad sostenible"
+          ]
+        },
+        {
+          "id": "cloud-infrastructure",
+          "title": "Nube e infraestructura",
+          "briefLine": "La capa base, creada para ofrecer escala, seguridad y resiliencia.",
+          "briefBullets": [
+            "Migración a la nube",
+            "Arquitectura de seguridad",
+            "Automatización de infraestructura"
+          ],
+          "strategicContext": "La seguridad y la infraestructura no se pueden actualizar después del lanzamiento. Los controles de riesgo, el diseño de confianza cero y la observabilidad deben diseñarse desde el principio.",
+          "executionContext": "Migramos y diseñamos sistemas nativos de la nube, automatizamos la infraestructura, implementamos seguridad de confianza cero y brindamos observabilidad desde el primer día.",
+          "subCapabilities": [
+            "Migración a la nube y desarrollo nativo de AWS, Azure y GCP",
+            "Automatización de infraestructura con Terraform e IaC",
+            "Arquitectura de seguridad, diseño de confianza cero y gestión de secretos",
+            "Recuperación ante desastres y planificación de conmutación por error en varias regiones",
+            "Observabilidad, registro, rastreo y alertas",
+            "Servicios gestionados en la nube y optimización de costes.",
+            "Postura de ciberseguridad y evaluación de riesgos digitales"
+          ],
+          "relatedOutcomes": [
+            "Menor riesgo operativo",
+            "Postura de cumplimiento más fuerte",
+            "Sistemas de producción resilientes"
+          ]
+        },
+        {
+          "id": "operations-managed",
+          "title": "Operaciones y servicios gestionados",
+          "briefLine": "La capa de evolución: nos quedamos después de la entrada en funcionamiento, porque es ahí donde se afianza la transformación.",
+          "briefBullets": [
+            "Operaciones gestionadas",
+            "Mantenimiento de aplicaciones",
+            "Gestión del sistema de IA"
+          ],
+          "strategicContext": "La mayoría de los programas de transformación fracasan en el momento del traspaso. Hive Vault Arc elimina ese traspaso con el mismo equipo desde la estrategia hasta la producción.",
+          "executionContext": "Proporcionamos propiedad continua de los sistemas que construimos: monitoreándolos, desarrollándolos y operándolos como un socio a largo plazo.",
+          "subCapabilities": [
+            "Operaciones gestionadas y propiedad continua después del lanzamiento.",
+            "Mantenimiento de aplicaciones, ajuste del rendimiento y expansión de funciones",
+            "Gestión y evolución de sistemas de automatización e IA.",
+            "Soporte TI y helpdesk para sistemas digitales internos",
+            "Outsourcing de procesos de negocio y servicios compartidos"
+          ],
+          "relatedOutcomes": [
+            "Operaciones de producción estables",
+            "Mejora continua después del lanzamiento",
+            "Responsabilidad de la asociación a largo plazo"
+          ]
+        }
+      ]
+    },
+    "delivery": {
+      "eyebrow": "Lo que deja la entrega",
+      "title": "El trabajo útil tiene que sobrevivir al traspaso.",
+      "description": "Cada compromiso debería dejar a su equipo con decisiones más claras, un sistema que funcione en la práctica y una propiedad que no desaparezca después del lanzamiento.",
+      "proofLink": "Ver comprobante de entrega",
+      "stages": [
+        {
+          "title": "Dirección compartida",
+          "detail": "Un alcance listo para tomar decisiones basado en las limitaciones que realmente enfrenta su equipo."
+        },
+        {
+          "title": "Un sistema de trabajo",
+          "detail": "Procesos, datos y tecnología conectados en torno al trabajo que debe realizarse."
+        },
+        {
+          "title": "Propiedad que continúa",
+          "detail": "Responsabilidad clara sobre la operación en vivo, su mejora y los próximos cambios."
+        }
+      ]
+    },
+    "programs": {
+      "eyebrow": "De la capacidad al programa",
+      "title": "Cuando el alcance esté claro, utilice una ruta de entrega lista.",
+      "imageAlt": "Programa de entrega {title}",
+      "view": "Ver programa"
+    },
+    "bottomCta": {
+      "title": "¿Necesita que esto se asigne a las limitaciones de su negocio?",
+      "description": "Alineamos el pilar, el programa y el modelo operativo correctos antes de que comience la ejecución.",
+      "primary": "Reserve una llamada de descubrimiento",
+      "secondary": "Volver a capacidades"
+    }
+  },
+  "Privacy": {
+    "common": {
+      "email": "Correo electrónico:",
+      "phone": "Teléfono:"
+    },
+    "hero": {
+      "eyebrow": "Cumplimiento y protección de datos",
+      "title": "Política de privacidad",
+      "description": "Hive Vault Arc se compromete a proteger sus datos personales de conformidad con la Ley marroquí 09-08 sobre la protección de las personas físicas en lo que respecta al tratamiento de datos personales (CNDP), así como el Reglamento General de Protección de Datos (GDPR) aplicable a los residentes de la Unión Europea en su ámbito extraterritorial.",
+      "updated": "Última actualización: 10 de julio de 2026"
+    },
+    "controller": {
+      "title": "1. Responsable del tratamiento de datos",
+      "intro": "El responsable del tratamiento de los datos personales recopilados a través de hivevaultarc.com es:",
+      "location": "Tánger, Tánger-Tetuán-Alhucemas, Marruecos"
+    },
+    "collection": {
+      "title": "2. Datos que recopilamos",
+      "intro": "Recopilamos únicamente los datos estrictamente necesarios para las finalidades que se describen a continuación:",
+      "items": [
+        {
+          "label": "Formulario de contacto",
+          "detail": "nombre, dirección de correo electrónico, número de teléfono (opcional), nombre de la empresa (opcional), industria (opcional), tamaño del equipo (opcional) y mensaje."
+        },
+        {
+          "label": "Registros del servidor",
+          "detail": "Dirección IP, tipo y versión del navegador, páginas visitadas y marcas de tiempo de solicitud."
+        },
+        {
+          "label": "Datos analíticos",
+          "detail": "rutas de páginas anónimas, referencias, categorías de dispositivos y navegadores, y datos de ubicación aproximados recopilados a través de Vercel Web Analytics. El servicio no almacena direcciones IP ni utiliza cookies para identificar a los visitantes."
+        }
+      ]
+    },
+    "purposes": {
+      "title": "3. Finalidades del Tratamiento",
+      "intro": "Sus datos son tratados con las siguientes finalidades:",
+      "items": [
+        "Responder a sus solicitudes de contacto y consultas sobre nuestros servicios.",
+        "Redacción y entrega de propuestas comerciales y contratos de servicios.",
+        "Mejorar el rendimiento del sitio web y la experiencia del usuario.",
+        "Cumplir con las obligaciones legales y reglamentarias aplicables."
+      ]
+    },
+    "legalBasis": {
+      "title": "4. Base Legal para el Tratamiento",
+      "intro": "Cada actividad de procesamiento se basa en una base legal que cumple con el Artículo 6 del GDPR y el Artículo 4 de la Ley 09-08:",
+      "items": [
+        {
+          "label": "Consentimiento",
+          "detail": "usted envía información voluntariamente a través del formulario de contacto."
+        },
+        {
+          "label": "Ejecución de un contrato",
+          "detail": "procesamiento necesario para cumplir con un contrato de servicio acordado."
+        },
+        {
+          "label": "Interés legítimo",
+          "detail": "registros de seguridad y análisis agregados sin cookies utilizados para proteger y mejorar el sitio."
+        }
+      ]
+    },
+    "cookies": {
+      "title": "5. Cookies y tecnologías de seguimiento",
+      "body": "El sitio público actualmente no utiliza cookies publicitarias o analíticas. Vercel Web Analytics mide las visitas a la página con datos agregados y anónimos y no coloca una cookie ni retiene un identificador persistente que sigue a un visitante a través de sitios web o días. Si una función futura requiere cookies opcionales, esta política y los controles de consentimiento se actualizarán antes de habilitar esas cookies."
+    },
+    "retention": {
+      "title": "6. Retención de datos",
+      "category": "Categoría de datos",
+      "period": "Periodo de retención",
+      "rows": [
+        {
+          "category": "Datos del formulario de contacto",
+          "period": "2 años desde el último contacto"
+        },
+        {
+          "category": "Registros del servidor",
+          "period": "Según la configuración de retención de registros de seguridad del proveedor de hosting"
+        },
+        {
+          "category": "Datos del cliente (contratos activos)",
+          "period": "5 años después del fin de la relación comercial"
+        },
+        {
+          "category": "Informes analíticos anónimos",
+          "period": "Para la ventana de informes disponible en el plan Vercel activo"
+        }
+      ]
+    },
+    "sharing": {
+      "title": "7. Intercambio de datos y destinatarios",
+      "intro": "Nunca vendemos sus datos personales. Los destinatarios autorizados se limitan estrictamente a los subprocesadores técnicos necesarios para operar el sitio:",
+      "recipients": [
+        {
+          "label": "Vercel Inc.",
+          "detail": "alojamiento e implementación de sitios (Covina, California, Estados Unidos)."
+        },
+        {
+          "label": "Análisis de Vercel",
+          "detail": "Medición de audiencia anónima."
+        }
+      ],
+      "closing": "Ninguno de sus datos se comparte con terceros con fines publicitarios o de marketing."
+    },
+    "transfers": {
+      "title": "8. Transferencias Internacionales de Datos",
+      "body": "Los datos alojados en servidores de Vercel en Estados Unidos implican una transferencia fuera del Espacio Económico Europeo, regida por Cláusulas Contractuales Tipo aprobadas por la Comisión Europea en virtud del artículo 46 del RGPD. Para transferencias fuera de Marruecos, Hive Vault Arc cumple con el artículo 43 de la Ley 09-08 y las autorizaciones CNDP aplicables."
+    },
+    "rights": {
+      "title": "9. Tus derechos",
+      "intro": "Según el RGPD (artículos 15 a 22) y la Ley 09-08, tienes los siguientes derechos:",
+      "items": [
+        {
+          "label": "Derecho de acceso",
+          "detail": "Obtener una copia de sus datos objeto de tratamiento."
+        },
+        {
+          "label": "Derecho de rectificación",
+          "detail": "Corregir datos inexactos o incompletos."
+        },
+        {
+          "label": "Derecho de supresión",
+          "detail": "Solicitar la eliminación de sus datos, sujeto a las excepciones aplicables."
+        },
+        {
+          "label": "Derecho a la restricción",
+          "detail": "Suspender temporalmente el tratamiento de sus datos."
+        },
+        {
+          "label": "Derecho a la portabilidad",
+          "detail": "Reciba sus datos en un formato estructurado y legible por máquina."
+        },
+        {
+          "label": "Derecho a oponerse",
+          "detail": "Oponerse al tratamiento basado en el interés legítimo."
+        }
+      ],
+      "exercisePrefix": "Para ejercer sus derechos, envíe su solicitud a",
+      "exerciseSuffix": ". Nos comprometemos a responder en un plazo de 30 días."
+    },
+    "authorities": {
+      "title": "10. Autoridades de Supervisión",
+      "intro": "Si considera que el tratamiento de sus datos vulnera sus derechos, puede presentar una reclamación ante la autoridad competente:",
+      "items": [
+        {
+          "audience": "Usuarios en Marruecos",
+          "name": "CNDP",
+          "description": "Comisión Nacional de Control de la Protección de Données à Caractère Personnel",
+          "href": "https://www.cndp.ma",
+          "domain": "www.cndp.ma"
+        },
+        {
+          "audience": "Usuarios en la UE",
+          "name": "CNIL (Francia) o DPA local",
+          "description": "La autoridad de protección de datos de su país de residencia",
+          "href": "https://www.cnil.fr",
+          "domain": "www.cnil.fr"
+        }
+      ]
+    },
+    "security": {
+      "title": "11. Seguridad de los datos",
+      "intro": "Hive Vault Arc implementa medidas técnicas y organizativas apropiadas para proteger sus datos contra pérdida, acceso no autorizado, divulgación o destrucción accidental:",
+      "items": [
+        "Cifrado de datos en tránsito vía HTTPS/TLS.",
+        "Estrictos controles de acceso a los sistemas que contienen datos personales.",
+        "Procedimientos documentados de respuesta a incidentes de seguridad.",
+        "Revisión periódica de los derechos de acceso de los usuarios."
+      ]
+    },
+    "automated": {
+      "title": "12. Toma de decisiones y elaboración de perfiles automatizados",
+      "body": "hivevaultarc.com no toma decisiones ni elabora perfiles de forma totalmente automatizada en el sentido del artículo 22 del RGPD. Ningún algoritmo toma decisiones con efectos legales o igualmente significativos para usted basándose en sus datos."
+    },
+    "changes": {
+      "title": "13. Cambios a esta política",
+      "body": "Hive Vault Arc puede actualizar esta Política de Privacidad para reflejar cambios en sus prácticas u obligaciones legales aplicables. En caso de un cambio material, se proporcionará un aviso por correo electrónico cuando corresponda o en el sitio. La fecha de la “Última actualización” se revisará en consecuencia."
+    },
+    "contact": {
+      "title": "14. Contáctenos",
+      "intro": "Si tiene preguntas sobre esta política o para ejercer sus derechos, comuníquese con nuestro equipo:",
+      "label": "Contacto de Protección de Datos",
+      "response": "Tiempo de respuesta: 30 días máximo"
+    },
+    "cta": {
+      "eyebrow": "¿Tiene alguna pregunta?",
+      "title": "Póngase en contacto con nuestro equipo directamente.",
+      "label": "Contáctenos"
+    }
+  },
+  "Legal": {
+    "common": {
+      "email": "Correo electrónico:",
+      "phone": "Teléfono:"
+    },
+    "hero": {
+      "eyebrow": "Información Legal",
+      "title": "Menciones Legales",
+      "description": "De conformidad con la ley marroquí de publicaciones comerciales y digitales, incluida la Ley 31-08 sobre protección del consumidor y el Código de Comercio, la siguiente información legal se aplica a hivevaultarc.com.",
+      "updated": "Última actualización: 10 de julio de 2026"
+    },
+    "publisher": {
+      "title": "1. Editor del sitio",
+      "intro": "El sitio hivevaultarc.com es publicado por:",
+      "location": "Tánger, Tánger-Tetuán-Alhucemas, Marruecos"
+    },
+    "director": {
+      "title": "2. Director de publicaciones",
+      "intro": "El director de publicación de hivevaultarc.com es:",
+      "role": "Fundador y director ejecutivo, Hive Vault Arc"
+    },
+    "hosting": {
+      "title": "3. Alojamiento",
+      "intro": "El sitio está alojado en:",
+      "location": "Covina, California 91723, Estados Unidos"
+    },
+    "intellectualProperty": {
+      "title": "4. Propiedad intelectual",
+      "bodyOne": "Todo el contenido de hivevaultarc.com, incluidos textos, imágenes, gráficos, logotipos, iconos, software y otros elementos, está protegido por la ley de derechos de autor marroquí en virtud de la Ley N° 2-00 sobre derechos de autor y derechos conexos, así como por las convenciones internacionales aplicables.",
+      "bodyTwo": "Cualquier reproducción, representación, modificación, publicación o adaptación de cualquier parte del sitio está prohibida sin la autorización previa por escrito de Hive Vault Arc. El uso no autorizado puede constituir una infracción de derechos de autor según la Ley 2-00."
+    },
+    "liability": {
+      "title": "5. Limitación de responsabilidad",
+      "intro": "Hive Vault Arc se esfuerza por mantener la información publicada en este sitio precisa y actualizada. Sin embargo, Hive Vault Arc no puede garantizar su exactitud, integridad o actualidad.",
+      "leadIn": "Hive Vault Arc no acepta ninguna responsabilidad por:",
+      "items": [
+        "Errores u omisiones en la información disponible en el sitio.",
+        "El contenido de sitios de terceros vinculados desde este sitio, que Hive Vault Arc no controla.",
+        "Daños directos o indirectos resultantes del acceso al sitio o del uso de la información que contiene.",
+        "Interrupciones temporales del servicio por mantenimiento o causas técnicas fuera de nuestro control."
+      ]
+    },
+    "personalData": {
+      "title": "6. Datos personales y CNDP",
+      "body": "La recopilación y el procesamiento de datos personales a través de este sitio se rige por la Ley marroquí 09-08 sobre protección de datos personales, bajo la supervisión de la Commission Nationale de contrôle de la Protection des Données à Caractère Personnel (CNDP).",
+      "linkPrefix": "Para obtener detalles completos sobre cómo recopilamos, utilizamos y protegemos sus datos, consulte nuestra",
+      "linkLabel": "Política de privacidad"
+    },
+    "jurisdiction": {
+      "title": "7. Ley aplicable y jurisdicción",
+      "eyebrow": "Cláusula de jurisdicción",
+      "body": "Este sitio y sus avisos legales se rigen por la ley marroquí. En caso de disputa relacionada con hivevaultarc.com, y en ausencia de una resolución amistosa, los tribunales de Tánger, Marruecos, tendrán jurisdicción, sujeto a las disposiciones obligatorias de protección al consumidor que puedan aplicarse.",
+      "laws": "Ley aplicable: Código de Comercio de Marruecos, Ley 31-08 y Ley 09-08."
+    },
+    "cookies": {
+      "title": "8. Galletas",
+      "body": "hivevaultarc.com actualmente no utiliza cookies publicitarias ni analíticas. Vercel Web Analytics registra datos de vistas de página agregados y anónimos sin cookies ni un identificador persistente entre sitios. Para obtener más información, consulte la sección “Cookies y tecnologías de seguimiento” de nuestra",
+      "linkLabel": "Política de privacidad"
+    },
+    "cta": {
+      "eyebrow": "¿Preguntas legales?",
+      "title": "Nuestro equipo está disponible para ayudar.",
+      "label": "Contáctenos"
+    }
+  },
+  "ArticleUi": {
+    "home": "Inicio",
+    "breadcrumb": "Miga de pan",
+    "by": "Por",
+    "aboutTitle": "Acerca de Hive Vault Arc",
+    "aboutDescription": "Hive Vault Arc es una firma de consultoría tecnológica y transformación digital con sede en Tánger, Marruecos. Asesoramos, diseñamos, construimos, enviamos y mantenemos sistemas inteligentes en IA, automatización, software personalizado, modernización de TI, infraestructura en la nube y capacidades de datos.",
+    "aboutCta": "Explorar estudios de casos",
+    "continueReading": "Continuar leyendo",
+    "related": "Información relacionada",
+    "allArticles": "Todos los artículos",
+    "directAnswer": "respuesta directa",
+    "keyTakeaways": "Conclusiones clave",
+    "methodology": "Metodología",
+    "limitations": "Limitaciones",
+    "accountability": "Responsabilidad editorial",
+    "reviewedBy": "Revisado por",
+    "relatedCases": "Casos relacionados",
+    "relatedCapabilities": "Capacidades relacionadas"
+  },
+  "InsightsHub": {
+    "types": {
+      "blog": "Blog",
+      "caseStudy": "Estudio de caso",
+      "news": "Artículo de noticias",
+      "perspective": "Perspectiva",
+      "research": "Informe de investigación"
+    },
+    "hero": {
+      "eyebrow": "Perspectivas",
+      "title": "lo que pensamos,",
+      "emphasis": "Prueba y envío.",
+      "description": "Blogs, estudios de casos, perspectivas e investigaciones basadas en trabajo operativo real.",
+      "diagramLabel": "INFORMACIÓN SOBRE EL ARCO DE LA BÓVEDA DE HIVE"
+    },
+    "categories": {
+      "eyebrow": "Tipos de insights",
+      "typeLabel": "Tipo de conocimiento",
+      "open": "Abrir {type}"
+    },
+    "englishCatalogue": {
+      "title": "Las publicaciones en español aparecerán aquí.",
+      "description": "Las publicaciones se mostrarán cuando exista una edición española aprobada y publicada."
+    },
+    "latest": {
+      "eyebrow": "Lo último",
+      "label": "Último {type}",
+      "readCaseStudy": "Leer estudio de caso",
+      "openReport": "Abrir informe",
+      "readInsight": "Leer información"
+    },
+    "grid": {
+      "eyebrow": "Todas las ideas",
+      "title": "Todo lo que hemos publicado",
+      "itemCount": "{count, plural, one {# elemento} other {# elementos}}",
+      "open": "Abrir {type}",
+      "loadMore": "Cargar más",
+      "loading": "Cargando seis más",
+      "tryAgain": "Inténtalo de nuevo",
+      "loadError": "No se pudieron cargar las siguientes publicaciones. Por favor inténtalo de nuevo.",
+      "emptyTitle": "Las publicaciones en español aparecerán cuando estén aprobadas.",
+      "emptyDescription": "El contenido localizado aparecerá tras la revisión editorial y su publicación aprobada."
+    },
+    "slider": {
+      "ariaLabel": "Carrusel de últimas publicaciones",
+      "title": "Últimas publicaciones",
+      "previous": "Información previa",
+      "next": "Siguiente visión",
+      "trackLabel": "Control deslizante de información",
+      "slidePosition": "{current} de {total}",
+      "readType": "Leer información {type}",
+      "choose": "Elige una publicación",
+      "goTo": "Ir a la diapositiva {number}"
+    },
+    "bottomCta": {
+      "title": "¿Necesita información asignada a sus operaciones?",
+      "description": "Podemos traducir estos conocimientos en una hoja de ruta de transformación práctica para su equipo.",
+      "primary": "Reserve una llamada de descubrimiento",
+      "secondary": "Ver capacidades"
+    },
+    "editorial": {
+      "heroEyebrow": "Perspectivas",
+      "heroTitle": "Pensamiento útil para sistemas que deben funcionar.",
+      "heroDescription": "Notas operativas, resúmenes de evidencia, guías industriales y casos de entrega para líderes que crean sistemas tecnológicos reales.",
+      "browseAll": "Explorar publicaciones",
+      "viewEvidence": "Ver evidencia del cliente",
+      "englishFallback": "Las publicaciones en español aprobadas aparecerán aquí cuando estén listas.",
+      "topicsTitle": "Explorar por pregunta empresarial",
+      "topicsDescription": "Comience con el problema operativo, no con el tipo de publicación.",
+      "topics": {
+        "ai-operational-systems": {
+          "title": "Sistemas operativos de IA",
+          "description": "Agentes, controles, diseño de flujo de trabajo y propiedad de la producción."
+        },
+        "custom-software-automation": {
+          "title": "Software personalizado y automatización",
+          "description": "Los sistemas construidos en torno al trabajo que las herramientas estándar no pueden resolver."
+        },
+        "real-estate-construction": {
+          "title": "Bienes raíces y construcción.",
+          "description": "Entrega de evidencias y patrones operativos para equipos de propiedad."
+        },
+        "morocco-north-africa-transformation": {
+          "title": "Marruecos y el norte de África",
+          "description": "Contexto del mercado local, operaciones multilingües y adopción."
+        },
+        "data-cloud-reliability": {
+          "title": "Confiabilidad de los datos y la nube",
+          "description": "Arquitectura, controles, observabilidad y operaciones resilientes."
+        }
+      },
+      "formats": {
+        "operating-note": "Nota operativa",
+        "evidence-brief": "Resumen de evidencia",
+        "industry-guide": "guía de la industria",
+        "case": "Caso",
+        "founder-view": "Vista del fundador"
+      },
+      "featuredEyebrow": "Publicación seleccionada",
+      "featuredTitle": "Empieza aquí",
+      "readFeatured": "Leer publicación",
+      "evidenceEyebrow": "Pruebas en producción",
+      "evidenceTitle": "Trabajo que llegó hasta el piso de operaciones.",
+      "evidenceDescription": "Casos de entrega aprobados. Alcance claro, sistemas visibles y resultados responsables.",
+      "approvedCase": "Caso de cliente aprobado",
+      "indexEyebrow": "Índice de publicaciones",
+      "indexTitle": "Últimas ideas y pruebas.",
+      "indexDescription": "Filtra la biblioteca por el problema que estás resolviendo o el formato editorial que necesitas.",
+      "topicFilter": "Tema",
+      "formatFilter": "Formato",
+      "allTopics": "Todos los temas",
+      "allFormats": "Todos los formatos",
+      "emptyTitle": "Ninguna publicación coincide con estos filtros.",
+      "emptyDescription": "Borre un filtro o elija otro tema.",
+      "loadMore": "Cargue seis más",
+      "loading": "Cargando",
+      "tryAgain": "Inténtalo de nuevo",
+      "loadError": "No se pudieron cargar las siguientes publicaciones.",
+      "ctaTitle": "Convierta una pregunta operativa en un próximo paso claro.",
+      "ctaDescription": "Traiga el flujo de trabajo, la restricción o el sistema. Ayudaremos a definir el camino práctico a seguir.",
+      "ctaPrimary": "Reserve una llamada de descubrimiento",
+      "ctaSecondary": "Explorar capacidades"
+    }
+  },
+  "CollectionUi": {
+    "all": "Todos",
+    "allInsights": "Todas las ideas",
+    "read": "leer",
+    "readBlog": "leer el blog",
+    "comingSoon": "Próximamente",
+    "prepared": "preparado para su publicación.",
+    "emptyDescription": "Publicamos deliberadamente, solo cuando el contenido cumple con nuestro estándar editorial. Vuelve pronto o explora otra sección.",
+    "defaultEmpty": "Estos artículos están siendo",
+    "collectionEmpty": "{title} están siendo",
+    "brand": "Hive Vault Arc",
+    "featured": "Destacado",
+    "browseLatest": "Explorar lo último",
+    "industryFilter": "Filtrar por industria",
+    "publishedCount": "{count} en la colección",
+    "showingCount": "Mostrando {shown} de {total}",
+    "loadMore": "Cargar 3 más",
+    "loading": "Cargando",
+    "tryAgain": "Inténtalo de nuevo",
+    "loadError": "No pudimos cargar las próximas publicaciones. Por favor inténtalo de nuevo.",
+    "types": {
+      "post": "Blog",
+      "newsArticle": "Artículo de noticias",
+      "perspective": "Perspectiva",
+      "researchReport": "Informe de investigación",
+      "caseStudy": "Estudio de caso"
+    },
+    "availableInEnglish": "Disponible en inglés",
+    "englishCatalogueTitle": "Las publicaciones en español aparecerán aquí.",
+    "englishCatalogueDescription": "Las publicaciones se mostrarán cuando exista una edición española aprobada y publicada.",
+    "caseStudyRoutes": {
+      "eyebrow": "Continuar el hilo operativo",
+      "description": "Pase de la evidencia de entrega al contexto, las capacidades o la conversación detrás del trabajo.",
+      "insights": {
+        "title": "Contexto operativo",
+        "description": "Lea el pensamiento detrás de los sistemas.",
+        "href": "/perspectivas"
+      },
+      "capabilities": {
+        "title": "Capacidades",
+        "description": "Vea cómo construimos alrededor del trabajo.",
+        "href": "/capacidades"
+      },
+      "contact": {
+        "title": "iniciar una conversación",
+        "description": "Traiga un desafío operativo similar.",
+        "href": "/contacto"
+      }
+    }
+  },
+  "BlogIndex": {
+    "eyebrow": "Estrategia + Diario de Ejecución",
+    "headline": "Hive Vault Arc",
+    "headlineItalic": "Informe de consultoría",
+    "description": "Una colección editorial sobre agentes de inteligencia artificial, software personalizado y la arquitectura de las operaciones comerciales modernas, escrita para equipos de liderazgo en Marruecos y más allá.",
+    "empty": "Aún no hay artículos en esta categoría."
+  },
+  "CaseStudiesIndex": {
+    "eyebrow": "Prueba de transformación",
+    "headline": "Dirigido por consultoría",
+    "headlineItalic": "Estudios de caso",
+    "description": "Cada caso documenta el desafío empresarial, la arquitectura de ejecución y el contexto de producción sin publicar afirmaciones de rendimiento no verificadas.",
+    "evidenceAvailable": "Carta de cliente disponible",
+    "empty": "Aún no hay estudios de caso en esta categoría.",
+    "bottomCta": {
+      "title": "¿Listo para ver cómo se ve la transformación en producción?",
+      "description": "Comience con una llamada de descubrimiento. Le mostraremos cómo la estrategia, la arquitectura y la entrega se alinean en entornos reales.",
+      "primary": "Iniciar descubrimiento",
+      "secondary": "Ver programas de solución"
+    }
+  },
+  "Portfolio": {
+    "hero": {
+      "eyebrow": "Portafolio de transformación",
+      "titleLineOne": "Sistemas en forma",
+      "titleLineTwo": "en torno a operaciones reales.",
+      "description": "Plataformas, automatización y sistemas operativos configurados en torno a los equipos que los utilizan.",
+      "primaryCta": "Ver trabajo entregado",
+      "secondaryCta": "Discutir un programa",
+      "featuredAriaLabel": "Estudios de casos destacados"
+    },
+    "projects": {
+      "eyebrow": "Estudios de casos publicados",
+      "title": "Sistemas entregados, en su contexto operativo.",
+      "description": "Cada registro indica el contexto del cliente, el sistema entregado y el estado actual. Nuevos trabajos aprobados ingresan a esta cartera a través del mismo catálogo de estudios de casos publicado.",
+      "count": "{count, plural, =0 {No hay proyectos publicados} one {# estudio de caso publicado} other {# estudios de caso publicados}}",
+      "statusLabel": "Estado de entrega",
+      "caseStudyCta": "Leer estudio de caso",
+      "openAria": "Estudio de caso abierto: {title}",
+      "empty": "Los estudios de casos publicados aparecerán aquí tan pronto como sean aprobados."
+    },
+    "signature": {
+      "titleLineOne": "Del mandato operativo",
+      "titleLineTwo": "al sistema responsable",
+      "eyebrow": "Estándar de entrega",
+      "subtitle": "Dirección. Arquitectura. Operaciones.",
+      "description": "Cada compromiso conecta el mandato empresarial, el diseño técnico, los controles de implementación y la propiedad a largo plazo.",
+      "items": [
+        {
+          "title": "Diagnóstico operativo",
+          "detail": "Las limitaciones, los flujos de trabajo, las partes interesadas y los criterios de éxito se documentan antes de tomar decisiones arquitectónicas."
+        },
+        {
+          "title": "Arquitectura del sistema",
+          "detail": "Los datos, las aplicaciones, las integraciones y los controles están diseñados como un sistema operativo coherente."
+        },
+        {
+          "title": "Entrega incremental",
+          "detail": "Los incrementos de trabajo crean puntos de revisión explícitos para los usuarios, los líderes y los propietarios técnicos."
+        },
+        {
+          "title": "Preparación para la producción",
+          "detail": "La liberación, la observabilidad, la seguridad, la recuperación y la entrega están integradas en el plan de entrega."
+        },
+        {
+          "title": "Gobernanza por diseño",
+          "detail": "Los derechos de decisión, los controles de acceso, la evidencia y la propiedad del cambio siguen siendo explícitos."
+        },
+        {
+          "title": "Propiedad continua",
+          "detail": "El equipo responsable permanece con el sistema durante su adopción, operación y evolución."
+        }
+      ]
+    },
+    "bottomCta": {
+      "title": "Tráiganos la restricción operativa. Daremos forma al sistema a su alrededor.",
+      "description": "Empiece por el contexto, las personas y el trabajo que debe seguir funcionando. Trazaremos la ruta responsable desde la decisión hasta la operación.",
+      "primary": "Discute tu programa",
+      "secondary": "Explorar todos los estudios de caso"
+    }
+  },
+  "About": {
+    "hero": {
+      "eyebrow": "Quienes somos",
+      "titleLineOne": "De la decisión empresarial a la operación en vivo.",
+      "emphasis": "Un equipo responsable.",
+      "description": "Hive Vault Arc conecta estrategia, ingeniería de inteligencia artificial, software, nube y operaciones administradas en un modelo de entrega centrado en la producción.",
+      "primaryCta": "reservar una llamada",
+      "secondaryCta": "Ver capacidades",
+      "frameworkLabel": "ARC Framework",
+      "frameworkLoop": "Evaluar. Reingeniería. Dominio.",
+      "imageAlt": "Equipo de entrega de tecnología revisando un plan de sistema en una sesión de trabajo enfocada",
+      "imageCaption": "Estrategia a la producción."
+    },
+    "factsHeading": "Hive Vault Arc de un vistazo",
+    "facts": [
+      {
+        "value": "Dirigido por el fundador",
+        "label": "Propiedad senior desde la primera decisión hasta la operación en vivo"
+      },
+      {
+        "value": "Tánger, Marruecos",
+        "label": "Sirviendo a organizaciones en Marruecos, Francia y MENA"
+      },
+      {
+        "value": "Experiencia conectada",
+        "label": "Estrategia, tecnología, IA, software, nube y operaciones"
+      },
+      {
+        "value": "Un bucle operativo",
+        "label": "Evaluar, rediseñar y comandar sin transferencia de entrega"
+      }
+    ],
+    "capabilities": {
+      "eyebrow": "que hacemos",
+      "title": "Lo que hacemos, en una sola vista.",
+      "description": "Las capacidades conectadas pasan de la decisión empresarial a la operación confiable.",
+      "cta": "Explora todas las capacidades",
+      "imageAlt": "Espacio de trabajo del modelo operativo ARC",
+      "imageLabel": "Modelo operativo ARCO",
+      "imageCaption": "Estrategia conectada con la entrega y las operaciones.",
+      "items": [
+        {
+          "number": "01",
+          "slug": "estrategia-negocio",
+          "title": "Estrategia",
+          "description": "Estrategia empresarial, modelos operativos y hojas de ruta de transformación.",
+          "outcome": "Dé forma a la hoja de ruta operativa antes de que comience la construcción.",
+          "phase": "evaluar"
+        },
+        {
+          "number": "02",
+          "slug": "consultoría tecnológica",
+          "title": "Tecnología",
+          "description": "Arquitectura, plataformas, integración y decisiones de tecnología emergente.",
+          "outcome": "Decida la arquitectura y el camino de integración.",
+          "phase": "evaluar"
+        },
+        {
+          "number": "03",
+          "slug": "análisis-de-datos-ai",
+          "title": "IA y datos",
+          "description": "Ingeniería de IA, estrategia de datos, análisis y automatización inteligente.",
+          "outcome": "Convierta los datos y los flujos de trabajo en inteligencia útil.",
+          "phase": "construir"
+        },
+        {
+          "number": "04",
+          "slug": "ingeniería de software",
+          "title": "programas",
+          "description": "Software personalizado, ingeniería de productos y experiencias digitales.",
+          "outcome": "Envíe la capa de producto que la gente realmente usa.",
+          "phase": "construir"
+        },
+        {
+          "number": "05",
+          "slug": "infraestructura de nube",
+          "title": "nube",
+          "description": "Plataformas en la nube, DevOps, seguridad y modernización de infraestructura.",
+          "outcome": "Hacer que el sistema sea confiable, seguro y observable.",
+          "phase": "construir"
+        },
+        {
+          "number": "06",
+          "slug": "operaciones gestionadas",
+          "title": "Operaciones",
+          "description": "Servicios gestionados, automatización, soporte y mejora continua del rendimiento.",
+          "outcome": "Mantenga la producción mejorando después del lanzamiento.",
+          "phase": "Operar"
+        }
+      ]
+    },
+    "delivery": {
+      "eyebrow": "Cómo entregamos",
+      "title": "Un bucle operativo. Sin traspaso de entrega.",
+      "description": "ARC conecta estrategia, ingeniería y operaciones para que la responsabilidad permanezca en un solo equipo desde la evaluación hasta la producción.",
+      "steps": [
+        {
+          "number": "01",
+          "title": "evaluar",
+          "description": "Mapee la fricción, defina la arquitectura de destino y secuencia la transformación antes de escribir una sola línea de código.",
+          "checkpoints": [
+            "Definir resultados mensurables",
+            "Auditar los sistemas y bloqueadores actuales.",
+            "Secuenciar la estrategia en hitos"
+          ]
+        },
+        {
+          "number": "02",
+          "title": "Reingeniería",
+          "description": "Construya los sistemas, implemente la inteligencia y conecte la infraestructura en incrementos de velocidad transparentes.",
+          "checkpoints": [
+            "Ofrezca IA, software y capas de nube",
+            "Validar frente a resultados reales",
+            "Iterar a través de demostraciones y bucles de control de calidad"
+          ]
+        },
+        {
+          "number": "03",
+          "title": "Comando",
+          "description": "Estabilice, supervise y evolucione la operación con el mismo equipo conservando la propiedad a largo plazo.",
+          "checkpoints": [
+            "Operar sistemas de producción.",
+            "Monitorear la confiabilidad y el rendimiento",
+            "Evolucionar a medida que crecen los requisitos"
+          ]
+        }
+      ]
+    },
+    "proof": {
+      "eyebrow": "Entrega de plataforma educativa",
+      "industry": "Educación y formación profesional",
+      "title": "Una academia digital para dos marcas educativas.",
+      "summary": "Hive Vault Arc descubrimiento de programas conectados, incorporación controlada de alumnos, cursos multimedia, evaluaciones, revisión de documentos, seguimiento del progreso y administración de la academia en una sola plataforma.",
+      "status": "Academia digital entregada",
+      "imageAlt": "Asesoramiento y formación premium y página de inicio de la academia digital KeepZen",
+      "cta": "Lea el estudio de caso de la academia digital"
+    },
+    "trust": {
+      "eyebrow": "Por qué los compradores confían en HVA",
+      "title": "Responsabilidad que puedes verificar.",
+      "description": "Vea quién es el responsable, qué se ha enviado, cómo operamos y cómo se maneja su información.",
+      "cta": "Revisar comprobante de entrega",
+      "items": [
+        {
+          "id": "leadership",
+          "title": "Liderazgo nombrado",
+          "description": "Los perfiles de los fundadores muestran quién es el propietario de la estrategia, la ingeniería, los sistemas de productos, la nube y la confiabilidad de la producción.",
+          "linkLabel": "Conoce a los fundadores"
+        },
+        {
+          "id": "proof",
+          "title": "Comprobante de entrega publicado",
+          "description": "El caso Premium Advice y KeepZen registra el desafío, la arquitectura de la plataforma, los flujos de trabajo de aprendizaje y la academia impartida.",
+          "linkLabel": "Lea el estudio de caso"
+        },
+        {
+          "id": "legal",
+          "title": "Información jurídica pública",
+          "description": "Nuestro editor, ubicación en Tánger, director de publicación, proveedor de alojamiento y contactos oficiales están documentados.",
+          "linkLabel": "Ver información legal"
+        },
+        {
+          "id": "privacy",
+          "title": "Prácticas de datos claros",
+          "description": "Nuestra política de privacidad explica qué recopilamos, por qué lo recopilamos y cómo se abordan las obligaciones de la Ley 09-08 y el RGPD.",
+          "linkLabel": "Lea la política de privacidad"
+        }
+      ]
+    },
+    "team": {
+      "eyebrow": "Nuestro equipo",
+      "title": "Las personas detrás de Hive Vault Arc",
+      "description": "Operadores, ingenieros y constructores con amplia experiencia y un compromiso compartido para resolver problemas complejos que importan.",
+      "viewProfile": "Ver perfil"
+    },
+    "contact": {
+      "eyebrow": "donde trabajamos",
+      "title": "Comienza en Tánger. Trabajar más allá de las fronteras.",
+      "description": "Acceso directo al equipo responsable de la decisión, entrega y operación.",
+      "location": "Tánger, Marruecos",
+      "region": "Marruecos, Europa y entrega remota en todo el mundo",
+      "languages": "Inglés, francés y árabe",
+      "socialLabel": "Hive Vault Arc perfiles sociales"
+    },
+    "bottomCta": {
+      "title": "Tráenos el resultado. Trazaremos la ruta hacia la producción.",
+      "description": "El mismo equipo responsable conecta la estrategia, la ingeniería y las operaciones desde la primera decisión hasta la entrega en vivo.",
+      "primary": "reservar una llamada",
+      "secondary": "Ver nuestras capacidades"
+    }
+  },
+  "Industries": {
+    "hero": {
+      "eyebrow": "Industrias",
+      "title": "Construido para el sector.",
+      "emphasis": "Diseñado para la operación.",
+      "description": "El contexto del sector se combina con la estrategia, la ingeniería y las operaciones en vivo.",
+      "primaryCta": "Ver sectores",
+      "secondaryCta": "Ver prueba",
+      "wordmark": "Industrias",
+      "wordmarkStart": "Ind",
+      "wordmarkEnd": "ustrías",
+      "imageAlt": "Módulos operativos conectados que representan los sectores atendidos por Hive Vault Arc"
+    },
+    "coverage": {
+      "eyebrow": "Cobertura sectorial",
+      "title": "Programas industriales construidos en torno a la realidad operativa.",
+      "description": "Cada vertical se asigna a los sistemas, flujos de trabajo y patrones de gobernanza que determinan si la transformación se mantiene en producción.",
+      "relatedWork": "Ver trabajos relacionados"
+    },
+    "cards": [
+      {
+        "id": "real-estate",
+        "category": "Bienes Raíces y Construcción",
+        "title": "Bienes Raíces",
+        "description": "CRM, calificación de clientes potenciales y comunicación con clientes asistida por IA para equipos inmobiliarios.",
+        "imageAlt": "CRM inmobiliario y liderar operaciones en Marruecos",
+        "bullets": [
+          "Liderar operaciones y CRM",
+          "Comunicación con el cliente de IA",
+          "Gobernanza del oleoducto"
+        ]
+      },
+      {
+        "id": "healthcare",
+        "category": "Salud y ciencias biológicas",
+        "title": "Atención sanitaria",
+        "description": "Paneles clínicos, sistemas médicos e inteligencia de diagnóstico.",
+        "imageAlt": "Panel de operaciones clínicas sanitarias en Marruecos",
+        "bullets": [
+          "Paneles clínicos",
+          "Sistemas médicos",
+          "Inteligencia diagnóstica"
+        ]
+      },
+      {
+        "id": "financial-services",
+        "category": "Servicios financieros",
+        "title": "Finanzas y Banca",
+        "description": "Sistemas bancarios modernos, señales de fraude e inteligencia de transacciones.",
+        "imageAlt": "Proyecto de acuerdos sobre servicios financieros en Marruecos",
+        "bullets": [
+          "Detección de fraude",
+          "Inteligencia de negocios",
+          "Banca digital"
+        ]
+      },
+      {
+        "id": "government",
+        "category": "Gobierno y sector público",
+        "title": "Gobierno",
+        "description": "Portales ciudadanos, sistemas de datos públicos y servicios preparados para IA.",
+        "imageAlt": "Transformación digital del gobierno en Marruecos",
+        "bullets": [
+          "Portales ciudadanos",
+          "Sistemas de datos públicos",
+          "preparación para la IA"
+        ]
+      },
+      {
+        "id": "retail",
+        "category": "Venta minorista y comercio electrónico",
+        "title": "Venta al por menor",
+        "description": "Comercio, personalización y CRM en el corredor Marruecos-Francia.",
+        "imageAlt": "Plataforma de comercio electrónico minorista en Marruecos",
+        "bullets": [
+          "Comercio omnicanal",
+          "Personalización",
+          "CRM minorista"
+        ]
+      },
+      {
+        "id": "energy",
+        "category": "Energía, servicios públicos y sostenibilidad",
+        "title": "Energía",
+        "description": "Redes inteligentes, análisis ESG e inteligencia de mantenimiento.",
+        "imageAlt": "Sistemas energéticos y de sostenibilidad en Marruecos",
+        "bullets": [
+          "Redes inteligentes",
+          "Análisis ESG",
+          "Mantenimiento predictivo"
+        ]
+      },
+      {
+        "id": "logistics",
+        "category": "Logística y Transporte",
+        "title": "Logística",
+        "description": "Flujos de trabajo de flotas, optimización de rutas y monitoreo de SLA.",
+        "imageAlt": "Automatización del flujo de trabajo de despacho logístico en Marruecos",
+        "bullets": [
+          "Operaciones de flota",
+          "Optimización de ruta",
+          "Monitoreo de SLA"
+        ]
+      },
+      {
+        "id": "consumer-goods",
+        "category": "Bienes de consumo y lujo",
+        "title": "Consumo y lujo",
+        "description": "Análisis de clientes, marketing de inteligencia artificial e inteligencia minorista de lujo.",
+        "imageAlt": "Operaciones de bienes de consumo y lujo en Marruecos y Francia",
+        "bullets": [
+          "Análisis de clientes",
+          "marketing de IA",
+          "Inteligencia de lujo"
+        ]
+      }
+    ],
+    "research": {
+      "shortLabel": "I+D",
+      "imageAlt": "Hive Vault Arc marco de investigación y desarrollo para contextos operativos de la industria",
+      "eyebrow": "Laboratorio activo",
+      "title": "Investigación y desarrollo activos:",
+      "emphasis": "Un marco. Muchos contextos operativos.",
+      "groups": {
+        "methodology": "Metodología",
+        "compliance": "Cumplimiento"
+      },
+      "tracks": [
+        {
+          "code": "IND-001",
+          "title": "Diagnóstico calibrado por sector",
+          "description": "Calibrado según la economía del sector, los tiempos de ciclo y los patrones de cuellos de botella.",
+          "group": "metodología"
+        },
+        {
+          "code": "IND-002",
+          "title": "Arquitectura consciente del dominio",
+          "description": "La arquitectura refleja el lenguaje de dominio, las estructuras de datos y las jerarquías de decisiones.",
+          "group": "metodología"
+        },
+        {
+          "code": "IND-003",
+          "title": "Conciencia regulatoria",
+          "description": "Se introdujeron controles temprano para reducir el riesgo de entrega en operaciones sensibles.",
+          "group": "cumplimiento"
+        },
+        {
+          "code": "IND-004",
+          "title": "Comunicación con las partes interesadas",
+          "description": "La ejecución se adapta a cómo se comunican realmente el liderazgo y las operaciones.",
+          "group": "cumplimiento"
+        }
+      ],
+      "primaryCta": "Más información sobre ARCO",
+      "secondaryCta": "Explorar capacidades"
+    },
+    "insights": {
+      "eyebrow": "Notas de campo",
+      "title": "Ideas contrastadas con la realidad operativa.",
+      "description": "Investigación, perspectivas y evidencia de entrega seleccionada de todo nuestro trabajo publicado.",
+      "railLabel": "Explora cada conocimiento",
+      "railAriaLabel": "Publicaciones sobre conocimientos de la industria",
+      "previous": "Mostrar la información anterior",
+      "next": "Mostrar la siguiente información",
+      "counter": "{current} de {total}",
+      "slidePosition": "Información {current} de {total}",
+      "read": "Leer información",
+      "readInsight": "Leer información: {title}"
+    },
+    "mandate": {
+      "eyebrow": "Nuestro mandato",
+      "quote": "La especificidad es el antídoto a la deuda técnica.",
+      "title": "¿Necesita un plan de transformación específico de la industria?",
+      "description": "Reserve una llamada de descubrimiento y asignaremos la capacidad y el programa de sistema adecuados para su sector.",
+      "primaryCta": "Reserve una llamada de descubrimiento",
+      "secondaryCta": "Ver capacidades"
+    }
+  },
+  "GeoPages": {
+    "aiAgentsTangier": {
+      "schemaName": "Desarrollo de agentes de IA en Tánger",
+      "schemaDescription": "Agentes de IA multilingües para atención al cliente, calificación de clientes potenciales y operaciones WhatsApp-first en Tánger.",
+      "breadcrumb": "Agentes de IA en Tánger",
+      "hero": {
+        "kicker": "Innovación empresarial local",
+        "title": "Agentes de IA creados para empresas de Tánger",
+        "lead": "Hive Vault Arc diseña agentes multilingües para WhatsApp recepción, calificación de clientes potenciales, atención al cliente y enrutamiento operativo. Cada sistema está diseñado en torno a las realidades del equipo que lo operará.",
+        "primary": "Reserve un descubrimiento de IA",
+        "secondary": "Explora nuestras experiencias",
+        "imageAlt": "Operaciones comerciales basadas en IA en Tánger, Marruecos"
+      },
+      "sections": [
+        {
+          "eyebrow": "Diseñado para el entorno operativo",
+          "title": "Contexto local, controles de producción y entrega responsable",
+          "paragraphs": [
+            "Un agente eficaz debe comprender el lenguaje, las reglas de escalamiento, los sistemas y las expectativas de servicio de la empresa. Diseñamos el modelo de funcionamiento antes de elegir la automatización."
+          ],
+          "cards": [
+            {
+              "title": "Contexto local",
+              "body": "Las conversaciones en árabe, francés e inglés fluyen en línea con los equipos de ventas y servicio de Tánger."
+            },
+            {
+              "title": "Casos de uso principales",
+              "body": "Recepción, calificación, clasificación de soporte, programación y enrutamiento al propietario humano adecuado."
+            },
+            {
+              "title": "Modelo de entrega",
+              "body": "Descubrimiento, arquitectura, implementación controlada y mejora posterior al lanzamiento bajo un solo equipo responsable."
+            }
+          ]
+        },
+        {
+          "title": "Qué cambia operativamente un agente de IA",
+          "paragraphs": [
+            "A diferencia de un chatbot con guión, un agente de IA puede interpretar la intención, utilizar herramientas aprobadas, seguir reglas comerciales y trasladar el contexto al siguiente paso operativo.",
+            "Para un equipo de Tánger, esto puede significar leer un mensaje WhatsApp entrante, hacer las preguntas de calificación correctas, actualizar un CRM y derivarlo a una persona con un historial de conversaciones completo."
+          ],
+          "cards": [
+            {
+              "title": "Ejecución autónoma",
+              "body": "El agente sigue una secuencia gobernada de acciones para completar una tarea comercial definida."
+            },
+            {
+              "title": "Integración del sistema",
+              "body": "Las herramientas de CRM, calendario, inventario y generación de informes permanecen conectadas a la conversación."
+            }
+          ]
+        },
+        {
+          "title": "Tipos de agentes especializados",
+          "paragraphs": [
+            "El agente adecuado depende del flujo de trabajo y no sólo del canal. Priorizamos casos de uso con propiedad clara y un resultado operativo observable."
+          ],
+          "cards": [
+            {
+              "title": "Operaciones WhatsApp",
+              "body": "Flujos de trabajo de recepción, calificación, reserva y soporte multilingües siempre activos."
+            },
+            {
+              "title": "Operaciones principales",
+              "body": "Calificación estructurada y enrutamiento con contexto limpio transmitido al equipo de ventas."
+            },
+            {
+              "title": "Atención al cliente",
+              "body": "Resolución de rutina con escalamiento controlado para casos que requieren juicio humano."
+            },
+            {
+              "title": "Agentes de operaciones personalizadas",
+              "body": "Asistentes diseñados específicamente para flujos de trabajo industriales, logísticos y de servicios."
+            }
+          ]
+        },
+        {
+          "title": "La secuencia de entrega de ARC",
+          "paragraphs": [
+            "Diagnosticamos el flujo de trabajo actual, definimos la arquitectura de conversación e integración, implementamos a través de puertas de lanzamiento controladas y luego monitoreamos y mejoramos el sistema de producción."
+          ],
+          "cards": [
+            {
+              "title": "diagnosticar",
+              "body": "Mapee la demanda, los cuellos de botella, la propiedad y el resultado comercial que el agente debe respaldar."
+            },
+            {
+              "title": "Diseño",
+              "body": "Defina la lógica de la conversación, el acceso a herramientas, el escalamiento, el manejo de datos y los controles de calidad."
+            },
+            {
+              "title": "Implementar",
+              "body": "Libere en etapas, valide la calidad de la respuesta y alinee el flujo de trabajo humano en torno al agente."
+            },
+            {
+              "title": "Optimizar",
+              "body": "Revise las interacciones reales y mejore el enrutamiento, las indicaciones, el conocimiento y la gobernanza."
+            }
+          ]
+        }
+      ],
+      "cta": {
+        "title": "Comience con el flujo de trabajo, no con el chatbot",
+        "description": "Evaluaremos dónde un agente puede crear un apalancamiento operativo útil, a qué debe conectarse y cómo se regirá la calidad después del lanzamiento.",
+        "primary": "Reserve una llamada de descubrimiento",
+        "secondary": "Ver todos los servicios digitales",
+        "tertiary": "Ver el ARC Framework"
+      }
+    },
+    "aiAgentsMorocco": {
+      "schemaName": "Desarrollo de agentes de IA en Marruecos",
+      "schemaDescription": "Entrega de agentes de IA multilingües para operaciones de clientes, calificación de clientes potenciales y automatización del flujo de trabajo en todo Marruecos.",
+      "breadcrumb": "Agentes de IA en Marruecos",
+      "hero": {
+        "kicker": "Servicios nacionales de IA",
+        "title": "Un socio agente de IA para organizaciones marroquíes",
+        "lead": "Hive Vault Arc ofrece agentes multilingües para organizaciones que necesitan una respuesta más rápida, una calificación más limpia y operaciones diarias más confiables. La consultoría, la ingeniería, la integración y la propiedad de la producción siguen conectadas.",
+        "primary": "Planifique una implementación de IA",
+        "secondary": "Ver la guía de Tánger",
+        "imageAlt": "Un operador empresarial que trabaja con un sistema operativo habilitado para IA"
+      },
+      "sections": [
+        {
+          "title": "Del interés por la IA a la disciplina operativa",
+          "paragraphs": [
+            "La cuestión práctica ya no es si la IA puede generar una respuesta. Se trata de si el sistema puede funcionar de forma segura dentro de un proceso real, utilizar los datos correctos y entregar la responsabilidad a la persona adecuada.",
+            "Comenzamos con el flujo de trabajo y el resultado operativo previsto, luego definimos el agente, las integraciones, los controles y el modelo de revisión necesarios para la producción."
+          ]
+        },
+        {
+          "title": "Una pila de agentes orientada a la producción",
+          "paragraphs": [
+            "La arquitectura se selecciona por su confiabilidad y mantenibilidad. Puede combinar canales de comunicación aprobados, orquestación, servicios backend, datos comerciales e informes sin atrapar la operación dentro de una herramienta desconectada."
+          ],
+          "cards": [
+            {
+              "title": "Capa de conversación",
+              "body": "Manejo de intenciones, lógica de calificación, límites de conocimiento y reglas de respuesta basadas en canales."
+            },
+            {
+              "title": "Capa de operaciones",
+              "body": "Sincronización, enrutamiento, escalamiento, análisis y propiedad clara del seguimiento de CRM."
+            }
+          ]
+        },
+        {
+          "title": "Casos de uso en todo Marruecos",
+          "paragraphs": [
+            "Adaptamos el agente a los flujos de trabajo del sector y las necesidades lingüísticas manteniendo una arquitectura gobernada."
+          ],
+          "cards": [
+            {
+              "title": "Bienes raíces",
+              "body": "Consultas sobre propiedades, calificación de prospectos, enrutamiento de citas y actualizaciones de canales."
+            },
+            {
+              "title": "Atención sanitaria",
+              "body": "Soporte de citas, clasificación de información y derivación controlada a los equipos de atención."
+            },
+            {
+              "title": "Logística",
+              "body": "Manejo de estados, comunicación de despacho y coordinación de operadores."
+            },
+            {
+              "title": "Servicios financieros",
+              "body": "Selección previa, orientación de incorporación y transferencia estructurada a un asesor."
+            }
+          ]
+        },
+        {
+          "title": "Alcance comercial y despliegue",
+          "paragraphs": [
+            "Los términos comerciales se definen después del descubrimiento porque el alcance del canal, las integraciones, la gobernanza y la responsabilidad de soporte cambian materialmente el trabajo.",
+            "La implementación nacional se realiza por etapas: validar un flujo de trabajo de alto impacto, fortalecer los controles de calidad, extenderlo a casos de uso adicionales y luego expandirlo a todos los equipos o regiones."
+          ]
+        }
+      ],
+      "cta": {
+        "title": "Construya agentes de IA que puedan operar en producción",
+        "description": "Pase de una idea de IA a un plan de implementación gobernado y adaptado a su mercado, sistemas y capacidad interna.",
+        "primary": "Reserve una llamada de descubrimiento",
+        "secondary": "Explore las experiencias en detalle",
+        "tertiary": "Ver servicios digitales en Tánger"
+      }
+    },
+    "itConsultingTangier": {
+      "schemaName": "Consultoría TI en Tánger",
+      "schemaDescription": "Estrategia tecnológica, arquitectura, modernización y gobernanza de entrega para organizaciones en Tánger.",
+      "breadcrumb": "Consultoría TI en Tánger",
+      "hero": {
+        "kicker": "Asesoramiento tecnológico de Tánger",
+        "title": "Consultoría TI conectada a la ejecución",
+        "lead": "Hive Vault Arc ayuda a los equipos de liderazgo a decidir qué modernizar, dónde invertir y cómo cumplir sin crear inestabilidad operativa. La estrategia, la arquitectura, la gobernanza de la implementación y la responsabilidad de la producción permanecen conectadas.",
+        "primary": "Reserve un descubrimiento de TI",
+        "secondary": "Explorar ARCO",
+        "imageAlt": "Taller de estrategia tecnológica y arquitectura en Tánger"
+      },
+      "sections": [
+        {
+          "title": "Consultoría que produce un sistema ejecutable",
+          "paragraphs": [
+            "Una estrategia tecnológica útil debe explicar qué cambios, por qué cambian, cómo se gestionan las dependencias y quién es el propietario del resultado. Convertimos las prioridades de liderazgo en decisiones de arquitectura y una hoja de ruta de entrega secuenciada."
+          ],
+          "cards": [
+            {
+              "title": "Auditoría tecnológica",
+              "body": "Sistemas actuales, fricción de procesos, dependencias de datos, exposición a la seguridad y propiedad."
+            },
+            {
+              "title": "Arquitectura de destino",
+              "body": "El futuro modelo operativo, límites de la plataforma, enfoque de integración y principios de decisión."
+            },
+            {
+              "title": "Gobernanza de la entrega",
+              "body": "Hitos, puertas de calidad, controles de riesgos y las responsabilidades necesarias para alcanzar la producción."
+            }
+          ]
+        },
+        {
+          "title": "Modernización sin interrupción operativa",
+          "paragraphs": [
+            "Rara vez es necesario reemplazar las herramientas fragmentadas y los procesos heredados al mismo tiempo. Identificamos los sistemas que crean la mayor restricción, definimos límites de transición seguros y secuenciamos la modernización en torno a la continuidad del negocio.",
+            "El resultado puede combinar sistemas retenidos, nuevas capas de integración, software personalizado específico, mejoras en la nube y una propiedad operativa más clara."
+          ]
+        },
+        {
+          "title": "Por qué es importante el contexto local",
+          "paragraphs": [
+            "Las organizaciones de Tánger a menudo operan en entornos de partes interesadas árabes, francesas e internacionales. El contexto local acorta la distancia entre la intención del liderazgo y la acción de entrega, mientras que los estándares de ingeniería globales protegen la calidad a largo plazo."
+          ],
+          "cards": [
+            {
+              "title": "Alineación de las partes interesadas",
+              "body": "Las estructuras de decisión, el lenguaje y las realidades operativas se abordan directamente."
+            },
+            {
+              "title": "Rigor arquitectónico",
+              "body": "Las recomendaciones se prueban en términos de confiabilidad, seguridad, integración y mantenibilidad."
+            },
+            {
+              "title": "Continuidad de entrega",
+              "body": "El equipo que asesora puede seguir siendo responsable durante la implementación y la estabilización."
+            }
+          ]
+        },
+        {
+          "title": "Qué esperar del compromiso",
+          "paragraphs": [
+            "El descubrimiento y la arquitectura establecen la línea de base, las limitaciones y la hoja de ruta lista para tomar decisiones. Luego, la entrega avanza a través de hitos con revisiones técnicas, verificaciones de impacto operativo y decisiones claras sobre inversiones adicionales."
+          ]
+        }
+      ],
+      "cta": {
+        "title": "¿Necesita una estrategia de TI que pueda ejecutar?",
+        "description": "Podemos mapear el entorno actual, definir la secuencia de modernización y llevar las decisiones a producción con una propiedad clara.",
+        "primary": "Reserve una llamada de descubrimiento",
+        "secondary": "Explora el ARC Framework",
+        "tertiary": "Ver todos los servicios digitales"
+      }
+    },
+    "customSoftwareMorocco": {
+      "schemaName": "Desarrollo de software personalizado en Marruecos",
+      "schemaDescription": "Aplicaciones web personalizadas, productos SaaS y sistemas operativos diseñados para organizaciones marroquíes.",
+      "breadcrumb": "Software personalizado en Marruecos",
+      "hero": {
+        "kicker": "ingeniería de software nacional",
+        "title": "Software personalizado creado en torno a su realidad operativa",
+        "lead": "Hive Vault Arc diseña sistemas de producción que se adaptan a cómo funciona realmente una organización. Reemplazamos herramientas fragmentadas y soluciones manuales con software mantenible, datos claros y ejecución controlada.",
+        "primary": "Alcance de una compilación de software",
+        "secondary": "Lea la guía de consultoría de TI",
+        "imageAlt": "Interfaz de software operativo personalizado para una organización marroquí"
+      },
+      "sections": [
+        {
+          "title": "Qué cambia el software personalizado en términos prácticos",
+          "paragraphs": [
+            "Las herramientas disponibles en el mercado están diseñadas para casos de uso promedio. Cuando el flujo de trabajo es distintivo, estratégicamente importante o está distribuido en sistemas desconectados, los equipos a menudo absorben la diferencia mediante entradas duplicadas, coordinación manual y visibilidad incompleta.",
+            "El software personalizado captura el proceso correctamente, mejora la adopción y crea una base de datos confiable para tomar decisiones."
+          ]
+        },
+        {
+          "title": "Una pila de tecnología mantenible",
+          "paragraphs": [
+            "La tecnología se selecciona en función de la fiabilidad, la mantenibilidad, la seguridad y la evolución esperada del producto, más que de la moda."
+          ],
+          "cards": [
+            {
+              "title": "Servicios de back-end",
+              "body": "API seguras, lógica de integración, orquestación del flujo de trabajo y reglas comerciales duraderas."
+            },
+            {
+              "title": "Interfaces web y móviles",
+              "body": "Experiencias rápidas y accesibles diseñadas para brindar claridad operativa."
+            },
+            {
+              "title": "Arquitectura de datos",
+              "body": "Esquemas consistentes, preparación de informes, trazabilidad y acceso controlado."
+            },
+            {
+              "title": "Módulos habilitados para IA",
+              "body": "Automatización dirigida y soporte de decisiones donde el flujo de trabajo lo justifique."
+            }
+          ]
+        },
+        {
+          "title": "Sistemas que construimos",
+          "paragraphs": [
+            "La forma del producto sigue la necesidad operativa y puede servir a equipos internos, clientes o ambos."
+          ],
+          "cards": [
+            {
+              "title": "Plataformas SaaS",
+              "body": "Productos basados en roles con una base sólida para facturación, administración y evolución de funciones."
+            },
+            {
+              "title": "Herramientas internas",
+              "body": "Portales de operaciones, paneles de procesos y flujos de trabajo de equipo coordinados."
+            },
+            {
+              "title": "Sistemas integrados en IA",
+              "body": "Aplicaciones que combinan lógica de flujo de trabajo con enrutamiento controlado, asistencia o información."
+            }
+          ]
+        },
+        {
+          "title": "Entrega basada en hitos",
+          "paragraphs": [
+            "El descubrimiento establece resultados y límites del sistema. La entrega incremental expone el progreso y el riesgo desde el principio. El lanzamiento incluye monitoreo y estabilización de la producción, seguido de optimización y escala planificadas."
+          ],
+          "cards": [
+            {
+              "title": "Descubre y diseña",
+              "body": "Aclare los resultados, la arquitectura, los datos, los usuarios y los criterios de aceptación."
+            },
+            {
+              "title": "Construir incrementalmente",
+              "body": "Ofrezca módulos útiles a través de iteraciones controladas y puntos de revisión compartidos."
+            },
+            {
+              "title": "Lanzar y estabilizar",
+              "body": "Implemente de forma segura, supervise el estado del sistema y resuelva problemas de producción."
+            },
+            {
+              "title": "Optimizar y evolucionar",
+              "body": "Mejorar el rendimiento y ampliar la hoja de ruta según la evidencia operativa."
+            }
+          ]
+        },
+        {
+          "title": "¿Construir o comprar?",
+          "paragraphs": [
+            "La decisión depende de qué tan central sea el flujo de trabajo, cuánta diferenciación crea y qué tan costosas se han vuelto las soluciones alternativas actuales. Un modelo híbrido suele ser correcto: conservar herramientas que funcionen y desarrollarlas sólo cuando el control o la integración sean importantes."
+          ]
+        }
+      ],
+      "cta": {
+        "title": "Cree software que se adapte a su operación",
+        "description": "Podemos definir los límites del sistema, la arquitectura, la secuencia de entrega y el modelo de propiedad a largo plazo para una plataforma personalizada.",
+        "primary": "Reserve una llamada de descubrimiento",
+        "secondary": "Ver los estudios de caso",
+        "tertiary": "Ver servicios digitales en Tánger"
+      }
+    },
+    "digitalServicesTangier": {
+      "schemaName": "Servicios digitales en Tánger",
+      "schemaDescription": "Estrategia, inteligencia artificial, software personalizado, nube y operaciones administradas brindadas por un equipo de transformación con sede en Tánger.",
+      "breadcrumb": "Servicios digitales en Tánger",
+      "hero": {
+        "kicker": "Servicios digitales en Tánger",
+        "title": "Servicios digitales creados para las empresas de Tánger",
+        "lead": "Hive Vault Arc es un socio de transformación con sede en Tánger para organizaciones que necesitan más que un proveedor de sitios web. Conectamos consultoría, inteligencia artificial, software personalizado, infraestructura en la nube, entrega y operaciones en curso en un compromiso responsable.",
+        "primary": "Comience con una llamada de descubrimiento",
+        "secondary": "Explora nuestras experiencias",
+        "imageAlt": "Hive Vault Arc Equipo de servicios digitales y entorno operativo en Tánger"
+      },
+      "sections": [
+        {
+          "title": "Una capa operativa digital conectada",
+          "paragraphs": [
+            "Los servicios digitales deberían hacer que una empresa sea más fácil de operar, medir y evolucionar. Eso incluye la estrategia detrás de las decisiones tecnológicas, los sistemas que ejecutan el trabajo diario, la automatización que elimina las tareas repetitivas y la infraestructura que mantiene todo confiable.",
+            "Conectamos descubrimiento, arquitectura, ingeniería, implementación y mejora a largo plazo para que el resultado sea un sistema operativo funcional en lugar de una colección de herramientas."
+          ],
+          "cards": [
+            {
+              "title": "IA y automatización",
+              "body": "Agentes multilingües, automatización del flujo de trabajo, operaciones principales y sistemas de atención al cliente."
+            },
+            {
+              "title": "consultoría informática",
+              "body": "Auditorías tecnológicas, decisiones de arquitectura, hojas de ruta de modernización y gobernanza de entrega."
+            },
+            {
+              "title": "Software personalizado",
+              "body": "Productos SaaS, sistemas CRM, plataformas operativas, API e integraciones."
+            }
+          ]
+        },
+        {
+          "title": "Por qué las organizaciones eligen un socio con sede en Tánger",
+          "paragraphs": [
+            "La presencia local aporta una comprensión directa de los entornos operativos árabes y franceses, el contexto comercial marroquí y los ritmos de las partes interesadas. Los estándares de ingeniería, los controles de liberación y la mantenibilidad siguen siendo internacionales."
+          ],
+          "cards": [
+            {
+              "title": "Contexto local",
+              "body": "El lenguaje, la toma de decisiones, la sensibilidad al cumplimiento y las operaciones diarias se entienden directamente."
+            },
+            {
+              "title": "Estándares de producción",
+              "body": "La arquitectura, las puertas de calidad, la seguridad y la confiabilidad siguen siendo fundamentales para la entrega."
+            },
+            {
+              "title": "Un equipo responsable",
+              "body": "La estrategia, la implementación, la integración, la nube y el mantenimiento permanecen conectados."
+            }
+          ]
+        },
+        {
+          "title": "El proceso ARC",
+          "paragraphs": [
+            "Evalúe los objetivos comerciales de los mapas, las herramientas existentes, la fricción de los procesos, la calidad de los datos y la propiedad. La reingeniería rediseña el flujo de trabajo prioritario y construye el sistema. El comando despliega, estabiliza, mide y mejora la operación."
+          ],
+          "cards": [
+            {
+              "title": "evaluar",
+              "body": "Establezca la restricción, el resultado objetivo, los sistemas, la evidencia y la hoja de ruta lista para tomar decisiones."
+            },
+            {
+              "title": "Reingeniería",
+              "body": "Diseñe y cree el flujo de trabajo, la arquitectura, las integraciones y los controles operativos."
+            },
+            {
+              "title": "Comando",
+              "body": "Liberar, estabilizar, monitorear y evolucionar el sistema en producción."
+            }
+          ]
+        },
+        {
+          "title": "Prueba antes que promesas",
+          "paragraphs": [
+            "Nuestros estudios de caso documentan el contexto empresarial, el enfoque de entrega y la evidencia aprobada disponible para su publicación. Las páginas en francés enlazan únicamente con contenido que tiene una traducción al francés aprobada."
+          ]
+        }
+      ],
+      "cta": {
+        "title": "Comience con el proceso de negocio",
+        "description": "Identificaremos dónde la consultoría, la inteligencia artificial, el software, la nube o las operaciones gestionadas pueden crear la mejora más clara y definiremos el camino de entrega correcto.",
+        "primary": "Reserve una llamada de descubrimiento",
+        "secondary": "Explora nuestras experiencias",
+        "tertiary": "Ver el ARC Framework"
+      }
+    }
+  },
+  "Faqs": {
+    "defaultHeading": "Preguntas frecuentes",
+    "articleHeading": "Preguntas sobre este artículo",
+    "home": {
+      "heading": "Preguntas frecuentes",
+      "items": [
+        {
+          "question": "¿Qué hace Hive Vault Arc?",
+          "answer": "Hive Vault Arc es un socio de transformación tecnológica que combina estrategia, ingeniería de inteligencia artificial, software, infraestructura en la nube y operaciones administradas. Asesoramos, construimos y operamos para que las organizaciones puedan rediseñar cómo se realiza el trabajo y mantener los sistemas de producción mejorando después del lanzamiento."
+        },
+        {
+          "question": "¿Qué es el Programa ARC?",
+          "answer": "El programa ARC es el modelo de participación estructurado de Hive Vault Arc: evalúa el estado operativo y las limitaciones, rediseña los procesos y sistemas y luego dirige la operación de producción a través de la estabilización y la mejora continua."
+        },
+        {
+          "question": "¿Hive Vault Arc crea agentes de IA WhatsApp?",
+          "answer": "Sí. Creamos agentes multilingües en la API empresarial WhatsApp para la calificación de clientes potenciales, atención al cliente, automatización de ventas, contexto operativo persistente e integración directa de CRM."
+        },
+        {
+          "question": "¿Hive Vault Arc es una empresa de inteligencia artificial, una consultora o una agencia de software?",
+          "answer": "Hive Vault Arc es un socio de transformación tecnológica. Combinamos estrategia, ingeniería de inteligencia artificial, entrega de software, infraestructura en la nube y operaciones administradas en un equipo responsable."
+        },
+        {
+          "question": "¿Qué tipo de soluciones de IA construye Hive Vault Arc?",
+          "answer": "Creamos agentes de IA orientados al cliente, automatización del flujo de trabajo interno, sistemas de enrutamiento y calificación de clientes potenciales, paneles de control de inteligencia de decisiones y capas de orquestación que conectan la IA con CRM, calendario y sistemas de datos."
+        },
+        {
+          "question": "¿Cómo es un compromiso de transformación digital?",
+          "answer": "Comienza con el descubrimiento de los objetivos comerciales, las limitaciones operativas y los sistemas existentes. Luego definimos la hoja de ruta, la arquitectura y el alcance de la entrega antes de ejecutarla a través de hitos claros y permanecer involucrados durante la implementación y la estabilización."
+        },
+        {
+          "question": "¿Puede Hive Vault Arc ayudarnos una vez que el sistema esté activo?",
+          "answer": "Sí. Proporcionamos monitoreo de confiabilidad, ciclos de optimización, extensiones de hoja de ruta y orientación arquitectónica a medida que evolucionan sus operaciones."
+        },
+        {
+          "question": "¿Publican comprobantes reales de entrega?",
+          "answer": "Sí. Publicamos estudios de casos aprobados con el contexto empresarial, decisiones de arquitectura, integraciones, estado de implementación y solo aquellos resultados que han sido verificados y autorizados para su publicación."
+        },
+        {
+          "question": "¿Dónde se encuentra Hive Vault Arc y a qué mercados atiende?",
+          "answer": "Tenemos nuestra sede en Tánger, Marruecos, y prestamos servicios a organizaciones en Marruecos y mercados internacionales. Nuestro equipo trabaja en inglés, francés, árabe y español."
+        },
+        {
+          "question": "¿Cómo funciona la fijación de precios?",
+          "answer": "El alcance comercial se define después del descubrimiento y depende de la complejidad de la transformación, los sistemas requeridos, las integraciones, las responsabilidades de entrega y las necesidades de soporte continuo."
+        }
+      ]
+    },
+    "capabilities": {
+      "heading": "Preguntas frecuentes",
+      "items": [
+        {
+          "question": "¿Cuáles son los pilares del servicio de Hive Vault Arc?",
+          "answer": "Hive Vault Arc trabaja en consultoría estratégica y empresarial, consultoría tecnológica, inteligencia artificial y datos, ingeniería de software, infraestructura en la nube y operaciones y servicios gestionados. Cada compromiso combina las capacidades requeridas por el problema operativo."
+        },
+        {
+          "question": "¿Qué soluciones de inteligencia artificial y automatización ofrecen?",
+          "answer": "Ofrecemos agentes de inteligencia artificial, automatización del flujo de trabajo, inteligencia de decisiones, sistemas de informes, capas de orquestación e integraciones operativas conectadas a CRM y plataformas de datos."
+        },
+        {
+          "question": "¿Qué incluye la consultoría en Hive Vault Arc?",
+          "answer": "La consultoría incluye estrategia, decisiones de arquitectura, diseño de hoja de ruta, planificación de funciones tecnológicas y secuenciación de transformación, manteniendo la responsabilidad hasta la entrega."
+        },
+        {
+          "question": "¿Cómo aborda los programas de transformación digital?",
+          "answer": "Conectamos diagnósticos operativos, prioridades de modernización, arquitectura, implementación, despliegue y mejora a largo plazo en un programa gobernado."
+        },
+        {
+          "question": "¿Ofrecen entrega de ingeniería para la construcción de productos y plataformas?",
+          "answer": "Sí. Diseñamos aplicaciones web y móviles personalizadas, plataformas SaaS, API, integraciones, sistemas CRM y plataformas operativas."
+        },
+        {
+          "question": "¿Qué capacidades de inteligencia artificial, datos y análisis se incluyen?",
+          "answer": "Nuestro trabajo incluye agentes de IA, ingeniería de IA generativa, análisis predictivo, canales de datos, almacenes, paneles ejecutivos y MLOps."
+        },
+        {
+          "question": "¿Cubre la nube, la infraestructura, la ciberseguridad y el riesgo digital?",
+          "answer": "Sí. La entrega puede incluir migración a la nube, automatización de infraestructura, diseño de confianza cero, observabilidad, controles de identidad, monitoreo y gobernanza."
+        },
+        {
+          "question": "¿Ofrecen operaciones y servicios gestionados después de la entrada en funcionamiento?",
+          "answer": "Sí. Podemos seguir siendo responsables de las operaciones gestionadas, el mantenimiento de las aplicaciones, el ajuste del rendimiento, la gestión del sistema de IA, el soporte y la optimización continua."
+        },
+        {
+          "question": "¿Cómo funciona ARC con Hive Vault Arc?",
+          "answer": "ARC conecta la evaluación, la reingeniería y el comando para que el diagnóstico, la arquitectura, la entrega y la responsabilidad de la producción permanezcan en un solo equipo."
+        },
+        {
+          "question": "¿Puede Hive Vault Arc seguir involucrado después del lanzamiento?",
+          "answer": "Sí. Los compromisos pueden continuar mediante mantenimiento, optimización, escalamiento y operaciones administradas de acuerdo con el modelo operativo del cliente."
+        }
+      ]
+    },
+    "about": {
+      "heading": "Preguntas frecuentes",
+      "items": [
+        {
+          "question": "¿Qué es Hive Vault Arc?",
+          "answer": "Hive Vault Arc es un socio de transformación tecnológica liderado por su fundador con sede en Tánger, Marruecos. Combinamos consultoría estratégica, ingeniería de inteligencia artificial, desarrollo de software, infraestructura en la nube y operaciones administradas."
+        },
+        {
+          "question": "¿Qué es el ARC Framework?",
+          "answer": "ARC es el modelo de entrega Hive Vault Arc: evaluar, rediseñar, comandar. Conecta el diagnóstico operativo, la entrega del sistema y la responsabilidad de la producción a largo plazo."
+        },
+        {
+          "question": "¿Quién lidera las interacciones Hive Vault Arc?",
+          "answer": "Hive Vault Arc está dirigido por fundadores. En esta página se mantienen los perfiles de liderazgo actuales y las áreas de responsabilidad."
+        },
+        {
+          "question": "¿Sigues involucrado después de la construcción inicial?",
+          "answer": "Sí. La fase de comando cubre operaciones administradas, monitoreo de producción, evolución de aplicaciones y optimización continua después del lanzamiento."
+        },
+        {
+          "question": "¿A qué industrias sirve Hive Vault Arc?",
+          "answer": "Trabajamos en bienes raíces y construcción, atención médica, servicios financieros, sector público, comercio minorista, energía, logística y negocios de consumo y lujo."
+        }
+      ]
+    },
+    "contact": {
+      "heading": "Preguntas frecuentes",
+      "items": [
+        {
+          "question": "¿Qué sucede después de enviar el formulario de contacto?",
+          "answer": "Revisamos su informe y respondemos con el siguiente paso más apropiado. La primera conversación se centra en sus prioridades, limitaciones y el camino correcto para la participación."
+        },
+        {
+          "question": "¿Se paga la primera llamada de descubrimiento?",
+          "answer": "No. El descubrimiento es gratuito y se utiliza para validar el ajuste, aclarar los resultados y definir posibles próximos pasos antes del alcance formal."
+        },
+        {
+          "question": "¿Puede Hive Vault Arc firmar un acuerdo de confidencialidad antes de una discusión detallada?",
+          "answer": "Sí. Podemos firmar un acuerdo de confidencialidad antes de discutir el sistema, los datos o los detalles comerciales confidenciales."
+        },
+        {
+          "question": "¿Publican precios fijos en el sitio web?",
+          "answer": "No. El precio se define después del descubrimiento y depende del alcance, la complejidad técnica, las integraciones, la responsabilidad de entrega y el soporte continuo."
+        }
+      ]
+    },
+    "portfolio": {
+      "heading": "Preguntas frecuentes",
+      "items": [
+        {
+          "question": "¿Qué representa la cartera?",
+          "answer": "El portafolio presenta programas de transformación reales implementados en entornos operativos, con énfasis en estrategia, automatización, ingeniería y responsabilidad de producción."
+        },
+        {
+          "question": "¿Son estos sistemas en vivo o demostraciones?",
+          "answer": "Los estudios de casos publicados describen sistemas en vivo o entregados. Su estado se establece dentro de cada estudio de caso."
+        },
+        {
+          "question": "¿Los estudios de caso incluyen contexto empresarial y técnico?",
+          "answer": "Sí. Incluimos el desafío empresarial, la estrategia de transformación, las decisiones de arquitectura, las integraciones, el estado de implementación y los resultados aprobados."
+        },
+        {
+          "question": "¿Puedes compartir pruebas adicionales en privado?",
+          "answer": "Cuando la confidencialidad lo permita, las oportunidades calificadas pueden recibir recorridos más profundos, artefactos arquitectónicos y referencias bajo los términos apropiados."
+        },
+        {
+          "question": "¿Cómo debemos utilizar el portafolio en nuestra evaluación?",
+          "answer": "Úselo para comparar su contexto con patrones de entrega similares y luego hable con nosotros para trazar el programa de transformación adecuado para su organización."
+        }
+      ]
+    },
+    "arc": {
+      "heading": "Preguntas que hacen los compradores antes de un compromiso con ARC",
+      "items": [
+        {
+          "question": "¿Qué pasa en Evaluar?",
+          "answer": "Evaluar mapas del flujo de trabajo actual, las dependencias del sistema, los propietarios de las decisiones y el resultado objetivo. El resultado es un mapa de restricciones y una hoja de ruta lista para tomar decisiones antes de que se apruebe el alcance de la construcción."
+        },
+        {
+          "question": "¿Qué datos necesitamos?",
+          "answer": "Comenzamos con la evidencia que sus equipos ya utilizan: flujos de trabajo, medidas operativas, acceso al sistema, puntos de falla conocidos y propiedad. La evidencia faltante se documenta como una limitación en lugar de reemplazarla con suposiciones."
+        },
+        {
+          "question": "¿Cuánto tiempo se tarda en llegar a la prueba de producción?",
+          "answer": "El tiempo se establece después de la Evaluación, cuando se conocen el alcance, las dependencias y las puertas de decisión. La hoja de ruta identifica la porción de producción segura más corta que se puede entregar y evaluar."
+        },
+        {
+          "question": "¿Cómo trabaja ARC con los equipos internos?",
+          "answer": "ARC establece una propiedad clara entre Hive Vault Arc y los líderes internos. Los equipos de los clientes validan la realidad operativa y el impacto empresarial, mientras que HVA lleva a cabo la arquitectura, la entrega, los controles de lanzamiento y las responsabilidades de producción acordadas."
+        },
+        {
+          "question": "¿Cuándo ARC no es la opción adecuada?",
+          "answer": "ARC no es la mejor opción cuando lo que se necesita es sólo capacidad de personal temporal, un documento de asesoramiento independiente o una construcción sin expectativas de responsabilidad operativa después del lanzamiento."
+        }
+      ]
+    },
+    "aiAgentsTangier": {
+      "heading": "Agentes de IA en Tánger: Preguntas frecuentes",
+      "items": [
+        {
+          "question": "¿Qué tipos de empresas de Tánger se benefician de los agentes de IA?",
+          "answer": "Las organizaciones con mensajes frecuentes a los clientes, trabajo de calificación repetido o soporte urgente pueden beneficiarse cuando el flujo de trabajo y las reglas de escalamiento están claramente definidos."
+        },
+        {
+          "question": "¿Puede Hive Vault Arc crear agentes en árabe y francés?",
+          "answer": "Sí. Diseñamos agentes multilingües en árabe, francés, inglés y español con un tono, límites de conocimiento y reglas de escalamiento específicos del negocio."
+        },
+        {
+          "question": "¿Cómo se define el cronograma de implementación?",
+          "answer": "El tiempo se define después del descubrimiento según la complejidad del flujo de trabajo, las integraciones, la preparación de los datos, las pruebas y la gobernanza necesaria para la producción."
+        },
+        {
+          "question": "¿Puede el agente conectarse a nuestro CRM y calendario?",
+          "answer": "Sí. Los agentes pueden conectarse a sistemas CRM, calendario, operaciones y generación de informes aprobados para que la conversación se convierta en una acción operativa."
+        },
+        {
+          "question": "¿Qué sucede después del lanzamiento?",
+          "answer": "Podemos brindar soporte de monitoreo, revisión de calidad, ajuste, gobernanza y hoja de ruta a medida que las interacciones reales revelan oportunidades de mejora."
+        }
+      ]
+    },
+    "aiAgentsMorocco": {
+      "heading": "Agentes de AI en Marruecos: Preguntas frecuentes",
+      "items": [
+        {
+          "question": "¿Trabajan sólo con organizaciones en Tánger?",
+          "answer": "No. Hive Vault Arc tiene su sede en Tánger y apoya a organizaciones en todo Marruecos, así como a equipos distribuidos e internacionales."
+        },
+        {
+          "question": "¿Qué se incluye en la implementación de un agente de IA?",
+          "answer": "Un alcance típico cubre el descubrimiento, el flujo de trabajo y el diseño de conversaciones, integraciones, pruebas, implementación controlada y un modelo operativo acordado posterior al lanzamiento."
+        },
+        {
+          "question": "¿Se pueden crear agentes sectoriales específicos?",
+          "answer": "Sí. El agente está diseñado en torno al flujo de trabajo del sector relevante, los límites de los datos, las expectativas de servicio y las responsabilidades de escalamiento."
+        },
+        {
+          "question": "¿Cómo se estructuran los precios?",
+          "answer": "Los términos comerciales se definen después del descubrimiento según el alcance, las integraciones, los canales, la gobernanza y la responsabilidad de las operaciones en curso."
+        },
+        {
+          "question": "¿Cómo empezamos?",
+          "answer": "Comenzamos con el descubrimiento del flujo de mensajes actual, las limitaciones operativas y el caso de uso más adecuado para una primera versión controlada."
+        }
+      ]
+    },
+    "itConsultingTangier": {
+      "heading": "Consultoría TI en Tánger: Preguntas frecuentes",
+      "items": [
+        {
+          "question": "¿Qué incluye la consultoría TI en Hive Vault Arc?",
+          "answer": "Puede incluir auditorías tecnológicas, arquitectura de destino, definición de hoja de ruta, gobernanza de entrega y soporte de implementación."
+        },
+        {
+          "question": "¿Solo aconsejas o también implementas?",
+          "answer": "Hacemos ambas cosas. El mismo equipo responsable puede tomar decisiones mediante la implementación, la estabilización y la mejora continua."
+        },
+        {
+          "question": "¿Se puede modernizar un entorno heredado fragmentado?",
+          "answer": "Sí. Definimos límites de modernización gradual que reducen el riesgo y preservan la continuidad del negocio."
+        },
+        {
+          "question": "¿Por qué trabajar con un equipo de consultoría con sede en Tánger?",
+          "answer": "El idioma local y el contexto operativo mejoran la alineación de las partes interesadas, mientras que nuestros estándares de ingeniería protegen la confiabilidad y la mantenibilidad a largo plazo."
+        },
+        {
+          "question": "¿Cómo comienza un compromiso?",
+          "answer": "Discovery mapea las limitaciones actuales, los resultados objetivo, la evidencia y la propiedad de las decisiones antes de proponer una secuencia práctica desde la consultoría hasta la entrega."
+        }
+      ]
+    },
+    "customSoftwareMorocco": {
+      "heading": "Desarrollo de software personalizado en Marruecos: preguntas frecuentes",
+      "items": [
+        {
+          "question": "¿Cuándo debería una organización elegir software personalizado?",
+          "answer": "El software personalizado es apropiado cuando un flujo de trabajo crítico es distintivo, está fragmentado entre herramientas o está limitado por el trabajo manual y las integraciones faltantes."
+        },
+        {
+          "question": "¿Cómo se selecciona la pila de tecnología?",
+          "answer": "Seleccionamos tecnologías en función de la confiabilidad, seguridad, mantenibilidad, requisitos de integración y evolución esperada del producto."
+        },
+        {
+          "question": "¿Puedes crear plataformas internas y orientadas al cliente?",
+          "answer": "Sí. Construimos sistemas internos, productos SaaS, portales de clientes y plataformas híbridas."
+        },
+        {
+          "question": "¿Cómo se controla el riesgo de entrega?",
+          "answer": "La entrega se realiza a través de hitos explícitos, puntos de revisión compartidos, criterios de aceptación y puertas de preparación para la producción."
+        },
+        {
+          "question": "¿Admite software después del lanzamiento?",
+          "answer": "Sí. Podemos proporcionar estabilización, mantenimiento, monitoreo, optimización y evolución de la hoja de ruta después del lanzamiento de producción."
+        }
+      ]
+    },
+    "digitalServicesTangier": {
+      "heading": "Servicios digitales en Tánger: preguntas frecuentes",
+      "items": [
+        {
+          "question": "¿Qué servicios digitales ofrece Hive Vault Arc en Tánger?",
+          "answer": "Ofrecemos estrategia tecnológica, agentes de inteligencia artificial y automatización, software personalizado, integración de sistemas, infraestructura en la nube y operaciones administradas."
+        },
+        {
+          "question": "¿Solo asesoras o también construyes?",
+          "answer": "Asesoramos, construimos y podemos operar los sistemas resultantes. El modelo de participación mantiene conectadas la arquitectura y la implementación."
+        },
+        {
+          "question": "¿Qué aporta un socio con sede en Tánger?",
+          "answer": "La presencia local respalda los contextos operativos árabes y franceses y la alineación directa de las partes interesadas, combinada con estándares de ingeniería de nivel de producción."
+        },
+        {
+          "question": "¿Qué tipo de organizaciones apoya?",
+          "answer": "Apoyamos a las organizaciones marroquíes e internacionales cuyo crecimiento depende de mejores sistemas, automatización, datos y disciplina de entrega."
+        },
+        {
+          "question": "¿Cómo se define el cronograma de participación?",
+          "answer": "La hoja de ruta y el cronograma se definen después del descubrimiento, cuando se conocen el alcance, las dependencias, el riesgo y las puertas de decisión interna."
+        }
+      ]
+    }
+  },
+  "Metadata": {
+    "defaultTitle": "Hive Vault Arc | Socio de transformación tecnológica",
+    "defaultDescription": "Hive Vault Arc combina estrategia, ingeniería de inteligencia artificial, software, infraestructura en la nube y operaciones administradas.",
+    "pages": {
+      "home": {
+        "title": "Hive Vault Arc | Consultoría tecnológica y transformación de la IA",
+        "description": "Hive Vault Arc es un socio de transformación tecnológica en Tánger, Marruecos, que combina consultoría estratégica, ingeniería de inteligencia artificial, desarrollo de software, infraestructura en la nube y operaciones gestionadas."
+      },
+      "arc": {
+        "title": "ARC Framework | Evaluar, rediseñar, comandar",
+        "description": "Descubra ARC Framework, el modelo operativo de Hive Vault Arc para diagnosticar limitaciones, reconstruir sistemas y mantener los resultados de producción."
+      },
+      "capabilities": {
+        "title": "Capacidades | Seis pilares de servicio, desde la estrategia hasta las operaciones",
+        "description": "Explore las capacidades de Hive Vault Arc en estrategia, consultoría tecnológica, inteligencia artificial y datos, ingeniería de software, infraestructura de nube y operaciones administradas."
+      },
+      "capabilitiesDetail": {
+        "title": "Capacidades en detalle | Entrega de tecnología integrada",
+        "description": "Revise la experiencia, el alcance de la entrega y los resultados conectados dentro de cada pilar de capacidad Hive Vault Arc."
+      },
+      "capabilitiesPrograms": {
+        "title": "Programas de solución | Sistemas operativos basados en consultoría",
+        "description": "Explore programas de soluciones estructuradas que combinan estrategia, ingeniería, automatización y soporte operativo continuo."
+      },
+      "industries": {
+        "title": "Industrias | Transformación Tecnológica por Sector",
+        "description": "Vea cómo Hive Vault Arc aplica su experiencia en estrategia, inteligencia artificial, software, nube y operaciones en industrias prioritarias."
+      },
+      "about": {
+        "title": "Acerca de | Equipo de transformación tecnológica dirigido por el fundador",
+        "description": "Conozca al equipo Hive Vault Arc liderado por el fundador que ofrece estrategia, inteligencia artificial, software, nube y operaciones administradas desde Tánger."
+      },
+      "portfolio": {
+        "title": "Portafolio | Compromisos de transformación y resultados de entrega",
+        "description": "Explore compromisos de transformación basados en consultoría entregados en operaciones de IA, modernización de CRM, análisis, ingeniería de software y confiabilidad de la nube."
+      },
+      "insights": {
+        "title": "Perspectivas | Blogs, estudios de casos, noticias, perspectivas e investigaciones",
+        "description": "Explore las publicaciones Hive Vault Arc sobre consultoría tecnológica, transformación digital, operaciones y ejecución de IA."
+      },
+      "blog": {
+        "title": "Blog | Estrategia tecnológica y conocimientos de ejecución",
+        "description": "Información práctica sobre consultoría tecnológica, automatización de IA, ingeniería de software y ejecución de modelos operativos."
+      },
+      "caseStudies": {
+        "title": "Estudios de caso | Resultados de la transformación impulsada por la consultoría",
+        "description": "Estudios de casos que documentan la estrategia de consultoría, la entrega de ingeniería y los resultados operativos aprobados."
+      },
+      "news": {
+        "title": "Artículos de noticias | Señales de tecnología y transformación",
+        "description": "Artículos oportunos sobre consultoría tecnológica, transformación digital, operaciones de IA y tendencias de modernización."
+      },
+      "perspectives": {
+        "title": "Perspectivas | Hive Vault Arc Punto de vista",
+        "description": "Perspectivas estratégicas sobre gobernanza de la transformación, modelos operativos y ejecución de tecnología a largo plazo."
+      },
+      "research": {
+        "title": "Informes de investigación | Análisis de transformación respaldado por datos",
+        "description": "Informes de investigación que cubren operaciones de IA, ejecución de transformaciones y preparación para la confiabilidad de la nube."
+      },
+      "contact": {
+        "title": "Contacto | Iniciar una conversación sobre transformación tecnológica",
+        "description": "Comuníquese con Hive Vault Arc para hablar sobre estrategia, ingeniería de inteligencia artificial, software, nube u operaciones administradas."
+      },
+      "privacy": {
+        "title": "Política de privacidad",
+        "description": "Cómo Hive Vault Arc recopila, usa, protege y retiene información personal."
+      },
+      "legal": {
+        "title": "Menciones Legales",
+        "description": "Información legal y del editor para el sitio web Hive Vault Arc."
+      },
+      "links": {
+        "title": "Enlaces oficiales",
+        "description": "Sitio web oficial Hive Vault Arc, perfiles sociales y enlaces de contacto."
+      },
+      "aiAgentsTangier": {
+        "title": "Agentes de IA en Tánger | Automatización empresarial multilingüe",
+        "description": "Agentes de IA para ventas, soporte y operaciones comerciales diseñados para organizaciones en Tánger."
+      },
+      "aiAgentsMorocco": {
+        "title": "Agentes de IA en Marruecos | Automatización empresarial",
+        "description": "Agentes de IA multilingües para ventas, soporte y flujos de trabajo operativos en todo Marruecos."
+      },
+      "itConsultingTangier": {
+        "title": "Consultoría TI en Tánger | Estrategia a través de la producción",
+        "description": "Consultoría tecnológica, arquitectura, entrega y soporte operativo para organizaciones en Tánger."
+      },
+      "customSoftwareMorocco": {
+        "title": "Software personalizado en Marruecos | Sistemas web y móviles",
+        "description": "Ingeniería de software personalizada para organizaciones marroquíes, desde la estrategia del producto hasta operaciones de producción confiables."
+      },
+      "digitalServicesTangier": {
+        "title": "Servicios Digitales en Tánger | Estrategia, IA y software",
+        "description": "Servicios digitales en Tánger que abarcan estrategia, inteligencia artificial, software personalizado, infraestructura en la nube y operaciones gestionadas."
+      }
+    }
+  }
+}

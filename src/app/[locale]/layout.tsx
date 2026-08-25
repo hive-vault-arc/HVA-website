@@ -9,8 +9,9 @@ import JsonLd from '@/components/JsonLd';
 import EmployeeHashScroller from '@/components/EmployeeHashScroller';
 import {TranslationAvailabilityProvider} from '@/components/localization/TranslationAvailability';
 import {routing} from '@/i18n/routing';
-import {localizedPath} from '@/i18n/route-manifest';
-import { manrope, newsreader } from '@/lib/fonts';
+import {localizedAlternates, localizedPath} from '@/i18n/route-manifest';
+import {arabic, manrope, newsreader} from '@/lib/fonts';
+import {PUBLIC_LOCALES, isPublicLocale, localeProfile} from '@/i18n/config';
 import {withoutCrawlerOnlyMessages} from '@/i18n/client-messages';
 import {
   CONTACT_EMAIL,
@@ -82,30 +83,78 @@ const GLOBAL_FOUNDERS = [
   {
     name: 'Khalid Chalhi',
     slug: 'khalid-chalhi',
-    jobTitle: {en: 'Co-Founder & CEO', fr: 'Cofondateur et CEO'},
+    jobTitle: {
+      en: 'Co-Founder & CEO', fr: 'Cofondateur et CEO', es: 'Cofundador y CEO', ar: 'المؤسس المشارك والرئيس التنفيذي',
+    },
   },
   {
     name: 'Ali Amrani',
     slug: 'ali-amrani',
-    jobTitle: {en: 'Co-Founder & CTO', fr: 'Cofondateur et CTO'},
+    jobTitle: {
+      en: 'Co-Founder & CTO', fr: 'Cofondateur et CTO', es: 'Cofundador y director tecnológico', ar: 'المؤسس المشارك والمدير التقني',
+    },
   },
   {
     name: 'Oubay Ghamat',
     slug: 'oubay-ghamat',
-    jobTitle: {en: 'Co-Founder & COO', fr: 'Cofondateur et COO'},
+    jobTitle: {
+      en: 'Co-Founder & COO', fr: 'Cofondateur et COO', es: 'Cofundador y director de operaciones', ar: 'المؤسس المشارك ومدير العمليات',
+    },
   },
 ] as const;
 
+const ORGANIZATION_COPY = {
+  en: {
+    description: 'Technology transformation partner based in Tangier, Morocco. Hive Vault Arc combines strategy, AI engineering, custom software, cloud infrastructure, and managed operations from advisory through production.',
+    location: 'Tangier, Morocco',
+    serviceTypes: ['Strategy and Business Consulting', 'Technology Consulting', 'AI Engineering and Data Analytics', 'Custom Software Engineering', 'Cloud Infrastructure', 'Managed Operations'],
+    catalog: 'Hive Vault Arc Services', arcName: 'ARC Program',
+    arcDescription: 'Full technology transformation engagement: Assess, Re-engineer, Command',
+    agentName: 'WhatsApp AI Agent', agentDescription: 'Intelligent WhatsApp automation for lead qualification, customer support, and sales',
+    siteDescription: 'Technology transformation partner for Moroccan and global businesses', navigationName: 'Hive Vault Arc Site Navigation',
+  },
+  fr: {
+    description: 'Partenaire de transformation technologique basé à Tanger. Hive Vault Arc réunit stratégie, ingénierie IA, logiciels sur mesure, infrastructure cloud et opérations managées, du conseil à la production.',
+    location: 'Tanger, Maroc',
+    serviceTypes: ['Conseil en stratégie et développement', 'Conseil technologique', 'Ingénierie IA et analytique des données', 'Ingénierie logicielle sur mesure', 'Infrastructure cloud', 'Opérations managées'],
+    catalog: 'Services Hive Vault Arc', arcName: 'Programme ARC',
+    arcDescription: 'Mission complète de transformation technologique : Évaluer, Réingénier, Piloter',
+    agentName: 'Agent IA WhatsApp', agentDescription: 'Automatisation intelligente de WhatsApp pour la qualification, le support client et les ventes',
+    siteDescription: 'Partenaire de transformation technologique pour les entreprises marocaines et internationales', navigationName: 'Navigation du site Hive Vault Arc',
+  },
+  es: {
+    description: 'Socio de transformación tecnológica con sede en Tánger, Marruecos. Hive Vault Arc combina estrategia, ingeniería de IA, software a medida, infraestructura en la nube y operaciones gestionadas, desde el asesoramiento hasta producción.',
+    location: 'Tánger, Marruecos',
+    serviceTypes: ['Consultoría de estrategia y negocio', 'Consultoría tecnológica', 'Ingeniería de IA y analítica de datos', 'Ingeniería de software a medida', 'Infraestructura en la nube', 'Operaciones gestionadas'],
+    catalog: 'Servicios de Hive Vault Arc', arcName: 'Programa ARC',
+    arcDescription: 'Transformación tecnológica integral: Evaluar, Reingenierizar, Dirigir',
+    agentName: 'Agente de IA para WhatsApp', agentDescription: 'Automatización inteligente de WhatsApp para cualificar oportunidades, atención al cliente y ventas',
+    siteDescription: 'Socio de transformación tecnológica para empresas marroquíes e internacionales', navigationName: 'Navegación del sitio de Hive Vault Arc',
+  },
+  ar: {
+    description: 'شريك للتحول التقني مقره طنجة، المغرب. تجمع Hive Vault Arc بين الاستراتيجية وهندسة الذكاء الاصطناعي والبرمجيات المخصصة والبنية السحابية والعمليات المُدارة، من الاستشارة إلى الإنتاج.',
+    location: 'طنجة، المغرب',
+    serviceTypes: ['استشارات الاستراتيجية والأعمال', 'الاستشارات التقنية', 'هندسة الذكاء الاصطناعي وتحليلات البيانات', 'هندسة البرمجيات المخصصة', 'البنية التحتية السحابية', 'العمليات المُدارة'],
+    catalog: 'خدمات Hive Vault Arc', arcName: 'برنامج ARC',
+    arcDescription: 'تحول تقني متكامل: التقييم وإعادة الهندسة والقيادة',
+    agentName: 'وكيل WhatsApp للذكاء الاصطناعي', agentDescription: 'أتمتة ذكية عبر WhatsApp لتأهيل الفرص ودعم العملاء والمبيعات',
+    siteDescription: 'شريك للتحول التقني للشركات المغربية والعالمية', navigationName: 'تنقل موقع Hive Vault Arc',
+  },
+} as const;
+
 export function generateStaticParams() {
-  return routing.locales.map((locale) => ({locale}));
+  // Paused locales are recognized at request time so their prefix can resolve
+  // to the controlled unpublished response, but they must never be prerendered
+  // before reviewed messages and CMS content are available.
+  return PUBLIC_LOCALES.map((locale) => ({locale}));
 }
 
 export async function generateMetadata({params}: LocaleLayoutProps): Promise<Metadata> {
   const {locale} = await params;
-  if (!hasLocale(routing.locales, locale)) return {};
+  if (!hasLocale(routing.locales, locale) || !isPublicLocale(locale)) return {};
 
   const t = await getTranslations({locale, namespace: 'Metadata'});
-  const canonical = locale === 'fr' ? '/fr' : '/';
+  const canonical = localizedPath('/', locale);
 
   return {
     ...baseMetadata,
@@ -116,15 +165,11 @@ export async function generateMetadata({params}: LocaleLayoutProps): Promise<Met
     description: t('defaultDescription'),
     alternates: {
       canonical,
-      languages: {
-        en: '/',
-        fr: '/fr',
-        'x-default': '/',
-      },
+      languages: localizedAlternates('/'),
     },
     openGraph: {
       ...baseMetadata.openGraph,
-      locale: locale === 'fr' ? 'fr_FR' : 'en_US',
+      locale: localeProfile(locale).openGraphLocale,
       url: canonical,
       title: t('defaultTitle'),
       description: t('defaultDescription'),
@@ -145,7 +190,10 @@ export const viewport: Viewport = {
 
 export default async function RootLayout({children, params}: LocaleLayoutProps) {
   const {locale} = await params;
-  if (!hasLocale(routing.locales, locale)) notFound();
+  if (!hasLocale(routing.locales, locale) || !isPublicLocale(locale)) notFound();
+
+  const profile = localeProfile(locale);
+  const organizationCopy = ORGANIZATION_COPY[locale];
 
   setRequestLocale(locale);
   const [messages, tNavigation, tMetadata] = await Promise.all([
@@ -186,17 +234,14 @@ export default async function RootLayout({children, params}: LocaleLayoutProps) 
       height: SITE_LOGO_HEIGHT,
     },
     image: absoluteUrl('/Images/media/og-default.webp'),
-    description:
-      locale === 'fr'
-        ? 'Partenaire de transformation technologique basé à Tanger. Hive Vault Arc réunit stratégie, ingénierie IA, logiciels sur mesure, infrastructure cloud et opérations managées, du conseil à la production.'
-        : 'Technology transformation partner based in Tangier, Morocco. Hive Vault Arc combines strategy, AI engineering, custom software, cloud infrastructure, and managed operations from advisory through production.',
+    description: organizationCopy.description,
     founder: leadershipPeople,
     founders: leadershipPeople,
     employee: leadershipPeople,
     member: leadershipPeople,
     foundingLocation: {
       '@type': 'Place',
-      name: locale === 'fr' ? 'Tanger, Maroc' : 'Tangier, Morocco',
+      name: organizationCopy.location,
     },
     address: {
       '@type': 'PostalAddress',
@@ -215,24 +260,7 @@ export default async function RootLayout({children, params}: LocaleLayoutProps) 
       { '@type': 'AdministrativeArea', name: 'North Africa' },
       { '@type': 'AdministrativeArea', name: 'Europe' },
     ],
-    serviceType:
-      locale === 'fr'
-        ? [
-            'Conseil en stratégie et développement',
-            'Conseil technologique',
-            'Ingénierie IA et analytique des données',
-            'Ingénierie logicielle sur mesure',
-            'Infrastructure cloud',
-            'Opérations managées',
-          ]
-        : [
-            'Strategy and Business Consulting',
-            'Technology Consulting',
-            'AI Engineering and Data Analytics',
-            'Custom Software Engineering',
-            'Cloud Infrastructure',
-            'Managed Operations',
-          ],
+    serviceType: organizationCopy.serviceTypes,
     email: CONTACT_EMAIL,
     telephone: CONTACT_PHONE_E164,
     contactPoint: [
@@ -276,28 +304,22 @@ export default async function RootLayout({children, params}: LocaleLayoutProps) 
     ],
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
-      name: locale === 'fr' ? 'Services Hive Vault Arc' : 'Hive Vault Arc Services',
+      name: organizationCopy.catalog,
       itemListElement: [
         {
           '@type': 'Offer',
           itemOffered: {
             '@type': 'Service',
-            name: locale === 'fr' ? 'Programme ARC' : 'ARC Program',
-            description:
-              locale === 'fr'
-                ? 'Mission complète de transformation technologique : Évaluer, Réingénier, Piloter'
-                : 'Full technology transformation engagement: Assess, Re-engineer, Command',
+            name: organizationCopy.arcName,
+            description: organizationCopy.arcDescription,
           },
         },
         {
           '@type': 'Offer',
           itemOffered: {
             '@type': 'Service',
-            name: locale === 'fr' ? 'Agent IA WhatsApp' : 'WhatsApp AI Agent',
-            description:
-              locale === 'fr'
-                ? 'Automatisation intelligente de WhatsApp pour la qualification, le support client et les ventes'
-                : 'Intelligent WhatsApp automation for lead qualification, customer support, and sales',
+            name: organizationCopy.agentName,
+            description: organizationCopy.agentDescription,
           },
         },
       ],
@@ -340,10 +362,7 @@ export default async function RootLayout({children, params}: LocaleLayoutProps) 
     url: absoluteUrl(localizedPath('/', locale)),
     name: 'Hive Vault Arc',
     alternateName: BRAND_SEARCH_VARIANTS,
-    description:
-      locale === 'fr'
-        ? 'Partenaire de transformation technologique pour les entreprises marocaines et internationales'
-        : 'Technology transformation partner for Moroccan and global businesses',
+    description: organizationCopy.siteDescription,
     inLanguage: locale,
     publisher: {
       '@id': absoluteUrl('/#organization'),
@@ -363,7 +382,7 @@ export default async function RootLayout({children, params}: LocaleLayoutProps) 
   const navigationSchema = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: locale === 'fr' ? 'Navigation du site Hive Vault Arc' : 'Hive Vault Arc Site Navigation',
+    name: organizationCopy.navigationName,
     itemListElement: schemaSiteLinks.map((item, index) => ({
       '@type': 'SiteNavigationElement',
       position: index + 1,
@@ -374,7 +393,12 @@ export default async function RootLayout({children, params}: LocaleLayoutProps) 
   };
 
   return (
-    <html lang={locale} data-scroll-behavior="smooth" className={`${manrope.variable} ${newsreader.variable}`}>
+    <html
+      lang={locale}
+      dir={profile.direction}
+      data-scroll-behavior="smooth"
+      className={`${manrope.variable} ${newsreader.variable} ${arabic.variable}`}
+    >
       <head>
         {/* Warm up third-party connections used for 3D assets */}
         <link rel="preconnect" href="https://prod.spline.design" />

@@ -4,7 +4,7 @@ import type {ReactNode} from 'react';
 import {useEffect, useMemo, useRef, useState} from 'react';
 import {track} from '@vercel/analytics/react';
 import Image from 'next/image';
-import {useTranslations} from 'next-intl';
+import {useLocale, useTranslations} from 'next-intl';
 import {Link} from '@/i18n/navigation';
 import {
   ArrowRight,
@@ -14,6 +14,10 @@ import {
   TrendingUp,
 } from '@/components/icons';
 import type {CaseStudy} from '@/lib/proof';
+import {isSanityCdnImage} from '@/lib/image-delivery';
+import type {AppLocale} from '@/i18n/config';
+import ResponsiveMedia from '@/components/media/ResponsiveMedia';
+import {SEMANTIC_MEDIA, type SemanticMediaDefinition} from '@/lib/semantic-media';
 
 type ArcProps = {
   readonly studies: readonly CaseStudy[];
@@ -31,14 +35,14 @@ type ArcPhaseCopy = {
 };
 
 type ArcPhase = ArcPhaseCopy & {
-  image: string;
+  media: SemanticMediaDefinition;
   letter: string;
 };
 
-const phaseImages = [
-  '/Images/arc/hva-arc-assess-diagnostic-v2.webp',
-  '/Images/arc/hva-arc-reengineer-architecture-v2.webp',
-  '/Images/arc/hva-arc-command-network-v2.webp',
+const phaseMedia = [
+  SEMANTIC_MEDIA.arc.assess,
+  SEMANTIC_MEDIA.arc.reengineer,
+  SEMANTIC_MEDIA.arc.command,
 ] as const;
 
 const phaseLetters = ['A', 'R', 'C'] as const;
@@ -61,10 +65,11 @@ function recordArcEvent(name: string, properties: Record<string, string> = {}) {
 
 export default function Arc({studies, children}: ArcProps) {
   const t = useTranslations('Arc');
+  const locale = useLocale() as AppLocale;
   const phaseCopy = t.raw('phases') as ArcPhaseCopy[];
   const arcPhases: readonly ArcPhase[] = phaseCopy.map((phase, index) => ({
     ...phase,
-    image: phaseImages[index] ?? phaseImages[0],
+    media: phaseMedia[index] ?? phaseMedia[0],
     letter: phaseLetters[index] ?? 'A',
   }));
   const buyerFit = t.raw('buyerFit') as string[];
@@ -300,7 +305,6 @@ export default function Arc({studies, children}: ArcProps) {
               }
             >
               {t('seeProduction')}
-              <ArrowRight aria-hidden="true" />
             </Link>
           </div>
         </div>
@@ -426,11 +430,9 @@ export default function Arc({studies, children}: ArcProps) {
             {arcPhases.map((phase) => (
               <article className="arc-briefing__stage" key={phase.title}>
                 <figure className="arc-briefing__stage-media">
-                  <Image
-                    src={phase.image}
-                    alt={phase.imageAlt}
-                    fill
-                    quality={90}
+                  <ResponsiveMedia
+                    media={phase.media}
+                    locale={locale}
                     sizes="(max-width: 1023px) 100vw, 54vw"
                     className="arc-briefing__stage-image"
                   />
@@ -524,11 +526,12 @@ export default function Arc({studies, children}: ArcProps) {
             >
               <figure className="arc-briefing__outcome-case-media">
                 <Image
-                  src="/Images/arc/hva-arc-real-estate-operations-v2.webp"
-                  alt={t('outcomesImageAlt')}
+                  src={outcomeStudy.assets.coverImage}
+                  alt={outcomeStudy.assets.coverAlt ?? t('outcomesImageAlt')}
                   fill
                   quality={90}
                   sizes="(max-width: 1023px) 100vw, 48vw"
+                  unoptimized={isSanityCdnImage(outcomeStudy.assets.coverImage)}
                 />
               </figure>
               <div className="arc-briefing__outcome-case-content">
@@ -594,7 +597,6 @@ export default function Arc({studies, children}: ArcProps) {
                 }
               >
                 {t('seeCaseStudies')}
-                <ArrowUpRight aria-hidden="true" />
               </Link>
             </div>
           </div>

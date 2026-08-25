@@ -45,6 +45,14 @@ export async function getPublishedCollection<
     return buildPublishedCollection(locale, [], await fetchByLocale('en'));
   }
 
+  if (locale !== 'fr') {
+    return {
+      items: await fetchByLocale(locale),
+      sourceLocale: locale,
+      hasFallbackContent: false,
+    };
+  }
+
   const [localizedItems, englishItems] = await Promise.all([
     fetchByLocale(locale),
     fetchByLocale('en'),
@@ -128,6 +136,11 @@ export async function getPublishedDocument<
   if (locale === 'en') {
     const englishDocument = await fetchByLocale('en');
     return englishDocument ? withSourceLocale(englishDocument, 'en') : null;
+  }
+
+  if (locale !== 'fr') {
+    const localizedDocument = await fetchByLocale(locale);
+    return localizedDocument ? withSourceLocale(localizedDocument, locale) : null;
   }
 
   const [localizedDocument, englishDocument] = await Promise.all([

@@ -1,12 +1,15 @@
 {
   "Locale": {
+    "eyebrow": "Language",
     "english": "English",
-    "french": "French",
+    "french": "Français",
     "selectLanguage": "Choose language",
     "currentLanguage": "Current language: {language}",
     "languages": {
       "en": "English",
-      "fr": "French"
+      "fr": "Français",
+      "es": "Español",
+      "ar": "العربية"
     },
     "switchTo": "View this page in {language}",
     "unavailable": "This page is not available in {language}"
@@ -509,6 +512,7 @@
     "railDescription": "Approved reference letters supporting published delivery work.",
     "readCaseStudy": "Read case study",
     "railAria": "Read the {client} case study. Client reference letter available.",
+    "sourceDisclosure": "Original source: {language}",
     "languages": {
       "ar": "Arabic",
       "en": "English",

@@ -1,4 +1,4 @@
-import type {AppLocale} from './config';
+import {LOCALE_PROFILES, PUBLIC_LOCALES, type AppLocale} from './config';
 import {routing, type AppPathname} from './routing';
 
 export type RouteKey =
@@ -75,8 +75,8 @@ export const STATIC_ROUTE_KEYS = Object.entries(ROUTE_MANIFEST)
   .filter(([, route]) => route.static)
   .map(([key]) => key as RouteKey);
 
-export function localePrefix(locale: AppLocale): '' | '/fr' {
-  return locale === 'fr' ? '/fr' : '';
+export function localePrefix(locale: AppLocale): '' | `/${string}` {
+  return LOCALE_PROFILES[locale].prefix;
 }
 
 export function localizedPath(
@@ -151,13 +151,26 @@ export function localizeHref(href: string, locale: AppLocale): string {
     : href;
 }
 
+/**
+ * next-intl preserves encoded dynamic segments when proxy URL normalization is
+ * disabled. Decode once before using a segment as a Sanity lookup key so
+ * Arabic slugs resolve identically in metadata and the page render.
+ */
+export function decodeRouteParam(value: string): string {
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    return value;
+  }
+}
+
 export function localizedAlternates(
   pathname: AppPathname,
   paramsByLocale: Partial<Record<AppLocale, Record<string, string | number>>> = {},
 ): Record<string, string> {
   const languages: Record<string, string> = {};
 
-  for (const locale of ['en', 'fr'] as const) {
+  for (const locale of PUBLIC_LOCALES) {
     const params = paramsByLocale[locale];
     if (pathname.includes('[') && !params) continue;
     languages[locale] = localizedPath(pathname, locale, params);

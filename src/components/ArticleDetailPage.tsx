@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import {useLocale, useTranslations} from 'next-intl';
 import { ArrowLeft, ArrowUpRight } from '@/components/icons';
+import {LOCALE_PROFILES, type AppLocale} from '@/i18n/config';
 import BottomCTA from './BottomCTA';
 import SectionBrandMark from './SectionBrandMark';
 import {isSanityCdnImage} from '@/lib/image-delivery';
@@ -100,8 +101,8 @@ function toIsoDateTime(input: string) {
   return input.includes('T') ? input : `${input}T00:00:00Z`;
 }
 
-function fmtDate(isoDateTime: string, locale: string) {
-  return new Date(isoDateTime).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-US', {
+function fmtDate(isoDateTime: string, locale: AppLocale) {
+  return new Date(isoDateTime).toLocaleDateString(LOCALE_PROFILES[locale].formattingLocale, {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
@@ -140,7 +141,7 @@ export default function ArticleDetailPage({
 }: Props) {
   const t = useTranslations('ArticleUi');
   const tEditorial = useTranslations('InsightsHub.editorial');
-  const locale = useLocale();
+  const locale = useLocale() as AppLocale;
   const { scrollYProgress } = useScroll();
   const progressScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
   const isoDate = publishedAt ? toIsoDateTime(publishedAt) : undefined;

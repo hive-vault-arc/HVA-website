@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import type {AppLocale} from '@/i18n/config';
-import {localizedPath} from '@/i18n/route-manifest';
+import {decodeRouteParam, localizedPath} from '@/i18n/route-manifest';
 import { notFound } from 'next/navigation';
 import JsonLd from '@/components/JsonLd';
 import PerspectiveView from '@/views/Perspective';
@@ -29,7 +29,8 @@ function getFaqItems(perspective: Perspective) {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const {locale, slug} = await params;
+  const {locale, slug: routeSlug} = await params;
+  const slug = decodeRouteParam(routeSlug);
   const perspective = await getPerspectiveBySlug(slug, locale).catch(() => null);
   if (!perspective) return {};
 
@@ -75,7 +76,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function PerspectivePage({ params }: Props) {
-  const {locale, slug} = await params;
+  const {locale, slug: routeSlug} = await params;
+  const slug = decodeRouteParam(routeSlug);
   const perspective = await getPerspectiveBySlug(slug, locale).catch(() => null);
   if (!perspective) notFound();
   const [relatedPerspectives, tContent] = await Promise.all([

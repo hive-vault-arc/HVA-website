@@ -1,9 +1,10 @@
 "use client";
 
-import React, { Suspense, useEffect, useRef, useState } from "react";
-import { useTranslations } from "next-intl";
+import React, { Suspense, useCallback, useEffect, useRef, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { ArrowUpRight, ChevronDown, Menu, X } from "@/components/icons";
+import { ArrowUpRight, ChevronDown, Globe, Menu, X } from "@/components/icons";
+import { LOCALE_PROFILES, type AppLocale } from "@/i18n/config";
 import Logo from "./Logo";
 import LocaleSwitcher from "./localization/LocaleSwitcher";
 import { useHydratedPathname } from "./localization/useHydratedPathname";
@@ -24,26 +25,50 @@ const Navbar: React.FC = () => {
     null,
   );
   const menuCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
+  const mobileMenuCloseRef = useRef<HTMLButtonElement>(null);
+  const mobileMenuPanelRef = useRef<HTMLDivElement>(null);
+  const previousBodyOverflowRef = useRef<string | null>(null);
   const pathname = useHydratedPathname();
+  const locale = useLocale() as AppLocale;
   const t = useTranslations("Navigation");
+  const localeLabel = LOCALE_PROFILES[locale].label;
 
   const toggleMobileSection = (section: string) => {
     setOpenMobileSection((prev) => (prev === section ? null : section));
   };
 
-  const closeMobileMenu = () => {
-    document.body.style.overflow = "";
+  const restoreBodyScroll = useCallback(() => {
+    if (previousBodyOverflowRef.current === null) return;
+    document.body.style.overflow = previousBodyOverflowRef.current;
+    previousBodyOverflowRef.current = null;
+  }, []);
+
+  const closeMobileMenu = useCallback(() => {
+    restoreBodyScroll();
     setIsMobileMenuOpen(false);
     setOpenMobileSection(null);
-  };
+    requestAnimationFrame(() => mobileMenuButtonRef.current?.focus());
+  }, [restoreBodyScroll]);
+
+  const openMobileMenu = useCallback(() => {
+    if (previousBodyOverflowRef.current === null) {
+      previousBodyOverflowRef.current = document.body.style.overflow;
+    }
+    document.body.style.overflow = "hidden";
+    setOpenMobileSection(null);
+    setIsMobileMenuOpen(true);
+  }, []);
 
   // Close all dropdowns and mobile menu on route change
   useEffect(() => {
-    document.body.style.overflow = "";
+    restoreBodyScroll();
     setIsMobileMenuOpen(false);
     setOpenMenu(null);
     setOpenMobileSection(null);
-  }, [pathname]);
+  }, [pathname, restoreBodyScroll]);
+
+  useEffect(() => restoreBodyScroll, [restoreBodyScroll]);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -64,6 +89,50 @@ const Navbar: React.FC = () => {
       if (menuCloseTimer.current) clearTimeout(menuCloseTimer.current);
     };
   }, []);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+
+    const panel = mobileMenuPanelRef.current;
+    const focusableSelector = [
+      'a[href]',
+      'button:not([disabled])',
+      'input:not([disabled])',
+      'select:not([disabled])',
+      'textarea:not([disabled])',
+      '[tabindex]:not([tabindex="-1"])',
+    ].join(',');
+    const focusInitialControl = requestAnimationFrame(() => {
+      mobileMenuCloseRef.current?.focus();
+    });
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        closeMobileMenu();
+        return;
+      }
+
+      if (event.key !== "Tab" || !panel) return;
+      const focusable = Array.from(panel.querySelectorAll<HTMLElement>(focusableSelector));
+      if (!focusable.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      cancelAnimationFrame(focusInitialControl);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [closeMobileMenu, isMobileMenuOpen]);
 
   const cancelMenuClose = () => {
     if (!menuCloseTimer.current) return;
@@ -222,9 +291,42 @@ const Navbar: React.FC = () => {
     return false;
   };
 
+  const mobileRowClass = (isActive: boolean) =>
+    `flex min-h-12 flex-1 items-center justify-between gap-4 px-4 text-start text-[15px] font-semibold transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#E8A838] ${
+      useDarkSurface
+        ? isActive
+          ? "bg-white/[0.1] text-white"
+          : "text-white/80 hover:bg-white/[0.08] hover:text-white"
+        : isActive
+          ? "bg-[#F8E9C8] text-[#1A2535]"
+          : "text-[#1A2535] hover:bg-[#E8A838]/[0.08]"
+    }`;
+
+  const mobileToggleClass = (isActive: boolean) =>
+    `flex min-h-12 w-12 shrink-0 items-center justify-center border-s transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#E8A838] ${
+      useDarkSurface
+        ? isActive
+          ? "border-white/15 bg-white/[0.1] text-white"
+          : "border-white/10 text-white/55 hover:bg-white/[0.08] hover:text-white"
+        : isActive
+          ? "border-[#1A2535]/10 bg-[#F8E9C8] text-[#1A2535]"
+          : "border-[#1A2535]/10 text-[#536174] hover:bg-[#E8A838]/[0.08] hover:text-[#1A2535]"
+    }`;
+
+  const mobileSubItemClass = (isActive: boolean) =>
+    `flex min-h-11 items-center justify-between gap-4 border-s-2 px-3 py-2.5 text-start text-sm font-medium transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#E8A838] ${
+      useDarkSurface
+        ? isActive
+          ? "border-[#E8A838] bg-white/[0.08] text-white"
+          : "border-transparent text-white/70 hover:border-white/35 hover:bg-white/[0.06] hover:text-white"
+        : isActive
+          ? "border-[#E8A838] bg-[#F8E9C8]/55 text-[#1A2535]"
+          : "border-transparent text-[#536174] hover:border-[#E8A838]/60 hover:bg-[#E8A838]/[0.06] hover:text-[#1A2535]"
+    }`;
+
   return (
     <header
-      className="navbar-sharp fixed left-2 right-2 top-2 z-50 w-auto max-w-none lg:left-1/2 lg:right-auto lg:w-[94%] lg:max-w-[1600px] lg:-translate-x-1/2"
+      className="navbar-sharp fixed inset-x-2 top-2 z-50 w-auto max-w-none lg:start-1/2 lg:end-auto lg:w-[94%] lg:max-w-[1600px] lg:-translate-x-1/2 rtl:lg:translate-x-1/2"
       onMouseEnter={cancelMenuClose}
       onMouseLeave={scheduleMenuClose}
       onBlur={(event) => {
@@ -237,23 +339,24 @@ const Navbar: React.FC = () => {
         <div className="mx-auto w-full">
           <div
             data-scrolled={isScrolled}
-            className={`navbar-shell relative z-30 flex h-14 w-full items-center justify-between border px-3 transition-[background-color,border-color,box-shadow] duration-200 sm:px-4 md:h-16 md:px-5 lg:px-6 ${
+            data-navbar-surface="shell"
+            className={`navbar-shell rounded-none relative z-30 flex h-14 w-full items-center justify-between border px-3 transition-[background-color,border-color,box-shadow] duration-200 sm:px-4 md:h-16 md:px-5 lg:px-6 ${
               useDarkSurface
-                ? `border-white/15 bg-[#0D1824] ${
+                ? `bg-[#0D1824] ${
                     isScrolled
-                      ? "shadow-[0_6px_18px_rgba(5,13,22,0.22)]"
-                      : "shadow-none"
+                      ? "border-white/15 shadow-[0_6px_18px_rgba(5,13,22,0.22)]"
+                      : "border-transparent shadow-none"
                   }`
-                : `border-[#DDE3EA] bg-[#FCFBF8] ${
+                : `bg-[#FCFBF8] ${
                     isScrolled
-                      ? "shadow-[0_6px_18px_rgba(26,37,53,0.10)]"
-                      : "shadow-none"
+                      ? "border-[#DDE3EA] shadow-[0_6px_18px_rgba(26,37,53,0.10)]"
+                      : "border-transparent shadow-none"
                   }`
             }`}
           >
             <Logo kind="navigation" light={useDarkSurface} />
 
-            <div className="ml-auto hidden h-full items-stretch gap-0.5 xl:flex">
+            <div className="ms-auto hidden h-full items-stretch gap-0.5 xl:flex">
               <div
                 className="relative flex items-stretch"
                 onMouseEnter={() => setOpenMenu(null)}
@@ -330,42 +433,50 @@ const Navbar: React.FC = () => {
             <div
               data-navbar-actions
               onMouseEnter={() => setOpenMenu(null)}
-              className="ml-3 hidden shrink-0 items-center gap-2 xl:flex"
+              className="ms-3 hidden shrink-0 items-center gap-2 xl:flex"
             >
               <Suspense
                 fallback={
                   <div
+                    data-locale-switcher-fallback="desktop"
                     aria-hidden="true"
-                    className="h-11 w-16 border border-[#DDE3EA]"
-                  />
+                    className="inline-flex min-h-12 min-w-[4.25rem] items-center justify-between gap-1.5 border border-[#1A2535]/15 bg-white px-2.5 text-[10px] font-semibold text-[#1A2535]"
+                  >
+                    <span className="flex min-w-0 items-center gap-1.5">
+                      <Globe className="h-3.5 w-3.5 shrink-0 text-[#E8A838]" aria-hidden="true" />
+                      <span className="max-w-[8rem] truncate text-start">{localeLabel}</span>
+                    </span>
+                    <ChevronDown
+                      aria-hidden="true"
+                      className="h-3 w-3 shrink-0 text-[#1A2535]/50"
+                    />
+                  </div>
                 }
               >
                 <LocaleSwitcher />
               </Suspense>
               <Link
                 href="/contact"
-                className="group flex min-h-11 items-center bg-[#1A2535] px-4 py-2 text-[13px] font-semibold text-[#FFFFFF] transition-colors duration-300 hover:bg-[#E8A838] hover:text-[#1A2535] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8A838]"
+                className="site-action site-action-primary px-4 text-[13px]"
               >
                 {t("bookCall")}
-                <ArrowUpRight className="ml-1.5 h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </Link>
             </div>
 
             <div className="flex items-center xl:hidden">
               <button
-                onClick={() => {
-                  const next = !isMobileMenuOpen;
-                  document.body.style.overflow = next ? "hidden" : "";
-                  setIsMobileMenuOpen(next);
-                }}
-                className={`inline-flex h-11 w-11 items-center justify-center rounded-md focus:outline-none ${
+                ref={mobileMenuButtonRef}
+                type="button"
+                onClick={isMobileMenuOpen ? closeMobileMenu : openMobileMenu}
+                className={`inline-flex h-11 w-11 items-center justify-center rounded-none transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8A838] ${
                   useDarkSurface
                     ? "text-white/85 hover:bg-white/10 hover:text-white"
                     : "text-[#1A2535]/70 hover:bg-[#E8A838]/10 hover:text-[#1A2535]"
                 }`}
                 aria-expanded={isMobileMenuOpen}
+                aria-controls={isMobileMenuOpen ? "mobile-navigation-panel" : undefined}
+                aria-label={isMobileMenuOpen ? t("closeMenu") : t("openMenu")}
               >
-                <span className="sr-only">{t("openMenu")}</span>
                 {isMobileMenuOpen ? (
                   <X className="block h-6 w-6" />
                 ) : (
@@ -387,7 +498,8 @@ const Navbar: React.FC = () => {
               }`}
             />
             <div
-              className={`navbar-mega-panel absolute left-0 right-0 top-full z-20 mt-1.5 hidden overflow-hidden border shadow-[0_24px_60px_rgba(13,24,36,0.18)] xl:block ${
+              data-navbar-surface="desktop-menu"
+              className={`navbar-mega-panel rounded-none absolute inset-x-0 top-full z-20 mt-1.5 hidden overflow-hidden border shadow-[0_24px_60px_rgba(13,24,36,0.18)] xl:block ${
                 useDarkSurface
                   ? "border-white/15 bg-[#0D1824]/[0.98] text-white"
                   : "border-[#DDE3EA] bg-[#FCFBF8]/[0.99] text-[#1A2535]"
@@ -396,7 +508,7 @@ const Navbar: React.FC = () => {
             >
               <div className="grid min-h-[238px] grid-cols-[minmax(240px,0.78fr)_2.22fr]">
                 <div
-                  className={`flex flex-col justify-between border-r px-8 py-7 ${
+                  className={`flex flex-col justify-between border-s px-8 py-7 ${
                     useDarkSurface ? "border-white/10" : "border-[#DDE3EA]"
                   }`}
                 >
@@ -414,7 +526,7 @@ const Navbar: React.FC = () => {
                       }`}
                     >
                       {activeDesktopMenu.overviewLabel}
-                      <ArrowUpRight className="mb-1 h-4 w-4 shrink-0 text-[#E8A838]" />
+                      <ArrowUpRight className="mb-1 h-4 w-4 shrink-0 text-[#E8A838] rtl:rotate-180" />
                     </Link>
                   </div>
                   <span aria-hidden="true" className="h-px w-12 bg-[#E8A838]" />
@@ -464,7 +576,7 @@ const Navbar: React.FC = () => {
                           </span>
                         </span>
                         <ArrowUpRight
-                          className={`mt-0.5 h-3.5 w-3.5 shrink-0 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 ${
+                          className={`mt-0.5 h-3.5 w-3.5 shrink-0 transition-transform duration-200 rtl:rotate-180 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 ${
                             useDarkSurface ? "text-white/55" : "text-[#536174]"
                           }`}
                         />
@@ -497,331 +609,214 @@ const Navbar: React.FC = () => {
           </>
         )}
 
-        {/* Mobile menu - full-screen slide-down overlay */}
         {isMobileMenuOpen && (
-          <div
-            className="fixed inset-0 z-[80] opacity-100 pointer-events-auto xl:hidden"
-            role="navigation"
-            aria-label={t("mobileNavigation")}
-          >
-            {/* Backdrop */}
-            <div
-              className="absolute inset-0 bg-[#1A2535]/25 backdrop-blur-sm"
+          <div className="fixed inset-0 z-[80] xl:hidden">
+            <button
+              type="button"
+              className="navbar-mobile-backdrop absolute inset-0 cursor-default bg-[#0D1824]/45"
+              aria-label={t("closeMenu")}
               onClick={closeMobileMenu}
             />
 
-            {/* Slide-down panel */}
-            <div className="absolute inset-x-0 top-0 translate-y-0 bg-[#FFFFFF] shadow-2xl max-h-[100dvh] overflow-y-auto transition-transform duration-300 ease-out">
-              {/* Panel header */}
-              <div className="sticky top-0 z-10 flex items-center justify-between border-b border-[#1A2535]/10 bg-white px-6 py-4">
-                <Logo kind="mark" />
+            <div
+              ref={mobileMenuPanelRef}
+              id="mobile-navigation-panel"
+              data-navbar-surface="mobile-menu"
+              className={`navbar-mobile-panel absolute inset-y-0 end-0 flex h-[100dvh] min-h-[100dvh] w-full max-w-[34rem] flex-col overflow-hidden border-s shadow-2xl md:w-[32rem] ${
+                useDarkSurface
+                  ? "border-white/15 bg-[#0D1824] text-white"
+                  : "border-[#DDE3EA] bg-[#FCFBF8] text-[#1A2535]"
+              }`}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="mobile-navigation-title"
+              tabIndex={-1}
+            >
+              <div
+                className={`flex min-h-16 shrink-0 items-center justify-between border-b px-4 sm:px-5 ${
+                  useDarkSurface
+                    ? "border-white/15 bg-[#0D1824]"
+                    : "border-[#DDE3EA] bg-[#FCFBF8]"
+                }`}
+              >
+                <h2 id="mobile-navigation-title" className="sr-only">
+                  {t("mobileNavigation")}
+                </h2>
+                <Logo kind="micro" light={useDarkSurface} />
                 <button
+                  ref={mobileMenuCloseRef}
                   type="button"
                   onClick={closeMobileMenu}
-                  className="flex h-11 w-11 items-center justify-center rounded-full bg-[#1A2535]/[0.08] text-[#1A2535]/60 transition-colors hover:bg-[#F8E9C8] hover:text-[#1A2535]"
+                  className={`flex h-12 w-12 items-center justify-center border transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8A838] ${
+                    useDarkSurface
+                      ? "border-white/15 text-white/75 hover:bg-white/[0.08] hover:text-white"
+                      : "border-[#1A2535]/15 text-[#1A2535]/65 hover:bg-[#E8A838]/[0.08] hover:text-[#1A2535]"
+                  }`}
                   aria-label={t("closeMenu")}
                 >
                   <X className="h-5 w-5" />
                 </button>
               </div>
 
-              {/* Nav items */}
-              <div className="px-4 py-3 pb-10">
-                {/* ARC - standalone */}
-                <Link
-                  href="/arc"
-                  onClick={closeMobileMenu}
-                  className={`flex items-center justify-between px-4 py-3.5 rounded-xl text-[15px] font-semibold transition-colors mb-1 ${
-                    isRouteActive("/arc")
-                      ? "bg-[#F8E9C8] text-[#1A2535]"
-                      : "text-[#1A2535] hover:bg-[#E8A838]/[0.08]"
+              <nav
+                className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-5 sm:px-5"
+                aria-label={t("mobileNavigation")}
+              >
+                <div
+                  className={`border-y ${
+                    useDarkSurface ? "border-white/15" : "border-[#DDE3EA]"
                   }`}
                 >
-                  ARC
-                  <ArrowUpRight className="h-4 w-4 opacity-40" />
-                </Link>
-
-                {/* Capabilities accordion */}
-                <div className="mb-1">
-                  <div className="mb-1 flex overflow-hidden rounded-xl">
-                    <Link
-                      href="/capabilities"
-                      onClick={closeMobileMenu}
-                      className={`flex min-h-11 flex-1 items-center px-4 text-[15px] font-semibold transition-colors ${
-                        isCapabilitiesActive
-                          ? "bg-[#F8E9C8] text-[#1A2535]"
-                          : "text-[#1A2535] hover:bg-[#E8A838]/[0.08]"
+                  <Link
+                    href="/arc"
+                    onClick={closeMobileMenu}
+                    aria-current={isRouteActive("/arc") ? "page" : undefined}
+                    className={`${mobileRowClass(isRouteActive("/arc"))} border-s-2 ${
+                      isRouteActive("/arc")
+                        ? "border-[#E8A838]"
+                        : "border-transparent"
+                    }`}
+                  >
+                    <span>ARC</span>
+                    <ArrowUpRight
+                      className={`h-4 w-4 shrink-0 rtl:rotate-180 ${
+                        useDarkSurface ? "text-white/55" : "text-[#536174]"
                       }`}
-                    >
-                      <span className="flex items-center gap-2.5">
-                        {t("capabilities")}
-                      </span>
-                    </Link>
-                    <button
-                      type="button"
-                      onClick={() => toggleMobileSection("capabilities")}
-                      className={`flex min-h-11 w-12 items-center justify-center border-l transition-colors ${
-                        isCapabilitiesActive
-                          ? "border-[#1A2535]/10 bg-[#F8E9C8] text-[#1A2535]"
-                          : "border-[#1A2535]/[0.08] text-[#1A2535]/[0.45] hover:bg-[#F8E9C8] hover:text-[#1A2535]"
-                      }`}
-                      aria-label={t("toggleCapabilities")}
-                      aria-expanded={openMobileSection === "capabilities"}
-                    >
-                      <ChevronDown
-                        className={`h-4 w-4 transition-transform duration-200 ${
-                          openMobileSection === "capabilities"
-                            ? "rotate-180"
-                            : ""
-                        }`}
-                      />
-                    </button>
-                  </div>
-                  {openMobileSection === "capabilities" && (
-                    <div className="mt-1 overflow-hidden">
-                      <div className="ml-4 border-l-2 border-[#E8A838]/20 pl-3 space-y-0.5 pb-2">
-                        <Link
-                          href="/capabilities"
-                          onClick={closeMobileMenu}
-                          className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm text-[#536174] hover:bg-[#F8E9C8] hover:text-[#1A2535] transition-colors"
-                        >
-                          {t("allCapabilities")}
-                        </Link>
-                        {CapabilitiesItems.map((item) => (
-                          <Link
-                            key={item.path}
-                            href={item.path}
-                            onClick={closeMobileMenu}
-                            className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                              isCapabilitiesItemActive(item.path)
-                                ? "bg-[#F8E9C8] text-[#E8A838] font-semibold"
-                                : "text-[#536174] hover:bg-[#F8E9C8] hover:text-[#1A2535]"
-                            }`}
-                          >
-                            {item.label}
-                            <ArrowUpRight className="h-3.5 w-3.5 opacity-35" />
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Industries accordion */}
-                <div className="mb-1">
-                  <div className="mb-1 flex overflow-hidden rounded-xl">
-                    <Link
-                      href="/industries"
-                      onClick={closeMobileMenu}
-                      className={`flex min-h-11 flex-1 items-center px-4 text-[15px] font-semibold transition-colors ${
-                        isIndustriesActive
-                          ? "bg-[#F8E9C8] text-[#1A2535]"
-                          : "text-[#1A2535] hover:bg-[#E8A838]/[0.08]"
-                      }`}
-                    >
-                      <span className="flex items-center gap-2.5">
-                        {t("industries")}
-                      </span>
-                    </Link>
-                    <button
-                      type="button"
-                      onClick={() => toggleMobileSection("industries")}
-                      className={`flex min-h-11 w-12 items-center justify-center border-l transition-colors ${
-                        isIndustriesActive
-                          ? "border-[#1A2535]/10 bg-[#F8E9C8] text-[#1A2535]"
-                          : "border-[#1A2535]/[0.08] text-[#1A2535]/[0.45] hover:bg-[#F8E9C8] hover:text-[#1A2535]"
-                      }`}
-                      aria-label={t("toggleIndustries")}
-                      aria-expanded={openMobileSection === "industries"}
-                    >
-                      <ChevronDown
-                        className={`h-4 w-4 transition-transform duration-200 ${
-                          openMobileSection === "industries" ? "rotate-180" : ""
-                        }`}
-                      />
-                    </button>
-                  </div>
-                  {openMobileSection === "industries" && (
-                    <div className="mt-1 overflow-hidden">
-                      <div className="ml-4 border-l-2 border-[#E8A838]/20 pl-3 space-y-0.5 pb-2">
-                        {industriesItems.map((item) => (
-                          <Link
-                            key={item.path}
-                            href={item.path}
-                            onClick={closeMobileMenu}
-                            className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-[#536174] hover:bg-[#F8E9C8] hover:text-[#1A2535] transition-colors"
-                          >
-                            {item.label}
-                            <ArrowUpRight className="h-3.5 w-3.5 opacity-35" />
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Who We Are accordion */}
-                <div className="mb-1">
-                  <div className="mb-1 flex overflow-hidden rounded-xl">
-                    <Link
-                      href="/aboutus"
-                      onClick={closeMobileMenu}
-                      className={`flex min-h-11 flex-1 items-center px-4 text-[15px] font-semibold transition-colors ${
-                        isWhoWeAreActive
-                          ? "bg-[#F8E9C8] text-[#1A2535]"
-                          : "text-[#1A2535] hover:bg-[#E8A838]/[0.08]"
-                      }`}
-                    >
-                      <span className="flex items-center gap-2.5">
-                        {t("whoWeAre")}
-                      </span>
-                    </Link>
-                    <button
-                      type="button"
-                      onClick={() => toggleMobileSection("who-we-are")}
-                      className={`flex min-h-11 w-12 items-center justify-center border-l transition-colors ${
-                        isWhoWeAreActive
-                          ? "border-[#1A2535]/10 bg-[#F8E9C8] text-[#1A2535]"
-                          : "border-[#1A2535]/[0.08] text-[#1A2535]/[0.45] hover:bg-[#F8E9C8] hover:text-[#1A2535]"
-                      }`}
-                      aria-label={t("toggleWhoWeAre")}
-                      aria-expanded={openMobileSection === "who-we-are"}
-                    >
-                      <ChevronDown
-                        className={`h-4 w-4 transition-transform duration-200 ${
-                          openMobileSection === "who-we-are" ? "rotate-180" : ""
-                        }`}
-                      />
-                    </button>
-                  </div>
-                  {openMobileSection === "who-we-are" && (
-                    <div className="mt-1 overflow-hidden">
-                      <div className="ml-4 border-l-2 border-[#E8A838]/20 pl-3 space-y-0.5 pb-2">
-                        {whoWeAreItems.map((item) => {
-                          const itemClassName = `flex min-h-11 items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                            isWhoWeAreItemActive(item.path)
-                              ? "bg-[#F8E9C8] text-[#E8A838] font-semibold"
-                              : "text-[#536174] hover:bg-[#F8E9C8] hover:text-[#1A2535]"
-                          }`;
-                          const itemContent = (
-                            <>
-                              {item.label}
-                              <ArrowUpRight className="h-3.5 w-3.5 opacity-35" />
-                            </>
-                          );
-
-                          return item.external ? (
-                            <a
-                              key={item.path}
-                              href={item.path}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              onClick={closeMobileMenu}
-                              className={itemClassName}
-                            >
-                              {itemContent}
-                            </a>
-                          ) : (
-                            <Link
-                              key={item.path}
-                              href={item.path}
-                              onClick={closeMobileMenu}
-                              className={itemClassName}
-                            >
-                              {itemContent}
-                            </Link>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Insights accordion */}
-                <div className="mb-1">
-                  <div className="mb-1 flex overflow-hidden rounded-xl">
-                    <Link
-                      href="/insights"
-                      onClick={closeMobileMenu}
-                      className={`flex min-h-11 flex-1 items-center px-4 text-[15px] font-semibold transition-colors ${
-                        isInsightsActive
-                          ? "bg-[#F8E9C8] text-[#1A2535]"
-                          : "text-[#1A2535] hover:bg-[#E8A838]/[0.08]"
-                      }`}
-                    >
-                      <span className="flex items-center gap-2.5">
-                        {t("insights")}
-                      </span>
-                    </Link>
-                    <button
-                      type="button"
-                      onClick={() => toggleMobileSection("insights")}
-                      className={`flex min-h-11 w-12 items-center justify-center border-l transition-colors ${
-                        isInsightsActive
-                          ? "border-[#1A2535]/10 bg-[#F8E9C8] text-[#1A2535]"
-                          : "border-[#1A2535]/[0.08] text-[#1A2535]/[0.45] hover:bg-[#F8E9C8] hover:text-[#1A2535]"
-                      }`}
-                      aria-label={t("toggleInsights")}
-                      aria-expanded={openMobileSection === "insights"}
-                    >
-                      <ChevronDown
-                        className={`h-4 w-4 transition-transform duration-200 ${
-                          openMobileSection === "insights" ? "rotate-180" : ""
-                        }`}
-                      />
-                    </button>
-                  </div>
-                  {openMobileSection === "insights" && (
-                    <div className="mt-1 overflow-hidden">
-                      <div className="ml-4 border-l-2 border-[#E8A838]/20 pl-3 space-y-0.5 pb-2">
-                        {insightsItems.map((item) => (
-                          <Link
-                            key={item.path}
-                            href={item.path}
-                            onClick={closeMobileMenu}
-                            className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                              isInsightsItemActive(item.path)
-                                ? "bg-[#F8E9C8] text-[#E8A838] font-semibold"
-                                : "text-[#536174] hover:bg-[#F8E9C8] hover:text-[#1A2535]"
-                            }`}
-                          >
-                            {item.label}
-                            <ArrowUpRight className="h-3.5 w-3.5 opacity-35" />
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                <Suspense
-                  fallback={
-                    <div
-                      aria-hidden="true"
-                      className="h-11 w-full border border-[#DDE3EA]"
                     />
-                  }
-                >
-                  <LocaleSwitcher mobile />
+                  </Link>
+
+                  {desktopMenus.map((menu) => {
+                    const isExpanded = openMobileSection === menu.key;
+                    const sectionId = `mobile-navigation-${menu.key}`;
+
+                    return (
+                      <div
+                        key={menu.key}
+                        className={`border-t ${
+                          useDarkSurface ? "border-white/15" : "border-[#DDE3EA]"
+                        }`}
+                      >
+                        <div className="flex">
+                          <Link
+                            href={menu.href}
+                            onClick={closeMobileMenu}
+                            aria-current={menu.active ? "page" : undefined}
+                            className={`${mobileRowClass(menu.active)} border-s-2 ${
+                              menu.active
+                                ? "border-[#E8A838]"
+                                : "border-transparent"
+                            }`}
+                          >
+                            <span>{menu.label}</span>
+                            <ArrowUpRight
+                              className={`h-4 w-4 shrink-0 rtl:rotate-180 ${
+                                useDarkSurface ? "text-white/55" : "text-[#536174]"
+                              }`}
+                            />
+                          </Link>
+                          <button
+                            type="button"
+                            onClick={() => toggleMobileSection(menu.key)}
+                            className={mobileToggleClass(menu.active || isExpanded)}
+                            aria-label={menu.toggleLabel}
+                            aria-controls={sectionId}
+                            aria-expanded={isExpanded}
+                          >
+                            <ChevronDown
+                              className={`h-4 w-4 transition-transform duration-200 ${
+                                isExpanded ? "rotate-180" : ""
+                              }`}
+                            />
+                          </button>
+                        </div>
+
+                        {isExpanded && (
+                          <div
+                            id={sectionId}
+                            className={`navbar-mobile-accordion border-t px-4 py-2 ${
+                              useDarkSurface
+                                ? "border-white/10"
+                                : "border-[#DDE3EA]"
+                            }`}
+                          >
+                            {menu.items.map((item) => {
+                              const isItemActive = isDesktopMenuItemActive(
+                                menu.key,
+                                item.path,
+                              );
+                              const itemContent = (
+                                <>
+                                  <span>{item.label}</span>
+                                  <ArrowUpRight
+                                    className={`h-3.5 w-3.5 shrink-0 rtl:rotate-180 ${
+                                      useDarkSurface
+                                        ? "text-white/45"
+                                        : "text-[#536174]"
+                                    }`}
+                                  />
+                                </>
+                              );
+
+                              return item.external ? (
+                                <a
+                                  key={item.path}
+                                  href={item.path}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  onClick={closeMobileMenu}
+                                  className={mobileSubItemClass(isItemActive)}
+                                >
+                                  {itemContent}
+                                </a>
+                              ) : (
+                                <Link
+                                  key={item.path}
+                                  href={item.path}
+                                  onClick={closeMobileMenu}
+                                  aria-current={isItemActive ? "page" : undefined}
+                                  className={mobileSubItemClass(isItemActive)}
+                                >
+                                  {itemContent}
+                                </Link>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </nav>
+
+              <div
+                className={`navbar-mobile-actions shrink-0 border-t px-4 pt-4 sm:px-5 ${
+                  useDarkSurface ? "border-white/15" : "border-[#DDE3EA]"
+                }`}
+              >
+                <Suspense
+                fallback={
+                  <div
+                    data-locale-switcher-fallback="mobile"
+                    aria-hidden="true"
+                    className={`flex min-h-12 items-center justify-center border-y px-3 text-[13px] font-semibold ${
+                      useDarkSurface
+                        ? "border-white/15 text-white/75"
+                        : "border-[#1A2535]/10 text-[#1A2535]/65"
+                    }`}
+                  >
+                    {localeLabel}
+                  </div>
+                }
+              >
+                  <LocaleSwitcher mobile dark={useDarkSurface} />
                 </Suspense>
-
-                {/* Divider */}
-                <div className="my-5 h-px bg-[#1A2535]/10" />
-
-                {/* CTA */}
                 <Link
                   href="/contact"
                   onClick={closeMobileMenu}
-                  className="flex items-center justify-center gap-2 w-full px-6 py-4 bg-[#1A2535] text-[#FFFFFF] rounded-xl text-[15px] font-semibold hover:bg-[#E8A838] hover:text-[#1A2535] transition-colors duration-200"
+                  className="site-action site-action-primary mt-3 w-full px-6 text-[15px]"
                 >
                   {t("bookCall")}
-                  <ArrowUpRight className="h-4 w-4" />
                 </Link>
-
-                {/* Brand tagline */}
-                <p className="mt-6 text-center text-[9px] font-mono uppercase tracking-[0.22em] text-[#1A2535]/25">
-                  {t("tagline")}
-                </p>
               </div>
             </div>
           </div>

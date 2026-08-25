@@ -79,3 +79,5 @@ image.png
 coder-report.md
 audit-report.md
 
+.vercel
+.env*

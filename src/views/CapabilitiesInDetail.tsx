@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import {MotionConfig, motion, useScroll, useTransform} from 'framer-motion';
-import {useTranslations} from 'next-intl';
+import {useLocale, useTranslations} from 'next-intl';
 import {
   ArrowRight,
   ArrowUpRight,
@@ -22,7 +22,16 @@ import BottomCTA from '../components/BottomCTA';
 import {CAPABILITY_SOLUTION_PROGRAM_DETAILS} from '../lib/capabilities-content';
 import type {CapabilityDetailSection} from '../lib/capabilities-content';
 import {useAnimationQuality} from '../lib/animationQuality';
+import {isSanityCdnImage} from '../lib/image-delivery';
+import {
+  DEFAULT_SOLUTION_PROGRAM_MEDIA,
+  type SolutionProgramMedia,
+} from '../lib/solution-program-media';
 import styles from './CapabilityIndustryPages.module.css';
+import type {AppLocale} from '@/i18n/config';
+import ResponsiveMedia from '@/components/media/ResponsiveMedia';
+import CloudEcosystemRail from '@/components/media/CloudEcosystemRail';
+import {SEMANTIC_MEDIA, semanticMediaAlt} from '@/lib/semantic-media';
 
 function getDetailIcon(id: string, cls = 'h-5 w-5', sw = 1.5) {
   switch (id) {
@@ -43,19 +52,13 @@ function getDetailIcon(id: string, cls = 'h-5 w-5', sw = 1.5) {
   }
 }
 
-const capabilityImages: Record<string, string> = {
-  'strategy-business': '/Images/capabilities/editorial/hva-strategy-business-capability-v2.webp',
-  'technology-consulting': '/Images/capabilities/editorial/hva-technology-consulting-capability-v2.webp',
-  'ai-data-analytics': '/Images/capabilities/editorial/hva-ai-data-capability-v2.webp',
-  'software-engineering': '/Images/capabilities/editorial/hva-software-engineering-capability-v2.webp',
-  'cloud-infrastructure': '/Images/capabilities/editorial/hva-cloud-infrastructure-capability-v2.webp',
-  'operations-managed': '/Images/capabilities/editorial/hva-operations-managed-capability-v2.webp',
-};
-
-const programImages: Record<string, string> = {
-  'ai-reception-and-lead-operations-program': '/Images/capabilities/editorial/hva-ai-reception-program-v2.webp',
-  'enterprise-crm-modernization-program': '/Images/capabilities/editorial/hva-crm-modernization-program-v2.webp',
-  'cloud-delivery-reliability-stack': '/Images/capabilities/editorial/hva-cloud-reliability-program-v2.webp',
+const capabilityMedia = {
+  'strategy-business': SEMANTIC_MEDIA.capabilities.strategyBusiness,
+  'technology-consulting': SEMANTIC_MEDIA.capabilities.technologyConsulting,
+  'ai-data-analytics': SEMANTIC_MEDIA.capabilities.aiData,
+  'software-engineering': SEMANTIC_MEDIA.capabilities.softwareEngineering,
+  'cloud-infrastructure': SEMANTIC_MEDIA.capabilities.cloudInfrastructure,
+  'operations-managed': SEMANTIC_MEDIA.capabilities.operationsManaged,
 };
 
 const detailStatIcons = [Network, Settings, Layers3];
@@ -63,9 +66,14 @@ const detailStatIcons = [Network, Settings, Layers3];
 type ProgramCopy = {category: string; name: string; summary: string};
 type DeliveryStageCopy = {title: string; detail: string};
 
-export default function CapabilitiesInDetail() {
+export default function CapabilitiesInDetail({
+  programMedia = DEFAULT_SOLUTION_PROGRAM_MEDIA,
+}: {
+  programMedia?: SolutionProgramMedia;
+}) {
   const t = useTranslations('CapabilitiesDetail');
   const capabilitiesT = useTranslations('Capabilities');
+  const locale = useLocale() as AppLocale;
   const {motionReduced} = useAnimationQuality();
   const coverageDialogRef = React.useRef<HTMLDialogElement>(null);
   const [activeCoverage, setActiveCoverage] = React.useState<CapabilityDetailSection | null>(null);
@@ -139,11 +147,9 @@ export default function CapabilitiesInDetail() {
               <div className={styles.heroActions}>
                 <Link href="#capability-map" className={styles.buttonPrimary}>
                   {t('hero.primaryCta')}
-                  <ArrowRight className="h-4 w-4" strokeWidth={1.7} aria-hidden="true" />
                 </Link>
                 <Link href="/capabilities/solution-programs" className={styles.buttonSecondary}>
                   {t('hero.secondaryCta')}
-                  <ArrowUpRight className="h-4 w-4" strokeWidth={1.7} aria-hidden="true" />
                 </Link>
               </div>
             </motion.div>
@@ -228,13 +234,16 @@ export default function CapabilitiesInDetail() {
                   transition={{duration: 0.46}}
                 >
                   <figure className={styles.capabilityMedia}>
-                    <Image
-                      src={capabilityImages[domain.id]!}
-                      alt={t('pillars.imageAlt', {title: domain.title})}
-                      fill
-                      quality={90}
+                    <ResponsiveMedia
+                      media={capabilityMedia[domain.id as keyof typeof capabilityMedia]}
+                      locale={locale}
                       sizes="(max-width: 900px) 100vw, 62vw"
                     />
+                    {domain.id === 'cloud-infrastructure' ? (
+                      <CloudEcosystemRail
+                        ariaLabel={locale === 'fr' ? 'Technologies cloud et de conteneurs' : 'Cloud and container technologies'}
+                      />
+                    ) : null}
                     <span className={styles.capabilityNumber}>
                       {String(index + 1).padStart(2, '0')}
                     </span>
@@ -298,13 +307,20 @@ export default function CapabilitiesInDetail() {
               </header>
               <div className={styles.dialogBody}>
                 <figure>
-                  <Image
-                    src={capabilityImages[activeCoverage.id]!}
-                    alt={t('pillars.imageAlt', {title: activeCoverage.title})}
-                    fill
-                    quality={90}
+                  <ResponsiveMedia
+                    media={capabilityMedia[activeCoverage.id as keyof typeof capabilityMedia]}
+                    locale={locale}
+                    alt={semanticMediaAlt(
+                      capabilityMedia[activeCoverage.id as keyof typeof capabilityMedia],
+                      locale,
+                    )}
                     sizes="(max-width: 720px) calc(100vw - 4rem), 34rem"
                   />
+                  {activeCoverage.id === 'cloud-infrastructure' ? (
+                    <CloudEcosystemRail
+                      ariaLabel={locale === 'fr' ? 'Technologies cloud et de conteneurs' : 'Cloud and container technologies'}
+                    />
+                  ) : null}
                 </figure>
                 <div className={styles.dialogCopy}>
                   <p>{activeCoverage.executionContext}</p>
@@ -353,32 +369,43 @@ export default function CapabilitiesInDetail() {
               </div>
             </header>
             <div className={styles.programRailGrid}>
-              {featuredPrograms.map((program, index) => (
-                <Link
-                  key={program.slug}
-                  href={`/capabilities/solution-programs#program-0${index + 1}`}
-                  className={styles.programCard}
-                >
-                  <figure className={styles.programCardMedia}>
-                    <Image
-                      src={programImages[program.slug]!}
-                      alt={t('programs.imageAlt', {title: program.name})}
-                      fill
-                      quality={90}
-                      sizes="(max-width: 760px) 100vw, 33vw"
-                    />
-                  </figure>
-                  <div className={styles.programCardCopy}>
-                    <span>{program.category}</span>
-                    <h3>{program.name}</h3>
-                    <p>{program.summary}</p>
-                    <span className={styles.programCardCta}>
-                      {t('programs.view')}
-                      <ArrowRight className="h-4 w-4" strokeWidth={1.7} aria-hidden="true" />
-                    </span>
-                  </div>
-                </Link>
-              ))}
+              {featuredPrograms.map((program, index) => {
+                const media =
+                  programMedia[program.slug] ??
+                  DEFAULT_SOLUTION_PROGRAM_MEDIA[program.slug];
+
+                return (
+                  <Link
+                    key={program.slug}
+                    href={`/capabilities/solution-programs#program-0${index + 1}`}
+                    className={styles.programCard}
+                  >
+                    <figure className={styles.programCardMedia}>
+                      <Image
+                        src={media.cardImage}
+                        alt={media.alt || t('programs.imageAlt', {title: program.name})}
+                        fill
+                        quality={90}
+                        sizes="(max-width: 760px) 100vw, 33vw"
+                        style={{
+                          objectFit: media.cardFit,
+                          objectPosition: media.objectPosition,
+                        }}
+                        unoptimized={isSanityCdnImage(media.cardImage)}
+                      />
+                    </figure>
+                    <div className={styles.programCardCopy}>
+                      <span>{program.category}</span>
+                      <h3>{program.name}</h3>
+                      <p>{program.summary}</p>
+                      <span className={styles.programCardCta}>
+                        {t('programs.view')}
+                        <ArrowRight className="h-4 w-4" strokeWidth={1.7} aria-hidden="true" />
+                      </span>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>

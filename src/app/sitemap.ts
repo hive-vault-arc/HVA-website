@@ -1,5 +1,5 @@
 import type {MetadataRoute} from 'next';
-import {APP_LOCALES, type AppLocale} from '@/i18n/config';
+import {PUBLIC_LOCALES, type AppLocale} from '@/i18n/config';
 import {
   ROUTE_MANIFEST,
   localizedAlternates,
@@ -85,11 +85,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticEntries = Object.values(ROUTE_MANIFEST)
     .filter((route) => route.indexable)
     .flatMap((route) =>
-      APP_LOCALES.map((locale) => staticEntry(route.pathname, locale, now)),
+      PUBLIC_LOCALES.map((locale) => staticEntry(route.pathname, locale, now)),
     );
 
   const localizedContent = await Promise.all(
-    APP_LOCALES.map(async (locale) => {
+    PUBLIC_LOCALES.map(async (locale) => {
       const [posts, capabilities, caseStudies, employees, news, perspectives, research] =
         await Promise.all([
           getAllPosts(locale),

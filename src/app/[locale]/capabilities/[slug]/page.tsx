@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import type {AppLocale} from '@/i18n/config';
-import {localizedPath} from '@/i18n/route-manifest';
+import {decodeRouteParam, localizedPath} from '@/i18n/route-manifest';
 import { notFound } from 'next/navigation';
 import JsonLd from '@/components/JsonLd';
 import CapabilityDetail from '@/views/CapabilityDetail';
@@ -27,7 +27,8 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const {locale, slug} = await params;
+  const {locale, slug: routeSlug} = await params;
+  const slug = decodeRouteParam(routeSlug);
   const capability = await getCapabilityProfileBySlug(slug, locale);
 
   if (!capability) {
@@ -62,7 +63,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function CapabilityProfilePage({ params }: Props) {
-  const {locale, slug} = await params;
+  const {locale, slug: routeSlug} = await params;
+  const slug = decodeRouteParam(routeSlug);
   const capability = await getCapabilityProfileBySlug(slug, locale);
 
   if (!capability) notFound();

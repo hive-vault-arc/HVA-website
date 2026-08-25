@@ -1,5 +1,7 @@
 # Spanish localization implementation guide
 
+> **Superseded for new work:** Read [the Spanish and Arabic localization specification](./localization/es-ar-localization-spec.md), [route manifest](./localization/es-ar-route-manifest.md), and [Spanish style guide](./localization/spanish-style-guide.md). This guide is retained as historical French-to-Spanish planning context; it contains two-locale implementation assumptions that do not match the current website.
+
 > Audience: the Hive Vault Arc co-founder or engineer adding Spanish to the website and Sanity Studio.
 >
 > Scope: reproduce the current English/French localization architecture for Spanish without duplicating documents, breaking translation links, publishing incomplete copy, or serving English content under Spanish URLs.

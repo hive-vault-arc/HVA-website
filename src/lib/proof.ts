@@ -15,6 +15,7 @@ import {
   buildPublishedCollection,
   getPublishedCollection,
   getPublishedDocument,
+  translationSlug,
 } from './localized-content';
 import {applyFrenchCmsFallback} from '@/i18n/cms-fallback-fr';
 import {withSanityFallback} from '../sanity/lib/fetch';
@@ -444,6 +445,39 @@ function getHomeCaseStudyProof(locale: AppLocale): Promise<HomeCaseStudyProof> {
   );
 }
 
+/**
+ * The signed client letter remains in its original language. Its surrounding
+ * case-study card, including its route and labels, must use the visitor's
+ * approved localized case-study record instead of an English fallback route.
+ */
+function localizeHomeClientEvidence(
+  evidence: ClientEvidenceSummary[],
+  localizedCaseStudies: CaseStudy[],
+): ClientEvidenceSummary[] {
+  return evidence.flatMap((item) => {
+    const localizedStudy = localizedCaseStudies.find(
+      (study) =>
+        study.slug === item.slug || translationSlug(study, 'en') === item.slug,
+    );
+
+    if (!localizedStudy) return [];
+
+    return [
+      {
+        ...item,
+        slug: localizedStudy.slug,
+        caseStudyTitle: localizedStudy.title,
+        clientName: localizedStudy.clientName,
+        industry: localizedStudy.industry,
+        clientLogo: localizedStudy.assets.clientLogo,
+        clientLogoAlt: localizedStudy.assets.clientLogoAlt ?? item.clientLogoAlt,
+        coverImage: localizedStudy.assets.coverImage,
+        coverImageAlt: localizedStudy.assets.coverAlt ?? item.coverImageAlt,
+      },
+    ];
+  });
+}
+
 export async function getPublishedHomeCaseStudyProof(
   locale: AppLocale = 'en',
 ): Promise<PublishedHomeCaseStudyProof> {
@@ -452,6 +486,27 @@ export async function getPublishedHomeCaseStudyProof(
     return {
       caseStudies: buildPublishedCollection('en', [], proof.caseStudies),
       clientEvidence: proof.clientEvidence,
+    };
+  }
+
+  if (locale !== 'fr') {
+    const [localizedProof, englishProof] = await Promise.all([
+      getHomeCaseStudyProof(locale),
+      getHomeCaseStudyProof('en'),
+    ]);
+    return {
+      caseStudies: {
+        items: localizedProof.caseStudies,
+        sourceLocale: locale,
+        hasFallbackContent: false,
+      },
+      clientEvidence:
+        localizedProof.clientEvidence.length > 0
+          ? localizedProof.clientEvidence
+          : localizeHomeClientEvidence(
+              englishProof.clientEvidence,
+              localizedProof.caseStudies,
+            ),
     };
   }
 
@@ -518,6 +573,8 @@ export function getClientEvidenceShowcase(
 
   if (locale === 'en') return fetchEvidence('en');
 
+  if (locale !== 'fr') return fetchEvidence(locale);
+
   return Promise.all([fetchEvidence(locale), fetchEvidence('en')]).then(
     ([localizedEvidence, englishEvidence]) =>
       localizedEvidence.length > 0
@@ -536,7 +593,7 @@ export const getCaseStudyBySlug = cache(async function getCaseStudyBySlug(
   if (caseStudy) return caseStudy;
 
   const localCaseStudy = CASE_STUDIES.find((study) => study.slug === slug);
-  if (localCaseStudy) {
+  if (localCaseStudy && (locale === 'en' || locale === 'fr')) {
     return locale === 'fr'
       ? applyFrenchCmsFallback(localCaseStudy)
       : localCaseStudy;

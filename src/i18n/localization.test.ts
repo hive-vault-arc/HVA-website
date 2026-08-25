@@ -1,10 +1,20 @@
 import {describe, expect, it} from 'vitest';
 import en from '../../messages/en.json';
 import fr from '../../messages/fr.json';
-import {APP_LOCALES, isAppLocale} from './config';
+import es from '../../messages/es.json';
+import ar from '../../messages/ar.json';
+import {
+  APP_LOCALES,
+  LOCALE_PROFILES,
+  PUBLIC_LOCALES,
+  isAppLocale,
+  isPublicLocale,
+  type AppLocale,
+} from './config';
 import {applyFrenchCmsFallback} from './cms-fallback-fr';
 import {
   ROUTE_MANIFEST,
+  decodeRouteParam,
   localizedAlternates,
   localizedPath,
   localizeHref,
@@ -56,21 +66,49 @@ function stringEntries(value: unknown, path = ''): Array<[string, string]> {
 }
 
 describe('localization catalogs', () => {
-  it('keeps identical English and French key topology', () => {
-    expect(leafShape(fr)).toEqual(leafShape(en));
+  it('uses complete native locale labels in every catalog', () => {
+    const expected = {
+      en: 'English',
+      fr: 'Français',
+      es: 'Español',
+      ar: 'العربية',
+    };
+
+    for (const catalog of [en, fr, es, ar]) {
+      expect(catalog.Locale.languages).toEqual(expected);
+      expect(catalog.Locale.eyebrow).toBeTruthy();
+    }
+  });
+
+  it('does not carry the French fallback notice into Spanish or Arabic', () => {
+    expect(JSON.stringify(es)).not.toContain('ediciones francesas');
+    expect(JSON.stringify(ar)).not.toContain('الطبعات الفرنسية');
+  });
+
+  it.each([
+    ['French', fr],
+    ['Spanish', es],
+    ['Arabic', ar],
+  ] as const)('keeps identical English and %s key topology', (_name, catalog) => {
+    expect(leafShape(catalog)).toEqual(leafShape(en));
   });
 
   it('contains no empty localized values', () => {
     expect(stringLeaves(en).filter((value) => value.trim().length === 0)).toEqual([]);
     expect(stringLeaves(fr).filter((value) => value.trim().length === 0)).toEqual([]);
+    expect(stringLeaves(es).filter((value) => value.trim().length === 0)).toEqual([]);
+    expect(stringLeaves(ar).filter((value) => value.trim().length === 0)).toEqual([]);
   });
 
-  it('keeps ICU variable names aligned in both locales', () => {
+  it.each([
+    ['French', fr],
+    ['Spanish', es],
+    ['Arabic', ar],
+  ] as const)('keeps ICU variable names aligned in %s', (_name, catalog) => {
     const english = new Map(stringEntries(en));
-    const french = new Map(stringEntries(fr));
 
     for (const [path, value] of english) {
-      expect(variables(french.get(path) ?? ''), path).toEqual(variables(value));
+      expect(variables(new Map(stringEntries(catalog)).get(path) ?? ''), path).toEqual(variables(value));
     }
   });
 });
@@ -102,12 +140,20 @@ describe('French CMS presentation fallback', () => {
 });
 
 describe('localized routes', () => {
-  it('accepts only the launched locales', () => {
-    expect(APP_LOCALES).toEqual(['en', 'fr']);
+  it('publishes every supported reviewed locale', () => {
+    expect(APP_LOCALES).toEqual(['en', 'fr', 'es', 'ar']);
+    expect(PUBLIC_LOCALES).toEqual(['en', 'fr', 'es', 'ar']);
     expect(isAppLocale('en')).toBe(true);
     expect(isAppLocale('fr')).toBe(true);
-    expect(isAppLocale('ar')).toBe(false);
-    expect(isAppLocale('es')).toBe(false);
+    expect(isAppLocale('ar')).toBe(true);
+    expect(isAppLocale('es')).toBe(true);
+    expect(isPublicLocale('ar')).toBe(true);
+    expect(isPublicLocale('es')).toBe(true);
+  });
+
+  it('defines ES and AR route and direction profiles', () => {
+    expect(LOCALE_PROFILES.es).toMatchObject({prefix: '/es', direction: 'ltr'});
+    expect(LOCALE_PROFILES.ar).toMatchObject({prefix: '/ar', direction: 'rtl'});
   });
 
   it.each(APP_LOCALES)('has no route collisions for %s', (locale) => {
@@ -124,6 +170,8 @@ describe('localized routes', () => {
     expect(localizedPath('/insights/research-reports', 'fr')).toBe(
       '/fr/publications/rapports-de-recherche',
     );
+    expect(localizedPath('/capabilities', 'es')).toBe('/es/capacidades');
+    expect(localizedPath('/capabilities', 'ar')).toBe('/ar/القدرات');
   });
 
   it('localizes string links, dynamic parameters, queries, and fragments', () => {
@@ -151,6 +199,8 @@ describe('localized routes', () => {
     expect(localizedAlternates('/industries')).toEqual({
       en: '/industries',
       fr: '/fr/secteurs',
+      es: '/es/sectores',
+      ar: '/ar/القطاعات',
       'x-default': '/industries',
     });
   });
@@ -177,15 +227,31 @@ describe('localized routes', () => {
     });
   });
 
-  it('keeps every indexable manifest route out of paused locale prefixes', () => {
+  it('keeps English unprefixed and publishes localized indexable routes', () => {
     for (const route of Object.values(ROUTE_MANIFEST).filter((item) => item.indexable)) {
-      for (const locale of APP_LOCALES) {
+      for (const locale of PUBLIC_LOCALES) {
         const path = localizedPath(route.pathname, locale);
-        expect(/^\/ar(?:\/|$)/.test(path)).toBe(false);
-        expect(/^\/es(?:\/|$)/.test(path)).toBe(false);
-        expect(/^\/en(?:\/|$)/.test(path)).toBe(false);
+        if (locale === 'en') expect(/^\/en(?:\/|$)/.test(path)).toBe(false);
+        if (locale === 'es') expect(/^\/es(?:\/|$)/.test(path)).toBe(true);
+        if (locale === 'ar') expect(/^\/ar(?:\/|$)/.test(path)).toBe(true);
       }
     }
+  });
+
+  it('decodes encoded non-Latin dynamic parameters before content lookup', () => {
+    const arabicSlug = 'لماذا-يجب-على-الشركات-دمج-وكلاء-الذكاء-الاصطناعي-2025';
+    expect(decodeRouteParam(encodeURIComponent(arabicSlug))).toBe(arabicSlug);
+    expect(decodeRouteParam('%E0%A4%A')).toBe('%E0%A4%A');
+  });
+
+  it('includes every public locale in static alternate links', () => {
+    expect(localizedAlternates('/capabilities')).toEqual({
+      en: '/capabilities',
+      fr: '/fr/expertises',
+      es: '/es/capacidades',
+      ar: '/ar/القدرات',
+      'x-default': '/capabilities',
+    });
   });
 });
 
@@ -195,9 +261,9 @@ describe('published localized collections', () => {
     title?: string;
     summary?: string;
     seo?: {title?: string; description?: string};
-    language: 'en' | 'fr';
+    language: AppLocale;
     translationTargets?: Array<{
-      language: 'en' | 'fr';
+      language: AppLocale;
       translationStatus: 'approved';
       slug: string;
     }>;
@@ -205,7 +271,7 @@ describe('published localized collections', () => {
 
   it('uses published French items when they exist', async () => {
     const fetchByLocale = async (
-      locale: 'en' | 'fr',
+      locale: AppLocale,
     ): Promise<TestPublication[]> =>
       locale === 'fr'
         ? [
@@ -244,7 +310,7 @@ describe('published localized collections', () => {
 
   it('keeps English items inside the French route when translations are pending', async () => {
     const fetchByLocale = async (
-      locale: 'en' | 'fr',
+      locale: AppLocale,
     ): Promise<TestPublication[]> =>
       locale === 'en'
         ? [{slug: 'english-publication', language: 'en' as const}]
@@ -257,9 +323,28 @@ describe('published localized collections', () => {
     });
   });
 
+  it.each(['es', 'ar'] as const)('never falls back to English content for paused %s', async (locale) => {
+    const fetchByLocale = async (requestedLocale: AppLocale): Promise<TestPublication[]> =>
+      requestedLocale === 'en'
+        ? [{slug: 'english-only', language: 'en'}]
+        : [];
+
+    await expect(getPublishedCollection(locale, fetchByLocale)).resolves.toEqual({
+      items: [],
+      sourceLocale: locale,
+      hasFallbackContent: false,
+    });
+
+    await expect(
+      getPublishedDocument(locale, async (requestedLocale) =>
+        requestedLocale === 'en' ? {slug: 'english-only', language: 'en'} : null,
+      ),
+    ).resolves.toBeNull();
+  });
+
   it('replaces translated documents without hiding untranslated siblings', async () => {
     const fetchByLocale = async (
-      locale: 'en' | 'fr',
+      locale: AppLocale,
     ): Promise<TestPublication[]> =>
       locale === 'fr'
         ? [
@@ -292,7 +377,7 @@ describe('published localized collections', () => {
 
   it('presents pending CMS titles in French without changing their source language', async () => {
     const fetchByLocale = async (
-      locale: 'en' | 'fr',
+      locale: AppLocale,
     ): Promise<TestPublication[]> =>
       locale === 'en'
         ? [

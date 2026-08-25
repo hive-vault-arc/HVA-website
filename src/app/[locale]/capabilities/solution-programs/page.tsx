@@ -11,6 +11,7 @@ import {
 } from '@/lib/seo';
 import {localizedPath} from '@/i18n/route-manifest';
 import {getTranslations} from 'next-intl/server';
+import {getSolutionProgramMedia} from '@/lib/solution-program-media.server';
 
 type PageProps = {params: Promise<{locale: AppLocale}>};
 
@@ -21,7 +22,8 @@ export async function generateMetadata({params}: PageProps): Promise<Metadata> {
 
 export default async function CapabilitiesSolutionProgramsPage({params}: PageProps) {
   const {locale} = await params;
-  const [tMeta, tNav] = await Promise.all([
+  const [programMedia, tMeta, tNav] = await Promise.all([
+    getSolutionProgramMedia(locale),
     getTranslations({locale, namespace: 'Metadata.pages.capabilitiesPrograms'}),
     getTranslations({locale, namespace: 'Navigation'}),
   ]);
@@ -58,7 +60,7 @@ export default async function CapabilitiesSolutionProgramsPage({params}: PagePro
   return (
     <>
       <JsonLd data={[itemListSchema, breadcrumbSchema]} />
-      <CapabilitiesSolutionPrograms />
+      <CapabilitiesSolutionPrograms programMedia={programMedia} />
     </>
   );
 }

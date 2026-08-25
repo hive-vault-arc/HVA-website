@@ -18,6 +18,11 @@ import {Link} from '@/i18n/navigation';
 import BottomCTA from '../components/BottomCTA';
 import {CAPABILITY_SOLUTION_PROGRAM_DETAILS} from '../lib/capabilities-content';
 import {useAnimationQuality} from '../lib/animationQuality';
+import {isSanityCdnImage} from '../lib/image-delivery';
+import {
+  DEFAULT_SOLUTION_PROGRAM_MEDIA,
+  type SolutionProgramMedia,
+} from '../lib/solution-program-media';
 import styles from './CapabilityIndustryPages.module.css';
 
 type ProgramCopy = {
@@ -33,15 +38,6 @@ type OwnershipStep = {
   title: string;
   detail: string;
   output: string;
-};
-
-const PROGRAM_IMAGES: Record<string, string> = {
-  'ai-reception-and-lead-operations-program':
-    '/Images/capabilities/editorial/hva-ai-reception-program-v2.webp',
-  'enterprise-crm-modernization-program':
-    '/Images/capabilities/editorial/hva-crm-modernization-program-v2.webp',
-  'cloud-delivery-reliability-stack':
-    '/Images/capabilities/editorial/hva-cloud-reliability-program-v2.webp',
 };
 
 const PROGRAM_HASHES = ['program-01', 'program-02', 'program-03'] as const;
@@ -62,7 +58,11 @@ function OwnershipIcon({index}: {index: number}) {
   return <Gauge {...props} />;
 }
 
-export default function CapabilitiesSolutionPrograms() {
+export default function CapabilitiesSolutionPrograms({
+  programMedia = DEFAULT_SOLUTION_PROGRAM_MEDIA,
+}: {
+  programMedia?: SolutionProgramMedia;
+}) {
   const t = useTranslations('SolutionPrograms');
   const locale = useLocale();
   const {motionReduced} = useAnimationQuality();
@@ -77,6 +77,9 @@ export default function CapabilitiesSolutionPrograms() {
     ...programCopy[index],
   }));
   const activeProgram = programs[activeIndex]!;
+  const activeMedia =
+    programMedia[activeProgram.slug] ??
+    DEFAULT_SOLUTION_PROGRAM_MEDIA[activeProgram.slug];
 
   const programHref = (href: string | undefined) =>
     locale === 'fr' && href?.startsWith('/case-studies/') ? '/case-studies' : href;
@@ -119,7 +122,6 @@ export default function CapabilitiesSolutionPrograms() {
               <div className={styles.heroActions}>
                 <Link href="#program-explorer" className={styles.buttonPrimary}>
                   {t('hero.primaryCta')}
-                  <ArrowRight className="h-4 w-4" strokeWidth={1.7} aria-hidden="true" />
                 </Link>
                 <Link href="/capabilities/in-detail" className={styles.textLink}>
                   {t('hero.secondaryCta')}
@@ -208,13 +210,23 @@ export default function CapabilitiesSolutionPrograms() {
                     className={styles.programStageArticle}
                   >
                     <figure className={styles.programStageMedia}>
-                      <Image
-                        src={PROGRAM_IMAGES[activeProgram.slug]!}
-                        alt={t('navigator.imageAlt', {title: activeProgram.name})}
-                        fill
-                        quality={90}
-                        sizes="(max-width: 760px) calc(100vw - 3rem), (max-width: 1120px) 44vw, 34rem"
-                      />
+                      <picture className="semantic-responsive-picture">
+                        {activeMedia.mobileImage !== activeMedia.stageImage ? (
+                          <source media="(max-width: 40rem)" srcSet={activeMedia.mobileImage} />
+                        ) : null}
+                        <Image
+                          src={activeMedia.stageImage}
+                          alt={activeMedia.alt || t('navigator.imageAlt', {title: activeProgram.name})}
+                          fill
+                          quality={90}
+                          sizes="(max-width: 760px) calc(100vw - 3rem), (max-width: 1120px) 44vw, 34rem"
+                          style={{
+                            objectFit: activeMedia.stageFit,
+                            objectPosition: activeMedia.objectPosition,
+                          }}
+                          unoptimized={isSanityCdnImage(activeMedia.stageImage)}
+                        />
+                      </picture>
                     </figure>
 
                     <div className={styles.programStageCopy}>

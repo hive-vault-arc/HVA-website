@@ -1,12 +1,15 @@
 {
   "Locale": {
-    "english": "Anglais",
+    "eyebrow": "Langue",
+    "english": "English",
     "french": "Français",
     "selectLanguage": "Choisir la langue",
     "currentLanguage": "Langue actuelle : {language}",
     "languages": {
-      "en": "Anglais",
-      "fr": "Français"
+      "en": "English",
+      "fr": "Français",
+      "es": "Español",
+      "ar": "العربية"
     },
     "switchTo": "Afficher cette page en {language}",
     "unavailable": "Cette page n’est pas disponible en {language}"
@@ -509,6 +512,7 @@
     "railDescription": "Lettres de référence approuvées à l’appui des missions publiées.",
     "readCaseStudy": "Lire l’étude de cas",
     "railAria": "Lire l’étude de cas {client}. Une lettre de référence client est disponible.",
+    "sourceDisclosure": "Source originale : {language}",
     "languages": {
       "ar": "Arabe",
       "en": "Anglais",

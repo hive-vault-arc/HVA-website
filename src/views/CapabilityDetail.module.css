@@ -144,10 +144,10 @@
 .primaryAction,
 .secondaryAction {
   display: inline-flex;
-  min-height: 2.875rem;
+  min-height: 3rem;
   align-items: center;
   justify-content: center;
-  gap: 0.55rem;
+  border-radius: 0;
   padding: 0.72rem 1.15rem;
   border: 1px solid transparent;
   font-family: var(--font-label);
@@ -167,12 +167,15 @@
 
 .secondaryAction {
   border-color: #536174;
+  background: transparent;
   color: #ffffff;
 }
 
 .secondaryAction:hover {
   border-color: #e8a838;
-  color: #f0c15a;
+  background: #e8a838;
+  color: #0d1824;
+  transform: translateY(-1px);
 }
 
 .briefBand {

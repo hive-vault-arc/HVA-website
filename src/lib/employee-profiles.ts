@@ -376,7 +376,7 @@ function applyLeadershipIdentity(
   return {
     ...profile,
     ...curated,
-    position: identity[locale],
+    position: locale === 'fr' ? identity.fr : identity.en,
     // Portraits are editorial fields in Sanity. Keep the CMS value intact so
     // image updates do not require a frontend code change.
     profileImage: profile.profileImage,

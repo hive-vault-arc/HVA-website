@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import { CANONICAL_MARKET_IDENTITY } from './positioning';
-import type {AppLocale} from '@/i18n/config';
+import {LOCALE_PROFILES, PUBLIC_LOCALES, type AppLocale} from '@/i18n/config';
 import type {AppPathname} from '@/i18n/routing';
 import {localizedAlternates, localizedPath} from '@/i18n/route-manifest';
 
-export const SUPPORTED_LOCALES = ['en', 'fr'] as const;
+export const SUPPORTED_LOCALES = PUBLIC_LOCALES;
 export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
 
 export const SITE_NAME = 'Hive Vault Arc';
@@ -248,7 +248,7 @@ export function buildLocalizedPageMetadata(input: LocalizedPageMetaInput): Metad
     description: input.description,
     keywords: input.keywords,
     path,
-    locale: input.locale === 'fr' ? 'fr_FR' : 'en_US',
+    locale: LOCALE_PROFILES[input.locale].openGraphLocale,
     alternates,
   });
 }

@@ -503,7 +503,6 @@ function CaseStudyCta() {
         <div className="case-study-template__cta-actions">
           <Link href="/contact" className="case-study-template__cta-primary">
             {t('caseCta.primary')}
-            <ArrowRight aria-hidden="true" />
           </Link>
           <Link
             href="/capabilities/solution-programs"

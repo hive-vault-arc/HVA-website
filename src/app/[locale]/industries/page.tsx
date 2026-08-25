@@ -25,11 +25,17 @@ function buildIndustryInsightItems(
   collections: IndustryInsightCollections,
 ): IndustryInsightItem[] {
   const localized = <T extends LocalizedContentMeta & {slug: string}>(items: T[]) =>
-    buildPublishedCollection(
-      locale,
-      items.filter((item) => item.language === locale),
-      items.filter((item) => item.language === 'en'),
-    );
+    locale === 'es' || locale === 'ar'
+      ? {
+          items: items.filter((item) => item.language === locale),
+          sourceLocale: locale,
+          hasFallbackContent: false,
+        }
+      : buildPublishedCollection(
+          locale,
+          items.filter((item) => item.language === locale),
+          items.filter((item) => item.language === 'en'),
+        );
   const posts = localized(collections.posts);
   const caseStudies = localized(collections.caseStudies);
   const newsArticles = localized(collections.newsArticles);
@@ -114,7 +120,7 @@ export default async function IndustriesPage({params}: PageProps) {
     getTranslations({locale, namespace: 'Metadata.pages.industries'}),
     getTranslations({locale, namespace: 'Navigation'}),
     getSanityIndustryInsightCollections(
-      locale === 'fr' ? ['fr', 'en'] : ['en'],
+      locale === 'en' ? ['en'] : [locale, 'en'],
     ),
   ]);
   const insightItems = buildIndustryInsightItems(locale, collections);

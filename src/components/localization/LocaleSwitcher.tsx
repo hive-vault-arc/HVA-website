@@ -5,7 +5,7 @@ import {useLocale, useTranslations} from 'next-intl';
 import {useSearchParams} from 'next/navigation';
 import {ChevronDown, Globe} from '@/components/icons';
 import {Link} from '@/i18n/navigation';
-import {APP_LOCALES, type AppLocale} from '@/i18n/config';
+import {LOCALE_PROFILES, PUBLIC_LOCALES, type AppLocale} from '@/i18n/config';
 import {localizeHref} from '@/i18n/route-manifest';
 import {useTranslationRoutes} from './TranslationAvailability';
 import {useHydratedPathname} from './useHydratedPathname';
@@ -20,7 +20,13 @@ const DYNAMIC_ROUTE_PATTERNS = [
   /^\/insights\/research-reports\/[^/]+$/,
 ];
 
-export default function LocaleSwitcher({mobile = false}: {mobile?: boolean}) {
+export default function LocaleSwitcher({
+  mobile = false,
+  dark = false,
+}: {
+  mobile?: boolean;
+  dark?: boolean;
+}) {
   const locale = useLocale() as AppLocale;
   const hydratedPathname = useHydratedPathname();
   const searchParams = useSearchParams();
@@ -38,9 +44,11 @@ export default function LocaleSwitcher({mobile = false}: {mobile?: boolean}) {
     : {};
   const queryString = new URLSearchParams(query).toString();
 
-  const localeOptions = APP_LOCALES.map((targetLocale) => {
+  const localeOptions = PUBLIC_LOCALES.map((targetLocale) => {
     const languageKey = `languages.${targetLocale}`;
-    const language = t.has(languageKey) ? t(languageKey) : targetLocale.toUpperCase();
+    const language = t.has(languageKey)
+      ? t(languageKey)
+      : LOCALE_PROFILES[targetLocale].label;
     const explicitTarget = translationRoutes[targetLocale];
     const unavailable =
       targetLocale !== locale && isDynamicRoute && !explicitTarget;
@@ -61,7 +69,6 @@ export default function LocaleSwitcher({mobile = false}: {mobile?: boolean}) {
 
   const activeOption =
     localeOptions.find((option) => option.active) ?? localeOptions[0];
-  const languageEyebrow = locale === 'fr' ? 'LANGUE' : 'LANGUAGE';
 
   useEffect(() => {
     setDesktopMenuOpen(false);
@@ -93,7 +100,9 @@ export default function LocaleSwitcher({mobile = false}: {mobile?: boolean}) {
     return (
       <div
         data-locale-switcher="mobile"
-        className="flex min-h-11 items-center justify-center gap-1 border-y border-[#1A2535]/10 py-2"
+        className={`flex min-h-12 items-center justify-center gap-1 border-y py-1 ${
+          dark ? 'border-white/15' : 'border-[#1A2535]/10'
+        }`}
         aria-label={t('selectLanguage')}
       >
         {localeOptions.map((option) => {
@@ -101,11 +110,13 @@ export default function LocaleSwitcher({mobile = false}: {mobile?: boolean}) {
             return (
               <span
                 key={option.locale}
-                className="cursor-not-allowed px-2.5 py-2 uppercase text-[#1A2535]/25"
+                className={`inline-flex min-h-11 items-center px-3 ${
+                  dark ? 'cursor-not-allowed text-white/25' : 'cursor-not-allowed text-[#1A2535]/25'
+                }`}
                 aria-disabled="true"
                 title={t('unavailable', {language: option.language})}
               >
-                {option.locale}
+                {option.language}
               </span>
             );
           }
@@ -122,13 +133,15 @@ export default function LocaleSwitcher({mobile = false}: {mobile?: boolean}) {
                   ? option.language
                   : t('switchTo', {language: option.language})
               }
-              className={`px-2.5 py-2 uppercase transition-colors ${
+              className={`inline-flex min-h-11 items-center px-3 transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8A838] ${
                 option.active
-                  ? 'bg-[#1A2535] text-white'
-                  : 'text-[#1A2535]/55 hover:bg-[#CD9F40]/15 hover:text-[#1A2535]'
+                  ? 'bg-[#E8A838] text-[#1A2535]'
+                  : dark
+                    ? 'text-white/70 hover:bg-white/[0.08] hover:text-white'
+                    : 'text-[#1A2535]/55 hover:bg-[#E8A838]/[0.08] hover:text-[#1A2535]'
               }`}
             >
-              {option.locale}
+              {option.language}
             </Link>
           );
         })}
@@ -154,7 +167,7 @@ export default function LocaleSwitcher({mobile = false}: {mobile?: boolean}) {
         aria-expanded={desktopMenuOpen}
         aria-controls={desktopMenuOpen ? menuId : undefined}
         aria-label={t('currentLanguage', {language: activeOption.language})}
-        className="group inline-flex min-h-11 min-w-[4.25rem] items-center justify-between gap-1.5 border border-[#1A2535]/15 bg-white px-2.5 text-[10px] font-semibold uppercase tracking-[0.08em] text-[#1A2535] transition-[border-color,background-color,color] duration-150 hover:border-[#CD9F40]/60 hover:bg-[#CD9F40]/[0.08] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#CD9F40]"
+        className="group inline-flex min-h-12 min-w-[4.25rem] items-center justify-between gap-1.5 rounded-none border border-[#1A2535]/15 bg-white px-2.5 text-[10px] font-semibold text-[#1A2535] transition-[border-color,background-color,color] duration-150 hover:border-[#CD9F40] hover:bg-[#F8E9C8] hover:text-[#1A2535] focus-visible:border-[#CD9F40] focus-visible:bg-[#F8E9C8] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#CD9F40]"
         onClick={() => setDesktopMenuOpen((open) => !open)}
         onKeyDown={(event) => {
           if (event.key !== 'ArrowDown') return;
@@ -169,7 +182,7 @@ export default function LocaleSwitcher({mobile = false}: {mobile?: boolean}) {
       >
         <span className="flex items-center gap-1.5">
           <Globe className="h-3.5 w-3.5 text-[#E8A838]" aria-hidden="true" />
-          <span>{activeOption.locale}</span>
+        <span className="max-w-[8rem] truncate text-start">{activeOption.language}</span>
         </span>
         <ChevronDown
           aria-hidden="true"
@@ -180,15 +193,16 @@ export default function LocaleSwitcher({mobile = false}: {mobile?: boolean}) {
       </button>
 
       {desktopMenuOpen ? (
-        <div className="absolute right-0 top-full z-30 mt-4">
+        <div className="absolute end-0 top-full z-30 mt-4">
           <div
-            className="navbar-mega-panel locale-switcher-menu w-[min(42rem,calc(100vw-2rem))] overflow-hidden border border-[#DDE3EA] bg-[#FCFBF8]/[0.99] text-[#1A2535] shadow-[0_24px_60px_rgba(13,24,36,0.18)]"
+            data-navbar-surface="locale-menu"
+            className="navbar-mega-panel locale-switcher-menu rounded-none w-[min(42rem,calc(100vw-2rem))] overflow-hidden border border-[#DDE3EA] bg-[#FCFBF8]/[0.99] text-[#1A2535] shadow-[0_24px_60px_rgba(13,24,36,0.18)]"
           >
             <div className="grid min-h-[238px] grid-cols-[minmax(240px,0.78fr)_2.22fr]">
-              <div className="flex flex-col justify-between border-r border-[#DDE3EA] px-8 py-7">
+              <div className="flex flex-col justify-between border-s border-[#DDE3EA] px-8 py-7">
                 <div>
                   <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-[#E8A838]">
-                    {languageEyebrow}
+                    {t('eyebrow')}
                   </p>
                   <div className="mt-5 flex max-w-[250px] items-end justify-between gap-5 font-serif text-[30px] leading-[1.05] text-[#1A2535]">
                     <span>{t('selectLanguage')}</span>
@@ -227,7 +241,6 @@ export default function LocaleSwitcher({mobile = false}: {mobile?: boolean}) {
                           </span>
                           <span className="text-[13px] font-semibold leading-5">{option.language}</span>
                         </span>
-                        <span className="text-[9px] font-semibold uppercase tracking-[0.12em]">{option.locale}</span>
                       </span>
                     );
                   }
@@ -257,9 +270,6 @@ export default function LocaleSwitcher({mobile = false}: {mobile?: boolean}) {
                           {String(index + 1).padStart(2, '0')}
                         </span>
                         <span className="text-[13px] font-semibold leading-5">{option.language}</span>
-                      </span>
-                      <span className={`text-[9px] font-semibold uppercase tracking-[0.12em] ${option.active ? 'text-[#E8A838]' : 'text-[#536174]'}`}>
-                        {option.locale}
                       </span>
                     </Link>
                   );
