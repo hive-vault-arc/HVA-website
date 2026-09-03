@@ -4,6 +4,7 @@ import { ArrowUpRight, Facebook, Globe, Instagram, Mail, Phone } from '@/compone
 import { FaGithub, FaLinkedinIn, FaTiktok, FaXTwitter } from 'react-icons/fa6';
 import Logo from './Logo';
 import FooterSpotlight from './ui/FooterSpotlight';
+import CookieSettingsButton from './privacy/CookieSettingsButton';
 import {
   CONTACT_EMAIL,
   CONTACT_PHONE_DISPLAY,
@@ -53,6 +54,7 @@ const industryLinks = [
 
 const legalLinks = [
   { href: '/privacy-policy', key: 'privacy' },
+  { href: '/cookie-policy', key: 'cookiePolicy' },
   { href: '/mentions-legales', key: 'legalMentions' },
 ] as const;
 
@@ -142,6 +144,7 @@ export default async function SiteFooter() {
                     {t(item.key)}
                   </Link>
                 ))}
+                <CookieSettingsButton />
               </div>
             </div>
             <div className="site-footer__social">

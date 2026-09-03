@@ -8,6 +8,10 @@ import Layout from '@/components/Layout';
 import JsonLd from '@/components/JsonLd';
 import EmployeeHashScroller from '@/components/EmployeeHashScroller';
 import {TranslationAvailabilityProvider} from '@/components/localization/TranslationAvailability';
+import {CookieConsentProvider} from '@/components/privacy/CookieConsentProvider';
+import CookieBanner from '@/components/privacy/CookieBanner';
+import CookiePreferencesDialog from '@/components/privacy/CookiePreferencesDialog';
+import MicrosoftClarity from '@/components/privacy/MicrosoftClarity';
 import {routing} from '@/i18n/routing';
 import {localizedAlternates, localizedPath} from '@/i18n/route-manifest';
 import {arabic, manrope, newsreader} from '@/lib/fonts';
@@ -406,14 +410,19 @@ export default async function RootLayout({children, params}: LocaleLayoutProps) 
       </head>
       <body>
         <NextIntlClientProvider messages={clientMessages}>
-          <JsonLd data={organizationSchema} />
-          <JsonLd data={websiteSchema} />
-          <JsonLd data={navigationSchema} />
-          <TranslationAvailabilityProvider>
-            <Layout>{children}</Layout>
-          </TranslationAvailabilityProvider>
-          <EmployeeHashScroller />
-          {process.env.VERCEL === '1' && <Analytics />}
+          <CookieConsentProvider>
+            <JsonLd data={organizationSchema} />
+            <JsonLd data={websiteSchema} />
+            <JsonLd data={navigationSchema} />
+            <TranslationAvailabilityProvider>
+              <Layout>{children}</Layout>
+            </TranslationAvailabilityProvider>
+            <EmployeeHashScroller />
+            <MicrosoftClarity />
+            <CookieBanner />
+            <CookiePreferencesDialog />
+            {process.env.VERCEL === '1' && <Analytics />}
+          </CookieConsentProvider>
         </NextIntlClientProvider>
       </body>
     </html>

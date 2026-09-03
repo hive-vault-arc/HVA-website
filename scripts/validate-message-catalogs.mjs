@@ -9,6 +9,7 @@ const sourceLocale = 'en';
 
 const PROTECTED_TERMS = [
   'Hive Vault Arc',
+  'Microsoft Clarity',
   'ARC Framework',
   'API',
   'APIs',

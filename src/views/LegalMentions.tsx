@@ -97,7 +97,7 @@ export default function LegalMentions() {
           <h2 className="services-brief-section-title">{t('cookies.title')}</h2>
           <p className="mt-4 text-base leading-relaxed text-secondary">
             {t('cookies.body')}{' '}
-            <Link href="/privacy-policy" className="text-primary underline underline-offset-2">{t('cookies.linkLabel')}</Link>.
+            <Link href="/cookie-policy" className="text-primary underline underline-offset-2">{t('cookies.linkLabel')}</Link>.
           </p>
         </article>
       </div>

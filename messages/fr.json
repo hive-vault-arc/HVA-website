@@ -63,6 +63,8 @@
     "company": "Entreprise",
     "legal": "Informations légales",
     "privacy": "Politique de confidentialité",
+    "cookiePolicy": "Politique relative aux cookies",
+    "cookieSettings": "Paramètres des cookies",
     "legalMentions": "Mentions légales",
     "rights": "Tous droits réservés.",
     "location": "Tanger, Maroc",
@@ -889,13 +891,28 @@
       "secondary": "Retour aux expertises"
     }
   },
+  "CookieConsent": {
+    "banner": {"title": "Cookies et confidentialité", "body": "Nous utilisons un cookie nécessaire pour mémoriser votre choix de confidentialité. Avec votre accord, Microsoft Clarity peut utiliser des cookies d’analyse et des relectures de session masquées afin d’améliorer ce site. Le refus de l’analyse n’empêche pas l’accès au site."},
+    "links": {"privacy": "Politique de confidentialité", "cookiePolicy": "Politique relative aux cookies"},
+    "actions": {"reject": "Refuser les cookies facultatifs", "customize": "Personnaliser", "accept": "Accepter l’analyse"},
+    "dialog": {"title": "Paramètres des cookies", "intro": "Choisissez si ce site peut utiliser l’analyse facultative. Votre choix s’applique pendant 180 jours et peut être modifié à tout moment.", "close": "Fermer les paramètres des cookies", "cancel": "Annuler", "save": "Enregistrer les choix", "necessary": {"title": "Strictement nécessaires", "description": "Enregistre votre choix de confidentialité et la version du consentement. Il ne contient ni identité ni historique de navigation.", "alwaysOn": "Toujours actifs"}, "analytics": {"title": "Analyse", "description": "Autorise Microsoft Clarity à mesurer des interactions masquées, créer des cartes de chaleur et relier les pages consultées avec consentement pour améliorer l’utilisabilité.", "vendor": "Microsoft Clarity · aucune publicité n’est utilisée.", "enabled": "Activée", "disabled": "Désactivée"}}
+  },
+  "CookiePolicy": {
+    "hero": {"eyebrow": "Contrôles de confidentialité", "title": "Politique relative aux cookies", "description": "Comment Hive Vault Arc utilise le stockage de préférence nécessaire et l’analyse facultative.", "updated": "Dernière mise à jour : 3 septembre 2026"},
+    "overview": {"title": "Notre approche", "body": "Nous maintenons le fonctionnement du site public sans cookies publicitaires. L’analyse facultative reste désactivée tant que vous ne l’acceptez pas explicitement, et votre choix peut être modifié à tout moment."},
+    "necessary": {"title": "Stockage de préférence nécessaire", "body": "Un cookie de préférence propriétaire indique si vous avez accepté ou refusé l’analyse facultative. Il est nécessaire pour respecter votre choix et ne vous suit pas entre les sites."},
+    "analytics": {"title": "Analyse Microsoft Clarity facultative", "body": "Après votre accord, Microsoft Clarity reçoit les pages vues, clics, défilements et informations sur l’appareil pour des cartes de chaleur et relectures masquées. Microsoft traite ces données dans Azure, éventuellement hors de votre pays. Le masquage strict inclut le formulaire de contact. Le stockage publicitaire reste refusé. Les enregistrements sont accessibles jusqu’à 30 jours.", "privacyLink": "Déclaration de confidentialité Microsoft"},
+    "table": {"title": "Cookies et stockage", "name": "Nom", "provider": "Fournisseur", "purpose": "Finalité", "lifetime": "Durée", "rows": [{"name": "hva_consent_v1", "provider": "Hive Vault Arc", "purpose": "Mémorise votre choix d’analyse et la version du consentement.", "lifetime": "180 jours"}, {"name": "_clck", "provider": "Microsoft Clarity", "purpose": "Mémorise un identifiant pseudonyme après accord pour l’analyse.", "lifetime": "1 an"}, {"name": "_clsk", "provider": "Microsoft Clarity", "purpose": "Regroupe les pages vues avec accord dans une session.", "lifetime": "1 jour"}, {"name": "_cltk", "provider": "Microsoft Clarity", "purpose": "Identifiant de l’onglet dans le stockage de session après accord.", "lifetime": "Jusqu’à la fermeture de l’onglet"}]},
+    "choices": {"title": "Gérer votre choix", "body": "Utilisez Paramètres des cookies dans le pied de page pour accepter, refuser ou retirer l’analyse facultative. Le retrait du consentement efface les cookies Clarity lorsqu’ils existent et recharge la page avec l’analyse désactivée."},
+    "contact": {"title": "Questions", "body": "Pour toute question sur la confidentialité ou vos données, contactez notre équipe ou consultez notre politique de confidentialité.", "privacyLink": "Lire la politique de confidentialité"}
+  },
   "Privacy": {
     "common": {"email": "E-mail :", "phone": "Téléphone :"},
     "hero": {
       "eyebrow": "Conformité et protection des données",
       "title": "Politique de confidentialité",
       "description": "Hive Vault Arc s’engage à protéger vos données personnelles conformément à la loi marocaine n° 09-08 relative à la protection des personnes physiques à l’égard du traitement des données à caractère personnel, sous le contrôle de la CNDP, ainsi qu’au Règlement général sur la protection des données (RGPD) lorsqu’il s’applique.",
-      "updated": "Dernière mise à jour : 10 juillet 2026"
+      "updated": "Dernière mise à jour : 3 septembre 2026"
     },
     "controller": {
       "title": "1. Responsable du traitement",
@@ -925,14 +942,15 @@
       "title": "4. Bases légales du traitement",
       "intro": "Chaque traitement repose sur une base légale conforme à l’article 6 du RGPD et à l’article 4 de la loi 09-08 :",
       "items": [
-        {"label": "Consentement", "detail": "vous transmettez volontairement vos informations au moyen du formulaire de contact."},
+        {"label": "Consentement", "detail": "vous transmettez volontairement vos informations au moyen du formulaire de contact ou acceptez explicitement l’analyse facultative Microsoft Clarity."},
         {"label": "Exécution d’un contrat", "detail": "traitement nécessaire à l’exécution d’une mission convenue."},
         {"label": "Intérêt légitime", "detail": "journaux de sécurité et mesures d’audience agrégées sans cookies utilisés pour protéger et améliorer le site."}
       ]
     },
     "cookies": {
       "title": "5. Cookies et technologies de suivi",
-      "body": "Le site public n’utilise actuellement ni cookies publicitaires ni cookies d’analyse. Vercel Web Analytics mesure les consultations au moyen de données anonymisées et agrégées, sans déposer de cookie ni conserver d’identifiant persistant suivant un visiteur entre différents sites ou jours. Si une future fonctionnalité exige des cookies facultatifs, la présente politique et les mécanismes de consentement seront mis à jour avant leur activation."
+      "body": "Vercel Web Analytics mesure les consultations au moyen de données anonymisées et agrégées, sans déposer de cookie ni conserver d’identifiant persistant suivant un visiteur entre différents sites ou jours. Microsoft Clarity est désactivé par défaut et ne peut s’exécuter qu’après votre accord pour l’analyse facultative. Il n’est pas utilisé à des fins publicitaires.",
+      "linkLabel": "Lire notre politique relative aux cookies"
     },
     "retention": {
       "title": "6. Durée de conservation",
@@ -950,7 +968,8 @@
       "intro": "Nous ne vendons jamais vos données personnelles. Les destinataires autorisés sont strictement limités aux sous-traitants techniques nécessaires à l’exploitation du site :",
       "recipients": [
         {"label": "Vercel Inc.", "detail": "hébergement et déploiement du site (Covina, Californie, États-Unis)."},
-        {"label": "Vercel Analytics", "detail": "mesure d’audience anonymisée."}
+        {"label": "Vercel Analytics", "detail": "mesure d’audience anonymisée."},
+        {"label": "Microsoft Clarity", "detail": "analyse facultative des interactions et relecture masquée, uniquement avec votre accord. La politique relative aux cookies détaille la collecte, le stockage et la conservation."}
       ],
       "closing": "Aucune de vos données n’est transmise à des tiers à des fins publicitaires ou marketing."
     },
@@ -1063,8 +1082,8 @@
     },
     "cookies": {
       "title": "8. Cookies",
-      "body": "hivevaultarc.com n’utilise actuellement ni cookies publicitaires ni cookies d’analyse. Vercel Web Analytics enregistre des données de consultation anonymisées et agrégées, sans cookie ni identifiant persistant entre différents sites. Pour plus d’informations, consultez la section « Cookies et technologies de suivi » de notre",
-      "linkLabel": "politique de confidentialité"
+      "body": "Vercel Web Analytics enregistre des données de consultation anonymisées et agrégées, sans cookie ni identifiant persistant entre différents sites. Microsoft Clarity est désactivé par défaut et ne peut s’exécuter qu’après l’acceptation de l’analyse facultative. Pour plus d’informations, consultez notre",
+      "linkLabel": "politique relative aux cookies"
     },
     "cta": {
       "eyebrow": "Une question juridique ?",
@@ -2278,6 +2297,10 @@
       "privacy": {
         "title": "Politique de confidentialité",
         "description": "Découvrez comment Hive Vault Arc collecte, utilise, protège et conserve les données personnelles."
+      },
+      "cookiePolicy": {
+        "title": "Politique relative aux cookies",
+        "description": "Comment Hive Vault Arc utilise le stockage de préférence nécessaire et l’analyse facultative."
       },
       "legal": {
         "title": "Mentions légales",
