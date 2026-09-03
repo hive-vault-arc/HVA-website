@@ -57,6 +57,8 @@ http://localhost:3000
 
 Production builds run `npm run build`, which verifies WebP assets before compiling the Next.js application. Pushes to `main` trigger the production deployment.
 
+For Clarity configuration, consent checks, and rollback steps, see the [Clarity setup and release notes](docs/clarity-setup-2026-09-03.md).
+
 ## Environment Variables
 
 - `NEXT_PUBLIC_CONTACT_API_URL` (optional): if set, contact form submits JSON to this endpoint; otherwise it falls back to `mailto:`.
