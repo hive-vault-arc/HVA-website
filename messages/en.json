@@ -63,6 +63,8 @@
     "company": "Company",
     "legal": "Legal",
     "privacy": "Privacy Policy",
+    "cookiePolicy": "Cookie Policy",
+    "cookieSettings": "Cookie settings",
     "legalMentions": "Legal Mentions",
     "rights": "All rights reserved.",
     "location": "Tangier, Morocco",
@@ -889,13 +891,28 @@
       "secondary": "Back to capabilities"
     }
   },
+  "CookieConsent": {
+    "banner": {"title": "Cookies and privacy", "body": "We use one necessary cookie to remember your privacy choice. With your permission, Microsoft Clarity may use analytics cookies and masked session replay to help us improve this website. Rejecting analytics will not affect access."},
+    "links": {"privacy": "Privacy Policy", "cookiePolicy": "Cookie Policy"},
+    "actions": {"reject": "Reject optional cookies", "customize": "Customize", "accept": "Accept analytics"},
+    "dialog": {"title": "Cookie settings", "intro": "Choose whether this website may use optional analytics. Your choice applies for 180 days and can be changed at any time.", "close": "Close cookie settings", "cancel": "Cancel", "save": "Save choices", "necessary": {"title": "Strictly necessary", "description": "Stores your privacy choice and consent version. It contains no identity or browsing history.", "alwaysOn": "Always active"}, "analytics": {"title": "Analytics", "description": "Allows Microsoft Clarity to measure masked interactions, create heatmaps, and connect consented page views into sessions so we can improve usability.", "vendor": "Microsoft Clarity · advertising is not used.", "enabled": "On", "disabled": "Off"}}
+  },
+  "CookiePolicy": {
+    "hero": {"eyebrow": "Privacy controls", "title": "Cookie Policy", "description": "How Hive Vault Arc uses necessary preference storage and optional analytics.", "updated": "Last updated: September 3, 2026"},
+    "overview": {"title": "Our approach", "body": "We keep the public website functional without advertising cookies. Optional analytics are disabled until you explicitly accept them, and you can change that choice at any time."},
+    "necessary": {"title": "Necessary preference storage", "body": "A first-party preference cookie records whether you accepted or rejected optional analytics. It is needed to honour your choice and does not track you across websites."},
+    "analytics": {"title": "Optional Microsoft Clarity analytics", "body": "After analytics consent, Microsoft Clarity receives page views, clicks, scrolling and device information for heatmaps and masked session replays. Microsoft processes this data in Azure, potentially outside your country. Strict masking is enabled, including the contact form. Advertising storage stays denied. Recordings are available for up to 30 days.", "privacyLink": "Microsoft Privacy Statement"},
+    "table": {"title": "Cookies and storage", "name": "Name", "provider": "Provider", "purpose": "Purpose", "lifetime": "Lifetime", "rows": [{"name": "hva_consent_v1", "provider": "Hive Vault Arc", "purpose": "Remembers your analytics choice and consent version.", "lifetime": "180 days"}, {"name": "_clck", "provider": "Microsoft Clarity", "purpose": "Remembers a pseudonymous visitor ID after analytics consent.", "lifetime": "1 year"}, {"name": "_clsk", "provider": "Microsoft Clarity", "purpose": "Connects consented page views into a session.", "lifetime": "1 day"}, {"name": "_cltk", "provider": "Microsoft Clarity", "purpose": "Tab identifier in session storage after analytics consent.", "lifetime": "Until the tab closes"}]},
+    "choices": {"title": "Managing your choice", "body": "Use Cookie settings in the footer to accept, reject, or withdraw optional analytics. Withdrawing consent clears Clarity cookies where available and reloads the page with analytics disabled."},
+    "contact": {"title": "Questions", "body": "For questions about privacy or your data, contact our team or read our Privacy Policy.", "privacyLink": "Read the Privacy Policy"}
+  },
   "Privacy": {
     "common": {"email": "Email:", "phone": "Phone:"},
     "hero": {
       "eyebrow": "Compliance & Data Protection",
       "title": "Privacy Policy",
       "description": "Hive Vault Arc is committed to protecting your personal data in compliance with Moroccan Law 09-08 on the protection of individuals with regard to the processing of personal data (CNDP), as well as the General Data Protection Regulation (GDPR) applicable to residents of the European Union under its extraterritorial scope.",
-      "updated": "Last updated: July 10, 2026"
+      "updated": "Last updated: September 3, 2026"
     },
     "controller": {
       "title": "1. Data Controller",
@@ -925,14 +942,15 @@
       "title": "4. Legal Basis for Processing",
       "intro": "Each processing activity rests on a legal basis compliant with Article 6 of the GDPR and Article 4 of Law 09-08:",
       "items": [
-        {"label": "Consent", "detail": "you voluntarily submit information through the contact form."},
+        {"label": "Consent", "detail": "you voluntarily submit information through the contact form or explicitly accept optional Microsoft Clarity analytics."},
         {"label": "Performance of a contract", "detail": "processing necessary to fulfil an agreed service engagement."},
         {"label": "Legitimate interest", "detail": "security logs and aggregated, cookieless analytics used to protect and improve the site."}
       ]
     },
     "cookies": {
       "title": "5. Cookies and Tracking Technologies",
-      "body": "The public site does not currently use advertising or analytics cookies. Vercel Web Analytics measures page views with anonymised, aggregated data and does not place a cookie or retain a persistent identifier that follows a visitor across websites or days. If a future feature requires optional cookies, this policy and the consent controls will be updated before those cookies are enabled."
+      "body": "Vercel Web Analytics measures page views with anonymised, aggregated data and does not place a cookie or retain a persistent identifier that follows a visitor across websites or days. Microsoft Clarity is disabled by default and may only run after you accept optional analytics. It is not used for advertising.",
+      "linkLabel": "Read our Cookie Policy"
     },
     "retention": {
       "title": "6. Data Retention",
@@ -950,7 +968,8 @@
       "intro": "We never sell your personal data. Authorised recipients are strictly limited to the technical sub-processors necessary to operate the site:",
       "recipients": [
         {"label": "Vercel Inc.", "detail": "site hosting and deployment (Covina, California, United States)."},
-        {"label": "Vercel Analytics", "detail": "anonymised audience measurement."}
+        {"label": "Vercel Analytics", "detail": "anonymised audience measurement."},
+        {"label": "Microsoft Clarity", "detail": "optional interaction analytics and masked session replay, only after your analytics consent. See the Cookie Policy for collection, storage and retention details."}
       ],
       "closing": "None of your data is shared with third parties for advertising or marketing purposes."
     },
@@ -1063,8 +1082,8 @@
     },
     "cookies": {
       "title": "8. Cookies",
-      "body": "hivevaultarc.com does not currently use advertising or analytics cookies. Vercel Web Analytics records anonymised, aggregated page-view data without cookies or a persistent cross-site identifier. For more information, see the “Cookies and Tracking Technologies” section of our",
-      "linkLabel": "Privacy Policy"
+      "body": "Vercel Web Analytics records anonymised, aggregated page-view data without cookies or a persistent cross-site identifier. Microsoft Clarity is disabled by default and may only run after a visitor accepts optional analytics. For more information, see our",
+      "linkLabel": "Cookie Policy"
     },
     "cta": {
       "eyebrow": "Legal questions?",
@@ -2278,6 +2297,10 @@
       "privacy": {
         "title": "Privacy Policy",
         "description": "How Hive Vault Arc collects, uses, protects, and retains personal information."
+      },
+      "cookiePolicy": {
+        "title": "Cookie Policy",
+        "description": "How Hive Vault Arc uses necessary preference storage and optional analytics."
       },
       "legal": {
         "title": "Legal Mentions",

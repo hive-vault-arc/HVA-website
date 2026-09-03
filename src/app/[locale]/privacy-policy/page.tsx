@@ -28,7 +28,7 @@ export default async function PrivacyPolicyPage({params}: PageProps) {
     description: tMeta('description'),
     url: absoluteUrl(path),
     inLanguage: locale,
-    dateModified: '2026-05-03',
+    dateModified: '2026-09-03',
     publisher: {
       '@type': 'Organization',
       '@id': `${SITE_URL}/#organization`,

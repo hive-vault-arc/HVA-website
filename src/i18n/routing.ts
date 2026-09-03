@@ -122,6 +122,12 @@ export const routing = defineRouting({
       es: '/politica-de-privacidad',
       ar: '/سياسة-الخصوصية',
     },
+    '/cookie-policy': {
+      en: '/cookie-policy',
+      fr: '/politique-de-cookies',
+      es: '/politica-de-cookies',
+      ar: '/سياسة-ملفات-الارتباط',
+    },
     '/mentions-legales': {en: '/mentions-legales', fr: '/mentions-legales', es: '/avisos-legales', ar: '/إشعارات-قانونية'},
     '/links': {
       en: '/links',

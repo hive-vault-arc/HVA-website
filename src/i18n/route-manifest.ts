@@ -18,6 +18,7 @@ export type RouteKey =
   | 'research'
   | 'contact'
   | 'privacy'
+  | 'cookiePolicy'
   | 'legal'
   | 'links'
   | 'aiAgentsTangier'
@@ -54,6 +55,7 @@ export const ROUTE_MANIFEST: Record<
   research: {pathname: '/insights/research-reports', static: false, indexable: true},
   contact: {pathname: '/contact', static: true, indexable: true},
   privacy: {pathname: '/privacy-policy', static: true, indexable: true},
+  cookiePolicy: {pathname: '/cookie-policy', static: true, indexable: true},
   legal: {pathname: '/mentions-legales', static: true, indexable: true},
   links: {pathname: '/links', static: true, indexable: false},
   aiAgentsTangier: {pathname: '/ai-agents-tangier', static: true, indexable: true},

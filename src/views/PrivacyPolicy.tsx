@@ -28,6 +28,7 @@ function LabelDetailList({items}: {items: LabelDetail[]}) {
 
 export default function PrivacyPolicy() {
   const t = useTranslations('Privacy');
+  const tCookies = useTranslations('CookiePolicy');
   const collection = t.raw('collection.items') as LabelDetail[];
   const purposes = t.raw('purposes.items') as string[];
   const legalBases = t.raw('legalBasis.items') as LabelDetail[];
@@ -86,7 +87,13 @@ export default function PrivacyPolicy() {
 
         <article className="mb-12">
           <h2 className="services-brief-section-title">{t('cookies.title')}</h2>
-          <p className="mt-4 text-base leading-relaxed text-secondary">{t('cookies.body')}</p>
+          <p className="mt-4 text-base leading-relaxed text-secondary">{tCookies('analytics.body')}</p>
+          <p className="mt-4 text-base leading-relaxed text-secondary">
+            {t('cookies.body')}{' '}
+            <Link href="/cookie-policy" className="text-primary underline underline-offset-2">
+              {t('cookies.linkLabel')}
+            </Link>.
+          </p>
         </article>
 
         <article className="mb-12">

@@ -24,6 +24,7 @@
     "test:semantic-visual": "node scripts/verify-semantic-routes.mjs"
   },
   "dependencies": {
+    "@microsoft/clarity": "^1.0.2",
     "@react-spring/web": "^10.0.1",
     "@sanity/image-url": "^2.1.1",
     "@splinetool/react-spline": "^4.1.0",

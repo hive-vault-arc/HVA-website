@@ -145,7 +145,7 @@ const Contact: React.FC = () => {
 
       <section className={styles.contactSection} aria-labelledby="contact-form-heading">
         <div className={`site-frame ${styles.contactGrid}`}>
-          <div className={styles.formPanel}>
+          <div className={styles.formPanel} data-clarity-mask="true">
             <div className={styles.formHeader}>
               <div>
                 <h2 id="contact-form-heading">{t('formHeading')}</h2>
