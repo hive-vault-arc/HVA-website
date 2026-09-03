@@ -63,6 +63,8 @@
     "company": "Empresa",
     "legal": "Legales",
     "privacy": "Política de privacidad",
+    "cookiePolicy": "Política de cookies",
+    "cookieSettings": "Configuración de cookies",
     "legalMentions": "Menciones Legales",
     "rights": "Todos los derechos reservados.",
     "location": "Tánger, Marruecos",
@@ -1267,6 +1269,21 @@
       "secondary": "Volver a capacidades"
     }
   },
+  "CookieConsent": {
+    "banner": {"title": "Cookies y privacidad", "body": "Usamos una cookie necesaria para recordar su elección de privacidad. Con su permiso, Microsoft Clarity puede usar cookies analíticas y repeticiones de sesión enmascaradas para ayudarnos a mejorar este sitio. Rechazar el análisis no afecta el acceso."},
+    "links": {"privacy": "Política de privacidad", "cookiePolicy": "Política de cookies"},
+    "actions": {"reject": "Rechazar cookies opcionales", "customize": "Personalizar", "accept": "Aceptar análisis"},
+    "dialog": {"title": "Configuración de cookies", "intro": "Elija si este sitio puede usar análisis opcionales. Su elección se aplica durante 180 días y puede cambiarse en cualquier momento.", "close": "Cerrar configuración de cookies", "cancel": "Cancelar", "save": "Guardar opciones", "necessary": {"title": "Estrictamente necesarias", "description": "Guarda su elección de privacidad y la versión del consentimiento. No contiene identidad ni historial de navegación.", "alwaysOn": "Siempre activas"}, "analytics": {"title": "Análisis", "description": "Permite a Microsoft Clarity medir interacciones enmascaradas, crear mapas de calor y conectar vistas de página consentidas en sesiones para mejorar la usabilidad.", "vendor": "Microsoft Clarity · no se utiliza publicidad.", "enabled": "Activo", "disabled": "Inactivo"}}
+  },
+  "CookiePolicy": {
+    "hero": {"eyebrow": "Controles de privacidad", "title": "Política de cookies", "description": "Cómo Hive Vault Arc utiliza almacenamiento de preferencias necesario y análisis opcional.", "updated": "Última actualización: 3 de septiembre de 2026"},
+    "overview": {"title": "Nuestro enfoque", "body": "Mantenemos el sitio público funcional sin cookies publicitarias. El análisis opcional permanece desactivado hasta que lo acepte expresamente, y puede cambiar esa elección en cualquier momento."},
+    "necessary": {"title": "Almacenamiento de preferencias necesario", "body": "Una cookie propia de preferencias registra si aceptó o rechazó el análisis opcional. Es necesaria para respetar su elección y no le sigue entre sitios web."},
+    "analytics": {"title": "Análisis opcional de Microsoft Clarity", "body": "Tras su consentimiento, Microsoft Clarity recibe páginas vistas, clics, desplazamientos e información del dispositivo para mapas de calor y sesiones enmascaradas. Microsoft procesa los datos en Azure, posiblemente fuera de su país. El enmascaramiento estricto incluye el formulario de contacto. El almacenamiento publicitario permanece denegado. Las grabaciones están disponibles hasta 30 días.", "privacyLink": "Declaración de privacidad de Microsoft"},
+    "table": {"title": "Cookies y almacenamiento", "name": "Nombre", "provider": "Proveedor", "purpose": "Finalidad", "lifetime": "Duración", "rows": [{"name": "hva_consent_v1", "provider": "Hive Vault Arc", "purpose": "Recuerda su elección de análisis y la versión del consentimiento.", "lifetime": "180 días"}, {"name": "_clck", "provider": "Microsoft Clarity", "purpose": "Recuerda un identificador seudónimo tras aceptar el análisis.", "lifetime": "1 año"}, {"name": "_clsk", "provider": "Microsoft Clarity", "purpose": "Conecta páginas vistas con consentimiento en una sesión.", "lifetime": "1 día"}, {"name": "_cltk", "provider": "Microsoft Clarity", "purpose": "Identificador de pestaña en el almacenamiento de sesión tras aceptar.", "lifetime": "Hasta cerrar la pestaña"}]},
+    "choices": {"title": "Gestionar su elección", "body": "Use Configuración de cookies en el pie de página para aceptar, rechazar o retirar el análisis opcional. Retirar el consentimiento borra las cookies de Clarity cuando están disponibles y recarga la página con el análisis desactivado."},
+    "contact": {"title": "Preguntas", "body": "Para preguntas sobre privacidad o sus datos, contacte con nuestro equipo o lea nuestra Política de privacidad.", "privacyLink": "Leer la Política de privacidad"}
+  },
   "Privacy": {
     "common": {
       "email": "Correo electrónico:",
@@ -1276,7 +1293,7 @@
       "eyebrow": "Cumplimiento y protección de datos",
       "title": "Política de privacidad",
       "description": "Hive Vault Arc se compromete a proteger sus datos personales de conformidad con la Ley marroquí 09-08 sobre la protección de las personas físicas en lo que respecta al tratamiento de datos personales (CNDP), así como el Reglamento General de Protección de Datos (GDPR) aplicable a los residentes de la Unión Europea en su ámbito extraterritorial.",
-      "updated": "Última actualización: 10 de julio de 2026"
+      "updated": "Última actualización: 3 de septiembre de 2026"
     },
     "controller": {
       "title": "1. Responsable del tratamiento de datos",
@@ -1317,7 +1334,7 @@
       "items": [
         {
           "label": "Consentimiento",
-          "detail": "usted envía información voluntariamente a través del formulario de contacto."
+          "detail": "usted envía información voluntariamente a través del formulario de contacto o acepta expresamente el análisis opcional de Microsoft Clarity."
         },
         {
           "label": "Ejecución de un contrato",
@@ -1331,7 +1348,8 @@
     },
     "cookies": {
       "title": "5. Cookies y tecnologías de seguimiento",
-      "body": "El sitio público actualmente no utiliza cookies publicitarias o analíticas. Vercel Web Analytics mide las visitas a la página con datos agregados y anónimos y no coloca una cookie ni retiene un identificador persistente que sigue a un visitante a través de sitios web o días. Si una función futura requiere cookies opcionales, esta política y los controles de consentimiento se actualizarán antes de habilitar esas cookies."
+      "body": "Vercel Web Analytics mide las visitas a la página con datos agregados y anónimos y no coloca una cookie ni retiene un identificador persistente que siga a un visitante entre sitios web o días. Microsoft Clarity está desactivado de forma predeterminada y solo puede ejecutarse después de que acepte el análisis opcional. No se utiliza para publicidad.",
+      "linkLabel": "Leer nuestra Política de cookies"
     },
     "retention": {
       "title": "6. Retención de datos",
@@ -1367,6 +1385,10 @@
         {
           "label": "Análisis de Vercel",
           "detail": "Medición de audiencia anónima."
+        },
+        {
+          "label": "Microsoft Clarity",
+          "detail": "análisis opcional de interacciones y sesiones enmascaradas, solo con su consentimiento. La Política de cookies detalla la recopilación, el almacenamiento y la conservación."
         }
       ],
       "closing": "Ninguno de sus datos se comparte con terceros con fines publicitarios o de marketing."
@@ -1513,8 +1535,8 @@
     },
     "cookies": {
       "title": "8. Galletas",
-      "body": "hivevaultarc.com actualmente no utiliza cookies publicitarias ni analíticas. Vercel Web Analytics registra datos de vistas de página agregados y anónimos sin cookies ni un identificador persistente entre sitios. Para obtener más información, consulte la sección “Cookies y tecnologías de seguimiento” de nuestra",
-      "linkLabel": "Política de privacidad"
+      "body": "Vercel Web Analytics registra datos de vistas de página agregados y anónimos sin cookies ni un identificador persistente entre sitios. Microsoft Clarity está desactivado de forma predeterminada y solo puede ejecutarse después de aceptar el análisis opcional. Para más información, consulte nuestra",
+      "linkLabel": "Política de cookies"
     },
     "cta": {
       "eyebrow": "¿Preguntas legales?",
@@ -3000,6 +3022,10 @@
       "privacy": {
         "title": "Política de privacidad",
         "description": "Cómo Hive Vault Arc recopila, usa, protege y retiene información personal."
+      },
+      "cookiePolicy": {
+        "title": "Política de cookies",
+        "description": "Cómo Hive Vault Arc utiliza almacenamiento de preferencias necesario y análisis opcional."
       },
       "legal": {
         "title": "Menciones Legales",

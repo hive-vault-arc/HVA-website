@@ -4,7 +4,41 @@
 >
 > Last researched: 12 August 2026
 >
-> Status: Microsoft Clarity and a cookie-consent interface are **not implemented yet**. This document is the implementation plan. Do not add the Clarity project ID or tracking script before completing the legal, policy, consent, masking, and testing gates in this guide.
+> Status: Implementation and account configuration completed on `feature/seo-analytics-foundations` on 3 September 2026. The company Vercel Production environment is configured, but the code must pass the contributor-review/release workflow before it collects live data. Local and preview collection remain disabled. See the [current setup and release record](clarity-setup-2026-09-03.md); the sections below retain the original engineering plan.
+
+## Implementation status — 3 September 2026
+
+Completed locally:
+
+- installed `@microsoft/clarity` and dynamically import it only after an explicit analytics opt-in;
+- implemented Consent V2 with `analytics_Storage: 'granted'` and `ad_Storage: 'denied'` only;
+- added an equal-prominence reject/customise/accept banner, a reopenable settings dialog, and withdrawal handling;
+- added an indexable, localized cookie-policy route for English, French, Spanish, and Arabic;
+- added the Cookie Policy and Cookie settings controls to the global footer;
+- explicitly applied `data-clarity-mask="true"` to the contact-form panel;
+- added only the required Clarity script origins to the Content Security Policy;
+- saved the public Clarity project identifier in the gitignored local environment file, with the production flag still `false`.
+
+Completed in the company accounts:
+
+- Clarity **Cookies** off, **Strict** masking selected, bot detection on; advertising and Google Analytics integrations disconnected.
+- The setup connection's current public IP excluded from production analytics. Other team networks and changing IPs are not automatically excluded.
+- Both public Clarity variables saved in the company Vercel project's **Production** environment only. A new deployment is required for them to take effect.
+
+Remaining release work:
+
+1. Review the feature pull request into `staging`, then approve the release pull request into `main` under the repository's contribution workflow.
+2. After deployment, check a real opt-in visit from a non-excluded network and confirm masking, recordings, and heatmap availability in Clarity. Local tests use a mocked tracker and are not proof of live ingestion.
+3. Complete company privacy/legal review where applicable; this engineering work does not certify CNDP formalities, international transfers, contracts, or existing policy claims.
+4. Use a separate QA project if preview telemetry is later required; previews currently do not load Clarity.
+
+Verification already completed on this branch:
+
+- `npm run i18n:validate -- fr`, `-- es`, and `-- ar` (separate runs)
+- `npm test -- --maxWorkers=2`: 33 files and 180 tests passed, including 10 consent/tracker tests
+- `npm run lint`
+- `npm run build`
+- Isolated Playwright CLI checks against a production build, with the production hostname routed to localhost and all Clarity requests mocked: pre-consent blocking, rejection persistence, analytics-only consent signals, single initialization across client navigation, withdrawal cleanup, keyboard focus/Escape, responsive layouts, and all four policy routes.
 
 ## Important legal note
 
@@ -71,11 +105,11 @@ The current frontend uses:
 
 - Next.js 16 App Router;
 - React 19;
-- `next-intl` with English and French locale content;
+- `next-intl` with English, French, Spanish, and Arabic locale content;
 - Vercel hosting and `@vercel/analytics`;
 - a global layout at `src/app/[locale]/layout.tsx`;
 - security headers and a Content Security Policy in `next.config.ts`;
-- localized privacy and legal copy in `messages/en.json` and `messages/fr.json`.
+- localized privacy, legal, and cookie-policy copy in `messages/en.json`, `messages/fr.json`, `messages/es.json`, and `messages/ar.json`.
 
 The current layout contains:
 
@@ -97,7 +131,7 @@ Those claims become inaccurate as soon as cookie-enabled Clarity is activated. U
 
 The current CSP allows Vercel's analytics script but does not allow the Clarity script in `script-src`. The implementation will therefore require a deliberate CSP change and browser-console testing.
 
-No current consent store, cookie banner, preferences dialog, or Clarity component was found. Build these as new standalone privacy components rather than placing tracking logic directly in the global layout.
+The consent store, banner, preferences dialog, Clarity loader, and cookie-policy route now exist as standalone privacy components. Keep tracking logic out of page components and retain the production flag off until the remaining gates above are completed.
 
 ## 3. The recommended privacy model
 
