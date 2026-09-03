@@ -4,6 +4,8 @@
 
 Code is prepared on `feature/seo-analytics-foundations`. Company account settings are saved. Live ingestion is **not yet verified**: production still runs the earlier `main` deployment. Release through feature → `staging` review → approved `main` release; do not redeploy the old code expecting it to install Clarity.
 
+Review: [PR #1](https://github.com/hive-vault-arc/HVA-website/pull/1). Its Vercel check failed with **Cannot deploy from a private GitHub organization repository on the Hobby plan**. The owner must resolve this hosting-plan/repository compatibility issue before Git-triggered deployment can proceed. No billing upgrade, repository visibility change, or deployment bypass was performed. GitHub CI was running when this note was recorded; check the PR for the final result.
+
 ## Company account configuration
 
 ### Microsoft Clarity
