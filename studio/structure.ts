@@ -105,6 +105,9 @@ export const structure: StructureResolver = (S) =>
       S.listItem()
         .title('Contributors')
         .child(S.documentTypeList('editorialContributor').title('Editorial Contributors')),
+      S.listItem()
+        .title('Strategic Release Audits')
+        .child(S.documentTypeList('strategicReleaseAudit').title('Strategic Release Audits')),
       S.divider(),
       S.listItem()
         .title('Capabilities')

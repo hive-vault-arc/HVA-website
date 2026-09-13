@@ -224,6 +224,34 @@ export type Author = {
   initials: string;
 };
 
+export type StrategicReleaseAudit = {
+  _id: string;
+  _type: "strategicReleaseAudit";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  familyId?: string;
+  schemaType?: string;
+  status?: "published";
+  releasedAt?: string;
+  publisher?: {
+    name?: string;
+    userId?: string;
+  };
+  documents?: Array<{
+    documentId?: string;
+    language?: string;
+    _key: string;
+  }>;
+  affectedRoutes?: Array<string>;
+  validationResults?: Array<{
+    check?: string;
+    status?: string;
+    details?: string;
+    _key: string;
+  }>;
+};
+
 export type EditorialContributorReference = {
   _ref: string;
   _type: "reference";
@@ -1403,6 +1431,7 @@ export type AllSanitySchemaTypes =
   | CaseStudyProjectMedia
   | EditorialLink
   | Author
+  | StrategicReleaseAudit
   | EditorialContributorReference
   | EvidenceRecord
   | EmployeeProfileReference

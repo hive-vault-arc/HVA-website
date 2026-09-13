@@ -68,7 +68,24 @@ const pageLocations = defineLocations({
   },
 })
 
+const industryLocations = defineLocations({
+  select: {title: 'title', language: 'language', slug: 'slug.current'},
+  resolve: (document) => {
+    if (!document?.language) return null
+    const route = routeForPage('industries', document.language as ContentLocale)
+    return {
+      locations: [
+        {
+          title: document.title || 'Industry',
+          href: document.slug ? `${route}#${encodeURIComponent(document.slug)}` : route,
+        },
+      ],
+    }
+  },
+})
+
 export const locations = {
   ...Object.fromEntries(documentTypes.map((type) => [type, documentLocations])),
+  industry: industryLocations,
   pageOptimization: pageLocations,
 }

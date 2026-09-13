@@ -81,9 +81,9 @@ function nearestSlug(node) {
   return undefined;
 }
 
-function idFor(file, line, claim) {
+function idFor(file, sourceKey, claim) {
   const hash = createHash('sha256')
-    .update(`${file}:${line}:${claim}`)
+    .update(`${file}:${sourceKey}:${claim}`)
     .digest('hex')
     .slice(0, 10);
   return `claim-${hash}`;
@@ -108,7 +108,14 @@ async function collectTypeScriptClaims(file) {
     ) {
       const claim = normalizedClaim(node.text);
       const line = sourceFile.getLineAndCharacterOfPosition(node.getStart()).line + 1;
-      claims.push({file, line, claim, slug: nearestSlug(node)});
+      const slug = nearestSlug(node);
+      claims.push({
+        file,
+        line,
+        claim,
+        slug,
+        sourceKey: slug ? `slug:${slug}` : `claim:${claim}`,
+      });
     }
     ts.forEachChild(node, visit);
   }
@@ -123,23 +130,30 @@ async function collectJsonClaims(file) {
   const claims = [];
   let searchFrom = 0;
 
-  function visit(value) {
+  function visit(value, pathSegments = []) {
     if (typeof value === 'string') {
       if (value.length >= 20 && CLAIM_PATTERN.test(value)) {
         const encoded = JSON.stringify(value);
         const index = sourceText.indexOf(encoded, searchFrom);
         if (index >= 0) searchFrom = index + encoded.length;
         const line = sourceText.slice(0, Math.max(index, 0)).split(/\r?\n/).length;
-        claims.push({file, line, claim: normalizedClaim(value)});
+        claims.push({
+          file,
+          line,
+          claim: normalizedClaim(value),
+          sourceKey: pathSegments.join('.'),
+        });
       }
       return;
     }
     if (Array.isArray(value)) {
-      for (const item of value) visit(item);
+      value.forEach((item, index) => visit(item, [...pathSegments, String(index)]));
       return;
     }
     if (value && typeof value === 'object') {
-      for (const item of Object.values(value)) visit(item);
+      for (const [key, item] of Object.entries(value)) {
+        visit(item, [...pathSegments, key]);
+      }
     }
   }
 
@@ -179,8 +193,8 @@ async function main() {
     'status',
     'source_location',
   ];
-  const rows = claims.map(({file, line, claim, slug}) => [
-    idFor(file, line, claim),
+  const rows = claims.map(({file, line, claim, slug, sourceKey}) => [
+    idFor(file, sourceKey, claim),
     claim,
     pageFor(file, slug),
     localeFor(file),
@@ -200,6 +214,11 @@ async function main() {
     'pending_exact_source_review',
     `${file}:${line}`,
   ]);
+
+  const claimIds = rows.map((row) => row[0]);
+  if (new Set(claimIds).size !== claimIds.length) {
+    throw new Error('Claim registry generated duplicate stable claim IDs.');
+  }
 
   await mkdir(path.dirname(OUTPUT), {recursive: true});
   await writeFile(

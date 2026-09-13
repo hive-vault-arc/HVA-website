@@ -13,8 +13,13 @@ import {
 } from './content-route-contract'
 import {locations, mainDocuments} from './presentation'
 import {schemaTypes} from './schemaTypes'
-import {LOCALIZED_SCHEMA_TYPES, SUPPORTED_LANGUAGES} from './schemaTypes/localization'
+import {
+  LOCALIZED_SCHEMA_TYPES,
+  STRATEGIC_SCHEMA_TYPES,
+  SUPPORTED_LANGUAGES,
+} from './schemaTypes/localization'
 import {structure} from './structure'
+import {StrategicFamilyPublishAction} from './actions/strategicFamilyPublishAction'
 
 const websiteOrigin = process.env.SANITY_STUDIO_WEBSITE_URL || 'https://hivevaultarc.com'
 
@@ -48,7 +53,7 @@ export default defineConfig({
       languageField: 'language',
       weakReferences: false,
       allowCreateMetaDoc: true,
-      bulkPublish: true,
+      bulkPublish: false,
       apiVersion: '2026-07-23',
       callback: async ({newDocument, client}) => {
         await client
@@ -64,12 +69,33 @@ export default defineConfig({
       previousOptions.filter(
         (option) =>
           option.templateId !== 'organizationProfile' &&
+          option.templateId !== 'strategicReleaseAudit' &&
           (!isLocalizedSchemaType(option.templateId) || option.parameters?.language === 'en'),
       ),
-    actions: (previousActions, context) =>
-      context.schemaType === 'organizationProfile'
-        ? previousActions.filter((action) => !['delete', 'duplicate'].includes(action.action || ''))
-        : previousActions,
+    actions: (previousActions, context) => {
+      if (context.schemaType === 'organizationProfile') {
+        return previousActions.filter(
+          (action) => !['delete', 'duplicate'].includes(action.action || ''),
+        )
+      }
+      if (context.schemaType === 'strategicReleaseAudit') {
+        return previousActions.filter(
+          (action) =>
+            !['delete', 'duplicate', 'publish', 'unpublish'].includes(action.action || ''),
+        )
+      }
+      if (
+        STRATEGIC_SCHEMA_TYPES.includes(
+          context.schemaType as (typeof STRATEGIC_SCHEMA_TYPES)[number],
+        )
+      ) {
+        return [
+          ...previousActions.filter((action) => action.action !== 'publish'),
+          StrategicFamilyPublishAction,
+        ]
+      }
+      return previousActions
+    },
     productionUrl: async (previousUrl, {document}) => {
       const locale = document.language as ContentLocale | undefined
       if (!locale || !SUPPORTED_LANGUAGES.some((language) => language.id === locale)) {

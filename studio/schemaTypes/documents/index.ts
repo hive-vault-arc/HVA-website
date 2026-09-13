@@ -10,6 +10,7 @@ import {pageOptimization} from './pageOptimization'
 import {post} from './post'
 import {researchReport} from './researchReport'
 import {organizationProfile} from './organizationProfile'
+import {strategicReleaseAudit} from './strategicReleaseAudit'
 
 export const documentTypes = [
   industry,
@@ -24,4 +25,5 @@ export const documentTypes = [
   organizationProfile,
   editorialContributor,
   evidenceRecord,
+  strategicReleaseAudit,
 ]

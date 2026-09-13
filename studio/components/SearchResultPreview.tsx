@@ -21,14 +21,14 @@ export function SearchResultPreview(props: ObjectInputProps) {
   const direction = language === 'ar' ? 'rtl' : 'ltr'
 
   let route = '/'
-  if (language && documentType === 'pageOptimization' && routeKey && routeKey in PAGE_ROUTE_TEMPLATES) {
-    route = routeForPage(routeKey, language)
-  } else if (
+  if (
     language &&
-    slug &&
-    documentType &&
-    documentType in DOCUMENT_ROUTE_TEMPLATES
+    documentType === 'pageOptimization' &&
+    routeKey &&
+    routeKey in PAGE_ROUTE_TEMPLATES
   ) {
+    route = routeForPage(routeKey, language)
+  } else if (language && slug && documentType && documentType in DOCUMENT_ROUTE_TEMPLATES) {
     route = routeForDocument(documentType as RoutedDocumentType, language, slug)
   }
 
