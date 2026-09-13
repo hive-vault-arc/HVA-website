@@ -5,9 +5,10 @@ import ts from 'typescript';
 
 const OUTPUT = 'docs/research/claim-registry.csv';
 const SOURCE_FILES = [
-  'src/app/ai/company/route.ts',
+  'src/app/ai/company/page.tsx',
   'src/lib/blog.ts',
   'src/lib/capabilities.ts',
+  'src/lib/company-resource.ts',
   'src/lib/insights.ts',
   'src/lib/perspectives.ts',
   'src/lib/positioning.ts',
