@@ -198,6 +198,9 @@ export default async function RootLayout({children, params}: LocaleLayoutProps) 
 
   const profile = localeProfile(locale);
   const organizationCopy = ORGANIZATION_COPY[locale];
+  const analyticsMeasurementId = process.env.VERCEL_ENV === 'production'
+    ? process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim()
+    : undefined;
 
   setRequestLocale(locale);
   const [messages, tNavigation, tMetadata] = await Promise.all([
@@ -410,7 +413,7 @@ export default async function RootLayout({children, params}: LocaleLayoutProps) 
       </head>
       <body>
         <NextIntlClientProvider messages={clientMessages}>
-          <CookieConsentProvider>
+          <CookieConsentProvider analyticsMeasurementId={analyticsMeasurementId}>
             <JsonLd data={organizationSchema} />
             <JsonLd data={websiteSchema} />
             <JsonLd data={navigationSchema} />

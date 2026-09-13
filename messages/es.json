@@ -1270,18 +1270,18 @@
     }
   },
   "CookieConsent": {
-    "banner": {"title": "Cookies y privacidad", "body": "Usamos una cookie necesaria para recordar su elección de privacidad. Con su permiso, Microsoft Clarity puede usar cookies analíticas y repeticiones de sesión enmascaradas para ayudarnos a mejorar este sitio. Rechazar el análisis no afecta el acceso."},
+    "banner": {"title": "Cookies y privacidad", "body": "Usamos una cookie necesaria para recordar su elección de privacidad. Con su permiso, Microsoft Clarity y Google Analytics usan cookies analíticas para ayudarnos a mejorar este sitio. Google Analytics no se carga antes de que acepte las cookies. Rechazar las cookies opcionales no afecta el acceso."},
     "links": {"privacy": "Política de privacidad", "cookiePolicy": "Política de cookies"},
-    "actions": {"reject": "Rechazar cookies opcionales", "customize": "Personalizar", "accept": "Aceptar análisis"},
-    "dialog": {"title": "Configuración de cookies", "intro": "Elija si este sitio puede usar análisis opcionales. Su elección se aplica durante 180 días y puede cambiarse en cualquier momento.", "close": "Cerrar configuración de cookies", "cancel": "Cancelar", "save": "Guardar opciones", "necessary": {"title": "Estrictamente necesarias", "description": "Guarda su elección de privacidad y la versión del consentimiento. No contiene identidad ni historial de navegación.", "alwaysOn": "Siempre activas"}, "analytics": {"title": "Análisis", "description": "Permite a Microsoft Clarity medir interacciones enmascaradas, crear mapas de calor y conectar vistas de página consentidas en sesiones para mejorar la usabilidad.", "vendor": "Microsoft Clarity · no se utiliza publicidad.", "enabled": "Activo", "disabled": "Inactivo"}}
+    "actions": {"reject": "Rechazar cookies opcionales", "customize": "Personalizar", "accept": "Aceptar cookies"},
+    "dialog": {"title": "Configuración de cookies", "intro": "Elija si este sitio puede usar análisis opcionales. Su elección se aplica durante 180 días y puede cambiarse en cualquier momento.", "close": "Cerrar configuración de cookies", "cancel": "Cancelar", "save": "Guardar opciones", "necessary": {"title": "Estrictamente necesarias", "description": "Guarda su elección de privacidad y la versión del consentimiento. No contiene identidad ni historial de navegación.", "alwaysOn": "Siempre activas"}, "analytics": {"title": "Análisis", "description": "Permite a Microsoft Clarity medir interacciones enmascaradas, crear mapas de calor y conectar vistas de página consentidas en sesiones. También permite a Google Analytics medir páginas vistas, navegación y eventos de medición mejorada habilitados.", "vendor": "Microsoft Clarity y Google Analytics · no se utiliza publicidad.", "enabled": "Activo", "disabled": "Inactivo"}}
   },
   "CookiePolicy": {
-    "hero": {"eyebrow": "Controles de privacidad", "title": "Política de cookies", "description": "Cómo Hive Vault Arc utiliza almacenamiento de preferencias necesario y análisis opcional.", "updated": "Última actualización: 3 de septiembre de 2026"},
+    "hero": {"eyebrow": "Controles de privacidad", "title": "Política de cookies", "description": "Cómo Hive Vault Arc utiliza almacenamiento de preferencias necesario y análisis opcional.", "updated": "Última actualización: 13 de septiembre de 2026"},
     "overview": {"title": "Nuestro enfoque", "body": "Mantenemos el sitio público funcional sin cookies publicitarias. El análisis opcional permanece desactivado hasta que lo acepte expresamente, y puede cambiar esa elección en cualquier momento."},
     "necessary": {"title": "Almacenamiento de preferencias necesario", "body": "Una cookie propia de preferencias registra si aceptó o rechazó el análisis opcional. Es necesaria para respetar su elección y no le sigue entre sitios web."},
-    "analytics": {"title": "Análisis opcional de Microsoft Clarity", "body": "Tras su consentimiento, Microsoft Clarity recibe páginas vistas, clics, desplazamientos e información del dispositivo para mapas de calor y sesiones enmascaradas. Microsoft procesa los datos en Azure, posiblemente fuera de su país. El enmascaramiento estricto incluye el formulario de contacto. El almacenamiento publicitario permanece denegado. Las grabaciones están disponibles hasta 30 días.", "privacyLink": "Declaración de privacidad de Microsoft"},
-    "table": {"title": "Cookies y almacenamiento", "name": "Nombre", "provider": "Proveedor", "purpose": "Finalidad", "lifetime": "Duración", "rows": [{"name": "hva_consent_v1", "provider": "Hive Vault Arc", "purpose": "Recuerda su elección de análisis y la versión del consentimiento.", "lifetime": "180 días"}, {"name": "_clck", "provider": "Microsoft Clarity", "purpose": "Recuerda un identificador seudónimo tras aceptar el análisis.", "lifetime": "1 año"}, {"name": "_clsk", "provider": "Microsoft Clarity", "purpose": "Conecta páginas vistas con consentimiento en una sesión.", "lifetime": "1 día"}, {"name": "_cltk", "provider": "Microsoft Clarity", "purpose": "Identificador de pestaña en el almacenamiento de sesión tras aceptar.", "lifetime": "Hasta cerrar la pestaña"}]},
-    "choices": {"title": "Gestionar su elección", "body": "Use Configuración de cookies en el pie de página para aceptar, rechazar o retirar el análisis opcional. Retirar el consentimiento borra las cookies de Clarity cuando están disponibles y recarga la página con el análisis desactivado."},
+    "analytics": {"title": "Análisis opcional", "body": "Tras su consentimiento, Microsoft Clarity recibe páginas vistas, clics, desplazamientos e información del dispositivo para mapas de calor y sesiones enmascaradas. Google Analytics recibe páginas vistas, navegación, eventos de medición mejorada habilitados, ubicación aproximada e información del navegador y del dispositivo. Google Analytics no se carga antes del consentimiento. No enviamos intencionalmente nombres, correos electrónicos, teléfonos, textos de mensajes ni identificadores de CRM a Google Analytics. El almacenamiento publicitario, los datos de usuario y la personalización publicitaria permanecen denegados.", "microsoftPrivacyLink": "Declaración de privacidad de Microsoft", "googlePrivacyLink": "Información de privacidad de Google Analytics"},
+    "table": {"title": "Cookies y almacenamiento", "name": "Nombre", "provider": "Proveedor", "purpose": "Finalidad", "lifetime": "Duración", "rows": [{"name": "hva_consent_v1", "provider": "Hive Vault Arc", "purpose": "Recuerda su elección de análisis y la versión del consentimiento.", "lifetime": "180 días"}, {"name": "_clck", "provider": "Microsoft Clarity", "purpose": "Recuerda un identificador seudónimo tras aceptar el análisis.", "lifetime": "1 año"}, {"name": "_clsk", "provider": "Microsoft Clarity", "purpose": "Conecta páginas vistas con consentimiento en una sesión.", "lifetime": "1 día"}, {"name": "_cltk", "provider": "Microsoft Clarity", "purpose": "Identificador de pestaña en el almacenamiento de sesión tras aceptar.", "lifetime": "Hasta cerrar la pestaña"}, {"name": "_ga", "provider": "Analítica de Google", "purpose": "Distingue a los visitantes tras aceptar el análisis.", "lifetime": "2 años"}, {"name": "_ga_[id-del-contenedor]", "provider": "Analítica de Google", "purpose": "Almacena el estado de sesión de GA4 tras aceptar el análisis.", "lifetime": "2 años"}]},
+    "choices": {"title": "Gestionar su elección", "body": "Use Configuración de cookies en el pie de página para aceptar, rechazar o retirar el análisis opcional. Retirar el consentimiento borra las cookies de Clarity y Google Analytics cuando están disponibles y recarga la página con el análisis desactivado."},
     "contact": {"title": "Preguntas", "body": "Para preguntas sobre privacidad o sus datos, contacte con nuestro equipo o lea nuestra Política de privacidad.", "privacyLink": "Leer la Política de privacidad"}
   },
   "Privacy": {
@@ -1293,7 +1293,7 @@
       "eyebrow": "Cumplimiento y protección de datos",
       "title": "Política de privacidad",
       "description": "Hive Vault Arc se compromete a proteger sus datos personales de conformidad con la Ley marroquí 09-08 sobre la protección de las personas físicas en lo que respecta al tratamiento de datos personales (CNDP), así como el Reglamento General de Protección de Datos (GDPR) aplicable a los residentes de la Unión Europea en su ámbito extraterritorial.",
-      "updated": "Última actualización: 3 de septiembre de 2026"
+      "updated": "Última actualización: 13 de septiembre de 2026"
     },
     "controller": {
       "title": "1. Responsable del tratamiento de datos",
@@ -1334,7 +1334,7 @@
       "items": [
         {
           "label": "Consentimiento",
-          "detail": "usted envía información voluntariamente a través del formulario de contacto o acepta expresamente el análisis opcional de Microsoft Clarity."
+          "detail": "usted envía información voluntariamente a través del formulario de contacto o acepta expresamente el análisis opcional de Microsoft Clarity y Google Analytics."
         },
         {
           "label": "Ejecución de un contrato",
@@ -1348,7 +1348,7 @@
     },
     "cookies": {
       "title": "5. Cookies y tecnologías de seguimiento",
-      "body": "Vercel Web Analytics mide las visitas a la página con datos agregados y anónimos y no coloca una cookie ni retiene un identificador persistente que siga a un visitante entre sitios web o días. Microsoft Clarity está desactivado de forma predeterminada y solo puede ejecutarse después de que acepte el análisis opcional. No se utiliza para publicidad.",
+      "body": "Vercel Web Analytics mide las visitas a la página con datos agregados y anónimos y no coloca una cookie ni retiene un identificador persistente que siga a un visitante entre sitios web o días. Microsoft Clarity y Google Analytics están desactivados de forma predeterminada y solo pueden ejecutarse después de que acepte el análisis opcional. Google Analytics usa cookies analíticas propias para medir páginas vistas, navegación y eventos de medición mejorada habilitados. El almacenamiento publicitario, los datos de usuario y la personalización publicitaria permanecen denegados.",
       "linkLabel": "Leer nuestra Política de cookies"
     },
     "retention": {
@@ -1369,8 +1369,8 @@
           "period": "5 años después del fin de la relación comercial"
         },
         {
-          "category": "Informes analíticos anónimos",
-          "period": "Para la ventana de informes disponible en el plan Vercel activo"
+          "category": "Informes analíticos",
+          "period": "Para los periodos de informes configurados en Vercel Web Analytics, Microsoft Clarity y Google Analytics"
         }
       ]
     },
@@ -1389,13 +1389,17 @@
         {
           "label": "Microsoft Clarity",
           "detail": "análisis opcional de interacciones y sesiones enmascaradas, solo con su consentimiento. La Política de cookies detalla la recopilación, el almacenamiento y la conservación."
+        },
+        {
+          "label": "Analítica de Google",
+          "detail": "medición opcional de la audiencia del sitio, solo con su consentimiento."
         }
       ],
       "closing": "Ninguno de sus datos se comparte con terceros con fines publicitarios o de marketing."
     },
     "transfers": {
       "title": "8. Transferencias Internacionales de Datos",
-      "body": "Los datos alojados en servidores de Vercel en Estados Unidos implican una transferencia fuera del Espacio Económico Europeo, regida por Cláusulas Contractuales Tipo aprobadas por la Comisión Europea en virtud del artículo 46 del RGPD. Para transferencias fuera de Marruecos, Hive Vault Arc cumple con el artículo 43 de la Ley 09-08 y las autorizaciones CNDP aplicables."
+      "body": "Los datos alojados o procesados por Vercel, Microsoft Clarity y Google Analytics pueden implicar una transferencia fuera del Espacio Económico Europeo. Cuando se aplica el RGPD, los términos de procesamiento de datos de los proveedores pertinentes establecen las garantías aplicables. Para transferencias fuera de Marruecos, Hive Vault Arc cumple con el artículo 43 de la Ley 09-08 y las autorizaciones CNDP aplicables."
     },
     "rights": {
       "title": "9. Tus derechos",
@@ -1488,7 +1492,7 @@
       "eyebrow": "Información Legal",
       "title": "Menciones Legales",
       "description": "De conformidad con la ley marroquí de publicaciones comerciales y digitales, incluida la Ley 31-08 sobre protección del consumidor y el Código de Comercio, la siguiente información legal se aplica a hivevaultarc.com.",
-      "updated": "Última actualización: 10 de julio de 2026"
+      "updated": "Última actualización: 13 de septiembre de 2026"
     },
     "publisher": {
       "title": "1. Editor del sitio",
@@ -1535,7 +1539,7 @@
     },
     "cookies": {
       "title": "8. Galletas",
-      "body": "Vercel Web Analytics registra datos de vistas de página agregados y anónimos sin cookies ni un identificador persistente entre sitios. Microsoft Clarity está desactivado de forma predeterminada y solo puede ejecutarse después de aceptar el análisis opcional. Para más información, consulte nuestra",
+      "body": "Vercel Web Analytics registra datos de vistas de página agregados y anónimos sin cookies ni un identificador persistente entre sitios. Microsoft Clarity y Google Analytics están desactivados de forma predeterminada y solo pueden ejecutarse después de aceptar el análisis opcional. Google Analytics utiliza cookies analíticas únicamente después de su consentimiento. Para más información, consulte nuestra",
       "linkLabel": "Política de cookies"
     },
     "cta": {

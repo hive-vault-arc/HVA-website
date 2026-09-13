@@ -37,7 +37,15 @@ export default function CookiePolicy() {
         <section>
           <h2 className="services-brief-section-title">{t('analytics.title')}</h2>
           <p>{t('analytics.body')}</p>
-          <p><a href="https://privacy.microsoft.com/privacystatement" className="underline underline-offset-2">{t('analytics.privacyLink')}</a></p>
+          <p>
+            <a href="https://privacy.microsoft.com/privacystatement" className="underline underline-offset-2">
+              {t('analytics.microsoftPrivacyLink')}
+            </a>
+            <span aria-hidden="true"> · </span>
+            <a href="https://policies.google.com/privacy" className="underline underline-offset-2">
+              {t('analytics.googlePrivacyLink')}
+            </a>
+          </p>
         </section>
         <section>
           <h2 className="services-brief-section-title">{t('table.title')}</h2>
