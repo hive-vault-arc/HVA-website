@@ -51,11 +51,21 @@ export type EditorialLink = {
   href: string;
 };
 
+export type EditorialEvidenceLink = {
+  label: string;
+  url: string;
+  claimIds?: string[];
+};
+
 export type EditorialContentFields = {
   editorialFormat?: EditorialFormat;
   topics?: EditorialTopic[];
+  answerQuestion?: string;
   directAnswer?: string;
   keyTakeaways?: string[];
+  answerEvidence?: EditorialEvidenceLink[];
+  relatedQuestions?: string[];
+  lastReviewed?: string;
   evidenceType?: string;
   reviewers?: EditorialPerson[];
   relatedCases?: EditorialLink[];

@@ -1,0 +1,77 @@
+schema_version: 1
+compiled_on: 2026-09-13
+review_status: pending_company_verification
+approval_owner: company_leadership
+
+identity:
+  legal_name: Hive Vault Arc
+  public_brand_name: Hive Vault Arc
+  canonical_website: https://hivevaultarc.com
+  logo_url: https://hivevaultarc.com/Images/brand/hva-icon-static-light-surface.svg
+
+public_contact:
+  email: contact@hivevaultarc.com
+  phone_e164: "+212670431249"
+  phone_display: "+212 670 431 249"
+  whatsapp: https://wa.me/212670431249
+
+headquarters:
+  city: Tangier
+  region: Tanger-Tetouan-Al Hoceima
+  country: Morocco
+  country_code: MA
+  latitude: 35.7595
+  longitude: -5.834
+
+supported_languages:
+  - English
+  - French
+  - Arabic
+  - Spanish
+
+markets_served:
+  - Morocco
+  - France
+  - Europe
+  - North Africa
+  - MENA
+
+official_profiles:
+  - platform: LinkedIn
+    url: https://www.linkedin.com/company/hive-vault-arc
+    verification_status: pending_company_verification
+  - platform: GitHub
+    url: https://github.com/hive-vault-arc
+    verification_status: company_organization
+  - platform: Instagram
+    url: https://www.instagram.com/hivevaultarc/
+    verification_status: pending_company_verification
+  - platform: Facebook
+    url: https://www.facebook.com/hivevaultarc
+    verification_status: pending_company_verification
+  - platform: X
+    url: https://x.com/Hivevaultarc
+    verification_status: pending_company_verification
+  - platform: TikTok
+    url: https://www.tiktok.com/@hivevaultarc
+    verification_status: pending_company_verification
+
+unknown_until_approved:
+  - founding_date
+  - public_business_hours
+  - legal_registration_name_if_different
+  - memberships
+  - awards
+
+sources:
+  - src/lib/entity-facts.ts
+  - src/lib/seo.ts
+  - current_public_website
+
+change_workflow:
+  - approve_in_company_fact_registry
+  - update_website_and_structured_data
+  - update_ai_company_endpoint
+  - reconcile_company_profiles
+  - notify_changed_canonical_urls
+  - retest_search_and_assistant_surfaces

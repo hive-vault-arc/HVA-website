@@ -76,16 +76,7 @@
 3. Add it to Vercel environment variables:
    - **Name:** `NEXT_PUBLIC_GA_MEASUREMENT_ID`
    - **Value:** `G-XXXXXXXXXX`
-4. In the codebase, install and wire up GA4:
-   ```bash
-   npm install @next/third-parties
-   ```
-   In `src/app/layout.tsx`:
-   ```tsx
-   import { GoogleAnalytics } from '@next/third-parties/google';
-   // In <body>:
-   <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID!} />
-   ```
+4. Deploy the existing direct GA4 integration in `src/app/[locale]/layout.tsx`. It loads only in Production and only after the visitor accepts cookies. Do not add a second snippet or manual pageview instrumentation.
 5. Set up key conversion events in GA4:
    - Contact form submission
    - CTA button clicks ("Book a Call", "Contact Us")
@@ -95,20 +86,9 @@
 
 ---
 
-### OUT-5 — Google Tag Manager (Optional but Recommended)
+### OUT-5 — Google Tag Manager (Retired)
 
-**Where:** https://tagmanager.google.com
-
-**Action:**
-1. Create a GTM account and container for `hivevaultarc.com`
-2. Get the GTM container ID (format: `GTM-XXXXXXX`)
-3. Install GTM in `layout.tsx` (or use `@next/third-parties`):
-   ```tsx
-   import { GoogleTagManager } from '@next/third-parties/google';
-   // In <head>:
-   <GoogleTagManager gtmId="GTM-XXXXXXX" />
-   ```
-4. Use GTM to manage all tracking tags (GA4, LinkedIn Insight, Facebook Pixel if needed) from one place without code deploys
+Do not install Google Tag Manager for the current measurement setup. Hive Vault Arc uses one direct GA4 tag behind the consent gate; adding GA4 again through GTM would duplicate measurement. Revisit this decision only through a separate, approved tracking-design change.
 
 ---
 
@@ -227,7 +207,7 @@ For each new page, paste the URL into URL Inspection and click **Request Indexin
 | OUT-2: Custom domain + www redirect | Khalid | ✅ Done | 2026-04-28 |
 | OUT-3: Google Search Console | Khalid | ⬜ | Week 1 |
 | OUT-4: Google Analytics 4 | Khalid | ⬜ | Week 1 |
-| OUT-5: Google Tag Manager | Khalid | ⬜ | Week 2 |
+| OUT-5: Google Tag Manager | Company analytics owner | Not used — direct GA4 | N/A |
 | OUT-6: Google Business Profile | Khalid | ⬜ | Week 1 |
 | OUT-7: LinkedIn Company Page | Khalid | ⬜ | Week 1 |
 | OUT-8: Update .env.example | Dev | ⬜ | With Sprint 01 |

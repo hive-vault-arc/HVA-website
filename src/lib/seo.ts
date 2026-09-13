@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { CANONICAL_MARKET_IDENTITY } from './positioning';
+import {COMPANY_ENTITY_FACTS, COMPANY_SOCIAL_PROFILES} from './entity-facts';
 import {LOCALE_PROFILES, PUBLIC_LOCALES, type AppLocale} from '@/i18n/config';
 import type {AppPathname} from '@/i18n/routing';
 import {localizedAlternates, localizedPath} from '@/i18n/route-manifest';
@@ -7,9 +8,50 @@ import {localizedAlternates, localizedPath} from '@/i18n/route-manifest';
 export const SUPPORTED_LOCALES = PUBLIC_LOCALES;
 export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
 
-export const SITE_NAME = 'Hive Vault Arc';
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://hivevaultarc.com';
-export const LINKEDIN_URL = 'https://www.linkedin.com/company/hive-vault-arc';
+export {COMPANY_ENTITY_FACTS};
+
+export const SITE_NAME = COMPANY_ENTITY_FACTS.publicBrandName;
+export const CANONICAL_SITE_URL = COMPANY_ENTITY_FACTS.canonicalWebsite;
+
+export function resolveSiteUrl(
+  configuredUrl = process.env.NEXT_PUBLIC_SITE_URL,
+  vercelEnvironment = process.env.VERCEL_ENV,
+): string {
+  const candidate = configuredUrl?.trim() || CANONICAL_SITE_URL;
+  let parsed: URL;
+
+  try {
+    parsed = new URL(candidate);
+  } catch {
+    throw new Error('NEXT_PUBLIC_SITE_URL must be a valid absolute URL.');
+  }
+
+  const hasUnexpectedParts =
+    parsed.protocol !== 'https:' ||
+    parsed.username !== '' ||
+    parsed.password !== '' ||
+    parsed.pathname !== '/' ||
+    parsed.search !== '' ||
+    parsed.hash !== '';
+
+  if (hasUnexpectedParts) {
+    throw new Error(
+      'NEXT_PUBLIC_SITE_URL must be an HTTPS origin without a path, query, fragment, or credentials.',
+    );
+  }
+
+  const normalized = parsed.origin.toLowerCase();
+  if (vercelEnvironment === 'production' && normalized !== CANONICAL_SITE_URL) {
+    throw new Error(
+      `Vercel Production must use NEXT_PUBLIC_SITE_URL=${CANONICAL_SITE_URL}.`,
+    );
+  }
+
+  return normalized;
+}
+
+export const SITE_URL = resolveSiteUrl();
+export const LINKEDIN_URL = COMPANY_SOCIAL_PROFILES[0].url;
 export const SITE_LOGO_PATH = '/Images/brand/hva-icon-static-light-surface.svg';
 export const SITE_LOGO_WIDTH = 100;
 export const SITE_LOGO_HEIGHT = 100;
@@ -21,7 +63,7 @@ export const DEFAULT_OG_IMAGE_PATH = '/Images/brand/hva-og-share.webp';
 export const DEFAULT_OG_IMAGE_WIDTH = 1200;
 export const DEFAULT_OG_IMAGE_HEIGHT = 630;
 
-export const BUSINESS_NAME = 'Hive Vault Arc';
+export const BUSINESS_NAME = COMPANY_ENTITY_FACTS.publicBrandName;
 export const DISPLAY_BRAND_NAME = BUSINESS_NAME;
 export const DISPLAY_BRAND_NAME_UPPER = 'HIVE VAULT ARC';
 export const BRAND_ABBREVIATION = 'H.V.A';
@@ -34,42 +76,11 @@ export const BRAND_ALIASES = [
   'Hive Vault ARC',
 ];
 export const BRAND_SEARCH_VARIANTS = [...BRAND_ALIASES, 'Hive Vault', 'Vault Arc', 'hivevaultarc.com'];
-export const CONTACT_EMAIL = 'contact@hivevaultarc.com';
-export const CONTACT_PHONE_E164 = '+212670431249';
-export const CONTACT_PHONE_DISPLAY = '+212 670 431 249';
-export const WHATSAPP_URL = 'https://wa.me/212670431249';
-export const SOCIAL_PROFILES = [
-  {
-    label: 'LinkedIn',
-    handle: 'Hive Vault Arc',
-    url: LINKEDIN_URL,
-  },
-  {
-    label: 'GitHub',
-    handle: 'hive-vault-arc',
-    url: 'https://github.com/hive-vault-arc',
-  },
-  {
-    label: 'Instagram',
-    handle: '@hivevaultarc',
-    url: 'https://www.instagram.com/hivevaultarc/',
-  },
-  {
-    label: 'Facebook',
-    handle: 'Hive Vault Arc',
-    url: 'https://www.facebook.com/hivevaultarc',
-  },
-  {
-    label: 'X',
-    handle: '@Hivevaultarc',
-    url: 'https://x.com/Hivevaultarc',
-  },
-  {
-    label: 'TikTok',
-    handle: '@hivevaultarc',
-    url: 'https://www.tiktok.com/@hivevaultarc',
-  },
-] as const;
+export const CONTACT_EMAIL = COMPANY_ENTITY_FACTS.publicEmail;
+export const CONTACT_PHONE_E164 = COMPANY_ENTITY_FACTS.publicPhoneE164;
+export const CONTACT_PHONE_DISPLAY = COMPANY_ENTITY_FACTS.publicPhoneDisplay;
+export const WHATSAPP_URL = COMPANY_ENTITY_FACTS.whatsappUrl;
+export const SOCIAL_PROFILES = COMPANY_SOCIAL_PROFILES;
 export const SOCIAL_PROFILE_URLS = SOCIAL_PROFILES.map((profile) => profile.url);
 export const DEFAULT_TITLE = `${SITE_NAME} | Technology Transformation Partner - Strategy, AI Engineering, Operations`;
 export const DEFAULT_DESCRIPTION = CANONICAL_MARKET_IDENTITY.longDescriptor;
@@ -257,14 +268,27 @@ export function absoluteUrl(path: string): string {
   return new URL(path, SITE_URL).toString();
 }
 
+export const SCHEMA_IDS = Object.freeze({
+  organization: absoluteUrl('/#organization'),
+  website: absoluteUrl('/#website'),
+});
+
+export function schemaId(path: string, fragment: string): string {
+  const url = new URL(path, SITE_URL);
+  url.hash = fragment.replace(/^#/, '');
+  return url.toString();
+}
+
 export function mergeKeywords(...groups: string[][]): string[] {
   return Array.from(new Set(groups.flat().map((keyword) => keyword.trim()).filter(Boolean)));
 }
 
 export function buildBreadcrumbSchema(crumbs: { name: string; path: string }[]) {
+  const lastCrumb = crumbs.at(-1);
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
+    ...(lastCrumb ? {'@id': schemaId(lastCrumb.path, 'breadcrumb')} : {}),
     itemListElement: crumbs.map((crumb, index) => ({
       '@type': 'ListItem',
       position: index + 1,

@@ -133,27 +133,9 @@ export async function getPublishedDocument<
   locale: AppLocale,
   fetchByLocale: (targetLocale: AppLocale) => Promise<T | null>,
 ): Promise<T | null> {
-  if (locale === 'en') {
-    const englishDocument = await fetchByLocale('en');
-    return englishDocument ? withSourceLocale(englishDocument, 'en') : null;
-  }
-
-  if (locale !== 'fr') {
-    const localizedDocument = await fetchByLocale(locale);
-    return localizedDocument ? withSourceLocale(localizedDocument, locale) : null;
-  }
-
-  const [localizedDocument, englishDocument] = await Promise.all([
-    fetchByLocale(locale),
-    fetchByLocale('en'),
-  ]);
-
-  if (localizedDocument) {
-    return withSourceLocale(localizedDocument, locale);
-  }
-
-  return englishDocument
-    ? applyFrenchCmsFallback(withSourceLocale(englishDocument, 'en'))
+  const localizedDocument = await fetchByLocale(locale);
+  return localizedDocument
+    ? withSourceLocale(localizedDocument, locale)
     : null;
 }
 
@@ -228,10 +210,6 @@ export function translationRoutes(
       ],
     ),
   ) as Partial<Record<AppLocale, string>>;
-
-  if (content.language === 'en' && !routes.fr) {
-    routes.fr = internalTemplate.replace(`[${paramName}]`, currentSlug);
-  }
 
   return routes;
 }

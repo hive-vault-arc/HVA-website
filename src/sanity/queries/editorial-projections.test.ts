@@ -20,6 +20,9 @@ describe('editorial Sanity projections', () => {
   ])('projects optional editorial fields without changing document predicates', (query) => {
     expect(query).toContain('editorialFormat');
     expect(query).toContain('directAnswer');
+    expect(query).toContain('answerQuestion');
+    expect(query).toContain('answerEvidence');
+    expect(query).toContain('lastReviewed');
     expect(query).toContain('methodology');
     expect(query).toContain('limitations');
     expect(query).toContain('primaryCta');

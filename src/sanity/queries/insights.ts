@@ -33,8 +33,16 @@ const seoFields = `
 const editorialFields = `
   editorialFormat,
   topics,
+  answerQuestion,
   directAnswer,
   keyTakeaways,
+  answerEvidence[]{
+    label,
+    url,
+    claimIds
+  },
+  relatedQuestions,
+  lastReviewed,
   evidenceType,
   reviewers[]{
     name,

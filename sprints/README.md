@@ -1,6 +1,6 @@
 # HVA Website — Sprint Backlog
 
-> 2026-05-24 note: this is the older general SEO/content backlog. For current SEO + AI discovery work, use `sprints/seo-ai-discovery/README.md`. Public-facing copy should now use `Hive Vault Arc`; `H.V.A` and `HVA` are aliases/search variants unless a historical sprint explicitly says otherwise.
+> 2026-09-13 note: this is the older general SEO/content backlog. For the current evidence-based SEO, AEO, and GEO program, use [`sprints/seo-aeo-geo-2026/README.md`](./seo-aeo-geo-2026/README.md). The May 2026 discovery pack remains historical implementation context. Public-facing copy should use `Hive Vault Arc`; `H.V.A` and `HVA` are aliases/search variants unless a historical sprint explicitly says otherwise.
 
 > All remaining work on the hiva-website, organized as sprint files for AI coding agent execution.
 > Last updated: 2026-06-04

@@ -4,7 +4,7 @@
 
 ## 2026-05-24 Current Baseline Update
 
-This audit was written against the old Vercel staging domain and is no longer the current execution baseline. Use `docs/specs/seo-ai-discovery/` and `sprints/seo-ai-discovery/` for current SEO/AI discovery work.
+This audit was written against the old Vercel staging domain and is no longer the current execution baseline. Use `sprints/seo-aeo-geo-2026/` and `docs/seo/implementation-status.md` for current work. Its former GTM recommendation is retired: the approved implementation is direct GA4 behind consent, with no GTM container.
 
 Current repo and production state:
 
@@ -37,13 +37,13 @@ This is **the single biggest reason the site doesn't rank**. The domain `hiva-ni
 
 ---
 
-### 2. No Google Analytics or Google Tag Manager
-There is **zero tracking installed** on the site. No GA4, no GTM. This means:
+### 2. Historical state: no Google Analytics
+At the time of this snapshot, there was **zero GA4 tracking installed** on the site. This meant:
 - You have no behavioral data to feed Google's algorithms
 - You cannot verify what traffic you do or don't receive
 - You cannot use GA4 as a Search Console data source
 
-**Fix:** Install Google Analytics 4 (GA4) via Google Tag Manager. Add the GTM container script to all pages.
+**Current decision:** Use the direct GA4 integration already implemented behind the cookie-consent gate. Do not add Google Tag Manager or a second pageview implementation.
 
 ---
 
@@ -197,7 +197,7 @@ These are areas where the site is already properly set up:
 |---|---|---|---|
 | 🔴 1 | **Get a custom domain and connect it** | Low | Extreme |
 | 🔴 2 | **Submit sitemap in GSC & request indexing** | Low | High |
-| 🔴 3 | **Install GA4 via GTM** | Low | High |
+| 🔴 3 | **Deploy direct, consent-gated GA4; do not add GTM** | Low | High |
 | 🔴 4 | **Fix the LinkedIn link to actual company page** | Low | Medium |
 | 🔴 5 | **Create Google Business Profile** | Low | High (local) |
 | 🟠 6 | **Populate `sameAs` in Organization schema** | Low | High |

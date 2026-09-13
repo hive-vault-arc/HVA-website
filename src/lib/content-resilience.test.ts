@@ -1,4 +1,6 @@
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest'
+import type {AppLocale} from '@/i18n/config'
+import type {CaseStudy, ClientEvidenceSummary} from './proof'
 
 const sanityMocks = vi.hoisted(() => ({
   getAllSanityPosts: vi.fn(async () => {
@@ -13,10 +15,17 @@ const sanityMocks = vi.hoisted(() => ({
   getSanityClientEvidenceShowcase: vi.fn(async () => {
     throw new TypeError('fetch failed')
   }),
-  getSanityHomeCaseStudyProof: vi.fn(async () => {
+  getSanityHomeCaseStudyProof: vi.fn<
+    (targetLocale: AppLocale) => Promise<{
+      caseStudies: CaseStudy[]
+      clientEvidence: ClientEvidenceSummary[]
+    }>
+  >(async () => {
     throw new TypeError('fetch failed')
   }),
-  getSanityCaseStudyBySlug: vi.fn(async () => {
+  getSanityCaseStudyBySlug: vi.fn<
+    (...args: unknown[]) => Promise<CaseStudy | null>
+  >(async () => {
     throw new TypeError('fetch failed')
   }),
 }))
@@ -31,7 +40,6 @@ import {
   getClientEvidenceShowcase,
   getPublishedHomeCaseStudyProof,
 } from './proof'
-import type {CaseStudy, ClientEvidenceSummary} from './proof'
 
 describe('local content resilience', () => {
   beforeEach(() => {

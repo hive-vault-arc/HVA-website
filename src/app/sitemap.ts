@@ -30,11 +30,9 @@ function absoluteLanguages(languages: Record<string, string>): Record<string, st
 function staticEntry(
   pathname: AppPathname,
   locale: AppLocale,
-  now: Date,
 ): MetadataRoute.Sitemap[number] {
   return {
     url: absolute(localizedPath(pathname, locale)),
-    lastModified: now,
     changeFrequency: 'monthly',
     priority: pathname === '/' ? (locale === 'en' ? 1 : 0.9) : 0.75,
     alternates: {
@@ -47,16 +45,18 @@ type DynamicContent = LocalizedContentMeta & {
   slug: string;
   publishedAt?: string;
   lastUpdated?: string;
+  seo?: {
+    noIndex?: boolean;
+  };
 };
 
 function dynamicEntries(
   items: DynamicContent[],
   locale: AppLocale,
   pathname: AppPathname,
-  now: Date,
   paramName = 'slug',
 ): MetadataRoute.Sitemap {
-  return items.map((item) => {
+  return items.filter((item) => !item.seo?.noIndex).map((item) => {
     const paramsByLocale: Partial<Record<AppLocale, Record<string, string>>> = {
       [locale]: {[paramName]: item.slug},
     };
@@ -70,7 +70,7 @@ function dynamicEntries(
 
     return {
       url: absolute(localizedPath(pathname, locale, {[paramName]: item.slug})),
-      lastModified: lastModifiedValue ? new Date(lastModifiedValue) : now,
+      ...(lastModifiedValue ? {lastModified: new Date(lastModifiedValue)} : {}),
       changeFrequency: 'monthly',
       priority: 0.7,
       alternates: {
@@ -81,11 +81,10 @@ function dynamicEntries(
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const now = new Date();
   const staticEntries = Object.values(ROUTE_MANIFEST)
     .filter((route) => route.indexable)
     .flatMap((route) =>
-      PUBLIC_LOCALES.map((locale) => staticEntry(route.pathname, locale, now)),
+      PUBLIC_LOCALES.map((locale) => staticEntry(route.pathname, locale)),
     );
 
   const localizedContent = await Promise.all(
@@ -102,41 +101,29 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         ]);
 
       return [
-        ...dynamicEntries(posts, locale, '/blog/[slug]', now),
-        ...dynamicEntries(capabilities, locale, '/capabilities/[slug]', now),
-        ...dynamicEntries(caseStudies, locale, '/case-studies/[slug]', now),
+        ...dynamicEntries(posts, locale, '/blog/[slug]'),
+        ...dynamicEntries(capabilities, locale, '/capabilities/[slug]'),
+        ...dynamicEntries(caseStudies, locale, '/case-studies/[slug]'),
         ...dynamicEntries(
           employees,
           locale,
           '/aboutus/our-people/[employee]',
-          now,
           'employee',
         ),
-        ...dynamicEntries(news, locale, '/insights/news-articles/[slug]', now),
+        ...dynamicEntries(news, locale, '/insights/news-articles/[slug]'),
         ...dynamicEntries(
           perspectives,
           locale,
           '/insights/perspectives/[slug]',
-          now,
         ),
         ...dynamicEntries(
           research,
           locale,
           '/insights/research-reports/[slug]',
-          now,
         ),
       ];
     }),
   );
 
-  return [
-    ...staticEntries,
-    ...localizedContent.flat(),
-    {
-      url: absolute('/ai/company'),
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.4,
-    },
-  ];
+  return [...staticEntries, ...localizedContent.flat()];
 }

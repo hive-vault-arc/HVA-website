@@ -16,13 +16,14 @@ import {
   CONTACT_EMAIL,
   CONTACT_PHONE_DISPLAY,
   CONTACT_PHONE_E164,
+  COMPANY_ENTITY_FACTS,
   SOCIAL_PROFILE_URLS,
   SITE_URL,
 } from '../../../lib/seo';
 
 export const revalidate = 86400;
 
-const LAST_UPDATED = '2026-07-12';
+const LAST_UPDATED = '2026-09-13';
 
 const importantPages = {
   home: absoluteUrl('/'),
@@ -42,7 +43,7 @@ const importantPages = {
   itConsultingTangier: absoluteUrl('/it-consulting-tangier'),
   customSoftwareMorocco: absoluteUrl('/custom-software-morocco'),
   digitalServicesTangier: absoluteUrl('/digital-services-tangier'),
-  servicesDigitauxTanger: absoluteUrl('/services-digitaux-tanger'),
+  servicesDigitauxTanger: absoluteUrl('/fr/services-digitaux-tanger'),
   llms: absoluteUrl('/llms.txt'),
   llmsFull: absoluteUrl('/llms-full.txt'),
   companyJson: absoluteUrl('/ai/company'),
@@ -82,8 +83,9 @@ export async function GET() {
 
   return NextResponse.json(
     {
-      schemaVersion: '1.0',
+      schemaVersion: '2.0',
       lastUpdated: LAST_UPDATED,
+      canonicalResource: absoluteUrl('/ai/company'),
       company: {
         name: BUSINESS_NAME,
         legalName: BUSINESS_NAME,
@@ -96,18 +98,18 @@ export async function GET() {
         telephone: CONTACT_PHONE_E164,
         formattedTelephone: CONTACT_PHONE_DISPLAY,
         location: {
-          city: 'Tangier',
-          region: 'Tanger-Tetouan-Al Hoceima',
-          country: 'Morocco',
-          countryCode: 'MA',
+          city: COMPANY_ENTITY_FACTS.headquarters.city,
+          region: COMPANY_ENTITY_FACTS.headquarters.region,
+          country: COMPANY_ENTITY_FACTS.headquarters.country,
+          countryCode: COMPANY_ENTITY_FACTS.headquarters.countryCode,
           coordinates: {
-            latitude: 35.7595,
-            longitude: -5.834,
+            latitude: COMPANY_ENTITY_FACTS.headquarters.latitude,
+            longitude: COMPANY_ENTITY_FACTS.headquarters.longitude,
           },
           remoteDelivery: true,
         },
-        marketsServed: ['Morocco', 'France', 'Europe', 'North Africa', 'MENA', 'Remote delivery worldwide'],
-        languages: ['English', 'French', 'Arabic', 'Spanish'],
+        marketsServed: COMPANY_ENTITY_FACTS.marketsServed,
+        languages: COMPANY_ENTITY_FACTS.supportedLanguages,
         founders: founderProfiles.map((member) => ({
           name: member.name,
           slug: member.slug,
@@ -189,7 +191,7 @@ export async function GET() {
             title: report.title,
             summary: report.summary,
             publishedAt: report.publishedAt,
-            url: absoluteUrl('/insights/research-reports'),
+            url: absoluteUrl(`/insights/research-reports/${report.slug}`),
           })),
         },
         industries: [
@@ -223,10 +225,15 @@ export async function GET() {
         llms: absoluteUrl('/llms.txt'),
         llmsFull: absoluteUrl('/llms-full.txt'),
       },
+      governance: {
+        entityFactReviewStatus: COMPANY_ENTITY_FACTS.review.status,
+        crawlerPolicy: absoluteUrl('/robots.txt'),
+        sourceNotes: 'Public company facts are compiled from the website configuration and require company-owner review when they change.',
+      },
     },
     {
       headers: {
-        'Cache-Control': 'public, max-age=86400, stale-while-revalidate=604800',
+        'Cache-Control': 'public, max-age=0, s-maxage=86400, stale-while-revalidate=604800',
       },
     }
   );

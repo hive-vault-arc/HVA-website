@@ -20,6 +20,7 @@ import {
 } from '@/lib/insight-collection-pagination';
 import {getEditorialTopicImage} from '@/lib/editorial-taxonomy';
 import {isSanityCdnImage} from '@/lib/image-delivery';
+import {trackCaseStudyOpen} from '@/lib/analytics-events';
 
 import BottomCTA from './BottomCTA';
 import InsightsEditorialHero from './InsightsEditorialHero';
@@ -185,6 +186,16 @@ function FeaturedPublication({
       <Link
         href={item.href}
         locale={item.sourceLocale}
+        onClick={
+          item.type === 'caseStudy'
+            ? () =>
+                trackCaseStudyOpen({
+                  locale: item.sourceLocale,
+                  slug: item.slug,
+                  placement: 'collection_feature',
+                })
+            : undefined
+        }
         className="insight-index-v2__feature-link"
       >
         <PublicationImage item={item} priority evidenceLabel={evidenceLabel} />
@@ -237,6 +248,16 @@ function PublicationCard({
       <Link
         href={item.href}
         locale={item.sourceLocale}
+        onClick={
+          item.type === 'caseStudy'
+            ? () =>
+                trackCaseStudyOpen({
+                  locale: item.sourceLocale,
+                  slug: item.slug,
+                  placement: 'collection_card',
+                })
+            : undefined
+        }
         className="insight-index-v2__card-link"
       >
         <PublicationImage item={item} evidenceLabel={evidenceLabel} />

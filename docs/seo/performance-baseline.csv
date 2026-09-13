@@ -1,0 +1,11 @@
+measured_on,url,template,device,field_lcp_ms,field_inp_ms,field_cls,field_status,lab_lcp_ms,lab_total_blocking_time_ms,lab_cls,lab_score,lab_status,evidence,owner,next_action
+2026-09-13,https://hivevaultarc.com/,homepage,mobile,,,,company_gsc_access_blocked,,,,,pagespeed_api_quota_unavailable,Google PageSpeed API returned HTTP 429 and zero daily project quota,Website Engineering,Run Lighthouse against the corrected production deployment and attach trace
+2026-09-13,https://hivevaultarc.com/capabilities,capabilities_index,mobile,,,,company_gsc_access_blocked,,,,,pending_post_deploy_test,No value recorded,Website Engineering,Run after canonical deployment
+2026-09-13,https://hivevaultarc.com/capabilities/technology-consulting,capability_detail,mobile,,,,company_gsc_access_blocked,,,,,pending_post_deploy_test,No value recorded,Website Engineering,Run after canonical deployment
+2026-09-13,https://hivevaultarc.com/ai-agents-morocco,commercial_service,mobile,,,,company_gsc_access_blocked,,,,,pending_post_deploy_test,No value recorded,Website Engineering,Run after canonical deployment
+2026-09-13,https://hivevaultarc.com/blog/fix-the-workflow-before-ai,blog_article,mobile,,,,company_gsc_access_blocked,,,,,pending_post_deploy_test,No value recorded,Website Engineering,Run after canonical deployment
+2026-09-13,https://hivevaultarc.com/insights/research-reports,research_index,mobile,,,,company_gsc_access_blocked,,,,,pending_post_deploy_test,No value recorded,Website Engineering,Run after canonical deployment
+2026-09-13,https://hivevaultarc.com/case-studies/multilingual-whatsapp-ai-agent,case_study,mobile,,,,company_gsc_access_blocked,,,,,pending_post_deploy_test,No value recorded,Website Engineering,Run after canonical deployment
+2026-09-13,https://hivevaultarc.com/contact,contact,mobile,,,,company_gsc_access_blocked,,,,,pending_post_deploy_test,No value recorded,Website Engineering,Run after canonical deployment
+2026-09-13,https://hivevaultarc.com/ar,arabic_homepage,mobile,,,,company_gsc_access_blocked,,,,,pending_post_deploy_test,No value recorded,Website Engineering,Run after canonical deployment with RTL review
+2026-09-13,https://hivevaultarc.com/ar/القدرات,arabic_detail_sample,mobile,,,,company_gsc_access_blocked,,,,,pending_post_deploy_test,No value recorded,Website Engineering,Run after canonical deployment with RTL review

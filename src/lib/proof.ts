@@ -593,10 +593,8 @@ export const getCaseStudyBySlug = cache(async function getCaseStudyBySlug(
   if (caseStudy) return caseStudy;
 
   const localCaseStudy = CASE_STUDIES.find((study) => study.slug === slug);
-  if (localCaseStudy && (locale === 'en' || locale === 'fr')) {
-    return locale === 'fr'
-      ? applyFrenchCmsFallback(localCaseStudy)
-      : localCaseStudy;
+  if (localCaseStudy && locale === 'en') {
+    return localCaseStudy;
   }
 
   throw new Error(`Case study not found: ${slug}`);

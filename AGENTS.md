@@ -70,6 +70,7 @@ The external brand package is read-only from this project. Copy an approved asse
 - Respect `prefers-reduced-motion`.
 - Preserve user changes and unrelated worktree changes.
 - Add comments only when they explain a non-obvious constraint or prevention rule.
+- Use only the company-controlled GitHub account, the `hive-vault-arc` organization repository, and the company-owned Vercel project for this website. Never use a personal GitHub account, personal remote, fork, or Vercel project. Before pushing or changing deployment settings, verify the company remote and approved account.
 
 ## Required Verification
 

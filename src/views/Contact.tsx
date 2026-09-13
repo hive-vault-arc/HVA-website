@@ -19,6 +19,7 @@ import {
   CONTACT_PHONE_E164,
   SOCIAL_PROFILES,
 } from '../lib/seo';
+import {trackGenerateLead} from '@/lib/analytics-events';
 import styles from './Contact.module.css';
 
 type ContactStatus = {
@@ -99,6 +100,7 @@ const Contact: React.FC = () => {
 
         lastSubmitAt.current = Date.now();
         setStatus({type: 'success', message: t('success')});
+        trackGenerateLead({locale, formId: 'contact-discovery'});
       } else {
         const subject = `[Hive Vault Arc] ${t('subject')}`;
         const body = [

@@ -1,0 +1,4 @@
+event_name,trigger,eligible_pages,parameters,consent_requirement,GA4_key_event,owner,validation_method
+generate_lead,Successful HTTP response from contact form endpoint,All localized contact pages,locale|form_id|method,analytics=true,yes_after_production_validation,Growth and Sales,Submit test lead with consent and confirm one DebugView event with no form values
+book_call_click,Click on a primary consultation CTA that points to the contact route,Localized pages using BottomCTA,locale|placement,analytics=true,no_until_sales_approves,Growth,Accept cookies and confirm exactly one event per click in DebugView
+case_study_open,Deliberate click on a case-study feature or collection card,Localized case-study collection pages,locale|case_study_slug|placement,analytics=true,no,Editorial and Growth,Accept cookies and confirm one event on feature and card paths

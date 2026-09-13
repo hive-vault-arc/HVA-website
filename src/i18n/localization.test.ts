@@ -411,35 +411,22 @@ describe('published localized collections', () => {
     );
   });
 
-  it('starts French and English detail lookups together', async () => {
-    let englishStarted = false;
-    let releaseFrench: (() => void) | undefined;
-    const frenchGate = new Promise<void>((resolve) => {
-      releaseFrench = resolve;
-    });
+  it('never publishes an English document at a French detail URL', async () => {
+    const requestedLocales: AppLocale[] = [];
 
-    const request = getPublishedDocument<TestPublication>('fr', async (locale) => {
-      if (locale === 'en') {
-        englishStarted = true;
-        return {
-          slug: 'fix-the-workflow-before-ai',
-          language: 'en',
-          title: 'Fix the Workflow Before You Add AI',
-        };
-      }
-
-      await frenchGate;
-      return null;
-    });
-
-    await Promise.resolve();
-    expect(englishStarted).toBe(true);
-    releaseFrench?.();
-
-    await expect(request).resolves.toEqual(
-      expect.objectContaining({
-        title: 'Corrigez le flux de travail avant d’ajouter l’IA',
+    await expect(
+      getPublishedDocument<TestPublication>('fr', async (locale) => {
+        requestedLocales.push(locale);
+        return locale === 'en'
+          ? {
+              slug: 'fix-the-workflow-before-ai',
+              language: 'en',
+              title: 'Fix the Workflow Before You Add AI',
+            }
+          : null;
       }),
-    );
+    ).resolves.toBeNull();
+
+    expect(requestedLocales).toEqual(['fr']);
   });
 });

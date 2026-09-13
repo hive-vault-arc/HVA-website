@@ -46,6 +46,26 @@ describe('Legacy Redirect Rules', () => {
     );
   });
 
+  it('redirects the current public Vercel alias to production', async () => {
+    const redirects = await (nextConfig.redirects?.() ?? Promise.resolve([]));
+
+    expect(redirects).toEqual(
+      expect.arrayContaining([
+        {
+          source: '/:path*',
+          has: [
+            {
+              type: 'host',
+              value: 'hive-vault-arc-website.vercel.app',
+            },
+          ],
+          destination: 'https://hivevaultarc.com/:path*',
+          permanent: true,
+        },
+      ])
+    );
+  });
+
   it('contains permanent redirects from legacy URLs to canonical destinations', async () => {
     const redirects = await (nextConfig.redirects?.() ?? Promise.resolve([]));
 

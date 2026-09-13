@@ -4,24 +4,25 @@ import { SITE_URL } from '../lib/seo';
 const crawlAllowPaths = ['/', '/llms.txt', '/llms-full.txt', '/ai/company'];
 const crawlDisallowPaths = ['/admin/', '/api/private/'];
 
-const searchAndAiCrawlerAgents = [
-  // Search engines and AI search/indexing crawlers.
+const searchAndRetrievalCrawlerAgents = [
   'Googlebot',
   'Bingbot',
   'OAI-SearchBot',
   'Claude-SearchBot',
   'PerplexityBot',
   'Applebot',
-  // User-triggered AI retrieval.
   'ChatGPT-User',
   'Claude-User',
   'Perplexity-User',
-  // Training and AI-use crawlers intentionally allowed for public pages.
+];
+
+const trainingCrawlerAgents = [
   'GPTBot',
   'ClaudeBot',
-  'anthropic-ai',
   'Google-Extended',
-  // Social and chat preview crawlers.
+];
+
+const previewCrawlerAgents = [
   'facebookexternalhit',
   'FacebookBot',
   'Twitterbot',
@@ -32,14 +33,31 @@ const searchAndAiCrawlerAgents = [
 ];
 
 export default function robots(): MetadataRoute.Robots {
+  const allowTrainingCrawlers = process.env.AI_TRAINING_CRAWL_POLICY === 'allow';
+
   return {
     rules: [
       { userAgent: '*', allow: crawlAllowPaths, disallow: crawlDisallowPaths },
       {
-        userAgent: searchAndAiCrawlerAgents,
+        userAgent: searchAndRetrievalCrawlerAgents,
         allow: crawlAllowPaths,
         disallow: crawlDisallowPaths,
       },
+      {
+        userAgent: previewCrawlerAgents,
+        allow: crawlAllowPaths,
+        disallow: crawlDisallowPaths,
+      },
+      allowTrainingCrawlers
+        ? {
+            userAgent: trainingCrawlerAgents,
+            allow: crawlAllowPaths,
+            disallow: crawlDisallowPaths,
+          }
+        : {
+            userAgent: trainingCrawlerAgents,
+            disallow: '/',
+          },
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,
   };

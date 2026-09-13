@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "decidedOn": "2026-09-13",
+  "fieldThresholdsP75": {
+    "lcpMillisecondsMax": 2500,
+    "inpMillisecondsMaxExclusive": 200,
+    "clsMaxExclusive": 0.1
+  },
+  "releaseGuards": {
+    "newBlockingThirdPartyScripts": 0,
+    "analyticsRequestsBeforeConsent": 0,
+    "analyticsConfigurationsAfterConsentPerProduct": 1,
+    "visibleH1PerIndexablePage": 1,
+    "initialJavaScriptRegressionPercentMax": 5,
+    "htmlTransferRegressionPercentMax": 10,
+    "largestAboveFoldImageBytesMax": 350000
+  },
+  "representativeTemplates": [
+    "/",
+    "/capabilities",
+    "/capabilities/technology-consulting",
+    "/ai-agents-morocco",
+    "/blog/fix-the-workflow-before-ai",
+    "/insights/research-reports",
+    "/case-studies/multilingual-whatsapp-ai-agent",
+    "/contact",
+    "/ar",
+    "/ar/القدرات"
+  ],
+  "measurementRule": "Record field data when available and label missing field data as insufficient. Use Lighthouse traces for diagnosis, not as a substitute for field data. A budget exception requires a written rationale and reviewer."
+}

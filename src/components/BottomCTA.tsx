@@ -1,8 +1,9 @@
 'use client';
 
 import {motion} from 'framer-motion';
-import {useTranslations} from 'next-intl';
+import {useLocale, useTranslations} from 'next-intl';
 import {Link} from '@/i18n/navigation';
+import {trackBookCallClick} from '@/lib/analytics-events';
 
 interface BottomCTAProps {
   headline: string;
@@ -34,6 +35,7 @@ export default function BottomCTA({
   compact = false,
 }: BottomCTAProps) {
   const t = useTranslations('Common');
+  const locale = useLocale();
   const isDark = variant === 'dark';
 
   return (
@@ -67,6 +69,11 @@ export default function BottomCTA({
         <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row lg:justify-end">
           <Link
             href={primaryHref}
+            onClick={
+              primaryHref === '/contact'
+                ? () => trackBookCallClick({locale, placement: 'bottom_cta'})
+                : undefined
+            }
             className={`site-action w-full px-7 sm:w-auto ${
               isDark ? 'site-action-primary-on-dark' : 'site-action-primary'
             }`}
