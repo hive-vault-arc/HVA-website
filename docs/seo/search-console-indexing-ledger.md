@@ -11,7 +11,7 @@ This file is the handoff marker for manual Google Search Console work. Update it
 - Indexed in the Page Indexing report: **71**
 - Not indexed in the Page Indexing report: **39**
 - Manual submission stop reached: **Yes.** After five successful submissions, Search Console returned the same generic submission error twice for the next valid URL. Google did not display an explicit quota message, so this may be a daily limit or a temporary service failure; manual requests were stopped to avoid waste.
-- Successful indexing submissions today: **5 across 4 unique URLs**
+- Successful indexing submissions today: **6 across 5 unique URLs**
 - Production change: organization-repository commit `b8fda9c` converted `/ai/company` from a JSON-only response into canonical HTML and moved the machine record to `/ai/company.json`.
 - Live sitemap audit: **171/171 canonical URLs passed with 0 failures.** Search Console previously reported 193 `URL not allowed` errors because an older sitemap used `https://hive-vault-arc-website.vercel.app`. The corrected sitemap was resubmitted on 2026-09-13 and Search Console now reports **Success**, **171 discovered pages**, and **0 videos**.
 
@@ -22,12 +22,14 @@ This file is the handoff marker for manual Google Search Console work. Update it
 - Live checks confirm that `/`, `/blog`, `/ai/company`, `/llms.txt`, and query strings preserve their full path and parameters when redirected to the canonical domain.
 - The canonical homepage and legacy perspectives destination both render self-referencing `https://hivevaultarc.com` canonical and Open Graph URLs.
 - The organization repository also retains the same permanent host redirect in `next.config.ts`, with regression coverage in `src/test/legacy-redirects.test.ts`.
+- Search Console's stored inspection for `https://hivevaultarc.com/` reflected its 2026-09-08 crawl and still reported `https://hive-vault-arc-website.vercel.app/` as both the user-declared and Google-selected canonical. A live test on 2026-09-13 confirmed that the corrected homepage is available to Google and can be indexed. The canonical homepage was then successfully added to Google's priority crawl queue.
 - No temporary Search Console removal was submitted. The Vercel hostname is outside the `sc-domain:hivevaultarc.com` property, and the permanent redirect is the correct consolidation signal. Recheck the branded search result after Google recrawls the old hostname; the label can remain stale during recrawl and canonical processing.
 
 ### Requested today
 
 | URL | Status before request | Request result |
 | --- | --- | --- |
+| `https://hivevaultarc.com/` | Alternate page with an obsolete Vercel-host canonical from Google's 2026-09-08 crawl; current live test passed | Added to Google's priority crawl queue after the Vercel alias received a platform-level 308 and the canonical homepage passed the live test |
 | `https://hivevaultarc.com/ai/company` | Crawled — currently not indexed; formerly JSON-only | Added to Google's priority crawl queue again after the canonical HTML upgrade deployed |
 | `https://hivevaultarc.com/llms.txt` | Crawled — currently not indexed | Added to Google's priority crawl queue |
 | `https://hivevaultarc.com/es` | Crawled — currently not indexed | Added to Google's priority crawl queue |
