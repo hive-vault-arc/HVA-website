@@ -15,6 +15,15 @@ This file is the handoff marker for manual Google Search Console work. Update it
 - Production change: organization-repository commit `b8fda9c` converted `/ai/company` from a JSON-only response into canonical HTML and moved the machine record to `/ai/company.json`.
 - Live sitemap audit: **171/171 canonical URLs passed with 0 failures.** Search Console previously reported 193 `URL not allowed` errors because an older sitemap used `https://hive-vault-arc-website.vercel.app`. The corrected sitemap was resubmitted on 2026-09-13 and Search Console now reports **Success**, **171 discovered pages**, and **0 videos**.
 
+### Vercel citation remediation
+
+- Google Search and its AI Overview still displayed the source label **Vercel** for the previously indexed hostname `hive-vault-arc-website.vercel.app` on 2026-09-13.
+- The company Vercel project's domain settings now enforce a platform-level **308 Permanent Redirect** from `hive-vault-arc-website.vercel.app` to `https://hivevaultarc.com`.
+- Live checks confirm that `/`, `/blog`, `/ai/company`, `/llms.txt`, and query strings preserve their full path and parameters when redirected to the canonical domain.
+- The canonical homepage and legacy perspectives destination both render self-referencing `https://hivevaultarc.com` canonical and Open Graph URLs.
+- The organization repository also retains the same permanent host redirect in `next.config.ts`, with regression coverage in `src/test/legacy-redirects.test.ts`.
+- No temporary Search Console removal was submitted. The Vercel hostname is outside the `sc-domain:hivevaultarc.com` property, and the permanent redirect is the correct consolidation signal. Recheck the branded search result after Google recrawls the old hostname; the label can remain stale during recrawl and canonical processing.
+
 ### Requested today
 
 | URL | Status before request | Request result |
