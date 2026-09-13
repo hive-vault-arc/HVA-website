@@ -10,16 +10,19 @@ This file is the handoff marker for manual Google Search Console work. Update it
 - Access correction: granted the company Workspace account **Full** access; it previously had no access.
 - Indexed in the Page Indexing report: **71**
 - Not indexed in the Page Indexing report: **39**
-- Daily quota reached: **No**
-- Successful indexing requests today: **2**
-- Live sitemap audit: **193 URLs currently use `https://hive-vault-arc-website.vercel.app` instead of the canonical domain.** Before the next production deployment, set `NEXT_PUBLIC_SITE_URL=https://hivevaultarc.com` for the Production environment. The current code rejects any different Vercel Production origin; re-run `npm run audit:seo -- --base https://hivevaultarc.com --expected-origin https://hivevaultarc.com` after deployment.
+- Manual submission stop reached: **Yes.** After five successful submissions, Search Console returned the same generic submission error twice for the next valid URL. Google did not display an explicit quota message, so this may be a daily limit or a temporary service failure; manual requests were stopped to avoid waste.
+- Successful indexing submissions today: **5 across 4 unique URLs**
+- Production change: organization-repository commit `b8fda9c` converted `/ai/company` from a JSON-only response into canonical HTML and moved the machine record to `/ai/company.json`.
+- Live sitemap audit: **171/171 canonical URLs passed with 0 failures.** Search Console previously reported 193 `URL not allowed` errors because an older sitemap used `https://hive-vault-arc-website.vercel.app`. The corrected sitemap was resubmitted on 2026-09-13 and Search Console now reports **Success**, **171 discovered pages**, and **0 videos**.
 
 ### Requested today
 
 | URL | Status before request | Request result |
 | --- | --- | --- |
-| `https://hivevaultarc.com/ai/company` | Crawled — currently not indexed | Added to Google's priority crawl queue |
+| `https://hivevaultarc.com/ai/company` | Crawled — currently not indexed; formerly JSON-only | Added to Google's priority crawl queue again after the canonical HTML upgrade deployed |
 | `https://hivevaultarc.com/llms.txt` | Crawled — currently not indexed | Added to Google's priority crawl queue |
+| `https://hivevaultarc.com/es` | Crawled — currently not indexed | Added to Google's priority crawl queue |
+| `https://hivevaultarc.com/fr` | Alternate page with an obsolete Vercel-host canonical | Added to Google's priority crawl queue after the production canonical was corrected |
 
 Indexing requests do not guarantee inclusion. Recheck these URLs in URL Inspection after Google has recrawled them; do not submit them repeatedly while they remain queued.
 
@@ -51,13 +54,44 @@ The remaining examples are non-page assets and must not consume indexing quota:
 - `/Images/favico/site.webmanifest`
 - two `/_next/static/media/*.woff2` font files
 
+### Confirmed status after the corrected sitemap submission
+
+Already indexed; no request was made:
+
+- `https://hivevaultarc.com/ar`
+- `https://hivevaultarc.com/ai-agents-morocco`
+- `https://hivevaultarc.com/fr/capabilities`
+- `https://hivevaultarc.com/es/capabilities`
+- `https://hivevaultarc.com/ar/capabilities`
+- `https://hivevaultarc.com/fr/contact`
+
+Confirmed not indexed and not yet successfully queued; inspect these first next session:
+
+| Priority | URL | Search Console state | 2026-09-13 request result |
+| ---: | --- | --- | --- |
+| 1 | `https://hivevaultarc.com/fr/ai-agents-morocco` | URL is unknown to Google | Failed twice with the same generic submission error; this triggered the manual stop |
+| 2 | `https://hivevaultarc.com/es/ai-agents-morocco` | URL is unknown to Google | Not submitted after the stop |
+| 3 | `https://hivevaultarc.com/ar/ai-agents-morocco` | URL is unknown to Google | Not submitted after the stop |
+| 4 | `https://hivevaultarc.com/es/contact` | URL is unknown to Google | Not submitted after the stop |
+| 5 | `https://hivevaultarc.com/ar/contact` | URL is unknown to Google | Not submitted after the stop |
+
+The four successfully queued URLs remain technically “not indexed” until Google recrawls and accepts them. A request is not an indexing guarantee.
+
+### Obsolete-page and removal review
+
+- The Page Indexing report contains no Not Found/404 category.
+- The live sitemap contains no missing pages: all 171 entries return a valid canonical response.
+- The 20 redirect exclusions, 5 canonical alternatives, and 2 intentional noindex pages are expected exclusions, not stale pages to submit or temporarily remove.
+- No Search Console removal request was created. Temporary removals are inappropriate for valid redirects, canonical alternatives, assets, or URLs already absent from the sitemap.
+
 ### Next session
 
 1. Open Search Console only as `workspace@hivevaultarc.com`.
-2. Recheck the report totals and record its new `Last update` date.
-3. Inspect `/ai/company` and `/llms.txt`; mark them indexed only if URL Inspection says **URL is on Google**.
-4. Request indexing only for newly reported canonical `200` HTML/content URLs that are not intentionally noindexed.
-5. Never request redirects, canonical alternates, fonts, icons, manifests, or other static assets.
+2. Recheck the report totals and record its new `Last update` date. The current totals still reflect the 2026-09-04 report snapshot.
+3. Inspect the four successfully queued URLs; mark them indexed only if URL Inspection says **URL is on Google**.
+4. Start with the five-item priority table above. Request only URLs that remain not indexed and still return canonical `200` HTML.
+5. Let the successful 171-URL sitemap cover the remaining inventory; do not attempt to manually submit every sitemap entry.
+6. Never request redirects, canonical alternates, fonts, icons, manifests, or other static assets.
 
 ## Measurement baseline checked on 2026-09-13
 
