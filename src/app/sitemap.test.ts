@@ -27,13 +27,14 @@ describe('sitemap authority and inventory', () => {
     const second = await sitemap();
     const expectedCount =
       Object.values(ROUTE_MANIFEST).filter((route) => route.indexable).length *
-      PUBLIC_LOCALES.length;
+        PUBLIC_LOCALES.length + 1;
 
     expect(first).toHaveLength(expectedCount);
     expect(first).toEqual(second);
     expect(new Set(first.map((entry) => entry.url)).size).toBe(first.length);
     expect(first.every((entry) => new URL(entry.url).origin === 'https://hivevaultarc.com')).toBe(true);
-    expect(first.some((entry) => entry.url.endsWith('/ai/company'))).toBe(false);
+    expect(first.some((entry) => entry.url.endsWith('/ai/company'))).toBe(true);
+    expect(first.some((entry) => entry.url.endsWith('/ai/company.json'))).toBe(false);
     expect(first.some((entry) => entry.url.endsWith('/links'))).toBe(false);
     expect(first.some((entry) => entry.url.includes('private-demonstration'))).toBe(false);
     expect(first.every((entry) => entry.lastModified === undefined)).toBe(true);

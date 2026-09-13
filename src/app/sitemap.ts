@@ -139,5 +139,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }),
   );
 
-  return [...staticEntries, ...localizedContent.flat()];
+  const companyProfileEntry: MetadataRoute.Sitemap[number] = {
+    url: absolute('/ai/company'),
+    changeFrequency: 'monthly',
+    priority: 0.8,
+  };
+
+  return [companyProfileEntry, ...staticEntries, ...localizedContent.flat()];
 }

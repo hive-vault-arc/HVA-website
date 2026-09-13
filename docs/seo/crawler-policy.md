@@ -24,7 +24,7 @@ Google-Extended does not control Google Search inclusion or ranking. It is gover
 
 ## Optional machine-readable resources
 
-`llms.txt`, `llms-full.txt`, and `/ai/company` remain public auxiliary resources. They are not treated as Google ranking requirements and are not included in the XML sitemap.
+`llms.txt` and `llms-full.txt` remain public auxiliary resources and are not treated as Google ranking requirements. `/ai/company` is a canonical, indexable HTML company profile and is included in the XML sitemap. `/ai/company.json` preserves the structured resource but is excluded from the sitemap and marked `noindex` so it does not compete with the HTML profile.
 
 ## Security boundary
 

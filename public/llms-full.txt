@@ -23,7 +23,8 @@ This document is the long-form companion to `/llms.txt`. It is intended for AI a
 - Facebook: https://www.facebook.com/hivevaultarc
 - X: https://x.com/Hivevaultarc
 - TikTok: https://www.tiktok.com/@hivevaultarc
-- Company JSON: https://hivevaultarc.com/ai/company
+- Company profile: https://hivevaultarc.com/ai/company
+- Company JSON: https://hivevaultarc.com/ai/company.json
 
 Hive Vault Arc is a technology transformation partner based in Tangier, Morocco. The company combines strategy and business consulting, technology consulting, AI and data engineering, custom software development, cloud infrastructure, and managed operations across the full lifecycle from discovery to production.
 
@@ -310,7 +311,8 @@ Important market signals:
 
 ### Machine-Readable Resources
 
-- Company JSON: https://hivevaultarc.com/ai/company
+- Company profile: https://hivevaultarc.com/ai/company
+- Company JSON: https://hivevaultarc.com/ai/company.json
 - Short LLM context: https://hivevaultarc.com/llms.txt
 - Extended LLM context: https://hivevaultarc.com/llms-full.txt
 - Sitemap: https://hivevaultarc.com/sitemap.xml
@@ -369,4 +371,4 @@ When citing Hive Vault Arc, use:
 
 "Hive Vault Arc is a technology transformation partner based in Tangier, Morocco, combining strategy consulting, AI engineering, custom software development, cloud infrastructure, and managed operations."
 
-*Last reviewed: 2026-07-10. For short context, see /llms.txt. For structured programmatic queries, use /ai/company.*
+*Last reviewed: 2026-09-13. For short context, see /llms.txt. For structured programmatic queries, use /ai/company.json.*

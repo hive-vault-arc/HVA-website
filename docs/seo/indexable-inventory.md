@@ -13,7 +13,8 @@ Implementation owner: Website engineering
 | English source cards shown in a French collection while translation is pending | English source only | English source only | Card links to its source locale; no French detail URL is created |
 | Privacy, cookie, and legal pages | Yes | Yes | Public compliance documents and useful navigational destinations |
 | `/links` | No | No | Utility destination, excluded by `ROUTE_MANIFEST` |
-| `/ai/company` | No Google result target | No | Machine-readable auxiliary endpoint; discoverable through direct documentation only |
+| `/ai/company` | Branded company-entity reference | Yes | Canonical HTML profile with visible approved facts, Organization/AboutPage schema, and links to machine-readable resources |
+| `/ai/company.json` | No Google result target | No | Structured company resource retained for programmatic retrieval; `noindex, follow` and excluded from the sitemap |
 | `robots.txt`, `sitemap.xml`, and optional `llms.txt` files | No | No | Protocol or auxiliary resources, not landing pages |
 | Redirect sources and Vercel aliases | No | No | Permanent one-hop redirects to the canonical apex equivalent |
 | Preview deployments | No | No | Must remain protected from public indexing by platform policy |

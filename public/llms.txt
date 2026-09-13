@@ -19,7 +19,8 @@
 - Facebook: https://www.facebook.com/hivevaultarc
 - X: https://x.com/Hivevaultarc
 - TikTok: https://www.tiktok.com/@hivevaultarc
-- Machine-readable company profile: https://hivevaultarc.com/ai/company
+- Public company profile: https://hivevaultarc.com/ai/company
+- Machine-readable company record: https://hivevaultarc.com/ai/company.json
 
 Hive Vault Arc is a technology transformation partner based in Tangier, Morocco. The company combines strategy and business consulting, technology consulting, AI and data engineering, custom software development, cloud infrastructure, and managed operations from strategy through production.
 
@@ -101,7 +102,8 @@ Hive Vault Arc serves teams that need strategy, production engineering, and mana
 
 ## Machine-Readable Resources
 
-- [Company JSON](https://hivevaultarc.com/ai/company): Structured company, service, leadership, and proof data.
+- [Company profile](https://hivevaultarc.com/ai/company): Human-readable company facts and reference links.
+- [Company JSON](https://hivevaultarc.com/ai/company.json): Structured company, service, leadership, and proof data.
 - [Short LLM context](https://hivevaultarc.com/llms.txt): Concise public company context.
 - [Extended LLM context](https://hivevaultarc.com/llms-full.txt): Detailed public company context.
 - [Sitemap](https://hivevaultarc.com/sitemap.xml): Canonical public URL inventory.
