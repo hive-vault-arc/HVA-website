@@ -58,7 +58,7 @@ export const SITE_LOGO_HEIGHT = 100;
 // A versioned URL prevents social-preview caches from retaining an older card.
 // The 1200×630 WebP keeps the image lightweight while preserving the standard
 // Open Graph aspect ratio used by messaging and social platforms.
-export const DEFAULT_OG_IMAGE_PATH = '/Images/brand/hva-og-share-v2.webp';
+export const DEFAULT_OG_IMAGE_PATH = '/Images/brand/hva-og-share-v3.webp';
 export const DEFAULT_OG_IMAGE_WIDTH = 1200;
 export const DEFAULT_OG_IMAGE_HEIGHT = 630;
 

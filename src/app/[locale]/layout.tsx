@@ -65,7 +65,7 @@ const baseMetadata: Metadata = {
         url: DEFAULT_OG_IMAGE_PATH,
         width: DEFAULT_OG_IMAGE_WIDTH,
         height: DEFAULT_OG_IMAGE_HEIGHT,
-        alt: 'Technology strategist arranging a layered systems model for Hive Vault Arc',
+        alt: 'A male technology strategist arranging a layered systems model for Hive Vault Arc',
       },
     ],
   },

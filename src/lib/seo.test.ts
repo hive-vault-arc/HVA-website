@@ -17,7 +17,7 @@ import {
 
 describe('default social preview', () => {
   it('uses a versioned 1200 by 630 WebP asset', async () => {
-    expect(DEFAULT_OG_IMAGE_PATH).toBe('/Images/brand/hva-og-share-v2.webp');
+    expect(DEFAULT_OG_IMAGE_PATH).toBe('/Images/brand/hva-og-share-v3.webp');
     expect(DEFAULT_OG_IMAGE_WIDTH).toBe(1200);
     expect(DEFAULT_OG_IMAGE_HEIGHT).toBe(630);
 
