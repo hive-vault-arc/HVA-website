@@ -5,14 +5,18 @@ import SiteMotion from './motion/SiteMotion';
 
 interface LayoutProps {
   children: React.ReactNode;
+  afterContent?: React.ReactNode;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout: React.FC<LayoutProps> = ({children, afterContent}) => {
 
   return (
     <>
       <Navbar />
-      <SiteMotion>{children}</SiteMotion>
+      <SiteMotion>
+        {children}
+        {afterContent}
+      </SiteMotion>
       <SiteFooter />
     </>
   );

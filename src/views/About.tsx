@@ -54,6 +54,11 @@ type AboutProps = {
     CaseStudy,
     'slug' | 'title' | 'clientName' | 'assets'
   >;
+  readonly organizationFacts?: {
+    email: string;
+    telephone: string;
+    sameAs: readonly string[];
+  };
 };
 
 type DeliveryStepCopy = {
@@ -128,9 +133,19 @@ const reveal = {
   transition: {duration: 0.48, ease: [0.23, 1, 0.32, 1]},
 } as const;
 
-const About = ({teamMembers, featuredCaseStudy}: AboutProps) => {
+const About = ({teamMembers, featuredCaseStudy, organizationFacts}: AboutProps) => {
   const t = useTranslations('About');
   const locale = useLocale() as AppLocale;
+  const publicEmail = organizationFacts?.email || CONTACT_EMAIL;
+  const publicTelephone = organizationFacts?.telephone || CONTACT_PHONE_E164;
+  const publicSocialProfiles = organizationFacts?.sameAs?.length
+    ? organizationFacts.sameAs.map((url) => {
+        const known = ABOUT_SOCIAL_PROFILES.find((profile) => profile.url === url);
+        if (known) return known;
+        const hostname = new URL(url).hostname.replace(/^www\./, '');
+        return {label: hostname, handle: hostname, url};
+      })
+    : ABOUT_SOCIAL_PROFILES;
   const featuredProof = featuredCaseStudy
     ? {
         slug: featuredCaseStudy.slug,
@@ -463,17 +478,17 @@ const About = ({teamMembers, featuredCaseStudy}: AboutProps) => {
                   <i className="about-v2__contact-icon"><MessageSquare aria-hidden="true" /></i>
                   <span>{t('contact.languages')}</span>
                 </span>
-                <a href={`mailto:${CONTACT_EMAIL}`}>
+                <a href={`mailto:${publicEmail}`}>
                   <i className="about-v2__contact-icon"><Mail aria-hidden="true" /></i>
-                  <span>{CONTACT_EMAIL}</span>
+                  <span>{publicEmail}</span>
                 </a>
-                <a href={`tel:${CONTACT_PHONE_E164}`}>
+                <a href={`tel:${publicTelephone}`}>
                   <i className="about-v2__contact-icon"><Phone aria-hidden="true" /></i>
-                  <span>{CONTACT_PHONE_DISPLAY}</span>
+                  <span>{organizationFacts ? publicTelephone : CONTACT_PHONE_DISPLAY}</span>
                 </a>
               </div>
               <div className="about-v2__contact-socials" aria-label={t('contact.socialLabel')}>
-                {ABOUT_SOCIAL_PROFILES.map((profile) => (
+                {publicSocialProfiles.map((profile) => (
                   <a
                     key={profile.label}
                     href={profile.url}

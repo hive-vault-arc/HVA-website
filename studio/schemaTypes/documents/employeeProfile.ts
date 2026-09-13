@@ -1,16 +1,12 @@
 import {UserIcon} from '@sanity/icons'
 import {defineArrayMember, defineField, defineType} from 'sanity'
-import {createLocalizationFields, localeScopedSlugIsUnique} from '../localization'
+import {createReviewFields} from '../editorialFields'
+import {
+  createLocalizationFields,
+  localeScopedSlugIsUnique,
+  validatePublicSlug,
+} from '../localization'
 import {requireWebpImage} from '../webpValidation'
-
-const slugValidation = (slug?: {current?: string}) => {
-  if (!slug?.current) return 'Required'
-  if (!/^[a-z0-9-]+$/.test(slug.current)) {
-    return 'Slug must be lowercase with hyphens only.'
-  }
-
-  return true
-}
 
 export const employeeProfile = defineType({
   name: 'employeeProfile',
@@ -40,7 +36,7 @@ export const employeeProfile = defineType({
       group: 'identity',
       description: 'Controls the public URL: /aboutus/our-people/{slug}',
       options: {source: 'name', isUnique: localeScopedSlugIsUnique},
-      validation: (rule) => rule.required().custom(slugValidation),
+      validation: (rule) => rule.required().custom(validatePublicSlug),
     }),
     defineField({
       name: 'position',
@@ -283,6 +279,7 @@ export const employeeProfile = defineType({
       },
       validation: (rule) => rule.required(),
     }),
+    ...createReviewFields('publishing'),
     defineField({
       name: 'seo',
       title: 'SEO',

@@ -5,6 +5,7 @@ import {caseStudyMetric} from './caseStudyMetric'
 import {caseStudyHeadlineMetric} from './caseStudyHeadlineMetric'
 import {publishedCaseStudyOutcome} from './publishedCaseStudyOutcome'
 import {faqSection} from './faqSection'
+import {editorialLink} from './editorialLink'
 import {faqItem} from './faqItem'
 import {headingSection} from './headingSection'
 import {listSection} from './listSection'
@@ -19,6 +20,7 @@ import {testimonial} from './testimonial'
 
 export const sharedObjectTypes = [
   author,
+  editorialLink,
   caseStudyProjectMedia,
   sourceLink,
   seo,

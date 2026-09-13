@@ -8,8 +8,11 @@ import {getLocalizedFaqs} from '@/i18n/faqs';
 import { getFeaturedEmployeeProfiles, type EmployeeProfile } from '@/lib/employee-profiles';
 import {
   BRAND_SEARCH_VARIANTS,
+  CONTACT_EMAIL,
+  CONTACT_PHONE_E164,
   GLOBAL_KEYWORDS,
   SITE_URL,
+  SOCIAL_PROFILE_URLS,
   absoluteUrl,
   buildLocalizedBreadcrumbSchema,
   mergeKeywords,
@@ -18,6 +21,10 @@ import {localizedPath} from '@/i18n/route-manifest';
 import {translationSlug} from '@/lib/localized-content';
 import {getTranslations} from 'next-intl/server';
 import {getCaseStudyBySlug} from '@/lib/proof';
+import {
+  getApprovedOrganizationProfile,
+  resolveOrganizationFacts,
+} from '@/lib/organization-profile';
 
 const FEATURED_PROOF_SLUG =
   'premium-advice-training-keepzen-digital-academy';
@@ -96,13 +103,24 @@ export async function generateMetadata({params}: PageProps): Promise<Metadata> {
 
 export default async function Page({params}: PageProps) {
   const {locale} = await params;
-  const [teamMembers, aboutFaqs, featuredCaseStudy, tMeta, tNav] = await Promise.all([
+  const [teamMembers, aboutFaqs, featuredCaseStudy, tMeta, tNav, approvedOrganization] = await Promise.all([
     getFeaturedEmployeeProfiles(locale),
     getLocalizedFaqs(locale, 'about'),
     getFeaturedProof(locale),
     getTranslations({locale, namespace: 'Metadata.pages.about'}),
     getTranslations({locale, namespace: 'Navigation'}),
+    getApprovedOrganizationProfile(),
   ]);
+  const organizationFacts = resolveOrganizationFacts(approvedOrganization, locale, {
+    brandName: 'Hive Vault Arc',
+    legalName: 'Hive Vault Arc',
+    canonicalWebsite: SITE_URL,
+    description: tMeta('description'),
+    publicEmail: CONTACT_EMAIL,
+    publicTelephone: CONTACT_PHONE_E164,
+    serviceAreas: ['Morocco', 'France', 'Europe', 'MENA'],
+    sameAs: SOCIAL_PROFILE_URLS,
+  });
   const founders = foundersFrom(teamMembers);
   const leadershipPeople = founders.map((member) => personSchema(member, locale));
   const pageUrl = absoluteUrl(localizedPath('/aboutus', locale));
@@ -117,15 +135,15 @@ export default async function Page({params}: PageProps) {
     mainEntity: {
       '@type': ['Organization', 'ProfessionalService'],
       '@id': absoluteUrl('/#organization'),
-      name: 'Hive Vault Arc',
+      name: organizationFacts.brandName,
       alternateName: BRAND_SEARCH_VARIANTS,
-      description: tMeta('description'),
+      description: organizationFacts.description,
       founder: leadershipPeople,
       founders: leadershipPeople,
       employee: teamMembers.map((member) => personSchema(member, locale)),
       member: leadershipPeople,
       foundingLocation: 'Tangier, Morocco',
-      areaServed: ['Morocco', 'France', 'Europe', 'MENA'],
+      areaServed: organizationFacts.serviceAreas,
       knowsAbout: [
         'Technology Transformation',
         'AI Engineering',
@@ -145,7 +163,15 @@ export default async function Page({params}: PageProps) {
   return (
     <>
       <JsonLd data={[aboutPageSchema, ...leadershipPeople, breadcrumbSchema]} />
-      <About teamMembers={teamMembers} featuredCaseStudy={featuredCaseStudy} />
+      <About
+        teamMembers={teamMembers}
+        featuredCaseStudy={featuredCaseStudy}
+        organizationFacts={{
+          email: organizationFacts.publicEmail,
+          telephone: organizationFacts.publicTelephone,
+          sameAs: organizationFacts.sameAs,
+        }}
+      />
       <FaqSection faqs={aboutFaqs.items} heading={aboutFaqs.heading} />
     </>
   );

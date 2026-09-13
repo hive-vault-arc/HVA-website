@@ -183,12 +183,10 @@ async function main() {
   let transaction = client.transaction()
   for (const document of documents) {
     transaction = transaction.patch(document._id, (patch) =>
-      patch
-        .ifRevisionId(document._rev)
-        .set({
-          'assets.clientLogo': imageReference(asset._id),
-          'assets.clientLogoAlt': localizedAltText[document.language],
-        }),
+      patch.ifRevisionId(document._rev).set({
+        'assets.clientLogo': imageReference(asset._id),
+        'assets.clientLogoAlt': localizedAltText[document.language],
+      }),
     )
   }
 

@@ -23,9 +23,12 @@ export function isRecoverableSanityFetchError(error: unknown): boolean {
   const code = candidate?.code ?? '';
 
   return Boolean(
-    candidate?.isNetworkError ||
+      candidate?.isNetworkError ||
       candidate?.message?.toLowerCase().includes('fetch failed') ||
       candidate?.message?.toLowerCase().includes('socket timed out') ||
+      candidate?.message
+        ?.toLowerCase()
+        .includes('expected signal ("abortsignal') ||
       code.startsWith('UND_') ||
       [
         'ECONNRESET',
@@ -90,6 +93,12 @@ export async function sanityFetch<QueryResponse>({
         token: previewToken,
         useCdn: false,
         perspective: 'drafts',
+        stega: {
+          enabled: true,
+          studioUrl:
+            process.env.NEXT_PUBLIC_SANITY_STUDIO_URL?.trim() ||
+            'http://localhost:3333',
+        },
       })
     : sanityClient;
 

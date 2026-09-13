@@ -1,16 +1,12 @@
 import {DocumentTextIcon} from '@sanity/icons'
 import {defineArrayMember, defineField, defineType} from 'sanity'
-import {createLocalizationFields, localeScopedSlugIsUnique} from '../localization'
+import {createEditorialFields} from '../editorialFields'
+import {
+  createLocalizationFields,
+  localeScopedSlugIsUnique,
+  validatePublicSlug,
+} from '../localization'
 import {requireWebpImage} from '../webpValidation'
-
-const slugValidation = (slug?: {current?: string}) => {
-  if (!slug?.current) return 'Required'
-  if (!/^[a-z0-9-]+$/.test(slug.current)) {
-    return 'Slug must be lowercase with hyphens only.'
-  }
-
-  return true
-}
 
 const hrefValidation = (href?: string) => {
   if (!href) return true
@@ -28,6 +24,7 @@ export const capability = defineType({
   groups: [
     {name: 'identity', title: 'Identity', default: true},
     {name: 'narrative', title: 'Narrative'},
+    {name: 'answer', title: 'Answer and evidence'},
     {name: 'connections', title: 'Connections'},
     {name: 'publishing', title: 'Publishing'},
     {name: 'seo', title: 'SEO'},
@@ -47,7 +44,7 @@ export const capability = defineType({
       type: 'slug',
       group: 'identity',
       options: {source: 'title', isUnique: localeScopedSlugIsUnique},
-      validation: (rule) => rule.required().custom(slugValidation),
+      validation: (rule) => rule.required().custom(validatePublicSlug),
     }),
     defineField({
       name: 'shortTitle',
@@ -208,6 +205,7 @@ export const capability = defineType({
       },
       validation: (rule) => rule.required(),
     }),
+    ...createEditorialFields({group: 'answer', includeRelatedCapabilities: false}),
     defineField({
       name: 'seo',
       title: 'SEO',

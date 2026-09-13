@@ -1,6 +1,10 @@
 import {TagIcon} from '@sanity/icons'
 import {defineField, defineType} from 'sanity'
-import {createLocalizationFields, localeScopedSlugIsUnique} from '../localization'
+import {
+  createLocalizationFields,
+  localeScopedSlugIsUnique,
+  validatePublicSlug,
+} from '../localization'
 
 export const industry = defineType({
   name: 'industry',
@@ -21,23 +25,14 @@ export const industry = defineType({
       title: 'Slug',
       type: 'slug',
       options: {source: 'title', isUnique: localeScopedSlugIsUnique},
-      validation: (rule) =>
-        rule.required().custom((slug) => {
-          if (!slug?.current) return 'Required'
-          if (!/^[a-z0-9-]+$/.test(slug.current)) {
-            return 'Slug must be lowercase with hyphens only.'
-          }
-
-          return true
-        }),
+      validation: (rule) => rule.required().custom(validatePublicSlug),
     }),
     defineField({
       name: 'description',
       title: 'Editorial description',
       type: 'text',
       rows: 3,
-      description:
-        'Optional internal context that helps editors choose the right industry.',
+      description: 'Optional internal context that helps editors choose the right industry.',
       validation: (rule) => rule.max(240),
     }),
     defineField({

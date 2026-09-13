@@ -4,6 +4,8 @@ import { Analytics } from '@vercel/analytics/react';
 import {NextIntlClientProvider, hasLocale} from 'next-intl';
 import {getMessages, getTranslations, setRequestLocale} from 'next-intl/server';
 import {notFound} from 'next/navigation';
+import {draftMode} from 'next/headers';
+import {VisualEditing} from 'next-sanity/visual-editing';
 import Layout from '@/components/Layout';
 import JsonLd from '@/components/JsonLd';
 import EmployeeHashScroller from '@/components/EmployeeHashScroller';
@@ -12,11 +14,17 @@ import {CookieConsentProvider} from '@/components/privacy/CookieConsentProvider'
 import CookieBanner from '@/components/privacy/CookieBanner';
 import CookiePreferencesDialog from '@/components/privacy/CookiePreferencesDialog';
 import MicrosoftClarity from '@/components/privacy/MicrosoftClarity';
+import PageOptimizationAnswer from '@/components/PageOptimizationAnswer';
 import {routing} from '@/i18n/routing';
 import {localizedAlternates, localizedPath} from '@/i18n/route-manifest';
 import {arabic, manrope, newsreader} from '@/lib/fonts';
 import {PUBLIC_LOCALES, isPublicLocale, localeProfile} from '@/i18n/config';
 import {withoutCrawlerOnlyMessages} from '@/i18n/client-messages';
+import {
+  getApprovedOrganizationProfile,
+  resolveOrganizationFacts,
+} from '@/lib/organization-profile';
+import {getPageOptimizationsForLocale} from '@/lib/page-optimization';
 import {
   CONTACT_EMAIL,
   CONTACT_PHONE_E164,
@@ -26,7 +34,6 @@ import {
   DEFAULT_DESCRIPTION,
   DEFAULT_TITLE,
   BRAND_SEARCH_VARIANTS,
-  GLOBAL_KEYWORDS,
   LINKEDIN_URL,
   SITE_LOGO_HEIGHT,
   SITE_LOGO_PATH,
@@ -46,7 +53,6 @@ const baseMetadata: Metadata = {
     template: `%s | ${SITE_NAME}`,
   },
   description: DEFAULT_DESCRIPTION,
-  keywords: GLOBAL_KEYWORDS,
   manifest: '/Images/favico/site.webmanifest',
   openGraph: {
     type: 'website',
@@ -198,17 +204,33 @@ export default async function RootLayout({children, params}: LocaleLayoutProps) 
 
   const profile = localeProfile(locale);
   const organizationCopy = ORGANIZATION_COPY[locale];
+  const preview = (await draftMode()).isEnabled;
   const analyticsMeasurementId = process.env.VERCEL_ENV === 'production'
     ? process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim()
     : undefined;
 
   setRequestLocale(locale);
-  const [messages, tNavigation, tMetadata] = await Promise.all([
+  const [messages, tNavigation, tMetadata, approvedOrganization, pageOptimizations] = await Promise.all([
     getMessages(),
     getTranslations({locale, namespace: 'Navigation'}),
     getTranslations({locale, namespace: 'Metadata.pages'}),
+    getApprovedOrganizationProfile(),
+    getPageOptimizationsForLocale(locale),
   ]);
   const clientMessages = withoutCrawlerOnlyMessages(messages);
+  const organizationFacts = resolveOrganizationFacts(approvedOrganization, locale, {
+    brandName: 'Hive Vault Arc',
+    legalName: 'Hive Vault Arc',
+    canonicalWebsite: SITE_URL,
+    description: organizationCopy.description,
+    publicEmail: CONTACT_EMAIL,
+    publicTelephone: CONTACT_PHONE_E164,
+    serviceAreas: organizationCopy.serviceTypes,
+    sameAs: SOCIAL_PROFILE_URLS,
+    logoUrl: absoluteUrl(SITE_LOGO_PATH),
+  });
+  const publicEmail = organizationFacts.publicEmail;
+  const publicTelephone = organizationFacts.publicTelephone;
   const leadershipPeople = GLOBAL_FOUNDERS.map((member) => ({
     '@type': 'Person',
     '@id': `${absoluteUrl(
@@ -229,19 +251,19 @@ export default async function RootLayout({children, params}: LocaleLayoutProps) 
     '@context': 'https://schema.org',
     '@type': ['Organization', 'ProfessionalService'],
     '@id': absoluteUrl('/#organization'),
-    name: 'Hive Vault Arc',
+    name: organizationFacts.brandName,
     alternateName: BRAND_SEARCH_VARIANTS,
-    legalName: 'Hive Vault Arc',
-    url: SITE_URL,
+    legalName: organizationFacts.legalName,
+    url: organizationFacts.canonicalWebsite,
     logo: {
       '@type': 'ImageObject',
-      url: absoluteUrl(SITE_LOGO_PATH),
-      contentUrl: absoluteUrl(SITE_LOGO_PATH),
+      url: organizationFacts.logoUrl,
+      contentUrl: organizationFacts.logoUrl,
       width: SITE_LOGO_WIDTH,
       height: SITE_LOGO_HEIGHT,
     },
     image: absoluteUrl('/Images/media/og-default.webp'),
-    description: organizationCopy.description,
+    description: organizationFacts.description,
     founder: leadershipPeople,
     founders: leadershipPeople,
     employee: leadershipPeople,
@@ -267,20 +289,20 @@ export default async function RootLayout({children, params}: LocaleLayoutProps) 
       { '@type': 'AdministrativeArea', name: 'North Africa' },
       { '@type': 'AdministrativeArea', name: 'Europe' },
     ],
-    serviceType: organizationCopy.serviceTypes,
-    email: CONTACT_EMAIL,
-    telephone: CONTACT_PHONE_E164,
+    serviceType: organizationFacts.serviceAreas,
+    email: publicEmail,
+    telephone: publicTelephone,
     contactPoint: [
       {
         '@type': 'ContactPoint',
         contactType: 'customer support',
-        email: CONTACT_EMAIL,
-        telephone: CONTACT_PHONE_E164,
+        email: publicEmail,
+        telephone: publicTelephone,
         availableLanguage: ['English', 'French', 'Arabic', 'Spanish'],
         areaServed: ['MA', 'FR', 'EU'],
       },
     ],
-    sameAs: SOCIAL_PROFILE_URLS,
+    sameAs: organizationFacts.sameAs,
     subjectOf: [
       {
         '@type': 'WebAPI',
@@ -418,12 +440,17 @@ export default async function RootLayout({children, params}: LocaleLayoutProps) 
             <JsonLd data={websiteSchema} />
             <JsonLd data={navigationSchema} />
             <TranslationAvailabilityProvider>
-              <Layout>{children}</Layout>
+              <Layout
+                afterContent={<PageOptimizationAnswer optimizations={pageOptimizations} />}
+              >
+                {children}
+              </Layout>
             </TranslationAvailabilityProvider>
             <EmployeeHashScroller />
             <MicrosoftClarity />
             <CookieBanner />
             <CookiePreferencesDialog />
+            {preview && <VisualEditing />}
             {process.env.VERCEL === '1' && <Analytics />}
           </CookieConsentProvider>
         </NextIntlClientProvider>

@@ -776,6 +776,7 @@ function normalizeCaseStudy(
 
   return {
     ...baseStudy,
+    ...resolveEditorialFields(study.slug, study),
     title: localCover?.title ?? baseStudy.title,
     summary: localCover?.summary ?? baseStudy.summary,
     deploymentStatus:

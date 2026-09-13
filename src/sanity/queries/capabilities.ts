@@ -6,6 +6,31 @@ const imageFields = `
   hotspot
 `;
 
+const editorialFields = `
+  editorialFormat,
+  topics,
+  answerQuestion,
+  directAnswer,
+  keyTakeaways,
+  answerEvidence[
+    @->.verificationStatus == "verified" &&
+    @->.publiclyCitable == true &&
+    (!defined(@->.expiresAt) || dateTime(@->.expiresAt + "T23:59:59Z") >= dateTime(now()))
+  ][]->{
+    "label": sourceTitle,
+    "url": sourceUrl,
+    "claimIds": [claimId]
+  },
+  relatedQuestions,
+  lastReviewed,
+  evidenceType,
+  reviewers[]->{name, role, initials},
+  relatedCases[]->{"label": title, "href": "/case-studies/" + slug.current},
+  methodology,
+  limitations,
+  primaryCta{label, href}
+`;
+
 const capabilitySummaryFields = `
   _id,
   language,
@@ -35,8 +60,9 @@ const capabilitySummaryFields = `
   ][0].translations[].value->{
     language,
     translationStatus,
+    "noIndex": seo.noIndex,
     "slug": slug.current
-  })[translationStatus == "approved"]
+  })[translationStatus == "approved" && noIndex != true]
 `;
 
 const capabilityFields = `
@@ -52,14 +78,15 @@ const capabilityFields = `
   },
   relatedCapabilities[]->{
     ${capabilitySummaryFields}
-  }
+  },
+  ${editorialFields}
 `;
 
 export const allCapabilityProfilesQuery = defineQuery(`
   *[
     _type == "capability" &&
     language == $locale &&
-    ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4)) &&
     defined(slug.current)
   ]
   | order(displayOrder asc, title asc) {
@@ -71,7 +98,7 @@ export const featuredCapabilityProfilesQuery = defineQuery(`
   *[
     _type == "capability" &&
     language == $locale &&
-    ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4)) &&
     defined(slug.current) &&
     featuredOnCapabilities == true
   ] | order(displayOrder asc, title asc) {
@@ -83,7 +110,7 @@ export const capabilityProfileBySlugQuery = defineQuery(`
   *[
     _type == "capability" &&
     language == $locale &&
-    ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4)) &&
     slug.current == $slug
   ][0] {
     ${capabilityFields}

@@ -19,8 +19,7 @@ const industries = [
       },
       fr: {
         title: 'Immobilier',
-        description:
-          'Promotion, courtage, location, opérations clients et services immobiliers.',
+        description: 'Promotion, courtage, location, opérations clients et services immobiliers.',
       },
     },
     legacyLabels: {
@@ -111,18 +110,15 @@ function plannedIndustryForStudy(study) {
   const label = normalized(study.industry)
 
   return (
-    industries.find((industry) =>
-      (industry.legacyLabels[study.language] ?? []).includes(label),
-    ) ?? null
+    industries.find((industry) => (industry.legacyLabels[study.language] ?? []).includes(label)) ??
+    null
   )
 }
 
 async function upsertIndustry(industry, language, existingDocuments) {
   const existing = existingDocuments.find(
     (document) =>
-      document.slug === industry.key &&
-      document.language === language &&
-      !document.isDraft,
+      document.slug === industry.key && document.language === language && !document.isDraft,
   )
   const translation = industry.translations[language]
   const content = {
@@ -158,10 +154,7 @@ async function linkTranslations(industry, englishId, frenchId) {
   )
   const content = {
     schemaTypes: ['industry'],
-    translations: [
-      translationReference('en', englishId),
-      translationReference('fr', frenchId),
-    ],
+    translations: [translationReference('en', englishId), translationReference('fr', frenchId)],
   }
 
   if (!existing?._id) {
@@ -237,9 +230,7 @@ async function main() {
   }
 
   for (const {study, industry} of plannedStudies) {
-    const industryId = referencesByKeyAndLanguage.get(
-      `${industry.key}:${study.language}`,
-    )
+    const industryId = referencesByKeyAndLanguage.get(`${industry.key}:${study.language}`)
     if (!industryId) {
       throw new Error(`Missing ${industry.key}/${study.language} industry reference.`)
     }

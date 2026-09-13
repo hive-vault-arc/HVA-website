@@ -82,4 +82,26 @@ describe('Sanity revalidation webhook', () => {
     expect(mocks.revalidateTag).toHaveBeenCalledWith('caseStudies:fr', 'max');
     expect(mocks.revalidateTag).toHaveBeenCalledWith('translationMetadata', 'max');
   });
+
+  it('invalidates route-bound optimization tags for one locale', async () => {
+    mocks.parseBody.mockResolvedValue({
+      body: {_type: 'pageOptimization', language: 'ar'},
+      isValidSignature: true,
+    });
+
+    const response = await POST(request() as never);
+    expect(response.status).toBe(200);
+    expect(mocks.revalidateTag).toHaveBeenCalledWith('pageOptimizations:ar', 'max');
+  });
+
+  it('invalidates company entity consumers when approved facts change', async () => {
+    mocks.parseBody.mockResolvedValue({
+      body: {_type: 'organizationProfile'},
+      isValidSignature: true,
+    });
+
+    const response = await POST(request() as never);
+    expect(response.status).toBe(200);
+    expect(mocks.revalidateTag).toHaveBeenCalledWith('companyEntity', 'max');
+  });
 });

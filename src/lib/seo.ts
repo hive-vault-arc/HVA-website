@@ -180,6 +180,9 @@ type PageMetaInput = {
   keywords?: string[];
   locale?: string;
   alternates?: Record<string, string>;
+  noIndex?: boolean;
+  socialImageUrl?: string;
+  socialImageAlt?: string;
 };
 
 type LocalizedPageMetaInput = Omit<PageMetaInput, 'path' | 'locale' | 'alternates'> & {
@@ -212,11 +215,13 @@ export function buildPageMetadata(input: PageMetaInput): Metadata {
   return {
     title: input.title,
     description,
-    keywords: input.keywords,
     alternates: {
       canonical,
       languages,
     },
+    ...(input.noIndex
+      ? {robots: {index: false, follow: true, googleBot: {index: false, follow: true}}}
+      : {}),
     openGraph: {
       type: 'website',
       url: canonical,
@@ -226,10 +231,10 @@ export function buildPageMetadata(input: PageMetaInput): Metadata {
       locale: input.locale ?? 'en',
       images: [
         {
-          url: new URL(DEFAULT_OG_IMAGE_PATH, SITE_URL).toString(),
+          url: input.socialImageUrl ?? new URL(DEFAULT_OG_IMAGE_PATH, SITE_URL).toString(),
           width: DEFAULT_OG_IMAGE_WIDTH,
           height: DEFAULT_OG_IMAGE_HEIGHT,
-          alt: `${input.title} | ${SITE_NAME}`,
+          alt: input.socialImageAlt ?? `${input.title} | ${SITE_NAME}`,
         },
       ],
     },
@@ -237,7 +242,7 @@ export function buildPageMetadata(input: PageMetaInput): Metadata {
       card: 'summary_large_image',
       title: input.title,
       description,
-      images: [new URL(DEFAULT_OG_IMAGE_PATH, SITE_URL).toString()],
+      images: [input.socialImageUrl ?? new URL(DEFAULT_OG_IMAGE_PATH, SITE_URL).toString()],
     },
   };
 }
@@ -261,6 +266,9 @@ export function buildLocalizedPageMetadata(input: LocalizedPageMetaInput): Metad
     path,
     locale: LOCALE_PROFILES[input.locale].openGraphLocale,
     alternates,
+    noIndex: input.noIndex,
+    socialImageUrl: input.socialImageUrl,
+    socialImageAlt: input.socialImageAlt,
   });
 }
 

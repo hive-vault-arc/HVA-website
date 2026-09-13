@@ -9,9 +9,9 @@ const sourceFields = `
 
 const authorFields = `
   authors[]{
-    name,
-    role,
-    initials
+    "name": select(_type == "reference" => @->name, name),
+    "role": select(_type == "reference" => @->role, role),
+    "initials": select(_type == "reference" => @->initials, initials)
   }
 `;
 
@@ -36,15 +36,19 @@ const editorialFields = `
   answerQuestion,
   directAnswer,
   keyTakeaways,
-  answerEvidence[]{
-    label,
-    url,
-    claimIds
+  answerEvidence[
+    @->.verificationStatus == "verified" &&
+    @->.publiclyCitable == true &&
+    (!defined(@->.expiresAt) || dateTime(@->.expiresAt + "T23:59:59Z") >= dateTime(now()))
+  ][]->{
+    "label": sourceTitle,
+    "url": sourceUrl,
+    "claimIds": [claimId]
   },
   relatedQuestions,
   lastReviewed,
   evidenceType,
-  reviewers[]{
+  reviewers[]->{
     name,
     role,
     initials
@@ -75,8 +79,9 @@ const localizationFields = `
   ][0].translations[].value->{
     language,
     translationStatus,
+    "noIndex": seo.noIndex,
     "slug": slug.current
-  })[translationStatus == "approved"]
+  })[translationStatus == "approved" && noIndex != true]
 `;
 
 const sectionFields = `
@@ -343,7 +348,7 @@ const paginatedInsightPredicate = `
   _type in ["post", "newsArticle", "perspective", "researchReport", "caseStudy"] &&
   defined(slug.current) &&
   (defined(publishedAt) || defined(lastUpdated)) &&
-  ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && (_type != "caseStudy" || count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4))) &&
   (
     language == $locale ||
     (
@@ -423,7 +428,7 @@ const paginatedCollectionPredicate = `
   _type == $collectionType &&
   defined(slug.current) &&
   (defined(publishedAt) || defined(lastUpdated)) &&
-  ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && (_type != "caseStudy" || count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4))) &&
   (
     language == $locale ||
     (
@@ -558,6 +563,7 @@ const caseStudyProjectMediaFields = `
 
 const caseStudyFields = `
   ${caseStudySummaryFields},
+  ${editorialFields},
   problem,
   systemArchitecture,
   operationalModules,
@@ -617,7 +623,7 @@ export const allPostsQuery = defineQuery(`
   *[
     _type == "post" &&
     language == $locale &&
-    ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && (_type != "caseStudy" || count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4))) &&
     defined(slug.current)
   ] | order(publishedAt desc, _updatedAt desc) {
     ${postSummaryFields}
@@ -628,7 +634,7 @@ export const postBySlugQuery = defineQuery(`
   *[
     _type == "post" &&
     language == $locale &&
-    ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && (_type != "caseStudy" || count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4))) &&
     slug.current == $slug
   ][0] {
     ${postFields}
@@ -639,7 +645,7 @@ export const allNewsArticlesQuery = defineQuery(`
   *[
     _type == "newsArticle" &&
     language == $locale &&
-    ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && (_type != "caseStudy" || count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4))) &&
     defined(slug.current)
   ] | order(publishedAt desc, _updatedAt desc) {
     ${newsArticleSummaryFields}
@@ -650,7 +656,7 @@ export const newsArticleBySlugQuery = defineQuery(`
   *[
     _type == "newsArticle" &&
     language == $locale &&
-    ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && (_type != "caseStudy" || count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4))) &&
     slug.current == $slug
   ][0] {
     ${newsArticleFields}
@@ -661,7 +667,7 @@ export const allPerspectivesQuery = defineQuery(`
   *[
     _type == "perspective" &&
     language == $locale &&
-    ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && (_type != "caseStudy" || count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4))) &&
     defined(slug.current)
   ] | order(publishedAt desc, _updatedAt desc) {
     ${perspectiveSummaryFields}
@@ -672,7 +678,7 @@ export const perspectiveBySlugQuery = defineQuery(`
   *[
     _type == "perspective" &&
     language == $locale &&
-    ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && (_type != "caseStudy" || count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4))) &&
     slug.current == $slug
   ][0] {
     ${perspectiveFields}
@@ -683,7 +689,7 @@ export const allResearchReportsQuery = defineQuery(`
   *[
     _type == "researchReport" &&
     language == $locale &&
-    ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && (_type != "caseStudy" || count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4))) &&
     defined(slug.current)
   ] | order(publishedAt desc, _updatedAt desc) {
     ${researchReportSummaryFields}
@@ -694,7 +700,7 @@ export const researchReportBySlugQuery = defineQuery(`
   *[
     _type == "researchReport" &&
     language == $locale &&
-    ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && (_type != "caseStudy" || count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4))) &&
     slug.current == $slug
   ][0] {
     ${researchReportFields}
@@ -705,7 +711,7 @@ export const allCaseStudiesQuery = defineQuery(`
   *[
     _type == "caseStudy" &&
     language == $locale &&
-    ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && (_type != "caseStudy" || count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4))) &&
     defined(slug.current)
   ] | order(lastUpdated desc, _updatedAt desc) {
     ${caseStudySummaryFields}
@@ -717,7 +723,7 @@ export const allInsightCollectionsQuery = defineQuery(`
     "posts": *[
       _type == "post" &&
       language in $locales &&
-      ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && (_type != "caseStudy" || count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4))) &&
       defined(slug.current)
     ] | order(publishedAt desc, _updatedAt desc) {
       ${postSummaryFields}
@@ -725,7 +731,7 @@ export const allInsightCollectionsQuery = defineQuery(`
     "newsArticles": *[
       _type == "newsArticle" &&
       language in $locales &&
-      ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && (_type != "caseStudy" || count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4))) &&
       defined(slug.current)
     ] | order(publishedAt desc, _updatedAt desc) {
       ${newsArticleSummaryFields}
@@ -733,7 +739,7 @@ export const allInsightCollectionsQuery = defineQuery(`
     "perspectives": *[
       _type == "perspective" &&
       language in $locales &&
-      ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && (_type != "caseStudy" || count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4))) &&
       defined(slug.current)
     ] | order(publishedAt desc, _updatedAt desc) {
       ${perspectiveSummaryFields}
@@ -741,7 +747,7 @@ export const allInsightCollectionsQuery = defineQuery(`
     "researchReports": *[
       _type == "researchReport" &&
       language in $locales &&
-      ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && (_type != "caseStudy" || count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4))) &&
       defined(slug.current)
     ] | order(publishedAt desc, _updatedAt desc) {
       ${researchReportSummaryFields}
@@ -749,7 +755,7 @@ export const allInsightCollectionsQuery = defineQuery(`
     "caseStudies": *[
       _type == "caseStudy" &&
       language in $locales &&
-      ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && (_type != "caseStudy" || count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4))) &&
       defined(slug.current)
     ] | order(lastUpdated desc, _updatedAt desc) {
       ${caseStudySummaryFields}
@@ -826,7 +832,7 @@ export const paginatedInsightCollectionQuery = defineQuery(`
     "industries": select(
       $includeIndustries == true => *[
         _type == "industry" &&
-        ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && (_type != "caseStudy" || count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4))) &&
         slug.current in *[
           ${paginatedCollectionPredicate}
         ].industryRef->slug.current
@@ -846,7 +852,7 @@ export const portfolioCaseStudiesQuery = defineQuery(`
   *[
     _type == "caseStudy" &&
     language == $locale &&
-    ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && (_type != "caseStudy" || count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4))) &&
     defined(slug.current)
   ] | order(lastUpdated desc, _updatedAt desc) {
     ${portfolioCaseStudyFields}
@@ -863,7 +869,7 @@ export const industryInsightCollectionsQuery = defineQuery(`
     "posts": *[
       _type == "post" &&
       language in $locales &&
-      ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && (_type != "caseStudy" || count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4))) &&
       defined(slug.current) &&
       defined(coverImage.asset)
     ] | order(publishedAt desc, _updatedAt desc) {
@@ -872,7 +878,7 @@ export const industryInsightCollectionsQuery = defineQuery(`
     "newsArticles": *[
       _type == "newsArticle" &&
       language in $locales &&
-      ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && (_type != "caseStudy" || count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4))) &&
       defined(slug.current) &&
       defined(coverImage.asset)
     ] | order(publishedAt desc, _updatedAt desc) {
@@ -881,7 +887,7 @@ export const industryInsightCollectionsQuery = defineQuery(`
     "perspectives": *[
       _type == "perspective" &&
       language in $locales &&
-      ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && (_type != "caseStudy" || count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4))) &&
       defined(slug.current) &&
       defined(coverImage.asset)
     ] | order(publishedAt desc, _updatedAt desc) {
@@ -890,7 +896,7 @@ export const industryInsightCollectionsQuery = defineQuery(`
     "researchReports": *[
       _type == "researchReport" &&
       language in $locales &&
-      ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && (_type != "caseStudy" || count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4))) &&
       defined(slug.current) &&
       defined(coverImage.asset)
     ] | order(publishedAt desc, _updatedAt desc) {
@@ -899,7 +905,7 @@ export const industryInsightCollectionsQuery = defineQuery(`
     "caseStudies": *[
       _type == "caseStudy" &&
       language in $locales &&
-      ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && (_type != "caseStudy" || count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4))) &&
       defined(slug.current) &&
       defined(assets.coverImage.asset)
     ] | order(lastUpdated desc, _updatedAt desc) {
@@ -934,7 +940,7 @@ export const homeCaseStudyProofQuery = defineQuery(`
     "caseStudies": *[
       _type == "caseStudy" &&
       language == $locale &&
-      ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && (_type != "caseStudy" || count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4))) &&
       defined(slug.current)
     ] | order(lastUpdated desc, _updatedAt desc) {
       ${caseStudySummaryFields}
@@ -942,7 +948,7 @@ export const homeCaseStudyProofQuery = defineQuery(`
     "clientEvidence": *[
       _type == "caseStudy" &&
       language == $locale &&
-      ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && (_type != "caseStudy" || count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4))) &&
       defined(slug.current) &&
       (${approvedClientEvidencePredicate})
     ]
@@ -957,7 +963,7 @@ export const clientEvidenceShowcaseQuery = defineQuery(`
   *[
     _type == "caseStudy" &&
     language == $locale &&
-    ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && (_type != "caseStudy" || count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4))) &&
     defined(slug.current) &&
     (${approvedClientEvidencePredicate})
   ]
@@ -971,7 +977,7 @@ export const caseStudyBySlugQuery = defineQuery(`
   *[
     _type == "caseStudy" &&
     language == $locale &&
-    ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && (_type != "caseStudy" || count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4))) &&
     slug.current == $slug
   ][0] {
     ${caseStudyFields},

@@ -19,6 +19,10 @@ const listTagByType: Record<string, string> = {
   caseStudy: 'caseStudies',
   employeeProfile: 'employeeProfiles',
   capability: 'capabilityProfiles',
+  pageOptimization: 'pageOptimizations',
+  organizationProfile: 'organizationProfile',
+  editorialContributor: 'editorialContributors',
+  evidenceRecord: 'evidenceRecords',
 };
 
 const groupTagByType: Record<string, string> = {
@@ -29,6 +33,10 @@ const groupTagByType: Record<string, string> = {
   caseStudy: 'insights',
   employeeProfile: 'people',
   capability: 'capabilities',
+  pageOptimization: 'pageOptimizations',
+  organizationProfile: 'organizationProfile',
+  editorialContributor: 'editorial',
+  evidenceRecord: 'evidence',
 };
 
 function slugValue(slug: SanityWebhookBody['slug']): string | undefined {
@@ -53,6 +61,10 @@ function tagsForPayload(body: SanityWebhookBody): string[] {
         ),
       ])
     );
+  }
+
+  if (body._type === 'organizationProfile') {
+    return ['organizationProfile', 'companyEntity', 'seo'];
   }
 
   const tags = [body._type ? groupTagByType[body._type] ?? 'insights' : 'insights'];

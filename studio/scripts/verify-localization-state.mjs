@@ -1,7 +1,8 @@
 import {getCliClient} from 'sanity/cli'
 
 const client = getCliClient({apiVersion: '2026-08-10'}).withConfig({perspective: 'raw'})
-const types = [
+const locales = ['en', 'fr', 'es', 'ar']
+const localizedTypes = [
   'post',
   'newsArticle',
   'perspective',
@@ -10,217 +11,127 @@ const types = [
   'employeeProfile',
   'capability',
   'industry',
+  'pageOptimization',
 ]
-const expectedByType = {
-  post: 5,
-  newsArticle: 1,
-  perspective: 2,
-  researchReport: 3,
-  caseStudy: 4,
-  employeeProfile: 3,
-  capability: 6,
-  industry: 2,
-}
-const expectedDocumentsPerLanguage = Object.values(expectedByType).reduce(
-  (total, count) => total + count,
-  0,
-)
+const strategicTypes = new Set([
+  'capability',
+  'caseStudy',
+  'employeeProfile',
+  'industry',
+  'pageOptimization',
+])
 
 const state = await client.fetch(
   `{
-    "english": *[
-      _type in $types &&
-      !(_id in path("drafts.**")) &&
-      language == "en" &&
-      translationStatus == "approved"
-    ]{_id, _type, title, name, "slug": slug.current},
-    "french": *[
-      _type in $types &&
-      !(_id in path("drafts.**")) &&
-      language == "fr" &&
-      translationStatus == "approved"
-    ]{_id, _type, title, name, "slug": slug.current},
-    "drafts": *[
-      _type in $types &&
-      _id in path("drafts.**")
-    ]{_id, _type, language, translationStatus, title, name, "slug": slug.current},
+    "documents": *[_type in $localizedTypes]{
+      _id, _type, language, translationStatus, visibility, "noIndex": seo.noIndex,
+      title, name, routeKey, "slug": slug.current
+    },
     "metadata": *[_type == "translation.metadata"]{
       _id,
-      "englishRef": translations[language == "en"][0].value._ref,
-      "frenchRef": translations[language == "fr"][0].value._ref,
-      "frenchWeak": translations[language == "fr"][0].value._weak,
-      "frenchStrengthenOnPublish": translations[language == "fr"][0].value._strengthenOnPublish,
-      "english": translations[language == "en"][0].value->{
-        _id,
-        _type,
+      translations[]{
         language,
-        translationStatus,
-        title,
-        name,
-        briefLine,
-        summary,
-        excerpt,
-        subtitle,
-        description,
-        story,
-        sections,
-        operationalModules,
-        subCapabilities,
-        expertise
-      },
-      "french": translations[language == "fr"][0].value->{
-        _id,
-        _type,
-        language,
-        translationStatus,
-        title,
-        name,
-        briefLine,
-        summary,
-        excerpt,
-        subtitle,
-        description,
-        story,
-        sections,
-        operationalModules,
-        subCapabilities,
-        expertise
+        "weak": value._weak,
+        "strengthenOnPublish": value._strengthenOnPublish,
+        "ref": value._ref,
+        "document": value->{_id, _type, language, translationStatus}
       }
-    },
-    "missingLocalization": *[
-      _type in $types &&
-      (!defined(language) || !defined(translationStatus))
-    ]{_id, _type}
+    }
   }`,
-  {types},
+  {localizedTypes},
 )
 
-function byType(documents) {
-  return Object.fromEntries(
-    types.map((type) => [type, documents.filter((document) => document._type === type).length]),
-  )
-}
-
-function displayText(document) {
-  return (
-    document?.briefLine ||
-    document?.summary ||
-    document?.excerpt ||
-    document?.subtitle ||
-    document?.description ||
-    document?.story ||
-    document?.title ||
-    ''
-  )
-}
-
-function bodyContent(document) {
-  return (
-    document?.sections ||
-    document?.operationalModules ||
-    document?.subCapabilities ||
-    document?.expertise ||
-    null
-  )
-}
-
 const errors = []
-const englishByType = byType(state.english)
-const frenchByType = byType(state.french)
-
-if (state.english.length !== expectedDocumentsPerLanguage) {
-  errors.push(
-    `expected ${expectedDocumentsPerLanguage} approved English documents, found ${state.english.length}`,
-  )
-}
-if (state.french.length !== expectedDocumentsPerLanguage) {
-  errors.push(
-    `expected ${expectedDocumentsPerLanguage} approved French documents, found ${state.french.length}`,
-  )
-}
-if (state.drafts.length !== 0) {
-  errors.push(
-    `expected no drafts after publication, found ${state.drafts.length}: ${state.drafts.map((document) => `${document._type}:${document.title || document.name || document.slug || document._id} (${document._id}, ${document.language || 'no-language'}/${document.translationStatus || 'no-status'})`).join(', ')}`,
-  )
-}
-if (state.metadata.length !== expectedDocumentsPerLanguage) {
-  errors.push(
-    `expected ${expectedDocumentsPerLanguage} translation metadata documents, found ${state.metadata.length}`,
-  )
-}
-
-for (const type of types) {
-  if (englishByType[type] !== expectedByType[type]) {
-    errors.push(
-      `expected ${expectedByType[type]} English ${type} documents, found ${englishByType[type]}`,
-    )
-  }
-  if (frenchByType[type] !== expectedByType[type]) {
-    errors.push(
-      `expected ${expectedByType[type]} French ${type} documents, found ${frenchByType[type]}`,
-    )
-  }
-}
+const warnings = []
+const referencedIds = new Set()
 
 for (const metadata of state.metadata) {
-  if (!metadata.englishRef || !metadata.frenchRef || !metadata.english || !metadata.french) {
-    errors.push(
-      `translation metadata ${metadata._id} has a missing or unresolved language reference`,
-    )
-    continue
+  const translations = metadata.translations || []
+  const resolved = translations.filter((translation) => translation.document)
+  const types = new Set(resolved.map((translation) => translation.document._type))
+  const familyType = [...types][0]
+
+  if (types.size > 1) errors.push(`${metadata._id}: translation family mixes schema types`)
+
+  for (const locale of locales) {
+    const matches = translations.filter((translation) => translation.language === locale)
+    if (matches.length > 1) errors.push(`${metadata._id}: duplicate ${locale} translation`)
+    if (matches.length === 0) {
+      const message = `${metadata._id}: missing ${locale} translation`
+      if (familyType && strategicTypes.has(familyType)) errors.push(message)
+      else warnings.push(message)
+      continue
+    }
+
+    const translation = matches[0]
+    if (!translation.document) errors.push(`${metadata._id}: unresolved ${locale} reference`)
+    if (translation.weak || translation.strengthenOnPublish) {
+      errors.push(`${metadata._id}: ${locale} reference is not strong`)
+    }
+    if (translation.document?.language !== locale) {
+      errors.push(`${metadata._id}: ${locale} label does not match referenced document language`)
+    }
+    if (translation.ref) referencedIds.add(translation.ref.replace(/^drafts\./, ''))
   }
-  if (metadata.frenchWeak || metadata.frenchStrengthenOnPublish) {
-    errors.push(`translation metadata ${metadata._id} still uses a weak French reference`)
+}
+
+for (const document of state.documents) {
+  const publicId = document._id.replace(/^drafts\./, '')
+  if (!locales.includes(document.language)) {
+    errors.push(`${document._id}: missing or invalid language`)
   }
+  if (!document.translationStatus) errors.push(`${document._id}: missing translationStatus`)
   if (
-    metadata.english.language !== 'en' ||
-    metadata.french.language !== 'fr' ||
-    metadata.english.translationStatus !== 'approved' ||
-    metadata.french.translationStatus !== 'approved'
+    document.slug &&
+    (!/^[\p{L}\p{N}]+(?:-[\p{L}\p{N}]+)*$/u.test(document.slug) ||
+      document.slug !== document.slug.normalize('NFC'))
   ) {
-    errors.push(`translation metadata ${metadata._id} links an unapproved or mislabeled document`)
+    errors.push(`${document._id}: invalid Unicode slug ${JSON.stringify(document.slug)}`)
   }
-  if (metadata.english._type !== metadata.french._type) {
-    errors.push(`translation metadata ${metadata._id} links different schema types`)
-  }
-
-  const englishDisplay = displayText(metadata.english).trim()
-  const frenchDisplay = displayText(metadata.french).trim()
-  if (englishDisplay && englishDisplay === frenchDisplay) {
-    errors.push(
-      `French ${metadata.french._type}:${metadata.french._id} still copies its English display text`,
-    )
-  }
-
-  const englishBody = bodyContent(metadata.english)
-  const frenchBody = bodyContent(metadata.french)
-  if (englishBody && JSON.stringify(englishBody) === JSON.stringify(frenchBody)) {
-    errors.push(
-      `French ${metadata.french._type}:${metadata.french._id} still copies its English body`,
-    )
-  }
+  if (!referencedIds.has(publicId)) errors.push(`${document._id}: orphan translation document`)
 }
 
-if (state.missingLocalization.length > 0) {
-  errors.push(
-    `${state.missingLocalization.length} localized documents are missing language/workflow fields`,
-  )
-}
+const publishedApproved = state.documents.filter(
+  (document) => !document._id.startsWith('drafts.') && document.translationStatus === 'approved',
+)
+const byLocale = Object.fromEntries(
+  locales.map((locale) => [
+    locale,
+    publishedApproved.filter((document) => document.language === locale).length,
+  ]),
+)
+const byType = Object.fromEntries(
+  localizedTypes.map((type) => [
+    type,
+    Object.fromEntries(
+      locales.map((locale) => [
+        locale,
+        publishedApproved.filter(
+          (document) => document._type === type && document.language === locale,
+        ).length,
+      ]),
+    ),
+  ]),
+)
 
-const summary = {
-  expectedPerLanguage: expectedDocumentsPerLanguage,
-  englishApproved: state.english.length,
-  frenchApproved: state.french.length,
-  drafts: state.drafts.length,
-  translationMetadata: state.metadata.length,
-  byType: {en: englishByType, fr: frenchByType},
-  missingLocalizationFields: state.missingLocalization,
-}
+console.log(
+  JSON.stringify(
+    {
+      translationFamilies: state.metadata.length,
+      localizedDocuments: state.documents.length,
+      publishedApproved: publishedApproved.length,
+      byLocale,
+      byType,
+      warnings,
+      errors,
+    },
+    null,
+    2,
+  ),
+)
 
-console.log(JSON.stringify(summary, null, 2))
-
-if (errors.length > 0) {
+if (errors.length) {
   throw new Error(`Localization verification failed:\n- ${errors.join('\n- ')}`)
 }
 
-console.log('Published bilingual localization state verified without mutating the dataset.')
+console.log('Four-language localization state verified without mutating the dataset.')

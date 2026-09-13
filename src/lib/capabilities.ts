@@ -8,6 +8,10 @@ import {
   localeTag,
 } from './localized-content';
 import { CAPABILITY_BRIEF_SECTIONS, CAPABILITY_DOMAINS } from './capabilities-content';
+import {
+  resolveEditorialFields,
+  type EditorialContentFields,
+} from './editorial-taxonomy';
 import { sanityFetch, withSanityFallback } from '../sanity/lib/fetch';
 import { urlForImage } from '../sanity/lib/image';
 import {
@@ -52,7 +56,7 @@ export type CapabilityProfileSummary = LocalizedContentMeta & {
   seo?: CapabilitySeo;
 };
 
-export type CapabilityProfile = CapabilityProfileSummary & {
+export type CapabilityProfile = CapabilityProfileSummary & Omit<EditorialContentFields, 'relatedCapabilities'> & {
   strategicContext: string;
   executionContext: string;
   subCapabilities: string[];
@@ -222,8 +226,26 @@ function normalizeCapabilitySummary(profile: SanityCapabilityProfileSummary): Ca
 }
 
 function normalizeCapabilityProfile(profile: SanityCapabilityProfile): CapabilityProfile {
+  const editorial = resolveEditorialFields(profile.slug, {
+    editorialFormat: profile.editorialFormat,
+    topics: profile.topics,
+    answerQuestion: profile.answerQuestion,
+    directAnswer: profile.directAnswer,
+    keyTakeaways: profile.keyTakeaways,
+    answerEvidence: profile.answerEvidence,
+    relatedQuestions: profile.relatedQuestions,
+    lastReviewed: profile.lastReviewed,
+    evidenceType: profile.evidenceType,
+    reviewers: profile.reviewers,
+    relatedCases: profile.relatedCases,
+    methodology: profile.methodology,
+    limitations: profile.limitations,
+    primaryCta: profile.primaryCta,
+  });
+
   return {
     ...normalizeCapabilitySummary(profile),
+    ...editorial,
     strategicContext: profile.strategicContext ?? '',
     executionContext: profile.executionContext ?? '',
     subCapabilities: profile.subCapabilities ?? [],

@@ -1,35 +1,46 @@
-import {defineConfig} from 'sanity'
-import {structureTool} from 'sanity/structure'
+import {documentInternationalization} from '@sanity/document-internationalization'
 import {visionTool} from '@sanity/vision'
+import {defineConfig} from 'sanity'
 import {presentationTool} from 'sanity/presentation'
+import {structureTool} from 'sanity/structure'
+import {internationalizedArray} from 'sanity-plugin-internationalized-array'
 import {
-  documentInternationalization,
-  useDeleteTranslationAction,
-  useDuplicateWithTranslationsAction,
-} from '@sanity/document-internationalization'
+  routeForDocument,
+  routeForPage,
+  type ContentLocale,
+  type PageRouteKey,
+  type RoutedDocumentType,
+} from './content-route-contract'
+import {locations, mainDocuments} from './presentation'
 import {schemaTypes} from './schemaTypes'
-import {structure} from './structure'
 import {LOCALIZED_SCHEMA_TYPES, SUPPORTED_LANGUAGES} from './schemaTypes/localization'
+import {structure} from './structure'
 
 const websiteOrigin = process.env.SANITY_STUDIO_WEBSITE_URL || 'https://hivevaultarc.com'
 
+function isLocalizedSchemaType(type: string) {
+  return LOCALIZED_SCHEMA_TYPES.includes(type as (typeof LOCALIZED_SCHEMA_TYPES)[number])
+}
+
 export default defineConfig({
   name: 'default',
-  title: 'HVA-website-studio',
-
+  title: 'Hive Vault Arc Content Studio',
   projectId: '0zprc9fo',
   dataset: 'production',
-
   plugins: [
     structureTool({structure}),
     visionTool(),
     presentationTool({
       previewUrl: {
         origin: websiteOrigin,
-        previewMode: {
-          enable: '/api/draft-mode/enable',
-        },
+        previewMode: {enable: '/api/draft-mode/enable'},
       },
+      resolve: {mainDocuments, locations},
+    }),
+    internationalizedArray({
+      languages: [...SUPPORTED_LANGUAGES],
+      defaultLanguages: ['en', 'fr', 'es', 'ar'],
+      fieldTypes: ['string', 'text'],
     }),
     documentInternationalization({
       supportedLanguages: [...SUPPORTED_LANGUAGES],
@@ -37,7 +48,7 @@ export default defineConfig({
       languageField: 'language',
       weakReferences: false,
       allowCreateMetaDoc: true,
-      bulkPublish: false,
+      bulkPublish: true,
       apiVersion: '2026-07-23',
       callback: async ({newDocument, client}) => {
         await client
@@ -47,81 +58,45 @@ export default defineConfig({
       },
     }),
   ],
-
-  schema: {
-    types: schemaTypes,
-  },
-
+  schema: {types: schemaTypes},
   document: {
     newDocumentOptions: (previousOptions) =>
       previousOptions.filter(
         (option) =>
-          !LOCALIZED_SCHEMA_TYPES.includes(
-            option.templateId as (typeof LOCALIZED_SCHEMA_TYPES)[number],
-          ) || option.parameters?.language === 'en',
+          option.templateId !== 'organizationProfile' &&
+          (!isLocalizedSchemaType(option.templateId) || option.parameters?.language === 'en'),
       ),
     actions: (previousActions, context) =>
-      LOCALIZED_SCHEMA_TYPES.includes(context.schemaType as (typeof LOCALIZED_SCHEMA_TYPES)[number])
-        ? [...previousActions, useDeleteTranslationAction, useDuplicateWithTranslationsAction]
+      context.schemaType === 'organizationProfile'
+        ? previousActions.filter((action) => !['delete', 'duplicate'].includes(action.action || ''))
         : previousActions,
-    productionUrl: (previousUrl, {document}) => {
+    productionUrl: async (previousUrl, {document}) => {
+      const locale = document.language as ContentLocale | undefined
+      if (!locale || !SUPPORTED_LANGUAGES.some((language) => language.id === locale)) {
+        return previousUrl
+      }
+      if (document._type === 'pageOptimization' && typeof document.routeKey === 'string') {
+        return `${websiteOrigin}${routeForPage(document.routeKey as PageRouteKey, locale)}`
+      }
       const slug = (document.slug as {current?: string} | undefined)?.current
-      if (!slug) return previousUrl
-      const language = document.language === 'fr' ? 'fr' : 'en'
-
-      const localizedPath = (englishPath: string, frenchPath: string) =>
-        `${websiteOrigin}${language === 'fr' ? `/fr${frenchPath}` : englishPath}`
-
-      if (document?._type === 'employeeProfile') {
-        return localizedPath(
-          `/aboutus/our-people/${encodeURIComponent(slug)}`,
-          `/qui-sommes-nous/equipe/${encodeURIComponent(slug)}`,
+      if (
+        !slug ||
+        !(
+          document._type in
+          {
+            employeeProfile: true,
+            caseStudy: true,
+            capability: true,
+            post: true,
+            newsArticle: true,
+            perspective: true,
+            researchReport: true,
+          }
         )
+      ) {
+        return previousUrl
       }
-
-      if (document?._type === 'caseStudy') {
-        return localizedPath(
-          `/case-studies/${encodeURIComponent(slug)}`,
-          `/etudes-de-cas/${encodeURIComponent(slug)}`,
-        )
-      }
-
-      if (document?._type === 'capability') {
-        return localizedPath(
-          `/capabilities/${encodeURIComponent(slug)}`,
-          `/expertises/${encodeURIComponent(slug)}`,
-        )
-      }
-
-      if (document?._type === 'post') {
-        return localizedPath(
-          `/blog/${encodeURIComponent(slug)}`,
-          `/blog/${encodeURIComponent(slug)}`,
-        )
-      }
-
-      if (document?._type === 'newsArticle') {
-        return localizedPath(
-          `/insights/news-articles/${encodeURIComponent(slug)}`,
-          `/publications/actualites/${encodeURIComponent(slug)}`,
-        )
-      }
-
-      if (document?._type === 'perspective') {
-        return localizedPath(
-          `/insights/perspectives/${encodeURIComponent(slug)}`,
-          `/publications/perspectives/${encodeURIComponent(slug)}`,
-        )
-      }
-
-      if (document?._type === 'researchReport') {
-        return localizedPath(
-          `/insights/research-reports/${encodeURIComponent(slug)}`,
-          `/publications/rapports-de-recherche/${encodeURIComponent(slug)}`,
-        )
-      }
-
-      return previousUrl
+      return `${websiteOrigin}${routeForDocument(document._type as RoutedDocumentType, locale, slug)}`
     },
   },
 })

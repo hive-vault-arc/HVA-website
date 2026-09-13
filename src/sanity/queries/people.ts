@@ -22,6 +22,8 @@ const employeeProfileSummaryFields = `
   profileImageAlt,
   expertise,
   linkedinUrl,
+  reviewers[]->{name, role, initials},
+  lastReviewed,
   displayOrder,
   featuredOnAbout,
   visibility,
@@ -37,8 +39,9 @@ const employeeProfileSummaryFields = `
   ][0].translations[].value->{
     language,
     translationStatus,
+    "noIndex": seo.noIndex,
     "slug": slug.current
-  })[translationStatus == "approved"]
+  })[translationStatus == "approved" && noIndex != true]
 `;
 
 const employeeProfileFields = `
@@ -66,7 +69,7 @@ export const allEmployeeProfilesQuery = defineQuery(`
   *[
     _type == "employeeProfile" &&
     language == $locale &&
-    ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4)) &&
     defined(slug.current)
   ]
   | order(displayOrder asc, name asc) {
@@ -78,7 +81,7 @@ export const featuredEmployeeProfilesQuery = defineQuery(`
   *[
     _type == "employeeProfile" &&
     language == $locale &&
-    ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4)) &&
     defined(slug.current) &&
     featuredOnAbout == true
   ] | order(displayOrder asc, name asc) {
@@ -90,7 +93,7 @@ export const employeeProfileBySlugQuery = defineQuery(`
   *[
     _type == "employeeProfile" &&
     language == $locale &&
-    ($preview == true || translationStatus == "approved") &&
+    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4)) &&
     slug.current == $slug
   ][0] {
     ${employeeProfileFields}

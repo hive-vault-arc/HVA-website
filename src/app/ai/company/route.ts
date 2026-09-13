@@ -7,6 +7,10 @@ import { getAllNewsArticles, getAllResearchReports } from '../../../lib/insights
 import { getAllPerspectives } from '../../../lib/perspectives';
 import { getAllCaseStudies } from '../../../lib/proof';
 import {
+  getApprovedOrganizationProfile,
+  resolveOrganizationFacts,
+} from '../../../lib/organization-profile';
+import {
   absoluteUrl,
   BRAND_ABBREVIATION,
   BRAND_ALIASES,
@@ -58,6 +62,7 @@ export async function GET() {
     perspectives,
     researchReports,
     employeeProfiles,
+    approvedOrganization,
   ] = await Promise.all([
     getAllCaseStudies(),
     getAllPosts(),
@@ -66,8 +71,20 @@ export async function GET() {
     getAllPerspectives(),
     getAllResearchReports(),
     getAllEmployeeProfiles(),
+    getApprovedOrganizationProfile(),
   ]);
   const aliases = Array.from(new Set([BRAND_ABBREVIATION, BRAND_INITIALISM, ...BRAND_ALIASES, ...BRAND_SEARCH_VARIANTS]));
+  const organizationFacts = resolveOrganizationFacts(approvedOrganization, 'en', {
+    brandName: BUSINESS_NAME,
+    legalName: BUSINESS_NAME,
+    canonicalWebsite: SITE_URL,
+    description:
+      'Hive Vault Arc is a technology transformation partner based in Tangier, Morocco. The company combines strategy consulting, AI engineering, custom software development, cloud infrastructure, and managed operations in one founder-led delivery team.',
+    publicEmail: CONTACT_EMAIL,
+    publicTelephone: CONTACT_PHONE_E164,
+    serviceAreas: COMPANY_ENTITY_FACTS.marketsServed,
+    sameAs: SOCIAL_PROFILE_URLS,
+  });
   const founderProfiles = employeeProfiles.filter((member) => member.profileType === 'coFounder');
   const people = employeeProfiles.map((member) => ({
     name: member.name,
@@ -84,19 +101,18 @@ export async function GET() {
   return NextResponse.json(
     {
       schemaVersion: '2.0',
-      lastUpdated: LAST_UPDATED,
+      lastUpdated: approvedOrganization?.reviewedAt || LAST_UPDATED,
       canonicalResource: absoluteUrl('/ai/company'),
       company: {
-        name: BUSINESS_NAME,
-        legalName: BUSINESS_NAME,
+        name: organizationFacts.brandName,
+        legalName: organizationFacts.legalName,
         shortName: BRAND_ABBREVIATION,
         alternateNames: aliases,
-        description:
-          'Hive Vault Arc is a technology transformation partner based in Tangier, Morocco. The company combines strategy consulting, AI engineering, custom software development, cloud infrastructure, and managed operations in one founder-led delivery team.',
-        website: SITE_URL,
-        email: CONTACT_EMAIL,
-        telephone: CONTACT_PHONE_E164,
-        formattedTelephone: CONTACT_PHONE_DISPLAY,
+        description: organizationFacts.description,
+        website: organizationFacts.canonicalWebsite,
+        email: organizationFacts.publicEmail,
+        telephone: organizationFacts.publicTelephone,
+        formattedTelephone: approvedOrganization?.publicTelephone || CONTACT_PHONE_DISPLAY,
         location: {
           city: COMPANY_ENTITY_FACTS.headquarters.city,
           region: COMPANY_ENTITY_FACTS.headquarters.region,
@@ -108,7 +124,7 @@ export async function GET() {
           },
           remoteDelivery: true,
         },
-        marketsServed: COMPANY_ENTITY_FACTS.marketsServed,
+        marketsServed: organizationFacts.serviceAreas,
         languages: COMPANY_ENTITY_FACTS.supportedLanguages,
         founders: founderProfiles.map((member) => ({
           name: member.name,
@@ -216,7 +232,7 @@ export async function GET() {
           'Workflow orchestration',
           'Managed AI operations',
         ],
-        socialProfiles: SOCIAL_PROFILE_URLS,
+        socialProfiles: organizationFacts.sameAs,
         importantPages,
       },
       crawlResources: {
@@ -228,7 +244,9 @@ export async function GET() {
       governance: {
         entityFactReviewStatus: COMPANY_ENTITY_FACTS.review.status,
         crawlerPolicy: absoluteUrl('/robots.txt'),
-        sourceNotes: 'Public company facts are compiled from the website configuration and require company-owner review when they change.',
+        sourceNotes: approvedOrganization
+          ? 'Approved company facts are sourced from the company-controlled Sanity organization profile.'
+          : 'Public company facts are compiled from the website configuration and require company-owner review when they change.',
       },
     },
     {

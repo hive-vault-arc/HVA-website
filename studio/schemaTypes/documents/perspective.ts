@@ -1,7 +1,12 @@
 import {DocumentTextIcon} from '@sanity/icons'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {sectionArrayMembers} from '../objects/sectionArrayMembers'
-import {createLocalizationFields, localeScopedSlugIsUnique} from '../localization'
+import {createEditorialFields} from '../editorialFields'
+import {
+  createLocalizationFields,
+  localeScopedSlugIsUnique,
+  validatePublicSlug,
+} from '../localization'
 import {createIndustryReferenceField} from '../industryReference'
 import {requireWebpImage} from '../webpValidation'
 
@@ -23,15 +28,7 @@ export const perspective = defineType({
       title: 'Slug',
       type: 'slug',
       options: {source: 'title', isUnique: localeScopedSlugIsUnique},
-      validation: (rule) =>
-        rule.required().custom((slug) => {
-          if (!slug?.current) return 'Required'
-          if (!/^[a-z0-9-]+$/.test(slug.current)) {
-            return 'Slug must be lowercase with hyphens only.'
-          }
-
-          return true
-        }),
+      validation: (rule) => rule.required().custom(validatePublicSlug),
     }),
     defineField({
       name: 'subtitle',
@@ -75,7 +72,10 @@ export const perspective = defineType({
       name: 'authors',
       title: 'Authors',
       type: 'array',
-      of: [defineArrayMember({type: 'author'})],
+      of: [
+        defineArrayMember({type: 'reference', to: [{type: 'editorialContributor'}]}),
+        defineArrayMember({type: 'author'}),
+      ],
       validation: (rule) => rule.required().min(1),
     }),
     defineField({
@@ -112,6 +112,7 @@ export const perspective = defineType({
       of: sectionArrayMembers,
       validation: (rule) => rule.required().min(1),
     }),
+    ...createEditorialFields(),
     defineField({
       name: 'seo',
       title: 'SEO',

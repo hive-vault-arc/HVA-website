@@ -15,6 +15,7 @@ import {
   Workflow,
 } from '@/components/icons';
 import BottomCTA from '../components/BottomCTA';
+import EditorialAnswerPanel from '../components/EditorialAnswerPanel';
 import {Link} from '@/i18n/navigation';
 import {useAnimationQuality} from '../lib/animationQuality';
 import type {CapabilityProfile, CapabilityProfileSummary} from '../lib/capabilities';
@@ -127,6 +128,8 @@ export default function CapabilityDetail({capability, relatedCapabilities}: Capa
             </div>
           </div>
         </section>
+
+        <EditorialAnswerPanel editorial={capability} />
 
         <section className={styles.briefBand} aria-label={t('capability.atAGlance')}>
           <div className={`site-frame ${styles.briefGrid}`}>

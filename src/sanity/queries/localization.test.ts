@@ -68,7 +68,9 @@ describe('public localized GROQ queries', () => {
   ])('filters the completed translation-target array after dereferencing it', (query) => {
     const source = String(query);
     expect(source).toContain('"translationTargets": (*[');
-    expect(source).toContain('})[translationStatus == "approved"]');
+    expect(source).toContain(
+      '})[translationStatus == "approved" && noIndex != true]'
+    );
   });
 
   it('keeps project media publication-gated and detail-only', () => {

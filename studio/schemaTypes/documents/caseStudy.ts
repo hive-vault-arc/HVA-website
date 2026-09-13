@@ -1,6 +1,11 @@
 import {DocumentTextIcon} from '@sanity/icons'
 import {defineArrayMember, defineField, defineType, type ValidationContext} from 'sanity'
-import {createLocalizationFields, localeScopedSlugIsUnique} from '../localization'
+import {createEditorialFields} from '../editorialFields'
+import {
+  createLocalizationFields,
+  localeScopedSlugIsUnique,
+  validatePublicSlug,
+} from '../localization'
 import {createIndustryReferenceField} from '../industryReference'
 import {requireWebpImage} from '../webpValidation'
 
@@ -42,15 +47,7 @@ export const caseStudy = defineType({
       title: 'Slug',
       type: 'slug',
       options: {source: 'title', isUnique: localeScopedSlugIsUnique},
-      validation: (rule) =>
-        rule.required().custom((slug) => {
-          if (!slug?.current) return 'Required'
-          if (!/^[a-z0-9-]+$/.test(slug.current)) {
-            return 'Slug must be lowercase with hyphens only.'
-          }
-
-          return true
-        }),
+      validation: (rule) => rule.required().custom(validatePublicSlug),
     }),
     defineField({
       name: 'clientName',
@@ -279,6 +276,7 @@ export const caseStudy = defineType({
       type: 'date',
       validation: (rule) => rule.required(),
     }),
+    ...createEditorialFields(),
     defineField({
       name: 'seo',
       title: 'SEO',

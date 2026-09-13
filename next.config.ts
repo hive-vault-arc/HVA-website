@@ -9,11 +9,8 @@ const securityHeaders = [
     key: 'X-Content-Type-Options',
     value: 'nosniff',
   },
-  // Clickjacking protection — allow framing only from same origin
-  {
-    key: 'X-Frame-Options',
-    value: 'SAMEORIGIN',
-  },
+  // Framing is restricted by CSP frame-ancestors below. Sanity's company Studio
+  // is allowed so authenticated editors can use Presentation and click-to-edit.
   // Reduce referrer leakage
   {
     key: 'Referrer-Policy',
@@ -50,6 +47,7 @@ const securityHeaders = [
       "object-src 'none'",
       "base-uri 'self'",
       "form-action 'self' https:",
+      "frame-ancestors 'self' https://*.sanity.studio",
     ].join('; '),
   },
 ];

@@ -1,9 +1,18 @@
-# Sanity Clean Content Studio
+# Hive Vault Arc Content Studio
 
-Congratulations, you have now installed the Sanity Content Studio, an open-source real-time content editing environment connected to the Sanity backend.
+This Sanity Studio is part of the company website repository but installs and deploys independently.
 
-Now you can do the following things:
+```text
+npm ci --prefix studio
+npm run studio:dev
+npm run studio:verify
+npm run studio:build
+```
 
-- [Read “getting started” in the docs](https://www.sanity.io/docs/introduction/getting-started?utm_source=readme)
-- [Join the Sanity community](https://www.sanity.io/community/join?utm_source=readme)
-- [Extend and build plugins](https://www.sanity.io/docs/content-studio/extending?utm_source=readme)
+Deployment must use the company-controlled Sanity account:
+
+```text
+npm run studio:deploy
+```
+
+Do not deploy or run a dataset mutation while authenticated with a personal account. See [`../docs/sanity-content-program.md`](../docs/sanity-content-program.md) for localization, evidence, migration, release, and verification rules.

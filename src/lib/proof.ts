@@ -6,6 +6,7 @@ import {
   getSanityHomeCaseStudyProof,
 } from './sanity-content';
 import type {ContentSeo} from './content-seo';
+import type {EditorialContentFields} from './editorial-taxonomy';
 import type {AppLocale} from '@/i18n/config';
 import type {
   LocalizedContentMeta,
@@ -140,7 +141,7 @@ export type CaseStudyEngagementType =
   | 'managedOperations'
   | 'hybridDelivery';
 
-export type CaseStudy = LocalizedContentMeta & {
+export type CaseStudy = LocalizedContentMeta & EditorialContentFields & {
   slug: string;
   title: string;
   clientName: string;

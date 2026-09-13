@@ -1,0 +1,145 @@
+.section {
+  background: var(--surface-warm);
+  border-block: 1px solid var(--color-neutral-dark);
+  padding-block: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.frame {
+  display: grid;
+  gap: clamp(2rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 1.45fr) minmax(17rem, 0.75fr);
+}
+
+.answer {
+  max-inline-size: 52rem;
+}
+
+.eyebrow {
+  color: var(--color-primary-display);
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  margin: 0 0 0.85rem;
+  text-transform: uppercase;
+}
+
+.answer h2 {
+  color: var(--color-tertiary);
+  font-family: var(--font-headline);
+  font-size: clamp(1.75rem, 1.4rem + 1vw, 2.6rem);
+  font-weight: 500;
+  line-height: 1.12;
+  margin: 0;
+}
+
+.response {
+  color: var(--color-secondary);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  margin: 1.25rem 0 0;
+}
+
+.takeaways {
+  border-inline-start: 2px solid var(--color-primary);
+  padding-inline-start: 1.5rem;
+}
+
+.takeaways h3 {
+  color: var(--color-tertiary);
+  font-family: var(--font-label);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  margin: 0 0 1rem;
+  text-transform: uppercase;
+}
+
+.takeaways ul {
+  display: grid;
+  gap: 0.85rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.takeaways li {
+  color: var(--color-secondary);
+  line-height: 1.55;
+  padding-inline-start: 1rem;
+  position: relative;
+}
+
+.takeaways li::before {
+  background: var(--color-primary);
+  block-size: 0.35rem;
+  content: '';
+  inline-size: 0.35rem;
+  inset-block-start: 0.65em;
+  inset-inline-start: 0;
+  position: absolute;
+}
+
+.evidence,
+.reviewDetail {
+  border-block-start: 1px solid var(--color-neutral-dark);
+  grid-column: 1 / -1;
+  padding-block-start: 1.5rem;
+}
+
+.evidence h3,
+.reviewDetail h3 {
+  color: var(--color-tertiary);
+  font-family: var(--font-label);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+}
+
+.evidence ul {
+  display: grid;
+  gap: 0.65rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.evidence a {
+  color: var(--color-secondary);
+  text-decoration-color: var(--color-primary);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.24em;
+}
+
+.evidence a:hover {
+  color: var(--color-tertiary);
+}
+
+.reviewDetail {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.reviewDetail p {
+  color: var(--color-secondary);
+  line-height: 1.65;
+  margin: 0;
+}
+
+@media (max-width: 48rem) {
+  .frame {
+    grid-template-columns: 1fr;
+  }
+
+  .takeaways {
+    border-block-start: 1px solid var(--color-neutral-dark);
+    border-inline-start: 0;
+    padding-block-start: 1.5rem;
+    padding-inline-start: 0;
+  }
+
+  .reviewDetail {
+    grid-template-columns: 1fr;
+  }
+}

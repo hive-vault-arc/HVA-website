@@ -85,7 +85,7 @@ const DEFAULT_CTA: EditorialLink = {
   href: "/contact",
 };
 
-const LEGACY_EDITORIAL_MAP: Record<string, LegacyEditorialRecord> = {
+export const LEGACY_EDITORIAL_MAP: Record<string, LegacyEditorialRecord> = {
   "agentic-ai-autonomous-revolution": {
     editorialFormat: "operating-note",
     topics: ["ai-operational-systems", "morocco-north-africa-transformation"],

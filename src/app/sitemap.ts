@@ -14,6 +14,7 @@ import {getAllNewsArticles, getAllResearchReports} from '@/lib/insights';
 import {getAllPerspectives} from '@/lib/perspectives';
 import type {LocalizedContentMeta} from '@/lib/localized-content';
 import {SITE_URL} from '@/lib/seo';
+import {getNoindexedPageOptimizationKeys} from '@/lib/page-optimization';
 
 const BASE_URL = SITE_URL.replace(/\/$/, '');
 
@@ -28,15 +29,23 @@ function absoluteLanguages(languages: Record<string, string>): Record<string, st
 }
 
 function staticEntry(
+  routeKey: string,
   pathname: AppPathname,
   locale: AppLocale,
+  noindexedPages: Set<string>,
 ): MetadataRoute.Sitemap[number] {
+  const alternates = Object.fromEntries(
+    Object.entries(localizedAlternates(pathname)).filter(([alternateLocale]) => {
+      const contentLocale = alternateLocale === 'x-default' ? 'en' : alternateLocale;
+      return !noindexedPages.has(`${routeKey}:${contentLocale}`);
+    }),
+  );
   return {
     url: absolute(localizedPath(pathname, locale)),
     changeFrequency: 'monthly',
     priority: pathname === '/' ? (locale === 'en' ? 1 : 0.9) : 0.75,
     alternates: {
-      languages: absoluteLanguages(localizedAlternates(pathname)),
+      languages: absoluteLanguages(alternates),
     },
   };
 }
@@ -81,10 +90,15 @@ function dynamicEntries(
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const staticEntries = Object.values(ROUTE_MANIFEST)
-    .filter((route) => route.indexable)
-    .flatMap((route) =>
-      PUBLIC_LOCALES.map((locale) => staticEntry(route.pathname, locale)),
+  const noindexedStaticPages = await getNoindexedPageOptimizationKeys();
+  const staticEntries = Object.entries(ROUTE_MANIFEST)
+    .filter(([, route]) => route.indexable)
+    .flatMap(([routeKey, route]) =>
+      PUBLIC_LOCALES.flatMap((locale) =>
+        noindexedStaticPages.has(`${routeKey}:${locale}`)
+          ? []
+          : [staticEntry(routeKey, route.pathname, locale, noindexedStaticPages)],
+      ),
     );
 
   const localizedContent = await Promise.all(

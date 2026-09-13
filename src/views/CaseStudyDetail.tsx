@@ -23,6 +23,7 @@ import CaseStudyProjectMedia, {
   type CaseStudyProjectMediaLabels,
 } from '@/components/CaseStudyProjectMedia';
 import CaseStudyTestimonial from '@/components/CaseStudyTestimonial';
+import EditorialAnswerPanel from '@/components/EditorialAnswerPanel';
 import {
   getEvidenceDirection,
   getEvidenceLanguageCode,
@@ -633,6 +634,8 @@ export default function CaseStudyDetail({
             </div>
           </div>
         </header>
+
+        <EditorialAnswerPanel editorial={study} />
 
         <div className="site-frame-wide case-study-template__dossier">
           <CaseStudyTestimonial evidence={study.clientEvidence} />
