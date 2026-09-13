@@ -65,7 +65,7 @@ const baseMetadata: Metadata = {
         url: DEFAULT_OG_IMAGE_PATH,
         width: DEFAULT_OG_IMAGE_WIDTH,
         height: DEFAULT_OG_IMAGE_HEIGHT,
-        alt: 'Hive Vault Arc logo - Technology Transformation Partner',
+        alt: 'Technology strategist arranging a layered systems model for Hive Vault Arc',
       },
     ],
   },
@@ -183,11 +183,27 @@ export async function generateMetadata({params}: LocaleLayoutProps): Promise<Met
       url: canonical,
       title: t('defaultTitle'),
       description: t('defaultDescription'),
+      images: [
+        {
+          url: DEFAULT_OG_IMAGE_PATH,
+          width: DEFAULT_OG_IMAGE_WIDTH,
+          height: DEFAULT_OG_IMAGE_HEIGHT,
+          alt: t('socialImageAlt'),
+        },
+      ],
     },
     twitter: {
       ...baseMetadata.twitter,
       title: t('defaultTitle'),
       description: t('defaultDescription'),
+      images: [
+        {
+          url: DEFAULT_OG_IMAGE_PATH,
+          width: DEFAULT_OG_IMAGE_WIDTH,
+          height: DEFAULT_OG_IMAGE_HEIGHT,
+          alt: t('socialImageAlt'),
+        },
+      ],
     },
   };
 }
@@ -262,7 +278,7 @@ export default async function RootLayout({children, params}: LocaleLayoutProps) 
       width: SITE_LOGO_WIDTH,
       height: SITE_LOGO_HEIGHT,
     },
-    image: absoluteUrl('/Images/media/og-default.webp'),
+    image: absoluteUrl(DEFAULT_OG_IMAGE_PATH),
     description: organizationFacts.description,
     founder: leadershipPeople,
     founders: leadershipPeople,

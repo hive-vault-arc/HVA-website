@@ -9,8 +9,9 @@ export async function buildStaticRouteMetadata(
   routeKey: RouteKey,
   keywords?: string[],
 ) {
-  const [t, optimization] = await Promise.all([
+  const [t, tMetadata, optimization] = await Promise.all([
     getTranslations({locale, namespace: `Metadata.pages.${routeKey}`}),
+    getTranslations({locale, namespace: 'Metadata'}),
     getPageOptimization(routeKey, locale),
   ]);
   const route = ROUTE_MANIFEST[routeKey];
@@ -23,6 +24,6 @@ export async function buildStaticRouteMetadata(
     keywords,
     noIndex: optimization?.noIndex,
     socialImageUrl: optimization?.socialImageUrl,
-    socialImageAlt: optimization?.socialImageAlt,
+    socialImageAlt: optimization?.socialImageAlt || tMetadata('socialImageAlt'),
   });
 }

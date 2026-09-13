@@ -1,14 +1,36 @@
+import {join} from 'node:path';
+import sharp from 'sharp';
 import {describe, expect, it} from 'vitest';
 import {
   CANONICAL_SITE_URL,
   CONTACT_PHONE_DISPLAY,
   CONTACT_PHONE_E164,
+  DEFAULT_OG_IMAGE_HEIGHT,
+  DEFAULT_OG_IMAGE_PATH,
+  DEFAULT_OG_IMAGE_WIDTH,
   WHATSAPP_URL,
   compactMetaDescription,
   resolveSiteUrl,
   SCHEMA_IDS,
   schemaId,
 } from './seo';
+
+describe('default social preview', () => {
+  it('uses a versioned 1200 by 630 WebP asset', async () => {
+    expect(DEFAULT_OG_IMAGE_PATH).toBe('/Images/brand/hva-og-share-v2.webp');
+    expect(DEFAULT_OG_IMAGE_WIDTH).toBe(1200);
+    expect(DEFAULT_OG_IMAGE_HEIGHT).toBe(630);
+
+    const imagePath = join(
+      process.cwd(),
+      'public',
+      DEFAULT_OG_IMAGE_PATH.replace(/^\//, ''),
+    );
+    const metadata = await sharp(imagePath).metadata();
+
+    expect(metadata).toMatchObject({format: 'webp', width: 1200, height: 630});
+  });
+});
 
 describe('compactMetaDescription', () => {
   it('normalizes whitespace without changing a concise description', () => {

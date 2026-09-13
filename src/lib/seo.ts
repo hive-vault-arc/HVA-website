@@ -55,11 +55,10 @@ export const LINKEDIN_URL = COMPANY_SOCIAL_PROFILES[0].url;
 export const SITE_LOGO_PATH = '/Images/brand/hva-icon-static-light-surface.svg';
 export const SITE_LOGO_WIDTH = 100;
 export const SITE_LOGO_HEIGHT = 100;
-// Social previews use a rasterized version of the same micro lockup rendered in
-// the navbar. Keeping this as a 1200×630 WebP makes the mark reliable across
-// LinkedIn, WhatsApp, Slack, and other link unfurlers that do not render SVG OG
-// images consistently.
-export const DEFAULT_OG_IMAGE_PATH = '/Images/brand/hva-og-share.webp';
+// A versioned URL prevents social-preview caches from retaining an older card.
+// The 1200×630 WebP keeps the image lightweight while preserving the standard
+// Open Graph aspect ratio used by messaging and social platforms.
+export const DEFAULT_OG_IMAGE_PATH = '/Images/brand/hva-og-share-v2.webp';
 export const DEFAULT_OG_IMAGE_WIDTH = 1200;
 export const DEFAULT_OG_IMAGE_HEIGHT = 630;
 

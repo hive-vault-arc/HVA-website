@@ -36,7 +36,7 @@ export const metadata: Metadata = {
         url: DEFAULT_OG_IMAGE_PATH,
         width: DEFAULT_OG_IMAGE_WIDTH,
         height: DEFAULT_OG_IMAGE_HEIGHT,
-        alt: "Hive Vault Arc company profile",
+        alt: "Technology strategist arranging a layered systems model for Hive Vault Arc",
       },
     ],
   },
