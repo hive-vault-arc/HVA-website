@@ -522,16 +522,31 @@
 
 @media (max-width: 767px) {
   .header {
-    padding-block: 7.75rem 3.5rem;
+    padding-block: 5.75rem 2.5rem;
+  }
+
+  .headerGrid {
+    gap: 1rem;
+  }
+
+  .pageLabel {
+    margin-bottom: 0.75rem;
   }
 
   .title {
-    max-width: 12ch;
-    font-size: clamp(2.6rem, 12cqw, 3.35rem);
-    line-height: 1;
+    max-width: 15ch;
+    font-size: clamp(2.25rem, 10.5cqw, 2.75rem);
+    line-height: 1.02;
   }
 
-  .contactSection,
+  .lead {
+    line-height: 1.55;
+  }
+
+  .contactSection {
+    padding-block: 2.5rem 4rem;
+  }
+
   .locationSection {
     padding-block: 4rem;
   }
