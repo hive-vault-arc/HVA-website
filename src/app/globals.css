@@ -25492,6 +25492,8 @@ body:has(.arc-briefing)
 
   .portfolio-v2__projects {
     padding: 2.75rem 0;
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   .portfolio-v2__project-intro {
