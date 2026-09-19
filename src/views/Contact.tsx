@@ -145,8 +145,65 @@ const Contact: React.FC = () => {
         </div>
       </header>
 
-      <section className={styles.contactSection} aria-labelledby="contact-form-heading">
+      <section className={styles.contactSection} aria-label={t('sectionLabel')}>
         <div className={`site-frame ${styles.contactGrid}`}>
+          <aside className={styles.contactRail} aria-labelledby="contact-details-heading">
+            <div>
+              <h2 id="contact-details-heading" className={styles.railHeading}>
+                {t('detailsHeading')}
+              </h2>
+              <address className={styles.contactList}>
+                <div className={styles.contactItem}>
+                  <Mail className={styles.detailIcon} aria-hidden="true" />
+                  <div>
+                    <h3>{t('inquiries')}</h3>
+                    {CONTACT_EMAILS.map((email) => (
+                      <a key={email} href={`mailto:${email}`}>
+                        {email}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+                <div className={styles.contactItem}>
+                  <Phone className={styles.detailIcon} aria-hidden="true" />
+                  <div>
+                    <h3>{t('directLine')}</h3>
+                    {CONTACT_PHONES.map((phone) => (
+                      <a key={phone.raw} href={`tel:${phone.raw}`}>
+                        {phone.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </address>
+            </div>
+
+            <nav className={styles.socials} aria-labelledby="contact-social-heading">
+              <h2 id="contact-social-heading" className={styles.railHeading}>
+                {t('socialHeading')}
+              </h2>
+              <ul>
+                {SOCIAL_PROFILES.map((profile) => {
+                  const SocialIcon = SOCIAL_ICONS[profile.label];
+                  return (
+                    <li key={profile.label}>
+                      <a href={profile.url} target="_blank" rel="noreferrer noopener">
+                        <SocialIcon className={styles.socialIcon} aria-hidden="true" />
+                        <span>{profile.label}</span>
+                        <ArrowUpRight className={styles.socialArrow} aria-hidden="true" />
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
+
+            <blockquote className={styles.quote}>
+              <p>“{t('quote')}”</p>
+              <footer>{t('quoteAttribution')}</footer>
+            </blockquote>
+          </aside>
+
           <div className={styles.formPanel} data-clarity-mask="true">
             <div className={styles.formHeader}>
               <div>
@@ -274,63 +331,6 @@ const Contact: React.FC = () => {
               )}
             </form>
           </div>
-
-          <aside className={styles.contactRail} aria-labelledby="contact-details-heading">
-            <div>
-              <h2 id="contact-details-heading" className={styles.railHeading}>
-                {t('detailsHeading')}
-              </h2>
-              <address className={styles.contactList}>
-                <div className={styles.contactItem}>
-                  <Mail className={styles.detailIcon} aria-hidden="true" />
-                  <div>
-                    <h3>{t('inquiries')}</h3>
-                    {CONTACT_EMAILS.map((email) => (
-                      <a key={email} href={`mailto:${email}`}>
-                        {email}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-                <div className={styles.contactItem}>
-                  <Phone className={styles.detailIcon} aria-hidden="true" />
-                  <div>
-                    <h3>{t('directLine')}</h3>
-                    {CONTACT_PHONES.map((phone) => (
-                      <a key={phone.raw} href={`tel:${phone.raw}`}>
-                        {phone.label}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </address>
-            </div>
-
-            <nav className={styles.socials} aria-labelledby="contact-social-heading">
-              <h2 id="contact-social-heading" className={styles.railHeading}>
-                {t('socialHeading')}
-              </h2>
-              <ul>
-                {SOCIAL_PROFILES.map((profile) => {
-                  const SocialIcon = SOCIAL_ICONS[profile.label];
-                  return (
-                    <li key={profile.label}>
-                      <a href={profile.url} target="_blank" rel="noreferrer noopener">
-                        <SocialIcon className={styles.socialIcon} aria-hidden="true" />
-                        <span>{profile.label}</span>
-                        <ArrowUpRight className={styles.socialArrow} aria-hidden="true" />
-                      </a>
-                    </li>
-                  );
-                })}
-              </ul>
-            </nav>
-
-            <blockquote className={styles.quote}>
-              <p>“{t('quote')}”</p>
-              <footer>{t('quoteAttribution')}</footer>
-            </blockquote>
-          </aside>
         </div>
       </section>
 

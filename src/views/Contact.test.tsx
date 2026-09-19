@@ -17,6 +17,21 @@ describe('Contact form', () => {
     vi.restoreAllMocks();
   });
 
+  it('places contact details before the discovery form in the compact reading order', () => {
+    render(<Contact />);
+
+    const detailsHeading = screen.getByRole('heading', {
+      name: 'Contact details',
+    });
+    const formHeading = screen.getByRole('heading', {
+      name: 'Send a short brief',
+    });
+
+    expect(
+      detailsHeading.compareDocumentPosition(formHeading) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+  });
+
   it('shows success feedback on successful submit', async () => {
     const fetchMock = vi.fn().mockResolvedValue({
       ok: true,
