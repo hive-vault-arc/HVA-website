@@ -89,43 +89,49 @@ const Portfolio = ({projects}: PortfolioProps) => {
     if (!root || motionReduced) return;
 
     gsap.registerPlugin(ScrollTrigger);
-    const context = gsap.context(() => {
-      gsap.utils.toArray<HTMLElement>('[data-portfolio-hero-media]').forEach((media, index) => {
-        gsap.to(media, {
-          yPercent: index === 0 ? 7 : -5,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: root,
-            start: 'top top',
-            end: '70% top',
-            scrub: 0.8,
-          },
-        });
-      });
+    const mediaContext = gsap.matchMedia();
 
-      gsap.utils.toArray<HTMLElement>('[data-portfolio-project]').forEach((project) => {
-        const media = project.querySelector<HTMLElement>('[data-portfolio-project-media]');
-        if (!media) return;
-
-        gsap.fromTo(
-          media,
-          {scale: 0.94, opacity: 0.76},
-          {
-            scale: 1,
-            opacity: 1,
+    mediaContext.add('(min-width: 768px)', () => {
+      const context = gsap.context(() => {
+        gsap.utils.toArray<HTMLElement>('[data-portfolio-hero-media]').forEach((media, index) => {
+          gsap.to(media, {
+            yPercent: index === 0 ? 7 : -5,
             ease: 'none',
             scrollTrigger: {
-              trigger: project,
-              start: 'top 92%',
-              end: 'center 48%',
-              scrub: 0.65,
+              trigger: root,
+              start: 'top top',
+              end: '70% top',
+              scrub: 0.8,
             },
-          },
-        );
-      });
-    }, root);
+          });
+        });
 
-    return () => context.revert();
+        gsap.utils.toArray<HTMLElement>('[data-portfolio-project]').forEach((project) => {
+          const media = project.querySelector<HTMLElement>('[data-portfolio-project-media]');
+          if (!media) return;
+
+          gsap.fromTo(
+            media,
+            {scale: 0.94, opacity: 0.76},
+            {
+              scale: 1,
+              opacity: 1,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: project,
+                start: 'top 92%',
+                end: 'center 48%',
+                scrub: 0.65,
+              },
+            },
+          );
+        });
+      }, root);
+
+      return () => context.revert();
+    });
+
+    return () => mediaContext.revert();
   }, [motionReduced, projects.length]);
 
   return (
