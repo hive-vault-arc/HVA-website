@@ -1,7 +1,7 @@
 import {Link} from '@/i18n/navigation';
 import {getLocale, getTranslations} from 'next-intl/server';
 import { ArrowLeft, ArrowUpRight } from '@/components/icons';
-import SectionBrandMark from './SectionBrandMark';
+import SectionAccent from './SectionAccent';
 import {getErrorCopy} from '@/i18n/error-copy';
 
 const RECOVERY_LINKS = [
@@ -20,7 +20,7 @@ export default async function NotFoundContent() {
         <div className="grid gap-12 border-y border-[#DDE3EA] py-12 md:py-16 lg:grid-cols-12 lg:items-end lg:gap-16">
           <div className="lg:col-span-4">
             <div className="mb-8 flex items-center gap-3">
-              <SectionBrandMark size="sm" />
+              <SectionAccent size="sm" />
               <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)]">
                 {t.navigationError}
               </p>

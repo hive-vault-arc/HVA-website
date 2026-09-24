@@ -7,7 +7,7 @@ import FaqSection from '@/components/FaqSection';
 import JsonLd from '@/components/JsonLd';
 import type {FaqItem} from '@/data/faqs';
 import {SITE_URL, absoluteUrl} from '@/lib/seo';
-import SectionBrandMark from '@/components/SectionBrandMark';
+import SectionAccent from '@/components/SectionAccent';
 
 export type GeoCardCopy = {
   title: string;
@@ -121,7 +121,7 @@ export default function GeoServicePage({
             </nav>
 
             <div className="geo-article-meta">
-              <SectionBrandMark size="sm" eager />
+              <SectionAccent size="sm" />
               <span>{copy.hero.kicker}</span>
               <span className="geo-article-meta-dot" aria-hidden="true" />
               <span className="geo-article-meta-muted">{copy.breadcrumb}</span>
@@ -131,7 +131,7 @@ export default function GeoServicePage({
             <p className="geo-article-subtitle">{copy.hero.lead}</p>
 
             <div className="geo-article-author">
-              <SectionBrandMark size="sm" />
+              <SectionAccent size="sm" />
               <div>
                 <strong>{copy.schemaName}</strong>
                 <span>{copy.hero.kicker}</span>

@@ -6,7 +6,7 @@ import { ArrowRight, CheckCircle2 } from '@/components/icons';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import PageAmbientBackground from '../components/PageAmbientBackground';
 import BottomCTA from '../components/BottomCTA';
-import SectionBrandMark from '../components/SectionBrandMark';
+import SectionAccent from '../components/SectionAccent';
 import { PRODUCT_SYSTEMS } from '../lib/proof';
 
 const ProductsSystems: React.FC = () => {
@@ -37,7 +37,7 @@ const ProductsSystems: React.FC = () => {
             transition={{ duration: 0.55 }}
           >
             <div className="mb-6 flex items-center gap-3">
-              <SectionBrandMark size="sm" />
+              <SectionAccent size="sm" />
               <span className="inline-block text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--section-label-color)]">
                 Consulting-Led System Programs
               </span>
@@ -102,7 +102,7 @@ const ProductsSystems: React.FC = () => {
               transition={{ duration: 0.45 }}
             >
               <div className="mb-6 flex items-center gap-3">
-                <SectionBrandMark surface="dark" size="sm" />
+                <SectionAccent size="sm" />
                 <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[var(--section-label-color-dark)]">
                   Why modular systems
                 </p>

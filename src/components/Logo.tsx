@@ -68,7 +68,7 @@ export default function Logo({
       data-brand-logo={assetShape}
       data-logo-surface={light ? 'dark' : 'light'}
       className={[
-        'inline-flex flex-shrink-0 items-center justify-center px-2 py-1',
+        'inline-flex min-h-11 flex-shrink-0 items-center justify-center px-2 py-1',
         'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8A838]',
         light ? 'bg-white' : 'bg-transparent',
         className,

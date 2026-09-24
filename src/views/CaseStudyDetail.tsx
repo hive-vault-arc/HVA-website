@@ -18,7 +18,7 @@ import {
   Users,
   Workflow,
 } from '@/components/icons';
-import SectionBrandMark from '@/components/SectionBrandMark';
+import SectionAccent from '@/components/SectionAccent';
 import CaseStudyProjectMedia, {
   type CaseStudyProjectMediaLabels,
 } from '@/components/CaseStudyProjectMedia';
@@ -497,7 +497,7 @@ function CaseStudyCta() {
     <section className="case-study-template__cta">
       <div className="site-frame-wide case-study-template__cta-grid">
         <div>
-          <SectionBrandMark surface="dark" size="sm" />
+          <SectionAccent size="sm" />
           <h2>{t('caseCta.title')}</h2>
           <p>{t('caseCta.description')}</p>
         </div>

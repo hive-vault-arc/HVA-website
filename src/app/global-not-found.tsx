@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import SectionBrandMark from '../components/SectionBrandMark';
+import SectionAccent from '../components/SectionAccent';
 import { manrope, newsreader } from '../lib/fonts';
 import { NOT_FOUND_METADATA } from '../lib/not-found';
 import './globals.css';
@@ -24,7 +24,7 @@ export default function GlobalNotFound() {
             <div className="grid gap-12 border-y border-[#DDE3EA] py-12 md:py-16 lg:grid-cols-12 lg:items-end lg:gap-16">
               <div className="lg:col-span-4">
                 <div className="mb-8 flex items-center gap-3">
-                  <SectionBrandMark size="sm" eager />
+                  <SectionAccent size="sm" />
                   <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--section-label-color)]">
                     Navigation error
                   </p>

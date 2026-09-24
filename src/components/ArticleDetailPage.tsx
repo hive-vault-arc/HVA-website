@@ -7,7 +7,7 @@ import {useLocale, useTranslations} from 'next-intl';
 import { ArrowLeft, ArrowUpRight } from '@/components/icons';
 import {LOCALE_PROFILES, type AppLocale} from '@/i18n/config';
 import BottomCTA from './BottomCTA';
-import SectionBrandMark from './SectionBrandMark';
+import SectionAccent from './SectionAccent';
 import {isSanityCdnImage} from '@/lib/image-delivery';
 import {
   getEditorialTopicImage,
@@ -224,7 +224,7 @@ export default function ArticleDetailPage({
             className="flex flex-wrap items-center gap-4 mb-7 text-xs font-bold tracking-widest uppercase"
             style={{ fontFamily: 'var(--font-body)' }}
           >
-            <SectionBrandMark size="sm" className="mr-1" />
+            <SectionAccent size="sm" className="me-1" />
             <span className="text-[#1A2535]">{eyebrow}</span>
             {isoDate && (
               <>
@@ -549,7 +549,7 @@ export default function ArticleDetailPage({
       {showAboutStrip && !editorial && (
         <section className="bg-[#F7F8FA] py-16">
           <div className="site-frame-narrow flex flex-col md:flex-row gap-10 items-center md:items-start">
-            <SectionBrandMark size="lg" />
+            <SectionAccent size="lg" />
             <div className="flex-1 text-center md:text-left">
               <h2
                 className="text-2xl mb-3 text-[#1A2535]"

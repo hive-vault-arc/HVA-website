@@ -116,6 +116,7 @@ Use the outlined Rostex assets from `.branding/logos/rostex-wordmarks/`. Preserv
 | Footer and wide company identity | `hva-rostex-wordmark-horizontal-web.svg` |
 | Structured data and square identity | `hva-rostex-wordmark-stacked.svg` |
 | Favicon/app identity | WebP and ICO derivatives of `hva-rostex-profile-picture-1080-white.png` |
+| Public email signature | Stable `hva-signature-logo.webp` URL, regenerated from the approved stacked master |
 | Dark surface | Approved navy/amber asset on a compact white plate; never recolor the letters |
 
 The supplied Rostex license is currently personal-use only. This logo branch may be reviewed locally, but its assets must not be pushed, preview-deployed, or released commercially until Hive Vault Arc has written commercial permission from the typeface author.

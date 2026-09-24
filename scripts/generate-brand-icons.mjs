@@ -12,6 +12,13 @@ const source = path.join(
 );
 const publicOutput = path.join(root, 'public', 'Images', 'favico');
 const faviconOutput = path.join(root, 'src', 'app', 'favicon.ico');
+const emailSignatureOutput = path.join(
+  root,
+  'public',
+  'assets',
+  'email',
+  'hva-signature-logo.webp',
+);
 const white = {r: 255, g: 255, b: 255, alpha: 1};
 
 const trimmedLogo = await sharp(source)
@@ -94,5 +101,6 @@ const icoEntries = await Promise.all(
   })),
 );
 await writeFile(faviconOutput, buildIco(icoEntries));
+await writeFile(emailSignatureOutput, await renderSquare(216, 0.84));
 
-console.log('Generated Rostex favicon and app-icon derivatives.');
+console.log('Generated Rostex favicon, app-icon, and email-signature derivatives.');

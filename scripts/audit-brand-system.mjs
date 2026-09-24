@@ -20,14 +20,29 @@ const approvedHex = new Set([
   "#f8e9c8",
 ]);
 
-const scanRoots = ["src", "tailwind.config.js", "postcss.config.js"];
-const sourceExtensions = new Set([".css", ".js", ".jsx", ".json", ".mjs", ".ts", ".tsx"]);
+const scanRoots = [
+  "src",
+  "public/email-signature.html",
+  "tailwind.config.js",
+  "postcss.config.js",
+];
+const sourceExtensions = new Set([
+  ".css",
+  ".html",
+  ".js",
+  ".jsx",
+  ".json",
+  ".mjs",
+  ".ts",
+  ".tsx",
+]);
 const legacyLogoPatterns = [
   /hva-logo-number-3\.webp/gi,
   /hva-logo-number-4\.webp/gi,
   /hva-icon-lockup-(?:micro|wide)-(?:dark|navy)\.svg/gi,
   /hva-icon-static-(?:dark|light)-surface\.svg/gi,
   /hva-wordmark-wide-(?:dark|navy)\.svg/gi,
+  /\bSectionBrandMark\b/g,
 ];
 
 function normalizeHex(value) {
@@ -127,7 +142,6 @@ for (const relativeFile of files) {
 
   const advisories = [
     ["legacy-font-satoshi", /\bSatoshi\b/gi],
-    ["section-brand-mark", /\bSectionBrandMark\b/g],
   ];
 
   for (const [name, pattern] of advisories) {
