@@ -1,5 +1,5 @@
 schema_version: 1
-compiled_on: 2026-09-13
+compiled_on: 2026-09-24
 review_status: pending_company_verification
 approval_owner: company_leadership
 
@@ -7,13 +7,17 @@ identity:
   legal_name: Hive Vault Arc
   public_brand_name: Hive Vault Arc
   canonical_website: https://hivevaultarc.com
-  logo_url: https://hivevaultarc.com/Images/brand/hva-icon-static-light-surface.svg
+  logo_url: https://hivevaultarc.com/Images/brand/hva-rostex-wordmark-stacked.svg
 
 public_contact:
   email: contact@hivevaultarc.com
-  phone_e164: "+212670431249"
-  phone_display: "+212 670 431 249"
-  whatsapp: https://wa.me/212670431249
+  phones:
+    - phone_e164: "+212610014949"
+      phone_display: "+212 610 014 949"
+      whatsapp: https://wa.me/212610014949
+    - phone_e164: "+212610012727"
+      phone_display: "+212 610 012 727"
+      whatsapp: https://wa.me/212610012727
 
 headquarters:
   city: Tangier

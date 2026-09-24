@@ -197,7 +197,12 @@ describe('Navbar', () => {
     fireEvent.click(screen.getByRole('button', {name: 'Open navigation menu'}));
 
     const panel = screen.getByRole('dialog', {name: 'Mobile navigation'});
-    expect(within(panel).getByAltText('Hive Vault Arc')).toBeInTheDocument();
+    const logoLink = within(panel).getByRole('link', {name: 'Hive Vault Arc - Home'});
+    expect(logoLink).toHaveAttribute('data-brand-logo', 'stacked');
+    expect(logoLink.querySelector('img')).toHaveAttribute(
+      'src',
+      '/Images/brand/hva-rostex-wordmark-stacked-web.svg',
+    );
     expect(panel).not.toHaveClass('rounded-xl');
     expect(panel).not.toHaveClass('rounded-lg');
     expect(within(panel).getByRole('link', {name: 'ARC'})).toHaveAttribute(

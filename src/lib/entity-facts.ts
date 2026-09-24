@@ -3,9 +3,18 @@ export const COMPANY_ENTITY_FACTS = {
   publicBrandName: 'Hive Vault Arc',
   canonicalWebsite: 'https://hivevaultarc.com',
   publicEmail: 'contact@hivevaultarc.com',
-  publicPhoneE164: '+212670431249',
-  publicPhoneDisplay: '+212 670 431 249',
-  whatsappUrl: 'https://wa.me/212670431249',
+  publicPhones: [
+    {
+      e164: '+212610014949',
+      display: '+212 610 014 949',
+      whatsappUrl: 'https://wa.me/212610014949',
+    },
+    {
+      e164: '+212610012727',
+      display: '+212 610 012 727',
+      whatsappUrl: 'https://wa.me/212610012727',
+    },
+  ],
   headquarters: {
     city: 'Tangier',
     region: 'Tanger-Tetouan-Al Hoceima',
@@ -18,7 +27,7 @@ export const COMPANY_ENTITY_FACTS = {
   marketsServed: ['Morocco', 'France', 'Europe', 'North Africa', 'MENA'],
   review: {
     status: 'pending_company_verification',
-    lastCompiled: '2026-09-13',
+    lastCompiled: '2026-09-24',
   },
 } as const;
 

@@ -27,7 +27,7 @@ import {
 import {getPageOptimizationsForLocale} from '@/lib/page-optimization';
 import {
   CONTACT_EMAIL,
-  CONTACT_PHONE_E164,
+  CONTACT_PHONE_E164S,
   DEFAULT_OG_IMAGE_HEIGHT,
   DEFAULT_OG_IMAGE_PATH,
   DEFAULT_OG_IMAGE_WIDTH,
@@ -240,13 +240,13 @@ export default async function RootLayout({children, params}: LocaleLayoutProps) 
     canonicalWebsite: SITE_URL,
     description: organizationCopy.description,
     publicEmail: CONTACT_EMAIL,
-    publicTelephone: CONTACT_PHONE_E164,
+    publicTelephones: CONTACT_PHONE_E164S,
     serviceAreas: organizationCopy.serviceTypes,
     sameAs: SOCIAL_PROFILE_URLS,
     logoUrl: absoluteUrl(SITE_LOGO_PATH),
   });
   const publicEmail = organizationFacts.publicEmail;
-  const publicTelephone = organizationFacts.publicTelephone;
+  const publicTelephones = organizationFacts.publicTelephones;
   const leadershipPeople = GLOBAL_FOUNDERS.map((member) => ({
     '@type': 'Person',
     '@id': `${absoluteUrl(
@@ -307,17 +307,15 @@ export default async function RootLayout({children, params}: LocaleLayoutProps) 
     ],
     serviceType: organizationFacts.serviceAreas,
     email: publicEmail,
-    telephone: publicTelephone,
-    contactPoint: [
-      {
+    telephone: publicTelephones,
+    contactPoint: publicTelephones.map((telephone) => ({
         '@type': 'ContactPoint',
         contactType: 'customer support',
         email: publicEmail,
-        telephone: publicTelephone,
+        telephone,
         availableLanguage: ['English', 'French', 'Arabic', 'Spanish'],
         areaServed: ['MA', 'FR', 'EU'],
-      },
-    ],
+      })),
     sameAs: organizationFacts.sameAs,
     subjectOf: [
       {

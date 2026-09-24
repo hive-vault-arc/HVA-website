@@ -25,6 +25,9 @@ const sourceExtensions = new Set([".css", ".js", ".jsx", ".json", ".mjs", ".ts",
 const legacyLogoPatterns = [
   /hva-logo-number-3\.webp/gi,
   /hva-logo-number-4\.webp/gi,
+  /hva-icon-lockup-(?:micro|wide)-(?:dark|navy)\.svg/gi,
+  /hva-icon-static-(?:dark|light)-surface\.svg/gi,
+  /hva-wordmark-wide-(?:dark|navy)\.svg/gi,
 ];
 
 function normalizeHex(value) {

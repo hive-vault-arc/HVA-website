@@ -9,7 +9,7 @@ import { getFeaturedEmployeeProfiles, type EmployeeProfile } from '@/lib/employe
 import {
   BRAND_SEARCH_VARIANTS,
   CONTACT_EMAIL,
-  CONTACT_PHONE_E164,
+  CONTACT_PHONE_E164S,
   GLOBAL_KEYWORDS,
   SITE_URL,
   SOCIAL_PROFILE_URLS,
@@ -117,7 +117,7 @@ export default async function Page({params}: PageProps) {
     canonicalWebsite: SITE_URL,
     description: tMeta('description'),
     publicEmail: CONTACT_EMAIL,
-    publicTelephone: CONTACT_PHONE_E164,
+    publicTelephones: CONTACT_PHONE_E164S,
     serviceAreas: ['Morocco', 'France', 'Europe', 'MENA'],
     sameAs: SOCIAL_PROFILE_URLS,
   });
@@ -168,7 +168,7 @@ export default async function Page({params}: PageProps) {
         featuredCaseStudy={featuredCaseStudy}
         organizationFacts={{
           email: organizationFacts.publicEmail,
-          telephone: organizationFacts.publicTelephone,
+          telephones: organizationFacts.publicTelephones,
           sameAs: organizationFacts.sameAs,
         }}
       />

@@ -108,28 +108,29 @@ Fluid type inside a capped page or section frame follows that frame with contain
 
 ## 4. Logo System
 
-Use approved assets from `.branding/logos/`. Copy selected files into the website asset directory without altering their geometry or colors.
+Use the outlined Rostex assets from `.branding/logos/rostex-wordmarks/`. Preserve the supplied path geometry and the exact Night Navy `#0B1726` and Amber `#E8A838` fills. The `*-web.svg` delivery files may tighten transparent canvas space only; they must not change, redraw, recolor, stretch, or reorder any logo path.
 
 | Context | Preferred asset |
 | --- | --- |
-| Light desktop/tablet navbar | `hva-icon-lockup-micro-navy.svg` |
-| Dark ARC desktop/tablet navbar | `hva-icon-lockup-micro-dark.svg` |
-| Mobile navbar and mobile menu | `hva-icon-static-light-surface.svg` or its dark-surface counterpart |
-| Light hero, footer introduction, company identity block | `hva-icon-lockup-wide-navy.svg` or `hva-wordmark-wide-navy.svg` |
-| Dark footer or dark identity block | `hva-icon-lockup-wide-dark.svg` or `hva-wordmark-wide-dark.svg` |
-| Favicon/app identity | `hva-favicon.svg` or `hva-app-icon.svg` |
+| Shared navbar and mobile menu | `hva-rostex-wordmark-stacked-web.svg` |
+| Footer and wide company identity | `hva-rostex-wordmark-horizontal-web.svg` |
+| Structured data and square identity | `hva-rostex-wordmark-stacked.svg` |
+| Favicon/app identity | WebP and ICO derivatives of `hva-rostex-profile-picture-1080-white.png` |
+| Dark surface | Approved navy/amber asset on a compact white plate; never recolor the letters |
+
+The supplied Rostex license is currently personal-use only. This logo branch may be reviewed locally, but its assets must not be pushed, preview-deployed, or released commercially until Hive Vault Arc has written commercial permission from the typeface author.
 
 ### Logo Frequency
 
 - Navbar: one logo placement.
-- Navbar lockups omit the positioning line: use the compact stacked lockup on tablet/desktop and the standalone circular mark on mobile.
+- Navbar: use the compact stacked Rostex wordmark at every breakpoint so the company name remains present without crowding navigation.
 - Footer: one full lockup placement.
 - Normal content section: no logo by default.
 - Long page: at most one additional intentional brand moment when it adds identity, not decoration.
 - Do not place the standalone mark beside every eyebrow or title.
 - Do not show two Hive Vault Arc logos in the same viewport unless one is part of a client proof screenshot.
-- Do not combine a standalone mark with a separately typed company name when a supplied lockup exists.
-- Do not use `hva-logo-number-3.webp` or `hva-logo-number-4.webp` in new work. Migrate existing placements to canonical SVG assets.
+- Do not extract or invent a standalone symbol from the Rostex wordmarks.
+- Do not use the former circular icons, former micro/wide lockups, `hva-logo-number-3.webp`, or `hva-logo-number-4.webp` in new work.
 
 ### Section Identity Without A Logo
 

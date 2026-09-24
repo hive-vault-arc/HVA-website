@@ -7,7 +7,7 @@ const fallback: OrganizationFacts = {
   canonicalWebsite: 'https://hivevaultarc.com',
   description: 'Fallback description',
   publicEmail: 'fallback@example.com',
-  publicTelephone: '+000',
+  publicTelephones: ['+000'],
   serviceAreas: ['Fallback market'],
   sameAs: ['https://example.com/fallback'],
 };
@@ -25,7 +25,7 @@ describe('approved organization fact resolution', () => {
         canonicalWebsite: 'https://hivevaultarc.com',
         descriptions: {en: 'Approved description', ar: 'وصف معتمد'},
         publicEmail: 'approved@example.com',
-        publicTelephone: '+111',
+        publicTelephones: ['+111', '+222'],
         serviceAreas: ['Morocco'],
         sameAs: ['https://example.com/approved'],
         logoUrl: 'https://cdn.sanity.io/logo.webp',
@@ -36,6 +36,7 @@ describe('approved organization fact resolution', () => {
 
     expect(resolved.description).toBe('وصف معتمد');
     expect(resolved.brandName).toBe('Approved Brand');
+    expect(resolved.publicTelephones).toEqual(['+111', '+222']);
     expect(resolved.sameAs).toEqual(['https://example.com/approved']);
   });
 });

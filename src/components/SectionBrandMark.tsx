@@ -7,13 +7,12 @@ type SectionBrandMarkProps = {
   eager?: boolean;
 };
 
-const LOGO_ON_LIGHT_SRC = '/Images/brand/hva-icon-static-light-surface.svg';
-const LOGO_ON_DARK_SRC = '/Images/brand/hva-icon-static-dark-surface.svg';
+const STACKED_WORDMARK_SRC = '/Images/brand/hva-rostex-wordmark-stacked-web.svg';
 
 const sizeClasses = {
-  sm: 'h-8 w-8',
-  md: 'h-10 w-10 md:h-12 md:w-12',
-  lg: 'h-14 w-14 md:h-16 md:w-16',
+  sm: 'h-8 w-16',
+  md: 'h-10 w-20 md:h-12 md:w-24',
+  lg: 'h-14 w-28 md:h-16 md:w-32',
 };
 
 export default function SectionBrandMark({
@@ -22,20 +21,25 @@ export default function SectionBrandMark({
   className = '',
   eager = false,
 }: SectionBrandMarkProps) {
-  const src = surface === 'dark' ? LOGO_ON_DARK_SRC : LOGO_ON_LIGHT_SRC;
-
   return (
     <span
       aria-hidden="true"
-      className={['inline-flex shrink-0 items-center justify-center', sizeClasses[size], className]
+      data-brand-logo="stacked"
+      data-logo-surface={surface}
+      className={[
+        'inline-flex shrink-0 items-center justify-center p-1',
+        surface === 'dark' ? 'bg-white' : 'bg-transparent',
+        sizeClasses[size],
+        className,
+      ]
         .filter(Boolean)
         .join(' ')}
     >
       <Image
-        src={src}
+        src={STACKED_WORDMARK_SRC}
         alt=""
-        width={100}
-        height={100}
+        width={792}
+        height={400}
         className="h-full w-full object-contain"
         loading={eager ? 'eager' : 'lazy'}
         fetchPriority={eager ? 'high' : 'auto'}

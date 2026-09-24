@@ -13,6 +13,7 @@
     "studio:deploy": "npm --prefix studio run deploy",
     "studio:verify": "npm --prefix studio run lint && npm --prefix studio run format:check && npm --prefix studio run typecheck && npm --prefix studio run schema:extract && npm --prefix studio run typegen",
     "routes:generate": "tsx scripts/generate-studio-route-contract.ts",
+    "brand:icons": "node scripts/generate-brand-icons.mjs",
     "audit:brand": "node scripts/audit-brand-system.mjs",
     "audit:brand:strict": "node scripts/audit-brand-system.mjs --strict",
     "audit:responsive": "node scripts/audit-responsive-system.mjs",

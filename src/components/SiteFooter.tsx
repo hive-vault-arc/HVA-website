@@ -7,8 +7,7 @@ import FooterSpotlight from './ui/FooterSpotlight';
 import CookieSettingsButton from './privacy/CookieSettingsButton';
 import {
   CONTACT_EMAIL,
-  CONTACT_PHONE_DISPLAY,
-  CONTACT_PHONE_E164,
+  CONTACT_PHONES,
   DISPLAY_BRAND_NAME_UPPER,
   SITE_URL,
   SOCIAL_PROFILES,
@@ -126,10 +125,12 @@ export default async function SiteFooter() {
                   <Mail className="h-3.5 w-3.5" aria-hidden="true" />
                   {CONTACT_EMAIL}
                 </a>
-                <a href={`tel:${CONTACT_PHONE_E164}`} className="site-footer__contact">
-                  <Phone className="h-3.5 w-3.5" aria-hidden="true" />
-                  {CONTACT_PHONE_DISPLAY}
-                </a>
+                {CONTACT_PHONES.map(({e164, display}) => (
+                  <a key={e164} href={`tel:${e164}`} className="site-footer__contact">
+                    <Phone className="h-3.5 w-3.5" aria-hidden="true" />
+                    {display}
+                  </a>
+                ))}
               </div>
             </div>
             </div>

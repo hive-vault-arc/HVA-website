@@ -43,7 +43,7 @@ Additional checks:
 - `FAQPage` schema is already emitted through the shared FAQ component.
 - `robots.txt`, `sitemap.xml`, `llms.txt`, and `llms-full.txt` are already deployed.
 - The company identity is now mostly centralized in `src/lib/seo.ts` and visible copy has moved toward `Hive Vault Arc`.
-- The primary phone number in current source appears consistent as `+212 670 431 249`.
+- The two approved public phone numbers in current source are `+212 610 014 949` and `+212 610 012 727`.
 
 ## Priority Gaps
 

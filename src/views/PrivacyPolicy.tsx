@@ -2,7 +2,7 @@
 
 import {useTranslations} from 'next-intl';
 import {Link} from '@/i18n/navigation';
-import {CONTACT_EMAIL, CONTACT_PHONE_DISPLAY, CONTACT_PHONE_E164} from '../lib/seo';
+import {CONTACT_EMAIL, CONTACT_PHONES} from '../lib/seo';
 
 type LabelDetail = {label: string; detail: string};
 type RetentionRow = {category: string; period: string};
@@ -62,7 +62,13 @@ export default function PrivacyPolicy() {
             </p>
             <p className="text-sm text-secondary">
               {t('common.phone')}{' '}
-              <a href={`tel:${CONTACT_PHONE_E164}`} className="text-primary underline underline-offset-2">{CONTACT_PHONE_DISPLAY}</a>
+              <span className="inline-flex flex-wrap gap-x-3 gap-y-1">
+                {CONTACT_PHONES.map(({e164, display}) => (
+                  <a key={e164} href={`tel:${e164}`} className="text-primary underline underline-offset-2">
+                    {display}
+                  </a>
+                ))}
+              </span>
             </p>
           </div>
         </article>

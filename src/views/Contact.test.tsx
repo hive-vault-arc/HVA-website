@@ -30,6 +30,14 @@ describe('Contact form', () => {
     expect(
       detailsHeading.compareDocumentPosition(formHeading) & Node.DOCUMENT_POSITION_FOLLOWING,
     ).toBeTruthy();
+    expect(screen.getByRole('link', {name: '+212 610 014 949'})).toHaveAttribute(
+      'href',
+      'tel:+212610014949',
+    );
+    expect(screen.getByRole('link', {name: '+212 610 012 727'})).toHaveAttribute(
+      'href',
+      'tel:+212610012727',
+    );
   });
 
   it('shows success feedback on successful submit', async () => {

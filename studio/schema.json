@@ -1885,6 +1885,16 @@
         },
         "optional": true
       },
+      "publicTelephones": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "string"
+          }
+        },
+        "optional": true
+      },
       "publicTelephone": {
         "type": "objectAttribute",
         "value": {

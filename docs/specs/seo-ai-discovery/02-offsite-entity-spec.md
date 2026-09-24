@@ -20,7 +20,7 @@ Use this identity everywhere:
 - Markets served: Morocco, France, Europe, North Africa, remote delivery worldwide
 - Website: `https://hivevaultarc.com`
 - Email: `contact@hivevaultarc.com`
-- Primary phone: `+212 670 431 249`
+- Public phones: `+212 610 014 949` and `+212 610 012 727`
 
 Do not publish an exact street address or opening hours unless they are true and approved for public use.
 

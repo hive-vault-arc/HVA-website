@@ -60,10 +60,33 @@ export const organizationProfile = defineType({
       group: 'public',
     }),
     defineField({
+      name: 'publicTelephones',
+      title: 'Approved Public Telephones',
+      description: 'Store every public number in E.164 format, for example +212610014949.',
+      type: 'array',
+      group: 'public',
+      of: [defineArrayMember({type: 'string'})],
+      validation: (rule) =>
+        rule
+          .unique()
+          .max(4)
+          .custom((telephones) => {
+            if (!telephones?.length) return true
+            const invalid = telephones.find(
+              (telephone) => typeof telephone !== 'string' || !/^\+[1-9]\d{7,14}$/.test(telephone),
+            )
+            return invalid ? 'Use E.164 format for every number, for example +212610014949.' : true
+          }),
+    }),
+    defineField({
       name: 'publicTelephone',
-      title: 'Approved Public Telephone',
+      title: 'Approved Public Telephone (Deprecated)',
       type: 'string',
       group: 'public',
+      deprecated: {reason: 'Use Approved Public Telephones so every public number is represented.'},
+      readOnly: true,
+      hidden: ({value}) => value === undefined,
+      initialValue: undefined,
     }),
     defineField({
       name: 'locations',

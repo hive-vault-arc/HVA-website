@@ -17,14 +17,14 @@ import {
   BRAND_SEARCH_VARIANTS,
   BUSINESS_NAME,
   CONTACT_EMAIL,
-  CONTACT_PHONE_DISPLAY,
-  CONTACT_PHONE_E164,
+  CONTACT_PHONE_E164S,
+  formatPublicTelephone,
   COMPANY_ENTITY_FACTS,
   SOCIAL_PROFILE_URLS,
   SITE_URL,
 } from "./seo";
 
-const LAST_UPDATED = "2026-09-13";
+const LAST_UPDATED = "2026-09-24";
 
 const importantPages = {
   home: absoluteUrl("/"),
@@ -89,7 +89,7 @@ export async function getCompanyResource() {
       description:
         "Hive Vault Arc is a technology transformation partner based in Tangier, Morocco. The company combines strategy consulting, AI engineering, custom software development, cloud infrastructure, and managed operations in one founder-led delivery team.",
       publicEmail: CONTACT_EMAIL,
-      publicTelephone: CONTACT_PHONE_E164,
+      publicTelephones: CONTACT_PHONE_E164S,
       serviceAreas: COMPANY_ENTITY_FACTS.marketsServed,
       sameAs: SOCIAL_PROFILE_URLS,
     },
@@ -122,9 +122,10 @@ export async function getCompanyResource() {
       description: organizationFacts.description,
       website: organizationFacts.canonicalWebsite,
       email: organizationFacts.publicEmail,
-      telephone: organizationFacts.publicTelephone,
-      formattedTelephone:
-        approvedOrganization?.publicTelephone || CONTACT_PHONE_DISPLAY,
+      telephone: organizationFacts.publicTelephones[0],
+      telephones: organizationFacts.publicTelephones,
+      formattedTelephone: formatPublicTelephone(organizationFacts.publicTelephones[0]),
+      formattedTelephones: organizationFacts.publicTelephones.map(formatPublicTelephone),
       location: {
         city: COMPANY_ENTITY_FACTS.headquarters.city,
         region: COMPANY_ENTITY_FACTS.headquarters.region,

@@ -52,9 +52,9 @@ export function resolveSiteUrl(
 
 export const SITE_URL = resolveSiteUrl();
 export const LINKEDIN_URL = COMPANY_SOCIAL_PROFILES[0].url;
-export const SITE_LOGO_PATH = '/Images/brand/hva-icon-static-light-surface.svg';
-export const SITE_LOGO_WIDTH = 100;
-export const SITE_LOGO_HEIGHT = 100;
+export const SITE_LOGO_PATH = '/Images/brand/hva-rostex-wordmark-stacked.svg';
+export const SITE_LOGO_WIDTH = 1080;
+export const SITE_LOGO_HEIGHT = 1080;
 // A versioned URL prevents social-preview caches from retaining an older card.
 // The 1200×630 WebP keeps the image lightweight while preserving the standard
 // Open Graph aspect ratio used by messaging and social platforms.
@@ -76,9 +76,13 @@ export const BRAND_ALIASES = [
 ];
 export const BRAND_SEARCH_VARIANTS = [...BRAND_ALIASES, 'Hive Vault', 'Vault Arc', 'hivevaultarc.com'];
 export const CONTACT_EMAIL = COMPANY_ENTITY_FACTS.publicEmail;
-export const CONTACT_PHONE_E164 = COMPANY_ENTITY_FACTS.publicPhoneE164;
-export const CONTACT_PHONE_DISPLAY = COMPANY_ENTITY_FACTS.publicPhoneDisplay;
-export const WHATSAPP_URL = COMPANY_ENTITY_FACTS.whatsappUrl;
+export const CONTACT_PHONES = COMPANY_ENTITY_FACTS.publicPhones;
+export const CONTACT_PHONE_E164S = CONTACT_PHONES.map(({e164}) => e164);
+export const WHATSAPP_URLS = CONTACT_PHONES.map(({whatsappUrl}) => whatsappUrl);
+
+export function formatPublicTelephone(telephone: string): string {
+  return CONTACT_PHONES.find(({e164}) => e164 === telephone)?.display ?? telephone;
+}
 export const SOCIAL_PROFILES = COMPANY_SOCIAL_PROFILES;
 export const SOCIAL_PROFILE_URLS = SOCIAL_PROFILES.map((profile) => profile.url);
 export const DEFAULT_TITLE = `${SITE_NAME} | Technology Transformation Partner - Strategy, AI Engineering, Operations`;

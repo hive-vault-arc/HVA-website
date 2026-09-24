@@ -9,7 +9,7 @@ export type OrganizationProfile = {
   legalName?: string;
   canonicalWebsite?: string;
   publicEmail?: string;
-  publicTelephone?: string;
+  publicTelephones?: string[];
   locations?: string[];
   serviceAreas?: string[];
   sameAs?: string[];
@@ -24,7 +24,7 @@ export type OrganizationFacts = {
   canonicalWebsite: string;
   description: string;
   publicEmail: string;
-  publicTelephone: string;
+  publicTelephones: readonly string[];
   serviceAreas: readonly string[];
   sameAs: readonly string[];
   logoUrl?: string;
@@ -41,7 +41,9 @@ export function resolveOrganizationFacts(
     canonicalWebsite: profile?.canonicalWebsite || fallback.canonicalWebsite,
     description: profile?.descriptions[locale] || fallback.description,
     publicEmail: profile?.publicEmail || fallback.publicEmail,
-    publicTelephone: profile?.publicTelephone || fallback.publicTelephone,
+    publicTelephones: profile?.publicTelephones?.length
+      ? profile.publicTelephones
+      : fallback.publicTelephones,
     serviceAreas: profile?.serviceAreas?.length ? profile.serviceAreas : fallback.serviceAreas,
     sameAs: profile?.sameAs?.length ? profile.sameAs : fallback.sameAs,
     logoUrl: profile?.logoUrl || fallback.logoUrl,
@@ -69,7 +71,7 @@ export async function getApprovedOrganizationProfile(): Promise<OrganizationProf
         legalName: profile.legalName ?? undefined,
         canonicalWebsite: profile.canonicalWebsite,
         publicEmail: profile.publicEmail ?? undefined,
-        publicTelephone: profile.publicTelephone ?? undefined,
+        publicTelephones: profile.publicTelephones ?? undefined,
         locations: profile.locations ?? undefined,
         serviceAreas: profile.serviceAreas ?? undefined,
         sameAs: profile.sameAs ?? undefined,

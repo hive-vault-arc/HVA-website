@@ -37,7 +37,7 @@ External tasks:
 - Uppercase lockup: `HIVE VAULT ARC`.
 - Keep `H.V.A` and `HVA` only as aliases, search variants, schema alternate names, code identifiers, or manifest short names.
 - Production domain: `https://hivevaultarc.com`.
-- Primary phone: `+212 670 431 249`.
+- Public phones: `+212 610 014 949` and `+212 610 012 727`.
 - Do not invent street addresses, opening hours, awards, reviews, client claims, or social URLs.
 - Keep existing routes and visible content unless a sprint explicitly asks for a cleanup.
 - No new dependencies unless the implementation proves one is already installed and appropriate.

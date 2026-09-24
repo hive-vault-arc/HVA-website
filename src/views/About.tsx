@@ -28,8 +28,7 @@ import type {AppLocale} from '@/i18n/config';
 import {SEMANTIC_MEDIA} from '@/lib/semantic-media';
 import {
   CONTACT_EMAIL,
-  CONTACT_PHONE_DISPLAY,
-  CONTACT_PHONE_E164,
+  CONTACT_PHONES,
   SOCIAL_PROFILES,
 } from '../lib/seo';
 
@@ -56,7 +55,7 @@ type AboutProps = {
   >;
   readonly organizationFacts?: {
     email: string;
-    telephone: string;
+    telephones: readonly string[];
     sameAs: readonly string[];
   };
 };
@@ -137,7 +136,9 @@ const About = ({teamMembers, featuredCaseStudy, organizationFacts}: AboutProps) 
   const t = useTranslations('About');
   const locale = useLocale() as AppLocale;
   const publicEmail = organizationFacts?.email || CONTACT_EMAIL;
-  const publicTelephone = organizationFacts?.telephone || CONTACT_PHONE_E164;
+  const publicTelephones = organizationFacts?.telephones?.length
+    ? organizationFacts.telephones
+    : CONTACT_PHONES.map(({e164}) => e164);
   const publicSocialProfiles = organizationFacts?.sameAs?.length
     ? organizationFacts.sameAs.map((url) => {
         const known = ABOUT_SOCIAL_PROFILES.find((profile) => profile.url === url);
@@ -482,10 +483,14 @@ const About = ({teamMembers, featuredCaseStudy, organizationFacts}: AboutProps) 
                   <i className="about-v2__contact-icon"><Mail aria-hidden="true" /></i>
                   <span>{publicEmail}</span>
                 </a>
-                <a href={`tel:${publicTelephone}`}>
-                  <i className="about-v2__contact-icon"><Phone aria-hidden="true" /></i>
-                  <span>{organizationFacts ? publicTelephone : CONTACT_PHONE_DISPLAY}</span>
-                </a>
+                {publicTelephones.map((telephone) => (
+                  <a key={telephone} href={`tel:${telephone}`}>
+                    <i className="about-v2__contact-icon"><Phone aria-hidden="true" /></i>
+                    <span>
+                      {CONTACT_PHONES.find(({e164}) => e164 === telephone)?.display ?? telephone}
+                    </span>
+                  </a>
+                ))}
               </div>
               <div className="about-v2__contact-socials" aria-label={t('contact.socialLabel')}>
                 {publicSocialProfiles.map((profile) => (

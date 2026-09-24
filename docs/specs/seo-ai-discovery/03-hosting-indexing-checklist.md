@@ -12,7 +12,7 @@ After each SEO deployment, the public internet should see only one official vers
 - Primary brand: `Hive Vault Arc`
 - Short aliases: `H.V.A`, `HVA`, `HiveVaultArc`
 - Primary contact email: `contact@hivevaultarc.com`
-- Primary phone: `+212 670 431 249`
+- Public phones: `+212 610 014 949` and `+212 610 012 727`
 - Location: Tangier, Morocco
 
 Everything outside the repo should match those facts.
@@ -195,7 +195,7 @@ Create or claim the business profile using:
 
 - Name: `Hive Vault Arc`
 - Website: `https://hivevaultarc.com`
-- Phone: `+212 670 431 249`
+- Phones: `+212 610 014 949` and `+212 610 012 727`
 - Email: `contact@hivevaultarc.com`
 - Location/service area: Tangier, Morocco
 - Category: technology consultant, software company, business technology service, or closest available category

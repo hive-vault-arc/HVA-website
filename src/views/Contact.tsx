@@ -15,8 +15,7 @@ import {
 } from '@/components/icons';
 import {
   CONTACT_EMAIL,
-  CONTACT_PHONE_DISPLAY,
-  CONTACT_PHONE_E164,
+  CONTACT_PHONES,
   SOCIAL_PROFILES,
 } from '../lib/seo';
 import {trackGenerateLead} from '@/lib/analytics-events';
@@ -28,10 +27,6 @@ type ContactStatus = {
 } | null;
 
 const CONTACT_EMAILS = [CONTACT_EMAIL];
-const CONTACT_PHONES = [
-  {raw: CONTACT_PHONE_E164, label: CONTACT_PHONE_DISPLAY},
-];
-
 const SOCIAL_ICONS: Record<(typeof SOCIAL_PROFILES)[number]['label'], ElementType> = {
   LinkedIn: FaLinkedinIn,
   GitHub: FaGithub,
@@ -169,8 +164,8 @@ const Contact: React.FC = () => {
                   <div>
                     <h3>{t('directLine')}</h3>
                     {CONTACT_PHONES.map((phone) => (
-                      <a key={phone.raw} href={`tel:${phone.raw}`}>
-                        {phone.label}
+                      <a key={phone.e164} href={`tel:${phone.e164}`}>
+                        {phone.display}
                       </a>
                     ))}
                   </div>

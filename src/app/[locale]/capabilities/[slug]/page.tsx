@@ -9,7 +9,7 @@ import {
   getRelatedCapabilityProfiles,
 } from '@/lib/capabilities';
 import {
-  CONTACT_PHONE_E164,
+  CONTACT_PHONE_E164S,
   GLOBAL_KEYWORDS,
   SITE_NAME,
   SITE_URL,
@@ -93,7 +93,7 @@ export default async function CapabilityProfilePage({ params }: Props) {
       '@id': `${SITE_URL}/#organization`,
       name: 'Hive Vault Arc',
       url: SITE_URL,
-      telephone: CONTACT_PHONE_E164,
+      telephone: CONTACT_PHONE_E164S,
       image: absoluteUrl('/Images/brand/hva-ai-software-agency-tangier.webp'),
       areaServed: ['Morocco', 'Remote'],
     },

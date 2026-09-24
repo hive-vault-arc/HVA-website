@@ -9,7 +9,7 @@ import { getFeaturedCapabilityProfiles } from '@/lib/capabilities';
 import {getEmployeeProfileBySlug} from '@/lib/employee-profiles';
 import {getSolutionProgramMedia} from '@/lib/solution-program-media.server';
 import {
-  CONTACT_PHONE_E164,
+  CONTACT_PHONE_E164S,
   GLOBAL_KEYWORDS,
   SITE_URL,
   absoluteUrl,
@@ -48,7 +48,7 @@ export default async function Page({params}: PageProps) {
       '@id': `${SITE_URL}/#organization`,
       name: 'Hive Vault Arc',
       url: SITE_URL,
-      telephone: CONTACT_PHONE_E164,
+      telephone: CONTACT_PHONE_E164S,
       priceRange: '$$',
       image: absoluteUrl('/Images/brand/hva-ai-software-agency-tangier.webp'),
       areaServed: ['Morocco', 'Remote'],

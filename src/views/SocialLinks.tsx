@@ -15,10 +15,8 @@ import {
 } from '@/components/icons';
 import {
   CONTACT_EMAIL,
-  CONTACT_PHONE_DISPLAY,
-  CONTACT_PHONE_E164,
+  CONTACT_PHONES,
   SOCIAL_PROFILES,
-  WHATSAPP_URL,
 } from '../lib/seo';
 import {useTranslations} from 'next-intl';
 
@@ -49,13 +47,13 @@ export default function SocialLinks() {
       href: `mailto:${CONTACT_EMAIL}`,
       external: false,
     },
-    {
+    ...CONTACT_PHONES.map(({e164, display}) => ({
       icon: Phone,
       label: t('call'),
-      handle: CONTACT_PHONE_DISPLAY,
-      href: `tel:${CONTACT_PHONE_E164}`,
+      handle: display,
+      href: `tel:${e164}`,
       external: false,
-    },
+    })),
     ...SOCIAL_PROFILES.map((profile) => ({
       icon: socialIcons[profile.label],
       label: profile.label,
@@ -63,13 +61,13 @@ export default function SocialLinks() {
       href: profile.url,
       external: true,
     })),
-    {
+    ...CONTACT_PHONES.map(({display, whatsappUrl}) => ({
       icon: Whatsapp,
       label: 'WhatsApp',
-      handle: CONTACT_PHONE_DISPLAY,
-      href: WHATSAPP_URL,
+      handle: display,
+      href: whatsappUrl,
       external: true,
-    },
+    })),
   ];
   return (
     <div className="bg-[#FFFFFF] text-[#1A2535]">
@@ -89,7 +87,7 @@ export default function SocialLinks() {
         <nav aria-label={t('navLabel')}>
           <ul className="space-y-3">
             {socialLinks.map(({ icon: Icon, label, handle, href, external }) => (
-              <li key={label}>
+              <li key={href}>
                 <a
                   href={href}
                   target={external ? '_blank' : undefined}

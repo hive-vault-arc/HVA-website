@@ -70,7 +70,7 @@ export default async function CompanyProfilePage() {
     alternateName: company.alternateNames,
     url: company.website,
     email: company.email,
-    telephone: company.telephone,
+    telephone: company.telephones,
     description: company.description,
     sameAs: company.socialProfiles,
     areaServed: company.marketsServed,
@@ -162,6 +162,17 @@ export default async function CompanyProfilePage() {
               <div>
                 <dt>Languages</dt>
                 <dd>{company.languages.join(", ")}</dd>
+              </div>
+              <div>
+                <dt>Contact</dt>
+                <dd className={styles.phoneList}>
+                  <a href={`mailto:${company.email}`}>{company.email}</a>
+                  {company.telephones.map((telephone, index) => (
+                    <a href={`tel:${telephone}`} key={telephone}>
+                      {company.formattedTelephones[index]}
+                    </a>
+                  ))}
+                </dd>
               </div>
               <div>
                 <dt>Last reviewed</dt>

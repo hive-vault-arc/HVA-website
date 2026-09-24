@@ -108,7 +108,7 @@ Minimum JSON shape:
     "description": "",
     "website": "https://hivevaultarc.com",
     "email": "contact@hivevaultarc.com",
-    "telephone": "+212670431249",
+    "telephone": ["+212610014949", "+212610012727"],
     "location": {
       "city": "Tangier",
       "country": "Morocco",

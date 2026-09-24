@@ -325,6 +325,7 @@ export type OrganizationProfile = {
   };
   descriptions: InternationalizedArrayText;
   publicEmail?: string;
+  publicTelephones?: Array<string>;
   publicTelephone?: string;
   locations?: Array<string>;
   serviceAreas?: Array<string>;
@@ -5153,7 +5154,7 @@ export type NoindexedPageOptimizationsQueryResult = Array<{
 
 // Source: ../src/sanity/queries/site.ts
 // Variable: approvedOrganizationProfileQuery
-// Query: *[    _id == "organizationProfile" &&    approvedForPublicUse == true &&    defined(reviewedBy) &&    defined(reviewedAt)  ][0]{    brandName,    legalName,    canonicalWebsite,    logo{asset, crop, hotspot},    descriptions[]{_key, value},    publicEmail,    publicTelephone,    locations,    serviceAreas,    sameAs,    reviewedAt  }
+// Query: *[    _id == "organizationProfile" &&    approvedForPublicUse == true &&    defined(reviewedBy) &&    defined(reviewedAt)  ][0]{    brandName,    legalName,    canonicalWebsite,    logo{asset, crop, hotspot},    descriptions[]{_key, value},    publicEmail,    publicTelephones,    publicTelephone,    locations,    serviceAreas,    sameAs,    reviewedAt  }
 export type ApprovedOrganizationProfileQueryResult = {
   brandName: string;
   legalName: string | null;
@@ -5168,6 +5169,7 @@ export type ApprovedOrganizationProfileQueryResult = {
     value: string | null;
   }>;
   publicEmail: string | null;
+  publicTelephones: Array<string> | null;
   publicTelephone: string | null;
   locations: Array<string> | null;
   serviceAreas: Array<string> | null;
@@ -5205,6 +5207,6 @@ declare module "@sanity/client" {
     '\n  *[\n    _type == "pageOptimization" &&\n    routeKey == $routeKey &&\n    language == $locale &&\n    ($preview == true || (!(_id in path("drafts.**")) && translationStatus == "approved" && count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4))\n  ][0]{\n    _id,\n    routeKey,\n    language,\n    translationStatus,\n    searchIntent,\n    audienceNotes,\n    editorialFormat,\n    topics,\n    answerQuestion,\n    directAnswer,\n    keyTakeaways,\n    relatedQuestions,\n    lastReviewed,\n    evidenceType,\n    methodology,\n    limitations,\n    primaryCta{label, href},\n    reviewers[]->{name, role, initials},\n    answerEvidence[\n      @->.verificationStatus == "verified" &&\n      @->.publiclyCitable == true &&\n      (!defined(@->.expiresAt) || dateTime(@->.expiresAt + "T23:59:59Z") >= dateTime(now()))\n    ][]->{\n      "label": sourceTitle,\n      "url": sourceUrl,\n      "claimIds": [claimId]\n    },\n    seo{\n      title,\n      description,\n      noIndex,\n      socialImage{asset, crop, hotspot},\n      socialImageAlt\n    }\n  }\n': PageOptimizationQueryResult;
     '\n  *[\n    _type == "pageOptimization" &&\n    language == $locale &&\n    ($preview == true || (!(_id in path("drafts.**")) && translationStatus == "approved" && count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4))\n  ]{\n    routeKey,\n    answerQuestion,\n    directAnswer,\n    keyTakeaways,\n    methodology,\n    limitations,\n    answerEvidence[\n      @->.verificationStatus == "verified" &&\n      @->.publiclyCitable == true &&\n      (!defined(@->.expiresAt) || dateTime(@->.expiresAt + "T23:59:59Z") >= dateTime(now()))\n    ][]->{\n      "label": sourceTitle,\n      "url": sourceUrl,\n      "claimIds": [claimId]\n    }\n  }\n': PageOptimizationsForLocaleQueryResult;
     '\n  *[\n    _type == "pageOptimization" &&\n    !(_id in path("drafts.**")) &&\n    translationStatus == "approved" &&\n    count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4 &&\n    seo.noIndex == true\n  ]{"key": routeKey + ":" + language}\n': NoindexedPageOptimizationsQueryResult;
-    '\n  *[\n    _id == "organizationProfile" &&\n    approvedForPublicUse == true &&\n    defined(reviewedBy) &&\n    defined(reviewedAt)\n  ][0]{\n    brandName,\n    legalName,\n    canonicalWebsite,\n    logo{asset, crop, hotspot},\n    descriptions[]{_key, value},\n    publicEmail,\n    publicTelephone,\n    locations,\n    serviceAreas,\n    sameAs,\n    reviewedAt\n  }\n': ApprovedOrganizationProfileQueryResult;
+    '\n  *[\n    _id == "organizationProfile" &&\n    approvedForPublicUse == true &&\n    defined(reviewedBy) &&\n    defined(reviewedAt)\n  ][0]{\n    brandName,\n    legalName,\n    canonicalWebsite,\n    logo{asset, crop, hotspot},\n    descriptions[]{_key, value},\n    publicEmail,\n    publicTelephones,\n    publicTelephone,\n    locations,\n    serviceAreas,\n    sameAs,\n    reviewedAt\n  }\n': ApprovedOrganizationProfileQueryResult;
   }
 }

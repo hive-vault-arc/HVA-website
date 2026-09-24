@@ -91,6 +91,7 @@ export const approvedOrganizationProfileQuery = defineQuery(`
     logo{asset, crop, hotspot},
     descriptions[]{_key, value},
     publicEmail,
+    publicTelephones,
     publicTelephone,
     locations,
     serviceAreas,

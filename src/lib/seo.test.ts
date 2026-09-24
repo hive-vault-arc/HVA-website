@@ -3,12 +3,15 @@ import sharp from 'sharp';
 import {describe, expect, it} from 'vitest';
 import {
   CANONICAL_SITE_URL,
-  CONTACT_PHONE_DISPLAY,
-  CONTACT_PHONE_E164,
+  CONTACT_PHONE_E164S,
+  CONTACT_PHONES,
   DEFAULT_OG_IMAGE_HEIGHT,
   DEFAULT_OG_IMAGE_PATH,
   DEFAULT_OG_IMAGE_WIDTH,
-  WHATSAPP_URL,
+  SITE_LOGO_HEIGHT,
+  SITE_LOGO_PATH,
+  SITE_LOGO_WIDTH,
+  WHATSAPP_URLS,
   compactMetaDescription,
   resolveSiteUrl,
   SCHEMA_IDS,
@@ -32,6 +35,14 @@ describe('default social preview', () => {
   });
 });
 
+describe('organization logo', () => {
+  it('uses the approved square Rostex wordmark in structured data', () => {
+    expect(SITE_LOGO_PATH).toBe('/Images/brand/hva-rostex-wordmark-stacked.svg');
+    expect(SITE_LOGO_WIDTH).toBe(1080);
+    expect(SITE_LOGO_HEIGHT).toBe(1080);
+  });
+});
+
 describe('compactMetaDescription', () => {
   it('normalizes whitespace without changing a concise description', () => {
     expect(compactMetaDescription('A concise\n  description for a consulting page.')).toBe(
@@ -51,10 +62,24 @@ describe('compactMetaDescription', () => {
 });
 
 describe('contact identity', () => {
-  it('uses the official number for display, structured data, and WhatsApp', () => {
-    expect(CONTACT_PHONE_DISPLAY).toBe('+212 670 431 249');
-    expect(CONTACT_PHONE_E164).toBe('+212670431249');
-    expect(WHATSAPP_URL).toBe('https://wa.me/212670431249');
+  it('uses both official numbers for display, structured data, and WhatsApp', () => {
+    expect(CONTACT_PHONES).toEqual([
+      {
+        e164: '+212610014949',
+        display: '+212 610 014 949',
+        whatsappUrl: 'https://wa.me/212610014949',
+      },
+      {
+        e164: '+212610012727',
+        display: '+212 610 012 727',
+        whatsappUrl: 'https://wa.me/212610012727',
+      },
+    ]);
+    expect(CONTACT_PHONE_E164S).toEqual(['+212610014949', '+212610012727']);
+    expect(WHATSAPP_URLS).toEqual([
+      'https://wa.me/212610014949',
+      'https://wa.me/212610012727',
+    ]);
   });
 });
 

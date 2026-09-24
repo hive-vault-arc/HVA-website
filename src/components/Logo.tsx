@@ -9,49 +9,41 @@ interface LogoProps {
   size?: 'nav' | 'footer';
 }
 
-const assets = {
-  mark: {
-    lightSurface: '/Images/brand/hva-icon-static-light-surface.svg',
-    darkSurface: '/Images/brand/hva-icon-static-dark-surface.svg',
-    width: 100,
-    height: 100,
-  },
-  micro: {
-    lightSurface: '/Images/brand/hva-icon-lockup-micro-navy.svg',
-    darkSurface: '/Images/brand/hva-icon-lockup-micro-dark.svg',
-    width: 700,
-    height: 280,
-  },
-  lockup: {
-    lightSurface: '/Images/brand/hva-icon-lockup-wide-navy.svg',
-    darkSurface: '/Images/brand/hva-icon-lockup-wide-dark.svg',
-    width: 835,
-    height: 210,
-  },
-  wordmark: {
-    lightSurface: '/Images/brand/hva-wordmark-wide-navy.svg',
-    darkSurface: '/Images/brand/hva-wordmark-wide-dark.svg',
-    width: 1000,
-    height: 260,
-  },
+const STACKED_WORDMARK = {
+  src: '/Images/brand/hva-rostex-wordmark-stacked-web.svg',
+  width: 792,
+  height: 400,
+} as const;
+
+const HORIZONTAL_WORDMARK = {
+  src: '/Images/brand/hva-rostex-wordmark-horizontal-web.svg',
+  width: 1968,
+  height: 148,
+} as const;
+
+const assetByKind = {
+  mark: STACKED_WORDMARK,
+  micro: STACKED_WORDMARK,
+  lockup: HORIZONTAL_WORDMARK,
+  wordmark: HORIZONTAL_WORDMARK,
 } as const;
 
 const sizeClasses = {
   mark: {
-    nav: 'h-9 w-9 md:h-10 md:w-10',
-    footer: 'h-12 w-12 md:h-14 md:w-14',
+    nav: 'h-9 w-auto',
+    footer: 'h-12 w-auto md:h-14',
   },
   micro: {
-    nav: 'h-10 w-auto md:h-11',
+    nav: 'h-9 w-auto',
     footer: 'h-12 w-auto md:h-14',
   },
   lockup: {
-    nav: 'h-12 w-auto md:h-14',
-    footer: 'h-12 w-auto sm:h-14 md:h-16',
+    nav: 'h-5 w-auto md:h-6',
+    footer: 'h-5 w-auto sm:h-6',
   },
   wordmark: {
-    nav: 'h-8 w-auto md:h-9',
-    footer: 'h-10 w-auto sm:h-12 md:h-14',
+    nav: 'h-5 w-auto md:h-6',
+    footer: 'h-5 w-auto sm:h-6',
   },
 } as const;
 
@@ -63,56 +55,34 @@ export default function Logo({
 }: LogoProps) {
   const t = useTranslations('Navigation');
   const isAboveFold = size === 'nav';
-
-  if (kind === 'navigation') {
-    const mark = assets.mark;
-    const micro = assets.micro;
-    const markSource = light ? mark.darkSurface : mark.lightSurface;
-    const microSource = light ? micro.darkSurface : micro.lightSurface;
-
-    return (
-      <Link
-        href="/"
-        aria-label={`Hive Vault Arc - ${t('home')}`}
-        className={['inline-flex flex-shrink-0 items-center', className].filter(Boolean).join(' ')}
-      >
-        <Image
-          src={markSource}
-          alt=""
-          width={mark.width}
-          height={mark.height}
-          className="h-10 w-10 object-contain sm:hidden"
-          loading="eager"
-          fetchPriority="high"
-        />
-        <Image
-          src={microSource}
-          alt="Hive Vault Arc"
-          width={micro.width}
-          height={micro.height}
-          className="hidden h-11 w-auto object-contain sm:block md:h-12"
-          loading="eager"
-          fetchPriority="high"
-        />
-      </Link>
-    );
-  }
-
-  const asset = assets[kind];
-  const source = light ? asset.darkSurface : asset.lightSurface;
+  const resolvedKind = kind === 'navigation' ? 'mark' : kind;
+  const asset = assetByKind[resolvedKind];
+  const assetShape = resolvedKind === 'mark' || resolvedKind === 'micro'
+    ? 'stacked'
+    : 'horizontal';
 
   return (
     <Link
       href="/"
       aria-label={`Hive Vault Arc - ${t('home')}`}
-      className={['inline-flex flex-shrink-0 items-center', className].filter(Boolean).join(' ')}
+      data-brand-logo={assetShape}
+      data-logo-surface={light ? 'dark' : 'light'}
+      className={[
+        'inline-flex flex-shrink-0 items-center justify-center px-2 py-1',
+        'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8A838]',
+        light ? 'bg-white' : 'bg-transparent',
+        className,
+      ]
+        .filter(Boolean)
+        .join(' ')}
     >
       <Image
-        src={source}
-        alt="Hive Vault Arc"
+        src={asset.src}
+        alt=""
+        aria-hidden="true"
         width={asset.width}
         height={asset.height}
-        className={`${sizeClasses[kind][size]} object-contain`}
+        className={`${sizeClasses[resolvedKind][size]} object-contain`}
         loading={isAboveFold ? 'eager' : 'lazy'}
         fetchPriority={isAboveFold ? 'high' : 'auto'}
       />
