@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 
 import BottomCTA from "@/components/BottomCTA";
@@ -669,9 +669,8 @@ export function AllInsightsGrid({
     [format, items, topic],
   );
 
-  async function loadMore() {
-    if (!cursor || loading) return;
-    abortRef.current?.abort();
+  const loadMore = useCallback(async () => {
+    if (!cursor || loading || abortRef.current) return;
     const controller = new AbortController();
     abortRef.current = controller;
     setLoading(true);
@@ -688,6 +687,12 @@ export function AllInsightsGrid({
       });
       if (!response.ok) throw new Error("Insights request failed.");
       const page = (await response.json()) as PaginatedInsights;
+      if (
+        page.nextCursor?.date === cursor.date &&
+        page.nextCursor?.id === cursor.id
+      ) {
+        throw new Error("Insights pagination did not advance.");
+      }
       setItems((current) => {
         const knownIds = new Set(current.map((item) => item.id));
         return [
@@ -706,7 +711,14 @@ export function AllInsightsGrid({
         setLoading(false);
       }
     }
-  }
+  }, [cursor, loading, locale]);
+
+  // Some topic and format labels come from local editorial fallbacks, so inspect every page before an empty result.
+  useEffect(() => {
+    if (!topic && !format) return;
+    if (!cursor || items.length >= total || loading || loadError) return;
+    void loadMore();
+  }, [topic, format, cursor, items.length, total, loading, loadError, loadMore]);
 
   function selectTopic(value: string) {
     const nextTopic = value as EditorialTopic | "";
@@ -715,6 +727,10 @@ export function AllInsightsGrid({
   }
 
   const canLoadMore = items.length < total && cursor !== null;
+  const filteredLibraryIncomplete = Boolean((topic || format) && canLoadMore);
+  const checkingFilteredPages = Boolean(
+    filteredLibraryIncomplete && !loadError,
+  );
 
   return (
     <section
@@ -775,6 +791,10 @@ export function AllInsightsGrid({
             filteredItems.map((item, index) => (
               <PublicationCard key={item.id} item={item} index={index} />
             ))
+          ) : filteredLibraryIncomplete ? (
+            <div className="border-y border-[#DDE3EA] py-10 text-sm text-[#536174] md:col-span-12">
+              {loadError ? t("loadError") : t("loading")}
+            </div>
           ) : (
             <div className="border-y border-[#DDE3EA] py-10 md:col-span-12">
               <h3 className="font-headline text-2xl text-[#1A2535]">
@@ -792,17 +812,17 @@ export function AllInsightsGrid({
             <button
               type="button"
               onClick={loadMore}
-              disabled={loading}
+              disabled={loading || checkingFilteredPages}
               className="inline-flex min-h-11 items-center gap-2 border border-[#1A2535] bg-white px-6 text-xs font-bold uppercase text-[#1A2535] transition-colors duration-700 hover:bg-[#1A2535] hover:text-white disabled:cursor-wait disabled:opacity-60"
             >
-              {loading
+              {loading || checkingFilteredPages
                 ? t("loading")
                 : loadError
                   ? t("tryAgain")
                   : t("loadMore")}
               <ArrowDown className="h-4 w-4" aria-hidden="true" />
             </button>
-            {loadError ? (
+            {loadError && (filteredItems.length > 0 || !filteredLibraryIncomplete) ? (
               <p className="text-sm text-[#536174]">{t("loadError")}</p>
             ) : null}
           </div>
@@ -834,7 +854,7 @@ export default function InsightsHub({
   }
 
   return (
-    <main className="insights-hub-page overflow-x-clip bg-white text-[#1A2535]">
+    <div className="insights-hub-page overflow-x-clip bg-white text-[#1A2535]">
       <InsightsEditorialHero
         eyebrow={t("heroEyebrow")}
         headline={collectionT("brand")}
@@ -876,6 +896,6 @@ export default function InsightsHub({
         secondaryLabel={t("ctaSecondary")}
         secondaryHref="/capabilities"
       />
-    </main>
+    </div>
   );
 }

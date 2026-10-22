@@ -88,4 +88,78 @@ describe('Insights grid pagination', () => {
     });
     expect(screen.getByText('Publication 4')).toBeInTheDocument();
   });
+
+  it('checks later pages before reporting that a filter has no matches', async () => {
+    const initialItems = Array.from({length: 6}, (_, index) => ({
+      ...listingItem(index + 1),
+      topics: ['ai-operational-systems'] as InsightListingItem['topics'],
+    }));
+    const laterItems = Array.from({length: 6}, (_, index) => ({
+      ...listingItem(index + 7),
+      topics: ['data-cloud-reliability'] as InsightListingItem['topics'],
+    }));
+    const fetchMock = vi.fn().mockResolvedValue(
+      new Response(
+        JSON.stringify({items: laterItems, total: 12, hasFallbackContent: false, nextCursor: null}),
+        {status: 200, headers: {'content-type': 'application/json'}},
+      ),
+    );
+    vi.stubGlobal('fetch', fetchMock);
+
+    render(
+      <AllInsightsGrid
+        initialItems={initialItems}
+        total={12}
+        initialCursor={{date: initialItems[5].date, id: initialItems[5].id}}
+        locale="en"
+      />,
+    );
+
+    fireEvent.change(screen.getByLabelText('Topic'), {
+      target: {value: 'data-cloud-reliability'},
+    });
+
+    expect(screen.queryByText('No publications match these filters.')).not.toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText('Publication 7')).toBeInTheDocument());
+    expect(screen.queryByText('Publication 1')).not.toBeInTheDocument();
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+
+  it('offers a retry instead of claiming no matches when a filtered page fails', async () => {
+    const initialItems = Array.from({length: 6}, (_, index) => ({
+      ...listingItem(index + 1),
+      topics: ['ai-operational-systems'] as InsightListingItem['topics'],
+    }));
+    const laterItem = {
+      ...listingItem(7),
+      topics: ['data-cloud-reliability'] as InsightListingItem['topics'],
+    };
+    const fetchMock = vi.fn()
+      .mockRejectedValueOnce(new Error('Network unavailable'))
+      .mockResolvedValueOnce(new Response(
+        JSON.stringify({items: [laterItem], total: 7, hasFallbackContent: false, nextCursor: null}),
+        {status: 200, headers: {'content-type': 'application/json'}},
+      ));
+    vi.stubGlobal('fetch', fetchMock);
+
+    render(
+      <AllInsightsGrid
+        initialItems={initialItems}
+        total={12}
+        initialCursor={{date: initialItems[5].date, id: initialItems[5].id}}
+        locale="en"
+      />,
+    );
+
+    fireEvent.change(screen.getByLabelText('Topic'), {
+      target: {value: 'data-cloud-reliability'},
+    });
+
+    await waitFor(() => expect(screen.getByRole('button', {name: 'Try again'})).toBeInTheDocument());
+    expect(screen.queryByText('No publications match these filters.')).not.toBeInTheDocument();
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    fireEvent.click(screen.getByRole('button', {name: 'Try again'}));
+    await waitFor(() => expect(screen.getByText('Publication 7')).toBeInTheDocument());
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+  });
 });

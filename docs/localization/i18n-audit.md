@@ -1,5 +1,7 @@
 # English–French localization audit
 
+This is the July 23, 2026 two-locale implementation record. Its paused Spanish/Arabic state and runtime versions are historical. The current branch configures all four locales; the [simple-v1 plan](../simple-v1-site-plan.md) governs new page scope, and `src/i18n/config.ts` and `src/i18n/routing.ts` govern current locale behavior.
+
 Updated: 2026-07-23
 
 ## Baseline

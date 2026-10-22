@@ -77,7 +77,7 @@ export default function CapabilityDetail({capability, relatedCapabilities}: Capa
 
   return (
     <MotionConfig reducedMotion={motionReduced ? 'always' : 'never'}>
-      <main className={styles.page} data-capability={capability.slug}>
+      <div className={styles.page} data-capability={capability.slug}>
         <motion.div
           aria-hidden="true"
           className={styles.progress}
@@ -281,7 +281,7 @@ export default function CapabilityDetail({capability, relatedCapabilities}: Capa
           secondaryLabel={t('capability.bottomSecondary')}
           secondaryHref="/capabilities"
         />
-      </main>
+      </div>
     </MotionConfig>
   );
 }

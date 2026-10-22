@@ -171,10 +171,22 @@ export type CaseStudy = LocalizedContentMeta & EditorialContentFields & {
   seo?: ContentSeo;
 };
 
+const SELECTED_CLIENT_CASE_SLUGS = new Set([
+  'top-tier-crm-transformation-program-real-estate-operations',
+  'premium-advice-training-keepzen-digital-academy',
+  'tarik-rami-immobilier',
+]);
+
+export function isSelectedClientCaseStudy(study: CaseStudy): boolean {
+  return SELECTED_CLIENT_CASE_SLUGS.has(translationSlug(study, 'en') ?? study.slug);
+}
+
 export type CaseStudyShowcaseSummary = Pick<
   CaseStudy,
   'slug' | 'title' | 'clientName' | 'industry' | 'summary'
 > & {
+  problem?: string;
+  sourceLocale?: AppLocale;
   assets: Pick<
     CaseStudy['assets'],
     'coverImage' | 'coverAlt' | 'clientLogo' | 'clientLogoAlt'

@@ -1,15 +1,21 @@
-# HVA Website — Sprint Backlog
+# Hive Vault Arc website work sequences
 
-> 2026-09-13 note: this is the older general SEO/content backlog. For the current evidence-based SEO, AEO, and GEO program, use [`sprints/seo-aeo-geo-2026/README.md`](./seo-aeo-geo-2026/README.md). The May 2026 discovery pack remains historical implementation context. Public-facing copy should use `Hive Vault Arc`; `H.V.A` and `HVA` are aliases/search variants unless a historical sprint explicitly says otherwise.
+The active work on `site/simple-v1` follows the [simpler website sequence](simple-v1/README.md) and [11-page site plan](../docs/simple-v1-site-plan.md). The current full website remains on `main`, with its maintained copy on `site/enterprise-maintained`.
 
-> All remaining work on the hiva-website, organized as sprint files for AI coding agent execution.
+The [full-site visual pack](website-consistency/README.md), [September SEO program](seo-aeo-geo-2026/README.md) and [May discovery pack](seo-ai-discovery/README.md) remain reference material. Their expansion tasks and execution orders are superseded for this branch. Review individual tasks against current code before reusing them.
+
+## Historical general backlog
+
+> The list below preserves the older general SEO/content backlog. Its September successor is the [SEO, AEO and GEO reference program](seo-aeo-geo-2026/README.md). Public-facing copy uses `Hive Vault Arc`; `H.V.A` and `HVA` remain aliases/search variants.
+
+> Earlier full-site work organized as sprint files.
 > Last updated: 2026-06-04
 
 ---
 
-## Execution Order
+## Historical execution order
 
-Run sprints in this order. Each sprint's exit criteria must pass before the next begins.
+This was the original full-site order. It is not the active simpler-site backlog.
 
 | Sprint | File | Priority | Description | Time Est. |
 |--------|------|----------|-------------|-----------|
@@ -40,11 +46,13 @@ Run sprints in this order. Each sprint's exit criteria must pass before the next
 **File:** `outside-configuration.md`
 
 Tasks that require manual action in Vercel, Google, LinkedIn, and other external dashboards.
-**Read this file and execute OUT-1 (Vercel env var) before running any sprint.**
+These external configuration tasks are historical references, not prerequisites for local simple-v1 work. External changes require the relevant company authorization.
 
 ---
 
-## How to Use These Sprints With an AI Coding Agent
+## Original full-site procedure
+
+The following procedure is retained as history; it does not authorize its external or deployment steps on this branch.
 
 1. Read `outside-configuration.md` first — execute OUT-1 before any code work
 2. Feed the agent one sprint file at a time

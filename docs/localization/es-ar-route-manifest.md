@@ -1,6 +1,6 @@
 # Spanish and Arabic route manifest
 
-Status: approved planning vocabulary. The internal pathname remains the code-level identifier; public paths are generated from `src/i18n/routing.ts` after the locale is launched.
+Status: inherited route reference. Spanish and Arabic are configured as public locales in `src/i18n/config.ts`; public paths come from `src/i18n/routing.ts`. The [11-page plan](../simple-v1-site-plan.md) governs the simpler target, while these inherited paths remain available until a reviewed migration.
 
 English remains unprefixed. French remains unchanged. Spanish and Arabic receive the prefixes `/es` and `/ar` respectively. Dynamic `[slug]` and `[employee]` values come only from approved translated Sanity documents.
 
@@ -49,5 +49,5 @@ English remains unprefixed. French remains unchanged. Spanish and Arabic receive
 - `/en` and `/en/:path*` continue redirecting to unprefixed English.
 - Existing French redirects remain unchanged.
 - There are no speculative redirects from English/French paths to Spanish/Arabic equivalents.
-- Until a complete locale is launched, `/es/**` and `/ar/**` remain controlled 404 routes and do not appear in sitemaps, canonicals, alternates, or the language switcher.
-- Once launched, every mapped static route has a self-canonical and reciprocal alternates; dynamic alternates exist only for approved translated records.
+- The historical pre-launch blanket 404 gate is no longer the runtime configuration. Preserve localized not-found behavior for missing or unapproved dynamic content.
+- Public mapped static routes have a self-canonical and reciprocal alternates; dynamic alternates exist only for approved translated records.

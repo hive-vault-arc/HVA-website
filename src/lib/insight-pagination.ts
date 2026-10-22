@@ -25,6 +25,7 @@ export type InsightListingItem = {
   readTime?: string;
   meta?: string;
   sourceLocale: AppLocale;
+  noIndex?: boolean;
   editorialFormat?: EditorialFormat;
   topics?: EditorialTopic[];
   directAnswer?: string;

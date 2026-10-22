@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import type {AppLocale} from "@/i18n/config";
 import {buildStaticRouteMetadata} from "@/i18n/metadata";
-import Contact from '@/views/Contact';
+import SimpleContact from '@/views/SimpleContact';
 import JsonLd from '@/components/JsonLd';
-import FaqSection from '@/components/FaqSection';
+import StudioFaqSection from '@/components/studio/StudioFaqSection';
 import {getLocalizedFaqs} from '@/i18n/faqs';
 import {localizedPath} from '@/i18n/route-manifest';
 import {getTranslations} from 'next-intl/server';
@@ -63,8 +63,8 @@ export default async function Page({params}: PageProps) {
   return (
     <>
       <JsonLd data={[contactSchema, breadcrumbSchema]} />
-      <Contact />
-      <FaqSection faqs={contactFaqs.items} heading={contactFaqs.heading} />
+      <SimpleContact locale={locale} />
+      <StudioFaqSection faqs={contactFaqs.items} heading={contactFaqs.heading} />
     </>
   );
 }

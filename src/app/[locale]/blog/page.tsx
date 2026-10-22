@@ -31,6 +31,7 @@ export default async function BlogPage({params}: PageProps) {
   const itemListSchema = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
+    '@id': `${pageUrl}#articles`,
     name: tMeta('title'),
     url: pageUrl,
     inLanguage: locale,
@@ -59,6 +60,12 @@ export default async function BlogPage({params}: PageProps) {
     },
     inLanguage: locale,
   };
+  const collectionSchema = {
+    '@context': 'https://schema.org', '@type': 'CollectionPage', name: tMeta('title'),
+    description: tMeta('description'), url: pageUrl, inLanguage: locale,
+    isPartOf: {'@id': `${SITE_URL}/#website`},
+    mainEntity: {'@type': 'ItemList', '@id': `${pageUrl}#articles`},
+  };
 
   const breadcrumbSchema = buildLocalizedBreadcrumbSchema(locale, [
     {name: tNav('home'), pathname: '/'},
@@ -67,7 +74,7 @@ export default async function BlogPage({params}: PageProps) {
 
   return (
     <>
-      <JsonLd data={[itemListSchema, blogSchema, breadcrumbSchema]} />
+      <JsonLd data={[itemListSchema, blogSchema, collectionSchema, breadcrumbSchema]} />
       <BlogIndex
         initialPage={initialPage}
         industries={initialPage.industries}

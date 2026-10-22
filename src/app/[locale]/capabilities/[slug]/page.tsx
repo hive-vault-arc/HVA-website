@@ -3,7 +3,7 @@ import type {AppLocale} from '@/i18n/config';
 import {decodeRouteParam, localizedPath} from '@/i18n/route-manifest';
 import { notFound } from 'next/navigation';
 import JsonLd from '@/components/JsonLd';
-import CapabilityDetail from '@/views/CapabilityDetail';
+import SimpleCapabilityDetail from '@/views/SimpleCapabilityDetail';
 import {
   getCapabilityProfileBySlug,
   getRelatedCapabilityProfiles,
@@ -155,7 +155,21 @@ export default async function CapabilityProfilePage({ params }: Props) {
         )}
       />
       <JsonLd data={[serviceSchema, webPageSchema, breadcrumbSchema]} />
-      <CapabilityDetail capability={capability} relatedCapabilities={relatedCapabilities} />
+      <SimpleCapabilityDetail capability={capability} relatedCapabilities={relatedCapabilities} labels={{
+        services: tContent('capabilities'),
+        start: tContent('capability.start'),
+        atAGlance: tContent('capability.atAGlance'),
+        contextTitle: tContent('capability.contextTitle'),
+        strategicContext: tContent('capability.strategicContext'),
+        executionContext: tContent('capability.executionContext'),
+        coverageTitle: tContent('capability.coverageTitle'),
+        scopeDescription: tContent('capability.scopeDescription'),
+        outcomesTitle: tContent('capability.outcomesTitle'),
+        relatedTitle: tContent('capability.relatedTitle'),
+        bottomTitle: tContent('capability.bottomTitle', {title: capability.shortTitle || capability.title}),
+        bottomDescription: tContent('capability.bottomDescription'),
+        bottomPrimary: tContent('capability.bottomPrimary'),
+      }} />
     </>
   );
 }

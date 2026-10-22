@@ -15,6 +15,9 @@ describe('Sanity fetch resilience', () => {
         cause: {errors: [{code: 'ETIMEDOUT'}]},
       })
     ).toBe(true);
+    expect(isRecoverableSanityFetchError(
+      new SyntaxError('Failed to parsed response body as JSON: Bad control character in string literal'),
+    )).toBe(true);
   });
 
   it('summarizes network failures without serializing request details', () => {

@@ -1,6 +1,8 @@
 # French Translation Sprints — H.V.A Website
 
-All sprint files for the French (`fr`) locale. Read `translation-guide.md` in the project root before starting.
+This is the historical full-site French sprint pack. The [simple-v1 plan](../../simple-v1-site-plan.md) and [active sequence](../../../sprints/simple-v1/README.md) govern the simpler website. Current runtime uses next-intl and four public locales; do not reapply the older setup order or rebuild each inherited page as a required core page.
+
+The files below preserve the original French (`fr`) implementation scope. The root `translation-guide.md` is historical research; use the current locale configuration and localized content helpers for new work.
 
 ---
 

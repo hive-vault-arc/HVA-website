@@ -1,5 +1,7 @@
 # Spanish and Arabic localization inventory template
 
+Use this template when a new CMS inventory is needed; its full-site checklist does not define the simple-v1 page scope. The [11-page plan](../simple-v1-site-plan.md) governs target content. Existing locale support and published records remain in place, including the four-language homepage copy in `src/data/studio-home.ts`.
+
 Status: execution template. Complete it with a fresh read-only inventory of the production Sanity dataset before any schema or content mutation. Do not reuse historical French counts.
 
 ## Inventory rules

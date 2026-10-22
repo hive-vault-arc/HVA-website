@@ -1,8 +1,12 @@
 # Spanish and Arabic localization specification
 
-Status: implementation in progress — release-gated  
+Status: inherited rollout specification and shared localization contract
 Owners: Hive Vault Arc frontend, Sanity Studio, Spanish editorial review, Arabic editorial review, legal review  
 Last reviewed: 2026-08-24
+
+## Simple v1 runtime and scope
+
+English, French, Spanish and Arabic are now configured as public locales in `src/i18n/config.ts`, with paths from `src/i18n/routing.ts`. The [11-page plan](../simple-v1-site-plan.md) governs the simpler page set; retain the locale, translation-availability, metadata and RTL contracts when adapting those pages. The rollout baseline and launch sequence below preserve their August context and do not describe the current branch's implementation status.
 
 ## 1. Purpose and release boundary
 
@@ -15,9 +19,9 @@ This specification adds first-class Spanish and Arabic support to the existing E
 - No Spanish or Arabic URL may show English CMS editorial copy as a fallback. Missing translations are unavailable, unlinked, unindexed, and return the existing localized not-found behavior.
 - This work does not localize machine endpoints (`/ai/company`, `/llms.txt`, `/llms-full.txt`, API routes, or IndexNow), original signed evidence, source files, or exact quotations.
 
-## 2. Live baseline and source of truth
+## 2. August rollout baseline
 
-The current public website uses `next-intl` with `en` and `fr` in `src/i18n/config.ts`, `src/i18n/routing.ts`, `src/i18n/request.ts`, and the `[locale]` App Router tree. English/French language handling is not yet generic: route alternates, metadata, revalidation, `TranslationTargets`, fallback helpers, and several source-data branches still assume two locales.
+At the August baseline, the website used `next-intl` with `en` and `fr`. Route alternates, metadata, revalidation, `TranslationTargets`, fallback helpers and source-data branches still assumed two locales. The current runtime has since expanded to all four locales; consult its typed configuration rather than reapplying the original baseline.
 
 This document supersedes the implementation detail in `docs/spanish-localization-implementation-guide.md`. The French sprint archive is historical evidence of scope, not a source of current code patterns. In particular, it predates the live `src/proxy.ts`, current message catalogue, and the present Sanity translation data.
 
@@ -34,13 +38,13 @@ All technical locale behavior must come from one typed `LocaleProfile` map rathe
 | `es` | `ltr` | `es-ES` | `es_ES` | `/es` | Spain-oriented Spanish |
 | `ar` | `rtl` | `ar-MA` | `ar_MA` | `/ar` | Modern Standard Arabic with Moroccan context |
 
-Future implementation extends `AppLocale` to `en | fr | es | ar`, and derives `APP_LOCALES`, locale labels, formatting, direction, prefixes, Open Graph values, revalidation tags, sitemaps, and alternates from the same map. English remains `x-default`.
+The implemented `AppLocale` includes `en | fr | es | ar`. Preserve the shared map for locale labels, formatting, direction, prefixes, Open Graph values, revalidation, sitemaps and alternates. English remains `x-default`.
 
 `localePrefix: 'as-needed'`, disabled locale detection, and disabled locale cookies remain unchanged. Visitors choose a language deliberately through its URL or the switcher.
 
 ## 4. Routes, navigation, and content availability
 
-`docs/localization/es-ar-route-manifest.md` is the canonical map for every configured static, dynamic, legal, and geo-service route. Components must use the localized navigation and route-manifest helpers; they must not concatenate translated URL segments.
+`src/i18n/routing.ts` is the runtime map for configured paths; `docs/localization/es-ar-route-manifest.md` is its human-readable reference. Components must use the localized navigation and route-manifest helpers; they must not concatenate translated URL segments.
 
 For a dynamic document:
 

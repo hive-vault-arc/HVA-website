@@ -1,201 +1,68 @@
-# Website Consistency Migration Map
+# Simple v1 page migration map
 
-## Purpose
+The [site plan](../simple-v1-site-plan.md) defines the 11-page core on `site/simple-v1`; the October 19 [requirements brief](../simple-v1-requirements.md) adds the required Insights library and latest design direction. This map adapts existing templates to that scope. The previous full-site family migration order is superseded for this branch.
 
-This document groups the public website into page families so visual changes are implemented once, reused, and verified consistently. It does not authorize copy, route, CMS, or data changes.
+The core pages, required Insights families and service-detail pages now use the simpler shared shell locally. The table below records the migration targets and intended content, while the [implementation review](../simple-v1-implementation-review.md) records what has been built and verified. Industry, location and other retained routes still await a route-by-route design review.
 
-## Shared Target
+## Shared shell
 
-Every family must use the same:
+Use the same simpler navigation, footer, page frame, controls, focus treatment and language behavior across the core and required Insights pages as they migrate. Target navigation is Services, Case Studies, About, Insights and Book a Call leading to Contact; the logo returns Home. Footer links include Insights, Privacy Policy, Cookie Policy and Legal Notice.
 
-- approved palette and typography roles from `DESIGN.md`;
-- navigation, footer, page shell, gutters, buttons, labels, and focus treatment;
-- responsive title scale and vertical rhythm;
-- canonical logo assets and logo-frequency limits;
-- image-job test and proof-frame rules;
-- inset treatment for dark emphasis modules;
-- mobile behavior at the acceptance widths in `AGENTS.md`.
+Retain the approved palette, existing logo assets and typography from [DESIGN.md](../../DESIGN.md), including its simple-v1 reference choices. Preserve cookie preferences, consent-aware analytics, locale routing, loading/error states and contact contracts.
 
-## Family 0: Shared Shell
+The shared shell now covers the core and required Insights pages. Keep the inherited routes reachable while their individual treatment is reviewed.
 
-Includes the root locale layout, navigation, mobile menu, footer, bottom CTA, cookie/analytics UI, route loading states, error states, and shared brand marks.
+## Main pages
 
-Target:
+| Target | Existing template | Migration work |
+| --- | --- | --- |
+| Home | `src/views/Home.tsx` | Apply the latest hero/storytelling brief while preserving Plan / Build / Run, real client work, ARC, FAQ and contact contracts. Add the short team introduction and selected Insights; align navigation and CTA with the site plan. |
+| Services | `src/app/[locale]/capabilities/page.tsx` | Combine the overview, detailed overview and useful program content into one page. Explain six services through problems, deliverables, examples, engagement steps and relevant FAQs. |
+| Case Studies | `src/app/[locale]/case-studies/page.tsx` | Feature the three named client projects with images, client problems, delivery summaries and links to real details. Absorb useful Portfolio content. Keep internal demonstrations labelled separately. |
+| About | `src/app/[locale]/aboutus/page.tsx` | Explain the company, real founders and location. Use short bios and a concise How we work section instead of requiring separate founder or ARC pages in the core. |
+| Contact | `src/app/[locale]/contact/page.tsx` | Use a short enquiry, approved contact facts, a real booking option when configured, and a clear explanation of the next step. Verify validation and truthful success/failure states. |
 
-- one navigation system on every public route;
-- one full lockup in the footer and one compact mark in navigation;
-- no legacy numbered WebP logos;
-- no unapproved colors or page-specific header variants;
-- a stable content width and gutter system;
-- accessible 44px controls and a keyboard-complete mobile menu.
+Use existing canonical paths while redesigning. Services and About are navigation labels; new `/services` or `/about` routes are not prerequisites.
 
-This family is a dependency for every other migration.
+## Three client details
 
-## Family 1: Homepage
+Use `src/app/[locale]/case-studies/[slug]/page.tsx` and the approved existing CMS slugs for:
 
-Route: `/[locale]`
+- ImmoWorld CRM and Real Estate Operations.
+- Premium Advice & Training / KeepZen Digital Academy.
+- Tarik Rami Immobilier Project and Client Management Platform.
 
-Target:
+All three follow client context, problem, what we built, screenshots, verified results or delivery status, and Contact CTA. Keep client colors inside their proof frames. Preserve asset identities, source quotes and approved project facts; do not invent outcome metrics or replace real screenshots with generated concepts.
 
-- retain the trusted light editorial direction;
-- use a concise hero title and one purposeful hero visual;
-- reduce decorative imagery and repeated marks;
-- use framed client proof without allowing client colors into the surrounding UI;
-- keep dark emphasis to one inset module before the footer;
-- preserve all existing content meaning and calls to action.
+## Three policy pages
 
-## Family 2: ARC Framework
+Retain the existing Privacy Policy, Cookie Policy and Legal Notice at `/privacy-policy`, `/cookie-policy` and `/mentions-legales`. Adapt the presentation and footer access while preserving reviewed legal copy and consent behavior. Policy content changes remain subject to legal review.
 
-Route: `/[locale]/arc`
+## Content outside the core
 
-Current risk: this family has historically behaved like a separate dark cinematic website with oversized copy and non-canonical visual language.
+ARC becomes How we work on Home and About. Industry descriptions become relevant service and project examples. Founder summaries belong on About; Portfolio joins Case Studies.
 
-Target:
+The existing published Insights library is required alongside the core. Adapt `/insights`, `/blog` and the existing News, Perspectives and Research Reports index/detail families with their localized routes. Reuse CMS content and preserve article identities, metadata and translation/fallback behavior. A unified Insights navigation entry keeps the experience simple without removing categories or entries.
 
-- rebuild as a light-first editorial page within the shared shell;
-- use one inset dark module only where the framework genuinely benefits from emphasis;
-- remove oversized title treatments and repeated standalone marks;
-- use a single consistent framework diagram language based on navy, line gray, amber, and white;
-- keep existing ARC content and information architecture.
+The six fuller service explanations remain as additional detail pages in the Simple v1 layout. Location pages, utility routes and machine-readable company resources are outside the 11-page count. Preserve their existing behavior until their treatment is reviewed.
 
-## Family 3: Capabilities And Programs
+For a future consolidation redirect, document the source, useful replacement, each locale equivalent, canonical and sitemap updates, and verification. Removing a navigation item alone does not remove its route.
 
-Routes:
+## Implementation order
 
-- `/[locale]/capabilities`
-- `/[locale]/capabilities/in-detail`
-- `/[locale]/capabilities/solution-programs`
-- `/[locale]/capabilities/[slug]`
+1. Complete Home against the target brief and establish the reusable simple shell.
+2. Adapt Services, then the Case Studies index and three detail pages.
+3. Adapt About and Contact.
+4. Bring all three policies into the shared shell without changing legal meaning.
+5. Adapt the required Insights families, then review other retained content, internal links and any proposed redirects.
+6. Verify the full core, Insights families and retained destinations in every public locale.
 
-Target:
+The [active sequence](../../sprints/simple-v1/README.md) tracks this order. The older full-site sprint pack remains reference material.
 
-- shared landing hero and service-card grammar;
-- consistent service detail template;
-- no decorative image per capability unless the image adds domain evidence;
-- no arbitrary accent color per service;
-- long technical content uses readable measures, tables, lists, and proof modules.
+## Acceptance
 
-## Family 4: Industries
+A migrated page must use approved visual tokens and assets, readable text measures, logical mobile order, visible keyboard focus and at least 44px controls. Generated concepts must be labelled; client evidence must remain real.
 
-Route: `/[locale]/industries`
+Check overflow and layout at 320, 375, 390, 430, 768, 820, 1024, 1280, 1440 and 1920px. Capture affected families at 390×844, 820×1180, 1440×1000 and 1920×1080. Check enlarged text, reduced motion and Arabic right-to-left behavior.
 
-Target:
-
-- one clear industry directory pattern;
-- restrained image use, with no generic image assigned merely to fill each item;
-- consistent icon treatment using the approved UI colors;
-- proof and case-study links remain visually distinct from category navigation.
-
-## Family 5: Company And Portfolio
-
-Routes:
-
-- `/[locale]/aboutus`
-- `/[locale]/aboutus/our-people/[employee]`
-- `/[locale]/whoarewe/portfolio`
-
-Target:
-
-- use real team and client evidence first;
-- use the wide lockup only for a deliberate company identity moment;
-- standardize person cards, portraits, roles, quotes, and proof summaries;
-- crop portraits consistently without modifying source identity;
-- avoid placing a company mark beside each company-related heading.
-
-## Family 6: Insights And Articles
-
-Routes:
-
-- `/[locale]/insights`
-- `/[locale]/insights/news-articles`
-- `/[locale]/insights/news-articles/[slug]`
-- `/[locale]/insights/perspectives`
-- `/[locale]/insights/perspectives/[slug]`
-- `/[locale]/insights/research-reports`
-- `/[locale]/insights/research-reports/[slug]`
-- `/[locale]/blog`
-- `/[locale]/blog/[slug]`
-
-Target:
-
-- one editorial index grammar and one article grammar;
-- predictable byline, date, reading measure, related-content, and CTA placement;
-- images support the subject rather than repeat generic AI imagery;
-- no page-specific type system or accent color;
-- long titles wrap without crop or overlap.
-
-## Family 7: Case Studies
-
-Routes:
-
-- `/[locale]/case-studies`
-- `/[locale]/case-studies/[slug]`
-
-Target:
-
-- keep client colors and screenshots inside framed proof;
-- use the website palette for navigation, labels, metrics, and surrounding surfaces;
-- standardize challenge, work, outcome, evidence, and next-step sections;
-- do not fabricate metrics, client marks, screenshots, or quotes.
-
-## Family 8: Conversion And Local Landing Pages
-
-Routes:
-
-- `/[locale]/contact`
-- `/[locale]/ai-agents-morocco`
-- `/[locale]/ai-agents-tangier`
-- `/[locale]/custom-software-morocco`
-- `/[locale]/digital-services-tangier`
-- `/[locale]/it-consulting-tangier`
-
-Target:
-
-- one conversion-oriented layout system;
-- consistent trust signals, forms, contact cards, FAQs, and location context;
-- no visual novelty added only to make SEO pages look different;
-- keep forms full-width and labels visible on mobile;
-- local/service imagery must be credible and relevant.
-
-## Family 9: Utility And Legal
-
-Routes:
-
-- `/[locale]/privacy-policy`
-- `/[locale]/mentions-legales`
-- `/[locale]/links`
-- locale error, loading, and not-found states
-
-Target:
-
-- quiet, readable, shared-shell layouts;
-- no decorative logo repetition;
-- legal copy uses a comfortable reading measure and clear heading hierarchy;
-- utility pages do not introduce a separate palette or font system.
-
-## Migration Order
-
-1. Establish tokens, canonical assets, and shared primitives.
-2. Migrate the shared shell.
-3. Migrate the homepage as the visual reference implementation.
-4. Migrate ARC and remove the largest outlier system.
-5. Migrate capabilities, industries, company, and portfolio.
-6. Migrate insights, articles, case studies, conversion, local, and legal pages.
-7. Run cross-family responsive, accessibility, performance, and visual-regression QA.
-
-Do not migrate one isolated route inside a family when a shared family template can solve the same problem for all routes.
-
-## Family Acceptance Matrix
-
-Each family passes only when:
-
-- palette audit reports no family-owned violations;
-- no legacy numbered logo asset remains;
-- logo frequency complies with `DESIGN.md`;
-- title line limits pass at desktop and 320px;
-- no horizontal overflow exists at all required widths;
-- dark modules are inset and limited;
-- images pass the image-job test;
-- controls meet touch and keyboard requirements;
-- content, links, locale behavior, metadata, and CMS rendering remain intact;
-- screenshots pass at `390x844`, `820x1180`, and `1440x1000`.
+Verify navigation, all six service destinations, the three client details, Insights library and entry links, policy links, locale switching and the contact flow. Preserve metadata, approved CMS rendering, consent and missing-content states. Run the relevant checks in [AGENTS.md](../../AGENTS.md), and distinguish inherited audit debt from new page failures.

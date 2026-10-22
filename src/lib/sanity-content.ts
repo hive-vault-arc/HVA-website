@@ -25,7 +25,7 @@ import {
   resolveEditorialFields,
   type EditorialContentFields,
 } from './editorial-taxonomy';
-import {getLocalCaseStudyCover} from './case-study-assets';
+import {getLocalCaseStudyCover, getLocalCaseStudyDisclosure} from './case-study-assets';
 import type {
   CaseStudy,
   CaseStudyEngagementType,
@@ -154,6 +154,7 @@ type SanityPaginatedInsight = {
   _type:
     'post' | 'newsArticle' | 'perspective' | 'researchReport' | 'caseStudy';
   language?: AppLocale;
+  noIndex?: boolean;
   slug: string;
   title: string;
   publishedAt?: string;
@@ -777,21 +778,11 @@ function normalizeCaseStudy(
   return {
     ...baseStudy,
     ...resolveEditorialFields(study.slug, study),
-    title: localCover?.title ?? baseStudy.title,
-    summary: localCover?.summary ?? baseStudy.summary,
-    deploymentStatus:
-      localCover?.deploymentStatus ?? baseStudy.deploymentStatus,
+    title: baseStudy.title || localCover?.title || '',
+    summary: baseStudy.summary || localCover?.summary || '',
+    deploymentStatus: baseStudy.deploymentStatus ?? localCover?.deploymentStatus ?? '',
     ...(localCover
-      ? {
-          seo: {
-            ...(baseStudy.seo ?? {}),
-            title: `${localCover.title} | Case Study`,
-            description: localCover.summary,
-          },
-        }
-      : {}),
-    ...(localCover?.coverDisclosure
-      ? {coverDisclosure: localCover.coverDisclosure}
+      ? {coverDisclosure: getLocalCaseStudyDisclosure(study.slug, study.language ?? 'en')}
       : {}),
     engagementType: normalizeCaseStudyEngagementType(study.engagementType),
     operationalModules: study.operationalModules ?? [],
@@ -842,9 +833,10 @@ function normalizePaginatedInsight(
     id: item._id,
     image: image || localCover?.image || '',
     date,
-    sourceLocale: locale,
+    sourceLocale: item.language ?? locale,
+    ...(item.noIndex === true ? {noIndex: true} : {}),
     ...resolveEditorialFields(item.slug, item),
-    title: localCover?.title ?? item.title,
+    title: item.title || localCover?.title || '',
   };
 
   switch (item._type) {
@@ -889,11 +881,11 @@ function normalizePaginatedInsight(
         ...base,
         type: 'case-study',
         tag: item.industry ?? '',
-        excerpt: localCover?.summary ?? item.summary ?? '',
+        excerpt: item.summary ?? localCover?.summary ?? '',
         href: `/case-studies/${item.slug}`,
         ...(item.clientName ? {meta: item.clientName} : {}),
-        ...(localCover?.coverDisclosure
-          ? {coverDisclosure: localCover.coverDisclosure}
+        ...(localCover
+          ? {coverDisclosure: getLocalCaseStudyDisclosure(item.slug, item.language ?? locale)}
           : {}),
       };
   }
@@ -1019,9 +1011,9 @@ function normalizePaginatedCollectionItem(
     date: item.publishedAt ?? item.lastUpdated ?? '',
     sourceLocale: locale,
     ...resolveEditorialFields(item.slug, item),
-    title: localCover?.title ?? item.title,
+    title: item.title || localCover?.title || '',
     excerpt:
-      localCover?.summary ?? item.excerpt ?? item.summary ?? '',
+      item.excerpt ?? item.summary ?? localCover?.summary ?? '',
     image:
       imageUrlFromSource(imageSource, CARD_COVER_WIDTH, CARD_COVER_HEIGHT) ||
       localCover?.image ||
@@ -1029,13 +1021,13 @@ function normalizePaginatedCollectionItem(
     industry: normalizeInsightIndustry(item.industryTaxonomy),
     ...(item.readTime ? {readTime: item.readTime} : {}),
     ...(item.authorName ? {authorName: item.authorName} : {}),
-    ...(localCover
-      ? {deploymentStatus: localCover.deploymentStatus}
-      : item.deploymentStatus
-        ? {deploymentStatus: item.deploymentStatus}
+    ...(item.deploymentStatus !== undefined && item.deploymentStatus !== null
+      ? {deploymentStatus: item.deploymentStatus}
+      : localCover?.deploymentStatus !== undefined
+        ? {deploymentStatus: localCover.deploymentStatus}
         : {}),
-    ...(localCover?.coverDisclosure
-      ? {coverDisclosure: localCover.coverDisclosure}
+    ...(localCover
+      ? {coverDisclosure: getLocalCaseStudyDisclosure(item.slug, item.language ?? locale)}
       : {}),
     ...(item.hasClientEvidence
       ? {hasClientEvidence: item.hasClientEvidence}
@@ -1135,8 +1127,8 @@ function normalizePortfolioCaseStudy(
 
   return {
     ...study,
-    title: localCover?.title ?? study.title,
-    summary: localCover?.summary ?? study.summary,
+    title: study.title || localCover?.title || '',
+    summary: study.summary || localCover?.summary || '',
     assets: {
       coverImage:
         imageUrlFromSource(

@@ -1,5 +1,7 @@
 # Hive Vault Arc SEO, AEO, and GEO Program
 
+This is the September full-site research and implementation program. Its observations retain their research dates. For `site/simple-v1`, the [11-page plan](../../docs/simple-v1-site-plan.md) and [active sequence](../simple-v1/README.md) govern scope; this pack is a reference for shared search, measurement and entity contracts. Its page-expansion and external-account tasks are not the active simpler-site backlog.
+
 - Research date: 2026-09-13
 - Website: `https://hivevaultarc.com`
 - Delivery model: nine implementation sprints; three each for SEO, AEO, and GEO

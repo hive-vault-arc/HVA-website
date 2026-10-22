@@ -1,5 +1,7 @@
 # Page-role and overlap decisions
 
+These September decisions describe the larger site's search roles. The [simple-v1 plan](../simple-v1-site-plan.md) supersedes their navigation and page-consolidation targets for the simpler experience. Existing URLs retain their behavior until a reviewed migration; these earlier Keep decisions do not require standalone ARC, Industries, Portfolio or publication indexes in the 11-page core.
+
 Decision date: 2026-09-13. These decisions prevent search-intent overlap; they do not approve unverified public claims.
 
 | Page group | Distinct user need | Distinct intent | Unique utility/evidence | Desired next action | Decision |

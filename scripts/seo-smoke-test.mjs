@@ -75,6 +75,15 @@ async function auditPage(url, requestUrl = url) {
   }
 
   const document = new JSDOM(html, {url: requestUrl}).window.document;
+  const title = document.title.trim();
+  const description = document.querySelector('meta[name="description"]')?.content?.trim() ?? '';
+  if (!title) failures.push('missing page title');
+  if (!description) failures.push('missing meta description');
+  for (const property of ['og:title', 'og:description', 'og:image']) {
+    if (!document.querySelector(`meta[property="${property}"]`)?.content?.trim()) {
+      failures.push(`missing ${property}`);
+    }
+  }
   const canonical = document.querySelector('link[rel="canonical"]')?.href;
   if (!canonical) {
     failures.push('missing canonical');
@@ -91,6 +100,8 @@ async function auditPage(url, requestUrl = url) {
 
   const headings = document.querySelectorAll('h1');
   if (headings.length !== 1) failures.push(`expected one H1, found ${headings.length}`);
+  const mainLandmarks = document.querySelectorAll('main');
+  if (mainLandmarks.length !== 1) failures.push(`expected one main landmark, found ${mainLandmarks.length}`);
 
   const robots = document.querySelector('meta[name="robots"]')?.content ?? '';
   if (/noindex/i.test(robots)) failures.push('sitemap URL is noindex');
@@ -119,7 +130,17 @@ async function auditPage(url, requestUrl = url) {
     }
   }
 
-  return {url, failures};
+  return {
+    url,
+    failures,
+    title,
+    description,
+    language: document.documentElement.lang,
+    alternates: alternates.map((alternate) => ({
+      language: alternate.hreflang,
+      url: normalizedUrl(alternate.href),
+    })),
+  };
 }
 
 async function main() {
@@ -173,6 +194,55 @@ async function main() {
   const failures = results.flatMap((result) =>
     result.failures.map((failure) => `${result.url} — ${failure}`),
   );
+  const failedUrls = new Set(results.filter((result) => result.failures.length).map((result) => result.url));
+  for (const field of ['title', 'description']) {
+    const seen = new Map();
+    for (const result of results) {
+      const value = result[field];
+      if (!value) continue;
+      const previousUrl = seen.get(value);
+      if (previousUrl) {
+        failures.push(`${result.url} — duplicate ${field} with ${previousUrl}`);
+        failedUrls.add(result.url);
+      } else {
+        seen.set(value, result.url);
+      }
+    }
+  }
+
+  const auditedByUrl = new Map(results.map((result) => [normalizedUrl(result.url), result]));
+  const sitemapUrls = new Set(locations.map(normalizedUrl));
+  const fullAudit = targets.length === locations.length;
+  for (const result of results) {
+    if (!result.alternates?.length) continue;
+    const languages = new Set();
+    for (const alternate of result.alternates) {
+      if (languages.has(alternate.language)) {
+        failures.push(`${result.url} — duplicate ${alternate.language} alternate`);
+        failedUrls.add(result.url);
+      }
+      languages.add(alternate.language);
+      if (alternate.language === 'x-default') continue;
+      if (fullAudit && !sitemapUrls.has(alternate.url)) {
+        failures.push(`${result.url} — alternate missing from sitemap: ${alternate.url}`);
+        failedUrls.add(result.url);
+        continue;
+      }
+      const target = auditedByUrl.get(alternate.url);
+      if (!target) continue;
+      const returnLink = target.alternates?.find((entry) => entry.language === result.language);
+      if (returnLink?.url !== normalizedUrl(result.url)) {
+        failures.push(`${result.url} — ${alternate.language} alternate has no ${result.language} return link`);
+        failedUrls.add(result.url);
+      }
+    }
+    if (result.language && !result.alternates.some(
+      (alternate) => alternate.language === result.language && alternate.url === normalizedUrl(result.url),
+    )) {
+      failures.push(`${result.url} — missing ${result.language} self alternate`);
+      failedUrls.add(result.url);
+    }
+  }
 
   console.log(
     JSON.stringify(
@@ -180,8 +250,8 @@ async function main() {
         sitemap: sitemapUrl,
         expectedOrigin,
         audited: targets.length,
-        passed: targets.length - results.filter((result) => result.failures.length).length,
-        failed: results.filter((result) => result.failures.length).length,
+        passed: targets.length - failedUrls.size,
+        failed: failedUrls.size,
         failures,
       },
       null,

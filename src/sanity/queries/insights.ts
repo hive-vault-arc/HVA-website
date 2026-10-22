@@ -263,6 +263,9 @@ const caseStudySummaryFields = `
   "industry": coalesce(industryRef->title, industry),
   "engagementType": coalesce(engagementType, "customSoftware"),
   summary,
+  problem,
+  systemArchitecture,
+  operationalModules,
   deploymentStatus,
   "publishedOutcomes": publishedOutcomes[
     publicationStatus == "approved" &&
@@ -374,6 +377,7 @@ const paginatedInsightFields = `
   _id,
   _type,
   language,
+  "noIndex": seo.noIndex,
   "slug": slug.current,
   title,
   publishedAt,

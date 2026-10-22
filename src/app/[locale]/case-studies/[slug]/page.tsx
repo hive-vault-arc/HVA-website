@@ -3,7 +3,7 @@ import type {AppLocale} from '@/i18n/config';
 import {decodeRouteParam, localizedPath} from '@/i18n/route-manifest';
 import { notFound } from 'next/navigation';
 import JsonLd from '@/components/JsonLd';
-import {getCaseStudyBySlug, getRelatedCaseStudies} from '@/lib/proof';
+import {getCaseStudyBySlug, getRelatedCaseStudies, isSelectedClientCaseStudy} from '@/lib/proof';
 import {
   SITE_URL,
   absoluteUrl,
@@ -11,6 +11,7 @@ import {
   buildLocalizedPageMetadata,
 } from '@/lib/seo';
 import CaseStudyDetail from '@/views/CaseStudyDetail';
+import SimpleCaseStudyDetail from '@/views/SimpleCaseStudyDetail';
 import {translationParams, translationRoutes} from '@/lib/localized-content';
 import {TranslationTargets} from '@/components/localization/TranslationAvailability';
 import {getTranslations} from 'next-intl/server';
@@ -59,32 +60,41 @@ export default async function CaseStudyDetailPage({ params }: Props) {
   const study = await getCaseStudyBySlug(slug, locale).catch(() => null);
   if (!study) notFound();
   const [relatedStudies, tContent] = await Promise.all([
-    getRelatedCaseStudies(study.slug, 3, locale),
+    getRelatedCaseStudies(study.slug, 24, locale),
     getTranslations({locale, namespace: 'DynamicContent'}),
   ]);
+  const pageUrl = absoluteUrl(localizedPath('/case-studies/[slug]', locale, {slug: study.slug}));
+  const articleId = `${pageUrl}#article`;
+  const pageId = `${pageUrl}#webpage`;
 
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
+    '@id': articleId,
     headline: study.title,
     description: study.summary,
-    dateModified: study.lastUpdated,
-    datePublished: study.lastUpdated,
-    author: {
-      '@type': 'Organization',
-      name: 'Hive Vault Arc',
-      url: SITE_URL,
-    },
-    image: absoluteUrl(study.assets.coverImage),
-    mainEntityOfPage: absoluteUrl(
-      localizedPath('/case-studies/[slug]', locale, {slug: study.slug}),
-    ),
+    ...(study.lastUpdated ? {dateModified: study.lastUpdated} : {}),
+    author: {'@id': `${SITE_URL}/#organization`},
+    publisher: {'@id': `${SITE_URL}/#organization`},
+    ...(study.assets.coverImage ? {image: absoluteUrl(study.assets.coverImage)} : {}),
+    mainEntityOfPage: {'@id': pageId},
     inLanguage: locale,
     isPartOf: { '@id': `${SITE_URL}/#website` },
     about: {
       '@type': 'Thing',
-      name: `${study.industry} systems engineering`,
+      name: study.industry,
     },
+  };
+  const webPageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': pageId,
+    name: study.title,
+    description: study.summary,
+    url: pageUrl,
+    inLanguage: locale,
+    isPartOf: {'@id': `${SITE_URL}/#website`},
+    mainEntity: {'@id': articleId},
   };
 
   const breadcrumbSchema = buildLocalizedBreadcrumbSchema(locale, [
@@ -102,8 +112,14 @@ export default async function CaseStudyDetailPage({ params }: Props) {
       <TranslationTargets
         routes={translationRoutes(study, locale, study.slug, '/case-studies/[slug]')}
       />
-      <JsonLd data={[articleSchema, breadcrumbSchema]} />
-      <CaseStudyDetail study={study} relatedStudies={relatedStudies} />
+      <JsonLd data={[articleSchema, webPageSchema, breadcrumbSchema]} />
+      {isSelectedClientCaseStudy(study) ? <SimpleCaseStudyDetail locale={locale} study={study} relatedStudies={relatedStudies.filter(isSelectedClientCaseStudy)} labels={{
+        client: tContent('client'), industry: tContent('industry'), status: tContent('status'),
+        challenge: tContent('caseSections.challenge'), architecture: tContent('caseSections.architecture'),
+        modules: tContent('caseSections.modules'), projectMedia: tContent('caseSections.projectMedia'),
+        outcomes: tContent('caseSections.outcomesTitle'), testimonial: tContent('caseSections.testimonial'),
+        openTestimonial: tContent('openTestimonial'), more: tContent('moreCaseStudies'),
+      }} /> : <CaseStudyDetail study={study} relatedStudies={relatedStudies} />}
     </>
   );
 }

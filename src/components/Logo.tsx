@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import type {MouseEventHandler} from 'react';
 import {useTranslations} from 'next-intl';
 import {Link} from '@/i18n/navigation';
 
@@ -7,6 +8,7 @@ interface LogoProps {
   light?: boolean;
   kind?: 'mark' | 'micro' | 'lockup' | 'wordmark' | 'navigation';
   size?: 'nav' | 'footer';
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
 }
 
 const STACKED_WORDMARK = {
@@ -52,6 +54,7 @@ export default function Logo({
   light = false,
   kind = 'mark',
   size = 'nav',
+  onClick,
 }: LogoProps) {
   const t = useTranslations('Navigation');
   const isAboveFold = size === 'nav';
@@ -64,6 +67,7 @@ export default function Logo({
   return (
     <Link
       href="/"
+      onClick={onClick}
       aria-label={`Hive Vault Arc - ${t('home')}`}
       data-brand-logo={assetShape}
       data-logo-surface={light ? 'dark' : 'light'}

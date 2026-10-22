@@ -4,7 +4,6 @@ import {useEffect, useId, useRef, useState} from 'react';
 import {useLocale, useTranslations} from 'next-intl';
 import {useSearchParams} from 'next/navigation';
 import {ChevronDown, Globe} from '@/components/icons';
-import {Link} from '@/i18n/navigation';
 import {LOCALE_PROFILES, PUBLIC_LOCALES, type AppLocale} from '@/i18n/config';
 import {localizeHref} from '@/i18n/route-manifest';
 import {useTranslationRoutes} from './TranslationAvailability';
@@ -122,10 +121,9 @@ export default function LocaleSwitcher({
           }
 
           return (
-            <Link
+            <a
               key={option.locale}
               href={option.href}
-              locale={option.locale}
               hrefLang={option.locale}
               aria-current={option.active ? 'page' : undefined}
               aria-label={
@@ -142,7 +140,7 @@ export default function LocaleSwitcher({
               }`}
             >
               {option.language}
-            </Link>
+            </a>
           );
         })}
       </div>
@@ -246,11 +244,10 @@ export default function LocaleSwitcher({
                   }
 
                   return (
-                    <Link
+                    <a
                       key={option.locale}
                       role="menuitem"
                       href={option.href}
-                      locale={option.locale}
                       hrefLang={option.locale}
                       aria-current={option.active ? 'page' : undefined}
                       aria-label={
@@ -271,7 +268,7 @@ export default function LocaleSwitcher({
                         </span>
                         <span className="text-[13px] font-semibold leading-5">{option.language}</span>
                       </span>
-                    </Link>
+                    </a>
                   );
                 })}
               </div>

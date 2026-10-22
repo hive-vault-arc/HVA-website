@@ -56,7 +56,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       ...base.openGraph,
       type: 'article',
       publishedTime: isoDate,
-      modifiedTime: isoDate,
       authors: [authorUrl],
       section: report.tag,
       images: [{ url: coverUrl, width: 1200, height: 630, alt: report.coverAlt ?? report.title }],
@@ -86,7 +85,6 @@ export default async function ResearchReportPage({ params }: Props) {
     headline: report.title,
     description: report.summary,
     datePublished: isoDate,
-    dateModified: isoDate,
     image: absoluteUrl(report.coverImage ?? '/Images/media/og-default.webp'),
     inLanguage: locale,
     articleSection: report.tag,
@@ -94,9 +92,9 @@ export default async function ResearchReportPage({ params }: Props) {
     author:
       report.authors.length > 0
         ? report.authors.map((author) => ({
-            '@type': 'Organization',
+            '@type': author.name.startsWith('Hive Vault Arc') ? 'Organization' : 'Person',
             name: author.name,
-            url: SITE_URL,
+            ...(author.name.startsWith('Hive Vault Arc') ? {url: SITE_URL} : {}),
           }))
         : {
             '@type': 'Organization',

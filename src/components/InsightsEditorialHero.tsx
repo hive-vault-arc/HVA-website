@@ -2,6 +2,7 @@
 
 import {ArrowDown, ArrowUpRight} from '@/components/icons';
 import {Link} from '@/i18n/navigation';
+import styles from '@/components/studio/studio.module.css';
 
 type SecondaryLink = {
   readonly label: string;
@@ -34,36 +35,32 @@ export default function InsightsEditorialHero({
   titleId = 'insight-index-title',
 }: Readonly<Props>) {
   return (
-    <section className="insight-index-v2__hero" aria-labelledby={titleId}>
-      <div className="site-frame-wide insight-index-v2__hero-grid">
-        <div className="insight-index-v2__hero-title">
-          <p className="insight-index-v2__hero-eyebrow">{eyebrow}</p>
+    <section className={styles.editorialHero} aria-labelledby={titleId}>
+      <div className={`${styles.frame} ${styles.editorialHeroGrid}`}>
+        <div className={styles.editorialHeroTitle}>
+          <p className={styles.innerEyebrow}>{eyebrow}</p>
           <h1
             id={titleId}
-            aria-label={
-              headlineItalic ? `${headline} ${headlineItalic}` : headline
-            }
+            aria-label={headlineItalic || headline}
           >
-            {headline}
-            {headlineItalic ? <span>{headlineItalic}</span> : null}
+            {headlineItalic || headline}
           </h1>
         </div>
 
-        <div className="insight-index-v2__hero-context">
+        <div className={styles.editorialHeroContext}>
           <p>{description}</p>
-          <div className="insight-index-v2__hero-stat">
+          <div className={styles.editorialHeroStat}>
             <strong>{total.toString().padStart(2, '0')}</strong>
-            <span>{countLabel}</span>
+            <span>{countLabel.replace(new RegExp(`^${total}\\s*`), '')}</span>
           </div>
-          <div className="insight-index-v2__hero-links">
-            <Link href={browseHref} className="insight-index-v2__browse-link">
+          <div className={styles.editorialHeroLinks}>
+            <Link href={browseHref}>
               {browseLabel}
               <ArrowDown aria-hidden="true" />
             </Link>
             {secondaryLink ? (
               <Link
                 href={secondaryLink.href}
-                className="insight-index-v2__secondary-link"
               >
                 {secondaryLink.label}
                 <ArrowUpRight aria-hidden="true" />

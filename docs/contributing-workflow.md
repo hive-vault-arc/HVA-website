@@ -1,65 +1,67 @@
 # Website contribution workflow
 
-This repository uses a short, reviewable path from focused work to production.
+The simpler website is developed on `site/simple-v1`, while the current full website remains deployed from `main`. Keep the full version maintained on `site/enterprise-maintained` so it can be used again when the company is ready.
 
 ## Branches
 
-| Branch | Purpose | Merge destination |
+| Branch | Purpose | Integration during the redesign |
 | --- | --- | --- |
-| `feature/seo-analytics-foundations` | Cookie consent, analytics, Bing Webmaster Tools, and SEO/GEO/AEO work. | `staging` |
-| `feature/ui-ux-improvements` | Deliberate UI, UX, accessibility, responsive, and interaction improvements. | `staging` |
-| `staging` | Shared integration and contributor-review environment. It must remain deployable. | `main` |
-| `main` | Production source of truth. | None |
+| `site/simple-v1` | The simpler 11-page website. | Review simpler-site work here; upstream `origin/site/simple-v1`. |
+| `site/enterprise-maintained` | The preserved full website and its ongoing maintenance. | Review full-site fixes here; upstream `origin/site/enterprise-maintained`. |
+| `main` | Current deployed full website. | Keep it in place until the simpler version is ready and its release is requested. |
+| `staging` | Existing integration/release branch. | Use only for an agreed release after the two development versions have been reviewed. |
 
-Create any additional work as a narrowly named feature branch from the latest `staging`, then open a pull request back into `staging`.
+The preservation point for the full website is `304f39c45c597cda7201babd40fd536f611523ac`. The active scope is the [simpler site plan](simple-v1-site-plan.md). The earlier feature-to-staging sequence does not require redesign work to start from `staging` or merge into production while it is unfinished.
 
-## Required delivery path
+## Local work
 
-1. Start from current `staging`.
-2. Make one coherent change in a feature branch.
-3. Open a pull request into `staging`; never push a feature directly to `main`.
-4. Address contributor feedback and ensure the **Verify website** check is green.
-5. Merge into `staging` after review.
-6. Test the staging deployment and open a release pull request from `staging` to `main`.
-7. Merge to `main` only when the release is approved and the same checks are green.
+Use the `site-simple-v1` checkout for the simpler version and the `site-enterprise-maintained` checkout for the full version. Each is a separate working directory; check the branch before edits.
 
-## Pull-request expectations
-
-- Keep changes small enough to review meaningfully.
-- State user impact, affected routes, CMS/schema changes, environment-variable changes, and rollback considerations.
-- Use the pull-request checklist for every change.
-- Include screenshots or a preview URL for visual work.
-- Do not commit `.env*`, tokens, API keys, DNS values, or credentials.
-- Do not make unrelated formatting or refactoring changes in a focused pull request.
-
-## Required checks
-
-The repository workflow runs the following on pull requests into `staging` and `main` and on pushes to either branch:
-
-```text
-npm run lint
-npm test
-npm run i18n:validate -- fr
-npm run i18n:validate -- es
-npm run i18n:validate -- ar
-npm run check:webp
-npm run build
+```powershell
+git branch --show-current
+git status --short
 ```
 
-Run the relevant commands locally before requesting review. Browser and visual checks remain required for layout, interaction, navigation, and responsive changes.
+Preserve uncommitted work. Fetch before updating from the remote, inspect incoming changes, and use a fast-forward pull when the checkout is ready. Do not reset, force-push or switch a dirty checkout to move between versions. Focused feature branches may branch from the relevant version and return to that version through review.
 
-## GitHub and deployment settings to configure
+## Maintaining both versions
 
-Configure these in the company GitHub organization after this workflow is merged:
+Shared corrections include company facts, service definitions, reviewed legal requirements, approved translations, consent behavior and integration contracts. Compare the two implementations and transfer only the applicable change. A reviewed isolated commit may be cherry-picked; otherwise adapt the patch and verify it in each version.
 
-1. Protect `main` and `staging`.
-2. Require pull requests before merging; disallow direct pushes and force pushes.
-3. Require the **Verify website / Lint, test, and build** status check.
-4. Require at least one approving review for `staging` and two for `main` when the contributor group supports it.
-5. Require branches to be current before merge, and dismiss stale approvals after new commits.
-6. Restrict production deployment in Vercel to `main`; use preview deployments for pull requests and staging work.
-7. Keep production secrets only in the company Vercel project and rotate any credential that was ever exposed outside a secure secret manager.
+Track the originating change and its corresponding commit or review on the other branch. Record when a change applies to only one version. Avoid merging all simpler-site work into the full branch, since page consolidation and reference-driven layouts belong to the simpler experience.
+
+## Review expectations
+
+- Keep each change coherent and reviewable.
+- Describe its effect on pages, routes, CMS contracts, environment variables and the other maintained version.
+- Include screenshots or a local preview for visual changes.
+- Preserve approved facts, real client evidence and legal text.
+- Keep secrets and local environment files out of commits.
+- Keep unrelated formatting and refactoring out of focused changes.
+
+The company GitHub organization and company hosting project remain the only delivery destinations.
+
+## Verification
+
+Documentation-only changes require link and factual consistency checks plus `git diff --check`.
+
+For implementation changes, use the relevant checks in [AGENTS.md](../AGENTS.md). The existing CI workflow runs on pull requests and pushes to `staging` and `main`; it does not currently list the two site branches as triggers. Therefore, run the appropriate checks locally while developing either version.
+
+Frontend release verification includes lint, type checking, route-contract drift, tests, all three translated message catalogs, WebP assets and a production build. Studio changes also require its lint, formatting, type generation and build checks. Existing brand, responsive and publishing-evidence debt is reported separately by CI; a reported baseline is not a passed migration.
+
+Visual changes also require browser and responsive review. Route changes must preserve localized destinations, metadata, canonicals, sitemap behavior and functioning contact paths.
+
+## Eventual production change
+
+1. Complete and review the simpler site's core pages and shared shell.
+2. Reconcile applicable maintenance fixes between the two versions.
+3. Confirm the full version is preserved locally and on `origin/site/enterprise-maintained`.
+4. Verify the proposed release and its production integrations, legal requirements and rollback path.
+5. When the user requests the production change, use the agreed release review to bring the ready simpler version to `main`.
+6. Continue maintaining both versions and review any later return to the full website as a separate release.
+
+No development task, documentation update or feature-branch push implies approval to change production, hosting settings or CMS publication.
 
 ## Rollback
 
-If a production release causes a regression, use Vercel's approved production rollback first, then open a corrective pull request. Do not rewrite `main` history or force-push to undo a release.
+Preserve the full version before any eventual cutover. Use the company hosting project's approved rollback path and a corrective reviewed change if a release regresses. Do not rewrite `main` history or force-push to undo a release.

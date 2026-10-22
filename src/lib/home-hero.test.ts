@@ -232,4 +232,22 @@ describe('buildHomeHeroProof', () => {
       result.trustedPartners.every((partner) => partner.hrefLocale === 'en'),
     ).toBe(true);
   });
+
+  it('does not link Spanish and Arabic fallback logos to missing localized case studies', () => {
+    for (const locale of ['es', 'ar'] as const) {
+      const result = buildHomeHeroProof([], locale);
+      expect(result.trustedPartners).toHaveLength(3);
+      expect(result.trustedPartners.every((partner) => !partner.href)).toBe(true);
+    }
+  });
+
+  it('uses each published study language for its client link', () => {
+    const result = buildHomeHeroProof([
+      study({
+        language: 'en', slug: 'immoworld', clientName: 'ImmoWorld',
+        assets: {coverImage: '/cover.webp', logoLabel: 'ImmoWorld', clientLogo: '/logo.webp'},
+      }),
+    ], 'fr');
+    expect(result.trustedPartners.find((partner) => partner.name === 'ImmoWorld')).toMatchObject({hrefLocale: 'en'});
+  });
 });

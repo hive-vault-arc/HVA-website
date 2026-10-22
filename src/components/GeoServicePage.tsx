@@ -111,7 +111,7 @@ export default function GeoServicePage({
   return (
     <>
       <JsonLd data={[professionalServiceSchema, breadcrumbSchema]} />
-      <main className="geo-article-page">
+      <div className="geo-article-page">
         <section className="geo-article-hero">
           <div className="site-frame-narrow geo-article-hero-inner">
             <nav className="geo-article-breadcrumb" aria-label={copy.breadcrumb}>
@@ -251,7 +251,7 @@ export default function GeoServicePage({
             </div>
           </div>
         </section>
-      </main>
+      </div>
       <FaqSection faqs={faqs.items} heading={faqs.heading} />
     </>
   );

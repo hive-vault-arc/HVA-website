@@ -26,6 +26,7 @@ export function isRecoverableSanityFetchError(error: unknown): boolean {
       candidate?.isNetworkError ||
       candidate?.message?.toLowerCase().includes('fetch failed') ||
       candidate?.message?.toLowerCase().includes('socket timed out') ||
+      /failed to pars(?:e|ed) response body as json/i.test(candidate?.message ?? '') ||
       candidate?.message
         ?.toLowerCase()
         .includes('expected signal ("abortsignal') ||

@@ -106,9 +106,10 @@ describe('localization catalogs', () => {
     ['Arabic', ar],
   ] as const)('keeps ICU variable names aligned in %s', (_name, catalog) => {
     const english = new Map(stringEntries(en));
+    const localized = new Map(stringEntries(catalog));
 
     for (const [path, value] of english) {
-      expect(variables(new Map(stringEntries(catalog)).get(path) ?? ''), path).toEqual(variables(value));
+      expect(variables(localized.get(path) ?? ''), path).toEqual(variables(value));
     }
   });
 });

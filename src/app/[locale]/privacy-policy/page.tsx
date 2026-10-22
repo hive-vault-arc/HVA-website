@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import type {AppLocale} from "@/i18n/config";
 import {buildStaticRouteMetadata} from "@/i18n/metadata";
 import PrivacyPolicy from '@/views/PrivacyPolicy';
+import styles from '@/components/studio/studio.module.css';
 import JsonLd from '@/components/JsonLd';
 import {SITE_URL, absoluteUrl, buildBreadcrumbSchema} from '@/lib/seo';
 import {localizedPath} from '@/i18n/route-manifest';
@@ -28,7 +29,6 @@ export default async function PrivacyPolicyPage({params}: PageProps) {
     description: tMeta('description'),
     url: absoluteUrl(path),
     inLanguage: locale,
-    dateModified: '2026-09-03',
     publisher: {
       '@type': 'Organization',
       '@id': `${SITE_URL}/#organization`,
@@ -44,7 +44,7 @@ export default async function PrivacyPolicyPage({params}: PageProps) {
   return (
     <>
       <JsonLd data={[webPageSchema, breadcrumbSchema]} />
-      <PrivacyPolicy />
+      <div className={styles.policyPage}><PrivacyPolicy /></div>
     </>
   );
 }

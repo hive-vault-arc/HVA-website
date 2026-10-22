@@ -1,5 +1,7 @@
 # Nine-sprint implementation status
 
+This is the dated implementation record for the inherited full-site SEO program. It is not the current simple-v1 page backlog or a fresh production measurement. The [11-page plan](../simple-v1-site-plan.md) and [active sequence](../../sprints/simple-v1/README.md) govern the new version; shared canonical, consent, entity and localization contracts remain relevant.
+
 Updated: 2026-09-13
 
 Status meanings: `implemented` means code or repository artifact is complete locally; `in review` requires company, subject-matter, legal, or native-language approval; `blocked external` requires a company-controlled external account or post-deployment data.

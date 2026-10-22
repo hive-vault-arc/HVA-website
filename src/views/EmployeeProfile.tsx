@@ -20,7 +20,7 @@ export default function EmployeeProfileView({profile, relatedProfiles}: Props) {
   const education = profile.education[0];
 
   return (
-    <main className="founder-profile-page">
+    <div className="founder-profile-page">
       <section className="founder-profile-hero">
         <div className="site-frame founder-profile-hero__layout">
           <figure
@@ -145,6 +145,6 @@ export default function EmployeeProfileView({profile, relatedProfiles}: Props) {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

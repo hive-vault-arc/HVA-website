@@ -1,327 +1,103 @@
-'use client';
-
-import React, { Suspense, lazy, useEffect } from 'react';
-import {useLocale, useTranslations} from 'next-intl';
+import Image from 'next/image';
 import {Link} from '@/i18n/navigation';
-import dynamic from 'next/dynamic';
-import ResponsiveMedia from '@/components/media/ResponsiveMedia';
-import CloudEcosystemRail from '@/components/media/CloudEcosystemRail';
+import {ArrowRight} from '@/components/icons';
+import StudioContactForm from '@/components/studio/StudioContactForm';
+import StudioHero from '@/components/studio/StudioHero';
+import StudioChallengeVisual from '@/components/studio/StudioChallengeVisual';
+import StudioArcVisual from '@/components/studio/StudioArcVisual';
+import StudioCaseStudies from '@/components/studio/StudioCaseStudies';
+import StudioTeam from '@/components/studio/StudioTeam';
+import StudioInsights from '@/components/studio/StudioInsights';
+import StudioScrollExperience from '@/components/studio/StudioScrollExperience';
+import {STUDIO_COPY} from '@/data/studio-home';
+import {getStudioServiceEntries, STUDIO_SERVICE_SLUGS, studioServiceHref} from '@/data/studio-services';
 import type {AppLocale} from '@/i18n/config';
-import {SEMANTIC_MEDIA} from '@/lib/semantic-media';
-import {
-  ArrowRight,
-  BarChart3,
-  Bot,
-  Cloud,
-  Eye,
-  Layers,
-  MessageSquare,
-} from '@/components/icons';
-import { motion } from 'framer-motion';
-import HomeDecisionGuide from '../components/HomeDecisionGuide';
-import TrustedByBar from '../components/TrustedByBar';
-import LogoLoop from '../components/LogoItem';
-import HeroSlider from '../components/ui/HeroSlider';
-import type { InsightsCarouselItem } from '../components/InsightsCarousel';
-import type { CaseStudyShowcaseSummary, ClientEvidenceSummary } from '../lib/proof';
-import type { HomeTrustedPartner } from '../lib/home-hero';
-import {
-  SiCloudflare,
-  SiDocker,
-  SiGithub,
-  SiGooglecloud,
-  SiKubernetes,
-  SiNextdotjs,
-  SiOpenai,
-  SiPostgresql,
-  SiPython,
-  SiReact,
-  SiSupabase,
-  SiTerraform,
-} from 'react-icons/si';
+import type {CaseStudyShowcaseSummary, ClientEvidenceSummary} from '@/lib/proof';
+import type {HomeTrustedPartner} from '@/lib/home-hero';
+import type {EmployeeProfile} from '@/lib/employee-profiles';
+import type {InsightListingItem} from '@/lib/insight-pagination';
+import styles from '@/components/studio/studio.module.css';
 
-const WorldMapDemo = lazy(() =>
-  import('../components/world-map-demo').then((module) => ({ default: module.WorldMapDemo }))
-);
-const InsightsCarousel = dynamic(() => import('../components/InsightsCarousel'), {
-  loading: () => <div className="h-[520px] bg-[#F1F3F6]" aria-hidden="true" />,
-});
+const SERVICE_IMAGES = ['/Images/semantic/home/plan-operating-model-v1.webp', '/Images/semantic/home/build-operating-model-v1.webp', '/Images/semantic/home/run-operating-model-v1.webp'];
 
-type HomeProps = {
-  insightsCarouselItems: InsightsCarouselItem[];
-  clientEvidence: ClientEvidenceSummary[];
-  caseStudies: CaseStudyShowcaseSummary[];
-  trustedPartners: HomeTrustedPartner[];
-};
+export default function Home({locale, caseStudies, clientQuote, trustedPartners, founderCount, teamMembers, insights, serviceEntries}: {locale: AppLocale; caseStudies: CaseStudyShowcaseSummary[]; clientQuote?: ClientEvidenceSummary; trustedPartners: HomeTrustedPartner[]; founderCount: number; teamMembers: EmployeeProfile[]; insights: InsightListingItem[]; serviceEntries: ReturnType<typeof getStudioServiceEntries>}) {
+  const copy = STUDIO_COPY[locale];
+  const servicesBySlug = new Map(serviceEntries.map(service => [service.slug, service]));
+  return <div className={styles.page} data-skip-site-motion>
+    <StudioHero copy={copy.hero} phases={copy.services.groups.map(group => group.label)} serviceCount={copy.services.groups.flatMap(group => group.links).length} founderCount={founderCount} trustedPartners={trustedPartners} caseStudies={caseStudies} workCopy={copy.work} locale={locale} />
 
-const Home: React.FC<HomeProps> = ({
-  insightsCarouselItems,
-  clientEvidence,
-  caseStudies,
-  trustedPartners,
-}) => {
-  const t = useTranslations('Home');
-  const locale = useLocale() as AppLocale;
+    <StudioScrollExperience>
+    <section id="challenges" className={`${styles.section} ${styles.challenges}`} aria-labelledby="studio-challenges-title">
+      <div className={styles.splitIntro}><span className={styles.chapterNumber} aria-hidden="true">01 /</span><h2 id="studio-challenges-title">{copy.challenges.title}</h2><p>{copy.challenges.intro}</p></div>
+      <ol className={styles.challengeList}>{copy.challenges.items.map((item, index) => <li key={item.title} className={styles.challenge} data-studio-reveal data-challenge-phase data-active={index === 0 ? 'true' : undefined}>
+        <span className={styles.challengeNumber} aria-hidden="true">0{index + 1}</span>
+        <div className={styles.challengeText}><h3>{item.title}</h3><p>{item.description}</p><a className={styles.textLink} href={`#studio-service-${index}`} data-service-link>{item.action}<ArrowRight size={18} aria-hidden="true" /></a></div>
+      </li>)}</ol>
+      <div className={styles.challengeSignalBridge} data-studio-reveal><StudioChallengeVisual /></div>
+    </section>
 
-  useEffect(() => {
-    document.body.classList.add('home-page');
-    return () => {
-      document.body.classList.remove('home-page');
-    };
-  }, []);
-
-  const arcPhases = t.raw('arcPhases') as Array<{
-    phase: string;
-    title: string;
-    discipline: string;
-    summary: string;
-    proof: string;
-  }>;
-
-  const capabilityConfig = [
-    {
-      icon: <MessageSquare className="w-5 h-5" strokeWidth={1.5} />,
-    },
-    {
-      icon: <Eye className="w-5 h-5" strokeWidth={1.5} />,
-    },
-    {
-      icon: <Bot className="w-5 h-5" strokeWidth={1.5} />,
-    },
-    {
-      icon: <Layers className="w-5 h-5" strokeWidth={1.5} />,
-    },
-    {
-      icon: <Cloud className="w-5 h-5" strokeWidth={1.5} />,
-    },
-    {
-      icon: <BarChart3 className="w-5 h-5" strokeWidth={1.5} />,
-    },
-  ];
-  const capabilityCopy = t.raw('capabilityPillars') as Array<{
-    title: string;
-    desc: string;
-    imageAlt: string;
-    details: string[];
-  }>;
-  const capabilityPillars = capabilityConfig.map((config, index) => ({
-    ...config,
-    ...capabilityCopy[index],
-  }));
-  const capabilityGroups = [
-    {
-      media: SEMANTIC_MEDIA.home.strategyTechnology,
-      pillarIndexes: [0, 1],
-    },
-    {
-      media: SEMANTIC_MEDIA.home.aiSoftware,
-      pillarIndexes: [2, 3],
-    },
-    {
-      media: SEMANTIC_MEDIA.home.cloudOperations,
-      pillarIndexes: [4, 5],
-    },
-  ];
-
-  const techLogos = [
-    { node: <SiReact />, title: 'React', href: 'https://react.dev' },
-    { node: <SiNextdotjs />, title: 'Next.js', href: 'https://nextjs.org' },
-    { node: <SiPython />, title: 'Python', href: 'https://www.python.org' },
-    { node: <SiOpenai />, title: 'OpenAI', href: 'https://openai.com' },
-    { node: <SiSupabase />, title: 'Supabase', href: 'https://supabase.com' },
-    { node: <SiDocker />, title: 'Docker', href: 'https://www.docker.com' },
-    { node: <SiKubernetes />, title: 'Kubernetes', href: 'https://kubernetes.io' },
-    { node: <SiTerraform />, title: 'Terraform', href: 'https://www.terraform.io' },
-    { node: <SiGooglecloud />, title: 'Google Cloud', href: 'https://cloud.google.com' },
-    { node: <SiCloudflare />, title: 'Cloudflare', href: 'https://www.cloudflare.com' },
-    { node: <SiGithub />, title: 'GitHub', href: 'https://www.github.com' },
-    { node: <SiPostgresql />, title: 'Postgres', href: 'https://www.postgresql.org' },
-  ];
-
-  return (
-    <div className="h-full home-reference">
-      <HeroSlider />
-      <TrustedByBar partners={trustedPartners} />
-      <HomeDecisionGuide evidence={clientEvidence} caseStudies={caseStudies} />
-
-      {/* Company identity and capability system */}
-      <section className="home-identity-section" aria-labelledby="home-identity-title">
-        <div className="site-frame-wide home-identity-intro">
-          <div className="home-identity-copy">
-            <div className="home-identity-eyebrow">
-              <span aria-hidden="true" />
-              <p>{t('identityEyebrow')}</p>
-            </div>
-            <h2 id="home-identity-title">
-              {t('identityTitle')}<br />{' '}
-              <em>{t('identityAccent')}</em>
-            </h2>
-            <p className="home-identity-description">
-              {t('identityDescription')}
-            </p>
-            <p className="home-identity-disciplines">
-              {t('identityDisciplines')}
-            </p>
-          </div>
-
-          <div className="home-identity-mosaic">
-            {capabilityGroups.map((group, groupIndex) => (
-              <motion.article
-                key={group.media.altKey}
-                className={`home-capability-group home-capability-group--${groupIndex + 1}`}
-                initial={{ opacity: 0, y: 18 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{
-                  duration: 0.52,
-                  delay: groupIndex * 0.06,
-                  ease: [0.32, 0.72, 0, 1],
-                }}
-              >
-                <figure className="home-capability-group__media">
-                  <ResponsiveMedia
-                    media={group.media}
-                    locale={locale}
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 44vw, 29vw"
-                    className="home-capability-group__image"
-                  />
-                  {groupIndex === 2 ? (
-                    <CloudEcosystemRail
-                      ariaLabel={
-                        locale === 'fr'
-                          ? 'Technologies cloud et de conteneurs'
-                          : 'Cloud and container technologies'
-                      }
-                    />
-                  ) : null}
-                </figure>
-
-                <div className="home-capability-group__content">
-                  {group.pillarIndexes.map((pillarIndex) => {
-                    const pillar = capabilityPillars[pillarIndex];
-
-                    return (
-                      <div key={pillar.title} className="home-capability-card">
-                        <span className="home-capability-card__icon" aria-hidden="true">
-                          {pillar.icon}
-                        </span>
-                        <div className="home-capability-card__copy">
-                          <p className="home-capability-card__label">
-                            {t('pillar')} 0{pillarIndex + 1}
-                          </p>
-                          <h3>{pillar.title}</h3>
-                          <p>{pillar.desc}</p>
-                        </div>
-                        <Link
-                          href="/capabilities"
-                          className="home-capability-card__link"
-                          aria-label={`${pillar.title}: ${t('ourCapabilities')}`}
-                        >
-                          <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                        </Link>
-                      </div>
-                    );
-                  })}
-                </div>
-              </motion.article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="home-arc-loop-section">
-        <div className="home-arc-loop-shell">
-          <div className="home-arc-loop-feature">
-            <motion.div
-              className="home-arc-loop-copy"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.55 }}
-            >
-              <div className="home-arc-loop-mark">
-                <i aria-hidden="true" />
-                <span>{t('arcLoop')}</span>
-              </div>
-              <h2 aria-label={t('arcTitle')}>
-                <span>{t('arcTitleLine1')}</span>
-                <span>{t('arcTitleLine2')}</span>
-                <span>{t('arcTitleLine3')}</span>
-              </h2>
-              <p>
-                {t('arcDescription')}
-              </p>
-              <Link href="/capabilities" className="home-arc-loop-link">
-                {t('ourCapabilities')}
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </motion.div>
-
-            <motion.figure
-              className="home-arc-loop-media"
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.55, delay: 0.08 }}
-            >
-              <div className="home-arc-loop-visual">
-                <ResponsiveMedia
-                  media={SEMANTIC_MEDIA.home.arcOperatingModel}
-                  locale={locale}
-                  sizes="(min-width: 1041px) 42vw, 100vw"
-                />
-              </div>
-              <figcaption className="home-arc-loop-visual-card">
-                <span>{t('featuredStory')}</span>
-                <strong>{t('featuredStoryTitle')}</strong>
-              </figcaption>
-            </motion.figure>
-          </div>
-
-          <div className="home-arc-loop-phases">
-            {arcPhases.map((phase) => (
-              <article key={phase.phase} className="home-arc-loop-phase" data-phase={phase.phase}>
-                <div className="home-arc-loop-phase-head">
-                  <span>{phase.phase}</span>
-                  <em>{phase.discipline}</em>
-                </div>
-                <div className="home-arc-loop-phase-title">
-                  <h3>{phase.title}</h3>
-                </div>
-                <strong>{phase.proof}</strong>
-                <p>{phase.summary}</p>
-              </article>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      <InsightsCarousel items={insightsCarouselItems} />
-
-      <div className="home-technology-marquee relative overflow-hidden py-10 text-[#1A2535] md:py-12">
-        <LogoLoop
-          logos={techLogos}
-          speed={55}
-          direction="left"
-          logoHeight={42}
-          gap={44}
-          pauseOnHover
-          scaleOnHover
-          fadeOut
-          fadeOutColor="#FFFFFF"
-          ariaLabel={t('technologyPartners')}
-        />
+    <section id="services" className={`${styles.section} ${styles.servicesSection}`} aria-labelledby="studio-services-title">
+      <div className={`${styles.frame} ${styles.serviceInner}`}>
+      <div className={styles.serviceRail}>
+        <span className={styles.chapterNumber} aria-hidden="true">02 /</span>
+        <h2 id="studio-services-title">{copy.services.title}</h2>
+        <p className={styles.serviceIntro}>{copy.services.intro}</p>
       </div>
+      <div className={styles.servicesGrid}>{copy.services.groups.map((service, index) => <article id={`studio-service-${index}`} key={service.label} className={styles.serviceCard} data-service-phase data-active={index === 0 ? 'true' : undefined}>
+        <div className={styles.serviceCopy}>
+          <div className={styles.serviceIdentity}><span className={styles.serviceOrdinal} aria-hidden="true">0{index + 1}</span><span className={styles.serviceLabel}>{service.label}</span></div>
+          <h3>{service.title}</h3><p>{service.description}</p>
+          <div className={styles.serviceLinks} data-service-links>{service.links.map((label, linkIndex) => {
+            const entry = servicesBySlug.get(STUDIO_SERVICE_SLUGS[index][linkIndex]);
+            return <Link key={label} href={entry ? studioServiceHref(entry) : '/capabilities'}>{label}<ArrowRight size={16} aria-hidden="true" /></Link>;
+          })}</div>
+        </div>
+        <div className={styles.serviceMedia}><Image src={SERVICE_IMAGES[index]} alt="" fill sizes="(min-width: 1280px) 50vw, (min-width: 768px) 48vw, 90vw" /><span className={styles.serviceMediaNote}>{copy.services.visualNote}</span></div>
+      </article>)}</div>
+      </div>
+    </section>
 
-      <section className="home-global-reach-section">
-        <Suspense fallback={<div className="h-[220px] w-full bg-[#F8E9C8] sm:h-[300px] md:h-[360px]" aria-hidden="true" />}>
-          <WorldMapDemo />
-        </Suspense>
-      </section>
-
+    <div className={styles.proofBand}>
+      <StudioCaseStudies copy={copy.work} caseStudies={caseStudies} locale={locale} />
+      <div className={`${styles.frame} ${styles.proofHandoff}`} data-studio-reveal>
+        <div className={styles.proofHandoffRoute} aria-hidden="true"><bdi dir="ltr">03</bdi><span className={styles.proofHandoffTrack} /><bdi dir="ltr">04</bdi></div>
+        {clientQuote ? <figure className={styles.proofQuote}>
+          <blockquote lang={clientQuote.documentLanguage} dir="auto">{clientQuote.quoteExcerpt}</blockquote>
+          <figcaption><strong>{clientQuote.clientName}</strong><span>{copy.work.testimonial} · <bdi dir="ltr">{clientQuote.documentLanguage.toUpperCase()}</bdi></span></figcaption>
+        </figure> : <p>{copy.work.bridge}</p>}
+        <div className={styles.proofHandoffActions}>
+          {clientQuote && <Link className={styles.proofQuoteLink} href={`/case-studies/${clientQuote.slug}`}>{copy.work.open}<ArrowRight size={18} aria-hidden="true" /></Link>}
+          <a href="#approach" className={styles.proofHandoffLink}><span className={styles.proofHandoffLinkText}>{copy.work.bridgeAction}</span><span aria-hidden="true"><ArrowRight size={22} /></span></a>
+        </div>
+      </div>
     </div>
-  );
-};
 
-export default Home;
+    <section id="approach" className={`${styles.frame} ${styles.section} ${styles.approach}`} aria-labelledby="studio-approach-title">
+      <div className={styles.sectionHeading}><span className={styles.chapterNumber} aria-hidden="true">04 /</span><h2 id="studio-approach-title">{copy.approach.title}</h2><p>{copy.approach.intro}</p>
+        <StudioArcVisual phases={copy.approach.phases.map(phase => phase.name)} />
+      </div>
+      <div className={styles.processStack} data-process-timeline>
+        <span className={styles.processTrack} data-process-track aria-hidden="true" />
+        {copy.approach.phases.map((phase, index) => <article className={styles.phase} data-process-phase data-active={index === 0 ? 'true' : undefined} key={phase.name}>
+          <div className={styles.phaseIdentity}><span className={styles.phaseNumber} aria-hidden="true">0{index + 1}</span><span className={styles.phaseName}>{phase.name}</span></div>
+          <div className={styles.phaseContent}><h3>{phase.title}</h3><p>{phase.description}</p><ul className={styles.phaseFocus}>{phase.focus.map(point => <li key={point}>{point}</li>)}</ul></div>
+        </article>)}</div>
+    </section>
+
+    <StudioTeam copy={copy.team} people={teamMembers} />
+    <StudioInsights copy={copy.insights} items={insights} locale={locale} />
+
+    <section className={`${styles.frame} ${styles.section} ${styles.split}`} aria-labelledby="studio-faq-title">
+      <div className={styles.splitIntro}><span className={styles.chapterNumber} aria-hidden="true">07 /</span><h2 id="studio-faq-title">{copy.faq.title}</h2><p>{copy.faq.intro}</p></div>
+      <div className={styles.faqItems}>{copy.faq.items.map((item, index) => <details key={item.question} name="studio-faq" open={index === 0}><summary>{item.question}<span className={styles.faqToggle} aria-hidden="true" /></summary><p>{item.answer}</p></details>)}</div>
+    </section>
+
+    <section id="contact" className={`${styles.section} ${styles.contact}`} aria-labelledby="studio-contact-title">
+      <div className={`${styles.frame} ${styles.split} ${styles.contactFrame}`}>
+        <div className={styles.splitIntro}><span className={styles.chapterNumber} aria-hidden="true">08 /</span><h2 id="studio-contact-title">{copy.contact.title}</h2><p>{copy.contact.description}</p><p className={styles.contactNote}>{copy.contact.note}</p><ul className={styles.callTopics}>{copy.contact.topics.map(topic => <li key={topic}>{topic}</li>)}</ul></div>
+        <StudioContactForm copy={copy.contact} locale={locale} />
+      </div>
+    </section>
+    </StudioScrollExperience>
+  </div>;
+}

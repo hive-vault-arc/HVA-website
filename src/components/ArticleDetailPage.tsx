@@ -258,8 +258,8 @@ export default function ArticleDetailPage({
 
           {/* Title */}
           <motion.h1
-            className="mb-6 text-[clamp(2.4rem,11cqw,3.8rem)] leading-tight tracking-tight text-[#1A2535] md:text-6xl"
-            style={{ fontFamily: 'var(--font-headline)' }}
+            className="mb-6 text-[clamp(2.25rem,9cqw,3.8rem)] font-semibold leading-[1.1] tracking-tight text-[#1A2535] md:text-6xl"
+            style={{ fontFamily: 'var(--font-body)' }}
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -461,8 +461,6 @@ export default function ArticleDetailPage({
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: 'easeOut' }}
-                itemScope
-                itemType="https://schema.org/Article"
               >
                 {children}
               </motion.article>
@@ -610,15 +608,8 @@ export default function ArticleDetailPage({
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {relatedItems.map((item, i) => (
-                <motion.div
-                  key={item.href}
-                  className="group"
-                  initial={isCaseStudy ? false : {opacity: 0, y: 8}}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.05 }}
-                  transition={{ duration: 0.5, delay: i * 0.08, ease: 'easeOut' }}
-                >
+              {relatedItems.map((item) => (
+                <div key={item.href} className="group">
                   <Link href={item.href} className="block">
                     <div className="aspect-[4/3] mb-5 overflow-hidden bg-[#E8EBF0] relative">
                       {getRelatedItemImage(item) ? (
@@ -656,7 +647,7 @@ export default function ArticleDetailPage({
                       {item.title}
                     </h3>
                   </Link>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
@@ -667,7 +658,7 @@ export default function ArticleDetailPage({
       {bottomCta && (
         <BottomCTA
           variant={bottomCta.variant}
-          revealImmediately={isCaseStudy}
+          revealImmediately
           headline={bottomCta.headline}
           subtext={bottomCta.subtext}
           primaryLabel={editorial?.primaryCta?.label ?? bottomCta.primaryLabel}

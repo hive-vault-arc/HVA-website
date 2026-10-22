@@ -1,5 +1,7 @@
 # Indexable inventory
 
+This inventory records the inherited full-site indexing policy, not the simpler site's page count. The [11-page plan](../simple-v1-site-plan.md) governs the target experience. Existing routes, sitemap entries and canonical behavior remain in place until any consolidation is implemented and reviewed; optional retained content remains additional to the core.
+
 Decision date: 2026-09-13  
 Canonical origin: `https://hivevaultarc.com`  
 Policy owner: Company leadership  

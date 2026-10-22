@@ -1,5 +1,7 @@
 # Translation Guide — H.V.A Website
 
+This is historical March 2026 localization research. Its initial architecture assessment and installation steps are superseded by the implemented next-intl configuration and four public locales. The [simple-v1 plan](docs/simple-v1-site-plan.md) governs page scope; use `src/i18n/config.ts`, `src/i18n/routing.ts` and the current localized content helpers for implementation.
+
 > Research date: March 2026. Covers the current codebase state, the full i18n library landscape, what top-tier companies use, and a concrete recommendation for this project.
 
 ---

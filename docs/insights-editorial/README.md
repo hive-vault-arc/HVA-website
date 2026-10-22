@@ -1,5 +1,7 @@
 # Insights Editorial Rebuild
 
+This is an inherited editorial implementation record for the larger website. The owner's October 19 [requirements brief](../simple-v1-requirements.md) now requires retaining the published Insights library alongside the [simpler site's 11-page core](../simple-v1-site-plan.md). A unified Insights entry can preserve Blog, News, Perspectives and Reports without four separate top-level menu items. This historical pack does not authorize its proposed rewrites or migrations. Its implementation observations and blockers below retain their original context; verify them against current source before reuse.
+
 ## Review State
 
 This pack is local-only. It does not authorize publishing, unpublishing, deleting,

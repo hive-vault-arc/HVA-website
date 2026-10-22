@@ -55,6 +55,34 @@ describe('employee profile resilience', () => {
     expect(profiles[0]?.responsibilityTag).toContain('Strategy');
   });
 
+  it.each([
+    {locale: 'es' as const, type: 'cofundador', position: 'Cofundador y CEO'},
+    {locale: 'ar' as const, type: 'مؤسس مشارك', position: 'شريك مؤسس والرئيس التنفيذي'},
+  ])('keeps the $locale published founder visible with its CMS role', async ({locale, type, position}) => {
+    vi.mocked(sanityFetch).mockResolvedValueOnce([{
+      language: locale,
+      translationStatus: 'approved',
+      visibility: locale === 'es' ? 'publicado' : 'نشرت',
+      slug: locale === 'es' ? 'khalid-chalhi' : 'خالد-شلهي',
+      name: 'Khalid Chalhi',
+      profileType: type,
+      position,
+      summary: 'Approved localized founder summary',
+      story: 'Approved localized founder story',
+      profileImage: '/Images/team/khalid-chalhi-founder-2026.webp',
+      profileImageAlt: 'Founder portrait',
+      featuredOnAbout: true,
+      displayOrder: 10,
+      expertise: [],
+      experience: [],
+      education: [],
+    }] as never);
+
+    const profiles = await getFeaturedEmployeeProfiles(locale);
+    expect(profiles).toHaveLength(1);
+    expect(profiles[0]).toMatchObject({profileType: 'coFounder', position});
+  });
+
   it('keeps individual founder pages available during a CMS timeout', async () => {
     const profile = await getEmployeeProfileBySlug('ali-amrani', 'en');
 

@@ -6,16 +6,25 @@ This repository is the public Hive Vault Arc website. It is a multilingual Next.
 
 The website is a reusable production system. Do not treat it as a disposable visual prototype.
 
+## Current Branch Scope
+
+`site/simple-v1` develops the simpler website defined in `docs/simple-v1-site-plan.md`: five main pages, three client case studies and three policy pages. This plan governs information architecture, navigation and content consolidation on this branch. Existing routes remain available until their migration is explicitly reviewed.
+
+`main` keeps the deployed full website until the simpler version is finished and its release is requested. `site/enterprise-maintained` preserves and maintains the full version. Review shared factual, legal, localization and integration fixes for both versions; do not automatically transfer the simpler layout into the full site.
+
+The active implementation sequence is `sprints/simple-v1/README.md`. Inherited full-site, SEO, editorial and locale sprint packs are reference material. Their page-expansion instructions and execution orders do not override the simpler site plan. See `docs/README.md` for document status and `docs/contributing-workflow.md` for branch handling.
+
 ## Read Order
 
 Before changing public UI, read these files in order:
 
 1. `AGENTS.md`
-2. `DESIGN.md`
-3. `docs/AGENT_LESSONS.md`
-4. `docs/design-system/page-family-migration.md`
-5. The active file under `sprints/website-consistency/`
-6. `docs/brand-copy-checklist.md` when changing public copy
+2. `docs/simple-v1-site-plan.md`
+3. `DESIGN.md`
+4. `docs/AGENT_LESSONS.md`
+5. `docs/design-system/page-family-migration.md`
+6. `sprints/simple-v1/README.md`
+7. `docs/brand-copy-checklist.md` when changing public copy
 
 Canonical external brand assets live in:
 
@@ -76,6 +85,8 @@ The external brand package is read-only from this project. Copy an approved asse
 
 Run the checks appropriate to the change:
 
+Documentation-only work requires link and consistency checks plus `git diff --check`; it does not require rebuilding unchanged application code. Implementation work uses the relevant checks below.
+
 ```powershell
 npm run audit:brand
 npm run audit:responsive
@@ -111,3 +122,13 @@ Stop and ask before:
 - changing public claims, metrics, testimonials, founders, contact details, or legal text;
 - adding a new full-page visual system that conflicts with `DESIGN.md`;
 - performing any CMS mutation, publication, deployment, or external account action that was not explicitly requested.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

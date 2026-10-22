@@ -1,5 +1,7 @@
 # Localization content inventory
 
+This is the earlier full-site localization baseline, including its recorded CMS counts and French draft state. It is not a current dataset inventory or the simpler site's page count. The [11-page plan](../simple-v1-site-plan.md) governs target content; current locale availability comes from `src/i18n/config.ts` and approved CMS records. The new homepage presentation copy is in `src/data/studio-home.ts` for all four public locales.
+
 ## Git-owned content
 
 - Global layout: metadata defaults, Organization/WebSite/Navigation JSON-LD, accessibility states.
@@ -26,9 +28,9 @@
 
 Total baseline: 23 published English documents.
 
-The localization baseline now contains 23 corresponding unpublished French drafts and 23
-translation metadata documents. These drafts are workflow scaffolds, not approved translations.
-They must remain unavailable to public queries until their copy and slugs have completed review.
+The recorded localization baseline contained 23 corresponding unpublished French drafts and 23
+translation metadata documents. Draft scaffolds are not approved translations. Public queries
+must use the actual approved publication state after copy and slug review.
 
 ## Preserved values
 

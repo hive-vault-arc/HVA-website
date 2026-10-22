@@ -45,12 +45,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       index: !article.seo?.noIndex,
       follow: !article.seo?.noIndex,
     },
-    authors: [{ name: 'Hive Vault Arc Research Team', url: authorUrl }],
+    authors: [{ name: 'Hive Vault Arc', url: authorUrl }],
     openGraph: {
       ...base.openGraph,
       type: 'article',
       publishedTime: isoDate,
-      modifiedTime: isoDate,
       authors: [authorUrl],
       section: article.category,
       images: [{ url: coverUrl, width: 1200, height: 630, alt: article.coverAlt ?? article.title }],
@@ -80,7 +79,6 @@ export default async function NewsArticlePage({ params }: Props) {
     headline: article.title,
     description: article.summary,
     datePublished: isoDate,
-    dateModified: isoDate,
     image: absoluteUrl(article.coverImage ?? '/Images/media/og-default.webp'),
     inLanguage: locale,
     articleSection: article.category,
@@ -109,11 +107,7 @@ export default async function NewsArticlePage({ params }: Props) {
       ),
     },
     isPartOf: { '@id': `${SITE_URL}/#website` },
-    about: [
-      { '@type': 'Thing', name: 'NVIDIA RTX Spark' },
-      { '@type': 'Thing', name: 'local AI agents' },
-      { '@type': 'Thing', name: 'private local LLMs' },
-    ],
+    about: article.tags.map(name => ({'@type': 'Thing', name})),
   };
 
   const breadcrumbSchema = buildLocalizedBreadcrumbSchema(locale, [

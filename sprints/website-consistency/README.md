@@ -1,5 +1,7 @@
 # Website Consistency Sprint Pack
 
+This is the inherited full-site visual program. On `site/simple-v1`, its page-family scope and execution order are superseded by the [11-page plan](../../docs/simple-v1-site-plan.md) and [active sequence](../simple-v1/README.md). Keep its shared design lessons as references; do not rebuild standalone ARC, Industries or Portfolio pages as required simpler-site work. The original program below describes the larger version.
+
 ## Objective
 
 Bring the complete Hive Vault Arc website under one controlled visual system without changing the meaning of the content, public routes, CMS contracts, or brand identity.
@@ -9,8 +11,8 @@ Bring the complete Hive Vault Arc website under one controlled visual system wit
 1. `AGENTS.md`
 2. `DESIGN.md`
 3. `docs/AGENT_LESSONS.md`
-4. `docs/design-system/page-family-migration.md`
-5. The active sprint file in this directory
+4. The original full-site family descriptions in this pack's sprint files
+5. The relevant historical sprint file in this directory
 
 ## Sprint Order
 

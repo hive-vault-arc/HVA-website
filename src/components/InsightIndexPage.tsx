@@ -411,7 +411,7 @@ export default function InsightIndexPage({
   };
 
   return (
-    <main className="insight-index-v2" data-collection={collectionType}>
+    <div className="insight-index-v2" data-collection={collectionType}>
       <InsightsEditorialHero
         eyebrow={eyebrow}
         headline={headline}
@@ -552,6 +552,6 @@ export default function InsightIndexPage({
         secondaryLabel={resolvedBottomCta.secondaryLabel}
         secondaryHref={resolvedBottomCta.secondaryHref}
       />
-    </main>
+    </div>
   );
 }

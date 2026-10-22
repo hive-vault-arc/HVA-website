@@ -199,7 +199,7 @@ function ResearchReportSidebar({ report }: { report: ResearchReport }) {
         </p>
         <Link
           href="/contact"
-          className="inline-flex items-center gap-1.5 text-xs font-bold tracking-widest uppercase text-[#1A2535] transition-all hover:gap-3 hover:text-[#E8A838]"
+          className="inline-flex min-h-11 items-center gap-2 border-b border-white/70 text-xs font-bold uppercase tracking-widest text-white transition-colors duration-150 hover:border-[#E8A838] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8A838]"
           style={{ fontFamily: 'var(--font-body)' }}
         >
           {t('reportSidebar.cta')}

@@ -1,41 +1,21 @@
 import type { Metadata } from 'next';
 import type {AppLocale} from '@/i18n/config';
 import {buildStaticRouteMetadata} from '@/i18n/metadata';
-import About from '@/views/About';
-import FaqSection from '@/components/FaqSection';
+import SimpleAbout from '@/views/SimpleAbout';
+import StudioFaqSection from '@/components/studio/StudioFaqSection';
 import JsonLd from '@/components/JsonLd';
 import {getLocalizedFaqs} from '@/i18n/faqs';
 import { getFeaturedEmployeeProfiles, type EmployeeProfile } from '@/lib/employee-profiles';
+import {getPublishedHomeCaseStudyProof, isSelectedClientCaseStudy, type CaseStudyShowcaseSummary} from '@/lib/proof';
 import {
-  BRAND_SEARCH_VARIANTS,
-  CONTACT_EMAIL,
-  CONTACT_PHONE_E164S,
   GLOBAL_KEYWORDS,
   SITE_URL,
-  SOCIAL_PROFILE_URLS,
   absoluteUrl,
   buildLocalizedBreadcrumbSchema,
   mergeKeywords,
 } from '@/lib/seo';
 import {localizedPath} from '@/i18n/route-manifest';
-import {translationSlug} from '@/lib/localized-content';
 import {getTranslations} from 'next-intl/server';
-import {getCaseStudyBySlug} from '@/lib/proof';
-import {
-  getApprovedOrganizationProfile,
-  resolveOrganizationFacts,
-} from '@/lib/organization-profile';
-
-const FEATURED_PROOF_SLUG =
-  'premium-advice-training-keepzen-digital-academy';
-
-async function getFeaturedProof(locale: AppLocale) {
-  const englishProof = await getCaseStudyBySlug(FEATURED_PROOF_SLUG, 'en');
-  if (locale === 'en') return englishProof;
-
-  const localizedSlug = translationSlug(englishProof, locale);
-  return localizedSlug ? getCaseStudyBySlug(localizedSlug, locale) : undefined;
-}
 
 function foundersFrom(teamMembers: EmployeeProfile[]): EmployeeProfile[] {
   return teamMembers.filter((member) => member.profileType === 'coFounder');
@@ -103,56 +83,36 @@ export async function generateMetadata({params}: PageProps): Promise<Metadata> {
 
 export default async function Page({params}: PageProps) {
   const {locale} = await params;
-  const [teamMembers, aboutFaqs, featuredCaseStudy, tMeta, tNav, approvedOrganization] = await Promise.all([
+  const [teamMembers, aboutFaqs, tMeta, tNav, homeProof] = await Promise.all([
     getFeaturedEmployeeProfiles(locale),
     getLocalizedFaqs(locale, 'about'),
-    getFeaturedProof(locale),
     getTranslations({locale, namespace: 'Metadata.pages.about'}),
     getTranslations({locale, namespace: 'Navigation'}),
-    getApprovedOrganizationProfile(),
+    getPublishedHomeCaseStudyProof(locale),
   ]);
-  const organizationFacts = resolveOrganizationFacts(approvedOrganization, locale, {
-    brandName: 'Hive Vault Arc',
-    legalName: 'Hive Vault Arc',
-    canonicalWebsite: SITE_URL,
-    description: tMeta('description'),
-    publicEmail: CONTACT_EMAIL,
-    publicTelephones: CONTACT_PHONE_E164S,
-    serviceAreas: ['Morocco', 'France', 'Europe', 'MENA'],
-    sameAs: SOCIAL_PROFILE_URLS,
-  });
   const founders = foundersFrom(teamMembers);
+  const caseStudies: CaseStudyShowcaseSummary[] = homeProof.caseStudies.items.filter(isSelectedClientCaseStudy).slice(0, 3).map(study => ({
+    slug: study.slug,
+    title: study.title,
+    clientName: study.clientName,
+    industry: study.industry,
+    summary: study.summary,
+    sourceLocale: study.language ?? homeProof.caseStudies.sourceLocale,
+    assets: {coverImage: study.assets.coverImage, coverAlt: study.assets.coverAlt, clientLogo: study.assets.clientLogo, clientLogoAlt: study.assets.clientLogoAlt},
+  }));
   const leadershipPeople = founders.map((member) => personSchema(member, locale));
   const pageUrl = absoluteUrl(localizedPath('/aboutus', locale));
 
   const aboutPageSchema = {
     '@context': 'https://schema.org',
     '@type': 'AboutPage',
+    '@id': `${pageUrl}#webpage`,
     name: tMeta('title'),
     url: pageUrl,
     description: tMeta('description'),
     inLanguage: locale,
-    mainEntity: {
-      '@type': ['Organization', 'ProfessionalService'],
-      '@id': absoluteUrl('/#organization'),
-      name: organizationFacts.brandName,
-      alternateName: BRAND_SEARCH_VARIANTS,
-      description: organizationFacts.description,
-      founder: leadershipPeople,
-      founders: leadershipPeople,
-      employee: teamMembers.map((member) => personSchema(member, locale)),
-      member: leadershipPeople,
-      foundingLocation: 'Tangier, Morocco',
-      areaServed: organizationFacts.serviceAreas,
-      knowsAbout: [
-        'Technology Transformation',
-        'AI Engineering',
-        'Strategy Consulting',
-        'Software Development',
-        'Cloud Infrastructure',
-        'Managed Operations',
-      ],
-    },
+    isPartOf: {'@id': absoluteUrl('/#website')},
+    mainEntity: {'@id': absoluteUrl('/#organization')},
   };
 
   const breadcrumbSchema = buildLocalizedBreadcrumbSchema(locale, [
@@ -163,16 +123,8 @@ export default async function Page({params}: PageProps) {
   return (
     <>
       <JsonLd data={[aboutPageSchema, ...leadershipPeople, breadcrumbSchema]} />
-      <About
-        teamMembers={teamMembers}
-        featuredCaseStudy={featuredCaseStudy}
-        organizationFacts={{
-          email: organizationFacts.publicEmail,
-          telephones: organizationFacts.publicTelephones,
-          sameAs: organizationFacts.sameAs,
-        }}
-      />
-      <FaqSection faqs={aboutFaqs.items} heading={aboutFaqs.heading} />
+      <SimpleAbout locale={locale} teamMembers={teamMembers} caseStudies={caseStudies} />
+      <StudioFaqSection faqs={aboutFaqs.items} heading={aboutFaqs.heading} />
     </>
   );
 }

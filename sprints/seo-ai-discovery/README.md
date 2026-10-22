@@ -1,5 +1,7 @@
 # SEO and AI Discovery Sprint Pack
 
+This May full-site pack is historical reference material. The [11-page plan](../../docs/simple-v1-site-plan.md) and [active sequence](../simple-v1/README.md) govern `site/simple-v1`; do not execute the original full-site order or external tasks merely because they appear below.
+
 Last updated: 2026-05-24
 
 ## Purpose

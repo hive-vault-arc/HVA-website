@@ -7,11 +7,21 @@ import {
   getResilientPaginatedInsightCollection,
   getResilientPaginatedInsights,
 } from '@/lib/resilient-insights';
-import {absoluteUrl, buildLocalizedBreadcrumbSchema} from '@/lib/seo';
+import {absoluteUrl, buildLocalizedBreadcrumbSchema, SITE_URL} from '@/lib/seo';
 import {localizedPath} from '@/i18n/route-manifest';
 import {getTranslations} from 'next-intl/server';
+import type {InsightListingItem} from '@/lib/insight-pagination';
 
 type PageProps = {params: Promise<{locale: AppLocale}>};
+
+function insightUrl(item: InsightListingItem) {
+  const slug = decodeURIComponent(item.href.split('/').filter(Boolean).at(-1) ?? '');
+  const route = item.type === 'blog' ? '/blog/[slug]' :
+    item.type === 'news-article' ? '/insights/news-articles/[slug]' :
+    item.type === 'perspective' ? '/insights/perspectives/[slug]' :
+    item.type === 'research-report' ? '/insights/research-reports/[slug]' : '/case-studies/[slug]';
+  return absoluteUrl(localizedPath(route, item.sourceLocale, {slug}));
+}
 
 export async function generateMetadata({params}: PageProps): Promise<Metadata> {
   const {locale} = await params;
@@ -34,6 +44,11 @@ export default async function InsightsPage({params}: PageProps) {
     description: tMeta('description'),
     url: absoluteUrl(localizedPath('/insights', locale)),
     inLanguage: locale,
+    isPartOf: {'@id': `${SITE_URL}/#website`},
+    mainEntity: {
+      '@type': 'ItemList', numberOfItems: initialPage.total,
+      itemListElement: initialPage.items.map((item, index) => ({'@type': 'ListItem', position: index + 1, name: item.title, url: insightUrl(item)})),
+    },
   };
   const breadcrumbSchema = buildLocalizedBreadcrumbSchema(locale, [
     {name: tNav('home'), pathname: '/'},

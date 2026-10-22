@@ -1,5 +1,7 @@
 # Localized route manifest
 
+This is an inventory of inherited route identifiers, not the target page list. The [simple-v1 plan](../simple-v1-site-plan.md) defines the 11-page core and its simpler navigation labels. Current runtime authority is `src/i18n/config.ts`, `src/i18n/routing.ts` and `src/i18n/route-manifest.ts`; English, French, Spanish and Arabic are configured as public locales. This table shows English and French equivalents; see the [Spanish and Arabic manifest](es-ar-route-manifest.md) for the other two.
+
 The route key and internal pathname are canonical implementation identifiers. English and French
 public pathnames are generated through `src/i18n/routing.ts`.
 
@@ -28,6 +30,7 @@ public pathnames are generated through `src/i18n/routing.ts`.
 | researchDetail | `/insights/research-reports/[slug]` | `/fr/publications/rapports-de-recherche/[french-slug]` | Sanity |
 | contact | `/contact` | `/fr/contact` | Git |
 | privacy | `/privacy-policy` | `/fr/politique-de-confidentialite` | Git / legal review |
+| cookiePolicy | `/cookie-policy` | `/fr/politique-de-cookies` | Git / legal review |
 | legal | `/mentions-legales` | `/fr/mentions-legales` | Git / legal review |
 | links | `/links` | `/fr/liens` | Git |
 | aiAgentsTangier | `/ai-agents-tangier` | `/fr/agents-ia-tanger` | Git |
@@ -43,4 +46,4 @@ public pathnames are generated through `src/i18n/routing.ts`.
 - `/services-digitaux-tanger` → `/fr/services-digitaux-tanger`
 - Legacy `/fr/capabilities/**` → `/fr/expertises/**`
 - Legacy service aliases preserve locale when a French equivalent exists.
-- `/ar/**` and `/es/**` return a controlled 404.
+- Spanish and Arabic use their configured localized paths. Missing or unapproved dynamic translations retain localized not-found behavior; do not restore the historical blanket `/ar/**` or `/es/**` 404 rule.

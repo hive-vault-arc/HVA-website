@@ -20,6 +20,7 @@ import {localizedAlternates, localizedPath} from '@/i18n/route-manifest';
 import {arabic, manrope, newsreader} from '@/lib/fonts';
 import {PUBLIC_LOCALES, isPublicLocale, localeProfile} from '@/i18n/config';
 import {withoutCrawlerOnlyMessages} from '@/i18n/client-messages';
+import {STUDIO_COPY} from '@/data/studio-home';
 import {
   getApprovedOrganizationProfile,
   resolveOrganizationFacts,
@@ -226,9 +227,8 @@ export default async function RootLayout({children, params}: LocaleLayoutProps) 
     : undefined;
 
   setRequestLocale(locale);
-  const [messages, tNavigation, tMetadata, approvedOrganization, pageOptimizations] = await Promise.all([
+  const [messages, tMetadata, approvedOrganization, pageOptimizations] = await Promise.all([
     getMessages(),
-    getTranslations({locale, namespace: 'Navigation'}),
     getTranslations({locale, namespace: 'Metadata.pages'}),
     getApprovedOrganizationProfile(),
     getPageOptimizationsForLocale(locale),
@@ -281,7 +281,6 @@ export default async function RootLayout({children, params}: LocaleLayoutProps) 
     image: absoluteUrl(DEFAULT_OG_IMAGE_PATH),
     description: organizationFacts.description,
     founder: leadershipPeople,
-    founders: leadershipPeople,
     employee: leadershipPeople,
     member: leadershipPeople,
     foundingLocation: {
@@ -294,18 +293,12 @@ export default async function RootLayout({children, params}: LocaleLayoutProps) 
       addressRegion: 'Tanger-Tetouan-Al Hoceima',
       addressCountry: 'MA',
     },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: 35.7595,
-      longitude: -5.834,
-    },
     areaServed: [
       { '@type': 'Country', name: 'Morocco' },
       { '@type': 'Country', name: 'France' },
       { '@type': 'AdministrativeArea', name: 'North Africa' },
       { '@type': 'AdministrativeArea', name: 'Europe' },
     ],
-    serviceType: organizationFacts.serviceAreas,
     email: publicEmail,
     telephone: publicTelephones,
     contactPoint: publicTelephones.map((telephone) => ({
@@ -322,7 +315,6 @@ export default async function RootLayout({children, params}: LocaleLayoutProps) 
         '@type': 'WebAPI',
         name: 'Hive Vault Arc machine-readable company profile',
         url: absoluteUrl('/ai/company'),
-        inLanguage: 'en',
       },
       {
         '@type': 'DigitalDocument',
@@ -370,30 +362,29 @@ export default async function RootLayout({children, params}: LocaleLayoutProps) 
   };
 
   const schemaSiteLinks = [
-    {pathname: '/' as const, name: tNavigation('home'), description: tMetadata('home.description')},
     {
       pathname: '/capabilities' as const,
-      name: tNavigation('capabilities'),
+      name: STUDIO_COPY[locale].nav.services,
       description: tMetadata('capabilities.description'),
     },
     {
-      pathname: '/industries' as const,
-      name: tNavigation('industries'),
-      description: tMetadata('industries.description'),
+      pathname: '/case-studies' as const,
+      name: STUDIO_COPY[locale].nav.work,
+      description: tMetadata('caseStudies.description'),
     },
     {
       pathname: '/aboutus' as const,
-      name: tNavigation('whoWeAre'),
+      name: STUDIO_COPY[locale].nav.about,
       description: tMetadata('about.description'),
     },
     {
       pathname: '/insights' as const,
-      name: tNavigation('insights'),
+      name: STUDIO_COPY[locale].nav.insights,
       description: tMetadata('insights.description'),
     },
     {
       pathname: '/contact' as const,
-      name: tNavigation('contact'),
+      name: STUDIO_COPY[locale].nav.action,
       description: tMetadata('contact.description'),
     },
   ];
@@ -402,24 +393,17 @@ export default async function RootLayout({children, params}: LocaleLayoutProps) 
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     '@id': absoluteUrl('/#website'),
-    url: absoluteUrl(localizedPath('/', locale)),
+    url: absoluteUrl('/'),
     name: 'Hive Vault Arc',
     alternateName: BRAND_SEARCH_VARIANTS,
-    description: organizationCopy.siteDescription,
-    inLanguage: locale,
+    description: ORGANIZATION_COPY.en.siteDescription,
+    inLanguage: PUBLIC_LOCALES,
     publisher: {
       '@id': absoluteUrl('/#organization'),
     },
     about: {
       '@id': absoluteUrl('/#organization'),
     },
-    hasPart: schemaSiteLinks.map((item) => ({
-      '@type': 'WebPage',
-      name: item.name,
-      description: item.description,
-      url: absoluteUrl(localizedPath(item.pathname, locale)),
-      inLanguage: locale,
-    })),
   };
 
   const navigationSchema = {

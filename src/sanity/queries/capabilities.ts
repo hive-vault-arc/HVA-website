@@ -6,6 +6,8 @@ const imageFields = `
   hotspot
 `;
 
+const publishedVisibilityFilter = '(!defined(visibility) || visibility in ["published", "publicado", "نشرت"])';
+
 const editorialFields = `
   editorialFormat,
   topics,
@@ -86,7 +88,7 @@ export const allCapabilityProfilesQuery = defineQuery(`
   *[
     _type == "capability" &&
     language == $locale &&
-    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4)) &&
+    ($preview == true || (translationStatus == "approved" && ${publishedVisibilityFilter} && count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4)) &&
     defined(slug.current)
   ]
   | order(displayOrder asc, title asc) {
@@ -98,7 +100,7 @@ export const featuredCapabilityProfilesQuery = defineQuery(`
   *[
     _type == "capability" &&
     language == $locale &&
-    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4)) &&
+    ($preview == true || (translationStatus == "approved" && ${publishedVisibilityFilter} && count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4)) &&
     defined(slug.current) &&
     featuredOnCapabilities == true
   ] | order(displayOrder asc, title asc) {
@@ -110,7 +112,7 @@ export const capabilityProfileBySlugQuery = defineQuery(`
   *[
     _type == "capability" &&
     language == $locale &&
-    ($preview == true || (translationStatus == "approved" && (!defined(visibility) || visibility == "published") && count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4)) &&
+    ($preview == true || (translationStatus == "approved" && ${publishedVisibilityFilter} && count(*[_type == "translation.metadata" && references(^._id)][0].translations[value->translationStatus == "approved"]) == 4)) &&
     slug.current == $slug
   ][0] {
     ${capabilityFields}

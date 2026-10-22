@@ -126,7 +126,7 @@ export function buildHomeHeroProof(
         logo: presentation.logo,
         logoAlt: study.assets.clientLogoAlt ?? `${study.clientName} logo`,
         href: `/case-studies/${study.slug}`,
-        ...(hrefLocale ? {hrefLocale} : {}),
+        ...(study.language || hrefLocale ? {hrefLocale: study.language ?? hrefLocale} : {}),
         surface: presentation.surface,
       },
     ];
@@ -137,10 +137,11 @@ export function buildHomeHeroProof(
     if (seenClients.has(clientKey)) continue;
 
     seenClients.add(clientKey);
-    trustedPartners.push({
-      ...fallbackPartner,
-      ...(hrefLocale ? {hrefLocale} : {}),
-    });
+    trustedPartners.push(
+      hrefLocale === 'es' || hrefLocale === 'ar'
+        ? {name: fallbackPartner.name, logo: fallbackPartner.logo, logoAlt: fallbackPartner.logoAlt, surface: fallbackPartner.surface}
+        : {...fallbackPartner, ...(hrefLocale ? {hrefLocale: 'en'} : {})},
+    );
   }
 
   trustedPartners.sort(

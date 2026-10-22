@@ -63,7 +63,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       ...base.openGraph,
       type: 'article',
       publishedTime: isoDate,
-      modifiedTime: isoDate,
       authors: [authorUrl],
       section: perspective.tag,
       images: [{ url: coverUrl, width: 1200, height: 630, alt: perspective.coverAlt }],
@@ -96,15 +95,14 @@ export default async function PerspectivePage({ params }: Props) {
     headline: perspective.title,
     description: perspective.summary,
     datePublished: isoDate,
-    dateModified: isoDate,
     image: absoluteUrl(perspective.coverImage),
     inLanguage: locale,
     articleSection: perspective.tag,
     keywords: perspective.keywords.join(', '),
     author: perspective.authors.map((author) => ({
-      '@type': 'Organization',
+      '@type': author.name.startsWith('Hive Vault Arc') ? 'Organization' : 'Person',
       name: author.name,
-      url: SITE_URL,
+      ...(author.name.startsWith('Hive Vault Arc') ? {url: SITE_URL} : {}),
     })),
     publisher: {
       '@type': 'Organization',
@@ -125,11 +123,7 @@ export default async function PerspectivePage({ params }: Props) {
       ),
     },
     isPartOf: { '@id': `${SITE_URL}/#website` },
-    about: [
-      { '@type': 'Thing', name: 'AI workflow automation strategy' },
-      { '@type': 'Thing', name: 'AI implementation readiness' },
-      { '@type': 'Thing', name: 'workflow automation before AI' },
-    ],
+    about: perspective.keywords.map((keyword) => ({'@type': 'Thing', name: keyword})),
   };
 
   const breadcrumbSchema = buildLocalizedBreadcrumbSchema(locale, [

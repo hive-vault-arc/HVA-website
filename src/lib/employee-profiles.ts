@@ -339,6 +339,9 @@ function sortProfiles(profiles: EmployeeProfile[]): EmployeeProfile[] {
 function normalizeEmployeeProfile(profile: SanityEmployeeProfile): EmployeeProfile {
   return {
     ...profile,
+    profileType: ['coFounder', 'cofundador', 'مؤسس مشارك'].includes(profile.profileType ?? '')
+      ? 'coFounder'
+      : profile.profileType,
     profileImage: imageUrlFromSource(profile.profileImage),
     profileImageAlt: profile.profileImageAlt ?? profile.name,
     responsibilityTag: profile.responsibilityTag ?? '',
@@ -364,6 +367,8 @@ function applyLeadershipIdentity(
   profile: EmployeeProfile,
   locale: AppLocale,
 ): EmployeeProfile {
+  if (locale !== 'en' && locale !== 'fr') return profile;
+
   const identity = LEADERSHIP_IDENTITY[
     profile.slug as keyof typeof LEADERSHIP_IDENTITY
   ];

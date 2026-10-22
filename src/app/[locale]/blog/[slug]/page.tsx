@@ -47,12 +47,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       index: !post.seo?.noIndex,
       follow: !post.seo?.noIndex,
     },
-    authors: [{ name: 'Hive Vault Arc Research Team', url: authorUrl }],
+    authors: post.authors.map(author => ({name: author.name, url: authorUrl})),
     openGraph: {
       ...base.openGraph,
       type: 'article',
       publishedTime: isoDate,
-      modifiedTime: isoDate,
       authors: [authorUrl],
       section: post.category,
       images: [{ url: coverUrl, width: 1200, height: 630, alt: post.coverAlt ?? post.title }],
@@ -80,14 +79,14 @@ export default async function BlogPostPage({ params }: Props) {
 
   const articleSchema = {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': 'BlogPosting',
     headline: post.title,
     description: post.excerpt,
-    author: {
-      '@type': 'Person',
-      name: 'Hive Vault Arc Research Team',
+    author: post.authors.map(author => ({
+      '@type': author.name.startsWith('Hive Vault Arc') ? 'Organization' : 'Person',
+      name: author.name,
       url: authorUrl,
-    },
+    })),
     publisher: {
       '@type': 'Organization',
       name: 'Hive Vault Arc',
@@ -101,7 +100,6 @@ export default async function BlogPostPage({ params }: Props) {
       },
     },
     datePublished: isoDate,
-    dateModified: isoDate,
     image: absoluteUrl(post.coverImage),
     inLanguage: locale,
     mainEntityOfPage: {
@@ -109,10 +107,7 @@ export default async function BlogPostPage({ params }: Props) {
       '@id': absoluteUrl(localizedPath('/blog/[slug]', locale, {slug: post.slug})),
     },
     keywords: post.tags.join(', '),
-    about: {
-      '@type': 'Organization',
-      '@id': `${SITE_URL}/#organization`,
-    },
+    about: post.tags.map(name => ({'@type': 'Thing', name})),
     articleSection: post.category,
   };
   const breadcrumbSchema = buildLocalizedBreadcrumbSchema(locale, [

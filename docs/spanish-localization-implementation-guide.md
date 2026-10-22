@@ -1,5 +1,7 @@
 # Spanish localization implementation guide
 
+For `site/simple-v1`, the [11-page plan](simple-v1-site-plan.md) governs target content. Spanish is already configured as public in the current runtime; the not-yet-implemented state below is historical planning context.
+
 > **Superseded for new work:** Read [the Spanish and Arabic localization specification](./localization/es-ar-localization-spec.md), [route manifest](./localization/es-ar-route-manifest.md), and [Spanish style guide](./localization/spanish-style-guide.md). This guide is retained as historical French-to-Spanish planning context; it contains two-locale implementation assumptions that do not match the current website.
 
 > Audience: the Hive Vault Arc co-founder or engineer adding Spanish to the website and Sanity Studio.

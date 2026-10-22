@@ -562,7 +562,7 @@ export default function CaseStudyDetail({
   const heroCoverImage = study.assets.coverImage;
 
   return (
-    <main
+    <div
       className="case-study-detail case-study-template"
       data-engagement-type={study.engagementType}
     >
@@ -658,6 +658,6 @@ export default function CaseStudyDetail({
         <RelatedCaseStudies studies={relatedStudies} />
         <CaseStudyCta />
       </article>
-    </main>
+    </div>
   );
 }

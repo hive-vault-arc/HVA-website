@@ -16,6 +16,9 @@ type TrustedByBarProps = {
 type TrustedPartnerLogoProps = {
   partner: HomeTrustedPartner;
   caseStudyLabel: string;
+  className?: string;
+  sizes?: string;
+  eager?: boolean;
 };
 
 function partnerSlug(name: string): string {
@@ -41,7 +44,7 @@ function partnerSlug(name: string): string {
     .replace(/(^-|-$)/g, '');
 }
 
-function TrustedPartnerLogo({partner, caseStudyLabel}: TrustedPartnerLogoProps) {
+export function TrustedPartnerLogo({partner, caseStudyLabel, className: presentationClassName, sizes = '(max-width: 640px) 42vw, 220px', eager = false}: TrustedPartnerLogoProps) {
   const monochromeRef = useRef<HTMLSpanElement>(null);
   const colorRef = useRef<HTMLSpanElement>(null);
   const pointerActiveRef = useRef(false);
@@ -103,6 +106,7 @@ function TrustedPartnerLogo({partner, caseStudyLabel}: TrustedPartnerLogoProps) 
   const className = [
     'home-trusted-logo',
     partner.surface === 'dark' ? 'home-trusted-logo--dark' : 'home-trusted-logo--light',
+    presentationClassName,
   ].join(' ');
 
   const interactionProps = {
@@ -136,7 +140,8 @@ function TrustedPartnerLogo({partner, caseStudyLabel}: TrustedPartnerLogoProps) 
           alt=""
           fill
           unoptimized={isSanityCdnImage(partner.logo)}
-          sizes="(max-width: 640px) 42vw, 220px"
+          sizes={sizes}
+          loading={eager ? 'eager' : 'lazy'}
         />
       </span>
       <span
@@ -149,7 +154,8 @@ function TrustedPartnerLogo({partner, caseStudyLabel}: TrustedPartnerLogoProps) 
           alt=""
           fill
           unoptimized={isSanityCdnImage(partner.logo)}
-          sizes="(max-width: 640px) 42vw, 220px"
+          sizes={sizes}
+          loading={eager ? 'eager' : 'lazy'}
         />
       </span>
     </span>

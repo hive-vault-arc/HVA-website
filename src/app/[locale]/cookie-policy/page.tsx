@@ -3,6 +3,7 @@ import type {AppLocale} from '@/i18n/config';
 import {getTranslations} from 'next-intl/server';
 import JsonLd from '@/components/JsonLd';
 import CookiePolicy from '@/views/CookiePolicy';
+import styles from '@/components/studio/studio.module.css';
 import {buildStaticRouteMetadata} from '@/i18n/metadata';
 import {localizedPath} from '@/i18n/route-manifest';
 import {absoluteUrl, buildBreadcrumbSchema, SITE_URL} from '@/lib/seo';
@@ -28,7 +29,6 @@ export default async function CookiePolicyPage({params}: CookiePolicyPageProps) 
     description: tMeta('description'),
     url: absoluteUrl(path),
     inLanguage: locale,
-    dateModified: '2026-09-03',
     publisher: {'@type': 'Organization', '@id': `${SITE_URL}/#organization`},
   };
   const breadcrumbSchema = buildBreadcrumbSchema([
@@ -39,7 +39,7 @@ export default async function CookiePolicyPage({params}: CookiePolicyPageProps) 
   return (
     <>
       <JsonLd data={[webPageSchema, breadcrumbSchema]} />
-      <CookiePolicy />
+      <div className={styles.policyPage}><CookiePolicy /></div>
     </>
   );
 }
