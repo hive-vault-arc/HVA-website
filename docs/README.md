@@ -8,7 +8,8 @@ This checkout develops the simpler website on `site/simple-v1`. Start with the [
 | --- | --- |
 | [Requirements brief](simple-v1-requirements.md) | October 19–20 owner requirements, SME priority, required Insights and carousel, component references, Hero 230 direction, SEO/schema, pending calendar integration and completion criteria. |
 | [Site plan](simple-v1-site-plan.md) | Page scope, content briefs, navigation, consolidation and branch arrangement. |
-| [Homepage implementation](simple-v1-homepage.md) | Current local homepage behavior, design choices and verification. |
+| [Homepage implementation](simple-v1-homepage.md) | Chronological homepage design decisions and verification; see the handoff for the latest paused state. |
+| [Homepage design handoff](simple-v1-homepage-handoff.md) | Paused design goal, reference cues, latest attempted layouts, verification limits and next review points. |
 | [Operating rules](../AGENTS.md) | Contributor rules and required checks. |
 | [Design system](../DESIGN.md) | Approved identity, palette, typography and responsive requirements. |
 | [Page migration map](design-system/page-family-migration.md) | How existing page templates become the simpler experience. |
