@@ -126,8 +126,10 @@ section.framer-1dhn5up .framer-kn1vej h2.framer-text {
 }
 
 .framer-u4tdaf .framer-1c5utj4 .framer-ueyy8a {
-  width: 89px !important;
-  height: 50px !important;
+  align-self: stretch;
+  flex: 1 1 auto;
+  width: 100% !important;
+  height: 100% !important;
   background-image: url("../images/HVAlogo.svg?v=3");
   background-position: center;
   background-repeat: no-repeat;
