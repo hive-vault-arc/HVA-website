@@ -1,0 +1,218 @@
+:root {
+  --hva-navy: #0B1726;
+  --hva-amber: #E8A838;
+}
+
+body {
+  background-color: var(--hva-navy) !important;
+}
+
+section.framer-90fe47 video[src*="video-a45b98e3"] {
+  filter: hue-rotate(25deg) saturate(0.9);
+}
+
+section.framer-90fe47 .framer-qXLm1.framer-v-s3jw6t {
+  background-color: var(--hva-amber) !important;
+}
+
+section.framer-90fe47 .framer-qXLm1.framer-v-s3jw6t > .framer-j29sji {
+  background-color: var(--hva-amber) !important;
+}
+
+section.framer-90fe47 .framer-qXLm1.framer-v-s3jw6t .framer-14xxtqj,
+section.framer-90fe47 .framer-qXLm1.framer-v-s3jw6t .framer-1di3ymy,
+section.framer-90fe47 .framer-qXLm1.framer-v-s3jw6t .framer-7jc342 {
+  background-color: var(--hva-navy) !important;
+}
+
+a.framer-93PRb {
+  display: block !important;
+  width: 89px !important;
+  min-width: 89px;
+  max-width: 89px !important;
+  height: 52px !important;
+  background-image: url("../images/hive-vault-arc-logo.png?v=1");
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center;
+}
+
+a.framer-93PRb:focus-visible {
+  outline: 2px solid var(--hva-amber);
+  outline-offset: 4px;
+}
+
+a.framer-93PRb > * {
+  opacity: 0 !important;
+}
+
+footer a.framer-1ph81iu {
+  display: block !important;
+  flex: 0 0 89px !important;
+  width: 89px !important;
+  min-width: 89px !important;
+  height: 50px !important;
+  background-image: url("../images/HVAlogo.svg?v=3");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+
+footer a.framer-1ph81iu:focus-visible {
+  outline: 2px solid var(--hva-amber);
+  outline-offset: 4px;
+}
+
+footer a.framer-1ph81iu > * {
+  opacity: 0 !important;
+}
+
+section.framer-90fe47 .framer-1ncwlly-container {
+  display: none !important;
+}
+
+section.framer-90fe47 .framer-0e49V.framer-1osscs5 {
+  background-color: var(--hva-amber) !important;
+  border-radius: 50%;
+}
+
+section.framer-90fe47 .framer-0e49V.framer-1osscs5 .framer-14xxtqj,
+section.framer-90fe47 .framer-0e49V.framer-1osscs5 .framer-1di3ymy,
+section.framer-90fe47 .framer-0e49V.framer-1osscs5 .framer-7jc342 {
+  background-color: var(--hva-navy) !important;
+}
+
+section.framer-1dhn5up .framer-kn1vej h2.framer-text {
+  -webkit-text-stroke-color: var(--hva-amber) !important;
+  -webkit-text-stroke-width: 1px !important;
+}
+
+.framer-tErQo .framer-1x4ufm1 p.framer-styles-preset-ihwujn {
+  -webkit-text-stroke-color: var(--hva-amber) !important;
+  -webkit-text-stroke-width: 1.2px !important;
+}
+
+.framer-tErQo .framer-axoxud {
+  background-color: var(--hva-amber) !important;
+  --border-color: var(--hva-amber) !important;
+}
+
+.framer-tErQo .framer-axoxud .framer-text,
+.framer-tErQo .framer-axoxud span {
+  color: var(--hva-navy) !important;
+}
+
+.framer-tErQo .framer-axoxud .framer-100pa6r,
+.framer-tErQo .framer-axoxud .framer-100pa6r .framer-text {
+  color: var(--hva-navy) !important;
+}
+
+.framer-u4tdaf .framer-1c5utj4 .framer-8ct1ew {
+  display: none !important;
+}
+
+.framer-u4tdaf .framer-1c5utj4 .framer-ueyy8a {
+  width: 89px !important;
+  height: 50px !important;
+  background-image: url("../images/HVAlogo.svg?v=3");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.framer-u4tdaf .framer-1c5utj4 .framer-ueyy8a > * {
+  opacity: 0 !important;
+}
+
+.framer-W7sX2:hover .framer-1h0updu {
+  background-color: var(--hva-amber) !important;
+}
+
+.framer-W7sX2:hover .framer-ydhg8v,
+.framer-W7sX2:hover .framer-15iev4s {
+  --gp405z: var(--hva-navy) !important;
+}
+
+.framer-tErQo .framer-scobtc-container .framer-67XAs {
+  min-height: 32px;
+}
+
+.framer-tErQo .framer-scobtc-container .framer-67XAs .framer-1ruk9tu {
+  min-height: 32px;
+  padding-bottom: 8px;
+  position: relative;
+  z-index: 2;
+}
+
+footer .framer-ttSuR.framer-b91qjr,
+footer .framer-1v4kw2c {
+  display: none !important;
+}
+
+footer .framer-16i8r3m-container {
+  display: none !important;
+}
+
+#svg-1436854794_962 path {
+  stroke: var(--hva-amber) !important;
+}
+
+.framer-vwyx9i .framer-EghX2.framer-14v7aht {
+  color: var(--hva-navy) !important;
+  background-color: var(--hva-amber) !important;
+  width: 205px !important;
+  min-width: 205px !important;
+  justify-content: center;
+  white-space: nowrap;
+  transition: filter 160ms ease, transform 160ms ease;
+}
+
+.framer-vwyx9i .framer-EghX2.framer-14v7aht:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.framer-vwyx9i .framer-EghX2.framer-14v7aht:focus-visible {
+  outline: 2px solid var(--hva-amber);
+  outline-offset: 4px;
+}
+
+.framer-vwyx9i .framer-EghX2 .framer-1nak6so,
+.framer-vwyx9i .framer-EghX2 .framer-1ft4jar-container {
+  display: none !important;
+}
+
+.framer-vwyx9i .framer-EghX2.framer-14v7aht::before {
+  content: "START A PROJECT";
+  color: var(--hva-navy);
+  font-family: "JetBrains Mono", "JetBrains Mono Placeholder", monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1em;
+  white-space: nowrap;
+}
+
+.framer-vwyx9i .framer-EghX2 .framer-u4Slx {
+  --1df8v9o: var(--hva-navy) !important;
+}
+
+html:lang(fr) .framer-vwyx9i .framer-EghX2.framer-14v7aht::before {
+  content: "DÉMARRER UN PROJET";
+}
+
+@media (max-width: 600px) {
+  a.framer-93PRb {
+    width: 76px !important;
+    min-width: 76px;
+    max-width: 76px !important;
+    height: 44px !important;
+  }
+
+  .framer-vwyx9i .framer-EghX2.framer-14v7aht {
+    padding: 14px !important;
+    width: 205px !important;
+    min-width: 205px !important;
+  }
+}
