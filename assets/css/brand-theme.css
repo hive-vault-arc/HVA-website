@@ -1,6 +1,7 @@
 :root {
   --hva-navy: #0B1726;
   --hva-amber: #E8A838;
+  --hva-gray: #6B7280;
 }
 
 body {
@@ -106,6 +107,16 @@ section.framer-1dhn5up .framer-kn1vej h2.framer-text {
 .framer-tErQo .framer-axoxud .framer-100pa6r,
 .framer-tErQo .framer-axoxud .framer-100pa6r .framer-text {
   color: var(--hva-navy) !important;
+}
+
+.framer-tErQo .framer-axoxud .framer-vqu5nz,
+.framer-tErQo .framer-axoxud .framer-1ahk36g {
+  background-color: #fff !important;
+}
+
+.framer-tErQo .framer-axoxud .framer-vqu5nz .framer-text,
+.framer-tErQo .framer-axoxud .framer-1ahk36g .framer-text {
+  color: var(--hva-gray) !important;
 }
 
 .framer-u4tdaf .framer-1c5utj4 .framer-8ct1ew {
