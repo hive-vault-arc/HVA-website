@@ -1,10 +1,16 @@
 {
-  "name": "framer-export-27151.rehosted.page",
+  "name": "hva-website",
   "version": "1.0.0",
   "private": true,
-  "description": "Static HTML clone of https://framer-export-27151.rehosted.page/",
+  "description": "HVA website migration to Next.js with the Framer export preserved during transition.",
   "scripts": {
-    "preview": "npx serve .",
-    "start": "npx serve ."
+    "dev": "next dev --webpack",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "^16.3.3",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
   }
 }
