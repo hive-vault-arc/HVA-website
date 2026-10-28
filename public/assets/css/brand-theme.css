@@ -244,3 +244,39 @@ html:lang(fr) .framer-vwyx9i .framer-EghX2.framer-14v7aht::before {
     font-size: clamp(22px, 8.2vw, 39px) !important;
   }
 }
+
+
+/* Replace inherited template marks with the HVA wordmark in these two cards. */
+.framer-tErQo .framer-1qvqq88 [data-framer-name="Vector logo"] {
+  width: 76px !important;
+  height: 44px !important;
+  background-image: url("../images/HVAlogo-header.png?v=1") !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+}
+
+.framer-12ajlcs .framer-rtmex0 img.framer-k28w4c {
+  content: url("../images/HVAlogo-header.png?v=1");
+  width: 76px !important;
+  height: 44px !important;
+  object-fit: contain !important;
+}
+
+
+/* Deployed Framer section class and icon wrapper variants. */
+section.framer-oaxwmf .framer-1qvqq88 [data-framer-name="Vector logo"] {
+  width: 76px !important;
+  height: 44px !important;
+  background-image: url("../images/HVAlogo-header.png?v=1") !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+}
+
+.framer-rtmex0:has(.framer-1d2f2g5-container) img.framer-k28w4c {
+  content: url("../images/HVAlogo-header.png?v=1");
+  width: 76px !important;
+  height: 44px !important;
+  object-fit: contain !important;
+}
