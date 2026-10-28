@@ -1,0 +1,400 @@
+{
+  "applied": true,
+  "changed_pages": 49,
+  "removed_html_bytes": 41199,
+  "pages": [
+    {
+      "page": "about-us.html",
+      "removed_bytes": 836,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "blog/beyond-the-text-box-engineering-autonomous-workflows-over-agency-free-chat.html",
+      "removed_bytes": 839,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "blog/building-decision-engines-instead-of-chat-interfaces.html",
+      "removed_bytes": 839,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "blog/designing-multi-layer-ai-systems-for-real-world-operations.html",
+      "removed_bytes": 839,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "blog/from-conversation-to-conclusion-why-your-product-needs-outcomes-not-dialogue.html",
+      "removed_bytes": 839,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "blog/from-fragmented-data-to-unified-intelligence-engines.html",
+      "removed_bytes": 839,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "blog/from-manual-bottlenecks-to-autonomous-growth-at-scale.html",
+      "removed_bytes": 839,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "blog/from-prompts-to-pipelines-architecting-intentional-intelligence-over-reactive-replies.html",
+      "removed_bytes": 839,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "blog/from-workflow-chaos-to-structured-automation-pipelines.html",
+      "removed_bytes": 839,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "blog/stop-prompting-start-predicting-transitioning-from-llms-to-logic-layers.html",
+      "removed_bytes": 839,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "blog/the-autonomy-leap-moving-from-conversation-as-interface-to-outcome-as-service.html",
+      "removed_bytes": 839,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "blog/why-most-ai-deployments-fail-in-production-environments.html",
+      "removed_bytes": 839,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "blog.html",
+      "removed_bytes": 836,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "career.html",
+      "removed_bytes": 836,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "cases/cinderbay-retail-group.html",
+      "removed_bytes": 839,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "cases/heliodesk-platforms.html",
+      "removed_bytes": 839,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "cases/ironpeak-industrial-manufacturing.html",
+      "removed_bytes": 839,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "cases/lumenarc-energy.html",
+      "removed_bytes": 839,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "cases/northbridge-education.html",
+      "removed_bytes": 839,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "cases/orbitra-systems.html",
+      "removed_bytes": 839,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "cases/vectorlane-mobility-network.html",
+      "removed_bytes": 839,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "cases.html",
+      "removed_bytes": 836,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "contacts.html",
+      "removed_bytes": 836,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "fr/about-us.html",
+      "removed_bytes": 839,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "fr/blog/beyond-the-text-box-engineering-autonomous-workflows-over-agency-free-chat.html",
+      "removed_bytes": 848,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "fr/blog/building-decision-engines-instead-of-chat-interfaces.html",
+      "removed_bytes": 848,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "fr/blog/designing-multi-layer-ai-systems-for-real-world-operations.html",
+      "removed_bytes": 848,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "fr/blog/from-conversation-to-conclusion-why-your-product-needs-outcomes-not-dialogue.html",
+      "removed_bytes": 848,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "fr/blog/from-fragmented-data-to-unified-intelligence-engines.html",
+      "removed_bytes": 848,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "fr/blog/from-manual-bottlenecks-to-autonomous-growth-at-scale.html",
+      "removed_bytes": 848,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "fr/blog/from-prompts-to-pipelines-architecting-intentional-intelligence-over-reactive-replies.html",
+      "removed_bytes": 848,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "fr/blog/from-workflow-chaos-to-structured-automation-pipelines.html",
+      "removed_bytes": 848,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "fr/blog/stop-prompting-start-predicting-transitioning-from-llms-to-logic-layers.html",
+      "removed_bytes": 848,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "fr/blog/the-autonomy-leap-moving-from-conversation-as-interface-to-outcome-as-service.html",
+      "removed_bytes": 848,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "fr/blog/why-most-ai-deployments-fail-in-production-environments.html",
+      "removed_bytes": 848,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "fr/blog.html",
+      "removed_bytes": 839,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "fr/career.html",
+      "removed_bytes": 839,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "fr/cases/cinderbay-retail-group.html",
+      "removed_bytes": 848,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "fr/cases/orbitra-systems.html",
+      "removed_bytes": 848,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "fr/cases.html",
+      "removed_bytes": 839,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "fr/contacts.html",
+      "removed_bytes": 839,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "fr/legal.html",
+      "removed_bytes": 839,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "fr/policy.html",
+      "removed_bytes": 839,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "fr/terms.html",
+      "removed_bytes": 839,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "fr.html",
+      "removed_bytes": 836,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "index.html",
+      "removed_bytes": 837,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "legal.html",
+      "removed_bytes": 836,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "policy.html",
+      "removed_bytes": 836,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    },
+    {
+      "page": "terms.html",
+      "removed_bytes": 836,
+      "blocks": {
+        "facebook": 1,
+        "x": 1
+      }
+    }
+  ],
+  "scope": "Only marked inherited Meta Pixel and X tracking blocks removed. Original assets, Framer runtime and checkout embed preserved."
+}
