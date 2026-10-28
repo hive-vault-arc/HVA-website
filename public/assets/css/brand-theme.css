@@ -280,3 +280,21 @@ section.framer-oaxwmf .framer-1qvqq88 [data-framer-name="Vector logo"] {
   height: 44px !important;
   object-fit: contain !important;
 }
+
+
+/* Match the actual deployed Framer wrappers for these two logo swaps. */
+.framer-1qvqq88 .framer-815i92 {
+  width: 76px !important;
+  height: 44px !important;
+  background-image: url("../images/HVAlogo-header.png?v=1") !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+}
+
+.framer-rtmex0 img.framer-k28w4c {
+  content: url("../images/HVAlogo-header.png?v=1") !important;
+  width: 76px !important;
+  height: 44px !important;
+  object-fit: contain !important;
+}
