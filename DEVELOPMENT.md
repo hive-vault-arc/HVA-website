@@ -25,3 +25,22 @@ selected branch before committing.
 
 See plans/SPRINTS.md for progress and remaining validation. Production-branch
 settings in Vercel have not yet been inspected; no production merge is authorized.
+
+## Synchronization result
+
+The tested source tree is now synchronized on remote dev and both Vercel preview
+checks pass. Source verification is recorded in plans/github-sync-verification.json.
+Browser visual checks still require Vercel login. Original OneDrive files remain
+unchanged. Clone the remote dev branch to continue with the real Git history.
+
+The browser-created hook has file mode 100644. On a new clone, make it executable
+and configure the hook before pushing:
+
+```sh
+chmod +x .githooks/pre-push
+git config core.hooksPath .githooks
+git config push.default current
+```
+
+On Windows, use Git Bash for the chmod command. Local Git hooks do not control
+GitHub browser commits, which must always explicitly target dev.
