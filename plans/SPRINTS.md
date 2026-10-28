@@ -14,7 +14,8 @@ OneDrive files and Vercel deployment have not been changed.
 - [x] Production build passes (Next.js 16.4.3 installed in original node_modules).
 - [ ] Local HTTP checks: blocked by session socket permissions (WinError 10013).
 - [ ] Desktop/mobile visual and hero playback comparison.
-- [ ] Apply changes to original project and check Vercel preview.
+- [x] Publish tested changes to remote dev and verify successful Vercel preview builds.
+- [ ] Browser visual/interaction QA: preview requires Vercel login. Original OneDrive folder remains unchanged.
 
 Acceptance: smaller HTML, unchanged unique CSS and other markup, no new missing
 references, successful build, visual comparison. Live metrics pending deployment URL.
@@ -146,3 +147,21 @@ d16bc1c2cc6b5f3de8326ed4145ec5270ee179a3. Tested changes are being uploaded in
 batches to remote dev. Do not treat earlier connector permission failures as
 current browser blockers. Main/migration are not being modified. Remote tree and
 Vercel preview checks are still pending until all batches have been committed.
+
+## Remote synchronization complete
+
+All tested source changes, generated images, maintenance scripts and sprint evidence
+are committed on remote dev. Verification at 5bf50c5c13d3bab3d688c770f458c6a2ab6a2d42
+matched all 846 expected files (UTF-8 CRLF/LF normalization allowed; binaries exact).
+Main and develop-nextjs-migration refs remain unchanged. GitHub Production environment
+still points to main commit 304f39c45c597cda7201babd40fd536f611523ac.
+Both Vercel project status checks reported successful deployments for that commit.
+
+A browser visit to the preview redirects to Vercel login, so visual, playback and
+interaction checks remain pending. No production merge or deployment was requested.
+See github-sync-verification.json for the recorded evidence and limitations.
+
+The web-created push hook is mode 100644. New clones must make it executable and
+configure hooksPath; browser commits are not governed by local hooks. The existing
+local copy still has its executable dev-only hook configured. Future normal Git
+work should clone remote dev, which preserves the repository's real history.
