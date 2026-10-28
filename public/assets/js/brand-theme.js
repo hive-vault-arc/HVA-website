@@ -44,6 +44,15 @@
       }
     });
 
+    const plainEmailNodes = [];
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    while (walker.nextNode()) plainEmailNodes.push(walker.currentNode);
+    plainEmailNodes.forEach(node => {
+      if (/^\s*hello@quantumflux\.top\s*$/i.test(node.textContent || "")) {
+        node.textContent = "contact@hivevaultarc.com";
+      }
+    });
+
     const credits = [];
     if (rootElement?.matches("div.framer-zk9kdz")) credits.push(rootElement);
     root.querySelectorAll?.("div.framer-zk9kdz").forEach(block => credits.push(block));
@@ -61,6 +70,10 @@
 
   applyBranding(document);
   new MutationObserver(records => {
-    records.forEach(record => record.addedNodes.forEach(node => applyBranding(node)));
-  }).observe(document.documentElement, { childList: true, subtree: true });
+    records.forEach(record => {
+      record.addedNodes.forEach(node => applyBranding(node));
+      if (record.type === "characterData") applyBranding(record.target.parentElement || document);
+      else if (record.target instanceof Element) applyBranding(record.target);
+    });
+  }).observe(document.documentElement, { childList: true, characterData: true, subtree: true });
 })();
