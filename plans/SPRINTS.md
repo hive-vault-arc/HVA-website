@@ -8,7 +8,7 @@ Updated: 30 October 2026. All implementation changes are on remote `dev` and dep
 - Latest code Preview verified Ready: commit `5199309` at https://hva-website-mphk0xjwx-oubayes-projects.vercel.app/.
 - Forms open a draft addressed to contact@hivevaultarc.com. Visitors must send from their own email app. Automatic server delivery and mailing-list signup are not implemented.
 - Still open: browser rendering/interaction QA, comparable load measurements, pre-existing hydration warnings, correct testimonial portrait, missing font/optional runtime modules, confirmed production domain and final metadata.
-- The execution environment is currently unavailable. GitHub/Vercel read access remains available; new code changes needing local checks must wait for execution access. No additional browser-sharing access was created after the approval rejection.
+- Execution access resumed on 30 October. The current build passes 150 local HTTP route/asset checks. Rendered browser QA and comparable performance measurements remain pending.
 
 Historical evidence below is retained as a record of earlier stages; its past-tense local-only/access limitations do not describe current remote deployment status.
 
@@ -216,3 +216,8 @@ The export's contact and newsletter forms referenced two inherited Framer submis
 ## Template SEO references (30 October 2026)
 
 Build cleanup removes 243 language alternate links to quantumflux.framer.ai from the export, preserving unrelated links. Local production build passed. Replacement hreflang links and canonical URLs still require the confirmed HVA production domain. This is metadata cleanup, not a measured loading improvement.
+
+
+## Local HTTP release validation (30 October 2026)
+
+A fresh production build and local server passed 150 HEAD checks: 49 exported .html routes, their 49 clean URLs, the root homepage, 24 generated stylesheets, 26 existing font files, and a deliberately unknown path returning 404. Stylesheets and fonts returned expected MIME types and immutable cache headers; redirects were not followed. The checker is restricted to loopback hosts and makes no form submissions. Run the production server on port 3092, then `npm run check:routes`. This verifies routing and delivery only, not rendered layouts, animation, contact email-app launching, or real-world loading metrics.

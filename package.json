@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "next dev --webpack",
     "build": "node scripts/configure_contact_forms.cjs && node scripts/gallery_placeholders.cjs && node scripts/lazy_homepage_images.cjs && node scripts/remove_duplicate_preloads.cjs && node scripts/extract_export_styles.cjs && node scripts/remove_template_language_links.cjs && next build",
-    "start": "next start"
+    "start": "next start",
+    "check:routes": "node scripts/check_export_routes.cjs"
   },
   "dependencies": {
     "next": "^16.3.3",
