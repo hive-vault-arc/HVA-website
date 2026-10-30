@@ -188,3 +188,8 @@ Added immutable browser caching only to the 26 existing fingerprinted WOFF2 file
 ## Cacheable exported styles (30 October 2026)
 
 Build extraction moves 30,750,516 inline CSS bytes from 49 pages into 24 fingerprinted stylesheets. The homepage HTML decreases to about 4.58 MB (approximately 20% smaller). Framer style markers and component metadata remain unchanged, and the stylesheet link retains the original cascade position. All 49 extracted blocks match the source CSS exactly after line-ending normalization. Blocks with relative URLs stay inline. Local production build and HTTP checks passed (CSS 200, text/css, immutable cache). First-visit total transfer is not claimed to decrease by 20%; CSS is fetched separately. Browser visual/interaction QA and measured load timing remain open.
+
+
+## Site-wide duplicate preload cleanup (30 October 2026)
+
+The build removes 1,916 additional duplicate module preload links across the other 48 pages (1,975 including the homepage). Each removed target matches an animation module by SHA-256 and is not referenced by filename in the animation modules or entry bundle. Script and video tags match the original source across all 49 pages. Local production build passed and a second pass made zero changes. Image lazy loading remains limited to the homepage. Browser interactions and real loading measurements remain pending.
