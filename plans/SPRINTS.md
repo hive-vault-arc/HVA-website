@@ -203,3 +203,8 @@ Added the omitted snippets module at its expected import path with empty `getSni
 ## Contact form delivery audit (30 October 2026)
 
 The export's contact and newsletter forms referenced two inherited Framer submission endpoints; HVA ownership could not be established. The build now removes those endpoint URLs from HTML/runtime sources and sets forms to open a visitor-reviewed email draft addressed to contact@hivevaultarc.com. Contact buttons and explanatory notes state that the visitor must send from their email app. Newsletter UI requests updates by email rather than confirming a mailing-list signup. Form values are retained; hidden honeypots, password/file inputs, and disabled controls are excluded. The adapter loads on all 49 pages to handle client navigation. Local production build and draft destination/content/validation checks passed without sending an inquiry. Browser validation remains pending. A dedicated HVA form delivery backend is still needed for one-click server submission; the absent thank-you route is not used by this draft flow.
+
+
+## Template SEO references (30 October 2026)
+
+Build cleanup removes 243 language alternate links to quantumflux.framer.ai from the export, preserving unrelated links. Local production build passed. Replacement hreflang links and canonical URLs still require the confirmed HVA production domain. This is metadata cleanup, not a measured loading improvement.
