@@ -20,10 +20,6 @@ const nextConfig = {
     // Generated assets contain content hashes; browser reuse is safe across deploys.
     return [
       {
-        source: "/assets/js/:asset*",
-        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
-      },
-      {
         source: "/assets/optimized/:asset*",
         headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
       },
