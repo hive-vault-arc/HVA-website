@@ -193,3 +193,8 @@ Build extraction moves 30,750,516 inline CSS bytes from 49 pages into 24 fingerp
 ## Site-wide duplicate preload cleanup (30 October 2026)
 
 The build removes 1,916 additional duplicate module preload links across the other 48 pages (1,975 including the homepage). Each removed target matches an animation module by SHA-256 and is not referenced by filename in the animation modules or entry bundle. Script and video tags match the original source across all 49 pages. Local production build passed and a second pass made zero changes. Image lazy loading remains limited to the homepage. Browser interactions and real loading measurements remain pending.
+
+
+## Missing navigation snippets module (30 October 2026)
+
+Added the omitted snippets module at its expected import path with empty `getSnippets` and `snippetsSorting` exports, matching the runtime loader contract. This intentionally adds no inherited page-specific custom code; existing embedded page scripts remain. Local import-contract check and production build passed. Browser navigation verification is still pending. The missing thank-you route component and optional syntax/font loaders remain unresolved; no substitute modules were added for those.
