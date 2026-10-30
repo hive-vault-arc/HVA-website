@@ -165,3 +165,11 @@ The web-created push hook is mode 100644. New clones must make it executable and
 configure hooksPath; browser commits are not governed by local hooks. The existing
 local copy still has its executable dev-only hook configured. Future normal Git
 work should clone remote dev, which preserves the repository's real history.
+
+
+## First-load follow-up (30 October 2026)
+
+- The homepage now serves at `/` without the previous redirect to `/index.html`; a local production build returned HTTP 200 with the exported homepage. Both Vercel Preview builds passed at commit `1a5eb04`.
+- The Vercel build now marks 77 offscreen homepage images `loading="lazy"`; the first 12 images and all hero video elements remain unchanged. The build script is idempotent. Both Vercel Preview builds passed at commit `0358ad4`.
+- Measured mobile load timing and rendered hero/video checks remain open because the Preview requires Vercel sign-in in the available browser.
+- The 5.5 MB homepage HTML and 59 low-priority module preloads remain the next first-load targets; do not remove Framer runtime dependencies without verifying interactions.
