@@ -226,3 +226,8 @@ A fresh production build and local server passed 150 HEAD checks: 49 exported .h
 ## DOM observer runtime work (30 October 2026)
 
 Branding/contact observers now deduplicate mutation targets and skip descendant roots already covered by an ancestor. Tech-tile or form mutations share one scoped root. Observers pause during their own synchronous DOM edits and reconnect in a finally block, avoiding self-triggered follow-up scans. Branding/content transformation logic is unchanged. Syntax checks passed; a behavioral fixture reduced seven overlapping records to two scans and verified reconnect-on-error behavior. No actual browser speed gain is claimed until profiling is available.
+
+
+## Confirmed production domain (30 October 2026)
+
+User confirmed https://hivevaultarc.com. The build generates 49 canonical/og:url entries, absolute social-image URLs, 132 hreflang links for existing English/French counterparts, and a 49-URL sitemap. Preview robots disallow crawling; production robots allow crawling. Template-host anchor links become local paths, and the Framer canonical origin is updated. Local metadata/XML checks and production build passed; DNS/domain assignment was not modified. Browser navigation metadata remains to be verified.
