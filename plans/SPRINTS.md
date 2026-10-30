@@ -178,3 +178,8 @@ work should clone remote dev, which preserves the repository's real history.
 ## Missing decorative gallery images (30 October 2026)
 
 The build replaces references to 13 absent gallery images with a shared 516-byte HVA geometric placeholder. Both HTML and runtime module URLs are updated so hydration does not restore missing gallery URLs. Local production build passed; source scan leaves one missing homepage image, the testimonial portrait `image-56520568.png`. The portrait requires the correct supplied photo or a separately approved content change. Placeholder appearance remains pending browser QA.
+
+
+## Font caching follow-up (30 October 2026)
+
+Added immutable browser caching only to the 26 existing fingerprinted WOFF2 filenames (991,976 bytes including duplicate copies). Local production build passed. HTTP HEAD checks confirmed font max-age=31536000 and homepage max-age=0. This improves repeat visits, not first-visit transfer size. Missing font files referenced by exported font-face rules still require investigation before changing typography.
