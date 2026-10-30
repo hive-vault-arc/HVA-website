@@ -62,11 +62,21 @@
   }, true);
 
   apply(document);
-  new MutationObserver((records) => {
-    for (const record of records) {
-      if (record.type === "characterData") apply(record.target);
-      else { record.addedNodes.forEach(apply); apply(record.target); }
-    }
-  }).observe(document.documentElement, { childList: true, characterData: true, subtree: true });
+const observerOptions={childList:true,characterData:true,subtree:true};
+const observer=new MutationObserver(records=>{
+  const roots=new Set();
+  for(const record of records){
+    let root=record.target.nodeType===3?record.target.parentElement:record.target;
+    if(!root||!root.isConnected)continue;
+    root=root.closest?.("form.framer-txifz4, form.framer-vswvir")||root;
+    roots.add(root);
+  }
+  const work=[...roots].filter(root=>{
+    for(let parent=root.parentElement;parent;parent=parent.parentElement)if(roots.has(parent))return false;
+    return true;
+  });
+  observer.disconnect();
+  try{work.forEach(apply);}finally{observer.observe(document.documentElement,observerOptions);}
+});
+observer.observe(document.documentElement,observerOptions);
 })();
-

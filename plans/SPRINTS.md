@@ -221,3 +221,8 @@ Build cleanup removes 243 language alternate links to quantumflux.framer.ai from
 ## Local HTTP release validation (30 October 2026)
 
 A fresh production build and local server passed 150 HEAD checks: 49 exported .html routes, their 49 clean URLs, the root homepage, 24 generated stylesheets, 26 existing font files, and a deliberately unknown path returning 404. Stylesheets and fonts returned expected MIME types and immutable cache headers; redirects were not followed. The checker is restricted to loopback hosts and makes no form submissions. Run the production server on port 3092, then `npm run check:routes`. This verifies routing and delivery only, not rendered layouts, animation, contact email-app launching, or real-world loading metrics.
+
+
+## DOM observer runtime work (30 October 2026)
+
+Branding/contact observers now deduplicate mutation targets and skip descendant roots already covered by an ancestor. Tech-tile or form mutations share one scoped root. Observers pause during their own synchronous DOM edits and reconnect in a finally block, avoiding self-triggered follow-up scans. Branding/content transformation logic is unchanged. Syntax checks passed; a behavioral fixture reduced seven overlapping records to two scans and verified reconnect-on-error behavior. No actual browser speed gain is claimed until profiling is available.
