@@ -5,7 +5,7 @@
   "description": "HVA website migration to Next.js with the Framer export preserved during transition.",
   "scripts": {
     "dev": "next dev --webpack",
-    "build": "node scripts/lazy_homepage_images.cjs && next build",
+    "build": "node scripts/gallery_placeholders.cjs && node scripts/lazy_homepage_images.cjs && next build",
     "start": "next start"
   },
   "dependencies": {
