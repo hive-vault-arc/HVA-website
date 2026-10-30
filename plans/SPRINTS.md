@@ -1,10 +1,16 @@
 # HVA website improvement sprints
 
-Updated: 2026-10-28. Sprint 1 in progress.
+Updated: 30 October 2026. All implementation changes are on remote `dev` and deployed as Vercel Previews. No production merge has been made in this work.
 
-Active tracker. Historical plans 001 and 002 record completed hero-video diagnostics.
-Preserve restored video playback. Changes are staged in a working copy; original
-OneDrive files and Vercel deployment have not been changed.
+## Current status
+
+- Implemented: duplicate CSS removal; responsive WebP variants; inherited advertising removal; direct homepage routing; cache rules for generated images, fonts and extracted CSS; site-wide duplicate module-preload cleanup; cacheable CSS extraction across 49 pages; decorative gallery placeholders; missing snippet-loader compatibility; email-draft contact handling; inherited language-link cleanup.
+- Latest code Preview verified Ready: commit `5199309` at https://hva-website-mphk0xjwx-oubayes-projects.vercel.app/.
+- Forms open a draft addressed to contact@hivevaultarc.com. Visitors must send from their own email app. Automatic server delivery and mailing-list signup are not implemented.
+- Still open: browser rendering/interaction QA, comparable load measurements, pre-existing hydration warnings, correct testimonial portrait, missing font/optional runtime modules, confirmed production domain and final metadata.
+- The execution environment is currently unavailable. GitHub/Vercel read access remains available; new code changes needing local checks must wait for execution access. No additional browser-sharing access was created after the approval rejection.
+
+Historical evidence below is retained as a record of earlier stages; its past-tense local-only/access limitations do not describe current remote deployment status.
 
 ## Sprint 1: Baseline and duplicate CSS
 - [x] Inspect source and establish baseline.
@@ -33,15 +39,17 @@ Acceptance: no unexplained image 404s, real responsive variants, lower image tra
 - [ ] Profile actual requests and main-thread work.
 - [x] Remove marked inherited Facebook/X advertising snippets on all 49 pages.
 - [x] Trace checkout embed: runtime consumers found; preserve until template licensing component is reviewed.
-- [ ] Reduce module preloads and defer optional below-fold components.
+- [x] Remove verified duplicate module preloads across all 49 pages.
+- [ ] Defer optional below-fold components after browser profiling.
 - [ ] Pause offscreen media; preserve responsive hero playback.
 - [ ] Support reduced motion and profile mobile animation.
 Acceptance: menus, dialogs, forms and animations work; less initial loading/blocking.
 
 ## Sprint 4: Delivery, routing and SEO
-- [ ] Check deployed compression and browser/CDN cache headers.
+- [x] Confirm deployed Brotli and optimized-image caching; verify font/style cache rules by local HTTP checks.
+- [ ] Confirm all final asset headers on the latest deployed Preview.
 - [ ] Version assets before adding long immutable browser caching.
-- [ ] Remove unnecessary homepage redirect while preserving links.
+- [x] Serve the homepage directly at `/` without the former redirect.
 - [ ] Fix original-domain hreflang links, canonicals, titles and descriptions.
 - [ ] Use absolute social image URLs; add sitemap, robots and useful 404 page.
 Acceptance: correct deployed headers, routes, language alternates and status codes.
