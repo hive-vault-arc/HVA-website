@@ -235,3 +235,8 @@ Branding/contact observers now deduplicate mutation targets and skip descendant 
 ## Confirmed production domain (30 October 2026)
 
 User confirmed https://hivevaultarc.com. The build generates 49 canonical/og:url entries, absolute social-image URLs, 132 hreflang links for existing English/French counterparts, and a 49-URL sitemap. Preview robots disallow crawling; production robots allow crawling. Template-host anchor links become local paths, and the Framer canonical origin is updated. Local metadata/XML checks and production build passed; DNS/domain assignment was not modified. Browser navigation metadata remains to be verified.
+
+
+## Descriptive page titles (30 October 2026)
+
+Replaced the duplicated generic titles on 16 main English/French pages with route-specific titles and matching og:title/twitter:title values. Existing article titles and page content are preserved. The built export now has 49 unique document titles, verified along with matching main-page social titles; local production build passed. Browser client-navigation metadata verification remains pending. The live-domain release hold remains in force.

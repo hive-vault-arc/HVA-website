@@ -7,6 +7,16 @@ const all = files(root);
 const pages = all.filter(f=>f.endsWith(".html"));
 const route = file => "/" + path.relative(root,file).split(path.sep).join("/").replace(/\.html$/,"").replace(/^index$/,"");
 const routes = new Set(pages.map(route));
+const titles = {
+  "/about-us": ["About Us", "\u00c0 propos"],
+  "/blog": ["Insights", "Articles"],
+  "/career": ["Careers", "Carri\u00e8res"],
+  "/cases": ["Case Studies", "\u00c9tudes de cas"],
+  "/contacts": ["Contact Us", "Contact"],
+  "/legal": ["Legal Information", "Mentions l\u00e9gales"],
+  "/policy": ["Privacy Policy", "Politique de confidentialit\u00e9"],
+  "/terms": ["Terms of Use", "Conditions d\u2019utilisation"],
+};
 const escape = value => value.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
 for (const file of all.filter(f=>/\.(?:js|mjs)$/.test(f))) {
   const before=fs.readFileSync(file,"utf8"), after=before.replaceAll("https://quantumflux.framer.ai/","/").replaceAll("https://quantumflux.framer.ai",origin);
@@ -17,12 +27,15 @@ for(const file of pages){
   const english=french?(current==="/fr"?"/":current.slice(3)):current;
   const translated=english==="/"?"/fr":"/fr"+english;
   let html=fs.readFileSync(file,"utf8");
+  const title = titles[english] ? titles[english][french ? 1 : 0] + " | Hive Vault Arc" : null;
+  if (title) html=html.replace(/<title>[\s\S]*?<\/title>/i,"<title>"+escape(title)+"</title>");
   html=html.replace(/<link\b[^>]*>/g,tag=>{
     if(/\brel=["']canonical["']/i.test(tag)||/\bhreflang=/i.test(tag))return "";
     return tag.includes("quantumflux.framer.ai")&&/\brel=["']alternate["']/i.test(tag)?"":tag;
   });
   html=html.replace(/\bhref="https:\/\/quantumflux\.framer\.ai([^" ]*)"/g,(_,suffix)=>'href="'+(suffix||'/')+'"');
   html=html.replace(/<meta\b[^>]*>/g,tag=>{
+    if(title && /(?:property|name)=["'](?:og:title|twitter:title)["']/i.test(tag)) return tag.replace(/content=["'][^"']*["']/i,'content="'+escape(title)+'"');
     if(/(?:property|name)=["'](?:og:url|og:locale|og:locale:alternate)["']/i.test(tag))return "";
     if(/(?:property|name)=["'](?:og:image|twitter:image)["']/i.test(tag)){
       return tag.replace(/content=["']([^"']*)["']/i,(_,value)=>{
