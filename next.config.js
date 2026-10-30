@@ -28,10 +28,10 @@ const nextConfig = {
   async rewrites() {
     // Framer changes links to clean paths after hydration. Serve the matching
     // export on a direct visit or refresh while retaining existing .html URLs.
-    return exportedHtmlPages(path.join(__dirname, "public")).map((page) => ({
+    return [{ source: "/", destination: "/index.html" }, ...exportedHtmlPages(path.join(__dirname, "public")).map((page) => ({
       source: `/${page.replace(/\.html$/, "")}`,
       destination: `/${page}`,
-    }));
+    }))];
   },
 };
 
