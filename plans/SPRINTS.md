@@ -198,3 +198,8 @@ The build removes 1,916 additional duplicate module preload links across the oth
 ## Missing navigation snippets module (30 October 2026)
 
 Added the omitted snippets module at its expected import path with empty `getSnippets` and `snippetsSorting` exports, matching the runtime loader contract. This intentionally adds no inherited page-specific custom code; existing embedded page scripts remain. Local import-contract check and production build passed. Browser navigation verification is still pending. The missing thank-you route component and optional syntax/font loaders remain unresolved; no substitute modules were added for those.
+
+
+## Contact form delivery audit (30 October 2026)
+
+The export's contact and newsletter forms referenced two inherited Framer submission endpoints; HVA ownership could not be established. The build now removes those endpoint URLs from HTML/runtime sources and sets forms to open a visitor-reviewed email draft addressed to contact@hivevaultarc.com. Contact buttons and explanatory notes state that the visitor must send from their email app. Newsletter UI requests updates by email rather than confirming a mailing-list signup. Form values are retained; hidden honeypots, password/file inputs, and disabled controls are excluded. The adapter loads on all 49 pages to handle client navigation. Local production build and draft destination/content/validation checks passed without sending an inquiry. Browser validation remains pending. A dedicated HVA form delivery backend is still needed for one-click server submission; the absent thank-you route is not used by this draft flow.
