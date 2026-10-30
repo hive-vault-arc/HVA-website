@@ -2,6 +2,10 @@
 
 Updated: 30 October 2026. All implementation changes are on remote `dev` and deployed as Vercel Previews. No production merge has been made in this work.
 
+## Release constraint
+
+Keep hivevaultarc.com and its current live site unchanged, per the user's instruction on 30 October 2026. Development metadata is preparation only. No domain assignment, DNS change, production promotion, or merge is authorized by generic requests to continue. Draft PR #3 remains open for development review.
+
 ## Current status
 
 - Implemented: duplicate CSS removal; responsive WebP variants; inherited advertising removal; direct homepage routing; cache rules for generated images, fonts and extracted CSS; site-wide duplicate module-preload cleanup; cacheable CSS extraction across 49 pages; decorative gallery placeholders; missing snippet-loader compatibility; email-draft contact handling; inherited language-link cleanup.
