@@ -21,7 +21,7 @@ const nextConfig = {
     const fonts = fs.readdirSync(path.join(__dirname, "public/assets/fonts"))
       .filter((name) => /^font-[a-f0-9]+(?:-[a-f0-9]+)?\.woff2$/.test(name))
       .map((name) => ({ source: `/assets/fonts/${name}`, headers: cache }));
-    return [{ source: "/assets/optimized/:asset*", headers: cache }, ...fonts];
+    return [{ source: "/assets/optimized/:asset*", headers: cache }, { source: "/assets/styles/:asset*", headers: cache }, ...fonts];
   },
   async rewrites() {
     // Framer changes links to clean paths after hydration. Serve the matching
