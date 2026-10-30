@@ -183,3 +183,8 @@ The build replaces references to 13 absent gallery images with a shared 516-byte
 ## Font caching follow-up (30 October 2026)
 
 Added immutable browser caching only to the 26 existing fingerprinted WOFF2 filenames (991,976 bytes including duplicate copies). Local production build passed. HTTP HEAD checks confirmed font max-age=31536000 and homepage max-age=0. This improves repeat visits, not first-visit transfer size. Missing font files referenced by exported font-face rules still require investigation before changing typography.
+
+
+## Cacheable exported styles (30 October 2026)
+
+Build extraction moves 30,750,516 inline CSS bytes from 49 pages into 24 fingerprinted stylesheets. The homepage HTML decreases to about 4.58 MB (approximately 20% smaller). Framer style markers and component metadata remain unchanged, and the stylesheet link retains the original cascade position. All 49 extracted blocks match the source CSS exactly after line-ending normalization. Blocks with relative URLs stay inline. Local production build and HTTP checks passed (CSS 200, text/css, immutable cache). First-visit total transfer is not claimed to decrease by 20%; CSS is fetched separately. Browser visual/interaction QA and measured load timing remain open.
