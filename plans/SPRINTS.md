@@ -173,3 +173,8 @@ work should clone remote dev, which preserves the repository's real history.
 - The Vercel build now marks 69 offscreen homepage images `loading="lazy"`; the first 12 images and all hero video elements remain unchanged. The build script is idempotent. Both Vercel Preview builds passed at commit `0358ad4`.
 - Measured mobile load timing and rendered hero/video checks remain open because the Preview requires Vercel sign-in in the available browser.
 - The 59 homepage module preloads were proven byte-identical to `/assets/animate/*.mjs` imports while pointing to separate `/assets/js/*.js` URLs (4,462,548 bytes of duplicate source). The build now strips only verified duplicate preload tags; the entry script and module imports remain. Local production build passed, deployed visual/network timing remains open. The 5.5 MB homepage HTML is the next first-load target.
+
+
+## Missing decorative gallery images (30 October 2026)
+
+The build replaces references to 13 absent gallery images with a shared 516-byte HVA geometric placeholder. Both HTML and runtime module URLs are updated so hydration does not restore missing gallery URLs. Local production build passed; source scan leaves one missing homepage image, the testimonial portrait `image-56520568.png`. The portrait requires the correct supplied photo or a separately approved content change. Placeholder appearance remains pending browser QA.
