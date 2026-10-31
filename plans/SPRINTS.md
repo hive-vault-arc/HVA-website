@@ -240,3 +240,8 @@ User confirmed https://hivevaultarc.com. The build generates 49 canonical/og:url
 ## Descriptive page titles (30 October 2026)
 
 Replaced the duplicated generic titles on 16 main English/French pages with route-specific titles and matching og:title/twitter:title values. Existing article titles and page content are preserved. The built export now has 49 unique document titles, verified along with matching main-page social titles; local production build passed. Browser client-navigation metadata verification remains pending. The live-domain release hold remains in force.
+
+
+## Large inline SVG images (31 October 2026)
+
+Large data-URI SVG image sources are extracted to four SHA-256-named reusable files at build time. Small icons stay inline. Local processing removed about 7.46 million HTML characters, including roughly 473 KB on the homepage. Extracted SVG content was compared with source instances and parsed as XML; no relative resource URLs were found. Local production build passed. Total first-visit bytes and browser paint time have not been measured; rendered/hydration behavior requires browser QA. Domain release hold remains in force.
