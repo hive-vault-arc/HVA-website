@@ -325,3 +325,29 @@ a:is([href="https://x.com"],[href="https://x.com/"],[href="https://facebook.com"
 }
 
 #hva-skip-link[hidden] { display: none !important; }
+
+/* Two contact modes remain after removing the inherited job application tab. */
+.framer-aUq9O .framer-zsw4nl {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 400px !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+  align-items: stretch;
+  gap: 5px;
+}
+.framer-aUq9O .framer-zsw4nl > .framer-u9wl44-container {
+  display: none !important;
+}
+.framer-aUq9O .framer-zsw4nl > :is(.framer-myvvf0-container, .framer-2nonx5-container) {
+  width: auto !important;
+  min-width: 0;
+  height: 50px;
+}
+.framer-aUq9O .framer-zsw4nl .framer-K3um8 {
+  box-sizing: border-box;
+  justify-content: center;
+}
+@media (max-width: 600px) {
+  .framer-aUq9O .framer-zsw4nl { width: 100% !important; }
+}
