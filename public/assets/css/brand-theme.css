@@ -351,3 +351,15 @@ a:is([href="https://x.com"],[href="https://x.com/"],[href="https://facebook.com"
 @media (max-width: 600px) {
   .framer-aUq9O .framer-zsw4nl { width: 100% !important; }
 }
+
+/* Keep both tab states stretched even when Framer swaps variant wrappers. */
+.framer-aUq9O .framer-zsw4nl > :not(.framer-u9wl44-container) {
+  width: 100% !important;
+  min-width: 0 !important;
+  justify-self: stretch;
+}
+.framer-aUq9O .framer-zsw4nl .framer-K3um8 {
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 100% !important;
+}
