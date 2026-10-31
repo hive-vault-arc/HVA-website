@@ -1,0 +1,861 @@
+{
+  "changed_files": [
+    "public/about-us.html",
+    "public/assets/animate/29esqK2Fqhhi6pTRmzbtM2lk3CGnGBOzZ5Ghvns585Q.C7QJJ2uG.mjs",
+    "public/assets/animate/bKruenimQ.CqW1DcDo.mjs",
+    "public/assets/animate/O6AphEqlk.CncYuj28.mjs",
+    "public/assets/animate/OX5tXq3N-ijsisWBdLsmBwcskIrB-45Qz026X1iZIjE.BxXRi1d8.mjs",
+    "public/assets/animate/QgNme7WW6ytcz-RJPs-AJr4DOvTxXR6JG6MHNoQt7gI.RNdnNz9r.mjs",
+    "public/assets/animate/RhXgtsQD10vA81L0Mr_DcxleqVhHgODGV-sNg9T1p34.BFmx3GZ5.mjs",
+    "public/assets/animate/u14O65Rfz.C5t5Bnqb.mjs",
+    "public/assets/animate/UUiunbxNoVAgpRUkNQuHzx1MyzcFxVv7tf-hRwCEE70.BtnlyNpv.mjs",
+    "public/assets/animate/WHlZAavCLDER2yQvxo4740gXtq9jg70K73-CVpc98tI.DJQC9LeY.mjs",
+    "public/assets/js/29esqK2Fqhhi6pTRmzbtM2lk3CGnGBOzZ5Ghvns585Q.C7QJJ2uG-1233e11e.js",
+    "public/assets/js/29esqK2Fqhhi6pTRmzbtM2lk3CGnGBOzZ5Ghvns585Q.C7QJJ2uG.mjs",
+    "public/assets/js/bKruenimQ.CqW1DcDo-afd97320.js",
+    "public/assets/js/bKruenimQ.CqW1DcDo.mjs",
+    "public/assets/js/O6AphEqlk.CncYuj28-d9d2bf93.js",
+    "public/assets/js/O6AphEqlk.CncYuj28.mjs",
+    "public/assets/js/OX5tXq3N-ijsisWBdLsmBwcskIrB-45Qz026X1iZIjE.BxXRi1d8-1194ba6d.js",
+    "public/assets/js/OX5tXq3N-ijsisWBdLsmBwcskIrB-45Qz026X1iZIjE.BxXRi1d8.mjs",
+    "public/assets/js/QgNme7WW6ytcz-RJPs-AJr4DOvTxXR6JG6MHNoQt7gI.RNdnNz9r-1a19a6a2.js",
+    "public/assets/js/QgNme7WW6ytcz-RJPs-AJr4DOvTxXR6JG6MHNoQt7gI.RNdnNz9r.mjs",
+    "public/assets/js/RhXgtsQD10vA81L0Mr_DcxleqVhHgODGV-sNg9T1p34.BFmx3GZ5-30f403e2.js",
+    "public/assets/js/RhXgtsQD10vA81L0Mr_DcxleqVhHgODGV-sNg9T1p34.BFmx3GZ5.mjs",
+    "public/assets/js/u14O65Rfz.C5t5Bnqb-2166111c.js",
+    "public/assets/js/u14O65Rfz.C5t5Bnqb.mjs",
+    "public/assets/js/UUiunbxNoVAgpRUkNQuHzx1MyzcFxVv7tf-hRwCEE70.BtnlyNpv-97342131.js",
+    "public/assets/js/UUiunbxNoVAgpRUkNQuHzx1MyzcFxVv7tf-hRwCEE70.BtnlyNpv.mjs",
+    "public/assets/js/WHlZAavCLDER2yQvxo4740gXtq9jg70K73-CVpc98tI.DJQC9LeY-3c129d6c.js",
+    "public/assets/js/WHlZAavCLDER2yQvxo4740gXtq9jg70K73-CVpc98tI.DJQC9LeY.mjs",
+    "public/blog/beyond-the-text-box-engineering-autonomous-workflows-over-agency-free-chat.html",
+    "public/blog/building-decision-engines-instead-of-chat-interfaces.html",
+    "public/blog/designing-multi-layer-ai-systems-for-real-world-operations.html",
+    "public/blog/from-conversation-to-conclusion-why-your-product-needs-outcomes-not-dialogue.html",
+    "public/blog/from-fragmented-data-to-unified-intelligence-engines.html",
+    "public/blog/from-manual-bottlenecks-to-autonomous-growth-at-scale.html",
+    "public/blog/from-prompts-to-pipelines-architecting-intentional-intelligence-over-reactive-replies.html",
+    "public/blog/from-workflow-chaos-to-structured-automation-pipelines.html",
+    "public/blog/stop-prompting-start-predicting-transitioning-from-llms-to-logic-layers.html",
+    "public/blog/the-autonomy-leap-moving-from-conversation-as-interface-to-outcome-as-service.html",
+    "public/blog/why-most-ai-deployments-fail-in-production-environments.html",
+    "public/blog.html",
+    "public/career.html",
+    "public/cases/cinderbay-retail-group.html",
+    "public/cases/heliodesk-platforms.html",
+    "public/cases/ironpeak-industrial-manufacturing.html",
+    "public/cases/lumenarc-energy.html",
+    "public/cases/northbridge-education.html",
+    "public/cases/orbitra-systems.html",
+    "public/cases/vectorlane-mobility-network.html",
+    "public/cases.html",
+    "public/contacts.html",
+    "public/fr/about-us.html",
+    "public/fr/blog/from-fragmented-data-to-unified-intelligence-engines.html",
+    "public/fr/blog.html",
+    "public/fr/career.html",
+    "public/fr/cases.html",
+    "public/fr/contacts.html",
+    "public/fr/legal.html",
+    "public/fr/policy.html",
+    "public/fr/terms.html",
+    "public/fr.html",
+    "public/index.html",
+    "public/legal.html",
+    "public/policy.html",
+    "public/terms.html"
+  ],
+  "replacements": 1244,
+  "variants": [
+    {
+      "source": "assets/images/image-d2ec2149.png",
+      "edge": 512,
+      "width": 512,
+      "height": 256,
+      "source_bytes": 47384,
+      "variant_bytes": 10070,
+      "url": "/assets/optimized/e625c131a43332577a5a.webp"
+    },
+    {
+      "source": "assets/images/image-cd0e8ab4.jpg",
+      "edge": 512,
+      "width": 384,
+      "height": 512,
+      "source_bytes": 37913,
+      "variant_bytes": 24548,
+      "url": "/assets/optimized/9befea358014093d8a29.webp"
+    },
+    {
+      "source": "assets/images/image-a580302d.jpg",
+      "edge": 512,
+      "width": 410,
+      "height": 512,
+      "source_bytes": 39846,
+      "variant_bytes": 30936,
+      "url": "/assets/optimized/382c747982bb850d0719.webp"
+    },
+    {
+      "source": "assets/images/image-6789ca09.png",
+      "edge": 512,
+      "width": 512,
+      "height": 341,
+      "source_bytes": 481607,
+      "variant_bytes": 21988,
+      "url": "/assets/optimized/ca3807b98224c7c920dc.webp"
+    },
+    {
+      "source": "assets/images/image-6789ca09.png",
+      "edge": 1024,
+      "width": 1024,
+      "height": 683,
+      "source_bytes": 481607,
+      "variant_bytes": 55512,
+      "url": "/assets/optimized/a787e580a1aa96d2e6ea.webp"
+    },
+    {
+      "source": "assets/images/image-ea88b3ac.png",
+      "edge": 512,
+      "width": 512,
+      "height": 341,
+      "source_bytes": 768130,
+      "variant_bytes": 54220,
+      "url": "/assets/optimized/63f5451f8545d9b51af6.webp"
+    },
+    {
+      "source": "assets/images/image-ea88b3ac.png",
+      "edge": 1024,
+      "width": 1024,
+      "height": 683,
+      "source_bytes": 768130,
+      "variant_bytes": 158342,
+      "url": "/assets/optimized/c1f740ff5e92ca0f3a78.webp"
+    },
+    {
+      "source": "assets/images/image-4a0b8d0d.png",
+      "edge": 512,
+      "width": 512,
+      "height": 512,
+      "source_bytes": 150320,
+      "variant_bytes": 41198,
+      "url": "/assets/optimized/ad1047b9675fef512fc7.webp"
+    },
+    {
+      "source": "assets/images/image-99834282.png",
+      "edge": 512,
+      "width": 512,
+      "height": 341,
+      "source_bytes": 545509,
+      "variant_bytes": 33786,
+      "url": "/assets/optimized/a535ab05bf262496e269.webp"
+    },
+    {
+      "source": "assets/images/image-99834282.png",
+      "edge": 1024,
+      "width": 1024,
+      "height": 683,
+      "source_bytes": 545509,
+      "variant_bytes": 90412,
+      "url": "/assets/optimized/51e14fb4527b5cb42239.webp"
+    },
+    {
+      "source": "assets/images/image-978d72c0.png",
+      "edge": 512,
+      "width": 512,
+      "height": 341,
+      "source_bytes": 363257,
+      "variant_bytes": 30178,
+      "url": "/assets/optimized/8a3716aa0e73c6727043.webp"
+    },
+    {
+      "source": "assets/images/image-978d72c0.png",
+      "edge": 1024,
+      "width": 1024,
+      "height": 682,
+      "source_bytes": 363257,
+      "variant_bytes": 80146,
+      "url": "/assets/optimized/f2e9530361b8c3faa6c0.webp"
+    },
+    {
+      "source": "assets/images/image-7b22f9eb.png",
+      "edge": 512,
+      "width": 512,
+      "height": 341,
+      "source_bytes": 88860,
+      "variant_bytes": 25634,
+      "url": "/assets/optimized/81c4b5fe158450126bee.webp"
+    },
+    {
+      "source": "assets/images/image-7b22f9eb.png",
+      "edge": 1024,
+      "width": 512,
+      "height": 341,
+      "source_bytes": 88860,
+      "variant_bytes": 25634,
+      "url": "/assets/optimized/81c4b5fe158450126bee.webp"
+    },
+    {
+      "source": "assets/images/image-4ec2778d.png",
+      "edge": 512,
+      "width": 512,
+      "height": 512,
+      "source_bytes": 149284,
+      "variant_bytes": 55882,
+      "url": "/assets/optimized/c17dbda00a1b5840314b.webp"
+    },
+    {
+      "source": "assets/images/image-292c3d38.png",
+      "edge": 512,
+      "width": 512,
+      "height": 341,
+      "source_bytes": 328229,
+      "variant_bytes": 24378,
+      "url": "/assets/optimized/45fd90c4c9e564a9abe1.webp"
+    },
+    {
+      "source": "assets/images/image-292c3d38.png",
+      "edge": 1024,
+      "width": 1024,
+      "height": 682,
+      "source_bytes": 328229,
+      "variant_bytes": 67050,
+      "url": "/assets/optimized/b19d7131189af688db78.webp"
+    },
+    {
+      "source": "assets/images/image-80de5472.png",
+      "edge": 512,
+      "width": 512,
+      "height": 384,
+      "source_bytes": 120889,
+      "variant_bytes": 49882,
+      "url": "/assets/optimized/1c402996b857f01a9a12.webp"
+    },
+    {
+      "source": "assets/images/image-80de5472.png",
+      "edge": 1024,
+      "width": 512,
+      "height": 384,
+      "source_bytes": 120889,
+      "variant_bytes": 49882,
+      "url": "/assets/optimized/1c402996b857f01a9a12.webp"
+    },
+    {
+      "source": "assets/images/image-5bf31b46.png",
+      "edge": 512,
+      "width": 512,
+      "height": 512,
+      "source_bytes": 169842,
+      "variant_bytes": 28540,
+      "url": "/assets/optimized/71080b55767ba0a61d17.webp"
+    },
+    {
+      "source": "assets/images/image-e057f1c7.png",
+      "edge": 512,
+      "width": 512,
+      "height": 512,
+      "source_bytes": 131272,
+      "variant_bytes": 14870,
+      "url": "/assets/optimized/5353b5e99db5a0a3bb68.webp"
+    },
+    {
+      "source": "assets/images/image-f0ae8f40.png",
+      "edge": 512,
+      "width": 512,
+      "height": 512,
+      "source_bytes": 165375,
+      "variant_bytes": 28934,
+      "url": "/assets/optimized/3d9fc00cc7acc57d93a5.webp"
+    },
+    {
+      "source": "assets/images/image-f060b055.png",
+      "edge": 512,
+      "width": 512,
+      "height": 512,
+      "source_bytes": 135216,
+      "variant_bytes": 19168,
+      "url": "/assets/optimized/a2e62df67a4c3224de1d.webp"
+    },
+    {
+      "source": "assets/images/image-6852f4ea.png",
+      "edge": 512,
+      "width": 512,
+      "height": 512,
+      "source_bytes": 117468,
+      "variant_bytes": 14286,
+      "url": "/assets/optimized/6e083fccd7cd2cc600a9.webp"
+    },
+    {
+      "source": "assets/images/image-f3c78b17.png",
+      "edge": 512,
+      "width": 512,
+      "height": 341,
+      "source_bytes": 84677,
+      "variant_bytes": 28268,
+      "url": "/assets/optimized/16e1f0b82965393e6cd5.webp"
+    },
+    {
+      "source": "assets/images/image-f3c78b17.png",
+      "edge": 1024,
+      "width": 512,
+      "height": 341,
+      "source_bytes": 84677,
+      "variant_bytes": 28268,
+      "url": "/assets/optimized/16e1f0b82965393e6cd5.webp"
+    },
+    {
+      "source": "assets/images/image-f53f99ad.png",
+      "edge": 1024,
+      "width": 683,
+      "height": 1024,
+      "source_bytes": 674708,
+      "variant_bytes": 212216,
+      "url": "/assets/optimized/762ee21eeaf67e0afe14.webp"
+    },
+    {
+      "source": "assets/images/image-39727429.png",
+      "edge": 512,
+      "width": 512,
+      "height": 341,
+      "source_bytes": 92228,
+      "variant_bytes": 33226,
+      "url": "/assets/optimized/5d7075c075f44c9dffcc.webp"
+    },
+    {
+      "source": "assets/images/image-39727429.png",
+      "edge": 1024,
+      "width": 512,
+      "height": 341,
+      "source_bytes": 92228,
+      "variant_bytes": 33226,
+      "url": "/assets/optimized/5d7075c075f44c9dffcc.webp"
+    },
+    {
+      "source": "assets/images/image-4f0ad922.png",
+      "edge": 1024,
+      "width": 683,
+      "height": 1024,
+      "source_bytes": 547381,
+      "variant_bytes": 171082,
+      "url": "/assets/optimized/dda351b1ccba680913d4.webp"
+    },
+    {
+      "source": "assets/images/image-2837c752.png",
+      "edge": 512,
+      "width": 512,
+      "height": 385,
+      "source_bytes": 73436,
+      "variant_bytes": 11390,
+      "url": "/assets/optimized/dbf3176b5d384ac89119.webp"
+    },
+    {
+      "source": "assets/images/image-2837c752.png",
+      "edge": 1024,
+      "width": 512,
+      "height": 385,
+      "source_bytes": 73436,
+      "variant_bytes": 11390,
+      "url": "/assets/optimized/dbf3176b5d384ac89119.webp"
+    },
+    {
+      "source": "assets/images/image-c6cf58b8.png",
+      "edge": 512,
+      "width": 512,
+      "height": 341,
+      "source_bytes": 63138,
+      "variant_bytes": 5356,
+      "url": "/assets/optimized/81cb7c0e3ca16dd3aaa3.webp"
+    },
+    {
+      "source": "assets/images/image-c6cf58b8.png",
+      "edge": 1024,
+      "width": 512,
+      "height": 341,
+      "source_bytes": 63138,
+      "variant_bytes": 5356,
+      "url": "/assets/optimized/81cb7c0e3ca16dd3aaa3.webp"
+    },
+    {
+      "source": "assets/images/image-16589f7b.png",
+      "edge": 1024,
+      "width": 683,
+      "height": 1024,
+      "source_bytes": 71001,
+      "variant_bytes": 24030,
+      "url": "/assets/optimized/94a8e2745398e5187bda.webp"
+    },
+    {
+      "source": "assets/images/image-5ba75e0a.png",
+      "edge": 512,
+      "width": 512,
+      "height": 341,
+      "source_bytes": 94268,
+      "variant_bytes": 16712,
+      "url": "/assets/optimized/b1ef1d12bb2292aee6ee.webp"
+    },
+    {
+      "source": "assets/images/image-5ba75e0a.png",
+      "edge": 1024,
+      "width": 512,
+      "height": 341,
+      "source_bytes": 94268,
+      "variant_bytes": 16712,
+      "url": "/assets/optimized/b1ef1d12bb2292aee6ee.webp"
+    },
+    {
+      "source": "assets/images/image-5f3e599b.jpg",
+      "edge": 512,
+      "width": 384,
+      "height": 512,
+      "source_bytes": 42433,
+      "variant_bytes": 29466,
+      "url": "/assets/optimized/b5336576e8ba75a74b00.webp"
+    },
+    {
+      "source": "assets/images/image-761f9844.png",
+      "edge": 512,
+      "width": 512,
+      "height": 341,
+      "source_bytes": 437255,
+      "variant_bytes": 23238,
+      "url": "/assets/optimized/de518bdaaa0826b58662.webp"
+    },
+    {
+      "source": "assets/images/image-761f9844.png",
+      "edge": 1024,
+      "width": 1024,
+      "height": 682,
+      "source_bytes": 437255,
+      "variant_bytes": 61844,
+      "url": "/assets/optimized/3b5fdc01615592cbc3f6.webp"
+    },
+    {
+      "source": "assets/images/image-3f007442.png",
+      "edge": 1024,
+      "width": 683,
+      "height": 1024,
+      "source_bytes": 124742,
+      "variant_bytes": 26246,
+      "url": "/assets/optimized/2ea404bfa4315d753ab4.webp"
+    },
+    {
+      "source": "assets/images/image-db3f97df.png",
+      "edge": 512,
+      "width": 512,
+      "height": 287,
+      "source_bytes": 112469,
+      "variant_bytes": 7108,
+      "url": "/assets/optimized/3b5272672d0a5b3fbb23.webp"
+    },
+    {
+      "source": "assets/images/image-db3f97df.png",
+      "edge": 1024,
+      "width": 1024,
+      "height": 574,
+      "source_bytes": 112469,
+      "variant_bytes": 32190,
+      "url": "/assets/optimized/9bc5d673e0a16824e9fc.webp"
+    },
+    {
+      "source": "assets/images/image-839fb72e.png",
+      "edge": 512,
+      "width": 512,
+      "height": 512,
+      "source_bytes": 154763,
+      "variant_bytes": 30794,
+      "url": "/assets/optimized/59b4fc6942507111248a.webp"
+    },
+    {
+      "source": "assets/images/image-c3138fb8.png",
+      "edge": 1024,
+      "width": 847,
+      "height": 1024,
+      "source_bytes": 142735,
+      "variant_bytes": 49554,
+      "url": "/assets/optimized/8e95df6323b308439add.webp"
+    },
+    {
+      "source": "assets/images/image-0509d03f.png",
+      "edge": 1024,
+      "width": 847,
+      "height": 1024,
+      "source_bytes": 240108,
+      "variant_bytes": 114360,
+      "url": "/assets/optimized/bd4f50d82f4e533ace7e.webp"
+    },
+    {
+      "source": "assets/images/image-0d25f8f1.png",
+      "edge": 1024,
+      "width": 847,
+      "height": 1024,
+      "source_bytes": 429575,
+      "variant_bytes": 193452,
+      "url": "/assets/optimized/8de057b6987cd2ebe2a5.webp"
+    },
+    {
+      "source": "assets/images/image-c5f72374.png",
+      "edge": 1024,
+      "width": 847,
+      "height": 1024,
+      "source_bytes": 266396,
+      "variant_bytes": 42554,
+      "url": "/assets/optimized/7acf13f8db54e8ade7b4.webp"
+    },
+    {
+      "source": "assets/images/image-855b70b4.png",
+      "edge": 1024,
+      "width": 847,
+      "height": 1024,
+      "source_bytes": 489008,
+      "variant_bytes": 219122,
+      "url": "/assets/optimized/68dbbaf33d0d7893db54.webp"
+    },
+    {
+      "source": "assets/images/image-eb515b3a.png",
+      "edge": 1024,
+      "width": 771,
+      "height": 1024,
+      "source_bytes": 171977,
+      "variant_bytes": 33066,
+      "url": "/assets/optimized/c35db2492e5c3bbc499f.webp"
+    },
+    {
+      "source": "assets/images/image-1c3d43a6.png",
+      "edge": 1024,
+      "width": 847,
+      "height": 1024,
+      "source_bytes": 325709,
+      "variant_bytes": 118256,
+      "url": "/assets/optimized/204a82b7dd034ff13e00.webp"
+    },
+    {
+      "source": "assets/images/image-8fe9843f.png",
+      "edge": 512,
+      "width": 512,
+      "height": 512,
+      "source_bytes": 137303,
+      "variant_bytes": 22912,
+      "url": "/assets/optimized/35661b2adb8f5cb9814a.webp"
+    },
+    {
+      "source": "assets/images/image-8809d30d.png",
+      "edge": 1024,
+      "width": 683,
+      "height": 1024,
+      "source_bytes": 209223,
+      "variant_bytes": 42060,
+      "url": "/assets/optimized/0c92c02c38d112d633b2.webp"
+    },
+    {
+      "source": "assets/images/image-a2b20780.png",
+      "edge": 1024,
+      "width": 683,
+      "height": 1024,
+      "source_bytes": 283334,
+      "variant_bytes": 72540,
+      "url": "/assets/optimized/118e50c8139a3ed3fe12.webp"
+    },
+    {
+      "source": "assets/images/image-a6986b25.png",
+      "edge": 512,
+      "width": 512,
+      "height": 341,
+      "source_bytes": 458036,
+      "variant_bytes": 22366,
+      "url": "/assets/optimized/2d05fef39e135ad0c867.webp"
+    },
+    {
+      "source": "assets/images/image-a6986b25.png",
+      "edge": 1024,
+      "width": 1024,
+      "height": 683,
+      "source_bytes": 458036,
+      "variant_bytes": 56542,
+      "url": "/assets/optimized/f4a7ea7d577c28d6d952.webp"
+    },
+    {
+      "source": "assets/images/image-35264899.png",
+      "edge": 1024,
+      "width": 768,
+      "height": 1024,
+      "source_bytes": 695880,
+      "variant_bytes": 59910,
+      "url": "/assets/optimized/73eaeee7ca8f733585ee.webp"
+    },
+    {
+      "source": "assets/images/image-0599578f.png",
+      "edge": 512,
+      "width": 512,
+      "height": 410,
+      "source_bytes": 1142319,
+      "variant_bytes": 20248,
+      "url": "/assets/optimized/b39791afdc7ceea044ba.webp"
+    },
+    {
+      "source": "assets/images/image-0599578f.png",
+      "edge": 1024,
+      "width": 1024,
+      "height": 820,
+      "source_bytes": 1142319,
+      "variant_bytes": 54008,
+      "url": "/assets/optimized/abaa11fe898f5546028a.webp"
+    },
+    {
+      "source": "assets/images/image-0599578f.png",
+      "edge": 2048,
+      "width": 2048,
+      "height": 1640,
+      "source_bytes": 1142319,
+      "variant_bytes": 204360,
+      "url": "/assets/optimized/be33f38f2d0e5c809ad8.webp"
+    },
+    {
+      "source": "assets/images/image-0dd6e8c8.png",
+      "edge": 512,
+      "width": 512,
+      "height": 512,
+      "source_bytes": 120428,
+      "variant_bytes": 24820,
+      "url": "/assets/optimized/11106fc073663e5e7272.webp"
+    },
+    {
+      "source": "assets/images/image-2b276a23.png",
+      "edge": 512,
+      "width": 512,
+      "height": 341,
+      "source_bytes": 578663,
+      "variant_bytes": 29314,
+      "url": "/assets/optimized/ff97fd3e38e5ff816ce0.webp"
+    },
+    {
+      "source": "assets/images/image-2b276a23.png",
+      "edge": 1024,
+      "width": 1024,
+      "height": 683,
+      "source_bytes": 578663,
+      "variant_bytes": 82974,
+      "url": "/assets/optimized/0b146b6a22b231beac97.webp"
+    },
+    {
+      "source": "assets/images/image-dbdacc3f.jpg",
+      "edge": 1024,
+      "width": 768,
+      "height": 1024,
+      "source_bytes": 164998,
+      "variant_bytes": 116442,
+      "url": "/assets/optimized/da1bff2195acb45ad652.webp"
+    },
+    {
+      "source": "assets/images/image-dbdacc3f.jpg",
+      "edge": 2048,
+      "width": 1024,
+      "height": 1365,
+      "source_bytes": 164998,
+      "variant_bytes": 177316,
+      "url": "/assets/optimized/c4f75b67e60e4f7b57df.webp"
+    },
+    {
+      "source": "assets/images/image-694703c6.jpg",
+      "edge": 512,
+      "width": 512,
+      "height": 287,
+      "source_bytes": 270563,
+      "variant_bytes": 10056,
+      "url": "/assets/optimized/c330ffe100e2921e7f93.webp"
+    },
+    {
+      "source": "assets/images/image-694703c6.jpg",
+      "edge": 1024,
+      "width": 1024,
+      "height": 574,
+      "source_bytes": 270563,
+      "variant_bytes": 49496,
+      "url": "/assets/optimized/ff833581f84c569a2cc9.webp"
+    },
+    {
+      "source": "assets/images/image-694703c6.jpg",
+      "edge": 2048,
+      "width": 2048,
+      "height": 1148,
+      "source_bytes": 270563,
+      "variant_bytes": 197436,
+      "url": "/assets/optimized/14caa8e1c70521eab673.webp"
+    },
+    {
+      "source": "assets/images/image-6748fe3b.png",
+      "edge": 512,
+      "width": 512,
+      "height": 341,
+      "source_bytes": 407984,
+      "variant_bytes": 4044,
+      "url": "/assets/optimized/f3fd8b02f950e819ef03.webp"
+    },
+    {
+      "source": "assets/images/image-6748fe3b.png",
+      "edge": 1024,
+      "width": 1024,
+      "height": 683,
+      "source_bytes": 407984,
+      "variant_bytes": 12638,
+      "url": "/assets/optimized/f8e93cf7c387b79168b1.webp"
+    },
+    {
+      "source": "assets/images/image-6748fe3b.png",
+      "edge": 2048,
+      "width": 2048,
+      "height": 1365,
+      "source_bytes": 407984,
+      "variant_bytes": 126516,
+      "url": "/assets/optimized/5ce393766a4104ef627b.webp"
+    },
+    {
+      "source": "assets/images/image-27341a9f.png",
+      "edge": 512,
+      "width": 512,
+      "height": 341,
+      "source_bytes": 557140,
+      "variant_bytes": 8278,
+      "url": "/assets/optimized/44c82cd6f6231c5873a7.webp"
+    },
+    {
+      "source": "assets/images/image-27341a9f.png",
+      "edge": 1024,
+      "width": 1024,
+      "height": 683,
+      "source_bytes": 557140,
+      "variant_bytes": 41788,
+      "url": "/assets/optimized/98ba5c495bc826e061c3.webp"
+    },
+    {
+      "source": "assets/images/image-27341a9f.png",
+      "edge": 2048,
+      "width": 2048,
+      "height": 1365,
+      "source_bytes": 557140,
+      "variant_bytes": 358350,
+      "url": "/assets/optimized/2f851e5b3b8ee7680bb3.webp"
+    },
+    {
+      "source": "assets/images/image-120706d3.png",
+      "edge": 512,
+      "width": 512,
+      "height": 341,
+      "source_bytes": 269235,
+      "variant_bytes": 2814,
+      "url": "/assets/optimized/9bbe58d8747450f806da.webp"
+    },
+    {
+      "source": "assets/images/image-120706d3.png",
+      "edge": 1024,
+      "width": 1024,
+      "height": 683,
+      "source_bytes": 269235,
+      "variant_bytes": 7916,
+      "url": "/assets/optimized/0fd3513ca9e3b1f870f0.webp"
+    },
+    {
+      "source": "assets/images/image-120706d3.png",
+      "edge": 2048,
+      "width": 2048,
+      "height": 1365,
+      "source_bytes": 269235,
+      "variant_bytes": 138642,
+      "url": "/assets/optimized/8db1b5d0360600e6ba10.webp"
+    },
+    {
+      "source": "assets/images/image-1e157d6d.png",
+      "edge": 512,
+      "width": 512,
+      "height": 341,
+      "source_bytes": 109960,
+      "variant_bytes": 12620,
+      "url": "/assets/optimized/d5a63618aecb334b5400.webp"
+    },
+    {
+      "source": "assets/images/image-1e157d6d.png",
+      "edge": 1024,
+      "width": 1024,
+      "height": 683,
+      "source_bytes": 109960,
+      "variant_bytes": 39556,
+      "url": "/assets/optimized/baab699318138af3470a.webp"
+    },
+    {
+      "source": "assets/images/image-ea091d80.png",
+      "edge": 1024,
+      "width": 559,
+      "height": 1024,
+      "source_bytes": 195735,
+      "variant_bytes": 22434,
+      "url": "/assets/optimized/d537ef832e8a97d60b58.webp"
+    },
+    {
+      "source": "assets/images/image-ea091d80.png",
+      "edge": 2048,
+      "width": 1117,
+      "height": 2048,
+      "source_bytes": 195735,
+      "variant_bytes": 85022,
+      "url": "/assets/optimized/0640dce7d9f5021b9cc3.webp"
+    },
+    {
+      "source": "assets/images/image-fb9c5e03.png",
+      "edge": 1024,
+      "width": 989,
+      "height": 1024,
+      "source_bytes": 448649,
+      "variant_bytes": 179164,
+      "url": "/assets/optimized/87f861cb31c17712231d.webp"
+    },
+    {
+      "source": "assets/images/image-ed30adcb.png",
+      "edge": 1024,
+      "width": 771,
+      "height": 1024,
+      "source_bytes": 544609,
+      "variant_bytes": 15860,
+      "url": "/assets/optimized/15812124cbb9a5af2be5.webp"
+    },
+    {
+      "source": "assets/images/image-ed30adcb.png",
+      "edge": 2048,
+      "width": 1543,
+      "height": 2048,
+      "source_bytes": 544609,
+      "variant_bytes": 147216,
+      "url": "/assets/optimized/743f80247558a7c8fbe1.webp"
+    }
+  ],
+  "missing_source_images": [
+    "image-0798292c.png",
+    "image-0b8d48e2.png",
+    "image-0c87f467.jpg",
+    "image-1916934f.png",
+    "image-21a21293.png",
+    "image-2e2f289d.png",
+    "image-328f2bda.png",
+    "image-3b43f477.png",
+    "image-3f571c67.png",
+    "image-46fa906d.png",
+    "image-4faae907.jpg",
+    "image-5d514520.png",
+    "image-5fdef0d4.png",
+    "image-78c0b330.jpg",
+    "image-7d5337b7.png",
+    "image-86628895.png",
+    "image-8e96b015.png",
+    "image-91ecd7f5.png",
+    "image-93b1b11c.png",
+    "image-941a4464.jpg",
+    "image-997509df.png",
+    "image-a0f55cf1.jpg",
+    "image-a72d239e.png",
+    "image-a812572e.png",
+    "image-b0a61922.png",
+    "image-bfdaba2b.jpg",
+    "image-d1a83d6f.png",
+    "image-d75dfb33.jpg",
+    "image-d8319533.png",
+    "image-efec5797.png"
+  ],
+  "binary_cms": "Preserved unchanged; binary CMS may still supply original image URLs.",
+  "quality": "WebP quality 90, Lanczos resize, alpha preserved; visual QA pending."
+}
