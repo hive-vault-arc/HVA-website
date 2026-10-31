@@ -270,3 +270,8 @@ Added a focus-visible Skip to main content link on the English/French homepages,
 ## Restore gentler scrolling feel (31 October 2026)
 
 User requested slower, smoother scrolling. Comparison confirmed the original and current Lenis settings were identical (duration 2, wheel multiplier 1.1); prior loading work did not change those settings. To match the requested feel, the build tunes the existing mounted smooth-scroll component to duration 2.4 and wheel multiplier 0.85. Existing easing, smooth-wheel mode, touch multiplier 1 and syncTouch false are retained. Three entry-bundle copies were checked; local build passed. Actual feel requires user/browser confirmation. Preserve this scroll preference in future optimizations. Hero video and live-domain hold remain unchanged.
+
+
+## Build output regression checks (31 October 2026)
+
+Consolidated the existing preparation steps in their original order into prepare_export.cjs, followed by verify_export.cjs before Next builds. Checks cover generated CSS/SVG/WebP/contact-helper existence and content fingerprints (including srcset references), canonical/sitemap agreement, crawler policy, inherited form endpoints, video-source existence and the user-approved scrolling values. The local run passed 49 pages and 996 generated asset references. A temporary missing-CSS fixture correctly blocked validation and was restored. The full production build passed. `npm run check:export` repeats the artifact checks after preparation; 150 HTTP checks remain separate. These gates do not claim rendered, focus, real email delivery or measured speed verification.
