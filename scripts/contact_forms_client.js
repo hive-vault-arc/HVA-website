@@ -41,6 +41,15 @@
     root.querySelectorAll?.(selector).forEach(prepare);
   }
 
+  document.addEventListener("click", (event) => {
+    const link = event.target.closest?.("a");
+    if (!link || link.textContent.trim().toLowerCase() !== email) return;
+    // Override inherited home-page React routing on visible email links.
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    window.location.href = `mailto:${email}`;
+  }, true);
+
   document.addEventListener("submit", (event) => {
     const form = event.target;
     if (!(form instanceof HTMLFormElement) || !form.matches(selector)) return;

@@ -275,3 +275,8 @@ User requested slower, smoother scrolling. Comparison confirmed the original and
 ## Build output regression checks (31 October 2026)
 
 Consolidated the existing preparation steps in their original order into prepare_export.cjs, followed by verify_export.cjs before Next builds. Checks cover generated CSS/SVG/WebP/contact-helper existence and content fingerprints (including srcset references), canonical/sitemap agreement, crawler policy, inherited form endpoints, video-source existence and the user-approved scrolling values. The local run passed 49 pages and 996 generated asset references. A temporary missing-CSS fixture correctly blocked validation and was restored. The full production build passed. `npm run check:export` repeats the artifact checks after preparation; 150 HTTP checks remain separate. These gates do not claim rendered, focus, real email delivery or measured speed verification.
+
+
+## Remaining template contact addresses (31 October 2026)
+
+Build source cleanup replaces hello@quantumflux.top and case variants of quantumsupport@gmail.com with contact@hivevaultarc.com in HTML/runtime source, and uses you@example.com for the sample input placeholder. Static visible email links receive mailto destinations. The contact adapter captures exact visible HVA email links so inherited internal-home React routing cannot redirect those clicks. Other links are untouched; observer batching is preserved. All-page email-source checks, click-routing contract checks and the local production build passed. Legal wording, approved scrolling, hero video and domain hold remain unchanged; real email-app behavior still needs browser QA.

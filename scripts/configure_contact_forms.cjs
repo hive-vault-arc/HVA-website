@@ -20,7 +20,14 @@ function visit(directory) {
     });
     // Load the adapter on every page: Framer can mount a contact form after
     // client navigation even when the initial document contains no form.
+    after = after.replace(/hello@quantumflux\.top|quantumsupport@gmail\.com/gi, "contact@hivevaultarc.com")
+      .replaceAll("jane@framer.com", "you@example.com");
     if (entry.name.endsWith(".html")) {
+      after = after.replace(/<a\b([^>]*)>([\s\S]*?)<\/a>/g, (anchor, attributes, content) => {
+        if (!content.includes("contact@hivevaultarc.com")) return anchor;
+        const fixed = attributes.replace(/\bhref="[^"]*"/, 'href="mailto:contact@hivevaultarc.com"');
+        return "<a" + fixed + ">" + content + "</a>";
+      });
       after = after.replace(/<script\b[^>]*data-hva-contact[^>]*><\/script>/g, "");
       after = after.replace("</head>", `<script src="${clientPath}" defer data-hva-contact></script></head>`);
       after = after.replace(/<form\b[^>]*class="framer-(?:txifz4|vswvir)"[^>]*>/g, (tag) => {
