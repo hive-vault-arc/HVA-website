@@ -245,3 +245,8 @@ Replaced the duplicated generic titles on 16 main English/French pages with rout
 ## Large inline SVG images (31 October 2026)
 
 Large data-URI SVG image sources are extracted to four SHA-256-named reusable files at build time. Small icons stay inline. Local processing removed about 7.46 million HTML characters, including roughly 473 KB on the homepage. Extracted SVG content was compared with source instances and parsed as XML; no relative resource URLs were found. Local production build passed. Total first-visit bytes and browser paint time have not been measured; rendered/hydration behavior requires browser QA. Domain release hold remains in force.
+
+
+## Early hero font discovery (31 October 2026)
+
+The English/French homepages preload only the existing normal-weight-700 Plus Jakarta Sans WOFF2 used by the hero heading (40,748 bytes). The hint uses the same URL as font-face, with anonymous CORS, and is inserted once after charset. Repeated execution preserves one hint per homepage; local checks and production build passed. No measured speed gain is claimed. User explicitly requested retaining the hero video for now; its source, autoplay and playback behavior were not changed.
