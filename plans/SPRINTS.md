@@ -290,3 +290,12 @@ Recorded a local baseline comparison in PERFORMANCE-SIZES.md. Homepage HTML is 4
 ## Partial browser review (31 October 2026)
 
 Three bounded browser sessions accessed the authorized temporary dev share. Reported smooth desktop scrolling, readable hero content and visible email-draft instructions, but reports conflict about video/icon presence. Direct deployed HTML and branding-script fetches confirmed video elements, icon slots and the logo replacement code are delivered. This does not prove hydrated visual behavior. Mobile resizing was unavailable; keyboard/forms/navigation and measured loading checks remain open. Evidence and limits are recorded in BROWSER-QA-RESULTS.md. No runtime, hero video, scrolling, production or domain changes were made for this review.
+
+
+## Contact switch alignment and future booking integration (31 October 2026)
+
+The removed job tab left a three-option active pill (33% width, centered for the call state). Dev CSS now uses two equal columns, hides the job option before script initialization, stretches both button variants, and gives the active pill half of the available width with the call state aligned right. The preview for commit 106a3bc445144ca89aa8df9b59992236418963dc is READY; served CSS contains the half-width rule. Final rendered verification of this last pill change remains open.
+
+User confirmed HVA will use their working, in-development CalBook.ai product instead of Cal.com. Defer booking integration until the user creates the HVA account and supplies its booking URL. Do not invent a URL or create an account. The inherited Cal.com placeholder is a known pending item, not a completed booking flow.
+
+User excluded actual form email sending, hamburger and keyboard checks from the current QA scope. Continue layout review without sending inquiries. Preserve hero video, approved slow scrolling, draft PR and production/domain release hold.
