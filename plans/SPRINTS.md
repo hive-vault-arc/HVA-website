@@ -255,3 +255,8 @@ The English/French homepages preload only the existing normal-weight-700 Plus Ja
 ## Useful 404 recovery page (31 October 2026)
 
 Added a lightweight HVA not-found page with native links to Home, Contact and the French homepage. Root app body margin is reset for the full-page layout. Local production build passed; a missing URL returned HTTP 404 with the recovery content. All 150 local HTTP route/asset checks still pass. No inquiry was submitted. Browser appearance remains pending. Hero video and live-domain release hold are unchanged.
+
+
+## Public contact/navigation links (31 October 2026)
+
+Source-level cleanup replaces the inherited Oslo map URL/address with Tangier, Morocco across HTML and runtime modules, avoiding reliance on a post-load branding rewrite. Generic X/Facebook/YouTube/LinkedIn/Instagram/Pinterest homepage links are hidden by exact-href CSS until real HVA profiles are supplied. No profile ownership is invented. Local production build and old-map/address absence checks passed; spacing and interaction checks remain pending in a browser. Hero video and live-domain hold are unchanged.

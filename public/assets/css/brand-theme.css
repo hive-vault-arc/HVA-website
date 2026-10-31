@@ -298,3 +298,8 @@ section.framer-oaxwmf .framer-1qvqq88 [data-framer-name="Vector logo"] {
   height: 44px !important;
   object-fit: contain !important;
 }
+
+/* Generic platform homepages are export placeholders, not HVA profiles. */
+a:is([href="https://x.com"],[href="https://x.com/"],[href="https://facebook.com"],[href="https://facebook.com/"],[href="https://youtube.com"],[href="https://youtube.com/"],[href="https://linkedin.com"],[href="https://linkedin.com/"],[href="https://instagram.com"],[href="https://instagram.com/"],[href="https://pinterest.com"],[href="https://pinterest.com/"]) {
+  display: none !important;
+}
