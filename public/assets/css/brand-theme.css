@@ -363,3 +363,16 @@ a:is([href="https://x.com"],[href="https://x.com/"],[href="https://facebook.com"
   min-width: 0 !important;
   height: 100% !important;
 }
+
+/* The animated active pill must use the remaining two-tab geometry. */
+.framer-aUq9O .framer-zsw4nl > .framer-16jcwy1 {
+  box-sizing: border-box;
+  pointer-events: none;
+}
+.framer-aUq9O .framer-zsw4nl .framer-19xsa6n {
+  width: calc((100% - 5px) / 2) !important;
+}
+.framer-aUq9O.framer-v-iffqp6 .framer-16jcwy1,
+.framer-aUq9O.framer-v-16xoe8v .framer-16jcwy1 {
+  justify-content: flex-end !important;
+}
