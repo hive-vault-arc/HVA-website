@@ -280,3 +280,8 @@ Consolidated the existing preparation steps in their original order into prepare
 ## Remaining template contact addresses (31 October 2026)
 
 Build source cleanup replaces hello@quantumflux.top and case variants of quantumsupport@gmail.com with contact@hivevaultarc.com in HTML/runtime source, and uses you@example.com for the sample input placeholder. Static visible email links receive mailto destinations. The contact adapter captures exact visible HVA email links so inherited internal-home React routing cannot redirect those clicks. Other links are untouched; observer batching is preserved. All-page email-source checks, click-routing contract checks and the local production build passed. Legal wording, approved scrolling, hero video and domain hold remain unchanged; real email-app behavior still needs browser QA.
+
+
+## Size evidence versus loading claims (31 October 2026)
+
+Recorded a local baseline comparison in PERFORMANCE-SIZES.md. Homepage HTML is 40% smaller; including separately fetched CSS/SVG, estimated first-visit compressed markup bytes are approximately unchanged. The removed duplicate homepage JavaScript preloads total about 837 KB at Brotli quality 5, a size estimate rather than observed transfer. Real browser loading/CPU metrics remain pending. No runtime behavior was changed for this report.
