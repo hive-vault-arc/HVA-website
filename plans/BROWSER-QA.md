@@ -26,3 +26,7 @@ A fresh direct HTML src/href scan found one absent image filename (image-5652056
 ## Record failures
 
 For each failure, capture the latest Preview URL/commit, page, viewport, action, expected behavior, observed behavior and screenshot or browser annotation. Re-run affected checks after a fix. Do not treat source preservation or a successful deployment as visual verification.
+
+## Partial automated browser review (31 October 2026)
+
+See [BROWSER-QA-RESULTS.md](BROWSER-QA-RESULTS.md) for the tested snapshot, reported desktop observations, contradictory provider findings and direct served-source checks. Mobile viewport controls and retrievable screenshot evidence were unavailable. The required checks above remain open; no blanket browser or performance pass is established.

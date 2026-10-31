@@ -285,3 +285,8 @@ Build source cleanup replaces hello@quantumflux.top and case variants of quantum
 ## Size evidence versus loading claims (31 October 2026)
 
 Recorded a local baseline comparison in PERFORMANCE-SIZES.md. Homepage HTML is 40% smaller; including separately fetched CSS/SVG, estimated first-visit compressed markup bytes are approximately unchanged. The removed duplicate homepage JavaScript preloads total about 837 KB at Brotli quality 5, a size estimate rather than observed transfer. Real browser loading/CPU metrics remain pending. No runtime behavior was changed for this report.
+
+
+## Partial browser review (31 October 2026)
+
+Three bounded browser sessions accessed the authorized temporary dev share. Reported smooth desktop scrolling, readable hero content and visible email-draft instructions, but reports conflict about video/icon presence. Direct deployed HTML and branding-script fetches confirmed video elements, icon slots and the logo replacement code are delivered. This does not prove hydrated visual behavior. Mobile resizing was unavailable; keyboard/forms/navigation and measured loading checks remain open. Evidence and limits are recorded in BROWSER-QA-RESULTS.md. No runtime, hero video, scrolling, production or domain changes were made for this review.
