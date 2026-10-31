@@ -265,3 +265,8 @@ Source-level cleanup replaces the inherited Oslo map URL/address with Tangier, M
 ## Homepage keyboard entry point (31 October 2026)
 
 Added a focus-visible Skip to main content link on the English/French homepages, with a focusable native main target. The branding handler maintains it after client navigation and hides it on routes lacking a main landmark. Other exported pages need a proper landmark review before expanding coverage. Static target/duplicate checks, JavaScript syntax checks and local production build passed; actual keyboard/focus behavior still requires browser QA. No hero video or live domain settings changed.
+
+
+## Restore gentler scrolling feel (31 October 2026)
+
+User requested slower, smoother scrolling. Comparison confirmed the original and current Lenis settings were identical (duration 2, wheel multiplier 1.1); prior loading work did not change those settings. To match the requested feel, the build tunes the existing mounted smooth-scroll component to duration 2.4 and wheel multiplier 0.85. Existing easing, smooth-wheel mode, touch multiplier 1 and syncTouch false are retained. Three entry-bundle copies were checked; local build passed. Actual feel requires user/browser confirmation. Preserve this scroll preference in future optimizations. Hero video and live-domain hold remain unchanged.
