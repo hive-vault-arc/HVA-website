@@ -250,3 +250,8 @@ Large data-URI SVG image sources are extracted to four SHA-256-named reusable fi
 ## Early hero font discovery (31 October 2026)
 
 The English/French homepages preload only the existing normal-weight-700 Plus Jakarta Sans WOFF2 used by the hero heading (40,748 bytes). The hint uses the same URL as font-face, with anonymous CORS, and is inserted once after charset. Repeated execution preserves one hint per homepage; local checks and production build passed. No measured speed gain is claimed. User explicitly requested retaining the hero video for now; its source, autoplay and playback behavior were not changed.
+
+
+## Useful 404 recovery page (31 October 2026)
+
+Added a lightweight HVA not-found page with native links to Home, Contact and the French homepage. Root app body margin is reset for the full-page layout. Local production build passed; a missing URL returned HTTP 404 with the recovery content. All 150 local HTTP route/asset checks still pass. No inquiry was submitted. Browser appearance remains pending. Hero video and live-domain release hold are unchanged.
