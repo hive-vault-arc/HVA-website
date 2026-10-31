@@ -1,6 +1,6 @@
 # Browser QA before release
 
-Keep PR #3 in draft. Keep hivevaultarc.com and its existing live site unchanged. Use the latest Ready deployment for the dev branch from Vercel, not an older pinned Preview URL.
+Keep PR #3 in draft. Keep hivevaultarc.com and its existing live site unchanged. Use the stable dev Preview: https://hva-website-git-dev-oubayes-projects.vercel.app/ . Vercel confirmed this alias targets the latest SVG-optimized deployment on 31 October 2026. Deployment-specific URLs stay pinned to their original version and do not receive subsequent fixes.
 
 ## Required checks
 
