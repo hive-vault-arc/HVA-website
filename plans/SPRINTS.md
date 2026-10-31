@@ -260,3 +260,8 @@ Added a lightweight HVA not-found page with native links to Home, Contact and th
 ## Public contact/navigation links (31 October 2026)
 
 Source-level cleanup replaces the inherited Oslo map URL/address with Tangier, Morocco across HTML and runtime modules, avoiding reliance on a post-load branding rewrite. Generic X/Facebook/YouTube/LinkedIn/Instagram/Pinterest homepage links are hidden by exact-href CSS until real HVA profiles are supplied. No profile ownership is invented. Local production build and old-map/address absence checks passed; spacing and interaction checks remain pending in a browser. Hero video and live-domain hold are unchanged.
+
+
+## Homepage keyboard entry point (31 October 2026)
+
+Added a focus-visible Skip to main content link on the English/French homepages, with a focusable native main target. The branding handler maintains it after client navigation and hides it on routes lacking a main landmark. Other exported pages need a proper landmark review before expanding coverage. Static target/duplicate checks, JavaScript syntax checks and local production build passed; actual keyboard/focus behavior still requires browser QA. No hero video or live domain settings changed.

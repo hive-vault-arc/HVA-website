@@ -303,3 +303,25 @@ section.framer-oaxwmf .framer-1qvqq88 [data-framer-name="Vector logo"] {
 a:is([href="https://x.com"],[href="https://x.com/"],[href="https://facebook.com"],[href="https://facebook.com/"],[href="https://youtube.com"],[href="https://youtube.com/"],[href="https://linkedin.com"],[href="https://linkedin.com/"],[href="https://instagram.com"],[href="https://instagram.com/"],[href="https://pinterest.com"],[href="https://pinterest.com/"]) {
   display: none !important;
 }
+
+/* Keyboard entry point outside the Framer root. */
+#hva-skip-link {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 2147483647;
+  transform: translateY(-200%);
+  padding: 14px 20px;
+  border-radius: 8px;
+  background: #e8a838;
+  color: #0b1726;
+  font: 600 16px/1.4 system-ui, sans-serif;
+  text-decoration: none;
+}
+#hva-skip-link:focus {
+  transform: translateY(0);
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+#hva-skip-link[hidden] { display: none !important; }
