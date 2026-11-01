@@ -1,6 +1,7 @@
 // Keep preparation order explicit; each step operates on the exported source.
 for (const script of [
   "configure_contact_forms.cjs",
+  "configure_immoworld_case.cjs",
   "gallery_placeholders.cjs",
   "lazy_homepage_images.cjs",
   "remove_duplicate_preloads.cjs",
