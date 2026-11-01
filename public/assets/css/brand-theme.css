@@ -413,3 +413,24 @@ section.framer-1sdvygc svg[data-hva-logo] {
   justify-self: center;
   align-self: center;
 }
+
+/* Email-draft guidance is rendered on the site's dark form surfaces. */
+:is(form.framer-txifz4, form.framer-vswvir) [data-hva-contact-note] {
+  color: #d1d5db !important;
+  opacity: 1 !important;
+}
+:is(form.framer-txifz4, form.framer-vswvir) [data-hva-contact-note] a,
+:is(form.framer-txifz4, form.framer-vswvir) [data-hva-contact-note] a:visited {
+  color: var(--hva-amber, #e8a838) !important;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+:is(form.framer-txifz4, form.framer-vswvir) [data-hva-contact-note] a:hover {
+  text-decoration-thickness: 2px;
+}
+/* Static exported SVG wrappers use the same viewport as their replacement. */
+section.framer-1sdvygc svg.hva-tech-glyph {
+  width: 32px !important;
+  height: 32px !important;
+  overflow: visible;
+}
