@@ -384,3 +384,32 @@ section.framer-1sdvygc .hva-tech-glyph[data-hva-tech] {
   background: transparent !important;
   color: #0b1726;
 }
+
+/* Use one square viewport for static and cycling technology artwork. */
+section.framer-1sdvygc [data-framer-name="Icon"],
+section.framer-1sdvygc [data-framer-name="Icon"] > div,
+section.framer-1sdvygc [data-framer-name="Icon"] > div > div,
+section.framer-1sdvygc [data-framer-name="Icon"] > div > div > div {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 0;
+  min-height: 0;
+  aspect-ratio: auto !important;
+  box-sizing: border-box;
+}
+section.framer-1sdvygc .hva-tech-glyph[data-hva-tech] {
+  aspect-ratio: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box;
+  display: grid !important;
+  place-items: center !important;
+}
+section.framer-1sdvygc svg[data-hva-logo] {
+  display: block !important;
+  width: 32px !important;
+  height: 32px !important;
+  margin: 0 !important;
+  justify-self: center;
+  align-self: center;
+}
