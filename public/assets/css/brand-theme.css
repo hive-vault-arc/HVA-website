@@ -376,3 +376,11 @@ a:is([href="https://x.com"],[href="https://x.com/"],[href="https://facebook.com"
 .framer-aUq9O.framer-v-16xoe8v .framer-16jcwy1 {
   justify-content: flex-end !important;
 }
+
+/* Replaced SVGs must not retain the exported template icon masks. */
+section.framer-1sdvygc .hva-tech-glyph[data-hva-tech] {
+  -webkit-mask: none !important;
+  mask: none !important;
+  background: transparent !important;
+  color: #0b1726;
+}
