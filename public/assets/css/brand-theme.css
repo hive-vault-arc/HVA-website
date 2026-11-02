@@ -4,6 +4,19 @@
   --hva-gray: #6B7280;
 }
 
+/* A compact upward trend beside the productivity bars, without new metrics. */
+.framer-tErQo .framer-axoxud .framer-100pa6r::before {
+  content: "";
+  display: block;
+  flex: 0 0 clamp(24px, 2.8vw, 40px);
+  width: clamp(24px, 2.8vw, 40px);
+  height: 64px;
+  align-self: center;
+  margin-right: 4px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 64' fill='none'%3E%3Cpath d='M4 55L14 42L23 46L39 13' stroke='%23166534' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M25 18L39 13L41 28' stroke='%23166534' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  pointer-events: none;
+}
+
 body {
   background-color: var(--hva-navy) !important;
 }
@@ -433,4 +446,45 @@ section.framer-1sdvygc svg.hva-tech-glyph {
   width: 32px !important;
   height: 32px !important;
   overflow: visible;
+}
+
+/* Preserve original chip heights and hover layers in an evenly spaced stack. */
+.framer-8zNhp .framer-omb8u9[data-hva-case-stack-aligned] {
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0 !important;
+  height: 60px;
+  overflow: visible;
+}
+.framer-8zNhp .framer-omb8u9[data-hva-case-stack-aligned] > div {
+  width: 100% !important;
+  height: 60px;
+  min-width: 0;
+}
+.framer-8zNhp .framer-omb8u9[data-hva-case-stack-aligned] svg {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  display: block;
+}
+@media (max-width: 600px) {
+  .framer-8zNhp .framer-omb8u9[data-hva-case-stack-aligned] {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    height: auto;
+  }
+}
+
+/* Center the growth indicator above the bars rather than beside them. */
+.framer-tErQo .framer-axoxud .framer-100pa6r {
+  padding-top: 48px;
+  box-sizing: border-box;
+}
+.framer-tErQo .framer-axoxud .framer-100pa6r::before {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  margin: 0;
 }
