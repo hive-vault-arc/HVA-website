@@ -4,19 +4,6 @@
   --hva-gray: #6B7280;
 }
 
-/* A compact upward trend beside the productivity bars, without new metrics. */
-.framer-tErQo .framer-axoxud .framer-100pa6r::before {
-  content: "";
-  display: block;
-  flex: 0 0 clamp(24px, 2.8vw, 40px);
-  width: clamp(24px, 2.8vw, 40px);
-  height: 64px;
-  align-self: center;
-  margin-right: 4px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 64' fill='none'%3E%3Cpath d='M4 55L14 42L23 46L39 13' stroke='%23166534' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M25 18L39 13L41 28' stroke='%23166534' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
-  pointer-events: none;
-}
-
 body {
   background-color: var(--hva-navy) !important;
 }
@@ -474,17 +461,53 @@ section.framer-1sdvygc svg.hva-tech-glyph {
   }
 }
 
-/* Center the growth indicator above the bars rather than beside them. */
 .framer-tErQo .framer-axoxud .framer-100pa6r {
   padding-top: 48px;
   box-sizing: border-box;
 }
-.framer-tErQo .framer-axoxud .framer-100pa6r::before {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 40px;
-  height: 40px;
-  margin: 0;
+
+
+/* Replace the inherited founder portrait with a contained HVA brand panel. */
+.framer-147l3ie, .framer-147l3ie .framer-1w5u71j { background: transparent !important; }
+.framer-147l3ie .framer-1w5u71j img {
+  object-fit: contain !important;
+  object-position: center !important;
+  padding: clamp(24px, 4vw, 64px);
+  box-sizing: border-box;
+}
+/* Prevent the exported runtime from restoring the removed attribution. */
+.framer-13acx4s > .framer-k9e143 { display: none !important; }
+
+/* The services heading stands on its own without the old WDX label. */
+section.framer-1pz32rp .framer-hbs7dp > .framer-c1ihhw > .framer-1xjo9ph-container { display: none !important; }
+
+/* Keep the white and gold client logo legible on the case header. */
+.framer-8zNhp .hva-immoworld-logo { display:block; width:183px; height:60px; max-width:75%; object-fit:contain; padding:7px 10px; box-sizing:border-box; background:#0B1726; border-radius:8px; }
+
+/* Enlarge the benchmark emblem without changing the card layout. */
+.framer-tErQo .framer-1qvqq88 .framer-815i92 { width:60px!important; height:54px!important; }
+
+/* Remove the inherited case testimonial portrait. */
+.framer-bfMdl .framer-1toglko { display:none!important; }
+
+.framer-tErQo .framer-axoxud .framer-100pa6r { padding-top:40px; }
+
+
+/* Anchor the trend to measured bar centers across responsive layouts. */
+.framer-tErQo .framer-axoxud .framer-100pa6r::before { display:none; }
+.framer-axoxud .hva-activity-trend { position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; }
+
+/* Give both execution-flow GitHub marks the same square icon box. */
+.framer-jYGnD [data-hva-execution-tool="github"] {
+  width:24px!important; height:24px!important;
+  min-width:24px!important; min-height:24px!important;
+  max-width:24px!important; max-height:24px!important;
+  aspect-ratio:1!important; padding:0!important; margin:0!important;
+  box-sizing:border-box!important; flex:0 0 24px!important;
+  align-self:center; place-items:center;
+}
+.framer-jYGnD [data-hva-execution-tool="github"] > svg {
+  display:block!important; width:24px!important; height:24px!important;
+  max-width:none!important; aspect-ratio:1!important;
+  padding:0!important; margin:0!important; overflow:visible;
 }

@@ -6,3 +6,9 @@ out/
 .next-sprint*/
 .hva-backups/
 __pycache__/
+
+# Local preview logs and investigation output
+preview-error.log
+preview-output.log
+dependency-audit.local.json
+update-analysis-tools.py
