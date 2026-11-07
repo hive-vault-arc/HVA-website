@@ -1,14 +1,9 @@
-# Animation Plans
+# HVA website plans
 
-| # | Title | Severity | Status |
-|---|---|---|---|
-| 001 | Restore Origin Hero Video Behavior | HIGH | TODO |
+Start with [SPRINTS.md](SPRINTS.md) for the active improvement backlog and progress.
 
-## Recommended execution order
+Historical diagnostics:
+- 001: restore origin hero video behavior — completed according to its outcome.
+- 002: isolate homepage branding script — completed; script restored.
 
-1. Execute plan 001 first; it removes both HVA-specific changes that affect the
-   hero video.
-
-## Dependencies
-
-- Plan 001 has no dependencies.
+Preserve restored hero playback during optimization work.

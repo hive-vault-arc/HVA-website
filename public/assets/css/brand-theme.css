@@ -231,3 +231,426 @@ html:lang(fr) .framer-vwyx9i .framer-EghX2.framer-14v7aht::before {
     min-width: 205px !important;
   }
 }
+/* HVA hero responsive type: keep the visible text and video mask in sync. */
+@media (min-width: 810px) and (max-width: 1519.98px) {
+  section.framer-90fe47 h1,
+  section.framer-90fe47 svg text {
+    font-size: clamp(34px, 4.6vw, 66px) !important;
+  }
+}
+@media (max-width: 809.98px) {
+  section.framer-90fe47 h1,
+  section.framer-90fe47 svg text {
+    font-size: clamp(22px, 8.2vw, 39px) !important;
+  }
+}
+
+
+/* Replace inherited template marks with the HVA wordmark in these two cards. */
+.framer-tErQo .framer-1qvqq88 [data-framer-name="Vector logo"] {
+  width: 76px !important;
+  height: 44px !important;
+  background-image: url("../images/HVAlogo-header.png?v=1") !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+}
+
+.framer-12ajlcs .framer-rtmex0 img.framer-k28w4c {
+  content: url("../images/HVAlogo-header.png?v=1");
+  width: 76px !important;
+  height: 44px !important;
+  object-fit: contain !important;
+}
+
+
+/* Deployed Framer section class and icon wrapper variants. */
+section.framer-oaxwmf .framer-1qvqq88 [data-framer-name="Vector logo"] {
+  width: 76px !important;
+  height: 44px !important;
+  background-image: url("../images/HVAlogo-header.png?v=1") !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+}
+
+.framer-rtmex0:has(.framer-1d2f2g5-container) img.framer-k28w4c {
+  content: url("../images/HVAlogo-header.png?v=1");
+  width: 76px !important;
+  height: 44px !important;
+  object-fit: contain !important;
+}
+
+
+/* Match the actual deployed Framer wrappers for these two logo swaps. */
+.framer-1qvqq88 .framer-815i92 {
+  width: 76px !important;
+  height: 44px !important;
+  background-image: url("../images/HVAlogo-header.png?v=1") !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+}
+
+.framer-rtmex0 img.framer-k28w4c {
+  content: url("../images/HVAlogo-header.png?v=1") !important;
+  width: 76px !important;
+  height: 44px !important;
+  object-fit: contain !important;
+}
+
+/* Generic platform homepages are export placeholders, not HVA profiles. */
+a:is([href="https://x.com"],[href="https://x.com/"],[href="https://facebook.com"],[href="https://facebook.com/"],[href="https://youtube.com"],[href="https://youtube.com/"],[href="https://linkedin.com"],[href="https://linkedin.com/"],[href="https://instagram.com"],[href="https://instagram.com/"],[href="https://pinterest.com"],[href="https://pinterest.com/"]) {
+  display: none !important;
+}
+
+/* Keyboard entry point outside the Framer root. */
+#hva-skip-link {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 2147483647;
+  transform: translateY(-200%);
+  padding: 14px 20px;
+  border-radius: 8px;
+  background: #e8a838;
+  color: #0b1726;
+  font: 600 16px/1.4 system-ui, sans-serif;
+  text-decoration: none;
+}
+#hva-skip-link:focus {
+  transform: translateY(0);
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+#hva-skip-link[hidden] { display: none !important; }
+
+/* Two contact modes remain after removing the inherited job application tab. */
+.framer-aUq9O .framer-zsw4nl {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 400px !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+  align-items: stretch;
+  gap: 5px;
+}
+.framer-aUq9O .framer-zsw4nl > .framer-u9wl44-container {
+  display: none !important;
+}
+.framer-aUq9O .framer-zsw4nl > :is(.framer-myvvf0-container, .framer-2nonx5-container) {
+  width: auto !important;
+  min-width: 0;
+  height: 50px;
+}
+.framer-aUq9O .framer-zsw4nl .framer-K3um8 {
+  box-sizing: border-box;
+  justify-content: center;
+}
+@media (max-width: 600px) {
+  .framer-aUq9O .framer-zsw4nl { width: 100% !important; }
+}
+
+/* Keep both tab states stretched even when Framer swaps variant wrappers. */
+.framer-aUq9O .framer-zsw4nl > :not(.framer-u9wl44-container) {
+  width: 100% !important;
+  min-width: 0 !important;
+  justify-self: stretch;
+}
+.framer-aUq9O .framer-zsw4nl .framer-K3um8 {
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 100% !important;
+}
+
+/* The animated active pill must use the remaining two-tab geometry. */
+.framer-aUq9O .framer-zsw4nl > .framer-16jcwy1 {
+  box-sizing: border-box;
+  pointer-events: none;
+}
+.framer-aUq9O .framer-zsw4nl .framer-19xsa6n {
+  width: calc((100% - 5px) / 2) !important;
+}
+.framer-aUq9O.framer-v-iffqp6 .framer-16jcwy1,
+.framer-aUq9O.framer-v-16xoe8v .framer-16jcwy1 {
+  justify-content: flex-end !important;
+}
+
+/* Replaced SVGs must not retain the exported template icon masks. */
+section.framer-1sdvygc .hva-tech-glyph[data-hva-tech] {
+  -webkit-mask: none !important;
+  mask: none !important;
+  background: transparent !important;
+  color: #0b1726;
+}
+
+/* Use one square viewport for static and cycling technology artwork. */
+section.framer-1sdvygc [data-framer-name="Icon"],
+section.framer-1sdvygc [data-framer-name="Icon"] > div,
+section.framer-1sdvygc [data-framer-name="Icon"] > div > div,
+section.framer-1sdvygc [data-framer-name="Icon"] > div > div > div {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 0;
+  min-height: 0;
+  aspect-ratio: auto !important;
+  box-sizing: border-box;
+}
+section.framer-1sdvygc .hva-tech-glyph[data-hva-tech] {
+  aspect-ratio: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box;
+  display: grid !important;
+  place-items: center !important;
+}
+section.framer-1sdvygc svg[data-hva-logo] {
+  display: block !important;
+  width: 32px !important;
+  height: 32px !important;
+  margin: 0 !important;
+  justify-self: center;
+  align-self: center;
+}
+
+/* Email-draft guidance is rendered on the site's dark form surfaces. */
+:is(form.framer-txifz4, form.framer-vswvir) [data-hva-contact-note] {
+  color: #d1d5db !important;
+  opacity: 1 !important;
+}
+:is(form.framer-txifz4, form.framer-vswvir) [data-hva-contact-note] a,
+:is(form.framer-txifz4, form.framer-vswvir) [data-hva-contact-note] a:visited {
+  color: var(--hva-amber, #e8a838) !important;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+:is(form.framer-txifz4, form.framer-vswvir) [data-hva-contact-note] a:hover {
+  text-decoration-thickness: 2px;
+}
+/* Static exported SVG wrappers use the same viewport as their replacement. */
+section.framer-1sdvygc svg.hva-tech-glyph {
+  width: 32px !important;
+  height: 32px !important;
+  overflow: visible;
+}
+
+/* Preserve original chip heights and hover layers in an evenly spaced stack. */
+.framer-8zNhp .framer-omb8u9[data-hva-case-stack-aligned] {
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0 !important;
+  height: 60px;
+  overflow: visible;
+}
+.framer-8zNhp .framer-omb8u9[data-hva-case-stack-aligned] > div {
+  width: 100% !important;
+  height: 60px;
+  min-width: 0;
+}
+.framer-8zNhp .framer-omb8u9[data-hva-case-stack-aligned] svg {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  display: block;
+}
+@media (max-width: 600px) {
+  .framer-8zNhp .framer-omb8u9[data-hva-case-stack-aligned] {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    height: auto;
+  }
+}
+
+.framer-tErQo .framer-axoxud .framer-100pa6r {
+  padding-top: 48px;
+  box-sizing: border-box;
+}
+
+
+/* Replace the inherited founder portrait with a contained HVA brand panel. */
+.framer-147l3ie, .framer-147l3ie .framer-1w5u71j { background: transparent !important; }
+.framer-147l3ie .framer-1w5u71j img {
+  object-fit: contain !important;
+  object-position: center !important;
+  padding: clamp(24px, 4vw, 64px);
+  box-sizing: border-box;
+}
+/* Prevent the exported runtime from restoring the removed attribution. */
+.framer-13acx4s > .framer-k9e143 { display: none !important; }
+
+/* The services heading stands on its own without the old WDX label. */
+section.framer-1pz32rp .framer-hbs7dp > .framer-c1ihhw > .framer-1xjo9ph-container { display: none !important; }
+
+/* Keep the white and gold client logo legible on the case header. */
+.framer-8zNhp .hva-immoworld-logo { display:block; width:183px; height:60px; max-width:75%; object-fit:contain; padding:7px 10px; box-sizing:border-box; background:#0B1726; border-radius:8px; }
+
+/* Enlarge the benchmark emblem without changing the card layout. */
+.framer-tErQo .framer-1qvqq88 .framer-815i92 { width:60px!important; height:54px!important; }
+
+/* Remove the inherited case testimonial portrait. */
+.framer-bfMdl .framer-1toglko { display:none!important; }
+
+.framer-tErQo .framer-axoxud .framer-100pa6r { padding-top:40px; }
+
+
+/* Anchor the trend to measured bar centers across responsive layouts. */
+.framer-tErQo .framer-axoxud .framer-100pa6r::before { display:none; }
+.framer-axoxud .hva-activity-trend { position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; }
+
+/* Give both execution-flow GitHub marks the same square icon box. */
+.framer-jYGnD [data-hva-execution-tool="github"] {
+  width:24px!important; height:24px!important;
+  min-width:24px!important; min-height:24px!important;
+  max-width:24px!important; max-height:24px!important;
+  aspect-ratio:1!important; padding:0!important; margin:0!important;
+  box-sizing:border-box!important; flex:0 0 24px!important;
+  align-self:center; place-items:center;
+}
+.framer-jYGnD [data-hva-execution-tool="github"] > svg {
+  display:block!important; width:24px!important; height:24px!important;
+  max-width:none!important; aspect-ratio:1!important;
+  padding:0!important; margin:0!important; overflow:visible;
+}
+
+/* Integration visual scoped to the second expertise card. */
+.framer-twGWP[data-hva-integration] { isolation:isolate; overflow:hidden; background:#0B1726!important; }
+.framer-twGWP[data-hva-integration] > .framer-2sh9wl { display:none!important; }
+.hva-integration-background { position:absolute; inset:0; z-index:0; pointer-events:none; opacity:.85; mask-image:linear-gradient(to bottom,#000 0%,#000 50%,transparent 78%); }
+.hva-integration-svg { display:block; width:100%; height:75%; }
+.framer-twGWP[data-hva-integration] > .framer-dmbba9,.framer-twGWP[data-hva-integration] > .framer-r35v2z { z-index:1; }
+.hva-integration-flow { animation:hva-integration-flow 6s linear infinite; animation-play-state:paused; }
+.hva-integration-visible .hva-integration-flow { animation-play-state:running; }
+@keyframes hva-integration-flow { to { stroke-dashoffset:-448; } }
+@media(prefers-reduced-motion:reduce) { .hva-integration-flow { animation:none; } }
+
+/* Keep integration strokes crisp and preserve full icon contrast. */
+.hva-integration-background { opacity:1; mask-image:linear-gradient(to bottom,#000 0%,#000 62%,transparent 91%); }
+.hva-integration-svg { width:100%; height:auto; max-height:78%; overflow:visible; shape-rendering:geometricPrecision; }
+.hva-integration-svg > path { vector-effect:non-scaling-stroke; }
+.hva-integration-svg > path:not(.hva-integration-flow) { stroke-opacity:.28; }
+.framer-twGWP[data-hva-integration] { backdrop-filter:none!important; -webkit-backdrop-filter:none!important; }
+
+/* Pointer spotlight shared by expertise cards; no layout or filter animation. */
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference) {
+  section.framer-u4tdaf .framer-5etouc .framer-twGWP { isolation:isolate; }
+  section.framer-u4tdaf .framer-5etouc .framer-twGWP::after {
+    content:""; position:absolute; inset:0; border-radius:inherit;
+    pointer-events:none; z-index:2; opacity:0;
+    background:radial-gradient(220px circle at var(--hva-glow-x,50%) var(--hva-glow-y,50%),rgba(232,168,56,.16),rgba(232,168,56,.035) 45%,transparent 75%);
+    box-shadow:inset 0 0 0 1px rgba(232,168,56,.18);
+    transition:opacity .2s ease;
+  }
+  section.framer-u4tdaf .framer-5etouc .framer-twGWP.hva-glow-active::after { opacity:1; }
+}
+
+/* Collaboration canvas inspired by Animata's Collab Card. */
+.framer-5etouc .framer-2bus5s { min-height:430px; }
+.framer-twGWP[data-hva-collab] { min-height:430px!important; height:100%!important; display:grid!important; grid-template-columns:minmax(0,1fr); grid-template-rows:auto minmax(150px,1fr) auto; gap:22px!important; isolation:isolate; background:#0B1726!important; }
+.framer-twGWP[data-hva-collab] > .framer-r35v2z { grid-row:1; grid-column:1; }
+.framer-twGWP[data-hva-collab] > .framer-dmbba9 { grid-row:3; grid-column:1; gap:16px!important; }
+.framer-twGWP[data-hva-collab] > .framer-2sh9wl { display:none!important; }
+.hva-collab-visual { position:relative; grid-row:2; grid-column:1; width:100%; min-height:150px; pointer-events:none; }
+.hva-collab-canvas { position:absolute; inset:0; border:1px solid #ffffff14; border-radius:14px; overflow:hidden; background:radial-gradient(circle at 50% 60%,#e8a8380a,transparent 70%),radial-gradient(#ffffff12 .7px,transparent .7px); background-size:auto,18px 18px; }
+.hva-collab-top { position:absolute; inset:12px 14px auto; display:flex; align-items:center; justify-content:space-between; }
+.hva-collab-status { display:flex; align-items:center; gap:6px; color:#aab9c8; font:8px/1.2 Inter,sans-serif; letter-spacing:.1em; }
+.hva-collab-status i { width:5px; height:5px; background:#E8A838; border-radius:50%; }
+.hva-collab-people { display:flex; }
+.hva-collab-people span { display:grid; place-items:center; width:21px; height:21px; border:2px solid #0B1726; border-radius:50%; background:#E8A838; color:#0B1726; font:600 8px Inter,sans-serif; }
+.hva-collab-people span+span { margin-left:-5px; background:#617b96; color:white; }
+.hva-collab-selection { position:absolute; left:18%; right:18%; top:41%; padding:13px 0; border:1px dashed #E8A83888; text-align:center; }
+.hva-collab-selection > span { color:#e8edf3; font:500 clamp(14px,1.4vw,20px)/1.2 Inter,sans-serif; letter-spacing:-.03em; }
+.hva-collab-selection > i { position:absolute; width:5px; height:5px; background:#0B1726; border:1px solid #E8A838; }
+.hva-collab-selection > i:nth-child(1) { top:-3px; left:-3px; }
+.hva-collab-selection > i:nth-child(2) { top:-3px; right:-3px; }
+.hva-collab-selection > i:nth-child(3) { bottom:-3px; left:-3px; }
+.hva-collab-selection > i:nth-child(4) { bottom:-3px; right:-3px; }
+.hva-collab-cursor { position:absolute; display:flex; align-items:flex-start; color:#E8A838; animation:hva-collab-drift 6s ease-in-out infinite; animation-play-state:paused; }
+.hva-collab-cursor > span { margin:17px 0 0 -4px; padding:4px 8px; border-radius:0 6px 6px; background:currentColor; font:600 9px/1 Inter,sans-serif; }
+.hva-collab-you { left:17%; top:37%; }
+.hva-collab-you > span { background:#E8A838; color:#0B1726; }
+.hva-collab-hva { left:70%; top:68%; color:#91afcb; animation-delay:-2.7s; animation-direction:reverse; }
+.hva-collab-hva > span { background:#617b96; color:white; }
+.hva-collab-visible .hva-collab-cursor { animation-play-state:running; }
+@keyframes hva-collab-drift { 0%,100% { transform:translate(0,0); } 35% { transform:translate(18px,-9px); } 70% { transform:translate(-7px,8px); } }
+@media(max-width:600px) { .framer-twGWP[data-hva-collab] { min-height:420px!important; } }
+@media(prefers-reduced-motion:reduce) { .hva-collab-cursor { animation:none; } }
+
+/* Expand collaboration sideways into the spacer beside Business Impact. */
+.framer-tErQo .framer-5etouc > .framer-1g2c1vz { display:none!important; }
+.framer-tErQo .framer-5etouc > .framer-2bus5s { grid-column:span 4; min-height:0; height:340px; }
+.framer-twGWP[data-hva-collab] { min-height:0!important; height:100%!important; grid-template-rows:auto minmax(60px,1fr) auto; gap:16px!important; }
+.hva-collab-visual { min-height:60px; }
+@media(max-width:1199px) {
+ .framer-tErQo .framer-5etouc > .framer-2bus5s { height:300px; }
+ .framer-twGWP[data-hva-collab] { min-height:0!important; }
+}
+
+/* Fit the entire collaboration scene inside its shorter visual row. */
+.framer-twGWP[data-hva-collab] { row-gap:12px!important; }
+.framer-twGWP[data-hva-collab] > .framer-dmbba9 { gap:10px!important; }
+.hva-collab-canvas { overflow:visible; }
+.hva-collab-top { inset:8px 12px auto; }
+.hva-collab-selection { left:24%; right:24%; top:38%; padding:8px 0; }
+.hva-collab-selection > span { font-size:clamp(13px,1.2vw,17px); }
+.hva-collab-you { left:17%; top:36%; }
+.hva-collab-hva { left:74%; top:48%; }
+.hva-collab-cursor svg { width:16px; height:19px; }
+.hva-collab-cursor > span { margin-top:12px; padding:4px 7px; }
+@keyframes hva-collab-drift { 0%,100% { transform:translate(0,0); } 35% { transform:translate(10px,-4px); } 70% { transform:translate(-5px,4px); } }
+@media(max-width:600px) {
+ .hva-collab-top { inset:7px 9px auto; }
+ .hva-collab-status { font-size:7px; }
+ .hva-collab-selection { left:20%; right:20%; padding:6px 0; }
+ .hva-collab-you { left:10%; }
+ .hva-collab-hva { left:76%; }
+}
+
+/* Let the collaboration canvas use the full row down to the title. */
+.framer-twGWP[data-hva-collab] { row-gap:8px!important; }
+.framer-twGWP[data-hva-collab] > .hva-collab-visual { align-self:stretch; height:100%; min-height:0; }
+.framer-twGWP[data-hva-collab] .hva-collab-canvas { bottom:-2px; }
+.framer-twGWP[data-hva-collab] .hva-collab-selection { top:42%; padding:11px 0; }
+.framer-twGWP[data-hva-collab] .hva-collab-hva { top:62%; }
+
+/* Original document-to-results visual: CSS motion, no additional runtime library. */
+section.framer-u4tdaf .framer-twGWP[data-hva-transform] {
+ isolation:isolate; overflow:hidden; background:#0B1726!important;
+ display:grid!important; grid-template-columns:minmax(0,1fr);
+ grid-template-rows:auto minmax(0,1fr) auto; row-gap:12px!important;
+}
+[data-hva-transform] > .framer-2sh9wl { display:none!important; }
+[data-hva-transform] > .framer-r35v2z { grid-row:1; grid-column:1; z-index:1; }
+[data-hva-transform] > .framer-dmbba9 { grid-row:3; grid-column:1; gap:12px!important; z-index:1; }
+.hva-business-transform { grid-row:2; grid-column:1; min-width:0; min-height:0; width:100%; align-self:stretch; display:flex; align-items:center; pointer-events:none; }
+.hva-business-transform > svg { display:block; width:100%; height:100%; max-height:150px; overflow:hidden; }
+/* Incoming pages are clipped at the axis; outputs and particles share a four-second beat. */
+.hva-business-transform { border-radius:12px; background:radial-gradient(ellipse at 50% 50%,#17283c66,transparent 72%); }
+.hva-business-transform > svg { max-height:170px; }
+.hva-process-document { animation:hva-process-document 8s linear infinite; }
+.hva-process-output { animation:hva-process-output 12s linear infinite; }
+.hva-process-particle { animation:hva-process-particle 4s ease-out infinite; }
+.hva-process-core { animation:hva-process-core 4s ease-out infinite; transform-origin:280px 90px; }
+.hva-business-transform svg * { animation-play-state:paused; }
+.hva-transform-visible svg * { animation-play-state:running; }
+@keyframes hva-process-document { from { transform:translateX(-118px); } to { transform:translateX(280px); } }
+@keyframes hva-process-output {
+ 0% { transform:translate(284px,var(--hva-output-y)); opacity:0; }
+ 4% { opacity:1; }
+ 28% { opacity:1; }
+ 33.333%,100% { transform:translate(554px,var(--hva-output-y)); opacity:0; }
+}
+@keyframes hva-process-particle {
+ 0% { transform:translate(0,0); opacity:0; }
+ 3% { opacity:.85; }
+ 27%,100% { transform:translate(var(--hva-px),var(--hva-py)); opacity:0; }
+}
+@keyframes hva-process-core { 0%,28%,100% { transform:scale(1); } 8% { transform:scale(1.045); } }
+@media(prefers-reduced-motion:reduce) {
+ .hva-business-transform svg * { animation:none!important; }
+ .hva-process-document { transform:translateX(116px); }
+ .hva-process-document + .hva-process-document { transform:translateX(-21px); }
+ .hva-process-output { opacity:0; }
+ .hva-process-output:nth-of-type(4) { opacity:1; transform:translateX(350px); }
+ .hva-process-particle { display:none; }
+}
+

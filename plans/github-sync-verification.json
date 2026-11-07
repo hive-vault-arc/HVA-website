@@ -1,0 +1,32 @@
+{
+  "verified_commit": "5bf50c5c13d3bab3d688c770f458c6a2ab6a2d42",
+  "branch": "dev",
+  "base_migration_commit": "bc6b7423aa741d039699e15dd176303c65cd486c",
+  "verified_files": 846,
+  "missing_files": [],
+  "unexpected_files": [],
+  "content_mismatches": [],
+  "comparison": "Git blob hashes; UTF-8 text permits CRLF/LF normalization. Binary files compare exactly.",
+  "unchanged_refs": {
+    "main": "304f39c45c597cda7201babd40fd536f611523ac",
+    "develop-nextjs-migration": "bc6b7423aa741d039699e15dd176303c65cd486c"
+  },
+  "production": "GitHub Production environment remains on main commit 304f39c45c597cda7201babd40fd536f611523ac.",
+  "vercel_statuses": [
+    {
+      "context": "Vercel - hva-website",
+      "state": "success",
+      "url": "https://vercel.com/oubayes-projects/hva-website/6ahY56h9rY1PPLoyrQTGLWUgpBMh"
+    },
+    {
+      "context": "Vercel - hive-vault-arc-website",
+      "state": "success",
+      "url": "https://vercel.com/hive-vault-arc/hive-vault-arc-website/FWeoN1gFuYhxP5vPQnasvVQvCEWt"
+    }
+  ],
+  "limitations": [
+    "Browser inspection of the preview is blocked by Vercel authentication; visual and interaction QA remain pending.",
+    "GitHub browser-created .githooks/pre-push has mode 100644. New clones must make the hook executable and configure hooksPath. The original local working-copy hook remains executable.",
+    "Original OneDrive project was not modified. Future development should clone remote dev rather than push the independent local history."
+  ]
+}
