@@ -1,0 +1,52 @@
+/* Full-width transparent project scene; existing section content remains below it. */
+.framer-b0D5J > [data-hva-project-gallery] {
+ display:block!important; position:relative!important; width:100%!important;
+ height:clamp(480px,76svh,740px)!important; min-height:480px!important;
+ margin-bottom:28px; border:0!important; border-radius:0!important;
+ background:transparent!important; overflow:hidden!important; isolation:isolate;
+}
+.hva-project-island { position:absolute; inset:0; z-index:1; }
+.hva-project-island .infinite-menu { height:100%; width:100%; background:transparent!important; }
+.hva-project-fallback { position:absolute; inset:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; align-items:center; padding:32px; }
+.hva-project-fallback img { display:block; width:100%; height:auto; border-radius:12px; border:1px solid #ffffff18; }
+.hva-project-island:not(:has([data-gallery-ready])) { visibility:hidden; pointer-events:none; }
+[data-hva-project-gallery]:has([data-gallery-ready]) .hva-project-fallback { visibility:hidden; }
+.hva-project-island .infinite-menu__title { font-family:Inter,Arial,sans-serif; font-size:clamp(22px,2.2vw,34px); text-align:left; line-height:1.12; color:#f1f4f7; }
+.hva-project-island .infinite-menu__description { font-family:Inter,Arial,sans-serif; font-size:clamp(13px,1.1vw,16px); line-height:1.6; color:#bec9d5; }
+.hva-project-controls { position:absolute; bottom:12px; right:12px; left:12px; display:flex; align-items:center; justify-content:flex-end; gap:16px; pointer-events:none; color:#9aaabd; font:11px/1.4 Inter,Arial,sans-serif; }
+.hva-project-controls small { font:inherit; }
+.hva-project-controls button { pointer-events:auto; cursor:pointer; border:1px solid #ffffff24; border-radius:20px; padding:8px 16px; background:transparent; color:#e8edf3; font:inherit; }
+.hva-project-controls button:hover { border-color:#f97316; }
+.hva-project-controls button:focus-visible { outline:2px solid #f97316; outline-offset:3px; }
+/* Remove the original list's absolute positioning so it follows the gallery. */
+.framer-b0D5J:has(> [data-hva-project-gallery]) > .framer-1bjt5gk > .framer-1nzmsjc {
+ position:relative!important; bottom:auto!important; left:auto!important; transform:none!important; margin:0!important;
+}
+@media(min-width:900px) {
+ .hva-project-island .infinite-menu__title { left:3%; right:auto; width:24%; max-width:24%; }
+ .hva-project-island .infinite-menu__description { left:auto; right:3%; width:22%; max-width:22%; }
+}
+/* Explicit text rows remain stable even when the renderer reports a side layout. */
+@media(max-width:899px) {
+ .framer-b0D5J > [data-hva-project-gallery] { height:620px!important; }
+ .hva-project-island .infinite-menu__canvas { top:72px; bottom:112px; height:calc(100% - 184px); }
+ .hva-project-island .infinite-menu__info[data-layout] .infinite-menu__title {
+  top:14px; bottom:auto; left:12px; right:12px; width:auto; max-width:none;
+  transform:none; text-align:left; font-size:26px; line-height:1.2;
+ }
+ .hva-project-island .infinite-menu__info[data-layout] .infinite-menu__description {
+  top:auto; bottom:60px; left:12px; right:12px; width:auto; max-width:none;
+  transform:none; white-space:normal; font-size:14px; line-height:1.5;
+ }
+ .hva-project-island .infinite-menu__info[data-moving='true'] .infinite-menu__title,
+ .hva-project-island .infinite-menu__info[data-moving='true'] .infinite-menu__description { transform:translateY(6px); opacity:0; }
+}
+@media(max-width:600px) {
+ .framer-b0D5J > [data-hva-project-gallery] { height:clamp(500px,76svh,620px)!important; min-height:500px!important; margin-bottom:24px; }
+ .hva-project-island .infinite-menu__canvas { top:68px; bottom:136px; height:calc(100% - 204px); }
+ .hva-project-island .infinite-menu__info[data-layout] .infinite-menu__title { font-size:22px; }
+ .hva-project-island .infinite-menu__info[data-layout] .infinite-menu__description { bottom:78px; font-size:12px; }
+ .hva-project-controls { right:8px; bottom:14px; left:8px; font-size:10px; gap:8px; }
+ .hva-project-fallback { grid-template-columns:1fr; padding:22px; }
+ .hva-project-fallback img:not(:first-child) { display:none; }
+}

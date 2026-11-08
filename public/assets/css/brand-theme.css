@@ -654,3 +654,20 @@ section.framer-u4tdaf .framer-twGWP[data-hva-transform] {
  .hva-process-particle { display:none; }
 }
 
+
+/* Decorative artwork for Operational Expertise, kept behind readable card content. */
+section.framer-u4tdaf .framer-twGWP[data-hva-expertise-art] { isolation:isolate; overflow:hidden; background:#0B1726!important; }
+[data-hva-expertise-art] > .framer-2sh9wl { display:none!important; }
+[data-hva-expertise-art] > .hva-expertise-art { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 12%; pointer-events:none; z-index:0; mask-image:linear-gradient(to bottom,#000 0%,#000 48%,rgba(0,0,0,.35) 66%,transparent 79%); }
+[data-hva-expertise-art] > .framer-r35v2z,[data-hva-expertise-art] > .framer-dmbba9 { position:relative; z-index:1; }
+@media(max-width:767px) { [data-hva-expertise-art] > .hva-expertise-art { object-position:50% 18%; } }
+
+/* Orange conic pattern, with a contrast overlay behind the card copy. */
+section.framer-u4tdaf .framer-twGWP[data-hva-ownership] {
+ isolation:isolate;
+ background-color:orange!important;
+ background-image:linear-gradient(to bottom,rgba(11,23,38,.15) 0%,rgba(11,23,38,.42) 40%,rgba(11,23,38,.92) 100%),conic-gradient(from 0deg,orange,orangered,orange)!important;
+ background-size:100% 100%!important;
+ background-repeat:no-repeat!important;
+}
+[data-hva-ownership] > .framer-2sh9wl { display:none!important; }
