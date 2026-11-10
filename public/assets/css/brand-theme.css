@@ -671,3 +671,11 @@ section.framer-u4tdaf .framer-twGWP[data-hva-ownership] {
  background-repeat:no-repeat!important;
 }
 [data-hva-ownership] > .framer-2sh9wl { display:none!important; }
+
+/* Preserve the original engagement UI, with HVA branding in its statement avatar. */
+section.framer-1l3cdkc img[src*="image-52659a2a"] { visibility:hidden; }
+section.framer-1l3cdkc div:has(> img[src*="image-52659a2a"]) { background: url('/assets/images/HVAlogo-header.png') center / 85% auto no-repeat; }
+
+/* Let the original info popups expand to fit their explanatory copy. */
+section.framer-1l3cdkc .framer-gzlTn .framer-7d30gq { height:auto!important; min-height:0; }
+section.framer-1l3cdkc .framer-gzlTn .framer-x52jmo { max-width:calc(100vw - 90px); }
