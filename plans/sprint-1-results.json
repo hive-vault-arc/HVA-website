@@ -1,0 +1,597 @@
+{
+  "mode": "applied",
+  "pages": [
+    {
+      "page": "about-us.html",
+      "before_bytes": 2243997,
+      "after_bytes": 1525384,
+      "removed_css_bytes": 718613,
+      "sha256_before": "77040256627c28f7ff60edce523a9c2c694a2d2255bb224d0f854196f4517fab",
+      "sha256_after": "bad5669df4f69e72dd00a5b3095283bd8ed45dff9a6f80f07640b18cd354bcf3",
+      "missing_direct_references": [
+        "./404.html"
+      ]
+    },
+    {
+      "page": "blog/beyond-the-text-box-engineering-autonomous-workflows-over-agency-free-chat.html",
+      "before_bytes": 1811264,
+      "after_bytes": 1186822,
+      "removed_css_bytes": 624442,
+      "sha256_before": "d0dc246cbb592fde90901ade5f8999a751167762f0de790a822696802fb577fb",
+      "sha256_after": "73d8ded365cfae813cfb5a3df13cd343b4e7fe29b26eb4ac431e159067605e38",
+      "missing_direct_references": [
+        "../404.html"
+      ]
+    },
+    {
+      "page": "blog/building-decision-engines-instead-of-chat-interfaces.html",
+      "before_bytes": 1811103,
+      "after_bytes": 1186661,
+      "removed_css_bytes": 624442,
+      "sha256_before": "743f5e0c4661d2c955109e43d15d66c5c1754c535266c405d1bc4e6306a6f47e",
+      "sha256_after": "3be5f00d090115fe79b2c21d9bbbf732421a1c54e70f743f2ba487156d54ed54",
+      "missing_direct_references": [
+        "../404.html"
+      ]
+    },
+    {
+      "page": "blog/designing-multi-layer-ai-systems-for-real-world-operations.html",
+      "before_bytes": 1808040,
+      "after_bytes": 1183598,
+      "removed_css_bytes": 624442,
+      "sha256_before": "da33d1cfdee8c39bf31a89576c80da47bd2380ae3a3732a1aaf3b3458b90ccaa",
+      "sha256_after": "3c6a03436f5bcf0f6f91ec9f02058a7da3273076e2074ca713c924d61bc04e6a",
+      "missing_direct_references": [
+        "../404.html",
+        "../blog/-een8ZXusz.html"
+      ]
+    },
+    {
+      "page": "blog/from-conversation-to-conclusion-why-your-product-needs-outcomes-not-dialogue.html",
+      "before_bytes": 1810821,
+      "after_bytes": 1186379,
+      "removed_css_bytes": 624442,
+      "sha256_before": "ee9bc0bf444482fb1d9dec17f9b9966fea33d78e0c2e4ce07dbefd0c10433d08",
+      "sha256_after": "1a8ae241660edcec63d78cafb52c63b9d565018f18a1f72bc19731241246d9a3",
+      "missing_direct_references": [
+        "../404.html"
+      ]
+    },
+    {
+      "page": "blog/from-fragmented-data-to-unified-intelligence-engines.html",
+      "before_bytes": 1809674,
+      "after_bytes": 1185232,
+      "removed_css_bytes": 624442,
+      "sha256_before": "a9ac1f5a97f9caddb160ea1621c3ec9fdf75ac9ef64dddefaa506c4e45a68dc8",
+      "sha256_after": "0653eda0e21fa93ef0df98ac24c128022ecf8593030f1e5281c37278533341b9",
+      "missing_direct_references": [
+        "../404.html"
+      ]
+    },
+    {
+      "page": "blog/from-manual-bottlenecks-to-autonomous-growth-at-scale.html",
+      "before_bytes": 1807609,
+      "after_bytes": 1183167,
+      "removed_css_bytes": 624442,
+      "sha256_before": "d4956c0449601636690b665cdd8c757060336c1bfb8b4c56d33089ca45b6e71c",
+      "sha256_after": "53eb99a2ee4a74c34df32dfcce59871310f9260cec7379679b46f502f4bfc8e2",
+      "missing_direct_references": [
+        "../404.html",
+        "../blog/-een8ZXusz.html"
+      ]
+    },
+    {
+      "page": "blog/from-prompts-to-pipelines-architecting-intentional-intelligence-over-reactive-replies.html",
+      "before_bytes": 1823700,
+      "after_bytes": 1199258,
+      "removed_css_bytes": 624442,
+      "sha256_before": "86359cb1ee3992a98af6591aabac2ec88e0d879ec2dc68148972432a7b7c16f3",
+      "sha256_after": "882ba7a956efff6c51e1287d7940d3b2d9374d6f768a9302c5929a220186c58a",
+      "missing_direct_references": [
+        "../404.html"
+      ]
+    },
+    {
+      "page": "blog/from-workflow-chaos-to-structured-automation-pipelines.html",
+      "before_bytes": 1810595,
+      "after_bytes": 1186153,
+      "removed_css_bytes": 624442,
+      "sha256_before": "cdd805770bf29d0d454c21fc8bc5502a9b522da5b870ef8f89b70c39c376f69f",
+      "sha256_after": "debf29a13ff81efbed80f688e17ea0b697519e089ef45327725eb6ddd62a15bf",
+      "missing_direct_references": [
+        "../404.html"
+      ]
+    },
+    {
+      "page": "blog/stop-prompting-start-predicting-transitioning-from-llms-to-logic-layers.html",
+      "before_bytes": 1811255,
+      "after_bytes": 1186813,
+      "removed_css_bytes": 624442,
+      "sha256_before": "48cdb482a4d647c1f1b473a3331f8ff12dbeb07a5809ca43cdb88b4848f14a9f",
+      "sha256_after": "ad3d685a3c4346946ab9ae586ebbb861767a5197c9e8bb62780dfc6d0d9d30eb",
+      "missing_direct_references": [
+        "../404.html"
+      ]
+    },
+    {
+      "page": "blog/the-autonomy-leap-moving-from-conversation-as-interface-to-outcome-as-service.html",
+      "before_bytes": 1811008,
+      "after_bytes": 1186566,
+      "removed_css_bytes": 624442,
+      "sha256_before": "f331a348b6387eefbd8a74034d36cfd6c2c97474822ee7e12647e00fa09f579f",
+      "sha256_after": "6f60bc0a6766c0605739f94645f7e793a2eb52f683150c526abd57f542eef2d6",
+      "missing_direct_references": [
+        "../404.html"
+      ]
+    },
+    {
+      "page": "blog/why-most-ai-deployments-fail-in-production-environments.html",
+      "before_bytes": 2412504,
+      "after_bytes": 1788062,
+      "removed_css_bytes": 624442,
+      "sha256_before": "ef773295671e1f1ff67f67de0b46c4f930db6548810ab92a935f53ac20374e87",
+      "sha256_after": "837cfe9def45ac588e7fe1f83c145467dbb1f039eae98efb0e3f73beb7cc560a",
+      "missing_direct_references": [
+        "../404.html"
+      ]
+    },
+    {
+      "page": "blog.html",
+      "before_bytes": 1444464,
+      "after_bytes": 935180,
+      "removed_css_bytes": 509284,
+      "sha256_before": "cd18a850d187f34849d57948f47e1fc0c3d0f2bfd6a9e252ea5c4cbf9943a732",
+      "sha256_after": "09fcda51743ecdbe3b921a5521c6511a2a04288214c1e0f6f5a4dd4e804873a3",
+      "missing_direct_references": [
+        "./404.html"
+      ]
+    },
+    {
+      "page": "career.html",
+      "before_bytes": 1884098,
+      "after_bytes": 1261609,
+      "removed_css_bytes": 622489,
+      "sha256_before": "77f2e558518c6487846bd9a6afb57ced7acd87a57364653af45d356c69528f28",
+      "sha256_after": "a6b23afa829ba100d10a5112544e31f6524d154bc6416e78f6d35b16c10544c6",
+      "missing_direct_references": [
+        "./404.html"
+      ]
+    },
+    {
+      "page": "cases/cinderbay-retail-group.html",
+      "before_bytes": 1783930,
+      "after_bytes": 1149607,
+      "removed_css_bytes": 634323,
+      "sha256_before": "b4ca8cdd1426fcec26a7553391fec9097837c77dc7762610ee4cfeb221a4fa7e",
+      "sha256_after": "46b782a03a670526bd73a5f608bdc35784bc13b648ac2fcface7a72a98aadbe7",
+      "missing_direct_references": [
+        "../404.html"
+      ]
+    },
+    {
+      "page": "cases/heliodesk-platforms.html",
+      "before_bytes": 1780999,
+      "after_bytes": 1147691,
+      "removed_css_bytes": 633308,
+      "sha256_before": "b136342cda3aaec4768357b27fbf564bab7e7c16ca09874cc4cb36d495ad5036",
+      "sha256_after": "6816b9f34fddf76a2b6179c174770215412ce1da7cba2bf1290f0502569e0d89",
+      "missing_direct_references": [
+        "../404.html"
+      ]
+    },
+    {
+      "page": "cases/ironpeak-industrial-manufacturing.html",
+      "before_bytes": 1777715,
+      "after_bytes": 1146021,
+      "removed_css_bytes": 631694,
+      "sha256_before": "2711912188cf959bd48ca3181aa79bc0f7f5e5199b571482bfdf53983dc5754a",
+      "sha256_after": "e54a3a33764982c5d9008577448696c081b26a7e5dd5426da92cb60b7106cf14",
+      "missing_direct_references": [
+        "../404.html"
+      ]
+    },
+    {
+      "page": "cases/lumenarc-energy.html",
+      "before_bytes": 1783327,
+      "after_bytes": 1149026,
+      "removed_css_bytes": 634301,
+      "sha256_before": "f1b4722115952395d21d48316b5205a85c2db4d2b8228374869d647392c5e576",
+      "sha256_after": "13c8cc3e1cb45ae08c1e4dc857c8eee7f0f12f628c2eea50b2ef5f7d920e0387",
+      "missing_direct_references": [
+        "../404.html"
+      ]
+    },
+    {
+      "page": "cases/northbridge-education.html",
+      "before_bytes": 1774112,
+      "after_bytes": 1142376,
+      "removed_css_bytes": 631736,
+      "sha256_before": "662a13cea352280b1e6946879830acc352879675e988ede1be85276896a015ea",
+      "sha256_after": "1c83528fd92986cc1c462ac520bf73a60243d36c185ccee10c9aec166a62330d",
+      "missing_direct_references": [
+        "../404.html",
+        "../cases/-RZZRO2HiO.html"
+      ]
+    },
+    {
+      "page": "cases/orbitra-systems.html",
+      "before_bytes": 1802131,
+      "after_bytes": 1163507,
+      "removed_css_bytes": 638624,
+      "sha256_before": "f3f7d18184e532313d46cbff8dfe11d2fd5bfe44322f6445ce099d927ec14d9b",
+      "sha256_after": "166b75e7ee21c1c4e41f46c9cba1bde7cd1a46f09666c1acfa68ddde5cbf087f",
+      "missing_direct_references": [
+        "../404.html",
+        "../cases/-RZZRO2HiO.html"
+      ]
+    },
+    {
+      "page": "cases/vectorlane-mobility-network.html",
+      "before_bytes": 1781792,
+      "after_bytes": 1148484,
+      "removed_css_bytes": 633308,
+      "sha256_before": "2fbca4e4af2d6f578f7abffbe9dedd112145a4d12a90e69e4cc0f53cccdad692",
+      "sha256_after": "a2bd78f03c04e5942f8adfe77564040b6e0e731bb4e77df27e6efa3ec3621dd7",
+      "missing_direct_references": [
+        "../404.html"
+      ]
+    },
+    {
+      "page": "cases.html",
+      "before_bytes": 1580293,
+      "after_bytes": 1021883,
+      "removed_css_bytes": 558410,
+      "sha256_before": "e081ff55225d71c08de33aa638a847c1e300982635dd8d33e1c43ce95175c7e4",
+      "sha256_after": "fa73542d8eac7945c6dab9b2358e454072d6ef5b8dd679ca11c85aa9fd612ab9",
+      "missing_direct_references": [
+        "./404.html"
+      ]
+    },
+    {
+      "page": "contacts.html",
+      "before_bytes": 1965035,
+      "after_bytes": 1382370,
+      "removed_css_bytes": 582665,
+      "sha256_before": "b8c61e16358cc41a236ff2f6381a41890cbabeeb8e04327233f174099df14f69",
+      "sha256_after": "fcff381a93786df02f5a9ccf791ed7535cdcabd9a2badefce4a5e57915554cc7",
+      "missing_direct_references": [
+        "./404.html"
+      ]
+    },
+    {
+      "page": "fr/about-us.html",
+      "before_bytes": 2305189,
+      "after_bytes": 1586576,
+      "removed_css_bytes": 718613,
+      "sha256_before": "01990ed67c9a8a2acb68f06bbe3c8d7373dd2667a986ab156e18eafef0f3454c",
+      "sha256_after": "f664b969893bf8f455a586c88d2b36818c82f9f55edd61932c63386654d1c2f5",
+      "missing_direct_references": [
+        "../fr/404.html"
+      ]
+    },
+    {
+      "page": "fr/blog/beyond-the-text-box-engineering-autonomous-workflows-over-agency-free-chat.html",
+      "before_bytes": 1821170,
+      "after_bytes": 1196728,
+      "removed_css_bytes": 624442,
+      "sha256_before": "dd1e0579fbe5ec8e89956b42d01c5576cf0d55752ddc08c302e3e357d766740c",
+      "sha256_after": "5b08e218b93a6409eae61088d9a1894fdccbdde2d8af757e12db6c639e118a0b",
+      "missing_direct_references": [
+        "../../fr/404.html"
+      ]
+    },
+    {
+      "page": "fr/blog/building-decision-engines-instead-of-chat-interfaces.html",
+      "before_bytes": 1820784,
+      "after_bytes": 1196342,
+      "removed_css_bytes": 624442,
+      "sha256_before": "ba067c3a546f17725e4919cf6b52ab65f4692a340edd9849ecb787fedf07b834",
+      "sha256_after": "9a95b3e64f037787e6bb73b9c4ec6b21999af20f296bec40aa339c29caf8781a",
+      "missing_direct_references": [
+        "../../fr/404.html"
+      ]
+    },
+    {
+      "page": "fr/blog/designing-multi-layer-ai-systems-for-real-world-operations.html",
+      "before_bytes": 1818591,
+      "after_bytes": 1194149,
+      "removed_css_bytes": 624442,
+      "sha256_before": "6db52f7b9ecc0bfad112113cf9a5965eb138a1d46f32c37a2bb413a66d88c989",
+      "sha256_after": "70c9675b5355baeb172854fef712153279df3faa1a50872b72f1b887fe76db36",
+      "missing_direct_references": [
+        "../../fr/404.html",
+        "../../fr/blog/-een8ZXusz.html"
+      ]
+    },
+    {
+      "page": "fr/blog/from-conversation-to-conclusion-why-your-product-needs-outcomes-not-dialogue.html",
+      "before_bytes": 1821414,
+      "after_bytes": 1196972,
+      "removed_css_bytes": 624442,
+      "sha256_before": "7fe91c8ef0063de4aa3e523ccaadf3acc563e0886bbcddd21c8c1a5083dec05a",
+      "sha256_after": "c9908b35ecf0a0cfcf20b963c1c89eb3fbde12e9b882c350dfd5842ebca39a1c",
+      "missing_direct_references": [
+        "../../fr/404.html"
+      ]
+    },
+    {
+      "page": "fr/blog/from-fragmented-data-to-unified-intelligence-engines.html",
+      "before_bytes": 2473778,
+      "after_bytes": 1849336,
+      "removed_css_bytes": 624442,
+      "sha256_before": "6ef5920c445a1ef460b1094a06ce1bc8036130cd62d7a486d240c0ff970a3c52",
+      "sha256_after": "f3dc0f2485bfdf5ca099276e1449f46ea6e673c014e1e35d10935e5b4349f713",
+      "missing_direct_references": [
+        "../../fr/404.html"
+      ]
+    },
+    {
+      "page": "fr/blog/from-manual-bottlenecks-to-autonomous-growth-at-scale.html",
+      "before_bytes": 1817828,
+      "after_bytes": 1193386,
+      "removed_css_bytes": 624442,
+      "sha256_before": "3147b2a6d0626e244f65765ab58790b8ae8e0c09fb7951480024485667ab2f8d",
+      "sha256_after": "156be508d417bb952b12bc6aec72c22ebc8e1722fe061857d5c583761d0e3239",
+      "missing_direct_references": [
+        "../../fr/404.html",
+        "../../fr/blog/-een8ZXusz.html"
+      ]
+    },
+    {
+      "page": "fr/blog/from-prompts-to-pipelines-architecting-intentional-intelligence-over-reactive-replies.html",
+      "before_bytes": 1821241,
+      "after_bytes": 1196799,
+      "removed_css_bytes": 624442,
+      "sha256_before": "795071ff21869e4c719c75c989f506f6d7387a1d5f3699e9b8525c675508db00",
+      "sha256_after": "e0fe45d87d51a525daf2bda7d90f53ae46564e60fcb08fb3cbbce9f5d0140f2c",
+      "missing_direct_references": [
+        "../../fr/404.html"
+      ]
+    },
+    {
+      "page": "fr/blog/from-workflow-chaos-to-structured-automation-pipelines.html",
+      "before_bytes": 1820448,
+      "after_bytes": 1196006,
+      "removed_css_bytes": 624442,
+      "sha256_before": "2b471773069d5a2ef3f72c373f85c91f0a16b52a0b14bddb3f76aaf7bd8152a1",
+      "sha256_after": "7c8df0b6b5ecb3dd3288616d7db0a9bff5406cae586c7d71700114fd6d1fc02f",
+      "missing_direct_references": [
+        "../../fr/404.html"
+      ]
+    },
+    {
+      "page": "fr/blog/stop-prompting-start-predicting-transitioning-from-llms-to-logic-layers.html",
+      "before_bytes": 1821157,
+      "after_bytes": 1196715,
+      "removed_css_bytes": 624442,
+      "sha256_before": "c07b3428c697732856d16d74f47dd54a39b248126ec9a611961e0c7697602d25",
+      "sha256_after": "0e57b783d68c63f60ea47a4f86f9bc0c9374895e67a0c45c59a490ed186c708c",
+      "missing_direct_references": [
+        "../../fr/404.html"
+      ]
+    },
+    {
+      "page": "fr/blog/the-autonomy-leap-moving-from-conversation-as-interface-to-outcome-as-service.html",
+      "before_bytes": 1821464,
+      "after_bytes": 1197022,
+      "removed_css_bytes": 624442,
+      "sha256_before": "0a4dcd8650b9e9321e3391ff913c46d5a2d1f18f1ec3607472d54951bc0f61d8",
+      "sha256_after": "344fcad51ea1e90f70c92ed2c03706691be0260f7c6efc3c4eb9e41a12a02487",
+      "missing_direct_references": [
+        "../../fr/404.html"
+      ]
+    },
+    {
+      "page": "fr/blog/why-most-ai-deployments-fail-in-production-environments.html",
+      "before_bytes": 1821471,
+      "after_bytes": 1197029,
+      "removed_css_bytes": 624442,
+      "sha256_before": "7b6688b42ce8dcd77ef07556ea656161a68616f23480ceeb1b26b372e531e38b",
+      "sha256_after": "cfb29aa003cea8bcfa10e76c43e5fac0d25bb6726aada8ac6a57fcb0261f9a8a",
+      "missing_direct_references": [
+        "../../fr/404.html"
+      ]
+    },
+    {
+      "page": "fr/blog.html",
+      "before_bytes": 1441402,
+      "after_bytes": 932118,
+      "removed_css_bytes": 509284,
+      "sha256_before": "15eeb6523ed3dd5512580d45492a19a31bbf5d6db0a4fae445a2fb8934e80d7e",
+      "sha256_after": "7603be6ee021e08005a5383be9794fe1124d87da737bbfacd810981dc69b259a",
+      "missing_direct_references": [
+        "../fr/404.html"
+      ]
+    },
+    {
+      "page": "fr/career.html",
+      "before_bytes": 1895929,
+      "after_bytes": 1273440,
+      "removed_css_bytes": 622489,
+      "sha256_before": "8ce478a3b88c679f4daaa4837ed6daa4224ceaf23f2de0c2d5893a65e5e23cbf",
+      "sha256_after": "bf4394084a12a4ce114a61d8ea1b2d6f7389791c0b6b73e794f6342d4f2f0bc1",
+      "missing_direct_references": [
+        "../fr/404.html"
+      ]
+    },
+    {
+      "page": "fr/cases/cinderbay-retail-group.html",
+      "before_bytes": 1795773,
+      "after_bytes": 1161450,
+      "removed_css_bytes": 634323,
+      "sha256_before": "e7d0a0931c42de2c95fa5927d59bc253fde8632dfd5f6c2c7531797ed077c7a2",
+      "sha256_after": "7315f56febadb0b3593fe184e1a3626af1e42efe21b25d8f7286ca2f7e5283e5",
+      "missing_direct_references": [
+        "../../fr/404.html",
+        "../../fr/cases/heliodesk-platforms.html",
+        "../../fr/cases/ironpeak-industrial-manufacturing.html",
+        "../../fr/cases/lumenarc-energy.html",
+        "../../fr/cases/northbridge-education.html",
+        "../../fr/cases/vectorlane-mobility-network.html"
+      ]
+    },
+    {
+      "page": "fr/cases/orbitra-systems.html",
+      "before_bytes": 1800997,
+      "after_bytes": 1162373,
+      "removed_css_bytes": 638624,
+      "sha256_before": "c3f8aad3e54ba4f4b4df8c39a292df280ac5d0a38eee25fe697ceb8e259a603a",
+      "sha256_after": "b81a7937594cbe3b7413474d214a7a8fb79248b15c3d05d95220860d245fda30",
+      "missing_direct_references": [
+        "../../fr/404.html",
+        "../../fr/cases/-RZZRO2HiO.html",
+        "../../fr/cases/heliodesk-platforms.html",
+        "../../fr/cases/ironpeak-industrial-manufacturing.html",
+        "../../fr/cases/lumenarc-energy.html",
+        "../../fr/cases/northbridge-education.html",
+        "../../fr/cases/vectorlane-mobility-network.html"
+      ]
+    },
+    {
+      "page": "fr/cases.html",
+      "before_bytes": 1597502,
+      "after_bytes": 1039092,
+      "removed_css_bytes": 558410,
+      "sha256_before": "201dff920e4ce89715850513d6e147aff591e81d91b90c083973d689fa68168e",
+      "sha256_after": "66f46667b35139977a2365e1439a9e89d4db10dc7d03f1289e3f498456956b9c",
+      "missing_direct_references": [
+        "../fr/404.html",
+        "../fr/cases/heliodesk-platforms.html",
+        "../fr/cases/ironpeak-industrial-manufacturing.html",
+        "../fr/cases/lumenarc-energy.html",
+        "../fr/cases/northbridge-education.html",
+        "../fr/cases/vectorlane-mobility-network.html"
+      ]
+    },
+    {
+      "page": "fr/contacts.html",
+      "before_bytes": 1670793,
+      "after_bytes": 1088128,
+      "removed_css_bytes": 582665,
+      "sha256_before": "8cef62373c649a43ef3b1ffb9d4602931faf8d0b10c8197e84ccd886f6d4f8c1",
+      "sha256_after": "f2c6f2d86ddc4dd7ba71731d02063a2887f6d1516de1c559345772931130c1a1",
+      "missing_direct_references": [
+        "../fr/404.html"
+      ]
+    },
+    {
+      "page": "fr/legal.html",
+      "before_bytes": 1357413,
+      "after_bytes": 846921,
+      "removed_css_bytes": 510492,
+      "sha256_before": "6777de97c76685eb29e01a8fee747041568e2c47b026b40ba20a962ea45b2ebc",
+      "sha256_after": "0b5ca068713e02129453ed3554cda05f0fc53d9e0c610d5effc4831950b49ca6",
+      "missing_direct_references": [
+        "../fr/404.html"
+      ]
+    },
+    {
+      "page": "fr/policy.html",
+      "before_bytes": 1357502,
+      "after_bytes": 846978,
+      "removed_css_bytes": 510524,
+      "sha256_before": "fe85c4823ef5a19b0ca2e8197e78fe868595379c703596e8f7c451971c7c364e",
+      "sha256_after": "a809166ed388bf7ae7c90b8be74ab239ef029ce4648d24319bee305265ccf17a",
+      "missing_direct_references": [
+        "../fr/404.html"
+      ]
+    },
+    {
+      "page": "fr/terms.html",
+      "before_bytes": 1357536,
+      "after_bytes": 847059,
+      "removed_css_bytes": 510477,
+      "sha256_before": "7fea01870ae9cdb867cec6676f99bf0d20d9c9467a97f3ab3f0214b65c92d10c",
+      "sha256_after": "e09859af0e8b891453d0f5a3d01e1a94185759fb1e32106a5f345dfb947f98ed",
+      "missing_direct_references": [
+        "../fr/404.html"
+      ]
+    },
+    {
+      "page": "fr.html",
+      "before_bytes": 6909920,
+      "after_bytes": 5781574,
+      "removed_css_bytes": 1128346,
+      "sha256_before": "5501c0ec8678f0417330ea9294e1fe6430aa471f8271c7f6b3a0da814cb40b50",
+      "sha256_after": "7720ec0a7917d73ad1bd31cd051ed6b5eae37475de47f439c3468cc4722c18a4",
+      "missing_direct_references": [
+        "./404.html",
+        "./assets/images/image-0b8d48e2.png",
+        "./assets/images/image-0c87f467.jpg",
+        "./assets/images/image-3b43f477.png",
+        "./assets/images/image-3f571c67.png",
+        "./assets/images/image-56520568.png",
+        "./assets/images/image-5d514520.png",
+        "./assets/images/image-5fdef0d4.png",
+        "./assets/images/image-a812572e.png",
+        "./assets/images/image-b0a61922.png",
+        "./assets/images/image-bfdaba2b.jpg",
+        "./assets/images/image-d1a83d6f.png",
+        "./assets/images/image-d75dfb33.jpg",
+        "./assets/images/image-d8319533.png",
+        "./assets/images/image-efec5797.png"
+      ]
+    },
+    {
+      "page": "index.html",
+      "before_bytes": 6847399,
+      "after_bytes": 5719053,
+      "removed_css_bytes": 1128346,
+      "sha256_before": "84ef2f36136aa8ab71790518e02bae9ddf0cde6e4fd3106f2aa873b67bf4a896",
+      "sha256_after": "76ee6e4e798334372eb2235f360d1a3c0e5a455089f166a4e100211a70fd1e88",
+      "missing_direct_references": [
+        "./404.html",
+        "./assets/images/image-0b8d48e2.png",
+        "./assets/images/image-0c87f467.jpg",
+        "./assets/images/image-3b43f477.png",
+        "./assets/images/image-3f571c67.png",
+        "./assets/images/image-56520568.png",
+        "./assets/images/image-5d514520.png",
+        "./assets/images/image-5fdef0d4.png",
+        "./assets/images/image-a812572e.png",
+        "./assets/images/image-b0a61922.png",
+        "./assets/images/image-bfdaba2b.jpg",
+        "./assets/images/image-d1a83d6f.png",
+        "./assets/images/image-d75dfb33.jpg",
+        "./assets/images/image-d8319533.png",
+        "./assets/images/image-efec5797.png"
+      ]
+    },
+    {
+      "page": "legal.html",
+      "before_bytes": 1360377,
+      "after_bytes": 849885,
+      "removed_css_bytes": 510492,
+      "sha256_before": "04ff1f21d6f06ee1ee61f0017a1091f8980986d5c33282d6ee524dc8b2ac575c",
+      "sha256_after": "ad1edcee0cb36c97d00d23503d6642c741319d5f3e193851e3c6307cd2329f02",
+      "missing_direct_references": [
+        "./404.html"
+      ]
+    },
+    {
+      "page": "policy.html",
+      "before_bytes": 1359571,
+      "after_bytes": 849047,
+      "removed_css_bytes": 510524,
+      "sha256_before": "f7bb59b87685ffaec76824bc2a2c34408f923b58cb7534589dfed42f7074db2b",
+      "sha256_after": "b6ae03a35361065490920080705c2efac257b6a15ee4818ee26d94e6b4ac7bd5",
+      "missing_direct_references": [
+        "./404.html"
+      ]
+    },
+    {
+      "page": "terms.html",
+      "before_bytes": 1359903,
+      "after_bytes": 849426,
+      "removed_css_bytes": 510477,
+      "sha256_before": "7c43a3b7a033fc17ecab1b8039721beb77e2df61d982db962c7e557a47eca877",
+      "sha256_after": "35a49b15e89a7fc3d989436d4b726dd44e2b8ef4a205b932f48f4da534f7fd96",
+      "missing_direct_references": [
+        "./404.html"
+      ]
+    }
+  ],
+  "total_removed_css_bytes": 30750565,
+  "changed_pages": 49,
+  "limitation": "Direct HTML src/href/poster only; excludes srcset, CSS and runtime references."
+}
